@@ -35,6 +35,7 @@ async function ready(tools: VoiceTool[] = []) {
   const opening = fixtureValue.channel.open()
   fixtureValue.socket.connect()
   fixtureValue.socket.hello()
+  if (tools.length > 0) fixtureValue.socket.message({ type: 'mcp', payload: { id: 'ready-list', method: 'tools/list' } })
   await opening
   return fixtureValue
 }
@@ -72,6 +73,90 @@ describe('Linx voice channel', () => {
     socket.message(new ArrayBuffer(2))
     expect(events.map((event) => event.type)).toEqual(['ready', 'stt', 'tts', 'tts', 'audio', 'tts'])
     expect(events[3]).toEqual({ type: 'tts', state: 'sentence', text: '我在家。' })
+    channel.close()
+  })
+
+  it('waits for hello and the sent tools list in either order, emitting ready only once', async () => {
+    const tool: VoiceTool = { name: 'context', description: '', inputSchema: {}, execute: async () => 'context' }
+    for (const listFirst of [false, true]) {
+      const { channel, socket, events } = fixture([tool])
+      const opening = channel.open()
+      socket.connect()
+      const list = () => socket.message({ type: 'mcp', payload: { id: 'discovery', method: 'tools/list' } })
+      if (listFirst) list(); else socket.hello()
+      expect(events).toEqual([])
+      expect(() => channel.startInput()).toThrow('not ready')
+      if (listFirst) socket.hello(); else list()
+      await opening
+      expect(socket.json().find(value => value.payload?.id === 'discovery').payload.result.tools).toHaveLength(1)
+      list(); socket.hello()
+      expect(events.filter(event => event.type === 'ready')).toHaveLength(1)
+      channel.close()
+    }
+  })
+
+  it('bounds incomplete tool discovery by the same handshake deadline', async () => {
+    vi.useFakeTimers()
+    const { channel, socket, events } = fixture([{ name: 'context', description: '', inputSchema: {}, execute: async () => '' }])
+    const opening = channel.open()
+    const rejected = expect(opening).rejects.toThrow('timed out')
+    socket.connect(); socket.hello()
+    await vi.advanceTimersByTimeAsync(100)
+    await rejected
+    expect(events.map(event => event.type)).toEqual(['error', 'closed'])
+  })
+
+  it('cancels discovery without allowing a late tools reply to open the channel', async () => {
+    const { channel, socket, events } = fixture([{ name: 'context', description: '', inputSchema: {}, execute: async () => '' }])
+    const opening = channel.open()
+    const rejected = expect(opening).rejects.toThrow('Closed by caller')
+    socket.connect(); socket.hello()
+    const lateMessage = socket.onmessage!
+    channel.close()
+    lateMessage({ data: JSON.stringify({ type: 'mcp', payload: { id: 'late-list', method: 'tools/list' } }) })
+    await rejected
+    expect(events.map(event => event.type)).toEqual(['closed'])
+    expect(socket.json()).toHaveLength(1)
+  })
+
+  it('retains manual listen.start and listen.stop behavior', async () => {
+    const socket = new FakeSocket()
+    const channel = createVoiceChannel({ tools: [], listenMode: 'manual', createSocket: () => socket, onEvent() {} })
+    const opening = channel.open()
+    socket.connect(); socket.hello(); await opening
+    channel.startInput(); channel.stopInput()
+    expect(socket.json().slice(1)).toEqual([
+      { type: 'listen', session_id: 'server-session', state: 'start', mode: 'manual' },
+      { type: 'listen', session_id: 'server-session', state: 'stop' }
+    ])
+    channel.close()
+  })
+
+  it('keeps realtime input alive for three answers, including aborted output and recovery', async () => {
+    const socket = new FakeSocket()
+    const events: VoiceEvent[] = []
+    const channel = createVoiceChannel({ tools: [], voiceId: 'candidate-voice', createSocket: () => socket, onEvent: event => events.push(event) })
+    const opening = channel.open()
+    socket.connect(); socket.hello(); await opening
+    channel.startInput()
+    expect(socket.json().at(-1)).toMatchObject({ type: 'listen', state: 'start', mode: 'realtime', agent_params: { voice: { id: 'candidate-voice' } } })
+    for (const aborted of [false, true, false]) {
+      socket.message({ type: 'tts', state: 'start' })
+      socket.message(new ArrayBuffer(640))
+      socket.message({ type: 'tts', state: 'stop', is_aborted: aborted })
+      socket.message({ type: 'tts', state: 'stop', is_aborted: aborted })
+      socket.message({ type: 'tts', state: 'sentence_start', text: 'late discarded sentence' })
+      socket.message(new ArrayBuffer(640))
+      channel.input(new Uint8Array(640))
+    }
+    expect(events.filter(event => event.type === 'audio')).toHaveLength(3)
+    expect(events.filter(event => event.type === 'tts' && event.state === 'stop')).toEqual([
+      { type: 'tts', state: 'stop', text: null, aborted: false },
+      { type: 'tts', state: 'stop', text: null, aborted: true },
+      { type: 'tts', state: 'stop', text: null, aborted: false }
+    ])
+    expect(socket.json().filter(value => value.type === 'listen')).toHaveLength(1)
+    expect(events.some(event => event.type === 'closed')).toBe(false)
     channel.close()
   })
 
@@ -167,6 +252,7 @@ describe('Linx voice channel', () => {
     const opening = channel.open({ signal: controller.signal })
     socket.connect()
     socket.hello()
+    socket.message({ type: 'mcp', payload: { id: 'ready-list', method: 'tools/list' } })
     await opening
     toolCall(socket)
     await Promise.resolve()
@@ -187,8 +273,7 @@ describe('Linx voice channel', () => {
     channel.interrupt()
     socket.message(new ArrayBuffer(640))
     socket.message({ type: 'tts', state: 'sentence_start', text: 'cancelled' })
-    socket.message({ type: 'tts', state: 'start' })
-    socket.message({ type: 'tts', state: 'stop' })
+    socket.message({ type: 'tts', state: 'stop', is_aborted: true })
     expect(events.map((event) => event.type)).toEqual(['ready', 'tts', 'interrupted'])
     expect(socket.json().at(-1)).toMatchObject({ type: 'abort', session_id: 'server-session' })
     channel.startInput()

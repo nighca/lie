@@ -34,6 +34,8 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
   let socket: VoiceSocket | null = null
   let state: 'new' | 'opening' | 'ready' | 'closed' = 'new'
   let sessionId: string | null = null
+  let negotiatedFormat: PcmFormat | null = null
+  let toolsRegistered = options.tools.length === 0
   let speaking = false
   let inputActive = false
   let interrupted = false
@@ -57,6 +59,13 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
     const settle = settleOpen
     settleOpen = null
     settle?.(error)
+  }
+
+  function becomeReady() {
+    if (state !== 'opening' || negotiatedFormat == null || !toolsRegistered) return
+    state = 'ready'
+    finishOpen(null)
+    emit({ type: 'ready', format: negotiatedFormat })
   }
 
   function close(code = 1000, reason = 'Closed by caller') {
@@ -107,6 +116,8 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
     }
     if (payload.method === 'tools/list') {
       rpc(id, { tools: options.tools.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })), nextCursor: null })
+      toolsRegistered = true
+      becomeReady()
       return
     }
     const params = record(payload.params) ? payload.params : null
@@ -169,23 +180,28 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
           (audio.bits_per_sample ?? audio.bit_depth ?? 16) !== 16) {
         return fail('protocol', 'Unsupported negotiated audio format; PCM16 mono 16kHz required')
       }
-      const format: PcmFormat = { format: 'pcm', sampleRate: 16000, channels: 1, bitsPerSample: 16, frameDuration: 20 }
+      negotiatedFormat = { format: 'pcm', sampleRate: 16000, channels: 1, bitsPerSample: 16, frameDuration: 20 }
       sessionId = typeof value.session_id === 'string' ? value.session_id : null
-      state = 'ready'
-      finishOpen(null)
-      emit({ type: 'ready', format })
+      becomeReady()
       return
     }
-    if (state !== 'ready') return fail('protocol', 'Message received before hello')
+    if (state === 'opening' && value.type === 'mcp' && record(value.payload) &&
+        (value.payload.method === 'initialize' || value.payload.method === 'tools/list')) {
+      void handleMcp(value.payload)
+      return
+    }
+    if (state !== 'ready') return fail('protocol', 'Message received before ready')
     if (value.type === 'mcp' && record(value.payload)) void handleMcp(value.payload)
     if (value.type === 'stt' && typeof value.text === 'string') emit({ type: 'stt', text: value.text })
     if (value.type === 'tts') {
-      if (value.state === 'start' && !interrupted && !speaking) {
+      if (value.state === 'start' && !speaking) {
+        interrupted = false
         speaking = true
         emit({ type: 'tts', state: 'start', text: null })
       } else if (value.state === 'stop' && !interrupted && speaking) {
         speaking = false
-        emit({ type: 'tts', state: 'stop', text: null })
+        interrupted = value.is_aborted === true
+        emit({ type: 'tts', state: 'stop', text: null, aborted: interrupted })
       } else if (value.state === 'sentence_start' && speaking && !interrupted && typeof value.text === 'string') {
         emit({ type: 'tts', state: 'sentence', text: value.text })
       }
@@ -227,7 +243,8 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
       if (inputActive) return
       inputActive = true
       interrupted = false
-      send({ type: 'listen', session_id: sessionId, state: 'start', mode: options.listenMode ?? 'realtime' })
+      send({ type: 'listen', session_id: sessionId, state: 'start', mode: options.listenMode ?? 'realtime',
+        ...(options.voiceId == null ? {} : { agent_params: { voice: { id: options.voiceId } } }) })
     },
     input(data) {
       requireReady()

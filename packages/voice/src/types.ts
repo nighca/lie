@@ -9,7 +9,8 @@ export type PcmFormat = {
 export type VoiceEvent =
   | { type: 'ready'; format: PcmFormat }
   | { type: 'stt'; text: string }
-  | { type: 'tts'; state: 'start' | 'sentence' | 'stop'; text: string | null }
+  | { type: 'tts'; state: 'start' | 'sentence'; text: string | null }
+  | { type: 'tts'; state: 'stop'; text: null; aborted: boolean }
   | { type: 'audio'; data: Uint8Array }
   | { type: 'tool'; state: 'start' | 'end'; name: string }
   | { type: 'interrupted' }
@@ -41,6 +42,7 @@ export type VoiceChannelOptions = {
   handshakeTimeoutMs?: number
   toolTimeoutMs?: number
   listenMode?: 'manual' | 'realtime'
+  voiceId?: string
 }
 
 /** One connection lifetime. Create a new channel after closing; no implicit reconnect. */
