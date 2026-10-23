@@ -2,7 +2,8 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it } from 'vitest'
 
 import App from '../src/App.vue'
-import { setup } from './helpers'
+import { readAppearances } from '../src/presentation/appearances'
+import { game, setup } from './helpers'
 
 const cleanup: (() => void)[] = []
 afterEach(() => cleanup.splice(0).forEach((action) => action()))
@@ -77,4 +78,91 @@ describe('game screens', () => {
     expect(controls.get('button').text()).toBe('开始对话')
   })
 
+})
+
+
+describe('current character state portraits', () => {
+  function createScene() {
+    const content = { ...game, characters: game.characters.map((character, index) => ({ ...character, appearanceId: index === 0 ? 'red' : 'blue' })) }
+    const appearances = readAppearances([
+      { id: 'red', avatar: '/red-avatar.png', portrait: '/red-default.png', accent: '#ff0000', portraits: { listening: '/red-listening.png', waiting: '/red-waiting.png', speaking: '/red-speaking.png' } },
+      { id: 'blue', avatar: '/blue-avatar.png', portrait: '/blue-default.png', accent: '#0000ff', portraits: { speaking: '/blue-speaking.png' } },
+    ])
+    return { ...setup(undefined, content), appearances }
+  }
+
+  it('uses the default while preparing, then follows listening, waiting and speaking until the conversation ends', async () => {
+    const { controller, turns, voice, appearances } = createScene()
+    let ready!: () => void
+    const create = voice.create
+    voice.create = (scope) => ({ ...create(scope), open: () => new Promise((resolve) => { ready = resolve }) })
+    await controller.load('test'); controller.start()
+    const wrapper = mount(App, { props: { controller, appearances, demo: true } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const portrait = () => wrapper.get('.portrait-backdrop img').attributes('src')
+    expect(portrait()).toBe('/red-default.png')
+    const opening = controller.startConversation()
+    await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-default.png')
+    ready(); await opening; await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-listening.png')
+    turns[0].scope.onEvent({ type: 'userText', text: '问题。' })
+    await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-waiting.png')
+    turns[0].scope.onEvent({ type: 'speaking' })
+    await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-speaking.png')
+    turns[0].scope.onEvent({ type: 'listening' })
+    await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-listening.png')
+    controller.endConversation(); await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-default.png')
+    voice.create = create
+    await controller.startConversation()
+    turns[1].scope.onEvent({ type: 'error' })
+    await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-default.png')
+  })
+
+  it('selects the new character resources, falls back for missing states and keeps list avatars unchanged', async () => {
+    const { controller, turns, appearances } = createScene()
+    await controller.load('test'); controller.start()
+    const wrapper = mount(App, { props: { controller, appearances, demo: true } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const portrait = () => wrapper.get('.portrait-backdrop img').attributes('src')
+    const avatars = () => wrapper.findAll('.character-list img').map((image) => image.attributes('src'))
+    const originalAvatars = avatars()
+    await controller.startConversation(); await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/red-listening.png')
+    controller.selectCharacter('two'); await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/blue-default.png')
+    await controller.startConversation(); await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/blue-default.png')
+    turns[1].scope.onEvent({ type: 'userText', text: '问题。' })
+    await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/blue-default.png')
+    turns[1].scope.onEvent({ type: 'speaking' })
+    await wrapper.vm.$nextTick()
+    expect(portrait()).toBe('/blue-speaking.png')
+    expect(avatars()).toEqual(originalAvatars)
+  })
+
+  it('falls back from a failed state image without poisoning the default or another character', async () => {
+    const { controller, turns, appearances } = createScene()
+    await controller.load('test'); controller.start(); await controller.startConversation()
+    const wrapper = mount(App, { props: { controller, appearances, demo: true } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const portrait = () => wrapper.get('.portrait-backdrop img')
+    const failedListening = portrait()
+    turns[0].scope.onEvent({ type: 'speaking' }); await wrapper.vm.$nextTick()
+    await failedListening.trigger('error')
+    expect(portrait().attributes('src')).toBe('/red-speaking.png')
+    turns[0].scope.onEvent({ type: 'listening' }); await wrapper.vm.$nextTick()
+    expect(portrait().attributes('src')).toBe('/red-default.png')
+    await portrait().trigger('error')
+    expect(wrapper.find('.portrait-backdrop img').exists()).toBe(false)
+    expect(wrapper.get('.portrait-initial').text()).toBe('甲')
+    controller.selectCharacter('two'); await wrapper.vm.$nextTick()
+    expect(portrait().attributes('src')).toBe('/blue-default.png')
+  })
 })

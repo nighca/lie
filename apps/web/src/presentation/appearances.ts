@@ -4,6 +4,7 @@ export interface Appearance {
   portrait: string
   accent: string
   voiceId: string | null
+  portraits: { listening: string | null; waiting: string | null; speaking: string | null }
 }
 
 export function readAppearances(data: unknown): readonly Appearance[] {
@@ -13,6 +14,16 @@ export function readAppearances(data: unknown): readonly Appearance[] {
     const item = value as Record<string, unknown>
     if (typeof item.id !== 'string' || typeof item.avatar !== 'string' || typeof item.portrait !== 'string' || typeof item.accent !== 'string') throw new Error('Invalid appearance fields')
     if (item.voiceId != null && (typeof item.voiceId !== 'string' || item.voiceId.trim().length === 0)) throw new Error('Invalid appearance voiceId')
-    return { id: item.id, avatar: item.avatar, portrait: item.portrait, accent: item.accent, voiceId: typeof item.voiceId === 'string' ? item.voiceId.trim() : null }
+    const portraits: Appearance['portraits'] = { listening: null, waiting: null, speaking: null }
+    if (item.portraits != null) {
+      if (typeof item.portraits !== 'object' || Array.isArray(item.portraits)) throw new Error('Invalid appearance portraits')
+      const values = item.portraits as Record<string, unknown>
+      for (const state of ['listening', 'waiting', 'speaking'] as const) {
+        const url = values[state]
+        if (url != null && (typeof url !== 'string' || url.trim().length === 0)) throw new Error('Invalid appearance portrait')
+        portraits[state] = typeof url === 'string' ? url.trim() : null
+      }
+    }
+    return { id: item.id, avatar: item.avatar, portrait: item.portrait, accent: item.accent, portraits, voiceId: typeof item.voiceId === 'string' ? item.voiceId.trim() : null }
   })
 }

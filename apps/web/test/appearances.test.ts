@@ -61,3 +61,29 @@ describe('appearance voice configuration', () => {
     controller.dispose()
   })
 })
+
+describe('appearance state portraits', () => {
+  it('normalizes absent, null and partial state sets while retaining the default portrait', () => {
+    const appearances = readAppearances([
+      preset('legacy'),
+      { ...preset('default'), portraits: null },
+      { ...preset('partial'), portraits: { listening: '/listen.png', speaking: null } },
+    ])
+    expect(appearances.map(({ portraits }) => portraits)).toEqual([
+      { listening: null, waiting: null, speaking: null },
+      { listening: null, waiting: null, speaking: null },
+      { listening: '/listen.png', waiting: null, speaking: null },
+    ])
+    expect(appearances[2].portrait).toBe('/portrait.png')
+  })
+
+  it.each([false, 'image.png', 1, []])('rejects a non-object state set %j', (portraits) => {
+    expect(() => readAppearances([{ ...preset('invalid'), portraits }])).toThrow('Invalid appearance portraits')
+  })
+
+  it.each(['listening', 'waiting', 'speaking'])('rejects invalid %s URLs', (state) => {
+    for (const value of ['', '  ', 1, false, {}, []]) {
+      expect(() => readAppearances([{ ...preset('invalid'), portraits: { [state]: value } }])).toThrow('Invalid appearance portrait')
+    }
+  })
+})

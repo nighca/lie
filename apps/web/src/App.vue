@@ -11,6 +11,17 @@ const unsubscribe = props.controller.subscribe((value) => { view.value = value }
 onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
 const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)
+const portrait = computed(() => {
+  const preset = appearance(current.value?.appearanceId ?? null)
+  if (preset == null) return null
+  if (view.value.conversationActive && !view.value.busy) {
+    const status = view.value.voiceStatus
+    const state = status === 'recording' ? 'listening' : status === 'waiting' || status === 'speaking' ? status : null
+    const stateImage = state == null ? null : preset.portraits[state]
+    if (usableImage(stateImage)) return stateImage
+  }
+  return usableImage(preset.portrait) ? preset.portrait : null
+})
 const transcript = computed(() => view.value.history.map((entry) => ({
   id: entry.id,
   speaker: entry.role === 'user' ? '你' : current.value?.name ?? '人物',
@@ -30,6 +41,10 @@ const remainingTime = computed(() => {
 })
 function appearance(id: string | null) { return props.appearances.find((item) => item.id === id) ?? null }
 function usableImage(url: string | null) { return url != null && !brokenImages.value.has(url) }
+function portraitFailed(event: Event) {
+  const url = (event.currentTarget as HTMLImageElement).getAttribute('src')
+  if (url != null) brokenImages.value.add(url)
+}
 function speak() { if (view.value.conversationActive) props.controller.endConversation(); else void props.controller.startConversation() }
 </script>
 
@@ -82,7 +97,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </nav>
         <section v-if="current != null" class="character-stage" :style="{ '--character-accent': appearance(current.appearanceId)?.accent ?? 'var(--lie-aqua)' }" :aria-label="`${current.name}的人物形象`">
           <div class="portrait-backdrop">
-            <img v-if="usableImage(appearance(current.appearanceId)?.portrait ?? null)" :src="appearance(current.appearanceId)!.portrait" alt="人物形象" @error="brokenImages.add(appearance(current.appearanceId)!.portrait)">
+            <img v-if="portrait != null" :key="portrait" :src="portrait" alt="人物形象" @error="portraitFailed">
             <span v-else class="portrait-initial">{{ current.name.slice(0, 1) }}</span>
           </div>
           <div class="stage-caption"><h2>{{ current.name }}</h2><span>听听这位怎么说</span></div>
