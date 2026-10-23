@@ -1,25 +1,51 @@
-:root {
-  font-family: system-ui, sans-serif;
-  color: #252a34;
-  background: #fafafa;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+body { margin: 0; background: var(--lie-canvas); color: var(--lie-ink); font: 16px/1.65 var(--lie-font); }
+* { box-sizing: border-box; }
+.game-shell { max-width: 1440px; margin: auto; padding: 24px 32px 48px; }
+.game-header, .header-actions { display: flex; align-items: center; gap: 16px; }
+.game-header { justify-content: space-between; }
+.wordmark { color: var(--lie-ink); text-decoration: none; font-size: 48px; font-weight: 900; letter-spacing: -3px; }
+.wordmark span { display: inline-block; font-size: 18px; letter-spacing: 0; margin-left: 8px; }
+.environment-note, .muted { color: var(--lie-muted); font-size: 14px; }
+.environment-note { margin: 8px 0 24px; }
+h1, h2 { line-height: 1.2; overflow-wrap: anywhere; }
+h1 { font-size: clamp(28px, 3vw, 36px); }
+h2 { font-size: 24px; }
+.surface { background: var(--lie-surface); border: 3px solid var(--lie-ink); border-radius: 28px; box-shadow: 0 6px 0 #111b451a; }
+.intro-card { max-width: 880px; margin: 40px auto; padding: 48px; }
+.eyebrow { font-weight: 600; }
+.background { white-space: pre-wrap; max-width: 38em; margin: 24px 0; line-height: 1.8; }
+.intro-characters { display: flex; justify-content: center; flex-wrap: wrap; gap: 32px; margin: 32px 0; }
+.intro-characters > div { display: grid; text-align: center; gap: 8px; }
+.intro-characters img, .initial-avatar { width: 80px; height: 80px; border: 3px solid var(--lie-ink); border-radius: 24px; background: var(--lie-aqua); }
+.initial-avatar { display: grid; place-items: center; font-size: 32px; }
+.flow-hint { font-weight: 600; margin: 32px 0; }
+.case-heading { margin-bottom: 24px; }
+.case-heading h1 { margin: 4px 0; }
+.case-heading .eyebrow { margin: 0; }
+.conversation-layout { display: grid; grid-template-columns: 220px minmax(220px, 0.85fr) minmax(320px, 1fr); gap: 24px; align-items: start; margin-bottom: 24px; }
+.character-list { display: grid; gap: 16px; max-height: 560px; overflow-y: auto; padding: 5px; }
+.character-list .lie-character { flex-wrap: wrap; }
+.character-stage { text-align: center; }
+.portrait-backdrop { background: var(--character-accent); border-radius: 45% 55% 36% 42%; overflow: hidden; min-height: 300px; display: grid; align-items: end; }
+.portrait-backdrop img { width: 100%; max-height: 380px; }
+.portrait-initial { font-size: 100px; align-self: center; }
+.character-stage h2 { margin-bottom: 0; }
+.character-stage p { font-size: 14px; color: var(--lie-muted); }
+.conversation-copy { min-width: 0; }
+.conversation-copy h2 { margin-top: 0; }
+.conversation-copy > .lie-notice { margin-top: 16px; }
+.accusation-choices { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0 32px; }
+@media (max-width: 1100px) {
+  .conversation-layout { grid-template-columns: minmax(220px, 0.75fr) minmax(300px, 1fr); }
+  .character-list { grid-column: 1 / -1; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); max-height: none; }
 }
-
-body {
-  margin: 0;
-}
-
-main {
-  max-width: 48rem;
-  margin: 12vh auto;
-  padding: 2rem;
-}
-
-h1 {
-  line-height: 1.3;
-}
-
-p {
-  line-height: 1.7;
+@media (max-width: 700px) {
+  .game-shell { padding: 16px; }
+  .game-header { align-items: flex-start; flex-wrap: wrap; }
+  .wordmark { font-size: 36px; }
+  .header-actions { flex-wrap: wrap; }
+  .intro-card { margin: 24px auto; padding: 24px; }
+  .conversation-layout { grid-template-columns: minmax(0, 1fr); }
+  .character-list { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .character-stage { max-width: 320px; margin: auto; }
 }

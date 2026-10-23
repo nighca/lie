@@ -1,0 +1,5 @@
+[
+  { "id": "placeholder-coral", "avatar": "/appearances/avatar.svg", "portrait": "/appearances/portrait.svg", "accent": "#FF665B" },
+  { "id": "placeholder-yellow", "avatar": "/appearances/avatar.svg", "portrait": "/appearances/portrait.svg", "accent": "#FFF18A" },
+  { "id": "placeholder-blue", "avatar": "/appearances/avatar.svg", "portrait": "/appearances/portrait.svg", "accent": "#78DDD7" }
+]

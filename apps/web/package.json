@@ -4,10 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 5174 --strictPort",
+    "dev": "vite --host 127.0.0.1 --port 5176 --strictPort",
     "build": "vite build",
     "typecheck": "vue-tsc --noEmit",
-    "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort"
+    "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
+    "test": "vitest run"
   },
-  "dependencies": { "vue": "3.5.44" }
+  "dependencies": {
+    "vue": "3.5.44",
+    "@lie/ui": "0.0.0",
+    "@lie/game-core": "0.0.0",
+    "@lie/voice": "0.0.0"
+  }
 }
