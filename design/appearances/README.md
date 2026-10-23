@@ -37,7 +37,7 @@
 - `salt-pepper-beard`：参考 sunny-moustache 和 silver-bun。年长男性、灰白短发短胡须、自然面部细纹、珊瑚套头衫；不预设案件身份。实际 prompt 为 `prompts/salt-pepper-beard.txt`；原始输出 `/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-3f3a4766-aa5b-490b-8c63-378b9dba9d0f.png`。已逐张 `view_image` 检查，五官、手部与头部完整，颜色与轮廓符合现有插画。RGBA/透明 alpha 已核对；无脚本图像修改。
 - `plum-crop`：参考 blue-glasses 和 silver-bun。约二十岁的年轻成人中性外观，深肤色、短卷发、雀斑、紧实体型与紫色卫衣；外观不预设角色性别认同或心理。实际 prompt 为 `prompts/plum-crop.txt`；原始输出 `/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-49a9b805-aeea-4f4a-a6d0-c336b865c7d1.png`。已 `view_image` 检查成人比例、轮廓、手部、无文字道具及跨图一致性。RGBA/真实透明 alpha 已读取核对。
 
-本批新增三张均为 1254×1254 RGBA，分别约 0.97 MB、0.97 MB、0.89 MB，均为默认静态立绘。保留原始 PNG，不新增动画、状态矩阵或业务字段；现有三套 ID 和图片保持不变。
+本批新增三张均为 1254×1254 RGBA，分别约 0.97 MB、0.97 MB、0.94 MB，均为默认静态立绘。保留原始 PNG，不新增动画、状态矩阵或业务字段；现有三套 ID 和图片保持不变。
 
 ## QA 与限制
 
