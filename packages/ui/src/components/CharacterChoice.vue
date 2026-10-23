@@ -16,7 +16,7 @@ withDefaults(defineProps<{
 </template>
 
 <style scoped>
-.lie-character { display: flex; flex-direction: column; gap: 0; align-items: stretch; padding: 0; min-height: 0; overflow: hidden; border-radius: 20px; text-align: center; background: var(--lie-surface); }
+.lie-character { display: flex; flex-direction: column; gap: 0; align-items: stretch; padding: 1px; min-height: 0; overflow: hidden; border-radius: 20px; text-align: center; background: var(--lie-surface); }
 .lie-character[aria-pressed='true'] { padding: 0; background: var(--lie-surface); }
 .lie-character__avatar { position: relative; display: grid; flex: none; width: 100%; height: 106px; border-radius: 0; overflow: hidden; background: color-mix(in srgb, var(--character-accent, var(--lie-aqua)) 18%, var(--lie-surface)); }
 .lie-character__avatar :deep(img) { position: absolute; width: 240%; height: auto; max-width: none; left: 50%; top: -3%; transform: translateX(-50%); }
