@@ -15,6 +15,13 @@
 - Module architecture, interaction prototype and the playful Chinese B visual direction have been approved; see `docs/project-plan.md` for dated decisions. Do not ask for those approvals again. New consequential changes still require discussion.
 - Prefer the Codex in-app browser for development and testing. The user separately authorized their logged-in Chrome Linx console when provider configuration requires it; this does not change the development-browser preference.
 
+## Intake, backlog and scheduling
+
+- Acknowledge each new feature request, bug report or idea and state the intended behavior; clarify material ambiguity promptly. Assess conflicts with approved decisions and work in progress, urgency, and priority before starting implementation.
+- New input does not automatically preempt active work. Unless it conflicts with current work or warrants higher priority, first record it in the centralized backlog in `docs/project-plan.md`, including understood behavior, unresolved decisions, dependencies, status and any user-imposed start conditions. Explain conflicts promptly and do not continue on a contradicted assumption.
+- Whenever execution capacity becomes available, review the whole backlog and active agent results, then select the highest-priority eligible work. Respect explicit deferrals and approval gates; being idle or blocked never authorizes gated work. In particular, do not plan or produce the promotional video until the user judges the product mature and explicitly authorizes it.
+- Delegate concrete implementation and investigation tasks to independent subagents where practical. The root agent prioritizes intake responsiveness, scheduling, interface coordination, local review, integration and acceptance; a delegated task remains its initiator's responsibility. Do not wait for user reminders to inspect or integrate completed work. Keep the established worktree, ownership and single-integrator safeguards.
+
 ## Before parallel work
 
 - Inspect repository instructions, status, branches, and remotes. Protect unrelated and uncommitted changes; never stash, discard, overwrite, or commit them without their owner's agreement.
