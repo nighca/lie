@@ -28,5 +28,11 @@
     "avatar": "assets/salt-pepper-beard.png",
     "portrait": "assets/salt-pepper-beard.png",
     "accent": "#FF665B"
+  },
+  {
+    "id": "plum-crop",
+    "avatar": "assets/plum-crop.png",
+    "portrait": "assets/plum-crop.png",
+    "accent": "#AFA0F5"
   }
 ]
