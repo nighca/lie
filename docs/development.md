@@ -38,3 +38,19 @@ npm run preview --workspace @lie/web
 GitHub Actions 的 CI 在 main push 或手动触发时执行干净安装、类型检查、离线/替身自动化和完整构建。它不读取灵矽管理 key、不运行 `test:linx`、不自动部署。真实供应商验收必须另外执行并记录，不能由绿色 CI 推导。
 
 正式部署采用项目本地 cf CLI。首次准备好发布时，在仓库根目录执行 `npm ci`，再由账号持有者运行 `npm exec --workspace @lie/gateway -- cf auth login` 完成登录；使用 `npm exec --workspace @lie/gateway -- cf auth whoami` 检查结果。凭据不应发送到聊天或提交到仓库。供应商预付费与 Cloudflare 登录是不同前提。
+
+## 本地真实语音试玩
+
+准备真实灵矽专用测试设备（不执行推理），在仓库根目录运行：
+
+```sh
+npm run test:linx --workspace @lie/gateway -- --key-file /absolute/path/to/.linx-api-key --setup-only --export-dev-vars
+npm run build
+npm run dev --workspace @lie/gateway
+```
+
+打开 <http://127.0.0.1:8787/__lie/dev-session>，它仅在本地 Vite 开发服务器写入两小时 HttpOnly/SameSite=Strict 测试通行 Cookie，并跳转到游戏。接案、点击“开始说话”、允许麦克风后发问，讲完点“结束说话”。这个页面连接真实灵矽，不使用 `demo=1`。浏览器与系统都可能需要授予 Codex 麦克风权限；始终保留“取消本轮”入口。
+
+四项语音凭据仅在 development 配置中声明，以便 Cloudflare Vite 插件读取忽略的 `.dev.vars`；production 构建仍无需供应商凭据。测试入口不进入生产 Worker。该环境只供单个受控浏览器会话使用，不证明公共多用户分配已经完成。
+
+测试设备和凭据保留期间可反复打开同一本地入口。结束试玩后，先停止本地 Worker，再按网关 README 的 `--cleanup` 清理这组专用资源；不要在用户试玩中途清理。不要将 Cookie 或 `.dev.vars` 内容发到聊天或提交。
