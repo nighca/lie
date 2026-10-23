@@ -50,7 +50,7 @@ npm run test:linx --workspace @lie/gateway -- --key-file /absolute/path/to/.linx
 npm run test:linx --workspace @lie/gateway -- --key-file /absolute/path/to/.linx-api-key --cleanup
 ```
 
-Do not rerun inference until the user confirms provider credit is ready. The script now stops further inference immediately when a quota response is recognized. If a run fails, use its recorded state for cleanup; do not discard that state while resources remain. `--cleanup` only unbinds its own recorded devices and deletes its own recorded agent. Successful cleanup removes that state file. Existing probes, other agents and the user's original resources are not cleanup targets.
+Inference is opt-in and requires confirmed provider credit. The script now stops further inference immediately when a quota response is recognized. If a run fails, use its recorded state for cleanup; do not discard that state while resources remain. `--cleanup` only unbinds its own recorded devices and deletes its own recorded agent. Successful cleanup removes that state file. Existing probes, other agents and the user's original resources are not cleanup targets.
 
 The generic agent prompt instructs it to call **`self.lie_character_context` before every answer**, use the supplied `background/profile/systemPrompt/history`, and avoid borrowing other characters' or connections' information. This is different from the earlier `self.lie_probe_status` prompt. Configuration was read back as `Memory_nomem` and `chatHistoryConf: 0`. The tool schema/result match the browser bridge's context tool. No game content is uploaded into a permanent role-specific agent.
 
@@ -87,3 +87,16 @@ Local `cf build` and `cf deploy --dry-run` validate deployable Build Output with
 Installing `cf@0.15.0` initially produced five development-tool advisories through old Miniflare → `sharp <0.35.5` / `undici 7.29.0`. The automatic audit suggestion downgraded to `cf@0.8.0`; it was not applied. `cf@1.0.0-beta.20` removed them but required Node 24.22, so the final pin is **cf@1.0.0-beta.18**, which supports Node >=22. Final install reported **0 vulnerabilities**. No forced upgrades, root overrides, or production Worker runtime dependencies were added. The root lockfile is owned by the integrator and was not changed here.
 
 References: [Cloudflare CLI project/build behavior](https://developers.cloudflare.com/cf/projects/), [programmatic configuration](https://developers.cloudflare.com/cf/projects/cloudflare-config/), [Workers WebSockets](https://developers.cloudflare.com/workers/runtime-apis/websockets/), [Linx WebSocket protocol](https://linx.qiniu.com/docs/xrobot/platform/websocket), [Linx agent API](https://linx.qiniu.com/docs/xrobot/api/agent), [Linx device API](https://linx.qiniu.com/docs/xrobot/api/device). Checked 2026-10-23.
+
+
+## Prepare a local browser session without inference
+
+```sh
+npm run test:linx --workspace @lie/gateway -- --key-file /absolute/path/to/.linx-api-key --setup-only --export-dev-vars
+```
+
+`--setup-only` prepares or reuses the dedicated generic agent and at most three devices, refreshes their OTA connection tokens, and exits before opening any inference WebSocket. `--export-dev-vars` requires that flag and writes the first device's connection settings plus a random independent `VOICE_ACCESS_TOKEN` to ignored `apps/gateway/.dev.vars` with mode 0600. The management key is never exported. The state file is also 0600 and retains ownership and the access token for reuse/cleanup; neither file's contents are printed. Omitting `--export-dev-vars` prepares resources without exporting Worker settings. Normal invocation without these flags still runs the original six bounded scenarios.
+
+An existing `.dev.vars` is overwritten only when its agent and test access token match this script's retained state; unrelated local credentials are left intact. A new local export uses exclusive file creation. This setup uses one fixed device for the local Worker, so it is intended for one controlled browser session at a time and does not implement visitor allocation.
+
+Start the local Worker after exporting. The trusted browser harness must separately install the matching same-origin `lie_voice_access` cookie without printing or embedding its value in app assets. On completion stop the local Worker, then run the existing `--cleanup` command: it unbinds the three owned devices, deletes the owned agent, removes the owned `.dev.vars`, and finally removes the state file. If a management operation fails, keep state and retry cleanup; it records each successful step. A changed/unowned `.dev.vars` is preserved. Never delete private state while its remote resources remain.

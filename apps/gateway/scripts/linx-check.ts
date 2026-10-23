@@ -1,18 +1,25 @@
 import { randomBytes, randomUUID } from 'node:crypto'
-import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises'
+import { chmod, mkdir, readFile, unlink, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 import WebSocket from 'ws'
 
 const statePath = new URL('../tmp/linx-game-state.json', import.meta.url)
 const resultsPath = new URL('../tmp/linx-game-results.json', import.meta.url)
+const devVarsPath = new URL('../.dev.vars', import.meta.url)
+const setupOnly = process.argv.includes('--setup-only')
+const exportDevVars = process.argv.includes('--export-dev-vars')
+const cleanup = process.argv.includes('--cleanup')
+if ((exportDevVars && !setupOnly) || (cleanup && (setupOnly || exportDevVars))) {
+  throw new Error('--export-dev-vars requires --setup-only; --cleanup cannot be combined with setup flags')
+}
 const keyOption = process.argv.indexOf('--key-file')
 if (keyOption < 0 || process.argv[keyOption + 1]?.startsWith('--') || process.argv[keyOption + 1] == null) {
   throw new Error('Pass --key-file /path/to/local/.linx-api-key; never put its contents in arguments')
 }
 const key = (await readFile(resolve(process.argv[keyOption + 1]), 'utf8')).trim()
 type Device = { mac: string; client: string; bound: boolean; token: string | null }
-type State = { name: string; agentId: string | null; devices: Device[] }
+type State = { name: string; agentId: string | null; devices: Device[]; voiceAccessToken?: string }
 let state: State
 await mkdir(new URL('../tmp/', import.meta.url), { recursive: true })
 try {
@@ -25,7 +32,20 @@ try {
   await save()
 }
 if (!state.name.startsWith('LIE-game-test-') || state.devices.length !== 3) throw new Error('Refusing unrelated test state')
-async function save() { await writeFile(statePath, JSON.stringify(state), { mode: 0o600 }) }
+async function save() {
+  await writeFile(statePath, JSON.stringify(state), { mode: 0o600 })
+  await chmod(statePath, 0o600)
+}
+async function readDevVars(): Promise<string | null> {
+  try { return await readFile(devVarsPath, 'utf8') } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
+    return null
+  }
+}
+function ownsDevVars(content: string): boolean {
+  return state.voiceAccessToken != null && content.split('\n').includes(`VOICE_ACCESS_TOKEN=${JSON.stringify(state.voiceAccessToken)}`) &&
+    content.split('\n').includes(`LINX_AGENT_ID=${JSON.stringify(state.agentId)}`)
+}
 async function api(operation: string, path: string, method = 'GET', body: unknown = null) {
   const response = await fetch(`https://xrobo.qiniu.com${path}`, {
     method, headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
@@ -36,7 +56,9 @@ async function api(operation: string, path: string, method = 'GET', body: unknow
   if (!response.ok || (result.code != null && result.code !== 0)) throw new Error(`${operation} rejected: HTTP ${response.status}, code ${result.code ?? 'absent'}`)
   return result
 }
-if (process.argv.includes('--cleanup')) {
+if (cleanup) {
+  const existingDevVars = await readDevVars()
+  const removeDevVars = existingDevVars != null && ownsDevVars(existingDevVars)
   for (const device of state.devices) {
     if (!device.bound) continue
     await api('unbind-test-device', '/xiaozhi/device/unbind', 'POST', { deviceId: device.mac })
@@ -44,14 +66,19 @@ if (process.argv.includes('--cleanup')) {
     device.token = null
     await save()
   }
+  if (removeDevVars) await unlink(devVarsPath)
   if (state.agentId != null) {
     await api('delete-test-agent', `/xiaozhi/agent/${state.agentId}`, 'DELETE')
     state.agentId = null
     await save()
   }
   await unlink(statePath)
-  console.log(JSON.stringify({ cleanup: 'complete' }))
+  console.log(JSON.stringify({ cleanup: 'complete', removedOwnedDevVars: removeDevVars }))
   process.exit(0)
+}
+if (exportDevVars) {
+  const existing = await readDevVars()
+  if (existing != null && !ownsDevVars(existing)) throw new Error('Refusing to overwrite unowned .dev.vars')
 }
 if (state.agentId == null) {
   const created = await api('create-test-agent', '/xiaozhi/agent', 'POST', {
@@ -92,6 +119,29 @@ for (const device of state.devices) {
   device.bound = true
   device.token = config.websocket.token
   await save()
+}
+
+if (setupOnly) {
+  if (exportDevVars) {
+    const existing = await readDevVars()
+    if (existing != null && !ownsDevVars(existing)) throw new Error('Refusing to overwrite unowned .dev.vars')
+    if (state.voiceAccessToken == null) {
+      state.voiceAccessToken = randomBytes(32).toString('hex')
+      await save()
+    }
+    const values = {
+      LINX_WS_TOKEN: state.devices[0]!.token,
+      LINX_DEVICE_ID: state.devices[0]!.mac,
+      LINX_AGENT_ID: state.agentId,
+      VOICE_ACCESS_TOKEN: state.voiceAccessToken
+    }
+    const content = Object.entries(values).map(([name, value]) => `${name}=${JSON.stringify(value)}`).join('\n') + '\n'
+    await writeFile(devVarsPath, content, { mode: 0o600, flag: existing == null ? 'wx' : 'w' })
+    await chmod(devVarsPath, 0o600)
+  }
+  console.log(JSON.stringify({ setup: 'complete', inference: 'not-run', devices: state.devices.length,
+    exportedDevVars: exportDevVars, resourcesRetained: true }))
+  process.exit(0)
 }
 
 type Context = { background: string; profile: string; systemPrompt: string; history: { role: string; text: string }[] }
