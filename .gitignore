@@ -6,3 +6,6 @@ tmp/
 .linx-api-key
 .dev.vars
 .dev.vars.*
+node_modules/
+dist/
+coverage/
