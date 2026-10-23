@@ -1,5 +1,20 @@
 [
-  { "id": "placeholder-coral", "avatar": "/appearances/avatar.svg", "portrait": "/appearances/portrait.svg", "accent": "#FF665B" },
-  { "id": "placeholder-yellow", "avatar": "/appearances/avatar.svg", "portrait": "/appearances/portrait.svg", "accent": "#FFF18A" },
-  { "id": "placeholder-blue", "avatar": "/appearances/avatar.svg", "portrait": "/appearances/portrait.svg", "accent": "#78DDD7" }
+  {
+    "id": "coral-bob",
+    "avatar": "/appearances/coral-bob.png",
+    "portrait": "/appearances/coral-bob.png",
+    "accent": "#FF665B"
+  },
+  {
+    "id": "sunny-moustache",
+    "avatar": "/appearances/sunny-moustache.png",
+    "portrait": "/appearances/sunny-moustache.png",
+    "accent": "#FFCF43"
+  },
+  {
+    "id": "blue-glasses",
+    "avatar": "/appearances/blue-glasses.png",
+    "portrait": "/appearances/blue-glasses.png",
+    "accent": "#075BFA"
+  }
 ]
