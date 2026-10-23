@@ -61,3 +61,20 @@ root 先审核提示差异、脚本与以下固定矩阵，再决定是否放行
 两回答各1次STT、1次context调用、1次TTS start/stop并有PCM，分别23.923/26.936秒，共50.859秒。命令在第二答后人工输入STOP以退出码1结束；没有第三回答，没有修改candidate后重试，不保存音频。候选未取得所需全部通过证据，不适合据此更新用户现有agent或宣称问题解决。长度约束仍未稳定达到，其他未测能力保持未知。
 
 资源操作create/configure/read各1、OTA2、bind1；停止后unbind1/delete1均HTTP200/code0，`tmp/immersion-state.json`已删除。独立资源清理完成，不声称删除供应商日志。下一次试验或模型变化需root/用户另行讨论，不自动追加费用或继续叠提示。
+
+## 实测模型身份补查（只读，列表已精确匹配名称）
+
+2026-10-24，调查基线 `5ff83dc6d6304fa2fcc4a2b70cef3924ef7ef62e`。先检索仓库已保存的sanitized资料，只有本次agent读回的ID与空名称，不能从ID推断型号。再按[官方大语言模型API](https://linx.qiniu.com/docs/xrobot/api/llm)确认列表 `GET /v1/agents/models/llm`、详情 `GET /v1/models/{id}`、参数schema `GET /v1/models/{id}/custom-config-schema` 路径；先调用后两项各一次，未能识别名称；root随后明确追加授权一次列表精确ID查找，总共3次只读GET。
+
+| 本轮直接证据 | 结果与能得出的结论 |
+| --- | --- |
+| `GET /v1/models/f3626c105383d71654a57f2bb8a973f3` | HTTP200、业务code599；提取的id/name/provider/type均null。因此实际名称、具体型号/提供商未知；HTTP200不能算业务成功。未猜测599原因，未保存完整响应或错误message。这不证明模型不存在，详情与列表可能存在ID层级差异，但未证实原因。 |
+| 同ID的 `/custom-config-schema` | HTTP200、业务code0；只提取data.properties或data.schema.properties的键名，结果为空数组。只能确认端点有成功响应，**无法由该白名单投影确认schema具体形状或支持哪些参数，更不能推断模型不支持参数**。本次不读取schema配置值，不再查询schema。 |
+
+追加的 `GET /v1/agents/models/llm` 返回HTTP200/code0；仅在内存对publics/privates按目标ID精确匹配，未输出其他项或保存完整列表。该单项白名单为：`id=f3626c105383d71654a57f2bb8a973f3`、`name=deepseek-v4-flash`、`type=openai`、`provider=null`。因此**本次实测agent对应的目录名称是deepseek-v4-flash**；`openai`是API配置类型，不等于OpenAI模型或实际提供商。具体后端版本、服务提供商字段仍未知，不能仅凭名称进一步猜测。
+
+密钥仅在内存从原授权文件读取；输出只保留操作、状态码和上述白名单；没有保存完整config、密钥、账号端点、响应原文，也没有创建资源、修改agent、连接语音或调用推理。已确认的模型ID来自上一轮agent白名单读回，不因详情查询失败而失效；列表已匹配名称deepseek-v4-flash，具体后端版本/提供商仍未知。官方通用参数文档也不能证明这次模型实际生效的默认参数。
+
+两次候选失败不足以证明“模型本身差”或“跨连接记忆泄漏”。顶层指令包装、工具结果实际注入方式、模型采样随机性及未控默认参数都可能影响输出；空history下的“我说过了”是可见不当连续性措辞，不能从一句话证明供应商留存或串用了旧会话。前三轮也没有完整同模型/同参数对照证据。
+
+若以后获准做模型对比：先确认两个可识别的模型及允许参数，在新独立无记忆资源中固定同一顶层候选、同一角色profile、同一问题和逐字相同显式history；同一协议/参数/判定标准，只改变模型，并预先限定每组次数与遇错停止规则，保留真实回答供盲化人工语义比较。可观测不到的温度等标记未控；不要将单次输出差异归因于模型。此处只是讨论轮廓，今晚没有执行、切换模型或推荐购买。
