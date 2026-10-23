@@ -47,3 +47,10 @@
 6. 最终首案逻辑、形象在正式角色上的绑定与 AI 表现、真实玩家试玩。静态素材、fake 与模块测试不能代替这些验收。
 
 独立探针代码保留在专用分支/工作区，尚未并入本文记录的应用基线；不能假定应用仓库已有 spikes 目录。实际语音探针必须显式执行，普通应用测试不读取管理 key，也不调用真实模型。当前以 [架构设计](architecture.md) 为实现边界。
+
+## 正式静态部署验证（2026-10-23）
+
+- 源码 `af7832b`；Worker version `d435842d-1d27-4eb4-8c3d-eacadd7ca644`；地址 https://lie-game.nighca.workers.dev/。
+- 最新 Web/Worker 构建、网关类型检查和 5 项 workerd 测试通过，cf prebuilt dry-run 与首次 deploy 成功。
+- 公网页面、首案 JSON、形象 manifest、health 为 200；缺失游戏/API 为 JSON 404，普通 HTTP voice 为 426。ws 客户端同源握手实际返回 503，语音无凭据关闭。Node fetch 不支持 Upgrade 头，改用真实 ws 客户端完成该项验证。
+- Codex 内置浏览器确认首案背景、三人切换界面、接案流程与语音失败提示；未申请麦克风、未调用灵矽、未验证真实 AI 或多人资源分配。
