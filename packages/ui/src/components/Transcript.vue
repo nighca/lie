@@ -13,7 +13,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <details class="lie-transcript">
+  <details open class="lie-transcript">
     <summary>查看对话转写 · 只读</summary>
     <div class="lie-transcript__log" role="log" aria-label="语音转写" aria-live="polite" aria-relevant="additions text">
       <p v-if="messages.length === 0" class="lie-transcript__empty">{{ emptyText }}</p>

@@ -34,13 +34,20 @@ describe('shared controls', () => {
     expect(wrapper.attributes('aria-pressed')).toBe('true')
   })
 
-  it('renders readonly transcript updates with speaker names', async () => {
+  it('starts the readonly transcript expanded and preserves disclosure choice across updates', async () => {
     const wrapper = mount(Transcript, { props: { messages: [] } })
     wrappers.push(wrapper)
+    expect(wrapper.get('details').element.open).toBe(true)
     expect(wrapper.text()).toContain('还没有对话')
     await wrapper.setProps({ messages: [{ id: 'one', speaker: '你', text: '闭馆之后，你在哪里？', mine: true }] })
     expect(wrapper.get('[role="log"]').text()).toContain('你闭馆之后，你在哪里？')
     expect(wrapper.get('summary').text()).toContain('只读')
+    expect(wrapper.get('details').element.open).toBe(true)
+    await wrapper.get('summary').trigger('click')
+    expect(wrapper.get('details').element.open).toBe(false)
+    await wrapper.setProps({ messages: [{ id: 'two', speaker: '人物甲', text: '我在前台。' }] })
+    expect(wrapper.get('[role="log"]').text()).toContain('我在前台。')
+    expect(wrapper.get('details').element.open).toBe(false)
   })
 
   it('emits voice intents without changing the caller-owned state', async () => {
