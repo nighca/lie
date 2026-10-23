@@ -63,4 +63,3 @@ Palette: background #F2EFE7, white paper panels #FFFCF5, text #222B31, secondary
 Wordmark: "LIE" very legible bold sans capitals with one small proofreading-style line offset, exploratory not finished. Small board footer "VISUAL DIRECTION / NOT FINAL".
 Constraints: exactly three suspect cards, English short labels spelled correctly, evidence clearly legible, voice control clearly visible, no truth/guilt scores or culprit indicators, no real credentials/accounts, no badges, no wax seals, no typewriter fonts, no historical detective aesthetic, no physical props, no generic SaaS charts, no watermark.
 ```
-
