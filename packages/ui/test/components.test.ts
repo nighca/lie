@@ -34,20 +34,18 @@ describe('shared controls', () => {
     expect(wrapper.attributes('aria-pressed')).toBe('true')
   })
 
-  it('starts the readonly transcript expanded and preserves disclosure choice across updates', async () => {
+  it('keeps readonly transcription visible while messages update', async () => {
     const wrapper = mount(Transcript, { props: { messages: [] } })
     wrappers.push(wrapper)
-    expect(wrapper.get('details').element.open).toBe(true)
-    expect(wrapper.text()).toContain('还没有对话')
+    const log = wrapper.get('[role="log"]')
+    expect(log.isVisible()).toBe(true)
+    expect(log.text()).toContain('还没有对话')
     await wrapper.setProps({ messages: [{ id: 'one', speaker: '你', text: '闭馆之后，你在哪里？', mine: true }] })
-    expect(wrapper.get('[role="log"]').text()).toContain('你闭馆之后，你在哪里？')
-    expect(wrapper.get('summary').text()).toContain('只读')
-    expect(wrapper.get('details').element.open).toBe(true)
-    await wrapper.get('summary').trigger('click')
-    expect(wrapper.get('details').element.open).toBe(false)
+    expect(log.isVisible()).toBe(true)
+    expect(log.text()).toContain('你闭馆之后，你在哪里？')
     await wrapper.setProps({ messages: [{ id: 'two', speaker: '人物甲', text: '我在前台。' }] })
-    expect(wrapper.get('[role="log"]').text()).toContain('我在前台。')
-    expect(wrapper.get('details').element.open).toBe(false)
+    expect(log.isVisible()).toBe(true)
+    expect(log.text()).toContain('我在前台。')
   })
 
   it('emits voice intents without changing the caller-owned state', async () => {

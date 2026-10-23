@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 export interface TranscriptMessage {
   id: string
@@ -10,17 +10,24 @@ export interface TranscriptMessage {
 }
 
 const brokenAvatars = ref(new Set<string>())
+const log = ref<HTMLElement | null>(null)
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   messages: readonly TranscriptMessage[]
   emptyText?: string
 }>(), { emptyText: '还没有对话，开口打个招呼吧。' })
+
+function followLatest() {
+  if (log.value != null) log.value.scrollTop = log.value.scrollHeight
+}
+
+watch(() => props.messages, followLatest, { deep: true, flush: 'post' })
+onMounted(followLatest)
 </script>
 
 <template>
-  <details open class="lie-transcript">
-    <summary>查看对话转写 · 只读</summary>
-    <div class="lie-transcript__log" role="log" aria-label="语音转写" aria-live="polite" aria-relevant="additions text">
+  <section class="lie-transcript" aria-label="对话转写">
+    <div ref="log" class="lie-transcript__log" role="log" aria-label="语音转写" aria-live="polite" aria-relevant="additions text">
       <p v-if="messages.length === 0" class="lie-transcript__empty">{{ emptyText }}</p>
       <article v-for="message in messages" :key="message.id" class="lie-transcript__message" :class="{ 'lie-transcript__message--mine': message.mine }">
         <span class="lie-transcript__avatar" aria-hidden="true">
@@ -31,12 +38,11 @@ withDefaults(defineProps<{
         <div class="lie-transcript__bubble"><strong>{{ message.speaker }}</strong><p>{{ message.text }}</p></div>
       </article>
     </div>
-  </details>
+  </section>
 </template>
 
 <style scoped>
 .lie-transcript { border: 0; border-radius: 0; background: transparent; }
-.lie-transcript summary { padding: 0 0 14px; color: var(--lie-muted); font-size: 14px; }
 .lie-transcript__log { max-height: clamp(280px, calc(100vh - 450px), 380px); overflow-y: auto; padding: 0 6px 12px 0; scrollbar-gutter: stable; }
 .lie-transcript__empty { margin: 0; padding: 24px; border: 3px solid var(--lie-ink); border-radius: 24px; background: var(--lie-surface); line-height: 1.8; }
 .lie-transcript__message { display: flex; align-items: flex-start; gap: 12px; width: 100%; max-width: none; margin: 0 0 20px; padding: 0; border: 0; border-radius: 0; background: transparent; }
