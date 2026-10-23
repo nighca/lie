@@ -22,5 +22,11 @@
     "avatar": "assets/silver-bun.png",
     "portrait": "assets/silver-bun.png",
     "accent": "#78DDD7"
+  },
+  {
+    "id": "salt-pepper-beard",
+    "avatar": "assets/salt-pepper-beard.png",
+    "portrait": "assets/salt-pepper-beard.png",
+    "accent": "#FF665B"
   }
 ]

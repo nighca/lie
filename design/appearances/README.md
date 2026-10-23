@@ -12,6 +12,7 @@
 | `sunny-moustache` | 宽脸、小胡子、黄色上衣的成人男性 | `#FFCF43` |
 | `blue-glasses` | 瘦高、圆眼镜、蓝色服装的成人男性 | `#075BFA` |
 | `silver-bun` | 银发盘发、水蓝开衫、圆润体型的年长女性 | `#78DDD7` |
+| `salt-pepper-beard` | 灰白短发短胡须、珊瑚套头衫的年长男性 | `#FF665B` |
 
 头像与立绘共享同一张透明 PNG，无额外下载。立绘使用 `object-fit: contain; object-position: center bottom`。头像容器使用 `overflow: hidden`，内部图片从上部取景；建议图片宽高为头像容器的约 240%，`max-width: none`，居中定位并用 `top: -3%`，覆盖容器的底部区域。不能仅用同宽正方形图片的 `object-fit: cover`，那会仍显示整个人物。最终按各容器比例在浏览器里检查头发、眼镜和下巴；这属于 CSS 展示裁切，不修改原 PNG。
 
@@ -32,6 +33,7 @@
 2026-10-23，继续使用内置 `image_gen.imagegen`、`transparent_background: true`，不修改既有三套 ID 或 PNG。扩充只是可见外貌差异，不指定心理、道德、故事身份或性别认同；manifest 不增加业务字段。
 
 - `silver-bun`：参考 coral-bob 和 sunny-moustache。年长女性、银发盘发、圆润体型、水蓝开衫；保留自然年龄细节，不将年龄画成衰弱符号。实际 prompt 为 `prompts/silver-bun.txt`；原始输出 `/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-8d591f09-4933-4f4f-966d-c9141cff28c2.png`。已 `view_image` 检查轮廓、手部、无文字道具、与现有插画一致。RGBA 与真实透明 alpha 已读取核对；底部自然截断裤腿。
+- `salt-pepper-beard`：参考 sunny-moustache 和 silver-bun。年长男性、灰白短发短胡须、自然面部细纹、珊瑚套头衫；不预设案件身份。实际 prompt 为 `prompts/salt-pepper-beard.txt`；原始输出 `/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-3f3a4766-aa5b-490b-8c63-378b9dba9d0f.png`。已逐张 `view_image` 检查，五官、手部与头部完整，颜色与轮廓符合现有插画。RGBA/透明 alpha 已核对；无脚本图像修改。
 
 ## QA 与限制
 
