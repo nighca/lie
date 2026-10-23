@@ -1,0 +1,28 @@
+# @lie/ui
+
+Shared Vue components for the approved Chinese B direction: sunny yellow, cobalt blue, navy outlines and simple rounded shapes. Visual values follow `design/ui/tokens.json`; screen composition follows `design/ui/spec.md`. This package contains no game rules, provider calls or microphone access.
+
+```ts
+import { CharacterChoice, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
+import '@lie/ui/style.css'
+```
+
+- `UiButton`: `variant` (`primary`, `secondary`, `quiet`), `disabled`, `busy`, default label slot. Native button attributes and click listeners pass through. Busy preserves the label and disables activation.
+- `CharacterChoice`: `name`, optional `description`, `selected`, `disabled`, optional `avatar` slot. A native toggle button with `aria-pressed`; the caller owns selection and list layout. Without artwork it displays the name's first character.
+- `Transcript`: readonly `messages` (`id`, `speaker`, `text`, optional `mine`), optional `emptyText`. Native collapsible disclosure, speaker labels and polite log updates. It neither scrolls the reader to the bottom nor accepts input. System feedback belongs in `UiNotice`, not in character speech.
+- `VoiceControl`: `status` (`idle`, `recording`, `waiting`, `speaking`, `error`), `label`, optional `actionLabel`, `cancelLabel`, `interruptLabel`, `disabled`. Non-null action labels expose buttons emitting `start`, `cancel`, `interrupt`. The caller owns their actual meaning, including finishing a recording. The optional `meter` slot can display real audio amplitude. The component does not generate fake waveform activity.
+- `UiDialog`: controlled `open`, `title`, default body and optional `actions` slots, `close` event. Uses the browser's native modal focus containment and restoration. Escape and the visible close button request closure; the caller updates `open`. Requires a modern browser supporting `dialog.showModal()`.
+- `UiNotice`: `tone` (`info`, `error`) and a default body slot. A separate labelled status region for feedback.
+
+## Preview and checks
+
+From the repository root after installing workspace dependencies:
+
+```sh
+npm run dev --workspace @lie/ui -- --port 5175
+npm run typecheck --workspace @lie/ui
+npm run test --workspace @lie/ui
+npm run build --workspace @lie/ui
+```
+
+The preview is a component gallery with fake Chinese content, long names and two/three-person layouts. It is not the production game. `build` checks the source package; the consuming application's Vite build compiles exported Vue files. Browser verification should use the Codex built-in browser, including keyboard focus, Escape, 200% zoom and long-text wrapping.
