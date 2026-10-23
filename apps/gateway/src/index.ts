@@ -2,7 +2,7 @@ import type { InferEnv } from 'cf/config'
 
 import type config from '../cloudflare.config'
 
-export type GatewayEnv = InferEnv<typeof config.worker> & Partial<Record<
+export type GatewayEnv = InferEnv<ReturnType<typeof config.worker>> & Partial<Record<
   'LINX_WS_TOKEN' | 'LINX_DEVICE_ID' | 'LINX_AGENT_ID' | 'VOICE_ACCESS_TOKEN', string
 >>
 const upstreamUrl = 'https://xrobo-io.qiniuapi.com/v1/ws/'
