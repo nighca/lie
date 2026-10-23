@@ -1,0 +1,22 @@
+{
+  "name": "@lie/gateway",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cf dev",
+    "build": "cf build",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.scripts.json",
+    "test": "vitest run",
+    "test:linx": "node --use-system-ca scripts/linx-check.ts"
+  },
+  "devDependencies": {
+    "cf": "1.0.0-beta.18",
+    "ws": "8.22.0",
+    "@cloudflare/vite-plugin": "2.0.0-beta.v.4",
+    "@cloudflare/workers-types": "5.20261023.1",
+    "@types/ws": "8.18.1",
+    "vite": "8.3.5",
+    "miniflare": "5.20261019.2-beta"
+  }
+}
