@@ -1,0 +1,14 @@
+[
+  {
+    "id": "mint-puffs",
+    "avatar": "assets/mint-puffs-v2.png",
+    "portrait": "assets/mint-puffs-v2.png",
+    "accent": "#78DDD7"
+  },
+  {
+    "id": "ochre-freckles",
+    "avatar": "assets/ochre-freckles.png",
+    "portrait": "assets/ochre-freckles.png",
+    "accent": "#FFCF43"
+  }
+]
