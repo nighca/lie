@@ -129,8 +129,12 @@
 | T12 | worktree、本地 review 与本地集成/里程碑 push 协作规范 | 协作代理，主代理 review | 已落实 | 根目录 `AGENTS.md` |
 | T13 | 多游戏内容包与通用引擎架构提案 | 架构代理，主代理 review | 已按 D22–D24 收敛，用户已确认模块拆解（D30） | `architecture.md`；D08、D10、D16、D17 |
 | T14 | Cloudflare 静态站点、薄网关与灵矽最小验证 | Cloudflare 探针代理、灵矽探针代理，主代理 review/部署 | 基础公网链路已通过，收尾自动化/清理中 | 探针工作分支：`spikes/cloudflare`、`spikes/linx`；待 review/集成 |
-| T15 | 统一 UI、Logo 与物料的视觉方向 | 独立视觉负责人，主代理 review | 中文 B 风格已确认；具体设计稿已产出，主代理 review 中 | `visual-direction.md`；风格批准后展开正式设计 |
+| T15 | 统一 UI、Logo 与物料的视觉方向 | 独立视觉负责人，主代理 review | 中文 B 风格已确认；具体流程/语音/结果设计稿已 review 并集成本地 main | `visual-direction.md`；风格批准后展开正式设计 |
 | T16 | 假数据交互原型 | 独立原型代理，主代理 review/内置浏览器验证 | 用户已确认流程/结构，正式实现已获架构授权 | 工作分支 `prototypes/interaction`；不连接真实服务 |
+
+| T17 | 公共 UI 组件 | 组件代理、主代理 review | 已集成，5 项组件测试通过 | `packages/ui`；含独立展示页 |
+| T18 | 内容、会话状态与角色上下文 A/B/C | 核心代理、主代理 review | 已集成，30 项自动化测试通过；正式故事待确认 | `packages/game-core` |
+| T19 | 浏览器语音协议与音频边界 E | 语音代理、主代理 review | 实现与独立测试中 | `packages/voice`；真实收音/播放另验 |
 
 ## 工作顺序与变更原则
 
