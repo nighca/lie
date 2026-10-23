@@ -23,7 +23,7 @@ describe('game screens', () => {
       await button!.trigger('click')
     }
     await click('接案，开始调查')
-    expect(wrapper.get('details').element.open).toBe(true)
+    expect(wrapper.get('[role="log"]').isVisible()).toBe(true)
     await click('最终指认')
     await click('指认 乙')
     expect(wrapper.text()).toContain('这次指认不正确')
