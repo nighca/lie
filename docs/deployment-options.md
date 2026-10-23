@@ -20,7 +20,7 @@ Worker 两端显式设置 `binaryType = 'arraybuffer'`，避免二进制默认 B
 
 ## 正式部署与 CLI 状态
 
-正式网关位于 `apps/gateway`，代码交付与 root review、正式部署验收需分别记录，不能把旧探针 URL 当作正式游戏地址。本记录基线时正式网关尚在 review，完整线上游戏尚未发布。
+正式网关位于 `apps/gateway`，代码交付与 root review、正式部署验收需分别记录，不能把旧探针 URL 当作正式游戏地址。正式网关已完成源码 review、本地 workerd 测试、网页/Worker 组合构建与部署 dry-run，完整线上游戏尚未发布。
 
 正式新项目使用 **cf CLI**；其独立登录尚未完成。旧 Wrangler 的现有 OAuth 登录不能被描述成 cf 已登录，也不以更换 CLI 绕开正式项目的登录前提。原探针目录已有 `wrangler.jsonc`，因此仅对该旧项目使用项目本地 Wrangler 完成指定临时 secret 清理，符合项目工具约定。
 

@@ -27,7 +27,7 @@ function speak() { if (view.value.voiceStatus === 'recording') props.controller.
 <template>
   <div class="game-shell">
     <header class="game-header"><a class="wordmark" href="/" aria-label="LIE 首页">LiE <span>语音推理</span></a><div v-if="view.phase === 'interrogating'" class="header-actions"><UiButton variant="quiet" @click="controller.end()">结束本局</UiButton><UiButton @click="controller.openAccusation()">最终指认</UiButton></div></header>
-    <p class="environment-note">{{ demo ? '开发演示 · 假数据，无真实 AI、麦克风或声音' : '开发预览 · 真实语音需配置服务网关，目前可能尚未接入' }} · 剧情为开发占位</p>
+    <p class="environment-note">{{ demo ? '演示模式 · 对话为模拟内容，不使用麦克风' : '语音体验开发预览' }}</p>
 
     <main v-if="view.phase === 'loading' || view.phase === 'failed'" class="intro-card surface"><h1>{{ view.phase === 'loading' ? '正在准备案件…' : '案件暂时无法加载' }}</h1><p role="status">{{ view.notice }}</p><p v-if="view.phase === 'failed'">请刷新页面重试。</p></main>
 

@@ -1,26 +1,33 @@
 # LIE
 
-现代背景的单人 AI 语音侦探推理游戏。玩家自由审问三名嫌疑人，对照证词和证据，还原预先确定的案件真相。
+轻松开口，认真推理。与三名 AI 角色自由语音交流，对照各自的说法，最后用按钮选出事件的责任人。
 
-首发平台为桌面浏览器 Web，使用灵矽提供大模型与语音能力，目标是在 2–3 天的开发窗口内完成可演示 MVP。目前处于产品方案与技术接入预研阶段，尚无可运行应用。
+首案为《空盒里的纪念章》。前端使用 Vue + TypeScript，游戏内容和单局逻辑在浏览器运行；Cloudflare 静态托管与薄 Worker 网关连接灵矽，无游戏数据库。角色形象独立复用，新增同玩法故事通过静态内容包和配置完成。
 
-前端使用 Vue + TypeScript；如需服务端或 Worker，采用 TypeScript 并优先 Node.js 技术生态。具体部署运行时与兼容性在技术方案中确认。
+## 本地运行
+
+需要 Node.js 24.15+（24.x）和 npm 11。
+
+```sh
+npm ci
+npm run dev
+```
+
+打开 http://127.0.0.1:5176/?demo=1 查看明确标注的模拟对话演示。生产构建不启用此模式。真实语音需配置网关及供应商额度，尚未完成真实麦克风与角色行为验收。
+
+```sh
+npm run typecheck
+npm test
+npm run build
+```
 
 ## 项目资料
 
-- [项目计划与决策记录](docs/project-plan.md)：已确认方向、待决策项、任务和里程碑。
-- [AI 协作规范](AGENTS.md)：worktree 隔离、本地 review、串行集成和普通 push。
-- [多游戏架构提案](docs/architecture.md)：内容包、运行引擎、角色知识与供应商适配边界。
-- [玩法提案](docs/gameplay-proposal.md)：待评审的一局流程和交互规则。
-- [案件候选](docs/case-options.md)：待选择的原创案件及推理逻辑。
-- [视觉方向提案](docs/visual-direction.md)：整体 UI、Logo 与物料风格；确认方向后展开正式设计。
-- [灵矽技术预研](docs/technical-discovery.md)：文档依据、接入选项和实测清单。
-- [在线部署与无传统服务端预研](docs/deployment-options.md)：纯静态与托管运行方式的可行性、限制和待验证项。
+- [开发与检查](docs/development.md)
+- [架构设计](docs/architecture.md)
+- [玩法与首案](docs/gameplay-proposal.md) / [完整剧透与逻辑核查](docs/case-options.md)
+- [视觉设计](docs/visual-direction.md) / [预置形象](design/appearances/README.md)
+- [技术验证与清理记录](docs/validation.md) / [部署方案](docs/deployment-options.md)
+- [项目计划与决策](docs/project-plan.md) / [AI 协作规范](AGENTS.md)
 
-原始背景草稿在本地 `tmp/context.md`，按临时资料保留，不纳入版本控制。后续决定以项目计划中的记录为准。
-
-产品和技术提案须区分已确认决定、推荐方案及待验证假设。游戏逻辑维护案件事实和运行状态，AI 在角色知识与行为约束内进行表演；引擎运行位置与托管部署方式仍待架构评审。
-
-首版交付一个游戏，架构须支持通过新增内容包扩展同审讯玩法的游戏；首案的三名嫌疑人及剧情不能硬编码进通用引擎或 UI。
-
-模块架构初稿须由用户确认后，才开始应用实现。适合自动化验证的模块随实现交付测试，真实 AI 与语音表现另做集成评估。
+当前已有完整页面、独立模块自动化和本地 Worker 构建。正式在线体验尚未发布；模型调用等待供应商额度恢复。测试替身通过不代表真实语音或 AI 表现已经验收。
