@@ -16,5 +16,11 @@
     "avatar": "assets/blue-glasses.png",
     "portrait": "assets/blue-glasses.png",
     "accent": "#075BFA"
+  },
+  {
+    "id": "silver-bun",
+    "avatar": "assets/silver-bun.png",
+    "portrait": "assets/silver-bun.png",
+    "accent": "#78DDD7"
   }
 ]
