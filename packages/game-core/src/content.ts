@@ -9,6 +9,7 @@ export interface GameDefinition {
   readonly id: string
   readonly title: string
   readonly background: string
+  readonly interrogationLimitSeconds: number
   readonly characters: readonly CharacterDefinition[]
   readonly ending: {
     readonly culpritId: string
@@ -51,6 +52,10 @@ export function validateGame(data: unknown): GameDefinition {
   const id = readText(game.id, 'game.id')
   const title = readText(game.title, 'game.title')
   const background = readText(game.background, 'game.background')
+  const interrogationLimitSeconds = game.interrogationLimitSeconds
+  if (typeof interrogationLimitSeconds !== 'number' || !Number.isSafeInteger(interrogationLimitSeconds) || interrogationLimitSeconds <= 0) {
+    throw new ContentValidationError('game.interrogationLimitSeconds', 'Expected a positive safe integer')
+  }
   if (!Array.isArray(game.characters) || game.characters.length === 0) {
     throw new ContentValidationError('game.characters', 'Expected at least one character')
   }
@@ -81,6 +86,7 @@ export function validateGame(data: unknown): GameDefinition {
     id,
     title,
     background,
+    interrogationLimitSeconds,
     characters,
     ending: { culpritId, reveal: readText(ending.reveal, 'game.ending.reveal') }
   }

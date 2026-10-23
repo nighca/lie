@@ -45,6 +45,16 @@ describe('static game content', () => {
     }
   })
 
+  it.each([null, 0, -1, 1.5, NaN, Infinity, -Infinity, '60', Number.MAX_SAFE_INTEGER + 1])('rejects an invalid interrogation allowance %s', (limit) => {
+    expect(() => validateGame({ ...twoCharacterPlaceholder(), interrogationLimitSeconds: limit }))
+      .toThrow('game.interrogationLimitSeconds: Expected a positive safe integer')
+  })
+
+  it('requires an interrogation allowance in static content', () => {
+    const { interrogationLimitSeconds, ...data } = twoCharacterPlaceholder()
+    expect(() => validateGame(data)).toThrow('game.interrogationLimitSeconds')
+  })
+
   it('rejects duplicate character IDs', () => {
     const game = twoCharacterPlaceholder()
     expect(() => validateGame({ ...game, characters: [game.characters[0], game.characters[0]] }))

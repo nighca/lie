@@ -6,6 +6,7 @@ export function twoCharacterPlaceholder(): GameDefinition {
     id: 'placeholder-two',
     title: '双人测试占位',
     background: '  公共背景原文\n不对它做摘要。  ',
+    interrogationLimitSeconds: 60,
     characters: [
       { id: 'a', name: '甲', profile: '  甲的设定原文\n秘密甲。  ', appearanceId: null },
       { id: 'b', name: '乙', profile: '乙独有秘密：提前离开。', appearanceId: 'placeholder-b' }
@@ -20,6 +21,7 @@ export function threeCharacterPlaceholder(): GameDefinition {
     ...game,
     id: 'placeholder-three',
     title: '三人测试占位',
+    interrogationLimitSeconds: 90,
     characters: [...game.characters, { id: 'c', name: '丙', profile: '丙的设定。', appearanceId: null }],
     ending: { culpritId: 'c', reveal: '三人包的独立结局。' }
   }

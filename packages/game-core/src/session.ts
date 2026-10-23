@@ -27,6 +27,7 @@ export interface GameSession {
   readonly game: GameDefinition
   readonly phase: GamePhase
   readonly currentCharacterId: string | null
+  readonly interrogationUsedMs: number
   readonly histories: Readonly<Record<string, readonly DialogueEntry[]>>
   readonly result: AccusationResult | null
   readonly createdAt: number
@@ -59,6 +60,7 @@ export function createGameSession(game: GameDefinition, identity: SessionIdentit
     game: snapshot,
     phase: 'intro',
     currentCharacterId: null,
+    interrogationUsedMs: 0,
     histories: Object.fromEntries(snapshot.characters.map((character) => [character.id, []])),
     result: null,
     createdAt: identity.now,
@@ -118,4 +120,20 @@ export function appendDialogue(
     ...session,
     histories: { ...session.histories, [characterId]: [...history, { ...entry }] }
   }
+}
+
+/** Consumes caller-measured active voice time; reaching the limit leaves accusation available. */
+export function consumeInterrogationTime(session: GameSession, elapsedMs: number): GameSession {
+  requirePhase(session, 'interrogating')
+  if (!Number.isFinite(elapsedMs) || elapsedMs < 0) {
+    throw new RangeError('Elapsed interrogation time must be finite and non-negative')
+  }
+  return {
+    ...session,
+    interrogationUsedMs: Math.min(session.game.interrogationLimitSeconds * 1000, session.interrogationUsedMs + elapsedMs)
+  }
+}
+
+export function getInterrogationRemainingMs(session: GameSession): number {
+  return Math.max(0, session.game.interrogationLimitSeconds * 1000 - session.interrogationUsedMs)
 }

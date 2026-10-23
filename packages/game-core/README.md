@@ -4,7 +4,7 @@ A/B/C 的独立 TypeScript 基础模块，不依赖 Vue、DOM、Node.js API、�
 
 ## 内容
 
-`validateGame(unknown)` 返回规范化的 `GameDefinition`；静态数据为 `id`、`title`、`background`、`characters[{id,name,profile,appearanceId?}]`、`ending{culpritId,reveal}`。文本保持原文，省略或空值的 `appearanceId` 规范为 `null`。不检查故事逻辑，也不生成角色文案。
+`validateGame(unknown)` 返回规范化的 `GameDefinition`；静态数据为 `id`、`title`、`background`、`interrogationLimitSeconds`、`characters[{id,name,profile,appearanceId?}]`、`ending{culpritId,reveal}`。`interrogationLimitSeconds` 为必填正安全整数，单位秒，不提供默认额度。文本保持原文，省略或空值的 `appearanceId` 规范为 `null`。不检查故事逻辑，也不生成角色文案。
 
 `loadGame(gameId, read)` 使用调用方注入的异步读取函数，检查返回内容及游戏 ID。读取失败原样抛出；坏内容抛 `ContentValidationError`，`issues` 提供字段位置。
 
@@ -26,6 +26,15 @@ const result = accuse(running, selectedCharacterId, 102)
 - `appendDialogue` 只接受当前有效人物。条目为 `{id,role:'user'|'assistant',text,at,interrupted}`；本人同 ID 条目重复到达时返回原状态，不覆盖已有证词。
 
 所有转换均返回新状态且不改输入，输入与结果使用 readonly 契约。错误操作抛 `GameStateError`，`code` 为 `invalid-phase`、`unknown-character` 或 `inactive-character`。异步事件归属、旧连接代次、麦克风和播放均由编排层负责，core 不管理 provider 生命周期。
+
+## 审问额度
+
+每局 `interrogationUsedMs` 初始为 0；切人保留，重开归零。
+
+- `consumeInterrogationTime(session, elapsedMs)` 仅接受 `interrogating`，将外部测得的有限非负毫秒增量累计并封顶于本游戏额度；允许小数毫秒。非法增量抛 `RangeError`，阶段错误沿用 `GameStateError`。
+- `getInterrogationRemainingMs(session)` 在任意阶段读取剩余毫秒，最小为 0。
+
+额度用尽不改变阶段、不判负，也不改写指认规则或历史。计时口径、单调时钟、语音停止与到期指认界面由编排层负责；core 不创建 timer，不把对话记录时间戳当作语音时长。
 
 ## 角色上下文
 
