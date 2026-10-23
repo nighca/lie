@@ -1,0 +1,8 @@
+Use case: stylized-concept
+Asset type: reusable transparent character portrait for a cheerful Chinese voice mystery game.
+Input images: Image 1 approved B style board is STYLE REFERENCE ONLY. Image 2 coral-bob and Image 3 sunny-moustache are companion finished assets: match their bold smooth dark navy outline weight, clean simplified adult cartoon face, restrained cel shading, scale, and thigh-up isolated framing. Create a NEW distinct man, not either existing person.
+Primary request: ONE original adult man, blue-glasses appearance. Slender tall build, warm peach skin, narrow oval adult face, curly short dark navy hair, round navy glasses showing both eyes clearly, expressive brows, gentle attentive closed-mouth smile, adult around 30. Cream short-sleeved T-shirt, simple cobalt blue dungarees/overalls with plain navy straps and no insignia. No tools or occupational props.
+Composition: square canvas, ONE centered standing head-to-upper-thigh portrait, entire hair/head and both elbows/hands visible. Front-facing mild 3/4 body turn, arms naturally relaxed at sides, head in upper central portion for CSS avatar crop. Similar head scale and total on-canvas height as companions, transparent margin around hair and sides.
+Style: polished cheerful flat adult cartoon, smooth deep navy #111B45 outlines, large clear color blocks, cobalt #075BFA, cream #FFFEF7, restrained 2-tone cel shadow. No photo textures or 3D.
+Background: actual alpha transparency, fully isolated. No floor, cast shadow, background blob, graphic frame or painted checkerboard.
+Constraints: exactly one man, no text, logo, label, UI, props, clue/evidence, badge, guilt or fear indicators, no contact sheet, no animation variants.

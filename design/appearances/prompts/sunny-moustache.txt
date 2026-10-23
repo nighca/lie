@@ -1,0 +1,8 @@
+Use case: stylized-concept
+Asset type: reusable transparent character portrait for a cheerful Chinese voice mystery game.
+Input images: Image 1 is the approved B style board, STYLE REFERENCE ONLY. Image 2 coral-bob is the ALREADY APPROVED ASSET STYLE AND FRAMING REFERENCE: match its clean bold deep navy outline weight, simplified adult proportions, face scale, flat colors, restrained cel shadow, and isolated thigh-up pose. Do not repeat that woman.
+Primary request: ONE original adult man, sunny-moustache appearance. Warm peach skin, broad friendly rectangular face, thick dark navy eyebrows, short slightly wavy navy hair, small neat navy moustache, adult around 45, stocky build, relaxed curious friendly expression and small closed-mouth smile. Simple sunshine yellow polo shirt #FFCF43, navy trousers. No uniform insignia or job-specific clothing.
+Composition: square canvas, one centered standing head-to-upper-thigh portrait, entire head and both elbows/hands inside canvas. Front-facing with mild 3/4 body turn, relaxed arms at sides. Proportions and on-canvas scale consistent with coral-bob image. Face in upper central portion for CSS avatar crop. Keep transparent margins around head and body.
+Style: polished cheerful flat cartoon adult matching both references, smooth dark navy #111B45 outlines, large clean color shapes, subtle 2-tone cel shading, no realistic textures or 3D.
+Background: real alpha transparency. No floor, cast shadow, background color, graphic blobs, frame or painted checkerboard.
+Constraints: one man only; no woman, no text/logo/labels/UI/props/tools/cards/weapons/badges/evidence, no guilt or frightened expression, no sheet of variants.

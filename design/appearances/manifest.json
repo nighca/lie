@@ -1,0 +1,20 @@
+[
+  {
+    "id": "coral-bob",
+    "avatar": "assets/coral-bob.png",
+    "portrait": "assets/coral-bob.png",
+    "accent": "#FF665B"
+  },
+  {
+    "id": "sunny-moustache",
+    "avatar": "assets/sunny-moustache.png",
+    "portrait": "assets/sunny-moustache.png",
+    "accent": "#FFCF43"
+  },
+  {
+    "id": "blue-glasses",
+    "avatar": "assets/blue-glasses.png",
+    "portrait": "assets/blue-glasses.png",
+    "accent": "#075BFA"
+  }
+]

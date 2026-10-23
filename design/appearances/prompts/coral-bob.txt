@@ -1,0 +1,8 @@
+Use case: stylized-concept
+Asset type: reusable transparent character portrait for a cheerful Chinese voice mystery game.
+Input image: provided approved B style board is STYLE REFERENCE ONLY, not a UI to reproduce.
+Primary request: create ONE original adult woman character, coral-bob appearance. Warm peach skin, chin-length dark navy bob with asymmetric part, confident friendly eyebrows and a small relaxed closed-mouth smile, coral triangular earrings, coral casual jacket over cream top and navy trousers. Adult around 35, approachable and playful, not childlike or sexualized.
+Style: polished flat cartoon illustration matching the reference's bold smooth deep navy outlines (#111B45), large clean simple color shapes, restrained 2-tone shadows, expressive friendly adult face. Palette coral #FF665B, navy #111B45, cream #FFFEF7, small cobalt #075BFA accents. No realistic textures or 3D.
+Composition: square 1024x1024 canvas, ONE centered head-to-upper-thigh standing portrait, whole head/hair and both elbows fully visible, generous transparent margin at top and sides. Front-facing with slight natural 3/4 body turn, arms relaxed at her sides, neutral open welcoming stance. Consistent game-character asset framing; face occupies upper central portion suitable for CSS avatar crop.
+Background: actual alpha transparency, no floor, no cast shadow, no colored blob or frame, no checkerboard painted into image.
+Constraints: no text, logos, labels, UI, props, cards, badges, tools, weapons, crime clues, emotions implying guilt. One character only, fully isolated. Not a sheet of variants.
