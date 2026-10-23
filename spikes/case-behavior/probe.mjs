@@ -9,6 +9,8 @@ import { matrix } from './matrix.mjs'
 const require = createRequire(new URL(process.env.LIE_DEPENDENCY_ROOT ?? '../../../../lie/package.json', import.meta.url))
 const WebSocket = require('ws')
 
+const regression = process.argv.includes('--regression')
+const resultName = regression ? 'results-regression.json' : 'results.json'
 const dir = new URL('./tmp/', import.meta.url)
 await mkdir(dir, { recursive: true })
 // Transpile actual core sources unchanged except ESM relative extension resolution.
@@ -30,15 +32,28 @@ if (process.argv.includes('--offline-check')) {
   console.log(JSON.stringify({ offline: 'passed', characters: game.characters.length, websocketResolved: typeof WebSocket === 'function' }))
   process.exit(0)
 }
-const state = JSON.parse(await readFile(new URL('behavior-state.json', dir), 'utf8'))
-assert.ok(state.name.startsWith('LIE-case-behavior-') && state.devices.length === 3)
+const state = JSON.parse(await readFile(new URL(regression ? 'regression-state.json' : 'behavior-state.json', dir), 'utf8'))
+assert.ok(state.name.startsWith(regression ? 'LIE-case-regression-' : 'LIE-case-behavior-') && state.devices.length === 3)
 const histories = { shen: [], chen: [], gu: [] }
+const original = regression ? JSON.parse(await readFile(new URL('./results.json', import.meta.url), 'utf8')) : []
+const entries = rows => rows.flatMap(row => [
+  { id: randomUUID(), role: 'user', text: row.question, at: Date.now(), interrupted: false },
+  { id: randomUUID(), role: 'assistant', text: row.output, at: Date.now(), interrupted: false }
+])
+const selected = regression ? [
+  { ...matrix[4], history: entries([original[3]]) },
+  { character: 'chen', question: '沈禾把盒子交给顾遥以后，到你去接盒的那段时间，你和他在哪里，有没有分开？', history: [] },
+  { ...matrix[2], history: entries(original.slice(0, 2)) },
+  { ...matrix[6], history: [] }
+] : matrix.slice(0, 9)
+assert.equal(selected.length, regression ? 4 : 9)
 const results = []
 try {
-  for (const row of matrix.slice(0, 9)) {
+  for (const row of selected) {
+    if (regression) histories[row.character] = row.history
     const result = await sample(row)
     results.push(result)
-    await writeFile(new URL('results.json', dir), JSON.stringify(results, null, 2), { mode: 0o600 })
+    await writeFile(new URL(resultName, dir), JSON.stringify(results, null, 2), { mode: 0o600 })
     console.log(JSON.stringify({ character: result.character, contextCalls: result.contextCalls, durationMs: result.durationMs }))
   }
 } catch {
@@ -116,7 +131,7 @@ async function sample({ character, question }) {
 
   } catch (error) {
     const reason = ['transport', 'closed', 'quota', 'answer-budget', 'unexpected-tool', 'protocol', 'timeout'].includes(error.message) ? error.message : 'validation'
-    await writeFile(new URL('failure.json', dir), JSON.stringify({ character, question, ...stats, reason }, null, 2), { mode: 0o600 })
+    await writeFile(new URL(regression ? 'failure-regression.json' : 'failure.json', dir), JSON.stringify({ character, question, ...stats, reason }, null, 2), { mode: 0o600 })
     throw error
   } finally { socket.close(1000, 'Case check complete') }
 }
