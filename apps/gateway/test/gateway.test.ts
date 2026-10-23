@@ -84,6 +84,23 @@ describe('gateway in workerd', () => {
     expect((await gateway.dispatchFetch(`${testOrigin}/api/voice`)).status).toBe(426)
   })
 
+  it('preserves cached game revalidation across repeated loads', async () => {
+    const url = `${testOrigin}/games/test.json`
+    const initial = await gateway.dispatchFetch(url)
+    expect(initial.status).toBe(200)
+    expect(await initial.json()).toEqual({ id: 'test' })
+    const etag = initial.headers.get('ETag')!
+    expect(etag).toBeTruthy()
+    for (let reload = 0; reload < 6; reload++) {
+      const response = await gateway.dispatchFetch(url, { headers: { 'If-None-Match': etag } })
+      expect(response.status).toBe(304)
+      expect(response.headers.get('ETag')).toBe(etag)
+      expect(await response.text()).toBe('')
+    }
+    const missing = await gateway.dispatchFetch(`${testOrigin}/games/missing.json`, { headers: { 'If-None-Match': etag } })
+    expect(missing.status).toBe(404)
+  })
+
   it('rejects cross-origin/missing access/query overrides and unconfigured voice', async () => {
     expect((await gateway.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders({ Origin: 'https://elsewhere.example' }) })).status).toBe(403)
     expect((await gateway.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders({ Cookie: '' }) })).status).toBe(403)

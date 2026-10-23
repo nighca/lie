@@ -31,7 +31,7 @@ export default {
     if (url.pathname === '/api/voice' && request.method === 'GET') return relayVoice(request, env)
     if (url.pathname.startsWith('/api/')) return Response.json({ error: 'Not found' }, { status: 404 })
     const response = await env.ASSETS.fetch(request)
-    if (url.pathname.startsWith('/games/') && !response.headers.get('Content-Type')?.includes('application/json')) {
+    if (url.pathname.startsWith('/games/') && response.status !== 304 && !response.headers.get('Content-Type')?.includes('application/json')) {
       return Response.json({ error: 'Game not found' }, { status: 404 })
     }
     return response
