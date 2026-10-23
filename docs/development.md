@@ -7,14 +7,14 @@ npm ci
 npm run dev
 ```
 
-正式 Web 工程的本地入口是 <http://127.0.0.1:5174/>，与独立交互原型的 5173 端口区分。优先在 Codex 内置浏览器调试。
+正式 Web 工程的本地入口是 <http://127.0.0.1:5176/>，与独立交互原型的 5173 端口区分。优先在 Codex 内置浏览器调试。
 
 ## 目录和命令
 
-- `apps/web`：Vue 3 + TypeScript + Vite，目前只有中文占位页面，不包含游戏业务或最终视觉实现。
+- `apps/web`：Vue 3 + TypeScript + Vite，包含完整游戏页面、浏览器对话编排与开发演示。
 - `packages/*`：共享模块工作区；公共 UI 包使用 `@lie/ui` 名称，由组件任务提供。
-- 根 `tsconfig.base.json`：共享的严格 TypeScript 配置，各包只包含自己的源码。
-- `prototypes/` 与 `spikes/`：独立实验，不纳入正式应用的 npm workspaces；沿用各自说明安装、验证。
+- 根 `tsconfig.base.json`：共享的严格 TypeScript 配置，各包独立检查源码和相关测试。
+- 历史原型与探针保存在独立工作分支；不要假设 main 上存在相应目录。
 
 ```sh
 npm run typecheck
@@ -23,9 +23,9 @@ npm run build
 npm run preview --workspace @lie/web
 ```
 
-根命令顺序执行各工作区已经定义的同名命令。测试工具已提供 Vitest、Vue Test Utils 和 jsdom；需要测试的模块自行提供 `test` 脚本和 Vitest 配置。当前占位页面没有业务行为，不添加仅验证静态文字的测试；新增业务和组件应按实际行为补充自动化测试。
+类型检查和测试遍历各工作区；构建显式先 Web 后网关。测试使用 Vitest、Vue Test Utils、jsdom 和 workerd，覆盖游戏规则、对话编排、公共组件、语音协议和网关边界。新增业务应按实际行为补充自动化测试。
 
-`npm run build` 产出 `apps/web/dist` 静态文件；类型检查是独立命令，提交前应同时运行 `typecheck`、`test` 和 `build`。本次基础工程不选择正式 Worker 配置、部署资源、路由或状态管理方案；它们仍由架构讨论决定。禁止将供应商凭证放入 `VITE_*` 变量或前端资源。
+`npm run build` 产出 `apps/web/dist` 静态文件；类型检查是独立命令，提交前应同时运行 `typecheck`、`test` 和 `build`。正式 Worker 配置位于 `apps/gateway/cloudflare.config.ts`，游戏状态保存在浏览器内存中。禁止将供应商凭证放入 `VITE_*` 变量或前端资源。
 
 ## 工作区协作
 
