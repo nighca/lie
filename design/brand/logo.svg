@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="400" height="160" role="img" aria-labelledby="title desc">
+  <title id="title">LIE</title>
+  <desc id="desc">Original rounded navy LIE wordmark with a coral dot.</desc>
+  <g fill="none" stroke="#111B45" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M45 34v92h76"/>
+    <path d="M188 74v52"/>
+    <path d="M350 34h-78v92h78M272 80h63"/>
+  </g>
+  <circle cx="188" cy="31" r="16" fill="#FF665B"/>
+</svg>
