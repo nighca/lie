@@ -7,11 +7,7 @@ export default defineConfig({
     compatibilityDate: '2026-10-23',
     assets: { notFoundHandling: 'single-page-application', runWorkerFirst: ['/api/*', '/games/*'] },
     env: {
-      ASSETS: bindings.assets(),
-      LINX_WS_TOKEN: bindings.secret(),
-      LINX_DEVICE_ID: bindings.secret(),
-      LINX_AGENT_ID: bindings.secret(),
-      VOICE_ACCESS_TOKEN: bindings.secret()
+      ASSETS: bindings.assets()
     },
     observability: {
       enabled: true,
