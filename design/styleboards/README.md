@@ -1,3 +1,71 @@
+# LIE 语音风格板：当前待选方向
+
+状态：探索预览，未批准，非正式 Logo、角色、界面或可运行页面。2026-10-23。
+
+用户已明确移除证据元素：玩家只与三名嫌疑人语音对话，最终通过按钮选择嫌疑人。以下两张新版图取代旧版；旧图仅保留设计历史，不再待选。
+
+| 最新图片 | 方向 | 评审重点 |
+| --- | --- | --- |
+| [voice-night.png](voice-night.png) | A 夜间审讯室 | 深色、琥珀、大幅人物、语音主控；对峙感更强 |
+| [voice-light.png](voice-light.png) | B 明亮访谈台 | 浅色、深蓝、编辑式人物访谈排版；更轻、留白更多 |
+
+![A 夜间审讯室](voice-night.png)
+
+![B 明亮访谈台](voice-light.png)
+
+两张均由内置 `image_gen.imagegen` 独立生成，`transparent_background: false`，没有输入图片、CLI fallback 或代码替代图片。人物、名字、表情、对白与英文均为占位，不确认案件、角色身份或产品语言。图中只有少量只读转写，不含文字输入。字标仍为方向探索。用户选定风格后再制作正式 UI 与品牌资产。
+
+## 当前本地路径与 QA
+
+- `/private/tmp/lie-visual-styleboards/design/styleboards/voice-night.png`
+- `/private/tmp/lie-visual-styleboards/design/styleboards/voice-light.png`
+
+均复制到项目，保留原始生成文件：
+
+- `/Users/nighca/.codex/generated_images/01a167a4-52a9-7eb2-ba15-8e2e9c90d04b/exec-6f350c4b-f938-491d-b2d1-17e68dcee9ab.png`
+- `/Users/nighca/.codex/generated_images/01a167a4-52a9-7eb2-ba15-8e2e9c90d04b/exec-5f3abf97-cb37-472e-bf83-ce63ab4d0d18.png`
+
+已通过 `view_image` 打开两张复制后的 PNG，均为1536×1024，检查到：
+
+- 恰好三个嫌疑人卡，当前人物大幅展示，短转写清楚，语音主控与“Choose suspect”指认入口明显。
+- 没有证据卡、文件、照片物证、线索板、搜证或出示按钮；没有罪犯揭晓或可信度分数。
+- 两图底部包含字标、色板及收音/等待/说话的独立品牌示例；这些是控件样本，不是同时发生的游戏状态。
+- 两图现代且对照明显，未见真实账号、凭证、警徽或霓虹。浅色图增加了短占位人物描述及小标语，不作为产品文案。
+- 人物外观在两套图中未完全一致；正式人物在案件与风格确认后统一制作。英文演示不能替代中文排版验证。
+- 静态图未验证交互、真实语音、键盘、实际色值对比度或最终响应式布局；当前只用于用户确认美术方向。
+
+## 新版实际完整提示词 A
+
+```text
+Use case: ui-mockup
+Asset type: exploratory art direction board for LIE desktop browser voice-only mystery game; not a production screen.
+Primary request: wide landscape high-fidelity UI style board, dark night interrogation direction. The entire experience is only speaking with three suspects and eventually choosing one suspect. Focus on PEOPLE and VOICE, not documents or investigation props.
+Composition: upper 80% is a large flat front-facing desktop web app mockup, bottom narrow strip contains LIE wordmark exploration, five palette swatches and three small voice status specimens.
+UI: LIE geometric legible wordmark top left, subtle "VOICE INTERROGATION", top right restrained button "Choose suspect". Three fictional contemporary adult portrait cards in a compact rail across the left or top, labeled ALEX / MORGAN / RILEY, with ALEX clearly selected by border plus text. Large selected suspect portrait is the main visual focus in a generous central interview area; original monochrome editorial illustrated face with natural detailed ink and shading, contemporary clothing, calm guarded expression. Short read-only transcript beneath or beside portrait: "YOU / Where were you that evening?" and "ALEX / I stayed home. Ask anyone." No other narrative paragraphs. Bottom stable voice controls with prominent microphone, understated amber waveform, "Listening", "Stop". Separate small bottom brand specimens show "Listening", "Thinking", "Speaking" with simple icons and small waveform, clearly style specimens not concurrent active states.
+Palette: charcoal blue background #11171C, panels #1B242C, white text #EEF1ED, secondary #B7C1C7, amber #E6B66A. Restrained fine rules, subtle rounded rectangles, large clear sans-serif labels, generous breathing room, elegant intentional hierarchy. Flat actual web interface, no physical monitor.
+Wordmark exploration: LIE with one subtly broken stroke, legible first. Small footer "DIRECTION A / VOICE ONLY / NOT FINAL".
+Strict exclusions: NO evidence cards, NO files or paper, NO casefile panels, NO documents, NO physical clues, NO photos of objects, NO clue board, NO investigation tools, NO presenting evidence buttons, NO guilt meters, NO culprit reveal. Exactly three suspects. No badge, no old-fashioned detective props, no neon sci-fi, no charts, no real people identities or accounts. This is a voice dialogue game, not an evidence dashboard. English short labels only, no tiny dense text.
+```
+
+## 新版实际完整提示词 B
+
+```text
+Use case: ui-mockup
+Asset type: exploratory art direction board for LIE desktop browser voice-only mystery game; not a production screen.
+Primary request: wide landscape high-fidelity UI style board, light editorial interview direction. This is a modern voice interrogation game, only speaking with three suspects then choosing one suspect. PEOPLE and VOICE dominate. Contemporary magazine-like character interview composition, bright warm background and clear typography, no dossiers.
+Composition: upper 80% is a flat front-facing desktop web app mockup; narrow lower strip shows LIE wordmark exploration, palette, and simple voice-status specimens.
+UI: bold clean "LIE" wordmark top left with small rust proofreading-like offset line, a quiet heading "THE CONVERSATION", top right button "Choose suspect". Three compact fictional contemporary adult editorial illustrated portrait cards labeled ALEX / MORGAN / RILEY on a rail at left, ALEX selected by navy underline and label. Main area has large selected character illustration on warm near-white field, original detailed monochrome pen/ink contemporary portrait with natural features and guarded expression, a large name ALEX and generous negative space. Beside or beneath image a short read-only conversation transcript: "YOU / Where were you that evening?" and "ALEX / I stayed home. Ask anyone." Bottom stable voice area has navy microphone button, restrained navy waveform, "Listening", and "Stop". Bottom specimen strip contains "Listening", "Thinking", "Speaking" simple icon/voice-state treatments, distinct from actual active screen.
+Palette: warm background #F2EFE7, panels #FFFCF5, strong dark ink #222B31, secondary #59646B, navy #24495C, tiny rust #A33B30 accents. Near-square shapes, thin precise rules, modern spacious sans-serif typography, readable short labels, no tiny dense text. Contemporary digital interview, not vintage archival material.
+Footer "DIRECTION B / VOICE ONLY / NOT FINAL".
+Strict exclusions: NO evidence, NO files, NO cards containing documents, NO paper sheets, NO casefile panels, NO physical clues or photographs of objects, NO clue board, NO investigation tools, NO presenting evidence buttons, NO guilt meters, NO culprit reveal. Exactly three suspects, not more. No badges, no vintage props, no neon, no charts, no real person identities or accounts. Flat UI, no device mockup.
+```
+
+---
+
+## 已被取代的旧版记录
+
+以下为此前含证据玩法的历史记录；其中“待选”“下一步”等措辞均已失效，旧图 night-desk.png 和 open-casefile.png 不能作为当前产品方向交付。
+
 # LIE 风格板：供用户选择方向
 
 状态：探索预览，未批准，非正式 Logo、角色、界面或可运行页面。2026-10-23。
