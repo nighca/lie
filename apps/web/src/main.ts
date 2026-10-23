@@ -5,6 +5,7 @@ import App from './App.vue'
 import { createGameController } from './application/controller'
 import { createDemoVoicePort } from './application/demoVoice'
 import { createLiveVoicePort } from './application/liveVoice'
+import { observePageLifecycle } from './application/pageLifecycle'
 import gameConfig from './game-config.json'
 import { readAppearances } from './presentation/appearances'
 import './style.css'
@@ -28,7 +29,7 @@ async function main() {
     if (response.ok) appearances = readAppearances(await response.json())
   } catch { /* Presentation assets are optional; names remain available. */ }
   createApp(App, { controller, appearances, demo }).mount('#app')
-  window.addEventListener('pagehide', () => controller.dispose(), { once: true })
+  observePageLifecycle(controller, document, window)
   await controller.load(new URLSearchParams(location.search).get('game') ?? gameConfig.defaultGameId)
 }
 

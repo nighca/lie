@@ -4,7 +4,8 @@ export type ConversationEvent =
   | { type: 'userText'; text: string }
   | { type: 'assistantText'; text: string }
   | { type: 'speaking' }
-  | { type: 'idle' }
+  | { type: 'listening' }
+  | { type: 'interrupted' }
   | { type: 'closed' }
   | { type: 'error' }
 
@@ -18,11 +19,9 @@ export interface ConversationScope {
   onEvent(event: ConversationEvent): void
 }
 
-/** One captured user turn and its spoken answer; close stops every owned device resource. */
+/** One continuous conversation; open prepares devices and capture, close releases them. */
 export interface Conversation {
   open(): Promise<void>
-  startInput(): Promise<void>
-  finishInput(): void
   close(): void
 }
 

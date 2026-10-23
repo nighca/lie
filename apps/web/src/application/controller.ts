@@ -1,4 +1,4 @@
-import { accuse, appendDialogue, buildCharacterContext, createGameSession, endSession, loadGame, restartSession, selectCharacter, startSession } from '@lie/game-core'
+import { accuse, appendDialogue, buildCharacterContext, consumeInterrogationTime, createGameSession, endSession, getInterrogationRemainingMs, loadGame, restartSession, selectCharacter, startSession } from '@lie/game-core'
 import type { DialogueEntry, GameSession } from '@lie/game-core'
 
 import type { Conversation, ConversationEvent, VoicePort } from './voice'
@@ -12,10 +12,18 @@ export interface GameView {
   history: readonly DialogueEntry[]
   voiceStatus: 'idle' | 'recording' | 'waiting' | 'speaking' | 'error'
   busy: boolean
+  conversationActive: boolean
+  interrogationRemainingMs: number
   notice: string | null
   accusationOpen: boolean
   accusationFeedback: string | null
   reveal: string | null
+}
+
+export interface ConversationClock {
+  now(): number
+  setTimeout(action: () => void, delayMs: number): ReturnType<typeof setTimeout>
+  clearTimeout(timer: ReturnType<typeof setTimeout>): void
 }
 
 export interface ControllerOptions {
@@ -23,6 +31,7 @@ export interface ControllerOptions {
   voice: VoicePort
   newSessionId(): string
   now(): number
+  clock?: ConversationClock
 }
 
 export function createGameController(options: ControllerOptions) {
@@ -38,6 +47,13 @@ export function createGameController(options: ControllerOptions) {
   let accusationFeedback: string | null = null
   let pendingText = ''
   let entrySequence = 0
+  const clock: ConversationClock = options.clock ?? {
+    now: () => performance.now(),
+    setTimeout: (action, delay) => setTimeout(action, delay),
+    clearTimeout: (timer) => clearTimeout(timer),
+  }
+  let enabledAt: number | null = null
+  let budgetTimer: ReturnType<typeof setTimeout> | null = null
   const listeners = new Set<(view: GameView) => void>()
 
   function getView(): GameView {
@@ -50,6 +66,8 @@ export function createGameController(options: ControllerOptions) {
       currentCharacterId: session?.currentCharacterId ?? null,
       history: pendingText.length > 0 ? [...history, { id: 'pending-answer', role: 'assistant', text: pendingText, at: options.now(), interrupted: false }] : history.map((entry) => ({ ...entry })),
       voiceStatus, busy, notice, accusationOpen, accusationFeedback,
+      conversationActive: active != null,
+      interrogationRemainingMs: remainingMs(),
       reveal: session?.phase === 'solved' ? session.result!.reveal : null,
     }
   }
@@ -68,7 +86,21 @@ export function createGameController(options: ControllerOptions) {
     append('assistant', pendingText, interrupted)
     pendingText = ''
   }
+  function remainingMs() {
+    if (session == null) return 0
+    return Math.max(0, getInterrogationRemainingMs(session) - (enabledAt == null ? 0 : Math.max(0, clock.now() - enabledAt)))
+  }
+  function settleTime() {
+    if (budgetTimer != null) clock.clearTimeout(budgetTimer)
+    budgetTimer = null
+    if (enabledAt == null) return
+    const elapsed = Math.max(0, clock.now() - enabledAt)
+    enabledAt = null
+    session = consumeInterrogationTime(requireSession(), elapsed)
+  }
   function stopVoice(interrupted = true) {
+    const expired = enabledAt != null && remainingMs() <= 0
+    settleTime()
     flushPending(interrupted)
     voiceEpoch++
     const previous = active
@@ -77,16 +109,38 @@ export function createGameController(options: ControllerOptions) {
     previous?.connection.close()
     busy = false
     voiceStatus = 'idle'
+    return expired
+  }
+  function showExpiry() {
+    accusationOpen = true
+    accusationFeedback = null
+    notice = '询问时间已用完。你可以回看对话，并选择最终指认；重新开始一局可再次询问。'
+  }
+  function expireBudget() {
+    stopVoice()
+    showExpiry()
+    publish()
+  }
+  function tickBudget(epoch: number) {
+    if (active?.epoch !== epoch || enabledAt == null) return
+    const remaining = remainingMs()
+    if (remaining <= 0) { expireBudget(); return }
+    budgetTimer = clock.setTimeout(() => tickBudget(epoch), Math.min(250, remaining))
+    publish()
   }
   function acceptEvent(event: ConversationEvent) {
-    if (event.type === 'userText') append('user', event.text)
+    if (enabledAt != null && remainingMs() <= 0) { expireBudget(); return }
+    if (event.type === 'userText') { append('user', event.text); voiceStatus = 'waiting' }
     if (event.type === 'speaking') voiceStatus = 'speaking'
     if (event.type === 'assistantText') { pendingText += event.text; voiceStatus = 'speaking' }
-    if (event.type === 'idle') stopVoice(false)
+    if (event.type === 'listening' || event.type === 'interrupted') {
+      flushPending(event.type === 'interrupted')
+      voiceStatus = 'recording'
+    }
     if (event.type === 'closed' || event.type === 'error') {
       stopVoice()
       voiceStatus = 'error'
-      notice = '语音暂时中断。已显示转写保留，你可以重新开始说话。'
+      notice = '语音暂时中断。已显示转写保留，你可以重新开始对话。'
     }
     publish()
   }
@@ -125,14 +179,15 @@ export function createGameController(options: ControllerOptions) {
     },
     selectCharacter(characterId: string) {
       if (requireSession().currentCharacterId === characterId) return
-      stopVoice()
+      const expired = stopVoice()
       session = selectCharacter(requireSession(), characterId)
-      notice = '已切换人物，已显示转写保留。'
+      if (expired) showExpiry()
+      else notice = '已切换人物，已显示转写保留。'
       publish()
     },
-    async startInput() {
+    async startConversation() {
       const current = requireSession()
-      if (current.phase !== 'interrogating' || accusationOpen || busy) return
+      if (current.phase !== 'interrogating' || accusationOpen || active != null || getInterrogationRemainingMs(current) <= 0) return
       stopVoice()
       const epoch = voiceEpoch
       const abort = new AbortController()
@@ -155,29 +210,22 @@ export function createGameController(options: ControllerOptions) {
       try {
         await connection.open()
         if (!isCurrent()) return
-        await connection.startInput()
-        if (!isCurrent()) return
         busy = false
         voiceStatus = 'recording'
-        publish()
+        enabledAt = clock.now()
+        tickBudget(epoch)
       } catch {
         if (isCurrent()) acceptEvent({ type: 'error' })
       }
     },
-    finishInput() {
-      if (active == null || voiceStatus !== 'recording') return
-      voiceStatus = 'waiting'
-      try { active.connection.finishInput() } catch { acceptEvent({ type: 'error' }); return }
-      publish()
-    },
-    interrupt() {
-      stopVoice()
-      notice = '已停止语音，已显示转写保留。'
+    endConversation() {
+      if (stopVoice()) showExpiry()
+      else notice = '已结束对话，已显示转写保留。'
       publish()
     },
     openAccusation() {
       if (requireSession().phase !== 'interrogating') return
-      stopVoice()
+      if (stopVoice()) showExpiry()
       accusationOpen = true
       accusationFeedback = null
       publish()
@@ -188,7 +236,7 @@ export function createGameController(options: ControllerOptions) {
       stopVoice()
       session = accuse(requireSession(), characterId, options.now())
       if (session.phase === 'solved') accusationOpen = false
-      else accusationFeedback = '这次指认不正确。你可以返回调查，继续听取大家的说法。'
+      else accusationFeedback = getInterrogationRemainingMs(session) > 0 ? '这次指认不正确。你可以返回调查，继续听取大家的说法。' : '这次指认不正确。你可以回看对话，再次指认，或重新开始一局。'
       publish()
     },
     end() {

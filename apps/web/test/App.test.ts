@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it } from 'vitest'
 
 import App from '../src/App.vue'
@@ -37,4 +37,44 @@ describe('game screens', () => {
     expect(wrapper.text()).toContain('接案，开始调查')
     expect(controller.getView().phase).toBe('intro')
   })
+
+  it('uses one start/end action through listening, waiting and speaking, with a shared time display', async () => {
+    const { controller, turns } = setup()
+    await controller.load('test'); controller.start()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const controls = () => wrapper.get('[aria-label="语音对话控制"]')
+    expect(wrapper.get('[aria-label="剩余询问时间"]').text()).toContain('08:00')
+    expect(controls().findAll('button')).toHaveLength(1)
+    await controls().get('button').trigger('click'); await flushPromises()
+    expect(controls().get('button').text()).toBe('结束对话')
+    for (const event of [{ type: 'userText', text: '问题' } as const, { type: 'speaking' } as const, { type: 'listening' } as const]) {
+      turns[0].scope.onEvent(event)
+      await wrapper.vm.$nextTick()
+      expect(controls().findAll('button')).toHaveLength(1)
+      expect(controls().get('button').text()).toBe('结束对话')
+    }
+    await controls().get('button').trigger('click')
+    expect(turns[0].closed).toBe(true)
+    expect(controls().get('button').text()).toBe('开始对话')
+  })
+
+  it('offers cancellation while microphone and service preparation is pending', async () => {
+    const { controller, voice, turns } = setup()
+    let ready!: () => void
+    const create = voice.create
+    voice.create = (scope) => ({ ...create(scope), open: () => new Promise((resolve) => { ready = resolve }) })
+    await controller.load('test'); controller.start()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const controls = wrapper.get('[aria-label="语音对话控制"]')
+    await controls.get('button').trigger('click')
+    expect(controls.get('button').text()).toBe('取消连接')
+    expect(controls.get('button').attributes('disabled')).toBeUndefined()
+    await controls.get('button').trigger('click')
+    expect(turns[0].closed).toBe(true)
+    ready(); await flushPromises()
+    expect(controls.get('button').text()).toBe('开始对话')
+  })
+
 })

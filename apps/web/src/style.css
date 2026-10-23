@@ -13,7 +13,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .environment-note, .muted, .presentation-note { color: var(--lie-muted); font-size: 14px; }
 .environment-note { margin: 8px 0 24px; }
-.presentation-note { grid-column: 2 / -1; text-align: center; margin: 0; }
+.presentation-note, .conversation-hint { grid-column: 2 / -1; text-align: center; margin: 0; }
 .surface { background: var(--lie-surface); border: 3px solid var(--lie-ink); border-radius: 28px; box-shadow: 0 6px 0 #111b451a; }
 .intro-card { max-width: 1040px; margin: 24px auto; padding: 36px 48px 40px; text-align: center; }
 .eyebrow { color: var(--lie-muted); font-size: 16px; font-weight: 600; margin: 0 0 12px; }
@@ -63,7 +63,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .investigation { grid-template-columns: minmax(220px, .85fr) minmax(300px, 1fr); }
   .character-list { grid-column: 1 / -1; grid-row: auto; display: flex; max-height: none; }
   .character-list > .lie-character { flex: 1 0 140px; }
-  .investigation > .lie-voice, .presentation-note { grid-column: 1 / -1; }
+  .investigation > .lie-voice, .presentation-note, .conversation-hint { grid-column: 1 / -1; }
   .portrait-backdrop { height: 350px; }
 }
 @media (max-width: 700px) {
@@ -85,3 +85,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .accusation-choices { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
   .accusation-character .avatar-frame, .accusation-character .initial-avatar { height: 150px; }
 }
+
+.interrogation-budget { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.conversation-hint { text-align: center; margin: 16px 0 0; }

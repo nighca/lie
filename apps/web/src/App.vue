@@ -18,16 +18,19 @@ const transcript = computed(() => view.value.history.map((entry) => ({
   mine: entry.role === 'user',
   avatar: entry.role === 'user' ? null : appearance(current.value?.appearanceId ?? null)?.avatar ?? null,
 })))
-const labels = { idle: '等待你开口', recording: '正在聆听', waiting: '等待回应', speaking: '正在说话', error: '语音暂时中断' }
+const labels = { idle: '等待你开口', recording: '正在聆听', waiting: '等待回应 · 麦克风已开启', speaking: '正在说话 · 可直接开口打断', error: '语音暂时中断' }
 const actionLabel = computed(() => {
-  if (view.value.voiceStatus === 'recording') return props.demo ? '结束模拟发言' : '结束说话'
-  if (view.value.voiceStatus === 'error') return '重试'
-  if (view.value.voiceStatus === 'speaking' || view.value.voiceStatus === 'waiting') return props.demo ? '打断并模拟发言' : '打断并说话'
-  return props.demo ? '模拟说话' : '开始说话'
+  if (view.value.conversationActive) return view.value.busy ? '取消连接' : '结束对话'
+  if (view.value.interrogationRemainingMs <= 0) return '询问时间已用完'
+  return props.demo ? '开始模拟对话' : '开始对话'
+})
+const remainingTime = computed(() => {
+  const seconds = Math.ceil(view.value.interrogationRemainingMs / 1000)
+  return `${Math.floor(seconds / 60).toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`
 })
 function appearance(id: string | null) { return props.appearances.find((item) => item.id === id) ?? null }
 function usableImage(url: string | null) { return url != null && !brokenImages.value.has(url) }
-function speak() { if (view.value.voiceStatus === 'recording') props.controller.finishInput(); else void props.controller.startInput() }
+function speak() { if (view.value.conversationActive) props.controller.endConversation(); else void props.controller.startConversation() }
 </script>
 
 <template>
@@ -36,6 +39,7 @@ function speak() { if (view.value.voiceStatus === 'recording') props.controller.
       <a class="wordmark" href="/" aria-label="LIE 首页">LiE <span>语音推理</span></a>
       <h1 v-if="view.phase === 'interrogating'" class="header-title">{{ view.title }}</h1>
       <div v-if="view.phase === 'interrogating'" class="header-actions">
+        <span class="interrogation-budget" aria-label="剩余询问时间">剩余 {{ remainingTime }}</span>
         <UiButton variant="quiet" @click="controller.end()">结束本局</UiButton>
         <UiButton @click="controller.openAccusation()">最终指认</UiButton>
       </div>
@@ -62,6 +66,7 @@ function speak() { if (view.value.voiceStatus === 'recording') props.controller.
         </div>
       </div>
       <ol class="flow-hint" aria-label="调查流程"><li>开口问话</li><li>对照说法</li><li>最终指认</li></ol>
+      <p class="muted">本局共 {{ remainingTime }} 询问时间，跨人物共享。语音开启时计时，结束对话后暂停，连接准备不计时。</p>
       <UiButton class="intro-start" @click="controller.start()">接案，开始调查</UiButton>
     </main>
 
@@ -89,7 +94,8 @@ function speak() { if (view.value.voiceStatus === 'recording') props.controller.
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>
-      <VoiceControl :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="view.busy ? null : actionLabel" :cancel-label="view.voiceStatus === 'recording' || view.voiceStatus === 'waiting' ? '取消本轮' : null" :interrupt-label="view.voiceStatus === 'speaking' ? '打断说话' : null" @start="speak" @cancel="controller.interrupt()" @interrupt="controller.interrupt()" />
+      <VoiceControl :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" @start="speak" />
+      <p class="muted conversation-hint">{{ view.conversationActive ? '对话持续进行中，停顿后会自动回答；你也可以直接开口打断。' : '点击一次开始多轮对话，再次点击结束。语音开启时计时，结束后暂停。' }}</p>
       <p class="presentation-note">转写仅供回看 · 人物的表情和配色不代表是否撒谎</p>
     </main>
 
