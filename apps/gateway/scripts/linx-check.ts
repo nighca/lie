@@ -1,10 +1,9 @@
 import { randomBytes, randomUUID } from 'node:crypto'
 import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises'
-import { createRequire } from 'node:module'
 import { resolve } from 'node:path'
 
-const require = createRequire(import.meta.url)
-const WebSocket = require('ws')
+import WebSocket from 'ws'
+
 const statePath = new URL('../tmp/linx-game-state.json', import.meta.url)
 const resultsPath = new URL('../tmp/linx-game-results.json', import.meta.url)
 const keyOption = process.argv.indexOf('--key-file')
@@ -99,6 +98,10 @@ type Context = { background: string; profile: string; systemPrompt: string; hist
 type Result = { label: string; hello: boolean; toolsCalled: number; text: string; audioBytes: number; ttsStop: boolean; durationMs: number; passed: boolean; sessionId: string | null }
 function conversation(label: string, device: Device, context: Context, question: string): Promise<Result> {
   return new Promise((resolveResult, reject) => {
+    if (state.agentId == null || device.token == null) {
+      reject(new Error('Missing dedicated test credentials'))
+      return
+    }
     const started = Date.now()
     const result: Result = { label, hello: false, toolsCalled: 0, text: '', audioBytes: 0, ttsStop: false, durationMs: 0, passed: false, sessionId: null }
     const socket = new WebSocket('wss://xrobo-io.qiniuapi.com/v1/ws/', {
