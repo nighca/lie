@@ -68,7 +68,7 @@ root 先审核提示差异、脚本与以下固定矩阵，再决定是否放行
 
 | 本轮直接证据 | 结果与能得出的结论 |
 | --- | --- |
-| `GET /v1/models/f3626c105383d71654a57f2bb8a973f3` | HTTP200、业务code599；提取的id/name/provider/type均null。因此实际名称、具体型号/提供商未知；HTTP200不能算业务成功。未猜测599原因，未保存完整响应或错误message。这不证明模型不存在，详情与列表可能存在ID层级差异，但未证实原因。 |
+| `GET /v1/models/f3626c105383d71654a57f2bb8a973f3` | HTTP200、业务code599；提取的id/name/provider/type均null。该详情响应无法确定名称、具体型号/提供商；HTTP200不能算业务成功。未猜测599原因，未保存完整响应或错误message。这不证明模型不存在，详情与列表可能存在ID层级差异，但未证实原因。 |
 | 同ID的 `/custom-config-schema` | HTTP200、业务code0；只提取data.properties或data.schema.properties的键名，结果为空数组。只能确认端点有成功响应，**无法由该白名单投影确认schema具体形状或支持哪些参数，更不能推断模型不支持参数**。本次不读取schema配置值，不再查询schema。 |
 
 追加的 `GET /v1/agents/models/llm` 返回HTTP200/code0；仅在内存对publics/privates按目标ID精确匹配，未输出其他项或保存完整列表。该单项白名单为：`id=f3626c105383d71654a57f2bb8a973f3`、`name=deepseek-v4-flash`、`type=openai`、`provider=null`。因此**本次实测agent对应的目录名称是deepseek-v4-flash**；`openai`是API配置类型，不等于OpenAI模型或实际提供商。具体后端版本、服务提供商字段仍未知，不能仅凭名称进一步猜测。
