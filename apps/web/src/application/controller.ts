@@ -32,6 +32,7 @@ export interface ControllerOptions {
   newSessionId(): string
   now(): number
   clock?: ConversationClock
+  resolveVoiceId?(appearanceId: string | null): string | null
 }
 
 export function createGameController(options: ControllerOptions) {
@@ -192,9 +193,11 @@ export function createGameController(options: ControllerOptions) {
       const epoch = voiceEpoch
       const abort = new AbortController()
       const characterId = current.currentCharacterId!
+      const appearanceId = current.game.characters.find((character) => character.id === characterId)!.appearanceId
+      const voiceId = options.resolveVoiceId?.(appearanceId) ?? null
       const isCurrent = () => active?.epoch === epoch && session?.sessionId === current.sessionId && session.currentCharacterId === characterId && !abort.signal.aborted
       const connection = options.voice.create({
-        sessionId: current.sessionId, characterId, epoch, signal: abort.signal, isCurrent,
+        sessionId: current.sessionId, characterId, voiceId, epoch, signal: abort.signal, isCurrent,
         readContext() {
           if (!isCurrent()) throw new Error('Conversation is no longer active')
           const live = requireSession()

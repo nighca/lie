@@ -1,6 +1,6 @@
 import type { GameDefinition } from '@lie/game-core'
 
-import type { ConversationClock } from '../src/application/controller'
+import type { ControllerOptions, ConversationClock } from '../src/application/controller'
 import { createGameController } from '../src/application/controller'
 import type { ConversationScope, VoicePort } from '../src/application/voice'
 
@@ -13,7 +13,7 @@ export const game: GameDefinition = {
   ending: { culpritId: 'one', reveal: '仅在揭晓后显示的结局。' },
 }
 
-export function setup(clock: ConversationClock = { now: () => 0, setTimeout, clearTimeout }, content = game) {
+export function setup(clock: ConversationClock = { now: () => 0, setTimeout, clearTimeout }, content = game, resolveVoiceId?: ControllerOptions['resolveVoiceId']) {
   const turns: { scope: ConversationScope; closed: boolean }[] = []
   let number = 0
   const voice: VoicePort = {
@@ -23,6 +23,6 @@ export function setup(clock: ConversationClock = { now: () => 0, setTimeout, cle
       return { async open() {}, close() { turn.closed = true } }
     },
   }
-  const controller = createGameController({ readGame: async () => content, voice, newSessionId: () => `session-${++number}`, now: () => 100, clock })
+  const controller = createGameController({ readGame: async () => content, voice, newSessionId: () => `session-${++number}`, now: () => 100, clock, resolveVoiceId })
   return { controller, turns, voice }
 }

@@ -12,6 +12,7 @@ export type ConversationEvent =
 export interface ConversationScope {
   sessionId: string
   characterId: string
+  voiceId: string | null
   epoch: number
   signal: AbortSignal
   isCurrent(): boolean

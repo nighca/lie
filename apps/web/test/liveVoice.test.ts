@@ -4,7 +4,7 @@ import type { VoiceChannelOptions } from '@lie/voice'
 import { createLiveVoicePort } from '../src/application/liveVoice'
 import type { ConversationScope } from '../src/application/voice'
 
-function setupBridge() {
+function setupBridge(voiceId: string | null = null) {
   let current = true
   let options: VoiceChannelOptions | null = null
   let drained = () => {}
@@ -15,7 +15,7 @@ function setupBridge() {
   const onEvent = vi.fn()
   const readContext = vi.fn(() => ({ background: '公共', characterId: 'one', characterName: '甲', profile: '甲自己的设定', history: [], systemPrompt: '角色提示' }))
   const abort = new AbortController()
-  const scope: ConversationScope = { sessionId: 'session', characterId: 'one', epoch: 1, signal: abort.signal, isCurrent: () => current, readContext, onEvent }
+  const scope: ConversationScope = { sessionId: 'session', characterId: 'one', voiceId, epoch: 1, signal: abort.signal, isCurrent: () => current, readContext, onEvent }
   let onFrame: (data: Uint8Array) => void = () => {}
   const dependencies = {
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
@@ -30,6 +30,13 @@ function setupBridge() {
 const format = { format: 'pcm' as const, sampleRate: 16000, channels: 1 as const, bitsPerSample: 16 as const, frameDuration: 20 }
 
 describe('continuous browser voice and device bridge', () => {
+  it.each([null, 'vendor:voice/warm'])('passes configured voice %s without changing the provider default', (voiceId) => {
+    const bridge = setupBridge(voiceId)
+    if (voiceId == null) expect(Object.hasOwn(bridge.options(), 'voiceId')).toBe(false)
+    else expect(bridge.options().voiceId).toBe(voiceId)
+    bridge.connection.close()
+  })
+
   it('keeps capture and one channel open across drained answers and an interruption', async () => {
     const bridge = setupBridge()
     await bridge.connection.open()

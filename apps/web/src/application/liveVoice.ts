@@ -39,6 +39,7 @@ export function createLiveVoicePort(dependencies = {
       }
       const channel = dependencies.createChannel({
         listenMode: 'realtime',
+        ...(scope.voiceId != null ? { voiceId: scope.voiceId } : {}),
         tools: [{
           name: 'self.lie_character_context',
           description: '读取当前扮演人物的背景、本人设定与本人的历史。回答玩家前先读取。',
