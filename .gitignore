@@ -1,0 +1,8 @@
+tmp/
+.DS_Store
+.env
+.env.*
+!.env.example
+.linx-api-key
+.dev.vars
+.dev.vars.*
