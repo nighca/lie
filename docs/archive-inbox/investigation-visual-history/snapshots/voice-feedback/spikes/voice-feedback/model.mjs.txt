@@ -1,0 +1,32 @@
+export const assistantGraphemeMs = 100
+export const userFallbackGraphemeMs = 70
+export function initialFeedback() {
+  return { epoch: 1, active: true, inputActive: false, outputActive: false, waitingForReply: false, draft: null, finalized: new Set(), history: [] }
+}
+export function reduceFeedback(state, event) {
+  if (event.epoch !== state.epoch || !state.active) return state
+  const next = { ...state, history: [...state.history], finalized: new Set(state.finalized) }
+  if (event.type === 'partial' && !next.finalized.has(event.id)) next.draft = { id: event.id, text: event.text, revision: event.revision }
+  if (event.type === 'partial' && state.draft?.id === event.id && event.revision <= state.draft.revision) return state
+  if (event.type === 'final' && !next.finalized.has(event.id)) {
+    next.finalized.add(event.id); next.history.push({ id: event.id, text: event.text, mine: true }); next.draft = null; next.waitingForReply = true
+  }
+  if (event.type === 'level') next.inputActive = event.active
+  if (event.type === 'playback') { next.outputActive = event.active; if (event.active) next.waitingForReply = false }
+  if (event.type === 'stop') { next.active = false; next.draft = null; next.inputActive = false; next.outputActive = false; next.waitingForReply = false }
+  return next
+}
+export function feedbackLabel(state) {
+  if (!state.active) return '对话已结束'
+  if (state.inputActive) return state.outputActive ? '你在说话 · 正在打断' : '你在说话'
+  if (state.outputActive) return '角色回答'
+  if (state.waitingForReply) return '思考中'
+  return '等你开口'
+}
+export function rms(samples) {
+  if (samples.length === 0) return 0
+  return Math.min(1, Math.sqrt(samples.reduce((sum, value) => sum + value * value, 0) / samples.length))
+}
+export function revealCount(elapsedMs, graphemeMs, total) {
+  return Math.min(total, Math.floor(Math.max(0, elapsedMs) / graphemeMs))
+}

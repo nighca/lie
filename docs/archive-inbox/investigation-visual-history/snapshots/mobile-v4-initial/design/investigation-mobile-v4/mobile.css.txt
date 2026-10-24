@@ -1,0 +1,29 @@
+
+.prototype-bar,.design-notes{display:none}.brand span{isolation:isolate}.brand span:after{z-index:-1}
+@media(max-width:700px){
+body.compact-mobile{height:100dvh;overflow:hidden;padding:0}
+.compact-mobile .app{width:100%;height:100dvh;max-width:700px;margin:0 auto;padding:12px 16px 132px;display:flex;flex-direction:column;min-width:0}
+.compact-mobile .header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;flex-shrink:0;margin-bottom:12px;min-height:0}
+.compact-mobile .brand{gap:8px}.compact-mobile .brand img{width:74px;height:38px}.compact-mobile .brand span{font-size:13px}
+.compact-mobile .header-actions{grid-column:2;grid-row:1}.compact-mobile .text-button{font-size:11px;min-height:38px}
+.compact-mobile .case-heading{grid-column:1/-1;grid-row:2;order:0;display:flex;flex-direction:row;align-items:baseline;justify-content:space-between;gap:8px;width:100%;padding:0}
+.compact-mobile .case-heading h1{width:auto;font-size:20px;line-height:1.35;text-align:left;min-width:0;overflow-wrap:anywhere}.compact-mobile .case-context{flex-shrink:0;font-size:10px;gap:3px}
+.compact-mobile .investigation{height:auto;flex:1;min-height:0;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 148px;grid-template-rows:168px minmax(0,1fr);gap:12px}
+.compact-mobile .people-column{grid-column:1;grid-row:1;display:flex;min-height:0;min-width:0}
+.compact-mobile .characters{display:flex;flex-direction:column;width:100%;min-height:0;overflow:auto;gap:6px;padding:2px 0 4px}
+.compact-mobile .character{width:100%;height:44px;min-height:44px;flex-direction:row;align-items:center;flex-shrink:0;border-radius:13px;border-width:2px}
+.compact-mobile .character .avatar{width:40px;height:40px;flex-shrink:0;border-radius:10px 0 0 10px}.compact-mobile .avatar img{width:210%;top:-3%}
+.compact-mobile .character strong{flex:1;min-width:0;padding:0 8px;font-size:13px;line-height:1.4;text-align:left;white-space:normal;overflow-wrap:anywhere}
+.compact-mobile .character small{font-size:8px;line-height:1.3;padding-right:6px;width:25px}
+.compact-mobile .stage{grid-column:2;grid-row:1;height:168px;min-height:0}.compact-mobile .stage h2{display:none}.compact-mobile .portrait>img{height:132%}.compact-mobile .portrait:before{inset:12% 0 4%}
+.compact-mobile .records{grid-column:1/-1;grid-row:2;min-height:0;border-radius:22px;padding:14px 12px 12px;overflow:hidden}
+.compact-mobile .records h2{font-size:16px;margin:0 0 10px;padding:0 2px 10px;flex-shrink:0}
+.compact-mobile .log{padding:0 4px 0 0;overscroll-behavior:contain;scrollbar-width:thin}
+.compact-mobile .message{max-width:calc(100% - 34px);margin:0 0 12px 34px}.compact-mobile .message.mine{margin-left:0;margin-right:34px}
+.compact-mobile .message>img,.compact-mobile .npc-avatar{width:26px;height:26px;left:-34px}.compact-mobile .mine>img{left:auto;right:-34px}.compact-mobile .bubble{padding:9px 11px}.compact-mobile .bubble p{font-size:15px;line-height:1.75;font-weight:550}.compact-mobile .bubble strong{font-size:10px}
+.compact-mobile .controls{position:fixed;left:0;right:0;bottom:0;width:100%;border-radius:22px 22px 0 0;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:34px 48px;gap:8px 14px;padding:10px 16px calc(14px + env(safe-area-inset-bottom));margin:0;min-height:0;box-shadow:0 -3px 12px #111b4510}
+.compact-mobile .budget{grid-column:1;grid-row:1;align-items:baseline;gap:8px}.compact-mobile .budget span{font-size:10px}.compact-mobile .budget strong{font-size:22px}
+.compact-mobile .answer-region{grid-column:2;grid-row:1;height:34px;padding:0;border:0}.compact-mobile .answer-button{min-height:34px;font-size:12px;padding:5px 10px}
+.compact-mobile .voice-main{grid-column:1/-1;grid-row:2;display:flex;align-items:center;gap:16px;min-width:0}.compact-mobile .voice-toggle{width:128px;min-width:128px;height:48px;min-height:48px;font-size:13px;flex-shrink:0;padding:9px 12px}.compact-mobile .voice-feedback{min-width:0;min-height:40px;flex:1}.compact-mobile .voice-feedback .bars{height:30px}.compact-mobile .feedback-heading{margin:0}.compact-mobile .feedback-heading strong{font-size:12px}
+}
+@media(max-height:700px) and (max-width:700px){.compact-mobile .investigation{grid-template-rows:136px minmax(0,1fr);gap:10px}.compact-mobile .stage{height:136px}.compact-mobile .characters{gap:4px}.compact-mobile .character{height:40px;min-height:40px}.compact-mobile .character .avatar{width:36px;height:36px}}

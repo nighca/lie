@@ -1,0 +1,225 @@
+{
+  "computed": "normal",
+  "font": "14px / 23.1px system-ui, -apple-system, \"system-ui\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+  "out": [
+    {
+      "pair": [
+        {
+          "chars": [
+            {
+              "char": "本",
+              "left": 0,
+              "right": 14
+            },
+            {
+              "char": "局",
+              "left": 14,
+              "right": 28
+            },
+            {
+              "char": "可",
+              "left": 28,
+              "right": 42
+            },
+            {
+              "char": "询",
+              "left": 42,
+              "right": 56
+            },
+            {
+              "char": "问",
+              "left": 56,
+              "right": 71.75
+            },
+            {
+              "char": "8",
+              "left": 71.75,
+              "right": 82.296875
+            },
+            {
+              "char": "分",
+              "left": 82.2890625,
+              "right": 96.296875
+            },
+            {
+              "char": "钟",
+              "left": 96.2890625,
+              "right": 110.296875
+            }
+          ],
+          "mode": "normal",
+          "width": 110.296875
+        },
+        {
+          "chars": [
+            {
+              "char": "本",
+              "left": 0,
+              "right": 14
+            },
+            {
+              "char": "局",
+              "left": 14,
+              "right": 28
+            },
+            {
+              "char": "可",
+              "left": 28,
+              "right": 42
+            },
+            {
+              "char": "询",
+              "left": 42,
+              "right": 56
+            },
+            {
+              "char": "问",
+              "left": 56,
+              "right": 70
+            },
+            {
+              "char": "8",
+              "left": 70,
+              "right": 78.796875
+            },
+            {
+              "char": "分",
+              "left": 78.7890625,
+              "right": 92.796875
+            },
+            {
+              "char": "钟",
+              "left": 92.7890625,
+              "right": 106.796875
+            }
+          ],
+          "mode": "no-autospace",
+          "width": 106.796875
+        }
+      ],
+      "text": "本局可询问8分钟"
+    },
+    {
+      "pair": [
+        {
+          "chars": [
+            {
+              "char": "本",
+              "left": 0,
+              "right": 14
+            },
+            {
+              "char": "局",
+              "left": 14,
+              "right": 28
+            },
+            {
+              "char": "可",
+              "left": 28,
+              "right": 42
+            },
+            {
+              "char": "询",
+              "left": 42,
+              "right": 56
+            },
+            {
+              "char": "问",
+              "left": 56,
+              "right": 71.75
+            },
+            {
+              "char": "5",
+              "left": 71.75,
+              "right": 82.0078125
+            },
+            {
+              "char": "分",
+              "left": 82,
+              "right": 97.7578125
+            },
+            {
+              "char": "3",
+              "left": 97.75,
+              "right": 106.3828125
+            },
+            {
+              "char": "0",
+              "left": 106.375,
+              "right": 116.8046875
+            },
+            {
+              "char": "秒",
+              "left": 116.796875,
+              "right": 130.8046875
+            }
+          ],
+          "mode": "normal",
+          "width": 130.8046875
+        },
+        {
+          "chars": [
+            {
+              "char": "本",
+              "left": 0,
+              "right": 14
+            },
+            {
+              "char": "局",
+              "left": 14,
+              "right": 28
+            },
+            {
+              "char": "可",
+              "left": 28,
+              "right": 42
+            },
+            {
+              "char": "询",
+              "left": 42,
+              "right": 56
+            },
+            {
+              "char": "问",
+              "left": 56,
+              "right": 70
+            },
+            {
+              "char": "5",
+              "left": 70,
+              "right": 78.5078125
+            },
+            {
+              "char": "分",
+              "left": 78.5,
+              "right": 92.5078125
+            },
+            {
+              "char": "3",
+              "left": 92.5,
+              "right": 101.1328125
+            },
+            {
+              "char": "0",
+              "left": 101.125,
+              "right": 109.8046875
+            },
+            {
+              "char": "秒",
+              "left": 109.796875,
+              "right": 123.8046875
+            }
+          ],
+          "mode": "no-autospace",
+          "width": 123.8046875
+        }
+      ],
+      "text": "本局可询问5分30秒"
+    }
+  ],
+  "scrollWidth": 391,
+  "viewport": [
+    391,
+    844
+  ]
+}

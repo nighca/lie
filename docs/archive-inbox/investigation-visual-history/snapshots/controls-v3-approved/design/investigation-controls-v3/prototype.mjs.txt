@@ -1,0 +1,95 @@
+import { enabledStates, feedback, naturalDuration, readBackground, timerLabel } from './model.mjs'
+const sample = await (await fetch('./public-example.json')).json()
+const appearances = await (await fetch('../../apps/web/public/appearances/manifest.json')).json()
+const publicPath = '../../apps/web/public'
+let current = sample.characters[0]
+let state = 'off'
+let remaining = 452
+let tick = 0
+const scene = document.querySelector('#scene')
+const voiceToggle = document.querySelector('#voice-toggle')
+const notice = document.querySelector('#notice')
+function notify(text) { notice.textContent = text; notice.hidden = text.length === 0 }
+function appearance(character) { return appearances.find((item) => item.id === character.appearanceId) }
+function setState(next) { state = remaining === 0 ? 'exhausted' : next; scene.value = state; renderFeedback() }
+function renderFeedback() {
+  const [status, meta, action] = feedback(state, current.name)
+  document.querySelector('#voice-state').textContent = status
+  document.querySelector('.feedback-heading').hidden = ['off', 'input', 'output', 'duplex'].includes(state)
+  document.querySelector('#voice-meta').textContent = meta
+  document.querySelector('#toggle-label').textContent = action
+  voiceToggle.setAttribute('aria-pressed', String(enabledStates.has(state)))
+  voiceToggle.setAttribute('aria-label', action)
+  voiceToggle.disabled = state === 'exhausted' || state === 'connecting'
+  document.querySelector('#remaining').textContent = timerLabel(remaining)
+  renderMeters()
+}
+function renderMeters() {
+  const active = ['input', 'output', 'duplex'].includes(state)
+  const root = document.querySelector('#voice-bars')
+  root.hidden = state === 'off'
+  root.classList.toggle('active', active)
+  root.classList.toggle('output-bars', state === 'output')
+  root.setAttribute('aria-label', state === 'output' ? '角色声音，模拟音量' : '玩家声音，模拟音量')
+  for (const [index, bar] of [...root.children].entries()) bar.style.height = `${active ? 6 + Math.abs(Math.sin(tick * .48 + index * .43)) * 24 : 3}px`
+}
+function selectCharacter(character) {
+  current = character
+  setState('off')
+  const art = appearance(current)
+  document.querySelector('#portrait').src = publicPath + art.portrait
+  document.querySelector('#record-avatar').src = publicPath + art.avatar
+  document.querySelector('.stage').style.setProperty('--accent', art.accent)
+  document.querySelector('.voice-feedback').style.setProperty('--character-accent', art.accent)
+  document.querySelector('#character-name').textContent = current.name
+  document.querySelector('#record-name').textContent = current.name
+  for (const button of document.querySelectorAll('[data-character]')) button.setAttribute('aria-pressed', String(button.dataset.character === current.id))
+}
+for (const [id] of [['voice-bars']]) {
+  const root = document.getElementById(id)
+  for (let index = 0; index < 24; index++) root.append(document.createElement('i'))
+}
+for (const character of sample.characters) {
+  const art = appearance(character)
+  const button = document.createElement('button')
+  button.className = 'character'; button.dataset.character = character.id; button.style.setProperty('--accent', art.accent)
+  button.innerHTML = '<span class="avatar"><img alt=""></span><strong></strong><small>当前人物</small>'
+  button.querySelector('img').src = publicPath + art.avatar
+  button.querySelector('strong').textContent = character.name
+  button.setAttribute('aria-label', `询问${character.name}`)
+  button.addEventListener('click', () => { selectCharacter(character); notify('') })
+  document.querySelector('#characters').append(button)
+  const choice = document.createElement('div'); choice.className = 'answer-choice'
+  choice.innerHTML = '<div class="avatar"><img alt=""></div><button class="button primary"></button>'
+  choice.querySelector('img').src = publicPath + art.avatar
+  choice.querySelector('button').textContent = `指认${character.name}`
+  choice.querySelector('button').addEventListener('click', () => { document.querySelector('#answer-dialog').close(); notify('原型演示：这里提交指认，未计算游戏结果。') })
+  document.querySelector('#answer-choices').append(choice)
+}
+document.querySelector('#case-title').textContent = sample.title
+document.querySelector('#background-title').textContent = sample.title
+document.querySelector('#public-background').textContent = sample.background
+scene.addEventListener('change', () => { remaining = scene.value === 'exhausted' ? 0 : 452; setState(scene.value); notify('') })
+voiceToggle.addEventListener('click', () => {
+  if (enabledStates.has(state)) { setState('off'); return }
+  setState('connecting')
+  setTimeout(() => { if (state === 'connecting') setState('ready') }, 450)
+})
+document.querySelector('#background-open').addEventListener('click', () => {
+  const result = readBackground(state)
+  setState(result.state)
+  document.querySelector('#background-dialog').showModal()
+})
+document.querySelector('#answer-open').addEventListener('click', () => { setState('off'); document.querySelector('#answer-dialog').showModal() })
+document.querySelector('#intro-preview').addEventListener('click', () => document.querySelector('#intro-dialog').showModal())
+document.querySelector('#end-game').addEventListener('click', () => notify('原型演示：此处沿用现有结束确认，未结束真实游戏。'))
+for (const button of document.querySelectorAll('[data-close]')) button.addEventListener('click', () => document.getElementById(button.dataset.close).close())
+for (const button of document.querySelectorAll('[data-duration]')) button.addEventListener('click', () => { document.querySelector('#intro-duration').textContent = `本局可询问${naturalDuration(Number(button.dataset.duration))}` })
+selectCharacter(current)
+const requestedState = new URLSearchParams(location.search).get('state')
+if ([...scene.options].some((option) => option.value === requestedState)) {
+  remaining = requestedState === 'exhausted' ? 0 : 452
+  setState(requestedState)
+}
+setInterval(() => { tick++; renderMeters() }, 100)
+setInterval(() => { if (enabledStates.has(state) && remaining > 0) { remaining--; renderFeedback(); if (remaining === 0) setState('exhausted') } }, 1000)

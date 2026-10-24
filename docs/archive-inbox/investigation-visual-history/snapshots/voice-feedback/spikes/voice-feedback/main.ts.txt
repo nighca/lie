@@ -1,0 +1,6 @@
+import { createApp } from 'vue'
+
+import '../../packages/ui/style.css'
+import FeedbackFixture from './FeedbackFixture.vue'
+
+createApp(FeedbackFixture).mount('#app')

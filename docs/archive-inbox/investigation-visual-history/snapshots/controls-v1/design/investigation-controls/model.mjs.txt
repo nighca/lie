@@ -1,0 +1,22 @@
+export const enabledStates = new Set(['ready', 'input', 'waiting', 'output', 'duplex'])
+export function naturalDuration(seconds) {
+  const minutes = Math.floor(seconds / 60)
+  const remainder = seconds % 60
+  return `${minutes > 0 ? `${minutes}分${remainder === 0 ? '钟' : ''}` : ''}${remainder > 0 ? `${remainder}秒` : ''}`
+}
+export function timerLabel(seconds) { return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}` }
+export function feedback(state, name) {
+  const rows = {
+    off: ['对话未开启', '计时已暂停', '开启对话'],
+    ready: ['等你开口', '收音已开启 · 计时中', '结束对话'],
+    input: ['收到声音', '收音已开启 · 计时中', '结束对话'],
+    waiting: ['等待回答', '收音已开启 · 计时中', '结束对话'],
+    output: [`${name}在回答`, '可直接开口打断 · 计时中', '结束对话'],
+    duplex: ['收到声音 · 正在打断', '收音已开启 · 计时中', '结束对话'],
+    exhausted: ['询问时间用完了', '仍可回看记录或回答', '时间已用完'],
+    connecting: ['正在连接', '计时尚未开始', '连接中'],
+    error: ['连接中断', '计时已暂停', '重新开启'],
+  }
+  return rows[state]
+}
+export function readBackground(state) { return { state: 'off', stopped: enabledStates.has(state) || state === 'connecting' } }

@@ -1,0 +1,21 @@
+{
+  "title": "空盒里的纪念章",
+  "background": "社区摄影社十周年小展闭馆，合影前，一枚社团自制的蓝色珐琅纪念章不见了。18:00，沈禾把装章的白盒交给顾遥补拍；五分钟后，陈拓取回同一白盒，里面却只剩衬垫。\n闭馆后只有这三人在前厅和单门摄影间活动，没有换盒，章也不可能从合好的盒子里自行掉出。你是赶来主持合影的同伴，请和他们聊聊，找出未经同意取走纪念章的人。",
+  "characters": [
+    {
+      "id": "shen",
+      "name": "沈禾",
+      "appearanceId": "sunny-moustache"
+    },
+    {
+      "id": "gu",
+      "name": "顾遥",
+      "appearanceId": "coral-bob"
+    },
+    {
+      "id": "chen",
+      "name": "陈拓",
+      "appearanceId": "blue-glasses"
+    }
+  ]
+}

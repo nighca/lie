@@ -1,0 +1,33 @@
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import { initialFeedback, reduceFeedback, feedbackLabel, rms, revealCount } from './model.mjs'
+const event = (type, extra = {}) => ({ epoch: 1, type, ...extra })
+test('partial corrections replace one draft, never append history; late revision ignored', () => {
+  let state = initialFeedback()
+  state = reduceFeedback(state, event('partial', { id: 'u1', text: '你把章', revision: 1 }))
+  state = reduceFeedback(state, event('partial', { id: 'u1', text: '你把盒子', revision: 2 }))
+  assert.equal(state.draft.text, '你把盒子'); assert.equal(state.history.length, 0)
+  assert.equal(reduceFeedback(state, event('partial', { id: 'u1', text: '旧的', revision: 1 })), state)
+})
+test('final commits once; duplicate and late partial cannot overwrite it', () => {
+  let state = reduceFeedback(initialFeedback(), event('final', { id: 'u1', text: '最后是谁拿的？' }))
+  state = reduceFeedback(state, event('final', { id: 'u1', text: '重复final' }))
+  state = reduceFeedback(state, event('partial', { id: 'u1', revision: 4, text: '迟到' }))
+  assert.equal(state.history.length, 1); assert.equal(state.history[0].text, '最后是谁拿的？'); assert.equal(state.draft, null)
+})
+test('bargein retains concurrent input/output; silence never invents thinking', () => {
+  let state = reduceFeedback(initialFeedback(), event('playback', { active: true }))
+  state = reduceFeedback(state, event('level', { active: true }))
+  assert.equal(state.outputActive, true); assert.equal(feedbackLabel(state), '你在说话 · 正在打断')
+  state = reduceFeedback(state, event('level', { active: false })); assert.equal(feedbackLabel(state), '角色回答')
+  assert.equal(feedbackLabel(initialFeedback()), '等你开口')
+})
+test('stop clears provisional feedback and ignores stale callbacks', () => {
+  const stopped = reduceFeedback(initialFeedback(), event('stop'))
+  assert.equal(reduceFeedback(stopped, event('level', { active: true })), stopped)
+  const state = initialFeedback(); assert.equal(reduceFeedback(state, { epoch: 0, type: 'final', id: 'u1', text: '旧角色' }), state)
+})
+test('RMS derives real samples; slower fixed pace has no 2400ms forced catchup', () => {
+  assert.equal(rms(new Float32Array(64)), 0); assert.equal(rms(new Float32Array([0.5, -0.5])), 0.5)
+  assert.equal(revealCount(2400, 100, 100), 24); assert.equal(revealCount(10000, 100, 100), 100)
+})

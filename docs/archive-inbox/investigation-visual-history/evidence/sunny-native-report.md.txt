@@ -1,0 +1,15 @@
+# Sunny independent IAB QA
+
+Candidate5501; game empty-medal-box demo=1, canonical name沈禾. No source modifications, microphone or provider calls. Initial default desktop1280×720: animation canvas visible1254×1254 and no horizontal overflow. Final dedicated phone tab measured actualinnerWidth/scrollWidth391, innerHeight/footer844, dpr1 and canvasvisible. Saved desktop/phone screenshots inspected.
+
+Four states default/listening/waiting/speaking, 25% and75% extreme screenshots captured from canonical candidate QA HTML and each visually inspected. No obvious open background holes, lost hand, neck split or waist separation at these samples; static reference and canvas same character. Listening inner shoulder retains layered puppet-like seam, not asserted as new all-pixel coverage guarantee. Existing approved art/candidate limitations remain. Not phoneme synchronized and no new transition validation claim.
+
+prefers-reduced-motion reduce: canvas displaynone and sunny default.png visible; restoringfeatures[], switching to顾遥/陈拓 then沈禾 restores one visible canvaslabel沈禾, no extra stale canvas. Blocked only sunny animation/package.json with CDP Network URLs and cache disabled: sunny canvasnone and default.png fallback. Cleared block/cacheoverride, switchedaway/back, canvasblock restored. Ended a demo session and game returned default; normal rendering continued.
+
+Browser logs game/QA/phone warn+error arrays all empty. All block/media/device metrics overrides cleared, viewportreset and all3 self-created tabs closed. Other user tabs untouched.
+
+Limit: Native visibility hide/resume was NOT verified: creating another IAB tab left the game document.visibilityState='visible'; protocol Emulation.setPageVisibilityOverride unsupported. Did not inject a fake document.hidden value or claim that this validates native lifecycle. Runtime unchanged and shared existing automated coverage is separate evidence. Root should keep this item explicit pending if required.
+
+Intermediate viewport measurements were355×767 at dpr1.1, then430×928; these were discarded. Final fresh dedicated tab explicitlyset391×844 and readback391/844/dpr1, so report only final verified phone dimensions. Screenshots are native IAB capture buffers (content may be JPEG despite .png filename); no image alteration performed.
+
+Screenshot review correction: 1280×720 short desktop game stage crops the lower hands at the waist (existing narrow-height canvas130% layout). Do NOT mark full hands visible for that game viewport. The 8 full phase canvases and actual391 game show hands intact. Standard desktop1280×878 was not captured in this batch; root informed before any complete-game-art claim.

@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import { enabledStates, feedback, naturalDuration, readBackground } from './model.mjs'
+test('natural duration keeps seconds when minutes are not exact', () => {
+  assert.equal(naturalDuration(600), '10分钟')
+  assert.equal(naturalDuration(330), '5分30秒')
+  assert.equal(naturalDuration(45), '45秒')
+})
+test('silence, user sound, waiting and actual answer all count while voice is enabled', () => {
+  for (const state of ['ready','input','waiting','output','duplex']) {
+    assert.ok(enabledStates.has(state))
+    assert.match(feedback(state,'顾遥')[1], /计时中/)
+    assert.deepEqual(readBackground(state), { state:'off', stopped:true })
+  }
+  for (const state of ['off','connecting','error','exhausted']) assert.ok(!enabledStates.has(state))
+})
+test('background closes enabled or preparing voice without an automatic restart decision', () => {
+  assert.deepEqual(readBackground('connecting'), { state:'off', stopped:true })
+  assert.deepEqual(readBackground('off'), { state:'off', stopped:false })
+})
