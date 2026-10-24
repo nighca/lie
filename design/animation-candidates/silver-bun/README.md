@@ -1,5 +1,7 @@
 # Silver-bun animation candidate
 
+当前接入候选按2026-10-25夜间小修自主授权准备正式资源，尚待总协调review/集成；不声称用户已亲自批准最终waiting。接入、验证及IAB边界见[正式接入记录](../../../docs/animation/silver-bun-game-integration.md)。以下保留制作修订历史，旧截图/旧待验状态以各段所述版本为准。
+
 Candidate only, not activated in canonical manifest. Source four-state PNGs are unchanged. Owner `/root/silver_bun_animation`; 2026-10-24.
 
 ## Actual assembly

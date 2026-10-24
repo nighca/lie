@@ -52,7 +52,8 @@
       "listening": "assets/silver-bun/listening.png",
       "waiting": "assets/silver-bun/waiting.png",
       "speaking": "assets/silver-bun/speaking.png"
-    }
+    },
+    "animation": "assets/silver-bun/animation/package.json"
   },
   {
     "id": "salt-pepper-beard",
