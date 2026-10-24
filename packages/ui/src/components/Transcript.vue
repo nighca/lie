@@ -7,6 +7,7 @@ export interface TranscriptMessage {
   text: string
   mine?: boolean
   avatar?: string | null
+  interrupted?: boolean
 }
 
 const brokenAvatars = ref(new Set<string>())
@@ -35,7 +36,7 @@ onMounted(followLatest)
           <svg v-else-if="message.mine" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="var(--lie-surface)" stroke="currentColor" stroke-width="2.5"/><circle cx="15" cy="18" r="1.7" fill="currentColor"/><circle cx="25" cy="18" r="1.7" fill="currentColor"/><path d="M15 24Q20 29 25 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
           <span v-else>{{ message.speaker.slice(0, 1) }}</span>
         </span>
-        <div class="lie-transcript__bubble"><strong>{{ message.speaker }}</strong><p>{{ message.text }}</p></div>
+        <div class="lie-transcript__bubble"><strong>{{ message.speaker }}</strong><p>{{ message.text }}</p><span v-if="message.interrupted" class="lie-transcript__interrupted">回答被打断</span></div>
       </article>
     </div>
   </section>
@@ -53,6 +54,7 @@ onMounted(followLatest)
 .lie-transcript__bubble::before { content: ''; position: absolute; width: 12px; height: 12px; top: 16px; left: -9px; transform: rotate(45deg); background: inherit; border-left: 3px solid var(--lie-ink); border-bottom: 3px solid var(--lie-ink); }
 .lie-transcript__message--mine .lie-transcript__avatar { color: var(--lie-primary); background: var(--lie-soft-blue); }
 .lie-transcript__bubble strong { font-size: 14px; color: var(--lie-muted); }
+.lie-transcript__interrupted { display: inline-block; margin-top: 4px; font-size: 12px; color: var(--lie-muted); }
 .lie-transcript__bubble p { font-weight: 600; margin-top: 4px; }
 @media (max-width: 700px) { .lie-transcript__log { max-height: 380px; } }
 </style>

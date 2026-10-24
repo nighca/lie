@@ -26,6 +26,7 @@ const transcript = computed(() => view.value.history.map((entry) => ({
   id: entry.id,
   speaker: entry.role === 'user' ? '你' : current.value?.name ?? '人物',
   text: entry.text,
+  interrupted: entry.interrupted,
   mine: entry.role === 'user',
   avatar: entry.role === 'user' ? null : appearance(current.value?.appearanceId ?? null)?.avatar ?? null,
 })))

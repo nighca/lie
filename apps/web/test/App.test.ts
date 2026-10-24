@@ -77,6 +77,24 @@ describe('game screens', () => {
     expect(wrapper.get('[aria-label="语音对话控制"] button').text()).toBe('开始对话')
   })
 
+  it('shows interrupted controller history without marking normally completed answers', async () => {
+    const { controller, turns } = setup()
+    await controller.load('test'); controller.start(); await controller.startConversation()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    turns[0].scope.onEvent({ type: 'assistantText', text: '保留这段已经显示的文字。' })
+    turns[0].scope.onEvent({ type: 'interrupted' })
+    turns[0].scope.onEvent({ type: 'assistantText', text: '随后正常结束的回答。' })
+    turns[0].scope.onEvent({ type: 'listening' })
+    await wrapper.vm.$nextTick()
+    expect(controller.getView().history.map(({ interrupted }) => interrupted)).toEqual([true, false])
+    const answers = wrapper.findAll('[role="log"] article')
+    expect(answers[0].get('p').text()).toBe('保留这段已经显示的文字。')
+    expect(answers[0].get('.lie-transcript__interrupted').text()).toBe('回答被打断')
+    expect(answers[1].get('p').text()).toBe('随后正常结束的回答。')
+    expect(answers[1].find('.lie-transcript__interrupted').exists()).toBe(false)
+  })
+
   it('offers cancellation while microphone and service preparation is pending', async () => {
     const { controller, voice, turns } = setup()
     let ready!: () => void

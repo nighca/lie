@@ -77,4 +77,18 @@ describe('shared controls', () => {
     await wrapper.setProps({ open: false })
     expect(wrapper.get('dialog').element.open).toBe(false)
   })
+
+  it('preserves interrupted answer text and marks only that answer with readable status text', () => {
+    const wrapper = mount(Transcript, { props: { messages: [
+      { id: 'partial', speaker: '甲', text: '已经显示的一句回答。', interrupted: true },
+      { id: 'complete', speaker: '甲', text: '正常完成的回答。', interrupted: false },
+    ] } })
+    wrappers.push(wrapper)
+    const answers = wrapper.findAll('article')
+    expect(answers[0].get('p').text()).toBe('已经显示的一句回答。')
+    expect(answers[0].get('.lie-transcript__interrupted').text()).toBe('回答被打断')
+    expect(answers[1].get('p').text()).toBe('正常完成的回答。')
+    expect(answers[1].find('.lie-transcript__interrupted').exists()).toBe(false)
+    expect(wrapper.get('[role="log"]').text()).toContain('回答被打断')
+  })
 })
