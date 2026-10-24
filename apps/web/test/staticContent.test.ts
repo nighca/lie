@@ -1,12 +1,14 @@
 import { readFile, stat } from 'node:fs/promises'
 import { fileURLToPath, URL as NodeURL } from 'node:url'
 
-import { validateGame } from '@lie/game-core'
+import { accuse, buildCharacterContext, createGameSession, getInterrogationRemainingMs, selectCharacter, startSession, validateGame } from '@lie/game-core'
 import { describe, expect, it } from 'vitest'
 
 import designAppearances from '../../../design/appearances/manifest.json'
 import authoredCase from '../../../content/games/empty-medal-box.json'
+import authoredDuckCase from '../../../content/games/duck-finale.json'
 import caseData from '../public/games/empty-medal-box.json'
+import duckCaseData from '../public/games/duck-finale.json'
 import catalogData from '../public/games/index.json'
 import { readCatalog } from '../src/application/catalog'
 import gameConfig from '../src/game-config.json'
@@ -26,6 +28,27 @@ describe('bundled game content', () => {
       expect(appearance!.portrait).toMatch(/^\/appearances\//)
     }
     expect(game.characters).toHaveLength(3)
+  })
+
+  it('runs the actual four-character second case with its own budget and terminal accusation', () => {
+    expect(duckCaseData).toEqual(authoredDuckCase)
+    const game = validateGame(duckCaseData)
+    expect(game.characters).toHaveLength(4)
+    const running = startSession(createGameSession(game, { sessionId: 'duck-case', now: 1 }), 2)
+    expect(getInterrogationRemainingMs(running)).toBe(600_000)
+    const appearances = readAppearances(appearanceData)
+    for (const character of game.characters) {
+      expect(appearances.find((appearance) => appearance.id === character.appearanceId)).toBeDefined()
+      const selected = selectCharacter(running, character.id)
+      expect(selected.currentCharacterId).toBe(character.id)
+      const context = buildCharacterContext(game, character.id, [])
+      expect(context.profile).toBe(character.profile)
+      expect(game.characters.filter((item) => item.id !== character.id).every((item) => !context.systemPrompt.includes(item.profile))).toBe(true)
+      const result = accuse(selected, character.id, 3)
+      expect(result.phase).toBe(character.id === game.ending.culpritId ? 'solved' : 'lost')
+      expect(result.result!.reveal).toBe(character.id === game.ending.culpritId ? game.ending.reveal : null)
+      expect(() => accuse(result, game.ending.culpritId, 4)).toThrow('invalid-phase')
+    }
   })
 
   it('keeps public catalog cards in sync with their actual content packages', async () => {
