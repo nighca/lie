@@ -1,0 +1,8 @@
+default right-shoulder-cuff opaque 15948 uncovered-alpha 0 source-black 1933 outside-canonical-selection 0 first-gaps []
+default left-shoulder-cuff opaque 12978 uncovered-alpha 0 source-black 1902 outside-canonical-selection 0 first-gaps []
+listening right-shoulder-cuff opaque 16285 uncovered-alpha 324 source-black 2047 outside-canonical-selection 2047 first-gaps [(802, 392), (808, 394), (816, 396), (822, 398)]
+listening left-shoulder-cuff opaque 15458 uncovered-alpha 0 source-black 2111 outside-canonical-selection 0 first-gaps []
+waiting right-shoulder-cuff opaque 13637 uncovered-alpha 0 source-black 1840 outside-canonical-selection 0 first-gaps []
+waiting left-shoulder-cuff opaque 13116 uncovered-alpha 0 source-black 1950 outside-canonical-selection 0 first-gaps []
+speaking right-shoulder-cuff opaque 16732 uncovered-alpha 0 source-black 2163 outside-canonical-selection 0 first-gaps []
+speaking left-shoulder-cuff opaque 12981 uncovered-alpha 14 source-black 1964 outside-canonical-selection 0 first-gaps [(424, 434), (418, 436), (408, 440), (382, 450)]

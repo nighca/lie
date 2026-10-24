@@ -15,28 +15,29 @@ group('head-root','contact-root',(615,380))
 group('left-root','body-root',(390,485))
 group('right-root','body-root',(870,460))
 group('speaking-root','body-root',(870,460))
-body=[[490,335],[780,335],[815,450],[805,650],[810,750],[870,850],[1000,1254],[300,1254],[340,900],[365,850],[400,700],[375,550],[420,450]]
+body=[[490,335],[780,335],[900,425],[850,500],[835,650],[825,700],[835,750],[870,850],[1000,1254],[300,1254],[340,900],[365,850],[400,700],[375,550],[420,450]]
 sprite('body','shared-torso',3,body,'body-root',True)
+sprite('body-waiting-lower','waiting-source',3,[[200,860],[1100,860],[1100,1254],[200,1254]],'body-root')
+sprite('waiting-chest','waiting-source',4,[[200,400],[510,385],[535,405],[650,415],[700,390],[715,350],[745,330],[1050,350],[1100,890],[200,890]],'contact-root')
+sprite('neck-waiting','waiting-source',4,[[520,370],[570,390],[625,390],[680,365],[725,330],[735,370],[710,405],[690,435],[650,465],[620,485],[600,495],[570,470],[540,435]],'contact-root')
 head=[[350,0],[800,0],[800,290],[739,290],[730,335],[700,365],[660,385],[600,402],[540,392],[510,373],[490,350],[350,350]]
 for state in ['default','listening','waiting','speaking']:
  sprite('head-'+state,state+'-source',8,head,'head-root',state=='default')
-sprite('arm-left','default-source',1,[[320,450],[435,410],[435,530],[415,630],[420,735],[390,800],[380,900],[330,1000],[370,1254],[180,1254],[180,1000],[200,800],[230,720],[245,650],[280,550]],'left-root',True)
-sprite('arm-right','default-source',1,[[820,410],[950,425],[1080,650],[1100,1254],[860,1254],[900,1020],[870,900],[850,800],[825,720],[800,600]],'right-root',True)
-sprite('arm-listening','listening-source',1,[[300,200],[500,200],[500,370],[470,395],[450,405],[485,415],[485,485],[450,580],[425,700],[210,730],[160,650],[180,500],[260,420],[300,390]],'contact-root')
-# Canonical sleeves and skin have identical registration and share the chin contact rig.
-sprite('arm-waiting-left','waiting-source',1,[[320,455],[450,400],[460,510],[445,585],[425,650],[445,710],[475,770],[450,815],[400,830],[350,795],[300,730],[260,680],[270,570]],'contact-root')
+sprite('arm-left','default-source',1,[[270,430],[470,365],[500,435],[455,550],[435,700],[410,800],[380,900],[330,1000],[370,1254],[180,1254],[180,1000],[200,800],[230,720],[245,650]],'left-root',True)
+sprite('arm-right','default-source',1,[[730,335],[1000,380],[1150,600],[1150,1254],[860,1254],[900,1020],[870,900],[780,850],[760,740],[760,550]],'right-root',True)
+sprite('arm-listening','listening-source',1,[[280,190],[500,190],[510,370],[500,430],[500,550],[440,750],[150,750],[150,500],[260,400]],'contact-root')
+# Full canonical shoulder caps overlap inside the torso rather than meeting at a cut edge.
 sprite('arm-waiting','waiting-source',9,[[520,345],[555,340],[570,365],[600,345],[650,340],[668,352],[665,372],[630,385],[635,400],[650,410],[650,440],[645,465],[630,490],[605,520],[575,540],[560,625],[535,700],[505,755],[460,790],[420,820],[380,810],[345,780],[325,735],[340,680],[380,625],[440,565],[495,495],[515,440]],'contact-root')
-sprite('arm-waiting-right','waiting-source',9,[[820,420],[930,450],[1000,640],[980,720],[940,790],[900,800],[880,815],[850,838],[800,845],[740,848],[680,842],[620,831],[560,817],[520,814],[480,817],[460,830],[440,834],[420,820],[410,805],[425,780],[465,770],[500,780],[530,720],[650,715],[775,680],[790,580]],'contact-root')
-sprite('sleeve-speaking','speaking-source',1,[[820,420],[935,450],[1000,560],[1060,670],[1030,710],[900,700],[835,650],[810,560]],'speaking-root')
+sprite('sleeve-speaking','speaking-source',1,[[730,335],[1100,380],[1150,650],[1100,735],[800,735],[760,600]],'speaking-root')
 sprite('arm-speaking','speaking-source',4,[[1030,645],[1065,720],[1065,800],[1045,845],[1010,858],[970,852],[940,850],[920,845],[900,830],[880,810],[860,790],[840,765],[825,740],[815,725],[780,728],[750,720],[730,705],[710,685],[690,660],[680,630],[690,610],[710,605],[735,615],[750,625],[780,630],[805,640],[830,640],[830,595],[840,565],[858,565],[874,600],[885,640],[885,675]],'speaking-root')
-attachments=[n['id'] for n in nodes if n.get('sprite') and n['id']!='body']
+attachments=[n['id'] for n in nodes if n.get('sprite')]
 def wave(node,property,values,duration):
  return dict(node=node,property=property,interpolation='linear',keys=[dict(time=duration*i/(len(values)-1),value=value) for i,value in enumerate(values)])
 def clip(state,duration):
- visible=['head-'+state]
+ visible=['head-'+state,'body-waiting-lower' if state=='waiting' else 'body']
  if state=='default':visible+=['arm-left','arm-right']
  elif state=='listening':visible+=['arm-listening','arm-right']
- elif state=='waiting':visible+=['arm-waiting','arm-waiting-left','arm-waiting-right']
+ elif state=='waiting':visible+=['waiting-chest','neck-waiting','arm-waiting']
  else:visible+=['arm-left','sleeve-speaking','arm-speaking']
  tracks=[wave('body-root','y',[900,896,900,904,900],duration),wave('body-root','rotation',[0,.4,.08,-.4,0],duration)]
  if state in ['listening','waiting']:

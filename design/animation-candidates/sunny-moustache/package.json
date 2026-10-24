@@ -142,15 +142,23 @@
             335
           ],
           [
-            815,
-            450
+            900,
+            425
           ],
           [
-            805,
+            850,
+            500
+          ],
+          [
+            835,
             650
           ],
           [
-            810,
+            825,
+            700
+          ],
+          [
+            835,
             750
           ],
           [
@@ -184,6 +192,174 @@
           [
             420,
             450
+          ]
+        ]
+      }
+    },
+    {
+      "id": "body-waiting-lower",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 3,
+        "mask": [
+          [
+            200,
+            860
+          ],
+          [
+            1100,
+            860
+          ],
+          [
+            1100,
+            1254
+          ],
+          [
+            200,
+            1254
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-chest",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 4,
+        "mask": [
+          [
+            200,
+            400
+          ],
+          [
+            510,
+            385
+          ],
+          [
+            535,
+            405
+          ],
+          [
+            650,
+            415
+          ],
+          [
+            700,
+            390
+          ],
+          [
+            715,
+            350
+          ],
+          [
+            745,
+            330
+          ],
+          [
+            1050,
+            350
+          ],
+          [
+            1100,
+            890
+          ],
+          [
+            200,
+            890
+          ]
+        ]
+      }
+    },
+    {
+      "id": "neck-waiting",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 4,
+        "mask": [
+          [
+            520,
+            370
+          ],
+          [
+            570,
+            390
+          ],
+          [
+            625,
+            390
+          ],
+          [
+            680,
+            365
+          ],
+          [
+            725,
+            330
+          ],
+          [
+            735,
+            370
+          ],
+          [
+            710,
+            405
+          ],
+          [
+            690,
+            435
+          ],
+          [
+            650,
+            465
+          ],
+          [
+            620,
+            485
+          ],
+          [
+            600,
+            495
+          ],
+          [
+            570,
+            470
+          ],
+          [
+            540,
+            435
           ]
         ]
       }
@@ -478,27 +654,27 @@
         "order": 1,
         "mask": [
           [
-            320,
-            450
+            270,
+            430
+          ],
+          [
+            470,
+            365
+          ],
+          [
+            500,
+            435
+          ],
+          [
+            455,
+            550
           ],
           [
             435,
-            410
+            700
           ],
           [
-            435,
-            530
-          ],
-          [
-            415,
-            630
-          ],
-          [
-            420,
-            735
-          ],
-          [
-            390,
+            410,
             800
           ],
           [
@@ -532,10 +708,6 @@
           [
             245,
             650
-          ],
-          [
-            280,
-            550
           ]
         ]
       }
@@ -558,19 +730,19 @@
         "order": 1,
         "mask": [
           [
-            820,
-            410
+            730,
+            335
           ],
           [
-            950,
-            425
+            1000,
+            380
           ],
           [
-            1080,
-            650
+            1150,
+            600
           ],
           [
-            1100,
+            1150,
             1254
           ],
           [
@@ -586,16 +758,16 @@
             900
           ],
           [
-            850,
-            800
+            780,
+            850
           ],
           [
-            825,
-            720
+            760,
+            740
           ],
           [
-            800,
-            600
+            760,
+            550
           ]
         ]
       }
@@ -618,132 +790,40 @@
         "order": 1,
         "mask": [
           [
-            300,
-            200
+            280,
+            190
           ],
           [
             500,
-            200
+            190
           ],
           [
-            500,
+            510,
             370
           ],
           [
-            470,
-            395
+            500,
+            430
           ],
           [
-            450,
-            405
+            500,
+            550
           ],
           [
-            485,
-            415
+            440,
+            750
           ],
           [
-            485,
-            485
+            150,
+            750
           ],
           [
-            450,
-            580
-          ],
-          [
-            425,
-            700
-          ],
-          [
-            210,
-            730
-          ],
-          [
-            160,
-            650
-          ],
-          [
-            180,
+            150,
             500
           ],
           [
             260,
-            420
-          ],
-          [
-            300,
-            390
-          ]
-        ]
-      }
-    },
-    {
-      "id": "arm-waiting-left",
-      "parent": "contact-root",
-      "transform": {
-        "x": 0,
-        "y": 0,
-        "pivotX": 0,
-        "pivotY": 0,
-        "rotation": 0,
-        "scaleX": 1,
-        "scaleY": 1
-      },
-      "visible": false,
-      "sprite": {
-        "asset": "waiting-source",
-        "order": 1,
-        "mask": [
-          [
-            320,
-            455
-          ],
-          [
-            450,
             400
-          ],
-          [
-            460,
-            510
-          ],
-          [
-            445,
-            585
-          ],
-          [
-            425,
-            650
-          ],
-          [
-            445,
-            710
-          ],
-          [
-            475,
-            770
-          ],
-          [
-            450,
-            815
-          ],
-          [
-            400,
-            830
-          ],
-          [
-            350,
-            795
-          ],
-          [
-            300,
-            730
-          ],
-          [
-            260,
-            680
-          ],
-          [
-            270,
-            570
           ]
         ]
       }
@@ -881,130 +961,6 @@
       }
     },
     {
-      "id": "arm-waiting-right",
-      "parent": "contact-root",
-      "transform": {
-        "x": 0,
-        "y": 0,
-        "pivotX": 0,
-        "pivotY": 0,
-        "rotation": 0,
-        "scaleX": 1,
-        "scaleY": 1
-      },
-      "visible": false,
-      "sprite": {
-        "asset": "waiting-source",
-        "order": 9,
-        "mask": [
-          [
-            820,
-            420
-          ],
-          [
-            930,
-            450
-          ],
-          [
-            1000,
-            640
-          ],
-          [
-            980,
-            720
-          ],
-          [
-            940,
-            790
-          ],
-          [
-            900,
-            800
-          ],
-          [
-            880,
-            815
-          ],
-          [
-            850,
-            838
-          ],
-          [
-            800,
-            845
-          ],
-          [
-            740,
-            848
-          ],
-          [
-            680,
-            842
-          ],
-          [
-            620,
-            831
-          ],
-          [
-            560,
-            817
-          ],
-          [
-            520,
-            814
-          ],
-          [
-            480,
-            817
-          ],
-          [
-            460,
-            830
-          ],
-          [
-            440,
-            834
-          ],
-          [
-            420,
-            820
-          ],
-          [
-            410,
-            805
-          ],
-          [
-            425,
-            780
-          ],
-          [
-            465,
-            770
-          ],
-          [
-            500,
-            780
-          ],
-          [
-            530,
-            720
-          ],
-          [
-            650,
-            715
-          ],
-          [
-            775,
-            680
-          ],
-          [
-            790,
-            580
-          ]
-        ]
-      }
-    },
-    {
       "id": "sleeve-speaking",
       "parent": "speaking-root",
       "transform": {
@@ -1022,36 +978,28 @@
         "order": 1,
         "mask": [
           [
-            820,
-            420
+            730,
+            335
           ],
           [
-            935,
-            450
+            1100,
+            380
           ],
           [
-            1000,
-            560
-          ],
-          [
-            1060,
-            670
-          ],
-          [
-            1030,
-            710
-          ],
-          [
-            900,
-            700
-          ],
-          [
-            835,
+            1150,
             650
           ],
           [
-            810,
-            560
+            1100,
+            735
+          ],
+          [
+            800,
+            735
+          ],
+          [
+            760,
+            600
           ]
         ]
       }
@@ -1214,6 +1162,10 @@
       "duration": 4.8,
       "loop": true,
       "visibility": {
+        "body": true,
+        "body-waiting-lower": false,
+        "waiting-chest": false,
+        "neck-waiting": false,
         "head-default": true,
         "head-listening": false,
         "head-waiting": false,
@@ -1221,9 +1173,7 @@
         "arm-left": true,
         "arm-right": true,
         "arm-listening": false,
-        "arm-waiting-left": false,
         "arm-waiting": false,
-        "arm-waiting-right": false,
         "sleeve-speaking": false,
         "arm-speaking": false
       },
@@ -1396,6 +1346,10 @@
       "duration": 4.8,
       "loop": true,
       "visibility": {
+        "body": true,
+        "body-waiting-lower": false,
+        "waiting-chest": false,
+        "neck-waiting": false,
         "head-default": false,
         "head-listening": true,
         "head-waiting": false,
@@ -1403,9 +1357,7 @@
         "arm-left": false,
         "arm-right": true,
         "arm-listening": true,
-        "arm-waiting-left": false,
         "arm-waiting": false,
-        "arm-waiting-right": false,
         "sleeve-speaking": false,
         "arm-speaking": false
       },
@@ -1578,6 +1530,10 @@
       "duration": 4.8,
       "loop": true,
       "visibility": {
+        "body": false,
+        "body-waiting-lower": true,
+        "waiting-chest": true,
+        "neck-waiting": true,
         "head-default": false,
         "head-listening": false,
         "head-waiting": true,
@@ -1585,9 +1541,7 @@
         "arm-left": false,
         "arm-right": false,
         "arm-listening": false,
-        "arm-waiting-left": true,
         "arm-waiting": true,
-        "arm-waiting-right": true,
         "sleeve-speaking": false,
         "arm-speaking": false
       },
@@ -1706,6 +1660,10 @@
       "duration": 3.6,
       "loop": true,
       "visibility": {
+        "body": true,
+        "body-waiting-lower": false,
+        "waiting-chest": false,
+        "neck-waiting": false,
         "head-default": false,
         "head-listening": false,
         "head-waiting": false,
@@ -1713,9 +1671,7 @@
         "arm-left": true,
         "arm-right": false,
         "arm-listening": false,
-        "arm-waiting-left": false,
         "arm-waiting": false,
-        "arm-waiting-right": false,
         "sleeve-speaking": true,
         "arm-speaking": true
       },

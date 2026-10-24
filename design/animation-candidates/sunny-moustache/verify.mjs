@@ -21,7 +21,7 @@ for(const [state,meta] of Object.entries(provenance.sources)) {
  assert.equal(hash(original),meta.sha256)
  assert.equal(meta.sha256,provenance.parts[state+'-source'].sha256)
 }
-const expectedArms={default:['arm-left','arm-right'],listening:['arm-listening','arm-right'],waiting:['arm-waiting','arm-waiting-left','arm-waiting-right'],speaking:['arm-left','sleeve-speaking','arm-speaking']}
+const expectedArms={default:['arm-left','arm-right'],listening:['arm-listening','arm-right'],waiting:['arm-waiting'],speaking:['arm-left','sleeve-speaking','arm-speaking']}
 const heads=['head-default','head-listening','head-waiting','head-speaking']
 function checkPose(pose,state,elapsed) {
  const target=sampleClip(data,data.clips[data.states[state]],elapsed)
@@ -43,7 +43,7 @@ for(const [state,id] of Object.entries(data.states)) {
  assert.notDeepEqual(positive[state==='listening'||state==='waiting'?'contact-root':'head-root'].transform,negative[state==='listening'||state==='waiting'?'contact-root':'head-root'].transform)
 }
 assert.equal(data.nodes.find(node=>node.id==='head-root').parent,'contact-root')
-for(const id of ['arm-listening','arm-waiting','arm-waiting-left','arm-waiting-right']) {
+for(const id of ['arm-listening','arm-waiting','waiting-chest','neck-waiting']) {
  const node=data.nodes.find(node=>node.id===id)
  assert.equal(node.parent,'contact-root')
  assert.equal(node.sprite.asset,id==='arm-listening'?'listening-source':'waiting-source')
@@ -54,8 +54,9 @@ for(const id of ['sleeve-speaking','arm-speaking']) {
  assert.equal(node.parent,'speaking-root')
  assert.equal(node.sprite.asset,'speaking-source')
 }
-assert(data.nodes.find(node=>node.id==='arm-waiting-left').sprite.order < data.nodes.find(node=>node.id==='body').sprite.order)
-assert(data.nodes.find(node=>node.id==='arm-waiting').sprite.order > data.nodes.find(node=>node.id==='body').sprite.order)
+assert.equal(data.nodes.find(node=>node.id==='body-waiting-lower').parent,'body-root')
+assert.equal(data.nodes.find(node=>node.id==='body-waiting-lower').sprite.asset,'waiting-source')
+assert(data.nodes.find(node=>node.id==='arm-waiting').sprite.order > data.nodes.find(node=>node.id==='waiting-chest').sprite.order)
 const timeline=new AnimationTimeline(data)
 timeline.setState('speaking')
 checkPose(timeline.advance(.11),'speaking',.11)
