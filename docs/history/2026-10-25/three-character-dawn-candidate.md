@@ -2,7 +2,7 @@
 
 本代候选基线 `f4338346e3ec20fd742f6a75ea4362f428c18b5b`，worktree `/Users/nighca/.codex/worktrees/three-character-qa-dawn/lie`，分支 `codex/three-character-qa-dawn`。旧候选目录消失且5504/5505无监听后，由独立环境owner重放已review30链至eacd93e，再附source `1f7bb995e6db44bf9b584171ef38313a1d02a4af`灰白部分QA记录至bfb2a33。旧a440候选refs保留，不操作。
 
-当前候选 `bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c` clean。环境owner以Node24.22.1运行全仓379测试、类型、Web＋gateway构建、79资源strict及3专属strict均PASS；3package＋16PNG与旧候选source/public/dist逐字节相同，35旧静态资源不变，新Editor CSS保留。日志：`/private/tmp/three-character-dawn-tests.log`、`/private/tmp/three-character-dawn-types.log`、`/private/tmp/three-character-dawn-build.log`。root实际review附加证据22行及6截图，无blocker；这些仍只是部分正式QA，不能代替最终正式游戏IAB。
+候选 `bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`在环境handoff时clean；后续动画QA创建授权untracked `apps/web/public/qa-three-character-iframe.html`，由动画owner最终删除，root不得擅清。环境handoff检查如下：。环境owner以Node24.22.1运行全仓379测试、类型、Web＋gateway构建、79资源strict及3专属strict均PASS；3package＋16PNG与旧候选source/public/dist逐字节相同，35旧静态资源不变，新Editor CSS保留。日志：`/private/tmp/lie-three-character-dawn-tests.log`、`/private/tmp/lie-three-character-dawn-types.log`、`/private/tmp/lie-three-character-dawn-build.log`。root实际review附加证据22行及6截图，无blocker；这些仍只是部分正式QA，不能代替最终正式游戏IAB。
 
 纯local demo统一 `http://127.0.0.1:5504`，PID24833/PTY77092，gateway指127.0.0.1:1，HTTP200；旧5505不恢复。动画专项已获root通知实际WT/SHA/URL，在新5504继续正式页QA，不占全局viewport。候选尚未main/push/部署。后续main若有功能变化须重建影响审查。
 
@@ -43,3 +43,5 @@
 31. `bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`
 
 本批状态核验07:03:31：main已新增fan至3a67735；本候选仍基于f433834，需后续重建/影响验证，动画正持5504 QA，勿动branch/runtime。
+
+本批文档source base `3f52ee599c321e76528cc7c73d52777ca9f6c34d`，与当时当前main3a67735不同；root按最新main候选集成。新main组合候选由环境owner独立重建，5504 QA源不动。

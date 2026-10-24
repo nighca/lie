@@ -40,7 +40,7 @@
 | 三案引擎、持续语音、调查v3/v4、共享品牌、逐字转写与静态回退 | [组合验收](history/2026-10-24/combined-ui-animation.md)、[真实语音边界](realtime-voice-validation.md) |
 | 调查输入反馈及UI1—9（人数头像/扇卡/笔触/标签/静音波形/通知/分段） | [输入反馈](history/2026-10-24/coordinator-takeover.md)、[1—9](history/2026-10-24/ui-polish-acceptance.md)；17条旧“只记录”已解除 |
 | 编辑器10—17、PC卡复用、草稿状态组、窄屏步骤连接线、投稿弹窗局部排版 | [编辑器验收](history/2026-10-24/editor-feedback-integration.md)、[实施文档](game-editor-implementation.md) |
-| 指认可变人数扇卡 | main `3a67735`；root实际review七图/完整diff，独立Node24.22.1 Web186/类型/构建8形象60资源通过；1/4/7人数及键盘/触屏回归见[验收记录](history/2026-10-25/accusation-fan-layout.md)。 |
+| 指认可变人数扇卡 | main `3a67735`；root实际review七图/完整diff，独立Node24.22.1 Web186/类型/构建8形象60资源通过；1/4/7人数及键盘/窄屏回归见[验收记录](history/2026-10-25/accusation-fan-layout.md)。 |
 | 编辑器大形象定位稳定 | main `f433834`；root全diff/context/五图review，Node24.22.1独立28测试/Web类型/构建及8形象60资源通过；[实施记录](game-editor-implementation.md)。iframe验收限制见交接。 |
 | 顾遥/蓝衣/阳光小胡子动画与多候选作者预览 | [顾遥](animation/coral-game-integration.md)、[蓝衣](animation/blue-glasses-game-integration.md)、[小胡子](animation/sunny-moustache-game-integration.md) |
 | Logo红点彩蛋、README双语头图 | [Logo记录](../design/brand/logo-easter-egg/README.md)、[双语头图及详细集成快照](history/2026-10-25/README.md) |
@@ -53,7 +53,7 @@
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 银发waiting接入 / 动画专项＋root review | 三角色新候选`a440ec9`（base0a67498）已重建并过全仓379/类型/构建79资源；原素材review/哈希保持，旧候选目录消失、5504/5505无监听阻塞；`three_character_environment`已在新WT以f433834重放30链至eacd93e、附灰白部分QA至bfb2a33 clean，单套5504纯local demo HTTP200/79资源ready；动画专项已获root成功通知继续正式IAB，Node24.22.1全仓379测试/类型/Web＋gateway构建/79资源及3专属strict均通过，旧5505不恢复，角色未main。完整来源见交接候选登记，不复制旧链。 |
+| P1 | 银发waiting接入 / 动画专项＋root review | 三角色新候选`a440ec9`（base0a67498）已重建并过全仓379/类型/构建79资源；原素材review/哈希保持，旧候选目录消失、5504/5505无监听阻塞；`three_character_environment`已在新WT以f433834重放30链至eacd93e、附灰白部分QA至bfb2a33（环境handoff时clean，当前QA临时壳由动画owner最终删除），单套5504纯local demo HTTP200/79资源ready；动画专项已获root成功通知继续正式IAB，Node24.22.1全仓379测试/类型/Web＋gateway构建/79资源及3专属strict均通过，旧5505不恢复，角色未main。新main3a67735组合正在由环境owner独立候选重建，5504 QA源不动；完整来源见交接候选登记。 |
 | P1 | gray/plum接入与扩人 / 动画专项＋main_acceptance_environment | 正式activation source HEAD `822e9b5` clean（base5968661，12有序提交）已root实际源码/图review；当前恢复候选bfb2a33（basef433834），含结果投影的组合检查已通过，统一新5504正式游戏IAB未完整交付；约06:52 waiting flag已清空，原因不可见，未main。新source `1f7bb99`仅灰白QA六图/22行记录，root已实际review无blocker，非全部QA；之后按原canonical制mint/ochre，最多2角色并行。 |
 | P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；fan＋Editor已main，等silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
@@ -74,4 +74,3 @@
 
 原位维护决定/owner/依赖/下一步；已完成流水移[历史](history/2026-10-25/README.md)。记录、本地集成、push、部署与真人验收分别报告。
 
-三角色当前候选`bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`仍基于f433834；main新增fan后须后续重建/影响验证。动画正持5504 QA，勿动其branch/runtime。本批文档source base为3f52ee5，并非当前main；root需按最新main候选集成。
