@@ -2,11 +2,19 @@
 
 2026-10-24；只读调研。基于已review仓库 `e6bdf7352bff917e23229ed2fd67d77c9296c93c`。编辑器本体已另行获准开发；**本文没有注册GitHub App、创建fork/分支/commit/PR、请求登录授权或修改任何工作流和产品代码**，自动投稿方式仍待用户选定。
 
+## 最新确认与实测前提
+
+用户已选择跳GitHub页面、由本人确认提交，不让LIE取得GitHub OAuth/token授权。只调查能预填多少，自动PR/OAuth/App/PAT路线不作为当前实施方向。
+
+root于2026-10-24只读运行`gh repo view nighca/lie --json nameWithOwner,isPrivate,visibility,defaultBranchRef`，确认目标仓为PRIVATE、main分支。当前外部玩家并无默认访问权；正式投稿前需用户决定公开源码仓或另设公开投稿仓，不能自动改可见性或加协作者。
+
+root在IAB打开带filename/value/message/description的短测试参数链接，仅放无敏感的“预填能力检查（不提交）”JSON。页面未登录且私有仓访问返回404；没有看到编辑表单，因此不能认定value、message或description实测成功。没有提交文件/commit/PR，没有fork或登录授权；临时tab已关闭。当前已确认的官方能力仍是filename预填，以及已有head/base差异后的compare title/body等。正文/commit参数保留待有适当GitHub网页登录态后只读验证，不能凭“无正式文档”推断一定不支持。
+
 ## 建议先做什么
 
 建议第一阶段按钮叫 **“投稿到官方案件库”**，实际流程明确为：校验并复制/下载案件JSON → 打开GitHub新建文件页 → 作者在GitHub完成登录、fork/commit和创建PR → 维护者review故事及测试 → 合入后发布。它没有给LIE增加账号数据库，也不接管用户GitHub token；**不是点击即自动创建PR**。
 
-完整JSON不放URL：本仓首案实际9,280字节UTF-8，用`URLSearchParams`放进`value`后，构造的链接是27,101个字符。这里只在本地计算长度，未发往GitHub；已经足以说明长URL不能作为正式稿件传输方式。下载和粘贴不依赖这个长度。
+完整JSON不放URL：本仓首案实际9,280字节UTF-8，用`URLSearchParams`放进`value`后，构造的链接是27,101个字符。这里只在本地计算长度，未发往GitHub；说明不能直接套用游戏fragment分享的容量结论；GitHub服务器收到的是query，需要另测接受长度，不能仅因27k字符就断言绝对不可用。下载和粘贴不依赖这个长度。
 
 GitHub存储fork、commit、PR和review，本地编辑器只处理草稿；“无自建DB”不表示整个流程没有云状态。若用户需要的是授权后直接在产品里生成PR，可以复用薄Worker承担GitHub凭据交换/调用，不一定需要传统backend或数据库，但属于新增授权与写入能力，不能先按纯链接按钮偷换实现。
 
