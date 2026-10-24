@@ -934,6 +934,54 @@
       }
     },
     {
+      "id": "sleeve-speaking",
+      "parent": "speaking-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 4,
+        "mask": [
+          [
+            800,
+            445
+          ],
+          [
+            910,
+            450
+          ],
+          [
+            1010,
+            700
+          ],
+          [
+            985,
+            725
+          ],
+          [
+            838,
+            754
+          ],
+          [
+            805,
+            690
+          ],
+          [
+            795,
+            600
+          ]
+        ]
+      }
+    },
+    {
       "id": "arm-speaking",
       "parent": "speaking-root",
       "transform": {
@@ -951,68 +999,120 @@
         "order": 4,
         "mask": [
           [
+            845,
+            635
+          ],
+          [
+            880,
+            635
+          ],
+          [
+            895,
+            670
+          ],
+          [
+            880,
+            700
+          ],
+          [
+            963,
+            691
+          ],
+          [
+            991,
+            790
+          ],
+          [
+            989,
+            845
+          ],
+          [
+            968,
+            877
+          ],
+          [
+            945,
+            892
+          ],
+          [
+            905,
+            880
+          ],
+          [
+            875,
+            867
+          ],
+          [
+            860,
+            853
+          ],
+          [
+            850,
+            840
+          ],
+          [
+            840,
+            825
+          ],
+          [
+            830,
+            812
+          ],
+          [
+            820,
+            797
+          ],
+          [
+            810,
+            788
+          ],
+          [
+            740,
+            783
+          ],
+          [
+            715,
+            768
+          ],
+          [
+            695,
+            748
+          ],
+          [
+            675,
+            733
+          ],
+          [
+            668,
+            710
+          ],
+          [
+            686,
+            698
+          ],
+          [
+            704,
+            697
+          ],
+          [
+            724,
+            687
+          ],
+          [
+            750,
+            698
+          ],
+          [
             780,
-            430
+            706
           ],
           [
-            910,
-            450
+            808,
+            706
           ],
           [
-            1010,
-            700
-          ],
-          [
-            1015,
-            900
-          ],
-          [
-            930,
-            910
-          ],
-          [
-            870,
-            860
-          ],
-          [
-            820,
-            805
-          ],
-          [
-            750,
-            795
-          ],
-          [
-            700,
-            775
-          ],
-          [
-            670,
-            740
-          ],
-          [
-            660,
-            700
-          ],
-          [
-            700,
-            690
-          ],
-          [
-            750,
-            680
-          ],
-          [
-            800,
-            700
-          ],
-          [
-            825,
-            640
-          ],
-          [
-            820,
-            550
+            830,
+            682
           ]
         ]
       }
@@ -1032,6 +1132,7 @@
         "arm-waiting": false,
         "arm-waiting-left": false,
         "arm-waiting-right": false,
+        "sleeve-speaking": false,
         "arm-speaking": false,
         "head-closed": true,
         "head-open": false
@@ -1214,6 +1315,7 @@
         "arm-waiting": false,
         "arm-waiting-left": false,
         "arm-waiting-right": false,
+        "sleeve-speaking": false,
         "arm-speaking": false,
         "head-closed": true,
         "head-open": false
@@ -1396,6 +1498,7 @@
         "arm-waiting": true,
         "arm-waiting-left": true,
         "arm-waiting-right": true,
+        "sleeve-speaking": false,
         "arm-speaking": false,
         "head-closed": true,
         "head-open": false
@@ -1524,6 +1627,7 @@
         "arm-waiting": false,
         "arm-waiting-left": false,
         "arm-waiting-right": false,
+        "sleeve-speaking": true,
         "arm-speaking": true,
         "head-closed": true,
         "head-open": false

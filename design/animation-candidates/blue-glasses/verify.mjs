@@ -36,6 +36,12 @@ for(const id of ['arm-waiting','arm-waiting-left','arm-waiting-right']) {
 }
 assert(data.nodes.find(n=>n.id==='arm-waiting-left').sprite.order < data.nodes.find(n=>n.id==='body-waiting').sprite.order)
 assert(data.nodes.find(n=>n.id==='arm-waiting').sprite.order > data.nodes.find(n=>n.id==='body-waiting').sprite.order)
+for(const id of ['sleeve-speaking','arm-speaking']) {
+ const node=data.nodes.find(n=>n.id===id)
+ assert.equal(node.parent,'speaking-root')
+ assert.equal(node.sprite.asset,'speaking-source')
+ assert.deepEqual(node.transform,{x:0,y:0,pivotX:0,pivotY:0,rotation:0,scaleX:1,scaleY:1})
+}
 const timeline=new AnimationTimeline(data)
 function checkInterruptedPose(pose,state,elapsed) {
  const target=sampleClip(data,data.clips[data.states[state]],elapsed)
