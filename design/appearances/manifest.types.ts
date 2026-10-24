@@ -25,17 +25,6 @@ export interface AppearanceManifestEntry {
     /** 人物说话时的立绘：assets/<id>/speaking.png。 */
     speaking: string
   }
-  /**
-   * 可选的旧版运行时目录名，用来保留现有 URL，如 coral-bob-v2。
-   * 新形象通常省略，生成器默认输出 /appearances/<id>/。
-   * 不改变上述统一源路径，也不是素材版本管理机制。
-   */
-  publicDirectory?: string
-  /**
-   * 可选的旧版平铺头像文件名，如 coral-bob.png。
-   * 新形象通常省略，默认与立绘放在同一生成目录。
-   */
-  publicAvatar?: string
 }
 
 /** 完整权威清单；非空、ID 唯一等跨条目约束由生成器校验。 */

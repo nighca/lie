@@ -12,19 +12,29 @@
 
 新增形象不修改业务代码或第二份清单。缺中文名/声音/状态、重复ID、资源缺失、状态画布不一致等会报错，校验失败不会改写已有生成物。中文名由前端直接消费；声音配置齐全不等于已完成真人试听。
 
-## 生成物与兼容 URL
+## 生成物与统一 URL
 
 `apps/web/public/appearances/` **不纳入Git，是生成物**，包括应用manifest和图片，不可手工维护。标准Web npm生命周期覆盖根命令及直接workspace命令；build结束再逐字节检查实际dist产物，陈旧、缺失或多余文件会阻断构建和持续部署。`npm run appearances:check` 只检查、不修改；首次clone可先运行generate，缺少生成物不是另一份制作任务。
 
-当前8套保留已有运行时URL，避免破坏历史设计和原型引用。源清单的可选 `publicDirectory` 和 `publicAvatar` 只控制这些兼容输出位置；新形象可不填，默认输出 `/appearances/<id>/default.png` 等。正式源路径始终保持统一目录，不随兼容URL变化。
+所有形象统一输出 `/appearances/<id>/default.png`、`listening.png`、`waiting.png`、`speaking.png`；独立头像输出同目录`avatar.png`，共用头像则直接引用default。源清单没有运行时目录/头像兼容字段，不输出旧平铺头像或`-v1/-v2`别名；新增形象无需修改生成器。正式产品与当前演示应消费生成manifest或统一路径，历史设计稿按历史来源保留，不为其维护长期URL映射。
 
 当前正式库8套均有4态、voiceId和中文name。迁移复制已审阅的运行时原图，不缩放、裁切、重生成；32态图及3个独立头像逐字节一致。其他5套的avatar复用default，不再复制相同PNG。原先平铺 `assets/*.png`、`state-studies/`、`expansion-complete/`、prompts和sources.json均保留为历史出处，不能据旧批次的“仅默认图”描述推断当前正式能力。
 
-## 本次迁移验收（2026-10-24）
+## 统一URL验收（2026-10-24）
+
+- 用户已批准移除兼容输出字段，所有现有形象与新增形象遵循同一目录。源清单只接受正式字段，拼错或额外字段报错；重复ID与canonical路径约束确保不同形象的输出不相撞，不另维护兼容碰撞分支。
+- 与`ac1d1b5`基线相比，8个ID、中文name、voiceId、accent和32态图+3独立头像的Git原始字节完全相同；生成前保留旧运行时清单，重新生成后旧平铺/版本目录PNG均已删除，输出仍恰为35张PNG，无别名副本。
+- 独立`npm ci`后，全仓类型检查、254项自动化（生成器16/gateway11/web135/core51/UI20/voice21）和完整Web/Worker构建通过；实际dist按源逐字节校验通过。新增首页测试从真实Application读取群像src并检查生成PNG，避免只改清单却遗留首页404。
+- Codex内置浏览器在独立5366实际检查首页3张群像的`/appearances/<id>/avatar.png`全部加载；基础编辑器8中文标签/ID正确，前三套独立avatar与其余五套default全部加载，console warn/error为空。此分支未包含另案Editor v2/共享header提交，不把当前旧表单画面当新版交互验收；未使用麦克风/付费服务。
+- 原生截图本地`/private/tmp/lie-unified-appearance-home.jpg`、`/private/tmp/lie-unified-appearance-editor.jpg`供root验收；旧历史设计仍按其独立源图运行，未为历史引用保留runtime alias。当前动画/调查样片的硬引用迁移由对应owner另以新提交处理，不改写已handoff提交。
+
+## 单一来源初次迁移验收（2026-10-24，统一URL前）
 
 - 对比迁移基线 `a0c4b3d`：运行时清单除新增 `name` 外完全相同，35张唯一PNG的SHA-256均一致；旧URL、voiceId、主题色及状态映射不变。
 - 根目录 `npm run typecheck`、`npm test`（255项，包括18项生成器测试）、`npm run build` 通过。删除生成目录后从标准Web dev命令启动，自动补齐8套35图；最终dist逐字节校验通过，网关直接使用该Web dist。
 - 视觉负责人独立用Codex内置浏览器只读检查5364编辑器：8个中文形象标签与对应ID正确，logo及8张默认图全部加载，未捕获console warn/error。当前浏览器画面仍为既有编辑器，不包含另案待实现的三步交互；动态未知ID名称变更由组件测试覆盖，不把这次只读检查当作来源机制的独立证明。未使用麦克风或付费语音。
+
+统一URL后8个ID/中文名/voiceId/主题色和35张源PNG均保持，变化只有生成URL；再次generate会删除旧输出文件。当前验收以统一路径、源字节一致和实际页面无404为准。
 
 以下保留历史生成提示、初稿范围及QA。当时的相对路径、手工交接或未制作状态等说明属于旧批次；当前接入以上述权威清单与自动生成流程为准。
 

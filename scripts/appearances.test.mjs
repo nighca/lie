@@ -38,6 +38,7 @@ test('a new appearance needs only assets and one source entry; generated names a
   const runtime = JSON.parse(await readFile(join(f.outputDirectory, 'manifest.json'), 'utf8'))
   assert.equal(runtime[1].name, '另一个中文名')
   assert.equal(runtime[1].voiceId, 'existing-authorized-voice')
+  assert.equal(runtime[1].avatar, '/appearances/another-new-person/default.png')
   assert.equal(runtime[1].portrait, '/appearances/another-new-person/default.png')
   for (const state of ['listening', 'waiting', 'speaking']) assert.equal(runtime[1].portraits[state], `/appearances/another-new-person/${state}.png`)
   assert.deepEqual(await readFile(join(f.outputDirectory, 'another-new-person/speaking.png')), png)
@@ -77,8 +78,7 @@ for (const [label, mutate, message] of [
   ['missing speaking', (item) => [{ ...item, portraits: { listening: item.portraits.listening, waiting: item.portraits.waiting } }], /\.speaking/],
   ['noncanonical paths', (item) => [{ ...item, portrait: '../outside.png' }], /\.portrait/],
   ['unsafe ID', (item) => [{ ...item, id: '../outside' }], /Appearance id/],
-  ['unsafe public directory', (item) => [{ ...item, publicDirectory: '../outside' }], /publicDirectory/],
-  ['unsafe avatar output', (item) => [{ ...item, publicAvatar: '../outside.png' }], /publicAvatar/],
+  ['unknown source field', (item) => [{ ...item, displayLabel: 'typo' }], /unexpected field displayLabel/],
 ]) {
   test(`invalid source (${label}) cannot change existing output`, async (t) => {
     const f = await fixture(t)
@@ -103,21 +103,15 @@ test('missing resources, invalid PNG and mismatched canvases are rejected before
   await assert.rejects(syncAppearances(f), /state canvas must match default/)
 })
 
-test('two IDs cannot overwrite the same generated public paths', async (t) => {
-  const f = await fixture(t)
-  await f.assets('second-person')
-  await f.manifest([{ ...entry(), publicDirectory: 'shared' }, { ...entry('second-person'), publicDirectory: 'shared' }])
-  await assert.rejects(syncAppearances(f), /Conflicting generated appearance path/)
-})
-
-test('legacy public URLs are catalog metadata and do not change canonical source paths', async (t) => {
+test('a distinct avatar has one canonical URL in the same preset directory', async (t) => {
   const f = await fixture(t)
   await writeFile(join(f.sourceDirectory, 'assets/fixture-guide/avatar.png'), png)
-  await f.manifest([{ ...entry(), avatar: 'assets/fixture-guide/avatar.png', publicDirectory: 'fixture-guide-v1', publicAvatar: 'fixture-guide.png' }])
-  await syncAppearances(f)
+  await f.manifest([{ ...entry(), avatar: 'assets/fixture-guide/avatar.png' }])
+  assert.equal((await syncAppearances(f)).assets, 5)
   const runtime = JSON.parse(await readFile(join(f.outputDirectory, 'manifest.json'), 'utf8'))
-  assert.equal(runtime[0].avatar, '/appearances/fixture-guide.png')
-  assert.equal(runtime[0].portrait, '/appearances/fixture-guide-v1/default.png')
+  assert.equal(runtime[0].avatar, '/appearances/fixture-guide/avatar.png')
+  assert.equal(runtime[0].portrait, '/appearances/fixture-guide/default.png')
+  assert.deepEqual(await readFile(join(f.outputDirectory, 'fixture-guide/avatar.png')), png)
 })
 
 test('source and output trees cannot overlap or traverse symlinks', async (t) => {

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url))
 const states = ['listening', 'waiting', 'speaking']
+const sourceFields = new Set(['id', 'name', 'avatar', 'portrait', 'accent', 'voiceId', 'portraits'])
 const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])
 
 function object(value, label) {
@@ -46,7 +47,6 @@ export async function syncAppearances({ sourceDirectory = join(projectRoot, 'des
   if (!Array.isArray(manifest) || manifest.length === 0) throw new Error('Appearance manifest must be a nonempty array')
   const ids = new Set()
   const outputs = new Map()
-  const owners = new Map()
   const runtime = []
   const loaded = new Map()
   async function load(path) {
@@ -59,15 +59,14 @@ export async function syncAppearances({ sourceDirectory = join(projectRoot, 'des
     }
     return loaded.get(path)
   }
-  function add(path, bytes, id) {
-    if (owners.has(path) && (owners.get(path) !== id || !outputs.get(path).equals(bytes))) throw new Error(`Conflicting generated appearance path: ${path}`)
-    owners.set(path, id)
+  function add(path, bytes) {
     outputs.set(path, bytes)
     return `/appearances/${path}`
   }
   for (const raw of manifest) {
     const item = object(raw, 'Appearance')
     const id = segment(item.id, 'Appearance id')
+    for (const field of Object.keys(item)) if (!sourceFields.has(field)) throw new Error(`${id}: unexpected field ${field}`)
     if (ids.has(id)) throw new Error(`Duplicate appearance id: ${id}`)
     ids.add(id)
     const name = text(item.name, `${id}.name`)
@@ -76,20 +75,18 @@ export async function syncAppearances({ sourceDirectory = join(projectRoot, 'des
     const portrait = assetPath(item.portrait, id, 'default', `${id}.portrait`)
     const avatar = item.avatar === portrait ? portrait : assetPath(item.avatar, id, 'avatar', `${id}.avatar`)
     const portraits = object(item.portraits, `${id}.portraits`)
-    const directory = item.publicDirectory == null ? id : segment(item.publicDirectory, `${id}.publicDirectory`)
-    if (item.publicAvatar != null && !/^[a-z0-9]+(?:-[a-z0-9]+)*\.png$/.test(item.publicAvatar)) throw new Error(`${id}.publicAvatar: expected flat PNG filename`)
     const defaultBytes = await load(portrait)
     const generated = {
       id, name,
-      avatar: add(item.publicAvatar ?? `${directory}/${avatar === portrait ? 'default' : 'avatar'}.png`, await load(avatar), id),
-      portrait: add(`${directory}/default.png`, defaultBytes, id),
+      avatar: add(`${id}/${avatar === portrait ? 'default' : 'avatar'}.png`, await load(avatar)),
+      portrait: add(`${id}/default.png`, defaultBytes),
       accent: item.accent, voiceId, portraits: {},
     }
     for (const state of states) {
       const path = assetPath(portraits[state], id, state, `${id}.portraits.${state}`)
       const bytes = await load(path)
       if (!bytes.subarray(16, 24).equals(defaultBytes.subarray(16, 24))) throw new Error(`${path}: state canvas must match default`)
-      generated.portraits[state] = add(`${directory}/${state}.png`, bytes, id)
+      generated.portraits[state] = add(`${id}/${state}.png`, bytes)
     }
     runtime.push(generated)
   }

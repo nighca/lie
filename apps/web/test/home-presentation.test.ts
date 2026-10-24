@@ -1,3 +1,6 @@
+import { readFile } from 'node:fs/promises'
+import { fileURLToPath, URL as NodeURL } from 'node:url'
+
 import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createMemoryHistory, createRouter } from 'vue-router'
@@ -42,6 +45,16 @@ describe('homepage presentation', () => {
     expect(wrapper.get('.home-intro').text()).toContain('和角色语音对话')
     expect(wrapper.get('.home-header button').text()).toBe('创作案件')
     expect(createController).toHaveBeenCalledTimes(0)
+  })
+
+  it('resolves every homepage cast illustration from generated PNG resources', async () => {
+    const { wrapper } = await home(catalog)
+    const images = wrapper.findAll('.home-cast img')
+    expect(images.length).toBeGreaterThan(0)
+    for (const image of images) {
+      const bytes = await readFile(fileURLToPath(new NodeURL(`../public${image.attributes('src')}`, import.meta.url)))
+      expect(bytes.subarray(1, 4).toString()).toBe('PNG')
+    }
   })
 
   it('opens the selected catalog identity independently of its position', async () => {

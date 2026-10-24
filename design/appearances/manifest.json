@@ -10,9 +10,7 @@
       "listening": "assets/coral-bob/listening.png",
       "waiting": "assets/coral-bob/waiting.png",
       "speaking": "assets/coral-bob/speaking.png"
-    },
-    "publicDirectory": "coral-bob-v2",
-    "publicAvatar": "coral-bob.png"
+    }
   },
   {
     "id": "sunny-moustache",
@@ -25,9 +23,7 @@
       "listening": "assets/sunny-moustache/listening.png",
       "waiting": "assets/sunny-moustache/waiting.png",
       "speaking": "assets/sunny-moustache/speaking.png"
-    },
-    "publicDirectory": "sunny-moustache-v1",
-    "publicAvatar": "sunny-moustache.png"
+    }
   },
   {
     "id": "blue-glasses",
@@ -40,9 +36,7 @@
       "listening": "assets/blue-glasses/listening.png",
       "waiting": "assets/blue-glasses/waiting.png",
       "speaking": "assets/blue-glasses/speaking.png"
-    },
-    "publicDirectory": "blue-glasses-v1",
-    "publicAvatar": "blue-glasses.png"
+    }
   },
   {
     "id": "silver-bun",
@@ -55,8 +49,7 @@
       "listening": "assets/silver-bun/listening.png",
       "waiting": "assets/silver-bun/waiting.png",
       "speaking": "assets/silver-bun/speaking.png"
-    },
-    "publicDirectory": "silver-bun-v1"
+    }
   },
   {
     "id": "salt-pepper-beard",
@@ -69,8 +62,7 @@
       "listening": "assets/salt-pepper-beard/listening.png",
       "waiting": "assets/salt-pepper-beard/waiting.png",
       "speaking": "assets/salt-pepper-beard/speaking.png"
-    },
-    "publicDirectory": "salt-pepper-beard-v1"
+    }
   },
   {
     "id": "plum-crop",
@@ -83,8 +75,7 @@
       "listening": "assets/plum-crop/listening.png",
       "waiting": "assets/plum-crop/waiting.png",
       "speaking": "assets/plum-crop/speaking.png"
-    },
-    "publicDirectory": "plum-crop-v1"
+    }
   },
   {
     "id": "mint-puffs",
@@ -97,8 +88,7 @@
       "listening": "assets/mint-puffs/listening.png",
       "waiting": "assets/mint-puffs/waiting.png",
       "speaking": "assets/mint-puffs/speaking.png"
-    },
-    "publicDirectory": "mint-puffs-v1"
+    }
   },
   {
     "id": "ochre-freckles",
@@ -111,7 +101,6 @@
       "listening": "assets/ochre-freckles/listening.png",
       "waiting": "assets/ochre-freckles/waiting.png",
       "speaking": "assets/ochre-freckles/speaking.png"
-    },
-    "publicDirectory": "ochre-freckles-v1"
+    }
   }
 ]

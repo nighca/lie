@@ -85,6 +85,9 @@ describe('bundled game content', () => {
       expect(appearance!.voiceId).toBe(source.voiceId)
       const runtimePaths = { avatar: appearance!.avatar, default: appearance!.portrait, ...appearance!.portraits }
       const sourcePaths = { avatar: source.avatar, default: source.portrait, ...source.portraits }
+      expect(runtimePaths.avatar).toBe(`/appearances/${source.id}/${source.avatar === source.portrait ? 'default' : 'avatar'}.png`)
+      expect(runtimePaths.default).toBe(`/appearances/${source.id}/default.png`)
+      for (const state of ['listening', 'waiting', 'speaking'] as const) expect(runtimePaths[state]).toBe(`/appearances/${source.id}/${state}.png`)
       let canvas: number[] | null = null
       for (const state of ['avatar', 'default', 'listening', 'waiting', 'speaking'] as const) {
         expect(runtimePaths[state], `${source.id}/${state}`).toBeTypeOf('string')

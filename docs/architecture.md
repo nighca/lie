@@ -71,7 +71,7 @@
 
 源清单每套必须有稳定id、中文展示name、主题色、已配置voiceId、头像和完整四态路径。中文name只标识预置形象；案件角色的姓名、经历和秘密仍来自故事文本，相同形象可以扮演不同身份。Editor直接显示`appearance.name`，不维护ID到中文名的业务代码映射。新增预置形象只需加正式素材和一条源清单，不需修改引擎或UI。
 
-`scripts/appearances.mjs`校验源并确定性生成未跟踪的`apps/web/public/appearances/`，包含应用manifest与PNG；不可手改生成物。现有8套通过源清单中的可选`publicDirectory/publicAvatar`保留既有运行时URL；新形象省略兼容字段时默认输出`/appearances/<id>/...`。旧URL引用不要求重写历史原型或来源文档。
+`scripts/appearances.mjs`校验源并确定性生成未跟踪的`apps/web/public/appearances/`，包含应用manifest与PNG；不可手改生成物。所有形象固定输出`/appearances/<id>/{default,listening,waiting,speaking}.png`；独立头像为同目录`avatar.png`，否则复用default。源规格不包含额外运行时目录/头像兼容字段，生成器不保留旧URL别名；正式应用和当前样片须使用清单或统一路径。历史原型/来源文档仅保留历史性质，不为其维持长期映射。
 
 Web的predev、pretest、pretypecheck、prebuild钩子自动生成，覆盖根npm命令和直接workspace命令。postbuild按权威源逐字节检查实际dist/appearances，缺失、陈旧或多余产物会使构建失败，从而阻断CI部署。也可用`npm run appearances:generate`与`npm run appearances:check`显式生成/检查。运行中的dev修改了源时重新生成并刷新，或重启dev；直接运行Vite二进制及静态原型服务器前也先生成。
 

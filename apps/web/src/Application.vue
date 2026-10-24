@@ -129,9 +129,9 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
         <p>和角色语音对话，<br>找出藏起真相的人。</p>
         <div class="home-cast" aria-hidden="true">
           <div class="home-cast-backdrop"></div>
-          <img class="home-cast-sunny" src="/appearances/sunny-moustache.png" alt="">
-          <img class="home-cast-coral" src="/appearances/coral-bob.png" alt="">
-          <img class="home-cast-blue" src="/appearances/blue-glasses.png" alt="">
+          <img class="home-cast-sunny" src="/appearances/sunny-moustache/avatar.png" alt="">
+          <img class="home-cast-coral" src="/appearances/coral-bob/avatar.png" alt="">
+          <img class="home-cast-blue" src="/appearances/blue-glasses/avatar.png" alt="">
           <span class="home-spark first">✦</span><span class="home-spark second">✦</span>
         </div>
       </section>
