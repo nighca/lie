@@ -1,0 +1,168 @@
+{
+  "sources": {
+    "default": {
+      "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        256,
+        18,
+        1010,
+        1254
+      ]
+    },
+    "listening": {
+      "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        252,
+        17,
+        1011,
+        1254
+      ]
+    },
+    "waiting": {
+      "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        329,
+        17,
+        969,
+        1254
+      ]
+    },
+    "speaking": {
+      "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        254,
+        18,
+        994,
+        1254
+      ]
+    }
+  },
+  "parts": {
+    "speaking-source": {
+      "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        254,
+        18,
+        994,
+        1254
+      ]
+    },
+    "waiting-arms": {
+      "sha256": "67dc3e08356adeeccfe8ec8777a6b05f17136eb03c783a355ec78f02b3ace463",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        259,
+        217,
+        1048,
+        1064
+      ]
+    },
+    "default-source": {
+      "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        256,
+        18,
+        1010,
+        1254
+      ]
+    },
+    "listening-source": {
+      "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        252,
+        17,
+        1011,
+        1254
+      ]
+    },
+    "waiting-torso": {
+      "sha256": "3527476e1c65d0463fd991d7fe5f2b69313ac534a45bd9ed5be7742439bd6ac0",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        308,
+        361,
+        983,
+        1254
+      ]
+    },
+    "shared-torso": {
+      "sha256": "2a4ad43d7ecd09f47a790757941d8dd77d803bdd8460d13d5ffc32f4cf8d6226",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        292,
+        356,
+        1002,
+        1254
+      ]
+    }
+  },
+  "generatedPngsCopiedByteForByte": true,
+  "originalsModified": false
+}
