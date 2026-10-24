@@ -69,7 +69,7 @@
 
 按用户提出的方向，把可复用“形象”与故事角色分开：形象库维护头像、默认立绘、主题色和可选的状态动作/动画；游戏角色通过 `appearanceId` 引用。相同形象可以在不同故事扮演不同身份，姓名、经历与秘密仍属于角色文本。
 
-形象预设现支持可选的 `voiceId`，解析后统一为字符串或 `null`。声音与头像/立绘一样按预设复用，案件仍只引用 `appearanceId`；未配置时沿用供应商默认。应用在创建对话 scope 时通过注入的预设查询固定该次音色，传给已有语音通道，切人关闭旧连接后取新预设；不修改共享 agent 默认。当前 runtime manifest 已按用户认可的声音配置 coral-bob → Bella 2.0、sunny-moustache → 龙三叔、blue-glasses → Alvin。沈禾暂用龙三叔，更粗犷的备选待用户选择后再替换；`appearance` 命名暂不迁移。
+形象预设现支持可选的 `voiceId`，解析后统一为字符串或 `null`。声音与头像/立绘一样按预设复用，案件仍只引用 `appearanceId`；未配置时沿用供应商默认。应用在创建对话 scope 时通过注入的预设查询固定该次音色，传给已有语音通道，切人关闭旧连接后取新预设；不修改共享 agent 默认。当前 runtime manifest 已按用户认可的声音配置 coral-bob → Bella 2.0、sunny-moustache → 龙三叔、blue-glasses → Alvin。用户已确认Alvin中文试听通过，沈禾继续使用龙三叔，龙飞/龙小诚两项替代候选未获采用；`appearance` 命名暂不迁移。
 
 形象预设另支持可选 `portraits.listening / waiting / speaking`，缺省解析为 `null`。仅当前人物的大立绘根据已有会话状态切换：recording 对应 listening，waiting/speaking 同名；连接准备、结束或错误恢复默认 `portrait`。缺失或加载失败的状态图回默认，默认图失败显示人物首字；列表头像不随状态变化。状态只是语音生命周期的展示，不增加人声检测、心理/罪责判断或动画机制。正式素材映射仍待视觉选择，当前 manifest 未配置状态图。
 
