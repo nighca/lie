@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { matrix } from './matrix.mjs'
+import { hash } from './settings.mjs'
 
 // This file is offline only: no provider, key, agent, device, or socket access.
 if (process.argv.length !== 2) throw new Error('Offline preparation accepts no execution arguments')
@@ -38,4 +39,7 @@ const prepared = matrix.map(row => {
   return { id: row.id, gameId: row.gameId, characterId: row.characterId, question: row.question, context }
 })
 await writeFile(new URL('prepared-contexts.json', temporary), JSON.stringify(prepared, null, 2))
+const sourceFiles = ['packages/game-core/src/content.ts', 'packages/game-core/src/session.ts', 'packages/game-core/src/context.ts', 'content/games/duck-finale.json', 'content/games/salt-sugar-mixup.json', 'spikes/case-behavior-validation/matrix.mjs']
+const hashes = Object.fromEntries(await Promise.all(sourceFiles.map(async path => [path, hash(await readFile(new URL(`../../${path}`, import.meta.url)))])))
+await writeFile(new URL('prepared-hashes.json', temporary), JSON.stringify(hashes, null, 2))
 console.log(JSON.stringify({ offline: 'passed', targets: prepared.length, games: games.size, otherProfilesAndEnding: 'excluded', providerCalls: 0 }))

@@ -1,0 +1,28 @@
+{
+  "capturedAt": "2026-10-24T07:19:27.845Z",
+  "sourceAgentGet": {
+    "status": 200,
+    "code": 0
+  },
+  "modelCatalogGet": {
+    "status": 200,
+    "code": 0
+  },
+  "llmModelId": "f3626c105383d71654a57f2bb8a973f3",
+  "llmModelName": "deepseek-v4-flash",
+  "modelType": "openai",
+  "provider": null,
+  "modelMatchedExpected": true,
+  "genericPromptMatchesSource": true,
+  "genericPromptHash": "d07839ee2b4089104a23ce1b47795c8cd13341a10ab48aefc57f4576e1bc5840",
+  "memModelId": "Memory_nomem",
+  "chatHistoryConf": 0,
+  "ttsVoiceId": "1965294143278125057",
+  "ttsModelId": null,
+  "maxTokens": 160,
+  "searchEnabled": false,
+  "greetingDisabled": true,
+  "observedBillingFields": {},
+  "actualVoiceCoefficient": null,
+  "cashCostVerified": false
+}

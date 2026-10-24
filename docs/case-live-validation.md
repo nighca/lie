@@ -66,3 +66,25 @@
 `prepare.mjs`没有fetch、WebSocket、key读取或供应商操作，只转译实际core源到被忽略tmp、读取两案、构造16份当前问题上下文。检查本人profile精确匹配、无ending字段/其他人完整profile、各案8题、ID唯一、每份工具JSON小于64KiB；生成`tmp/prepared-contexts.json`供root检查，不提交生产内容。
 
 运行：`LIE_DEPENDENCY_ROOT=/Users/nighca/code/nighca/lie/package.json node spikes/case-behavior-validation/prepare.mjs`。预检/资源脚本/live probe尚未新增，本方案review通过后再实现，不留下一个无意运行就会收费的默认命令。
+
+## 2026-10-24 当天只读核实与待review脚本
+
+root后续明确放行了当前正式agent和模型目录各一次只读GET，并允许实现live脚本但不放行执行。本节更新顶部“未调用账号API”的早期状态：**实际只发生以下两个GET，仍没有新资源、WSS或推理。**
+
+安全证据在 `spikes/case-behavior-validation/metadata-2026-10-24.json`：2026-10-24T07:19:27.845Z（北京时间15:19），两GET均HTTP200/code0。当前ID仍是f3626c105383d71654a57f2bb8a973f3，目录名称deepseek-v4-flash；type=openai只是API类型，provider未返回。正式generic提示与源码逐字相同，hash为d07839ee2b4089104a23ce1b47795c8cd13341a10ab48aefc57f4576e1bc5840；Memory_nomem/history0/max_tokens160/searchfalse/disable_greeting true一致。
+
+当前默认ttsVoiceId读回1965294143278125057，ttsModelId未返回。拟新测试agent显式复制这个当前默认voiceId而不是依赖新建模板随机默认，更不改任何正式形象voiceId；没有试听它或宣称其适合新人物。匹配模型的白名单billing字段为空，音色系数与现金成本继续未知。没有查询音色目录或再查第三个账号端点。
+
+### 可review文件与保护
+
+- `metadata.mjs`：只读两个GET；`metadata-attempt.json`以wx/0600先记录，防止本轮误重跑；只输出/保存白名单，没有完整agent/模型配置、账号ID、设备ID、密钥或token。
+- `owned-resources.mjs`：创建/绑定每一步前写owner ledger；仅本次创建返回的agent ID和本次生成的8个MAC可清理。setup、配置、绑定、run失败都走finally；create响应丢失则保留未确认ledger，不猜远端ID。bind响应失败时对本次已记录bind attempt的唯一生成MAC尝试解绑，不能触碰现有用户设备。清理失败保留ledger。
+- `answer.mjs`：45秒总超时、10秒握手、结束最多1秒后terminate；ws maxPayload及JSON64KiB、输出8192字节、4000PCM帧/4MB音频、最多3次当前上下文工具。重复回答、未知工具、STT题目不一致、缺上下文/PCM或洪泛都停止；音频仅统计丢弃。
+- `run.mjs`：必须显式execute-reviewed参数，依赖当天核实metadata且不超过24小时，模型/提示/默认voice固定读回核对，prepare源hash不一致拒绝继续。每个回答先原子保存0600结构化结果，再人工PASS/FAIL/UNCERTAIN；任何非PASS停止。execution-attempt wx锁禁止误重跑；不自动刷新metadata、不自动改提示或重试。
+- 处理SIGINT/SIGTERM，停止新增步骤并走finally。系统强杀/掉电无法保证finally，需root查看私密ledger再cleanup-only；清理只保证已确认解绑/删自有agent，不声称删除供应商日志或未绑定设备记录。
+
+### 离线验收结果
+
+16项fake WebSocket/管理API测试通过：单问/本人context/单答，二次回答与未知工具拒绝，音频/文本/JSON/context洪泛停止，错题回声停止，超时且不响应close时强制terminate，缺PCM不算成功；8个自有设备完整清理；创建后配置失败清理；create不明确不猜ID；bind失败只解绑本次MAC；人工stop不重开；清理失败保留；错误owner拒绝；预先abort零API；模型readback不同拒绝全部绑设备和推理。所有这些是本地fake，不是服务验收。
+
+16份实际core离线上下文检查通过（每案8，只有本人profile/本题history，无ending或其他人完整profile），脚本语法与diff检查通过。没有跑live runner，也没有execution-attempt/owned-state或live-results。完整执行与cleanup命令见同目录README，仅供root审核后放行，不因文件交付自动授权执行。
