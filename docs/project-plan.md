@@ -58,7 +58,7 @@
 | P2 | 启动延迟与剩余回归 / 语音/工程owner待排 | observer已集成但无真人阶段采样/加速结论；先有界实测，再优化，不跨轮保活mic/连接。开发代理WS问题已独立派下行owner，不混作延迟结论。 |
 | P2 | 开发代理完整WS拒绝 / review_blue_animation | 已派`codex/dev-websocket-rejection`从bf05837调查/可可靠局部修复：[原问题](dependency-audit.md)第112行，无凭据完整握手预期403/503却socket hang up，旧依赖亦现。限Vite config与独立离线harness/test/docs，gateway变更先协调；不触main-preview/8787/真实provider。 |
 | P3 | 银发/双丸子主题区分 / 视觉owner待排 | 两者accent同`#78DDD7`；先定accent/卡底/服装层级方案，不混waiting返修。若改服装须静态/动画一致，未授权全面重画。 |
-| P3 | 结果页被指认角色与正误两态 / 视觉＋动画owner | [结果页提案](result-character-states-proposal.md)已review；夜间已派main_acceptance_environment从bf05837新`codex/accusation-result-projection`做controller最小`result:{characterId,correct}|null`投影/专属测试，复制既有session.result，不投影wrong真相并保留清理语义。完整UI/新素材/动画契约仍待方案；用户倾向结果页加被指认者，合并指认页仅备选未定。先局部方案→GameView投影/播放契约→素材与UI联合接入；从result.characterId取人，不用已清空currentCharacterId/真凶替代。正确懊恼/无奈，错误不解/抗议；错指仍不揭真相，一次错误终局。具体新素材授权另核。 |
+| P3 | 结果页被指认角色与正误两态 / 视觉＋动画owner | [结果页提案](result-character-states-proposal.md)已review；夜间已派main_acceptance_environment从bf05837新`codex/accusation-result-projection`做controller最小`result:{characterId,correct}\|null`投影/专属测试，复制既有session.result，不投影wrong真相并保留清理语义。完整UI/新素材/动画契约仍待方案；用户倾向结果页加被指认者，合并指认页仅备选未定。先局部方案→GameView投影/播放契约→素材与UI联合接入；从result.characterId取人，不用已清空currentCharacterId/真凶替代。正确懊恼/无奈，错误不解/抗议；错指仍不揭真相，一次错误终局。具体新素材授权另核。 |
 | P2/P3 | 动画剩余质量 / 动画＋UI owner | sunny真实隐藏恢复未验，1280×720既有舞台裁切保留；按真实问题排期，静态回退及资源取消不退化。 |
 
 ## 保留的门禁与外部依赖
