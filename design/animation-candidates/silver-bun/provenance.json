@@ -15,20 +15,6 @@
       ]
     },
     {
-      "id": "torso",
-      "source": "/Users/nighca/.codex/generated_images/01a16db7-5ef1-7342-b690-7847489750d7/exec-a15516eb-16f0-4660-a632-ee9d8ef38c35.png",
-      "sha256": "3047354064befbc1b74de45a8cb9b0fd56948b851fe11578f734bb3c606fb2e4",
-      "size": [
-        1024,
-        1536
-      ],
-      "mode": "RGBA",
-      "alphaExtrema": [
-        0,
-        254
-      ]
-    },
-    {
       "id": "mouths",
       "source": "/Users/nighca/.codex/generated_images/01a16db7-5ef1-7342-b690-7847489750d7/exec-cc23c077-ca28-4f1b-8ba6-9896060af9a8.png",
       "sha256": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",

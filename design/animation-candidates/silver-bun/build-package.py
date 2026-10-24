@@ -5,7 +5,7 @@ from PIL import Image
 root=Path(__file__).resolve().parent
 repo=root.parents[2]
 gen=Path('/Users/nighca/.codex/generated_images/01a16db7-5ef1-7342-b690-7847489750d7')
-files={'head':gen/'exec-0d6778c7-bc4c-4ebd-8a3b-195b1c0ed108.png','torso':gen/'exec-a15516eb-16f0-4660-a632-ee9d8ef38c35.png','mouths':gen/'exec-cc23c077-ca28-4f1b-8ba6-9896060af9a8.png'}
+files={'head':gen/'exec-0d6778c7-bc4c-4ebd-8a3b-195b1c0ed108.png','mouths':gen/'exec-cc23c077-ca28-4f1b-8ba6-9896060af9a8.png'}
 for state in ['default','listening','waiting','speaking']:files[state+'-source']=repo/'design/appearances/assets/silver-bun'/f'{state}.png'
 assets={};sources=[]
 for name,p in files.items():
@@ -22,7 +22,7 @@ def node(id,parent=None,transform=None,asset=None,order=0,mask=None,crop=None,vi
   if crop:n['sprite']['crop']=crop
  nodes.append(n)
 node('body-root',transform=t(650,800,650,800))
-node('torso','body-root',dict(x=175,y=240,pivotX=0,pivotY=0,rotation=0,scaleX=.9,scaleY=.75),asset='torso',order=10,mask=[[453,150],[520,157],[580,140],[594,210],[657,248],[740,280],[780,364],[822,480],[789,624],[770,733],[833,855],[875,936],[860,984],[902,1180],[940,1536],[180,1536],[178,1150],[200,1014],[190,928],[233,840],[286,704],[270,615],[264,512],[300,415],[300,300],[325,260],[413,214],[455,202]])
+node('torso','body-root',asset='default-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[875,680],[900,800],[940,975],[950,1254],[374,1254],[382,972],[385,912],[443,759],[440,650],[330,530],[350,460],[420,420],[578,395]])
 left=[[420,438],[505,452],[489,538],[477,685],[448,784],[407,867],[397,942],[400,990],[390,1040],[411,1165],[375,1218],[278,1180],[268,1090],[293,1000],[289,856],[298,780],[286,732],[318,671],[340,546],[367,480]]
 right=[[818,456],[896,481],[934,552],[953,710],[983,788],[985,864],[1000,1060],[1035,1194],[976,1225],[933,1195],[946,1080],[935,1000],[919,885],[884,817],[875,673],[856,560]]
 node('left-neutral','body-root',t(445,480,445,480),asset='default-source',order=20,mask=left)

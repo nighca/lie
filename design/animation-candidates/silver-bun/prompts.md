@@ -17,8 +17,8 @@ Reference/edit target: canonical `silver-bun/waiting.png`. Output `exec-31606037
 
 > Use case: precise-object-edit. Asset type: reusable 2D animation arm contact group. Edit target attached older woman waiting/thinking. Extract ONLY BOTH connected arms in EXACT same thoughtful pose: on image left the aqua sleeve elbow bent up, bare forearm rising to curled hand with fingers supporting chin; image right aqua sleeve bent inward with bare forearm held horizontally across waist supporting opposite elbow. Keep their relative placement as one contact group. Remove the entire head, neck, torso, white shirt, cardigan body panels and trousers. Preserve original sleeve folds, hand shapes, proportions, navy outlines, aqua and skin colors. Transparent negative space between limbs must be genuinely transparent. Original precise 2D style; no redesign; no text; isolated group centered with transparent margin.
 
-## 4 · torso halo fix · selected with runtime mask
-Reference/edit target: output 2 (viewed before edit). Output `exec-a15516eb-16f0-4660-a632-ee9d8ef38c35.png`. Halo still present in PNG; authored runtime silhouette mask excludes it. Original bytes retained.
+## 4 · torso halo fix · previously selected, now rejected
+Reference/edit target: output 2 (viewed before edit). Output `exec-a15516eb-16f0-4660-a632-ee9d8ef38c35.png`. Halo still present in PNG; authored runtime silhouette mask excludes it. Original output retained in built-in generated_images, but current candidate no longer references this torso after shoulder review.
 
 > Use case: background-extraction. Correct this sprite: remove EVERY blue/skin glow, blurred halo, shadow or gradient outside the torso silhouette. Background must be completely transparent at all pixels outside the precise dark ink contour, including around the severed neck and cardigan shoulders. Keep exact torso/clothes unchanged. Crisp opaque cel artwork inside contour, genuine transparent alpha outside. No luminous backdrop, no shadow, no dark background, no new clothing.
 
