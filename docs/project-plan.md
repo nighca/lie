@@ -47,17 +47,17 @@
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 银发waiting局部修订接入 / 动画专项＋main_acceptance_environment | 夜间小修授权可实视/review后推进，不能把旧版自动写批准。源到`e46f6cc`、夜间记录`79258ad`；activation clean `0404805`已交，root候选`28c2c92`（base31db7c9）372测试/类型/构建67资源/strictcheck/重建hash通过，仍等5504真实IAB，未集成。 |
-| P1 | gray/plum扩人 / 动画专项 | gray `fbc1471`、plum `31111b6`源码clean，等最后391四态窗口后完整交付，尚非正式资产；最多2角色并行。银发之后角色经agent实际视觉复查、clean交付、rootreview可集成，不再逐个等用户，不自动部署。 |
-| P2 | 指认弹窗可变人数扇卡 / 调查专项 | 从`31db7c9`新WT accusation-fan-layout实施，5507独占QA中；修4人换行裁切，hover/focus上移、触屏/窄屏可选，不硬人数、不靠hover提交，点击具体人才指认。与结果页设计独立。 |
+| P1 | 银发waiting局部修订接入 / 动画专项＋main_acceptance_environment | 夜间小修授权可实视/review后推进，不能把旧版自动写批准。源到`e46f6cc`、夜间记录`79258ad`；activation clean `0404805`已交，root新候选`e6c12da`（base08cf274），与已全检`28c2c92`仅中央docs差异；372测试/类型/构建67资源/strictcheck/重建hash证据沿用，仍等5504真实IAB，未集成。 |
+| P1 | gray/plum扩人 / 动画专项 | gray `33e7e267`、plum `b91dfcce`各4提交完整source clean，root子agent只读预审通过；动画专项正做实际391 iframe四态QA，尚未通过，不写正式完成；最多2角色并行。银发之后角色经agent实际视觉复查、clean交付、rootreview可集成，不再逐个等用户，不自动部署。 |
+| P2 | 指认弹窗可变人数扇卡 / 调查专项 | 从`31db7c9`新WT accusation-fan-layout实施，5507 waitingOnApproval，仍持viewport未释放；修4人换行裁切，hover/focus上移、触屏/窄屏可选，不硬人数、不靠hover提交，点击具体人才指认。与结果页设计独立。 |
 | P2 | 编辑器大形象位置跳动 / 编辑器专项 | portrait-alignment查出CSS130%/top与静态center及mobile intrinsic尺寸差异，Editor局部absolute/100%/contain/center候选28测试/类型/构建60资源通过；5402/5403保留，等fan后391/1004实际末回归，未集成。若触共享组件先协调，不关动画或重画掩盖。 |
-| P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`公开路径；按新main审迁移，必须纳入`scripts/main-preview.mjs`素材生成命令，与Editor/fan所有权协调。 |
+| P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；等fan＋Editor＋silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
 | P2 | 编辑器分享/投稿端到端 / 编辑器＋用户 | 完整URL16000暂定上限待跨浏览器；GitHub待IAB登录、公开及无上游写权限身份实测，长query失败不等于短预填不支持。 |
 | P2 | 角色出戏边界 / 语音内容owner | 攻击问仍有幕后元话语，候选未解决且未生产；停止无限付费叠提示，不擅换模型/供应商/剧情。[调查](role-immersion-investigation.md) |
 | P2 | 启动延迟与剩余回归 / 语音/工程owner待排 | observer已集成但无真人阶段采样/加速结论；先有界实测，再优化，不跨轮保活mic/连接。开发代理WS拒握手挂断旧问题尚未作为通过。 |
 | P3 | 银发/双丸子主题区分 / 视觉owner待排 | 两者accent同`#78DDD7`；先定accent/卡底/服装层级方案，不混waiting返修。若改服装须静态/动画一致，未授权全面重画。 |
-| P3 | 结果页被指认角色与正误两态 / 视觉＋动画owner | 用户倾向结果页加被指认者，合并指认页仅备选未定。先局部方案→GameView投影/播放契约→素材与UI联合接入；从result.characterId取人，不用已清空currentCharacterId/真凶替代。正确懊恼/无奈，错误不解/抗议；错指仍不揭真相，一次错误终局。具体新素材授权另核。 |
+| P3 | 结果页被指认角色与正误两态 / 视觉＋动画owner | [结果页只读提案](result-character-states-proposal.md)已review，尚未改contract或实现；用户倾向结果页加被指认者，合并指认页仅备选未定。先局部方案→GameView投影/播放契约→素材与UI联合接入；从result.characterId取人，不用已清空currentCharacterId/真凶替代。正确懊恼/无奈，错误不解/抗议；错指仍不揭真相，一次错误终局。具体新素材授权另核。 |
 | P2/P3 | 动画剩余质量 / 动画＋UI owner | sunny真实隐藏恢复未验，1280×720既有舞台裁切保留；按真实问题排期，静态回退及资源取消不退化。 |
 
 ## 保留的门禁与外部依赖
