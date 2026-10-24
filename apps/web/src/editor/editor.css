@@ -1,6 +1,6 @@
 .editor-shell { color: var(--lie-ink); }
 .editor-header { margin-bottom: 30px; }
-.editor-steps { display: flex; justify-content: center; gap: 48px; padding: 16px 0; border-block: 1px solid #e1d77b; }
+.editor-steps { display: flex; justify-content: center; gap: 48px; padding: 16px 0; }
 .editor-steps button { display: flex; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; color: #77734f; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
 .editor-steps button > span { display: grid; place-items: center; width: 29px; height: 29px; border: 2px solid #b6b18c; border-radius: 10px; }
 .editor-steps button[aria-current=step] { color: var(--lie-ink); }
@@ -46,13 +46,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .add-character > span { font-size: 25px; line-height: 1.1; }
 .character-editor { display: grid; grid-template-columns: minmax(185px, .72fr) minmax(0, 1.6fr); min-height: 492px; }
 .editor-character-stage { display: flex; flex-direction: column; align-items: center; padding: 26px 18px 24px; background: #fff9df; border-right: 1px solid #e9e3cc; min-width: 0; }
+.editor-character-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-bottom: 18px; }
 .portrait-halo { width: 100%; height: 285px; display: grid; place-items: center; }
 .portrait-halo img { width: 100%; height: 285px; object-fit: contain; }
-.editor-character-stage h2 { font-size: 20px; margin: 12px 0 0; overflow-wrap: anywhere; max-width: 100%; }
-.appearance-choice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; max-width: 100%; margin-top: 20px; padding: 8px 11px; border: 1.5px solid #d1d9e8; border-radius: 12px; background: white; font: inherit; font-size: 12px; cursor: pointer; }
+.editor-character-stage h2 { font-size: 20px; margin: 0; overflow-wrap: anywhere; min-width: 0; }
+.appearance-choice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; max-width: 100%; margin-top: 8px; padding: 4px 0; border: 0; background: transparent; font: inherit; font-size: 12px; cursor: pointer; }
 .appearance-name { color: var(--lie-muted); overflow-wrap: anywhere; }
 .appearance-action { color: var(--lie-primary); font-weight: 700; }
-.appearance-choice:hover { border-color: var(--lie-primary); }
+.appearance-choice:hover .appearance-action { text-decoration: underline; }
 .portrait-initial { display: grid; place-items: center; font-size: 30px; background: #eaf2ff; color: var(--lie-primary); }
 .field-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .text-button { border: 0; background: transparent; color: var(--lie-primary); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; padding: 2px 0; }
@@ -66,8 +67,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .guidance-line { display: flex; align-items: start; gap: 9px; color: var(--lie-muted); font-size: 12px; font-weight: 400; margin: 0; }
 .guidance-line > span:first-child { flex-shrink: 0; }
 .guidance-line > span:last-child { flex: 1; min-width: 0; }
-.delete-button { margin-top: 24px; padding: 7px 12px; border: 1.5px solid #dbc2ba; border-radius: 10px; background: transparent; color: #9b5e55; font: inherit; font-size: 12px; cursor: pointer; }
-.delete-button:hover { background: #fff0e9; border-color: #9b5e55; }
+.delete-button { flex-shrink: 0; min-height: 32px; padding: 4px 0; border: 0; background: transparent; color: #9b5e55; font: inherit; font-size: 12px; cursor: pointer; }
+.delete-button:hover { text-decoration: underline; }
 .no-characters { padding: 58px 24px; text-align: center; }
 .no-characters h2 { margin: 12px 0; }
 .no-characters p { color: var(--lie-muted); }
@@ -112,12 +113,13 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
   .character-card small { font-size: 9px; }
   .add-character { width: 88px; min-height: 112px; border-radius: 15px; }
   .character-editor { display: block; }
-  .editor-character-stage { display: grid; grid-template-columns: 68px minmax(0, 1fr) auto; grid-template-rows: auto auto; gap: 8px 12px; padding: 17px 19px; border-right: 0; border-bottom: 1px solid #e9e3cc; }
+  .editor-character-stage { display: grid; grid-template-columns: 68px minmax(0, 1fr); grid-template-rows: auto auto; gap: 8px 12px; padding: 17px 19px; border-right: 0; border-bottom: 1px solid #e9e3cc; }
   .portrait-halo { grid-area: 1 / 1 / 3 / 2; height: 58px; }
   .portrait-halo img, .portrait-halo .portrait-initial { width: 68px; height: 68px; object-fit: cover; object-position: center 10%; border-radius: 15px; }
-  .editor-character-stage h2 { grid-area: 1 / 2; font-size: 17px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .editor-character-stage .appearance-choice { grid-area: 2 / 2 / 3 / 4; justify-content: flex-start; justify-self: start; margin: 0; padding: 5px 8px; font-size: 11px; }
-  .editor-character-stage .delete-button { grid-area: 1 / 3; margin: 0; padding: 5px 8px; font-size: 11px; }
+  .editor-character-heading { grid-area: 1 / 2; margin: 0; }
+  .editor-character-stage h2 { font-size: 17px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .editor-character-stage .appearance-choice { grid-area: 2 / 2; justify-content: flex-start; justify-self: start; margin: 0; padding: 0; font-size: 11px; }
+  .editor-character-stage .delete-button { font-size: 11px; }
   .character-fields { padding: 22px 19px; }
   .answer-toggle { padding: 11px; gap: 9px; }
   .answer-toggle strong { font-size: 13px; }
