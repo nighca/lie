@@ -1,11 +1,11 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { VoiceChannelOptions } from '@lie/voice'
+import type { VoiceChannelOptions, VoiceStartupObservation } from '@lie/voice'
 
 import { createLiveVoicePort } from '../src/application/liveVoice'
 import { VoiceAvailabilityError } from '../src/application/voice'
 import type { ConversationScope } from '../src/application/voice'
 
-function setupBridge(voiceId: string | null = null) {
+function setupBridge(voiceId: string | null = null, diagnostics: { onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void; now?: () => number } = {}) {
   let current = true
   let options: VoiceChannelOptions | null = null
   let drained = () => {}
@@ -21,6 +21,7 @@ function setupBridge(voiceId: string | null = null) {
   const scope: ConversationScope = { sessionId: 'session', characterId: 'one', voiceId, epoch: 1, signal: abort.signal, isCurrent: () => current, readContext, onEvent }
   let onFrame: (data: Uint8Array) => void = () => {}
   const dependencies = {
+    ...diagnostics,
     fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready' }))),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
     createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void) { drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
@@ -228,4 +229,87 @@ describe('continuous browser voice and device bridge', () => {
     bridge.connection.close()
   })
 
+})
+
+
+describe('local startup diagnostics', () => {
+  it('uses a per-opening relative clock, keeps branches parallel and records only the first forwarded PCM', async () => {
+    let now = 100
+    const events: (VoiceStartupObservation & { elapsedMs: number })[] = []
+    const bridge = setupBridge(null, { now: () => now, onStartup: event => events.push(event) })
+    let status!: (value: Response) => void
+    let channelReady!: () => void
+    bridge.dependencies.fetchStatus.mockImplementation(() => new Promise(resolve => { status = resolve }))
+    bridge.channel.open.mockImplementation(() => new Promise(resolve => { channelReady = resolve }))
+    const opening = bridge.connection.open()
+    expect(events).toEqual([{ stage: 'startup', result: 'started', elapsedMs: 0 }, { stage: 'status', result: 'started', elapsedMs: 0 }])
+    expect(bridge.dependencies.openMic).toHaveBeenCalledTimes(0)
+    now = 140
+    status(new Response('{"status":"ready"}'))
+    await vi.waitFor(() => expect(bridge.channel.open).toHaveBeenCalledOnce())
+    expect(bridge.dependencies.openMic).toHaveBeenCalledOnce()
+    expect(bridge.context.resume).toHaveBeenCalledOnce()
+    bridge.frame(new Uint8Array(640))
+    expect(events.some(event => event.stage === 'firstForwardedPcm')).toBe(false)
+    now = 180
+    channelReady(); await opening
+    bridge.frame(new Uint8Array(640)); bridge.frame(new Uint8Array(640))
+    expect(events.filter(event => event.stage === 'firstForwardedPcm')).toEqual([{ stage: 'firstForwardedPcm', result: 'completed', elapsedMs: 80 }])
+    expect(events.findIndex(event => event.stage === 'listenStart')).toBeLessThan(events.findIndex(event => event.stage === 'firstForwardedPcm'))
+    expect(events.every(event => Object.keys(event).sort().join() === 'elapsedMs,result,stage')).toBe(true)
+    bridge.connection.close()
+    await vi.waitFor(() => expect(events.at(-1)).toEqual({ stage: 'cleanup', result: 'completed', elapsedMs: 80 }))
+    const second = setupBridge(null, { now: () => now, onStartup: event => events.push(event) })
+    await second.connection.open()
+    expect(events.filter(event => event.stage === 'startup' && event.result === 'started').map(event => event.elapsedMs)).toEqual([0, 0])
+    second.connection.close()
+  })
+
+  it('reports cleanup completion only after late permission and asynchronous stop settle', async () => {
+    const events: VoiceStartupObservation[] = []
+    const bridge = setupBridge(null, { onStartup: event => events.push(event) })
+    let grant!: (value: { stop(): Promise<void> }) => void
+    let stopped!: () => void
+    bridge.dependencies.openMic.mockImplementation(() => new Promise(resolve => { grant = resolve }))
+    const opening = bridge.connection.open()
+    await vi.waitFor(() => expect(bridge.dependencies.openMic).toHaveBeenCalledOnce())
+    bridge.expire(); bridge.connection.close()
+    expect(events).toContainEqual(expect.objectContaining({ stage: 'startup', result: 'cancelled' }))
+    expect(events.filter(event => event.stage === 'cleanup').map(event => event.result)).toEqual(['started'])
+    grant({ stop: () => new Promise(resolve => { stopped = resolve }) })
+    await vi.waitFor(() => expect(stopped).toBeTypeOf('function'))
+    expect(events.filter(event => event.stage === 'cleanup').map(event => event.result)).toEqual(['started'])
+    stopped(); await opening
+    await vi.waitFor(() => expect(events.filter(event => event.stage === 'cleanup').map(event => event.result)).toEqual(['started', 'completed']))
+    expect(bridge.channel.startInput).toHaveBeenCalledTimes(0)
+  })
+
+  it('isolates throwing observers from successful startup and failure cleanup', async () => {
+    const bridge = setupBridge(null, { onStartup() { throw new Error('diagnostic only') } })
+    await bridge.connection.open()
+    bridge.frame(new Uint8Array(640))
+    expect(bridge.channel.input).toHaveBeenCalledOnce()
+    expect(() => bridge.connection.close()).not.toThrow()
+    const failed = setupBridge(null, { onStartup() { throw new Error('diagnostic only') } })
+    failed.channel.open.mockRejectedValue(new Error('network'))
+    await expect(failed.connection.open()).rejects.toThrow('network')
+    expect(failed.context.close).toHaveBeenCalledOnce()
+  })
+})
+
+
+it('records failed startup before a controller-like error consumer cancels the scope', async () => {
+  const events: VoiceStartupObservation[] = []
+  const bridge = setupBridge(null, { onStartup: event => events.push(event) })
+  let reject!: (error: Error) => void
+  bridge.channel.open.mockImplementation(() => new Promise((_resolve, fail) => { reject = fail }))
+  bridge.onEvent.mockImplementation(event => {
+    if (event.type === 'error') { bridge.expire(); bridge.connection.close() }
+  })
+  const opening = bridge.connection.open()
+  await vi.waitFor(() => expect(bridge.channel.open).toHaveBeenCalledOnce())
+  bridge.options().onEvent({ type: 'error', code: 'connection', message: 'private network detail' })
+  reject(new Error('network'))
+  await expect(opening).rejects.toThrow('network')
+  expect(events.filter(event => event.stage === 'startup').map(event => event.result)).toEqual(['started', 'failed'])
 })

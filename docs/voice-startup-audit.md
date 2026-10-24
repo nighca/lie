@@ -63,3 +63,14 @@
 | 5 | 只有worklet/resume长时，最小验证同次启动的图构建/模块加载改进 | 当前gUM必须先成功才有stream。每次采集context独立，addModule不能视为跨新context已缓存；跨开启复用context/module仍有生命周期代价 | 同次内不改语义的局部优化可review；共享播放/采集context、预解锁或跨开启持有先讨论 |
 
 没有真实阶段数据前，不承诺毫秒收益、不定p95目标、不把两个AudioContext或Blob模块直接认定为性能问题；不换VAD/provider/模型，不扩大mic/WS保活，不改变隐私与结束语义。
+
+
+## 最小observer实现（本地候选，2026-10-24）
+
+`createLiveVoicePort`的依赖对象现在可选接受同步`onStartup(event)`和`now(): number`；不传observer时不记录、不输出、不持久化、不联网，也不建立诊断计时器。应用默认调用方未配置它。每次`Conversation.open()`以所注入时钟（默认performance.now）建立独立相对原点，事件仅`{stage,result,elapsedMs}`。底层channel/openMicrophone接受可选`onStartup({stage,result})`，由adapter补同一时间基准；`packages/voice/src/startup.ts`集中有限字符串类型和安全调用。observer同步抛错以及注入时钟异常被隔离，不改变业务异常/ready顺序。
+
+阶段为startup/status/statusHeaders/playbackResume/microphone/worklet/captureResume/socket/socketOpen/hello/toolsList/channelReady/listenStart/firstForwardedPcm/cleanup；result仅started/completed/cancelled/failed。不是每个阶段均有开始/结束对：socket为创建请求，socketOpen/hello/toolsList是协议里程碑；statusHeaders指响应头到达，status完成包含解析及ready校验；microphone完成是gUM返回，非完整采集就绪；listenStart是本地发送，不是供应商ack。只记录首个真正forward的PCM，不存其字节/能量/转写或任何身份字段。未加入click/controller-recording事件，因为本批范围不改UI/controller；相对零点为open入口，不冒称DOM点击时刻。
+
+cleanup started仅表示关闭已请求；completed必须等adapter可见mic准备Promise（包括迟到授权即stop）、已取得mic.stop及播放context.close全部settle且无拒绝。gUM未决期间不会发completed。任一相关Promise拒绝则保守报failed，表示无法凭这组Promise确认清理完成，不能据此推断实际资源泄漏；权限拒绝导致mic准备Promise拒绝亦属此类。它不确认操作系统硬件灯、权限弹窗消失或远端WS关闭ack。取消之后仍允许资源准备/清理的迟到事件，分别按结果记录，不写回游戏；数据分析不能把迟到阶段完成算成startup成功。错误consumer同步取消时，startup/channelReady仍记录原始failed，不误记为用户cancelled。
+
+仅接口和离线fake验证完成，未做真实阶段采样或任何加速承诺；status gate/权限时机/并行次序/hello+tools-list ready/内容隔离及资源生命周期保持现有行为。回答延迟和实际首音指标未加入。验收应包括相对clock重置、并发/early PCM/首帧只记一次、取消后迟到grant与异步stop、握手门槛、observer抛错及错误回调同步取消；现有生命周期测试仍保留。本批没有开启产品服务、浏览器、mic或provider。

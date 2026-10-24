@@ -1,3 +1,5 @@
+import type { VoiceStartupObserver } from './startup'
+
 export type PcmFormat = {
   format: 'pcm'
   sampleRate: number
@@ -36,6 +38,7 @@ export interface VoiceSocket {
 }
 
 export type VoiceChannelOptions = {
+  onStartup?: VoiceStartupObserver
   tools: readonly VoiceTool[]
   onEvent: (event: VoiceEvent) => void
   createSocket?: () => VoiceSocket

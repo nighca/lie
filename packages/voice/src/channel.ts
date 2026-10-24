@@ -1,3 +1,4 @@
+import { observeStartup } from './startup'
 import type { PcmFormat, VoiceChannel, VoiceChannelOptions, VoiceSocket } from './types'
 
 const inputFormat = {
@@ -33,6 +34,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
   if (tools.size !== options.tools.length) throw new Error('Duplicate voice tool name')
   let socket: VoiceSocket | null = null
   let state: 'new' | 'opening' | 'ready' | 'closed' = 'new'
+  let openingFailed = false
   let sessionId: string | null = null
   let negotiatedFormat: PcmFormat | null = null
   let toolsRegistered = options.tools.length === 0
@@ -64,12 +66,14 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
   function becomeReady() {
     if (state !== 'opening' || negotiatedFormat == null || !toolsRegistered) return
     state = 'ready'
+    observeStartup(options.onStartup, 'channelReady', 'completed')
     finishOpen(null)
     emit({ type: 'ready', format: negotiatedFormat })
   }
 
   function close(code = 1000, reason = 'Closed by caller') {
     if (state === 'closed') return
+    if (state === 'opening') observeStartup(options.onStartup, 'channelReady', openingFailed ? 'failed' : 'cancelled')
     state = 'closed'
     speaking = false
     inputActive = false
@@ -93,6 +97,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
 
   function fail(code: 'connection' | 'protocol' | 'timeout', message: string) {
     if (state === 'closed') return
+    openingFailed = state === 'opening'
     emit({ type: 'error', code, message })
     close(4000, message)
   }
@@ -116,6 +121,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
     }
     if (payload.method === 'tools/list') {
       rpc(id, { tools: options.tools.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })), nextCursor: null })
+      if (state === 'opening' && !toolsRegistered) observeStartup(options.onStartup, 'toolsList', 'completed')
       toolsRegistered = true
       becomeReady()
       return
@@ -180,6 +186,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
           (audio.bits_per_sample ?? audio.bit_depth ?? 16) !== 16) {
         return fail('protocol', 'Unsupported negotiated audio format; PCM16 mono 16kHz required')
       }
+      observeStartup(options.onStartup, 'hello', 'completed')
       negotiatedFormat = { format: 'pcm', sampleRate: 16000, channels: 1, bitsPerSample: 16, frameDuration: 20 }
       sessionId = typeof value.session_id === 'string' ? value.session_id : null
       becomeReady()
@@ -216,6 +223,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
         return Promise.reject(new DOMException('Aborted', 'AbortError'))
       }
       state = 'opening'
+      observeStartup(options.onStartup, 'channelReady', 'started')
       return new Promise<void>((resolve, reject) => {
         settleOpen = (error) => error == null ? resolve() : reject(error)
         handshakeTimer = setTimeout(() => fail('timeout', 'Voice handshake timed out'), options.handshakeTimeoutMs ?? 10000)
@@ -225,9 +233,11 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
           removeAbortListener = () => signal.removeEventListener('abort', abort)
         }
         try {
+          observeStartup(options.onStartup, 'socket', 'started')
           socket = (options.createSocket ?? browserSocket)()
           socket.binaryType = 'arraybuffer'
           socket.onopen = () => {
+            observeStartup(options.onStartup, 'socketOpen', 'completed')
             if (state === 'opening') send({ type: 'hello', version: 1, features: { mcp: true }, transport: 'websocket', audio_params: inputFormat })
           }
           socket.onmessage = (event) => message(event.data)

@@ -285,3 +285,44 @@ describe('Linx voice channel', () => {
     expect(() => channel.startInput()).toThrow('not ready')
   })
 })
+
+
+it('observes socket, discovery and readiness without exposing protocol payloads or changing gates', async () => {
+  const socket = new FakeSocket()
+  const observations: unknown[] = []
+  const channel = createVoiceChannel({ createSocket: () => socket, tools: [{ name: 'private-tool', description: '', inputSchema: {}, execute: async () => 'private' }], onEvent() {}, onStartup: event => observations.push(event) })
+  const opening = channel.open()
+  socket.connect(); socket.hello()
+  expect(() => channel.startInput()).toThrow('not ready')
+  socket.message({ type: 'mcp', payload: { id: 'private-id', method: 'tools/list' } })
+  await opening
+  expect(observations).toEqual([
+    { stage: 'channelReady', result: 'started' }, { stage: 'socket', result: 'started' },
+    { stage: 'socketOpen', result: 'completed' }, { stage: 'hello', result: 'completed' },
+    { stage: 'toolsList', result: 'completed' }, { stage: 'channelReady', result: 'completed' },
+  ])
+  channel.close()
+})
+
+it('contains observer exceptions and distinguishes handshake failure from cancellation', async () => {
+  const socket = new FakeSocket()
+  const observer = vi.fn((_event: { stage: string; result: string }) => { throw new Error('diagnostics') })
+  const channel = createVoiceChannel({ createSocket: () => socket, tools: [], onEvent() {}, onStartup: observer })
+  const opening = channel.open()
+  socket.onerror?.()
+  await expect(opening).rejects.toThrow('connection failed')
+  expect(observer.mock.calls.map(call => call[0])).toEqual([
+    { stage: 'channelReady', result: 'started' }, { stage: 'socket', result: 'started' }, { stage: 'channelReady', result: 'failed' },
+  ])
+})
+
+
+it('retains failed startup diagnostics when an error consumer closes synchronously', async () => {
+  const socket = new FakeSocket()
+  const events: unknown[] = []
+  const channel = createVoiceChannel({ createSocket: () => socket, tools: [], onEvent(event) { if (event.type === 'error') channel.close() }, onStartup: event => events.push(event) })
+  const opening = channel.open()
+  socket.onerror?.()
+  await expect(opening).rejects.toThrow()
+  expect(events.at(-1)).toEqual({ stage: 'channelReady', result: 'failed' })
+})

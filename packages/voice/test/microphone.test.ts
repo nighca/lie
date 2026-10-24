@@ -101,3 +101,25 @@ describe('microphone lifecycle', () => {
     expect(active.worklet.disconnect).toHaveBeenCalledOnce()
   })
 })
+
+
+it('reports acquisition, worklet and capture resume stages without audio data', async () => {
+  const fixture = audioFixture()
+  const events: unknown[] = []
+  const mic = await openMicrophone({ ...fixture.options, onStartup: event => events.push(event) })
+  expect(events).toEqual([
+    { stage: 'microphone', result: 'started' }, { stage: 'microphone', result: 'completed' },
+    { stage: 'worklet', result: 'started' }, { stage: 'worklet', result: 'completed' },
+    { stage: 'captureResume', result: 'started' }, { stage: 'captureResume', result: 'completed' },
+  ])
+  await mic.stop()
+})
+
+it('contains observer exceptions and reports a failed worklet while stopping the stream', async () => {
+  const fixture = audioFixture()
+  const observer = vi.fn((_event: { stage: string; result: string }) => { throw new Error('diagnostics') })
+  fixture.context.audioWorklet.addModule.mockRejectedValue(new Error('module failure'))
+  await expect(openMicrophone({ ...fixture.options, onStartup: observer })).rejects.toThrow('module failure')
+  expect(observer).toHaveBeenLastCalledWith({ stage: 'worklet', result: 'failed' })
+  expect(fixture.track.stop).toHaveBeenCalledOnce()
+})

@@ -1,10 +1,18 @@
 import { createPcmPlayer, createVoiceChannel, openMicrophone } from '@lie/voice'
-import type { PcmFormat } from '@lie/voice'
+import type { PcmFormat, VoiceStartupObservation } from '@lie/voice'
 
 import { VoiceAvailabilityError } from './voice'
 import type { VoicePort } from './voice'
 
-export function createLiveVoicePort(dependencies = {
+export function createLiveVoicePort(dependencies: {
+  createChannel: typeof createVoiceChannel
+  createPlayer: typeof createPcmPlayer
+  openMic: typeof openMicrophone
+  createContext: () => AudioContext
+  fetchStatus: (signal: AbortSignal) => Promise<Response>
+  onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void
+  now?: () => number
+} = {
   createChannel: createVoiceChannel,
   createPlayer: createPcmPlayer,
   openMic: openMicrophone,
@@ -13,6 +21,21 @@ export function createLiveVoicePort(dependencies = {
 }): VoicePort {
   return {
     create(scope) {
+      let startedAt: number | null = null
+      let startupFinished = false
+      let firstForwarded = false
+      let micReady: Promise<void> | null = null
+      const observe = dependencies.onStartup == null ? null : (event: VoiceStartupObservation) => {
+        try {
+          dependencies.onStartup?.({ ...event, elapsedMs: Math.max(0, (dependencies.now ?? performance.now.bind(performance))() - (startedAt ?? 0)) })
+        } catch { /* A diagnostic callback cannot affect voice behavior. */ }
+      }
+      function report(stage: VoiceStartupObservation['stage'], result: VoiceStartupObservation['result']) { observe?.({ stage, result }) }
+      function finishStartup(result: VoiceStartupObservation['result']) {
+        if (startupFinished) return
+        startupFinished = true
+        report('startup', result)
+      }
       let context: AudioContext | null = null
       let player: ReturnType<typeof createPcmPlayer> | null = null
       let microphone: Awaited<ReturnType<typeof openMicrophone>> | null = null
@@ -67,6 +90,7 @@ export function createLiveVoicePort(dependencies = {
       }
       const channel = dependencies.createChannel({
         listenMode: 'realtime',
+        ...(observe == null ? {} : { onStartup: observe }),
         ...(scope.voiceId != null ? { voiceId: scope.voiceId } : {}),
         tools: [{
           name: 'self.lie_character_context',
@@ -101,51 +125,83 @@ export function createLiveVoicePort(dependencies = {
           if (event.type === 'audio' && answerInProgress && event.data.byteLength > 0 && format != null) {
             try { playing = true; player!.enqueue(event.data, format) } catch { scope.onEvent({ type: 'error' }) }
           }
-          if (event.type === 'closed') scope.onEvent({ type: 'closed' })
-          if (event.type === 'error') scope.onEvent({ type: 'error' })
+          if (event.type === 'closed') { finishStartup('failed'); scope.onEvent({ type: 'closed' }) }
+          if (event.type === 'error') { finishStartup('failed'); scope.onEvent({ type: 'error' }) }
         },
       })
       function close() {
         if (closed) return
         closed = true
+        finishStartup('cancelled')
+        report('cleanup', 'started')
         capturing = false
         channel.close()
-        void microphone?.stop()
+        const micStop = microphone?.stop()
         microphone = null
         answerEnded = false
         answerInProgress = false
         player?.stop()
-        if (context != null && context.state !== 'closed') void context.close()
+        const contextStop = context != null && context.state !== 'closed' ? context.close() : null
+        if (observe != null) void Promise.allSettled([micReady, micStop, contextStop]).then(results => {
+          report('cleanup', results.some(result => result.status === 'rejected') ? 'failed' : 'completed')
+        })
       }
       return {
         async open() {
+          if (observe != null) {
+            try { startedAt = (dependencies.now ?? performance.now.bind(performance))() } catch { startedAt = 0 }
+          }
+          report('startup', 'started')
           try {
             let availability: unknown
             try {
+              report('status', 'started')
               const response = await dependencies.fetchStatus(scope.signal)
+              report('statusHeaders', 'completed')
               if (!response.ok) throw new Error('Voice status check failed')
               availability = (await response.json())?.status
             } catch {
+              report('status', scope.signal.aborted || closed ? 'cancelled' : 'failed')
               throw new VoiceAvailabilityError('check-failed')
             }
-            if (!current()) return
-            if (availability === 'unavailable') throw new VoiceAvailabilityError('unavailable')
-            if (availability !== 'ready') throw new VoiceAvailabilityError('check-failed')
+            if (!current()) { report('status', 'cancelled'); return }
+            if (availability !== 'ready') {
+              report('status', 'failed')
+              throw new VoiceAvailabilityError(availability === 'unavailable' ? 'unavailable' : 'check-failed')
+            }
+            report('status', 'completed')
             context = dependencies.createContext()
             player = dependencies.createPlayer(context, answerDrained, (level) => {
               const ended = outputLevel !== 0 && level === 0
               outputLevel = level
               feedback(ended)
             })
-            const micReady = dependencies.openMic({ signal: scope.signal, onLevel: inputMeter, onFrame(data) { if (capturing && current()) channel.input(data) } }).then(async (mic) => {
+            micReady = dependencies.openMic({
+              ...(observe == null ? {} : { onStartup: observe }),
+              signal: scope.signal,
+              onLevel: inputMeter,
+              onFrame(data) {
+                if (!capturing || !current()) return
+                channel.input(data)
+                if (!firstForwarded) { firstForwarded = true; report('firstForwardedPcm', 'completed') }
+              },
+            }).then(async (mic) => {
               if (!current()) await mic.stop()
               else microphone = mic
             })
-            await Promise.all([context.resume(), channel.open({ signal: scope.signal }), micReady])
+            report('playbackResume', 'started')
+            const playbackReady = context.resume().then(() => report('playbackResume', 'completed'), error => {
+              report('playbackResume', scope.signal.aborted || closed ? 'cancelled' : 'failed')
+              throw error
+            })
+            await Promise.all([playbackReady, channel.open({ signal: scope.signal }), micReady])
             if (!current()) return
             channel.startInput()
+            report('listenStart', 'completed')
             capturing = true
+            finishStartup('completed')
           } catch (error) {
+            finishStartup(scope.signal.aborted || closed ? 'cancelled' : 'failed')
             close()
             throw error
           }

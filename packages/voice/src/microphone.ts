@@ -1,3 +1,5 @@
+import { observeStartup } from './startup'
+import type { VoiceStartupObserver } from './startup'
 import { createPcmEncoder } from './pcm'
 
 const workletSource = `
@@ -18,6 +20,7 @@ registerProcessor('lie-capture', LieCapture);
 `
 
 export type MicrophoneOptions = {
+  onStartup?: VoiceStartupObserver
   onFrame: (data: Uint8Array) => void
   onLevel?: (level: number) => void
   signal?: AbortSignal
@@ -31,12 +34,20 @@ export async function openMicrophone(options: MicrophoneOptions): Promise<{ stop
   const { signal } = options
   if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
   const getUserMedia = options.getUserMedia ?? ((constraints) => navigator.mediaDevices.getUserMedia(constraints))
-  const stream = await getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true }, video: false })
+  observeStartup(options.onStartup, 'microphone', 'started')
+  const stream = await getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true }, video: false }).then(stream => {
+    observeStartup(options.onStartup, 'microphone', 'completed')
+    return stream
+  }, error => {
+    observeStartup(options.onStartup, 'microphone', signal?.aborted ? 'cancelled' : 'failed')
+    throw error
+  })
   let context: AudioContext | null = null
   let source: MediaStreamAudioSourceNode | null = null
   let worklet: AudioWorkletNode | null = null
   let gain: GainNode | null = null
   let moduleUrl: string | null = null
+  let preparingStage: 'worklet' | 'captureResume' | null = null
   let lastLevelAt = -Infinity
   let stopped = false
   let stopPromise: Promise<void> | null = null
@@ -69,7 +80,11 @@ export async function openMicrophone(options: MicrophoneOptions): Promise<{ stop
     signal?.addEventListener('abort', abort, { once: true })
     context = (options.createContext ?? (() => new AudioContext()))()
     moduleUrl = URL.createObjectURL(new Blob([workletSource], { type: 'application/javascript' }))
+    preparingStage = 'worklet'
+    observeStartup(options.onStartup, 'worklet', 'started')
     await context.audioWorklet.addModule(moduleUrl)
+    observeStartup(options.onStartup, 'worklet', 'completed')
+    preparingStage = null
     checkAbort()
     URL.revokeObjectURL(moduleUrl)
     moduleUrl = null
@@ -91,10 +106,15 @@ export async function openMicrophone(options: MicrophoneOptions): Promise<{ stop
     source.connect(worklet)
     worklet.connect(gain)
     gain.connect(context.destination)
+    preparingStage = 'captureResume'
+    observeStartup(options.onStartup, 'captureResume', 'started')
     await context.resume()
+    observeStartup(options.onStartup, 'captureResume', 'completed')
+    preparingStage = null
     checkAbort()
     return { stop }
   } catch (error) {
+    if (preparingStage != null) observeStartup(options.onStartup, preparingStage, signal?.aborted ? 'cancelled' : 'failed')
     await stop()
     throw error
   }
