@@ -65,6 +65,8 @@
 
 内容加载器按游戏 ID 找到静态文件；一局开始后使用同一份内容快照，不中途热换。发布版本可由静态资源版本或构建标识追踪，无需作者在首版故事中维护额外的版本体系。
 
+逐字段含义、校验和引用边界见[案件内容作者规格](../content/games/README.md)，权威 TypeScript 接口见 `packages/game-core/src/content.ts`。
+
 ## 形象资源与故事角色
 
 可复用预置形象与故事角色分开。`design/appearances/manifest.json`是唯一权威输入，正式PNG统一放`design/appearances/assets/<id>/`，含default、listening、waiting、speaking四态；前三套另保留与默认立绘不同的avatar.png，其他形象头像可直接引用default。先前`state-studies/`、`expansion-complete/`及平铺原图保留为来源记录，不是需要同步维护的正式清单。
