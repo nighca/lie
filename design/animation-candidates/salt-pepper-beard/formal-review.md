@@ -20,3 +20,7 @@ This is source-owner team QA, not independent user acceptance. Captured against 
 - 391 × 844 same-origin iframe test was not performed because its authorized server root disappeared. No temporary shell was created, no global viewport changed.
 - Hidden-tab behavior, intentionally delayed package load / late completion isolation, and static fallback in all voice states were not verified. No `document.hidden` simulation or hidden app-state evaluation was used.
 - Screenshots under `evidence/formal-*.jpg` are native browser captures, not modified artwork. No fake-provider result is claimed as live-provider voice behavior.
+
+## Recovery follow-up attempt (2026-10-25 morning)
+
+Coordinator supplied a restarted service `http://127.0.0.1:5504/?game=duck-finale&demo=1` with clean worktree `/Users/nighca/.codex/worktrees/three-character-qa-dawn/lie`, verified HEAD `bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`. This agent could not open a new in-app browser tab: the old id 2 returned `Browser is not available: 2`, and a fresh CUA inventory contained only Chrome id 1, no in-app browser. Chrome was not used and no existing tab was touched. No CDP overrides were applied, no candidate files changed, no service restarted or stopped. Recovery, late completion isolation and static voice-state follow-ups remain unverified by this agent; the coordinator can continue them in its available browser session. This attempt produced no new screenshot.
