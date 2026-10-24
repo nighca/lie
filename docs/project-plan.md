@@ -385,3 +385,6 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 2026-10-24 原画分层动画验证已获批准：用户明确同意继续coral-bob原画拆层+骨骼动画验证。已委派视觉owner appearance_assets独立单角色样片，保留原画/补遮挡/关节衔接，制作与IAB验收一起交付；不以SVG简化重绘替代，不自动选商业运行时或扩到八套生产。该验证独立于正式产品，不改变现有渲染。
 
 协作方式调整：用户指出root长时间执行本地验收造成消息排队，要求更多耗时制作、测试、浏览器验收交独立代理。root优先全局判断、调度和讨论，分发后及时结束轮次，待代理结果回来再接续；保留实际diff关键review与单integrator责任，不以等待代理为由停掉其他已授权独立工作。
+
+
+2026-10-24 新增五形象音色补齐正式调度：用户询问是否推进并要求若未推进立即安排。当前仅有官方候选，未完成中文试听和正式voiceId映射；已交remaining_character_states独立推进silver-bun/salt-pepper-beard/plum-crop/mint-puffs/ochre-freckles候选核验、有界中文实测、配置与切换验证。首案三款已确认音色不变，不改用户既有本地/线上设备，不更换模型或购买服务；实际语音和fake回归分开报告。原case-live-validation脚本仍待root完整review，不因新任务自动获准执行。代理拥有新五voiceId及其测试/试听验证文档与必要安全探针，不改共享UI和本计划；root待交付review集成，无需用户再次批准常规候选落实。
