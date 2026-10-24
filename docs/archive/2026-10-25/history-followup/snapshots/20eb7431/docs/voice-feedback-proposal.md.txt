@@ -1,0 +1,84 @@
+# 调查页语音反馈与转写提案
+
+状态：供布局与接口确认，未修改生产代码。基于 reviewed `main` `6410c3b3f151acd3b365a90b6c40c6316f5e3c71`；2026-10-24 官方资料只读核实，无新增灵矽推理/设备/麦克风调用。
+
+## 建议体验
+
+底部一条控制栏从左到右：**剩余询问 07:32｜当前状态 + 音量｜结束对话**。桌面保持同一行，窄屏让状态文字、音量条、来源说明在中间一列上下排列；时间始终最左。输入用绿、播放用蓝，同时用文字区分，不能只靠颜色。无需重复“正在和谁聊”“每句都能回看”等说明。
+
+正常等待时显示“等你开口”；检测到输入活动显示“你在说话”；收到玩家最终转写到开始实际播放前显示“思考中”；实际播放时显示“角色回答”。输入与输出可同时 active，插话时显示“你在说话 · 正在打断”，两路音量分别保持真实值，直到播放器实际 stop/排空后清零。准备、断线、额度耗尽仍是单独状态，不拿四种活动状态代替错误反馈。
+
+**不能从静音直接推断服务端在思考。** 静音可能只是停顿；至少收到 final 用户回合或已知回复工具调用后才进入等待回复。音量大也不等于可靠人声识别；局部声音检测只能作为活动估计，不声称是服务端 VAD。耳机、外放回声、风噪需要独立验收。
+
+计时仍沿用现有 `enabledAt` 累计：语音启用后，静音、等待、回答与插话全部计；连接准备不计，结束后暂停，跨人物共享。本提案不改变预算规则，不按声音活动累计。
+
+## 官方能证明什么
+
+[灵矽 WebSocket 协议](https://linx.qiniu.com/docs/xrobot/platform/websocket) 说明 realtime 是全双工模式，检测语音可打断；公开 STT 只有 `type: stt` 与 `text`，没有已公布的 partial/final 标记、utterance ID、revision 或独立 VAD 起止事件。TTS 有 start/sentence_start/stop，以及 stop.is_aborted。文档建议正常 stop 等播放完成，aborted 立即清缓冲。公开文档**不能证明逐步识别或修正协议可用**，也不能凭连续多个 stt 自行推断它们是一句的 partial。
+
+本项目目前 `channel.ts` 把每条 stt 输出为 `{type:'stt',text}`；`liveVoice.ts` 每次收到它就中断旧答复并产生 userText；controller 立即 append 用户历史。若未辨明语义就把多个识别片段放进去，会制造多个回合、重复中断与错误上下文。现有五音色试听每段各收到一次 STT，但它们不是 partial 能力测试，不能据此断言所有真实讲话永远只有 final。
+
+因此首阶段支持公开协议可证实的 **final-only 路径**，玩家文字收到整句后按固定速度在本地展开。若后续灵矽提供明确协议或隔离抓包证明支持 partial，再启用真实 partial 分支，不引入浏览器第二 ASR，不新增音频上传服务，不修改供应商来假装解决本问题。
+
+## 转写节奏
+
+当前 `transcriptReveal.ts` 每 50ms 调度，并在 2400ms deadline 内按剩余长度加速。单改成 100ms 但保留 deadline，长句仍会追赶，不满足“再慢一点”。
+
+建议角色 **100ms/字素**、玩家 final fallback **70ms/字素**，按 Intl.Segmenter 划分；移除 2.4s 强制追赶。每次 tick 从累计经过时间计算应显示位置，不按长句总长加速。45字角色文本约4.5秒，100字约10秒；这是明确的视觉节奏，不是精确口型/词级语音同步。播放结束不瞬间补齐；新回合开始、切换历史或 reduced-motion 时可立即补全上一条，避免多条同时动画堆积。被打断的文本沿用当前业务实际已接收文本与打断标识，不为动画截断后再改变角色记忆。
+
+partial 若获证实：完整显示最新草稿快照，不再额外逐字；允许删除和替换先前识错字。同一句靠供应商稳定 ID 与 revision 更新，不做字符串前缀拼接；final 一次定稿、替换草稿、写入历史；final 后迟到 partial、重复 final、低 revision 忽略。草稿不进入 MCP history。没有可靠轮次标记时，不猜测 partial 与 final 边界，继续 final-only。
+
+## 最小接口改动草案
+
+不是新音频管线，只在现有采集、播放与 scope 生命周期上提供只读反馈：
+
+| 层 | 已有事实 | 建议增量 |
+| --- | --- | --- |
+| microphone | 一次 getUserMedia，AEC+noiseSuppression；已有 AudioWorklet Float32 帧 | 从已有帧计算 RMS/peak，20Hz 以下回调 onLevel；不新建麦克风、不再上传音频 |
+| player | PCM排队定时播放，stop/onIdle；source直接接destination | 所有 source 接共享 analyser，再接destination；按 AudioContext 当前播放时钟采样；stop清sources与反馈，排空归零 |
+| channel | stt、TTS、PCM与工具事件 | 当前stt仍按现合同处理；只有证实后才新增带id/revision/final的用户转写事件，不猜供应商字段 |
+| liveVoice | scope.isCurrent、AbortSignal、播放器drain、输入持续上传 | 独立 input/output level 与活动事实；TTS start未必已有声音，actual playback单独判断；保留bargein现逻辑 |
+| controller | voiceStatus、budget、pendingText、history | 增加仅本局临时 userDraft 与 feedback（input/output/waiting），不落game-core或案件JSON；只接受当前epoch；final幂等后append |
+| VoiceControl / Transcript | 状态、slots、真实消息列表 | 时间左侧、双路反馈；待定转写作为pending UI投影，替换不新增history；视觉展开不改业务text |
+
+可讨论的事件形状（仅内部提案，不是已获灵矽证明的协议）：
+
+```ts
+type FeedbackEvent =
+  | { type: 'inputLevel'; rms: number; activeEstimate: boolean }
+  | { type: 'playbackLevel'; rms: number; playing: boolean }
+  | { type: 'userDraft'; utteranceId: string; revision: number; text: string }
+  | { type: 'userFinal'; utteranceId: string; text: string }
+```
+
+level 不必每帧穿透整个 GameView 触发所有游戏组件；可用 scope 绑定的轻量反馈订阅，或每50–100ms合并最新值；UI最多20Hz，rAF只负责可见时画图。保留现有麦克风独立 context 与播放器 context，不为波形强制合并两者。先基于现有 Float32 样本，不重复 PCM decode。输出不能使用收到网络包的瞬间峰值，否则服务端提前推音频时波形先于声音；共享 AnalyserNode 能反映正在播放的信号。参考 [MDN AnalyserNode](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getFloatTimeDomainData) 与 [Web Audio 可视化](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API)。
+
+活动估计建议先明确为幅度门限+滞回（例如高于噪声底持续120ms进入、低于门限350ms退出），阈值需本地真人外放测试，不能声称声学 VAD。麦克风AEC已有启用，但不保证扬声器回声完全消失；角色说话时不关闭输入，也不靠前端静音绕过bargein。未有可靠活动判断时，可保守显示“收到声音”或保持“等你开口”，音量本身照实变化，这个文案取舍需与用户确认。
+
+## 清理、可访问与边界
+
+- 结束、切人、指认、页面隐藏、到期、断线、dispose：取消采样与逐字timer，断开analyser，清临时草稿/level/活动估计，原有stop释放track/context；晚到epoch事件一律丢弃。此前已定稿历史保持原规则。
+- 输入/输出是两条事实，不能设计互斥enum；本地幅度升高不提前修改已确认人物答复，实际中断沿用现有逻辑。
+- reduced-motion立即显示已收到文本、不做跳动波形；保留状态文字和静态音量值。不用波形每帧aria-live；状态只在转换时礼貌播报，partial视觉草稿不逐字读屏，final一次播报。当前Transcript的log aria-live需在实现时验证，避免draft修正/每字反复播报。
+- 后台隐藏即停现有语音，不继续无声采集；断线手动重开。既有授权之外不新申请权限；本调研和样片没有实际收音。
+- 不增加用户档案、DB、服务端会话状态或上传日志。幅度仅内存，调试默认不保存音频/识别内容。
+
+## 可点击样片与独立检查
+
+`spikes/voice-feedback` 使用真实 `Transcript`、`UiButton`，其余为局部提案布局与离线 reducer。明确标注模拟 partial 和合成 PCM，**不连接供应商、不调用 getUserMedia、不伪称真实语音反馈通过**。实际生产组件与接口保持不变。角色展示使用已有已确认素材。
+
+```sh
+node --test spikes/voice-feedback/model.test.mjs
+node node_modules/vite/bin/vite.js --config spikes/voice-feedback/vite.config.ts
+# http://127.0.0.1:5194/
+```
+
+已完成：5项离线测试覆盖partial替换/低版本、final幂等/晚到草稿、输入输出并存、epoch/stop清理、PCM RMS与不强制追赶；独立fixture生产构建通过。IAB实际CSS宽1280和391检查无横向溢出（当前浏览器75%zoom，viewport参数经DOM宽度校验），点击修正、重复final仅保留一条、同时输入输出、结束关闭、final-only逐字与手动减少动态状态均检查；修复了样片中新答复开始时应补全上一条fallback的遗漏，console warn/error为空。已保存[桌面截图](../spikes/voice-feedback/desktop.jpg)和[窄屏截图](../spikes/voice-feedback/narrow.jpg)供布局确认。没有把模拟PCM当真实mic/player管线的性能或回声验证。
+
+生产落地前还需：波形真实输入/播放时钟测试、虚拟时钟长句速度测试、final-only/有明确partial协议两路径、final重复和跨scope丢弃、排队音频到实际drain、bargein正常/aborted stop、reduced-motion和读屏、连接准备不计时/活动全计时、窄屏与低性能测试。真实partial能力需要供应商明确协议或有界隔离真人实验授权与证据后再承诺。
+
+## 交用户确认的具体点
+
+1. 是否采用这条“时间最左，状态与双路音量居中，结束按钮最右”的布局？样片不是整页重新设计。
+2. 字幕先按角色100ms/字、玩家fallback70ms/字，不设强制赶完窗口；能接受长句继续展开，下一回合补全上一条吗？
+3. 灵矽公开协议尚未证明partial：先final-only本地展开，真实partial待证实再启用；输入状态基于幅度估计时，是否用更保守的“收到声音”替代“你在说话”？

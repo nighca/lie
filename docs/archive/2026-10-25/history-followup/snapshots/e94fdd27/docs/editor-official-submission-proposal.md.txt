@@ -1,0 +1,183 @@
+# 编辑器向官方案件库投稿：可行性与分阶段方案
+
+2026-10-24；只读调研。基于已review仓库 `e6bdf7352bff917e23229ed2fd67d77c9296c93c`。编辑器本体已另行获准开发；**本文没有注册GitHub App、创建fork/分支/commit/PR、请求登录授权或修改任何工作流和产品代码**，自动投稿方式仍待用户选定。
+
+## 最新确认与实测前提
+
+用户已选择跳GitHub页面、由本人确认提交，不让LIE取得GitHub OAuth/token授权。只调查能预填多少，自动PR/OAuth/App/PAT路线不作为当前实施方向。
+
+root于2026-10-24只读运行`gh repo view nighca/lie --json nameWithOwner,isPrivate,visibility,defaultBranchRef`，确认目标仓为PRIVATE、main分支。当前外部玩家并无默认访问权。用户随后已明确决定：晚些时候公开当前nighca/lie源码仓，不另设投稿仓。投稿以此仓为目标；现在不自动改可见性或加协作者，外部投稿实测与开放等待实际公开。
+
+root在IAB打开带filename/value/message/description的短测试参数链接，仅放无敏感的“预填能力检查（不提交）”JSON。页面未登录且私有仓访问返回404；没有看到编辑表单，因此不能认定value、message或description实测成功。没有提交文件/commit/PR，没有fork或登录授权；临时tab已关闭。当前已确认的官方能力仍是filename预填，以及已有head/base差异后的compare title/body等。正文/commit参数保留待有适当GitHub网页登录态后只读验证，不能凭“无正式文档”推断一定不支持。
+
+## 建议先做什么
+
+建议第一阶段按钮叫 **“投稿到官方案件库”**，实际流程明确为：校验并复制/下载案件JSON → 打开GitHub新建文件页 → 作者在GitHub完成登录、fork/commit和创建PR → 维护者review故事及测试 → 合入后发布。它没有给LIE增加账号数据库，也不接管用户GitHub token；**不是点击即自动创建PR**。
+
+完整JSON不放URL：本仓首案实际9,280字节UTF-8，用`URLSearchParams`放进`value`后，构造的链接是27,101个字符。这里只在本地计算长度，未发往GitHub；说明不能直接套用游戏fragment分享的容量结论；GitHub服务器收到的是query，需要另测接受长度，不能仅因27k字符就断言绝对不可用。下载和粘贴不依赖这个长度。
+
+GitHub存储fork、commit、PR和review，本地编辑器只处理草稿；“无自建DB”不表示整个流程没有云状态。若用户需要的是授权后直接在产品里生成PR，可以复用薄Worker承担GitHub凭据交换/调用，不一定需要传统backend或数据库，但属于新增授权与写入能力，不能先按纯链接按钮偷换实现。
+
+## 官方能力：预填页面与真正创建PR的区别
+
+### 新建文件页
+
+GitHub[官方博客](https://github.blog/news-insights/creating-files-on-github/)明确介绍了新建文件URL的`filename`预填。候选入口形态如下，文件名需校验后再编码：
+
+```text
+https://github.com/nighca/lie/new/main?filename=content%2Fgames%2Fmy-case.json
+```
+
+打开这个页面不会自动提交文件、fork或PR。GitHub[创建文件文档](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files)说明：没有目标仓写权限时，GitHub会帮助用户fork并在commit后向原仓提PR；作者仍需确认文件内容、提交和PR。拥有目标仓写权限的人也应主动选新分支并走投稿review，不能因此直接写main。
+
+**`value`等参数的证据边界：** 本轮没有找到与`filename`同等级的GitHub正式文档承诺“任意JSON通过`value`可可靠预填”。没有以社区讨论或经验当正式接口，也没有在用户账号里实测。`value`不能作为首版必需依赖；即使个别情况下可用，也必须保留复制/下载粘贴，并面对URL上限。`message`、`description`同样不在本轮认定的稳定新建文件契约内。
+
+### 外部贡献者实际步骤
+
+1. 编辑器校验当前JSON，展示即将公开投稿的内容，复制文件正文；下载作为跳转和登录过程的保底，避免草稿丢失。
+2. 点击上述新建文件入口，作者在GitHub登录；需要时由GitHub引导fork到作者账号，或作者先手动fork、在fork创建主题分支再添加JSON。
+3. 粘贴/上传正确文件，检查路径和内容，commit到作者拥有写权限的分支。
+4. 用GitHub的Compare & pull request进入原仓；确认base是`nighca/lie:main`、head是作者fork的主题分支，补简介后点击Create pull request。
+5. 创建PR成功才算投稿已提交；“已打开GitHub”或“文件已下载”不显示成“已提交成功”。维护者review/接受后才能成为官方案件，并非PR一建就上线。
+
+这些步骤依据[从fork创建PR](https://docs.github.com/en/pull-requests/how-tos/create-pull-requests/creating-a-pull-request-from-a-fork)。原仓的公开可读性不授予作者在原仓创建分支的权限。
+
+已存在分支后，GitHub[正式支持compare URL参数](https://docs.github.com/en/enterprise-cloud%40latest/pull-requests/reference/using-query-parameters-to-create-a-pull-request)预填`quick_pull`、`title`、`body`等：
+
+```text
+https://github.com/nighca/lie/compare/main...AUTHOR:submit-my-case?quick_pull=1&title=Add+my+case
+```
+
+这只能为已有差异预填PR表单，不会凭JSON自动造出head分支或commit。官方也说明URL超过服务端限制会返回414；本轮未发现可承诺跨浏览器/代理一致的具体最大字符值，因此不写成“固定8KB/32KB”。
+
+## 真正自动创建PR：三种路径
+
+GitHub[创建PR REST端点](https://docs.github.com/en/rest/pulls/pulls#create-a-pull-request)需要已经有可比较的head/base；细粒度令牌要求Pull requests写权限。文件写入还需要相应仓库的Contents写权限，不能只申请“登录身份”就宣称可投稿。REST的[跨域支持](https://docs.github.com/en/rest/using-the-rest-api/using-cors-and-jsonp-to-make-cross-origin-requests)与GitHub网页登录态不是一回事：浏览器可以在拿到合适token后调API，但LIE不能读取或借用另一个域名的GitHub登录Cookie。
+
+| 路径 | 真正需要的权限/工具 | 能否无自建DB | 主要区别 |
+| --- | --- | --- | --- |
+| GitHub网页辅助投稿（推荐首期） | 用户在GitHub拥有账号、自己的fork/分支；LIE无token、无App | 可以，甚至无需新增Worker逻辑 | 多几步但授权面最小，明确不是自动PR |
+| OAuth App代表用户写其fork并创建PR | 注册OAuth App、作者同意权限、Worker保管client_secret并交换token，API完成fork/分支/文件/PR | 可以设计为短时会话，不建长期账号库；仍有瞬态认证状态与GitHub云状态 | 保留作者fork身份；授权权限与跨fork流程复杂，无法只用纯静态页面加PKCE草率完成 |
+| GitHub App作为投稿机器人 | 仓主注册并仅向指定仓安装App；Worker保管私钥，短期installation token，限定Contents/Pull requests写权限 | 不必自建DB，GitHub保存提交记录；公开入口身份/防滥用、重复提交策略仍要设计 | 在官方仓候选分支发机器人PR，不依赖每个作者拥有fork；提交者身份、署名与可追溯性必须另行明确，不能匿名开放仓写代理 |
+
+### OAuth、PKCE与Worker的实际边界
+
+当前 **GitHub.com** [OAuth授权文档](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps)已经支持`code_challenge`/`code_verifier`及S256；但同一文档仍将web flow换token时的`client_secret`列为必需。不能套用部分旧Enterprise Server文档的“GitHub不支持PKCE”，也不能反向推导“支持PKCE，所以可以把secret省掉”。授权端点的CORS限制也不能用REST API的CORS支持来代替。
+
+工程上可以在现有Worker增加OAuth回调：浏览器发起授权，Worker保管secret，校验state/PKCE并换token，再由Worker执行白名单GitHub操作。只需短时投稿时，可用加密、HttpOnly、Secure、SameSite且过期受控的会话Cookie携带小体积认证状态，或采用其他已review的瞬态状态方案；**这是可行设计推断，本轮没有实现或证明完整安全性**。案件正文留浏览器草稿，回调后再明确确认发送，不塞进OAuth state或Cookie。
+
+这样不强制引入D1、DO或传统账号DB，但不承诺完全无状态：state、PKCE verifier、token寿命、同源请求校验、撤销和重复请求都必须有明确归属。若要跨设备恢复、后台重试、长期刷新令牌或严格去重，可能需要额外持久状态，应再讨论而非藏在“薄网关”里。
+
+OAuth [scope文档](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps)区分`public_repo`与含私有仓能力的`repo`。不要为故事投稿无条件申请私有仓访问；同时[Contents端点](https://docs.github.com/en/rest/repos/contents#create-or-update-file-contents)当前对classic/OAuth列的是`repo`，因此本轮**不保证public_repo一定覆盖拟选全部API**，选型后必须逐端点核验/最小权限实验。GitHub App则以仓库权限和安装范围限制，不用OAuth scope字符串替代。
+
+Device flow虽然不要求client_secret，但官方定位于无浏览器/受限设备，并[不建议无理由启用](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/best-practices-for-creating-an-oauth-app)；也没有因此验证浏览器端完整交换可行。它不是为了省Worker就默认采用的首版捷径。
+
+### PAT能不能省掉OAuth
+
+有合适PAT时，浏览器理论上可直接通过REST CORS完成授权API调用，不必为此强制建Worker或DB；但这变成让作者手工创建并交给网页敏感token，体验与权限风险都高于原生GitHub提交流程。[官方PAT说明](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)也明确细粒度PAT目前对“向非成员的公开仓贡献”仍有限制；不能因为某个Contents/PR端点接受fine-grained token就保证整个外部fork投稿链路支持。
+
+因此不推荐普通玩家首期粘贴PAT，更不会把仓主PAT放进前端、URL、JSON稿件或共享本地存储。App注册/安装、用户授权、目标仓写入都要另获明确范围确认；本调研没有执行这些动作。
+
+## 提交什么数据，才能真的成为可玩案件
+
+当前真实仓库有三处配合：
+
+1. `content/games/<id>.json`是故事源；结构为id/title/background/interrogationLimitSeconds/characters/ending，角色profile纯文本，appearanceId关联预置资源。
+2. `apps/web/public/games/<id>.json`是Web运行时fetch读取的静态副本；只加故事源不会被当前运行时自动发现。
+3. `apps/web/public/games/index.json`是首页目录，条目为id/title/**summary**/interrogationLimitSeconds；summary并不存在于当前GameDefinition中，不能从故事源自动“读出”未提供的字段。
+
+当前没有自动生成上述副本/目录的脚本。现`staticContent.test.ts`会遍历已有目录并核其内容，却不会发现一个只新增源、从未进目录的稿件；只有首案源/副本另有直接import对照。当前CI workflow仅push main与手动触发，**没有pull_request预检事件**。不能告诉作者“添一个源JSON，现有CI就会检查并自动上架”。以上是本次基线代码检查，不排除另行集成中的第二案和编辑器修改。
+
+### 推荐数据分层（提案，尚未实现）
+
+编辑器基础导入/导出继续使用现有游戏JSON，不因官方投稿新增强制运行字段。投稿可另外收集一段公开summary与可选署名，形成这样的本地提交材料：
+
+```json
+{
+  "submissionVersion": 1,
+  "summary": "不泄露责任人的一句案件简介",
+  "authorDisplayName": "作者希望公开显示的名字",
+  "game": {
+    "id": "my-case",
+    "title": "案件标题",
+    "interrogationLimitSeconds": 600,
+    "background": "公共背景纯文本",
+    "characters": [
+      {"id": "a", "name": "甲", "appearanceId": "coral-bob", "profile": "角色完整设定纯文本"}
+    ],
+    "ending": {"culpritId": "a", "reveal": "成功指认后的说明"}
+  }
+}
+```
+
+这是可review的投稿封装候选，**不是新的已批准游戏schema**；示例只说明形状，不是有趣的单人案件。game部分可独立导出试玩，summary/署名不混进NPC背景，署名不默认收集真实姓名或邮箱。
+
+最小首期可不落这个封装到源码：作者先提交`content/games/<id>.json`，summary放PR正文，维护者review时补public副本与目录，三处一起通过检查后再合并。这不要求作者手工修改共用index，代价是维护者每篇多一步。若要让“源JSON单文件投稿”在merge后自动发布，先实现并review以下独立内容流水线，而非承诺当前已经会：
+
+- 源目录是权威输入，使用现有validator核合法文本/角色/固定责任人和已注册appearanceId；额外限制稿件slug、文件名与id一致、大小、重名及路径，禁止由用户任意指定写入路径。
+- 公共summary仍需显式来源。可选A：维护者控制的`content/catalog.json`；可选B：每案单独metadata伴随文件。两者会影响单文件投稿体验，必须选清楚；不让脚本擅自生成剧情简介或偷偷改GameDefinition。
+- 确定性脚本由已验证源生成public JSON与首页index，排序稳定；在build前执行，或将产物提交并用CI重新生成后检查无diff。不能只在CI里检查却仍发布旧产物。
+- PR增加无生产secret的`pull_request`内容预检，main通过后才沿现有CD部署。不要用带部署凭据的`pull_request_target`执行投稿者代码；[GitHub官方说明](https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target)明确区分其信任边界。
+- 故事review仍检查可解性、角色口径、歧义和用时；schema通过不自动等于官方收录，不自动合并、发布或调用付费模型。
+
+## 需要用户作出的选择
+
+1. 首期接受“跳GitHub由作者完成提交/PR”的无新增授权方案，还是明确要“产品内授权后直接生成PR”？按钮说明会忠实反映这一区别。
+2. 若要自动化，偏向作者本人fork投稿的OAuth，还是仅指定仓的GitHub App机器人？后者还需决定投稿者身份、署名和公开入口的使用范围。
+3. 先由维护者在review时补副本/目录，还是单独批准内容生成流水线和summary来源？这一项决定“只添加一个源文件”能否最终无手工步骤发布。
+
+仓库现行“内部agent不走PR”约束与用户创作者的外部投稿PR不是同一种协作：当前提案只讨论用户明确提出的外部官方投稿通道，不借机把日常agent集成改为PR。
+
+## 2026-10-24 独立内置浏览器实测
+
+独立视觉/UI实验代理在 reviewed main `d6c4deab85658d52a0b85e21e8ca6538c87e1f34` 建 `codex/github-prefill-verification`，用Codex内置浏览器id3实际访问。**浏览器未登录GitHub**（页面明确显示Sign in）；没有借用Chrome登录态、读取Cookie/token或执行登录。私有`nighca/lie`显示404，不能访问其原生编辑表单。这项验证没有改变仓库可见性。
+
+与之前单一404不同，本轮额外访问已知公开仓`solarkyle/alibi`（main分支、页面可读），用安全虚构JSON测试原生`new/main`：
+
+| 字段/能力 | 官方依据 | 此次实际结果 |
+| --- | --- | --- |
+| `filename` | [GitHub官方博客](https://github.blog/news-insights/creating-files-on-github/)明确支持 | 公开仓短链接转登录页，解码`return_to`与原链接全文相同；尚未看到文件名输入框，不能称表单已预填。 |
+| `value`正文 | 本轮未找到同等级官方契约；没有文档不等于不支持 | 124字节短JSON随链接进入登录跳转；9280字节中文合成JSON的27334字符链接被GitHub明确拒绝。**未实测正文编辑框全文相等**，不是“不支持value”的证据。 |
+| `message`提交摘要 | 官方创建文件文档有commit message UI，但未证明此query键 | 短链接登录`return_to`保留此键；未进入commit弹层，预填未知。 |
+| `description`提交说明 | 同上，不把commit说明与PR正文混为一谈 | 短链接登录`return_to`保留此键；表单未知。 |
+| `quick_pull=1` | [官方compare参数文档](https://docs.github.com/en/pull-requests/reference/using-query-parameters-to-create-a-pull-request)支持 | 公开既有差异可读；未登录仍仅显示比较页和Sign in，没有PR编辑表单。 |
+| PR `title`/`body` | 同一官方文档明确支持 | 参数保留于比较页URL及Sign in的return_to，实际title/body输入框数量均0；此轮未验证填入后的全文相等。 |
+| 外部作者fork/branch/commit/PR完整链 | [官方创建文件](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files)与[从fork创建PR](https://docs.github.com/en/pull-requests/how-tos/create-pull-requests/creating-a-pull-request-from-a-fork)说明步骤 | 未登录，且无权为实验创建任何写操作；未验证完整链。公开可读不等同有写权限。 |
+
+### 已观测的URL长度失败
+
+短虚构JSON为124字节UTF-8，URL524字符，浏览器到达登录页且`new URL(loginUrl).searchParams.get('return_to') === originalUrl`为true。这只是**跳转参数保真**。
+
+长合成JSON为9280字节UTF-8、3440个JS字符串代码单元，含中文、emoji、保留字符和重复测试填充；与首案只匹配字节体积，不匹配真实文本分布，也没有发送私有正文。`URLSearchParams({filename,value,message,description})`生成27334字符链接。内置浏览器确实保留全部27334字符地址，但GitHub展示 **“Whoa there! Your request URL is too long.”**，页面标题“Bad request · GitHub”。因此在这一条实际路径和会话条件下，该体量query不能到编辑表单；不是“所有9280字节JSON都必失败”或“GitHub统一上限是X”。本轮没有读取网络响应码，**不声称观测到HTTP414**，不为未登录/登录后或其他代理猜固定字节阈值。游戏fragment的16000字符规则与此服务器query没有可迁移关系。
+
+安全样本、精确短URL/compare URL、原生截图和重现编码检查保存在[实验目录](../design/github-prefill-verification/README.md)。`node spikes/github-prefill/verify.mjs`验证JSON有效、本地URL解码正文/保留符号全文相等及实际长度，**不是浏览器表单验收**。没有重试大型请求网格或通过shell绕过UI。
+
+### 精确入口与推荐操作流
+
+生产首期建议保持不依赖正文query的可靠基线：编辑器校验并保存本地草稿，先提供复制JSON/下载JSON，再打开固定目标的新建文件页；有用户输入slug时先沿现有内容ID规则验证，然后只将固定前缀与slug拼成filename并用URLSearchParams编码。例如：
+
+```text
+https://github.com/nighca/lie/new/main?filename=content%2Fgames%2Fmy-case.json
+```
+
+路径形态来自已有研究和官方filename能力，**当前私有目标未登录无法验收编辑框**。不要把query里的message/description/value提升为首版必需接口，更不要为长案把完整私有正文偷偷发往另一个仓。
+
+普通外部作者在GitHub登录→公开原仓的新建文件入口→如GitHub要求先fork则由作者确认→检查路径/粘贴正文→commit到本人fork的主题分支→Compare & pull request→核对upstream main与本人head→填写PR标题/简介→由本人最终提交。若GitHub要求先建fork才能编辑，应明确切到作者fork的新建文件入口，而不是暗中调用创建API。此轮不确定GitHub对未创建fork用户的每一步UI顺序，不能承诺“打开链接绝不会产生fork引导”。GitHub官方说明最终commit/propose才写入；本轮停在其之前，没有测试该写入。
+
+对于**作者已拥有且已提交文件的分支**，可按官方文档构造：
+
+```text
+https://github.com/nighca/lie/compare/main...AUTHOR:submit-my-case?quick_pull=1&title=Add+my+case&body=Public+summary
+```
+
+其中AUTHOR、分支必须来自作者实际已建立的fork/主题分支；LIE目前不知道这些值，不能把占位URL当成一键完整投稿。fork重命名等跨仓路径变体应优先由GitHub“compare across forks”选择器生成后使用，当前没有实测其精确URL构造，不猜内部端点。
+
+公开compare实验从现有`goplus/builder/pull/3640`观察到具体SHA比较链接，跟随页面明确给出的三点默认比较，再附官方quick_pull/title/body参数；页面实际显示9commits/80files差异但无PR编辑字段。只是无登录差异可读实验，不代表用户是外部作者、拥有head写权限或此处适合创建新的PR。
+
+### 仍缺什么才能完成表单验证
+
+1. 用户在**Codex内置浏览器**自行登录GitHub即可补短样本的filename/value与commit摘要/说明表单检查，不需要把token交给LIE，也不需要先公开项目就能验证公开仓原生编辑能力。要检查当前私有目标，登录账号还需其访问权。
+2. 真正的普通外部贡献者路径须在`nighca/lie`按用户计划实际公开后，由一个无上游写权限的登录身份检查。仓主表单成功不能替代外部作者权限实验。当前不申请改可见性或添加协作者。
+3. 对commit摘要/说明，可仅打开提交review弹层并读取各字段，不点击最终commit/propose；对PR title/body须有可比较且有权使用的既有head。若GitHub在进入编辑前要求创建fork，本轮禁止写入范围下停在该引导，由用户另行决定是否授权测试fork。没有必要为这项验证先建OAuth/App/PAT。
+
+**给编辑器负责人的当前可用结论：** 可做复制/下载+固定目标filename跳转的基础流程，状态只称“已打开GitHub”；正文query作为仍待登录实测的增强项且必须有长度/失败保底。此轮已实证长中文query会被拒，不能承诺完整案件JSON可稳定预填，更不能宣称已成功投稿。尚未验证字段的结论保持“未知”，而不是“不支持”。

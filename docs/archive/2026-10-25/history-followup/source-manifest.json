@@ -1,0 +1,312 @@
+[
+  {
+    "archive": "snapshots/6da37877/design/investigation-mobile-v4/README.md.txt",
+    "source_commit": "6da3787788d0ee945c2b639e2d00852add1d1d02",
+    "source_path": "design/investigation-mobile-v4/README.md",
+    "source_blob": "3366b1343e418afd9cad3b1d0c6636e2ffcfabc4",
+    "source_commit_date": "2026-10-24T20:06:13+08:00",
+    "source_subject": "design: remove redundant current-person labels and center mobile names",
+    "sha256": "1cb90ebd9848153b7ed09785a699c82d33822b69af5c5a71d80ad4a18bda514c",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/f4fc3aa8/design/investigation-mobile-v4/README.md.txt",
+    "source_commit": "f4fc3aa895aa9034e261bbaffa3dceb939cd13ce",
+    "source_path": "design/investigation-mobile-v4/README.md",
+    "source_blob": "f4474f4ef5bb63631ff608b98b9fe97987977926",
+    "source_commit_date": "2026-10-24T19:56:26+08:00",
+    "source_subject": "design: prioritize readable transcripts in compact mobile investigation",
+    "sha256": "5c841f2f5b7541bb8c620f4a3eeac82ba665b27f5fe892a85d3c0a879909ed19",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/1d9ee768/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "1d9ee7681aa62f2aeb8af60143bd7204b217303d",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "c9013b3d2e2a69c9233b055ab133c5f834ece9e1",
+    "source_commit_date": "2026-10-24T18:39:09+08:00",
+    "source_subject": "design: bring brand underline closer to lettering",
+    "sha256": "4f2f75ef569ff5cc4cf38976bea258ab5846715c959711dffec1049d12173061",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/151842d6/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "151842d649392b0cf518a4960c176c5e98c40051",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "d60b93ce61a951ac472e6fa0c91ad0c8bebb5076",
+    "source_commit_date": "2026-10-24T18:38:12+08:00",
+    "source_subject": "design: deepen character waveform tint",
+    "sha256": "54344e98d6339cef113c84b8a1865acda44fc3c143519a7cbaec5e159f94fb89",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/84b627c3/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "84b627c3df9cf2c6cb100b14b6680ed92a50f26e",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "e8dcdd3a6fccd5e8dbad94690d590a0d9a337c75",
+    "source_commit_date": "2026-10-24T18:37:25+08:00",
+    "source_subject": "design: strengthen brand lettering with system font weight",
+    "sha256": "09e8e9c978681058727e607c139f06770ec3f6fa747e2fc3f28dadce0ddd6210",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/cf371a5a/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "cf371a5a161610f897a8a8d45de82071b6ae351a",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "66b148f4bf1b4466ca20f495c3e273f0f93e7000",
+    "source_commit_date": "2026-10-24T18:35:34+08:00",
+    "source_subject": "design: simplify background title and darken character waveform",
+    "sha256": "1888d0127edf075f572493311271dec5065e1d25409e82439c73a1a0a167482a",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/d34a1343/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "d34a1343bf413b0be5ac532e44ef5624097e9377",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "1bdde802b2d294d5d2d7e103b9905b4670fe31c7",
+    "source_commit_date": "2026-10-24T18:32:59+08:00",
+    "source_subject": "design: trace original styleboard brand underline",
+    "sha256": "d385ba64039e239c47ecef9e974c564af2ee2eb16ab4cfb19528391977d4758a",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/c99baa99/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "c99baa99d2f57f92f541859ccf95ad080d7297b7",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "66f7ec7d2a76d133c2638566d7b86a5f046ee32e",
+    "source_commit_date": "2026-10-24T18:31:15+08:00",
+    "source_subject": "design: remove idle feedback and redundant background copy",
+    "sha256": "42cb96f3ef8202188a6ba04a8b4c4bcab6044c6c28c9068077e7e631d12720ad",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/4d63515b/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "4d63515b42c46e997a68f53e3af2ed79355666e6",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "524e0bfb8845ae76bd3c5a4e13c5c4161631f556",
+    "source_commit_date": "2026-10-24T18:29:02+08:00",
+    "source_subject": "design: restore hand-drawn brand underline detail",
+    "sha256": "7a90df8c7038215f47b56edeeec60c91f884b58aaa9b412150749230b0ac9fd3",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/6c7333bf/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "6c7333bf3485aad9223ba6e932d31599363bed6a",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "e62aea7987190733b2bea7543cc999533683167b",
+    "source_commit_date": "2026-10-24T18:22:22+08:00",
+    "source_subject": "design: simplify voice feedback and apply character waveform colors",
+    "sha256": "8df8e9af8a077bd3f95f628517bdbf81d1a76e7885137476e92ac206c072bf81",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/fd44c80d/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "fd44c80d4afb93c48f2e171a1eb112a49aa16ba7",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "c923f3b76f64cbfe5a32ac22a23131321f835f69",
+    "source_commit_date": "2026-10-24T18:19:43+08:00",
+    "source_subject": "design: align investigation shell with shared page gutters",
+    "sha256": "0dc159225f861c13ec7568bbbf8b1fa8a9894303f3e0226ff5ec57f1bec07213",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/87205d7d/design/investigation-controls-v3/README.md.txt",
+    "source_commit": "87205d7dcc1d04e9a93e95cebbedda4426cd4f57",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "303eab0408e75eaaa4330108df9f552f85ecdc43",
+    "source_commit_date": "2026-10-24T18:13:02+08:00",
+    "source_subject": "design: unify investigation voice feedback and title background entry",
+    "sha256": "fc2f0f5eadb7343ff16bda394b7c60e9106940f922271a6950cd0ecadcf4c996",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/c5e40f29/docs/coral-animation-next.md.txt",
+    "source_commit": "c5e40f29cd0e5681ddcd3996dd8ccc94acf719b1",
+    "source_path": "docs/coral-animation-next.md",
+    "source_blob": "b6878513f31843f56b632e582fa75a755a48c18a",
+    "source_commit_date": "2026-10-24T17:58:09+08:00",
+    "source_subject": "Restore breathing and contact-preserving micro motion in listening and waiting",
+    "sha256": "94f4efc9f52e9abd1a5467b8ef56130e91a127a6951c42cff473fb0351579c41",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/64127c1c/docs/coral-animation-next.md.txt",
+    "source_commit": "64127c1c5fcc8511a0afffdede660fda841a5423",
+    "source_path": "docs/coral-animation-next.md",
+    "source_blob": "33affbae0456a761c97555e3ba9324967f8874ea",
+    "source_commit_date": "2026-10-24T17:52:32+08:00",
+    "source_subject": "Refine Coral listening arm continuity and restore chin-rest pose",
+    "sha256": "ed027419ad1ff7f38b981d06deb030c4bbb1296c9aede0d24003d53ff6e14182",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/251bb8f7/docs/architecture.md.txt",
+    "source_commit": "251bb8f7ed8ce8e16be1b03cbfb01a24c727bb0f",
+    "source_path": "docs/architecture.md",
+    "source_blob": "8363f81dea4f493ef76f70fdcd1fb1263e62f07c",
+    "source_commit_date": "2026-10-24T17:31:48+08:00",
+    "source_subject": "Document existing game content fields for authors",
+    "sha256": "db7904d03088772701fd4b04c8cc74db8b21382029a16cd4b554e836ca65450d",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/e94fdd27/design/github-prefill-verification/README.md.txt",
+    "source_commit": "e94fdd27e671c0541a28706a38caf75964988387",
+    "source_path": "design/github-prefill-verification/README.md",
+    "source_blob": "aefc452adb722558b0f13c0835d40a74ebb73735",
+    "source_commit_date": "2026-10-24T16:52:20+08:00",
+    "source_subject": "Verify GitHub prefill login and URL length boundaries",
+    "sha256": "c2676b911857e3129190ef4779bf8dbda19c2ae0d2a9cdbbb48d7e32b2968547",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/e94fdd27/docs/editor-official-submission-proposal.md.txt",
+    "source_commit": "e94fdd27e671c0541a28706a38caf75964988387",
+    "source_path": "docs/editor-official-submission-proposal.md",
+    "source_blob": "6e9e979eb706b82b3aab35b75de1521cd89a4d9f",
+    "source_commit_date": "2026-10-24T16:52:20+08:00",
+    "source_subject": "Verify GitHub prefill login and URL length boundaries",
+    "sha256": "7190bf0fba3e207732f66ea439273153147598e57608ed94a741524db11a5e45",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/51776c8a/design/investigation-controls/README.md.txt",
+    "source_commit": "51776c8a3a9a8f1e9ad8290f0ee1aef8fa803069",
+    "source_path": "design/investigation-controls/README.md",
+    "source_blob": "975d5c0b28c4eb47d2df93b49177959075c422b3",
+    "source_commit_date": "2026-10-24T16:43:35+08:00",
+    "source_subject": "Propose investigation controls and public background review",
+    "sha256": "11013e5217759089beb7c2ae1eadbdd14a919677fc47ec894a5764ac3fbc3e80",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/51776c8a/docs/investigation-controls-proposal.md.txt",
+    "source_commit": "51776c8a3a9a8f1e9ad8290f0ee1aef8fa803069",
+    "source_path": "docs/investigation-controls-proposal.md",
+    "source_blob": "5e03d2bfb08a264900e6bcd0c5ad85a3abf5f1c2",
+    "source_commit_date": "2026-10-24T16:43:35+08:00",
+    "source_subject": "Propose investigation controls and public background review",
+    "sha256": "a4c40e72331afc594d4555a1ae1d574d8fff7feae00c0482bb96091066d59e27",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/041c74a4/docs/editor-ux-proposal.md.txt",
+    "source_commit": "041c74a47ae03a6fd157aca012c10ed402272175",
+    "source_path": "docs/editor-ux-proposal.md",
+    "source_blob": "898418cb28868c1df669ed8e6be4984f848376a9",
+    "source_commit_date": "2026-10-24T16:33:58+08:00",
+    "source_subject": "design: require preset characters and set one answer in character editing",
+    "sha256": "3628d05987d4743a3139d4198dfa6b54153f211171855401ffccec6627b0bcc1",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/36ff3b3a/docs/editor-ux-proposal.md.txt",
+    "source_commit": "36ff3b3afa5b9b14952d5432216c05fd06fe1dd1",
+    "source_path": "docs/editor-ux-proposal.md",
+    "source_blob": "9d919bba815e12d31b5e73e0d27421f705b8f52f",
+    "source_commit_date": "2026-10-24T16:25:19+08:00",
+    "source_subject": "docs: archive independent editor prototype browser review",
+    "sha256": "5d3245a068e970d6ecd2fe9b6301542cf8546766a82a14fa036c2b5f698fd80d",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/20eb7431/docs/voice-feedback-proposal.md.txt",
+    "source_commit": "20eb74312253a0750b8a1eda6ae9d3eacf9dbbeb",
+    "source_path": "docs/voice-feedback-proposal.md",
+    "source_blob": "55f007f622a2d10f6cde53d92dfdf0ca48125862",
+    "source_commit_date": "2026-10-24T16:21:05+08:00",
+    "source_subject": "Propose scoped voice feedback and transcript interaction with offline fixture",
+    "sha256": "c44bb7586eb930746ce09e6a11241e778d92e45c5dc3db63e11902e02671240a",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/fcb084f7/docs/editor-ux-proposal.md.txt",
+    "source_commit": "fcb084f7b65e476a94890c7a26734480d7c48925",
+    "source_path": "docs/editor-ux-proposal.md",
+    "source_blob": "8fff2a579d1be5a3f2226c0ee8b2ee4b0cb21965",
+    "source_commit_date": "2026-10-24T16:15:48+08:00",
+    "source_subject": "design: prototype focused step-by-step case creation",
+    "sha256": "df06cf30c076098e8fe0a6dec3d397373d4d5dc21e5c66555474b8eccfe3a233",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/7bab57b0/docs/hunyuan-coral-animation.md.txt",
+    "source_commit": "7bab57b09b144f76f0d9f7f03e7a5b7e8891c8e0",
+    "source_path": "docs/hunyuan-coral-animation.md",
+    "source_blob": "9e3ad145ee095b2b5fad10906959fd4459de95c4",
+    "source_commit_date": "2026-10-24T14:23:51+08:00",
+    "source_subject": "spike: animate user-provided Hunyuan coral model locally",
+    "sha256": "e43c66dc6bca78223a4af932e58e8e2759dacd7d5ad179fae0afd5caff95cd7b",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/b2a7b603/docs/2d-animation-investigation.md.txt",
+    "source_commit": "b2a7b603a28752a42261c5a1a79b9625b5a6a8d3",
+    "source_path": "docs/2d-animation-investigation.md",
+    "source_blob": "8dc7f449e4858278db84515fb13fff126c16fa5a",
+    "source_commit_date": "2026-10-24T13:31:23+08:00",
+    "source_subject": "Investigate 2D character animation with articulated SVG study",
+    "sha256": "93801696f184e2ba94ef7e038543ec43b52ec5c6754c73d526015ca68b712b63",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/03ce42bf/docs/expanded-preset-voice-options.md.txt",
+    "source_commit": "03ce42bfa3f04edd6546115317341223750c0c84",
+    "source_path": "docs/expanded-preset-voice-options.md",
+    "source_blob": "74c4c03bbe332e38e26a98a1cef879a4a8ee8211",
+    "source_commit_date": "2026-10-24T12:56:31+08:00",
+    "source_subject": "Clarify pending older-character voice fit",
+    "sha256": "76ffda063aa6a68f6a6ebd425b36d8e858acaaeeed4f39ef6bd0993ea37a5d84",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/e2f43910/docs/expanded-preset-voice-options.md.txt",
+    "source_commit": "e2f43910cad5d949b779cefd7ac16737d5305113",
+    "source_path": "docs/expanded-preset-voice-options.md",
+    "source_blob": "60da6cc21b873c15056ebd99903a8d88a8a24baf",
+    "source_commit_date": "2026-10-24T12:56:19+08:00",
+    "source_subject": "Document official voice candidates for five expanded presets",
+    "sha256": "329176dbe0591abf94518a5c513b6426cd3b0c702b8317b610f62c15f4b6792d",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/9cf490af/docs/promo-video-production-research.md.txt",
+    "source_commit": "9cf490af27af4cf1d8191a318cc5936a4e17edb1",
+    "source_path": "docs/promo-video-production-research.md",
+    "source_blob": "72a76409700c5d30dbb9a0d560a69144e9a38744",
+    "source_commit_date": "2026-10-24T11:42:38+08:00",
+    "source_subject": "Document gated promotional video toolchain research",
+    "sha256": "f36d2bee6fd1add8ca9b068654f566d07c0e21e78f19d3098dfe318630abe24d",
+    "status": "research only; production remains gated by explicit user authorization"
+  },
+  {
+    "archive": "snapshots/3e8b665f/design/conversation-refined/README.md.txt",
+    "source_commit": "3e8b665faff5069198622bc35b0baa42afd53de9",
+    "source_path": "design/conversation-refined/README.md",
+    "source_blob": "8afb58faa6ccd4e231ab4b8cef939dd048fade5d",
+    "source_commit_date": "2026-10-24T11:04:38+08:00",
+    "source_subject": "Specify refined A conversation layout and state fixtures",
+    "sha256": "9abffd02f2f6a45f79b06b1fc6a4bf891b50b40f89a09898b5c8b0fb31e59c0a",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/3e8b665f/docs/conversation-design-spec.md.txt",
+    "source_commit": "3e8b665faff5069198622bc35b0baa42afd53de9",
+    "source_path": "docs/conversation-design-spec.md",
+    "source_blob": "d97de85cdc654cfdde491f02430ad5584c29d8fc",
+    "source_commit_date": "2026-10-24T11:04:38+08:00",
+    "source_subject": "Specify refined A conversation layout and state fixtures",
+    "sha256": "4aa979e6b37d2f9d3592f567d9e49f8cbed1fd07ea57e4951162f3bd4cdd156f",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  },
+  {
+    "archive": "snapshots/006e39c5/docs/realtime-voice-validation.md.txt",
+    "source_commit": "006e39c59e62d53c08f10d4889f20c7953989568",
+    "source_path": "docs/realtime-voice-validation.md",
+    "source_blob": "f2b0f1df861e91c50254ee8ec0a2b9ff94414272",
+    "source_commit_date": "2026-10-24T00:02:24+08:00",
+    "source_subject": "Add isolated opt-in browser harness for realtime microphone acceptance",
+    "sha256": "c6f5ef3210e46f7dc6c83a5c977969dff28687c2e3544c5795337ccd5df30e71",
+    "status": "historical proposal/research or intermediate revision; not current approval"
+  }
+]

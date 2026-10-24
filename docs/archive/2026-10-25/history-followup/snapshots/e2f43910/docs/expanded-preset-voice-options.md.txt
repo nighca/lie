@@ -1,0 +1,67 @@
+# 新增五套形象：音色预选（待试听）
+
+2026-10-24。**这是候选推荐，不是用户已试听、已批准或运行时已配置的声音。** 本轮仅查官方目录和文档，不修改 manifest、智能体默认音色或账号配置，不创建 agent／device，不调用模型或付费合成，不上传素材。
+
+## 已核证据与边界
+
+- 授权只读 [官方音色列表 API](https://linx.qiniu.com/docs/xrobot/api/others)：`GET https://xrobo.qiniu.com/v1/voices`，本次 HTTP200／code0，226项。推荐行的真实 ID、名称、languages、age、styles、profile、tier、expired_time 和 demo 均从本次返回提取，没有从音频文件名猜音色ID。
+- 下列十款均有 `languages=["zh","en"]`、`profile=public`、`tier=free`、`expired_time=""`。这是**目录字段**，不是零费用承诺；空到期字段不等于保证永久可用。未核账户对各款的实际调用权益、实时中文效果或资源包计时系数。
+- [官方配置指引](https://linx.qiniu.com/docs/xrobot/guide/agent-config)区分固定示例试听与改参后的真实对话；[资源包规则](https://linx.qiniu.com/docs/xrobot/guide/resource-usage-billing)要求按实际模型和音色计时系数核算。目录未返回所选十款的系数，**资源包具体倍率未知**。若要精确核算，需要只读查看控制台配置页；本轮未进入、未保存配置，也不为核倍率而改生产智能体。
+- 官方 demo URL 来自灵矽目录，音频托管在其给出的阿里云／字节域名。只用 HEAD 检查链接响应，不下载音频、不生成试听。本代理没有听感判断，用户也尚未试听这五组；英文示例不代表不支持中文，中文支持以目录languages为证，不等于真实中文合成已验收。
+
+## 推荐与一个备选
+
+五个主推荐 ID 互不重复，也与现三位 Bella2.0／龙三叔／Alvin 不同。声线区别目前只是目录标签层面的初筛，需耳验后才能称听觉上可区分。保持默认语速／音调／情绪，不靠变速变调伪造年龄感；头像、造型和音色不约束未来游戏人物的身份。
+
+### silver-bun · 东亚年长女性、水蓝开衫
+
+以温和、清楚的叙述作为预选方向，两款目录都为中年而非老年。没有验证年长听感；也不因东亚外观给角色强加口音。
+
+| 顺序 | 官方名称及真实 voice ID | 官方目录标签 | 官方试听与链接检查 |
+| --- | --- | --- | --- |
+| 推荐 | 温暖治愈女 · `8fca6d5172fc4c309c2d16352ca8a9b3` | middle / female / wenrou | [官方 demo](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/nqjskd/%E9%BE%99%E5%AA%9B.mp3)；HEAD 200 |
+| 备选 | 温暖磁性女 · `bf5485de3fd044ce8c26438fa78a6745` | middle / female / wenrou | [官方 demo](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/xladsm/%E9%BE%99%E6%82%A6.mp3)；HEAD 200 |
+
+### salt-pepper-beard · 年长男性
+
+优先试沉稳叙述与知性表达的差异；两款目录同为中年，是否适合年长形象待听。没有复用沈禾已确认的龙三叔，也不继续推荐用户为沈禾否决的龙飞／龙小诚。
+
+| 顺序 | 官方名称及真实 voice ID | 官方目录标签 | 官方试听与链接检查 |
+| --- | --- | --- | --- |
+| 推荐 | 睿智青年男 · `a42e04fcefac4e9492581fbc95f3fce3` | middle / male / chenwen | [官方 demo](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/tojjob/%E9%BE%99%E6%A5%A0.mp3)；HEAD 200 |
+| 备选 | 智慧青年男 · `03f5f7eb7ed344d69af8a1c6ede55f4a` | middle / male / zhixing | [官方 demo](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/yxlcev/%E9%BE%99%E6%A9%99.mp3)；HEAD 200 |
+
+### plum-crop · 短卷发、年轻成人、中性外观
+
+以冷静清楚为初选、温和为备选，不根据中性外观断言角色性别。目录把两款分类为女性，只是供应商元数据；最终也可以换为其他音区，不把该分类写进游戏角色身份。
+
+| 顺序 | 官方名称及真实 voice ID | 官方目录标签 | 官方试听与链接检查 |
+| --- | --- | --- | --- |
+| 推荐 | 低调冷静女 · `2c1ea0eb64c74975813af2187ef2aa0f` | adult / female / lengjing | [官方 demo](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/nbabuh/%E9%BE%99%E5%BA%94%E9%9D%99.mp3)；HEAD 200 |
+| 备选 | 正经青年女 · `6f0b15259a4942e98b79fdac7cc259d6` | adult / female / wenrou | [官方 demo](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/rbfsft/YUMI.mp3)；HEAD 200 |
+
+### mint-puffs · 青少年外观
+
+先试友好表达，再对比温和表达；两款目录为young，避开child和幼儿陪伴类型。不预设青少年必须甜腻、夸张或装幼。
+
+| 顺序 | 官方名称及真实 voice ID | 官方目录标签 | 官方试听与链接检查 |
+| --- | --- | --- | --- |
+| 推荐 | 爽快思思/Skye · `e1dd0f75cad64290a1172dff48103694` | young / female / youhao | [官方 demo](https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Skye.mp3)；HEAD 200 |
+| 备选 | Candy · `2015700351469047810` | young / female / wenrou | [官方 demo](https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/console/bigtts/Candy.mp3)；HEAD 200 |
+
+### ochre-freckles · 青少年外观
+
+以友好自然为初选、较开朗为备选；两款都是young，未选童声。不能仅凭目录名称中的少年或青年判断真实年龄感。
+
+| 顺序 | 官方名称及真实 voice ID | 官方目录标签 | 官方试听与链接检查 |
+| --- | --- | --- | --- |
+| 推荐 | 少年梓辛/Brayan · `d0a37106e7f945b0aa85f3d233ffc36e` | young / male / youhao | [官方 demo](https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Brayan.mp3)；HEAD 200 |
+| 备选 | 阳光青年 · `7e74beb93aaf4b9a866b554068adad0d` | young / male / kailang | [官方 demo](https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E9%98%B3%E5%85%89%E9%9D%92%E5%B9%B4.mp3)；HEAD 200 |
+
+## 后续接入条件
+
+建议先每个形象只听主推荐，不满意再听其唯一备选，反馈关注自然度、清晰度和五人与既有三人的区分。年长两款尤其需确认：目录没有老年标签的候选被本轮伪称为老年声音，不能因银发或胡须就自动认为匹配。
+
+用户选定后，再由 root 安排最小正式映射；现有每会话 `listen.agent_params.voice.id` 路径已存在，预选本身不要求用户逐一在后台改 agent。若后续调用暴露特定音色权益／资源包问题，再提供具体后台操作，当前不需要用户额外创建凭据、克隆声音或购买服务。实际中文与切人辨识度的真实验收仍单独安排，不能以HEAD成功或静态目录替代。
+
+本轮未触碰首案三位已确认声音。除本文件外没有新增资源、候选音频文件或运行时数据。

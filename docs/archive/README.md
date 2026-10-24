@@ -12,6 +12,7 @@
 | 待确认方案 | [邀请码设计](../invite-access-design.md)、[投稿研究](../editor-official-submission-proposal.md)、[公开语音方案](../public-voice-launch-proposal.md) |
 | 决策与完成证据 | [历史索引](../history/README.md)、[当前计划与门禁](../project-plan.md) |
 | 归档补存 | [2026-10-25盘点、原文与待交付范围](2026-10-25/README.md) |
+| 历史提交与chat补查 | [第二轮31份中间版本、chat范围及旧dirty映射](2026-10-25/history-followup/README.md) |
 
 完成交付时，作者列出文档、必要附件及未完成草稿；标注日期、来源、提案/已批准/已否决/被替代/未验证状态和替代关系。发起者实际review并集成默认分支，确认文档可追溯后再清理worktree。进行中的材料仍由原owner完整交付。
 
