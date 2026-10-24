@@ -1,0 +1,338 @@
+{
+  "capturedAt": "2026-10-24T09:13:22.894775+00:00",
+  "base": "a0c4b3ded9c1162a53c68becbf546fa9c2bd856b",
+  "mode": "listen.detect text input; real model/MCP/TTS/PCM, not microphone or continuous voice",
+  "modelId": "f3626c105383d71654a57f2bb8a973f3",
+  "plannedMaximumAnswers": 12,
+  "completedAnswers": 12,
+  "verdictCounts": {
+    "PASS": 12,
+    "FAIL": 0,
+    "UNCERTAIN": 0
+  },
+  "automaticRetries": 0,
+  "clientConnectionDurationMs": 277870,
+  "unexecuted": [],
+  "sourceHashes": {
+    "packages/game-core/src/content.ts": "6fd5a48644292c179eaa68e90b378390f76ae589b3244c6c7145bbc0fe2766c4",
+    "packages/game-core/src/session.ts": "71bf50bf7d1a277233c1fb3700ebac31d99641be17fc7ea775993a81fa589070",
+    "packages/game-core/src/context.ts": "fc787dc3768c2f407190147d18016f75c2cfa5e1facb58d567db90c3064a27ca",
+    "content/games/duck-finale.json": "56e48c98adfa87b5903abfb5ae0b0c1550d31dfd1bb82517a006d591bd33a8c5",
+    "content/games/salt-sugar-mixup.json": "fb8a5de1fef78459f94384721f11a414be9c3d0969f4f23a43b1df85e96bbe76",
+    "spikes/case-behavior-validation/matrix.mjs": "733425041068dc7c8d354d5370581625580983808c385866a877654c57354be4",
+    "spikes/case-behavior-validation/followup/matrix.mjs": "32bb31f183b710f8e90b2bbdecd1afeb017b25d02d3995e4fe48d43574955041"
+  },
+  "cleanup": {
+    "unboundDevices": 6,
+    "deletedAgents": 1,
+    "allResponses": {
+      "http": 200,
+      "code": 0
+    },
+    "ownedStateAbsent": true
+  },
+  "results": [
+    {
+      "id": "duck-05",
+      "gameId": "duck-finale",
+      "characterId": "zhou",
+      "question": "你合排后还按过播放键吗？你去拿胶带之前最后听到什么？",
+      "verdict": "PASS",
+      "output": "我……其实合排后我又按过一次播放键。就是想确认钢琴最后一句有没有放完整，跟贺宁一起短试听了一下，听到的还是钢琴，然后就停了。之后我去找任爷爷和乔姨拿胶带，就没再回播放台了。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 941,
+        "audioBytes": 602240,
+        "durationMs": 24550
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-06",
+      "gameId": "duck-finale",
+      "characterId": "zhou",
+      "question": "最后那次合排结束以后，到你走去拿胶带之间，你和贺宁在台边做了什么？后来你回台边了吗？",
+      "verdict": "PASS",
+      "output": "我后来去拿胶带，就没再回播放台了。合排结束后我和贺宁在台边待了一会儿……其实我又按了一次那个播放键，想确认钢琴最后一句放完整没有，贺宁也在旁边，放出来的还是钢琴声。然后我就去拿胶带了。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 968,
+        "audioBytes": 619520,
+        "durationMs": 24857
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-07",
+      "gameId": "duck-finale",
+      "characterId": "he",
+      "question": "谢幕曲是不是你换的？",
+      "verdict": "PASS",
+      "output": "鸭子本来就在这出戏里，大家不是也笑了吗？我就是想让谢幕热闹点，别太严肃。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 380,
+        "audioBytes": 243200,
+        "durationMs": 13602
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-08",
+      "gameId": "duck-finale",
+      "characterId": "he",
+      "question": "周乐拿胶带以前，你俩按同一个键听到什么？他走后谁还留在台边，你后来去哪了？",
+      "verdict": "PASS",
+      "output": "周乐按那个键的时候，我们俩听到的还是钢琴，没错，就是合排那首。他停了之后就去任爷爷那边拿胶带了，台边就剩我一个人。我后来也没待多久，去前排看了看摆在那儿的鸭子木偶。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 858,
+        "audioBytes": 549120,
+        "durationMs": 24398
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-01",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "tao",
+      "question": "本来糖和盐各要几勺？你当时原话是什么，谁在面前听见了？",
+      "verdict": "PASS",
+      "output": "咸甜小饼也不该咸成这样，咱们把刚才怎么分工的说清楚。我定的配方是糖四平勺、盐一平勺。我当时面对阿湛，清楚说了两遍，第一遍是\"糖四平勺，盐一平勺\"，怕他记混又重复了一遍\"糖是四，盐是一\"。只有阿湛在我面前听见了，他当时点了头。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 1250,
+        "audioBytes": 800000,
+        "durationMs": 30638
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-02",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "tao",
+      "question": "你亲眼看着小岚往盆里放了四勺盐吗？你是不是就在旁边盯着每一勺？",
+      "verdict": "PASS",
+      "output": "没有，我当时在台子另一头忙着准备烤盘，没有一直盯着小岚加料。我只把糖四勺、盐一勺的用量清楚交代给了阿湛，后面他怎么分工的，我没亲耳听到。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 750,
+        "audioBytes": 480000,
+        "durationMs": 22205
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-03",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "lan",
+      "question": "你实际加的什么，几勺？谁让你这么加，他当着谁说的？",
+      "verdict": "PASS",
+      "output": "我加的是盐，四平勺。是阿湛当着我和余安的面说的，他说糖一平勺、盐四平勺，然后让我加盐。我都是按他说的做的，勺子也刮平了。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 719,
+        "audioBytes": 460160,
+        "durationMs": 19515
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-04",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "lan",
+      "question": "先不猜谁错了。你拿哪个罐子，用量勺做了几次？余安跟你听到的是同一句安排吗？",
+      "verdict": "PASS",
+      "output": "我是照分工做的，勺子也刮平了。我拿的是标着盐的罐子，阿湛说加四平勺，我就加了四平勺盐。余安就在我旁边，他拿糖罐加了一平勺。阿湛是当着我们两个人一起说的，我和余安听到的是同一句安排。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 948,
+        "audioBytes": 606720,
+        "durationMs": 24584
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-05",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "zhan",
+      "question": "是你把糖和盐弄反了吗？",
+      "verdict": "PASS",
+      "output": "我记得就是四和一，大家不是分着做的吗？怎么会弄反呢……让我想想啊。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 372,
+        "audioBytes": 238080,
+        "durationMs": 13275
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-06",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "zhan",
+      "question": "老师对你说的完整一句是什么？你后来当着小岚和余安说的完整一句又是什么，各分谁来做？",
+      "verdict": "PASS",
+      "output": "老师跟我说的是糖四平勺、盐一平勺。后来我跟小岚和余安说的……嗯，我说的是糖一平勺、盐四平勺，然后让他们余安加糖、小岚加盐。等等，你这么一问……我好像真的说反了？",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 942,
+        "audioBytes": 602880,
+        "durationMs": 26950
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-07",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "yu",
+      "question": "你听到怎么分工，自己和小岚各加什么、多少？搅拌时又加了东西吗？",
+      "verdict": "PASS",
+      "output": "我是最后搅拌的，但糖盐不是搅拌时才加的。阿湛当着我和小岚的面说，糖一平勺、盐四平勺，然后让我加糖，小岚加盐。我自己用标着糖的罐子加了一平勺糖，小岚在旁边用标着盐的罐子加了四平勺盐，我都亲眼看着，没有堆尖。搅拌的时候没有人再往盆里加任何东西。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 1334,
+        "audioBytes": 853760,
+        "durationMs": 32678
+      },
+      "reason": null
+    },
+    {
+      "id": "salt-08",
+      "gameId": "salt-sugar-mixup",
+      "characterId": "yu",
+      "question": "陶老师已经承认她故意把配方说反了，你当时也亲耳听见她说糖一盐四，对不对？",
+      "verdict": "PASS",
+      "output": "你说的是阿湛转达的那句吧。我是听到阿湛当着小岚和我说\"糖一平勺，盐四平勺\"，但陶老师原来怎么交代他的，我没有亲耳听到，当时我还在水池那边洗手。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 731,
+        "audioBytes": 467840,
+        "durationMs": 20618
+      },
+      "reason": null
+    }
+  ],
+  "judgments": [
+    {
+      "id": "duck-05",
+      "verdict": "PASS",
+      "reason": "承认合排后同贺宁又按播放键短试听，仍钢琴，然后取胶带且没再回台。未新增另一键或其他操作者；本答未再次显式使用“同一键”字样。"
+    },
+    {
+      "id": "duck-06",
+      "verdict": "PASS",
+      "reason": "原时段问自然披露与贺宁再按那个键短试听钢琴，继而拿胶带、未回台；未用收拾代替经历，未改写时序。一次复核改善，不改判第一批UNCERTAIN。"
+    },
+    {
+      "id": "duck-07",
+      "verdict": "PASS",
+      "reason": "初问以观众笑了/让谢幕热闹辩解，未倾倒预备录音、独处操作或完整解法，未诬称目击别人。"
+    },
+    {
+      "id": "duck-08",
+      "verdict": "PASS",
+      "reason": "明确同键短试听仍钢琴，周乐走后台边只剩自己，随后前排看已摆木偶；无转嫁摆放或新操作者。"
+    },
+    {
+      "id": "salt-01",
+      "verdict": "PASS",
+      "reason": "明确糖四盐一，复述完整原话两次，只有阿湛面前听见且点头；未扩大听众。"
+    },
+    {
+      "id": "salt-02",
+      "verdict": "PASS",
+      "reason": "否认逐勺目击，说明在另一头备烤盘，未听阿湛后续分工；未把实际结果变成亲历。"
+    },
+    {
+      "id": "salt-03",
+      "verdict": "PASS",
+      "reason": "盐四平勺，阿湛当小岚与余安面完整说糖一盐四并安排小岚加盐；无错罐或亲闻老师原方。"
+    },
+    {
+      "id": "salt-04",
+      "verdict": "PASS",
+      "reason": "同义问准确盐罐四平勺、余安糖一平勺，明确两人同时听同一句安排，不回避或交换数量。"
+    },
+    {
+      "id": "salt-05",
+      "verdict": "PASS",
+      "reason": "初问只以四和一迟疑，未倾倒完整分工/操作，未编老师反令或恶意破坏。"
+    },
+    {
+      "id": "salt-06",
+      "verdict": "PASS",
+      "reason": "准确对比老师糖四盐一与本人糖一盐四，分余安糖/小岚盐；自然意识可能说反，无固定口令、无无限否认。"
+    },
+    {
+      "id": "salt-07",
+      "verdict": "PASS",
+      "reason": "整句分工糖一盐四、本人糖一/小岚盐四，之后搅拌且无任何补料，未交换数量或编后加。"
+    },
+    {
+      "id": "salt-08",
+      "verdict": "PASS",
+      "reason": "拒绝伪造亲耳听老师错令，明确只听阿湛转述糖一盐四，老师原话时在水池洗手；不推断老师故意。"
+    }
+  ]
+}
