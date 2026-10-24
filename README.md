@@ -1,44 +1,67 @@
 # <img src="design/brand/logo.svg" width="160" height="86" alt="LIE">
 
-**轻松开口，认真推理。**
+**Easy conversation. Serious deduction.**
+
+English · [简体中文](README.zh-CN.md)
 
 [![CI](https://github.com/nighca/lie/actions/workflows/ci.yml/badge.svg)](https://github.com/nighca/lie/actions/workflows/ci.yml)
 ![Node.js 24](https://img.shields.io/badge/Node.js-24-075BFA?style=flat-square&logo=nodedotjs&logoColor=white)
 ![Vue 3](https://img.shields.io/badge/Vue-3-075BFA?style=flat-square&logo=vuedotjs&logoColor=white)
 ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-075BFA?style=flat-square&logo=typescript&logoColor=white)
 
-![LIE：明亮黄蓝与原创卡通人物的语音推理游戏](design/brand/readme-hero.png)
+![LIE: a voice detective game with bright yellow and blue colors and original cartoon characters](design/brand/readme-hero.png)
 
-与三名 AI 角色自由语音交流，对照各自的说法，最后选出事件的责任人。画面轻松，人物却未必把话说全——问什么、先问谁、相信哪一句，由你决定。
+Talk freely with AI characters, compare their accounts, and identify who is responsible. The artwork is playful; the characters may leave things unsaid. What to ask, whom to question first, and which story to trust are up to you. The game interface is in Chinese.
 
-首案 **《空盒里的纪念章》**：同一个白盒，五分钟后只剩衬垫。闭馆的社区摄影小展里，三个人各有一段经历。
+[Play the development preview](https://lie-game.nighca.workers.dev/) · [Create a case](https://lie-game.nighca.workers.dev/editor)
 
-中文界面采用明亮黄蓝、深蓝描边与原创卡通人物，给推理留一点轻松的反差。
+## Play a case
 
-> 本地与[线上开发预览](https://lie-game.nighca.workers.dev/)已启用真实语音，当前按用户决定临时关闭应用访问鉴权。三位角色已配置不同音色；线上真实语音协议链路已验证，整合版真人试玩、角色行为与多人体验仍在验收。
-
-## 一局怎么玩
-
-| 接案 | 开口问话 | 换个人聊 | 做出指认 |
+| Read the brief | Ask questions | Talk to someone else | Make your accusation |
 | --- | --- | --- | --- |
-| 读公共背景，认识在场人物 | 用自己的话提问、追问 | 对照说法，回看各人的只读转写 | 点击人物，查看结果 |
+| Learn the public background and meet the characters | Start a voice conversation; ask follow-ups and interrupt naturally | Compare accounts and revisit read-only transcripts | Select one person and see the result |
 
-选错可以返回继续调查；选对后揭晓完整经过，再开一局。角色交流只有语音，切人、开始、结束和最终指认保留按钮操作。没有文字聊天输入，也不要求填写推理说明。
+A correct accusation reveals the full story. A wrong accusation ends the attempt without revealing the answer; try again by starting a new game. Character conversations use voice only. Switching characters, starting or ending a conversation, and accusing someone use buttons; there is no text-chat composer or written deduction form.
 
-## 本地体验
+The questioning budget is shared across all characters. It counts time while voice is enabled, including pauses, waiting and replies; connection setup does not count. Running out of time ends questioning and moves to accusation, without automatically losing or revealing the truth. Leaving an active investigation asks for confirmation and discards that attempt rather than saving progress.
 
-需要 **Node.js 24.22.1+ 的 24.x 版本**与 **npm 11**。
+| Case | Characters | Questioning budget |
+| --- | ---: | ---: |
+| **空盒里的纪念章** — a medal disappears before a photography club group photo | 3 | 8 minutes |
+| **压轴怎么是鸭叫** — a puppet show's piano finale unexpectedly becomes duck quacks | 4 | 10 minutes |
+| **盐和糖的小乌龙** — a community baking session produces unexpectedly salty cookies | 4 | 9 minutes |
+
+Case sizes vary; the engine does not hardcode three suspects.
+
+## Make and share your own mystery
+
+The editor has three freely navigable steps: story setup, characters, and the ending. Write a public background and a plain-text profile for each character, choose reusable appearances, select the single correct target, and set the time budget. Eight presets provide portraits, state images and configured voices; appearance names are separate from story character names.
+
+Incomplete drafts autosave in the current browser. Trial play uses the same game engine. Sharing compresses the complete case into the URL fragment, so a friend can open it without a story database or an account. The current full-link budget is 16,000 characters; cross-browser boundary acceptance is still pending. Editing a draft does not change links already sent.
+
+Official contribution preparation lets an author copy or download JSON and continue on GitHub. It does not automatically create a PR or publish a case; the current private repository is not open to external submissions. See the [editor implementation](docs/game-editor-implementation.md) and [case authoring guide](content/games/README.md).
+
+## Run locally
+
+Use **Node.js 24.22.1 or newer within 24.x** and **npm 11**.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-打开 **[本地开发演示](http://127.0.0.1:5176/?demo=1)**。点击“模拟说话”，再点击“结束模拟发言”，体验假数据问答与指认流程。此模式不采集麦克风、不调用模型、不播放声音，仅在 Vite 开发环境启用；生产构建忽略 `demo=1`。
+Open the [local development demo](http://127.0.0.1:5176/?demo=1), choose a case, then click **“开始模拟对话”**. Fake turns repeat until you click **“结束对话”**. This mode captures no microphone, calls no model and plays no audio. It is available only in Vite development; production builds ignore `demo=1`.
 
-真实接口使用同源 Worker 提供的页面与 `/api/voice`，需要单独配置服务端凭据和受限测试访问方式。未就绪时会显示错误，不会自动替换成假回答。接入步骤见 [Web 应用说明](apps/web/README.md)与 [网关说明](apps/gateway/README.md)。不要把管理 key 放进前端变量、URL 或提交记录。
+Real voice needs the same-origin Worker and server-side Linx bindings. After configuring those locally:
 
-## 工程与验证
+```sh
+npm run build
+npm run dev --workspace @lie/gateway
+```
+
+Use `http://127.0.0.1:8787/` for the Worker-served app and `/api/voice`. A missing service or configuration produces an error, never a silent switch to fake answers. See the [web application notes](apps/web/README.md), [gateway notes](apps/gateway/README.md) and [development guide](docs/development.md) for details and historical experiments. Keep management keys and private bindings out of frontend variables, URLs and Git history.
+
+## Checks and deployment
 
 ```sh
 npm run typecheck
@@ -46,32 +69,34 @@ npm test
 npm run build
 ```
 
-发布基线 `97b434e` 通过 **68 项自动化测试、类型检查和完整构建**；[GitHub Actions](https://github.com/nighca/lie/actions/workflows/ci.yml)在 main 更新或手动触发时执行干净安装与这些检查。自动化覆盖内容校验、指认规则、角色上下文、异步归属、语音协议、UI 流程和 Worker 边界；真实服务另行验收。私有仓库的 CI 徽章可能需要登录后才能显示。
+Automated checks cover content validation, accusation rules, character context, asynchronous ownership, voice transport, UI flows and Worker boundaries. Fake-provider success does not certify real microphone capture, recognition, playback or model behavior. Real-service evidence is recorded separately in the [validation log](docs/validation.md) and [case follow-up](docs/case-live-followup.md).
 
-完整页面已在 Codex 内置浏览器验证模拟问答、切人独立历史、错误指认后继续、正确揭晓与重开。独立技术探针也曾打通 Cloudflare → 灵矽 WSS、端侧 MCP 和文本触发 PCM 返回；这不等于真实麦克风、ASR、播放与多人隔离已经通过。详见 [验证记录](docs/validation.md)。
+[GitHub Actions](https://github.com/nighca/lie/actions/workflows/ci.yml) runs a clean installation, checks, build and deployment dry run on `main` pushes or manual dispatch. If that commit is still the latest `main`, it deploys the verified build to Cloudflare using repository secrets. Older builds skip deployment. The [editor milestone deployment record](docs/deployments/2026-10-24-editor-milestone.md) distinguishes successful CI from the actual active deployment. A private repository's CI badge may require login.
 
-## 架构一眼看清
+Local and online development previews support real voice. Application authentication is temporarily disabled by the project owner's decision; provider credentials remain on the Worker. Production access, concurrency allocation and account-wide spending controls are still deferred. A browser's questioning timer is not a hard provider spending cap. Continuous-voice user testing and bounded real-model checks do not establish unrestricted multi-user readiness; see the [online voice preview boundaries](docs/online-voice-preview.md).
+
+## Architecture
 
 ```mermaid
 flowchart LR
-    Content["静态故事 JSON · 独立形象素材"] --> Browser["浏览器：Vue 界面、游戏规则、逐角色历史"]
-    Browser <-->|"同源 WebSocket · 端侧 MCP"| Worker["薄 Cloudflare Worker"]
-    Worker <-->|"鉴权 · 文本与音频"| Linx["灵矽：语音与模型"]
+    Content["Static story JSON · reusable appearances"] --> Browser["Browser: Vue UI, game rules, per-character history"]
+    Browser <-->|"Same-origin WebSocket · client MCP"| Worker["Thin Cloudflare Worker"]
+    Worker <-->|"Authentication · text and audio"| Linx["Linx: voice and language models"]
 ```
 
-故事以公共背景和各角色设定的纯文本为主，只保留程序需要的少量元数据；形象通过独立资源配置复用。同一玩法下，新增故事通过内容包与配置完成。游戏内容和单局逻辑在浏览器运行，完整答案可被开发者工具检查；平台管理凭据留在托管端。无需游戏数据库或传统常驻服务端。
+Stories primarily contain plain-text public backgrounds and character profiles, with only the metadata the engine needs. Additional cases use content packages and presentation configuration. Game content and session logic run in the browser; complete answers are inspectable in developer tools. Provider management credentials stay on the hosted side. No game database or traditional always-running server is required.
 
-| 位置 | 职责 |
+| Location | Responsibility |
 | --- | --- |
-| [apps/web](apps/web) | Vue 页面、浏览器对话编排与显式展示视图 |
-| [packages/game-core](packages/game-core) | 独立 TypeScript 内容校验、会话、指认与角色上下文 |
-| [packages/ui](packages/ui) | 统一视觉的公共 Vue 组件 |
-| [packages/voice](packages/voice) | 灵矽协议、PCM、麦克风与播放 |
-| [apps/gateway](apps/gateway) | 静态资源与薄语音网关，不处理案件规则 |
+| [apps/web](apps/web) | Vue pages, browser conversation orchestration and presentation |
+| [packages/game-core](packages/game-core) | Independent TypeScript content validation, sessions, accusation and role context |
+| [packages/ui](packages/ui) | Shared Vue components and visual styling |
+| [packages/voice](packages/voice) | Linx protocol, PCM, microphone capture and playback |
+| [apps/gateway](apps/gateway) | Static assets and thin voice transport; no case rules |
 
-## 继续了解
+## More about the project
 
-- **玩法与内容：** [首版玩法](docs/gameplay-proposal.md) · [完整剧情与作者核查，含剧透](docs/case-options.md)
-- **产品与美术：** [视觉方向](docs/visual-direction.md) · [界面设计规范](design/ui/spec.md) · [可复用形象](design/appearances/README.md)
-- **工程与上线：** [架构设计](docs/architecture.md) · [开发说明](docs/development.md) · [部署方案](docs/deployment-options.md) · [验证记录](docs/validation.md)
-- **项目协作：** [计划与决策](docs/project-plan.md) · [AI agent 协作规范](AGENTS.md)
+- **Gameplay and content:** [gameplay proposal](docs/gameplay-proposal.md) · [first-case story and author checks — spoilers](docs/case-options.md)
+- **Product and artwork:** [visual direction](docs/visual-direction.md) · [UI specification](design/ui/spec.md) · [reusable appearances](design/appearances/README.md)
+- **Engineering and release:** [architecture](docs/architecture.md) · [development](docs/development.md) · [deployment options](docs/deployment-options.md) · [validation](docs/validation.md)
+- **Project collaboration:** [plan and decisions](docs/project-plan.md) · [AI agent collaboration](AGENTS.md)
