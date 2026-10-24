@@ -1,13 +1,17 @@
 <!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Salt pepper beard phase inspection</title>
-<style>body{font:16px system-ui;background:#fff18a;color:#111b45;margin:16px}nav{display:flex;gap:8px;flex-wrap:wrap}button,select{padding:8px}main{display:grid;grid-template-columns:1fr 1fr;gap:16px}canvas,img{display:block;width:100%;background:#fffef7;border:2px solid #111b45;box-sizing:border-box}@media(max-width:620px){main{grid-template-columns:1fr}}</style>
+<style>body{font:16px system-ui;background:#fff18a;color:#111b45;margin:16px}nav{display:flex;gap:8px;flex-wrap:wrap}button,select{padding:8px}main{display:grid;grid-template-columns:1fr 1fr;gap:16px}.stage{aspect-ratio:1;overflow:hidden;background:#fffef7}.stage canvas,.stage img{display:block;width:100%;background:#fffef7;border:2px solid #111b45;box-sizing:border-box}body[data-detail=waist] .stage>*{width:230%;max-width:none;transform:translate(-26%,-47%)}body[data-detail=shoulders] .stage>*{width:230%;max-width:none;transform:translate(-28%,-22%)}body[data-detail=face] .stage>*{width:250%;max-width:none;transform:translate(-27%,2.5%)}@media(max-width:620px){main{grid-template-columns:1fr}}</style>
 <h1>灰白胡须 · 定相位自检</h1><p>正式数据采样器与Canvas渲染器。phase=循环比例；姿态切换未制作自然抬放。讲话为合成嘴形。</p>
-<nav><select id="state" aria-label="状态"><option>default</option><option>listening</option><option>waiting</option><option>speaking</option></select><select id="phase" aria-label="相位"><option value="0">0%</option><option value=".25">25% 正极值</option><option value=".75">75% 负极值</option><option value=".13">13% 嘴形</option></select></nav>
-<main><section><h2>原静态</h2><img id="reference" alt="原静态参考"></section><section><h2>候选定相位</h2><canvas id="portrait" aria-label="候选定相位"></canvas></section></main>
+<nav><select id="state" aria-label="状态"><option>default</option><option>listening</option><option>waiting</option><option>speaking</option></select><select id="phase" aria-label="相位"><option value="0">0%</option><option value=".25">25% 正极值</option><option value=".75">75% 负极值</option><option value=".13">13% 嘴形</option></select><select id="detail" aria-label="局部"><option value="full">全身</option><option value="waist">腰线/袖口</option><option value="shoulders">肩腋</option><option value="face">头颈/脸</option></select></nav>
+<main><section><h2>原静态</h2><div class="stage"><img id="reference" alt="原静态参考"></div></section><section><h2>候选定相位</h2><div class="stage"><canvas id="portrait" aria-label="候选定相位"></canvas></div></section></main>
 <script type="module">
 import {loadAnimationPackage,createCanvasRenderer,sampleClip} from '../../../packages/appearance-animation/src/index.ts'
 const {data,images}=await loadAnimationPackage(new URL('./package.json',location.href),new AbortController().signal)
 const renderer=createCanvasRenderer(document.querySelector('canvas'),data,images)
-const state=document.querySelector('#state'), phase=document.querySelector('#phase')
+const state=document.querySelector('#state'), phase=document.querySelector('#phase'), detail=document.querySelector('#detail')
+const query=new URLSearchParams(location.search)
+state.value=query.get('state')??'default';phase.value=query.get('phase')??'0';detail.value=query.get('detail')??'full'
+function setDetail(){document.body.dataset.detail=detail.value}
+detail.onchange=setDetail;setDetail()
 function render(){const clip=data.states[state.value];renderer.render(sampleClip(data,data.clips[clip],Number(phase.value)*data.clips[clip].duration));document.querySelector('#reference').src='/appearances/salt-pepper-beard/'+(state.value==='default'?'default':state.value)+'.png'}
 state.onchange=phase.onchange=render;render()
 </script>

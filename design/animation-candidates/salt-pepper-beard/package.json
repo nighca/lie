@@ -78,10 +78,10 @@
       "id": "left-root",
       "parent": "body-root",
       "transform": {
-        "x": 420,
-        "y": 470,
-        "pivotX": 420,
-        "pivotY": 470,
+        "x": 410,
+        "y": 870,
+        "pivotX": 410,
+        "pivotY": 870,
         "rotation": 0,
         "scaleX": 1,
         "scaleY": 1
@@ -202,11 +202,11 @@
             550
           ],
           [
-            850,
+            860,
             700
           ],
           [
-            840,
+            860,
             810
           ],
           [
@@ -306,11 +306,11 @@
             550
           ],
           [
-            850,
+            860,
             700
           ],
           [
-            840,
+            860,
             810
           ],
           [
@@ -670,15 +670,15 @@
             760
           ],
           [
-            470,
+            490,
             820
           ],
           [
-            420,
+            450,
             880
           ],
           [
-            410,
+            430,
             910
           ],
           [
@@ -742,19 +742,31 @@
             1254
           ],
           [
-            890,
+            900,
             1030
           ],
           [
-            880,
+            900,
             950
           ],
           [
-            800,
-            880
+            890,
+            900
           ],
           [
-            760,
+            880,
+            860
+          ],
+          [
+            865,
+            820
+          ],
+          [
+            860,
+            780
+          ],
+          [
+            850,
             740
           ],
           [
@@ -806,12 +818,24 @@
             600
           ],
           [
-            480,
-            720
+            470,
+            650
+          ],
+          [
+            425,
+            700
+          ],
+          [
+            340,
+            725
+          ],
+          [
+            220,
+            725
           ],
           [
             160,
-            750
+            650
           ],
           [
             150,
@@ -862,19 +886,31 @@
             1254
           ],
           [
-            890,
+            900,
             1030
           ],
           [
-            880,
+            900,
             950
           ],
           [
-            800,
-            880
+            890,
+            900
           ],
           [
-            760,
+            880,
+            860
+          ],
+          [
+            865,
+            820
+          ],
+          [
+            860,
+            780
+          ],
+          [
+            850,
             740
           ],
           [
@@ -1046,20 +1082,76 @@
             880
           ],
           [
-            850,
+            1030,
             900
           ],
           [
+            900,
+            890
+          ],
+          [
+            850,
+            845
+          ],
+          [
+            850,
+            815
+          ],
+          [
+            840,
+            780
+          ],
+          [
+            820,
+            740
+          ],
+          [
+            810,
+            700
+          ],
+          [
             790,
-            800
+            620
           ],
           [
-            750,
-            650
-          ],
-          [
-            750,
+            780,
             500
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hem-speaking",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 3,
+        "mask": [
+          [
+            780,
+            860
+          ],
+          [
+            862,
+            860
+          ],
+          [
+            862,
+            980
+          ],
+          [
+            780,
+            980
           ]
         ]
       }
@@ -1217,6 +1309,7 @@
         "contact-waiting": false,
         "neck-waiting": false,
         "sleeve-speaking": false,
+        "hem-speaking": false,
         "arm-speaking": false
       },
       "tracks": [
@@ -1403,6 +1496,7 @@
         "contact-waiting": false,
         "neck-waiting": false,
         "sleeve-speaking": false,
+        "hem-speaking": false,
         "arm-speaking": false
       },
       "tracks": [
@@ -1589,114 +1683,112 @@
         "contact-waiting": true,
         "neck-waiting": true,
         "sleeve-speaking": false,
+        "hem-speaking": false,
         "arm-speaking": false
       },
       "tracks": [
         {
-          "node": "body-root",
-          "property": "y",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 930
-            },
-            {
-              "time": 1.2,
-              "value": 926
-            },
-            {
-              "time": 2.4,
-              "value": 930
-            },
-            {
-              "time": 3.5999999999999996,
-              "value": 934
-            },
-            {
-              "time": 4.8,
-              "value": 930
-            }
-          ]
-        },
-        {
-          "node": "body-root",
-          "property": "rotation",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 0
-            },
-            {
-              "time": 1.2,
-              "value": 0.4
-            },
-            {
-              "time": 2.4,
-              "value": 0.08
-            },
-            {
-              "time": 3.5999999999999996,
-              "value": -0.4
-            },
-            {
-              "time": 4.8,
-              "value": 0
-            }
-          ]
-        },
-        {
-          "node": "contact-root",
-          "property": "rotation",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 0
-            },
-            {
-              "time": 1.2,
-              "value": 0.95
-            },
-            {
-              "time": 2.4,
-              "value": 0.15
-            },
-            {
-              "time": 3.5999999999999996,
-              "value": -0.85
-            },
-            {
-              "time": 4.8,
-              "value": 0
-            }
-          ]
-        },
-        {
           "node": "contact-root",
           "property": "y",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 395
-            },
-            {
-              "time": 1.2,
-              "value": 393.8
-            },
-            {
-              "time": 2.4,
-              "value": 395
-            },
-            {
-              "time": 3.5999999999999996,
-              "value": 396.2
+              "value": 915
             },
             {
               "time": 4.8,
-              "value": 395
+              "value": 915
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "pivotY",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 915
+            },
+            {
+              "time": 4.8,
+              "value": 915
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "scaleY",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 1.0
+            },
+            {
+              "time": 0.3,
+              "value": 1.0022961
+            },
+            {
+              "time": 0.6,
+              "value": 1.00424264
+            },
+            {
+              "time": 0.8999999999999999,
+              "value": 1.00554328
+            },
+            {
+              "time": 1.2,
+              "value": 1.006
+            },
+            {
+              "time": 1.5,
+              "value": 1.00554328
+            },
+            {
+              "time": 1.7999999999999998,
+              "value": 1.00424264
+            },
+            {
+              "time": 2.1,
+              "value": 1.0022961
+            },
+            {
+              "time": 2.4,
+              "value": 1.0
+            },
+            {
+              "time": 2.6999999999999997,
+              "value": 0.9977039
+            },
+            {
+              "time": 3.0,
+              "value": 0.99575736
+            },
+            {
+              "time": 3.3,
+              "value": 0.99445672
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 0.994
+            },
+            {
+              "time": 3.9,
+              "value": 0.99445672
+            },
+            {
+              "time": 4.2,
+              "value": 0.99575736
+            },
+            {
+              "time": 4.5,
+              "value": 0.9977039
+            },
+            {
+              "time": 4.8,
+              "value": 1.0
             }
           ]
         }
@@ -1721,6 +1813,7 @@
         "contact-waiting": false,
         "neck-waiting": false,
         "sleeve-speaking": true,
+        "hem-speaking": true,
         "arm-speaking": true
       },
       "tracks": [

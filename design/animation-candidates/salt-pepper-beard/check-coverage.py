@@ -30,5 +30,6 @@ for state,clipid in data['states'].items():
     if r<90 and g<90 and b<140:
      black+=1
      if not any(s['asset']==reference for s in selected):missed+=1
-  if not (state=='speaking' and side=='right'):assert holes==0 and missed==0,(state,side,holes,missed,first)
+  assert holes==0,(state,side,holes,first)
+  if not (state=='speaking' and side=='right'):assert missed==0,(state,side,missed)
   print(state,side,'reference',reference,'opaque',opaque,'uncovered-alpha',holes,'source-black',black,'outside-source-selection',missed,'first-gaps',first)

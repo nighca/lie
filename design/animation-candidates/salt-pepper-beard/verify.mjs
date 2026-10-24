@@ -41,8 +41,30 @@ for(const [state,id] of Object.entries(data.states)) {
  assert.deepEqual(sampleClip(data,clip,0),sampleClip(data,clip,clip.duration))
  for(let i=0;i<240;i++)checkPose(sampleClip(data,clip,i*clip.duration/240),state,i*clip.duration/240)
  const positive=sampleClip(data,clip,clip.duration*.25),negative=sampleClip(data,clip,clip.duration*.75)
- assert.notDeepEqual(positive['body-root'].transform,negative['body-root'].transform)
+ if(state==='waiting')assert.deepEqual(positive['body-root'].transform,negative['body-root'].transform)
+ else assert.notDeepEqual(positive['body-root'].transform,negative['body-root'].transform)
  assert.notDeepEqual(positive[state==='listening'||state==='waiting'?'contact-root':'head-root'].transform,negative[state==='listening'||state==='waiting'?'contact-root':'head-root'].transform)
+}
+function local(t) {
+ const r=t.rotation*Math.PI/180,c=Math.cos(r),s=Math.sin(r),a=c*t.scaleX,b=s*t.scaleX,k=-s*t.scaleY,d=c*t.scaleY
+ return [a,b,k,d,t.x-a*t.pivotX-k*t.pivotY,t.y-b*t.pivotX-d*t.pivotY]
+}
+function multiply(a,b){return [a[0]*b[0]+a[2]*b[1],a[1]*b[0]+a[3]*b[1],a[0]*b[2]+a[2]*b[3],a[1]*b[2]+a[3]*b[3],a[0]*b[4]+a[2]*b[5]+a[4],a[1]*b[4]+a[3]*b[5]+a[5]]}
+function world(pose) {
+ const result=new Map()
+ for(const node of data.nodes){const matrix=local(pose[node.id].transform);result.set(node.id,node.parent==null?matrix:multiply(result.get(node.parent),matrix))}
+ return result
+}
+const waiting=data.clips[data.states.waiting]
+assert.equal(waiting.tracks.find(t=>t.node==='contact-root'&&t.property==='scaleY').keys.length,17)
+const baseline=world(sampleClip(data,waiting,0)).get('body-waiting-lower')
+for(let i=0;i<=240;i++) {
+ const matrices=world(sampleClip(data,waiting,waiting.duration*i/240)),lower=matrices.get('body-waiting-lower'),upper=matrices.get('contact-waiting')
+ assert.deepEqual(lower,baseline,'waiting full-parent lower body remains fixed')
+ assert(Math.abs(upper[1])<1e-12);assert(Math.abs(upper[2])<1e-12);assert.equal(upper[0],1)
+ assert(Math.abs(upper[0]*620+upper[2]*915+upper[4]-620)<1e-9)
+ assert(Math.abs(upper[1]*620+upper[3]*915+upper[5]-915)<1e-9,'waiting waist anchor stays fixed')
+ assert.deepEqual(matrices.get('head-waiting'),matrices.get('contact-waiting'),'chin contact shares full parent transform')
 }
 assert.equal(data.nodes.find(node=>node.id==='head-root').parent,'contact-root')
 for(const id of ['arm-listening','contact-waiting','neck-waiting']) {
@@ -71,4 +93,4 @@ for(let i=0;i<100;i++) {
  const elapsed=[.09,.17,.21][i%3]
  checkPose(timeline.advance(elapsed),state,elapsed)
 }
-console.log(`PASS: strict v1 and pixel budget; ${Object.keys(data.assets).length} PNG dimensions/hashes/alpha; 4 canonical source hashes; 960 samples; 4 loop closures; single head/mouth and state attachments; contact registration; 100 interrupted settles with continuous finite transforms and target visibility`)
+console.log(`PASS: strict v1 and pixel budget; ${Object.keys(data.assets).length} PNG dimensions/hashes/alpha; 4 canonical source hashes; 960 samples; 4 loop closures; single head/mouth and state attachments; contact registration; 241 full-parent waiting fixed-waist samples; 100 interrupted settles with continuous finite transforms and target visibility`)
