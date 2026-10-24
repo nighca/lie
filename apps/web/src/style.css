@@ -51,7 +51,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .accusation-hint { color: var(--lie-muted); text-align: center; margin: 8px 0 0; }
 .accusation-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 28px 0; }
 .accusation-character .avatar-frame, .accusation-character .initial-avatar { height: 200px; }
-.accusation-character .lie-button { width: 100%; border-radius: 18px; font-size: 18px; padding-inline: 12px; margin-bottom: 5px; }
+.accusation-character .lie-button { width: calc(100% - 16px); border-radius: 18px; font-size: 18px; padding-inline: 12px; margin: 12px 8px 16px; }
 .result-card .eyebrow { display: inline-block; color: var(--lie-ink); background: var(--lie-soft-blue); padding: 6px 20px; border-radius: 99px; }
 .result-story { max-width: 46em; margin: auto; }
 .result-card h2 { font-size: 20px; width: fit-content; padding: 6px 16px; margin: 24px 0 0; border-radius: 99px; background: var(--lie-soft-blue); }
