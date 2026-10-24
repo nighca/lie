@@ -7,7 +7,11 @@ import type { Appearance } from '../../apps/web/src/presentation/appearances'
 const query = new URLSearchParams(location.search)
 const candidateAppearance = query.get('appearance') ?? 'coral-bob'
 const candidateSource = query.get('src')
-const candidateSources = new Map([...query.entries()].filter(([key]) => key.startsWith('src.')).map(([key, value]) => [key.slice(4), value]))
+const configuredSources: Record<string, string> = JSON.parse(import.meta.env.VITE_ANIMATION_PREVIEW_CANDIDATES ?? '{}')
+const candidateSources = new Map(Object.entries(configuredSources))
+for (const [key, value] of query) {
+  if (key.startsWith('src.')) candidateSources.set(key.slice(4), value)
+}
 if (candidateSource != null) candidateSources.set(candidateAppearance, candidateSource)
 const selected = ref(candidateAppearance), entries = ref<readonly Appearance[]>([])
 const state = ref<AnimationState>('default')
