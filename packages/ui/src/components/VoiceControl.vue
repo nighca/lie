@@ -30,8 +30,7 @@ watch([showInput, level], ([next, value], [previous]) => {
 const feedbackLabel = computed(() => {
   if (props.preparing) return '正在连接'
   if (props.status === 'error') return props.label
-  if (!enabled.value || showInput.value) return ''
-  return props.status === 'waiting' || props.status === 'speaking' ? props.label : '等你开口'
+  return ''
 })
 function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(value) * 85))}px` }
 </script>

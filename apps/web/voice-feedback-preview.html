@@ -25,12 +25,13 @@ createApp({ setup() {
     h('h1', '语音反馈展示'),
     h('p', '本页复用正式组件与全局样式。波形为模拟玩家音量，不使用麦克风，不连接语音服务。'),
     h('label', ['展示状态 ', h('select', { value: mode.value, onChange: event => { mode.value = event.target.value } }, [
-      h('option', { value: 'speaking' }, '角色回答 · 只显示文字'),
+      h('option', { value: 'waiting' }, '等待回答 · 留空'),
+      h('option', { value: 'speaking' }, '角色回答 · 留空'),
       h('option', { value: 'input' }, '玩家讲话 · 只显示黑色波形'),
-      h('option', { value: 'recording' }, '等待玩家 · 只显示文字'),
+      h('option', { value: 'recording' }, '等待玩家 · 留空'),
       h('option', { value: 'off' }, '对话关闭 · 留空'),
     ])]),
-    h(VoiceControl, { active: mode.value !== 'off', status: mode.value === 'speaking' ? 'speaking' : 'recording', label: mode.value === 'speaking' ? '正在回答' : '正在聆听', actionLabel: mode.value === 'off' ? '开启对话' : '结束对话', inputActive: mode.value === 'input', inputLevel: level.value }, {
+    h(VoiceControl, { active: mode.value !== 'off', status: ['speaking', 'waiting'].includes(mode.value) ? mode.value : 'recording', label: mode.value === 'speaking' ? '正在回答' : '正在聆听', actionLabel: mode.value === 'off' ? '开启对话' : '结束对话', inputActive: mode.value === 'input', inputLevel: level.value }, {
       details: () => h('strong', '06:04'),
       answer: () => h(UiButton, { variant: 'secondary' }, () => '我有答案了 →'),
     }),
