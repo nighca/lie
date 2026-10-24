@@ -59,6 +59,14 @@ def alpha(pose,x,y):
 js="""import fs from 'node:fs';import{readAnimationPackage}from './packages/appearance-animation/src/package.ts';import{sampleClip}from './packages/appearance-animation/src/playback.ts';const p=readAnimationPackage(JSON.parse(fs.readFileSync('design/animation-candidates/plum-crop/package.json')));console.log(JSON.stringify(Object.fromEntries(Object.keys(p.states).map(s=>[s,Array.from({length:32},(_,i)=>sampleClip(p,p.clips[p.states[s]],i/8))]))));"""
 env={**os.environ,'PATH':'/private/tmp/lie-toolchain-node/node-v24.22.1-darwin-arm64/bin:'+os.environ['PATH']}
 poses=json.loads(subprocess.check_output(['node','--experimental-transform-types','--input-type=module','-e',js],cwd=repo,env=env,text=True))
+shoulder_probes=0
+for pose in poses['speaking']:
+ dy=pose['body-root']['transform']['y']-800
+ for x,y in [(865,461),(870,462),(875,464),(880,466),(885,468),(890,471)]:
+  source_alpha=images['speaking-source'].getpixel((x,y))[3]
+  assert source_alpha>=200,('diagnosed shoulder source point',x,y,source_alpha)
+  assert alpha(pose,x,y+dy)>=128,('speaking shoulder cap lost at phase',x,y,dy)
+  shoulder_probes+=1
 count=0
 for state in ['default','listening','speaking','waiting']:
  # Bounded internal bands, excluding animated outer silhouettes.
@@ -73,4 +81,4 @@ for state in ['default','listening','speaking','waiting']:
       count+=1
       if alpha(pose,x,y)<128:bad.append((x,y))
   assert not bad,(state,i/8,'internal source-alpha seam',len(bad),bad[:12])
-print('PASS: static body/hand/sleeve silhouette coverage; no lowered-arm skin residue; 32 full-chain phases per state;',count,'internal opacity probes;',hand_pixels,'speaking-hand skin pixels and 6 original-ink probes retained. Geometry/nearest-alpha evidence only, not Canvas colour or visual acceptance.')
+print('PASS: static body/hand/sleeve silhouette coverage; no lowered-arm skin residue; 32 full-chain phases per state;',count,'internal opacity probes;',hand_pixels,'speaking-hand skin pixels and 6 original-ink probes retained;',shoulder_probes,'anchored shoulder probes retained. Geometry/nearest-alpha evidence only, not Canvas colour or visual acceptance.')

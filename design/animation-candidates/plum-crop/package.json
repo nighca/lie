@@ -711,11 +711,11 @@
         "mask": [
           [
             870,
-            440
+            540
           ],
           [
             970,
-            485
+            540
           ],
           [
             1040,
@@ -1211,6 +1211,42 @@
           ]
         ]
       }
+    },
+    {
+      "id": "speaking-shoulder-cap",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 43,
+        "mask": [
+          [
+            840,
+            420
+          ],
+          [
+            980,
+            420
+          ],
+          [
+            980,
+            560
+          ],
+          [
+            840,
+            560
+          ]
+        ]
+      }
     }
   ],
   "clips": {
@@ -1226,6 +1262,7 @@
         "waiting-arms": false,
         "speak-arm": false,
         "mouth-open": false,
+        "speaking-shoulder-cap": false,
         "waiting-lower-body": false,
         "listening-torso": false,
         "mouth-closed": true
@@ -1407,6 +1444,7 @@
         "waiting-arms": false,
         "speak-arm": false,
         "mouth-open": false,
+        "speaking-shoulder-cap": false,
         "waiting-lower-body": false,
         "listening-torso": true,
         "mouth-closed": true
@@ -1588,6 +1626,7 @@
         "waiting-arms": true,
         "speak-arm": false,
         "mouth-open": false,
+        "speaking-shoulder-cap": false,
         "waiting-lower-body": true,
         "listening-torso": false,
         "mouth-closed": true
@@ -1790,6 +1829,7 @@
         "waiting-arms": false,
         "speak-arm": true,
         "mouth-open": false,
+        "speaking-shoulder-cap": true,
         "waiting-lower-body": false,
         "listening-torso": false,
         "mouth-closed": true
