@@ -20,8 +20,7 @@ def wave(id,prop,base,amp):return dict(node=id,property=prop,interpolation='line
 body=rect(0,415,1254,1254)
 # The listening hand/forearm starts above the body cut and remains a single contact group.
 listen=[[390,240],[530,240],[545,435],[580,435],[580,540],[330,650],[270,630],[340,475],[390,415]]
-# Waiting chin and forearm are canonical pixels, attached to the same head/upper-body root.
-chin=[[590,423],[601,401],[615,375],[634,372],[679,382],[681,392],[665,400],[645,400],[638,410],[659,406],[681,413],[690,475],[660,513],[604,670],[505,688],[505,640],[585,470]]
+# Waiting keeps its original head/chin/hand as one same-source contact assembly.
 nodes=[node('body-root',None,transform(650,860,650,850)),node('head-root','body-root',transform(650,445,650,445)),node('head','head-root',transform(),sprite('default-source',30,[[0,0],[1254,0],[1254,431],[747,431],[750,493],[575,493],[580,431],[0,431]])),node('mouth-closed','head-root',transform(603,320),sprite('default-source',35,[[0,21],[85,0],[94,5],[85,31],[50,44],[10,38]],[603,320,96,48])),node('mouth-open','head-root',transform(603,320),sprite('speaking-source',36,[[0,25],[88,0],[95,4],[89,44],[63,69],[30,66],[10,45]],[603,320,98,72]))]
 for state in ['default','listening','waiting','speaking']:
  parent='head-root' if state in ['listening','waiting'] else 'body-root'
@@ -32,7 +31,7 @@ for state in ['default','listening','waiting','speaking']:
   nodes[-1]['sprite']['crop']=[0,0,1254,866]
   nodes.append(node(state+'-lower','body-root',transform(0,850),sprite(state+'-source',9,None,[0,850,1254,404])))
  if state=='listening':nodes.append(node('listen-contact','head-root',transform(),sprite('listening-source',40,listen)))
- if state=='waiting':nodes.append(node('chin-contact','head-root',transform(),sprite('waiting-source',41,chin)))
+ if state=='waiting':nodes.append(node('chin-contact','head-root',transform(),sprite('waiting-source',41,[[0,0],[1254,0],[1254,431],[747,431],[750,493],[575,493],[580,431],[0,431]])))
 clips={}
 for state in ['default','listening','waiting','speaking']:
  visibility={n['id']:False for n in nodes if n.get('sprite') and n['id'] not in ['head','mouth-closed','mouth-open']}
@@ -41,6 +40,7 @@ for state in ['default','listening','waiting','speaking']:
  if state in ['listening','waiting']:visibility[state+'-lower']=True
  visibility['listen-contact']=state=='listening';visibility['chin-contact']=state=='waiting'
  visibility.update({'mouth-closed':True,'mouth-open':False})
+ if state=='waiting':visibility['head']=False
  tracks=[wave('body-root','y',860,3),wave('head-root','rotation',0,.9),wave('head-root','y',445,1.2)]
  if state in ['listening','waiting']:
   tracks=[wave('body-root','y',860,0),wave('head-root','y',858,0),wave('head-root','pivotY',858,0),wave('head-root','scaleY',1,.006)]

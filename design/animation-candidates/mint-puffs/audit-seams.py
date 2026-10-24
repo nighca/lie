@@ -37,12 +37,20 @@ def alpha(pose,x,y):
 js="""import fs from 'node:fs';import{readAnimationPackage}from './packages/appearance-animation/src/package.ts';import{sampleClip}from './packages/appearance-animation/src/playback.ts';const p=readAnimationPackage(JSON.parse(fs.readFileSync('design/animation-candidates/mint-puffs/package.json')));console.log(JSON.stringify(Object.fromEntries(Object.keys(p.states).map(s=>[s,Array.from({length:32},(_,i)=>sampleClip(p,p.clips[p.states[s]],i/8))]))));"""
 env={**os.environ,'PATH':'/private/tmp/lie-toolchain-node/node-v24.22.1-darwin-arm64/bin:'+os.environ['PATH']}
 poses=json.loads(subprocess.check_output(['node','--experimental-transform-types','--input-type=module','-e',js],cwd=repo,env=env,text=True))
-chin=next(n for n in data['nodes'] if n['id']=='chin-contact')['sprite']['mask']
-for point in [(585,392),(600,396),(690,383),(700,380)]:
- assert not inside(*point,chin),('original chin contour retained in contact mask',point)
-for point in [(635,390),(645,425),(630,460)]:
- assert inside(*point,chin),('actual contact hand omitted',point)
- assert images['waiting-source'].getpixel(point)[3]>=240,('empty hand probe',point)
+contact=next(n for n in data['nodes'] if n['id']=='chin-contact')
+head=next(n for n in data['nodes'] if n['id']=='head')
+assert contact['sprite']['asset']=='waiting-source'
+assert contact['sprite']['mask']==head['sprite']['mask']
+assert contact['transform']==head['transform']
+assert contact['parent']==head['parent']=='head-root'
+# The diagnosed dark default-jaw pixels must now use the original waiting pixels.
+for x,y in [(597,393),(598,393),(600,394),(599,395)]:
+ original=images['waiting-source'].getpixel((x,y))
+ wrong=images['default-source'].getpixel((x,y))
+ assert original[3]>=240 and original[0]>wrong[0]+40,(x,y,'empty or irrelevant jaw probe')
+ assert inside(x,y,contact['sprite']['mask'])
+ for pose in poses['waiting']:
+  assert pose['chin-contact']['visible'] and not pose['head']['visible']
 counts={}
 bands={'neck':(620,705,423,468),'shoulders':(470,830,480,505),'listening-wrist':(380,425,505,540),'waiting-chin':(610,650,390,430),'waist':(470,860,850,866)}
 for state in poses:
@@ -60,23 +68,23 @@ for state in poses:
   assert count>100,(state,name,'empty source probes',count)
   counts[state+'/'+name]=count
 # Actual nontransparent source hair bounds through the complete head->head-root->body-root chain.
-head=next(n for n in data['nodes'] if n['id']=='head')
-im=images[head['sprite']['asset']];mask=head['sprite']['mask']
-hair=[]
-for y in range(0,600,2):
- for x in range(0,im.width,2):
-  if im.getpixel((x,y))[3]>=200 and inside(x,y,mask):hair.append((x,y))
-assert len(hair)>1000
 limits={}
 for state,frames in poses.items():
+ head=next(n for n in data['nodes'] if n['id']==('chin-contact' if state=='waiting' else 'head'))
+ im=images[head['sprite']['asset']];mask=head['sprite']['mask']
+ hair=[]
+ for y in range(0,600,2):
+  for x in range(0,im.width,2):
+   if im.getpixel((x,y))[3]>=200 and inside(x,y,mask):hair.append((x,y))
+ assert len(hair)>1000
  minimum=1254
  for pose in frames:
   matrices={}
   for n in data['nodes']:
    m=local(pose[n['id']]['transform']);parent=n['parent']
    matrices[n['id']]=m if parent is None else multiply(matrices[parent],m)
-  m=matrices['head']
+  m=matrices[head['id']]
   minimum=min(minimum,min(m[1]*x+m[3]*y+m[5] for x,y in hair))
  assert minimum>=3,(state,'hair crop risk',minimum)
  limits[state]=round(minimum,3)
-print('PASS 32 real-sampler phases, nonempty full-chain source-alpha seams:',counts,'; actual opaque hair minY:',limits)
+print('PASS 32 real-sampler phases, nonempty full-chain source-alpha seams:',counts,'; actual opaque hair minY:',limits,'; four diagnosed jaw points use original waiting material, not default jaw')

@@ -4,7 +4,8 @@ import crypto from 'node:crypto'
 import { readAnimationPackage } from '../../../packages/appearance-animation/src/package.ts'
 import { sampleClip, AnimationTimeline } from '../../../packages/appearance-animation/src/playback.ts'
 const dir = new URL('./', import.meta.url)
-const data = readAnimationPackage(JSON.parse(fs.readFileSync(new URL('package.json', dir))))
+const raw = JSON.parse(fs.readFileSync(new URL('package.json', dir)))
+const data = readAnimationPackage(raw)
 const provenance = JSON.parse(fs.readFileSync(new URL('provenance.json', dir)))
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex')
 let pixels = data.canvas.width * data.canvas.height
@@ -19,6 +20,28 @@ for (const item of provenance.sources) {
   pixels += asset.width * asset.height
 }
 assert(pixels <= 33554432)
+const baseline = JSON.parse(fs.readFileSync(new URL('waiting-baseline.json', dir)))
+const fingerprint = value => hash(JSON.stringify(value))
+for (const [state, expected] of Object.entries(baseline.clips)) assert.equal(fingerprint(raw.clips[state]), expected, state+' clip changed')
+assert.equal(fingerprint(raw.assets), baseline.assets)
+assert.equal(fingerprint(raw.nodes.filter(n=>['mouth-closed','mouth-open'].includes(n.id))), baseline.mouthNodes)
+assert.equal(fingerprint(raw.nodes.filter(n=>n.id!=='chin-contact')), baseline.otherNodes)
+const contact = data.nodes.find(n=>n.id==='chin-contact')
+assert.equal(contact.sprite.asset, 'waiting-source')
+for (const id of ['head','mouth-closed','mouth-open']) {
+  const other = data.nodes.find(n=>n.id===id)
+  assert.equal(contact.parent, other.parent)
+  assert(contact.sprite.order > other.sprite.order)
+}
+assert.deepEqual(contact.transform, data.nodes.find(n=>n.id==='head').transform)
+assert.deepEqual(contact.sprite.mask, data.nodes.find(n=>n.id==='head').sprite.mask)
+assert.equal(fingerprint(raw.clips.waiting.tracks), baseline.waitingTracks)
+const waitingVisibility = { ...raw.clips.waiting.visibility }
+assert.equal(waitingVisibility.head, false)
+delete waitingVisibility.head
+assert.equal(fingerprint(waitingVisibility), baseline.waitingVisibility)
+assert.equal(raw.clips.waiting.visibility['mouth-closed'], true)
+assert.equal(raw.clips.waiting.visibility['mouth-open'], false)
 const states = Object.keys(data.states)
 function valid(pose, state) {
   for (const n of Object.values(pose)) for (const [key,value] of Object.entries(n.transform)) {
@@ -28,6 +51,7 @@ function valid(pose, state) {
   for (const other of states) assert.equal(pose[other+'-body'].visible, other === state)
   assert.equal(pose['listen-contact'].visible, state === 'listening')
   assert.equal(pose['chin-contact'].visible, state === 'waiting')
+  assert.equal(pose['head'].visible, state !== 'waiting')
 }
 for (const state of states) {
   const clip = data.clips[data.states[state]]
@@ -56,4 +80,4 @@ for(let i=0;i<100;i++) {
   for(const id of Object.keys(previous))assert.deepEqual(immediate[id].transform,previous[id].transform)
   for(const delta of [.025,.045,.03]){previous=timeline.advance(delta);valid(previous,state)}
 }
-console.log(`PASS strict parser, 4 native PNG/hash/canonical/alpha checks, ${pixels} pixels, 1280 samples, four loop closures, mouth/pose exclusivity, real contact parents, fixed-waist breath, 100 interrupted switches`)
+console.log(`PASS strict parser, 4 native PNG/hash/canonical/alpha checks, ${pixels} pixels, 1280 samples, four loop closures, mouth/pose exclusivity, real contact parents, fixed-waist breath, 100 interrupted switches; frozen nonwaiting clips/assets/mouths/other nodes and waiting tracks unchanged`)
