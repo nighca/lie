@@ -31,4 +31,16 @@
 
 Node 24.22.1：现有 `test/App.test.ts` 17项通过（含10分钟、5分30秒的原文断言），Web `vue-tsc --noEmit`、Vite production build及60个生成素材检查通过，`git diff --check`通过。未增加只复述class/CSS声明的测试。
 
-子任务实际未开放IAB，已将独立5501构建预览与上述最小检查交给root协调有IAB的专项代验；本段不宣称已完成浏览器间距测量或跨浏览器实机验收。旧浏览器的忽略属性行为是CSS兼容降级推断，不是本次旧浏览器实测。
+### 本次 IAB 代验与证据复核
+
+子任务未开放IAB，由root协调有IAB的专项在独立5501构建预览完成检查；本任务随后阅读测量JSON并实际目检桌面/窄屏截图。只进入intro，未开始游戏或语音。
+
+- 1280×878与391×844下，`scrollWidth`分别为1280/391，无水平溢出。窄屏截图为页面上部，时长在首屏之外；其排版数值由DOM测量核验，未声称该截图已展示完整时长区域。
+- `CSS.supports`：`normal=true`、`no-autospace=true`、`ideograph-numeric=false`。专属时长computed为`normal`，普通`.muted`仍为`no-autospace`，未污染通用样式。
+- 原文仍为`本局可询问8分钟`，没有插入实际空格。14px同字体的临时inline span测得normal/no-autospace宽度为110.296875/106.796875px，增加3.5px；“本局可询问5分30秒”为130.8046875/123.8046875px，增加7px。
+- Range逐字结果与每个中西文边界约1.75px的增量一致：8分钟有两处，5分30秒有四处；这是当前字体/字号下的实测，不把1.75px硬编码进CSS。
+- 临时测量节点已移除，没有改真实文字或游戏数据；console warn/error为空，viewport已重置，自建tab已关闭。
+
+原始临时证据：`/private/tmp/lie-cjk-spacing/measurements.json`、`desktop.png`、`mobile.png`。这些是本机临时文件，核心测量已保存在本文，文件后续可能被清理。
+
+仅本次IAB实测，未做独立Firefox/Safari或旧浏览器实机验收。旧浏览器忽略属性的行为仍是CSS兼容降级推断。
