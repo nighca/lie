@@ -55,3 +55,9 @@
 标准 `npm ci`退出0、audit零漏洞；npm提示既有workerd/fsevents安装脚本未纳入当前allowScripts，本次未修改该策略或升级依赖，已有本机二进制支持后续Worker test/build成功。最终全仓 **388项通过**：runner9、生成器21、gateway11、Web191、character-animation33、core51、UI38、voice34；全仓typecheck及Web→Worker build通过，postbuild严格输出检查8预设79资源通过。Web中新增5项历史兼容、runner新增1项，共比base382项增加6项。最终一次全检后仅对staticContent测试的局部变量做同义改名及文档补录，未改变应用/资源/依赖身份，按最新用户要求复用已通过证据，不再重复同一应用全检。
 
 浏览器重新生成的完整URL已与base编码器输出逐字符比较相等；完整资源hash对比已通过。差异检查无空白错误。只提交授权源码/正式移动/现有消费者和本文证据；不包含临时HTML、临时capture模块、生成public/dist、私密配置、日志或其他owner在制文件。全局main、发布与真实服务切换由root后续审查/操作窗口分别确认。
+
+### Root review 后的测试夹具修正
+
+Root发现新增runner测试把 `process.execPath`直接写入shebang；正式运行时路径含`Application Support`空格，不能据无空格临时运行时通过而认定可移植。已将fixture改为`#!/usr/bin/env node`，受控PATH先含fixture bin、再含当前Node二进制目录，确保解析同一运行时；等待runner退出失败时仍由finally恢复原PATH。仅测试夹具变化，无生产代码、资源或依赖变化。
+
+使用实际 `/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node --test --test-name-pattern='default runner generates' scripts/main-preview.test.mjs`，1项通过、退出0；不重复388项、类型或构建。此修正以独立后续提交交付，不改写原候选commit。正式8787/8788仍未操作，继续等root服务turn。

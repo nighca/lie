@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { mkdir, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import test from 'node:test'
 import { setTimeout as delay } from 'node:timers/promises'
 import { readMain, runMainPreview } from './main-preview.mjs'
@@ -212,9 +212,9 @@ test('default runner generates the current character preset source before launch
   await writeFile(join(f.root, 'scripts/character-presets.mjs'), "import { appendFileSync } from 'node:fs';appendFileSync('events', JSON.stringify({event:'generate'})+'\\n')")
   await writeFile(join(f.root, 'node_modules/vite/bin/vite.js'), "require('node:fs').appendFileSync('events', JSON.stringify({event:'web'})+'\\n');setInterval(()=>{},1000)")
   const npm = join(f.root, 'bin/npm')
-  await writeFile(npm, `#!${process.execPath}\nconst fs=require('node:fs'); const install=process.argv[2]==='ci'; fs.appendFileSync('events',JSON.stringify({event:install?'install':'gateway'})+'\\n'); if(!install)setInterval(()=>{},1000)`, { mode: 0o755 })
+  await writeFile(npm, `#!/usr/bin/env node\nconst fs=require('node:fs'); const install=process.argv[2]==='ci'; fs.appendFileSync('events',JSON.stringify({event:install?'install':'gateway'})+'\\n'); if(!install)setInterval(()=>{},1000)`, { mode: 0o755 })
   const previous = process.env.PATH
-  process.env.PATH = `${join(f.root, 'bin')}:${previous}`
+  process.env.PATH = `${join(f.root, 'bin')}:${dirname(process.execPath)}:${previous}`
   const controller = new AbortController()
   const done = runMainPreview({ root: f.root, pollMs: 30, signal: controller.signal })
   void done.catch(() => {})
@@ -227,7 +227,7 @@ test('default runner generates the current character preset source before launch
     assert.deepEqual(events.slice(0, 2), ['install', 'generate'])
   } finally {
     controller.abort()
-    await done
-    process.env.PATH = previous
+    try { await done }
+    finally { process.env.PATH = previous }
   }
 })
