@@ -56,3 +56,5 @@
 
 - 线上376ce64里程碑独立验收完成：Actions40084031747实际部署success，CF活动deployment f57ee64c/100% version8079aea6对应同SHA；正式IAB桌面/391与HTTP三案/八形象/新bundle通过，未语音推理。已审e8b4ece报告并归档。root补读公网health/ready时Python证书库缺链，未降TLS；改macOS curl系统信任验证，不据本机证书问题宣布服务故障。
 - 空闲执行位已启动此前已授权的玩家final-only逐字回退/角色进一步降速，以及工具链依赖只读审计；调查设计和动画分别由独立chat接收用户直接决策，具体新方向原位更新当前队列。
+
+- [总协调接手与调查页最终版本review](coordinator-takeover.md)：用户批准cad5788的四提交范围、独立343测试/类型/构建和桌面/391复核，后续只记录反馈另列。
