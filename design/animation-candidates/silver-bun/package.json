@@ -356,7 +356,133 @@
       "visible": true,
       "sprite": {
         "asset": "head",
-        "order": 30
+        "order": 30,
+        "mask": [
+          [
+            0,
+            0
+          ],
+          [
+            1362,
+            0
+          ],
+          [
+            1362,
+            1155
+          ],
+          [
+            1030,
+            1155
+          ],
+          [
+            1030,
+            925
+          ],
+          [
+            540,
+            925
+          ],
+          [
+            540,
+            1155
+          ],
+          [
+            0,
+            1155
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-torso",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 10,
+        "mask": [
+          [
+            580,
+            375
+          ],
+          [
+            715,
+            375
+          ],
+          [
+            745,
+            400
+          ],
+          [
+            850,
+            425
+          ],
+          [
+            945,
+            530
+          ],
+          [
+            875,
+            680
+          ],
+          [
+            900,
+            800
+          ],
+          [
+            940,
+            975
+          ],
+          [
+            950,
+            1254
+          ],
+          [
+            374,
+            1254
+          ],
+          [
+            382,
+            972
+          ],
+          [
+            385,
+            912
+          ],
+          [
+            443,
+            759
+          ],
+          [
+            440,
+            650
+          ],
+          [
+            330,
+            530
+          ],
+          [
+            350,
+            460
+          ],
+          [
+            420,
+            420
+          ],
+          [
+            578,
+            395
+          ]
+        ]
       }
     },
     {
@@ -773,6 +899,8 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "torso": true,
+        "waiting-torso": false,
         "left-neutral": true,
         "right-neutral": true,
         "listen-arm": false,
@@ -923,6 +1051,8 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "torso": true,
+        "waiting-torso": false,
         "left-neutral": false,
         "right-neutral": true,
         "listen-arm": true,
@@ -1046,6 +1176,8 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "torso": false,
+        "waiting-torso": true,
         "left-neutral": false,
         "right-neutral": false,
         "listen-arm": false,
@@ -1142,6 +1274,8 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "torso": true,
+        "waiting-torso": false,
         "left-neutral": true,
         "right-neutral": false,
         "listen-arm": false,

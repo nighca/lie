@@ -28,7 +28,8 @@ right=[[818,456],[896,481],[934,552],[953,710],[983,788],[985,864],[1000,1060],[
 node('left-neutral','body-root',t(445,480,445,480),asset='default-source',order=20,mask=left)
 node('right-neutral','body-root',t(875,500,875,500),asset='default-source',order=21,mask=right)
 node('head-root','body-root',t(625,390,625,390))
-node('head','head-root',t(307,-15,s=.45),asset='head',order=30)
+node('head','head-root',t(307,-15,s=.45),asset='head',order=30,mask=[[0,0],[1362,0],[1362,1155],[1030,1155],[1030,925],[540,925],[540,1155],[0,1155]])
+node('waiting-torso','head-root',asset='waiting-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[875,680],[900,800],[940,975],[950,1254],[374,1254],[382,972],[385,912],[443,759],[440,650],[330,530],[350,460],[420,420],[578,395]],visible=False)
 node('mouth-closed','head-root',t(577,316,s=.16),asset='mouths',order=31,crop=[245,235,590,260])
 node('mouth-open','head-root',t(577,309,s=.16),asset='mouths',order=31,crop=[1380,170,620,380],visible=False)
 node('listen-arm','head-root',asset='listening-source',order=40,mask=[[419,253],[446,251],[465,278],[472,315],[493,332],[511,365],[504,407],[485,432],[465,481],[452,531],[451,595],[435,662],[407,722],[359,744],[310,731],[280,703],[275,649],[284,586],[308,537],[339,514],[369,463],[405,411],[398,389],[380,345],[382,313],[397,278]],visible=False)
@@ -37,7 +38,7 @@ node('speak-arm','body-root',t(880,530,880,530),asset='speaking-source',order=40
 def track(n,p,vals,d=4):return dict(node=n,property=p,interpolation='linear',keys=[dict(time=d*i/(len(vals)-1),value=v) for i,v in enumerate(vals)])
 clips={}
 for state in ['idle','listening','waiting','speaking']:
- vis={'left-neutral':state not in ['listening','waiting'],'right-neutral':state not in ['waiting','speaking'],'listen-arm':state=='listening','waiting-arms':state=='waiting','speak-arm':state=='speaking','mouth-open':False,'mouth-closed':True}
+ vis={'torso':state!='waiting','waiting-torso':state=='waiting','left-neutral':state not in ['listening','waiting'],'right-neutral':state not in ['waiting','speaking'],'listen-arm':state=='listening','waiting-arms':state=='waiting','speak-arm':state=='speaking','mouth-open':False,'mouth-closed':True}
  tracks=[track('body-root','y',[800,798,800,802,800]),track('head-root','rotation',[0,.35,0,-.35,0]),track('head-root','y',[390,389,390,391,390])]
  if state not in ['waiting','listening']:tracks += [track('left-neutral','rotation',[0,.3,0,-.3,0])]
  if state not in ['waiting','speaking']:tracks += [track('right-neutral','rotation',[0,-.3,0,.3,0])]
