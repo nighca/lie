@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-更新：2026-10-25，依据本地 reviewed main `596866140893ed08f5bc247c6fd8758947a85003`及本轮协调派单；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
+更新：2026-10-25，依据本地 reviewed main `df2011b286e604c18cb48787e4d5939bb3dbdc71`及本轮协调派单；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
 
 ## 授权与执行方式
 
@@ -13,7 +13,7 @@
 
 | 入口 | 当前事实 |
 | --- | --- |
-| 本地main | `5968661`已含下表成果，后续候选另列；这些新增改动均未push。 |
+| 本地main | `df2011b`已含下表成果，后续候选另列；这些新增改动均未push。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
 | 远程/线上 | 本地origin/main跟踪及最后实际部署证据均为`32d89bf91f441168148884593a0f49b816ad7162`；本轮未fetch/重验远端，不能冒称最新remote。见[部署证据](deployments/2026-10-24-animation-milestone.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |
@@ -47,10 +47,10 @@
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 银发waiting局部修订接入 / 动画专项＋main_acceptance_environment | 夜间小修授权可实视/review后推进，不能把旧版自动写批准。源到`e46f6cc`、夜间记录`79258ad`；activation clean `0404805`已交，root新候选`e6c12da`（base08cf274），与已全检`28c2c92`仅中央docs差异；372测试/类型/构建67资源/strictcheck/重建hash证据沿用，仍等5504真实IAB，未集成；正式集成前须从届时main重建，若仅docs差异可保留已验产物结论。 |
-| P1 | gray/plum扩人 / 动画专项＋main_acceptance_environment | `33e7e267`/`b91dfcce`各4提交source clean且预审通过；同源391 iframe四态/8原生图及边界通过，非顶层设备。临时壳已删，最终QA记录gray `5c02f220`/plum `00881f69` clean已交；异常来源及正式游戏验收仍待，详[交接](coordinator-handoff.md#专项在制与共享所有权)。顶层slot已取消；从5968661独立gray-plum-activation整项接入，5505/session69382已过372测试/类型/构建72资源；不碰silver manifest依赖。动画专项先做5504/5505正式游戏QA，再按原canonical制mint/ochre；最多2角色。银发之后自验/clean/rootreview后集成，不逐个等用户或自动部署。 |
+| P1 | 银发waiting接入 / 动画专项＋root review | 已纳入三角色组合候选`d4b0580`（base df2011b）；组合检查/独立review通过，仅5504正式游戏IAB待交，不属于main。完整来源见交接候选登记，不复制旧链。 |
+| P1 | gray/plum接入与扩人 / 动画专项＋main_acceptance_environment | 正式activation source HEAD `822e9b5` clean（base5968661，12有序提交）已root实际源码/图review；纳入同一三角色组合候选，5505正式游戏IAB进行中未交付，未main。之后按原canonical制mint/ochre，最多2角色并行。 |
 | P2 | 指认弹窗可变人数扇卡 / 调查专项 | 从`31db7c9`新WT accusation-fan-layout实施，5507 waitingOnApproval，仍持viewport未释放；修4人换行裁切，hover/focus上移、触屏/窄屏可选，不硬人数、不靠hover提交，点击具体人才指认。与结果页设计独立。 |
-| P2 | 编辑器大形象位置跳动 / 编辑器专项 | portrait-alignment查出CSS130%/top与静态center及mobile intrinsic尺寸差异，Editor局部absolute/100%/contain/center候选28测试/类型/构建60资源通过；5402/5403保留，新获准用自有同源1004/391 iframe核冷/热加载，不改全局viewport；尚未成功，顶层slot须成功后root明确取消，当前仍等fan后，未集成。若触共享组件先协调，不关动画或重画掩盖。 |
+| P2 | 编辑器大形象位置跳动 / 编辑器专项 | 局部CSS候选28测试/类型/构建60资源通过；自有同源iframe初轮1004下216.23×285、391下317×160居中通过，尚需多角色反复切换/cleanup完整handoff。当前waitingOnApproval，顶层slot未取消，未集成；不改共享组件或资产掩盖。 |
 | P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；等fan＋Editor＋silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
 | P2 | 编辑器分享/投稿端到端 / 编辑器＋用户 | 完整URL16000暂定上限待跨浏览器；GitHub待IAB登录、公开及无上游写权限身份实测，长query失败不等于短预填不支持。 |
