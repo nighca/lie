@@ -97,11 +97,31 @@
             800
           ],
           [
-            940,
-            975
+            920,
+            880
           ],
           [
-            950,
+            938,
+            950
+          ],
+          [
+            915,
+            968
+          ],
+          [
+            918,
+            1000
+          ],
+          [
+            925,
+            1100
+          ],
+          [
+            931,
+            1200
+          ],
+          [
+            940,
             1254
           ],
           [
@@ -473,6 +493,126 @@
           [
             350,
             460
+          ],
+          [
+            420,
+            420
+          ],
+          [
+            578,
+            395
+          ]
+        ]
+      }
+    },
+    {
+      "id": "listening-torso",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 10,
+        "mask": [
+          [
+            580,
+            375
+          ],
+          [
+            715,
+            375
+          ],
+          [
+            745,
+            400
+          ],
+          [
+            850,
+            425
+          ],
+          [
+            945,
+            530
+          ],
+          [
+            875,
+            680
+          ],
+          [
+            900,
+            800
+          ],
+          [
+            920,
+            880
+          ],
+          [
+            938,
+            950
+          ],
+          [
+            915,
+            968
+          ],
+          [
+            918,
+            1000
+          ],
+          [
+            925,
+            1100
+          ],
+          [
+            931,
+            1200
+          ],
+          [
+            940,
+            1254
+          ],
+          [
+            374,
+            1254
+          ],
+          [
+            355,
+            1000
+          ],
+          [
+            355,
+            950
+          ],
+          [
+            385,
+            875
+          ],
+          [
+            425,
+            800
+          ],
+          [
+            460,
+            720
+          ],
+          [
+            470,
+            650
+          ],
+          [
+            470,
+            560
+          ],
+          [
+            440,
+            500
           ],
           [
             420,
@@ -901,6 +1041,7 @@
       "visibility": {
         "torso": true,
         "waiting-torso": false,
+        "listening-torso": false,
         "left-neutral": true,
         "right-neutral": true,
         "listen-arm": false,
@@ -1051,8 +1192,9 @@
       "duration": 4,
       "loop": true,
       "visibility": {
-        "torso": true,
+        "torso": false,
         "waiting-torso": false,
+        "listening-torso": true,
         "left-neutral": false,
         "right-neutral": true,
         "listen-arm": true,
@@ -1178,6 +1320,7 @@
       "visibility": {
         "torso": false,
         "waiting-torso": true,
+        "listening-torso": false,
         "left-neutral": false,
         "right-neutral": false,
         "listen-arm": false,
@@ -1276,6 +1419,7 @@
       "visibility": {
         "torso": true,
         "waiting-torso": false,
+        "listening-torso": false,
         "left-neutral": true,
         "right-neutral": false,
         "listen-arm": false,

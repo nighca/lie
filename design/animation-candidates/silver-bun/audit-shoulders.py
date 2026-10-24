@@ -36,3 +36,24 @@ for y in range(926,1155):
     for x in range(541,1030):
         assert not inside(x,y),f'excess collarbone retained at {x},{y}'
 print('PASS: lower central collarbone excluded while chin retained; no image pixels changed')
+for node_id in ['torso','listening-torso']:
+    node=next(node for node in package['nodes'] if node['id']==node_id)
+    polygon=node['sprite']['mask']
+    image=Image.open(root/package['assets'][node['sprite']['asset']]['src'])
+    for y in range(890,1220):
+        for x in range(920,1030):
+            r,g,b,a=image.getpixel((x,y))
+            if a>=200 and r>150 and 70<g<210 and b<145:
+                assert not inside(x,y),f'{node_id}: lowered right arm skin retained at {x},{y}'
+    print(f'PASS: {node_id} excludes lower-right skin pixels in original lowered-arm region')
+node=next(node for node in package['nodes'] if node['id']=='listening-torso')
+polygon=node['sprite']['mask']
+image=Image.open(root/package['assets']['listening-source']['src'])
+count=0
+for y in range(745,991):
+    for x in range(330,650):
+        r,g,b,a=image.getpixel((x,y))
+        if a>=200 and r<170 and g>140 and b>140:
+            count+=1
+            assert inside(x,y),f'listening cardigan clipped at {x},{y}'
+print(f'PASS: listening retains all {count} aqua cardigan pixels in left waist/hem band')
