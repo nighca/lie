@@ -24,6 +24,14 @@
 | states | 必须映射default/listening/waiting/speaking到已存在clip；default通常映射idle循环 |
 | transitions | 显式{from,to,clip}列表，无条目用240ms共享数值通道settle；显式clip必须存在、不循环、不重复状态对 |
 
+### 栅格资源限额
+
+v1每包最多32个assets，canvas面积与所有assets声明面积合计最多33,554,432像素（32 × 1024²）。共享asset只计一次；两个不同asset即使引用同一PNG也分别计入，因为会分别解码。单边仍最多8192。此限额是技术资源约束，不是创作建议；当前Coral可通过，无须改素材。按每像素RGBA四字节计算，画布和解码像素的名义总量最多128MiB，未计编码文件、浏览器/GPU拷贝、对象及临时开销，不能当浏览器堆内存硬上限。
+
+加载器最多并发三项部件fetch/解码；取到PNG后先检查签名/IHDR尺寸与声明一致，再交浏览器解码，解码后还会核对natural尺寸，避免伪报小尺寸绕过像素预算。超过数量/像素预算的包在发起部件请求前拒绝；尺寸不一致的PNG在创建Image前拒绝。
+
+调用方取消时，解码等待会立即拒绝、清空image.src、释放临时Object URL并移除abort监听，不等待decode()先结束。原生decode Promise的晚到成功/失败仍有处理器，不会把结果写回或产生未处理拒绝；任一部件失败也会取消并释放同批其他加载及已完成图片。成功后的decoded images仍由调用方在停止播放后释放引用。
+
 父节点变换与显隐向后代传播，但sprite按独立order绘制，因而靠耳手可逻辑跟随头、视觉在头前，袖肩仍在躯干后。图层不可直接在不同状态换父节点；特殊姿态用专用节点/显隐，保持稳定rig。
 
 显式transition按作者轨道直接播放一次，完成后进入目标loop并保留越过结束点的剩余时长。显式clip不叠加隐式240ms混合；没有显式clip时仅数字通道从当前pose混合到新目标、显隐/附件立即切换。中断时从当前可见pose取样；若存在新的显式过渡，由作者负责其起点衔接。自然抬放需制作专门轨迹/部件，不能把静态换臂或数值settle描述成完整抬放。
@@ -32,7 +40,7 @@
 
 独立`@lie/appearance-animation`不依赖Vue或游戏规则。时间推进由宿主传delta秒；采样和状态机可离线测试。Canvas后端只负责矩阵、遮罩、绘制顺序，不读取案件、管理凭据、音频或角色ID。
 
-`@lie/ui`的`AnimatedPortrait`参数为`src:string|null`、`state`四态、可选label（默认人物形象）；默认slot是原有静态img/首字回退。加载完成前或版本/资源/尺寸/Canvas失败，始终保留slot。source变化取消旧加载，晚到结果不得覆盖新人物；卸载取消RAF、请求和解码引用，Object URL解码后即释放。
+`@lie/ui`的`AnimatedPortrait`参数为`src:string|null`、`state`四态、可选label（默认人物形象）；默认slot是原有静态img/首字回退。加载完成前或版本/资源/尺寸/Canvas失败，始终保留slot。source变化取消旧加载，晚到结果不得覆盖新人物；卸载取消RAF、请求和解码引用，Object URL在解码成功、失败或取消时即释放。
 
 组件本身display:contents，不增加舞台定位层。canvas沿现大立绘absolute、height130%/width100%/object-fit contain/object-position top居中布局；调查页如更改img的取景，同步确认canvas样式。头像、列表、首页、指认卡不切成动画。
 

@@ -1,6 +1,8 @@
 import type { AnimationPackage, AnimationProperty, AnimationState } from './types'
 
 export const animationStates: readonly AnimationState[] = ['default', 'listening', 'waiting', 'speaking']
+const maxAssets = 32
+const maxPixels = 32 * 1024 * 1024
 const properties = ['x', 'y', 'pivotX', 'pivotY', 'rotation', 'scaleX', 'scaleY'] as const
 function object(value: unknown, label: string): Record<string, unknown> {
   if (value == null || typeof value !== 'object' || Array.isArray(value)) throw Error(`${label}: expected object`)
@@ -22,11 +24,19 @@ export function readAnimationPackage(value: unknown): AnimationPackage {
   fields(root, ['schemaVersion', 'canvas', 'assets', 'nodes', 'clips', 'states', 'transitions'], 'Animation')
   if (root.schemaVersion !== 1) throw Error('Unsupported animation schemaVersion')
   const canvas = object(root.canvas, 'canvas'); fields(canvas, ['width', 'height'], 'canvas')
+  const canvasSize = { width: size(canvas.width, 'canvas.width'), height: size(canvas.height, 'canvas.height') }
+  let pixels = canvasSize.width * canvasSize.height
+  if (pixels > maxPixels) throw Error('Animation exceeds total pixel budget')
+  const entries = Object.entries(object(root.assets, 'assets'))
+  if (entries.length > maxAssets) throw Error('Animation exceeds asset count limit')
   const assets: AnimationPackage['assets'] = {}
-  for (const [id, raw] of Object.entries(object(root.assets, 'assets'))) {
+  for (const [id, raw] of entries) {
     text(id, 'asset ID'); const asset = object(raw, id); fields(asset, ['src', 'width', 'height'], id)
     if (typeof asset.src !== 'string' || !/^parts\/[a-z0-9]+(?:-[a-z0-9]+)*\.png$/.test(asset.src)) throw Error(`${id}: asset must be a local parts/*.png`)
-    assets[id] = { src: asset.src, width: size(asset.width, id), height: size(asset.height, id) }
+    const width = size(asset.width, id), height = size(asset.height, id)
+    pixels += width * height
+    if (pixels > maxPixels) throw Error('Animation exceeds total pixel budget')
+    assets[id] = { src: asset.src, width, height }
   }
   const ids = new Set<string>()
   const nodes: AnimationPackage['nodes'] = array(root.nodes, 'nodes').map(raw => {
@@ -93,5 +103,5 @@ export function readAnimationPackage(value: unknown): AnimationPackage {
     if (from === to || pairs.has(pair)) throw Error('Duplicate or self transition'); pairs.add(pair)
     return { from, to, clip }
   })
-  return { schemaVersion: 1, canvas: { width: size(canvas.width, 'canvas.width'), height: size(canvas.height, 'canvas.height') }, assets, nodes, clips, states, transitions }
+  return { schemaVersion: 1, canvas: canvasSize, assets, nodes, clips, states, transitions }
 }

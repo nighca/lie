@@ -20,3 +20,5 @@ renderer.render(timeline.advance(deltaSeconds))
 ```
 
 `rotation` uses degrees and tracks use seconds. A 240ms numeric settle is only the fallback when no explicit transition clip exists. Visibility/part changes are discrete. Natural arm lifts require authored trajectories and suitable parts; there is no automatic bitmap morph, IK, mesh skinning, arbitrary script evaluation or audio/phoneme engine.
+
+Raster limits: at most 32 assets and 33,554,432 total pixels across canvas + assets, nominally 128 MiB of RGBA storage (excluding encoded bytes, browser/GPU copies and other overhead). PNG IHDR dimensions must match declarations before decode. The loader allows three simultaneous part fetch/decode operations; abort or failure clears image sources, revokes decode URLs promptly, and cancels sibling work without waiting for an unsettled decode. Late decode resolutions/rejections cannot publish results.

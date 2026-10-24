@@ -12,6 +12,23 @@ describe('versioned animation contract', () => {
     expect(Object.keys(data.states)).toEqual(['default', 'listening', 'waiting', 'speaking'])
     expect(data.nodes.filter(node => node.sprite?.asset === 'listening-arm')).toHaveLength(2)
   })
+  it('caps resource count even when each image is tiny', () => {
+    const raw = fixture()
+    raw.assets = Object.fromEntries(Array.from({ length: 33 }, (_, i) => [`part-${i}`, { src: `parts/part-${i}.png`, width: 1, height: 1 }]))
+    expect(() => readAnimationPackage(raw)).toThrow('asset count')
+  })
+  it('caps total canvas and shared-image pixels before playback', () => {
+    const raw = fixture()
+    const used = raw.canvas.width * raw.canvas.height + Object.values(raw.assets).reduce((sum: number, asset: any) => sum + asset.width * asset.height, 0)
+    const remaining = 32 * 1024 * 1024 - used
+    raw.assets['budget-wide'] = { src: 'parts/budget-wide.png', width: 8192, height: Math.floor(remaining / 8192) }
+    if (remaining % 8192 !== 0) raw.assets['budget-remainder'] = { src: 'parts/budget-remainder.png', width: remaining % 8192, height: 1 }
+    expect(() => readAnimationPackage(raw)).not.toThrow()
+    raw.assets['over-budget'] = { src: 'parts/over-budget.png', width: 1, height: 1 }
+    expect(() => readAnimationPackage(raw)).toThrow('pixel budget')
+    const hugeCanvas = fixture(); hugeCanvas.canvas = { width: 8192, height: 8192 }
+    expect(() => readAnimationPackage(hugeCanvas)).toThrow('pixel budget')
+  })
   it.each([
     ['version', (d: any) => { d.schemaVersion = 2 }],
     ['script', (d: any) => { d.evaluate = '() => alert(1)' }],
