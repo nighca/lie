@@ -75,7 +75,7 @@ describe('bundled game content', () => {
 
   it('generates every catalog preset with unchanged canonical assets and a shared state canvas', async () => {
     const runtime = readAppearances(appearanceData)
-    const completed = readAppearances(designAppearances)
+    const completed = designAppearances
     expect(runtime.map(({ id }) => id)).toEqual(completed.map(({ id }) => id))
     for (const source of completed) {
       const appearance = runtime.find((item) => item.id === source.id)

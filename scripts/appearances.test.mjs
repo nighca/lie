@@ -122,3 +122,44 @@ test('source and output trees cannot overlap or traverse symlinks', async (t) =>
   await symlink(join(f.sourceDirectory, 'assets/fixture-guide/default.png'), sourceAsset)
   await assert.rejects(syncAppearances(f), /expected a regular asset/)
 })
+
+async function animationFixture(f) {
+  const base = join(f.sourceDirectory, 'assets/fixture-guide/animation')
+  await mkdir(join(base, 'parts'), { recursive: true })
+  await writeFile(join(base, 'parts/body.png'), png)
+  const data = { schemaVersion: 1, canvas: { width: 1, height: 1 }, assets: { body: { src: 'parts/body.png', width: 1, height: 1 } }, nodes: [{ id: 'body', parent: null, visible: true, transform: { x: 0, y: 0, pivotX: 0, pivotY: 0, rotation: 0, scaleX: 1, scaleY: 1 }, sprite: { asset: 'body', order: 0 } }], clips: { idle: { duration: 1, loop: true, visibility: {}, tracks: [] } }, states: { default: 'idle', listening: 'idle', waiting: 'idle', speaking: 'idle' }, transitions: [] }
+  const path = join(base, 'package.json')
+  await writeFile(path, JSON.stringify(data))
+  return { path, base, data }
+}
+
+test('animated and static appearances coexist; shared parts are copied once with unchanged bytes', async t => {
+  const f = await fixture(t), animation = await animationFixture(f)
+  await f.assets('another-person')
+  await f.manifest([{ ...entry(), animation: 'assets/fixture-guide/animation/package.json' }, entry('another-person')])
+  await syncAppearances(f)
+  const runtime = JSON.parse(await readFile(join(f.outputDirectory, 'manifest.json'), 'utf8'))
+  assert.equal(runtime[0].animation, '/appearances/fixture-guide/animation/package.json')
+  assert.equal(runtime[1].animation, undefined)
+  assert.deepEqual(await readFile(join(f.outputDirectory, 'fixture-guide/animation/package.json')), await readFile(animation.path))
+  assert.deepEqual(await readFile(join(f.outputDirectory, 'fixture-guide/animation/parts/body.png')), png)
+  await f.manifest([entry(), entry('another-person')]); await syncAppearances(f)
+  await assert.rejects(readFile(join(f.outputDirectory, 'fixture-guide/animation/package.json')), { code: 'ENOENT' })
+})
+
+for (const [label, mutate] of [
+  ['unsupported version', data => { data.schemaVersion = 2 }],
+  ['outside asset', data => { data.assets.body.src = '../outside.png' }],
+  ['missing node', data => { data.nodes[0].parent = 'missing' }],
+  ['wrong dimensions', data => { data.assets.body.width = 2 }],
+]) {
+  test(`bad animation (${label}) cannot change existing generated output`, async t => {
+    const f = await fixture(t); await syncAppearances(f)
+    const before = await readFile(join(f.outputDirectory, 'manifest.json'))
+    const animation = await animationFixture(f); mutate(animation.data)
+    await writeFile(animation.path, JSON.stringify(animation.data))
+    await f.manifest([{ ...entry(), animation: 'assets/fixture-guide/animation/package.json' }])
+    await assert.rejects(syncAppearances(f))
+    assert.deepEqual(await readFile(join(f.outputDirectory, 'manifest.json')), before)
+  })
+}

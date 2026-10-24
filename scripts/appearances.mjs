@@ -1,10 +1,11 @@
 import { readFile, readdir, mkdir, writeFile, rm, realpath, lstat } from 'node:fs/promises'
 import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { readAnimationPackage } from '../packages/appearance-animation/src/package.ts'
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url))
 const states = ['listening', 'waiting', 'speaking']
-const sourceFields = new Set(['id', 'name', 'avatar', 'portrait', 'accent', 'voiceId', 'portraits'])
+const sourceFields = new Set(['id', 'name', 'avatar', 'portrait', 'accent', 'voiceId', 'portraits', 'animation'])
 const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])
 
 function object(value, label) {
@@ -87,6 +88,21 @@ export async function syncAppearances({ sourceDirectory = join(projectRoot, 'des
       const bytes = await load(path)
       if (!bytes.subarray(16, 24).equals(defaultBytes.subarray(16, 24))) throw new Error(`${path}: state canvas must match default`)
       generated.portraits[state] = add(`${id}/${state}.png`, bytes)
+    }
+    if (item.animation != null) {
+      const expected = `assets/${id}/animation/package.json`
+      if (item.animation !== expected) throw new Error(`${id}.animation: expected ${expected}`)
+      const input = join(source, expected)
+      if (!(await lstat(input)).isFile() || !((await realpath(input)).startsWith(`${realSource}${sep}`))) throw new Error(`${expected}: expected regular animation package`)
+      const bytes = await readFile(input)
+      const animation = readAnimationPackage(JSON.parse(bytes.toString('utf8')))
+      generated.animation = add(`${id}/animation/package.json`, bytes)
+      for (const asset of Object.values(animation.assets)) {
+        const path = `assets/${id}/animation/${asset.src}`
+        const image = await load(path)
+        if (image.readUInt32BE(16) !== asset.width || image.readUInt32BE(20) !== asset.height) throw new Error(`${path}: dimensions differ from animation contract`)
+        add(`${id}/animation/${asset.src}`, image)
+      }
     }
     runtime.push(generated)
   }

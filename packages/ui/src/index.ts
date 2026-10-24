@@ -7,3 +7,5 @@ export { default as VoiceControl } from './components/VoiceControl.vue'
 export type { VoiceStatus } from './components/VoiceControl.vue'
 export { default as UiDialog } from './components/UiDialog.vue'
 export { default as UiNotice } from './components/UiNotice.vue'
+
+export { default as AnimatedPortrait } from './components/AnimatedPortrait.vue'

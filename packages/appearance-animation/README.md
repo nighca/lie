@@ -1,0 +1,22 @@
+# @lie/appearance-animation
+
+Independent, bounded Canvas 2D animation player. It does not depend on Vue, game content, voice providers or a particular character. The current package name is retained for the agreed implementation sequence; the approved CharacterPreset naming migration follows game integration.
+
+- `readAnimationPackage(unknown)` validates schema version 1 and all internal references.
+- `sampleClip(package, clip, seconds)` is deterministic and host independent.
+- `AnimationTimeline(package, initialState)` plays named states, explicit one-shot transitions and interrupted default settling.
+- `createCanvasRenderer(canvas, package, images)` draws decoded shared parts with hierarchy, independent order, crop and polygon masks.
+- `loadAnimationPackage(url, signal)` fetches/decodes local package-relative parts and validates dimensions. The caller owns cancellation and decoded resource lifetime.
+
+The Vue `AnimatedPortrait` wrapper lives in `@lie/ui`. Static fallback belongs to its slot and the existing appearance manifest. See [contract](../../docs/animation/contract.md) and [production workflow](../../docs/animation/production-workflow.md).
+
+```ts
+const { data, images } = await loadAnimationPackage(packageUrl, abort.signal)
+const timeline = new AnimationTimeline(data, 'default')
+const renderer = createCanvasRenderer(canvas, data, images)
+timeline.setState('listening')
+renderer.render(timeline.advance(deltaSeconds))
+// On disposal: stop the host clock, abort loading, renderer.dispose(), images.clear().
+```
+
+`rotation` uses degrees and tracks use seconds. A 240ms numeric settle is only the fallback when no explicit transition clip exists. Visibility/part changes are discrete. Natural arm lifts require authored trajectories and suitable parts; there is no automatic bitmap morph, IK, mesh skinning, arbitrary script evaluation or audio/phoneme engine.

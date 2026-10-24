@@ -1,0 +1,41 @@
+# 人物动画数据契约 v1
+
+2026-10-24。用户已批准有限Canvas数据播放器、独立动画包由形象清单引用、先顾遥在游戏页接入并兼容静态人物。当前执行顺序保留appearance命名，已批准的CharacterPreset/character-animation整体命名在动画接入后由协调者统一推进，不在本任务提前批量改名。
+
+## 单一来源与目录
+
+`design/appearances/manifest.json`继续唯一维护id/name/accent/voiceId/头像与静态四态。条目可选`animation: "assets/<id>/animation/package.json"`。缺省无动画，仍为合法静态人物。案件继续只引用appearanceId，不知道节点或播放器。
+
+动画包独立于清单，内部不重复人物姓名、音色、主题色、故事或供应商信息。PNG位于包内`parts/<asset-id>.png`；资源共享发生在同一包的所有clip间。源生成器严格校验JSON/引用/实际PNG尺寸，原样复制JSON及被引用PNG，输出`/appearances/<id>/animation/package.json`及相对parts路径。生成物不手改、不跟踪。旧静态四态的路径与字节保持不变。
+
+生产机器契约的权威定义为`packages/appearance-animation/src/types.ts`与`package.ts`的严格解析器；未知版本、字段、坏引用、非有限数值、循环父链、重复轨道、不合法路径均拒绝，不执行数据中的JS。
+
+| 字段 | 规格 |
+| --- | --- |
+| schemaVersion | 固定1；不支持的版本回静态，不猜测兼容 |
+| canvas | width/height，正安全整数，最多8192；统一逻辑像素坐标 |
+| assets | 部件ID→{src,width,height}；src仅parts/小写连字符ID.png；实际PNG尺寸须一致 |
+| nodes | 父先子后的节点数组；唯一id、parent或null、transform、visible，可选sprite |
+| transform | x/y/pivotX/pivotY（逻辑像素）、rotation（度）、正scaleX/scaleY；缺失不猜默认值 |
+| sprite | asset引用、order全局绘制次序；可选crop=[x,y,w,h]在原PNG内，mask为节点局部坐标多边形 |
+| clips | 命名clip→duration秒、loop、visibility覆盖、tracks；每次从默认装配采样，不继承另一clip残留 |
+| track | node引用、property、interpolation、keys；属性仅七个transform通道或visible；linear/step，visible只能step/boolean |
+| keys | {time,value}数组，首帧0、时间严格递增且不超duration；数字有限、缩放为正 |
+| states | 必须映射default/listening/waiting/speaking到已存在clip；default通常映射idle循环 |
+| transitions | 显式{from,to,clip}列表，无条目用240ms共享数值通道settle；显式clip必须存在、不循环、不重复状态对 |
+
+父节点变换与显隐向后代传播，但sprite按独立order绘制，因而靠耳手可逻辑跟随头、视觉在头前，袖肩仍在躯干后。图层不可直接在不同状态换父节点；特殊姿态用专用节点/显隐，保持稳定rig。
+
+显式transition按作者轨道直接播放一次，完成后进入目标loop并保留越过结束点的剩余时长。显式clip不叠加隐式240ms混合；没有显式clip时仅数字通道从当前pose混合到新目标、显隐/附件立即切换。中断时从当前可见pose取样；若存在新的显式过渡，由作者负责其起点衔接。自然抬放需制作专门轨迹/部件，不能把静态换臂或数值settle描述成完整抬放。
+
+## 播放器与Vue边界
+
+独立`@lie/appearance-animation`不依赖Vue或游戏规则。时间推进由宿主传delta秒；采样和状态机可离线测试。Canvas后端只负责矩阵、遮罩、绘制顺序，不读取案件、管理凭据、音频或角色ID。
+
+`@lie/ui`的`AnimatedPortrait`参数为`src:string|null`、`state`四态、可选label（默认人物形象）；默认slot是原有静态img/首字回退。加载完成前或版本/资源/尺寸/Canvas失败，始终保留slot。source变化取消旧加载，晚到结果不得覆盖新人物；卸载取消RAF、请求和解码引用，Object URL解码后即释放。
+
+组件本身display:contents，不增加舞台定位层。canvas沿现大立绘absolute、height130%/width100%/object-fit contain/object-position top居中布局；调查页如更改img的取景，同步确认canvas样式。头像、列表、首页、指认卡不切成动画。
+
+减少动态效果时使用原静态四态slot，不启动动画；文档hidden时暂停RAF/时钟，恢复不补算离开期间时长。游戏页面只将已有语音生命周期映射成四态：未对话/连接准备/结束/错误→default，recording→listening，waiting/speaking同名。不新增人声识别或心理推断。
+
+当前嘴部为数据中的合成时序显隐/缩放，没有真实语音或中文音素同步。调用方无需传音量；未来如加入真实驱动应单独确认契约，不能把演示时序当真实供应商效果。

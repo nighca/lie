@@ -6,7 +6,7 @@ import { DRAFT_KEY } from '../src/editor/draft'
 import * as sharing from '../src/editor/share'
 import { game as sourceGame } from './helpers'
 
-const appearance = { id: 'new-guide', name: '新来的向导', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456', voiceId: 'existing-voice', portraits: { listening: null, waiting: null, speaking: null } }
+const appearance = { id: 'new-guide', name: '新来的向导', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456', voiceId: 'existing-voice', animation: null, portraits: { listening: null, waiting: null, speaking: null } }
 const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: appearance.id })) }
 const cleanup: (() => void)[] = []
 beforeEach(() => {

@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { createDraft, draftGame, DRAFT_KEY, loadDraft, removeCharacter, saveDraft } from '../src/editor/draft'
 import { game as sourceGame } from './helpers'
 
-const appearances = [{ id: 'blue', name: '蓝衣眼镜', avatar: '/a.png', portrait: '/p.png', accent: '#123456', voiceId: null, portraits: { listening: null, waiting: null, speaking: null } }]
+const appearances = [{ id: 'blue', name: '蓝衣眼镜', avatar: '/a.png', portrait: '/p.png', accent: '#123456', voiceId: null, animation: null, portraits: { listening: null, waiting: null, speaking: null } }]
 const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: 'blue' })) }
 
 function editable() { return JSON.parse(JSON.stringify(game)) }

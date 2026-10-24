@@ -101,3 +101,14 @@ describe('appearance display names', () => {
     expect(() => readAppearances([{ id: 'missing', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456' }])).toThrow('Invalid appearance name')
   })
 })
+
+
+describe('optional appearance animation', () => {
+  it('keeps static appearances and resolves an animated appearance in one catalog', () => {
+    const values = readAppearances([preset('static'), { ...preset('moving'), animation: '/appearances/moving/animation/package.json' }])
+    expect(values.map(value => value.animation)).toEqual([null, '/appearances/moving/animation/package.json'])
+  })
+  it.each(['', 'https://example.net/animation/package.json', '/appearances/other/animation/package.json', 2, {}])('rejects invalid animation references %j', animation => {
+    expect(() => readAppearances([{ ...preset('moving'), animation }])).toThrow('Invalid appearance animation')
+  })
+})

@@ -10,7 +10,8 @@
       "listening": "assets/coral-bob/listening.png",
       "waiting": "assets/coral-bob/waiting.png",
       "speaking": "assets/coral-bob/speaking.png"
-    }
+    },
+    "animation": "assets/coral-bob/animation/package.json"
   },
   {
     "id": "sunny-moustache",

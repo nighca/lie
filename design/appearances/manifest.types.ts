@@ -16,6 +16,8 @@ export interface AppearanceManifestEntry {
   accent: string
   /** 已配置的灵矽音色 ID，正式库必填非空；这是音色标识，不是 API key。 */
   voiceId: string
+  /** 可选独立动画包；固定 assets/<id>/animation/package.json，缺省沿用静态四态。 */
+  animation?: string
   /** 三种补充立绘；连同 portrait 构成当前四态，画布尺寸必须一致。 */
   portraits: {
     /** 人物聆听玩家时的立绘：assets/<id>/listening.png。 */
