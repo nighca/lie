@@ -40,7 +40,7 @@
     "avatar": "/appearances/silver-bun-v1/default.png",
     "portrait": "/appearances/silver-bun-v1/default.png",
     "accent": "#78DDD7",
-    "voiceId": null,
+    "voiceId": "8fca6d5172fc4c309c2d16352ca8a9b3",
     "portraits": {
       "listening": "/appearances/silver-bun-v1/listening.png",
       "waiting": "/appearances/silver-bun-v1/waiting.png",
@@ -52,7 +52,7 @@
     "avatar": "/appearances/salt-pepper-beard-v1/default.png",
     "portrait": "/appearances/salt-pepper-beard-v1/default.png",
     "accent": "#FF665B",
-    "voiceId": null,
+    "voiceId": "a42e04fcefac4e9492581fbc95f3fce3",
     "portraits": {
       "listening": "/appearances/salt-pepper-beard-v1/listening.png",
       "waiting": "/appearances/salt-pepper-beard-v1/waiting.png",
@@ -64,7 +64,7 @@
     "avatar": "/appearances/plum-crop-v1/default.png",
     "portrait": "/appearances/plum-crop-v1/default.png",
     "accent": "#AFA0F5",
-    "voiceId": null,
+    "voiceId": "2c1ea0eb64c74975813af2187ef2aa0f",
     "portraits": {
       "listening": "/appearances/plum-crop-v1/listening.png",
       "waiting": "/appearances/plum-crop-v1/waiting.png",
@@ -76,7 +76,7 @@
     "avatar": "/appearances/mint-puffs-v1/default.png",
     "portrait": "/appearances/mint-puffs-v1/default.png",
     "accent": "#78DDD7",
-    "voiceId": null,
+    "voiceId": "e1dd0f75cad64290a1172dff48103694",
     "portraits": {
       "listening": "/appearances/mint-puffs-v1/listening.png",
       "waiting": "/appearances/mint-puffs-v1/waiting.png",
@@ -88,7 +88,7 @@
     "avatar": "/appearances/ochre-freckles-v1/default.png",
     "portrait": "/appearances/ochre-freckles-v1/default.png",
     "accent": "#FFCF43",
-    "voiceId": null,
+    "voiceId": "d0a37106e7f945b0aa85f3d233ffc36e",
     "portraits": {
       "listening": "/appearances/ochre-freckles-v1/listening.png",
       "waiting": "/appearances/ochre-freckles-v1/waiting.png",

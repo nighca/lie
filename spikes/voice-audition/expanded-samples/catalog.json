@@ -1,0 +1,178 @@
+{
+  "capturedAt": "2026-10-24T08:02:41.299Z",
+  "voices": [
+    {
+      "appearance": "silver-bun",
+      "id": "8fca6d5172fc4c309c2d16352ca8a9b3",
+      "name": "温暖治愈女",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/nqjskd/%E9%BE%99%E5%AA%9B.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "female",
+        "styles": [
+          "wenrou"
+        ],
+        "scenes": [
+          "audiobook"
+        ],
+        "profile": "public",
+        "emotions": {
+          "default": {
+            "emotion": "default",
+            "demo_url": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/nqjskd/%E9%BE%99%E5%AA%9B.mp3"
+          }
+        }
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "appearance": "salt-pepper-beard",
+      "id": "a42e04fcefac4e9492581fbc95f3fce3",
+      "name": "睿智青年男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/tojjob/%E9%BE%99%E6%A5%A0.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "audiobook"
+        ],
+        "profile": "public",
+        "emotions": {
+          "default": {
+            "emotion": "default",
+            "demo_url": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/tojjob/%E9%BE%99%E6%A5%A0.mp3"
+          }
+        }
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "appearance": "plum-crop",
+      "id": "2c1ea0eb64c74975813af2187ef2aa0f",
+      "name": "低调冷静女",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/nbabuh/%E9%BE%99%E5%BA%94%E9%9D%99.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "female",
+        "styles": [
+          "lengjing"
+        ],
+        "scenes": [
+          "supporter"
+        ],
+        "profile": "public",
+        "emotions": {
+          "default": {
+            "emotion": "default",
+            "demo_url": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/nbabuh/%E9%BE%99%E5%BA%94%E9%9D%99.mp3"
+          }
+        }
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "appearance": "mint-puffs",
+      "id": "e1dd0f75cad64290a1172dff48103694",
+      "name": "爽快思思/Skye",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Skye.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "young",
+        "gender": "female",
+        "styles": [
+          "youhao"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public",
+        "emotions": {
+          "angry": {
+            "emotion": "angry",
+            "demo_url": "https://xrobot-storage.qnaigc.com/demo/demo_emotion/%E7%88%BD%E5%BF%AB%E6%80%9D%E6%80%9D_zh_female_shuangkuaisisi_emo_v2_mars_bigtts_angry.wav"
+          },
+          "coldness": {
+            "emotion": "coldness",
+            "demo_url": "https://xrobot-storage.qnaigc.com/demo/demo_emotion/%E7%88%BD%E5%BF%AB%E6%80%9D%E6%80%9D_zh_female_shuangkuaisisi_emo_v2_mars_bigtts_coldness.wav"
+          },
+          "default": {
+            "emotion": "default",
+            "demo_url": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Skye.mp3"
+          },
+          "excited": {
+            "emotion": "excited",
+            "demo_url": "https://xrobot-storage.qnaigc.com/demo/demo_emotion/%E7%88%BD%E5%BF%AB%E6%80%9D%E6%80%9D_zh_female_shuangkuaisisi_emo_v2_mars_bigtts_excited.wav"
+          },
+          "happy": {
+            "emotion": "happy",
+            "demo_url": "https://xrobot-storage.qnaigc.com/demo/demo_emotion/%E7%88%BD%E5%BF%AB%E6%80%9D%E6%80%9D_zh_female_shuangkuaisisi_emo_v2_mars_bigtts_happy.wav"
+          },
+          "neutral": {
+            "emotion": "neutral",
+            "demo_url": "https://xrobot-storage.qnaigc.com/demo/demo_emotion/%E7%88%BD%E5%BF%AB%E6%80%9D%E6%80%9D_zh_female_shuangkuaisisi_emo_v2_mars_bigtts_neutual.wav"
+          },
+          "sad": {
+            "emotion": "sad",
+            "demo_url": "https://xrobot-storage.qnaigc.com/demo/demo_emotion/%E7%88%BD%E5%BF%AB%E6%80%9D%E6%80%9D_zh_female_shuangkuaisisi_emo_v2_mars_bigtts_excited.wav"
+          },
+          "surprised": {
+            "emotion": "surprised",
+            "demo_url": "https://xrobot-storage.qinaigc.com/demo/demo_emotion/%E7%88%BD%E5%BF%AB%E6%80%9D%E6%80%9D_zh_female_shuangkuaisisi_emo_v2_mars_bigtts_sad.wav"
+          }
+        }
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "appearance": "ochre-freckles",
+      "id": "d0a37106e7f945b0aa85f3d233ffc36e",
+      "name": "少年梓辛/Brayan",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Brayan.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "youhao"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public",
+        "emotions": {
+          "default": {
+            "emotion": "default",
+            "demo_url": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Brayan.mp3"
+          }
+        }
+      },
+      "tier": "free",
+      "expired_time": ""
+    }
+  ]
+}
