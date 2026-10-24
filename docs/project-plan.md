@@ -421,3 +421,6 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 
 
 2026-10-24 形象库单一权威来源专项：用户review design/appearances/manifest.json指出音色/前三套四态不同步、路径混用assets和expansion-complete、中文名写死Editor.vue，强调新增应只改一处。root实际读取design/runtime/Editor来源确认目标当前未成立，不能用运行时已有正确配置掩盖源陈旧。已交editorowner独立appearance-catalog-source：design manifest唯一权威，加入8中文name与全部已配voiceId/四态，正式素材统一assets/<id>/；自动确定性生成runtime清单/素材并接build/dev，editor读name不维护map，新增只需放素材和增加源条目。源严格校验name/voice/状态/文件/ID，runtime当前容错独立；保留历史原稿及现有URL引用，不删其他owner依赖，不重新生图。任务含生成一致性、缺失资源、动态新增无需业务代码的有效自动检查、类型/构建及中文消费验收。此为用户明确设计目标的落实，不等原型视觉确认，也不改变游戏机制。调查页owner已收到文件边界协调，当前设计继续。
+
+
+2026-10-24 编辑器v2原型正式获批：用户确认整体没问题，要求按此实现，补充最后一步除试玩还要分享、投稿官方。root按分享主按钮/试玩次按钮/投稿独立弱入口安排，避免混淆复制分享与官方收录。editorowner先完成当前形象单一源（包括apps/web/package.json hooks和.gitignore必要范围已协调），rootreview集成后从该SHA进入生产editor，以新name契约为依赖；保持本地draft/同引擎试玩/压缩URL分享，不增账号或作品版本管理。投稿入口沿无OAuth跳GitHub作者确认，不伪称自动PR；当前仓私有，公开计划未执行，外部投稿未开放应如实提示，先可整理JSON/复制或下载及准确GitHub步骤，不依赖尚未验证的长query预填，不代表用户创建fork/commit/PR。原型审批无需再问，生产交付需相关自动检查和独立IAB验收，rootreview集成。
