@@ -46,7 +46,7 @@
 | 编辑器基础/v2 | 基础草稿、同引擎试玩和URL分享已本地可测；v2原型已批准，生产实现等待单一来源依赖 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff→041c74a`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
 | 调查控制与语音反馈 | 设计`51776c8`与技术提案`20eb743`已交，待root归档/用户确认；未改正式UI | 自然时长、背景回看、底栏指认/时间/音量、“询问记录”；背景停止规则/窄屏固定底栏仍提案。 |
 | GitHub投稿 | 研究`9612c85`与独立实测`e94fdd2`已交；未登录IAB短链接遇登录门槛，9280B合成中文JSON的27334字符query被GitHub拒绝为过长 | [投稿方案](editor-official-submission-proposal.md)；正文/commit/PR表单全文预填仍未知，复制/下载为保底。 |
-| 动画探索 | 第二轮54895已交，用户指出聆听臂连接/比例和等待未托腮；已转独立动画chat继续单角色修正，静态角色仍生产基线 | 更明显待机、聆听手靠耳、说话嘴部开合；视觉时序不等于语音/中文口型同步。3D暂停扩大。 |
+| 动画探索 | 第二轮54895已交，用户指出聆听臂连接/比例和等待未托腮；独立动画chat已交64127c1→c5e40f2修正候选，姿态与微动画待用户看；静态角色仍生产基线 | 更明显待机、聆听手靠耳、说话嘴部开合；视觉时序不等于语音/中文口型同步。3D暂停扩大。 |
 | 自动化与CD | 核心/voice/UI/web/gateway分层fake与回归、typecheck/build及受控CD均存在 | [验证记录](validation.md)、[CD](continuous-deployment.md)；测试数量跟随具体review提交，不沿用旧110项当现基线。 |
 
 ## 优先执行队列
@@ -62,8 +62,8 @@
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
 | P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题已实际完成且root逐答review为12PASS，清理6设备/1agent完成；证据已review并准备合入，不覆盖首批UNCERTAIN，不代替真人多轮。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
-| P1 | 单角色原画动画 / 独立chat | 用户可直接讨论的「LIE 人物动画设计与打磨」chat `01a16d44-aeea-7552-b184-5118072e75f3` 已接手；修正v2聆听手臂比例/连接及等待托腮。root负责进度协调、review与集成，原子代理不重复制作；不扩人。 |
-| P2 | 里程碑发布 / root唯一integrator | 上述review成熟后统一发布，并核CI/CD、线上版本与voice状态；本地新版不等同线上8cad已更新。 |
+| P1 | 单角色原画动画 / 独立chat | 用户可直接讨论的「LIE 人物动画设计与打磨」chat `01a16d44-aeea-7552-b184-5118072e75f3` 已接手；听臂连接/等待托腮及微动画已在候选修正，待用户验看；root负责进度协调、review与集成，原子代理不重复制作；不扩人。 |
+| P2 | 里程碑发布 / root唯一integrator | 里程碑376ce64已正常push，8787构建/health/资源清单已验；独立代理核目标SHA的Actions和CF实际部署，尚不把push当上线。 |
 | P2 | GitHub预填补验 / 独立UI实验+用户 | 等用户IAB登录；普通外部贡献链等实际公开及无上游写权限身份。只停预填/review，未经授权不建fork/branch/commit/PR；不向公开仓传项目私有正文。 |
 | P2 | 角色出戏边界 / root+语音/内容owner | 首案攻击问仍出现幕后元话语，工具层/独立顶层候选均未解决，候选未生产；已停止无限付费叠提示。目录只读识别deepseek-v4-flash不证明根因，不擅自换模型/供应商/剧情；见[沉浸调查](role-immersion-investigation.md)、[首案证据](case-behavior-validation.md)。 |
 | P2 | 启动等待/延迟质量 / 语音owner | 已有启动阶段拆分分析；在真实测量基础上评估AudioContext/WS/hello/mic/worklet，不擅自跨轮保活麦克风/连接。 |

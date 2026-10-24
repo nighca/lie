@@ -47,3 +47,6 @@
 - 组合独立IAB验收完成：1280/391首页标题/品牌同值、三案切全部8形象、35PNG统一URL全200，Editor三步/8中文名/659字符真实分享开intro正常，console空。记录/private/tmp/lie-combined-qa.md；只用假voice与虚构草稿，无麦克风/真实推理。临时服务/标签页已清理。root准备快进主干并更新8787，Editor共用header另有最小候选短验中。
 
 - root完整review编辑器共用header f03：仅slots/旧CSS清理/事件与忙碌离开门禁，Web150/type/build通过；独立1280/391品牌/notice/nav/返回真实QA通过。候选集成本轮全部已验功能后准备里程碑push，线上实际部署仍须另外核验。
+
+- 里程碑376ce64正常fetch/recheck后push origin main成功（远端8cad→376），未强推；8787已同步，HTTP确认最终CPqSMV_C bundle、health ok/storage none及8canonical清单。线上Actions/CF实际部署由独立验证owner接手，尚不宣称已上线。
+- 动画独立chat直接同步（用户已明确授权双方通信）：64127c1修正连续听臂/托腮承托，c5e40f2补接触组联动微动画，无新图；作者实际IAB但该补丁独立QA不可用，视觉仍待用户验看，不纳生产。
