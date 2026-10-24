@@ -43,7 +43,7 @@
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
 | 八形象与音色 | 本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[manifest](../apps/web/public/appearances/manifest.json)。 |
 | 形象单一来源 | editorowner候选已做源manifest的name/voice/四态+canonical assets及自动runtime生成，测试/IAB标签检查已交；**尚待root review集成** | 当前正式design源仍未同步，不能以runtime正确掩盖；依赖集成后editorv2消费name。 |
-| 编辑器基础/v2 | 基础草稿、同引擎试玩和URL分享已本地可测；v2原型已批准，生产实现等待单一来源依赖 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
+| 编辑器基础/v2 | 基础草稿、同引擎试玩和URL分享已本地可测；v2原型已批准，生产实现等待单一来源依赖 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff→041c74a`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
 | 调查控制与语音反馈 | 设计`51776c8`与技术提案`20eb743`已交，待root归档/用户确认；未改正式UI | 自然时长、背景回看、底栏指认/时间/音量、“询问记录”；背景停止规则/窄屏固定底栏仍提案。 |
 | GitHub投稿 | 研究`9612c85`与独立实测`e94fdd2`已交；未登录IAB短链接遇登录门槛，9280B合成中文JSON的27334字符query被GitHub拒绝为过长 | [投稿方案](editor-official-submission-proposal.md)；正文/commit/PR表单全文预填仍未知，复制/下载为保底。 |
 | 动画探索 | 原画六PNG关节样片`87917a0`用户认可方向；静态角色仍生产基线。已授权coral-bob第二轮，不扩其他人物 | 更明显待机、聆听手靠耳、说话嘴部开合；视觉时序不等于语音/中文口型同步。3D暂停扩大。 |
