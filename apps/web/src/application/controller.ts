@@ -197,7 +197,6 @@ export function createGameController(options: ControllerOptions) {
       const expired = stopVoice()
       session = selectCharacter(requireSession(), characterId)
       if (expired) showExpiry()
-      else notice = '已切换人物，已显示转写保留。'
       publish()
     },
     async startConversation() {
@@ -241,9 +240,8 @@ export function createGameController(options: ControllerOptions) {
         }
       }
     },
-    endConversation(options: { quiet?: boolean } = {}) {
+    endConversation() {
       if (stopVoice()) showExpiry()
-      else if (!options.quiet) notice = '已结束对话，已显示转写保留。'
       publish()
     },
     openAccusation() {

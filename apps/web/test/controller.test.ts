@@ -115,7 +115,7 @@ describe('browser orchestration', () => {
     await controller.load('test'); controller.start(); await controller.startConversation()
     turns[0].scope.onEvent({ type: 'assistantText', text: '部分回答。' })
     controller.endConversation()
-    expect(controller.getView().notice).toContain('已显示转写保留')
+    expect(controller.getView()).toMatchObject({ conversationActive: false, history: [{ text: '部分回答。', interrupted: true }] })
     await controller.startConversation()
     turns[0].scope.onEvent({ type: 'listening' })
     expect(controller.getView().voiceStatus).toBe('recording')
