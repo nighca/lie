@@ -127,7 +127,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>
-      <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :output-level="voiceFeedback.outputLevel" :input-active="voiceFeedback.inputActive" :style="{ '--character-accent': appearance(current?.appearanceId ?? null)?.accent ?? 'var(--lie-aqua)' }" @start="speak">
+      <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" @start="speak">
         <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><strong>{{ remainingTime }}</strong></div></template>
         <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
       </VoiceControl>

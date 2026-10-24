@@ -183,7 +183,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .game-shell .character-list > .lie-character { width: 100px; border-width: 2px; }
 .game-shell .character-list .lie-character__avatar { height: 86px; }
-.game-shell .character-list .lie-character__copy { padding: 0 5px; }
+.game-shell .character-list .lie-character__copy { padding: 4px 5px; }
 .game-shell .character-list .lie-character__copy strong { font-size: 14px; line-height: 24px; }
 @media (max-width: 700px) {
   .game-shell .character-list > .lie-character { width: 88px; flex-basis: 88px; }

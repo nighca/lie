@@ -116,7 +116,8 @@ describe('game screens', () => {
       expect(controls().findAll('button')).toHaveLength(2)
       expect(controls().get('button').text()).toBe('结束对话')
       expect(controls().get('button').attributes('aria-pressed')).toBe('true')
-      expect(controls().find('.lie-voice__waveform').exists()).toBe(true)
+      expect(controls().find('.lie-voice__waveform').exists()).toBe(false)
+      expect(controls().find('[role="status"]').exists()).toBe(true)
     }
     await controls().get('button').trigger('click')
     expect(turns[0].closed).toBe(true)

@@ -15,26 +15,24 @@ const props = withDefaults(defineProps<{
   interruptLabel?: string | null
   disabled?: boolean
   inputLevel?: number
-  outputLevel?: number
   inputActive?: boolean
-}>(), { active: false, preparing: false, actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false, inputLevel: 0, outputLevel: 0, inputActive: false })
+}>(), { active: false, preparing: false, actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false, inputLevel: 0, inputActive: false })
 
 const emit = defineEmits<{ start: []; cancel: []; interrupt: [] }>()
 const enabled = computed(() => props.active && !props.preparing)
-const source = computed(() => !enabled.value ? null : props.inputActive ? 'input' : props.outputLevel > .001 ? 'output' : null)
-const level = computed(() => source.value === 'input' ? props.inputLevel : source.value === 'output' ? props.outputLevel : 0)
+const showInput = computed(() => enabled.value && props.inputActive && props.status !== 'error')
+const level = computed(() => showInput.value ? props.inputLevel : 0)
 const samples = ref<number[]>(Array(24).fill(0))
-watch([source, level], ([next, value], [previous]) => {
+watch([showInput, level], ([next, value], [previous]) => {
   const history = next === previous ? samples.value : Array(24).fill(0)
   samples.value = [...history.slice(1), value]
 })
 const feedbackLabel = computed(() => {
   if (props.preparing) return '正在连接'
   if (props.status === 'error') return props.label
-  if (!enabled.value || source.value != null) return ''
-  return props.status === 'waiting' || props.status === 'speaking' ? '等待回答' : '等你开口'
+  if (!enabled.value || showInput.value) return ''
+  return props.status === 'waiting' || props.status === 'speaking' ? props.label : '等你开口'
 })
-const meterLabel = computed(() => source.value === 'output' ? '角色声音音量' : '玩家声音音量')
 function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(value) * 85))}px` }
 </script>
 
@@ -49,8 +47,10 @@ function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(va
       </div>
       <div class="lie-voice__feedback">
         <span v-if="feedbackLabel" class="lie-voice__status" role="status">{{ feedbackLabel }}</span>
-        <div v-if="enabled" class="lie-voice__waveform" :data-source="source" :aria-label="meterLabel" role="img"><i v-for="(sample, index) in samples" :key="index" :style="{ height: height(sample) }" /></div>
-        <meter v-if="enabled" class="lie-voice__static-meter" :aria-label="meterLabel" min="0" max="1" :value="level" />
+        <template v-else-if="showInput">
+          <div class="lie-voice__waveform" aria-label="玩家声音音量" role="img"><i v-for="(sample, index) in samples" :key="index" :style="{ height: height(sample) }" /></div>
+          <meter class="lie-voice__static-meter" aria-label="玩家声音音量" min="0" max="1" :value="level" />
+        </template>
       </div>
     </div>
     <div v-if="$slots.answer" class="lie-voice__answer"><slot name="answer" /></div>
@@ -64,12 +64,10 @@ function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(va
 .lie-voice__actions { display: flex; gap: 12px; flex: 0 0 auto; padding: 0; }
 .lie-voice__actions :deep(.lie-button) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; min-width: 146px; border: 2px solid var(--lie-ink); border-radius: 14px; padding: 10px 16px; font-size: 14px; font-weight: 800; box-shadow: 0 3px var(--lie-ink); }
 .lie-voice__actions svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
-.lie-voice__feedback { display: flex; flex: 1; flex-direction: column; justify-content: center; max-width: 390px; min-width: 0; min-height: 48px; }
+.lie-voice__feedback { display: flex; flex: 1; flex-direction: column; justify-content: center; max-width: 390px; min-width: 0; height: 48px; }
 .lie-voice__status { font-size: 13px; font-weight: 800; }
 .lie-voice__waveform { display: flex; align-items: center; gap: 3px; height: 32px; overflow: hidden; }
-.lie-voice__waveform i { flex: 1; min-width: 2px; max-width: 8px; border-radius: 3px; background: #d8dee9; }
-.lie-voice__waveform[data-source='input'] i { background: #202020; }
-.lie-voice__waveform[data-source='output'] i { background: color-mix(in srgb, var(--character-accent, var(--lie-aqua)) 60%, #202020); }
+.lie-voice__waveform i { flex: 1; min-width: 2px; max-width: 8px; border-radius: 3px; background: #202020; }
 .lie-voice__static-meter { display: none; width: 100%; }
 .lie-voice__answer { display: flex; align-items: center; justify-content: flex-end; }
 .lie-voice__answer :deep(.lie-button) { min-height: 42px; border: 2px solid var(--lie-ink); border-radius: 12px; padding: 8px 10px; font-size: 13px; box-shadow: 0 2px var(--lie-ink); white-space: nowrap; }
