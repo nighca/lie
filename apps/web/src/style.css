@@ -6,10 +6,6 @@ h2 { font-size: 24px; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .game-shell { max-width: 1440px; margin: auto; padding: 24px; }
 .game-shell > .lie-product-header { margin-bottom: 20px; }
-.wordmark { display: inline-flex; align-items: center; gap: 16px; color: var(--lie-ink); text-decoration: none; line-height: 1; flex-shrink: 0; }
-.wordmark img { display: block; width: 105px; height: 56px; object-fit: contain; }
-.wordmark span { position: relative; font-size: 18px; letter-spacing: 0; white-space: nowrap; }
-.wordmark span::after { content: ''; position: absolute; height: 5px; border-radius: 4px; background: var(--lie-coral); left: 0; right: 0; bottom: -9px; transform: rotate(-3deg); }
 .muted { color: var(--lie-muted); font-size: 14px; }
 .surface { background: var(--lie-surface); border: 3px solid var(--lie-ink); border-radius: 28px; box-shadow: 0 6px 0 #111b451a; }
 .intro-card { max-width: 1040px; margin: 24px auto; padding: 36px 48px 40px; text-align: center; }
@@ -68,9 +64,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 @media (max-width: 700px) {
   .game-shell { padding: 16px; }
-  .wordmark { gap: 8px; }
-  .wordmark img { width: 88px; height: 47px; }
-  .wordmark span { font-size: 14px; }
   .intro-card { margin: 24px auto; padding: 28px 20px; }
   .intro-characters { gap: 8px; }
   .intro-character { flex-basis: min(140px, calc((100% - 8px) / 2)); }

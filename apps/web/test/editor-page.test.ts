@@ -28,6 +28,32 @@ function page(stored: unknown = null) {
 }
 
 describe('three-step editor', () => {
+  it('uses the shared product brand, draft notice and existing leave event', async () => {
+    const { wrapper, click } = page(game)
+    expect(wrapper.get('.lie-product-header__brand span').text()).toBe('语音推理')
+    expect(wrapper.get('.lie-product-header__notice [role=status]').text()).toContain('已恢复')
+    await wrapper.get('.lie-product-header__brand').trigger('click')
+    await click('返回首页')
+    expect(wrapper.emitted('leave')).toHaveLength(2)
+    expect(wrapper.get('h1').text()).toBe('故事设定')
+  })
+
+  it('keeps header departure disabled while a share snapshot is being encoded', async () => {
+    let finish: (url: string) => void = () => {}
+    vi.spyOn(sharing, 'encodeGameLink').mockImplementation(() => new Promise((resolve) => { finish = resolve }))
+    const { wrapper } = page(game)
+    const share = wrapper.findAll('button').find((button) => button.text() === '分享案件')!
+    await share.trigger('click')
+    expect(wrapper.get('.lie-product-header__actions button').attributes('disabled')).toBeDefined()
+    await wrapper.get('.lie-product-header__brand').trigger('click')
+    expect(wrapper.emitted('leave')).toBeUndefined()
+    finish('https://lie.example/play#game=encoded')
+    await flushPromises()
+    await wrapper.get('[aria-label=关闭]').trigger('click')
+    await wrapper.get('.lie-product-header__brand').trigger('click')
+    expect(wrapper.emitted('leave')).toHaveLength(1)
+  })
+
   it('freely switches steps and characters while autosaving incomplete text', async () => {
     const { wrapper, step, click } = page()
     await wrapper.get('[name=title]').setValue('我的小谜题')

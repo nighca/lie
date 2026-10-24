@@ -40,3 +40,14 @@ IAB实际点击品牌→弹“结束这次调查？”；选继续仍为原 `?ga
 - `/private/tmp/lie-shared-header-investigation-short.jpg`
 
 素材URL迁移owner同时只改Application现有home-cast三处src；本提交不触这些字符串，root可按各自范围合并。不新增旧appearance路径。
+
+
+## 编辑器接入补充
+
+编辑器后续以同一 `ProductHeader` 统一品牌；上述“保留wordmark/未接入编辑器”描述仅对应首次提交的历史边界，现在不再适用。当前步骤的既有h1仍显示“故事设定”等，不另加一份重复标题。actions保留“返回首页”，notice显示原有浏览器草稿状态；品牌点击仍由原Editor发出leave交调用方处理，分享编码期间不发leave且返回按钮禁用。
+
+Editor仅保留页头外部间距，不覆写Logo、标签字或下划线。`rg`确认生产Web和UI已无wordmark消费者后，删除Editor旧品牌CSS及style.css中的旧wordmark规则；不动其他全局选择器、编辑器创作逻辑、路由、素材URL或语音。新增组件回归覆盖实际共享品牌/草稿notice和正常、忙碌时的原leave语义；导航测试改读既有命名步骤nav，不为旧标题保留重复文案。
+
+编辑器接入检查：Web 150项、UI 22项测试及两者类型检查通过，Web生产构建与35图dist校验通过。独立QA由完成组合检查后的测试owner执行，先创建自己IAB tab再设置并读取真实viewport：1280×800时Logo105×56、文字18px/400；391×844时innerWidth/scrollWidth均391、Logo88×47、文字14px/400；下划线均5px、bottom -9px、rotate -3°，与共享组件一致。391时品牌x16–168，返回按钮x299–375/y26–66，草稿notice y80–96，步骤nav y108–160，留12px间隔，没有挤压。页面仅保留步骤h1，没有第二个页头h1。
+
+QA实际点击品牌和返回按钮均按原leave回到`/?demo=1`首页“有人在说谎”，console warn/error为空；未改草稿、触发麦克风、访问GitHub或操作8787，结束后reset viewport并关闭自己的tab。截图`/private/tmp/lie-editor-shared-header-desktop.jpg`、`/private/tmp/lie-editor-shared-header-narrow.jpg`保留供root复核，实施owner已查看真实窄屏图。此短验只补页头与窄屏边界，不冒称复制、下载、GitHub提交或全部其他编辑器功能经过重新真人验收。

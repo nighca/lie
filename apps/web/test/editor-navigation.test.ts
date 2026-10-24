@@ -80,7 +80,7 @@ describe('editor and shared case application routes', () => {
     const { wrapper, router, sessions } = await screen('/editor/preview?game=do-not-fetch')
     expect(router.currentRoute.value.path).toBe('/editor')
     expect(sessions).toHaveLength(0)
-    expect(wrapper.text()).toContain('创作案件')
+    expect(wrapper.get('nav[aria-label="创作步骤"]').text()).toContain('故事设定')
   })
 
   it('plays a decoded shared snapshot, ends wrong accusation, and only restarts into a fresh attempt', async () => {
@@ -133,7 +133,7 @@ describe('editor and shared case application routes', () => {
     await router.push('/editor')
     release(); await settle()
     expect(sessions).toHaveLength(0)
-    expect(wrapper.text()).toContain('创作案件')
+    expect(wrapper.get('nav[aria-label="创作步骤"]').text()).toContain('故事设定')
   })
 
   it('cannot construct a controller from a decoder that completes after unmount', async () => {

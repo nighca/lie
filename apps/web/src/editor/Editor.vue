@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 import type { GameDefinition } from '@lie/game-core'
-import { UiButton, UiNotice } from '@lie/ui'
+import { ProductHeader, UiButton, UiNotice } from '@lie/ui'
 
 import type { Appearance } from '../presentation/appearances'
 import EditorDialog from './EditorDialog.vue'
@@ -119,11 +119,10 @@ function download() {
 
 <template>
   <div class="editor-shell">
-    <header class="editor-header">
-      <a href="/" class="wordmark" aria-label="LIE 首页" @click.prevent="!busy && emit('leave')"><img src="/brand/logo.svg" width="94" height="48" alt=""></a>
-      <strong>创作案件</strong><span class="editor-save" role="status">{{ saveStatus }}</span>
-      <UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton>
-    </header>
+    <ProductHeader class="editor-header" @navigate-home="!busy && emit('leave')">
+      <template #actions><UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton></template>
+      <template #notice><p class="editor-save" role="status">{{ saveStatus }}</p></template>
+    </ProductHeader>
     <nav class="editor-steps" aria-label="创作步骤">
       <button v-for="(label, index) in steps" :key="label" type="button" :disabled="busy" :aria-current="step === index ? 'step' : false" @click="step = index"><span>{{ index + 1 }}</span>{{ label }}<small v-if="!issues.some((issue) => issue.step === index)" aria-label="内容已填写">✓</small></button>
     </nav>
