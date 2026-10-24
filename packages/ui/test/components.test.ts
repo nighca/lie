@@ -90,7 +90,7 @@ describe('shared controls', () => {
     expect(wrapper.find('[role="status"]').exists()).toBe(false)
     expect(wrapper.find('.lie-voice__waveform').exists()).toBe(true)
     expect(wrapper.get('meter').element.value).toBe(0)
-    expect(wrapper.findAll('i').every((bar) => bar.attributes('style').includes('3px'))).toBe(true)
+    expect(wrapper.findAll('i').every((bar) => (bar.attributes('style') ?? '').includes('3px'))).toBe(true)
     await wrapper.setProps({ status: 'waiting', inputLevel: .001 })
     expect(wrapper.get('meter').element.value).toBe(0)
     expect(wrapper.find('.lie-voice__waveform').exists()).toBe(true)
