@@ -6,11 +6,11 @@
 
 ## 当前阶段与目标
 
-已完成通用引擎、持续语音及三案本地可玩闭环；编辑器v2、统一头部/素材URL已随376ce64部署，当前重点是已集成调查控制与顾遥动画的用户验收、已批准移动v4及真人质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
+已完成通用引擎、持续语音及三案本地可玩闭环；编辑器v2、统一头部/素材URL已随32d89bf部署，当前重点是已集成调查控制与顾遥动画的用户验收、已批准移动v4及真人质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
 
 - **本地8787**：更新新版三步编辑器/分享投稿准备、共用头部、“有人在说谎”和统一形象URL，实际提供32d89bf的新调查窄屏v4/顾遥动画/资源取消修复/最新编辑器居中与双语README；JS/CSS/动画package与PNG200，47生成资源检查通过；本地存在不等于线上已发布。
-- **线上**：GitHub main已普通push `32d89bf91f441168148884593a0f49b816ad7162`，新CI/CD由独立owner验收中；以下为上一次确认的活动部署。[lie-game](https://lie-game.nighca.workers.dev/)已部署`376ce64efb4c035d083d47a93852da22a923a2cc`，三案/新版编辑器/共用品牌/8音色四态及统一路径可用；[部署验收](deployments/2026-10-24-editor-milestone.md)。语音ready检查不等于本次真人收音或推理验收。
-- **发布链**：main push后CI通过再部署同提交，CD已核验本次第三个里程碑：Actions40084031747成功、CF活动版本8079aea6 100%流量对应376ce64，正式IAB/健康/新构建均通过。见[持续部署](continuous-deployment.md)。
+- **线上**：[LIE](https://lie-game.nighca.workers.dev/)已确认部署 `32d89bf91f441168148884593a0f49b816ad7162`：新调查v4、顾遥动画/静态兼容、最新编辑器、统一品牌与双语README；[本轮部署验收](deployments/2026-10-24-animation-milestone.md)。配置ready不等于真人语音验收。
+- **发布链**：main push后CI通过再部署同提交；Actions40093890628实际deploy成功，CF deployment e914ca59/version d2f7139c #10承接100%流量，tag精确32d89bf；新bundle/CSS及47资源全200。见[本轮证据](deployments/2026-10-24-animation-milestone.md)。
 - **关键质量缺口**：整合版真人麦克风/外放/长会话/盲测、多用户隔离和正式费用硬限额未闭环；fake、文本detect或短WAV通过均不能替代。
 
 ## 当前有效决定
@@ -39,7 +39,7 @@
 | --- | --- | --- |
 | 内容目录 | 本地三案：空盒里的纪念章3人480秒、压轴怎么是鸭叫4人600秒、盐和糖的小乌龙4人540秒；合计复用全部8形象 | [源内容](../content/games/)、[运行目录](../apps/web/public/games/index.json)；第二/第三案有界真实文本语义已复核，真人多轮仍待。 |
 | game-core | 动态人数/局隔离/人物上下文/预算/终局规则已实现并回归 | [架构](architecture.md)、`packages/game-core`；无新增规则DSL。 |
-| Web与UI | 本地main/8787已到32d89bf：调查窄屏v4、共享手绘品牌、自然时长/背景回看、居中×、逐字节奏与统一外框；343组合测试/类型/构建、独立IAB桌面/391通过 | [组合验收与限制](history/2026-10-24/combined-ui-animation.md)；线上仍376ce64。 |
+| Web与UI | 本地main/8787已到32d89bf：调查窄屏v4、共享手绘品牌、自然时长/背景回看、居中×、逐字节奏与统一外框；343组合测试/类型/构建、独立IAB桌面/391通过 | [组合验收与限制](history/2026-10-24/combined-ui-animation.md)；线上已32d89bf。 |
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
 | 八形象与音色 | 线上/本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[权威清单](../design/appearances/manifest.json)。 |
 | 形象单一来源 | 已集成并上线；name/voice/四态+canonical assets及自动runtime生成齐备，35图字节不变，兼容输出字段已删除 | 唯一源为design清单，public为生成物；统一/appearances/<id>/路径，新增仅加源条目和素材。 |
@@ -56,16 +56,16 @@
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
 | P1 | 调查窄屏v4 / 独立设计chat | 80f8b62已root全diff review；与顾遥动画/全局×组合202项UI+Web测试、Web类型/构建通过；真实391/375记录400/257px、底栏贴底无页面溢出；桌面既有21px纵滚保留。已review集成本地32d89bf并更新8787；新JS/CSS/动画资源均200。 |
-| P1 | 编辑器后续微调 / 编辑器专项chat | 清草稿/居中×/27fc人物顺序与居中已在2de0f22/8787；去当前人物1e3d2c8已review并组合验收，实际391切卡保持88×112，已review集成本地32d89bf并更新8787；旧依赖不重复回放。 |
+| P1 | 编辑器验收基线 / 编辑器专项chat | 用户在8787明确“这个版本我看下来没啥问题了”，当前视觉/交互体验通过；清草稿、图片→换形象→姓名居中、居中×与无冗余卡片标签作为基线。长URL跨浏览器/真人语音/GitHub投稿端到端仍另验，后续代码交命名单owner。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
 | P1 | 动画用户验收与扩人 / 独立动画chat | 顾遥游戏接入及25130cc资源修复已在2de0f22/8787，可用户实际游戏验收；独立QA未可靠定格speaking短窗口，原owner四态验证另记；用户已授权蓝衣/银发候选并行，逐人review/验收后才激活。 |
 | P2 | 手绘风格细节 / 独立视觉chat | 原稿描摹下划线、800字重/.025em及位置/文字盖笔触已随调查v3集成本地2de0f22/8787；后续仅收实际反馈，不重复制作已批准稿。 |
 | P2 | GitHub预填补验 / 独立UI实验+用户 | 等用户IAB登录；普通外部贡献链等实际公开及无上游写权限身份。只停预填/review，未经授权不建fork/branch/commit/PR；不向公开仓传项目私有正文。 |
 | P2 | 角色出戏边界 / root+语音/内容owner | 首案攻击问仍出现幕后元话语，工具层/独立顶层候选均未解决，候选未生产；已停止无限付费叠提示。目录只读识别deepseek-v4-flash不证明根因，不擅自换模型/供应商/剧情；见[沉浸调查](role-immersion-investigation.md)、[首案证据](case-behavior-validation.md)。 |
 | P2 | 启动等待/延迟质量 / 语音owner | 已有启动阶段拆分分析；在真实测量基础上评估AudioContext/WS/hello/mic/worklet，不擅自跨轮保活麦克风/连接。 |
-| P2 | 依赖审计 / 工程owner待排 | 审计b3b3bc9与补丁0603879已交并root审查；Node24.22.1+精确Undici/Zod覆盖保持cf主线，独立审计归零/271测试通过，root在真实Node24.22.1下复验新UI组合：审计0、277测试/类型/构建通过，补丁已集成本地04844ab；尚未push/部署。开发代理WS拒绝握手挂断在旧依赖也复现，未当成通过。 |
+| P2 | 依赖审计 / 工程owner待排 | 审计b3b3bc9与补丁0603879已交并root审查；Node24.22.1+精确Undici/Zod覆盖保持cf主线，独立审计归零/271测试通过，root在真实Node24.22.1下复验新UI组合：审计0、277测试/类型/构建通过，补丁已集成本地04844ab；已随32d89bf发布且远程Node24.22.1 CI/CD成功。开发代理WS拒绝握手挂断在旧依赖也复现，未当成通过。 |
 | P3 | 正确/错误指认状态图 / 视觉owner | 已登记未生成；正确应被看穿/懊恼/无奈，非开心；错误可不解/委屈/抗议，按人物处理。仅提交结果后显示，不提前泄题、不改变错误终局不揭晓。 |
-| P3 | 双语README / 文档owner | 默认英文README.md、README.zh-CN.md互链已review并随2de0f22本地集成，链接/命令对齐，未push。 |
+| P3 | 双语README / 文档owner | 默认英文README.md、README.zh-CN.md互链已review并随2de0f22本地集成，链接/命令对齐，已随32d89bf发布。 |
 | P2 | 人物预设统一命名 / root+appearance_assets | CharacterPreset与@lie/character-animation已批；动画接入前置已满足，只读盘点7e47d7a已review；采用内部类型/模块/制作目录/包名统一，保留已有appearanceId序列化键与/appearances/公开路径以免破坏草稿/分享且无需兼容层；已从32d89bf派appearance_assets单owner独立实施，不再重问定名。 |
 
 ## 当前需用户确认或外部协助
