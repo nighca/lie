@@ -4,7 +4,7 @@
 
 ## 来源与接入范围
 
-候选原 base 为 `c9c2e765b19ad84b70f54a5cefc8ad45b6f90479`，14个提交从 `24c7814bf0d0e5d908eeb2bb551d556efd55e184` 到 `e46f6ccf3fa19d0627aa01b45530eeccd70f38eb`。最后数据修改为 `ebbf81f82ad72c45c0a1fef633a4bdc1c34e6196`。较早 d68ad39 的图和复验只描述历史；当前参考为 `feedback-review.md`、`waiting-review.md`、silver-feedback-* 与 silver-waiting-breath-* 原生图。既有通用 runtime/contract 依赖已经在当前 main，不重放，不增加兼容分支。
+候选原 base 为 `c9c2e765b19ad84b70f54a5cefc8ad45b6f90479`，14个提交从 `24c7814bf0d0e5d908eeb2bb551d556efd55e184` 到 `e46f6ccf3fa19d0627aa01b45530eeccd70f38eb`。最后数据修改为 `ebbf81f82ad72c45c0a1fef633a4bdc1c34e6196`。源owner另追加纯文档夜间代验记录 `79258ad5f51582aed981a1596e7bedcbfd5e7255`（parent e46f6），已review并按新commit纳入；15个来源提交无资源变化。该记录允许团队代验后交协调review，仍不冒称用户亲自验收最终waiting。较早 d68ad39 的图和复验只描述历史；当前参考为 `feedback-review.md`、`waiting-review.md`、silver-feedback-* 与 silver-waiting-breath-* 原生图。既有通用 runtime/contract 依赖已经在当前 main，不重放，不增加兼容分支。
 
 正式源为 `design/appearances/assets/silver-bun/animation/package.json` 与引用的六份 PNG，均原字节复制。仅在 manifest 的 silver-bun 条目加入 `animation: "assets/silver-bun/animation/package.json"`，生成 `/appearances/silver-bun/animation/package.json`。生成物不提交。旧四态静态图和头像引用均保持，其他人物/UI/引擎/案件/provider/命名不改。候选作者 inspection.html 的唯一import另以独立commit改为相对当前工作树的 `../../../packages/appearance-animation/src/index.ts`，避免引用原作者工作树旧runtime；不扩大Vite文件白名单。
 
