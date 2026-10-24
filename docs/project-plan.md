@@ -83,6 +83,8 @@
 
 ## 执行入口与维护规则
 
+- **主协调执行边界（用户最新要求）**：简短评估后有一定工作量的事情整项委派，包括实施、环境/服务配置、运维排障、浏览器验收及长检查，不把耗时收尾留在root；root保持接收/排期/接口协调/用户决策/review/单队列集成与报告，并保留结果责任。固定main环境任务已完成，后续维护另派执行owner，不继续扩展本轮环境配置。
+
 - [开发/本地运行](development.md)、[架构](architecture.md)、[编辑器](game-editor-implementation.md)、[案件实测](case-live-validation.md)、[协作](../AGENTS.md)。普通`npm test`/`typecheck`/`build`不读取管理key、不自动发真实推理。
 - 总协调已由旧chat `01a1677a-5eff-7f22-87c6-d2c382569aee`接续至`01a16e3d-d2f9-75e0-a09f-d39d5ab927dd`，三个专项已通知，30分钟推进及4小时交接heartbeat已启用；当前唯一integrator/自动化ID见[交接登记](coordinator-handoff.md)，按[定时轮换](coordinator-rotation.md)创建全新接任chat、停旧任务并确认接手后归档旧chat。
 - 本地试玩`http://127.0.0.1:8787/`由launchd运行main-preview脚本跟随main；root及后续接任者维护，轮换时不要停止它；独立实验使用自己的端口/tab，不操作用户会话/麦克风。候选链接与SHA仅供review，不能描述成线上已交付。

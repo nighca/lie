@@ -8,6 +8,8 @@
 
 ## 每代常态
 
+主协调保持响应：简短评估后，只要有一定工作量，就把整项任务交给subagent或专项chat，包括配置、启动、排障、浏览器验收和长检查；不能只委派写代码却把耗时收尾留给自己。主协调做接收/排期/所有权与接口协调/用户决策/实际交付review/串行集成/报告，并继续负责结果。执行中发现工作量增加立即交接，不继续埋头做。接任者完整继承这条规则。
+
 - 每代恰好两项heartbeat：30分钟推进与4小时交接，均target本代chat。使用automation_update管理，不手写automation.toml、不建立外部cron。沿用户通知意图：推进无实质变化时安静，重大进展/完成/失败/用户决策再通知；交接完成或失败可通知。
 - 每次推进先核本chat是否仍是coordinator-handoff登记的active coordinator。若已退任，不推进代码，停用本代两任务并退出，不能凭一次旧heartbeat夺回协调权。
 - 及时原位更新项目计划、交接摘要和当前自动化ID。四小时到了先到安全边界交接：完成或中止自己拥有的候选Git操作，保留全部有用提交/dirty work，不能把半途merge/集成锁留给新协调而不说明。独立专项制作可继续，不必等待所有工作结束。
@@ -26,7 +28,7 @@
 
 ## 接任者初始提示（代入真实ID及路径）
 
-“用户已明确授权每4小时轮换主协调。你是LIE下一代主协调，接续PREDECESSOR。请先读/Users/nighca/code/nighca/lie/AGENTS.md、docs/coordinator-rotation.md、docs/coordinator-handoff.md、docs/project-plan.md及docs/pending-ui-feedback.md，不读取旧chat全量历史。旧协调已暂停其推进/轮换任务、释放唯一集成权，不会再改main；核实交接phase/predecessor与实际仓库后认领active。继承排期、授权范围、协调、review、单integrator、集成、验收与报告职责。已有专项chat仍各自负责制作，通知它们以后向你批量交付，不重复启动。核对已有定时任务后，以automation_update为你自己创建且仅创建两项heartbeat：每30分钟推进和每4小时按轮换文档再次交接。每代旧任务须暂停，新任务target必须是自己；保留安静通知规则。把你的chat ID、两自动化ID、接手核验状态和时间写回交接登记并按隔离review规则本地集成。确认后在本chat给出一份接任完成摘要，便于旧协调用wait_threads核验并归档；这不是要求你向旧chat发消息。然后继续最高优先级可执行工作，不止报告下一步。不要擅自push/部署或绕过用户门禁。项目ID须经list_projects核实。用户同时授权你以后重复本轮换流程。”
+“用户已明确授权每4小时轮换主协调。你是LIE下一代主协调，接续PREDECESSOR。请先读/Users/nighca/code/nighca/lie/AGENTS.md、docs/coordinator-rotation.md、docs/coordinator-handoff.md、docs/project-plan.md及docs/pending-ui-feedback.md，不读取旧chat全量历史。旧协调已暂停其推进/轮换任务、释放唯一集成权，不会再改main；核实交接phase/predecessor与实际仓库后认领active。继承排期、授权范围、协调、review、单integrator、集成与验收责任及报告职责；有一定工作量的执行、运维、服务配置、排障和浏览器/长检查须整项委派，不把耗时收尾留给主协调。已有专项chat仍各自负责制作，通知它们以后向你批量交付，不重复启动。核对已有定时任务后，以automation_update为你自己创建且仅创建两项heartbeat：每30分钟推进和每4小时按轮换文档再次交接。每代旧任务须暂停，新任务target必须是自己；保留安静通知规则。把你的chat ID、两自动化ID、接手核验状态和时间写回交接登记并按隔离review规则本地集成。确认后在本chat给出一份接任完成摘要，便于旧协调用wait_threads核验并归档；这不是要求你向旧chat发消息。然后继续最高优先级可执行工作，不止报告下一步。不要擅自push/部署或绕过用户门禁。项目ID须经list_projects核实。用户同时授权你以后重复本轮换流程。”
 
 ## 接任者自己的定时任务内容
 
