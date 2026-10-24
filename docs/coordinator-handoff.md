@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，as-of reviewed main `31db7c9f3d4f1224612d1017b37ef27520651fd3`及本轮root派单。本页精简登记协调权、未完成交付和保留资源；[项目计划](project-plan.md)列授权/队列，[完整旧快照](history/2026-10-25/README.md)只供追溯，不能覆盖新决定。接任前重读实际HEAD和最新专项交付，文档自身会推进main。
+2026-10-25，as-of reviewed main `596866140893ed08f5bc247c6fd8758947a85003`及本轮root派单。本页精简登记协调权、未完成交付和保留资源；[项目计划](project-plan.md)列授权/队列，[完整旧快照](history/2026-10-25/README.md)只供追溯，不能覆盖新决定。接任前重读实际HEAD和最新专项交付，文档自身会推进main。
 
 ## 协调权登记（本代最后确认）
 
@@ -22,9 +22,9 @@
 
 ## 仓库与接任第一步
 
-- 核验基线main为`31db7c9f3d4f1224612d1017b37ef27520651fd3`，此基线新增成果均未push；本地origin/main跟踪及最后实际部署证据为`32d89bf91f441168148884593a0f49b816ad7162`。本轮未fetch，不能冒称当前远程/线上最新版本。
+- 核验基线main为`596866140893ed08f5bc247c6fd8758947a85003`，此基线新增成果均未push；本地origin/main跟踪及最后实际部署证据为`32d89bf91f441168148884593a0f49b816ad7162`。本轮未fetch，不能冒称当前远程/线上最新版本。
 - owning main在`/Users/nighca/code/nighca/lie`；root review/integration工作树为`/Users/nighca/.codex/worktrees/investigation-review-takeover/lie`，候选分支随集成变动，先查实际status/branch，不按旧分支名操作。
-- 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。当前优先接silver、fan、Editor结果并协调命名依赖；所有待办见[队列](project-plan.md#仍需执行的队列)。
+- 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。当前优先接silver、fan、Editor及gray/plum接入结果并协调命名依赖；所有待办见[队列](project-plan.md#仍需执行的队列)。
 - 旧命名候选`/private/tmp/lie-integrate-text-architecture` / `codex/integrate-preset-voices`保留refs；其中调查/预览改动已有main成果，禁止整批重放。原命名源`cb86dd6e25e22444dc93b892c2d609c0a0d6ac08`仅待按新main重新审阅。
 
 ## 专项、在制与共享所有权
@@ -32,12 +32,13 @@
 | Owner / chat | 当前交付与边界 |
 | --- | --- |
 | 调查共享视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 1—9/home已main；新`codex/accusation-fan-layout` WT同名，从`31db7c9`实施指认可变人数扇卡，5507/session81667 waitingOnApproval，仍持viewport未释放。拥有相关App/专属CSS，需先协调新共享接口；结果页两态尚在方案队列。 |
-| 编辑器 `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 10—17/草稿组/连接线/投稿已main；新`codex/editor-portrait-alignment` WT同名，局部absolute/100%/contain/center候选28测试/类型/构建60资源通过；5402/5403保留，等391/1004实际末回归，未集成。Editor/helper/editor测试/共享CharacterChoice边界保持，若改AnimatedPortrait须协调动画/UI。 |
-| 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | gray `33e7e2670317b9b0d65a847cbcb52b6edaa4c554`、plum `b91dfccec7dee2996687eed154313927cf8cebe8`各4提交完整source clean，root子agent只读预审通过；实际391 iframe四态QA进行中、尚未完成，尚非正式资产，最多2角色；保留独立制作/实视权。银发之后自验+clean+rootreview可集成，不逐人等用户、不自动发布。 |
-| root子agent `main_acceptance_environment` | 新WT `/Users/nighca/.codex/worktrees/silver-bun-activation/lie` 从`31db7c9`准备接入；源候选14提交到`e46f6ccf3fa19d0627aa01b45530eeccd70f38eb`，追加无源改动夜间记录`79258ad5f51582aed981a1596e7bedcbfd5e7255`；activation clean `0404805bb30e8c9f7b2599a3ad542f052c8f03f7`已交；root新候选`e6c12da9c59bf56a9963c373bde101ca6cae6599`（base08cf274），与已全检`28c2c922fa7ecd1ee824a11c14f33de535328179`仅中央docs差异，372测试/类型/构建67资源/strictcheck/重建hash证据沿用，5504/session64148仍待真实IAB，未集成。 |
+| 编辑器 `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 10—17/草稿组/连接线/投稿已main；新`codex/editor-portrait-alignment` WT同名，局部absolute/100%/contain/center候选28测试/类型/构建60资源通过；5402/5403保留，新获准自有同源1004/391 iframe冷/热检查，不改共享viewport；尚未成功，顶层slot暂保留，未集成。Editor/helper/editor测试/共享CharacterChoice边界保持，若改AnimatedPortrait须协调动画/UI。 |
+| 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | gray `33e7e2670317b9b0d65a847cbcb52b6edaa4c554`、plum `b91dfccec7dee2996687eed154313927cf8cebe8`各4提交完整source clean，root子agent只读预审通过；同源391 iframe四态真实点击/8原生图及完整边界通过，innerWidth=scrollWidth=391（非顶层设备）。每壳1条无source URL的MutationObserver.observe非Node异常，直接作者页此前console空，正式顶层来源待核；正删壳补最终QA SHA，游戏正式验收尚待，最多2角色；保留独立制作/实视权。银发之后自验+clean+rootreview可集成，不逐人等用户、不自动发布。 |
+| root子agent `main_acceptance_environment` | 新WT `/Users/nighca/.codex/worktrees/silver-bun-activation/lie` 从`31db7c9`准备接入；源候选14提交到`e46f6ccf3fa19d0627aa01b45530eeccd70f38eb`，追加无源改动夜间记录`79258ad5f51582aed981a1596e7bedcbfd5e7255`；activation clean `0404805bb30e8c9f7b2599a3ad542f052c8f03f7`已交；root新候选`e6c12da9c59bf56a9963c373bde101ca6cae6599`（base08cf274），与已全检`28c2c922fa7ecd1ee824a11c14f33de535328179`仅中央docs差异，372测试/类型/构建67资源/strictcheck/重建hash证据沿用，5504/session64148仍待真实IAB，未集成。候选仍base08cf274，集成前从届时main重建；若仅docs差异可保留已验产物结论。 |
+| root子agent `main_acceptance_environment` / gray-plum | 已派从`596866140893ed08f5bc247c6fd8758947a85003`新独立gray-plum-activation整项接入，先预审4+4源并等最终QA记录，不碰silver manifest依赖；无main/push，正式游戏验收未完成。 |
 | 命名迁移执行owner待排 | `CharacterPreset`/`@lie/character-animation`已批，`cb86dd6`未集成；保持appearanceId和公开`/appearances/`。待fan＋Editor＋silver合main后，按[落地计划](character-preset-migration-plan.md)统一迁移；含runner命令与环境owner受控重启，不能覆盖新代码。 |
 
-共享窗口：fan5507尚未释放 → Editor5402/5403最终391/1004 → silver5504。gray/plum改做不改共享viewport的实际391 iframe QA，原顶层391预留仍待root明确取消；后续窗口均由root显式转授，排队不是已持有。
+共享窗口：fan5507仍waitingOnApproval并持有 → Editor5402/5403 → silver5504。gray/plum的顶层slot已由root明确取消；Editor若自有1004/391 iframe验证成功，再由root明确取消其顶层slot（当前未成功）。后续窗口均由root显式转授，排队不是已持有。
 
 [结果页只读提案](result-character-states-proposal.md)已review，当前未改contract或实现，设计/素材授权不扩大。
 
