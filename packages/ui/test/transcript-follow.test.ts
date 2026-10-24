@@ -62,7 +62,7 @@ describe('transcript follows the latest visible content', () => {
     Object.defineProperty(log, 'scrollHeight', { configurable: true, get: () => height })
     await wrapper.setProps({ messages: [{ id: 'reply', speaker: '甲', text: '逐字展示会让文本持续增高。'.repeat(20) }] })
     height = 400
-    await vi.advanceTimersByTimeAsync(50)
+    await vi.advanceTimersByTimeAsync(100)
     expect(log.scrollTop).toBe(400)
     const partial = wrapper.get('article p').text()
     expect(partial.length).toBeGreaterThan(0)
@@ -77,12 +77,12 @@ describe('transcript follows the latest visible content', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 
-  it('skips animation when reduced motion is already preferred', async () => {
+  it.each([false, true])('skips animation when reduced motion is already preferred (player=%s)', async (mine) => {
     const media = Object.assign(new EventTarget(), { matches: true })
     vi.stubGlobal('matchMedia', () => media)
     const wrapper = mount(Transcript, { props: { messages: [], animate: true } })
     wrappers.push(wrapper)
-    await wrapper.setProps({ messages: [{ id: 'reply', speaker: '甲', text: '完整展示' }] })
+    await wrapper.setProps({ messages: [{ id: 'reply', speaker: '甲', text: '完整展示', mine }] })
     expect(wrapper.get('article p').text()).toBe('完整展示')
   })
 

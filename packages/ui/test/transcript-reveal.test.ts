@@ -13,42 +13,41 @@ function setup() {
 const answer = (id: string, text: string, pending = false): RevealMessage => ({ id, speaker: '人物', text, pending })
 
 describe('transcript presentation reveal', () => {
-  it.each([40, 60])('gives a %i-character answer readable pacing without exceeding bounded catchup', (length) => {
+  it.each([40, 50, 60])('reveals a %i-grapheme answer at 100ms per grapheme with no catchup deadline', (length) => {
     const { reveal, rows } = setup()
     const text = '字'.repeat(length)
     reveal.update([], true)
     reveal.update([answer('reply', text)], true)
-    vi.advanceTimersByTime(800)
-    expect(rows()[0].text.length).toBeGreaterThan(0)
-    expect(rows()[0].text.length).toBeLessThan(length)
-    let elapsed = 800
-    while (rows()[0].text !== text && elapsed < 2400) {
-      vi.advanceTimersByTime(50)
-      elapsed += 50
-    }
-    expect(elapsed).toBeGreaterThanOrEqual(1800)
+    vi.advanceTimersByTime(2400)
+    expect(rows()[0].text).toBe('字'.repeat(24))
+    vi.advanceTimersByTime(length * 100 - 2400 - 1)
+    expect(rows()[0].text).toBe('字'.repeat(length - 1))
+    vi.advanceTimersByTime(1)
     expect(rows()[0].text).toBe(text)
     expect(vi.getTimerCount()).toBe(0)
     reveal.dispose()
   })
 
-  it('shows mounted history and user messages immediately, revealing only newly received answers', () => {
+  it('shows mounted history immediately, then reveals a new final-only player question at 70ms per grapheme', () => {
     const { reveal, rows } = setup()
     const history = answer('old', '已有历史')
     reveal.update([history], true)
     expect(rows()[0].text).toBe('已有历史')
     const question = { ...answer('user', '玩家问题'), mine: true }
     reveal.update([history, question], true)
+    expect(rows()[1].text).toBe('')
+    vi.advanceTimersByTime(69)
+    expect(rows()[1].text).toBe('')
+    vi.advanceTimersByTime(1)
+    expect(rows()[1].text).toBe('玩')
+    vi.advanceTimersByTime(210)
     expect(rows()[1].text).toBe('玩家问题')
     const response = answer('reply', '新的角色回复，应当逐步出现。')
     reveal.update([history, question, response], true)
+    vi.advanceTimersByTime(99)
     expect(rows()[2].text).toBe('')
-    vi.advanceTimersByTime(64)
-    expect(rows()[2].text.length).toBeGreaterThan(0)
-    expect(rows()[2].text.length).toBeLessThan(response.text.length)
-    vi.advanceTimersByTime(2400)
-    expect(rows()[2].text).toBe(response.text)
-    expect(vi.getTimerCount()).toBe(0)
+    vi.advanceTimersByTime(1)
+    expect(rows()[2].text).toBe('新')
     reveal.dispose()
   })
 
@@ -56,7 +55,7 @@ describe('transcript presentation reveal', () => {
     const { reveal, rows } = setup()
     reveal.update([], true)
     reveal.update([answer('pending', '这段角色回复还在继续', true)], true)
-    vi.advanceTimersByTime(64)
+    vi.advanceTimersByTime(100)
     const partial = rows()[0].text
     const key = rows()[0].key
     reveal.update([answer('pending', '这段角色回复还在继续，现在又收到更多文字。', true)], true)
@@ -64,28 +63,45 @@ describe('transcript presentation reveal', () => {
     reveal.update([answer('final-id', '这段角色回复还在继续，现在又收到更多文字。')], true)
     expect(rows()[0].key).toBe(key)
     expect(rows()[0].text).toBe(partial)
-    vi.advanceTimersByTime(2400)
+    vi.advanceTimersByTime(4000)
     expect(rows()[0].text).toBe('这段角色回复还在继续，现在又收到更多文字。')
     reveal.dispose()
   })
 
-  it('caps catchup at the original 2400ms deadline despite continuously arriving chunks and never queues old rounds', () => {
+  it('keeps a fixed cadence under streaming updates and repeated identical publishes', () => {
     const { reveal, rows } = setup()
     reveal.update([], true)
     let text = '长'.repeat(400)
     reveal.update([answer('stream', text, true)], true)
-    for (let i = 0; i < 23; i++) {
-      vi.advanceTimersByTime(100)
-      text += '后续文字'.repeat(20)
+    for (let i = 0; i < 240; i++) {
+      vi.advanceTimersByTime(10)
+      text += '新'
       reveal.update([answer('stream', text, true)], true)
     }
-    vi.advanceTimersByTime(100)
-    expect(rows()[0].text).toBe(text)
-    reveal.update([answer('stream', text), answer('new', '下一轮新回复')], true)
-    expect(rows()[0].text).toBe(text)
+    expect(rows()[0].text).toBe('长'.repeat(24))
+    const key = rows()[0].key
+    reveal.update([answer('final', text)], true)
+    expect(rows()[0].key).toBe(key)
+    vi.advanceTimersByTime(99)
+    expect(rows()[0].text).toBe('长'.repeat(24))
+    vi.advanceTimersByTime(1)
+    expect(rows()[0].text).toBe('长'.repeat(25))
+    reveal.dispose()
+  })
+
+  it('flushes a partial player question when an answer arrives and gives the new answer its full first interval', () => {
+    const { reveal, rows } = setup()
+    const question = { ...answer('user', '一个很长的新玩家问题'), mine: true }
+    reveal.update([], true)
+    reveal.update([question], true)
+    vi.advanceTimersByTime(75)
+    expect(rows()[0].text).toBe('一')
+    reveal.update([question, answer('reply', '新的回答')], true)
+    expect(rows()[0].text).toBe(question.text)
+    vi.advanceTimersByTime(99)
     expect(rows()[1].text).toBe('')
-    vi.advanceTimersByTime(50)
-    expect(rows()[1].text.length).toBeGreaterThan(0)
+    vi.advanceTimersByTime(1)
+    expect(rows()[1].text).toBe('新')
     reveal.dispose()
   })
 
@@ -94,23 +110,23 @@ describe('transcript presentation reveal', () => {
     reveal.update([], true)
     const old = answer('old', '旧回复'.repeat(100))
     reveal.update([old], true)
-    vi.advanceTimersByTime(50)
+    vi.advanceTimersByTime(100)
     expect(rows()[0].text.length).toBeLessThan(old.text.length)
     reveal.update([old, { ...answer('user', '新问题'), mine: true }, answer('new', '新回复正在展示')], true)
     expect(rows()[0].text).toBe(old.text)
     expect(rows()[2].text).toBe('')
-    vi.advanceTimersByTime(50)
+    vi.advanceTimersByTime(100)
     expect(rows()[2].text.length).toBeGreaterThan(0)
     reveal.dispose()
   })
 
-  it('does not split emoji families, flags, or combining-character graphemes', () => {
+  it.each([false, true])('does not split emoji families, flags, or combining-character graphemes (player=%s)', (mine) => {
     const { reveal, rows } = setup()
     const clusters = ['👩‍👩‍👦', '🇨🇳', 'é', '好']
     reveal.update([], true)
-    reveal.update([answer('emoji', clusters.join(''))], true)
+    reveal.update([{ ...answer('emoji', clusters.join('')), mine }], true)
     for (let i = 1; i <= clusters.length; i++) {
-      vi.advanceTimersByTime(50)
+      vi.advanceTimersByTime(mine ? 70 : 100)
       expect(rows()[0].text).toBe(clusters.slice(0, i).join(''))
     }
     reveal.dispose()
@@ -140,6 +156,22 @@ describe('transcript presentation reveal', () => {
     expect(fresh.rows()[0].text).toBe('新挂载历史')
     fresh.reveal.dispose()
   })
+  it('flushes an unfinished player final on stop and keeps history complete when animation resumes', () => {
+    const { reveal, rows } = setup()
+    const question = { ...answer('question', '停止后的玩家文字应完整保留'), mine: true }
+    reveal.update([], true)
+    reveal.update([question], true)
+    vi.advanceTimersByTime(70)
+    expect(rows()[0].text).toBe('停')
+    reveal.update([question], false)
+    expect(rows()[0].text).toBe(question.text)
+    reveal.update([question], true)
+    vi.advanceTimersByTime(700)
+    expect(rows()[0].text).toBe(question.text)
+    expect(vi.getTimerCount()).toBe(0)
+    reveal.dispose()
+  })
+
   it('degrades to complete text when the browser has no grapheme segmenter', async () => {
     vi.stubGlobal('Intl', Object.create(Intl, { Segmenter: { value: undefined } }))
     vi.resetModules()
