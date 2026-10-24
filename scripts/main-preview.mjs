@@ -60,7 +60,15 @@ export async function runMainPreview({ root = projectRoot, pollMs = 1500, signal
     try { owner = Number(await readFile(resolve(lockDirectory, 'owner'), 'utf8')) } catch { throw conflict }
     if (!Number.isInteger(owner) || owner <= 0) throw conflict
     try { process.kill(owner, 0); throw conflict } catch (error) { if (error.code !== 'ESRCH') throw conflict }
-    await mkdir(resolve(lockDirectory, 'reclaim'))
+    const reclaim = resolve(lockDirectory, 'reclaim')
+    await mkdir(reclaim)
+    try {
+      if (Number(await readFile(resolve(lockDirectory, 'owner'), 'utf8')) !== owner) throw conflict
+      try { process.kill(owner, 0); throw conflict } catch (error) { if (error.code !== 'ESRCH') throw conflict }
+    } catch (error) {
+      await rm(reclaim, { recursive: true })
+      throw error
+    }
     await rm(lockDirectory, { recursive: true })
     await mkdir(lockDirectory)
   }

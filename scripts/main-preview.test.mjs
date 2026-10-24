@@ -177,3 +177,29 @@ test('cancelling installation stops its process group before any services start'
   assert.equal(alive(installation.pid), false)
   assert.deepEqual((await f.events()).map((event) => event.event), ['install'])
 })
+
+
+test('concurrent dead-lock reclaimers launch only one service group', async (t) => {
+  const f = await fixture(t)
+  const dead = Number(execFileSync(process.execPath, ['-e', 'console.log(process.pid)'], { encoding: 'utf8' }).trim())
+  const lock = join(f.root, '.git/main-preview.lock')
+  await mkdir(lock)
+  await writeFile(join(lock, 'owner'), String(dead))
+  const controller = new AbortController()
+  const errors = []
+  const contenders = Array.from({ length: 2 }, () => {
+    const result = runMainPreview({ ...f, pollMs: 30, signal: controller.signal })
+    void result.catch((error) => { errors.push(error) })
+    return result
+  })
+  try {
+    await until(async () => errors.length === 1 && (await f.events()).some((event) => event.event === 'start'))
+    assert.equal(await readFile(join(lock, 'owner'), 'utf8'), String(process.pid))
+    assert.equal((await f.events()).filter((event) => event.event === 'start').length, 1)
+  } finally {
+    controller.abort()
+    const outcomes = await Promise.allSettled(contenders)
+    assert.equal(outcomes.filter((result) => result.status === 'fulfilled').length, 1)
+    assert.equal(outcomes.filter((result) => result.status === 'rejected').length, 1)
+  }
+})
