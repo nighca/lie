@@ -8,7 +8,8 @@
       "reference": "design/appearances/assets/blue-glasses/default.png",
       "prompt": "Use case: precise-object-edit. Asset type: transparent 2D character animation shared torso sprite. Edit target image: the supplied blue-overalls young man. Preserve EXACT original 1024x1536 canvas, scale, position, blue overalls, off-white t-shirt, straps, pocket, belt and pants through bottom edge. Remove ONLY the head/hair/face (keep his entire neck, terminating with a flat hidden overlap at jaw height) and the two bare arms/hands below the t-shirt sleeves. Reconstruct clean complete short sleeves with transparent empty openings; do not change torso silhouette, perspective, drawing linework, color or shading. Neck must remain continuous through collar. No new design. Everything removed must be genuinely transparent alpha, no checkerboard, no white background. Output only one isolated torso-and-neck sprite, positioned exactly as in input; no text.",
       "adopted": true,
-      "transparent_background": true
+      "transparent_background": true,
+      "currentlyUsed": true
     },
     {
       "number": 2,
@@ -17,7 +18,8 @@
       "reference": "design/appearances/assets/blue-glasses/waiting.png",
       "prompt": "Use case: precise-object-edit. Asset type: transparent 2D animation torso sprite. Edit target supplied blue-overalls man in chin-thinking pose. Keep EXACT original square 1254x1254 canvas and exact pixel scale/placement. Remove ONLY all head/hair/face above the neck and both bare skin arms/hands, including the hand touching chin and crossed supporting forearm. Reconstruct the t-shirt/blue overall bib underneath the removed arms, preserving EXACT original off-white sleeves, blue straps, buckles, pocket, belt, pants, line weight, color, illustration style and perspective. Keep neck intact from jaw level downward, leave a flat overlap at jaw height. Output only the complete torso/neck/pants with both short sleeves and no bare arms. Genuine transparent alpha background, no checkerboard, no text. Do not reshape or move the torso or sleeves.",
       "adopted": true,
-      "transparent_background": true
+      "transparent_background": true,
+      "currentlyUsed": true
     },
     {
       "number": 3,
@@ -26,7 +28,9 @@
       "reference": "design/appearances/assets/blue-glasses/waiting.png",
       "prompt": "Use case: background-extraction. Asset type: transparent character animation contact-group sprite. Edit target: supplied blue-overalls man thinking with finger on chin and opposite arm supporting elbow. Extract ONLY BOTH BARE ARMS AND HANDS together as ONE intact contact group, exactly original position/scale on original 1254x1254 canvas. Keep original skin colors, fingers, original curved elbow, crossed supporting hand, linework and shading unchanged. Remove all head, hair, neck, clothes, white sleeves, blue bib, straps and pants. At each upper arm preserve enough skin to extend invisibly behind original short sleeve opening; do not add any sleeve. Both arms/hands must retain their complete connected shapes, including the entire chin-touching finger. All other pixels genuinely transparent alpha. No background, no checkerboard, no text. Do not move, enlarge, redraw pose or separate the two arms.",
       "adopted": true,
-      "transparent_background": true
+      "transparent_background": true,
+      "currentlyUsed": false,
+      "supersededReason": "Canonical complete waiting sleeve/arms now replace the nonuniformly registered generated contact group to avoid mixed upper-arm contours."
     }
   ],
   "pixelEdits": false

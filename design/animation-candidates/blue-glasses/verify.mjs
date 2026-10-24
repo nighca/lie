@@ -22,13 +22,20 @@ for(const [state,clipId] of Object.entries(data.states)) {
   const pose=sampleClip(data,clip,i*clip.duration/240)
   for(const node of Object.values(pose))for(const value of Object.values(node.transform))assert(Number.isFinite(value))
   assert.notEqual(pose['head-open'].visible,pose['head-closed'].visible)
-  if(state==='waiting')assert(pose['arm-waiting'].visible && pose['arm-waiting-back'].visible)
+  if(state==='waiting')assert(pose['arm-waiting'].visible && pose['arm-waiting-left'].visible && pose['arm-waiting-right'].visible)
   if(state==='listening')assert(pose['arm-listening'].visible)
  }
  assert.notDeepEqual(sampleClip(data,clip,clip.duration*.25),sampleClip(data,clip,clip.duration*.75))
 }
 assert.equal(data.nodes.find(n=>n.id==='head-root').parent,'contact-root')
-for(const id of ['arm-listening','arm-waiting','arm-waiting-back'])assert.equal(data.nodes.find(n=>n.id===id).parent,'contact-root')
+for(const id of ['arm-listening','arm-waiting','arm-waiting-left','arm-waiting-right'])assert.equal(data.nodes.find(n=>n.id===id).parent,'contact-root')
+for(const id of ['arm-waiting','arm-waiting-left','arm-waiting-right']) {
+ const node=data.nodes.find(n=>n.id===id)
+ assert.equal(node.sprite.asset,'waiting-source')
+ assert.deepEqual(node.transform,{x:0,y:0,pivotX:0,pivotY:0,rotation:0,scaleX:1,scaleY:1})
+}
+assert(data.nodes.find(n=>n.id==='arm-waiting-left').sprite.order < data.nodes.find(n=>n.id==='body-waiting').sprite.order)
+assert(data.nodes.find(n=>n.id==='arm-waiting').sprite.order > data.nodes.find(n=>n.id==='body-waiting').sprite.order)
 const timeline=new AnimationTimeline(data)
 function checkInterruptedPose(pose,state,elapsed) {
  const target=sampleClip(data,data.clips[data.states[state]],elapsed)

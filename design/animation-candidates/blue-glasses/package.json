@@ -15,11 +15,6 @@
       "width": 1254,
       "height": 1254
     },
-    "waiting-arms": {
-      "src": "parts/waiting-arms.png",
-      "width": 1254,
-      "height": 1254
-    },
     "shared-torso": {
       "src": "parts/shared-torso.png",
       "width": 1254,
@@ -326,98 +321,6 @@
           [
             470,
             470
-          ]
-        ]
-      }
-    },
-    {
-      "id": "sleeve-waiting-left",
-      "parent": "body-root",
-      "transform": {
-        "x": 0,
-        "y": 0,
-        "pivotX": 0,
-        "pivotY": 0,
-        "rotation": 0,
-        "scaleX": 1,
-        "scaleY": 1
-      },
-      "visible": false,
-      "sprite": {
-        "asset": "waiting-source",
-        "order": 4,
-        "mask": [
-          [
-            350,
-            490
-          ],
-          [
-            470,
-            450
-          ],
-          [
-            490,
-            570
-          ],
-          [
-            470,
-            680
-          ],
-          [
-            450,
-            735
-          ],
-          [
-            320,
-            735
-          ],
-          [
-            300,
-            660
-          ]
-        ]
-      }
-    },
-    {
-      "id": "sleeve-waiting-right",
-      "parent": "body-root",
-      "transform": {
-        "x": 0,
-        "y": 0,
-        "pivotX": 0,
-        "pivotY": 0,
-        "rotation": 0,
-        "scaleX": 1,
-        "scaleY": 1
-      },
-      "visible": false,
-      "sprite": {
-        "asset": "waiting-source",
-        "order": 4,
-        "mask": [
-          [
-            790,
-            440
-          ],
-          [
-            910,
-            460
-          ],
-          [
-            990,
-            680
-          ],
-          [
-            980,
-            735
-          ],
-          [
-            810,
-            735
-          ],
-          [
-            790,
-            650
           ]
         ]
       }
@@ -735,37 +638,73 @@
       }
     },
     {
-      "id": "arm-waiting-back",
+      "id": "arm-waiting-left",
       "parent": "contact-root",
       "transform": {
-        "x": 170,
-        "y": 198,
+        "x": 0,
+        "y": 0,
         "pivotX": 0,
         "pivotY": 0,
         "rotation": 0,
-        "scaleX": 0.7,
-        "scaleY": 0.65
+        "scaleX": 1,
+        "scaleY": 1
       },
       "visible": false,
       "sprite": {
-        "asset": "waiting-arms",
+        "asset": "waiting-source",
         "order": 1,
         "mask": [
           [
-            0,
-            0
+            350,
+            490
           ],
           [
-            1254,
-            0
+            480,
+            450
           ],
           [
-            1254,
-            1254
+            500,
+            540
           ],
           [
-            0,
-            1254
+            465,
+            650
+          ],
+          [
+            480,
+            730
+          ],
+          [
+            520,
+            800
+          ],
+          [
+            515,
+            845
+          ],
+          [
+            475,
+            865
+          ],
+          [
+            435,
+            845
+          ],
+          [
+            395,
+            790
+          ],
+          [
+            365,
+            735
+          ],
+          [
+            315,
+            740
+          ],
+          [
+            310,
+            660
           ]
         ]
       }
@@ -774,58 +713,222 @@
       "id": "arm-waiting",
       "parent": "contact-root",
       "transform": {
-        "x": 170,
-        "y": 198,
+        "x": 0,
+        "y": 0,
         "pivotX": 0,
         "pivotY": 0,
         "rotation": 0,
-        "scaleX": 0.7,
-        "scaleY": 0.65
+        "scaleX": 1,
+        "scaleY": 1
       },
       "visible": false,
       "sprite": {
-        "asset": "waiting-arms",
+        "asset": "waiting-source",
         "order": 9,
         "mask": [
           [
-            557.1428571428572,
-            210.76923076923077
+            540,
+            395
           ],
           [
-            721.4285714285714,
-            210.76923076923077
+            565,
+            365
           ],
           [
-            721.4285714285714,
-            826.1538461538461
+            615,
+            337
           ],
           [
-            1257.142857142857,
-            826.1538461538461
+            650,
+            332
           ],
           [
-            1257.142857142857,
-            1387.6923076923076
+            660,
+            348
           ],
           [
-            114.28571428571429,
-            1387.6923076923076
+            640,
+            375
           ],
           [
-            114.28571428571429,
-            826.1538461538461
+            655,
+            385
           ],
           [
-            357.14285714285717,
-            826.1538461538461
+            660,
+            425
           ],
           [
-            478.5714285714286,
-            518.4615384615385
+            655,
+            480
           ],
           [
-            528.5714285714286,
-            433.8461538461538
+            630,
+            520
+          ],
+          [
+            600,
+            535
+          ],
+          [
+            580,
+            650
+          ],
+          [
+            555,
+            755
+          ],
+          [
+            530,
+            820
+          ],
+          [
+            500,
+            855
+          ],
+          [
+            470,
+            855
+          ],
+          [
+            430,
+            820
+          ],
+          [
+            410,
+            780
+          ],
+          [
+            435,
+            720
+          ],
+          [
+            475,
+            650
+          ],
+          [
+            510,
+            535
+          ],
+          [
+            535,
+            490
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-waiting-right",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 9,
+        "mask": [
+          [
+            790,
+            440
+          ],
+          [
+            910,
+            460
+          ],
+          [
+            990,
+            680
+          ],
+          [
+            970,
+            760
+          ],
+          [
+            910,
+            800
+          ],
+          [
+            890,
+            858
+          ],
+          [
+            865,
+            888
+          ],
+          [
+            800,
+            895
+          ],
+          [
+            740,
+            899
+          ],
+          [
+            680,
+            892
+          ],
+          [
+            620,
+            882
+          ],
+          [
+            560,
+            872
+          ],
+          [
+            520,
+            870
+          ],
+          [
+            480,
+            878
+          ],
+          [
+            440,
+            871
+          ],
+          [
+            410,
+            862
+          ],
+          [
+            395,
+            850
+          ],
+          [
+            410,
+            815
+          ],
+          [
+            450,
+            800
+          ],
+          [
+            480,
+            815
+          ],
+          [
+            535,
+            800
+          ],
+          [
+            650,
+            795
+          ],
+          [
+            790,
+            775
+          ],
+          [
+            790,
+            650
           ]
         ]
       }
@@ -923,13 +1026,12 @@
         "body-normal": true,
         "body-listening": false,
         "body-waiting": false,
-        "sleeve-waiting-left": false,
-        "sleeve-waiting-right": false,
         "arm-left": true,
         "arm-right": true,
         "arm-listening": false,
         "arm-waiting": false,
-        "arm-waiting-back": false,
+        "arm-waiting-left": false,
+        "arm-waiting-right": false,
         "arm-speaking": false,
         "head-closed": true,
         "head-open": false
@@ -1106,13 +1208,12 @@
         "body-normal": false,
         "body-listening": true,
         "body-waiting": false,
-        "sleeve-waiting-left": false,
-        "sleeve-waiting-right": false,
         "arm-left": false,
         "arm-right": true,
         "arm-listening": true,
         "arm-waiting": false,
-        "arm-waiting-back": false,
+        "arm-waiting-left": false,
+        "arm-waiting-right": false,
         "arm-speaking": false,
         "head-closed": true,
         "head-open": false
@@ -1289,13 +1390,12 @@
         "body-normal": false,
         "body-listening": false,
         "body-waiting": true,
-        "sleeve-waiting-left": true,
-        "sleeve-waiting-right": true,
         "arm-left": false,
         "arm-right": false,
         "arm-listening": false,
         "arm-waiting": true,
-        "arm-waiting-back": true,
+        "arm-waiting-left": true,
+        "arm-waiting-right": true,
         "arm-speaking": false,
         "head-closed": true,
         "head-open": false
@@ -1418,13 +1518,12 @@
         "body-normal": true,
         "body-listening": false,
         "body-waiting": false,
-        "sleeve-waiting-left": false,
-        "sleeve-waiting-right": false,
         "arm-left": true,
         "arm-right": false,
         "arm-listening": false,
         "arm-waiting": false,
-        "arm-waiting-back": false,
+        "arm-waiting-left": false,
+        "arm-waiting-right": false,
         "arm-speaking": true,
         "head-closed": true,
         "head-open": false
