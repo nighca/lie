@@ -12,7 +12,7 @@ for name,p in files.items():
  dest=root/'parts'/f'{name}.png';shutil.copyfile(p,dest);im=Image.open(p)
  assets[name]={'src':f'parts/{name}.png','width':im.width,'height':im.height}
  sources.append({'id':name,'source':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'size':list(im.size),'mode':im.mode,'alphaExtrema':list(im.getchannel('A').getextrema())})
-def t(x=0,y=0,px=0,py=0,s=1):return dict(x=x,y=y,pivotX=px,pivotY=py,rotation=0,scaleX=s,scaleY=s)
+def t(x=0,y=0,px=0,py=0,s=1,r=0):return dict(x=x,y=y,pivotX=px,pivotY=py,rotation=r,scaleX=s,scaleY=s)
 nodes=[]
 def node(id,parent=None,transform=None,asset=None,order=0,mask=None,crop=None,visible=True):
  n=dict(id=id,parent=parent,transform=transform or t(),visible=visible)
@@ -31,8 +31,8 @@ node('head-root','body-root',t(625,390,625,390))
 node('head','head-root',t(307,-15,s=.45),asset='head',order=30,mask=[[0,0],[1362,0],[1362,1155],[1030,1155],[1030,925],[540,925],[540,1155],[0,1155]])
 node('waiting-torso','head-root',asset='waiting-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[875,680],[900,800],[940,975],[950,1254],[374,1254],[382,972],[385,912],[443,759],[440,650],[330,530],[350,460],[420,420],[578,395]],visible=False)
 node('listening-torso','head-root',asset='listening-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[875,680],[900,800],[920,880],[938,950],[915,968],[918,1000],[925,1100],[931,1200],[940,1254],[374,1254],[355,1000],[355,950],[385,875],[425,800],[460,720],[470,650],[470,560],[440,500],[420,420],[578,395]],visible=False)
-node('mouth-closed','head-root',t(584,310,s=.16),asset='mouths',order=31,crop=[245,235,590,260])
-node('mouth-open','head-root',t(584,303,s=.16),asset='mouths',order=31,crop=[1380,170,620,380],visible=False)
+node('mouth-closed','head-root',t(631.2,326.8,295,130,s=.16,r=-9),asset='mouths',order=31,crop=[245,235,590,260])
+node('mouth-open','head-root',t(633.6,329.4,310,190,s=.16,r=-9),asset='mouths',order=31,crop=[1380,170,620,380],visible=False)
 node('listen-arm','head-root',asset='listening-source',order=40,mask=[[419,253],[446,251],[465,278],[472,315],[493,332],[511,365],[504,407],[485,432],[480,500],[480,575],[480,650],[470,680],[450,710],[420,735],[380,750],[330,750],[290,725],[265,690],[265,630],[275,580],[308,537],[339,514],[369,463],[405,411],[398,389],[380,345],[382,313],[397,278]],visible=False)
 node('waiting-arms','head-root',asset='waiting-source',order=40,mask=[[411,444],[375,491],[365,574],[369,685],[382,746],[415,794],[455,820],[539,827],[720,845],[854,868],[922,850],[957,800],[968,713],[951,608],[924,530],[866,476],[820,446],[796,491],[824,600],[839,691],[762,733],[637,742],[589,718],[605,654],[615,525],[642,466],[653,418],[642,382],[594,363],[563,392],[549,441],[552,502],[514,583],[486,648],[466,600],[485,501],[480,449]],visible=False)
 node('speak-arm','body-root',t(880,530,880,530),asset='speaking-source',order=40,mask=[[820,450],[947,500],[974,600],[1030,610],[1060,680],[1040,770],[1000,870],[924,900],[860,870],[830,790],[820,700],[850,650]],visible=False)

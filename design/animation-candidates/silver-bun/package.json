@@ -637,11 +637,11 @@
       "id": "mouth-closed",
       "parent": "head-root",
       "transform": {
-        "x": 584,
-        "y": 310,
-        "pivotX": 0,
-        "pivotY": 0,
-        "rotation": 0,
+        "x": 631.2,
+        "y": 326.8,
+        "pivotX": 295,
+        "pivotY": 130,
+        "rotation": -9,
         "scaleX": 0.16,
         "scaleY": 0.16
       },
@@ -661,11 +661,11 @@
       "id": "mouth-open",
       "parent": "head-root",
       "transform": {
-        "x": 584,
-        "y": 303,
-        "pivotX": 0,
-        "pivotY": 0,
-        "rotation": 0,
+        "x": 633.6,
+        "y": 329.4,
+        "pivotX": 310,
+        "pivotY": 190,
+        "rotation": -9,
         "scaleX": 0.16,
         "scaleY": 0.16
       },
