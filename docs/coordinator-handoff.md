@@ -14,11 +14,11 @@
 
 ## 仓库与已集成状态
 
-上次核验main基线：a8db41e48b165da88be969e28e44265a48a3237b，clean；本交接文档会产生后续纯文档提交，接任者读实际HEAD。origin/main本地跟踪32d89bf，未在接手时fetch；最后有部署证据的线上版本32d89bf，不能当最新远程ref独立验证。
+上次核验main基线：925b1da3dec4ea8118e32d450181df079fd97e4b，clean；本交接文档会产生后续纯文档提交，接任者读实际HEAD。origin/main本地跟踪32d89bf，未在接手时fetch；最后有部署证据的线上版本32d89bf，不能当最新远程ref独立验证。
 
 887ac03已本地集成调查页用户验收四提交（原base62b3846；c0ba5b8→3cf9081→6b2c83e→cad5788；本地98303f8→cf06960→38b6ee3→aae203d+验收文档）。玩家输入黑波形、普通状态文案留空、48px固定slot/姓名32px增高、Vite本地8787代理。343测试/全仓类型/构建及47资源通过，IAB桌面/391布局核验通过；后续preview导航中止，未宣称全真人复验。未push/部署/更新8787。504a5dd/36e548d为反馈授权和接口协调文档。
 
-当前自有文档工作树/branch：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie / codex/investigation-review-takeover，当前分支已切为codex/integrate-editor-draft-status（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
+当前自有文档工作树：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie，当前分支已切为codex/coordinator-work-queue（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
 
 ## 专项与最高优先级执行
 
@@ -29,16 +29,17 @@
 
 ## 待review的动画和命名
 
-- blue-glasses：用户视觉通过对象fdcb016583225167b358e1d70519ada75a8ff7e3，验收记录8a4f7f9；WT /Users/nighca/.codex/worktrees/blue-glasses-animation/lie /codex/blue-glasses-animation当时clean，原base0843fe5。已知修订c0b4f4b→1d4b2b3→fe8f313→b2efc4e→fdcb016→8a4f7f9（核实际log完整SHAs及初始依赖，不据简记直接cherry-pick）。排rootreview/正式激活，不自动把研究图当生产源。
+- blue-glasses root已完成独立source/diff/截图review；子agentreview_blue_animation额外核现main parser/PNG/重建/960sample/100interrupt/生成演练通过，无阻塞。已派同agent新managed /Users/nighca/.codex/worktrees/blue-glasses-activation/lie /codex/blue-glasses-activation从925b1da实施9候选提交+正式源animation package/6PNG+manifest仅blue引用；当前测试与文档收尾，root待完整clean handoff及游戏内兼容复核。精确原9候选链：c89ab1ecc1cb4a96b791be75f933202d7280cfad→199015e9a4bb691a9701422df18e282dd4f9e54d→0843fe5e3e77f9cfc1accd032b7abfece4b3046a→c0b4f4b2dbbab989de32f6207a16cc82798be39e→1d4b2b306ea923e8ba56bcc526b86b2acaf63b8e→fe8f313b844a85b66da324ad04839cb69e65f023→b2efc4e8c027ea83fe703c42f8928ec75ebe24d0→fdcb016583225167b358e1d70519ada75a8ff7e3→8a4f7f988b640e7b7619aa9a9edcf2d8968dde21。不要重放通用runtime2993ad7/00dcd60。
+- blue-glasses原验收：用户视觉通过对象fdcb016583225167b358e1d70519ada75a8ff7e3，验收记录8a4f7f9；WT /Users/nighca/.codex/worktrees/blue-glasses-animation/lie /codex/blue-glasses-animation当时clean，原base0843fe5。已知修订c0b4f4b→1d4b2b3→fe8f313→b2efc4e→fdcb016→8a4f7f9（核实际log完整SHAs及初始依赖，不据简记直接cherry-pick）。排rootreview/正式激活，不自动把研究图当生产源。
 - silver-bun：WT同名 /codex/silver-bun-animation，base c9c2e765（已有dd35/f60显式依赖需核）；ordered24c7814→17be2c8→2ddc75e→c19e0d5→4f276ef→b561183→a965211→d68ad39。专项完整review/独立QA/桌面391/四态极值通过，交用户5352候选，尚无批准证据，不激活。
-- sunny-moustache：WT同名 /codex/sunny-moustache-animation，base62b3846，无额外依赖；ordered4e59d7d4f16ff3c02ae8f8642b0a8b213ae1014d→c891485→68c2f7b，专项交付clean。5PNG/20nodes、预算9435096、960sample/100interrupt及桌面/391四态复验，initiator-review.md和16截图；两个异源诊断区仍有324/14计数，不能夸称全覆盖。刚交用户5355待视觉批准，不激活。
-- 动画作者预览另有新增量待核完整SHA：animation-comparison-preview在cf28df8之后的两文件提交，增量SHA6744842，支持src.<id>多候选比较及ANIMATION_PREVIEW_CANDIDATE_ROOTS环境配置；5351保留专项进程，不重放已有272c1ac依赖，不代表正式动画激活。
+- sunny-moustache：WT同名 /codex/sunny-moustache-animation，base62b3846，无额外依赖；ordered4e59d7d4f16ff3c02ae8f8642b0a8b213ae1014d→c891485→68c2f7b，专项交付clean。5PNG/20nodes、预算9435096、960sample/100interrupt及桌面/391四态复验，initiator-review.md和16截图；两个异源诊断区仍有324/14计数，不能夸称全覆盖。用户已明确视觉批准，独立记录dcf759331af83e97cdb7f06a3108f6d74acb8859追加于68c2f7b；待rootreview和正式接入，不再误标待批准。
+- 动画作者预览有序cf28df834cc7d9c2ff480edde83accb38de08081→67448426aee22f5886c09883b1163653164f309e→e9deb6f3854d7c8e5838b34a3c83350507d2b70e待root集成（main还无cf28，不可只取后两增量；旧命名候选272c1ac才含cf28）。root已读两增量完整小diff；支持src.<id>多候选、ANIMATION_PREVIEW_CANDIDATE_ROOTS及VITE_ANIMATION_PREVIEW_CANDIDATES。旧5355错源已由专项统一模板修复，5351/5352/5355服务sessions1743/71849/2008，plum5356/gray5357保留；本地作者工具与生产激活分开，勿重启旧sunny模板。
 - CharacterPreset命名：原owner cb86dd6e25e22444dc93b892c2d609c0a0d6ac08，旧候选1629830为其cherry-pick。批准内部源/类型/包改名，保持appearanceId和/appearances/公开兼容；待完整rootreview与按当前main再组合，不能覆盖新Editor/App或候选资产。所有制作owner仍按当前main既有appearance路径，不提前要求换源。
-- Logo小彩蛋：用户已授权独立subagent先设计，细节未定；先查旧任务是否曾派发，避免重复，未批准生产方案。其他 backlog和门禁见project-plan。
+- Logo小彩蛋：已查docs/design/tmp无既有提案，root现派子agent logo_easter_egg_design，仅独立design/brand/logo-easter-egg新目录设计2—3探索方案，可选本地HTML/SVG演示，不改生产/正式Logo/导航/素材。方案待用户确认，工作树路径/SHAs待handoff。其他backlog与门禁见project-plan。
 
 ## 服务、限制与接任第一步
 
-- 本地8787原由旧root维护，最后文档版本32d89bf；本代未刷新。不要假定main更新就自动服务新包。5397编辑器、5351/5352/5355动画预览有专项owner，保留；本代5486检查服务已停止，5488编辑器候选检查服务已停止，自己的IAB tab已关闭/viewport已reset。专项最新viewport消息优先，禁止占用户mic/草稿。
+- 本地8787原由旧root维护，最后文档版本32d89bf；本代未刷新。不要假定main更新就自动服务新包。5397/5398编辑器检查服务均已停；5351/5352/5355动画预览有专项owner，保留；本代5486检查服务已停止，5488编辑器候选检查服务已停止，自己的IAB tab已关闭/viewport已reset。专项最新viewport消息优先，禁止占用户mic/草稿。
 - 真人mic/外放/长会话、三案盲测、费用硬限额仍未闭环；fake/组件测试不能替代。应用鉴权临时停用/线上目标已有特定授权，正式访问限额仍暂缓。仓仍PRIVATE，未授权现在改可见性或代建投稿PR。宣传视频只研究，实际脚本/分镜/生成媒体/制作等用户明确放行。
 - 新协调先核仓库与最新用户决定、用紧凑wait_threads查三专项结果；优先review已交调查/编辑器本批并协调组件依赖，然后blue-glasses等已批准可执行事项。不要以记录误读阻止17条实施，也不要因接手重复派制作任务。
 - 若刚轮换失败：先核phase与是否已创建successor，遵循rotation恢复，不能双integrator。尚未到轮换时维持本chat协调和两任务，不提前归档。
