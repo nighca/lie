@@ -49,7 +49,7 @@
 
 约06:52三专项waiting flags均恢复为空，原因不可见，不写审批批准或拒绝。fan已review/独立验证并本地集成，动画继续原owner验收；Editor已root review/独立验证并本地集成至f433834。保持未测项目，不重发/绕过权限动作。
 
-旧三角色历史候选ref `codex/integrate-three-characters-current` / `a440ec99cc0b5fab81ec0fb17278df5b2eb847ef`保留，base `0a67498cb58f0dd8403a57556bd786c854150276`；旧30提交来源及哈希/静态不变证据见[前代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)。旧review WT已不在清单，不按旧路径操作。当前QA源为下述bfb候选；新main3a67735组合由`three_character_environment`在新managed candidate独立重建中，5504 QA源branch/runtime保持不动。
+旧三角色历史候选ref `codex/integrate-three-characters-current` / `a440ec99cc0b5fab81ec0fb17278df5b2eb847ef`保留，base `0a67498cb58f0dd8403a57556bd786c854150276`；旧30提交来源及哈希/静态不变证据见[前代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)。旧review WT已不在清单，不按旧路径操作。当前QA源为下述bfb候选；新main组合由`three_character_environment`完成于新managed WT `three-character-integrate-dawn`，冻结clean候选 `051c441027030b8795cc14d7d998d85f14f55dd9`（base3a67735）：382测试/Web186、全类型、Web＋gateway构建79资源、3 strict/hash通过；root实际31log/tree对应review一致，尚未main，5504 QA源branch/runtime保持不动。
 
 本代环境恢复由`three_character_environment`整项负责：新managed WT `/Users/nighca/.codex/worktrees/three-character-qa-dawn/lie`，branch `codex/three-character-qa-dawn`，base `f4338346e3ec20fd742f6a75ea4362f428c18b5b`，重放30链至`eacd93ebd705915a9023648c55e591ec65e00795`，再附灰白部分QA至`bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`（环境handoff时clean；当前动画QA创建授权的untracked `apps/web/public/qa-three-character-iframe.html`，由动画owner最终删除，root不得擅清）。统一`http://127.0.0.1:5504`，PID24833/PTY77092，Node24.22.1纯demo gateway指127.0.0.1:1，HTTP200/79资源ready；Node24.22.1全仓379测试/类型/Web＋gateway构建/79资源及3专属strict均通过。root已成功通知动画专项实际WT/SHA/URL继续正式IAB，不占global viewport，旧5505不恢复。root已实际review22行附加证据＋6截图无blocker；3包＋16PNG逐字节同旧候选、35旧静态不变、Editor CSS保留。[本代有序31提交及检查](history/2026-10-25/three-character-dawn-candidate.md)。附加source `1f7bb995e6db44bf9b584171ef38313a1d02a4af`（base `5c02f2203b8aca411a0bd8155599e864da1a8f9c`，salt-pepper-beard-animation WT clean）仅灰白QA六图/记录，不是完整QA。
 
@@ -78,3 +78,5 @@
 真人mic/外放/长会话/三案盲测、新增五声音色耳验、分享长URL跨浏览器、GitHub外部投稿端到端及费用硬限额未闭环；sunny真实隐藏恢复未验/1280×720舞台裁切保留。fake、文本detect、短WAV、ready或专项QA不等于用户/真人验收。
 
 仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；正式访问/并发/费用/回收策略暂缓，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
+
+本轮分享浏览器只读探查仅一次inventory见Chrome、无IAB即停止，无新增browser PASS；有界实际分享QA已整项交原Editor专项，正在核IAB，不用Chrome fallback、不碰用户draft/mic/viewport、不启停服务。动画当前仅三角色391 iframe四态观察、灰失败四态static及解除恢复单canvas通过，plum同类收尾；尚无完整clean handoff，不提前称整体PASS。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。

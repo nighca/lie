@@ -17,7 +17,7 @@
 
 | 入口 | 当前事实 |
 | --- | --- |
-| 本地main | 当前main `3a677358cc5fc69f215f13c44d51c5a9643eab2c`已含下表成果；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
+| 本地main | 当前main `0f73006f54052610ea3e89a4c9432c766c560360`已含下表成果；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
 | 远程/线上 | 本地origin/main跟踪及最后实际部署证据均为`32d89bf91f441168148884593a0f49b816ad7162`；本轮未fetch/重验远端，不能冒称最新remote。见[部署证据](deployments/2026-10-24-animation-milestone.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |
@@ -53,7 +53,7 @@
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 银发waiting接入 / 动画专项＋root review | 三角色新候选`a440ec9`（base0a67498）已重建并过全仓379/类型/构建79资源；原素材review/哈希保持，旧候选目录消失、5504/5505无监听阻塞；`three_character_environment`已在新WT以f433834重放30链至eacd93e、附灰白部分QA至bfb2a33（环境handoff时clean，当前QA临时壳由动画owner最终删除），单套5504纯local demo HTTP200/79资源ready；动画专项已获root成功通知继续正式IAB，Node24.22.1全仓379测试/类型/Web＋gateway构建/79资源及3专属strict均通过，旧5505不恢复，角色未main。新main3a67735组合正在由环境owner独立候选重建，5504 QA源不动；完整来源见交接候选登记。 |
+| P1 | 银发waiting接入 / 动画专项＋root review | 三角色新候选`a440ec9`（base0a67498）已重建并过全仓379/类型/构建79资源；原素材review/哈希保持，旧候选目录消失、5504/5505无监听阻塞；`three_character_environment`已在新WT以f433834重放30链至eacd93e、附灰白部分QA至bfb2a33（环境handoff时clean，当前QA临时壳由动画owner最终删除），单套5504纯local demo HTTP200/79资源ready；动画专项已获root成功通知继续正式IAB，Node24.22.1全仓379测试/类型/Web＋gateway构建/79资源及3专属strict均通过，旧5505不恢复，角色未main。新main组合候选051c441（base3a67735）已382测试/Web186、类型/构建79资源/3 strict及hash通过，root实际31log/tree review一致，尚未main，5504 QA源不动；完整来源见交接候选登记。 |
 | P1 | gray/plum接入与扩人 / 动画专项＋main_acceptance_environment | 正式activation source HEAD `822e9b5` clean（base5968661，12有序提交）已root实际源码/图review；当前恢复候选bfb2a33（basef433834），含结果投影的组合检查已通过，统一新5504正式游戏IAB未完整交付；约06:52 waiting flag已清空，原因不可见，未main。新source `1f7bb99`仅灰白QA六图/22行记录，root已实际review无blocker，非全部QA；之后按原canonical制mint/ochre，最多2角色并行。 |
 | P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；fan＋Editor已main，等silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
@@ -73,3 +73,5 @@
 - **实测与费用**：付费模型复核先审脚本/固定矩阵、设单次上限，首FAIL/UNCERTAIN/协议异常即停，只清自建资源。开发优先IAB，Chrome例外仅已授权灵矽控制台。普通测试/类型/构建不读取管理key、不自动发真实推理。
 
 原位维护决定/owner/依赖/下一步；已完成流水移[历史](history/2026-10-25/README.md)。记录、本地集成、push、部署与真人验收分别报告。
+
+本轮分享浏览器只读探查仅一次inventory见Chrome、无IAB即停止，无新增browser PASS；有界实际分享QA已整项交原Editor专项，正在核IAB，不用Chrome fallback、不碰用户draft/mic/viewport、不启停服务。动画当前仅三角色391 iframe四态观察、灰失败四态static及解除恢复单canvas通过，plum同类收尾；尚无完整clean handoff，不提前称整体PASS。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。

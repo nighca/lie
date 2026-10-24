@@ -50,3 +50,5 @@
 ## 清晨三角色环境恢复候选
 
 [候选有序31提交与检查](three-character-dawn-candidate.md)：base f433834，候选bfb2a33环境handoff时clean，后续QA临时壳由动画owner清理，环境组合检查通过、正式游戏IAB仍待完整交付；不等于main或发布。
+
+同一[三角色候选记录](three-character-dawn-candidate.md#新main组合候选待正式qa交付)另存最新051c组合31链及382测试/Web186证据，旧bfb QA链保留；正式QA未完整交付。
