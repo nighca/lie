@@ -1,5 +1,7 @@
 # Plum-crop animation candidate
 
+当前正式资源接入候选见[组合接入记录](../../../docs/animation/gray-plum-game-integration.md)，尚待总协调review及顶层游戏QA；下列内容保留来源制作/代验历史。
+
 2026-10-25. Owner: plum_animation_resume. Candidate-only files; canonical source images, production manifest, runtime and UI are unchanged. The user authorized coordinator visual review and integration of later characters without another individual user acceptance gate; the initiator has now completed actual visual review and handed it off for coordinator integration review.
 
 ## Assembly

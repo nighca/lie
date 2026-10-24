@@ -66,7 +66,8 @@
       "listening": "assets/salt-pepper-beard/listening.png",
       "waiting": "assets/salt-pepper-beard/waiting.png",
       "speaking": "assets/salt-pepper-beard/speaking.png"
-    }
+    },
+    "animation": "assets/salt-pepper-beard/animation/package.json"
   },
   {
     "id": "plum-crop",
@@ -79,7 +80,8 @@
       "listening": "assets/plum-crop/listening.png",
       "waiting": "assets/plum-crop/waiting.png",
       "speaking": "assets/plum-crop/speaking.png"
-    }
+    },
+    "animation": "assets/plum-crop/animation/package.json"
   },
   {
     "id": "mint-puffs",
