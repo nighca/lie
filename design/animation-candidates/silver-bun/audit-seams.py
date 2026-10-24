@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import {readAnimationPackage} from './packages/appearance-animation/src/package.ts';
 import {sampleClip} from './packages/appearance-animation/src/playback.ts';
 const data=readAnimationPackage(JSON.parse(fs.readFileSync('design/animation-candidates/silver-bun/package.json')));
-console.log(JSON.stringify(Object.fromEntries(['default','listening'].map(state=>[state,Array.from({length:32},(_,i)=>sampleClip(data,data.clips[data.states[state]],i/8))]))));
+console.log(JSON.stringify(Object.fromEntries(['default','listening','waiting'].map(state=>[state,Array.from({length:32},(_,i)=>sampleClip(data,data.clips[data.states[state]],i/8))]))));
 """],cwd=root.parents[2]))
 def alpha(n,world,nodes):
  chain=[];c=n
@@ -30,16 +30,16 @@ def alpha(n,world,nodes):
  im=images[s['asset']]
  if 'crop' in s:x+=s['crop'][0];y+=s['crop'][1]
  return im.getpixel((int(x),int(y)))[3] if 0<=x<im.width and 0<=y<im.height else 0
-for state in ['default','listening']:
+for state in ['default','listening','waiting']:
  for phase,pose in enumerate(poses[state]):
   nodes={n['id']:{**n,**pose[n['id']]} for n in p['nodes']}
-  torso=nodes['listening-torso' if state=='listening' else 'torso']
+  torso=nodes['waiting-lower-body' if state=='waiting' else 'listening-torso' if state=='listening' else 'torso']
   def world(x,y):
    c=torso
    while c:
     tr=c['transform'];r=tr['rotation']*math.pi/180;dx=(x-tr['pivotX'])*tr['scaleX'];dy=(y-tr['pivotY'])*tr['scaleY'];x=tr['x']+dx*math.cos(r)-dy*math.sin(r);y=tr['y']+dx*math.sin(r)+dy*math.cos(r);c=nodes[c['parent']] if c['parent'] else None
    return x,y
-  regions=[('right sleeve/torso',870,911,640,841)]
+  regions=[('waist overlap',440,901,842,859)] if state=='waiting' else [('right sleeve/torso',870,911,640,841)]
   if state=='default':regions.append(('left inner cuff',395,426,830,881))
   for label,x0,x1,y0,y1 in regions:
    checked=0

@@ -422,6 +422,54 @@
       }
     },
     {
+      "id": "waiting-lower-body",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 9,
+        "mask": [
+          [
+            909.6,
+            842
+          ],
+          [
+            940,
+            975
+          ],
+          [
+            950,
+            1254
+          ],
+          [
+            374,
+            1254
+          ],
+          [
+            382,
+            972
+          ],
+          [
+            385,
+            912
+          ],
+          [
+            411.5359477124183,
+            842
+          ]
+        ]
+      }
+    },
+    {
       "id": "waiting-torso",
       "parent": "head-root",
       "transform": {
@@ -467,24 +515,12 @@
             800
           ],
           [
-            940,
-            975
+            913.2571428571429,
+            858
           ],
           [
-            950,
-            1254
-          ],
-          [
-            374,
-            1254
-          ],
-          [
-            382,
-            972
-          ],
-          [
-            385,
-            912
+            405.47058823529414,
+            858
           ],
           [
             443,
@@ -1387,7 +1423,8 @@
         "waiting-arms": true,
         "speak-arm": false,
         "mouth-open": false,
-        "mouth-closed": true
+        "mouth-closed": true,
+        "waiting-lower-body": true
       },
       "tracks": [
         {
@@ -1398,18 +1435,6 @@
             {
               "time": 0.0,
               "value": 800
-            },
-            {
-              "time": 1.0,
-              "value": 796
-            },
-            {
-              "time": 2.0,
-              "value": 800
-            },
-            {
-              "time": 3.0,
-              "value": 804
             },
             {
               "time": 4.0,
@@ -1427,20 +1452,23 @@
               "value": 0
             },
             {
-              "time": 1.0,
-              "value": 0.85
-            },
-            {
-              "time": 2.0,
+              "time": 4.0,
               "value": 0
-            },
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "pivotY",
+          "interpolation": "linear",
+          "keys": [
             {
-              "time": 3.0,
-              "value": -0.85
+              "time": 0.0,
+              "value": 850
             },
             {
               "time": 4.0,
-              "value": 0
+              "value": 850
             }
           ]
         },
@@ -1451,23 +1479,86 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 390
-            },
-            {
-              "time": 1.0,
-              "value": 388.5
-            },
-            {
-              "time": 2.0,
-              "value": 390
-            },
-            {
-              "time": 3.0,
-              "value": 391.5
+              "value": 850
             },
             {
               "time": 4.0,
-              "value": 390
+              "value": 850
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "scaleY",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 1.0
+            },
+            {
+              "time": 0.25,
+              "value": 1.002296
+            },
+            {
+              "time": 0.5,
+              "value": 1.004243
+            },
+            {
+              "time": 0.75,
+              "value": 1.005543
+            },
+            {
+              "time": 1.0,
+              "value": 1.006
+            },
+            {
+              "time": 1.25,
+              "value": 1.005543
+            },
+            {
+              "time": 1.5,
+              "value": 1.004243
+            },
+            {
+              "time": 1.75,
+              "value": 1.002296
+            },
+            {
+              "time": 2.0,
+              "value": 1.0
+            },
+            {
+              "time": 2.25,
+              "value": 0.997704
+            },
+            {
+              "time": 2.5,
+              "value": 0.995757
+            },
+            {
+              "time": 2.75,
+              "value": 0.994457
+            },
+            {
+              "time": 3.0,
+              "value": 0.994
+            },
+            {
+              "time": 3.25,
+              "value": 0.994457
+            },
+            {
+              "time": 3.5,
+              "value": 0.995757
+            },
+            {
+              "time": 3.75,
+              "value": 0.997704
+            },
+            {
+              "time": 4.0,
+              "value": 1.0
             }
           ]
         }

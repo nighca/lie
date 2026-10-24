@@ -1,5 +1,5 @@
 """Assemble data and copy unmodified PNGs. Never edits image pixels."""
-import json, shutil, hashlib
+import json, shutil, hashlib, math
 from pathlib import Path
 from PIL import Image
 root=Path(__file__).resolve().parent
@@ -29,7 +29,20 @@ node('left-neutral','body-root',t(445,480,445,480),asset='default-source',order=
 node('right-neutral','body-root',t(875,500,875,500),asset='default-source',order=21,mask=right)
 node('head-root','body-root',t(625,390,625,390))
 node('head','head-root',t(307,-15,s=.45),asset='head',order=30,mask=[[0,0],[1362,0],[1362,1155],[1030,1155],[1030,925],[540,925],[540,1155],[0,1155]])
-node('waiting-torso','head-root',asset='waiting-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[875,680],[900,800],[940,975],[950,1254],[374,1254],[382,972],[385,912],[443,759],[440,650],[330,530],[350,460],[420,420],[578,395]],visible=False)
+def waist_mask(polygon,boundary,upper):
+ result=[]
+ for i,current in enumerate(polygon):
+  previous=polygon[i-1]
+  current_inside=current[1]<=boundary if upper else current[1]>=boundary
+  previous_inside=previous[1]<=boundary if upper else previous[1]>=boundary
+  if current_inside!=previous_inside:
+   x=previous[0]+(current[0]-previous[0])*(boundary-previous[1])/(current[1]-previous[1])
+   result.append([x,boundary])
+  if current_inside:result.append(current)
+ return result
+waiting_mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[875,680],[900,800],[940,975],[950,1254],[374,1254],[382,972],[385,912],[443,759],[440,650],[330,530],[350,460],[420,420],[578,395]]
+node('waiting-lower-body','body-root',asset='waiting-source',order=9,mask=waist_mask(waiting_mask,842,False),visible=False)
+node('waiting-torso','head-root',asset='waiting-source',order=10,mask=waist_mask(waiting_mask,858,True),visible=False)
 node('listening-torso','head-root',asset='listening-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[900,680],[925,800],[920,880],[938,950],[915,968],[918,1000],[925,1100],[931,1200],[940,1254],[374,1254],[355,1000],[355,950],[385,875],[425,800],[460,720],[470,650],[470,560],[440,500],[420,420],[578,395]],visible=False)
 node('mouth-closed','head-root',t(631.2,326.8,295,130,s=.16,r=-9),asset='mouths',order=31,crop=[245,235,590,260])
 node('mouth-open','head-root',t(633.6,329.4,310,190,s=.16,r=-9),asset='mouths',order=31,crop=[1380,170,620,380],visible=False)
@@ -44,6 +57,9 @@ for state in ['idle','listening','waiting','speaking']:
  tracks=[track('body-root','y',[800,796,800,804,800]),track('head-root','rotation',[0,head_tilt,0,-head_tilt,0]),track('head-root','y',[390,388.5,390,391.5,390])]
  if state not in ['waiting','listening']:tracks += [track('left-neutral','rotation',[0,1.2,0,-1.2,0])]
  if state not in ['waiting','speaking']:tracks += [track('right-neutral','rotation',[0,-1.2,0,1.2,0])]
+ if state=='waiting':
+  vis['waiting-lower-body']=True
+  tracks=[track('body-root','y',[800,800]),track('head-root','rotation',[0,0]),track('head-root','pivotY',[850,850]),track('head-root','y',[850,850]),track('head-root','scaleY',[round(1+.006*math.sin(i*math.pi/8),6) for i in range(17)])]
  if state=='speaking':
   tracks += [track('speak-arm','rotation',[0,1.9,0,-1.9,0])]
   for n,invert in [('mouth-open',False),('mouth-closed',True)]:tracks.append(dict(node=n,property='visible',interpolation='step',keys=[dict(time=i*.25,value=(i%3!=0)^invert) for i in range(17)]))
