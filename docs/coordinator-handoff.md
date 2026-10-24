@@ -33,7 +33,7 @@
 - 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。当前优先接silver、fan、Editor及gray/plum接入结果并协调命名依赖；所有待办见[队列](project-plan.md#仍需执行的队列)。
 - 旧命名候选`/private/tmp/lie-integrate-text-architecture` / `codex/integrate-preset-voices`保留refs；其中调查/预览改动已有main成果，禁止整批重放。原命名源`cb86dd6e25e22444dc93b892c2d609c0a0d6ac08`仅待按新main重新审阅。
 
-本代另将分享codec代码级边界只读审计整项交`share_boundary_audit`：16000/Unicode/fragment刷新契约、临时探针/现有单测，结果待回/root review；不使用浏览器/服务/草稿/mic/provider，不改代码或触碰Editor dirty，不将代码证据写成浏览器PASS。
+本代`share_boundary_audit`已完成代码级只读审计，待root独立源码/探针复核：sharing＋navigation现有19/19通过，生产codec探针16000 URL与131072 UTF8字节边界、Unicode往返及无效/截断输入拒绝符合契约，未见需修复源码缺陷。执行Node24.17.0低于项目24.22.1，不称要求版本复验。证据`/private/tmp/lie-share-boundary-audit.mjs`；无代码/服务/浏览器变动。仅Node/jsdom＋源码证据，未验真实reload、地址栏粘贴、network fragment、宿主/play回退或跨浏览器16k；16000仍暂定，且仍加载manifest/catalog，不称完全离线。
 
 ## 专项、在制与共享所有权
 
@@ -57,7 +57,7 @@
 
 [结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
 
-06:43本代已实际成功向三个专项通知新协调ID，工具返回对应threadId；后续向本代完整批量handoff，保持原所有权、dirty工作、服务和viewport，不重启在制任务、不重发或绕过权限动作。本代接任时紧凑wait核三个专项仍actual waitingOnApproval、无新完整handoff，原因不可见，不推断拒绝。前代root子agent全部completed，其句柄不随chat继承；本代在制只读审计如上；保留refs/dirty工作与证据，不清目录。
+06:43本代已实际成功向三个专项通知新协调ID，工具返回对应threadId；后续向本代完整批量handoff，保持原所有权、dirty工作、服务和viewport，不重启在制任务、不重发或绕过权限动作。本代接任时紧凑wait核三个专项仍actual waitingOnApproval、无新完整handoff，原因不可见，不推断拒绝。前代root子agent全部completed，其句柄不随chat继承；本代只读审计交付与复核边界如上；保留refs/dirty工作与证据，不清目录。
 
 蓝衣/sunny/Logo/README/observer/投稿/home/CJK均已本地main，已完成链与检查见[当前成果](project-plan.md#已集成本地main的成果)和[归档快照](history/2026-10-25/README.md)，不要沿旧记录再次激活或宣称仍待合入。17条原“只记录”已经解除且完成本地集成，不是后续禁令。
 
