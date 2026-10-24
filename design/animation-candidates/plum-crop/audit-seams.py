@@ -25,6 +25,16 @@ for y in range(925,1254):
  for x in range(910,1050):
   r,g,b,a=images['default-source'].getpixel((x,y))
   if a>=200 and r>130 and r>g*1.3 and g>b*1.15:assert not inside(x,y,torso),('lowered arm retained in torso',x,y)
+hand=next(n for n in data['nodes'] if n['id']=='speak-arm')['sprite']['mask']
+hand_pixels=0
+for y in range(615,756):
+ for x in range(710,881):
+  r,g,b,a=images['speaking-source'].getpixel((x,y))
+  if a>=200 and r>130 and r>g*1.3 and g>b*1.15:
+   hand_pixels+=1
+   assert inside(x,y,hand),('clipped original speaking hand skin',x,y)
+for point in [(755,664),(775,667),(805,687),(785,750),(750,733),(740,729)]:
+ assert inside(*point,hand),('clipped original hand ink probe',point)
 def local(t):
  r=t['rotation']*math.pi/180;c=math.cos(r);s=math.sin(r);a=c*t['scaleX'];b=s*t['scaleX'];e=-s*t['scaleY'];f=c*t['scaleY']
  return [a,b,e,f,t['x']-a*t['pivotX']-e*t['pivotY'],t['y']-b*t['pivotX']-f*t['pivotY']]
@@ -63,4 +73,4 @@ for state in ['default','listening','speaking','waiting']:
       count+=1
       if alpha(pose,x,y)<128:bad.append((x,y))
   assert not bad,(state,i/8,'internal source-alpha seam',len(bad),bad[:12])
-print('PASS: static body/hand/sleeve silhouette coverage; no lowered-arm skin residue; 32 full-chain phases per state;',count,'internal opacity probes. Geometry/nearest-alpha evidence only, not Canvas colour or visual acceptance.')
+print('PASS: static body/hand/sleeve silhouette coverage; no lowered-arm skin residue; 32 full-chain phases per state;',count,'internal opacity probes;',hand_pixels,'speaking-hand skin pixels and 6 original-ink probes retained. Geometry/nearest-alpha evidence only, not Canvas colour or visual acceptance.')
