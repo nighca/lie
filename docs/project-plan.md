@@ -55,7 +55,7 @@
 
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
-| P1 | 玩家输入反馈 / 调查专项→新root | 用户验收cad5788，四提交已完成root全diff review及隔离集成验证：玩家输入黑色波形、三种普通状态留空，仅连接/错误提示，48px居中，桌面姓名32px/14px；343测试、全仓类型/构建通过，独立IAB桌面/391核验通过。已纳入本地main；8787和线上仍另记。连通静音平线已获新授权并派调查专项实施，尚未交付。见[本轮review](history/2026-10-24/coordinator-takeover.md)。 |
+| P1 | 玩家输入反馈 / 调查专项→新root | 用户验收cad5788，四提交已完成root全diff review及隔离集成验证：玩家输入黑色波形、三种普通状态留空，仅连接/错误提示，48px居中，桌面姓名32px/14px；343测试、全仓类型/构建通过，独立IAB桌面/391核验通过。已纳入本地main；8787和线上仍另记。连通静音平线已随反馈1—9本轮组合review通过并本地集成。见[本轮review](history/2026-10-24/coordinator-takeover.md)。 |
 | P1 | 调查窄屏v4 / 独立设计chat | 80f8b62已root全diff review；与顾遥动画/全局×组合202项UI+Web测试、Web类型/构建通过；真实391/375记录400/257px、底栏贴底无页面溢出；桌面既有21px纵滚保留。已review集成本地32d89bf并更新8787；新JS/CSS/动画资源均200。 |
 | P1 | 编辑器验收基线 / 编辑器专项chat | 用户在8787明确“这个版本我看下来没啥问题了”，当前视觉/交互体验通过；清草稿、图片→换形象→姓名居中、居中×与无冗余卡片标签作为基线。长URL跨浏览器/真人语音/GitHub投稿端到端仍另验，后续代码交命名单owner。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
@@ -67,10 +67,11 @@
 | P2 | 依赖审计 / 工程owner待排 | 审计b3b3bc9与补丁0603879已交并root审查；Node24.22.1+精确Undici/Zod覆盖保持cf主线，独立审计归零/271测试通过，root在真实Node24.22.1下复验新UI组合：审计0、277测试/类型/构建通过，补丁已集成本地04844ab；已随32d89bf发布且远程Node24.22.1 CI/CD成功。开发代理WS拒绝握手挂断在旧依赖也复现，未当成通过。 |
 | P3 | 每个角色的两种指认结果状态 / 视觉owner，root排期 | 已登记待制作，用户再次确认需后续处理：为每个角色分别增加①被错误指认时（可不解/委屈/抗议）②被正确指认时（被看穿/懊恼/无奈，非开心），按人物性格表现。待当前人物制作容量释放后纳入视觉专项排期，遵守同时在制最多2人；先出视觉候选供用户验收，再制作/接入正式资源，具体静态或动画形式届时提案。仅提交指认并得出结果后显示，不提前泄题、不改变错误终局不揭晓。 |
 | P3 | 双语README / root子agent logo_easter_egg_design | 双语互链已随32d89bf发布。用户新增：英文README头图仍为中文，需拆成同风格英文/中文两图，各README引用对应语言。已委派复用现有HTML/SVG源、局部翻译及渲染验收，不重画角色、不改正式Logo；待完整review交付，不抢占P1调查页。 |
-| P1 | UI反馈1—9 / 调查共享视觉专项 | 用户澄清原“只记录”不约束root，已正式授权安排实施；从887ac03分派首页/品牌/介绍卡片/转写/持续玩家波形/通知/结局分段。owner负责相关Web/UI文件，禁止编辑器/素材/命名迁移，交回完整review与桌面/391验收。见[17条范围](pending-ui-feedback.md)。 |
+| P1 | UI反馈1—9 / 调查共享视觉专项→root | 原675ed777→2e3cbeb2→0807f50d已完整diff/context/原生桌面及窄屏截图review；跳过已满足fixture副本72220db。当前main组合候选ed97fee→bbda744→1a6d2a9独立全仓356测试/类型/构建54资源与catalog公开投影/三案镜像核对通过，本轮本地集成，未push。头像人数/首页流程/扇形卡/共享笔触/玩家标签右对齐/连通静音平线/删正常提示/结局分段完成；无真人语音验收。见[本批证据](history/2026-10-24/ui-polish-acceptance.md)。 |
 | P1 | UI反馈10—17 / 编辑器专项 | 原三提交7af9f884→ead3505e→dc4bf01已root全diff review与本地集成；10—17/PC复用完成，独立344测试/全仓类型构建及IAB桌面/391对照通过，见[本批验收](history/2026-10-24/editor-feedback-integration.md)。保存状态+清草稿共同显隐followup b018ad7也已rootreview，本地de95ffa集成；独立Web169/类型/构建通过。用户在编辑器专项追加授权本批PC人物卡复用：编辑器owner持有CharacterChoice等价默认样式迁移，调查owner删除style.css冗余覆盖须依赖该提交；移动各自保留。catalog新characters接口与editor fixture分owner，root组合验。用户新增478px步骤连接线问题已由专项6fd08f5修复；root完整diff/478与320截图review，当前main候选9bd60e6独立26编辑测试/类型/构建54资源通过，本轮本地集成，未push。 |
-| P3 | Logo小彩蛋 / root子agent review_blue_animation | 用户已验收5497红点轻跳预览并明确“就按这个效果实现”，正式接入已授权。review_blue_animation负责ProductHeader同几何560ms/3px、键盘/触屏及减弱动态实现与QA；先准备，待调查1—9的ProductHeader下划线变更review集成后再从新main开工，避免重叠。root review/集成，当前正式页眉尚未改动。 |
+| P3 | Logo小彩蛋 / root子agent review_blue_animation | 用户已验收5497红点轻跳预览并明确“就按这个效果实现”，正式接入已授权。review_blue_animation负责ProductHeader同几何560ms/3px、键盘/触屏及减弱动态实现与QA；先准备，调查1—9依赖本轮集成后即可从新main开工；执行agent当前先在安全边界交回语音observer，再切Logo，避免并行所有权。root review/集成，当前正式页眉尚未改动。 |
 | P2 | 动画作者预览 / 动画专项→root | 三提交cf28df8→6744842→e9deb6f已核完整diff/原生截图并按序合入当前main候选，selected按人物绑定src、多候选入口与显式fs目录；独立Node24.22.1预览构建43模块/vue-tsc通过，本轮本地集成，未push，不改变已运行5351/5352/5355服务。 |
+| P2 | 官方投稿弹窗视觉优化 / 编辑器专项待排 | 用户在1004×676认为排布欠佳，明确单独记录安排优化；已有编辑器其余部分含步骤线已获用户验收通过。此为独立待办，待当前P1集成后排期；整理导语/公开说明、GitHub入口、fork/PR步骤、JSON复制区与底部说明的层级/间距/密度，覆盖桌面及移动。保持仅复制JSON、filename-only路径、用户手动fork/branch/PR，不改可见性或代提交；未启动，稿未批准。 |
 | P2 | 人物预设统一命名 / root+appearance_assets | CharacterPreset与@lie/character-animation已批；动画接入前置已满足，只读盘点7e47d7a已review；采用内部类型/模块/制作目录/包名统一，保留已有appearanceId序列化键与/appearances/公开路径以免破坏草稿/分享且无需兼容层；原owner已交cb86dd6，旧候选1629830含迁移且尚未合入main；本轮优先调查页，不重复回放旧候选的调查提交，不再重问定名。 |
 
 ## 当前需用户确认或外部协助
