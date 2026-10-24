@@ -46,12 +46,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .add-character > span { font-size: 25px; line-height: 1.1; }
 .character-editor { display: grid; grid-template-columns: minmax(185px, .72fr) minmax(0, 1.6fr); min-height: 492px; }
 .editor-character-stage { display: flex; flex-direction: column; align-items: center; padding: 26px 18px 24px; background: #fff9df; border-right: 1px solid #e9e3cc; min-width: 0; }
-.editor-character-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-bottom: 18px; }
+.editor-character-heading { display: flex; flex-direction: column; align-items: stretch; gap: 6px; width: 100%; margin-bottom: 18px; }
+.editor-character-heading .delete-button { align-self: flex-end; order: -1; }
 .portrait-halo { width: 100%; height: 285px; display: grid; place-items: center; }
 .portrait-halo img { width: 100%; height: 285px; object-fit: contain; }
-.editor-character-stage h2 { font-size: 20px; margin: 0; overflow-wrap: anywhere; min-width: 0; }
+.editor-character-stage h2 { font-size: 28px; font-weight: 800; line-height: 1.3; text-align: center; margin: 0; overflow-wrap: anywhere; min-width: 0; }
 .appearance-choice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; max-width: 100%; margin-top: 8px; padding: 4px 0; border: 0; background: transparent; font: inherit; font-size: 12px; cursor: pointer; }
-.appearance-name { color: var(--lie-muted); overflow-wrap: anywhere; }
 .appearance-action { color: var(--lie-primary); font-weight: 700; }
 .appearance-choice:hover .appearance-action { text-decoration: underline; }
 .portrait-initial { display: grid; place-items: center; font-size: 30px; background: #eaf2ff; color: var(--lie-primary); }
@@ -116,8 +116,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
   .editor-character-stage { display: grid; grid-template-columns: 68px minmax(0, 1fr); grid-template-rows: auto auto; gap: 8px 12px; padding: 17px 19px; border-right: 0; border-bottom: 1px solid #e9e3cc; }
   .portrait-halo { grid-area: 1 / 1 / 3 / 2; height: 58px; }
   .portrait-halo img, .portrait-halo .portrait-initial { width: 68px; height: 68px; object-fit: cover; object-position: center 10%; border-radius: 15px; }
-  .editor-character-heading { grid-area: 1 / 2; margin: 0; }
-  .editor-character-stage h2 { font-size: 17px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .editor-character-heading { grid-area: 1 / 2; flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; margin: 0; }
+  .editor-character-heading .delete-button { order: 0; align-self: center; }
+  .editor-character-stage h2 { font-size: 22px; text-align: left; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .editor-character-stage .appearance-choice { grid-area: 2 / 2; justify-content: flex-start; justify-self: start; margin: 0; padding: 0; font-size: 11px; }
   .editor-character-stage .delete-button { font-size: 11px; }
   .character-fields { padding: 22px 19px; }

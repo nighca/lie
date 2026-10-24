@@ -237,6 +237,6 @@ describe('three-step editor', () => {
     await wrapper.setProps({ appearances: [{ ...appearance, name: '来自清单的新名字' }] })
     expect(wrapper.get('.editor-appearance').text()).toBe('来自清单的新名字')
     await wrapper.get('[aria-label=关闭]').trigger('click')
-    expect(wrapper.get('[data-field=appearance]').text()).toBe('来自清单的新名字更换形象')
+    expect(wrapper.get('[data-field=appearance]').text()).toBe('更换形象')
   })
 })
