@@ -39,7 +39,7 @@
 | --- | --- | --- |
 | 内容目录 | 本地三案：空盒里的纪念章3人480秒、压轴怎么是鸭叫4人600秒、盐和糖的小乌龙4人540秒；合计复用全部8形象 | [源内容](../content/games/)、[运行目录](../apps/web/public/games/index.json)；第二/第三案有界真实文本语义已复核，真人多轮仍待。 |
 | game-core | 动态人数/局隔离/人物上下文/预算/终局规则已实现并回归 | [架构](architecture.md)、`packages/game-core`；无新增规则DSL。 |
-| Web与UI | 本地main/8787已到32d89bf：调查窄屏v4、共享手绘品牌、自然时长/背景回看、居中×、逐字节奏与统一外框；343组合测试/类型/构建、独立IAB桌面/391通过 | [组合验收与限制](history/2026-10-24/combined-ui-animation.md)；线上已32d89bf。 |
+| Web与UI | 本地main已追加调查反馈、Editor10—17/PC复用/草稿组及蓝衣动画；8787/线上仍最后核验32d89bf：调查窄屏v4、共享手绘品牌、自然时长/背景回看、居中×、逐字节奏与统一外框；343组合测试/类型/构建、独立IAB桌面/391通过 | [组合验收与限制](history/2026-10-24/combined-ui-animation.md)；线上已32d89bf。 |
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
 | 八形象与音色 | 线上/本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[权威清单](../design/appearances/manifest.json)。 |
 | 形象单一来源 | 已集成并上线；name/voice/四态+canonical assets及自动runtime生成齐备，35图字节不变，兼容输出字段已删除 | 唯一源为design清单，public为生成物；统一/appearances/<id>/路径，新增仅加源条目和素材。 |
@@ -59,7 +59,7 @@
 | P1 | 调查窄屏v4 / 独立设计chat | 80f8b62已root全diff review；与顾遥动画/全局×组合202项UI+Web测试、Web类型/构建通过；真实391/375记录400/257px、底栏贴底无页面溢出；桌面既有21px纵滚保留。已review集成本地32d89bf并更新8787；新JS/CSS/动画资源均200。 |
 | P1 | 编辑器验收基线 / 编辑器专项chat | 用户在8787明确“这个版本我看下来没啥问题了”，当前视觉/交互体验通过；清草稿、图片→换形象→姓名居中、居中×与无冗余卡片标签作为基线。长URL跨浏览器/真人语音/GitHub投稿端到端仍另验，后续代码交命名单owner。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
-| P1 | 动画用户验收与扩人 / 独立动画chat | 顾遥已在既有版本；蓝衣用户视觉通过，root已完整source review并派review_blue_animation在独立blue-glasses-activation从925b1da接入，候选9提交须从c89ab1e起、不带旧runtime祖先；银发待用户批准，阳光小胡子新获用户批准dcf7593待review/接入。在制plum-crop与salt-pepper-beard保持并行2。 |
+| P1 | 动画用户验收与扩人 / 独立动画chat | 顾遥已在既有版本；蓝衣用户视觉通过，原九候选+正式源已root完整review并本地接入；全仓345测试/类型/构建及54资源通过，IAB桌面/391布局、减弱动态/故障回退/换人恢复通过，未真语音，见[接入证据](animation/blue-glasses-game-integration.md)；银发待用户批准，阳光小胡子新获用户批准dcf7593待review/接入。在制plum-crop与salt-pepper-beard保持并行2。 |
 | P2 | 手绘风格细节 / 独立视觉chat | 原稿描摹下划线、800字重/.025em及位置/文字盖笔触已随调查v3集成本地2de0f22/8787；后续仅收实际反馈，不重复制作已批准稿。 |
 | P2 | GitHub预填补验 / 独立UI实验+用户 | 等用户IAB登录；普通外部贡献链等实际公开及无上游写权限身份。只停预填/review，未经授权不建fork/branch/commit/PR；不向公开仓传项目私有正文。 |
 | P2 | 角色出戏边界 / root+语音/内容owner | 首案攻击问仍出现幕后元话语，工具层/独立顶层候选均未解决，候选未生产；已停止无限付费叠提示。目录只读识别deepseek-v4-flash不证明根因，不擅自换模型/供应商/剧情；见[沉浸调查](role-immersion-investigation.md)、[首案证据](case-behavior-validation.md)。 |
@@ -69,7 +69,7 @@
 | P3 | 双语README / 文档owner | 默认英文README.md、README.zh-CN.md互链已review并随2de0f22本地集成，链接/命令对齐，已随32d89bf发布。 |
 | P1 | UI反馈1—9 / 调查共享视觉专项 | 用户澄清原“只记录”不约束root，已正式授权安排实施；从887ac03分派首页/品牌/介绍卡片/转写/持续玩家波形/通知/结局分段。owner负责相关Web/UI文件，禁止编辑器/素材/命名迁移，交回完整review与桌面/391验收。见[17条范围](pending-ui-feedback.md)。 |
 | P1 | UI反馈10—17 / 编辑器专项 | 原三提交7af9f884→ead3505e→dc4bf01已root全diff review与本地集成；10—17/PC复用完成，独立344测试/全仓类型构建及IAB桌面/391对照通过，见[本批验收](history/2026-10-24/editor-feedback-integration.md)。保存状态+清草稿共同显隐followup b018ad7也已rootreview，本地de95ffa集成；独立Web169/类型/构建通过。用户在编辑器专项追加授权本批PC人物卡复用：编辑器owner持有CharacterChoice等价默认样式迁移，调查owner删除style.css冗余覆盖须依赖该提交；移动各自保留。catalog新characters接口与editor fixture分owner，root组合验。 |
-| P3 | Logo小彩蛋 / root子agent logo_easter_egg_design | 已核库内无已有提案，按原用户授权派独立设计探索；仅design/brand/logo-easter-egg新目录，不改生产Logo/导航，给2—3克制方案和可选本地演示，方案交用户确认后才实施。 |
+| P3 | Logo小彩蛋 / root子agent logo_easter_egg_design | 设计提案与A交互预览已review并本地收录；用户已选红点轻跳方向，5497可看560ms/3px样稿，root核原生链接/减弱动态模拟/原几何。仅design目录，正式Logo未改，待用户验收预览后再生产。 |
 | P2 | 人物预设统一命名 / root+appearance_assets | CharacterPreset与@lie/character-animation已批；动画接入前置已满足，只读盘点7e47d7a已review；采用内部类型/模块/制作目录/包名统一，保留已有appearanceId序列化键与/appearances/公开路径以免破坏草稿/分享且无需兼容层；原owner已交cb86dd6，旧候选1629830含迁移且尚未合入main；本轮优先调查页，不重复回放旧候选的调查提交，不再重问定名。 |
 
 ## 当前需用户确认或外部协助

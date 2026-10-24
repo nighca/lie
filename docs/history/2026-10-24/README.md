@@ -62,3 +62,5 @@
 - 用户授权每4小时主协调轮换、30分钟推进模式持续继承；当前登记见[主协调交接状态](../../coordinator-handoff.md)，具体防重/失败恢复见[轮换流程](../../coordinator-rotation.md)。本次仅配置，尚未实际创建接任chat。
 
 - [编辑器反馈10—17及PC卡复用review](editor-feedback-integration.md)：原三提交完整复核、root344测试/类型/构建与桌面/391，新增保存状态组另交。
+
+- [蓝衣眼镜正式资源接入](../../animation/blue-glasses-game-integration.md)：用户批准候选逐字节接入、root345测试/54资源及游戏内静态回退与换人检查；Logo A方向仅独立预览，未改生产品牌。
