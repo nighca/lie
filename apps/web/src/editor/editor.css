@@ -49,7 +49,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .editor-character-identity { display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
 .editor-character-stage > .delete-button { position: absolute; top: 18px; right: 18px; }
 .portrait-halo { position: relative; overflow: hidden; width: 100%; height: 285px; display: grid; place-items: center; }
-.portrait-halo img { width: 100%; height: 285px; object-fit: contain; }
+.portrait-halo img, .portrait-halo :deep(canvas) { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; object-fit: contain; object-position: center; transform: none; }
 .editor-character-stage h2 { font-size: 28px; font-weight: 800; line-height: 1.3; text-align: center; margin: 20px 0 0; overflow-wrap: anywhere; max-width: 100%; }
 .appearance-choice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; max-width: 100%; margin-top: 8px; padding: 4px 0; border: 0; background: transparent; font: inherit; font-size: 12px; cursor: pointer; }
 .appearance-action { color: var(--lie-muted); font-weight: 700; }
@@ -129,7 +129,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
   .add-character { width: 88px; min-height: 112px; border-radius: 15px; }
   .character-editor { display: block; }
   .editor-character-stage { padding: 48px 19px; border-right: 0; border-bottom: 1px solid #e9e3cc; }
-  .portrait-halo, .portrait-halo img { height: 160px; }
+  .portrait-halo { height: 160px; }
   .editor-character-stage h2 { font-size: 22px; }
   .editor-character-stage .delete-button { font-size: 11px; }
   .character-fields { padding: 22px 19px; }
