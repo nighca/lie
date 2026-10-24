@@ -37,3 +37,5 @@
 - 用户指出首页与案件页品牌下划线等不一致，并指定首页主文案“有人在说谎”。root核Application/App重复header和home CSS覆写，已委派独立共用组件/插槽收敛，先home+case，保留各自标题/操作和离开确认；editorv2收尾不抢文件，依赖集成后最小复用。
 
 - 用户明确批准删去publicDirectory/publicAvatar，不再为旧URL给长期清单加兼容元数据；统一/appearances/<id>/default、独立avatar及三状态路径，更新活跃引用，历史稿不驱动正式路径。已交视觉owner在editorQA后独立实现生成器/类型/源/引用迁移；editor/header两owner已协调文件边界，无aliases，不改源图字节或音色。
+
+- 用户确认调查稿背景回看stop语音/暂停、关闭手动重开，以及窄屏固定底栏；新意见为背景入口移人物栏、指认分隔为右小区并降权、语音改明确按钮及更明显玩家输入波形。已交视觉owner在统一URL迁移后继续改稿，未把整稿误记已批准或直接生产。
