@@ -1,0 +1,152 @@
+{
+  "sources": {
+    "default": {
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        212,
+        24,
+        1056,
+        1254
+      ]
+    },
+    "listening": {
+      "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        199,
+        24,
+        1063,
+        1254
+      ]
+    },
+    "waiting": {
+      "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        280,
+        20,
+        982,
+        1254
+      ]
+    },
+    "speaking": {
+      "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        212,
+        23,
+        1063,
+        1254
+      ]
+    }
+  },
+  "parts": {
+    "speaking-source": {
+      "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        212,
+        23,
+        1063,
+        1254
+      ]
+    },
+    "waiting-source": {
+      "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        280,
+        20,
+        982,
+        1254
+      ]
+    },
+    "default-source": {
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        212,
+        24,
+        1056,
+        1254
+      ]
+    },
+    "listening-source": {
+      "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        199,
+        24,
+        1063,
+        1254
+      ]
+    },
+    "shared-torso": {
+      "sha256": "315270e0a6c53f2cd36d540e6e2b988475876e91255b790f73ec9b90a598daa8",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        265,
+        321,
+        1040,
+        1254
+      ]
+    }
+  },
+  "generatedPngsCopiedByteForByte": true,
+  "originalsModified": false
+}

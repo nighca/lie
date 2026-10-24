@@ -1,0 +1,15 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "pixelEdits": false,
+  "calls": [
+    {
+      "number": 1,
+      "prompt": "Use case: precise-object-edit. Asset type: transparent 2D character animation torso-and-neck sprite. Edit target: supplied young stocky man with dark moustache and yellow polo shirt. Preserve EXACT original 1254x1254 square canvas, pixel scale/position, yellow polo collar/buttons/folds, belt, dark navy trousers and drawing style. Remove ONLY head/hair/face above jaw level and BOTH bare arms/hands; retain the full continuous neck from hidden jaw overlap downward. Reconstruct the torso where arms were removed. Keep shoulder and short-sleeve shapes in their original position, but no bare arms. Do not invent detached floating shapes or text. Genuine alpha transparency everywhere outside the torso/neck/pants; no opaque backdrop or checkerboard. No redesign of clothes or proportions. Sleeves will be replaced by the original source sleeves at runtime, so preserve torso/collar accurately.",
+      "reference": "design/appearances/assets/sunny-moustache/default.png",
+      "output": "/Users/nighca/.codex/generated_images/01a16db1-d70a-7db0-b15a-494de957a66a/exec-3319318c-f089-41e2-863f-bd1de70f1026.png",
+      "part": "shared-torso",
+      "adopted": true,
+      "transparent_background": true
+    }
+  ]
+}

@@ -1,0 +1,2120 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "assets": {
+    "shared-torso": {
+      "src": "parts/shared-torso.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "default-source": {
+      "src": "parts/default-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "listening-source": {
+      "src": "parts/listening-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "waiting-source": {
+      "src": "parts/waiting-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "speaking-source": {
+      "src": "parts/speaking-source.png",
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  "nodes": [
+    {
+      "id": "body-root",
+      "parent": null,
+      "transform": {
+        "x": 615,
+        "y": 900,
+        "pivotX": 615,
+        "pivotY": 900,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "contact-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 615,
+        "y": 380,
+        "pivotX": 615,
+        "pivotY": 380,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "head-root",
+      "parent": "contact-root",
+      "transform": {
+        "x": 615,
+        "y": 380,
+        "pivotX": 615,
+        "pivotY": 380,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "left-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 390,
+        "y": 485,
+        "pivotX": 390,
+        "pivotY": 485,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "right-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 870,
+        "y": 460,
+        "pivotX": 870,
+        "pivotY": 460,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "speaking-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 870,
+        "y": 460,
+        "pivotX": 870,
+        "pivotY": 460,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "body",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "shared-torso",
+        "order": 3,
+        "mask": [
+          [
+            490,
+            335
+          ],
+          [
+            780,
+            335
+          ],
+          [
+            815,
+            450
+          ],
+          [
+            805,
+            650
+          ],
+          [
+            810,
+            750
+          ],
+          [
+            870,
+            850
+          ],
+          [
+            1000,
+            1254
+          ],
+          [
+            300,
+            1254
+          ],
+          [
+            340,
+            900
+          ],
+          [
+            365,
+            850
+          ],
+          [
+            400,
+            700
+          ],
+          [
+            375,
+            550
+          ],
+          [
+            420,
+            450
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-default",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 8,
+        "mask": [
+          [
+            350,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            800,
+            290
+          ],
+          [
+            739,
+            290
+          ],
+          [
+            730,
+            335
+          ],
+          [
+            700,
+            365
+          ],
+          [
+            660,
+            385
+          ],
+          [
+            600,
+            402
+          ],
+          [
+            540,
+            392
+          ],
+          [
+            510,
+            373
+          ],
+          [
+            490,
+            350
+          ],
+          [
+            350,
+            350
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-listening",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 8,
+        "mask": [
+          [
+            350,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            800,
+            290
+          ],
+          [
+            739,
+            290
+          ],
+          [
+            730,
+            335
+          ],
+          [
+            700,
+            365
+          ],
+          [
+            660,
+            385
+          ],
+          [
+            600,
+            402
+          ],
+          [
+            540,
+            392
+          ],
+          [
+            510,
+            373
+          ],
+          [
+            490,
+            350
+          ],
+          [
+            350,
+            350
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-waiting",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 8,
+        "mask": [
+          [
+            350,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            800,
+            290
+          ],
+          [
+            739,
+            290
+          ],
+          [
+            730,
+            335
+          ],
+          [
+            700,
+            365
+          ],
+          [
+            660,
+            385
+          ],
+          [
+            600,
+            402
+          ],
+          [
+            540,
+            392
+          ],
+          [
+            510,
+            373
+          ],
+          [
+            490,
+            350
+          ],
+          [
+            350,
+            350
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-speaking",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 8,
+        "mask": [
+          [
+            350,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            800,
+            290
+          ],
+          [
+            739,
+            290
+          ],
+          [
+            730,
+            335
+          ],
+          [
+            700,
+            365
+          ],
+          [
+            660,
+            385
+          ],
+          [
+            600,
+            402
+          ],
+          [
+            540,
+            392
+          ],
+          [
+            510,
+            373
+          ],
+          [
+            490,
+            350
+          ],
+          [
+            350,
+            350
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-left",
+      "parent": "left-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 1,
+        "mask": [
+          [
+            320,
+            450
+          ],
+          [
+            435,
+            410
+          ],
+          [
+            435,
+            530
+          ],
+          [
+            415,
+            630
+          ],
+          [
+            420,
+            735
+          ],
+          [
+            390,
+            800
+          ],
+          [
+            380,
+            900
+          ],
+          [
+            330,
+            1000
+          ],
+          [
+            370,
+            1254
+          ],
+          [
+            180,
+            1254
+          ],
+          [
+            180,
+            1000
+          ],
+          [
+            200,
+            800
+          ],
+          [
+            230,
+            720
+          ],
+          [
+            245,
+            650
+          ],
+          [
+            280,
+            550
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-right",
+      "parent": "right-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 1,
+        "mask": [
+          [
+            820,
+            410
+          ],
+          [
+            950,
+            425
+          ],
+          [
+            1080,
+            650
+          ],
+          [
+            1100,
+            1254
+          ],
+          [
+            860,
+            1254
+          ],
+          [
+            900,
+            1020
+          ],
+          [
+            870,
+            900
+          ],
+          [
+            850,
+            800
+          ],
+          [
+            825,
+            720
+          ],
+          [
+            800,
+            600
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-listening",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 1,
+        "mask": [
+          [
+            300,
+            200
+          ],
+          [
+            500,
+            200
+          ],
+          [
+            500,
+            370
+          ],
+          [
+            470,
+            395
+          ],
+          [
+            450,
+            405
+          ],
+          [
+            485,
+            415
+          ],
+          [
+            485,
+            485
+          ],
+          [
+            450,
+            580
+          ],
+          [
+            425,
+            700
+          ],
+          [
+            210,
+            730
+          ],
+          [
+            160,
+            650
+          ],
+          [
+            180,
+            500
+          ],
+          [
+            260,
+            420
+          ],
+          [
+            300,
+            390
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-waiting-left",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 1,
+        "mask": [
+          [
+            320,
+            455
+          ],
+          [
+            450,
+            400
+          ],
+          [
+            460,
+            510
+          ],
+          [
+            445,
+            585
+          ],
+          [
+            425,
+            650
+          ],
+          [
+            445,
+            710
+          ],
+          [
+            475,
+            770
+          ],
+          [
+            450,
+            815
+          ],
+          [
+            400,
+            830
+          ],
+          [
+            350,
+            795
+          ],
+          [
+            300,
+            730
+          ],
+          [
+            260,
+            680
+          ],
+          [
+            270,
+            570
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-waiting",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 9,
+        "mask": [
+          [
+            520,
+            345
+          ],
+          [
+            555,
+            340
+          ],
+          [
+            570,
+            365
+          ],
+          [
+            600,
+            345
+          ],
+          [
+            650,
+            340
+          ],
+          [
+            668,
+            352
+          ],
+          [
+            665,
+            372
+          ],
+          [
+            630,
+            385
+          ],
+          [
+            635,
+            400
+          ],
+          [
+            650,
+            410
+          ],
+          [
+            650,
+            440
+          ],
+          [
+            645,
+            465
+          ],
+          [
+            630,
+            490
+          ],
+          [
+            605,
+            520
+          ],
+          [
+            575,
+            540
+          ],
+          [
+            560,
+            625
+          ],
+          [
+            535,
+            700
+          ],
+          [
+            505,
+            755
+          ],
+          [
+            460,
+            790
+          ],
+          [
+            420,
+            820
+          ],
+          [
+            380,
+            810
+          ],
+          [
+            345,
+            780
+          ],
+          [
+            325,
+            735
+          ],
+          [
+            340,
+            680
+          ],
+          [
+            380,
+            625
+          ],
+          [
+            440,
+            565
+          ],
+          [
+            495,
+            495
+          ],
+          [
+            515,
+            440
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-waiting-right",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 9,
+        "mask": [
+          [
+            820,
+            420
+          ],
+          [
+            930,
+            450
+          ],
+          [
+            1000,
+            640
+          ],
+          [
+            980,
+            720
+          ],
+          [
+            940,
+            790
+          ],
+          [
+            900,
+            800
+          ],
+          [
+            880,
+            815
+          ],
+          [
+            850,
+            838
+          ],
+          [
+            800,
+            845
+          ],
+          [
+            740,
+            848
+          ],
+          [
+            680,
+            842
+          ],
+          [
+            620,
+            831
+          ],
+          [
+            560,
+            817
+          ],
+          [
+            520,
+            814
+          ],
+          [
+            480,
+            817
+          ],
+          [
+            460,
+            830
+          ],
+          [
+            440,
+            834
+          ],
+          [
+            420,
+            820
+          ],
+          [
+            410,
+            805
+          ],
+          [
+            425,
+            780
+          ],
+          [
+            465,
+            770
+          ],
+          [
+            500,
+            780
+          ],
+          [
+            530,
+            720
+          ],
+          [
+            650,
+            715
+          ],
+          [
+            775,
+            680
+          ],
+          [
+            790,
+            580
+          ]
+        ]
+      }
+    },
+    {
+      "id": "sleeve-speaking",
+      "parent": "speaking-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 1,
+        "mask": [
+          [
+            820,
+            420
+          ],
+          [
+            935,
+            450
+          ],
+          [
+            1000,
+            560
+          ],
+          [
+            1060,
+            670
+          ],
+          [
+            1030,
+            710
+          ],
+          [
+            900,
+            700
+          ],
+          [
+            835,
+            650
+          ],
+          [
+            810,
+            560
+          ]
+        ]
+      }
+    },
+    {
+      "id": "arm-speaking",
+      "parent": "speaking-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 4,
+        "mask": [
+          [
+            1030,
+            645
+          ],
+          [
+            1065,
+            720
+          ],
+          [
+            1065,
+            800
+          ],
+          [
+            1045,
+            845
+          ],
+          [
+            1010,
+            858
+          ],
+          [
+            970,
+            852
+          ],
+          [
+            940,
+            850
+          ],
+          [
+            920,
+            845
+          ],
+          [
+            900,
+            830
+          ],
+          [
+            880,
+            810
+          ],
+          [
+            860,
+            790
+          ],
+          [
+            840,
+            765
+          ],
+          [
+            825,
+            740
+          ],
+          [
+            815,
+            725
+          ],
+          [
+            780,
+            728
+          ],
+          [
+            750,
+            720
+          ],
+          [
+            730,
+            705
+          ],
+          [
+            710,
+            685
+          ],
+          [
+            690,
+            660
+          ],
+          [
+            680,
+            630
+          ],
+          [
+            690,
+            610
+          ],
+          [
+            710,
+            605
+          ],
+          [
+            735,
+            615
+          ],
+          [
+            750,
+            625
+          ],
+          [
+            780,
+            630
+          ],
+          [
+            805,
+            640
+          ],
+          [
+            830,
+            640
+          ],
+          [
+            830,
+            595
+          ],
+          [
+            840,
+            565
+          ],
+          [
+            858,
+            565
+          ],
+          [
+            874,
+            600
+          ],
+          [
+            885,
+            640
+          ],
+          [
+            885,
+            675
+          ]
+        ]
+      }
+    }
+  ],
+  "clips": {
+    "default": {
+      "duration": 4.8,
+      "loop": true,
+      "visibility": {
+        "head-default": true,
+        "head-listening": false,
+        "head-waiting": false,
+        "head-speaking": false,
+        "arm-left": true,
+        "arm-right": true,
+        "arm-listening": false,
+        "arm-waiting-left": false,
+        "arm-waiting": false,
+        "arm-waiting-right": false,
+        "sleeve-speaking": false,
+        "arm-speaking": false
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 900
+            },
+            {
+              "time": 1.2,
+              "value": 896
+            },
+            {
+              "time": 2.4,
+              "value": 900
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 904
+            },
+            {
+              "time": 4.8,
+              "value": 900
+            }
+          ]
+        },
+        {
+          "node": "body-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.4
+            },
+            {
+              "time": 2.4,
+              "value": 0.08
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -0.4
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 1.6
+            },
+            {
+              "time": 2.4,
+              "value": 0.25
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -1.3
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 380
+            },
+            {
+              "time": 1.2,
+              "value": 378.5
+            },
+            {
+              "time": 2.4,
+              "value": 380
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 381.5
+            },
+            {
+              "time": 4.8,
+              "value": 380
+            }
+          ]
+        },
+        {
+          "node": "left-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.9
+            },
+            {
+              "time": 2.4,
+              "value": -0.2
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -1.4
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": -1.3
+            },
+            {
+              "time": 2.4,
+              "value": 0.25
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 1.1
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    "listening": {
+      "duration": 4.8,
+      "loop": true,
+      "visibility": {
+        "head-default": false,
+        "head-listening": true,
+        "head-waiting": false,
+        "head-speaking": false,
+        "arm-left": false,
+        "arm-right": true,
+        "arm-listening": true,
+        "arm-waiting-left": false,
+        "arm-waiting": false,
+        "arm-waiting-right": false,
+        "sleeve-speaking": false,
+        "arm-speaking": false
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 900
+            },
+            {
+              "time": 1.2,
+              "value": 896
+            },
+            {
+              "time": 2.4,
+              "value": 900
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 904
+            },
+            {
+              "time": 4.8,
+              "value": 900
+            }
+          ]
+        },
+        {
+          "node": "body-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.4
+            },
+            {
+              "time": 2.4,
+              "value": 0.08
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -0.4
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.95
+            },
+            {
+              "time": 2.4,
+              "value": 0.15
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -0.85
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 380
+            },
+            {
+              "time": 1.2,
+              "value": 378.8
+            },
+            {
+              "time": 2.4,
+              "value": 380
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 381.2
+            },
+            {
+              "time": 4.8,
+              "value": 380
+            }
+          ]
+        },
+        {
+          "node": "left-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.9
+            },
+            {
+              "time": 2.4,
+              "value": -0.2
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -1.4
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": -1.3
+            },
+            {
+              "time": 2.4,
+              "value": 0.25
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 1.1
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    "waiting": {
+      "duration": 4.8,
+      "loop": true,
+      "visibility": {
+        "head-default": false,
+        "head-listening": false,
+        "head-waiting": true,
+        "head-speaking": false,
+        "arm-left": false,
+        "arm-right": false,
+        "arm-listening": false,
+        "arm-waiting-left": true,
+        "arm-waiting": true,
+        "arm-waiting-right": true,
+        "sleeve-speaking": false,
+        "arm-speaking": false
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 900
+            },
+            {
+              "time": 1.2,
+              "value": 896
+            },
+            {
+              "time": 2.4,
+              "value": 900
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 904
+            },
+            {
+              "time": 4.8,
+              "value": 900
+            }
+          ]
+        },
+        {
+          "node": "body-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.4
+            },
+            {
+              "time": 2.4,
+              "value": 0.08
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -0.4
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.95
+            },
+            {
+              "time": 2.4,
+              "value": 0.15
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -0.85
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 380
+            },
+            {
+              "time": 1.2,
+              "value": 378.8
+            },
+            {
+              "time": 2.4,
+              "value": 380
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 381.2
+            },
+            {
+              "time": 4.8,
+              "value": 380
+            }
+          ]
+        }
+      ]
+    },
+    "speaking": {
+      "duration": 3.6,
+      "loop": true,
+      "visibility": {
+        "head-default": false,
+        "head-listening": false,
+        "head-waiting": false,
+        "head-speaking": true,
+        "arm-left": true,
+        "arm-right": false,
+        "arm-listening": false,
+        "arm-waiting-left": false,
+        "arm-waiting": false,
+        "arm-waiting-right": false,
+        "sleeve-speaking": true,
+        "arm-speaking": true
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 900
+            },
+            {
+              "time": 0.9,
+              "value": 896
+            },
+            {
+              "time": 1.8,
+              "value": 900
+            },
+            {
+              "time": 2.7,
+              "value": 904
+            },
+            {
+              "time": 3.6,
+              "value": 900
+            }
+          ]
+        },
+        {
+          "node": "body-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 0.9,
+              "value": 0.4
+            },
+            {
+              "time": 1.8,
+              "value": 0.08
+            },
+            {
+              "time": 2.7,
+              "value": -0.4
+            },
+            {
+              "time": 3.6,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 0.9,
+              "value": 1.6
+            },
+            {
+              "time": 1.8,
+              "value": 0.25
+            },
+            {
+              "time": 2.7,
+              "value": -1.3
+            },
+            {
+              "time": 3.6,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 380
+            },
+            {
+              "time": 0.9,
+              "value": 378.5
+            },
+            {
+              "time": 1.8,
+              "value": 380
+            },
+            {
+              "time": 2.7,
+              "value": 381.5
+            },
+            {
+              "time": 3.6,
+              "value": 380
+            }
+          ]
+        },
+        {
+          "node": "left-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 0.9,
+              "value": 0.9
+            },
+            {
+              "time": 1.8,
+              "value": -0.2
+            },
+            {
+              "time": 2.7,
+              "value": -1.4
+            },
+            {
+              "time": 3.6,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 0.9,
+              "value": -1.3
+            },
+            {
+              "time": 1.8,
+              "value": 0.25
+            },
+            {
+              "time": 2.7,
+              "value": 1.1
+            },
+            {
+              "time": 3.6,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "speaking-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 0.9,
+              "value": -2.2
+            },
+            {
+              "time": 1.8,
+              "value": 0.35
+            },
+            {
+              "time": 2.7,
+              "value": 1.7
+            },
+            {
+              "time": 3.6,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-speaking",
+          "property": "visible",
+          "interpolation": "step",
+          "keys": [
+            {
+              "time": 0,
+              "value": false
+            },
+            {
+              "time": 0.13,
+              "value": true
+            },
+            {
+              "time": 0.34,
+              "value": false
+            },
+            {
+              "time": 0.49,
+              "value": true
+            },
+            {
+              "time": 0.73,
+              "value": false
+            },
+            {
+              "time": 0.87,
+              "value": true
+            },
+            {
+              "time": 1,
+              "value": false
+            },
+            {
+              "time": 1.13,
+              "value": true
+            },
+            {
+              "time": 1.34,
+              "value": false
+            },
+            {
+              "time": 1.49,
+              "value": true
+            },
+            {
+              "time": 1.73,
+              "value": false
+            },
+            {
+              "time": 1.87,
+              "value": true
+            },
+            {
+              "time": 2,
+              "value": false
+            },
+            {
+              "time": 2.13,
+              "value": true
+            },
+            {
+              "time": 2.34,
+              "value": false
+            },
+            {
+              "time": 2.49,
+              "value": true
+            },
+            {
+              "time": 2.73,
+              "value": false
+            },
+            {
+              "time": 2.87,
+              "value": true
+            },
+            {
+              "time": 3,
+              "value": false
+            },
+            {
+              "time": 3.13,
+              "value": true
+            },
+            {
+              "time": 3.34,
+              "value": false
+            },
+            {
+              "time": 3.49,
+              "value": true
+            },
+            {
+              "time": 3.6,
+              "value": false
+            }
+          ]
+        },
+        {
+          "node": "head-default",
+          "property": "visible",
+          "interpolation": "step",
+          "keys": [
+            {
+              "time": 0,
+              "value": true
+            },
+            {
+              "time": 0.13,
+              "value": false
+            },
+            {
+              "time": 0.34,
+              "value": true
+            },
+            {
+              "time": 0.49,
+              "value": false
+            },
+            {
+              "time": 0.73,
+              "value": true
+            },
+            {
+              "time": 0.87,
+              "value": false
+            },
+            {
+              "time": 1,
+              "value": true
+            },
+            {
+              "time": 1.13,
+              "value": false
+            },
+            {
+              "time": 1.34,
+              "value": true
+            },
+            {
+              "time": 1.49,
+              "value": false
+            },
+            {
+              "time": 1.73,
+              "value": true
+            },
+            {
+              "time": 1.87,
+              "value": false
+            },
+            {
+              "time": 2,
+              "value": true
+            },
+            {
+              "time": 2.13,
+              "value": false
+            },
+            {
+              "time": 2.34,
+              "value": true
+            },
+            {
+              "time": 2.49,
+              "value": false
+            },
+            {
+              "time": 2.73,
+              "value": true
+            },
+            {
+              "time": 2.87,
+              "value": false
+            },
+            {
+              "time": 3,
+              "value": true
+            },
+            {
+              "time": 3.13,
+              "value": false
+            },
+            {
+              "time": 3.34,
+              "value": true
+            },
+            {
+              "time": 3.49,
+              "value": false
+            },
+            {
+              "time": 3.6,
+              "value": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "states": {
+    "default": "default",
+    "listening": "listening",
+    "waiting": "waiting",
+    "speaking": "speaking"
+  },
+  "transitions": []
+}
