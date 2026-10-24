@@ -45,7 +45,7 @@
 
 - 语音启动observer已review本地集成：源WT /Users/nighca/.codex/worktrees/voice-startup-observer/lie，basecd9a017，ordered5e465594529ba8b7bd14c43863a6c38711933147→c96bf4dc85042089d323a42d0be11f4abeb760f2，clean。root核完整10文件diff/周边；独立review发现远端握手close误标cancelled的P2，追加修正后1000/1013 failed与caller/abort cancelled复核通过。当前main候选eb4ac0e→355210b全仓369测试/Web176/voice34、全类型构建54资源通过。本地可选DI observer默认无记录/输出/联网，有限stage/result+单open elapsed，无内容/ID；迟到权限/异步stop未结束不虚报cleanup completed。无真实阶段数据/加速承诺，不动gate/生命周期。Logo已完成IAB/组合review并本轮集成，5503已停。
 
-- 编辑器追加验收：用户确认其余部分（含步骤线）无问题。单独P2待办为1004×676官方投稿弹窗视觉层级/间距优化，owner编辑器专项已从c845f22启动隔离scoped排版，等待Logo后独立viewport窗口；保持手动GitHub/仅复制JSON契约，不与已验收本批混淆。
+- 投稿弹窗独立优化本轮review集成：WT /Users/nighca/.codex/worktrees/submission-dialog-layout/lie，basec845f22，唯一b0c83d70122f7c5d25ae48bbb00c16d7d9c73776 clean；root全3file diff/context、1004/391原生图review，当前main组合候选4517e56独立31编辑/投稿测试/Web类型构建60资源通过。仅Editor模板/专属CSS/专项文档，原JSON/filename-only手动GitHub约定不变；专项IAB1004×676/391/1280、JSON滚动、实际clipboard与textarea完全相同通过，5401停/tab关/reset。不把专项QA当用户最终新排版批准，其他已验收编辑器仍完成。
 
 - 新独立P2：编辑器大形象有/无动画预置垂直位置不同，切动画先低后上移。用户仅要求记录排查，当前不实施。根因未验证（fallback/canvas定位只是猜测），空白截图不算复现；后续由编辑器+动画UI核冷/热加载、定位/透明留白/缩放锚点、桌面移动及共享调查页。目标静态→idle无跳跃/呈现基准一致，不关动画、不做新资产、不重开其他已验收部分。
 
