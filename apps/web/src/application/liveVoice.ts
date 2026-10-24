@@ -22,9 +22,35 @@ export function createLiveVoicePort(dependencies = {
       let playing = false
       let answerEnded = false
       let answerInProgress = false
+      let inputLevel = 0
+      let outputLevel = 0
+      let inputActive = false
+      let inputTransitionAt: number | null = null
+      let lastFeedbackAt = -Infinity
+      function feedback(force = false) {
+        if (!capturing || !current()) return
+        const now = performance.now()
+        if (!force && now - lastFeedbackAt < 50) return
+        lastFeedbackAt = now
+        scope.onEvent({ type: 'audioLevel', inputLevel, outputLevel, inputActive })
+      }
+      function inputMeter(level: number) {
+        if (!capturing || !current()) return
+        inputLevel = level
+        const switching = inputActive ? level < 0.008 : level >= 0.012
+        const now = performance.now()
+        if (!switching) inputTransitionAt = null
+        else if (inputTransitionAt == null) inputTransitionAt = now
+        else if (now - inputTransitionAt >= (inputActive ? 350 : 120)) {
+          inputActive = !inputActive
+          inputTransitionAt = null
+        }
+        feedback()
+      }
       function current() { return !closed && scope.isCurrent() }
       function answerDrained() {
         playing = false
+        if (outputLevel !== 0) { outputLevel = 0; feedback(true) }
         if (answerEnded && answerInProgress && current()) {
           answerEnded = false
           answerInProgress = false
@@ -106,8 +132,12 @@ export function createLiveVoicePort(dependencies = {
             if (availability === 'unavailable') throw new VoiceAvailabilityError('unavailable')
             if (availability !== 'ready') throw new VoiceAvailabilityError('check-failed')
             context = dependencies.createContext()
-            player = dependencies.createPlayer(context, answerDrained)
-            const micReady = dependencies.openMic({ signal: scope.signal, onFrame(data) { if (capturing && current()) channel.input(data) } }).then(async (mic) => {
+            player = dependencies.createPlayer(context, answerDrained, (level) => {
+              const ended = outputLevel !== 0 && level === 0
+              outputLevel = level
+              feedback(ended)
+            })
+            const micReady = dependencies.openMic({ signal: scope.signal, onLevel: inputMeter, onFrame(data) { if (capturing && current()) channel.input(data) } }).then(async (mic) => {
               if (!current()) await mic.stop()
               else microphone = mic
             })

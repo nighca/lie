@@ -28,6 +28,26 @@ function audioFixture() {
 }
 
 describe('microphone lifecycle', () => {
+  it('measures real input RMS at most every 50 ms and resets on stop', async () => {
+    const fixture = audioFixture()
+    let now = 0
+    const time = vi.spyOn(performance, 'now').mockImplementation(() => now)
+    const onLevel = vi.fn()
+    const microphone = await openMicrophone({ ...fixture.options, onLevel })
+    try {
+      fixture.worklet.port.onmessage?.({ data: new Float32Array([0.5, -0.5]) })
+      expect(onLevel).toHaveBeenLastCalledWith(0.5)
+      now = 20
+      fixture.worklet.port.onmessage?.({ data: new Float32Array([1, -1]) })
+      expect(onLevel).toHaveBeenCalledTimes(1)
+      now = 50
+      fixture.worklet.port.onmessage?.({ data: new Float32Array([0, 0]) })
+      expect(onLevel).toHaveBeenLastCalledWith(0)
+      await microphone.stop()
+      expect(onLevel).toHaveBeenLastCalledWith(0)
+    } finally { await microphone.stop(); time.mockRestore() }
+  })
+
   it('uses the actual sample rate, never monitors microphone sound, and releases owned resources', async () => {
     const fixture = audioFixture()
     const microphone = await openMicrophone(fixture.options)

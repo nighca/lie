@@ -2,7 +2,7 @@ import { accuse, appendDialogue, buildCharacterContext, consumeInterrogationTime
 import type { DialogueEntry, GameSession } from '@lie/game-core'
 
 import { VoiceAvailabilityError } from './voice'
-import type { Conversation, ConversationEvent, VoicePort } from './voice'
+import type { Conversation, ConversationEvent, VoiceFeedback, VoicePort } from './voice'
 
 export interface GameView {
   phase: 'loading' | 'failed' | GameSession['phase']
@@ -42,6 +42,12 @@ export function createGameController(options: ControllerOptions) {
   let voiceEpoch = 0
   let active: { connection: Conversation; abort: AbortController; epoch: number } | null = null
   let voiceStatus: GameView['voiceStatus'] = 'idle'
+  let voiceFeedback: VoiceFeedback = { inputLevel: 0, outputLevel: 0, inputActive: false }
+  const feedbackListeners = new Set<(feedback: VoiceFeedback) => void>()
+  function publishFeedback(feedback: VoiceFeedback) {
+    voiceFeedback = feedback
+    for (const listener of feedbackListeners) listener({ ...feedback })
+  }
   let busy = false
   let notice: string | null = null
   let accusationOpen = false
@@ -105,6 +111,7 @@ export function createGameController(options: ControllerOptions) {
     voiceEpoch++
     const previous = active
     active = null
+    publishFeedback({ inputLevel: 0, outputLevel: 0, inputActive: false })
     previous?.abort.abort()
     previous?.connection.close()
     busy = false
@@ -129,6 +136,10 @@ export function createGameController(options: ControllerOptions) {
   }
   function acceptEvent(event: ConversationEvent) {
     if (enabledAt != null && remainingMs() <= 0) { expireBudget(); return }
+    if (event.type === 'audioLevel') {
+      publishFeedback({ inputLevel: event.inputLevel, outputLevel: event.outputLevel, inputActive: event.inputActive })
+      return
+    }
     if (event.type === 'userText') { append('user', event.text); voiceStatus = 'waiting' }
     if (event.type === 'speaking') voiceStatus = 'speaking'
     if (event.type === 'assistantText') { pendingText += event.text; voiceStatus = 'speaking' }
@@ -146,6 +157,12 @@ export function createGameController(options: ControllerOptions) {
 
   return {
     getView,
+    getVoiceFeedback: (): VoiceFeedback => ({ ...voiceFeedback }),
+    subscribeVoiceFeedback(listener: (feedback: VoiceFeedback) => void) {
+      feedbackListeners.add(listener)
+      listener({ ...voiceFeedback })
+      return () => feedbackListeners.delete(listener)
+    },
     subscribe(listener: (view: GameView) => void) {
       listeners.add(listener)
       listener(getView())
@@ -257,7 +274,7 @@ export function createGameController(options: ControllerOptions) {
       notice = null
       publish()
     },
-    dispose() { ++loadEpoch; stopVoice(); listeners.clear() },
+    dispose() { ++loadEpoch; stopVoice(); listeners.clear(); feedbackListeners.clear() },
   }
 }
 

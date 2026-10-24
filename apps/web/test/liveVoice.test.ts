@@ -9,6 +9,8 @@ function setupBridge(voiceId: string | null = null) {
   let current = true
   let options: VoiceChannelOptions | null = null
   let drained = () => {}
+  let inputMeter = (_level: number) => {}
+  let outputMeter = (_level: number) => {}
   const stopMic = vi.fn(async () => {})
   const context = { state: 'running', resume: vi.fn(async () => {}), close: vi.fn(async () => {}) }
   const player = { enqueue: vi.fn(), stop: vi.fn(() => drained()) }
@@ -21,17 +23,45 @@ function setupBridge(voiceId: string | null = null) {
   const dependencies = {
     fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready' }))),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
-    createPlayer(_context: AudioContext, onIdle: () => void = () => {}) { drained = onIdle; return player },
-    openMic: vi.fn(async (value: { onFrame(data: Uint8Array): void }): Promise<{ stop(): Promise<void> }> => { onFrame = value.onFrame; return { stop: stopMic } }),
+    createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void) { drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
+    openMic: vi.fn(async (value: { onFrame(data: Uint8Array): void; onLevel?: (level: number) => void }): Promise<{ stop(): Promise<void> }> => { onFrame = value.onFrame; inputMeter = value.onLevel ?? (() => {}); return { stop: stopMic } }),
     createContext: () => context as unknown as AudioContext,
   }
   const connection = createLiveVoicePort(dependencies).create(scope)
-  return { connection, dependencies, channel, player, context, onEvent, readContext, stopMic, expire() { current = false; abort.abort() }, options: () => options!, drain: () => drained(), frame: (data: Uint8Array) => onFrame(data) }
+  return { connection, dependencies, channel, player, context, onEvent, readContext, stopMic, expire() { current = false; abort.abort() }, options: () => options!, inputMeter: (level: number) => inputMeter(level), outputMeter: (level: number) => outputMeter(level), drain: () => drained(), frame: (data: Uint8Array) => onFrame(data) }
 }
 
 const format = { format: 'pcm' as const, sampleRate: 16000, channels: 1 as const, bitsPerSample: 16 as const, frameDuration: 20 }
 
 describe('continuous browser voice and device bridge', () => {
+  it('uses sampled levels rather than packets, estimates input activity with hysteresis and isolates closure', async () => {
+    const bridge = setupBridge()
+    let now = 0
+    const time = vi.spyOn(performance, 'now').mockImplementation(() => now)
+    try {
+      await bridge.connection.open()
+      bridge.options().onEvent({ type: 'ready', format })
+      bridge.options().onEvent({ type: 'tts', state: 'start', text: null })
+      bridge.options().onEvent({ type: 'audio', data: new Uint8Array([1, 2]) })
+      expect(bridge.onEvent.mock.calls.flat().filter((event) => event.type === 'audioLevel')).toHaveLength(0)
+      bridge.inputMeter(0.02)
+      expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'audioLevel', inputLevel: 0.02, outputLevel: 0, inputActive: false })
+      now = 150; bridge.inputMeter(0.03)
+      expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'audioLevel', inputLevel: 0.03, outputLevel: 0, inputActive: true })
+      now = 200; bridge.outputMeter(0.2)
+      expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'audioLevel', inputLevel: 0.03, outputLevel: 0.2, inputActive: true })
+      now = 250; bridge.inputMeter(0)
+      now = 550; bridge.inputMeter(0)
+      expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'audioLevel', inputLevel: 0, outputLevel: 0.2, inputActive: true })
+      now = 600; bridge.inputMeter(0)
+      expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'audioLevel', inputLevel: 0, outputLevel: 0.2, inputActive: false })
+      bridge.connection.close()
+      bridge.onEvent.mockClear()
+      now = 700; bridge.inputMeter(1); bridge.outputMeter(1)
+      expect(bridge.onEvent).not.toHaveBeenCalled()
+    } finally { bridge.connection.close(); time.mockRestore() }
+  })
+
   it.each([null, 'vendor:voice/warm'])('passes configured voice %s without changing the provider default', (voiceId) => {
     const bridge = setupBridge(voiceId)
     if (voiceId == null) expect(Object.hasOwn(bridge.options(), 'voiceId')).toBe(false)

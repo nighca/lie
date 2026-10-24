@@ -1,6 +1,14 @@
 import type { CharacterContext } from '@lie/game-core'
 
+/** Linear RMS amplitudes. inputActive is a local estimate, not provider VAD. */
+export interface VoiceFeedback {
+  inputLevel: number
+  outputLevel: number
+  inputActive: boolean
+}
+
 export type ConversationEvent =
+  | ({ type: 'audioLevel' } & VoiceFeedback)
   | { type: 'userText'; text: string }
   | { type: 'assistantText'; text: string }
   | { type: 'speaking' }

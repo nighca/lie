@@ -19,6 +19,7 @@ registerProcessor('lie-capture', LieCapture);
 
 export type MicrophoneOptions = {
   onFrame: (data: Uint8Array) => void
+  onLevel?: (level: number) => void
   signal?: AbortSignal
   getUserMedia?: (constraints: MediaStreamConstraints) => Promise<MediaStream>
   createContext?: () => AudioContext
@@ -36,12 +37,14 @@ export async function openMicrophone(options: MicrophoneOptions): Promise<{ stop
   let worklet: AudioWorkletNode | null = null
   let gain: GainNode | null = null
   let moduleUrl: string | null = null
+  let lastLevelAt = -Infinity
   let stopped = false
   let stopPromise: Promise<void> | null = null
 
   function stop(): Promise<void> {
     if (stopPromise != null) return stopPromise
     stopped = true
+    options.onLevel?.(0)
     signal?.removeEventListener('abort', abort)
     if (worklet != null) {
       worklet.port.onmessage = null
@@ -74,7 +77,14 @@ export async function openMicrophone(options: MicrophoneOptions): Promise<{ stop
     source = context.createMediaStreamSource(stream)
     worklet = (options.createWorklet ?? ((audioContext) => new AudioWorkletNode(audioContext, 'lie-capture')))(context)
     worklet.port.onmessage = (event: MessageEvent<Float32Array>) => {
-      if (!stopped) encoder.push(event.data)
+      if (stopped) return
+      encoder.push(event.data)
+      const now = performance.now()
+      if (options.onLevel != null && now - lastLevelAt >= 50) {
+        lastLevelAt = now
+        const energy = event.data.reduce((sum, sample) => sum + sample * sample, 0)
+        options.onLevel(Math.min(1, Math.sqrt(energy / Math.max(1, event.data.length))))
+      }
     }
     gain = context.createGain()
     gain.gain.value = 0

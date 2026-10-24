@@ -13,6 +13,33 @@ function deferred<T>() {
 }
 
 describe('browser orchestration', () => {
+  it('publishes meters separately and resets and rejects stale feedback across turns', async () => {
+    const { controller, turns } = setup()
+    await controller.load('test'); controller.start(); await controller.startConversation()
+    const viewListener = vi.fn()
+    const feedbackListener = vi.fn()
+    controller.subscribe(viewListener)
+    const unsubscribe = controller.subscribeVoiceFeedback(feedbackListener)
+    expect(controller.getVoiceFeedback()).toEqual({ inputLevel: 0, outputLevel: 0, inputActive: false })
+    viewListener.mockClear()
+    const event = { type: 'audioLevel' as const, inputLevel: 0.4, outputLevel: 0.2, inputActive: true }
+    turns[0].scope.onEvent(event)
+    expect(controller.getVoiceFeedback()).toEqual({ inputLevel: 0.4, outputLevel: 0.2, inputActive: true })
+    expect(viewListener).not.toHaveBeenCalled()
+    controller.selectCharacter('two')
+    expect(controller.getVoiceFeedback()).toEqual({ inputLevel: 0, outputLevel: 0, inputActive: false })
+    turns[0].scope.onEvent(event)
+    expect(controller.getVoiceFeedback().inputLevel).toBe(0)
+    await controller.startConversation()
+    turns[1].scope.onEvent(event)
+    turns[1].scope.onEvent({ type: 'error' })
+    expect(controller.getVoiceFeedback()).toEqual({ inputLevel: 0, outputLevel: 0, inputActive: false })
+    unsubscribe()
+    feedbackListener.mockClear()
+    controller.dispose()
+    expect(feedbackListener).not.toHaveBeenCalled()
+  })
+
   it('projects only public fields and gives a tool only its own character context', async () => {
     const { controller, turns } = setup()
     await controller.load('test')
