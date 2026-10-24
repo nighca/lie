@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import crypto from 'node:crypto'
+import {readAnimationPackage} from '../../../packages/appearance-animation/src/package.ts'
+import {sampleClip,AnimationTimeline} from '../../../packages/appearance-animation/src/playback.ts'
+const dir=new URL('./',import.meta.url),raw=JSON.parse(fs.readFileSync(new URL('package.json',dir))),data=readAnimationPackage(raw),provenance=JSON.parse(fs.readFileSync(new URL('provenance.json',dir)))
+const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex')
+for(const item of provenance.sources){const asset=data.assets[item.id],bytes=fs.readFileSync(new URL(asset.src,dir));assert.deepEqual(bytes.subarray(0,8),Buffer.from([137,80,78,71,13,10,26,10]));assert.equal(bytes.readUInt32BE(16),asset.width);assert.equal(bytes.readUInt32BE(20),asset.height);assert.equal(hash(bytes),item.sha256);const origin=item.id==='head'?item.origin:new URL('../../appearances/assets/plum-crop/'+item.id.replace('-source','')+'.png',dir);assert.equal(hash(fs.readFileSync(origin)),item.sha256)}
+for(const [state,expected] of Object.entries(provenance.originalCanonicalStates))assert.equal(hash(fs.readFileSync(new URL('../../appearances/assets/plum-crop/'+state+'.png',dir))),expected)
+function valid(pose,state){for(const node of Object.values(pose))for(const [channel,value] of Object.entries(node.transform)){assert(Number.isFinite(value));if(channel.startsWith('scale'))assert(value>0)}assert.notEqual(pose['mouth-open'].visible,pose['mouth-closed'].visible);for(const id of ['torso','left-neutral','right-neutral','listen-arm','waiting-torso','waiting-lower-body','waiting-arms','listening-torso','speak-arm'])assert.equal(pose[id].visible,data.clips[data.states[state]].visibility[id])}
+let samples=0
+for(const state of Object.keys(data.states)){const clip=data.clips[data.states[state]];for(let i=0;i<240;i++){valid(sampleClip(data,clip,i/60),state);samples++}assert.deepEqual(sampleClip(data,clip,0),sampleClip(data,clip,4));const a=sampleClip(data,clip,1),b=sampleClip(data,clip,3);if(state==='waiting'){assert.notEqual(a['head-root'].transform.scaleY,b['head-root'].transform.scaleY);for(const pose of [a,b]){assert.equal(pose['body-root'].transform.y,800);assert.equal(pose['head-root'].transform.rotation,0);assert.equal(pose['head-root'].transform.y,pose['head-root'].transform.pivotY)}}else{assert.notEqual(a['body-root'].transform.y,b['body-root'].transform.y);assert.notEqual(a['head-root'].transform.rotation,b['head-root'].transform.rotation)}}
+for(const id of ['head','mouth-open','mouth-closed','listen-arm','waiting-arms','waiting-torso'])assert.equal(data.nodes.find(n=>n.id===id).parent,'head-root')
+assert.equal(data.nodes.find(n=>n.id==='waiting-lower-body').parent,'body-root')
+const timeline=new AnimationTimeline(data);let previous=timeline.advance(.37)
+for(let i=0;i<100;i++){const state=['speaking','waiting','listening','default'][i%4];timeline.setState(state);const immediate=timeline.advance(0);valid(immediate,state);for(const id of Object.keys(previous))for(const key of Object.keys(previous[id].transform))assert.equal(immediate[id].transform[key],previous[id].transform[key],id+'.'+key);for(const delta of [.025,.045,.03]){previous=timeline.advance(delta);valid(previous,state)}}
+assert.throws(()=>readAnimationPackage({...raw,schemaVersion:2}));assert.throws(()=>readAnimationPackage({...raw,unexpected:true}))
+console.log('PASS strict contract; 5 PNG dimensions/native hashes; canonical hashes; '+samples+' finite samples; loop boundaries; mouth/limb exclusivity; contact parents; anchored waiting breath; 100 interrupted switches with every numeric channel continuous')

@@ -1,0 +1,71 @@
+{
+  "sources": [
+    {
+      "id": "default-source",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+      "width": 1254,
+      "height": 1254,
+      "origin": "/Users/nighca/.codex/worktrees/plum-crop-animation/lie/design/appearances/assets/plum-crop/default.png"
+    },
+    {
+      "id": "head",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "2d08b2b17687fad6f9fb54bb2a76be78f86ede46bd6a189362e8806ee1df98e0",
+      "width": 1254,
+      "height": 1254,
+      "origin": "/Users/nighca/.codex/generated_images/01a16e95-7926-79e0-a8ae-6f56388db3d8/exec-7ec2e3ee-5d07-4ed0-b3b3-9f81361a655f.png"
+    },
+    {
+      "id": "listening-source",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+      "width": 1254,
+      "height": 1254,
+      "origin": "/Users/nighca/.codex/worktrees/plum-crop-animation/lie/design/appearances/assets/plum-crop/listening.png"
+    },
+    {
+      "id": "speaking-source",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+      "width": 1254,
+      "height": 1254,
+      "origin": "/Users/nighca/.codex/worktrees/plum-crop-animation/lie/design/appearances/assets/plum-crop/speaking.png"
+    },
+    {
+      "id": "waiting-source",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+      "width": 1254,
+      "height": 1254,
+      "origin": "/Users/nighca/.codex/worktrees/plum-crop-animation/lie/design/appearances/assets/plum-crop/waiting.png"
+    }
+  ],
+  "generationCalls": 1,
+  "originalCanonicalStates": {
+    "default": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+    "listening": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+    "waiting": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+    "speaking": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8"
+  }
+}

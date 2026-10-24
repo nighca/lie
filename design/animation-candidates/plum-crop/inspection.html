@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>紫衣短卷发动画候选</title>
+<style>
+*{box-sizing:border-box}body{font:16px system-ui;background:#fff18a;color:#111b45;padding:18px;margin:0}nav{display:flex;flex-wrap:wrap;gap:8px}button{font:inherit;padding:8px 12px;border:2px solid #111b45;border-radius:9px;background:#fffef7}button[aria-pressed=true]{background:#075bfa;color:white}main{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}.frame{position:relative;aspect-ratio:1;background:#fffef7;overflow:hidden;border:2px solid #111b45;border-radius:12px}canvas,img{width:100%;display:block}h2{font-size:15px}h1{font-size:24px}.detail main{grid-template-columns:repeat(2,minmax(0,1fr))}.detail .frame{height:370px;aspect-ratio:auto}.detail canvas,.detail img{position:absolute;left:calc(50% - 627px);width:1254px;height:1254px;top:-280px}.face canvas,.face img{top:-70px}.waist canvas,.waist img{top:-540px}.full main{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:620px){main,.detail main,.full main{grid-template-columns:1fr}.detail .frame{height:330px}}
+</style>
+<h1>紫衣短卷发 · 动画候选</h1><p>原画与动态对照；嘴形为合成时序。循环、相反极值和中断使用正式采样器与 Canvas 后端。</p>
+<nav><button data-state="default">default</button><button data-state="listening">listening</button><button data-state="waiting">waiting</button><button data-state="speaking">speaking</button><button id="pause">暂停</button><button id="interrupt">100ms 中断序列</button></nav><p><a href="?">播放</a> · <a href="?phase=extrema">极值</a> · <a href="?phase=extrema&detail=shoulders">肩颈</a> · <a href="?phase=extrema&detail=waist">腰/袖口</a> · <a href="?phase=face&detail=face">嘴部</a></p><main></main>
+<script type="module">
+import {readAnimationPackage,sampleClip,AnimationTimeline,createCanvasRenderer} from '/@fs/Users/nighca/.codex/worktrees/plum-crop-animation/lie/packages/appearance-animation/src/index.ts';
+const query=new URLSearchParams(location.search),detail=query.get('detail'),phase=query.get('phase'),main=document.querySelector('main');
+if(detail)document.body.classList.add('detail',detail);
+const data=readAnimationPackage(await(await fetch('./package.json')).json()),images=new Map(await Promise.all(Object.entries(data.assets).map(async([id,asset])=>{const image=new Image();image.src=new URL(asset.src,location.href);await image.decode();return[id,image]})));
+let timeline=new AnimationTimeline(data),state='default',paused=false,last=null,interruptUntil=0,nextInterrupt=0,interruptIndex=0;
+function section(title){const section=document.createElement('section'),h=document.createElement('h2'),frame=document.createElement('div');h.textContent=title;frame.className='frame';section.append(h,frame);main.append(section);return frame}
+function original(state){const image=new Image();image.src='../../appearances/assets/plum-crop/'+state+'.png';section('原画 '+state).append(image)}
+if(phase){for(const state of ['default','listening','waiting','speaking'])original(state);for(const seconds of (phase==='face'?[0,.25,1,3]:[1,3]))for(const state of ['default','listening','waiting','speaking']){const canvas=document.createElement('canvas');section(state+' '+seconds+'s').append(canvas);createCanvasRenderer(canvas,data,images).render(sampleClip(data,data.clips[data.states[state]],seconds))}}
+else{original(state);const canvas=document.createElement('canvas');section('动画').append(canvas);const renderer=createCanvasRenderer(canvas,data,images);function tick(now){if(interruptUntil>now&&now>=nextInterrupt){setState(['speaking','waiting','listening','default'][interruptIndex++%4]);nextInterrupt=now+100}const delta=last===null?0:(now-last)/1000;last=now;renderer.render(timeline.advance(paused?0:delta));requestAnimationFrame(tick)}requestAnimationFrame(tick)}
+function setState(next){state=next;timeline.setState(state);const reference=main.querySelector('img');if(!phase)reference.src='../../appearances/assets/plum-crop/'+state+'.png';for(const button of document.querySelectorAll('[data-state]'))button.setAttribute('aria-pressed',String(button.dataset.state===state))}
+for(const button of document.querySelectorAll('[data-state]'))button.onclick=()=>setState(button.dataset.state);
+document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'继续':'暂停'};
+document.querySelector('#interrupt').onclick=()=>{interruptUntil=performance.now()+4000;nextInterrupt=0};
+window.candidate={data,sampleClip,timeline};setState('default');
+</script>
