@@ -9,3 +9,5 @@ source `ebbf81f82ad72c45c0a1fef633a4bdc1c34e6196`，实际parent `9133ca3aaa013c
 独立只读QA已审完整增量、精确比较其他三clip/非waiting node/assets，并实际运行check.mjs通过；该检查在25ms采样中断言body及下身全部transform固定、头无横摆、实际纵向呼吸、嘴互斥、loop与中断连续。worker实际source audit及全父链32相位waiting腰线alpha覆盖检查通过；QA阅读源码确认有界非空断言，未重复耗时Python检查。数值覆盖不证明颜色重影、抗锯齿或所有过渡帧艺术效果。
 
 检查后关闭自建tab；本次未设置共享viewport。5354临时服务停止，保留用户5355与其他共享预览服务。用户仍需判断waiting观感，未合入main、push或激活。
+
+后续授权覆盖：用户睡眠期间允许常规小修由团队自行判断/复查，主协调已明确本waiting局部呼吸纳入夜间自验。发起者对同一未变化源码的实播/极值复验与独立QA记录仍适用，并已再次运行严格hash/Timeline检查、核clean。现确认该候选可交主协调正式接入review，不再以等待用户阻塞；历史记录中的待用户状态由此覆盖。未声称已main/push/部署。

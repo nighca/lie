@@ -126,3 +126,7 @@ Checks assert fixed complete body-root/lower-node transforms at 25ms waiting sam
 ## Latest waiting acceptance candidate
 
 User requested local breathing instead of whole-body sway in waiting. Source `ebbf81f` completed initiator actual desktop/live/478px and waist/face extrema review plus independent source review; see `waiting-review.md`. Other three clips stay exact. This waiting revision still awaits user visual acceptance; no activation.
+
+## Nighttime delegated acceptance
+
+The user authorized routine local fixes and team acceptance while unavailable until 08:30 on 2026-10-25; the project coordinator explicitly included this waiting correction. Initiator actual review of unchanged source ebbf81f/e46f6 and independent checks recorded in waiting-review.md are complete. A fresh strict/hash/Timeline verification and clean-status check pass. This final candidate is accepted by the initiator for coordinator integration review; older pending-user notes are historical. No main integration, publication or deployment is claimed here.
