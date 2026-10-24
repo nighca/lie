@@ -1,0 +1,10 @@
+export const presets = [
+  { id: 'coral-bob', name: '珊瑚短发', avatar: '/appearances/coral-bob.png', portrait: '/appearances/coral-bob-v2/default.png', accent: '#ff665b' },
+  { id: 'sunny-moustache', name: '阳光小胡子', avatar: '/appearances/sunny-moustache.png', portrait: '/appearances/sunny-moustache-v1/default.png', accent: '#ffcf43' },
+  { id: 'blue-glasses', name: '蓝衣眼镜', avatar: '/appearances/blue-glasses.png', portrait: '/appearances/blue-glasses-v1/default.png', accent: '#9fc5fb' },
+  { id: 'silver-bun', name: '银发盘发', avatar: '/appearances/silver-bun-v1/default.png', portrait: '/appearances/silver-bun-v1/default.png', accent: '#78ddd7' },
+  { id: 'salt-pepper-beard', name: '灰白胡须', avatar: '/appearances/salt-pepper-beard-v1/default.png', portrait: '/appearances/salt-pepper-beard-v1/default.png', accent: '#ffae84' },
+  { id: 'plum-crop', name: '紫衣短卷发', avatar: '/appearances/plum-crop-v1/default.png', portrait: '/appearances/plum-crop-v1/default.png', accent: '#afa0f5' },
+  { id: 'mint-puffs', name: '薄荷双丸子', avatar: '/appearances/mint-puffs-v1/default.png', portrait: '/appearances/mint-puffs-v1/default.png', accent: '#78ddd7' },
+  { id: 'ochre-freckles', name: '赭黄雀斑', avatar: '/appearances/ochre-freckles-v1/default.png', portrait: '/appearances/ochre-freckles-v1/default.png', accent: '#ffcf43' },
+]

@@ -1,0 +1,44 @@
+import { presets } from './appearances.js'
+
+export const storageKey = 'lie-editor-ux-prototype'
+
+export function exampleDraft() {
+  return {
+    id: 'prototype-duck',
+    title: '谢幕前的小鸭',
+    background: '社区木偶剧谢幕前，用来登场的小鸭木偶不见了。刚才小林、阿禾和小周都在后台帮忙。木偶没有离开剧场，节目还在继续。到底是谁把它收走了？',
+    interrogationLimitSeconds: 600,
+    characters: [
+      { id: 'lin', name: '小林', appearanceId: 'coral-bob', profile: '你叫小林，是社区木偶剧的道具负责人。你说话爽快，有点爱逞强。\n\n今晚谢幕前，你从道具桌拿走了小鸭木偶，放进舞台左侧的蓝色抽屉，想在谢幕后给主创一个惊喜。你没事先告诉别人，也没把它带离剧场。\n\n你亲眼看见小周在搬音箱，没看见阿禾进道具间。你不知道他们之后去了哪里。\n\n刚被问到木偶在哪时，你会说：“我收起来了，演完给大家看。”如果被追问收在哪，你就承认在蓝色抽屉。你一开始没意识到大家急着要用它。\n\n你只说自己亲历的事。问到别人的动机或你没看见的事，就直说不知道，不替任何人解释。' },
+      { id: 'he', name: '阿禾', appearanceId: 'sunny-moustache', profile: '你叫阿禾，负责社区木偶剧的摄影。你看到小林在谢幕前抱走了小鸭木偶，但没看见她放到哪里。之后你一直在舞台边调相机。\n\n你偷偷移动过灯架，怕被责备，所以没主动提这件事。如果被问到，就承认移动了灯架。你没碰过小鸭木偶，也不知道小周之后做了什么。' },
+      { id: 'zhou', name: '小周', appearanceId: 'blue-glasses', profile: '你叫小周，负责社区木偶剧的音响。谢幕前你一直在舞台右侧搬音箱，你没有收走小鸭木偶。\n\n你看见小林从道具桌抱走一个黄色的东西，但没看清是不是木偶。你试音时放错过一小段音乐，不太愿意主动提；被追问就如实承认。你不知道小林把东西放在哪里。' },
+    ],
+    ending: { culpritId: 'lin', reveal: '小林想在谢幕后给主创一个惊喜，提前把小鸭木偶收进舞台左侧的蓝色抽屉，却忘了告诉大家。阿禾只是移动了灯架，小周只是放错过音乐，都没有收走木偶。' },
+  }
+}
+
+export function formIssues(draft) {
+  const issues = []
+  const requireText = (value, issue) => { if (!String(value ?? '').trim()) issues.push(issue) }
+  requireText(draft.title, { step: 0, field: 'title', message: '给案件起个名字' })
+  requireText(draft.background, { step: 0, field: 'background', message: '补充玩家看到的公共背景' })
+  if (!Number.isSafeInteger(draft.interrogationLimitSeconds) || draft.interrogationLimitSeconds <= 0) issues.push({ step: 0, field: 'interrogationLimitSeconds', message: '设置大于 0 的询问时长' })
+  if (draft.characters.length === 0) issues.push({ step: 1, field: 'add-character', message: '至少添加一位人物' })
+  draft.characters.forEach((character, index) => {
+    const name = character.name.trim() || `人物 ${index + 1}`
+    requireText(character.name, { step: 1, field: 'name', characterId: character.id, message: `填写人物 ${index + 1} 的姓名` })
+    requireText(character.profile, { step: 1, field: 'profile', characterId: character.id, message: `补充${name}的人物设定` })
+    if (!presets.some((appearance) => appearance.id === character.appearanceId)) issues.push({ step: 1, field: 'appearanceId', characterId: character.id, message: `为${name}选择一个预置形象` })
+  })
+  if (!draft.characters.some((character) => character.id === draft.ending.culpritId)) issues.push({ step: 1, field: 'culpritId', message: '在人物编辑中选定一位案件答案' })
+  requireText(draft.ending.reveal, { step: 2, field: 'reveal', message: '写下正确指认后的完整经过' })
+  return issues
+}
+
+export function removePerson(draft, id) {
+  const index = draft.characters.findIndex((character) => character.id === id)
+  if (index < 0) return null
+  draft.characters.splice(index, 1)
+  if (draft.ending.culpritId === id) draft.ending.culpritId = ''
+  return draft.characters[Math.min(index, draft.characters.length - 1)]?.id ?? null
+}

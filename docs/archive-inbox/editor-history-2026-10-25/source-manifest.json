@@ -1,0 +1,887 @@
+{
+  "inventory_base": "b03c9d3f498b738a71f06ce7a3a964f240ebccc5",
+  "date": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "source_thread": "01a16d90-27cc-77c2-9e0a-4b28b1135371",
+  "method": "19 retained editor/share branch HEADs plus reachable commit objects; compare blob membership against full reviewed-main history. Archive only missing prototype text/image objects and bounded retained review screenshots. Byte-preserving copies, deduplicated by Git blob. No credentials or runtime fixture code copied.",
+  "branches": [
+    {
+      "ref": "codex/game-editor-proposal",
+      "head": "2563d8dfbf5485cdbcb30226c18b00af7d799dba",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/game-editor",
+      "head": "e20922c646df091d63db61753057913d24740d62",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/game-editor-routes",
+      "head": "dfcad63f4a22f737cc7a16118177cf65c0134a86",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-link-capacity-research",
+      "head": "1c92846d4dbef6facd2fd61cf63d6e9ba1efca8c",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-official-submission",
+      "head": "9612c8563697c6715a67f8436d2bdbb90896c414",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-ux-prototype",
+      "head": "041c74a47ae03a6fd157aca012c10ed402272175",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-v2-production",
+      "head": "ae50e99f3dc9456b0fad8626343cdcf42fe23d83",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-shared-header",
+      "head": "f03a44c59579475a76c52d4982e8920d86b5b52d",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-clear-draft",
+      "head": "5b3291937772b5b5007a9910feab94040d48ec0d",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-character-controls",
+      "head": "e573b27afe573b929dade5ca929ce3137498aff4",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-portrait-hierarchy",
+      "head": "b1346195db302599cc17cd6e42b379e4fc3f5288",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-name-emphasis",
+      "head": "7a7251248539583c8f3ed32af3081f723b3a13b1",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-centered-portrait",
+      "head": "27fc913598cf14bb93de05007b439998379f823b",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-selected-card",
+      "head": "1e3d2c8a760108ff1d913397518ba17565799875",
+      "worktree_exists": false,
+      "worktree_status": null
+    },
+    {
+      "ref": "codex/editor-feedback-polish",
+      "head": "b018ad7dad494f54f5122831815257036b2dbd85",
+      "worktree_exists": true,
+      "worktree_status": ""
+    },
+    {
+      "ref": "codex/editor-step-connectors",
+      "head": "6fd08f53b332b29fa2507f13630748b6e9d8b168",
+      "worktree_exists": true,
+      "worktree_status": ""
+    },
+    {
+      "ref": "codex/submission-dialog-layout",
+      "head": "b0c83d70122f7c5d25ae48bbb00c16d7d9c73776",
+      "worktree_exists": true,
+      "worktree_status": ""
+    },
+    {
+      "ref": "codex/editor-portrait-alignment",
+      "head": "60e0ed7edbb62c9952aadf6bd7e73d09e0da9148",
+      "worktree_exists": true,
+      "worktree_status": ""
+    },
+    {
+      "ref": "codex/share-intro-wrap",
+      "head": "c13e6194751334085094a10b773018a998341b01",
+      "worktree_exists": true,
+      "worktree_status": ""
+    }
+  ],
+  "prototype_snapshots": [
+    {
+      "source_commit": "fcb084f7b65e476a94890c7a26734480d7c48925",
+      "source_commit_date": "2026-10-24T16:15:48+08:00",
+      "source_subject": "design: prototype focused step-by-step case creation",
+      "status": "historical prototype; source says awaiting user confirmation; preserve verbatim, later approval does not rewrite this snapshot",
+      "files": [
+        {
+          "source_path": "design/editor-ux/index.html",
+          "source_blob": "7f75ca71b23bfa8d001d88962eda8712aead2db9",
+          "sha256": "e648ff034b4eaea96e2aa9222fbbf7c8095ea927a01716ab1c16e0a4baba67f6",
+          "bytes": 5536,
+          "in_base_history": false,
+          "archive_object": "objects/7f75ca71b23bfa8d001d88962eda8712aead2db9--index.html.txt"
+        },
+        {
+          "source_path": "design/editor-ux/model.js",
+          "source_blob": "1cc2a4262198b04df0f3d809e21829900b1fc9cb",
+          "sha256": "2fa556867c982f6346e0b2027413db4ef795821a71a8ff8d5971b789affcf9a0",
+          "bytes": 4058,
+          "in_base_history": false,
+          "archive_object": "objects/1cc2a4262198b04df0f3d809e21829900b1fc9cb--model.js.txt"
+        },
+        {
+          "source_path": "design/editor-ux/prototype.js",
+          "source_blob": "21ec419605c8eac36a77a1744b35dc9d67b2e1ec",
+          "sha256": "3f26c85f116cc560773db294578dc0fbf339414cd5377c0564da039541acdcb4",
+          "bytes": 18611,
+          "in_base_history": false,
+          "archive_object": "objects/21ec419605c8eac36a77a1744b35dc9d67b2e1ec--prototype.js.txt"
+        },
+        {
+          "source_path": "design/editor-ux/prototype.test.mjs",
+          "source_blob": "623c99cdd359f082f5a1539e84daf126d7e2d028",
+          "sha256": "9c2e1027cddc0980db2ae7b5b3e02250df1dfd3320aaacd60fff9ce7dcf1e821",
+          "bytes": 7107,
+          "in_base_history": false,
+          "archive_object": "objects/623c99cdd359f082f5a1539e84daf126d7e2d028--prototype.test.mjs.txt"
+        },
+        {
+          "source_path": "design/editor-ux/style.css",
+          "source_blob": "ba86962d08a6f10935a60e3a3e65ba1e0764d776",
+          "sha256": "bdb374529c42e4d48afdc0bc1b70292d242da7c335bb15d784417d7baac33de7",
+          "bytes": 20323,
+          "in_base_history": false,
+          "archive_object": "objects/ba86962d08a6f10935a60e3a3e65ba1e0764d776--style.css.txt"
+        },
+        {
+          "source_path": "docs/editor-ux-proposal.md",
+          "source_blob": "8fff2a579d1be5a3f2226c0ee8b2ee4b0cb21965",
+          "sha256": "df06cf30c076098e8fe0a6dec3d397373d4d5dc21e5c66555474b8eccfe3a233",
+          "bytes": 5373,
+          "in_base_history": false,
+          "existing_archive": "docs/archive/2026-10-25/history-followup/snapshots/fcb084f7/docs/editor-ux-proposal.md.txt",
+          "existing_archive_commit": "75a2e9511bf798c9e2e7eab392ebef4807beada2"
+        }
+      ]
+    },
+    {
+      "source_commit": "36ff3b3afa5b9b14952d5432216c05fd06fe1dd1",
+      "source_commit_date": "2026-10-24T16:25:19+08:00",
+      "source_subject": "docs: archive independent editor prototype browser review",
+      "status": "historical prototype; source says awaiting user confirmation; preserve verbatim, later approval does not rewrite this snapshot",
+      "files": [
+        {
+          "source_path": "design/editor-ux/index.html",
+          "source_blob": "7f75ca71b23bfa8d001d88962eda8712aead2db9",
+          "sha256": "e648ff034b4eaea96e2aa9222fbbf7c8095ea927a01716ab1c16e0a4baba67f6",
+          "bytes": 5536,
+          "in_base_history": false,
+          "archive_object": "objects/7f75ca71b23bfa8d001d88962eda8712aead2db9--index.html.txt"
+        },
+        {
+          "source_path": "design/editor-ux/model.js",
+          "source_blob": "1cc2a4262198b04df0f3d809e21829900b1fc9cb",
+          "sha256": "2fa556867c982f6346e0b2027413db4ef795821a71a8ff8d5971b789affcf9a0",
+          "bytes": 4058,
+          "in_base_history": false,
+          "archive_object": "objects/1cc2a4262198b04df0f3d809e21829900b1fc9cb--model.js.txt"
+        },
+        {
+          "source_path": "design/editor-ux/prototype.js",
+          "source_blob": "21ec419605c8eac36a77a1744b35dc9d67b2e1ec",
+          "sha256": "3f26c85f116cc560773db294578dc0fbf339414cd5377c0564da039541acdcb4",
+          "bytes": 18611,
+          "in_base_history": false,
+          "archive_object": "objects/21ec419605c8eac36a77a1744b35dc9d67b2e1ec--prototype.js.txt"
+        },
+        {
+          "source_path": "design/editor-ux/prototype.test.mjs",
+          "source_blob": "623c99cdd359f082f5a1539e84daf126d7e2d028",
+          "sha256": "9c2e1027cddc0980db2ae7b5b3e02250df1dfd3320aaacd60fff9ce7dcf1e821",
+          "bytes": 7107,
+          "in_base_history": false,
+          "archive_object": "objects/623c99cdd359f082f5a1539e84daf126d7e2d028--prototype.test.mjs.txt"
+        },
+        {
+          "source_path": "design/editor-ux/screens/characters-desktop.jpg",
+          "source_blob": "0c40be7297fb1c815309a1cb056c7ba475631b67",
+          "sha256": "df7171b0ab9fe8d49c7db3f1cd72da45d0c9e61f2edea9ad80eb566b60abdacc",
+          "bytes": 129963,
+          "in_base_history": false,
+          "archive_object": "objects/0c40be7297fb1c815309a1cb056c7ba475631b67.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/characters-mobile.jpg",
+          "source_blob": "bf36ae55b69889a0757e35c0fa7750be3f318c9c",
+          "sha256": "34c61af81f86320e9542718e84ac675db81dea2776945f9b0cb9ffbdd368bf9b",
+          "bytes": 74223,
+          "in_base_history": false,
+          "archive_object": "objects/bf36ae55b69889a0757e35c0fa7750be3f318c9c.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/example-desktop.jpg",
+          "source_blob": "17c35fa8b4bf01e4411cc5105dd9c732fdd2c887",
+          "sha256": "98df5e9cef68942501a577eb35ab226f6319a6bf0234e127ace29dbe3d280711",
+          "bytes": 124739,
+          "in_base_history": false,
+          "archive_object": "objects/17c35fa8b4bf01e4411cc5105dd9c732fdd2c887.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/style.css",
+          "source_blob": "17542e1632631e8fd4e69c34348792da321212f7",
+          "sha256": "fc8eed86deb33ab909fe7d2e34101e7846dc4ef74c3d890ff884b0cb3345b375",
+          "bytes": 20395,
+          "in_base_history": false,
+          "archive_object": "objects/17542e1632631e8fd4e69c34348792da321212f7--style.css.txt"
+        },
+        {
+          "source_path": "docs/editor-ux-proposal.md",
+          "source_blob": "9d919bba815e12d31b5e73e0d27421f705b8f52f",
+          "sha256": "5d3245a068e970d6ecd2fe9b6301542cf8546766a82a14fa036c2b5f698fd80d",
+          "bytes": 7120,
+          "in_base_history": false,
+          "existing_archive": "docs/archive/2026-10-25/history-followup/snapshots/36ff3b3a/docs/editor-ux-proposal.md.txt",
+          "existing_archive_commit": "75a2e9511bf798c9e2e7eab392ebef4807beada2"
+        }
+      ]
+    },
+    {
+      "source_commit": "041c74a47ae03a6fd157aca012c10ed402272175",
+      "source_commit_date": "2026-10-24T16:33:58+08:00",
+      "source_subject": "design: require preset characters and set one answer in character editing",
+      "status": "historical prototype; source says awaiting user confirmation; preserve verbatim, later approval does not rewrite this snapshot",
+      "files": [
+        {
+          "source_path": "design/editor-ux/appearances.js",
+          "source_blob": "b3b7975f177ccf35d4f7b80d32b68fe298dd245d",
+          "sha256": "1a1b60efcd48f118400cfb8549cfd0b41899c15c500ce638a89b4e5f8e42b6ff",
+          "bytes": 1387,
+          "in_base_history": false,
+          "archive_object": "objects/b3b7975f177ccf35d4f7b80d32b68fe298dd245d--appearances.js.txt"
+        },
+        {
+          "source_path": "design/editor-ux/index.html",
+          "source_blob": "7f75ca71b23bfa8d001d88962eda8712aead2db9",
+          "sha256": "e648ff034b4eaea96e2aa9222fbbf7c8095ea927a01716ab1c16e0a4baba67f6",
+          "bytes": 5536,
+          "in_base_history": false,
+          "archive_object": "objects/7f75ca71b23bfa8d001d88962eda8712aead2db9--index.html.txt"
+        },
+        {
+          "source_path": "design/editor-ux/model.js",
+          "source_blob": "f5a77bd950961e6dede5af00e962b7a3520c4853",
+          "sha256": "56c625daa9acdbde5f9a7a2a7bb0f00688fafb31b7cfa694e9f10c659329fe48",
+          "bytes": 4320,
+          "in_base_history": false,
+          "archive_object": "objects/f5a77bd950961e6dede5af00e962b7a3520c4853--model.js.txt"
+        },
+        {
+          "source_path": "design/editor-ux/prototype.js",
+          "source_blob": "c9706850d8e7ac7d738cfea570103680b3bdd307",
+          "sha256": "3be7a2db78b409a1fbe75ca53822f553b1a57a178d3475371730cbc5ceb7e3c9",
+          "bytes": 17399,
+          "in_base_history": false,
+          "archive_object": "objects/c9706850d8e7ac7d738cfea570103680b3bdd307--prototype.js.txt"
+        },
+        {
+          "source_path": "design/editor-ux/prototype.test.mjs",
+          "source_blob": "7ecd2dcd162418e8e8948c6679e98a8e92380b05",
+          "sha256": "da5fa2001008b140b82d50d459b76289e4ae6e7794b70414eb34a5e275674d4f",
+          "bytes": 12816,
+          "in_base_history": false,
+          "archive_object": "objects/7ecd2dcd162418e8e8948c6679e98a8e92380b05--prototype.test.mjs.txt"
+        },
+        {
+          "source_path": "design/editor-ux/screens/characters-desktop.jpg",
+          "source_blob": "0c40be7297fb1c815309a1cb056c7ba475631b67",
+          "sha256": "df7171b0ab9fe8d49c7db3f1cd72da45d0c9e61f2edea9ad80eb566b60abdacc",
+          "bytes": 129963,
+          "in_base_history": false,
+          "archive_object": "objects/0c40be7297fb1c815309a1cb056c7ba475631b67.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/characters-mobile.jpg",
+          "source_blob": "bf36ae55b69889a0757e35c0fa7750be3f318c9c",
+          "sha256": "34c61af81f86320e9542718e84ac675db81dea2776945f9b0cb9ffbdd368bf9b",
+          "bytes": 74223,
+          "in_base_history": false,
+          "archive_object": "objects/bf36ae55b69889a0757e35c0fa7750be3f318c9c.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/example-desktop.jpg",
+          "source_blob": "17c35fa8b4bf01e4411cc5105dd9c732fdd2c887",
+          "sha256": "98df5e9cef68942501a577eb35ab226f6319a6bf0234e127ace29dbe3d280711",
+          "bytes": 124739,
+          "in_base_history": false,
+          "archive_object": "objects/17c35fa8b4bf01e4411cc5105dd9c732fdd2c887.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/v2-ending-desktop.jpg",
+          "source_blob": "9ea2a9c0827b2b842843cb1ec77b113e38fa8702",
+          "sha256": "26e007ad7b4c873c3e05b0cc3a7d5ea9508322621a319ef1eda6ee92d2f3813f",
+          "bytes": 96171,
+          "in_base_history": false,
+          "archive_object": "objects/9ea2a9c0827b2b842843cb1ec77b113e38fa8702.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/v2-ending-mobile.jpg",
+          "source_blob": "c896afbb45b0039b62ca8a07f43f40ee92a21aad",
+          "sha256": "9a29c8eb841446ac01750dd347dfe65796dc098acef70ee0c678905de8bb64d3",
+          "bytes": 69173,
+          "in_base_history": false,
+          "archive_object": "objects/c896afbb45b0039b62ca8a07f43f40ee92a21aad.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/v2-person-desktop.jpg",
+          "source_blob": "08ac6c8687f740f2d8e6f69b4c5e14c2ad3c0faf",
+          "sha256": "d1fe470bb454d4c042b52688c617a70302ad0b7eee085f4b01e5f9f1dbc6b2af",
+          "bytes": 138128,
+          "in_base_history": false,
+          "archive_object": "objects/08ac6c8687f740f2d8e6f69b4c5e14c2ad3c0faf.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/screens/v2-person-mobile.jpg",
+          "source_blob": "b63503c4cd22859fbee7b64903c10b97c78959c1",
+          "sha256": "569a15a5a7bfaadda9b0244ac5b6cd3f3136d03fe409c58e70899a252f6876a4",
+          "bytes": 77955,
+          "in_base_history": false,
+          "archive_object": "objects/b63503c4cd22859fbee7b64903c10b97c78959c1.jpg"
+        },
+        {
+          "source_path": "design/editor-ux/style.css",
+          "source_blob": "45539e7f8b621a9d76969e967f13ae2df572f519",
+          "sha256": "1535a92a7054ff02c97a9199096c466b80ea14b2400b5da98ef9c892c0438aca",
+          "bytes": 20789,
+          "in_base_history": false,
+          "archive_object": "objects/45539e7f8b621a9d76969e967f13ae2df572f519--style.css.txt"
+        },
+        {
+          "source_path": "docs/editor-ux-proposal.md",
+          "source_blob": "898418cb28868c1df669ed8e6be4984f848376a9",
+          "sha256": "3628d05987d4743a3139d4198dfa6b54153f211171855401ffccec6627b0bcc1",
+          "bytes": 11001,
+          "in_base_history": false,
+          "existing_archive": "docs/archive/2026-10-25/history-followup/snapshots/041c74a4/docs/editor-ux-proposal.md.txt",
+          "existing_archive_commit": "75a2e9511bf798c9e2e7eab392ebef4807beada2"
+        }
+      ]
+    }
+  ],
+  "retained_review_evidence": [
+    {
+      "source_path": "/private/tmp/lie-editor-centered-portrait-391.jpg",
+      "source_mtime": "2026-10-24T20:01:08.833064+08:00",
+      "source_blob": "9212e013dc3fd9356de97e5a896bbcaa8333e7d0",
+      "sha256": "5f36437cb2ee7962050b67efc23f56899aec6c432c6108e2fa0328540b685bee",
+      "bytes": 30564,
+      "in_base_history": false,
+      "status": "Historical approved portrait/link/name hierarchy QA; later animations and shared-card styling were added. No claim this image is the latest main.",
+      "archive_object": "objects/9212e013dc3fd9356de97e5a896bbcaa8333e7d0.jpg",
+      "related_source_commit": "27fc913598cf14bb93de05007b439998379f823b"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-centered-portrait-desktop.jpg",
+      "source_mtime": "2026-10-24T20:00:58.904310+08:00",
+      "source_blob": "83190066009f8f54fcb60b641be304bbd814144f",
+      "sha256": "8ccb934b1747aebd632ef6bd0df4ddd61c9d1af7445863ac7a8ab2cad7f84633",
+      "bytes": 77731,
+      "in_base_history": false,
+      "status": "Historical approved portrait/link/name hierarchy QA; later animations and shared-card styling were added. No claim this image is the latest main.",
+      "archive_object": "objects/83190066009f8f54fcb60b641be304bbd814144f.jpg",
+      "related_source_commit": "27fc913598cf14bb93de05007b439998379f823b"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-character-controls-391.jpg",
+      "source_mtime": "2026-10-24T19:22:32.243732+08:00",
+      "source_blob": "5f73033cc668c4ada1bafa291cff0ec500c5cf99",
+      "sha256": "0b45c1096520cbf3951a4cc3364942886c8bdabbfd8587696cf20c0e7802aa03",
+      "bytes": 37836,
+      "in_base_history": false,
+      "status": "Earlier implemented control grouping, subsequently refined by user feedback. Historical design/review evidence, not current appearance/name hierarchy.",
+      "archive_object": "objects/5f73033cc668c4ada1bafa291cff0ec500c5cf99.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-character-controls-desktop.jpg",
+      "source_mtime": "2026-10-24T19:23:49.836078+08:00",
+      "source_blob": "174fd07d7ff1a71efb758121c88c625050ab39a8",
+      "sha256": "5673c5093618359680aac98ddbb7a6b5372db47d7118a74664d50b8dd10df3b7",
+      "bytes": 76610,
+      "in_base_history": false,
+      "status": "Earlier implemented control grouping, subsequently refined by user feedback. Historical design/review evidence, not current appearance/name hierarchy.",
+      "archive_object": "objects/174fd07d7ff1a71efb758121c88c625050ab39a8.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-clear-draft-desktop.jpg",
+      "source_mtime": "2026-10-24T19:10:17.635837+08:00",
+      "source_blob": "cb940f9d9c925b66143a8dd24ee1cd997e579aad",
+      "sha256": "e9fc387e89c72113ab4b3583235b58b4b14dfc5b36bbc2f25393d55bbf91bf16",
+      "bytes": 54231,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/cb940f9d9c925b66143a8dd24ee1cd997e579aad.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-close-391.jpg",
+      "source_mtime": "2026-10-24T19:22:40.343092+08:00",
+      "source_blob": "185274d57073d3c32ee721999c8b2a4b50d8b285",
+      "sha256": "1a4dfed8684aa348b2eb0960da2e7640a34e1ada33e95fc6c2260b1cea842ae8",
+      "bytes": 37243,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/185274d57073d3c32ee721999c8b2a4b50d8b285.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-draft-cleared-391.jpg",
+      "source_mtime": "2026-10-24T22:34:29.776545+08:00",
+      "source_blob": "e310a3d315a64b78f47657a1a7270c4268ad593e",
+      "sha256": "41b71c8a09e44ff72049b5b477e9345b6c75631efeef64d010a5d584e55bc783",
+      "bytes": 50351,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/e310a3d315a64b78f47657a1a7270c4268ad593e.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-draft-status-391.jpg",
+      "source_mtime": "2026-10-24T22:34:24.221085+08:00",
+      "source_blob": "3238af5b7e77ddae002b1b6750c2408365d991ad",
+      "sha256": "645c33eb13c4cd81397f08f7fc11d180d4806604328162dd74b1d7d98d84fe69",
+      "bytes": 50740,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/3238af5b7e77ddae002b1b6750c2408365d991ad.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-draft-status-desktop.jpg",
+      "source_mtime": "2026-10-24T22:32:47.592407+08:00",
+      "source_blob": "884fb6ee89b1b59a0ff93e8812277e86a436181d",
+      "sha256": "20ad1d6f43f68d6458afe17594d6c8afd528e5931f9460017491d1e8703458a6",
+      "bytes": 65267,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/884fb6ee89b1b59a0ff93e8812277e86a436181d.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-name-emphasis-391.jpg",
+      "source_mtime": "2026-10-24T19:45:41.179484+08:00",
+      "source_blob": "ac9281973991e8ddca00c6912bb0a4548c734b94",
+      "sha256": "aa04a477c2f3fcdf47cce21f71fbdb6d114803d0bf743331c2956b975a0a29c0",
+      "bytes": 35148,
+      "in_base_history": false,
+      "status": "Superseded layout: emphasized name above portrait. User later requested portrait/link/name order; do not apply as current direction.",
+      "archive_object": "objects/ac9281973991e8ddca00c6912bb0a4548c734b94.jpg",
+      "related_source_commit": "7a7251248539583c8f3ed32af3081f723b3a13b1"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-name-emphasis-desktop.jpg",
+      "source_mtime": "2026-10-24T19:45:29.755225+08:00",
+      "source_blob": "87da046da19e8125d7af5ade89d9e94ae2dda942",
+      "sha256": "d175a8353428ef33f77276ef3e6411724b9e3bcfe0cfb49ff30fd19136eba59c",
+      "bytes": 77539,
+      "in_base_history": false,
+      "status": "Superseded layout: emphasized name above portrait. User later requested portrait/link/name order; do not apply as current direction.",
+      "archive_object": "objects/87da046da19e8125d7af5ade89d9e94ae2dda942.jpg",
+      "related_source_commit": "7a7251248539583c8f3ed32af3081f723b3a13b1"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-polish-391.jpg",
+      "source_mtime": "2026-10-24T22:24:29.901935+08:00",
+      "source_blob": "130c50c5b3ff281f35f7a852efbee85e19c2ee3c",
+      "sha256": "055b58884d32002f3615cabe42071ec267cbe9960c9ed653ff58ad2b18a818b3",
+      "bytes": 55237,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/130c50c5b3ff281f35f7a852efbee85e19c2ee3c.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-polish-desktop.jpg",
+      "source_mtime": "2026-10-24T22:24:18.038989+08:00",
+      "source_blob": "5237927f41ddb7888269549101979c0588d61df0",
+      "sha256": "bc88972c0b80d0779210396d289415fc5c9e3c454ff30ad99c9c9ee05050c8f5",
+      "bytes": 78938,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/5237927f41ddb7888269549101979c0588d61df0.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-portrait-hierarchy-391.jpg",
+      "source_mtime": "2026-10-24T19:38:33.717516+08:00",
+      "source_blob": "05cf890b13867e7c3530ff6cc28b0897b71b2aa2",
+      "sha256": "04c7c9078614faec8f25940ce1951d9bbe2bd8e2dcf9e2ffe0102fa972c129ea",
+      "bytes": 34963,
+      "in_base_history": false,
+      "status": "Earlier implemented control grouping, subsequently refined by user feedback. Historical design/review evidence, not current appearance/name hierarchy.",
+      "archive_object": "objects/05cf890b13867e7c3530ff6cc28b0897b71b2aa2.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-portrait-hierarchy-desktop.jpg",
+      "source_mtime": "2026-10-24T19:37:05.720477+08:00",
+      "source_blob": "108094fc547937443f76f17eca5d03754261446c",
+      "sha256": "43f450604ea6c052b7a08b91553aa85a662a5ecf6bb080464d8b384cd0171189",
+      "bytes": 78625,
+      "in_base_history": false,
+      "status": "Earlier implemented control grouping, subsequently refined by user feedback. Historical design/review evidence, not current appearance/name hierarchy.",
+      "archive_object": "objects/108094fc547937443f76f17eca5d03754261446c.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-selected-card-desktop.jpg",
+      "source_mtime": "2026-10-24T20:09:18.915744+08:00",
+      "source_blob": "70270e898beff457852a6a79da52c5f516c68676",
+      "sha256": "5ce20caaa3080e0c4599d0e012d9f1d5273f2426de4a2d7fba9d4c1ac1cbb025",
+      "bytes": 80547,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/70270e898beff457852a6a79da52c5f516c68676.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-static-desktop.jpg",
+      "source_mtime": "2026-10-24T22:26:01.023566+08:00",
+      "source_blob": "0c877a8c9ed3b19ad4cb38312e9b10bd39cdf674",
+      "sha256": "d41b8ac9251be0381aeb8335ddeb654d33502a824416f27aee6212bcffc5acbe",
+      "bytes": 75978,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/0c877a8c9ed3b19ad4cb38312e9b10bd39cdf674.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-step-connectors-320.jpg",
+      "source_mtime": "2026-10-24T23:35:49.797945+08:00",
+      "source_blob": "4e7d86d64264be8ecf02d93d76bf45e635d79102",
+      "sha256": "1132e1c79d145d41632f21caa3e016f4f93b813ca5142d1fc251f9071855ac03",
+      "bytes": 46738,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/4e7d86d64264be8ecf02d93d76bf45e635d79102.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-step-connectors-391.jpg",
+      "source_mtime": "2026-10-24T23:33:06.495261+08:00",
+      "source_blob": "7db300a98dd7bae49982182fdff066f89e614bd0",
+      "sha256": "53efa8df8e370fb1bfa6964cea85fa0866ea4bae9c5ba48807c83dd06e3a5426",
+      "bytes": 48782,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/7db300a98dd7bae49982182fdff066f89e614bd0.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-step-connectors-478.jpg",
+      "source_mtime": "2026-10-24T23:33:05.368160+08:00",
+      "source_blob": "d2d2c8d3720d31a432b7eba3982f50147abfbb79",
+      "sha256": "75208fc00d938d937473021822c1f7e43c1631e1985151758e589923bcc93e06",
+      "bytes": 52053,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/d2d2c8d3720d31a432b7eba3982f50147abfbb79.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-step-connectors-desktop.jpg",
+      "source_mtime": "2026-10-24T23:35:50.924791+08:00",
+      "source_blob": "5e9c6caa4bd212082d9be61d2a07acce78d880e0",
+      "sha256": "496334a5e45beba7cf00ac3e9e0f8dd69cdfed6bb44b8a7ea509756954ed2a22",
+      "bytes": 61092,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/5e9c6caa4bd212082d9be61d2a07acce78d880e0.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-submission-391.jpg",
+      "source_mtime": "2026-10-24T22:24:36.620751+08:00",
+      "source_blob": "992f4c940f8b8be0c319f4964c59439de56172e8",
+      "sha256": "3871460a56e315d88b1b832665be87004c826e7870a3ec7a13647196e5f628a9",
+      "bytes": 54334,
+      "in_base_history": false,
+      "status": "Historical isolated editor implementation/QA screenshot, with current behavior and approval boundaries in docs/game-editor-implementation.md and integration history; do not infer a new approval from filesystem date.",
+      "archive_object": "objects/992f4c940f8b8be0c319f4964c59439de56172e8.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-characters-desktop.jpg",
+      "source_mtime": "2026-10-24T16:17:55.299703+08:00",
+      "source_blob": "0c40be7297fb1c815309a1cb056c7ba475631b67",
+      "sha256": "df7171b0ab9fe8d49c7db3f1cd72da45d0c9e61f2edea9ad80eb566b60abdacc",
+      "bytes": 129963,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/0c40be7297fb1c815309a1cb056c7ba475631b67.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-characters-mobile.jpg",
+      "source_mtime": "2026-10-24T16:18:56.479495+08:00",
+      "source_blob": "bf36ae55b69889a0757e35c0fa7750be3f318c9c",
+      "sha256": "34c61af81f86320e9542718e84ac675db81dea2776945f9b0cb9ffbdd368bf9b",
+      "bytes": 74223,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/bf36ae55b69889a0757e35c0fa7750be3f318c9c.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-example-desktop.jpg",
+      "source_mtime": "2026-10-24T16:18:13.899747+08:00",
+      "source_blob": "17c35fa8b4bf01e4411cc5105dd9c732fdd2c887",
+      "sha256": "98df5e9cef68942501a577eb35ab226f6319a6bf0234e127ace29dbe3d280711",
+      "bytes": 124739,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/17c35fa8b4bf01e4411cc5105dd9c732fdd2c887.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-example-mobile.jpg",
+      "source_mtime": "2026-10-24T16:18:58.488108+08:00",
+      "source_blob": "3f7c46993a91efad75c454527e72e1b96dcfe03f",
+      "sha256": "f43ccebf7b732b40fb84d1167d7e1f600d4225fd43055068da30dca14daffdc5",
+      "bytes": 76934,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/3f7c46993a91efad75c454527e72e1b96dcfe03f.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-five-mobile.jpg",
+      "source_mtime": "2026-10-24T16:19:20.835124+08:00",
+      "source_blob": "9e592932bdacc9d199daefe4c80494723602f2f6",
+      "sha256": "a1c12a66d95a283568398c5cac69d50ef8f72faec3f3e324da933e574b6090b0",
+      "bytes": 63062,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/9e592932bdacc9d199daefe4c80494723602f2f6.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-v2-ending-desktop.jpg",
+      "source_mtime": "2026-10-24T16:30:51.131358+08:00",
+      "source_blob": "9ea2a9c0827b2b842843cb1ec77b113e38fa8702",
+      "sha256": "26e007ad7b4c873c3e05b0cc3a7d5ea9508322621a319ef1eda6ee92d2f3813f",
+      "bytes": 96171,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/9ea2a9c0827b2b842843cb1ec77b113e38fa8702.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-v2-ending-mobile.jpg",
+      "source_mtime": "2026-10-24T16:31:24.663010+08:00",
+      "source_blob": "c896afbb45b0039b62ca8a07f43f40ee92a21aad",
+      "sha256": "9a29c8eb841446ac01750dd347dfe65796dc098acef70ee0c678905de8bb64d3",
+      "bytes": 69173,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/c896afbb45b0039b62ca8a07f43f40ee92a21aad.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-v2-person-desktop.jpg",
+      "source_mtime": "2026-10-24T16:30:48.364739+08:00",
+      "source_blob": "08ac6c8687f740f2d8e6f69b4c5e14c2ad3c0faf",
+      "sha256": "d1fe470bb454d4c042b52688c617a70302ad0b7eee085f4b01e5f9f1dbc6b2af",
+      "bytes": 138128,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/08ac6c8687f740f2d8e6f69b4c5e14c2ad3c0faf.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-v2-person-mobile.jpg",
+      "source_mtime": "2026-10-24T16:31:07.704870+08:00",
+      "source_blob": "b63503c4cd22859fbee7b64903c10b97c78959c1",
+      "sha256": "569a15a5a7bfaadda9b0244ac5b6cd3f3136d03fe409c58e70899a252f6876a4",
+      "bytes": 77955,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/b63503c4cd22859fbee7b64903c10b97c78959c1.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-editor-ux-validation-desktop.jpg",
+      "source_mtime": "2026-10-24T16:18:37.246677+08:00",
+      "source_blob": "9e0b01de8b5b85f7cf24f6f94adea4cd4f323043",
+      "sha256": "5318308eef8ab4617bfe98444371db4c9618bc99edf183bfe778cd2ef281cbae",
+      "bytes": 126180,
+      "in_base_history": false,
+      "status": "Historical prototype review image: v1 for names without v2; v2 for v2 names. Source proposal snapshots retain awaiting-confirmation status; later prototype approval is separately recorded in main implementation documentation. Not a current production screenshot.",
+      "archive_object": "objects/9e0b01de8b5b85f7cf24f6f94adea4cd4f323043.jpg",
+      "related_source_commit": "041c74a47ae03a6fd157aca012c10ed402272175"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-after-canvas.jpg",
+      "source_mtime": "2026-10-25T00:28:14.896714+08:00",
+      "source_blob": "21379f7dc0e9b923ae113fc9f85f7dacac6939c3",
+      "sha256": "4d6d1563b5d8b1e5cb5cb5dc596c6b59e8a45ec91a8d03e89cda379bb80468e4",
+      "bytes": 55080,
+      "in_base_history": false,
+      "status": "Intermediate center/percentage-height candidate; discarded after mobile static image auto-minimum size was found. Do not use as final-fix acceptance.",
+      "archive_object": "objects/21379f7dc0e9b923ae113fc9f85f7dacac6939c3.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-after-fallback.jpg",
+      "source_mtime": "2026-10-25T00:27:59.568286+08:00",
+      "source_blob": "859e7d0905fd7cd23566016edfac514af92aa796",
+      "sha256": "e1cb66f6c23289b559b3eecece7bf3455b5522505a633c1ef7536e1b71394ab9",
+      "bytes": 55044,
+      "in_base_history": false,
+      "status": "Intermediate center/percentage-height candidate; discarded after mobile static image auto-minimum size was found. Do not use as final-fix acceptance.",
+      "archive_object": "objects/859e7d0905fd7cd23566016edfac514af92aa796.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-alignment-391.jpg",
+      "source_mtime": "2026-10-25T00:28:16.020663+08:00",
+      "source_blob": "26e570271a4e95e9ed8489a6eecefe54ff489abd",
+      "sha256": "7755e8e946b3e04ce1e671ebb43ca1e133c255ed7c725a8fb7ba770c2f05ec0d",
+      "bytes": 52451,
+      "in_base_history": false,
+      "status": "Intermediate center/percentage-height candidate; discarded after mobile static image auto-minimum size was found. Do not use as final-fix acceptance.",
+      "archive_object": "objects/26e570271a4e95e9ed8489a6eecefe54ff489abd.jpg"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-before-canvas.jpg",
+      "source_mtime": "2026-10-25T00:27:39.850547+08:00",
+      "source_blob": "8619d2d3641a9ae5b8f28312ee5dc745726a3567",
+      "sha256": "63db339dd2bba84e4eef4a24facabfd9f376ff834266dff4ba799594d989afa6",
+      "bytes": 55129,
+      "in_base_history": false,
+      "status": "Bug baseline before portrait frame alignment; not an approved final rendering.",
+      "archive_object": "objects/8619d2d3641a9ae5b8f28312ee5dc745726a3567.jpg",
+      "related_source_commit": "4fde8d43aaadb6ab0664a748cb2565c88952d957"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-before-fallback.jpg",
+      "source_mtime": "2026-10-25T00:27:18.020106+08:00",
+      "source_blob": "859e7d0905fd7cd23566016edfac514af92aa796",
+      "sha256": "e1cb66f6c23289b559b3eecece7bf3455b5522505a633c1ef7536e1b71394ab9",
+      "bytes": 55044,
+      "in_base_history": false,
+      "status": "Bug baseline before portrait frame alignment; not an approved final rendering.",
+      "archive_object": "objects/859e7d0905fd7cd23566016edfac514af92aa796.jpg",
+      "related_source_commit": "4fde8d43aaadb6ab0664a748cb2565c88952d957"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-iframe-before.jpg",
+      "source_mtime": "2026-10-25T00:55:41.395571+08:00",
+      "source_blob": "295194f027e3d6b9e5989e5e1a8fb389ad79d686",
+      "sha256": "d69bb7bba070860258531149aef4e6d8c0eed71ef8174cf6dc6cd8b62f32115e",
+      "bytes": 101118,
+      "in_base_history": false,
+      "status": "Bug baseline before portrait frame alignment; not an approved final rendering.",
+      "archive_object": "objects/295194f027e3d6b9e5989e5e1a8fb389ad79d686.jpg",
+      "related_source_commit": "4fde8d43aaadb6ab0664a748cb2565c88952d957"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-iframe-fixed-fallback.jpg",
+      "source_mtime": "2026-10-25T00:55:55.760272+08:00",
+      "source_blob": "40b3be6b525095c3e8de89ca58561a82aa163ac2",
+      "sha256": "eb86076385f336538e63e3e1c607aede24679d7c944dc37c38b208fed922899c",
+      "bytes": 98206,
+      "in_base_history": false,
+      "status": "Final portrait CSS candidate evidence in explicitly labelled iframe CSS viewports; reviewed/integrated separately by root, not new user visual approval or top-level mobile-device acceptance.",
+      "archive_object": "objects/40b3be6b525095c3e8de89ca58561a82aa163ac2.jpg",
+      "related_source_commit": "60e0ed7edbb62c9952aadf6bd7e73d09e0da9148"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-iframe-fixed-ready.jpg",
+      "source_mtime": "2026-10-25T00:56:05.001679+08:00",
+      "source_blob": "0688da792992cd9dd08746aa327152a687a467ce",
+      "sha256": "2c9fed3e7a0526fc66db79498cd749413450a795962043969196d8e100dd716f",
+      "bytes": 100558,
+      "in_base_history": false,
+      "status": "Final portrait CSS candidate evidence in explicitly labelled iframe CSS viewports; reviewed/integrated separately by root, not new user visual approval or top-level mobile-device acceptance.",
+      "archive_object": "objects/0688da792992cd9dd08746aa327152a687a467ce.jpg",
+      "related_source_commit": "60e0ed7edbb62c9952aadf6bd7e73d09e0da9148"
+    },
+    {
+      "source_path": "/private/tmp/lie-portrait-iframe-switches.jpg",
+      "source_mtime": "2026-10-25T00:56:50.620858+08:00",
+      "source_blob": "bc856c8f9185b2c637c33894eba62107e2fd7059",
+      "sha256": "19a24b41a8bbf0f2fb08e9808bec8ad726aaf0fcf55faee3b61365b9a3f207e2",
+      "bytes": 102564,
+      "in_base_history": false,
+      "status": "Final portrait CSS candidate evidence in explicitly labelled iframe CSS viewports; reviewed/integrated separately by root, not new user visual approval or top-level mobile-device acceptance.",
+      "archive_object": "objects/bc856c8f9185b2c637c33894eba62107e2fd7059.jpg",
+      "related_source_commit": "60e0ed7edbb62c9952aadf6bd7e73d09e0da9148"
+    },
+    {
+      "source_path": "/private/tmp/lie-share-wrap-boundary-frames.jpg",
+      "source_mtime": "2026-10-25T07:14:09.973200+08:00",
+      "source_blob": "2036e4598726271e2a01733e6ee7531016a945a5",
+      "sha256": "75d0dc270f04edc9e089b7efec3a380bc724419df1075698a66814c55fa2c921",
+      "bytes": 237698,
+      "in_base_history": false,
+      "status": "Final local soft-wrap fix QA in labelled iframe CSS viewports; root reviewed/integrated. Synthetic test content, not story-design approval.",
+      "archive_object": "objects/2036e4598726271e2a01733e6ee7531016a945a5.jpg",
+      "related_source_commit": "c13e6194751334085094a10b773018a998341b01"
+    },
+    {
+      "source_path": "/private/tmp/lie-share-wrap-unicode-frames.jpg",
+      "source_mtime": "2026-10-25T07:16:43.597487+08:00",
+      "source_blob": "bd8e3833f5de52cf25e52902d4c8f98b22d31909",
+      "sha256": "022ab640d002e121e8aff8a9d75569e8ad7268f852759c4b3d5bc61a0042b305",
+      "bytes": 86234,
+      "in_base_history": false,
+      "status": "Final local soft-wrap fix QA in labelled iframe CSS viewports; root reviewed/integrated. Synthetic test content, not story-design approval.",
+      "archive_object": "objects/bd8e3833f5de52cf25e52902d4c8f98b22d31909.jpg",
+      "related_source_commit": "c13e6194751334085094a10b773018a998341b01"
+    },
+    {
+      "source_path": "/private/tmp/lie-submission-layout-1004.jpg",
+      "source_mtime": "2026-10-25T00:08:36.039382+08:00",
+      "source_blob": "91514bd90b25d9399e3bcd5c51a93540d334858b",
+      "sha256": "64b5ee452cb88c457ec007a4b4dde3cfa5c1c0ff527946d2ffb0e3f387310810",
+      "bytes": 58982,
+      "in_base_history": false,
+      "status": "Implemented submission layout candidate under routine authorization; root review/integration recorded, no independent claim of subsequent user visual acceptance.",
+      "archive_object": "objects/91514bd90b25d9399e3bcd5c51a93540d334858b.jpg",
+      "related_source_commit": "b0c83d70122f7c5d25ae48bbb00c16d7d9c73776"
+    },
+    {
+      "source_path": "/private/tmp/lie-submission-layout-391.jpg",
+      "source_mtime": "2026-10-25T00:08:56.912392+08:00",
+      "source_blob": "55806025f566a8792d2124b9ea0647dc7d24c79b",
+      "sha256": "1ee33b614e8f3f8ad96477ff558ea1ee4bfab42ca1857cf23dd1c36747cab6e6",
+      "bytes": 48191,
+      "in_base_history": false,
+      "status": "Implemented submission layout candidate under routine authorization; root review/integration recorded, no independent claim of subsequent user visual acceptance.",
+      "archive_object": "objects/55806025f566a8792d2124b9ea0647dc7d24c79b.jpg",
+      "related_source_commit": "b0c83d70122f7c5d25ae48bbb00c16d7d9c73776"
+    },
+    {
+      "source_path": "/private/tmp/lie-submission-layout-desktop.jpg",
+      "source_mtime": "2026-10-25T00:08:57.075423+08:00",
+      "source_blob": "c05f1a68a56d3002c7512c6979804c0bb9092697",
+      "sha256": "475d5dd5a0d89e2f475096f03299e37d6b01aef24a56a2b81eb9c63c902fcfdf",
+      "bytes": 68020,
+      "in_base_history": false,
+      "status": "Implemented submission layout candidate under routine authorization; root review/integration recorded, no independent claim of subsequent user visual acceptance.",
+      "archive_object": "objects/c05f1a68a56d3002c7512c6979804c0bb9092697.jpg",
+      "related_source_commit": "b0c83d70122f7c5d25ae48bbb00c16d7d9c73776"
+    }
+  ],
+  "unique_archive_objects": 56,
+  "dedup_followup_commit": "75a2e9511bf798c9e2e7eab392ebef4807beada2",
+  "already_archived_by_followup": [
+    {
+      "source_blob": "8fff2a579d1be5a3f2226c0ee8b2ee4b0cb21965",
+      "existing_archive": "docs/archive/2026-10-25/history-followup/snapshots/fcb084f7/docs/editor-ux-proposal.md.txt"
+    },
+    {
+      "source_blob": "9d919bba815e12d31b5e73e0d27421f705b8f52f",
+      "existing_archive": "docs/archive/2026-10-25/history-followup/snapshots/36ff3b3a/docs/editor-ux-proposal.md.txt"
+    },
+    {
+      "source_blob": "898418cb28868c1df669ed8e6be4984f848376a9",
+      "existing_archive": "docs/archive/2026-10-25/history-followup/snapshots/041c74a4/docs/editor-ux-proposal.md.txt"
+    }
+  ]
+}

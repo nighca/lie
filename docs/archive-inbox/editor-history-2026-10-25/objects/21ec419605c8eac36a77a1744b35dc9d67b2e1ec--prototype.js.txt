@@ -1,0 +1,158 @@
+import { exampleDraft, formIssues, removePerson, storageKey } from './model.js'
+
+const assets = '../../apps/web/public'
+const presets = [
+  { id: 'coral-bob', name: '珊瑚短发', avatar: '/appearances/coral-bob.png', portrait: '/appearances/coral-bob-v2/default.png', accent: '#ff665b' },
+  { id: 'sunny-moustache', name: '阳光小胡子', avatar: '/appearances/sunny-moustache.png', portrait: '/appearances/sunny-moustache-v1/default.png', accent: '#ffcf43' },
+  { id: 'blue-glasses', name: '蓝衣眼镜', avatar: '/appearances/blue-glasses.png', portrait: '/appearances/blue-glasses-v1/default.png', accent: '#9fc5fb' },
+  { id: 'silver-bun', name: '银发盘发', avatar: '/appearances/silver-bun-v1/default.png', portrait: '/appearances/silver-bun-v1/default.png', accent: '#78ddd7' },
+  { id: 'salt-pepper-beard', name: '灰白胡须', avatar: '/appearances/salt-pepper-beard-v1/default.png', portrait: '/appearances/salt-pepper-beard-v1/default.png', accent: '#ffae84' },
+  { id: 'plum-crop', name: '紫衣短卷发', avatar: '/appearances/plum-crop-v1/default.png', portrait: '/appearances/plum-crop-v1/default.png', accent: '#afa0f5' },
+  { id: 'mint-puffs', name: '薄荷双丸子', avatar: '/appearances/mint-puffs-v1/default.png', portrait: '/appearances/mint-puffs-v1/default.png', accent: '#78ddd7' },
+  { id: 'ochre-freckles', name: '赭黄雀斑', avatar: '/appearances/ochre-freckles-v1/default.png', portrait: '/appearances/ochre-freckles-v1/default.png', accent: '#ffcf43' },
+]
+const state = { draft: exampleDraft(), step: 0, selectedId: 'lin', issues: [], checked: false, answerRemoved: false }
+let restored = false
+try {
+  const saved = JSON.parse(localStorage.getItem(storageKey) ?? 'null')
+  if (saved?.draft != null && Array.isArray(saved.draft.characters) && saved.draft.ending != null) {
+    state.draft = saved.draft
+    state.step = [0, 1, 2].includes(saved.step) ? saved.step : 0
+    state.selectedId = state.draft.characters.some((person) => person.id === saved.selectedId) ? saved.selectedId : state.draft.characters[0]?.id ?? null
+    restored = true
+  }
+} catch { /* Only this isolated prototype key is read. The production draft is untouched. */ }
+const escape = (value) => String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;')
+const person = () => state.draft.characters.find((character) => character.id === state.selectedId) ?? null
+const preset = (character) => presets.find((value) => value.id === character?.appearanceId) ?? null
+const name = (character) => character?.name.trim() || '未命名人物'
+const image = (character, kind = 'avatar', className = '') => {
+  const appearance = preset(character)
+  return appearance == null ? `<span class="portrait-initial ${className}" aria-hidden="true">${escape(name(character).slice(0, 1))}</span>` : `<img class="${className}" src="${assets}${appearance[kind]}" alt="">`
+}
+function persist() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify({ draft: state.draft, step: state.step, selectedId: state.selectedId }))
+    document.querySelector('#save-status').textContent = '草稿已保存 · 仅此浏览器'
+  } catch { document.querySelector('#save-status').textContent = '草稿未能保存，请勿关闭页面' }
+}
+function heading(title, subtitle) {
+  return `<div class="page-heading"><div><h1 tabindex="-1">${title}</h1><p>${subtitle}</p></div><span class="free-step-note">随时切换步骤，内容都会保留</span></div>`
+}
+function errors() {
+  const target = document.querySelector('#issue-summary')
+  if (target == null) return
+  target.hidden = state.issues.length === 0
+  target.innerHTML = `<p>还有 ${state.issues.length} 处待补充，完成后就能${state.pendingAction === 'share' ? '分享' : '试玩'}。</p><ul>${state.issues.map((issue, index) => `<li><button type="button" data-issue="${index}">${escape(issue.message)} ↗</button></li>`).join('')}</ul>`
+  for (const field of document.querySelectorAll('[data-field]')) {
+    const invalid = state.issues.some((issue) => issue.step === state.step && issue.field === field.dataset.field && (issue.characterId == null || issue.characterId === state.selectedId))
+    field.setAttribute('aria-invalid', String(invalid))
+  }
+}
+function steps() {
+  const missing = formIssues(state.draft)
+  for (const button of document.querySelectorAll('[data-step]')) {
+    if (Number(button.dataset.step) === state.step) button.setAttribute('aria-current', 'step')
+    else button.removeAttribute('aria-current')
+    const marker = button.querySelector('.step-state')
+    const incomplete = missing.some((issue) => issue.step === Number(button.dataset.step))
+    marker.textContent = incomplete ? (state.checked ? '!' : '') : '✓'
+    marker.classList.toggle('is-error', incomplete && state.checked)
+  }
+}
+function footer(back, next, final = false) {
+  return `<footer class="step-footer">${back == null ? '<span class="footer-hint">不必按顺序写，先从有灵感的地方开始。</span>' : `<button type="button" class="back-button" data-goto="${back}">← 上一步</button>`}<button type="button" class="button button-primary" ${final ? 'data-action="trial"' : `data-goto="${state.step + 1}"`}>${next} <span aria-hidden="true">${final ? '▷' : '→'}</span></button></footer>`
+}
+function story() {
+  return `${heading('故事，从一件小事开始。', '只写大家都知道的事，秘密留给人物。')}<div class="story-layout"><section class="panel form-panel" aria-label="故事基本设置">
+    <div class="field"><label class="form-label" for="case-title">案件标题</label><input id="case-title" data-field="title" type="text" value="${escape(state.draft.title)}" placeholder="比如：谢幕前的小鸭"></div>
+    <div class="field"><label class="form-label" for="case-background">公共背景</label><textarea id="case-background" data-field="background" rows="6" placeholder="发生了什么？玩家为什么要找这几个人聊聊？">${escape(state.draft.background)}</textarea><small>接案时会完整展示给玩家。不要提前写出答案。</small></div>
+    <div class="field"><label class="form-label" for="case-minutes">共享询问时间</label><div class="duration-options">${[5, 8, 10].map((minutes) => `<button type="button" data-minutes="${minutes}" aria-pressed="${state.draft.interrogationLimitSeconds === minutes * 60}">${minutes} 分钟</button>`).join('')}<label class="duration-custom"><span>自定</span><input id="case-minutes" data-field="interrogationLimitSeconds" type="number" min="0.1" step="0.5" value="${state.draft.interrogationLimitSeconds / 60}" aria-label="自定义询问分钟数"><span>分钟</span></label></div><small>所有人物共享；语音开启时计时，结束对话后暂停。</small></div>
+    </section><aside><div class="panel player-preview"><span class="preview-badge"><i></i> 玩家接案时会看到</span><h2 id="preview-title">${escape(state.draft.title || '你的案件标题')}</h2><p id="preview-background">${escape(state.draft.background || '你的故事，会从这里开始。')}</p><div class="preview-portraits">${state.draft.characters.slice(0, 5).map((character) => image(character)).join('')}</div><div class="preview-time"><span id="preview-count">${state.draft.characters.length}</span> 位人物 · <span id="preview-minutes">${state.draft.interrogationLimitSeconds / 60}</span> 分钟询问时间</div></div><div class="preview-caption"><span>i</span>背景是所有人的共同起点。人物各自知道的事，在下一步分别填写。</div></aside></div>${footer(null, '继续：故事人物')}`
+}
+function characters() {
+  const selected = person()
+  const appearance = preset(selected)
+  const rail = `<nav class="character-rail" aria-label="选择编辑人物">${state.draft.characters.map((character) => `<button class="character-card" type="button" data-person="${escape(character.id)}" aria-label="编辑${escape(name(character))}" aria-pressed="${character.id === state.selectedId}" style="--character-accent: ${preset(character)?.accent ?? '#eaf2ff'}">${image(character)}<strong>${escape(name(character))}</strong><span>正在编辑</span></button>`).join('')}<button type="button" class="add-character" data-action="add"><span aria-hidden="true">＋</span>添加人物</button></nav>`
+  const editor = selected == null ? `<section class="panel no-characters"><span style="font-size:36px" aria-hidden="true">＋</span><h2>先请一位人物登场。</h2><p>每个人，都可以知道一点别人不知道的事。</p><button type="button" class="button button-primary" data-action="add">添加第一位人物</button></section>` : `<section class="panel character-editor" aria-label="当前人物编辑"><aside class="character-stage" style="--character-accent: ${appearance?.accent ?? '#eaf2ff'}"><p class="stage-title">当前人物</p><div class="portrait-halo">${image(selected, 'portrait')}</div><h2 id="stage-name">${escape(name(selected))}</h2><p class="preset-label">${escape(appearance?.name ?? '不使用形象')}</p><button type="button" class="button" data-action="appearances">换个形象 ↗</button></aside><div class="character-fields"><div class="field"><label class="form-label" for="person-name">人物姓名</label><input id="person-name" data-field="name" type="text" value="${escape(selected.name)}" placeholder="这个角色叫什么？"></div><div class="field"><div class="form-label"><label for="person-profile">人物设定</label><button type="button" class="text-button" data-action="example">看完整示例 ↗</button></div><textarea id="person-profile" data-field="profile" rows="9" placeholder="你叫……\n你经历过……\n你知道……，但不知道……\n当被问到……时，你会……">${escape(selected.profile)}</textarea><p class="guidance-line"><span aria-hidden="true">✦</span><span>推荐用<b>第二人称「你叫……」</b>，写清亲历、所知和回答方式。</span></p></div><div class="character-tools"><span>仅用于这个角色的对话，不直接展示给玩家。</span><button type="button" class="delete-button" data-action="delete">删除人物</button></div></div></section>`
+  return `${heading('让每个人，都有自己的说法。', '一次写好一个人，随时切换、添加或回改。')}${state.answerRemoved ? '<div class="soft-warning">正确人物已被删除，请重新选择答案。<button type="button" data-goto="2">前往真相结局 ↗</button></div>' : ''}<div class="character-layout">${rail}${editor}</div>${footer(0, '继续：真相结局')}`
+}
+function ending() {
+  return `${heading('真相，留到最后揭晓。', '选出真正的责任人，再把完整经过交代清楚。')}<div class="ending-layout"><section class="panel form-panel" aria-label="真相结局设置"><div class="field"><span class="form-label" id="answer-label">正确指认的人物</span><div class="answer-choices" role="group" aria-labelledby="answer-label" data-field="culpritId" tabindex="-1">${state.draft.characters.map((character) => `<button type="button" class="answer-choice" data-answer="${escape(character.id)}" aria-pressed="${state.draft.ending.culpritId === character.id}">${image(character)}<strong>${escape(name(character))}</strong><i aria-hidden="true">${state.draft.ending.culpritId === character.id ? '✓' : ''}</i></button>`).join('')}</div>${state.draft.characters.length === 0 ? '<small>还没有人物。<button type="button" class="text-button" data-goto="1">去添加 ↗</button></small>' : '<small>玩家只有一次指认机会。</small>'}</div><div class="field"><label class="form-label" for="ending-reveal">完整经过</label><textarea id="ending-reveal" data-field="reveal" rows="8" placeholder="究竟发生了什么？把各个人物的说法串起来，给玩家一个完整解释。">${escape(state.draft.ending.reveal)}</textarea><small>正确指认后，才会展示这段文字。</small></div></section><aside><div class="panel player-preview ending-preview"><span class="preview-badge"><i></i> 玩家正确指认后会看到</span><div><span class="ending-check" aria-hidden="true">✓</span></div><h2>谜题解开了！</h2><p id="preview-reveal">${escape(state.draft.ending.reveal || '把真正的经过，留在这里。')}</p><p class="loss-note">指认错误则结束本局，不揭晓真相；玩家可重新挑战。</p></div></aside></div>${footer(1, '试玩这个案件', true)}`
+}
+function render(focusField = null) {
+  document.querySelector('#screen').innerHTML = `<section id="issue-summary" class="error-summary" role="alert" hidden></section>${state.step === 0 ? story() : state.step === 1 ? characters() : ending()}`
+  steps(); errors()
+  if (focusField != null) document.querySelector(`[data-field="${focusField}"]`)?.focus()
+}
+function go(step) { state.step = Number(step); persist(); render(); document.querySelector('.page-heading h1')?.focus({ preventScroll: true }) }
+function locate(issue) {
+  state.step = issue.step
+  if (issue.characterId != null) state.selectedId = issue.characterId
+  persist(); render(issue.field)
+  if (issue.field === 'add-character') document.querySelector('[data-action="add"]')?.focus()
+}
+function check(action) {
+  state.checked = true
+  state.pendingAction = action
+  state.issues = formIssues(state.draft)
+  if (state.issues.length > 0) { locate(state.issues[0]); return }
+  if (action === 'trial') {
+    document.querySelector('#trial-copy').innerHTML = `<h3>${escape(state.draft.title)}</h3><p>${escape(state.draft.background)}</p><p class="trial-meta">${state.draft.characters.length} 位人物 · ${state.draft.interrogationLimitSeconds / 60} 分钟询问时间</p>`
+    document.querySelector('#trial-dialog').showModal()
+  } else document.querySelector('#share-dialog').showModal()
+}
+function afterEdit() {
+  if (state.checked) state.issues = formIssues(state.draft)
+  persist(); steps(); errors()
+}
+document.addEventListener('input', (event) => {
+  const field = event.target.dataset.field
+  if (field == null) return
+  const value = event.target.value
+  if (field === 'title' || field === 'background') { state.draft[field] = value; document.querySelector(field === 'title' ? '#preview-title' : '#preview-background').textContent = value || (field === 'title' ? '你的案件标题' : '你的故事，会从这里开始。') }
+  else if (field === 'interrogationLimitSeconds') { state.draft.interrogationLimitSeconds = value === '' ? 0 : Math.round(Number(value) * 60); document.querySelector('#preview-minutes').textContent = state.draft.interrogationLimitSeconds / 60; for (const button of document.querySelectorAll('[data-minutes]')) button.setAttribute('aria-pressed', String(Number(button.dataset.minutes) * 60 === state.draft.interrogationLimitSeconds)) }
+  else if (field === 'name' && person() != null) { person().name = value; document.querySelector('#stage-name').textContent = name(person()); const card = document.querySelector(`[data-person="${state.selectedId}"]`); card.querySelector('strong').textContent = name(person()); card.setAttribute('aria-label', `编辑${name(person())}`) }
+  else if (field === 'profile' && person() != null) person().profile = value
+  else if (field === 'reveal') { state.draft.ending.reveal = value; document.querySelector('#preview-reveal').textContent = value || '把真正的经过，留在这里。' }
+  afterEdit()
+})
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('button')
+  if (button == null) return
+  if (button.dataset.close != null) { document.getElementById(button.dataset.close).close(); return }
+  if (button.dataset.step != null || button.dataset.goto != null) { go(button.dataset.step ?? button.dataset.goto); return }
+  if (button.dataset.person != null) { state.selectedId = button.dataset.person; persist(); render(); return }
+  if (button.dataset.issue != null) { locate(state.issues[Number(button.dataset.issue)]); return }
+  if (button.dataset.minutes != null) { state.draft.interrogationLimitSeconds = Number(button.dataset.minutes) * 60; afterEdit(); render(); return }
+  if (button.dataset.answer != null) { state.draft.ending.culpritId = button.dataset.answer; state.answerRemoved = false; afterEdit(); render(); return }
+  if (button.dataset.preset != null && person() != null) { person().appearanceId = button.dataset.preset === 'none' ? null : button.dataset.preset; document.querySelector('#appearance-dialog').close(); persist(); render(); return }
+  const action = button.dataset.action
+  if (action === 'example') document.querySelector('#example-dialog').showModal()
+  if (action === 'appearances') {
+    document.querySelector('#appearance-grid').innerHTML = presets.map((appearance) => `<button type="button" class="preset-choice" data-preset="${appearance.id}" aria-pressed="${person()?.appearanceId === appearance.id}"><img src="${assets}${appearance.portrait}" alt="">${appearance.name}</button>`).join('') + '<button type="button" class="preset-choice" data-preset="none">不使用形象</button>'
+    document.querySelector('#appearance-dialog').showModal()
+  }
+  if (action === 'add') {
+    const character = { id: crypto.randomUUID(), name: '', appearanceId: presets[state.draft.characters.length % presets.length].id, profile: '' }
+    state.draft.characters.push(character); state.selectedId = character.id; state.step = 1; afterEdit(); render('name')
+    document.querySelector(`[data-person="${character.id}"]`)?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+  }
+  if (action === 'delete' && person() != null) {
+    document.querySelector('#delete-title').textContent = `删除${name(person())}？`
+    document.querySelector('#delete-copy').textContent = '这个人物的设定也会移除。如果他是正确答案，你需要重新选择正确指认的人物。'
+    document.querySelector('#delete-dialog').showModal()
+  }
+  if (action === 'confirm-delete' && person() != null) {
+    if (state.draft.ending.culpritId === state.selectedId) state.answerRemoved = true
+    state.selectedId = removePerson(state.draft, state.selectedId)
+    document.querySelector('#delete-dialog').close(); afterEdit(); render()
+  }
+  if (action === 'trial' || action === 'share') check(action)
+  if (action === 'reset') {
+    Object.assign(state, { draft: exampleDraft(), step: 0, selectedId: 'lin', issues: [], checked: false, answerRemoved: false })
+    persist(); render()
+  }
+})
+render()
+if (restored) document.querySelector('#save-status').textContent = '已恢复草稿 · 继续上次编辑'

@@ -1,0 +1,137 @@
+import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
+import { createRequire } from 'node:module'
+import test from 'node:test'
+
+import { validateGame } from '../../packages/game-core/src/content.ts'
+import { exampleDraft, formIssues, removePerson, storageKey } from './model.js'
+
+const require = createRequire(import.meta.url)
+const { JSDOM } = require('jsdom')
+
+test('the complete second-person sample fits the current game contract', () => {
+  const draft = exampleDraft()
+  assert.deepEqual(validateGame(draft), draft)
+  assert.equal(formIssues(draft).length, 0)
+  assert.match(draft.characters[0].profile, /^你叫小林/)
+})
+
+test('deleting the answer clears its relation, selects a remaining neighbor, and supports deleting the last person', () => {
+  const draft = exampleDraft()
+  assert.equal(removePerson(draft, 'lin'), 'he')
+  assert.equal(draft.ending.culpritId, '')
+  assert.ok(formIssues(draft).some((issue) => issue.step === 2 && issue.field === 'culpritId'))
+  assert.equal(removePerson(draft, 'he'), 'zhou')
+  assert.equal(removePerson(draft, 'zhou'), null)
+  assert.ok(formIssues(draft).some((issue) => issue.field === 'add-character'))
+})
+
+test('form guidance identifies the exact step, character and missing field without blocking navigation', () => {
+  const draft = exampleDraft()
+  draft.title = ''
+  draft.characters[1].profile = ''
+  const issues = formIssues(draft)
+  assert.deepEqual(issues.map(({ step, field, characterId }) => ({ step, field, characterId })), [
+    { step: 0, field: 'title', characterId: undefined },
+    { step: 1, field: 'profile', characterId: 'he' },
+  ])
+})
+
+test('clickable prototype preserves edits, permits free steps, manages people, examples and correction targets', async () => {
+  const html = await readFile(new URL('./index.html', import.meta.url), 'utf8')
+  const dom = new JSDOM(html, { url: 'http://127.0.0.1:5343/design/editor-ux/index.html' })
+  const previous = { document: globalThis.document, localStorage: globalThis.localStorage }
+  Object.assign(globalThis, { document: dom.window.document, localStorage: dom.window.localStorage })
+  dom.window.HTMLDialogElement.prototype.showModal = function () { this.open = true }
+  dom.window.HTMLDialogElement.prototype.close = function () { this.open = false }
+  dom.window.HTMLElement.prototype.scrollIntoView = function () {}
+  try {
+    await import('./prototype.js')
+    const document = dom.window.document
+    const click = (selector) => { const node = document.querySelector(selector); assert.ok(node, selector); node.click() }
+    const input = (selector, text) => {
+      const node = document.querySelector(selector)
+      assert.ok(node, selector)
+      node.value = text
+      node.dispatchEvent(new dom.window.Event('input', { bubbles: true }))
+    }
+    input('#case-title', '')
+    click('[data-step="2"]')
+    assert.equal(document.querySelector('.page-heading h1').textContent, '真相，留到最后揭晓。')
+    click('[data-step="0"]')
+    input('#case-title', '我改好的案件')
+    click('[data-step="1"]')
+    click('[data-person="he"]')
+    input('#person-profile', '你叫阿禾。保留这段刚写好的设定。')
+    click('[data-person="lin"]')
+    click('[data-person="he"]')
+    assert.equal(document.querySelector('#person-profile').value, '你叫阿禾。保留这段刚写好的设定。')
+    click('[data-action="example"]')
+    assert.equal(document.querySelector('#example-dialog').open, true)
+    assert.match(document.querySelector('#example-dialog').textContent, /第二人称/)
+    click('[data-close="example-dialog"]')
+    click('[data-action="add"]')
+    const newId = JSON.parse(localStorage.getItem(storageKey)).selectedId
+    input('#person-name', '新人物')
+    click('[data-step="0"]')
+    assert.equal(document.querySelector('#case-title').value, '我改好的案件')
+    click('[data-action="trial"]')
+    assert.equal(document.querySelector('[aria-current="step"]').dataset.step, '1')
+    assert.equal(document.activeElement.id, 'person-profile')
+    assert.match(document.querySelector('#issue-summary').textContent, /补充新人物的人物设定/)
+    assert.equal(document.querySelector('[aria-pressed="true"][data-person]').dataset.person, newId)
+    input('#person-profile', '你叫新人物，你不知道木偶去了哪里。')
+    click('[data-action="trial"]')
+    assert.equal(document.querySelector('#trial-dialog').open, true)
+    click('[data-close="trial-dialog"]')
+    click('[data-person="lin"]')
+    click('[data-action="delete"]')
+    assert.equal(document.querySelector('#delete-dialog').open, true)
+    click('[data-action="confirm-delete"]')
+    assert.match(document.querySelector('.soft-warning').textContent, /正确人物已被删除/)
+    click('[data-goto="2"]')
+    assert.equal(document.querySelector('[data-answer][aria-pressed="true"]'), null)
+    click('[data-answer="he"]')
+    click('[data-action="share"]')
+    assert.equal(document.querySelector('#share-dialog').open, true)
+    const stored = JSON.parse(localStorage.getItem(storageKey))
+    assert.equal(stored.draft.title, '我改好的案件')
+    assert.equal(stored.draft.ending.culpritId, 'he')
+    assert.equal(stored.draft.characters.length, 3)
+    assert.ok(stored.draft.characters.some((character) => character.id === newId))
+    assert.equal(localStorage.getItem('lie-editor-draft'), null)
+  } finally {
+    dom.window.close()
+    for (const [key, value] of Object.entries(previous)) {
+      if (value == null) delete globalThis[key]
+      else globalThis[key] = value
+    }
+  }
+})
+
+test('reopening the prototype restores the last step, selected person and edited draft', async () => {
+  const html = await readFile(new URL('./index.html', import.meta.url), 'utf8')
+  const dom = new JSDOM(html, { url: 'http://127.0.0.1:5343/design/editor-ux/index.html' })
+  const previous = { document: globalThis.document, localStorage: globalThis.localStorage }
+  Object.assign(globalThis, { document: dom.window.document, localStorage: dom.window.localStorage })
+  try {
+    const draft = exampleDraft()
+    draft.title = '上次写到的标题'
+    draft.characters[1].profile = '你叫阿禾，这是我上次没写完的设定。'
+    localStorage.setItem(storageKey, JSON.stringify({ draft, step: 1, selectedId: 'he' }))
+    await import('./prototype.js?restore-test')
+    const document = dom.window.document
+    assert.equal(document.querySelector('[aria-current="step"]').dataset.step, '1')
+    assert.equal(document.querySelector('[data-person][aria-pressed="true"]').dataset.person, 'he')
+    assert.equal(document.querySelector('#person-profile').value, draft.characters[1].profile)
+    assert.match(document.querySelector('#save-status').textContent, /已恢复草稿/)
+    document.querySelector('[data-step="0"]').click()
+    assert.equal(document.querySelector('#case-title').value, '上次写到的标题')
+  } finally {
+    dom.window.close()
+    for (const [key, value] of Object.entries(previous)) {
+      if (value == null) delete globalThis[key]
+      else globalThis[key] = value
+    }
+  }
+})

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIE · 案件创作台交互原型</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="prototype-note"><span>交互原型</span> 可以编辑、切换步骤和人物；不会启动语音。<button type="button" data-action="reset">恢复示例草稿</button></div>
+  <header class="topbar wrap">
+    <span class="brand" aria-label="LIE 标志"><img src="../../apps/web/public/brand/logo.svg" alt="LIE" width="104" height="56"></span>
+    <span class="workbench-name">案件创作台</span>
+    <span class="save-state" role="status"><i></i><span id="save-status">草稿保存在此浏览器</span></span>
+    <div class="global-actions"><button class="button button-secondary" type="button" data-action="trial"><span aria-hidden="true">▷</span> 试玩</button><button class="button button-primary" type="button" data-action="share">分享链接 <span aria-hidden="true">↗</span></button></div>
+  </header>
+  <div class="stepbar-wrap"><nav class="stepbar wrap" aria-label="创作步骤">
+    <button type="button" data-step="0" aria-controls="screen"><span class="step-number">1</span><span>故事设定</span><span class="step-state" data-state="0"></span></button><span class="step-line" aria-hidden="true"></span>
+    <button type="button" data-step="1" aria-controls="screen"><span class="step-number">2</span><span>故事人物</span><span class="step-state" data-state="1"></span></button><span class="step-line" aria-hidden="true"></span>
+    <button type="button" data-step="2" aria-controls="screen"><span class="step-number">3</span><span>真相结局</span><span class="step-state" data-state="2"></span></button>
+  </nav></div>
+  <main class="wrap" id="screen"></main>
+  <dialog id="example-dialog" class="dialog example-dialog" aria-labelledby="example-title">
+    <header><div><span class="eyebrow">人物设定 · 完整示例</span><h2 id="example-title">把设定，写给角色。</h2></div><button type="button" class="icon-button" data-close="example-dialog" aria-label="关闭示例">×</button></header>
+    <p class="dialog-intro">推荐用第二人称「你叫……」。告诉角色自己经历过什么、知道什么，以及会怎样回答。</p>
+    <div class="example-text"><p><b>你叫小林</b>，是社区木偶剧的道具负责人。你说话爽快，有点爱逞强。</p><p>今晚谢幕前，你从道具桌拿走了小鸭木偶，放进<b>舞台左侧的蓝色抽屉</b>，想在谢幕后给主创一个惊喜。你没事先告诉别人，也没把它带离剧场。</p><p>你亲眼看见小周在搬音箱，没看见阿禾进道具间。<b>你不知道他们之后去了哪里</b>。</p><p>刚被问到木偶在哪时，你会说：「我收起来了，演完给大家看。」如果被追问收在哪，你就承认在蓝色抽屉。你一开始没意识到大家急着要用它。</p><p>你只说自己亲历的事。问到别人的动机或你没看见的事，就直说不知道，不替任何人解释。</p></div>
+    <p class="example-footnote">这整段都是一份人物设定，不需要拆成其他字段。</p><footer><button type="button" class="button button-primary" data-close="example-dialog">明白了，继续写</button></footer>
+  </dialog>
+  <dialog id="appearance-dialog" class="dialog appearance-dialog" aria-labelledby="appearance-title"><header><div><span class="eyebrow">预置形象</span><h2 id="appearance-title">选一位，来演这个角色。</h2></div><button type="button" class="icon-button" data-close="appearance-dialog" aria-label="关闭形象选择">×</button></header><div id="appearance-grid"></div></dialog>
+  <dialog id="delete-dialog" class="dialog small-dialog" aria-labelledby="delete-title"><header><h2 id="delete-title">删除这个人物？</h2><button type="button" class="icon-button" data-close="delete-dialog" aria-label="取消删除">×</button></header><p id="delete-copy"></p><footer><button class="button button-secondary" type="button" data-close="delete-dialog">保留人物</button><button class="button button-primary" type="button" data-action="confirm-delete">删除人物</button></footer></dialog>
+  <dialog id="trial-dialog" class="dialog small-dialog" aria-labelledby="trial-title"><header><h2 id="trial-title">试玩准备好了</h2><button type="button" class="icon-button" data-close="trial-dialog" aria-label="关闭试玩预览">×</button></header><div id="trial-copy"></div><p class="prototype-explanation">原型只展示检查与接案信息；正式版沿用现有游戏流程和语音服务。</p><footer><button class="button button-primary" type="button" data-close="trial-dialog">返回继续编辑</button></footer></dialog>
+  <dialog id="share-dialog" class="dialog small-dialog" aria-labelledby="share-title"><header><h2 id="share-title">把谜题交给朋友</h2><button type="button" class="icon-button" data-close="share-dialog" aria-label="关闭分享">×</button></header><p>修改内容后，重新生成链接即可。</p><div class="sample-link">https://lie.example/play#game=……</div><p class="prototype-explanation">原型示意链接，不可游玩；正式版保留现有压缩分享与长度检查。</p><footer><button class="button button-primary" type="button" data-close="share-dialog">返回继续编辑</button></footer></dialog>
+  <script type="module" src="./prototype.js"></script>
+</body>
+</html>
