@@ -1,6 +1,10 @@
 # LIE — 当前项目计划
 
-更新：2026-10-25，依据本地 reviewed main `0a67498cb58f0dd8403a57556bd786c854150276`及本轮协调派单；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
+更新：2026-10-25，依据本地 reviewed main `43a98e6b12b55ed0cb6791d436a3398fe5b8547a`及本轮协调派单；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
+
+## 当前轮换交接
+
+2026-10-25 02:28发起换代，02:30只读复核。旧任务lie/lie-2均已PAUSED；本批最后文档由旧root review/集成后释放唯一集成权，此后旧root不再写main。接任者尚未创建，核[交接登记](coordinator-handoff.md)与[本代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)后认领，勿重复派制作/重做已main17条。三专项等待原因不可见，游戏IAB未完成；其余授权、队列与08:30准确截止不因换代改变。
 
 ## 授权与执行方式
 
@@ -13,7 +17,7 @@
 
 | 入口 | 当前事实 |
 | --- | --- |
-| 本地main | `0a67498`已含下表成果，后续候选另列；这些新增改动均未push。 |
+| 本地main | `43a98e6`已含下表成果，后续候选另列；这些新增改动均未push。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
 | 远程/线上 | 本地origin/main跟踪及最后实际部署证据均为`32d89bf91f441168148884593a0f49b816ad7162`；本轮未fetch/重验远端，不能冒称最新remote。见[部署证据](deployments/2026-10-24-animation-milestone.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |
@@ -43,12 +47,12 @@
 
 ## 仍需执行的队列
 
-同优先级按依赖/空闲owner调度，不重派已在制工作；专项chat ID及当代执行者在交接登记。01:28 fan/Editor/动画三个专项均实际waitingOnApproval，正式游戏QA无新交付；flag不等于拒绝，原因不推测。只读排查结论：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
+同优先级按依赖/空闲owner调度，不重派已在制工作；专项chat ID及当代执行者在交接登记。02:28 root紧凑快照fan/Editor/动画三个专项仍实际waitingOnApproval，正式游戏QA无新交付；flag不等于拒绝，原因不推测。只读排查结论：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
 | P1 | 银发waiting接入 / 动画专项＋root review | 三角色新候选`a440ec9`（base0a67498）已重建并过全仓379/类型/构建79资源；原素材review/哈希保持，5504正式游戏IAB仍待交，角色未main。完整来源见交接候选登记，不复制旧链。 |
-| P1 | gray/plum接入与扩人 / 动画专项＋main_acceptance_environment | 正式activation source HEAD `822e9b5` clean（base5968661，12有序提交）已root实际源码/图review；纳入同一新候选a440ec9，含结果投影的组合检查已通过，5505正式游戏IAB未交付；01:28动画专项实际waitingOnApproval，未main。之后按原canonical制mint/ochre，最多2角色并行。 |
+| P1 | gray/plum接入与扩人 / 动画专项＋main_acceptance_environment | 正式activation source HEAD `822e9b5` clean（base5968661，12有序提交）已root实际源码/图review；纳入同一新候选a440ec9，含结果投影的组合检查已通过，5505正式游戏IAB未交付；02:28动画专项仍实际waitingOnApproval，未main。之后按原canonical制mint/ochre，最多2角色并行。 |
 | P2 | 指认弹窗可变人数扇卡 / 调查专项 | 从`31db7c9`新WT accusation-fan-layout实施，5507 waitingOnApproval，仍持viewport未释放；修4人换行裁切，hover/focus上移、触屏/窄屏可选，不硬人数、不靠hover提交，点击具体人才指认。与结果页设计独立。 |
 | P2 | 编辑器大形象位置跳动 / 编辑器专项 | 局部CSS候选28测试/类型/构建60资源通过；自有同源iframe初轮1004下216.23×285、391下317×160居中通过，尚需多角色反复切换/cleanup完整handoff。当前waitingOnApproval，顶层slot未取消，未集成；不改共享组件或资产掩盖。 |
 | P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；等fan＋Editor＋silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |

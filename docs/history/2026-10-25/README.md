@@ -34,3 +34,7 @@
 - [首页流程去胶囊](home-flow-typography.md)：局部CSS与IAB核验，已本地集成；其中当时“待review”和服务存活描述仅为历史。
 - [CJK时长留白](../../cjk-numeric-spacing.md)：官方能力/兼容性及真实测量，已本地集成。
 - README双语头图：原交付`bc4b4e23f2b095c1ea7e829d61906182249c56c9`，本地已集成；英文源/PNG新增、中文README/HTML/PNG逐字节保留。IAB原生JPEG转PNG无缩放，未称无损；见[源](../../../design/brand/readme-hero.en.html)及上方完整handoff快照。
+
+## 02:28主协调轮换
+
+[01a16e3d本代交接快照](coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)：02:30新鲜核main/dirty工作/候选30链/服务/两旧任务PAUSED。最后文档集成后才正式release；接任者尚未创建，不代表交接已成功。原文快照不改，当前入口由后续协调认领更新。

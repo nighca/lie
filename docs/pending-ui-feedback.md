@@ -2,7 +2,7 @@
 
 2026-10-24。用户在新总协调明确澄清：“不实施”只是对当时记录专项的临时要求，总协调必须安排实施。17条已正式分派，不再作为禁止实施门禁。原记录来自5394页面标记/截图；此前暂缓原文保留于历史review，不覆盖此最新授权。
 
-实施基线：reviewed main `887ac03`。调查/共享视觉专项 `01a16d5c-de69-7452-8d6a-280d15a87e9e` 负责1—9；编辑器专项 `01a16d90-27cc-77c2-9e0a-4b28b1135371` 负责10—17。各自新建隔离worktree，root独立review/集成。1—9仍在制；10—17及PC卡复用已完成rootreview与本地集成，详见history/2026-10-24/editor-feedback-integration.md（不表示线上发布）。用户在编辑器专项进一步授权同步PC人物卡复用：既有调查卡片已集成887ac03，现由编辑器owner持有CharacterChoice.vue，吸收现调查PC四条等价默认样式，无新props；调查owner持有style.css，删除冗余覆盖须依赖组件迁移提交，移动端仍独立。首页catalog公开characters元数据由调查owner持有，editor-navigation fixture由编辑器owner跟进，root组合验证。
+以下实施基线/原owner分工仅为历史范围参考，不是重新派工清单。原实施基线：reviewed main `887ac03`。调查/共享视觉专项 `01a16d5c-de69-7452-8d6a-280d15a87e9e` 负责1—9；编辑器专项 `01a16d90-27cc-77c2-9e0a-4b28b1135371` 负责10—17。各自新建隔离worktree，root独立review/集成。1—17、PC卡复用及草稿状态组均已完成rootreview并纳入本地main；当前状态见[项目计划](project-plan.md)，完整证据见[历史索引](history/README.md)及[编辑器集成](history/2026-10-24/editor-feedback-integration.md)。新增改动尚未push，线上版本另记，不混作已发布。用户在编辑器专项进一步授权同步PC人物卡复用：既有调查卡片已集成887ac03，现由编辑器owner持有CharacterChoice.vue，吸收现调查PC四条等价默认样式，无新props；调查owner持有style.css，删除冗余覆盖须依赖组件迁移提交，移动端仍独立。首页catalog公开characters元数据由调查owner持有，editor-navigation fixture由编辑器owner跟进，root组合验证。
 
 1. 共享品牌“语音推理”下划线再倾斜一点，左低右高；保留现有已批准手绘笔触。
 2. 首页案件卡右上不再展示询问时长，改为展示角色数量；可考虑以本案多个角色头像排列来表现（头像排列为用户建议的设计方向，尚无具体排布稿）。不因此删除实际游戏时限。
