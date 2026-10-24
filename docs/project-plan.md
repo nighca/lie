@@ -43,8 +43,8 @@
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
 | 八形象与音色 | 线上/本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[权威清单](../design/appearances/manifest.json)。 |
 | 形象单一来源 | 已集成并上线；name/voice/四态+canonical assets及自动runtime生成齐备，35图字节不变，兼容输出字段已删除 | 唯一源为design清单，public为生成物；统一/appearances/<id>/路径，新增仅加源条目和素材。 |
-| 编辑器基础/v2 | 三步/示例/唯一答案/必选预设/分享投稿准备已上线；清草稿与最新人物居中27fc913已在2de0f22/8787 | 用户专用chat `01a16d90-27cc-77c2-9e0a-4b28b1135371`；后续1e3d2c8去当前人物待review，完整链接16000暂定主浏览器上限待验。 |
-| 调查控制与语音反馈 | 已批v3正式实现/真实音量/背景stop/手动恢复/标题关闭预留已集成本地2de0f22与8787；新窄屏v4已获批，由设计chat独立后续实现 | 窄屏v4提升记录空间、居中/贴底、移除当前人物；新稿不与已集成v3混称。 |
+| 编辑器基础/v2 | 三步/示例/唯一答案/必选预设/分享投稿准备已上线；清草稿与最新人物居中27fc913已在2de0f22/8787 | 用户专用chat `01a16d90-27cc-77c2-9e0a-4b28b1135371`；去当前人物1e3d2c8已review入本地候选，完整链接16000暂定主浏览器上限待验。 |
+| 调查控制与语音反馈 | 已批v3正式实现/真实音量/背景stop/手动恢复/标题关闭预留已集成本地2de0f22与8787；新窄屏v4已root review及组合验收，包含静态与顾遥动画 | 窄屏v4提升记录空间、居中/贴底、移除当前人物；新稿不与已集成v3混称。 |
 | GitHub投稿 | 研究`9612c85`与独立实测`e94fdd2`已交；未登录IAB短链接遇登录门槛，9280B合成中文JSON的27334字符query被GitHub拒绝为过长 | [投稿方案](editor-official-submission-proposal.md)；正文/commit/PR表单全文预填仍未知，复制/下载为保底。 |
 | 动画探索 | 顾遥独立Canvas包、四态游戏桥接、静态回退、资源上限/取消释放已集成本地2de0f22与8787；蓝衣/银发新候选由动画chat逐人review，不激活未批素材 | [正式契约](animation/contract.md)、[游戏接入](animation/coral-game-integration.md)；合成嘴时序不是语音口型同步。 |
 | 自动化与CD | 核心/voice/UI/web/gateway分层fake与回归、typecheck/build及受控CD均存在 | [验证记录](validation.md)、[CD](continuous-deployment.md)；测试数量跟随具体review提交，不沿用旧110项当现基线。 |
@@ -55,8 +55,8 @@
 
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
-| P1 | 调查窄屏v4 / 独立设计chat | v3已review集成本地2de0f22/8787，343组合检查及独立IAB通过；用户已批v4移动布局与去当前人物/姓名居中，owner仅style.css+CharacterChoice及tests后续实施，root review集成。 |
-| P1 | 编辑器后续微调 / 编辑器专项chat | 清草稿/居中×/27fc人物顺序与居中已在2de0f22/8787；去当前人物1e3d2c8已交待review，保持卡片尺寸与选中状态；旧依赖不重复回放。 |
+| P1 | 调查窄屏v4 / 独立设计chat | 80f8b62已root全diff review；与顾遥动画/全局×组合202项UI+Web测试、Web类型/构建通过；真实391/375记录400/257px、底栏贴底无页面溢出；桌面既有21px纵滚保留。已本地集成fe250a0，随后更新8787。 |
+| P1 | 编辑器后续微调 / 编辑器专项chat | 清草稿/居中×/27fc人物顺序与居中已在2de0f22/8787；去当前人物1e3d2c8已review并组合验收，实际391切卡保持88×112，已本地集成790d8b9，随后更新8787；旧依赖不重复回放。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
 | P1 | 动画用户验收与扩人 / 独立动画chat | 顾遥游戏接入及25130cc资源修复已在2de0f22/8787，可用户实际游戏验收；独立QA未可靠定格speaking短窗口，原owner四态验证另记；用户已授权蓝衣/银发候选并行，逐人review/验收后才激活。 |
 | P2 | 手绘风格细节 / 独立视觉chat | 原稿描摹下划线、800字重/.025em及位置/文字盖笔触已随调查v3集成本地2de0f22/8787；后续仅收实际反馈，不重复制作已批准稿。 |
@@ -66,7 +66,7 @@
 | P2 | 依赖审计 / 工程owner待排 | 审计b3b3bc9与补丁0603879已交并root审查；Node24.22.1+精确Undici/Zod覆盖保持cf主线，独立审计归零/271测试通过，root在真实Node24.22.1下复验新UI组合：审计0、277测试/类型/构建通过，补丁已集成本地04844ab；尚未push/部署。开发代理WS拒绝握手挂断在旧依赖也复现，未当成通过。 |
 | P3 | 正确/错误指认状态图 / 视觉owner | 已登记未生成；正确应被看穿/懊恼/无奈，非开心；错误可不解/委屈/抗议，按人物处理。仅提交结果后显示，不提前泄题、不改变错误终局不揭晓。 |
 | P3 | 双语README / 文档owner | 默认英文README.md、README.zh-CN.md互链已review并随2de0f22本地集成，链接/命令对齐，未push。 |
-| P2 | 人物预设统一命名 / root+appearance_assets | CharacterPreset与@lie/character-animation已批；动画接入前置已满足，已派独立只读迁移范围盘点，覆盖源码/类型/包/目录与已有草稿/分享wire影响，先避免破坏用户数据与活跃owner，不再重问定名。 |
+| P2 | 人物预设统一命名 / root+appearance_assets | CharacterPreset与@lie/character-animation已批；动画接入前置已满足，只读盘点7e47d7a已review；采用内部类型/模块/制作目录/包名统一，保留已有appearanceId序列化键与/appearances/公开路径以免破坏草稿/分享且无需兼容层；将从本轮reviewed main派单owner实施，不再重问定名。 |
 
 ## 当前需用户确认或外部协助
 
