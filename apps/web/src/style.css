@@ -176,9 +176,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .investigation-title { align-items: flex-start; padding: 0; }
 }
 
-.game-shell .background-dialog .lie-dialog__header { justify-content: space-between; padding: 0; text-align: left; min-height: 36px; }
+.game-shell .background-dialog .lie-dialog__header { justify-content: space-between; padding: 0 48px 0 0; text-align: left; min-height: 48px; }
 .game-shell .background-dialog .lie-dialog__header h2 { font-size: 24px; }
-.game-shell .background-dialog .lie-dialog__header .lie-button { position: static; flex-shrink: 0; font-size: 12px; min-height: 36px; }
 .game-shell .background-dialog .lie-dialog__actions { justify-content: flex-end; margin-top: 24px; }
 .game-shell .background-dialog .lie-dialog__actions .lie-button { min-width: 0; }
 
