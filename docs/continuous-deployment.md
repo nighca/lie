@@ -55,3 +55,7 @@ npm exec --workspace @lie/gateway -- cf deploy --prebuilt --mode production --wo
 - [cf 的构建、mode、dry-run 与部署选项](https://developers.cloudflare.com/cf/projects/)
 - [单 Worker Editor 权限与作用域](https://developers.cloudflare.com/workers/authorization/workers/)
 - [GitHub Actions 并发与顺序限制](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency)
+
+## 首次真实运行验收
+
+2026-10-24 用户配置两项repository secrets后，main `a5ed1e4f0d8a30eb5d607b076e5d25505c35472f` 的 [Actions运行40063253520](https://github.com/nighca/lie/actions/runs/40063253520) 全流程成功，含真正Deploy步骤。root只读核对Cloudflare活动版本 `63f438a8-d6d1-4ec5-ae36-0e0f71fb3faf` 承载100%，部署消息带相同提交SHA。线上首页/静态目录正常、health ok、voice status ready，生产供应商配置仍在；本次没有重新测试麦克风或语音回答，不把ready当作完整语音验收。
