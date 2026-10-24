@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>赭色雀斑正式组件自检</title>
+<style>*{box-sizing:border-box}body{font:16px system-ui;margin:0;padding:18px;background:#fff18a;color:#111b45}nav{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;padding:8px 12px;border:2px solid #111b45;background:#fffef7;border-radius:10px}button[aria-pressed=true]{background:#075bfa;color:white}main{display:grid;grid-template-columns:repeat(2,minmax(0,450px));gap:12px}.stage{position:relative;aspect-ratio:1;background:#fffef7;border:2px solid #111b45;border-radius:12px;overflow:hidden}.stage img{width:100%;height:100%;object-fit:contain}.stage canvas{height:100%;width:100%}h1{font-size:24px}h2{font-size:18px}.narrow main{width:355px;max-width:100%;grid-template-columns:1fr}@media(max-width:620px){main{grid-template-columns:1fr}}</style>
+<h1>赭色雀斑 · 正式 AnimatedPortrait</h1><p>原画纹理，四态微动作；讲话为原闭/开嘴头部合成切换。姿态更换未制作自然抬放。此页不连接语音或麦克风。</p><p><a href="./qa.html?phase=extrema">定相位全身</a> · <a href="./qa.html?phase=extrema&detail=shoulders">肩颈</a> · <a href="./qa.html?phase=extrema&detail=waist">腰袖</a> · <a href="./narrow.html">391px独立子视口</a></p><div id="app"></div>
+<script type="module">
+import {createApp,h,ref} from 'vue'
+import AnimatedPortrait from '../../../packages/ui/src/components/AnimatedPortrait.vue'
+if(new URLSearchParams(location.search).has('narrow'))document.body.classList.add('narrow')
+createApp({setup(){const state=ref('default'),mode=ref('animation'),mounted=ref(true);let timer=null;let index=0;const states=['default','listening','waiting','speaking'];const stop=()=>{clearInterval(timer);timer=null};return()=>h('div',[
+ h('nav',[
+ ...states.map(s=>h('button',{'aria-pressed':state.value===s,onClick:()=>{stop();state.value=s}},s)),
+ h('button',{onClick:()=>{stop();timer=setInterval(()=>{state.value=states[index++%4];if(index%40===0)stop()},100)}},'100ms 中断序列'),
+ h('button',{onClick:()=>{mode.value=mode.value==='animation'?'static':'animation'}},'静态/动画'),
+ h('button',{onClick:()=>{mode.value=mode.value==='bad'?'animation':'bad'}},'坏路径回退'),
+ h('button',{onClick:()=>{mounted.value=!mounted.value}},'卸载/重挂')]),
+ h('main',[
+ h('section',[h('h2','原画 '+state.value),h('div',{class:'stage'},h('img',{src:'../../appearances/assets/ochre-freckles/'+state.value+'.png',alt:'原画'}))]),
+ h('section',[h('h2','正式组件 '+state.value),h('div',{class:'stage'},mounted.value?h(AnimatedPortrait,{src:mode.value==='animation'?new URL('./package.json',location.href).pathname:mode.value==='bad'?'./missing-package.json':null,state:state.value,label:'赭色雀斑动画候选'},()=>h('img',{src:'../../appearances/assets/ochre-freckles/'+state.value+'.png',alt:'静态回退'})):h('p','组件已卸载'))])])])}}).mount('#app')
+</script>

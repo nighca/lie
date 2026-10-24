@@ -1,0 +1,23 @@
+PASS strict parser; 4 PNG byte hashes/actual dimensions/canonical identity; 960 finite samples; 4 loop closures; single canonical head and exclusive limbs; 33 full-parent fixed-waist/contact phases; 100 interrupted numeric-continuity sequences
+default: 65261 baseline opaque probes; missing=0; regions=[]
+listening: 65345 baseline opaque probes; missing=0; regions=[]
+waiting: 54256 baseline opaque probes; missing=0; regions=[]
+1221 nonempty opacity probes with full parent chain; failures=[]
+1615 classified canonical armpit ink probes excluded from opposite moving part
+8243 actual pants/hand probes exclude lower silhouette contamination
+
+> @lie/appearance-animation@0.0.0 typecheck
+> tsc --project tsconfig.json
+
+
+> @lie/appearance-animation@0.0.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /Users/nighca/.codex/worktrees/ochre-freckles-animation/lie/packages/appearance-animation
+
+
+ Test Files  2 passed (2)
+      Tests  33 passed (33)
+   Start at  07:32:46
+   Duration  123ms (tests 73%, import 14%, transform 8%, worker 5%)

@@ -1,0 +1,20 @@
+[
+  {
+    "tool": "built-in image_gen",
+    "call": 1,
+    "repair": false,
+    "adopted": false,
+    "reason": "Viewed native output and actual assembled Canvas: generated neck registration introduced duplicate original/generated neck outlines; canonical heads preserve identity and contact better.",
+    "prompt": "Use case: identity-preserve. Edit target: the supplied character portrait. Create one animation part: ONLY his complete head, hair, ears, face and long neck, on genuine transparent background. Remove all clothes, torso, arms, hands and legs. Keep this exact young male character identity, messy ochre/copper brown hair silhouette, wide brown eyes, thick navy brows, light freckles, warm peach skin, playful Chinese cartoon style and crisp navy ink. Keep the same angle and proportions as the source, looking toward viewer. REMOVE ONLY the mouth drawing: mouth area must be uninterrupted matching peach skin (no lips, no smile, no mouth hole) for separate canonical mouth overlay. Neck continues down to a plain flat cutoff well below chin. Do not add a bottom neck outline. Leave generous transparent padding around the head; no labels, no sheet, no extra objects. Preserve fine clean alpha edges; no white halo.",
+    "reference": "/Users/nighca/.codex/worktrees/ochre-freckles-animation/lie/design/appearances/assets/ochre-freckles/default.png",
+    "nativeOutput": "/Users/nighca/.codex/generated_images/01a17031-3294-7c60-adbe-e45906bcffb5/exec-61f278dd-9cc7-4265-8187-8d9bc38d4323.png",
+    "sha256": "c1a909c6fee402a9e9d9824b107c0134e1448071db97153b2bd3f169a789d7e2",
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ]
+  }
+]

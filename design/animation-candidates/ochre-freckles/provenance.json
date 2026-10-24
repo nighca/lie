@@ -1,0 +1,53 @@
+{
+  "parts": {
+    "default-source": {
+      "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "listening-source": {
+      "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "speaking-source": {
+      "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "waiting-source": {
+      "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  },
+  "generationCalls": 1,
+  "repairCalls": 0,
+  "generationRecords": "generation-records.json",
+  "sources": {
+    "default": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+    "listening": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+    "waiting": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+    "speaking": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a"
+  }
+}
