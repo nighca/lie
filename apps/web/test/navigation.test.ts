@@ -27,7 +27,7 @@ async function screen(path = '/', loadCatalog = async () => catalog) {
   cleanup.push(() => wrapper.unmount())
   await flushPromises()
   async function click(text: string) {
-    const button = wrapper.findAll('button').find((item) => item.text() === text)
+    const button = wrapper.findAll('button').find((item) => item.text() === text && (item.element.closest('dialog') == null || item.element.closest('dialog')!.open))
     expect(button, text).toBeDefined()
     await button!.trigger('click'); await flushPromises()
   }
@@ -93,7 +93,7 @@ describe('home and case navigation', () => {
   it('cancels leaving with URL, session, history and voice intact, then discards on confirmation', async () => {
     const { router, sessions, click } = await screen('/?game=test')
     await click('接案，开始调查')
-    await click('开始模拟对话')
+    await click('开启模拟对话')
     const old = sessions[0]
     old.turns[0].scope.onEvent({ type: 'userText', text: '问题' })
     const before = old.controller.getView()
@@ -120,7 +120,7 @@ describe('home and case navigation', () => {
     let closed = false
     let finish: (() => void) | null = null
     sessions[0].voice.create = () => ({ open: () => new Promise<void>((resolve) => { finish = resolve }), close() { closed = true } })
-    await click('接案，开始调查'); await click('开始模拟对话')
+    await click('接案，开始调查'); await click('开启模拟对话')
     expect(sessions[0].controller.getView().busy).toBe(true)
     const leave = router.push('/')
     await flushPromises(); await click('确认结束'); await leave
@@ -159,11 +159,11 @@ describe('home and case navigation', () => {
 
   it('leaves failed and solved sessions without confirmation, and restarts with empty history', async () => {
     const { wrapper, router, sessions, click } = await screen('/?game=test')
-    await click('接案，开始调查'); await click('最终指认'); await click('指认 乙')
+    await click('接案，开始调查'); await click('我有答案了 →'); await click('指认 乙')
     expect(wrapper.text()).not.toContain(game.ending.reveal)
     await click('重新开始一局')
     expect(sessions[0].controller.getView().history).toEqual([])
-    await click('接案，开始调查'); await click('最终指认'); await click('指认 甲')
+    await click('接案，开始调查'); await click('我有答案了 →'); await click('指认 甲')
     expect(wrapper.text()).toContain(game.ending.reveal)
     await click('返回案件列表')
     expect(router.currentRoute.value.query.game).toBeUndefined()
@@ -172,7 +172,7 @@ describe('home and case navigation', () => {
 
   it('discards hidden-page state only on actual pagehide and returns from bfcache to a fresh intro', async () => {
     const { wrapper, sessions, click } = await screen('/?game=test')
-    await click('接案，开始调查'); await click('开始模拟对话')
+    await click('接案，开始调查'); await click('开启模拟对话')
     const old = sessions[0]
     Object.defineProperty(document, 'hidden', { configurable: true, value: true })
     document.dispatchEvent(new Event('visibilitychange')); await flushPromises()

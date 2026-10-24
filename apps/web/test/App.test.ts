@@ -1,5 +1,5 @@
 import { flushPromises, mount } from '@vue/test-utils'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from '../src/App.vue'
 import { VoiceAvailabilityError } from '../src/application/voice'
@@ -7,14 +7,16 @@ import { readAppearances } from '../src/presentation/appearances'
 import { game, setup } from './helpers'
 
 const cleanup: (() => void)[] = []
+beforeEach(() => {
+  Object.defineProperties(HTMLDialogElement.prototype, {
+    showModal: { configurable: true, value(this: HTMLDialogElement) { this.open = true } },
+    close: { configurable: true, value(this: HTMLDialogElement) { this.open = false } },
+  })
+})
 afterEach(() => { cleanup.splice(0).forEach((action) => action()); vi.useRealTimers() })
 
 describe('game screens', () => {
   it('ends a wrong accusation in failure and permits only a fresh attempt before a correct result', async () => {
-    Object.defineProperties(HTMLDialogElement.prototype, {
-      showModal: { configurable: true, value(this: HTMLDialogElement) { this.open = true } },
-      close: { configurable: true, value(this: HTMLDialogElement) { this.open = false } },
-    })
     const { controller } = setup()
     await controller.load('test')
     const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
@@ -26,7 +28,7 @@ describe('game screens', () => {
     }
     await click('接案，开始调查')
     expect(wrapper.get('[role="log"]').isVisible()).toBe(true)
-    await click('最终指认')
+    await click('我有答案了 →')
     await click('指认 乙')
     expect(wrapper.text()).toContain('本局失败')
     expect(wrapper.get('main h1').text()).toBe('指认不正确')
@@ -36,12 +38,62 @@ describe('game screens', () => {
     await click('重新开始一局')
     expect(controller.getView().phase).toBe('intro')
     await click('接案，开始调查')
-    await click('最终指认')
+    await click('我有答案了 →')
     await click('指认 甲')
     expect(wrapper.text()).toContain('仅在揭晓后显示的结局')
     await click('重新开始一局')
     expect(wrapper.text()).toContain('接案，开始调查')
     expect(controller.getView().phase).toBe('intro')
+  })
+
+  it.each([[600, '10分钟'], [330, '5分30秒']])('uses natural language for a %s-second introduction', async (seconds, label) => {
+    const { controller } = setup(undefined, { ...game, interrogationLimitSeconds: Number(seconds) })
+    await controller.load('test')
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    expect(wrapper.get('.muted').text()).toBe(`本局可询问${label}`)
+  })
+
+  it('opens only public background under the case title and leaves voice paused until manually restarted', async () => {
+    vi.useFakeTimers()
+    let now = 0
+    const { controller, turns } = setup({ now: () => now, setTimeout, clearTimeout })
+    await controller.load('test'); controller.start(); await controller.startConversation()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    now = 2000
+    await wrapper.get('[aria-label="查看案件背景"]').trigger('click')
+    const background = wrapper.get('.background-dialog')
+    expect(background.get('h2').text()).toBe(game.title)
+    expect(background.text()).toContain(game.background)
+    expect(background.text()).not.toContain(game.characters[0].profile)
+    expect(background.text()).not.toContain(game.ending.reveal)
+    expect(turns[0].closed).toBe(true)
+    const paused = controller.getView().interrogationRemainingMs
+    expect(paused).toBe(478000)
+    await background.get('footer button').trigger('click')
+    now = 20000
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(controller.getView().interrogationRemainingMs).toBe(paused)
+    expect(controller.getView().conversationActive).toBe(false)
+    expect(turns).toHaveLength(1)
+    await wrapper.get('[aria-label="语音对话控制"] button').trigger('click'); await flushPromises()
+    expect(turns).toHaveLength(2)
+  })
+
+  it('keeps only the background modal open when time expires while opening it', async () => {
+    let now = 0
+    const { controller } = setup({ now: () => now, setTimeout, clearTimeout })
+    await controller.load('test'); controller.start(); await controller.startConversation()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    now = 480000
+    await wrapper.get('[aria-label="查看案件背景"]').trigger('click')
+    expect(wrapper.get<HTMLDialogElement>('.background-dialog').element.open).toBe(true)
+    expect(wrapper.get<HTMLDialogElement>('.accusation-dialog').element.open).toBe(false)
+    await wrapper.get('.background-dialog footer button').trigger('click')
+    expect(wrapper.get<HTMLDialogElement>('.accusation-dialog').element.open).toBe(true)
+    expect(controller.getView().phase).toBe('interrogating')
   })
 
   it('uses one start/end action through listening, waiting and speaking, with a shared time display', async () => {
@@ -51,25 +103,25 @@ describe('game screens', () => {
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const controls = () => wrapper.get('[aria-label="语音对话控制"]')
     expect(controls().get('[aria-label="剩余询问时间"]').text()).toContain('08:00')
-    expect(wrapper.get('.conversation-copy h2').text()).toBe('对话转写')
-    expect(controls().findAll('button')).toHaveLength(1)
-    expect(controls().text()).toContain('麦克风已关闭')
+    expect(wrapper.get('.conversation-copy h2').text()).toBe('询问记录')
+    expect(controls().findAll('button')).toHaveLength(2)
+    expect(controls().get('button').attributes('aria-pressed')).toBe('false')
     expect(controls().text()).not.toContain('计时中')
     await controls().get('button').trigger('click'); await flushPromises()
     expect(controls().get('button').text()).toBe('结束对话')
-    expect(controls().text()).toContain('对话已开启')
+    expect(controls().get('button').attributes('aria-pressed')).toBe('true')
     for (const event of [{ type: 'userText', text: '问题' } as const, { type: 'speaking' } as const, { type: 'listening' } as const]) {
       turns[0].scope.onEvent(event)
       await wrapper.vm.$nextTick()
-      expect(controls().findAll('button')).toHaveLength(1)
+      expect(controls().findAll('button')).toHaveLength(2)
       expect(controls().get('button').text()).toBe('结束对话')
-      expect(controls().text()).toContain('对话已开启')
-      expect(controls().get('[aria-label="麦克风已开启，正在计时，可直接开口打断"]').text()).toBe('收音中 · 计时中 · 可打断')
+      expect(controls().get('button').attributes('aria-pressed')).toBe('true')
+      expect(controls().find('.lie-voice__waveform').exists()).toBe(true)
     }
     await controls().get('button').trigger('click')
     expect(turns[0].closed).toBe(true)
-    expect(controls().get('button').text()).toBe('开始对话')
-    expect(controls().text()).toContain('麦克风已关闭')
+    expect(controls().get('button').text()).toBe('开启对话')
+    expect(controls().get('button').attributes('aria-pressed')).toBe('false')
     expect(controls().text()).not.toContain('计时中')
   })
 
@@ -79,10 +131,10 @@ describe('game screens', () => {
     const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const controls = wrapper.get('[aria-label="语音对话控制"]')
-    expect(controls.text()).toContain('对话已开启')
+    expect(controls.get('button').attributes('aria-pressed')).toBe('true')
     turns[0].scope.onEvent({ type: 'error' }); await wrapper.vm.$nextTick()
     expect(controls.text()).toContain('语音暂时中断')
-    expect(controls.text()).toContain('麦克风已关闭')
+    expect(controls.get('button').attributes('aria-pressed')).toBe('false')
     expect(controls.text()).not.toContain('计时中')
     expect(turns[0].closed).toBe(true)
   })
@@ -95,8 +147,8 @@ describe('game screens', () => {
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     await wrapper.get('[aria-label="语音对话控制"] button').trigger('click'); await flushPromises()
     expect(wrapper.text()).toContain('当前环境尚未开放语音体验')
-    expect(wrapper.get('[aria-label="语音对话控制"]').text()).toContain('等待你开口')
-    expect(wrapper.get('[aria-label="语音对话控制"] button').text()).toBe('开始对话')
+    expect(wrapper.get('[aria-label="语音对话控制"] button').attributes('aria-pressed')).toBe('false')
+    expect(wrapper.get('[aria-label="语音对话控制"] button').text()).toBe('开启对话')
   })
 
   it('shows interrupted controller history without marking normally completed answers', async () => {
@@ -156,14 +208,14 @@ describe('game screens', () => {
     const controls = wrapper.get('[aria-label="语音对话控制"]')
     await controls.get('button').trigger('click')
     expect(controls.get('button').text()).toBe('取消连接')
-    expect(controls.text()).toContain('对话准备中')
+    expect(controls.text()).toContain('正在连接')
     expect(controls.text()).not.toContain('对话已开启')
     expect(controls.text()).not.toContain('计时中')
     expect(controls.get('button').attributes('disabled')).toBeUndefined()
     await controls.get('button').trigger('click')
     expect(turns[0].closed).toBe(true)
     ready(); await flushPromises()
-    expect(controls.get('button').text()).toBe('开始对话')
+    expect(controls.get('button').text()).toBe('开启对话')
   })
 
 })

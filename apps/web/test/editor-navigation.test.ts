@@ -43,7 +43,7 @@ async function screen(path = '/') {
   cleanup.push(() => wrapper.unmount())
   await settle()
   async function click(text: string) {
-    const button = wrapper.findAll('button').find((item) => item.text() === text)
+    const button = wrapper.findAll('button').find((item) => item.text() === text && (item.element.closest('dialog') == null || item.element.closest('dialog')!.open))
     expect(button, text).toBeDefined()
     await button!.trigger('click'); await settle()
   }
@@ -65,7 +65,7 @@ describe('editor and shared case application routes', () => {
     expect(sessions[0].source).toEqual(customGame)
     expect(wrapper.text()).toContain(customGame.title)
     expect(wrapper.findAll('button').some((button) => button.text() === '返回编辑器')).toBe(true)
-    await click('接案，开始调查'); await click('开始模拟对话')
+    await click('接案，开始调查'); await click('开启模拟对话')
     const leaving = router.push('/editor'); await settle()
     await click('继续调查'); await leaving
     expect(sessions[0].setup.turns[0].closed).toBe(false)
@@ -88,11 +88,11 @@ describe('editor and shared case application routes', () => {
     const { wrapper, router, sessions, click } = await screen(path)
     expect(sessions).toHaveLength(1)
     expect(sessions[0].source).toEqual(customGame)
-    await click('接案，开始调查'); await click('最终指认'); await click('指认 乙')
+    await click('接案，开始调查'); await click('我有答案了 →'); await click('指认 乙')
     expect(wrapper.text()).toContain('本局失败')
     await click('重新开始一局')
     expect(sessions[0].setup.controller.getView().phase).toBe('intro')
-    await click('接案，开始调查'); await click('最终指认'); await click('指认 甲')
+    await click('接案，开始调查'); await click('我有答案了 →'); await click('指认 甲')
     expect(wrapper.text()).toContain(customGame.ending.reveal)
     await click('返回案件列表')
     expect(router.currentRoute.value.path).toBe('/')
@@ -102,7 +102,7 @@ describe('editor and shared case application routes', () => {
 
   it('confirms active hash replacement, ignores old voice results and loads the new shared story', async () => {
     const { router, sessions, click } = await screen(await sharedPath())
-    await click('接案，开始调查'); await click('开始模拟对话')
+    await click('接案，开始调查'); await click('开启模拟对话')
     const old = sessions[0].setup
     const nextPath = await sharedPath({ ...customGame, id: 'other', title: '另一份分享案' })
     const leaving = router.push(nextPath); await settle(); await click('确认结束'); await leaving; await settle()

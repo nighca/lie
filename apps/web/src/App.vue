@@ -8,7 +8,14 @@ import type { Appearance } from './presentation/appearances'
 const props = withDefaults(defineProps<{ controller: GameController; appearances: readonly Appearance[]; demo: boolean; returnLabel?: string }>(), { returnLabel: '返回案件列表' })
 const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: [] }>()
 const view = ref(props.controller.getView())
-const unsubscribe = props.controller.subscribe((value) => { view.value = value })
+const voiceFeedback = ref(props.controller.getVoiceFeedback())
+const unsubscribeFeedback = props.controller.subscribeVoiceFeedback((value) => { voiceFeedback.value = value })
+onUnmounted(unsubscribeFeedback)
+const backgroundOpen = ref(false)
+const unsubscribe = props.controller.subscribe((value) => {
+  view.value = value
+  if (value.phase !== 'interrogating') backgroundOpen.value = false
+})
 onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
 const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)
@@ -36,7 +43,7 @@ const labels = { idle: '等待你开口', recording: '正在聆听', waiting: '�
 const actionLabel = computed(() => {
   if (view.value.conversationActive) return view.value.busy ? '取消连接' : '结束对话'
   if (view.value.interrogationRemainingMs <= 0) return '询问时间已用完'
-  return props.demo ? '开始模拟对话' : '开始对话'
+  return props.demo ? '开启模拟对话' : '开启对话'
 })
 const remainingTime = computed(() => {
   const seconds = Math.ceil(view.value.interrogationRemainingMs / 1000)
@@ -48,15 +55,22 @@ function portraitFailed(event: Event) {
   const url = (event.currentTarget as HTMLImageElement).getAttribute('src')
   if (url != null) brokenImages.value.add(url)
 }
+const durationLabel = computed(() => {
+  const seconds = Math.ceil(view.value.interrogationRemainingMs / 1000)
+  const minutes = Math.floor(seconds / 60)
+  const remainder = seconds % 60
+  return `${minutes > 0 ? `${minutes}分${remainder === 0 ? '钟' : ''}` : ''}${remainder > 0 ? `${remainder}秒` : ''}`
+})
+function openBackground() { props.controller.endConversation({ quiet: true }); backgroundOpen.value = true }
 function speak() { if (view.value.conversationActive) props.controller.endConversation(); else void props.controller.startConversation() }
 </script>
 
 <template>
-  <div class="game-shell">
-    <ProductHeader :title="view.phase === 'interrogating' ? view.title : null" @navigate-home="emit('navigateHome')">
+  <div class="game-shell" :class="{ 'game-shell--investigating': view.phase === 'interrogating' }">
+    <ProductHeader @navigate-home="emit('navigateHome')">
+      <template v-if="view.phase === 'interrogating'" #title><h1 class="investigation-heading" :aria-label="view.title"><button class="investigation-title" aria-label="查看案件背景" @click="openBackground"><span>{{ view.title }}</span><small>案件背景 ↗</small></button></h1></template>
       <template v-if="view.phase === 'interrogating'" #actions>
         <UiButton variant="quiet" @click="emit('requestEnd')">结束本局</UiButton>
-        <UiButton @click="controller.openAccusation()">最终指认</UiButton>
       </template>
       <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>
     </ProductHeader>
@@ -81,7 +95,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </div>
       </div>
       <ol class="flow-hint" aria-label="调查流程"><li>开口问话</li><li>对照说法</li><li>最终指认</li></ol>
-      <p class="muted">本局共 {{ remainingTime }} 询问时间，跨人物共享。语音开启时计时，结束对话后暂停，连接准备不计时。</p>
+      <p class="muted">本局可询问{{ durationLabel }}</p>
       <UiButton class="intro-start" @click="controller.start()">接案，开始调查</UiButton>
       <UiButton variant="quiet" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
     </main>
@@ -104,14 +118,14 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <div class="stage-caption"><h2>{{ current.name }}</h2></div>
         </section>
         <section class="conversation-copy">
-          <h2>对话转写</h2>
+          <h2>询问记录</h2>
           <Transcript :key="view.currentCharacterId ?? ''" :messages="transcript" :animate="view.conversationActive && !view.busy" />
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>
-      <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" @start="speak">
-        <template #meter><span v-if="view.conversationActive && !view.busy" class="conversation-hint" aria-label="麦克风已开启，正在计时，可直接开口打断">收音中 · 计时中 · 可打断</span></template>
-        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问时间</span><strong>{{ remainingTime }}</strong><small>{{ view.busy ? '连接准备不计时' : '所有人物共享' }}</small></div></template>
+      <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :output-level="voiceFeedback.outputLevel" :input-active="voiceFeedback.inputActive" :style="{ '--character-accent': appearance(current?.appearanceId ?? null)?.accent ?? 'var(--lie-aqua)' }" @start="speak">
+        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><strong>{{ remainingTime }}</strong></div></template>
+        <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
       </VoiceControl>
     </main>
 
@@ -136,7 +150,11 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
     </main>
 
-    <UiDialog :open="view.accusationOpen" title="最终指认" @close="controller.closeAccusation()">
+    <UiDialog class="background-dialog" :open="backgroundOpen && view.phase === 'interrogating'" :title="view.title" @close="backgroundOpen = false">
+      <p class="public-background">{{ view.background }}</p>
+      <template #actions><UiButton @click="backgroundOpen = false">继续调查</UiButton></template>
+    </UiDialog>
+    <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="我有答案了" @close="controller.closeAccusation()">
       <p class="accusation-question">你认为谁是这次事件的责任人？</p>
       <p class="accusation-hint">点击人物提交指认</p>
       <div class="accusation-choices">

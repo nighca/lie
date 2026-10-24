@@ -77,10 +77,25 @@ describe('shared controls', () => {
     await wrapper.setProps({ status: 'waiting', label: '等待回答' })
     expect(wrapper.get('.lie-voice__details').text()).toBe('剩余询问时间 02:30')
     expect(wrapper.findAll('button')).toHaveLength(1)
-    expect(wrapper.get('[role="status"]').text()).toContain('对话已开启')
+    expect(wrapper.get('[role="status"]').text()).toBe('等待回答')
     await wrapper.setProps({ active: false, status: 'idle', label: '等待你开口' })
-    expect(wrapper.get('[role="status"]').text()).toContain('麦克风已关闭')
-    expect(wrapper.get('[role="status"]').text()).not.toContain('对话已开启')
+    expect(wrapper.get('button').attributes('aria-pressed')).toBe('false')
+    expect(wrapper.find('.lie-voice__waveform').exists()).toBe(false)
+  })
+
+  it('shows actual level history with input priority and clears it between sources', async () => {
+    const wrapper = mount(VoiceControl, { props: { active: true, status: 'speaking', label: '正在回答', inputLevel: 0, outputLevel: 0 } })
+    wrappers.push(wrapper)
+    await wrapper.setProps({ outputLevel: .04 })
+    expect(wrapper.get('.lie-voice__waveform').attributes('data-source')).toBe('output')
+    expect(wrapper.find('[role="status"]').exists()).toBe(false)
+    expect(wrapper.findAll('i').at(-1)!.attributes('style')).toContain('17px')
+    await wrapper.setProps({ inputLevel: .09, inputActive: true })
+    expect(wrapper.get('.lie-voice__waveform').attributes('data-source')).toBe('input')
+    expect(wrapper.findAll('i').at(-1)!.attributes('style')).toContain('25.5px')
+    expect(wrapper.findAll('i')[0].attributes('style')).toContain('3px')
+    await wrapper.setProps({ active: false })
+    expect(wrapper.find('.lie-voice__waveform').exists()).toBe(false)
   })
 
   it('opens a native modal and requests closure on Escape', async () => {

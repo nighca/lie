@@ -24,7 +24,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .flow-hint li { position: relative; flex: 1; padding: 6px 12px; border-radius: 99px; background: var(--lie-soft-blue); font-weight: 600; white-space: nowrap; }
 .flow-hint li + li::before { content: '→'; position: absolute; left: -24px; }
 .intro-start { width: min(100%, 660px); font-size: 22px; min-height: 64px; }
-.investigation { display: grid; grid-template-columns: 104px minmax(300px, .94fr) minmax(420px, 1fr); grid-template-rows: minmax(0, 1fr) 104px; gap: 20px; height: calc(100dvh - 132px); min-height: 480px; }
+.investigation { display: grid; grid-template-columns: 104px minmax(300px, .94fr) minmax(420px, 1fr); grid-template-rows: minmax(0, 1fr) 124px; gap: 20px; height: calc(100dvh - 132px); min-height: 480px; }
 .conversation-layout { display: contents; }
 .character-list { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; gap: 12px; min-height: 0; overflow-y: auto; padding: 4px 2px 8px; }
 .character-list > .lie-character { flex-shrink: 0; }
@@ -40,11 +40,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .conversation-copy > .lie-transcript { flex: 1; min-height: 0; --lie-transcript-max-height: none; }
 .conversation-copy > .lie-notice { flex-shrink: 0; margin-top: 12px; padding: 10px 12px; border-width: 2px; border-radius: 14px; font-size: 13px; }
 .investigation > .lie-voice { grid-column: 2 / -1; }
-.interrogation-budget { padding-left: 20px; border-left: 1px solid #111b4522; white-space: nowrap; }
+.interrogation-budget { white-space: nowrap; line-height: 1.3; }
 .interrogation-budget > span { display: block; color: var(--lie-muted); font-size: 12px; }
-.interrogation-budget strong { display: block; font-size: 26px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; }
-.interrogation-budget small { display: block; color: var(--lie-muted); font-size: 11px; line-height: 1.2; }
-.conversation-hint { display: block; color: var(--lie-muted); font-size: 12px; margin-top: 4px; }
+.interrogation-budget strong { display: block; margin-top: 4px; font-size: 26px; font-weight: 850; font-variant-numeric: tabular-nums; }
+.investigation-heading { font: inherit; margin: 0; }
+.investigation-title { display: flex; flex-direction: column; align-items: center; gap: 5px; border: 0; border-radius: 16px; background: transparent; color: inherit; padding: 6px 16px; max-width: 100%; font: inherit; font-weight: 800; cursor: pointer; }
+.investigation-title small { font-size: 11px; font-weight: 400; color: var(--lie-muted); }
+.investigation-title:hover { background: #fff9c080; }
+.investigation-title:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 4px; }
+.game-shell .background-dialog.lie-dialog { width: min(660px, calc(100% - 32px)); padding: 26px 28px; border-width: 2px; border-radius: 26px; }
+.public-background { white-space: pre-wrap; line-height: 1.85; font-size: 15px; margin: 0; }
+.game-shell .background-dialog .lie-button { border-width: 2px; border-radius: 15px; min-height: 46px; font-size: 14px; }
 .accusation-question { font-size: 24px; font-weight: 800; text-align: center; margin: 0; }
 .accusation-hint { color: var(--lie-muted); text-align: center; margin: 8px 0 0; }
 .accusation-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 28px 0; }
@@ -56,7 +62,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .result-divider { display: flex; justify-content: center; gap: 18px; margin-top: 28px; }
 .result-divider span { display: block; width: 16px; height: 16px; background: var(--lie-aqua); border-radius: 3px; transform: rotate(20deg); }
 .result-divider span:nth-child(2) { background: var(--lie-coral); transform: rotate(-15deg); }
-@media (max-width: 1000px) {
+@media (max-width: 850px) {
   .investigation { height: auto; min-height: 0; grid-template-columns: minmax(240px, .85fr) minmax(320px, 1fr); grid-template-rows: auto 440px auto; }
   .character-list { grid-column: 1 / -1; grid-row: auto; flex-direction: row; }
   .character-list > .lie-character { flex: 0 0 104px; }
@@ -79,7 +85,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .stage-caption h2 { font-size: 24px; }
   .conversation-copy { padding: 18px; }
   .conversation-copy h2 { margin-bottom: 12px; padding-bottom: 12px; }
-  .interrogation-budget { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0; border: 0; }
+  .interrogation-budget { display: flex; align-items: baseline; gap: 8px; }
+  .interrogation-budget strong { font-size: 22px; margin: 0; }
+  .interrogation-budget > span { font-size: 11px; }
+  .game-shell--investigating { padding-bottom: calc(175px + env(safe-area-inset-bottom)); }
+  .game-shell .background-dialog.lie-dialog { padding: 22px 20px; }
   .accusation-choices { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
   .accusation-character .avatar-frame, .accusation-character .initial-avatar { height: 150px; }
 }
@@ -157,3 +167,43 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .leave-confirmation .lie-dialog__actions { flex-wrap: wrap; gap: 12px; }
+
+@media (min-width: 851px) and (max-width: 1150px) {
+  .investigation { grid-template-columns: 104px minmax(260px, .94fr) minmax(340px, 1fr); gap: 16px; grid-template-rows: minmax(0, 1fr) 132px; }
+  .conversation-copy { padding: 20px; }
+}
+@media (max-width: 1000px) {
+  .investigation-title { align-items: flex-start; padding: 0; }
+}
+
+.game-shell .background-dialog .lie-dialog__header { justify-content: space-between; padding: 0; text-align: left; min-height: 36px; }
+.game-shell .background-dialog .lie-dialog__header h2 { font-size: 24px; }
+.game-shell .background-dialog .lie-dialog__header .lie-button { position: static; flex-shrink: 0; font-size: 12px; min-height: 36px; }
+.game-shell .background-dialog .lie-dialog__actions { justify-content: flex-end; margin-top: 24px; }
+.game-shell .background-dialog .lie-dialog__actions .lie-button { min-width: 0; }
+
+.game-shell .character-list > .lie-character { width: 100px; border-width: 2px; }
+.game-shell .character-list .lie-character__avatar { height: 86px; }
+.game-shell .character-list .lie-character__copy { padding: 0 5px; }
+.game-shell .character-list .lie-character__copy strong { font-size: 14px; line-height: 24px; }
+.game-shell .character-list .lie-character__selected { padding: 0; font-size: 9px; line-height: 16px; }
+@media (max-width: 700px) {
+  .game-shell .character-list > .lie-character { width: 88px; flex-basis: 88px; }
+  .game-shell .character-list .lie-character__avatar { height: 72px; }
+  .game-shell .character-list .lie-character__copy strong { font-size: 12px; line-height: 22px; }
+}
+
+.game-shell .accusation-dialog.lie-dialog { width: min(660px, calc(100% - 32px)); padding: 26px 28px; border-width: 2px; border-radius: 26px; }
+.game-shell .accusation-dialog .lie-dialog__header h2 { font-size: 24px; }
+@media (max-width: 700px) {
+  .game-shell .accusation-dialog.lie-dialog { padding: 22px 20px; }
+  .accusation-dialog .accusation-question { font-size: 18px; }
+  .accusation-dialog .accusation-choices { grid-template-columns: minmax(0, 1fr); gap: 12px; margin: 20px 0; }
+  .accusation-dialog .accusation-character { display: flex; align-items: center; }
+  .accusation-dialog .accusation-character .avatar-frame, .accusation-dialog .accusation-character .initial-avatar { width: 94px; height: 88px; flex-shrink: 0; }
+  .accusation-dialog .accusation-character .lie-button { flex: 1; width: auto; min-width: 0; margin: 12px; font-size: 14px; min-height: 42px; padding: 8px; }
+}
+.game-shell--investigating .lie-product-header__actions .lie-button--quiet { min-height: 0; padding: 8px 0; border: 0; background: transparent; color: var(--lie-muted); box-shadow: none; font-size: 13px; font-weight: 400; }
+@media (max-width: 700px) {
+  .game-shell--investigating .lie-product-header__actions .lie-button--quiet { font-size: 11px; }
+}

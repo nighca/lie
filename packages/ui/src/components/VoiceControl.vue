@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { computed, ref, watch } from 'vue'
+
 import UiButton from './UiButton.vue'
 
 export type VoiceStatus = 'idle' | 'recording' | 'waiting' | 'speaking' | 'error'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   active?: boolean
   preparing?: boolean
   status: VoiceStatus
@@ -12,52 +14,84 @@ withDefaults(defineProps<{
   cancelLabel?: string | null
   interruptLabel?: string | null
   disabled?: boolean
-}>(), { active: false, preparing: false, actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false })
+  inputLevel?: number
+  outputLevel?: number
+  inputActive?: boolean
+}>(), { active: false, preparing: false, actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false, inputLevel: 0, outputLevel: 0, inputActive: false })
 
 const emit = defineEmits<{ start: []; cancel: []; interrupt: [] }>()
+const enabled = computed(() => props.active && !props.preparing)
+const source = computed(() => !enabled.value ? null : props.inputActive ? 'input' : props.outputLevel > .001 ? 'output' : null)
+const level = computed(() => source.value === 'input' ? props.inputLevel : source.value === 'output' ? props.outputLevel : 0)
+const samples = ref<number[]>(Array(24).fill(0))
+watch([source, level], ([next, value], [previous]) => {
+  const history = next === previous ? samples.value : Array(24).fill(0)
+  samples.value = [...history.slice(1), value]
+})
+const feedbackLabel = computed(() => {
+  if (props.preparing) return '正在连接'
+  if (props.status === 'error') return props.label
+  if (!enabled.value || source.value != null) return ''
+  return props.status === 'waiting' || props.status === 'speaking' ? '等待回答' : '等你开口'
+})
+const meterLabel = computed(() => source.value === 'output' ? '角色声音音量' : '玩家声音音量')
+function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(value) * 85))}px` }
 </script>
 
 <template>
-  <section class="lie-voice" :data-status="status" :data-conversation="active ? 'active' : 'inactive'" aria-label="语音对话控制">
-    <span class="lie-voice__symbol" aria-hidden="true">
-      <svg v-if="status === 'speaking'" viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15h7l9-8v26l-9-8H5Z"/><path d="M28 13q8 7 0 14M32 7q14 13 0 26"/></svg>
-      <span v-else-if="status === 'error'" class="lie-voice__error">!</span>
-      <span v-else-if="status === 'waiting'" class="lie-voice__waiting">•••</span>
-      <svg v-else viewBox="0 0 32 40" width="32" height="40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="10" y="3" width="12" height="22" rx="6" /><path d="M4 19v2a12 12 0 0 0 24 0v-2M16 33v5M10 38h12" /></svg></span>
-    <div class="lie-voice__status" role="status" aria-live="polite"><span class="lie-voice__activity"><span aria-hidden="true" class="lie-voice__activity-dot"></span>{{ preparing ? '对话准备中' : active ? '对话已开启' : '麦克风已关闭' }}</span><strong>{{ label }}</strong><slot name="meter" /></div>
+  <section class="lie-voice" :data-status="status" :data-conversation="enabled ? 'active' : 'inactive'" aria-label="语音对话控制">
     <div v-if="$slots.details" class="lie-voice__details"><slot name="details" /></div>
-    <div class="lie-voice__actions">
-      <UiButton v-if="cancelLabel != null" variant="secondary" :disabled="disabled" @click="emit('cancel')">{{ cancelLabel }}</UiButton>
-      <UiButton v-if="interruptLabel != null" variant="secondary" :disabled="disabled" @click="emit('interrupt')">{{ interruptLabel }}</UiButton>
-      <UiButton v-if="actionLabel != null" :disabled="disabled" @click="emit('start')">{{ actionLabel }}</UiButton>
+    <div class="lie-voice__main">
+      <div class="lie-voice__actions">
+        <UiButton v-if="cancelLabel != null" variant="secondary" :disabled="disabled" @click="emit('cancel')">{{ cancelLabel }}</UiButton>
+        <UiButton v-if="interruptLabel != null" variant="secondary" :disabled="disabled" @click="emit('interrupt')">{{ interruptLabel }}</UiButton>
+        <UiButton v-if="actionLabel != null" :disabled="disabled" :aria-pressed="enabled" @click="emit('start')"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg>{{ actionLabel }}</UiButton>
+      </div>
+      <div class="lie-voice__feedback">
+        <span v-if="feedbackLabel" class="lie-voice__status" role="status">{{ feedbackLabel }}</span>
+        <div v-if="enabled" class="lie-voice__waveform" :data-source="source" :aria-label="meterLabel" role="img"><i v-for="(sample, index) in samples" :key="index" :style="{ height: height(sample) }" /></div>
+        <meter v-if="enabled" class="lie-voice__static-meter" :aria-label="meterLabel" min="0" max="1" :value="level" />
+      </div>
     </div>
+    <div v-if="$slots.answer" class="lie-voice__answer"><slot name="answer" /></div>
   </section>
 </template>
 
 <style scoped>
-.lie-voice { gap: 20px; min-height: 104px; border-width: 2px; border-radius: 25px; padding: 16px 22px; box-shadow: 0 5px 0 #111b4515; }
-.lie-voice__symbol { position: relative; width: 56px; height: 56px; border-width: 2px; box-shadow: none; }
-.lie-voice__symbol svg { max-width: 28px; max-height: 32px; }
-.lie-voice__activity { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; line-height: 1.4; color: var(--lie-muted); }
-.lie-voice__activity-dot { width: 8px; height: 8px; flex-shrink: 0; border: 2px solid currentColor; border-radius: 50%; }
-.lie-voice[data-conversation='active'] { border-color: var(--lie-primary); background: var(--lie-soft-blue); }
-.lie-voice[data-conversation='active'] .lie-voice__activity { color: var(--lie-primary); }
-.lie-voice[data-conversation='active'] .lie-voice__activity-dot { background: currentColor; }
-.lie-voice[data-conversation='inactive'] .lie-voice__symbol { background: var(--lie-soft-blue); color: var(--lie-ink); }
-.lie-voice__status strong { display: block; font-size: 20px; font-weight: 800; line-height: 1.4; }
-.lie-voice__details { flex-shrink: 0; }
-.lie-voice__actions { justify-content: flex-end; gap: 12px; }
-.lie-voice__actions :deep(.lie-button) { min-height: 52px; border-width: 2px; border-radius: 17px; font-size: 18px; padding: 10px 18px; }
-.lie-voice__waiting { font-size: 22px; letter-spacing: 1px; }
-.lie-voice__error { font-size: 32px; font-weight: 800; }
-.lie-voice[data-status='error'] .lie-voice__symbol { background: var(--lie-coral); }
+.lie-voice { display: grid; grid-template-columns: 82px minmax(0, 1fr) auto; align-items: center; gap: 16px; min-height: 124px; border: 2px solid var(--lie-ink); border-radius: 24px; background: var(--lie-surface); padding: 16px 20px; box-shadow: 0 4px #111b4520; }
+.lie-voice__details { min-width: 0; }
+.lie-voice__main { display: flex; align-items: center; gap: 24px; min-width: 0; }
+.lie-voice__actions { display: flex; gap: 12px; flex: 0 0 auto; padding: 0; }
+.lie-voice__actions :deep(.lie-button) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; min-width: 146px; border: 2px solid var(--lie-ink); border-radius: 14px; padding: 10px 16px; font-size: 14px; font-weight: 800; box-shadow: 0 3px var(--lie-ink); }
+.lie-voice__actions svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.lie-voice__feedback { display: flex; flex: 1; flex-direction: column; justify-content: center; max-width: 390px; min-width: 0; min-height: 48px; }
+.lie-voice__status { font-size: 13px; font-weight: 800; }
+.lie-voice__waveform { display: flex; align-items: center; gap: 3px; height: 32px; overflow: hidden; }
+.lie-voice__waveform i { flex: 1; min-width: 2px; max-width: 8px; border-radius: 3px; background: #d8dee9; }
+.lie-voice__waveform[data-source='input'] i { background: #202020; }
+.lie-voice__waveform[data-source='output'] i { background: color-mix(in srgb, var(--character-accent, var(--lie-aqua)) 60%, #202020); }
+.lie-voice__static-meter { display: none; width: 100%; }
+.lie-voice__answer { display: flex; align-items: center; justify-content: flex-end; }
+.lie-voice__answer :deep(.lie-button) { min-height: 42px; border: 2px solid var(--lie-ink); border-radius: 12px; padding: 8px 10px; font-size: 13px; box-shadow: 0 2px var(--lie-ink); white-space: nowrap; }
+@media (max-width: 1150px) and (min-width: 701px) {
+  .lie-voice { grid-template-columns: 72px minmax(0, 1fr) auto; min-height: 132px; gap: 12px; padding: 12px 16px; }
+  .lie-voice__main { gap: 18px; }
+  .lie-voice__actions :deep(.lie-button) { min-width: 140px; }
+}
 @media (max-width: 700px) {
-  .lie-voice { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; padding: 14px; gap: 12px; border-radius: 24px; }
-  .lie-voice__symbol { grid-column: 1; grid-row: 1; width: 44px; height: 44px; }
-  .lie-voice__status { grid-column: 2; grid-row: 1; }
-  .lie-voice__status strong { font-size: 18px; }
-  .lie-voice__actions { grid-column: 3; grid-row: 1; justify-content: flex-end; }
-  .lie-voice__actions :deep(.lie-button) { min-height: 44px; font-size: 16px; padding: 8px 12px; }
-  .lie-voice__details { grid-column: 1 / -1; grid-row: 2; border-top: 1px solid #111b451c; padding-top: 12px; }
+  .lie-voice { position: fixed; bottom: 0; left: 0; right: 0; z-index: 4; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; min-height: 0; gap: 10px 14px; border-radius: 22px 22px 0 0; padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 16px #111b4514; }
+  .lie-voice__details { grid-column: 1; grid-row: 1; }
+  .lie-voice__answer { grid-column: 2; grid-row: 1; }
+  .lie-voice__answer :deep(.lie-button) { min-height: 34px; padding: 5px 10px; font-size: 12px; }
+  .lie-voice__main { grid-column: 1 / -1; grid-row: 2; gap: 16px; }
+  .lie-voice__actions :deep(.lie-button) { min-width: 128px; padding-inline: 10px; font-size: 13px; }
+  .lie-voice__feedback { max-width: none; }
+  .lie-voice__status { font-size: 12px; }
+  .lie-voice__waveform { height: 30px; gap: 2px; }
+  .lie-voice__waveform i { min-width: 1px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lie-voice__waveform { display: none; }
+  .lie-voice__static-meter { display: block; }
 }
 </style>

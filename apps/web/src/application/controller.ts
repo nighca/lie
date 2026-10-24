@@ -241,9 +241,9 @@ export function createGameController(options: ControllerOptions) {
         }
       }
     },
-    endConversation() {
+    endConversation(options: { quiet?: boolean } = {}) {
       if (stopVoice()) showExpiry()
-      else notice = '已结束对话，已显示转写保留。'
+      else if (!options.quiet) notice = '已结束对话，已显示转写保留。'
       publish()
     },
     openAccusation() {
