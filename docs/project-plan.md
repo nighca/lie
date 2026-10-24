@@ -1,10 +1,10 @@
 # LIE — 当前项目计划
 
-更新：2026-10-25，依据本地 reviewed main `43a98e6b12b55ed0cb6791d436a3398fe5b8547a`及本轮协调派单；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
+更新：2026-10-25，依据接任核验本地 main `6653bf44b8bd9c1d9b1895e9111d894ebdc94ec0`及本轮协调登记；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
 
 ## 当前轮换交接
 
-2026-10-25 02:28发起换代，02:30只读复核。旧任务lie/lie-2均已PAUSED；本批最后文档由旧root review/集成后释放唯一集成权，此后旧root不再写main。接任者尚未创建，核[交接登记](coordinator-handoff.md)与[本代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)后认领，勿重复派制作/重做已main17条。三专项等待原因不可见，游戏IAB未完成；其余授权、队列与08:30准确截止不因换代改变。
+2026-10-25 02:37 Asia/Shanghai，新协调`01a16f33-082b-78b2-bb32-b6f49fb4850a`（LIE 主协调 · 10月25日夜间接任）核实旧root释放登记与实际HEAD后认领active及唯一集成权。本代恰好两项heartbeat：`lie-3`每30分钟、`lie-4`每4小时，均ACTIVE且实际target已核为本chat；旧`lie`/`lie-2`保持PAUSED。三个专项已收到新协调ID，仍持原所有权，向本代完整批量交付，不重复启动或重发权限动作。接任紧凑fan仍waitingOnApproval、原因不可见；正式游戏IAB仍未交付，不能当视觉PASS。详[交接登记](coordinator-handoff.md)及[前代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)。既有候选链/服务保留，17条不重做；全部授权、功能队列及08:30准确截止不变，无实质变化时安静。
 
 ## 授权与执行方式
 
@@ -17,7 +17,7 @@
 
 | 入口 | 当前事实 |
 | --- | --- |
-| 本地main | `43a98e6`已含下表成果，后续候选另列；这些新增改动均未push。 |
+| 本地main | 接任基线`6653bf4`已含下表成果；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
 | 远程/线上 | 本地origin/main跟踪及最后实际部署证据均为`32d89bf91f441168148884593a0f49b816ad7162`；本轮未fetch/重验远端，不能冒称最新remote。见[部署证据](deployments/2026-10-24-animation-milestone.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |

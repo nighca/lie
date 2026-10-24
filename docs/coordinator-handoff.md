@@ -1,23 +1,25 @@
 # 当前主协调交接状态
 
-2026-10-25，as-of reviewed main `43a98e6b12b55ed0cb6791d436a3398fe5b8547a`及本轮root派单。本页精简登记协调权、未完成交付和保留资源；[项目计划](project-plan.md)列授权/队列，[完整旧快照](history/2026-10-25/README.md)只供追溯，不能覆盖新决定。接任前重读实际HEAD和最新专项交付，文档自身会推进main。
+2026-10-25，as-of接任基线 main `6653bf44b8bd9c1d9b1895e9111d894ebdc94ec0`及本轮root核验。本页精简登记协调权、未完成交付和保留资源；[项目计划](project-plan.md)列授权/队列，[完整旧快照](history/2026-10-25/README.md)只供追溯，不能覆盖新决定。接任前重读实际HEAD和最新专项交付，文档自身会推进main。
 
-## 协调权登记（02:28轮换发起，02:30只读复核）
+## 协调权登记（2026-10-25 02:37 Asia/Shanghai接任）
 
-本登记随旧root最后文档review/集成生效；位于独立候选时不代表实际释放。旧root完成这次文档集成后不再写main，接任者核实登记后认领；本文档制作阶段未创建chat；旧root随后按轮换流程创建唯一接任者。02:02 preflight只是历史盘点，不是actual release。完整refs/dirty文件/30有序SHA见[本代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)。
+旧root已在`6653bf4`释放；新root核实phase/predecessor及实际HEAD后认领唯一协调/集成权。本登记在独立文档worktree制作，仅经新root实际review、候选cherry-pick及本地main快进后纳入main；文档自身会推进HEAD。完整旧refs/dirty文件/30有序SHA保留于[前代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)，不重做其候选。
 
 | 字段 | 值 |
 | --- | --- |
-| phase | released-for-successor |
-| coordinator | none |
-| integrator | none |
-| predecessor | `01a16e3d-d2f9-75e0-a09f-d39d5ab927dd`，本批最后文档集成后不再写main |
-| successor | 尚未创建，只创建一次；接任认领后才重新成为唯一integrator |
-| 30分钟heartbeat | ID `lie`，PAUSED，target仍为旧root `01a16e3d-d2f9-75e0-a09f-d39d5ab927dd` |
-| 4小时heartbeat | ID `lie-2`，PAUSED，target仍为旧root `01a16e3d-d2f9-75e0-a09f-d39d5ab927dd` |
-| 项目 | `ec01ea33-d2f9-4986-98e0-ed1644ba1772`，本机`/Users/nighca/code/nighca/lie`；创建接任者前list_projects复核 |
+| phase | active |
+| coordinator | `01a16f33-082b-78b2-bb32-b6f49fb4850a`，LIE 主协调 · 10月25日夜间接任 |
+| integrator | `01a16f33-082b-78b2-bb32-b6f49fb4850a`，唯一集成者 |
+| predecessor | `01a16e3d-d2f9-75e0-a09f-d39d5ab927dd`，已释放，不再写main |
+| successor | none；下次轮换按流程创建一次全新chat |
+| 本代30分钟heartbeat | ID `lie-3`，ACTIVE，实际target `01a16f33-082b-78b2-bb32-b6f49fb4850a`已核验 |
+| 本代4小时heartbeat | ID `lie-4`，ACTIVE，实际target `01a16f33-082b-78b2-bb32-b6f49fb4850a`已核验 |
+| 前代heartbeat | `lie` / `lie-2`均PAUSED，target保持旧root，不复用 |
+| 项目 | `ec01ea33-d2f9-4986-98e0-ed1644ba1772`，本机`/Users/nighca/code/nighca/lie`；项目及本chat真实ID已核验 |
+| 接手核验 | 实际HEAD为`6653bf44b8bd9c1d9b1895e9111d894ebdc94ec0`；两项新任务的实际ID/status/target已核，三个专项已成功收到新协调ID，所有权不变 |
 
-按[轮换流程](coordinator-rotation.md)先保存状态、安全释放集成权、停本代两任务，再创建全新chat；核实其active认领/两新任务/专项接手后归档旧chat。失败查既有successor状态，不重复创建、不双integrator；轮换不等于push授权。
+本代恰好两项heartbeat；无实质变化时安静，仅重要进展、完成、失败或所需用户行动通知。按[轮换流程](coordinator-rotation.md)继续每4小时交接，旧chat待核实接任成功后归档；轮换不等于push授权。不向旧chat补发接任消息，以本chat完成摘要供其wait核验。
 
 **持续工作模式**：有一定工作量的执行、配置、运维、排障、浏览器和长检查须整项委派；root做调度/接口/决策/review/串行集成/报告且负责结果。隔离worktree、有序cherry-pick、clean main快进、内部无PR，详[AGENTS](../AGENTS.md)。此前一条环境通知因用户停止要求被自动审批拒绝，未重试，不绕道补发；固定环境任务已完成，不由root继续扩展配置。
 
@@ -25,8 +27,8 @@
 
 ## 仓库与接任第一步
 
-- 核验基线main为`43a98e6b12b55ed0cb6791d436a3398fe5b8547a`，此基线新增成果均未push；本地origin/main跟踪及最后实际部署证据为`32d89bf91f441168148884593a0f49b816ad7162`。本轮未fetch，不能冒称当前远程/线上最新版本。
-- owning main在`/Users/nighca/code/nighca/lie`；root review/integration工作树为`/Users/nighca/.codex/worktrees/investigation-review-takeover/lie`，候选分支随集成变动，先查实际status/branch，不按旧分支名操作。
+- 接任核验基线main为`6653bf44b8bd9c1d9b1895e9111d894ebdc94ec0`，此基线新增成果均未push；本地origin/main跟踪及最后实际部署证据为`32d89bf91f441168148884593a0f49b816ad7162`。本轮未fetch，不能冒称当前远程/线上最新版本。
+- owning main在`/Users/nighca/code/nighca/lie`；前代root review/integration保留工作树为`/Users/nighca/.codex/worktrees/investigation-review-takeover/lie`，候选分支随集成变动，先查实际status/branch，不按旧分支名操作。
 - 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。当前优先接silver、fan、Editor及gray/plum接入结果并协调命名依赖；所有待办见[队列](project-plan.md#仍需执行的队列)。
 - 旧命名候选`/private/tmp/lie-integrate-text-architecture` / `codex/integrate-preset-voices`保留refs；其中调查/预览改动已有main成果，禁止整批重放。原命名源`cb86dd6e25e22444dc93b892c2d609c0a0d6ac08`仅待按新main重新审阅。
 
@@ -52,7 +54,7 @@
 
 [结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
 
-新协调须向三个专项通知新ID；root子agent句柄不随新chat自动继承，保留worktree、依赖refs和交付来源再接续。常规反馈批量handoff，冲突/接口/viewport及时协调。
+新协调已向三个专项成功通知新ID，后续完整批量交付到本代；不重启在制任务、不重发权限动作。接任紧凑快照fan仍waitingOnApproval，原因不可见；root子agent句柄不随新chat自动继承，保留worktree、依赖refs和交付来源再接续。常规反馈批量handoff，冲突/接口/viewport及时协调。
 
 蓝衣/sunny/Logo/README/observer/投稿/home/CJK均已本地main，已完成链与检查见[当前成果](project-plan.md#已集成本地main的成果)和[归档快照](history/2026-10-25/README.md)，不要沿旧记录再次激活或宣称仍待合入。17条原“只记录”已经解除且完成本地集成，不是后续禁令。
 
