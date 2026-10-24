@@ -83,3 +83,16 @@ for y in range(675,741):
             count+=1
             assert inside(x,y),f'listening elbow contour clipped at {x},{y}'
 print(f'PASS: listening elbow retains all {count} opaque lower-arc pixels, including ink')
+node=next(node for node in package['nodes'] if node['id']=='speak-arm')
+polygon=node['sprite']['mask']
+image=Image.open(root/package['assets']['speaking-source']['src'])
+hand_count=0
+for y in range(620,811):
+    for x in range(810,881):
+        r,g,b,a=image.getpixel((x,y))
+        if a>=200 and r>210 and g>190 and b>160:
+            assert not inside(x,y),f'speaking arm includes unrelated shirt-white at {x},{y}'
+        if 695<=y<=755 and a>=200 and r>170 and 70<g<210 and b<145:
+            hand_count+=1
+            assert inside(x,y),f'speaking palm/finger skin clipped at {x},{y}'
+print(f'PASS: speaking arm excludes moving shirt-white and retains {hand_count} palm/finger skin pixels in inner-edge band')
