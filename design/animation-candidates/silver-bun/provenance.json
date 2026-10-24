@@ -1,0 +1,108 @@
+{
+  "sources": [
+    {
+      "id": "head",
+      "source": "/Users/nighca/.codex/generated_images/01a16db7-5ef1-7342-b690-7847489750d7/exec-0d6778c7-bc4c-4ebd-8a3b-195b1c0ed108.png",
+      "sha256": "cf884ae64a094939821ff061f76c2e9084fafe4d54d9b57a1f8d2b50addc7914",
+      "size": [
+        1362,
+        1155
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "torso",
+      "source": "/Users/nighca/.codex/generated_images/01a16db7-5ef1-7342-b690-7847489750d7/exec-a15516eb-16f0-4660-a632-ee9d8ef38c35.png",
+      "sha256": "3047354064befbc1b74de45a8cb9b0fd56948b851fe11578f734bb3c606fb2e4",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        254
+      ]
+    },
+    {
+      "id": "mouths",
+      "source": "/Users/nighca/.codex/generated_images/01a16db7-5ef1-7342-b690-7847489750d7/exec-cc23c077-ca28-4f1b-8ba6-9896060af9a8.png",
+      "sha256": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "default-source",
+      "source": "/Users/nighca/.codex/worktrees/silver-bun-animation/lie/design/appearances/assets/silver-bun/default.png",
+      "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "listening-source",
+      "source": "/Users/nighca/.codex/worktrees/silver-bun-animation/lie/design/appearances/assets/silver-bun/listening.png",
+      "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "waiting-source",
+      "source": "/Users/nighca/.codex/worktrees/silver-bun-animation/lie/design/appearances/assets/silver-bun/waiting.png",
+      "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "id": "speaking-source",
+      "source": "/Users/nighca/.codex/worktrees/silver-bun-animation/lie/design/appearances/assets/silver-bun/speaking.png",
+      "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "originalCanonicalStates": {
+    "default": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+    "listening": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+    "waiting": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+    "speaking": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398"
+  }
+}
