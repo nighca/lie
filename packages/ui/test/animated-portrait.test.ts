@@ -47,6 +47,10 @@ describe('optional animated portrait', () => {
     media.matches = true
     const wrapper = show(); await flushPromises(); expect(mock.load).not.toHaveBeenCalled(); expect(wrapper.find('img').exists()).toBe(true); wrapper.unmount()
   })
+  it('keeps the static portrait when motion preferences are unavailable', async () => {
+    vi.stubGlobal('matchMedia', null)
+    const wrapper = show(); await flushPromises(); expect(mock.load).not.toHaveBeenCalled(); expect(wrapper.find('img').exists()).toBe(true); wrapper.unmount()
+  })
   it('does not load remote animation sources', async () => {
     const wrapper = show('https://example.net/animation/package.json'); await flushPromises(); expect(mock.load).not.toHaveBeenCalled(); expect(wrapper.find('img').exists()).toBe(true); wrapper.unmount()
   })

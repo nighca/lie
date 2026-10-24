@@ -12,6 +12,7 @@ let media: MediaQueryList | null = null
 const motionChanged = () => { reduced.value = media?.matches ?? false }
 
 onMounted(() => {
+  if (typeof window.matchMedia !== 'function') { reduced.value = true; return }
   media = window.matchMedia('(prefers-reduced-motion: reduce)')
   motionChanged()
   media.addEventListener('change', motionChanged)

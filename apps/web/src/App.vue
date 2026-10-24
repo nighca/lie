@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onUnmounted, ref } from 'vue'
-import { CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
+import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
 
 import type { GameController } from './application/controller'
 import type { Appearance } from './presentation/appearances'
@@ -19,15 +19,17 @@ const unsubscribe = props.controller.subscribe((value) => {
 onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
 const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)
+const currentAppearance = computed(() => appearance(current.value?.appearanceId ?? null))
+const portraitState = computed(() => {
+  if (!view.value.conversationActive || view.value.busy) return 'default'
+  const status = view.value.voiceStatus
+  return status === 'recording' ? 'listening' : status === 'waiting' || status === 'speaking' ? status : 'default'
+})
 const portrait = computed(() => {
-  const preset = appearance(current.value?.appearanceId ?? null)
+  const preset = currentAppearance.value
   if (preset == null) return null
-  if (view.value.conversationActive && !view.value.busy) {
-    const status = view.value.voiceStatus
-    const state = status === 'recording' ? 'listening' : status === 'waiting' || status === 'speaking' ? status : null
-    const stateImage = state == null ? null : preset.portraits[state]
-    if (usableImage(stateImage)) return stateImage
-  }
+  const stateImage = portraitState.value === 'default' ? null : preset.portraits[portraitState.value]
+  if (usableImage(stateImage)) return stateImage
   return usableImage(preset.portrait) ? preset.portrait : null
 })
 const transcript = computed(() => view.value.history.map((entry) => ({
@@ -112,8 +114,10 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </nav>
         <section v-if="current != null" class="character-stage" :style="{ '--character-accent': appearance(current.appearanceId)?.accent ?? 'var(--lie-aqua)' }" :aria-label="`${current.name}的人物形象`">
           <div class="portrait-backdrop">
-            <img v-if="portrait != null" :key="portrait" :src="portrait" alt="人物形象" @error="portraitFailed">
-            <span v-else class="portrait-initial">{{ current.name.slice(0, 1) }}</span>
+            <AnimatedPortrait :src="currentAppearance?.animation ?? null" :state="portraitState" :label="current.name">
+              <img v-if="portrait != null" :key="portrait" :src="portrait" alt="人物形象" @error="portraitFailed">
+              <span v-else class="portrait-initial">{{ current.name.slice(0, 1) }}</span>
+            </AnimatedPortrait>
           </div>
           <div class="stage-caption"><h2>{{ current.name }}</h2></div>
         </section>
