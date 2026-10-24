@@ -242,7 +242,10 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
           }
           socket.onmessage = (event) => message(event.data)
           socket.onerror = () => fail('connection', 'Voice connection failed')
-          socket.onclose = (event) => close(event.code, event.reason)
+          socket.onclose = (event) => {
+            openingFailed = state === 'opening'
+            close(event.code, event.reason)
+          }
         } catch {
           fail('connection', 'Voice connection could not be opened')
         }

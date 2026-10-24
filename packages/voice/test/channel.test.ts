@@ -326,3 +326,28 @@ it('retains failed startup diagnostics when an error consumer closes synchronous
   await expect(opening).rejects.toThrow()
   expect(events.at(-1)).toEqual({ stage: 'channelReady', result: 'failed' })
 })
+
+
+it.each([1000, 1013])('records remote closure %s before ready as failed rather than caller cancellation', async code => {
+  const socket = new FakeSocket()
+  const events: unknown[] = []
+  const channel = createVoiceChannel({ createSocket: () => socket, tools: [], onEvent() {}, onStartup: event => events.push(event) })
+  const opening = channel.open()
+  socket.connect()
+  socket.onclose?.({ code, reason: 'server refused handshake' })
+  await expect(opening).rejects.toThrow('server refused handshake')
+  expect(events.at(-1)).toEqual({ stage: 'channelReady', result: 'failed' })
+})
+
+it.each(['caller', 'abort'])('retains cancelled for %s closure before ready', async method => {
+  const socket = new FakeSocket()
+  const events: unknown[] = []
+  const abort = new AbortController()
+  const channel = createVoiceChannel({ createSocket: () => socket, tools: [], onEvent() {}, onStartup: event => events.push(event) })
+  const opening = channel.open({ signal: abort.signal })
+  socket.connect()
+  if (method === 'caller') channel.close()
+  else abort.abort()
+  await expect(opening).rejects.toThrow()
+  expect(events.at(-1)).toEqual({ stage: 'channelReady', result: 'cancelled' })
+})

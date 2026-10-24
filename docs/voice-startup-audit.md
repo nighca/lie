@@ -74,3 +74,5 @@
 cleanup started仅表示关闭已请求；completed必须等adapter可见mic准备Promise（包括迟到授权即stop）、已取得mic.stop及播放context.close全部settle且无拒绝。gUM未决期间不会发completed。任一相关Promise拒绝则保守报failed，表示无法凭这组Promise确认清理完成，不能据此推断实际资源泄漏；权限拒绝导致mic准备Promise拒绝亦属此类。它不确认操作系统硬件灯、权限弹窗消失或远端WS关闭ack。取消之后仍允许资源准备/清理的迟到事件，分别按结果记录，不写回游戏；数据分析不能把迟到阶段完成算成startup成功。错误consumer同步取消时，startup/channelReady仍记录原始failed，不误记为用户cancelled。
 
 仅接口和离线fake验证完成，未做真实阶段采样或任何加速承诺；status gate/权限时机/并行次序/hello+tools-list ready/内容隔离及资源生命周期保持现有行为。回答延迟和实际首音指标未加入。验收应包括相对clock重置、并发/early PCM/首帧只记一次、取消后迟到grant与异步stop、握手门槛、observer抛错及错误回调同步取消；现有生命周期测试仍保留。本批没有开启产品服务、浏览器、mic或provider。
+
+握手阶段的远端close（包括1000正常关闭码、1013拒绝/暂不可用）表示本次启动失败，channelReady记failed；仅调用方close或scope abort记cancelled。该区分不改变底层原close/error事件与open拒绝语义。
