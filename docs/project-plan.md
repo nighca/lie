@@ -58,11 +58,11 @@
 | P1 | 形象单一源 / game_editor_implementation→root | 单一源已本地；统一/id/生成URL及移除兼容字段已review，组合检查/IAB通过；35图字节/音色保留。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
 | P1 | 编辑器v2正式落地 / game_editor_implementation | 生产v2已本地集成，独立桌面/391验收通过；与统一header/URL的组合269项回归/typecheck/build和独立IAB1280/391通过，更新8787。官方投稿仍手动/private限制。 |
 | P1 | 统一产品头部 / remaining_character_states | ProductHeader/home+case与“有人在说谎”已review/组合IAB通过；保持调查离开确认。Editor亦已复用共用header，独立1280/391及Web150项检查通过。 |
-| P1 | 调查体验整体确认 / root+视觉owner+用户 | 旧稿517/技术20eb已交；用户已批背景stop/关闭手动重开及窄屏固定底栏；v2候选507b已交并经独立1280/1004/391检查，root已看1004讲话稿；待用户确认视觉布局后生产。 |
+| P1 | 调查体验整体确认 / 独立设计chat+root+用户 | 旧稿517/技术20eb已交；用户已批背景stop/关闭手动重开及窄屏固定底栏；v2候选507b已交并经独立1280/1004/391检查；已转「LIE 调查页交互与视觉设计」chat `01a16d5c-de69-7452-8d6a-280d15a87e9e` 直接确认，原代理不重复制作，待用户确认后生产。 |
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
 | P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题已实际完成且root逐答review为12PASS，清理6设备/1agent完成；证据已review并准备合入，不覆盖首批UNCERTAIN，不代替真人多轮。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
-| P1 | 单角色原画动画 / 独立chat | 用户可直接讨论的「LIE 人物动画设计与打磨」chat `01a16d44-aeea-7552-b184-5118072e75f3` 已接手；听臂连接/等待托腮及微动画已在候选修正，待用户验看；root负责进度协调、review与集成，原子代理不重复制作；不扩人。 |
+| P1 | 单角色原画动画 / 独立chat | 用户可直接讨论的「LIE 人物动画设计与打磨」chat `01a16d44-aeea-7552-b184-5118072e75f3` 已接手；听臂连接/等待托腮及微动画已在候选修正，独立chat正修头部偏左/头颈缝，待用户验看；root负责进度协调、review与集成，原子代理不重复制作；不扩人。 |
 | P2 | 里程碑发布 / root唯一integrator | 里程碑376ce64已正常push，8787构建/health/资源清单已验；独立代理核目标SHA的Actions和CF实际部署，尚不把push当上线。 |
 | P2 | GitHub预填补验 / 独立UI实验+用户 | 等用户IAB登录；普通外部贡献链等实际公开及无上游写权限身份。只停预填/review，未经授权不建fork/branch/commit/PR；不向公开仓传项目私有正文。 |
 | P2 | 角色出戏边界 / root+语音/内容owner | 首案攻击问仍出现幕后元话语，工具层/独立顶层候选均未解决，候选未生产；已停止无限付费叠提示。目录只读识别deepseek-v4-flash不证明根因，不擅自换模型/供应商/剧情；见[沉浸调查](role-immersion-investigation.md)、[首案证据](case-behavior-validation.md)。 |
