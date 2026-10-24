@@ -402,3 +402,8 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 2026-10-24 五音色root验收与新案实测启动：用户要求立即落实此前review/验证安排。root已读8ca39da完整实现/测试/manifest差异，确认仅新五voiceId、首案三声不变；复核五份安全results及WAV单声道16k/16bit/PCM长度与SHA全部相等，候选重跑10项探针安全测试、Web124项、Web类型和构建通过。五份短中文真实合成链路通过不等于用户耳听年龄质感通过；准备本地集成，未push。
 
 新案脚本原始run/settings/matrix/prepare/owned-resources/answer已root逐文件review；执行owner在独立case-live-execution从review main创建，原三提交一次cherry并修OTA官方ws metadata白名单，实际socket仍固定wss；root核2beb057补丁，24项离线和16实际core上下文prepare通过。已放行单次最多16答、逐答人工语义判读、首FAIL/UNCERTAIN/协议异常停、finally只清自建资源，不重试、不改模型/提示、不碰用户设备。此项是detect单轮真实模型语义验证，不是麦克风/真人多轮验收。
+
+
+2026-10-24 16:24 心跳实测验收：root读6份真实原答并对照周乐profile，第二案5 PASS、duck06 UNCERTAIN；直接问试听正确可达，泛时段问省略试听并以未设定“收拾”概括，既不能算通过，也不能据此断言整案不可解。按预定边界停止，第三案0题、余10题未执行；8解绑+1删agent成功且无owned-state。root候选重跑24项安全与16离线上下文投影通过，归档原始证据，不重复付费运行。独立内容review认为披露触发边界不清；root已安排周乐单句澄清（具体询问台边操作/声音/离开经过无需先猜试听，不拿收拾代替），固定真相及公共prompt不变，修改后另定小批复核。
+
+编辑器可点击原型fcb已交付，视觉owner独立IAB1280/391完成自由步骤/卡片切人/示例/加删答案/定位，未见阻塞；root读提案与桌面截图。原型owner发现窄屏指导文案换行问题正在小修，待交用户确认后正式实施。分层动画879已交root读制作记录/代码及原位对比，技术为真实六PNG关节，右肩叠线/手臂比例及边缘仍不达生产，不宣称可直接替换；不继续批量。voice-feedback20eb也已交待rootreview，生产未改。

@@ -1,6 +1,6 @@
 # 第二／第三案的有界真实语义检查
 
-现阶段：root只批准**两个只读metadata GET**，已经执行，安全证据为`metadata-2026-10-24.json`。资源创建与live推理脚本只供review，尚未获执行放行。不要因为看到下面命令就自动调用。
+现阶段：root已review并放行首批有界真实执行；实际6答为5 PASS、1 UNCERTAIN，随后停止并清理，详见`results-2026-10-24.json`与`docs/case-live-validation.md`。本轮执行授权已消耗，不因看到下面命令就重复调用；后续批次需先review内容修正及新范围。只读metadata证据为`metadata-2026-10-24.json`。
 
 ## 无网络检查
 
