@@ -67,3 +67,7 @@ Parent must review ALL four full-body states at 1s/3s again, including coat hems
 Parent full-body review confirmed the waist gap and speaking lowered-arm residue gone, but found old right-neutral mask clipping the outside forearm ink and listen-arm clipping its lower elbow arc. Right-neutral now includes a wider outer forearm/hand envelope and inner ink margin; it remains hidden in speaking/waiting, so no torso/arm residue is restored. Listen-arm lower contour mask is expanded beyond the source sleeve arc instead of cutting across it. No shoulder/neck, torso, frame track, or PNG changes in this follow-up.
 
 Read-only audit checks the source forearm skin plus opaque nearby ink (within 8px of skin), and every opaque pixel in the listening lower-elbow arc region x260–470/y675–740. These assertions use actual source alpha and include navy outlines; they do not treat the connected trousers silhouette as part of the hand. Parent has reported live four-state full-body and 1s/3s full-body phases without the previous defects on current data, and is separately checking waist zoom; subagent does not claim its own new browser pass.
+
+## Initiator final review
+
+2026-10-24: initiator completed actual four-state desktop/391 and eight full-body extrema review against a965211. Source checks and independent QA pass. See `initiator-review.md` and its native screenshots. User visual acceptance is still pending; not activated. Earlier screenshots and repair notes are historical.
