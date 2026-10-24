@@ -24,7 +24,8 @@
       "listening": "assets/sunny-moustache/listening.png",
       "waiting": "assets/sunny-moustache/waiting.png",
       "speaking": "assets/sunny-moustache/speaking.png"
-    }
+    },
+    "animation": "assets/sunny-moustache/animation/package.json"
   },
   {
     "id": "blue-glasses",

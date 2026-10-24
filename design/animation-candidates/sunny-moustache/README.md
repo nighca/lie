@@ -1,6 +1,6 @@
 # 阳光小胡子动画候选
 
-用户已于2026-10-24明确通过视觉验收，待总协调正式接入；未激活生产，见 `user-acceptance.md`。本轮仅阳光小胡子，不继续其他人物。基于reviewed main `62b3846eecce8e902cd8bfe1764c87a337551e4b`；候选数据只依赖该版本已有v1播放器。
+用户已于2026-10-24明确通过视觉验收，批准对象见 `user-acceptance.md`。当前分支接入正式资源，仍待总协调 review/集成；本轮仅阳光小胡子，不继续其他人物。基于reviewed main `62b3846eecce8e902cd8bfe1764c87a337551e4b`；候选数据只依赖该版本已有v1播放器。
 
 ## 来源与装配
 
@@ -29,7 +29,7 @@ npm run appearances:generate
 
 定相位页可选四态及25%/75%极值，仅制作检查，不是编辑器。`python3 design/animation-candidates/sunny-moustache/build.py`可重复生成package，脚本不读写图像像素。
 
-## 实际检查
+## 候选制作阶段实际检查（历史记录）
 
 - `node --experimental-transform-types design/animation-candidates/sunny-moustache/verify.mjs`通过：严格v1/像素预算；5份实际PNG签名/IHDR尺寸/hash/alpha记录；四态canonical源hash一致；960时刻有限transform/单头嘴/状态专属附件；4循环闭合；聆听托腮同源同父identity配准；100次settle未结束前再次中断的所有数值通道连续、每步数值有限及显隐立即符合目标采样。Node transform-types用于播放器parameter property，不修改引擎。
 - 现有播放器`npm run test --workspace=@lie/appearance-animation`：33/33通过；`npm run typecheck --workspace=@lie/appearance-animation`通过。
@@ -40,8 +40,8 @@ npm run appearances:generate
 
 ## 当前局限
 
-没有自然抬放transition，状态专用附件立即切换、数值通道由既有240ms settle衔接；无眨眼、网格变形、音量驱动或真实音素同步，讲话为合成开闭嘴。生成中央躯干按默认姿态重建，聆听被遮挡衣服褶皱可能略有差异；等待上胸与手采用接触组约束，局部独立活动较少。未用生成图替换头部身份。未获用户美术通过，不激活生产。
+没有自然抬放transition，状态专用附件立即切换、数值通道由既有240ms settle衔接；无眨眼、网格变形、音量驱动或真实音素同步，讲话为合成开闭嘴。生成中央躯干按默认姿态重建，聆听被遮挡衣服褶皱可能略有差异；等待上胸与手采用接触组约束，局部独立活动较少。未用生成图替换头部身份。用户视觉验收已通过；本分支已准备正式资源接入，集成与发布状态见 `../../../docs/animation/sunny-moustache-game-integration.md`。
 
 ## 发起者最终复验记录
 
-实际桌面/391/四态相反极值与原生截图见 `initiator-review.md`。候选源码 c891485 与实际复验JSON hash相同；仍待用户逐人视觉验收，未激活生产。
+实际桌面/391/四态相反极值与原生截图见 `initiator-review.md`。候选源码 c891485 与实际复验JSON hash相同；本角色已获用户视觉验收，正式接入记录见 `../../../docs/animation/sunny-moustache-game-integration.md`。
