@@ -19,20 +19,62 @@
   },
   {
     "id": "silver-bun",
-    "avatar": "assets/silver-bun.png",
-    "portrait": "assets/silver-bun.png",
-    "accent": "#78DDD7"
+    "avatar": "expansion-complete/silver-bun/assets/default.png",
+    "portrait": "expansion-complete/silver-bun/assets/default.png",
+    "accent": "#78DDD7",
+    "voiceId": null,
+    "portraits": {
+      "listening": "expansion-complete/silver-bun/assets/listening.png",
+      "waiting": "expansion-complete/silver-bun/assets/waiting.png",
+      "speaking": "expansion-complete/silver-bun/assets/speaking.png"
+    }
   },
   {
     "id": "salt-pepper-beard",
-    "avatar": "assets/salt-pepper-beard.png",
-    "portrait": "assets/salt-pepper-beard.png",
-    "accent": "#FF665B"
+    "avatar": "expansion-complete/salt-pepper-beard/assets/default.png",
+    "portrait": "expansion-complete/salt-pepper-beard/assets/default.png",
+    "accent": "#FF665B",
+    "voiceId": null,
+    "portraits": {
+      "listening": "expansion-complete/salt-pepper-beard/assets/listening.png",
+      "waiting": "expansion-complete/salt-pepper-beard/assets/waiting.png",
+      "speaking": "expansion-complete/salt-pepper-beard/assets/speaking.png"
+    }
   },
   {
     "id": "plum-crop",
-    "avatar": "assets/plum-crop.png",
-    "portrait": "assets/plum-crop.png",
-    "accent": "#AFA0F5"
+    "avatar": "expansion-complete/plum-crop/assets/default.png",
+    "portrait": "expansion-complete/plum-crop/assets/default.png",
+    "accent": "#AFA0F5",
+    "voiceId": null,
+    "portraits": {
+      "listening": "expansion-complete/plum-crop/assets/listening.png",
+      "waiting": "expansion-complete/plum-crop/assets/waiting.png",
+      "speaking": "expansion-complete/plum-crop/assets/speaking.png"
+    }
+  },
+  {
+    "id": "mint-puffs",
+    "avatar": "expansion-complete/mint-puffs/assets/default.png",
+    "portrait": "expansion-complete/mint-puffs/assets/default.png",
+    "accent": "#78DDD7",
+    "voiceId": null,
+    "portraits": {
+      "listening": "expansion-complete/mint-puffs/assets/listening.png",
+      "waiting": "expansion-complete/mint-puffs/assets/waiting.png",
+      "speaking": "expansion-complete/mint-puffs/assets/speaking.png"
+    }
+  },
+  {
+    "id": "ochre-freckles",
+    "avatar": "expansion-complete/ochre-freckles/assets/default.png",
+    "portrait": "expansion-complete/ochre-freckles/assets/default.png",
+    "accent": "#FFCF43",
+    "voiceId": null,
+    "portraits": {
+      "listening": "expansion-complete/ochre-freckles/assets/listening.png",
+      "waiting": "expansion-complete/ochre-freckles/assets/waiting.png",
+      "speaking": "expansion-complete/ochre-freckles/assets/speaking.png"
+    }
   }
 ]

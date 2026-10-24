@@ -34,5 +34,65 @@
       "waiting": "/appearances/blue-glasses-v1/waiting.png",
       "speaking": "/appearances/blue-glasses-v1/speaking.png"
     }
+  },
+  {
+    "id": "silver-bun",
+    "avatar": "/appearances/silver-bun-v1/default.png",
+    "portrait": "/appearances/silver-bun-v1/default.png",
+    "accent": "#78DDD7",
+    "voiceId": null,
+    "portraits": {
+      "listening": "/appearances/silver-bun-v1/listening.png",
+      "waiting": "/appearances/silver-bun-v1/waiting.png",
+      "speaking": "/appearances/silver-bun-v1/speaking.png"
+    }
+  },
+  {
+    "id": "salt-pepper-beard",
+    "avatar": "/appearances/salt-pepper-beard-v1/default.png",
+    "portrait": "/appearances/salt-pepper-beard-v1/default.png",
+    "accent": "#FF665B",
+    "voiceId": null,
+    "portraits": {
+      "listening": "/appearances/salt-pepper-beard-v1/listening.png",
+      "waiting": "/appearances/salt-pepper-beard-v1/waiting.png",
+      "speaking": "/appearances/salt-pepper-beard-v1/speaking.png"
+    }
+  },
+  {
+    "id": "plum-crop",
+    "avatar": "/appearances/plum-crop-v1/default.png",
+    "portrait": "/appearances/plum-crop-v1/default.png",
+    "accent": "#AFA0F5",
+    "voiceId": null,
+    "portraits": {
+      "listening": "/appearances/plum-crop-v1/listening.png",
+      "waiting": "/appearances/plum-crop-v1/waiting.png",
+      "speaking": "/appearances/plum-crop-v1/speaking.png"
+    }
+  },
+  {
+    "id": "mint-puffs",
+    "avatar": "/appearances/mint-puffs-v1/default.png",
+    "portrait": "/appearances/mint-puffs-v1/default.png",
+    "accent": "#78DDD7",
+    "voiceId": null,
+    "portraits": {
+      "listening": "/appearances/mint-puffs-v1/listening.png",
+      "waiting": "/appearances/mint-puffs-v1/waiting.png",
+      "speaking": "/appearances/mint-puffs-v1/speaking.png"
+    }
+  },
+  {
+    "id": "ochre-freckles",
+    "avatar": "/appearances/ochre-freckles-v1/default.png",
+    "portrait": "/appearances/ochre-freckles-v1/default.png",
+    "accent": "#FFCF43",
+    "voiceId": null,
+    "portraits": {
+      "listening": "/appearances/ochre-freckles-v1/listening.png",
+      "waiting": "/appearances/ochre-freckles-v1/waiting.png",
+      "speaking": "/appearances/ochre-freckles-v1/speaking.png"
+    }
   }
 ]

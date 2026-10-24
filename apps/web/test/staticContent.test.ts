@@ -4,6 +4,7 @@ import { fileURLToPath, URL as NodeURL } from 'node:url'
 import { validateGame } from '@lie/game-core'
 import { describe, expect, it } from 'vitest'
 
+import designAppearances from '../../../design/appearances/manifest.json'
 import authoredCase from '../../../content/games/empty-medal-box.json'
 import caseData from '../public/games/empty-medal-box.json'
 import catalogData from '../public/games/index.json'
@@ -45,6 +46,30 @@ describe('bundled game content', () => {
         const file = await stat(fileURLToPath(new NodeURL(`../public${path}`, import.meta.url)))
         expect(file.isFile()).toBe(true)
         expect(file.size).toBeGreaterThan(0)
+      }
+    }
+  })
+
+  it('registers every completed expansion with unchanged source assets and a shared state canvas', async () => {
+    const runtime = readAppearances(appearanceData)
+    const completed = readAppearances(designAppearances).filter((item) => item.portrait.startsWith('expansion-complete/'))
+    for (const source of completed) {
+      const appearance = runtime.find((item) => item.id === source.id)
+      expect(appearance, source.id).toBeDefined()
+      expect(appearance!.accent).toBe(source.accent)
+      const runtimePaths = { avatar: appearance!.avatar, default: appearance!.portrait, ...appearance!.portraits }
+      const sourcePaths = { avatar: source.avatar, default: source.portrait, ...source.portraits }
+      let canvas: number[] | null = null
+      for (const state of ['avatar', 'default', 'listening', 'waiting', 'speaking'] as const) {
+        expect(runtimePaths[state], `${source.id}/${state}`).toBeTypeOf('string')
+        expect(sourcePaths[state], `${source.id}/${state} source`).toBeTypeOf('string')
+        const output = await readFile(fileURLToPath(new NodeURL(`../public${runtimePaths[state]}`, import.meta.url)))
+        const original = await readFile(fileURLToPath(new NodeURL(`../../../design/appearances/${sourcePaths[state]}`, import.meta.url)))
+        expect(output.equals(original), `${source.id}/${state} unchanged`).toBe(true)
+        const size = [output.readUInt32BE(16), output.readUInt32BE(20)]
+        if (canvas == null) canvas = size
+        expect(size, `${source.id}/${state} canvas`).toEqual(canvas)
+        expect(size[0]).toBe(size[1])
       }
     }
   })
