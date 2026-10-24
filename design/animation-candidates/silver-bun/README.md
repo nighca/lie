@@ -31,3 +31,9 @@ Clean handoff base `c9c2e765b19ad84b70f54a5cefc8ad45b6f90479` includes reviewed 
 ## Shoulder-mask follow-up
 
 Original candidate commit stays immutable. Only torso mask geometry changed: left upper silhouette local x230/232→300; right upper shoulder x793/y290→740/y320 and x811→770. No PNG bytes, contact parent, limb proportions, state track, engine or production manifest changed. Source SHA checks verify originals and copied parts. Previous screenshot evidence documents the initial candidate and must not be treated as proof of this correction. On this follow-up the subagent IAB browser became unavailable (inventory only exposed Chrome); no alternate browser, viewport override, lifecycle check or new visual pass is claimed. Parent visual review remains required.
+
+## Right shoulder bridge follow-up
+
+Parent screenshot of the previous follow-up showed a small right shoulder contour suspended above the torso. The mask point `[740,320]` is now `[740,280]`, the adjoining `[770,364]` becomes `[780,364]` for the rotated-arm overlap margin, refilling only that upper shoulder bridge; the preceding left-corner correction remains. Read-only source samples at logical `(818,456)` through `(848,468)` map to aqua torso pixels with alpha253–254. Candidate check now asserts these five bridge points remain inside the torso mask at both ±1° arm rotation bounds (including the smaller neutral-arm excursion). This verifies geometric overlap, not final visual appearance. No PNG bytes changed.
+
+For parent visual verification use the deterministic page with `?detail=shoulders`: `http://127.0.0.1:5352/@fs/Users/nighca/.codex/worktrees/silver-bun-animation/lie/design/animation-candidates/silver-bun/inspection.html?detail=shoulders`. All four states at both 1s/3s are enlarged around shoulders; omit the parameter for full-body phases. Subagent IAB remains unavailable; no new screenshot or visual acceptance is claimed.

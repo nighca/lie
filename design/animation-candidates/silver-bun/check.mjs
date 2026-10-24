@@ -29,6 +29,14 @@ for(const state of Object.keys(data.states)) {
  assert.deepEqual(sampleClip(data,clip,0),sampleClip(data,clip,4))
 }
 for(const id of ['listen-arm','waiting-arms','mouth-closed','mouth-open'])assert.equal(data.nodes.find(n=>n.id===id).parent,'head-root')
+const torso=data.nodes.find(node=>node.id==='torso')
+function inside([x,y],polygon){let result=false;for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){const [xi,yi]=polygon[i],[xj,yj]=polygon[j];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))result=!result}return result}
+for(const angle of [-1,1])for(const [x,y] of [[818,456],[825,458],[832,460],[840,464],[848,468]]) {
+ const r=angle*Math.PI/180, dx=x-880, dy=y-530
+ const rotated=[880+dx*Math.cos(r)-dy*Math.sin(r),530+dx*Math.sin(r)+dy*Math.cos(r)]
+ const local=[(rotated[0]-torso.transform.x)/torso.transform.scaleX,(rotated[1]-torso.transform.y)/torso.transform.scaleY]
+ assert(inside(local,torso.sprite.mask),`right shoulder bridge covered at ${angle} degrees: ${x},${y}`)
+}
 const timeline=new AnimationTimeline(data)
 let previous=timeline.advance(.37)
 for(const state of ['speaking','waiting','listening','default','waiting','speaking']) {
