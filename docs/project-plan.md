@@ -227,3 +227,5 @@
 2026-10-24 用户醒后确认：正式Logo采用B方向微调对比的中间版 shorter.svg，并要求更新所有Logo使用点；与既定视觉方向一致，不抢占或改变游戏/语音机制。视觉负责人已接手应用字标、README及品牌素材引用盘点与替换，历史探索稿保留来源并标明状态，完成后由root独立验收。
 
 2026-10-24 Logo正式落地：root逐文件复核视觉负责人提交0cfacbd，正式SVG与shorter选定稿路径/配色一致；内置浏览器验收新1600×760 PNG头图、应用116×62页眉与favicon，console无警告/错误。候选组合133项测试、全项目类型检查和构建通过，准备同步本地试玩与现有静态预览；此更新不启用公开语音入口。
+
+2026-10-24 Logo里程碑发布：已验证源码921275a正常push至origin/main，本地8787同步同SHA并重启，保留原忽略测试配置。cf dry-run仅ASSETS，随后预览部署成功，Worker version adc6eeb5-8036-48c8-8904-363add8f8238；公网/api/health返回200 JSON status=ok/storage=none，首页引用index-CxCXDBfs.js，/brand/logo.svg与批准资源逐字节相同。内置浏览器确认本地/线上案件正常加载、正式Logo116×62显示、线上console无警告/错误。未配置公开语音凭据或执行真实收音；公开语音仍未开放。
