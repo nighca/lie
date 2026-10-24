@@ -4,7 +4,7 @@
 
 ## 当前轮换交接
 
-2026-10-25 06:43 Asia/Shanghai，新协调`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）核实前代release及clean main后认领active/唯一integrator，已实际通知三个专项保持owner并向本代完整批量交付。本代恰好两次mode=create产生`lie`/`lie-2`，ACTIVE且target本chat，每30分钟/4小时；工具自动分配历史ID，以target＋created_at区分，不能按旧快照暂停它们。前代`lie-3`/`lie-4`仍PAUSED。详[登记](coordinator-handoff.md)、[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)。本轮仅文档，无应用改动/push/部署。最新专项等待证据仍为06:37 changed=false/waitingOnApproval、原因不可见，正式游戏IAB未交付；不把通知成功当验收。保留owner/dirty工作/候选refs/服务；17条不重做。08:30截止不延长，重大门禁与队列不变。
+2026-10-25 06:43 Asia/Shanghai，新协调`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）核实前代release及clean main后认领active/唯一integrator，已实际通知三个专项保持owner并向本代完整批量交付。本代恰好两次mode=create产生`lie`/`lie-2`，ACTIVE且target本chat，每30分钟/4小时；工具自动分配历史ID，以target＋created_at区分，不能按旧快照暂停它们。前代`lie-3`/`lie-4`仍PAUSED。详[登记](coordinator-handoff.md)、[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)。本轮仅文档，无应用改动/push/部署。本代接任时（约06:41—06:42）分别紧凑wait核三专项仍actual waitingOnApproval、无新完整handoff、原因不可见，正式游戏IAB未交付；不把通知成功当验收。保留owner/dirty工作/候选refs/服务；17条不重做。08:30截止不延长，重大门禁与队列不变。
 
 ## 授权与执行方式
 
@@ -47,7 +47,7 @@
 
 ## 仍需执行的队列
 
-同优先级按依赖/空闲owner调度，不重派已在制工作；专项chat ID及当代执行者在交接登记。06:37 root紧凑快照fan/Editor/动画三个专项changed=false、仍实际waitingOnApproval，正式游戏QA无新交付；flag不等于拒绝，原因不推测。只读排查结论：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
+同优先级按依赖/空闲owner调度，不重派已在制工作；专项chat ID及当代执行者在交接登记。本代接任时（约06:41—06:42）root紧凑wait核fan/Editor/动画三个专项仍实际waitingOnApproval，无新完整handoff，正式游戏QA未交付；新cursor首次changed=true不代表交付完成；flag不等于拒绝，原因不推测。只读排查结论：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |

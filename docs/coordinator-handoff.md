@@ -47,7 +47,7 @@
 | 结果投影 / root候选独立验证 | source `6ca375176fa922f9d5bef566277257c810598460`→候选`17fb2ee2f269c7c4d2de03cae2415f5af84a5542`，base345a313，原候选分支`codex/integrate-result-projection`。生产仅controller2行，7项专属测试纳入Web183测试、类型/构建/60资源检查全过，已纳入本地main `0a67498`。仅复制既有被指认者/正误，不改UI/玩法/动画契约；详[实施记录](result-projection-implementation.md)。 |
 | 命名迁移执行owner待排 | `CharacterPreset`/`@lie/character-animation`已批，`cb86dd6`未集成；保持appearanceId和公开`/appearances/`。待fan＋Editor＋silver合main后，按[落地计划](character-preset-migration-plan.md)统一迁移；含runner命令与环境owner受控重启，不能覆盖新代码。 |
 
-06:37 root紧凑快照（changed=false）：fan、Editor、动画三专项仍actual waitingOnApproval，正式游戏QA无新交付；这不是拒绝结论，原因不猜测。只读排查已结束：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
+本代接任时（约06:41—06:42）root分别紧凑wait核fan、Editor、动画三专项仍actual waitingOnApproval，无新完整handoff，正式游戏QA未交付；新cursor首次changed=true只表示首次快照，不表示交付完成。这不是拒绝结论，原因不猜测。只读排查已结束：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
 
 三角色候选：`a440ec99cc0b5fab81ec0fb17278df5b2eb847ef`，06:37核ref `codex/integrate-three-characters-current`仍在；旧review WT已不在worktree清单，不按旧路径操作。base `0a67498cb58f0dd8403a57556bd786c854150276`，30有序角色提交完整来源见[前代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)，不重复重放。已按结果投影新基线重建，独立全仓379测试/全类型/Web＋gateway构建/79资源strict通过；3包＋16PNG哈希与已review旧候选相同，35份旧静态/头像source/public/dist逐字节不变。与旧d4b058仅差新main已有8文件，design/packages树一致；先前完整source review/有界父链检查证据保留。当前仅缺正式游戏IAB，三个专项等待原因不可见；不能将自动检查当视觉验收。main若再有功能变更须重建影响审查，不能盲合旧hash。
 
@@ -57,7 +57,7 @@
 
 [结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
 
-06:43本代已实际成功向三个专项通知新协调ID，工具返回对应threadId；后续向本代完整批量handoff，保持原所有权、dirty工作、服务和viewport，不重启在制任务、不重发或绕过权限动作。06:37三个专项均changed=false、waitingOnApproval且无新handoff，原因不可见，不推断拒绝。前代root子agent全部completed，其句柄不随chat继承；本代在制只读审计如上；保留refs/dirty工作与证据，不清目录。
+06:43本代已实际成功向三个专项通知新协调ID，工具返回对应threadId；后续向本代完整批量handoff，保持原所有权、dirty工作、服务和viewport，不重启在制任务、不重发或绕过权限动作。本代接任时紧凑wait核三个专项仍actual waitingOnApproval、无新完整handoff，原因不可见，不推断拒绝。前代root子agent全部completed，其句柄不随chat继承；本代在制只读审计如上；保留refs/dirty工作与证据，不清目录。
 
 蓝衣/sunny/Logo/README/observer/投稿/home/CJK均已本地main，已完成链与检查见[当前成果](project-plan.md#已集成本地main的成果)和[归档快照](history/2026-10-25/README.md)，不要沿旧记录再次激活或宣称仍待合入。17条原“只记录”已经解除且完成本地集成，不是后续禁令。
 
