@@ -1,6 +1,8 @@
 import { mount, flushPromises } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { AnimatedPortrait, CharacterChoice } from '@lie/ui'
+
 import Editor from '../src/editor/Editor.vue'
 import { DRAFT_KEY } from '../src/editor/draft'
 import * as sharing from '../src/editor/share'
@@ -108,6 +110,8 @@ describe('three-step editor', () => {
     expect(document.activeElement).toBe(wrapper.get('[data-field=name]').element)
     await wrapper.get('[data-field=name]').setValue('小周')
     await wrapper.findAll('.character-card')[0].trigger('click')
+    expect(wrapper.findAllComponents(CharacterChoice)).toHaveLength(2)
+    expect(wrapper.findAllComponents(CharacterChoice)[0].props('selected')).toBe(true)
     expect((wrapper.get('[data-field=profile]').element as HTMLTextAreaElement).value).toBe('人物文字')
     await step(0)
     expect((wrapper.get('[name=title]').element as HTMLInputElement).value).toBe('我的小谜题')
@@ -178,6 +182,15 @@ describe('three-step editor', () => {
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(appearance.id)
   })
 
+  it('uses the shared idle portrait and preserves a static fallback', async () => {
+    const { wrapper, step } = page(game)
+    await step(1)
+    expect(wrapper.getComponent(AnimatedPortrait).props()).toMatchObject({ src: null, state: 'default', label: '甲' })
+    expect(wrapper.get('.portrait-halo img').attributes('src')).toBe('/portrait.png')
+    await wrapper.setProps({ appearances: [{ ...appearance, animation: '/appearances/new-guide/animation/package.json' }] })
+    expect(wrapper.getComponent(AnimatedPortrait).props('src')).toBe('/appearances/new-guide/animation/package.json')
+  })
+
   it('shows a full second-person example without replacing authored text', async () => {
     const { wrapper, step, click } = page(game)
     await step(1); await click('看完整示例')
@@ -201,8 +214,13 @@ describe('three-step editor', () => {
     expect(wrapper.get('.final-actions .lie-button--primary').text()).toBe('分享案件')
     expect(wrapper.get('.final-actions .lie-button--secondary').text()).toBe('试玩')
     await click('投稿给官方')
-    expect(wrapper.get('dialog').text()).toContain('外部投稿暂未开放')
+    expect(wrapper.get('dialog').text()).toContain('fork 仓库')
+    expect(wrapper.get('dialog').text()).toContain('发起 Pull Request')
     expect(wrapper.get('dialog').text()).toContain('不会自动创建 PR')
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: vi.fn().mockResolvedValue(null) } })
+    await click('复制 JSON')
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
+    expect(wrapper.get('dialog').text()).toContain('已复制')
     const exported = JSON.parse((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
     expect(exported).toEqual(game)
     const link = new URL(wrapper.get('.github-link').attributes('href')!)

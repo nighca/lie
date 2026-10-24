@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 import type { GameDefinition } from '@lie/game-core'
-import { ProductHeader, UiButton, UiNotice } from '@lie/ui'
+import { AnimatedPortrait, CharacterChoice, ProductHeader, UiButton, UiNotice } from '@lie/ui'
 
 import type { Appearance } from '../presentation/appearances'
 import EditorDialog from './EditorDialog.vue'
@@ -125,15 +125,6 @@ async function copy(text: string) {
   try { await navigator.clipboard.writeText(text); if (mounted) copied.value = true }
   catch { if (mounted) notice.value = '无法自动复制，请选中下方内容手动复制。' }
 }
-function download() {
-  if (submission.value == null) return
-  const url = URL.createObjectURL(new Blob([submission.value.json], { type: 'application/json' }))
-  const anchor = document.createElement('a')
-  anchor.href = url
-  anchor.download = submission.value.filename.split('/').at(-1)!
-  anchor.click()
-  setTimeout(() => URL.revokeObjectURL(url), 0)
-}
 </script>
 
 <template>
@@ -159,9 +150,9 @@ function download() {
           <aside class="panel player-preview" aria-label="接案内容预览"><span class="preview-badge">玩家接案时看到的内容</span><h2>{{ draft.title || '你的案件标题' }}</h2><p>{{ draft.background || '故事从这里开始……' }}</p><div class="preview-portraits"><template v-for="person in draft.characters" :key="person.id"><img v-if="appearance(person)" :src="appearance(person)!.avatar" :alt="name(person)"></template></div><div class="preview-time">{{ draft.characters.length }} 位人物 · 共享询问 {{ minutes }} 分钟</div></aside>
         </div>
         <div v-else-if="step === 1" class="character-layout">
-          <nav class="character-rail" aria-label="编辑人物"><button v-for="person in draft.characters" :key="person.id" type="button" class="character-card" :aria-pressed="selectedId === person.id" :aria-label="`编辑${name(person)}`" @click="selectedId = person.id"><img v-if="appearance(person)" :src="appearance(person)!.avatar" alt="" :style="{ background: appearance(person)!.accent }"><span v-else class="portrait-initial">{{ name(person).slice(0, 1) }}</span><strong>{{ name(person) }}</strong></button><button type="button" class="add-character" data-field="add-character" @click="addCharacter"><span>＋</span>添加人物</button></nav>
+          <nav class="character-rail" aria-label="编辑人物"><CharacterChoice v-for="person in draft.characters" :key="person.id" class="character-card" :name="name(person)" :selected="selectedId === person.id" :aria-label="`编辑${name(person)}`" :style="{ '--character-accent': appearance(person)?.accent }" @click="selectedId = person.id"><template v-if="appearance(person)" #avatar><img :src="appearance(person)!.avatar" alt=""></template></CharacterChoice><button type="button" class="add-character" data-field="add-character" @click="addCharacter"><span>＋</span>添加人物</button></nav>
           <section v-if="character != null" class="panel character-editor" aria-label="人物编辑">
-            <div class="editor-character-stage"><button type="button" class="delete-button" :aria-label="`删除${name(character)}`" @click="overlay = 'delete'">删除人物</button><div class="editor-character-identity"><div class="portrait-halo"><img v-if="appearance(character)" :src="appearance(character)!.portrait" alt=""><span v-else class="portrait-initial">?</span></div><button type="button" class="appearance-choice" data-field="appearance" :aria-invalid="invalid('appearance')" @click="overlay = 'appearance'"><span class="appearance-action">{{ appearance(character) == null ? '选择形象' : '更换形象' }}</span></button><h2>{{ name(character) }}</h2></div></div>
+            <div class="editor-character-stage"><button type="button" class="delete-button" :aria-label="`删除${name(character)}`" @click="overlay = 'delete'">删除人物</button><div class="editor-character-identity"><div class="portrait-halo"><AnimatedPortrait :src="appearance(character)?.animation ?? null" state="default" :label="name(character)"><img v-if="appearance(character)" :src="appearance(character)!.portrait" alt=""><span v-else class="portrait-initial">?</span></AnimatedPortrait></div><button type="button" class="appearance-choice" data-field="appearance" :aria-invalid="invalid('appearance')" @click="overlay = 'appearance'"><span class="appearance-action">{{ appearance(character) == null ? '选择形象' : '更换形象' }}</span></button><h2>{{ name(character) }}</h2></div></div>
             <div class="character-fields">
               <label class="field">姓名<input v-model="character.name" :name="`name-${character.id}`" data-field="name" :aria-invalid="invalid('name')" placeholder="这个人物叫什么？"></label>
               <label class="answer-toggle"><input type="checkbox" data-field="answer" :aria-invalid="invalid('answer')" :checked="draft.ending.culpritId === character.id" @change="draft.ending.culpritId = ($event.target as HTMLInputElement).checked ? character.id : ''"><span><strong>将此人物设为案件答案</strong><small>玩家最终指认此人物，即挑战成功</small></span></label>
@@ -184,7 +175,14 @@ function download() {
       <template v-else-if="overlay === 'clear'"><p>将清除当前案件的全部编辑内容和此浏览器保存的草稿，重新开始创作。此操作无法撤销，已分享的链接不受影响。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留草稿</UiButton><UiButton @click="clearDraft">确认清除</UiButton></div></template>
       <template v-else-if="overlay === 'delete'"><p>将删除{{ character == null ? '' : name(character) }}的设定。如果他是案件答案，需要重新选择；此操作无法撤销。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留人物</UiButton><UiButton @click="deleteCharacter">确认删除</UiButton></div></template>
       <template v-else-if="overlay === 'share' && shareUrl != null"><p>朋友打开链接就能玩。修改草稿后需要重新生成链接，旧链接保留当时的内容。</p><label class="field">完整分享链接<textarea :value="shareUrl" readonly rows="4" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><p class="muted">{{ shareUrl.length.toLocaleString('en-US') }} / {{ SHARE_URL_LIMIT.toLocaleString('en-US') }} 字符</p><UiButton @click="copy(shareUrl)">{{ copied ? '已复制' : '复制分享链接' }}</UiButton></template>
-      <template v-else-if="overlay === 'submission' && submission != null"><UiNotice>当前源码仓库仍为私有，外部投稿暂未开放。你可以先保存案件文件；有仓库访问权限的作者可继续在 GitHub 操作。</UiNotice><p>这里帮你准备文件，不会自动创建 PR。文件将包含完整真相和人物设定，提交前请确认愿意公开。</p><label class="field">文件路径<input :value="submission.filename" readonly></label><label class="field">案件 JSON<textarea :value="submission.json" readonly rows="7" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><div class="dialog-actions"><UiButton variant="secondary" @click="download">下载 JSON</UiButton><UiButton variant="secondary" @click="copy(submission.json)">{{ copied ? '已复制' : '复制 JSON' }}</UiButton></div><ol class="submission-steps"><li>保存或复制上面的文件。</li><li>打开 GitHub 新建文件页，登录后粘贴 JSON。无写权限时按 GitHub 提示 fork。</li><li>提交到自己的新分支，再向 nighca/lie 的 main 创建 Pull Request；有写权限也请使用新分支。</li></ol><p class="muted">PR 由维护者审阅并补齐官方目录后收录，提交不等于上线。</p><a :href="submission.url" target="_blank" rel="noopener noreferrer" class="github-link">打开 GitHub 新建文件页 ↗</a></template>
+      <template v-else-if="overlay === 'submission' && submission != null">
+        <p>把案件投稿到官方案件库。内容包含完整真相和人物设定，提交前请确认愿意公开。</p>
+        <a :href="submission.url" target="_blank" rel="noopener noreferrer" class="github-link">打开 GitHub 新建文件页 ↗</a>
+        <ol class="submission-steps"><li>复制下方 JSON，打开上面的 GitHub 链接。</li><li>登录后按 GitHub 提示 fork 仓库，粘贴 JSON 并提交到自己的分支。</li><li>向 nighca/lie 的 main 发起 Pull Request，交给维护者审阅。</li></ol>
+        <label class="field">案件 JSON<textarea :value="submission.json" readonly rows="7" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label>
+        <UiButton variant="secondary" @click="copy(submission.json)">{{ copied ? '已复制' : '复制 JSON' }}</UiButton>
+        <p class="muted">这里不会自动创建 PR。维护者审阅并收录后，案件才会上线。</p>
+      </template>
       <p v-if="notice != null" role="alert">{{ notice }}</p>
     </EditorDialog>
   </div>
