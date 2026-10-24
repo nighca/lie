@@ -34,12 +34,3 @@ it('keeps Vite-served game JSON cache revalidation valid on every reload', async
   }
   expect((await fetch(new URL('/games/missing.json', origin))).status).toBe(404)
 })
-
-
-it('advertises the fixed local entry only from the development middleware, without setting a cookie', async () => {
-  const response = await fetch(new URL('/api/voice/status', origin))
-  expect(response.status).toBe(200)
-  expect(await response.json()).toEqual({ status: 'unavailable' })
-  expect(response.headers.get('X-Lie-Local-Test-Entry')).toBe('/__lie/dev-session')
-  expect(response.headers.get('Set-Cookie')).toBeNull()
-})

@@ -126,17 +126,14 @@ describe('browser orchestration', () => {
 
   it.each([
     ['unavailable', '当前环境尚未开放语音体验'],
-    ['access-required', '访问权限'],
     ['check-failed', '检查网络'],
   ] as const)('explains %s without consuming interrogation time', async (reason, message) => {
     const { controller, voice } = setup()
-    voice.create = () => ({ async open() { throw new VoiceAvailabilityError(reason, reason === 'access-required' ? '/__lie/dev-session' : null) }, close() {} })
+    voice.create = () => ({ async open() { throw new VoiceAvailabilityError(reason) }, close() {} })
     await controller.load('test'); controller.start(); await controller.startConversation()
     expect(controller.getView()).toMatchObject({ voiceStatus: 'idle', conversationActive: false, interrogationRemainingMs: 480000 })
     expect(controller.getView().notice).toContain(message)
-    expect(controller.getView().voiceAccessEntry).toBe(reason === 'access-required' ? '/__lie/dev-session' : null)
     controller.selectCharacter('two')
-    expect(controller.getView().voiceAccessEntry).toBeNull()
     controller.dispose()
   })
 

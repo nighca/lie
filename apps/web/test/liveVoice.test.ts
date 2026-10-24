@@ -39,10 +39,10 @@ describe('continuous browser voice and device bridge', () => {
     bridge.connection.close()
   })
 
-  it.each(['unavailable', 'access-required'])('reports %s before preparing devices or opening WebSocket', async (status) => {
+  it('reports unavailable before preparing devices or opening WebSocket', async () => {
     const bridge = setupBridge()
-    bridge.dependencies.fetchStatus.mockResolvedValue(new Response(JSON.stringify({ status }), { headers: { 'X-Lie-Local-Test-Entry': '/__lie/dev-session' } }))
-    await expect(bridge.connection.open()).rejects.toMatchObject({ reason: status, localTestEntry: status === 'access-required' ? '/__lie/dev-session' : null })
+    bridge.dependencies.fetchStatus.mockResolvedValue(new Response(JSON.stringify({ status: 'unavailable' })))
+    await expect(bridge.connection.open()).rejects.toMatchObject({ reason: 'unavailable' })
     expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
     expect(bridge.channel.open).not.toHaveBeenCalled()
     expect(bridge.context.resume).not.toHaveBeenCalled()

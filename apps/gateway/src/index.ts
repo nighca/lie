@@ -3,24 +3,9 @@ import type { InferEnv } from 'cf/config'
 import type config from '../cloudflare.config'
 
 export type GatewayEnv = InferEnv<ReturnType<typeof config.worker>> & Partial<Record<
-  'LINX_WS_TOKEN' | 'LINX_DEVICE_ID' | 'LINX_AGENT_ID' | 'VOICE_ACCESS_TOKEN', string
+  'LINX_WS_TOKEN' | 'LINX_DEVICE_ID' | 'LINX_AGENT_ID', string
 >>
 const upstreamUrl = 'https://xrobo-io.qiniuapi.com/v1/ws/'
-const accessCookieName = 'lie_voice_access'
-
-async function tokenMatches(provided: string, expected: string): Promise<boolean> {
-  const encoder = new TextEncoder()
-  const [providedHash, expectedHash] = await Promise.all([
-    crypto.subtle.digest('SHA-256', encoder.encode(provided)),
-    crypto.subtle.digest('SHA-256', encoder.encode(expected))
-  ])
-  return crypto.subtle.timingSafeEqual(providedHash, expectedHash)
-}
-
-function readCookie(request: Request): string {
-  const cookie = request.headers.get('Cookie')?.split(';').find((value) => value.trim().startsWith(`${accessCookieName}=`))
-  return cookie?.trim().slice(accessCookieName.length + 1) ?? ''
-}
 
 export default {
   async fetch(request: Request, env: GatewayEnv): Promise<Response> {
@@ -30,7 +15,7 @@ export default {
     }
     if (url.pathname === '/api/voice/status' && request.method === 'GET') {
       if ((request.headers.get('Origin') != null && request.headers.get('Origin') !== url.origin) || request.headers.get('Sec-Fetch-Site') === 'cross-site' || url.search !== '') return new Response('Forbidden', { status: 403 })
-      return Response.json({ status: await voiceStatus(request, env) }, { headers: { 'Cache-Control': 'no-store' } })
+      return Response.json({ status: voiceStatus(env) }, { headers: { 'Cache-Control': 'no-store' } })
     }
     if (url.pathname === '/api/voice' && request.method === 'GET') return relayVoice(request, env)
     if (url.pathname.startsWith('/api/')) return Response.json({ error: 'Not found' }, { status: 404 })
@@ -42,9 +27,9 @@ export default {
   }
 } satisfies ExportedHandler<GatewayEnv>
 
-async function voiceStatus(request: Request, env: GatewayEnv): Promise<'unavailable' | 'access-required' | 'ready'> {
-  if (!env.VOICE_ACCESS_TOKEN || !env.LINX_WS_TOKEN || !env.LINX_DEVICE_ID || !env.LINX_AGENT_ID) return 'unavailable'
-  return await tokenMatches(readCookie(request), env.VOICE_ACCESS_TOKEN) ? 'ready' : 'access-required'
+// Application access checks are temporarily disabled by user decision; provider credentials remain required.
+function voiceStatus(env: GatewayEnv): 'unavailable' | 'ready' {
+  return env.LINX_WS_TOKEN && env.LINX_DEVICE_ID && env.LINX_AGENT_ID ? 'ready' : 'unavailable'
 }
 
 async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> {
@@ -52,9 +37,8 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
   if (request.headers.get('Origin') !== new URL(request.url).origin || new URL(request.url).search !== '') {
     return new Response('Forbidden', { status: 403 })
   }
-  const status = await voiceStatus(request, env)
+  const status = voiceStatus(env)
   if (status === 'unavailable') return new Response('Voice unavailable', { status: 503 })
-  if (status === 'access-required') return new Response('Forbidden', { status: 403 })
   let response: Response
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)

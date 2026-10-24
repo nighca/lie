@@ -31,7 +31,7 @@ export interface VoicePort {
 }
 
 export class VoiceAvailabilityError extends Error {
-  constructor(readonly reason: 'unavailable' | 'access-required' | 'check-failed', readonly localTestEntry: string | null = null) {
+  constructor(readonly reason: 'unavailable' | 'check-failed') {
     super(reason)
   }
 }

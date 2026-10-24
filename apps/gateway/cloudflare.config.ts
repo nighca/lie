@@ -11,8 +11,7 @@ export default defineConfig({
       ...(mode === 'development' ? {
         LINX_WS_TOKEN: bindings.secret(),
         LINX_DEVICE_ID: bindings.secret(),
-        LINX_AGENT_ID: bindings.secret(),
-        VOICE_ACCESS_TOKEN: bindings.secret()
+        LINX_AGENT_ID: bindings.secret()
       } : {})
     },
     observability: {

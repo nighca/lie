@@ -61,16 +61,14 @@ describe('game screens', () => {
     expect(controls().get('button').text()).toBe('开始对话')
   })
 
-  it('explains local access requirements and offers an explicit cookie-writing entry without starting capture', async () => {
+  it('explains when voice is not enabled in this environment before capture starts', async () => {
     const { controller, voice } = setup()
-    voice.create = () => ({ async open() { throw new VoiceAvailabilityError('access-required', '/__lie/dev-session') }, close() {} })
+    voice.create = () => ({ async open() { throw new VoiceAvailabilityError('unavailable') }, close() {} })
     await controller.load('test'); controller.start()
     const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     await wrapper.get('[aria-label="语音对话控制"] button').trigger('click'); await flushPromises()
-    expect(wrapper.text()).toContain('语音体验需要访问权限')
-    const entry = wrapper.get('a[href="/__lie/dev-session"]')
-    expect(entry.text()).toContain('将写入测试 Cookie')
+    expect(wrapper.text()).toContain('当前环境尚未开放语音体验')
     expect(wrapper.get('[aria-label="语音对话控制"]').text()).toContain('等待你开口')
     expect(wrapper.get('[aria-label="语音对话控制"] button').text()).toBe('开始对话')
   })

@@ -95,17 +95,15 @@ export function createLiveVoicePort(dependencies = {
         async open() {
           try {
             let availability: unknown
-            let localTestEntry: string | null = null
             try {
               const response = await dependencies.fetchStatus(scope.signal)
               if (!response.ok) throw new Error('Voice status check failed')
               availability = (await response.json())?.status
-              if (response.headers.get('X-Lie-Local-Test-Entry') === '/__lie/dev-session' && ['127.0.0.1', 'localhost'].includes(location.hostname)) localTestEntry = '/__lie/dev-session'
             } catch {
               throw new VoiceAvailabilityError('check-failed')
             }
             if (!current()) return
-            if (availability === 'unavailable' || availability === 'access-required') throw new VoiceAvailabilityError(availability, availability === 'access-required' ? localTestEntry : null)
+            if (availability === 'unavailable') throw new VoiceAvailabilityError('unavailable')
             if (availability !== 'ready') throw new VoiceAvailabilityError('check-failed')
             context = dependencies.createContext()
             player = dependencies.createPlayer(context, answerDrained)

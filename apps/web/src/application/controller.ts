@@ -16,7 +16,6 @@ export interface GameView {
   conversationActive: boolean
   interrogationRemainingMs: number
   notice: string | null
-  voiceAccessEntry: string | null
   accusationOpen: boolean
   accusationFeedback: string | null
   reveal: string | null
@@ -46,7 +45,6 @@ export function createGameController(options: ControllerOptions) {
   let voiceStatus: GameView['voiceStatus'] = 'idle'
   let busy = false
   let notice: string | null = null
-  let voiceAccessEntry: string | null = null
   let accusationOpen = false
   let accusationFeedback: string | null = null
   let pendingText = ''
@@ -69,7 +67,7 @@ export function createGameController(options: ControllerOptions) {
       characters: session?.game.characters.map(({ id, name, appearanceId }) => ({ id, name, appearanceId })) ?? [],
       currentCharacterId: session?.currentCharacterId ?? null,
       history: pendingText.length > 0 ? [...history, { id: 'pending-answer', role: 'assistant', text: pendingText, at: options.now(), interrupted: false }] : history.map((entry) => ({ ...entry })),
-      voiceStatus, busy, notice, voiceAccessEntry, accusationOpen, accusationFeedback,
+      voiceStatus, busy, notice, accusationOpen, accusationFeedback,
       conversationActive: active != null,
       interrogationRemainingMs: remainingMs(),
       reveal: session?.phase === 'solved' ? session.result!.reveal : null,
@@ -103,7 +101,6 @@ export function createGameController(options: ControllerOptions) {
     session = consumeInterrogationTime(requireSession(), elapsed)
   }
   function stopVoice(interrupted = true) {
-    voiceAccessEntry = null
     const expired = enabledAt != null && remainingMs() <= 0
     settleTime()
     flushPending(interrupted)
@@ -225,8 +222,7 @@ export function createGameController(options: ControllerOptions) {
         if (isCurrent()) {
           if (error instanceof VoiceAvailabilityError) {
             stopVoice()
-            notice = error.reason === 'unavailable' ? '当前环境尚未开放语音体验。' : error.reason === 'access-required' ? '语音体验需要访问权限，或访问权限已过期。请获取此环境的体验入口后重试。' : '暂时无法确认语音服务状态，请检查网络后重试。'
-            voiceAccessEntry = error.localTestEntry
+            notice = error.reason === 'unavailable' ? '当前环境尚未开放语音体验。' : '暂时无法确认语音服务状态，请检查网络后重试。'
             publish()
           } else acceptEvent({ type: 'error' })
         }
