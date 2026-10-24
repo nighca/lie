@@ -1,8 +1,10 @@
 # 工具链依赖审计
 
-观测时间：2026-10-24。基线 `30be593e4e6501917270cc55b4d10b6239b7654c`。本轮只读调查，不修改 package/lock/CI/产品源码、不升级 Node、不运行 fix、登录或部署。
+观测时间：2026-10-24。基线 `30be593e4e6501917270cc55b4d10b6239b7654c`。原始审计阶段只读，不修改 package/lock/CI/产品源码、不升级 Node、不运行 fix、登录或部署；之后授权的补丁验证见文末。
 
-结论：锁文件审计复现 **6 high / 2 moderate / 0 critical**，对应 **4 条底层 advisory**；另外 6 个包名是依赖链传导，不是 8 个独立漏洞。当前没有证据证明这些 npm 包随生产浏览器或 Worker 部署。构建/本地代理/部署 CLI 仍会执行相关库，应按 P2 修复工具链，不能因 devDependencies 就忽略。额外发现 CI/本地 Node 24.17.0 的安全更新缺口，建议优先与此批兼容升级一起处理。
+当前候选状态：已完成下述最小补丁的本地验证，完整 npm audit 为 0；尚未合入、推送或部署。下文保留原始基线，避免把历史 8 项当成当前候选状态。
+
+原始基线结论：锁文件审计复现 **6 high / 2 moderate / 0 critical**，对应 **4 条底层 advisory**；另外 6 个包名是依赖链传导，不是 8 个独立漏洞。当前没有证据证明这些 npm 包随生产浏览器或 Worker 部署。构建/本地代理/部署 CLI 仍会执行相关库，应按 P2 修复工具链，不能因 devDependencies 就忽略。额外发现 CI/本地 Node 24.17.0 的安全更新缺口，建议优先与此批兼容升级一起处理。
 
 ## 可重现证据
 
@@ -80,6 +82,33 @@
 - `cf deploy --prebuilt ... --dry-run` 仅在下一负责人检查参数与无上传语义后做；本次没有执行 dry-run/部署，也没有读取凭据。正式部署继续沿项目发布门禁。
 - 若 scoped override 报 schema/API 兼容错误，保留候选失败证据，报告上游与 root；不通过 force/降级工具链掩盖失败。
 
-## 本轮边界
+## 原始审计边界
 
 已完成：官方 advisory/registry/Node 发布核对、锁文件与安装树、omit-dev 审计、现有锁的本地构建及 JS/source map 检查。未完成：override 后的安装/审计/兼容回归、新 Node 实际验证、恶意响应 PoC、所有工具远程配置路径、Cloudflare 托管 runtime 内部依赖审计。未改 package/lock/workflow/source，未联网模型、登录、创建资源或 push。当前检查通过仅证明现状可构建，不证明候选修复已验证。
+
+
+## 安全补丁候选验证（2026-10-24）
+
+用户授权常规最小维护后，补丁基于 `f283d16f209c3940f50cf8fb30112fb507d9f506`，显式继承原审计 `b3b3bc9`，保持 cf 1.0.0-beta.18、plugin 2.0.0-beta.v.4、两套 Miniflare 原版不变。实际落实上述父包 scoped overrides（Undici 7.30.1、Zod 4.6.6），根最低 Node 要求/README 改为 24.22.1，CI 固定 24.22.1；未升级 cf beta.21。
+
+### 真实工具运行时
+
+从 [Node 官方分发](https://nodejs.org/dist/v24.22.1/node-v24.22.1-darwin-arm64.tar.gz) 下载到 `/private/tmp/lie-toolchain-node/`，SHA256 为 `89c682593d76cd44233fa53b1563264e7de9cbb189cad169135c5b4fadfbc0a7`，与 [官方安全发布页](https://nodejs.org/en/blog/release/v24.22.1) 的签名摘要区一致后才解压执行。执行路径 `/private/tmp/lie-toolchain-node/node-v24.22.1-darwin-arm64/bin/node`，实际 `process.version=v24.22.1`、`process.versions.undici=7.30.1`，随附 npm 11.19.1。所有下列 npm/开发验证均以命令局部 PATH 使用此分发；没有修改全局 Node、shell 配置或系统设置。仅核 SHA256/HTTPS 来源，没有另行导入发布者 GPG 公钥验证签名。
+
+### 锁文件及回归
+
+- 首次 `npm install --package-lock-only --ignore-scripts` 只更新根 engine，未落实 overrides，仍报 8 项。随后只执行 `npm update undici zod --package-lock-only --ignore-scripts` 重新求解；未删锁、未使用 force。
+- 逐对象比较锁文件，唯一改变项是根 engine、`cf/node_modules/undici`、`miniflare/node_modules/undici`、hoisted `zod`；三个包对象仅 version/resolved/integrity 改变，没有其他元数据漂移。jsdom 的 Undici 8.12.3 保持；没有父包升级/降级。
+- `npm ci`、`npm ls ... --all` 通过，两份 Undici 7.30.1 与 Zod 4.6.6 均真实安装；`npm audit --json` 为 0 info/low/moderate/high/critical。
+- 根 `npm run typecheck`、`npm test`、`npm run build` 全通过：素材16、gateway11、web150、core51、UI22、voice21，合计 **271 项**。35 张生成素材仍由原有检查覆盖。gateway11 包含真正本地 workerd + 假上游的文本/二进制 relay、关闭和拒绝测试，无付费供应商调用。
+- npm 11.19.1 的安装脚本策略提示 workerd/fsevents 脚本尚未批准；没有改 allowScripts。现有可选平台二进制足以完成上述真实 workerd 测试与构建，未把警告隐藏成无输出。
+
+### 本地开发验证与明确限制
+
+`cf dev --dry-run -- --port 5397` 仅验证参数；实际 cf beta.18 的框架代理不转发自定义 port，仍尝试配置的 8787，因已占用退出。没有关闭、请求或修改用户8787服务。按该 CLI 自己的帮助指引，改为直接执行同一框架命令 `npm exec --workspace @lie/gateway -- vite --port 5397`，使用相同 config/Cloudflare Vite 插件；没有为绕开限制修改仓库配置，不能把它写成 cf dev 自定义端口已通过。
+
+5397 实测 11 条 HTTP 检查：health JSON、首页、正式 logo、形象 PNG、真实游戏 JSON 均200，缺失游戏/API均404，未带 Upgrade 的 voice 请求426、跨源 voice/status403、带查询 status403、无凭据 status 返回 unavailable。没有填入任何真实 secret，也没有请求真实语音。
+
+额外 WS 网络拒绝握手未收到预期403/503，而是 `socket hang up`。初始 fetch 探针因原生 fetch 禁止 Upgrade 请求头而失败；改用完整 ws 握手后仍挂断。为区分依赖回归，在本人旧审计工作树以相同 Node24.22.1、原未修补依赖与同配置启动5398：跨源/同源无凭据握手均复现相同挂断。因此没有观察到本次补丁新增回归，但此开发代理网络层路径仍未验证 HTTP 拒绝状态；不能用自动测试成功替代该事实。未扩大到真实 key、付费模型或生产连接调试。
+
+CI Node 固定版本已更新，但尚未运行远程 Linux CI/部署；当前真实验证平台仅 macOS ARM64。审计归零仍不涵盖所有内联库、供应商 runtime 或漏洞利用面；原报告中的这些边界继续有效。当前变更只涉及清单/锁、Node 文档/CI 固定版本和本报告，不改业务代码。
