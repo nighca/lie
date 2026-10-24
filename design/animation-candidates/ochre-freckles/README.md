@@ -14,7 +14,7 @@ Speaking alternates the original closed-mouth default head and open-mouth speaki
 
 ## Bounded image generation
 
-One built-in image_gen edit, zero repairs. All four canonical states and the native generated head were actually viewed. A proposed mouthless head was assembled then rejected because its neck registration created duplicate original/generated neck outlines. Only that unadopted output remains at its native generated_images path; its exact prompt, reference, PNG SHA256, dimensions and alpha are in generation-records.json and prompts.md. No Pillow/script/Canvas pixel modification or background removal was used. Python/Pillow reads image metadata, alpha and source colors only.
+One built-in image_gen edit, zero repairs. All four canonical states and the native generated head were actually viewed. A proposed mouthless head was assembled then rejected because its neck registration created duplicate original/generated neck outlines. The unadopted output is retained at its native generated_images path and as an unchanged archive/rejected-generated-head.png; its exact prompt, reference, PNG SHA256, dimensions and alpha are in generation-records.json and prompts.md. No Pillow/script/Canvas pixel modification or background removal was used. Python/Pillow reads image metadata, alpha and source colors only.
 
 ## Reproduction and automated evidence
 
@@ -48,3 +48,8 @@ Hidden-tab pause/resume, media reduced-motion emulation, late appearance loading
 ## Handoff boundary
 
 Worktree `/Users/nighca/.codex/worktrees/ochre-freckles-animation/lie`; branch `codex/ochre-freckles-animation`; original base `73ba1387c24762e48e78c003eef2421e53746a71`; no extra dependency commits. Only `design/animation-candidates/ochre-freckles/**` is intended for integration. Offline locked dependencies installed with ignore-scripts (208 packages, 0 audit vulnerabilities); ignored node_modules and generated pose evidence are not handed-off source changes. Root alone integrates, activates, runs final game QA and publishes. No main mutation, push or deployment by this owner.
+
+
+## Subsequent initiator review
+
+Final source/visual independent initiator checks, corrected-version391 observations, actual limits and preserved rejected drafts are recorded in [initiator-review.md](initiator-review.md); that record supersedes earlier pending initiator/old-head viewport status for those specific checks. Formal game activation remains separately pending.
