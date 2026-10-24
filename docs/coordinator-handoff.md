@@ -41,6 +41,8 @@
 
 - README头图语言：用户新增要求英文README用英文图、中文README用中文图。P3已派logo_easter_egg_design从d791f7f独立worktree处理README及readme-hero源/图片，保持既有构图角色风格。子agent无IAB能力，已协调调查专项在其P1交付后代渲染；README任务与新获批准的Logo正式接入分开。待clean完整交付、rootreview/集成。
 
+- 语音启动等待：review_blue_animation在等待Logo依赖期间，从0adf883独立managed WT做离线源码调查/测量方案，仅新docs/voice-startup-audit.md及必要离线证据，不改生产/不mic或provider。复用已有voice-conversation-proposal分析，交当前关键路径、可并行机会及权限/取消边界、度量缺口与排序清单；rootreview后再安排实施，Logo就绪时可安全边界切换。
+
 ## 服务、限制与接任第一步
 
 - 本地main验收环境已实际运行：用户launchd `dev.nighca.lie.main-preview`，plist ~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist，stable Node24.22.1在~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64，日志~/Library/Logs/LIE/main-preview.log；runner在owning main每1.5s看SHA，Vite8787→同源薄Worker8788，初启和lock变化npm ci，更新会重启自身服务，失败30s退避。独立于chat，不要在轮换时停止/重复启动。原项目私密.dev.vars仅复制至main的忽略目录，未输出内容/新建provider资源。版本/__lie/main-status已实测SHA与main一致，页面/三案/blue package200，voice/status ready，私密文件和异源Origin403。Node24.22.1全仓353测试（含8个runner生命周期/假凭据隔离）/类型/构建54资源通过。浏览器实际三案加载、console空；未自动收音，ready不是真人验收。main-preview原commit6a76307→e3c773b，本地9f3b607→162dde5；文档本身会推进main，需核下一实际SHA。
