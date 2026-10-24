@@ -30,6 +30,28 @@ for(const [state,clipId] of Object.entries(data.states)) {
 assert.equal(data.nodes.find(n=>n.id==='head-root').parent,'contact-root')
 for(const id of ['arm-listening','arm-waiting','arm-waiting-back'])assert.equal(data.nodes.find(n=>n.id===id).parent,'contact-root')
 const timeline=new AnimationTimeline(data)
-for(let i=0;i<100;i++){timeline.setState(['default','listening','waiting','speaking'][i%4]);const pose=timeline.advance(.09);assert(pose['head-closed'] || pose['head-open'])}
+function checkInterruptedPose(pose,state,elapsed) {
+ const target=sampleClip(data,data.clips[data.states[state]],elapsed)
+ for(const [id,node] of Object.entries(pose)) {
+  for(const value of Object.values(node.transform))assert(Number.isFinite(value),`${state}/${id}: finite interrupted transform`)
+  assert.equal(node.visible,target[id].visible,`${state}/${id}: visibility follows target clip immediately`)
+ }
+ assert.notEqual(pose['head-open'].visible,pose['head-closed'].visible,`${state}: exclusive mouth attachments`)
+}
+timeline.setState('speaking')
+checkInterruptedPose(timeline.advance(.11),'speaking',.11)
+for(let i=0;i<100;i++) {
+ const state=['listening','waiting','speaking','default'][i%4]
+ const before=timeline.advance(0)
+ timeline.setState(state)
+ const after=timeline.advance(0)
+ for(const id of Object.keys(before)) {
+  for(const value of Object.values(before[id].transform))assert(Number.isFinite(value),`${id}: finite pre-interruption transform`)
+  assert.deepEqual(after[id].transform,before[id].transform,`${state}/${id}: all numeric channels continuous at interruption`)
+ }
+ checkInterruptedPose(after,state,0)
+ const elapsed=[.09,.17,.21][i%3]
+ checkInterruptedPose(timeline.advance(elapsed),state,elapsed)
+}
 for(const [state,entry] of Object.entries(provenance.sources))assert.equal(hash(readFileSync(fileURLToPath(new URL(`../../appearances/assets/blue-glasses/${state}.png`,root)))),entry.sha256)
-console.log(`PASS: strict contract; ${Object.keys(data.assets).length} native PNG sizes/hashes; 960 samples; loop closure; exclusive mouths; contact hierarchy; 100 interruptions; canonical source hashes`)
+console.log(`PASS: strict contract; ${Object.keys(data.assets).length} native PNG sizes/hashes; 960 samples; loop closure; exclusive mouths; contact hierarchy; 100 interruptions (all-channel continuity, finite transforms, target visibility and exclusive mouths); canonical source hashes`)
