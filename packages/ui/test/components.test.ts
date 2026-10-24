@@ -28,16 +28,10 @@ describe('shared controls', () => {
     wrappers.push(wrapper)
     expect(wrapper.text()).toContain('名字很长也需要完整显示的人物')
     expect(wrapper.attributes('aria-pressed')).toBe('false')
-    const marker = wrapper.get('.lie-character__selected')
-    expect(marker.attributes('aria-hidden')).toBe('true')
-    expect(marker.classes()).toContain('lie-character__selected--placeholder')
     await wrapper.trigger('click')
     expect(wrapper.emitted('click')).toHaveLength(1)
     await wrapper.setProps({ selected: true })
     expect(wrapper.attributes('aria-pressed')).toBe('true')
-    expect(wrapper.get('.lie-character__selected').element).toBe(marker.element)
-    expect(marker.attributes('aria-hidden')).toBe('false')
-    expect(marker.classes()).not.toContain('lie-character__selected--placeholder')
   })
 
   it('keeps readonly transcription visible while messages update', async () => {
