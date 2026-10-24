@@ -6,7 +6,7 @@
 
 用户已选择跳GitHub页面、由本人确认提交，不让LIE取得GitHub OAuth/token授权。只调查能预填多少，自动PR/OAuth/App/PAT路线不作为当前实施方向。
 
-root于2026-10-24只读运行`gh repo view nighca/lie --json nameWithOwner,isPrivate,visibility,defaultBranchRef`，确认目标仓为PRIVATE、main分支。当前外部玩家并无默认访问权；正式投稿前需用户决定公开源码仓或另设公开投稿仓，不能自动改可见性或加协作者。
+root于2026-10-24只读运行`gh repo view nighca/lie --json nameWithOwner,isPrivate,visibility,defaultBranchRef`，确认目标仓为PRIVATE、main分支。当前外部玩家并无默认访问权。用户随后已明确决定：晚些时候公开当前nighca/lie源码仓，不另设投稿仓。投稿以此仓为目标；现在不自动改可见性或加协作者，外部投稿实测与开放等待实际公开。
 
 root在IAB打开带filename/value/message/description的短测试参数链接，仅放无敏感的“预填能力检查（不提交）”JSON。页面未登录且私有仓访问返回404；没有看到编辑表单，因此不能认定value、message或description实测成功。没有提交文件/commit/PR，没有fork或登录授权；临时tab已关闭。当前已确认的官方能力仍是filename预填，以及已有head/base差异后的compare title/body等。正文/commit参数保留待有适当GitHub网页登录态后只读验证，不能凭“无正式文档”推断一定不支持。
 
