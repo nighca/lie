@@ -11,7 +11,7 @@ withDefaults(defineProps<{
   <button class="lie-character" type="button" :aria-pressed="selected" :disabled="disabled">
     <span class="lie-character__avatar" aria-hidden="true"><slot name="avatar">{{ name.slice(0, 1) }}</slot></span>
     <span class="lie-character__copy"><strong>{{ name }}</strong><span v-if="description != null">{{ description }}</span></span>
-    <span v-if="selected" class="lie-character__selected">当前人物</span>
+    <span class="lie-character__selected" :class="{ 'lie-character__selected--placeholder': !selected }" :aria-hidden="!selected">当前人物</span>
   </button>
 </template>
 
@@ -23,6 +23,7 @@ withDefaults(defineProps<{
 .lie-character__copy { padding: 6px 8px; }
 .lie-character__copy strong { font-size: 16px; font-weight: 800; }
 .lie-character__selected { align-self: stretch; margin: 0; padding: 0 6px 6px; font-size: 11px; line-height: 1.4; }
+.lie-character__selected--placeholder { visibility: hidden; }
 .lie-character[aria-pressed='true'] .lie-character__copy > span { color: white; }
 .lie-character:disabled .lie-character__copy, .lie-character:disabled .lie-character__selected { color: var(--lie-disabled-text); background: var(--lie-disabled); }
 @media (max-width: 700px) {

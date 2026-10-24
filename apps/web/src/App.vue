@@ -110,8 +110,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>
-      <VoiceControl :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" @start="speak">
-        <template #meter><span v-if="view.conversationActive && !view.busy" class="conversation-hint">可直接开口打断</span></template>
+      <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" @start="speak">
+        <template #meter><span v-if="view.conversationActive && !view.busy" class="conversation-hint" aria-label="麦克风已开启，正在计时，可直接开口打断">收音中 · 计时中 · 可打断</span></template>
         <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问时间</span><strong>{{ remainingTime }}</strong><small>{{ view.busy ? '连接准备不计时' : '所有人物共享' }}</small></div></template>
       </VoiceControl>
     </main>

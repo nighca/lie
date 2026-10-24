@@ -28,10 +28,16 @@ describe('shared controls', () => {
     wrappers.push(wrapper)
     expect(wrapper.text()).toContain('名字很长也需要完整显示的人物')
     expect(wrapper.attributes('aria-pressed')).toBe('false')
+    const marker = wrapper.get('.lie-character__selected')
+    expect(marker.attributes('aria-hidden')).toBe('true')
+    expect(marker.classes()).toContain('lie-character__selected--placeholder')
     await wrapper.trigger('click')
     expect(wrapper.emitted('click')).toHaveLength(1)
     await wrapper.setProps({ selected: true })
     expect(wrapper.attributes('aria-pressed')).toBe('true')
+    expect(wrapper.get('.lie-character__selected').element).toBe(marker.element)
+    expect(marker.attributes('aria-hidden')).toBe('false')
+    expect(marker.classes()).not.toContain('lie-character__selected--placeholder')
   })
 
   it('keeps readonly transcription visible while messages update', async () => {
@@ -62,7 +68,7 @@ describe('shared controls', () => {
   })
 
   it('composes caller-owned voice details without adding another conversation action', async () => {
-    const wrapper = mount(VoiceControl, { props: { status: 'recording', label: '正在聆听', actionLabel: '结束对话' }, slots: { details: '<span>剩余询问时间 02:30</span>' } })
+    const wrapper = mount(VoiceControl, { props: { active: true, status: 'recording', label: '正在聆听', actionLabel: '结束对话' }, slots: { details: '<span>剩余询问时间 02:30</span>' } })
     wrappers.push(wrapper)
     expect(wrapper.get('.lie-voice__details').text()).toBe('剩余询问时间 02:30')
     expect(wrapper.findAll('button')).toHaveLength(1)
@@ -71,6 +77,10 @@ describe('shared controls', () => {
     await wrapper.setProps({ status: 'waiting', label: '等待回答' })
     expect(wrapper.get('.lie-voice__details').text()).toBe('剩余询问时间 02:30')
     expect(wrapper.findAll('button')).toHaveLength(1)
+    expect(wrapper.get('[role="status"]').text()).toContain('对话已开启')
+    await wrapper.setProps({ active: false, status: 'idle', label: '等待你开口' })
+    expect(wrapper.get('[role="status"]').text()).toContain('麦克风已关闭')
+    expect(wrapper.get('[role="status"]').text()).not.toContain('对话已开启')
   })
 
   it('opens a native modal and requests closure on Escape', async () => {

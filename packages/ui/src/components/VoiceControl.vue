@@ -4,25 +4,27 @@ import UiButton from './UiButton.vue'
 export type VoiceStatus = 'idle' | 'recording' | 'waiting' | 'speaking' | 'error'
 
 withDefaults(defineProps<{
+  active?: boolean
+  preparing?: boolean
   status: VoiceStatus
   label: string
   actionLabel?: string | null
   cancelLabel?: string | null
   interruptLabel?: string | null
   disabled?: boolean
-}>(), { actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false })
+}>(), { active: false, preparing: false, actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false })
 
 const emit = defineEmits<{ start: []; cancel: []; interrupt: [] }>()
 </script>
 
 <template>
-  <section class="lie-voice" :data-status="status" aria-label="语音对话控制">
+  <section class="lie-voice" :data-status="status" :data-conversation="active ? 'active' : 'inactive'" aria-label="语音对话控制">
     <span class="lie-voice__symbol" aria-hidden="true">
       <svg v-if="status === 'speaking'" viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15h7l9-8v26l-9-8H5Z"/><path d="M28 13q8 7 0 14M32 7q14 13 0 26"/></svg>
       <span v-else-if="status === 'error'" class="lie-voice__error">!</span>
       <span v-else-if="status === 'waiting'" class="lie-voice__waiting">•••</span>
       <svg v-else viewBox="0 0 32 40" width="32" height="40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="10" y="3" width="12" height="22" rx="6" /><path d="M4 19v2a12 12 0 0 0 24 0v-2M16 33v5M10 38h12" /></svg></span>
-    <div class="lie-voice__status"><strong role="status" aria-live="polite">{{ label }}</strong><slot name="meter" /></div>
+    <div class="lie-voice__status" role="status" aria-live="polite"><span class="lie-voice__activity"><span aria-hidden="true" class="lie-voice__activity-dot"></span>{{ preparing ? '对话准备中' : active ? '对话已开启' : '麦克风已关闭' }}</span><strong>{{ label }}</strong><slot name="meter" /></div>
     <div v-if="$slots.details" class="lie-voice__details"><slot name="details" /></div>
     <div class="lie-voice__actions">
       <UiButton v-if="cancelLabel != null" variant="secondary" :disabled="disabled" @click="emit('cancel')">{{ cancelLabel }}</UiButton>
@@ -36,6 +38,12 @@ const emit = defineEmits<{ start: []; cancel: []; interrupt: [] }>()
 .lie-voice { gap: 20px; min-height: 104px; border-width: 2px; border-radius: 25px; padding: 16px 22px; box-shadow: 0 5px 0 #111b4515; }
 .lie-voice__symbol { position: relative; width: 56px; height: 56px; border-width: 2px; box-shadow: none; }
 .lie-voice__symbol svg { max-width: 28px; max-height: 32px; }
+.lie-voice__activity { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; line-height: 1.4; color: var(--lie-muted); }
+.lie-voice__activity-dot { width: 8px; height: 8px; flex-shrink: 0; border: 2px solid currentColor; border-radius: 50%; }
+.lie-voice[data-conversation='active'] { border-color: var(--lie-primary); background: var(--lie-soft-blue); }
+.lie-voice[data-conversation='active'] .lie-voice__activity { color: var(--lie-primary); }
+.lie-voice[data-conversation='active'] .lie-voice__activity-dot { background: currentColor; }
+.lie-voice[data-conversation='inactive'] .lie-voice__symbol { background: var(--lie-soft-blue); color: var(--lie-ink); }
 .lie-voice__status strong { display: block; font-size: 20px; font-weight: 800; line-height: 1.4; }
 .lie-voice__details { flex-shrink: 0; }
 .lie-voice__actions { justify-content: flex-end; gap: 12px; }
