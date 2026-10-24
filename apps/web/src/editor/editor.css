@@ -4,9 +4,9 @@
 .editor-draft-status p { margin: 0; }
 .editor-draft-status button { padding: 0; border: 0; background: transparent; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .editor-draft-status button:disabled { cursor: default; opacity: .5; }
-.editor-steps { display: flex; justify-content: center; gap: 72px; padding: 16px 0; }
-.editor-steps button { position: relative; display: flex; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; color: #77734f; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
-.editor-steps button + button::before { content: ""; position: absolute; right: calc(100% + 18px); width: 36px; height: 2px; border-radius: 2px; background: #b6b18c; }
+.editor-steps { display: flex; align-items: center; justify-content: center; gap: 18px; padding: 16px 0; }
+.editor-steps button { flex-shrink: 0; white-space: nowrap; display: flex; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; color: #77734f; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
+.editor-step-connector { flex: 0 0 36px; height: 2px; border-radius: 2px; background: #b6b18c; }
 .editor-steps button > span { display: grid; place-items: center; width: 29px; height: 29px; border: 2px solid #b6b18c; border-radius: 10px; }
 .editor-steps button[aria-current=step] { color: var(--lie-ink); }
 .editor-steps button[aria-current=step] > span { background: var(--lie-primary); color: white; border-color: var(--lie-ink); box-shadow: 0 2px 0 var(--lie-ink); }
@@ -94,8 +94,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .github-link { display: inline-block; color: var(--lie-primary); font-weight: 700; margin-top: 8px; }
 @media (max-width: 850px) { .character-editor { grid-template-columns: minmax(155px, .65fr) minmax(0, 1.6fr); } .character-fields { padding: 24px 20px; } }
 @media (max-width: 670px) {
-  .editor-steps { gap: 28px; justify-content: space-between; padding: 13px 0; }
-  .editor-steps button + button::before { right: calc(100% + 8px); width: 12px; }
+  .editor-steps { gap: 8px; padding: 13px 0; }
+  .editor-step-connector { flex: 1 1 12px; min-width: 8px; }
   .editor-steps button { gap: 5px; font-size: 12px; }
   .editor-steps button > span { width: 24px; height: 24px; font-size: 12px; border-radius: 8px; }
   .editor-steps small { display: none; }

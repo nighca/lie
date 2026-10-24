@@ -134,7 +134,10 @@ async function copy(text: string) {
       <template v-if="saveStatus != null" #notice><div class="editor-draft-status"><p role="status">{{ saveStatus }}</p><button type="button" :disabled="busy" @click="overlay = 'clear'">清除草稿</button></div></template>
     </ProductHeader>
     <nav class="editor-steps" aria-label="创作步骤">
-      <button v-for="(label, index) in steps" :key="label" type="button" :disabled="busy" :aria-current="step === index ? 'step' : false" @click="step = index"><span>{{ index + 1 }}</span>{{ label }}<small v-if="!issues.some((issue) => issue.step === index)" aria-label="内容已填写">✓</small></button>
+      <template v-for="(label, index) in steps" :key="label">
+        <span v-if="index > 0" class="editor-step-connector" aria-hidden="true"></span>
+        <button type="button" :disabled="busy" :aria-current="step === index ? 'step' : false" @click="step = index"><span>{{ index + 1 }}</span>{{ label }}<small v-if="!issues.some((issue) => issue.step === index)" aria-label="内容已填写">✓</small></button>
+      </template>
     </nav>
     <main ref="form">
       <div v-if="notice != null" role="alert" class="editor-notice"><UiNotice tone="error">{{ notice }}</UiNotice></div>
