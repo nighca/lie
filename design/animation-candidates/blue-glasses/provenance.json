@@ -161,6 +161,22 @@
         1002,
         1254
       ]
+    },
+    "waiting-source": {
+      "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "opaqueBounds": [
+        329,
+        17,
+        969,
+        1254
+      ]
     }
   },
   "generatedPngsCopiedByteForByte": true,

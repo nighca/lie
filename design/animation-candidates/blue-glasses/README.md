@@ -1,14 +1,16 @@
 # 蓝衣眼镜动画候选
 
-2026-10-24，未激活生产，已完成发起者独立review，尚待用户逐人美术验收。使用内置imagegen，共3次首轮调用，0次额外修复调用；真实prompts、参考图和保留的原生输出见`generation-records.json`。所有PNG均原字节复制；没有脚本改像素、抠图或缩放导出。
+2026-10-24，未激活生产。首版完成发起者review后，用户反馈微动偏小及袖口白弧遮臂；本次纯数据修订待发起者刷新5351实际复验，再交用户验收。使用内置imagegen，共3次首轮调用，0次额外修复调用；真实prompts、参考图和保留的原生输出见`generation-records.json`。所有PNG均原字节复制；没有脚本改像素、抠图或缩放导出。
 
 ## 形象与部件
 
 来源为canonical蓝衣眼镜四态：深蓝卷发、圆黑框眼镜、白T恤、亮蓝背带工装。default双臂放下；listening手拢耳边；waiting一手点下巴、另一臂承托；speaking张嘴并掌心朝上解释。原四态完全未改。
 
-6份1254×1254 RGBA共享PNG、17节点、4循环。生成共享无臂躯干、托腮姿态无臂躯干及完整交叉手臂接触组；其余头部、普通臂、靠耳臂和讲话臂从原生源PNG按运行时多边形遮罩取样。闭嘴头供四态共享，讲话开嘴头与闭嘴头用显隐互斥切换。未把整张静态人物只做缩放冒充部件动画。
+7份1254×1254 RGBA共享PNG、19节点、4循环。生成共享无臂躯干、托腮姿态无臂躯干及完整交叉手臂接触组；其余头部、普通臂、靠耳臂和讲话臂从原生源PNG按运行时多边形遮罩取样。闭嘴头供四态共享，讲话开嘴头与闭嘴头用显隐互斥切换。未把整张静态人物只做缩放冒充部件动画。
 
-托腮和靠耳手与头同属contact-root；头颈留有遮挡重叠。躯干持续上下2逻辑像素/±0.18°，等待聆听接触组±0.32°/0.5像素，普通头±约0.6°，普通臂±0.35°，讲话掌臂约±1.4°。姿态专用臂稳定节点、专用显隐。等待接触组保留一体手肘关系，前后两层复用同一PNG，让袖口遮住上臂端点。
+托腮和靠耳手与头同属contact-root；头颈留有遮挡重叠。用户指出首版微动偏小及白袖弧线盖臂后，本次纯数据修订：躯干上下4逻辑像素/约±0.4°；等待聆听接触组约±0.9°/1.2像素；普通头约±1.5°/1.5像素；普通完整袖臂约±1.3°；讲话袖臂约±2°。头、身体、左右臂存在不同幅度/偏移/相位。普通臂枢轴上移至肩部，袖臂一起微动；等待前后两层仍复用同一接触组PNG。
+
+首版生成的完整袖筒内部为不透明灰白椭圆，前盖在裸臂上造成附加白弧线，用户截图已实际阅读确认。修订将生成躯干的两袖区域排除，普通/讲话采用canonical完整袖臂，聆听保留canonical靠耳袖臂，托腮复用canonical袖片遮住接触组上臂。没有把所有裸臂简单提到顶层，也没有生成新PNG。
 
 生成返回均1254方形，首条prompt误写1024×1536，但实际返回保留源画布；未据该错误文字做像素重采样。生成托腮臂没有保持原生配准，故以rig的非等比缩放/平移配准（.7/.65，170/198）；手臂比例与原画有轻微差别，应由用户判断。托腮躯干重建了被挡住的衣服，口袋和袖内阴影细节存在轻微变化。
 
@@ -28,11 +30,13 @@ npm run appearances:generate
 
 ## 实际检查
 
-- `node --experimental-transform-types design/animation-candidates/blue-glasses/verify.mjs`通过：严格v1解析、6份PNG实际头部尺寸/hash、960时刻有限变换/互斥嘴形、循环闭合、共用接触父链、100次在240ms settle完成前再次中断（setState前后advance(0)所有节点数值transform连续、每步数值有限、嘴形显隐互斥、所有部件显隐立即符合目标clip当前采样）、canonical源hash。Node仅strip类型不支持播放器parameter property，故明确使用其transform-types标志。
+- `node --experimental-transform-types design/animation-candidates/blue-glasses/verify.mjs`通过：严格v1解析、7份PNG实际头部尺寸/hash、960时刻有限变换/互斥嘴形、循环闭合、共用接触父链、100次在240ms settle完成前再次中断（setState前后advance(0)所有节点数值transform连续、每步数值有限、嘴形显隐互斥、所有部件显隐立即符合目标clip当前采样）、canonical源hash。Node仅strip类型不支持播放器parameter property，故明确使用其transform-types标志。
 - `npm run test --workspace=@lie/appearance-animation`：25/25通过。`npm run typecheck --workspace=@lie/appearance-animation`通过。没有运行全仓build，未更改应用或播放器代码。
-- IAB实际正式组件桌面四态播放、快速切换均能显示候选；console error/warn为空。额外用正式采样器逐态检查25%/75%截图，已实际逐图阅读。未见头颈/托腮接触大空隙、重影或裸露袖口截线。初版等待背带切缝、讲话手下夹带白衣区已修正。
-- 391实际innerWidth=391。正式组件default/waiting/speaking的全页证据可用；listening的截图下半间歇截断，定相位页部分截图出现布局畸变，不能当作通过。已reset释放viewport；发起者随后以新选中tab、实际innerWidth=scrollWidth=391完成四态实时组件复验，见`initiator-review.md`及`owner-*-391.jpg`；早期截图不替代该证据。只保留可读证据，没有将坏截图归为通过。
+- 以下浏览器记录属于本次修订前的首版，不证明修订通过：IAB实际正式组件桌面四态播放、快速切换均能显示候选；console error/warn为空。额外用正式采样器逐态检查25%/75%截图，已实际逐图阅读。未见头颈/托腮接触大空隙、重影或裸露袖口截线。初版等待背带切缝、讲话手下夹带白衣区已修正。
+- 首版391实际innerWidth=391。正式组件default/waiting/speaking的全页证据可用；listening的截图下半间歇截断，定相位页部分截图出现布局畸变，不能当作通过。已reset释放viewport；发起者随后以新选中tab、实际innerWidth=scrollWidth=391完成四态实时组件复验，见`initiator-review.md`及`owner-*-391.jpg`；早期截图不替代该证据。只保留可读证据，没有将坏截图归为通过。
 - 未另测本候选减少动态效果/隐藏暂停/资源失败/迟到换人/卸载；这些属既有通用组件能力与已有测试覆盖，不能把播放器单测当成本候选浏览器实测。发起者最终review仍需包含关键实际兼容检查。
+
+- 本次袖口/微动修订：制作代理IAB调用返回“Browser is not available: iab”，尚未实际查看修后桌面/391效果，已请求发起者刷新既有5351代验；没有重启其他owner的服务或占用viewport。现存screenshots与initiator-review.md针对旧版本，不能代表本次修订。
 
 ## 已知边界
 
