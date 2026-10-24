@@ -16,7 +16,7 @@ beforeEach(() => {
     removeEventListener(_event: string, listener: () => void) { motionChanges.delete(listener) },
   })))
 })
-afterEach(() => vi.unstubAllGlobals())
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals() })
 
 describe('product header', () => {
   it('renders the shared brand and emits caller-owned home navigation', async () => {
@@ -67,8 +67,14 @@ it('plays once per entry or focus, never restarts for a mouse click, and resets 
   expect(active()).toBe(true)
   await svg.trigger('animationend')
   expect(active()).toBe(false)
+  const focusVisible = vi.spyOn(link.element, 'matches').mockReturnValue(false)
   await link.trigger('pointerdown', { pointerType: 'mouse' })
   expect(active()).toBe(false)
+  await link.trigger('focus')
+  expect(focusVisible).toHaveBeenCalledWith(':focus-visible')
+  expect(active()).toBe(false)
+  await link.trigger('blur')
+  focusVisible.mockReturnValue(true)
   await link.trigger('focus')
   expect(active()).toBe(true)
   await link.trigger('blur')
@@ -96,6 +102,7 @@ it('supports touch without delaying navigation and cancels dragged or cancelled 
 
 it('resets when motion preference changes and releases its listener on unmount', async () => {
   const wrapper = mount(ProductHeader)
+  vi.spyOn(wrapper.get('a').element, 'matches').mockReturnValue(true)
   await wrapper.get('a').trigger('focus')
   expect(wrapper.get('svg').classes()).toContain('lie-product-header__logo--playing')
   expect(motionChanges.size).toBe(1)
