@@ -119,14 +119,34 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
   </div>
   <div v-else class="game-shell home-shell">
-    <header class="game-header"><a class="wordmark" href="/" aria-label="LIE 首页" @click.prevent="home"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a><p v-if="demo" class="environment-note">演示模式 · 对话为模拟内容，不使用麦克风</p></header>
+    <header class="game-header home-header">
+      <a class="wordmark" href="/" aria-label="LIE 首页" @click.prevent="home"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a>
+      <UiButton class="home-create" variant="quiet" @click="editor">创作案件</UiButton>
+      <p v-if="demo" class="environment-note">演示模式 · 对话为模拟内容，不使用麦克风</p>
+    </header>
     <main class="home-content">
-      <section class="home-intro"><UiButton variant="secondary" @click="editor">创作案件</UiButton><p class="eyebrow">开口聊聊，找到真相</p><h1>每个人，都有话没说完。</h1><p>和故事里的人物自由对话，听听他们的说法，再做出你的指认。</p></section>
-      <section aria-labelledby="cases-title"><h2 id="cases-title">挑一桩谜题</h2>
+      <section class="home-intro" aria-label="产品介绍">
+        <h1>有人，<br>有话没说完。</h1>
+        <p>和角色语音对话，<br>找出藏起真相的人。</p>
+        <div class="home-cast" aria-hidden="true">
+          <div class="home-cast-backdrop"></div>
+          <img class="home-cast-sunny" src="/appearances/sunny-moustache.png" alt="">
+          <img class="home-cast-coral" src="/appearances/coral-bob.png" alt="">
+          <img class="home-cast-blue" src="/appearances/blue-glasses.png" alt="">
+          <span class="home-spark first">✦</span><span class="home-spark second">✦</span>
+        </div>
+      </section>
+      <section class="home-cases" aria-labelledby="cases-title"><h2 id="cases-title">选择案件</h2>
         <p v-if="catalogStatus === 'loading'" role="status">正在准备案件…</p>
         <div v-else-if="catalogStatus === 'failed'" class="surface catalog-error"><p role="status">案件列表暂时无法加载</p><UiButton @click="loadCatalog">重试</UiButton></div>
         <p v-else-if="cases.length === 0">新案件正在准备中。</p>
-        <div v-else class="case-grid"><article v-for="item in cases" :key="item.id" class="surface case-card"><span class="case-symbol" aria-hidden="true">？</span><h3>{{ item.title }}</h3><p>{{ item.summary }}</p><span class="case-duration">{{ duration(item.interrogationLimitSeconds) }} 询问时间</span><UiButton @click="selectCase(item.id)">查看案件</UiButton></article></div>
+        <div v-else class="case-grid">
+          <article v-for="(item, index) in cases" :key="item.id" class="surface case-card">
+            <div class="case-top"><span class="case-number" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><span class="case-duration">{{ duration(item.interrogationLimitSeconds) }} 询问时间</span></div>
+            <h3>{{ item.title }}</h3><p>{{ item.summary }}</p>
+            <UiButton @click="selectCase(item.id)">查看案件</UiButton>
+          </article>
+        </div>
       </section>
     </main>
   </div>

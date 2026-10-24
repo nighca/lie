@@ -176,7 +176,7 @@ describe('home and case navigation', () => {
     expect(sessions).toHaveLength(2)
     expect(router.currentRoute.value.query.game).toBe('unknown')
     await click('返回案件列表')
-    expect(wrapper.text()).toContain('挑一桩谜题')
+    expect(wrapper.text()).toContain('选择案件')
   })
 })
 
