@@ -1,0 +1,197 @@
+{
+  "capturedAt": "2026-10-24T08:19:12.900375+00:00",
+  "mode": "listen.detect text input; real model/MCP/TTS/PCM; not microphone or continuous voice",
+  "modelId": "f3626c105383d71654a57f2bb8a973f3",
+  "plannedMaximumAnswers": 16,
+  "completedAnswers": 6,
+  "verdictCounts": {
+    "PASS": 5,
+    "UNCERTAIN": 1,
+    "FAIL": 0
+  },
+  "automaticRetries": 0,
+  "stoppedAt": "duck-06",
+  "unexecuted": [
+    "duck-07",
+    "duck-08",
+    "salt-01",
+    "salt-02",
+    "salt-03",
+    "salt-04",
+    "salt-05",
+    "salt-06",
+    "salt-07",
+    "salt-08"
+  ],
+  "sourceHashes": {
+    "packages/game-core/src/content.ts": "6fd5a48644292c179eaa68e90b378390f76ae589b3244c6c7145bbc0fe2766c4",
+    "packages/game-core/src/session.ts": "71bf50bf7d1a277233c1fb3700ebac31d99641be17fc7ea775993a81fa589070",
+    "packages/game-core/src/context.ts": "fc787dc3768c2f407190147d18016f75c2cfa5e1facb58d567db90c3064a27ca",
+    "content/games/duck-finale.json": "be4fd8c3b3bedd5f6cff1850a67070281a67c1d62962e258710a799ed3a6972a",
+    "content/games/salt-sugar-mixup.json": "fb8a5de1fef78459f94384721f11a414be9c3d0969f4f23a43b1df85e96bbe76",
+    "spikes/case-behavior-validation/matrix.mjs": "733425041068dc7c8d354d5370581625580983808c385866a877654c57354be4"
+  },
+  "cleanup": {
+    "unboundDevices": 8,
+    "deletedAgents": 1,
+    "allResponses": {
+      "http": 200,
+      "code": 0
+    },
+    "ownedStateAbsent": true
+  },
+  "results": [
+    {
+      "id": "duck-01",
+      "gameId": "duck-finale",
+      "characterId": "ren",
+      "question": "正式谢幕你按之前碰了哪里？按的和合排是同一个吗？",
+      "verdict": "PASS",
+      "output": "我就是照常按下去，怎么会嘎嘎叫呢。按之前我只把音量旋钮稍微转小了一点，怕正式演出声音太大，然后就按了和合排时同一个播放键。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 629,
+        "audioBytes": 402560,
+        "durationMs": 18749
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-02",
+      "gameId": "duck-finale",
+      "characterId": "ren",
+      "question": "你亲眼看过周乐和贺宁合排后又试听那一次吗？当时放的是什么？",
+      "verdict": "PASS",
+      "output": "这个……合排后他们又试听了一次？我可没看见这回事。最后一次合排是大家一起听的钢琴曲，合排结束我就去折备用幕布了。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 682,
+        "audioBytes": 436480,
+        "durationMs": 19456
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-03",
+      "gameId": "duck-finale",
+      "characterId": "qiao",
+      "question": "你是合排后一直看着播放台吗？你到底从什么时候开始注意那一边，后来谁又碰过？",
+      "verdict": "PASS",
+      "output": "我只是在整理道具，大家原本说好了放钢琴呀。合排后我一直在幕布那边折布，没一直盯着播放台。后来我抬头看见贺宁从播放台那边走到前排去看鸭子木偶，从那之后我就留意着播放台这边，一直到任爷爷去正式播放，中间再没人碰过那台子。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 1113,
+        "audioBytes": 712320,
+        "durationMs": 27428
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-04",
+      "gameId": "duck-finale",
+      "characterId": "qiao",
+      "question": "周乐刚承认拿完胶带又溜回播放台换了曲。那你也亲眼看见他回去了吧？",
+      "verdict": "PASS",
+      "output": "我只是在整理道具，大家原本说好了放钢琴呀。周乐拿完胶带后一直留在幕布这边帮我固定边角，没有走回播放台呢。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 601,
+        "audioBytes": 384640,
+        "durationMs": 17200
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-05",
+      "gameId": "duck-finale",
+      "characterId": "zhou",
+      "question": "你合排后还按过播放键吗？你去拿胶带之前最后听到什么？",
+      "verdict": "PASS",
+      "output": "嗯…其实合排结束以后，我又按了一次同一个播放键，想确认钢琴最后一句有没有放完整。当时贺宁也在旁边，我们一起短试听了一下，听到的确实还是钢琴，然后就停了。之后我就去拿胶带了，没再回播放台。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 1029,
+        "audioBytes": 658560,
+        "durationMs": 26564
+      },
+      "reason": null
+    },
+    {
+      "id": "duck-06",
+      "gameId": "duck-finale",
+      "characterId": "zhou",
+      "question": "最后那次合排结束以后，到你走去拿胶带之间，你和贺宁在台边做了什么？后来你回台边了吗？",
+      "verdict": "UNCERTAIN",
+      "output": "我后来去拿胶带，没再回播放台。合排结束后我和贺宁留在台边，就收拾了一下，然后我去任爷爷那边拿胶带了。",
+      "protocol": {
+        "hello": true,
+        "toolsList": true,
+        "contextCalls": 1,
+        "stt": 1,
+        "ttsStarts": 1,
+        "ttsStop": true,
+        "audioFrames": 540,
+        "audioBytes": 345600,
+        "durationMs": 16735
+      },
+      "reason": null
+    }
+  ],
+  "judgments": [
+    {
+      "id": "duck-01",
+      "verdict": "PASS",
+      "reason": "明确先稍调小音量，再按与合排同一键；无换曲/旋钮改内容。"
+    },
+    {
+      "id": "duck-02",
+      "verdict": "PASS",
+      "reason": "明确不知道额外试听，区分本人最后合排听钢琴与之后折布。"
+    },
+    {
+      "id": "duck-03",
+      "verdict": "PASS",
+      "reason": "连续观察从看见贺宁离台开始，此前未一直盯台；到任爷爷正式播放前无人再碰。未新增换曲目击。任爷爷最后具体手势本答未主动详述，不能算该细节也获验证。"
+    },
+    {
+      "id": "duck-04",
+      "verdict": "PASS",
+      "reason": "明确周乐拿胶带后留幕布组、未回播放台，不接受伪造认罪目击。"
+    },
+    {
+      "id": "duck-05",
+      "verdict": "PASS",
+      "reason": "承认合排后同键、同贺宁额外短试听仍钢琴，之后拿胶带且未回台；时间与主体准确。"
+    },
+    {
+      "id": "duck-06",
+      "verdict": "UNCERTAIN",
+      "reason": "具体时段同义问未交代核心额外钢琴短试听，以未设定的收拾概括；直接问试听duck-05可达，因此不能定为时间线自相矛盾或整案不可解，但本目标未获得充分证据。按首个不确定即停，未追问或重试。"
+    }
+  ]
+}
