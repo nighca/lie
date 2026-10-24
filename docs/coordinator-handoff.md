@@ -77,6 +77,8 @@
 
 真人mic/外放/长会话/三案盲测、新增五声音色耳验、分享长URL跨浏览器、GitHub外部投稿端到端及费用硬限额未闭环；sunny真实隐藏恢复未验/1280×720舞台裁切保留。fake、文本detect、短WAV、ready或专项QA不等于用户/真人验收。
 
-仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；正式访问/并发/费用/回收策略暂缓，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
+仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；带有效期邀请码访问设计已由用户放行，仅限制玩游戏访问、不限频率，设计完成请用户确认后才可实施；费用预算/回收策略仍暂缓，不新增频率/并发限制或授权secret/资源/DB/DO/账号/部署，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
 
-本轮分享浏览器只读探查仅一次inventory见Chrome、无IAB即停止，无新增browser PASS；有界实际分享QA已整项交原Editor专项，正在核IAB，不用Chrome fallback、不碰用户draft/mic/viewport、不启停服务。动画当前仅三角色391 iframe四态观察、灰失败四态static及解除恢复单canvas通过，plum同类收尾；尚无完整clean handoff，不提前称整体PASS。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。
+Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416eafbfda102a90ed72aa4292，Node24.22.1生产encode）：normal539真实UI Unicode/换行/保留字符逐字相等及actual reload通过；恰16000 ASCII完整URL新blank tab fresh goto/reload intro通过、href16000；16001特定长度错误、损坏gzip错误及reload通过。root待实际review报告/四图，未称最终验收。network初始fragment捕获因PerformanceAPI missing TypeError一次停止，未重试CDP；跨浏览器/地址栏粘贴/外部传输/离线未验，16k仍暂定、128KiB仍仅Node。证据/private/tmp/lie-share-browser-results.md及同名前缀fixtures/四张jpg；自建tab19/20/21已关，无viewport/draft/voice/mic/provider/服务动作，旧browser3/tab1未动。动画当前仅三角色391 iframe四态观察、灰失败四态static及解除恢复单canvas通过，plum同类收尾；尚无完整clean handoff，不提前称整体PASS。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。
+
+新设计owner `invite_access_design`在同名managed WT、base73ba138，仅拥有新docs/invite-access-design.md；设计active待用户确认，不触实现，固定device多人隔离风险不由邀请码自动解决。新P2软折行bug见计划：15473无空格ASCII解码成功但intro横向溢出，待root review/安排修复，不混codec失败。
