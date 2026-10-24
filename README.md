@@ -50,7 +50,7 @@ npm ci
 npm run dev
 ```
 
-Open the [local development demo](http://127.0.0.1:5176/?demo=1), choose a case, then click **“开始模拟对话”**. Fake turns repeat until you click **“结束对话”**. This mode captures no microphone, calls no model and plays no audio. It is available only in Vite development; production builds ignore `demo=1`.
+Open the [local development demo](http://127.0.0.1:5176/?demo=1), choose a case, then click **“开启模拟对话”**. Fake turns repeat until you click **“结束对话”**. This mode captures no microphone, calls no model and plays no audio. It is available only in Vite development; production builds ignore `demo=1`.
 
 Real voice needs the same-origin Worker and server-side Linx bindings. After configuring those locally:
 
