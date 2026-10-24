@@ -27,14 +27,21 @@ describe('pure session lifecycle', () => {
     expect(initial.phase).toBe('intro')
   })
 
-  it('keeps investigation and histories available after a wrong accusation', () => {
-    const running = startSession(createGameSession(twoCharacterPlaceholder(), { sessionId: 'run', now: 1 }), 2)
+  it.each([twoCharacterPlaceholder, threeCharacterPlaceholder])('ends the session after a wrong accusation without changing its history or revealing truth', (fixture) => {
+    const game = fixture()
+    const running = startSession(createGameSession(game, { sessionId: 'run', now: 1 }), 2)
     const spoken = appendDialogue(running, 'a', dialogue())
-    const wrong = freezeDeep(accuse(spoken, 'b', 3))
-    expect(wrong).toMatchObject({ phase: 'interrogating', currentCharacterId: 'a', endedAt: null, result: { characterId: 'b', correct: false, reveal: null } })
+    const wrongId = game.characters.find((character) => character.id !== game.ending.culpritId)!.id
+    const wrong = freezeDeep(accuse(spoken, wrongId, 3))
+    expect(wrong).toMatchObject({ phase: 'lost', currentCharacterId: null, endedAt: 3, result: { characterId: wrongId, correct: false, reveal: null } })
     expect(wrong.histories.a).toEqual([dialogue()])
-    expect(selectCharacter(wrong, 'b').currentCharacterId).toBe('b')
-    expect(accuse(wrong, 'a', 4).result?.correct).toBe(true)
+    expect(spoken.phase).toBe('interrogating')
+    expect(() => selectCharacter(wrong, 'a')).toThrow('invalid-phase')
+    expect(() => accuse(wrong, game.ending.culpritId, 4)).toThrow('invalid-phase')
+    expect(() => accuse(wrong, wrongId, 4)).toThrow('invalid-phase')
+    const restarted = restartSession(wrong, { sessionId: 'new', now: 4 })
+    expect(restarted).toMatchObject({ sessionId: 'new', phase: 'intro', result: null, interrogationUsedMs: 0 })
+    expect(Object.values(restarted.histories).every((history) => history.length === 0)).toBe(true)
   })
 
   it('ends without rewriting the answer or revealing the ending', () => {
@@ -60,13 +67,14 @@ describe('pure session lifecycle', () => {
     const running = startSession(initial, 2)
     const ended = endSession(running, 3)
     const solved = accuse(running, 'a', 3)
-    for (const session of [initial, ended, solved]) {
+    const lost = accuse(running, 'b', 3)
+    for (const session of [initial, ended, solved, lost]) {
       expect(() => selectCharacter(session, 'a')).toThrow('invalid-phase')
       expect(() => accuse(session, 'a', 4)).toThrow('invalid-phase')
       expect(() => endSession(session, 4)).toThrow('invalid-phase')
       expect(() => appendDialogue(session, 'a', dialogue())).toThrow('invalid-phase')
     }
-    for (const session of [running, ended, solved]) expect(() => startSession(session, 4)).toThrow('invalid-phase')
+    for (const session of [running, ended, solved, lost]) expect(() => startSession(session, 4)).toThrow('invalid-phase')
     expect(() => selectCharacter(running, 'missing')).toThrow(GameStateError)
     expect(() => accuse(running, 'missing', 4)).toThrow('unknown-character')
     expect(() => appendDialogue(running, 'missing', dialogue())).toThrow('unknown-character')

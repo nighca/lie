@@ -46,14 +46,15 @@ describe('interrogation time budget', () => {
     const running = consumeInterrogationTime(startSession(initial, 2), 1000)
     const ended = endSession(running, 3)
     const solved = accuse(running, 'a', 3)
-    for (const session of [initial, ended, solved]) {
+    const lost = accuse(running, 'b', 3)
+    for (const session of [initial, ended, solved, lost]) {
       expect(() => consumeInterrogationTime(session, 1000)).toThrow('invalid-phase')
     }
     expect(getInterrogationRemainingMs(ended)).toBe(59000)
     expect(getInterrogationRemainingMs(solved)).toBe(59000)
   })
 
-  it('preserves usage across characters and accusation attempts, then resets on restart', () => {
+  it('preserves shared usage through a terminal accusation, then resets on restart', () => {
     const spoken = appendDialogue(runningSession(), 'a', dialogue())
     const first = consumeInterrogationTime(spoken, 20000)
     const second = consumeInterrogationTime(selectCharacter(first, 'b'), 40000)
@@ -63,11 +64,10 @@ describe('interrogation time budget', () => {
     const wrong = accuse(second, 'b', 3)
     expect(wrong.result?.correct).toBe(false)
     expect(getInterrogationRemainingMs(wrong)).toBe(0)
-    expect(selectCharacter(wrong, 'a').histories.a).toEqual([dialogue()])
-    const solved = freezeDeep(accuse(wrong, 'a', 4))
-    expect(solved.result?.correct).toBe(true)
-    expect(getInterrogationRemainingMs(solved)).toBe(0)
-    const restarted = restartSession(solved, { sessionId: 'new', now: 5 })
+    expect(wrong.phase).toBe('lost')
+    expect(wrong.histories.a).toEqual([dialogue()])
+    expect(() => accuse(wrong, 'a', 4)).toThrow('invalid-phase')
+    const restarted = restartSession(wrong, { sessionId: 'new', now: 5 })
     expect(restarted.interrogationUsedMs).toBe(0)
     expect(getInterrogationRemainingMs(restarted)).toBe(60000)
     expect(restarted.histories).toEqual({ a: [], b: [] })

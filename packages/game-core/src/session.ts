@@ -1,7 +1,7 @@
 import { validateGame } from './content'
 import type { CharacterDefinition, GameDefinition } from './content'
 
-export type GamePhase = 'intro' | 'interrogating' | 'ended' | 'solved'
+export type GamePhase = 'intro' | 'interrogating' | 'ended' | 'solved' | 'lost'
 
 export interface DialogueEntry {
   readonly id: string
@@ -95,9 +95,7 @@ export function accuse(session: GameSession, characterId: string, now: number): 
   getCharacter(session.game, characterId)
   const correct = characterId === session.game.ending.culpritId
   const result = { characterId, correct, reveal: correct ? session.game.ending.reveal : null }
-  return correct
-    ? { ...session, phase: 'solved', currentCharacterId: null, endedAt: now, result }
-    : { ...session, result }
+  return { ...session, phase: correct ? 'solved' : 'lost', currentCharacterId: null, endedAt: now, result }
 }
 
 /** A restart returns to the opening with a fresh caller-provided session ID and empty history. */

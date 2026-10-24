@@ -5,7 +5,7 @@ import { VoiceAvailabilityError } from './voice'
 import type { Conversation, ConversationEvent, VoicePort } from './voice'
 
 export interface GameView {
-  phase: 'loading' | 'failed' | 'intro' | 'interrogating' | 'ended' | 'solved'
+  phase: 'loading' | 'failed' | GameSession['phase']
   title: string
   background: string
   characters: readonly { id: string; name: string; appearanceId: string | null }[]
@@ -17,7 +17,6 @@ export interface GameView {
   interrogationRemainingMs: number
   notice: string | null
   accusationOpen: boolean
-  accusationFeedback: string | null
   reveal: string | null
 }
 
@@ -46,7 +45,6 @@ export function createGameController(options: ControllerOptions) {
   let busy = false
   let notice: string | null = null
   let accusationOpen = false
-  let accusationFeedback: string | null = null
   let pendingText = ''
   let entrySequence = 0
   const clock: ConversationClock = options.clock ?? {
@@ -67,7 +65,7 @@ export function createGameController(options: ControllerOptions) {
       characters: session?.game.characters.map(({ id, name, appearanceId }) => ({ id, name, appearanceId })) ?? [],
       currentCharacterId: session?.currentCharacterId ?? null,
       history: pendingText.length > 0 ? [...history, { id: 'pending-answer', role: 'assistant', text: pendingText, at: options.now(), interrupted: false }] : history.map((entry) => ({ ...entry })),
-      voiceStatus, busy, notice, accusationOpen, accusationFeedback,
+      voiceStatus, busy, notice, accusationOpen,
       conversationActive: active != null,
       interrogationRemainingMs: remainingMs(),
       reveal: session?.phase === 'solved' ? session.result!.reveal : null,
@@ -115,7 +113,6 @@ export function createGameController(options: ControllerOptions) {
   }
   function showExpiry() {
     accusationOpen = true
-    accusationFeedback = null
     notice = '询问时间已用完。你可以回看对话，并选择最终指认；重新开始一局可再次询问。'
   }
   function expireBudget() {
@@ -160,7 +157,6 @@ export function createGameController(options: ControllerOptions) {
       session = null
       loadState = 'loading'
       accusationOpen = false
-      accusationFeedback = null
       notice = null
       publish()
       try {
@@ -237,16 +233,14 @@ export function createGameController(options: ControllerOptions) {
       if (requireSession().phase !== 'interrogating') return
       if (stopVoice()) showExpiry()
       accusationOpen = true
-      accusationFeedback = null
       publish()
     },
-    closeAccusation() { accusationOpen = false; accusationFeedback = null; publish() },
+    closeAccusation() { accusationOpen = false; publish() },
     accuse(characterId: string) {
       if (!accusationOpen) return
       stopVoice()
       session = accuse(requireSession(), characterId, options.now())
-      if (session.phase === 'solved') accusationOpen = false
-      else accusationFeedback = getInterrogationRemainingMs(session) > 0 ? '这次指认不正确。你可以返回调查，继续听取大家的说法。' : '这次指认不正确。你可以回看对话，再次指认，或重新开始一局。'
+      accusationOpen = false
       publish()
     },
     end() {
@@ -260,7 +254,6 @@ export function createGameController(options: ControllerOptions) {
       stopVoice()
       session = restartSession(requireSession(), { sessionId: options.newSessionId(), now: options.now() })
       accusationOpen = false
-      accusationFeedback = null
       notice = null
       publish()
     },

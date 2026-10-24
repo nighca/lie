@@ -121,6 +121,12 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <div class="result-story"><h2>完整经过</h2><p class="background">{{ view.reveal }}</p></div>
       <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
     </main>
+    <main v-else-if="view.phase === 'lost'" class="intro-card result-card surface">
+      <p class="eyebrow">本局失败</p>
+      <h1 class="case-title">指认不正确</h1>
+      <p class="background">这次调查已结束。想再试一次，请重新开始一局。</p>
+      <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
+    </main>
     <main v-else class="intro-card surface">
       <h1>本局已结束</h1><p>这次的对话已经停止。准备好后，可以重新接案。</p>
       <UiButton @click="controller.restart()">重新开始一局</UiButton>
@@ -136,7 +142,6 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <UiButton @click="controller.accuse(character.id)">指认 {{ character.name }}</UiButton>
         </div>
       </div>
-      <UiNotice v-if="view.accusationFeedback != null">{{ view.accusationFeedback }}</UiNotice>
       <template #actions><UiButton variant="secondary" @click="controller.closeAccusation()">返回调查</UiButton></template>
     </UiDialog>
   </div>
