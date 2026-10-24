@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
+
+import { createTranscriptReveal } from '../presentation/transcriptReveal'
+import type { RevealRow } from '../presentation/transcriptReveal'
 
 export interface TranscriptMessage {
   id: string
@@ -8,6 +11,7 @@ export interface TranscriptMessage {
   mine?: boolean
   avatar?: string | null
   interrupted?: boolean
+  pending?: boolean
 }
 
 const brokenAvatars = ref(new Set<string>())
@@ -15,14 +19,23 @@ const log = ref<HTMLElement | null>(null)
 
 const props = withDefaults(defineProps<{
   messages: readonly TranscriptMessage[]
+  animate?: boolean
   emptyText?: string
-}>(), { emptyText: '还没有对话，开口打个招呼吧。' })
+}>(), { animate: false, emptyText: '还没有对话，开口打个招呼吧。' })
 
 function followLatest() {
   if (log.value != null) log.value.scrollTop = log.value.scrollHeight
 }
 
-watch(() => props.messages, followLatest, { deep: true, flush: 'post' })
+const display = shallowRef<RevealRow<TranscriptMessage>[]>([])
+const motion = typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null
+const reduced = ref(motion?.matches ?? false)
+const reveal = createTranscriptReveal<TranscriptMessage>((rows) => { display.value = rows })
+function motionChanged() { reduced.value = motion?.matches ?? false }
+motion?.addEventListener('change', motionChanged)
+watch(() => [props.messages, props.animate, reduced.value], () => reveal.update(props.messages, props.animate && !reduced.value), { deep: true, immediate: true })
+watch(display, followLatest, { flush: 'post' })
+onUnmounted(() => { reveal.dispose(); motion?.removeEventListener('change', motionChanged) })
 onMounted(followLatest)
 </script>
 
@@ -30,13 +43,13 @@ onMounted(followLatest)
   <section class="lie-transcript" aria-label="对话转写">
     <div ref="log" class="lie-transcript__log" role="log" aria-label="语音转写" aria-live="polite" aria-relevant="additions text">
       <p v-if="messages.length === 0" class="lie-transcript__empty">{{ emptyText }}</p>
-      <article v-for="message in messages" :key="message.id" class="lie-transcript__message" :class="{ 'lie-transcript__message--mine': message.mine }">
+      <article v-for="{ key, message, text } in display" :key="key" class="lie-transcript__message" :class="{ 'lie-transcript__message--mine': message.mine }">
         <span class="lie-transcript__avatar" aria-hidden="true">
           <img v-if="message.avatar != null && !brokenAvatars.has(message.avatar)" :src="message.avatar" alt="" @error="brokenAvatars.add(message.avatar)">
           <svg v-else-if="message.mine" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="var(--lie-surface)" stroke="currentColor" stroke-width="2.5"/><circle cx="15" cy="18" r="1.7" fill="currentColor"/><circle cx="25" cy="18" r="1.7" fill="currentColor"/><path d="M15 24Q20 29 25 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
           <span v-else>{{ message.speaker.slice(0, 1) }}</span>
         </span>
-        <div class="lie-transcript__bubble"><strong>{{ message.speaker }}</strong><p>{{ message.text }}</p><span v-if="message.interrupted" class="lie-transcript__interrupted">回答被打断</span></div>
+        <div class="lie-transcript__bubble"><strong>{{ message.speaker }}</strong><p :aria-live="text !== message.text ? 'off' : 'polite'">{{ text }}</p><span v-if="message.interrupted" class="lie-transcript__interrupted">回答被打断</span></div>
       </article>
     </div>
   </section>

@@ -9,6 +9,8 @@ const wrappers: { unmount(): void }[] = []
 afterEach(() => {
   wrappers.splice(0).forEach((wrapper) => wrapper.unmount())
   vi.restoreAllMocks()
+  vi.useRealTimers()
+  vi.unstubAllGlobals()
 })
 
 describe('transcript follows the latest visible content', () => {
@@ -47,6 +49,41 @@ describe('transcript follows the latest visible content', () => {
       if (previous != null) Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', previous)
       else Reflect.deleteProperty(HTMLElement.prototype, 'scrollIntoView')
     }
+  })
+
+  it('follows every reveal frame and immediately flushes when reduced motion becomes enabled', async () => {
+    vi.useFakeTimers()
+    const media = Object.assign(new EventTarget(), { matches: false })
+    vi.stubGlobal('matchMedia', () => media)
+    const wrapper = mount(Transcript, { props: { messages: [], animate: true } })
+    wrappers.push(wrapper)
+    const log = wrapper.get('[role="log"]').element
+    let height = 100
+    Object.defineProperty(log, 'scrollHeight', { configurable: true, get: () => height })
+    await wrapper.setProps({ messages: [{ id: 'reply', speaker: '甲', text: '逐字展示会让文本持续增高。'.repeat(20) }] })
+    height = 400
+    await vi.advanceTimersByTimeAsync(32)
+    expect(log.scrollTop).toBe(400)
+    const partial = wrapper.get('article p').text()
+    expect(partial.length).toBeGreaterThan(0)
+    height = 700
+    media.matches = true
+    media.dispatchEvent(new Event('change'))
+    await nextTick()
+    expect(wrapper.get('article p').text()).toBe('逐字展示会让文本持续增高。'.repeat(20))
+    expect(log.scrollTop).toBe(700)
+    expect(vi.getTimerCount()).toBe(0)
+    wrapper.unmount()
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('skips animation when reduced motion is already preferred', async () => {
+    const media = Object.assign(new EventTarget(), { matches: true })
+    vi.stubGlobal('matchMedia', () => media)
+    const wrapper = mount(Transcript, { props: { messages: [], animate: true } })
+    wrappers.push(wrapper)
+    await wrapper.setProps({ messages: [{ id: 'reply', speaker: '甲', text: '完整展示' }] })
+    expect(wrapper.get('article p').text()).toBe('完整展示')
   })
 
 })

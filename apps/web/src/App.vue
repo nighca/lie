@@ -28,6 +28,7 @@ const transcript = computed(() => view.value.history.map((entry) => ({
   speaker: entry.role === 'user' ? '你' : current.value?.name ?? '人物',
   text: entry.text,
   interrupted: entry.interrupted,
+  pending: entry.id === 'pending-answer',
   mine: entry.role === 'user',
   avatar: entry.role === 'user' ? null : appearance(current.value?.appearanceId ?? null)?.avatar ?? null,
 })))
@@ -106,7 +107,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </section>
         <section class="conversation-copy">
           <h2>对话转写</h2>
-          <Transcript :messages="transcript" />
+          <Transcript :key="view.currentCharacterId ?? ''" :messages="transcript" :animate="view.conversationActive && !view.busy" />
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>

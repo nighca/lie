@@ -1,5 +1,5 @@
 import { flushPromises, mount } from '@vue/test-utils'
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import App from '../src/App.vue'
 import { VoiceAvailabilityError } from '../src/application/voice'
@@ -7,7 +7,7 @@ import { readAppearances } from '../src/presentation/appearances'
 import { game, setup } from './helpers'
 
 const cleanup: (() => void)[] = []
-afterEach(() => cleanup.splice(0).forEach((action) => action()))
+afterEach(() => { cleanup.splice(0).forEach((action) => action()); vi.useRealTimers() })
 
 describe('game screens', () => {
   it('ends a wrong accusation in failure and permits only a fresh attempt before a correct result', async () => {
@@ -100,6 +100,7 @@ describe('game screens', () => {
   })
 
   it('shows interrupted controller history without marking normally completed answers', async () => {
+    vi.useFakeTimers()
     const { controller, turns } = setup()
     await controller.load('test'); controller.start(); await controller.startConversation()
     const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
@@ -110,11 +111,38 @@ describe('game screens', () => {
     turns[0].scope.onEvent({ type: 'listening' })
     await wrapper.vm.$nextTick()
     expect(controller.getView().history.map(({ interrupted }) => interrupted)).toEqual([true, false])
+    await vi.advanceTimersByTimeAsync(800)
     const answers = wrapper.findAll('[role="log"] article')
     expect(answers[0].get('p').text()).toBe('保留这段已经显示的文字。')
     expect(answers[0].get('.lie-transcript__interrupted').text()).toBe('回答被打断')
     expect(answers[1].get('p').text()).toBe('随后正常结束的回答。')
     expect(answers[1].find('.lie-transcript__interrupted').exists()).toBe(false)
+  })
+
+  it('keeps progressive pending text stable when committed, flushes on stop and shows full history after switching back', async () => {
+    vi.useFakeTimers()
+    const { controller, turns } = setup()
+    await controller.load('test'); controller.start(); await controller.startConversation()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const text = '角色回复'.repeat(30)
+    turns[0].scope.onEvent({ type: 'assistantText', text }); await wrapper.vm.$nextTick()
+    await vi.advanceTimersByTimeAsync(64)
+    const paragraph = wrapper.get('[role="log"] article p')
+    const partial = paragraph.text()
+    expect(partial.length).toBeGreaterThan(0)
+    expect(partial.length).toBeLessThan(text.length)
+    turns[0].scope.onEvent({ type: 'listening' }); await wrapper.vm.$nextTick()
+    expect(wrapper.get('[role="log"] article p').element).toBe(paragraph.element)
+    expect(paragraph.text()).toBe(partial)
+    controller.endConversation(); await wrapper.vm.$nextTick()
+    expect(paragraph.text()).toBe(text)
+    controller.selectCharacter('two'); await wrapper.vm.$nextTick()
+    expect(wrapper.find('[role="log"] article').exists()).toBe(false)
+    controller.selectCharacter('one'); await wrapper.vm.$nextTick()
+    expect(wrapper.get('[role="log"] article p').text()).toBe(text)
+    controller.restart(); await wrapper.vm.$nextTick()
+    expect(vi.getTimerCount()).toBe(0)
   })
 
   it('offers cancellation while microphone and service preparation is pending', async () => {
