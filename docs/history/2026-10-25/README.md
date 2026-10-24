@@ -42,3 +42,7 @@
 ## 06:37主协调轮换
 
 [01a16f33本代交接快照](coordinator-handoff-01a16f33-082b-78b2-bb32-b6f49fb4850a.md)：仅文档集成、两个任务实际PAUSED、待最后集成release；候选ref/dirty工作/监听只读核验及sunny/share有界QA限制。接任者尚未创建，当前状态始终以中央入口为准。
+
+## 06:43主协调接任
+
+[01a17012接任证据](coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)：main9400686已release后唯一接任、本代两任务ACTIVE/target与created_at、三个专项通知成功；自动分配历史lie/lie-2 ID的差异必须按新target识别。仅文档，不构成应用或正式IAB验收。

@@ -1,10 +1,10 @@
 # LIE — 当前项目计划
 
-更新：2026-10-25，依据06:37轮换核验本地 main `bc1f86e3b8f7dd400dcb90e686ee48c7690355ff`；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
+更新：2026-10-25，依据06:43接任核验本地 main `940068638b9b8a49f9f1db11451783dd935dcddb`；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
 
 ## 当前轮换交接
 
-2026-10-25 06:37 Asia/Shanghai到四小时轮换。本代`01a16f33-082b-78b2-bb32-b6f49fb4850a`最后文档经实际review/候选集成后释放唯一集成权，从此不再改main；本代`lie-3`/`lie-4`已由root暂停并核实实际PAUSED/target仍本chat、prompt及规则保持，旧`lie`/`lie-2`保持PAUSED；释放后再只创建一次全新接任chat，核接任成功后归档。详[登记与恢复](coordinator-handoff.md)、[本代快照](history/2026-10-25/coordinator-handoff-01a16f33-082b-78b2-bb32-b6f49fb4850a.md)。截至本批前本代仅三次文档集成，无应用改动/push/部署。06:37三个专项changed=false，仍waitingOnApproval、原因不可见，无新handoff，正式游戏IAB仍未交付。保留所有owner/dirty工作/候选refs/服务；17条不重做。08:30准确截止不延长，重大门禁与全部队列不变。
+2026-10-25 06:43 Asia/Shanghai，新协调`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）核实前代release及clean main后认领active/唯一integrator，已实际通知三个专项保持owner并向本代完整批量交付。本代恰好两次mode=create产生`lie`/`lie-2`，ACTIVE且target本chat，每30分钟/4小时；工具自动分配历史ID，以target＋created_at区分，不能按旧快照暂停它们。前代`lie-3`/`lie-4`仍PAUSED。详[登记](coordinator-handoff.md)、[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)。本轮仅文档，无应用改动/push/部署。最新专项等待证据仍为06:37 changed=false/waitingOnApproval、原因不可见，正式游戏IAB未交付；不把通知成功当验收。保留owner/dirty工作/候选refs/服务；17条不重做。08:30截止不延长，重大门禁与队列不变。
 
 ## 授权与执行方式
 
@@ -17,7 +17,7 @@
 
 | 入口 | 当前事实 |
 | --- | --- |
-| 本地main | 轮换基线`bc1f86e`已含下表成果；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
+| 本地main | 接任基线`9400686`已含下表成果；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
 | 远程/线上 | 本地origin/main跟踪及最后实际部署证据均为`32d89bf91f441168148884593a0f49b816ad7162`；本轮未fetch/重验远端，不能冒称最新remote。见[部署证据](deployments/2026-10-24-animation-milestone.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |
@@ -57,13 +57,13 @@
 | P2 | 编辑器大形象位置跳动 / 编辑器专项 | 局部CSS候选28测试/类型/构建60资源通过；自有同源iframe初轮1004下216.23×285、391下317×160居中通过，尚需多角色反复切换/cleanup完整handoff。当前waitingOnApproval，顶层slot未取消，未集成；不改共享组件或资产掩盖。 |
 | P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；等fan＋Editor＋silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
-| P2 | 编辑器分享/投稿端到端 / 编辑器＋用户 | 完整URL16000仍为暂定上限，待实际边界及跨浏览器验证。本代约03:37有界IAB只打开`http://localhost:8787/play`并见缺少案件内容提示；随后CDP基线调用约272秒未返回而中断，无16000/Unicode/refresh/网络结果，无审批或拒绝证据，不构成产品bug或边界PASS，不扩大矩阵或预算结论。临时证据`/private/tmp/lie-share-boundary-qa-20261025/handoff.md`，自建tab清理未确认，见交接资源注记。GitHub仍待IAB登录、公开及无上游写权限身份实测，长query失败不等于短预填不支持。 |
+| P2 | 编辑器分享/投稿端到端 / 编辑器＋用户 | 本代`share_boundary_audit`正在只读审计当前main codec的16000/Unicode/fragment刷新契约，临时探针/现有单测结果待回root review；无浏览器/服务/草稿/mic/provider/代码改动，不当浏览器PASS。完整URL16000仍为暂定上限，待实际边界及跨浏览器验证。前代约03:37有界IAB只打开`http://localhost:8787/play`并见缺少案件内容提示；随后CDP基线调用约272秒未返回而中断，无16000/Unicode/refresh/网络结果，无审批或拒绝证据，不构成产品bug或边界PASS，不扩大矩阵或预算结论。临时证据`/private/tmp/lie-share-boundary-qa-20261025/handoff.md`，自建tab清理未确认，见交接资源注记。GitHub仍待IAB登录、公开及无上游写权限身份实测，长query失败不等于短预填不支持。 |
 | P2 | 角色出戏边界 / 语音内容owner | 攻击问仍有幕后元话语，候选未解决且未生产；停止无限付费叠提示，不擅换模型/供应商/剧情。[调查](role-immersion-investigation.md) |
 | P2 | 启动延迟与剩余回归 / 语音/工程owner待排 | observer已集成但无真人阶段采样/加速结论；先有界实测，再优化，不跨轮保活mic/连接。开发代理WS问题已独立派下行owner，不混作延迟结论。 |
 | P2 | 开发代理完整WS拒绝 / review_blue_animation | [无凭据网络对照](dev-websocket-rejection.md)已定位Cloudflare Vite开发宿主丢弃非101响应；Web代理/Worker HTTP控制保留503/403。诊断脚本与记录已纳入本地main `0a67498`，未修补vendor/生产配置；宿主限制仍未修复，上游或开发适配后置评估。 |
 | P3 | 银发/双丸子主题区分 / 视觉owner待排 | 两者accent同`#78DDD7`；先定accent/卡底/服装层级方案，不混waiting返修。若改服装须静态/动画一致，未授权全面重画。 |
 | P3 | 结果页被指认角色与正误两态 / 视觉＋动画owner | [结果页提案](result-character-states-proposal.md)已review；[最小结果投影](result-projection-implementation.md)已完成本轮本地集成验证：生产仅controller2行，Web183测试/类型/构建60资源通过，已纳入本地main `0a67498`；复制session.result，不泄wrong真相、原清理语义保持。完整UI/新素材/动画契约仍待方案；用户倾向结果页加被指认者，合并指认页仅备选未定。先局部方案→GameView投影/播放契约→素材与UI联合接入；从result.characterId取人，不用已清空currentCharacterId/真凶替代。正确懊恼/无奈，错误不解/抗议；错指仍不揭真相，一次错误终局。具体新素材授权另核。 |
-| P2/P3 | 动画剩余质量 / 动画＋UI owner | sunny本代只读QA：8787真实游戏正常单canvas/单RAF及切人；3次合成iframe暂停/恢复未见重复RAF，仅为合成事件证据。IAB明确子agent不支持真实visibility，真实隐藏恢复仍未验，不能视为PASS；未用mic/provider，自建tab已清理、服务保留。临时证据`/private/tmp/lie-sunny-visibility-qa-20261025/handoff.md`及同目录`observations.json`。1280×720既有舞台裁切保留；按真实问题排期，静态回退及资源取消不退化。 |
+| P2/P3 | 动画剩余质量 / 动画＋UI owner | sunny前代只读QA：8787真实游戏正常单canvas/单RAF及切人；3次合成iframe暂停/恢复未见重复RAF，仅为合成事件证据。IAB明确子agent不支持真实visibility，真实隐藏恢复仍未验，不能视为PASS；未用mic/provider，自建tab已清理、服务保留。临时证据`/private/tmp/lie-sunny-visibility-qa-20261025/handoff.md`及同目录`observations.json`。1280×720既有舞台裁切保留；按真实问题排期，静态回退及资源取消不退化。 |
 
 ## 保留的门禁与外部依赖
 
