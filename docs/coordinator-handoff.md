@@ -4,7 +4,7 @@
 
 ## 协调权登记（02:28轮换发起，02:30只读复核）
 
-本登记随旧root最后文档review/集成生效；位于独立候选时不代表实际释放。旧root完成这次文档集成后不再写main，接任者核实登记后认领；本任务不创建chat或修改automation。02:02 preflight只是历史盘点，不是actual release。完整refs/dirty文件/30有序SHA见[本代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)。
+本登记随旧root最后文档review/集成生效；位于独立候选时不代表实际释放。旧root完成这次文档集成后不再写main，接任者核实登记后认领；本文档制作阶段未创建chat；旧root随后按轮换流程创建唯一接任者。02:02 preflight只是历史盘点，不是actual release。完整refs/dirty文件/30有序SHA见[本代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)。
 
 | 字段 | 值 |
 | --- | --- |
@@ -44,7 +44,7 @@
 
 02:28 root紧凑快照：fan、Editor、动画三专项仍actual waitingOnApproval，正式游戏QA无新交付；这不是拒绝结论，原因不猜测。只读排查已结束：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
 
-三角色新候选：`a440ec99cc0b5fab81ec0fb17278df5b2eb847ef`，原review WT `/Users/nighca/.codex/worktrees/investigation-review-takeover/lie`现为clean `codex/integrate-night-checkpoint`@43a98e6，保留ref `codex/integrate-three-characters-current`（当前不占该WT），base `0a67498cb58f0dd8403a57556bd786c854150276`；30有序角色提交保留，完整链在本代快照；不按旧分支名操作现WT。已按结果投影新基线重建，独立全仓379测试/全类型/Web＋gateway构建/79资源strict通过；3包＋16PNG哈希与已review旧候选相同，35份旧静态/头像source/public/dist逐字节不变。与旧d4b058仅差新main已有8文件，design/packages树一致；先前完整source review/有界父链检查证据保留。当前仅缺正式游戏IAB，三个专项等待原因不可见；不能将自动检查当视觉验收。main若再有功能变更须重建影响审查，不能盲合旧hash。
+三角色新候选：`a440ec99cc0b5fab81ec0fb17278df5b2eb847ef`，原review WT `/Users/nighca/.codex/worktrees/investigation-review-takeover/lie`02:30核为clean `codex/integrate-night-checkpoint`@43a98e6，保留ref `codex/integrate-three-characters-current`（当前不占该WT），base `0a67498cb58f0dd8403a57556bd786c854150276`；30有序角色提交保留，完整链在本代快照；不按旧分支名操作现WT。已按结果投影新基线重建，独立全仓379测试/全类型/Web＋gateway构建/79资源strict通过；3包＋16PNG哈希与已review旧候选相同，35份旧静态/头像source/public/dist逐字节不变。与旧d4b058仅差新main已有8文件，design/packages树一致；先前完整source review/有界父链检查证据保留。当前仅缺正式游戏IAB，三个专项等待原因不可见；不能将自动检查当视觉验收。main若再有功能变更须重建影响审查，不能盲合旧hash。
 
 专项接入记录位于该候选的`docs/animation/silver-bun-game-integration.md`与`gray-plum-game-integration.md`（尚不在main），详细来源按source HEAD取log，不重复长链。
 
