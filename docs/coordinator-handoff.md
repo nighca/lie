@@ -18,12 +18,12 @@
 
 887ac03已本地集成调查页用户验收四提交（原base62b3846；c0ba5b8→3cf9081→6b2c83e→cad5788；本地98303f8→cf06960→38b6ee3→aae203d+验收文档）。玩家输入黑波形、普通状态文案留空、48px固定slot/姓名32px增高、Vite本地8787代理。343测试/全仓类型/构建及47资源通过，IAB桌面/391布局核验通过；后续preview导航中止，未宣称全真人复验。未push/部署/更新8787。504a5dd/36e548d为反馈授权和接口协调文档。
 
-当前自有文档工作树/branch：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie / codex/investigation-review-takeover，当前分支已切为codex/integrate-editor-feedback（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
+当前自有文档工作树/branch：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie / codex/investigation-review-takeover，当前分支已切为codex/integrate-editor-draft-status（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
 
 ## 专项与最高优先级执行
 
 - 调查/共享视觉：01a16d5c-de69-7452-b184-5118072e75f3；UI反馈1—9正在/已获正式实施授权，base887ac03，managed /Users/nighca/.codex/worktrees/investigation-ui-polish/lie /codex/investigation-ui-polish。负责Home/App/style/catalog公开characters接口/Application/Transcript/VoiceControl及相关测试；其子agent负责controller正常通知与三案reveal纯分段。禁止Editor和CharacterChoice。需完整clean handoff及桌面/391，root复核。
-- 编辑器：01a16d90-27cc-77c2-9e0a-4b28b1135371；反馈10—17+用户追加授权PC人物卡复用，base887ac03，codex/editor-feedback-polish（实际工作树交回时核）。拥有Editor/helper/editor tests与CharacterChoice.vue。CharacterChoice先以独立commit吸收原调查PC四条等价默认样式，再Editor复用，移动端各保留；调查style.css冗余四条删除须依赖该组件迁移SHA。catalog新characters fixture仅editor-navigation由编辑器改，其他catalog测试归调查owner。5397桌面/391/动画回退/投稿URL/草稿分享已专项自检，刚收到clean完整交付：/Users/nighca/.codex/worktrees/editor-feedback-polish/lie；有序7af9f884f0e90ddeb571fde392979d66d9274f7e（共享PC默认样式）→ead3505ee2a390b23d6a82c8fbc6ee5bbbdbee57（10—17及Editor卡）→dc4bf01f469b500584951a081aead0667ceaf5c3（catalog fixture）。Web168+UI35/类型/构建通过是专项报告，root已全diff/context review、344测试/全仓类型构建/IAB1280/391通过，已本地集成候选8091dd4→1312479→90c7c9e，见editor-feedback-integration.md；未push/部署。保存状态+清除共同显隐followup在制。5397server已停止。
+- 编辑器：01a16d90-27cc-77c2-9e0a-4b28b1135371；反馈10—17+用户追加授权PC人物卡复用，base887ac03，codex/editor-feedback-polish（实际工作树交回时核）。拥有Editor/helper/editor tests与CharacterChoice.vue。CharacterChoice先以独立commit吸收原调查PC四条等价默认样式，再Editor复用，移动端各保留；调查style.css冗余四条删除须依赖该组件迁移SHA。catalog新characters fixture仅editor-navigation由编辑器改，其他catalog测试归调查owner。5397桌面/391/动画回退/投稿URL/草稿分享已专项自检，刚收到clean完整交付：/Users/nighca/.codex/worktrees/editor-feedback-polish/lie；有序7af9f884f0e90ddeb571fde392979d66d9274f7e（共享PC默认样式）→ead3505ee2a390b23d6a82c8fbc6ee5bbbdbee57（10—17及Editor卡）→dc4bf01f469b500584951a081aead0667ceaf5c3（catalog fixture）。Web168+UI35/类型/构建通过是专项报告，root已全diff/context review、344测试/全仓类型构建/IAB1280/391通过，已本地集成候选8091dd4→1312479→90c7c9e，见editor-feedback-integration.md；未push/部署。保存状态+清除共同显隐followup原b018ad7已独立rootreview/本地de95ffa集成，Web169/类型/构建通过。5397server已停止。
 - 动画：01a16d44-aeea-7552-b184-5118072e75f3，保留独立制作/视觉验收权。用户并行角色制作上限2；最近sunny完成后在制plum-crop和salt-pepper-beard，均base62b3846，仅候选资产目录，不做命名迁移/激活manifest。交付/用户批准需实时核最新。
 - 三个专项已被用户授权向本协调同步；每次轮换由新协调通知新ID。常规交付完整批量，冲突/接口/viewport及时联系。
 
@@ -38,7 +38,7 @@
 
 ## 服务、限制与接任第一步
 
-- 本地8787原由旧root维护，最后文档版本32d89bf；本代未刷新。不要假定main更新就自动服务新包。5397编辑器、5351/5352/5355动画预览有专项owner，保留；本代5486检查服务已停止，5488编辑器候选临时服务session42812需本代结束检查时停止，自己的IAB tab已关闭/viewport已reset。专项最新viewport消息优先，禁止占用户mic/草稿。
+- 本地8787原由旧root维护，最后文档版本32d89bf；本代未刷新。不要假定main更新就自动服务新包。5397编辑器、5351/5352/5355动画预览有专项owner，保留；本代5486检查服务已停止，5488编辑器候选检查服务已停止，自己的IAB tab已关闭/viewport已reset。专项最新viewport消息优先，禁止占用户mic/草稿。
 - 真人mic/外放/长会话、三案盲测、费用硬限额仍未闭环；fake/组件测试不能替代。应用鉴权临时停用/线上目标已有特定授权，正式访问限额仍暂缓。仓仍PRIVATE，未授权现在改可见性或代建投稿PR。宣传视频只研究，实际脚本/分镜/生成媒体/制作等用户明确放行。
 - 新协调先核仓库与最新用户决定、用紧凑wait_threads查三专项结果；优先review已交调查/编辑器本批并协调组件依赖，然后blue-glasses等已批准可执行事项。不要以记录误读阻止17条实施，也不要因接手重复派制作任务。
 - 若刚轮换失败：先核phase与是否已创建successor，遵循rotation恢复，不能双integrator。尚未到轮换时维持本chat协调和两任务，不提前归档。

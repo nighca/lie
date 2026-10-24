@@ -9,3 +9,7 @@ Node24.22.1 root独立全仓typecheck、npm test（344：生成器21+网关11+We
 root真实IAB隔离5488：桌面1280编辑器卡100x122/2px边框/86px头像、步骤36px线、default canvas；实际391无横溢、卡88x112。调查桌面同100x122/头像86/姓名32px+14px，移动391compact头像40、底栏bottom844、scrollWidth391；console warn/error为空。重置viewport并关闭自建tab。未动用户8787草稿或mic，fake演示不当作真实语音验收；投稿未代写GitHub。专项另有投稿URL/复制/刷新/静态回退/分享测试和IAB证据，见game-editor-implementation。
 
 调查owner删除四条冗余PC覆盖须依赖本共享组件commit；在该删除交回前保留既有覆盖，当前行为等价。用户新请求保存状态和清除草稿共同显隐，由编辑器专项在dc4bf01之后另交新commit，未含本批。review通过后仅本地main集成，不自动push/部署/更新8787。
+
+## 保存状态组后续提交
+
+用户在编辑器专项新要求已收到独立b018ad7dad494f54f5122831815257036b2dbd85，root读完整4文件diff及既有save/clear流程：仅用saveStatus:string|null控制状态和清除一起出现/隐藏，保留读取/保存失败组、清除确认/只删本key和busy禁用，未增另套持久状态。原工作树核clean；从已集成afd3311新候选cherry-pick为de95ffa，无冲突。root独立Web169测试/类型/构建及47资源检查通过；本小followup浏览器沿专项5398的真实桌面/391创建→编辑→刷新→清除验收，不冒称root重复真人或浏览器检查。仅本地集成，未发布。
