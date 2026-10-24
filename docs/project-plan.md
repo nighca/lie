@@ -6,11 +6,11 @@
 
 ## 当前阶段与目标
 
-已完成通用引擎、持续语音及三案本地可玩闭环；编辑器v2、统一头部/素材URL与新案复核已进入集成验收，当前重点是更新试玩、调查控制改稿与真人质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
+已完成通用引擎、持续语音及三案本地可玩闭环；编辑器v2、统一头部/素材URL已随376ce64部署，当前重点是调查控制改稿、转写节奏、动画选型与真人质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
 
 - **本地8787**：更新新版三步编辑器/分享投稿准备、共用头部、“有人在说谎”和统一形象URL，保留三案与侦探头像；本地存在不等于线上已发布。
-- **线上**：[lie-game](https://lie-game.nighca.workers.dev/)仍为`8cad54ba99160aa578acd68b90ba52c51fa91569`里程碑，含首案三人四态/活动提示/稳定名单；语音已启用，真实合成PCM协议单轮通过，不等于真人完整验收。
-- **发布链**：main push后CI通过再部署同提交，CD已有两次真实成功记录；当前本地新功能尚未随线上版本发布。见[持续部署](continuous-deployment.md)。
+- **线上**：[lie-game](https://lie-game.nighca.workers.dev/)已部署`376ce64efb4c035d083d47a93852da22a923a2cc`，三案/新版编辑器/共用品牌/8音色四态及统一路径可用；[部署验收](deployments/2026-10-24-editor-milestone.md)。语音ready检查不等于本次真人收音或推理验收。
+- **发布链**：main push后CI通过再部署同提交，CD已核验本次第三个里程碑：Actions40084031747成功、CF活动版本8079aea6 100%流量对应376ce64，正式IAB/健康/新构建均通过。见[持续部署](continuous-deployment.md)。
 - **关键质量缺口**：整合版真人麦克风/外放/长会话/盲测、多用户隔离和正式费用硬限额未闭环；fake、文本detect或短WAV通过均不能替代。
 
 ## 当前有效决定
@@ -26,7 +26,7 @@
 | 视觉 | 中文B黄蓝/深蓝轮廓轻松卡通；调查A人物舞台、首页A优化均已批准并本地实现；正式Logo为B微调`shorter.svg`，玩家默认头像为A帽檐侦探。不得重新询问既定风格批准。 |
 | 转写 | 常显、只读，新增/增长只滚记录内部到底；玩家头像右侧/NPC左侧，历史完整显示，保留中断标记。当前渐显50ms帧/2400ms追赶，新降速与玩家实时文本另见待办。 |
 | 编辑分享 | 用户已正式授权并行实现，旧“仅研究/等首页完成”门禁失效。纯文本、必选预置形象、本地自动草稿、同引擎试玩、压缩fragment链接；不做账号云同步/上传素材/作品版本管理。作者和分享玩家沿现Linx网关，费用限制统一另案。 |
-| 编辑器v2 | 三步自由往返；人物页有完整设定示例/聚焦卡片，每人必选形象；人物内设唯一答案，选B替A、可暂未选，删除清引用；试玩/分享校验唯一答案。结局只读答案摘要；末步分享主操作、试玩次操作、官方投稿弱入口。原型已批，待依赖后生产实施。 |
+| 编辑器v2 | 三步自由往返；人物页有完整设定示例/聚焦卡片，每人必选形象；人物内设唯一答案，选B替A、可暂未选，删除清引用；试玩/分享校验唯一答案。结局只读答案摘要；末步分享主操作、试玩次操作、官方投稿弱入口。已完成生产实现、独立桌面/391验收并随376ce64上线。 |
 | 官方投稿 | 用户选择跳GitHub由本人确认提交，无LIE OAuth/PAT；未来公开现`nighca/lie`，不另设投稿仓。现在仍PRIVATE，未授权改可见性/代建fork/commit/PR。外部作者PR不改变内部agent无PR规则。 |
 | 协作 | 隔离worktree、独立owner/边界/基线；root唯一integrator，发起者负责review/集成/验收，关键版本再push。耗时制作/测试/浏览器验收尽量委派，root及时响应与调度；[AGENTS](../AGENTS.md)。 |
 | 工具与证据 | 开发验收优先Codex内置浏览器；Chrome例外仅已授权的灵矽控制台。适合自动化的模块须有有效测试；供应商真实语义/声音与fake回归分开报告。 |
@@ -37,16 +37,16 @@
 
 | 模块/资产 | 当前状态 | 证据/下一步 |
 | --- | --- | --- |
-| 内容目录 | 本地三案：空盒里的纪念章3人480秒、压轴怎么是鸭叫4人600秒、盐和糖的小乌龙4人540秒；合计复用全部8形象 | [源内容](../content/games/)、[运行目录](../apps/web/public/games/index.json)；真实语义未全过。 |
+| 内容目录 | 本地三案：空盒里的纪念章3人480秒、压轴怎么是鸭叫4人600秒、盐和糖的小乌龙4人540秒；合计复用全部8形象 | [源内容](../content/games/)、[运行目录](../apps/web/public/games/index.json)；第二/第三案有界真实文本语义已复核，真人多轮仍待。 |
 | game-core | 动态人数/局隔离/人物上下文/预算/终局规则已实现并回归 | [架构](architecture.md)、`packages/game-core`；无新增规则DSL。 |
 | Web与UI | 首页A、接案、调查A、指认/结果/重开、离开确认和基础editor/play路由已本地；头像/卡片尺寸/指认卡间距/缓存304/滚动已修 | [开发入口](development.md)、[编辑器实现](game-editor-implementation.md)；调查新控制仍候选。 |
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
-| 八形象与音色 | 本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[manifest](../apps/web/public/appearances/manifest.json)。 |
-| 形象单一来源 | 已通过root完整review、255项回归/typecheck/build与35图字节审计，准备快进本地；源name/voice/四态+canonical assets及自动runtime生成齐备 | 唯一源为design清单，public为生成物；旧运行URL不变。editorv2以本次集成SHA为基线。 |
-| 编辑器基础/v2 | 基础草稿、同引擎试玩和URL分享已本地可测；v2原型已批准，生产实现等待单一来源依赖 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff→041c74a`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
-| 调查控制与语音反馈 | 设计`51776c8`与技术提案`20eb743`已交，待root归档/用户确认；未改正式UI | 自然时长、背景回看、底栏指认/时间/音量、“询问记录”；背景停止规则/窄屏固定底栏仍提案。 |
+| 八形象与音色 | 线上/本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[权威清单](../design/appearances/manifest.json)。 |
+| 形象单一来源 | 已集成并上线；name/voice/四态+canonical assets及自动runtime生成齐备，35图字节不变，兼容输出字段已删除 | 唯一源为design清单，public为生成物；统一/appearances/<id>/路径，新增仅加源条目和素材。 |
+| 编辑器基础/v2 | v2三步/唯一答案/必选形象/示例/分享投稿准备与共用header已集成上线 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff→041c74a`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
+| 调查控制与语音反馈 | 独立chat推进下一稿；用户最新希望背景入口融入顶部案名，状态+波形在按钮右侧整体，只显当前发声方一条波形，分隔线继续调整；未改正式UI | 自然时长、背景回看、底栏指认/时间/音量、“询问记录”；背景stop/关闭手动重开与窄屏固定底栏已批，视觉待新稿确认。 |
 | GitHub投稿 | 研究`9612c85`与独立实测`e94fdd2`已交；未登录IAB短链接遇登录门槛，9280B合成中文JSON的27334字符query被GitHub拒绝为过长 | [投稿方案](editor-official-submission-proposal.md)；正文/commit/PR表单全文预填仍未知，复制/下载为保底。 |
-| 动画探索 | 第二轮54895已交，用户指出聆听臂连接/比例和等待未托腮；独立动画chat已交64127c1→c5e40f2修正候选，姿态与微动画待用户看；静态角色仍生产基线 | 更明显待机、聆听手靠耳、说话嘴部开合；视觉时序不等于语音/中文口型同步。3D暂停扩大。 |
+| 动画探索 | 第二轮54895已交，用户指出聆听臂连接/比例和等待未托腮；独立动画chat已交64127c1→c5e40f2→85b8f44修正候选；用户已批独立动画包由appearance引用，契约与播放器共同选型，有界Canvas/Pixi验证获准进行；静态仍生产基线 | 更明显待机、聆听手靠耳、说话嘴部开合；视觉时序不等于语音/中文口型同步。3D暂停扩大。 |
 | 自动化与CD | 核心/voice/UI/web/gateway分层fake与回归、typecheck/build及受控CD均存在 | [验证记录](validation.md)、[CD](continuous-deployment.md)；测试数量跟随具体review提交，不沿用旧110项当现基线。 |
 
 ## 优先执行队列
@@ -55,19 +55,14 @@
 
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
-| P1 | 形象单一源 / game_editor_implementation→root | 单一源已本地；统一/id/生成URL及移除兼容字段已review，组合检查/IAB通过；35图字节/音色保留。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
-| P1 | 编辑器v2正式落地 / game_editor_implementation | 生产v2已本地集成，独立桌面/391验收通过；与统一header/URL的组合269项回归/typecheck/build和独立IAB1280/391通过，更新8787。官方投稿仍手动/private限制。 |
-| P1 | 统一产品头部 / remaining_character_states | ProductHeader/home+case与“有人在说谎”已review/组合IAB通过；保持调查离开确认。Editor亦已复用共用header，独立1280/391及Web150项检查通过。 |
 | P1 | 调查体验整体确认 / 独立设计chat+root+用户 | 旧稿517/技术20eb已交；用户已批背景stop/关闭手动重开及窄屏固定底栏；v2候选507b已交并经独立1280/1004/391检查；已转「LIE 调查页交互与视觉设计」chat `01a16d5c-de69-7452-8d6a-280d15a87e9e` 直接确认，原代理不重复制作，待用户确认后生产。 |
-| P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
-| P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题已实际完成且root逐答review为12PASS，清理6设备/1agent完成；证据已review并准备合入，不覆盖首批UNCERTAIN，不代替真人多轮。 |
+| P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；game_editor_implementation已接独立实现：角色100ms/玩家70ms固定字素节奏、移除2400ms强追赶；保持历史/停止/打断/新轮补齐与减少动态效果，待review。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
 | P1 | 单角色原画动画 / 独立chat | 用户可直接讨论的「LIE 人物动画设计与打磨」chat `01a16d44-aeea-7552-b184-5118072e75f3` 已接手；听臂连接/等待托腮及微动画已在候选修正，独立chat正修头部偏左/头颈缝，待用户验看；root负责进度协调、review与集成，原子代理不重复制作；不扩人。 |
-| P2 | 里程碑发布 / root唯一integrator | 里程碑376ce64已正常push，8787构建/health/资源清单已验；独立代理核目标SHA的Actions和CF实际部署，尚不把push当上线。 |
 | P2 | GitHub预填补验 / 独立UI实验+用户 | 等用户IAB登录；普通外部贡献链等实际公开及无上游写权限身份。只停预填/review，未经授权不建fork/branch/commit/PR；不向公开仓传项目私有正文。 |
 | P2 | 角色出戏边界 / root+语音/内容owner | 首案攻击问仍出现幕后元话语，工具层/独立顶层候选均未解决，候选未生产；已停止无限付费叠提示。目录只读识别deepseek-v4-flash不证明根因，不擅自换模型/供应商/剧情；见[沉浸调查](role-immersion-investigation.md)、[首案证据](case-behavior-validation.md)。 |
 | P2 | 启动等待/延迟质量 / 语音owner | 已有启动阶段拆分分析；在真实测量基础上评估AudioContext/WS/hello/mic/worklet，不擅自跨轮保活麦克风/连接。 |
-| P2 | 依赖审计 / 工程owner待排 | 既有npm audit报2moderate/6high工具链依赖；核具体适用性/修复版本，不`audit fix --force`，不自动等同已证实生产漏洞。 |
+| P2 | 依赖审计 / 工程owner待排 | appearance_assets正复现2moderate/6high工具链依赖并核适用性/修复版本，不`audit fix --force`，不自动等同已证实生产漏洞。 |
 | P3 | 正确/错误指认状态图 / 视觉owner | 已登记未生成；正确应被看穿/懊恼/无奈，非开心；错误可不解/委屈/抗议，按人物处理。仅提交结果后显示，不提前泄题、不改变错误终局不揭晓。 |
 | P3 | README英文默认+中文互跳 / 文档owner待排 | 用户明确低优先级；随下次README维护，两版产品/运行信息一致，不抢主线。 |
 | P3 | 形象概念命名 / root+用户 | appearance命名讨论仍保留，当前不批量改ID/字段；多样化扩充已完成八套，不继续无界生图。 |
