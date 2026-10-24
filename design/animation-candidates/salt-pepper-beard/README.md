@@ -1,6 +1,6 @@
 # 灰白胡须动画候选
 
-未激活生产，尚待发起者独立实际视觉review。2026-10-24用户明确授权：银发盘发之后的角色由团队自行验收，通过后可合入并正式接入，无需逐人等待用户；用户稍后在项目统一查看。该授权不替代自检、发起者复查或唯一integrator的审查。任务base为reviewed main `62b3846eecce8e902cd8bfe1764c87a337551e4b`，无额外依赖提交；仅本角色候选目录。
+未激活生产，已完成发起者独立实际视觉review，可交主协调正式接入review。2026-10-24用户明确授权：银发盘发之后的角色由团队自行验收，通过后可合入并正式接入，无需逐人等待用户；用户稍后在项目统一查看。该授权不替代自检、发起者复查或唯一integrator的审查。任务base为reviewed main `62b3846eecce8e902cd8bfe1764c87a337551e4b`，无额外依赖提交；仅本角色候选目录。
 
 已实际查看canonical四态：灰白卷发与短须、珊瑚红毛衣/白内领、深蓝长裤；默认放下双臂、聆听拢耳、等待交叉承托/点下巴、讲话摊掌。保留四态表情，不重新设计脸或服装。
 
@@ -42,10 +42,14 @@ npm run appearances:generate
 
 ## 局限
 
-无自然抬放transition（专用附件即时切换、数值通道由既有240ms settle）；无眨眼、网格变形或真实语音/音量驱动。讲话中央躯干/左臂复用默认源，衣料折痕可能略异其静态原图；补底裤子为原生生成输出，需检查其外形/衔接。等待接触约束减少了上胸与手臂的相对活动。尚未视觉通过，不自动激活或开始第三角色。
+无自然抬放transition（专用附件即时切换、数值通道由既有240ms settle）；无眨眼、网格变形或真实语音/音量驱动。讲话中央躯干/左臂复用默认源，衣料折痕可能略异其静态原图；补底裤子为原生生成输出，需检查其外形/衔接。等待接触约束减少了上胸与手臂的相对活动。发起者复验通过，正式接入由主协调review验证；后续制作仍遵守最多2角色。
 
 ## 接缝修订（待发起者复验）
 
 根据发起者实际八张25%/75%截图修复：左普通袖臂改为袖口内侧锚点并增加同源内部重叠；普通右袖与聆听右袖收紧内缘，排除会随袖转出的原躯干衣摆黑尾，中央躯干补足对应内部选区；聆听拢耳袖片剔除下端胸线；讲话右袖剔除原躯干边，并以独立speaking-source/body-root窄片保留真实右衣摆。所有PNG原字节及hash不变。等待腰下固定、上胸头手同父纵向呼吸，保留下巴接触；其余三态分部轨道幅度不退回静态。
 
 `qa.html`保留状态/相位控件，并支持CSS局部放大`detail=waist|shoulders|face`，可同时带`state=speaking&phase=.25`。制作代理无可用IAB，本修订未自称浏览器通过；最终以发起者实际实时/相反相位复验为准。
+
+## Current reviewed handoff
+
+Initiator desktop/four-state extrema/live and isolated same-origin391 iframe review completed; see initiator-review.md and native evidence. The iframe host logged one unattributed MutationObserver error, direct author preview logged none; formal top-level game/console/fallback checks remain integration QA responsibilities. Historical author-only pending-review notes do not override this initiator result. Temporary iframe shell removed, no shared viewport change.
