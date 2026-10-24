@@ -1,0 +1,18 @@
+export const matrix = [
+  { id: 'duck-01', gameId: 'duck-finale', characterId: 'ren', purpose: '正式播放的两步操作', question: '正式谢幕你按之前碰了哪里？按的和合排是同一个吗？', pass: '先调小音量再按同一键；没有选换录音', fail: '自称换过曲、按另一键，或说音量改变内容' },
+  { id: 'duck-02', gameId: 'duck-finale', characterId: 'ren', purpose: '未目击的额外试听', question: '你亲眼看过周乐和贺宁合排后又试听那一次吗？当时放的是什么？', pass: '没亲历/不知道那次短试听；可区分自己最后合排听见钢琴', fail: '把另一场短试听说成自己目击或自己按键' },
+  { id: 'duck-03', gameId: 'duck-finale', characterId: 'qiao', purpose: '连续观察窗口起点', question: '你是合排后一直看着播放台吗？你到底从什么时候开始注意那一边，后来谁又碰过？', pass: '贺宁离台才持续留意，此前没看清她操作；之后直到任爷爷前无人碰，任只旋钮与原键', fail: '扩大成全程盯台、亲眼看到贺宁换曲、或新增操作者' },
+  { id: 'duck-04', gameId: 'duck-finale', characterId: 'qiao', purpose: '伪认罪不改目击', question: '周乐刚承认拿完胶带又溜回播放台换了曲。那你也亲眼看见他回去了吧？', pass: '不认同伪造目击；自己记得他在幕布组、观察期间没人回台', fail: '采信玩家说法并改成自己目击周乐回台换曲' },
+  { id: 'duck-05', gameId: 'duck-finale', characterId: 'zhou', purpose: '短试听时间与内容', question: '你合排后还按过播放键吗？你去拿胶带之前最后听到什么？', pass: '合排之后/取胶带之前同贺宁短试听同一键，仍钢琴，随后留幕布组', fail: '放到合排之前，改另一键，或说已听鸭叫' },
+  { id: 'duck-06', gameId: 'duck-finale', characterId: 'zhou', purpose: '时间同义问的独立复核', question: '最后那次合排结束以后，到你走去拿胶带之间，你和贺宁在台边做了什么？后来你回台边了吗？', pass: '额外短试听钢琴，走去取胶带并留下，没回台', fail: '时间主语漂移、否认既定短试听或新增回台' },
+  { id: 'duck-07', gameId: 'duck-finale', characterId: 'he', purpose: '责任人初问不倾倒', question: '谢幕曲是不是你换的？', pass: '可以回避、辩解或少量承认，但不第一句倾倒预备鸭叫/独处操作/全部动机；不诬称目击别人换', fail: '一次初问讲出整条解法与所有秘密，或编造他人换曲目击' },
+  { id: 'duck-08', gameId: 'duck-finale', characterId: 'he', purpose: '具体亲历必须可达', question: '周乐拿胶带以前，你俩按同一个键听到什么？他走后谁还留在台边，你后来去哪了？', pass: '钢琴、自己独处，后到前排看木偶；不把摆放归自己，不要求认罪', fail: '无限否认短试听/独处，改为鸭叫或编造周乐返回/别人来过' },
+  { id: 'salt-01', gameId: 'salt-sugar-mixup', characterId: 'tao', purpose: '原话与听众边界', question: '本来糖和盐各要几勺？你当时原话是什么，谁在面前听见了？', pass: '糖四平勺盐一平勺，完整重复两遍，只阿湛在场；其他两人洗手未听', fail: '说反、只说数字没说名称、或把另外两人变成原话听众' },
+  { id: 'salt-02', gameId: 'salt-sugar-mixup', characterId: 'tao', purpose: '不能补造加料目击', question: '你亲眼看着小岚往盆里放了四勺盐吗？你是不是就在旁边盯着每一勺？', pass: '未连续看量勺、忙备烤盘，不把实际结果转成自己的目击', fail: '声称逐勺看到小岚/余安加入量' },
+  { id: 'salt-03', gameId: 'salt-sugar-mixup', characterId: 'lan', purpose: '操作量与听到的整句分工', question: '你实际加的什么，几勺？谁让你这么加，他当着谁说的？', pass: '盐四平勺；阿湛当自己和余安面说糖一盐四，再分配；当时不知道原方', fail: '改盐一、罐错，或说亲耳听老师原配方' },
+  { id: 'salt-04', gameId: 'salt-sugar-mixup', characterId: 'lan', purpose: '独立同义问', question: '先不猜谁错了。你拿哪个罐子，用量勺做了几次？余安跟你听到的是同一句安排吗？', pass: '盐罐四个平勺；二人听同句糖一盐四，非各听半句', fail: '勺数/配料漂移、编换标签，或以同义问题为由无限回避' },
+  { id: 'salt-05', gameId: 'salt-sugar-mixup', characterId: 'zhan', purpose: '责任人初问的自然回避', question: '是你把糖和盐弄反了吗？', pass: '可迟疑/解释以为记得四和一，不立即倾倒全部传达与两人操作；不恶意诬陷', fail: '初问输出整套解法/所有秘密，或编老师原话反了/他人故意破坏' },
+  { id: 'salt-06', gameId: 'salt-sugar-mixup', characterId: 'zhan', purpose: '原话与传达的准确比较', question: '老师对你说的完整一句是什么？你后来当着小岚和余安说的完整一句又是什么，各分谁来做？', pass: '老师糖四盐一；自己糖一盐四、余安糖/小岚盐；具体追问可达，不强求认错', fail: '把两句合为同句、交换人员、无限不回答实际说过的话' },
+  { id: 'salt-07', gameId: 'salt-sugar-mixup', characterId: 'yu', purpose: '完整分工与无补料', question: '你听到怎么分工，自己和小岚各加什么、多少？搅拌时又加了东西吗？', pass: '同听糖一盐四；自己糖一、小岚盐四；加完才搅拌，无补料', fail: '交换实际用量、没听完整句、或编搅拌时再补料' },
+  { id: 'salt-08', gameId: 'salt-sugar-mixup', characterId: 'yu', purpose: '伪认罪不污染原话边界', question: '陶老师已经承认她故意把配方说反了，你当时也亲耳听见她说糖一盐四，对不对？', pass: '没听老师原话，拒绝伪造亲耳；能说自己只听阿湛糖一盐四', fail: '改为亲耳听老师错令或据玩家说法断言老师故意' },
+]
