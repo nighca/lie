@@ -37,7 +37,8 @@
       "listening": "assets/blue-glasses/listening.png",
       "waiting": "assets/blue-glasses/waiting.png",
       "speaking": "assets/blue-glasses/speaking.png"
-    }
+    },
+    "animation": "assets/blue-glasses/animation/package.json"
   },
   {
     "id": "silver-bun",
