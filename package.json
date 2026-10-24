@@ -13,9 +13,11 @@
   },
   "scripts": {
     "dev": "npm run dev --workspace @lie/web",
+    "dev:main": "node scripts/main-preview.mjs",
     "build": "npm run build --workspace @lie/web && npm run build --workspace @lie/gateway",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run test:appearances && npm run test --workspaces --if-present",
+    "test:main-preview": "node --test scripts/main-preview.test.mjs",
+    "test": "npm run test:main-preview && npm run test:appearances && npm run test --workspaces --if-present",
     "appearances:generate": "node scripts/appearances.mjs",
     "appearances:check": "node scripts/appearances.mjs --check",
     "test:appearances": "node --test scripts/appearances.test.mjs"
