@@ -68,7 +68,7 @@
 | P3 | 正确/错误指认状态图 / 视觉owner | 已登记未生成；正确应被看穿/懊恼/无奈，非开心；错误可不解/委屈/抗议，按人物处理。仅提交结果后显示，不提前泄题、不改变错误终局不揭晓。 |
 | P3 | 双语README / 文档owner | 默认英文README.md、README.zh-CN.md互链已review并随2de0f22本地集成，链接/命令对齐，已随32d89bf发布。 |
 | P1 | UI反馈1—9 / 调查共享视觉专项 | 用户澄清原“只记录”不约束root，已正式授权安排实施；从887ac03分派首页/品牌/介绍卡片/转写/持续玩家波形/通知/结局分段。owner负责相关Web/UI文件，禁止编辑器/素材/命名迁移，交回完整review与桌面/391验收。见[17条范围](pending-ui-feedback.md)。 |
-| P1 | UI反馈10—17 / 编辑器专项 | 已从887ac03分派步骤连线、待机动画回退、链接配色、投稿文案及复制/GitHub流程简化，限定Editor及相关helper/tests；与调查1—9并行无文件重叠。用户在编辑器专项追加授权本批PC人物卡复用：编辑器owner持有CharacterChoice等价默认样式迁移，调查owner删除style.css冗余覆盖须依赖该提交；移动各自保留。catalog新characters接口与editor fixture分owner，root组合验。 |
+| P1 | UI反馈10—17 / 编辑器专项 | 原三提交7af9f884→ead3505e→dc4bf01已root全diff review与本地集成；10—17/PC复用完成，独立344测试/全仓类型构建及IAB桌面/391对照通过，见[本批验收](history/2026-10-24/editor-feedback-integration.md)。保存状态+清草稿共同显隐是用户新请求，专项followup在制。用户在编辑器专项追加授权本批PC人物卡复用：编辑器owner持有CharacterChoice等价默认样式迁移，调查owner删除style.css冗余覆盖须依赖该提交；移动各自保留。catalog新characters接口与editor fixture分owner，root组合验。 |
 | P3 | Logo小彩蛋 / 视觉设计owner待核 | 用户授权独立sub agent先设计，细节未定；先查旧任务是否已分派，避免重复，方案待用户确认后才实施。 |
 | P2 | 人物预设统一命名 / root+appearance_assets | CharacterPreset与@lie/character-animation已批；动画接入前置已满足，只读盘点7e47d7a已review；采用内部类型/模块/制作目录/包名统一，保留已有appearanceId序列化键与/appearances/公开路径以免破坏草稿/分享且无需兼容层；原owner已交cb86dd6，旧候选1629830含迁移且尚未合入main；本轮优先调查页，不重复回放旧候选的调查提交，不再重问定名。 |
 

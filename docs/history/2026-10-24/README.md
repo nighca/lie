@@ -60,3 +60,5 @@
 - [总协调接手与调查页最终版本review](coordinator-takeover.md)：用户批准cad5788的四提交范围、独立343测试/类型/构建和桌面/391复核，后续只记录反馈另列。
 
 - 用户授权每4小时主协调轮换、30分钟推进模式持续继承；当前登记见[主协调交接状态](../../coordinator-handoff.md)，具体防重/失败恢复见[轮换流程](../../coordinator-rotation.md)。本次仅配置，尚未实际创建接任chat。
+
+- [编辑器反馈10—17及PC卡复用review](editor-feedback-integration.md)：原三提交完整复核、root344测试/类型/构建与桌面/391，新增保存状态组另交。
