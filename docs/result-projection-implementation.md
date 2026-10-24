@@ -13,3 +13,5 @@ GameView新增 `result: { readonly characterId: string; readonly correct: boolea
 原生产来源`6ca375176fa922f9d5bef566277257c810598460`已cherry-pick为候选`17fb2ee2f269c7c4d2de03cae2415f5af84a5542`，base为reviewed main `345a3135f3dec0c18003b0a5cd9302a4c606725d`。独立复核完整diff与getView/accuse/end/restart周边，生产仅controller两行新增；不改UI、玩法或新动画契约。Node24.22.1下Web17 suites/183 tests、Web typecheck、production build及60资源严格检查全部通过，测试使用fake，不替代真人语音。本批后续只校准三份文档；候选准备由root本地集成，尚未main/push。
 
 三角色旧候选`d4b0580`的检查属于旧基线；本投影进入main后，三角色必须从新main重建并复跑组合checks，不能用旧候选hash直接合main。正式结果UI和新素材仍未实现，新两态动画播放契约未获批准，沿原提案门禁。
+
+本轮root实际review生产两行、7项测试和周边命令语义，独立Web183/类型/构建60资源通过；同批仅另加无凭据开发WS诊断与文档，没有改变运行逻辑。随本轮已验证候选快进本地main，未push；实际main SHA以仓库HEAD为准。

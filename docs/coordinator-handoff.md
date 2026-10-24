@@ -35,8 +35,8 @@
 | 编辑器 `01a16d90-27cc-77c2-9e0a-4b28b1135371` | `codex/editor-portrait-alignment`局部候选28测试/类型/构建60资源通过。自有同源iframe初轮1004=216.23×285、391=317×160居中通过；多角色反复切换/cleanup及完整handoff尚待，当前waitingOnApproval，顶层slot未取消，5402/5403保留。若改共享AnimatedPortrait先协调。 |
 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 5504银发/5505灰紫正式游戏IAB未交付，01:28实际waitingOnApproval；候选391同源iframe四态/8图已过，非顶层设备。临时壳已删/最终记录已交，壳MutationObserver异常来源待正式页复核。完成游戏QA后制mint/ochre，保留原canonical，最多2角色；自验/clean/rootreview后可集成，不自动发布。 |
 | 接入执行 `main_acceptance_environment` / root review | gray/plum正式source HEAD `822e9b5bb8064f10c00178f9c5643dff6f3418dd`，base5968661，12有序提交clean；root已review builder/verify/manifest/docs/图，无源码blocker，sourceowner372测试/类型/构建72资源/strict/hash通过。与18个silver提交合成下述30提交候选，未main/push。 |
-| 独立工程 `review_blue_animation` | `codex/dev-websocket-rejection`从bf05837调查开发代理完整WS无凭据拒握手挂断；可可靠局部修则实施，重大选择保留。拥有vite.config.ts及必要离线harness/test/docs，gateway变更先协调；专用loopback端口，不用真实key/provider/mic/全局viewport，不碰8787或main-preview。 |
-| 结果投影 / root候选独立验证 | source `6ca375176fa922f9d5bef566277257c810598460`→候选`17fb2ee2f269c7c4d2de03cae2415f5af84a5542`，base345a313，当前WT/`codex/integrate-result-projection`。生产仅controller2行，7项专属测试纳入Web183测试、类型/构建/60资源检查全过，准备root本地集成。仅复制既有被指认者/正误，不改UI/玩法/动画契约；详[实施记录](result-projection-implementation.md)。 |
+| 开发WS调查 / review_blue_animation | source `929acef88f7f6b09221fa3993f986d2ffb85f54c`完整无凭据network矩阵已过，4自有端口关闭；诊断和[根因记录](dev-websocket-rejection.md)随本轮main纳入。开发宿主丢非101仍是未修复限制，无生产/依赖补丁，不重做调查或冒称已修。 |
+| 结果投影 / root候选独立验证 | source `6ca375176fa922f9d5bef566277257c810598460`→候选`17fb2ee2f269c7c4d2de03cae2415f5af84a5542`，base345a313，当前WT/`codex/integrate-result-projection`。生产仅controller2行，7项专属测试纳入Web183测试、类型/构建/60资源检查全过，随本次main快进纳入。仅复制既有被指认者/正误，不改UI/玩法/动画契约；详[实施记录](result-projection-implementation.md)。 |
 | 命名迁移执行owner待排 | `CharacterPreset`/`@lie/character-animation`已批，`cb86dd6`未集成；保持appearanceId和公开`/appearances/`。待fan＋Editor＋silver合main后，按[落地计划](character-preset-migration-plan.md)统一迁移；含runner命令与环境owner受控重启，不能覆盖新代码。 |
 
 01:28状态：fan、Editor、动画三专项均actual waitingOnApproval，正式游戏QA无新交付；这不是拒绝结论，原因不猜测。只读排查已结束：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
@@ -47,7 +47,7 @@
 
 共享窗口：fan5507仍waitingOnApproval并持有 → Editor5402/5403（条件保留，初轮iframe不等于完整交付）。silver5504/gray-plum5505由动画专项独立tab/同源391 iframe验游戏，不改全局viewport；gray/plum顶层slot已取消，Editor尚未取消。后续由root显式转授。
 
-[结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成候选验证、准备本地集成；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
+[结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
 
 新协调须向三个专项通知新ID；root子agent句柄不随新chat自动继承，保留worktree、依赖refs和交付来源再接续。常规反馈批量handoff，冲突/接口/viewport及时协调。
 
