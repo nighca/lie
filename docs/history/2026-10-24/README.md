@@ -33,3 +33,5 @@
 - root核aeed后续验证相对原脚本完整差异，放行12原题/6隔离身份单次执行，代理已启动；尚无通过结论，不把启动等同验收。
 
 - 用户要求查看源manifest规格。补充design/appearances/manifest.types.ts逐字段注释，区分制作源必填与运行时容错，加入JSON satisfies静态契约并从素材README链接。Web类型检查和18项生成器检查通过；路径/PNG/跨条目约束仍由生成器验证，不把TS字符串类型夸大为资源校验。
+
+- 用户指出首页与案件页品牌下划线等不一致，并指定首页主文案“有人在说谎”。root核Application/App重复header和home CSS覆写，已委派独立共用组件/插槽收敛，先home+case，保留各自标题/操作和离开确认；editorv2收尾不抢文件，依赖集成后最小复用。

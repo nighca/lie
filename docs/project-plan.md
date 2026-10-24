@@ -57,6 +57,7 @@
 | --- | --- | --- |
 | P1 | 形象单一源 / game_editor_implementation→root | 已本地集成；35图字节/旧URL不变，新增仅改源清单与素材。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
 | P1 | 编辑器v2正式落地 / game_editor_implementation | 已批准，无需再确认；从单一源review SHA开始，保持路由/草稿/分享，补有效回归和独立IAB；投稿诚实呈现未开放/手动步骤。 |
+| P1 | 统一产品头部 / remaining_character_states | 用户已要求统一首页/案件左侧品牌，root核home CSS覆写造成差异；独立共用header+slots实现，保留导航确认，首页主文案改“有人在说谎”。editorv2交付后再协调接入，不抢其文件。 |
 | P1 | 调查体验整体确认 / root+视觉owner+用户 | root审`51776c8`/`20eb743`并给用户具体稿；用户确认前不改顶部/底部/回看规则。后续按真实输入/播放器音量实现，不把模拟条当测量。 |
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
 | P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题`aeed`已root差异review放行，代理正在单次有界真实执行；不覆盖首批、首不通过停、不重试。 |
