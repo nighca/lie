@@ -35,3 +35,5 @@
 - 用户要求查看源manifest规格。补充design/appearances/manifest.types.ts逐字段注释，区分制作源必填与运行时容错，加入JSON satisfies静态契约并从素材README链接。Web类型检查和18项生成器检查通过；路径/PNG/跨条目约束仍由生成器验证，不把TS字符串类型夸大为资源校验。
 
 - 用户指出首页与案件页品牌下划线等不一致，并指定首页主文案“有人在说谎”。root核Application/App重复header和home CSS覆写，已委派独立共用组件/插槽收敛，先home+case，保留各自标题/操作和离开确认；editorv2收尾不抢文件，依赖集成后最小复用。
+
+- 用户明确批准删去publicDirectory/publicAvatar，不再为旧URL给长期清单加兼容元数据；统一/appearances/<id>/default、独立avatar及三状态路径，更新活跃引用，历史稿不驱动正式路径。已交视觉owner在editorQA后独立实现生成器/类型/源/引用迁移；editor/header两owner已协调文件边界，无aliases，不改源图字节或音色。

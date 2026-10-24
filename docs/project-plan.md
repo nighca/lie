@@ -55,7 +55,7 @@
 
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
-| P1 | 形象单一源 / game_editor_implementation→root | 已本地集成；35图字节/旧URL不变，新增仅改源清单与素材。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
+| P1 | 形象单一源 / game_editor_implementation→root | 已本地集成；35图字节保留；用户已批准移除兼容字段、统一/id/生成URL，视觉owner在editorQA后实施并协调活跃引用。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
 | P1 | 编辑器v2正式落地 / game_editor_implementation | 已批准，无需再确认；从单一源review SHA开始，保持路由/草稿/分享，补有效回归和独立IAB；投稿诚实呈现未开放/手动步骤。 |
 | P1 | 统一产品头部 / remaining_character_states | 用户已要求统一首页/案件左侧品牌，root核home CSS覆写造成差异；独立共用header+slots实现，保留导航确认，首页主文案改“有人在说谎”。editorv2交付后再协调接入，不抢其文件。 |
 | P1 | 调查体验整体确认 / root+视觉owner+用户 | root审`51776c8`/`20eb743`并给用户具体稿；用户确认前不改顶部/底部/回看规则。后续按真实输入/播放器音量实现，不把模拟条当测量。 |
