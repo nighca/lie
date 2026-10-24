@@ -303,3 +303,51 @@ describe('continuous conversation and shared budget', () => {
   })
 
 })
+
+
+describe('content-defined lists beyond three suspects', () => {
+  it.each([4, 5])('can interrogate the last of %i suspects without resetting the shared budget or mixing histories', async (count) => {
+    const content = {
+      ...game,
+      characters: Array.from({ length: count }, (_, index) => ({
+        id: `suspect-${index + 1}`, name: `角色${index + 1}`, profile: `角色${index + 1}的独立资料`, appearanceId: null,
+      })),
+      ending: { culpritId: `suspect-${count}`, reveal: '最后一个人物也能被正确指认。' },
+    }
+    let time = 0
+    const { controller, turns } = setup({ now: () => time, setTimeout, clearTimeout }, content)
+    await controller.load(content.id)
+    expect(controller.getView().characters).toHaveLength(count)
+    controller.start()
+    await controller.startConversation()
+    turns[0].scope.onEvent({ type: 'userText', text: '只问第一个人物。' })
+    time = 125
+    controller.selectCharacter(`suspect-${count}`)
+    expect(turns[0].closed).toBe(true)
+    expect(controller.getView().history).toEqual([])
+    expect(controller.getView().interrogationRemainingMs).toBe(480000 - 125)
+    await controller.startConversation()
+    const last = turns[1]
+    expect(last.scope.characterId).toBe(`suspect-${count}`)
+    expect(last.scope.readContext().profile).toBe(content.characters[count - 1].profile)
+    expect(last.scope.readContext().history).toEqual([])
+    last.scope.onEvent({ type: 'userText', text: '只问最后一个人物。' })
+    time = 500
+    controller.selectCharacter('suspect-1')
+    expect(controller.getView().history.map((entry) => entry.text)).toEqual(['只问第一个人物。'])
+    expect(controller.getView().interrogationRemainingMs).toBe(479500)
+    controller.selectCharacter(`suspect-${count}`)
+    expect(controller.getView().history.map((entry) => entry.text)).toEqual(['只问最后一个人物。'])
+    expect(controller.getView().interrogationRemainingMs).toBe(479500)
+    turns[0].scope.onEvent({ type: 'assistantText', text: '旧人物回包不得混入。' })
+    expect(controller.getView().history).toHaveLength(1)
+    controller.openAccusation(); controller.accuse(`suspect-${count}`)
+    expect(controller.getView()).toMatchObject({ phase: 'solved', reveal: content.ending.reveal })
+    controller.restart(); controller.start(); controller.openAccusation(); controller.accuse('suspect-1')
+    expect(controller.getView()).toMatchObject({ phase: 'lost', reveal: null, accusationOpen: false })
+    controller.openAccusation(); controller.accuse(`suspect-${count}`); await controller.startConversation()
+    expect(controller.getView().phase).toBe('lost')
+    expect(turns).toHaveLength(2)
+    controller.dispose()
+  })
+})
