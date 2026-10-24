@@ -2,7 +2,7 @@
 <style>body{font:16px system-ui;background:#fff18a;color:#111b45;padding:16px}main{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}canvas{width:100%;background:#fffef7;border:2px solid #111b45;border-radius:12px}h2{font-size:16px}button{padding:12px}.detail main{grid-template-columns:repeat(2,1fr)}.detail .frame{height:220px;position:relative;overflow:hidden;background:#fffef7;border:2px solid #111b45;border-radius:12px}.face .frame{height:360px}.detail.face canvas,.detail.face img{position:absolute;left:calc(50% - 750px);top:-115px;width:1500px;height:1500px;border:0;border-radius:0}.waist .frame{height:460px}.waist canvas{top:-500px!important}.detail canvas{position:absolute;left:calc(50% - 500px);top:-280px;width:1000px;height:1000px;border:0;border-radius:0}</style>
 <h1>银发盘发 · 相反运动极值</h1><p>正式采样器、Canvas 后端；各态第 1 秒和第 3 秒。仅数据预览，无语音连接。</p><main></main>
 <script type="module">
-import {readAnimationPackage,sampleClip,createCanvasRenderer} from '/@fs/Users/nighca/.codex/worktrees/silver-bun-animation/lie/packages/appearance-animation/src/index.ts';
+import {readAnimationPackage,sampleClip,createCanvasRenderer} from '../../../packages/appearance-animation/src/index.ts';
 const detail=new URLSearchParams(location.search).get('detail');if(['shoulders','waist','face'].includes(detail))document.body.classList.add('detail');if(detail==='waist')document.body.classList.add('waist');if(detail==='face')document.body.classList.add('face');
 const data=readAnimationPackage(await (await fetch('./package.json')).json());
 const images=new Map(await Promise.all(Object.entries(data.assets).map(async([id,asset])=>{let im=new Image();im.src=new URL(asset.src,location.href);await im.decode();return [id,im]})));
