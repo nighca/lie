@@ -13,10 +13,12 @@
 | 决策与完成证据 | [历史索引](../history/README.md)、[当前计划与门禁](../project-plan.md) |
 | 归档补存 | [2026-10-25盘点、原文与待交付范围](2026-10-25/README.md) |
 | 历史提交与chat补查 | [第二轮31份中间版本、chat范围及旧dirty映射](2026-10-25/history-followup/README.md) |
-| 专项历史补交 | [动画研究README、来源与失败证据](2026-10-25/animation-history-followup/README.md)；[编辑器原型与聊天设计回收](../archive-inbox/editor-history-2026-10-25/README.md)，Editor source `0788c19`随root下一候选同时集成 |
+| 专项历史补交 | [动画研究README、来源与失败证据](2026-10-25/animation-history-followup/README.md)；[编辑器原型与聊天设计回收](../archive-inbox/editor-history-2026-10-25/README.md)；[调查页、品牌与移动端历史设计](../archive-inbox/investigation-visual-history/README.md) |
 
 完成交付时，作者列出文档、必要附件及未完成草稿；标注日期、来源、提案/已批准/已否决/被替代/未验证状态和替代关系。发起者实际review并集成默认分支，确认文档可追溯后再清理worktree。进行中的材料仍由原owner完整交付。
 
 失效或备选文档可放`docs/archive/YYYY-MM-DD/`；已有`docs/history/`和`design/`内的版本化资料不必搬家。可保留原文快照并由索引解释状态；旧快照中的相对路径、服务地址和“当前”措辞只表示历史上下文。单一chat、临时路径、忽略目录或待清理worktree不是最终存档。
 
 仅保留解释设计/判断所需的附件；运行缓存和普通执行日志不全量入库。凭据、认证头及个人敏感信息排除，必要材料脱敏并注明缺失。原始材料找不到时列明missing/仅存摘要，不补造证据。
+
+2026-10-25历史补存交付已由root实际审查，纳入本地main，尚未push。来源提交按批次为`83b2bead0e6c0bf5cb963ad5b26fba6860b12972`；Editor `0788c19801ac5e59b04339a3b84aff4c2579692d` → `df9996282f66285387bdaee0d83b5bf893699762`；动画 `8a42a283ff4c93350156b6e836c0341a5f40f2d6`；调查 `1395873e1603f04e95c1e817cd477b72c6df17d9`。已核对来源字节/哈希、状态、索引与必要图片；各收件箱保持作者原路径并纳入本入口，不再重复搬运。
