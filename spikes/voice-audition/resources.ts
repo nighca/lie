@@ -3,7 +3,9 @@ import { chmod, mkdir, readFile, unlink, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 
-const statePath = new URL('./tmp/audition-state.json', import.meta.url)
+const alvinOnly = process.argv.includes('--alvin-only')
+const prefix = alvinOnly ? 'LIE-alvin-chinese-' : 'LIE-voice-audition-'
+const statePath = new URL(alvinOnly ? './tmp/alvin-state.json' : './tmp/audition-state.json', import.meta.url)
 const cleanup = process.argv.includes('--cleanup')
 const keyOption = process.argv.indexOf('--key-file')
 if (keyOption < 0 || process.argv[keyOption + 1]?.startsWith('--') || process.argv[keyOption + 1] == null) {
@@ -18,12 +20,12 @@ try {
   state = JSON.parse(await readFile(statePath, 'utf8'))
 } catch (error) {
   if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
-  state = { name: `LIE-voice-audition-${Date.now()}`, agentId: null, devices: Array.from({ length: 1 }, () => ({
+  state = { name: `${prefix}${Date.now()}`, agentId: null, devices: Array.from({ length: 1 }, () => ({
     mac: `02:${randomBytes(5).toString('hex').match(/../g)!.join(':')}`, client: randomUUID(), bound: false, token: null
   })) }
   await save()
 }
-if (!state.name.startsWith('LIE-voice-audition-') || state.devices.length !== 1) throw new Error('Refusing unrelated test state')
+if (!state.name.startsWith(prefix) || state.devices.length !== 1) throw new Error('Refusing unrelated test state')
 async function save() {
   await writeFile(statePath, JSON.stringify(state), { mode: 0o600 })
   await chmod(statePath, 0o600)

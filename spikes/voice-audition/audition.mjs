@@ -2,14 +2,17 @@ import assert from 'node:assert/strict'
 import { readFile, writeFile } from 'node:fs/promises'
 import { randomUUID, createHash } from 'node:crypto'
 import { setTimeout as delay } from 'node:timers/promises'
-import WebSocket from 'ws'
+import { createRequire } from 'node:module'
+const require = createRequire(new URL(process.env.LIE_DEPENDENCY_ROOT ?? '../../package.json', import.meta.url))
+const WebSocket = require('ws')
 
+const alvinOnly = process.argv.includes('--alvin-only')
 const dir = new URL('./tmp/', import.meta.url)
-const state = JSON.parse(await readFile(new URL('audition-state.json', dir), 'utf8'))
-assert.ok(state.name.startsWith('LIE-voice-audition-') && state.devices.length === 1)
+const state = JSON.parse(await readFile(new URL(alvinOnly ? 'alvin-state.json' : 'audition-state.json', dir), 'utf8'))
+assert.ok(state.name.startsWith(alvinOnly ? 'LIE-alvin-chinese-' : 'LIE-voice-audition-') && state.devices.length === 1)
 const clip = await readFile(new URL('input.pcm', dir))
 const line = '今天阳光很好，我们准备开始调查。'
-const candidates = [
+const candidates = alvinOnly ? [['blue-glasses', '29ddb9582ae8481ebf11562f99aeaf95']] : [
   ['coral-bob', '535b81a1db504baa99fd726e01afee15'],
   ['sunny-moustache', '2e7965636b0d4472ae51e75f419dff41'],
   ['blue-glasses', '29ddb9582ae8481ebf11562f99aeaf95']
@@ -27,7 +30,7 @@ try {
   for (const [appearance, voiceId] of candidates) {
     const result = await sample(appearance, voiceId)
     results.push(result)
-    await writeFile(new URL('results.json', dir), JSON.stringify(results, null, 2), { mode: 0o600 })
+    await writeFile(new URL(alvinOnly ? 'results-alvin.json' : 'results.json', dir), JSON.stringify(results, null, 2), { mode: 0o600 })
     console.log(JSON.stringify(result))
   }
 } catch {
@@ -104,13 +107,13 @@ async function sample(appearance, voiceId) {
     await wait(() => stats.ttsStop)
     assert.ok(stats.stt === 1 && stats.contextCalls >= 1 && stats.ttsStarts === 1 && chunks.length > 0)
     const pcm = Buffer.concat(chunks)
-    await writeFile(new URL(`${appearance}.wav`, dir), wav(pcm), { mode: 0o600 })
+    await writeFile(new URL(`${alvinOnly ? 'alvin-chinese' : appearance}.wav`, dir), wav(pcm), { mode: 0o600 })
     stats.durationMs = Date.now() - started
     return { appearance, voiceId, ...stats, audioBytes: pcm.length, audioSeconds: pcm.length / 32000,
       sha256: createHash('sha256').update(pcm).digest('hex'), fixedLineMatched: output.replace(/[\s，。！？]/g, '') === line.replace(/[\s，。！？]/g, '') }
   } catch (error) {
     const reason = ['transport', 'closed', 'quota', 'answer-budget', 'unexpected-tool', 'protocol', 'timeout'].includes(error.message) ? error.message : 'validation'
-    await writeFile(new URL('failure.json', dir), JSON.stringify({ appearance, ...stats, reason }, null, 2), { mode: 0o600 })
+    await writeFile(new URL(alvinOnly ? 'failure-alvin.json' : 'failure.json', dir), JSON.stringify({ appearance, ...stats, reason }, null, 2), { mode: 0o600 })
     throw error
   } finally { if (ticker != null) clearInterval(ticker); socket.close(1000, 'Audition complete') }
 }

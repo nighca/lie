@@ -18,3 +18,8 @@ The three listed candidate voices each get one new connection to the same generi
 Generated WAVs, credentials, catalog snapshots and results stay ignored; do not commit audio without separately checking distribution rights. No remote public demo is downloaded. Logs contain identifiers of public candidate voices, counts/timings, an audio hash and fixed-line match flag, never keys/device IDs or private transcripts. Different audio hashes do not prove different voice identities. Listen to the two generated samples and compare all three official demo links before approving any mapping. Successful outputs show the voice parameter is compatible with this protocol path, not that the supplier has audibly honored each ID.
 
 The first run obtained two samples, then stopped on a third-attempt failure and cleaned up resources. That run lacked per-failure stage diagnostics; do not infer its cause. The current script additionally records a sanitized `failure.json` for a future explicitly authorized run, without rerunning the paid experiment to improve logs. Agent-default before/after verification was interrupted too and is not reported as passed.
+
+
+## Single Alvin Chinese follow-up
+
+Pass `--alvin-only` to **all three** resource/probe/cleanup commands to use the isolated `LIE-alvin-chinese-*` one-answer mode. Set `LIE_DEPENDENCY_ROOT=/absolute/repository/package.json` on the probe when reusing that repository's installed `ws`. It reuses `tmp/input.pcm`, writes `tmp/alvin-chinese.wav`, `tmp/results-alvin.json` and `tmp/failure-alvin.json`, and never overwrites the initial three-candidate results. This follow-up was run once under explicit authorization; do not rerun automatically. See the dated validation document for actual results and cleanup.

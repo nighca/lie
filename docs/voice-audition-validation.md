@@ -43,3 +43,27 @@
 保持故事profile和展示资源分离，在现有展示预设条目增加可选voiceId，通过应用层交给已有VoiceChannelOptions.voiceId。切人仍关闭旧连接并建立新scope，只当前形象ID决定该连接声音；不要修改共享agent默认、不要为声音新增DB/agent池，也不把声音字段放入案件真相规则。声音缺省时现有供应商默认不变；最终三套映射由试听结论决定。
 
 [智能体API](https://linx.qiniu.com/docs/xrobot/api/agent)和[音色目录API](https://linx.qiniu.com/docs/xrobot/api/others)均可由已授权代理操作，不需要用户必须到console逐项配置；若要后台试听，可作为可选入口。暂保留appearance命名；`PresentationPreset`、`CharacterStyle`只是将来统合外观与声音的命名候选，未经确认不迁移。
+
+
+## Alvin中文验证与沈禾粗犷方向候选（2026-10-24）
+
+基线 `5d1d6f83ecbf24b1889299ed130a2a631e81707b`。用户认为原三声音基本可用，新增目标是核实Alvin中文并给沈禾找更粗犷的替代方向；不改变正式映射或现有共享agent。原第三次失败事实与缺少诊断的限制保留，不能用这次成功倒推那次原因。
+
+本轮授权只读[官方音色目录](https://linx.qiniu.com/docs/xrobot/api/others) `GET /v1/voices`，HTTP200/code0、226项；Alvin的实时目录明确 `languages=["zh","en"]`。因此官方英文demo不代表只支持英文。精简的三条公开目录证据见 `spikes/voice-audition/catalog-selected.json`，不包含凭据或完整账号响应。
+
+新增独立 `--alvin-only` 模式，只创建 `LIE-alvin-chinese-*` 名称的1agent/1device，私密状态为忽略的 `tmp/alvin-state.json`；输出/故障文件也与原运行隔离。复用上次本地say生成的无敏感PCM输入，没有重采真人麦克风或下载供应商demo。每次仅一个Alvin候选、一个新realtime连接、一个回答，listen.start传voice.id不修改agent默认声音，45秒上限，失败停止不重试。generic无记忆配置与原试听保持。
+
+此次成功：1 STT、1 MCP context、1 TTS start/stop，返回158帧、101120字节、3.16秒；TTS事件文本匹配固定中文句“今天阳光很好，我们准备开始调查。”。建连1690ms、hello2099ms、总14506ms。安全结果见 `spikes/voice-audition/results-alvin.json`。FFprobe独立确认pcm_s16le、16kHz、mono、3.16秒。**这验证了指定ID+中文文本+realtime返回音频的兼容链路；实际中文发音、自然度及是否确为Alvin听感仍由人耳复核，不能只凭文本/哈希确认音色身份。**
+
+中文WAV绝对路径（ignored，未提交）：`/private/tmp/lie-shared-ui-kit/spikes/voice-audition/tmp/alvin-chinese.wav`。样本是本次真实供应商输出；与官方英文demo分开，试听时不要用英文demo代替它。播放交付可以直接引用本地文件，无需重新生成。
+
+沈禾最多两项替代候选，仅按官方标签/命名初筛，不额外调用付费合成，不声称已经听证比龙三叔更粗犷：
+
+| 候选 | 公开ID/标签 | 官方目录给出的demo | 与需求的关系（推断） |
+| --- | --- | --- | --- |
+| 热血磁性男 / 龙飞 | `30b517c1409d4e4493319fbbd1f8126b`；成年男、rexue、zh/en | [龙飞](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/liqtfn/%E9%BE%99%E9%A3%9E.mp3) | 优先对比更有劲、更外放的方向；是否粗犷由用户听定 |
+| 磁性低音男 / 龙小诚 | `9d91653b2adf4aa9ad97e1c8f63fbda3`；中年男、chenwen、zh/en | [龙小诚](https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/sjhntj/%E9%BE%99%E5%B0%8F%E8%AF%9A.mp3) | 对比较低沉、成熟方向，低音不自动等于沙哑粗犷 |
+
+两链接来自中文目录及zh-CN路径，未下载音频，未将其实际台词/语言当作已经听验。不改变音调来假装换声音；最终是否替换龙三叔仍由用户选择。
+
+本轮操作量：目录GET1、create/configure/read各1、OTA2、bind1、realtime回答1；cleanup unbind1/delete1全部HTTP200/code0，私密 `alvin-state.json` 已删除。没有操作8787/5188资源，没读实际账单，不能说零费用。脚本语法与diff检查通过；WAV和完整目录保持ignored，不将供应商音频传播权视为已核实。

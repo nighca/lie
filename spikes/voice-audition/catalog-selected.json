@@ -1,0 +1,44 @@
+[
+  {
+    "id": "29ddb9582ae8481ebf11562f99aeaf95",
+    "name": "温暖阿虎/Alvin",
+    "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Alvin.mp3",
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "age": "adult",
+    "gender": "male",
+    "styles": [
+      "wenrou"
+    ]
+  },
+  {
+    "id": "30b517c1409d4e4493319fbbd1f8126b",
+    "name": "热血磁性男",
+    "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/liqtfn/%E9%BE%99%E9%A3%9E.mp3",
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "age": "adult",
+    "gender": "male",
+    "styles": [
+      "rexue"
+    ]
+  },
+  {
+    "id": "9d91653b2adf4aa9ad97e1c8f63fbda3",
+    "name": "磁性低音男",
+    "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/sjhntj/%E9%BE%99%E5%B0%8F%E8%AF%9A.mp3",
+    "languages": [
+      "zh",
+      "en"
+    ],
+    "age": "middle",
+    "gender": "male",
+    "styles": [
+      "chenwen"
+    ]
+  }
+]

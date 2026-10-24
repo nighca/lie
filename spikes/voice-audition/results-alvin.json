@@ -1,0 +1,20 @@
+[
+  {
+    "appearance": "blue-glasses",
+    "voiceId": "29ddb9582ae8481ebf11562f99aeaf95",
+    "hello": true,
+    "toolsList": true,
+    "contextCalls": 1,
+    "stt": 1,
+    "ttsStarts": 1,
+    "ttsStop": true,
+    "audioFrames": 158,
+    "openMs": 1690,
+    "helloMs": 2099,
+    "durationMs": 14506,
+    "audioBytes": 101120,
+    "audioSeconds": 3.16,
+    "sha256": "1a9dbfcb168b9d77cf56522a987f003a21df748396285063e5fad22725556ce7",
+    "fixedLineMatched": true
+  }
+]
