@@ -49,9 +49,9 @@
 
 - 投稿弹窗独立优化本轮review集成：WT /Users/nighca/.codex/worktrees/submission-dialog-layout/lie，basec845f22，唯一b0c83d70122f7c5d25ae48bbb00c16d7d9c73776 clean；root全3file diff/context、1004/391原生图review，当前main组合候选4517e56独立31编辑/投稿测试/Web类型构建60资源通过。仅Editor模板/专属CSS/专项文档，原JSON/filename-only手动GitHub约定不变；专项IAB1004×676/391/1280、JSON滚动、实际clipboard与textarea完全相同通过，5401停/tab关/reset。不把专项QA当用户最终新排版批准，其他已验收编辑器仍完成。
 
-- 新独立P2：编辑器大形象有/无动画预置垂直位置不同，切动画先低后上移。用户仅要求记录排查，当前不实施。根因未验证（fallback/canvas定位只是猜测），空白截图不算复现；后续由编辑器+动画UI核冷/热加载、定位/透明留白/缩放锚点、桌面移动及共享调查页。目标静态→idle无跳跃/呈现基准一致，不关动画、不做新资产、不重开其他已验收部分。
+- 新独立P2：编辑器大形象有/无动画预置垂直位置不同，切动画先低后上移。用户早前要求独立排查，夜间已派编辑器专项调查和最小修复（先查根因，若涉及共享组件须协调）。根因未验证（fallback/canvas定位只是猜测），空白截图不算复现；后续由编辑器+动画UI核冷/热加载、定位/透明留白/缩放锚点、桌面移动及共享调查页。目标静态→idle无跳跃/呈现基准一致，不关动画、不做新资产、不重开其他已验收部分。
 
-- 新两项用户截图反馈：①首页插画下三步浅蓝胶囊视觉不协调，调查专项在Logo QA后承接scoped方案/优化，允许Application.vue home-flow及style.css home-flow，不碰intro默认flow-hint；②intro“本局可询问8分钟”数字两侧视觉留白，已派logo_easter_egg_design从d2852a8新WT研究CSS规范/官方支持及最小时长呈现实现，允许App.vue时长与专属CSS，不改原始文本/表单/JSON/转写。两者所有权分开，尚待交付；IAB排Logo→投稿弹窗，间距检查再排。
+- 首页/CJK两项已review本地集成：CSS源WT cjk-numeric-spacing base d2852a8，有序35d1bfc41c12069a3cbd61e5071867927fb6599f→094867bd316bdada47ab296f9f22fabd11748d67 clean；home WT home-flow-typography basefe478c2，唯一b611447b30b409417e5f4205d5e2af1a570759c7 clean。root全文diff/官方规范+WebKit/测量JSON/home桌面391图review，当前main候选1e8200b→1ecb112→91e17a8独立21App/home测试/Web类型构建60资源通过。仅intro scoped autospace与3条home-flow去胶囊CSS，原文/intro pill/其他muted不变；实际IAB字体间距8分钟+3.5px、5分30秒+7px，桌面391无溢出/console空。CJK5501已停，home5505待owner收尾；夜间小排版自验允许，不冒称用户已看新稿。
 
 - 新独立P3：盐糖案陶老师silver-bun和小岚mint-puffs青绿主题过近，用户希望稍区分；实际manifest两者accent均#78DDD7。已通知动画专项当前不混改silver waiting或重画，视觉owner后续提适当accent/卡片/服装调整层级和配色，若改服装须统一静态与动画。只登记待排，非已确定新配色。
 
