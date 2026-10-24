@@ -140,3 +140,23 @@ test('model readback mismatch prevents all device binding and inference', async 
   assert.equal(f.operations.some(item => item.operation === 'bind-owned'), false)
   assert.equal(f.removed, true)
 })
+
+for (const url of ['ws://xrobo-io.qiniuapi.com/v1/ws/', 'wss://xrobo-io.qiniuapi.com/v1/ws', 'ws://evil.example/v1/ws/', 'ws://xrobo-io.qiniuapi.com/v1/ws/?token=secret', 'ws://xrobo-io.qiniuapi.com:8080/v1/ws/', 'ws://user@xrobo-io.qiniuapi.com/v1/ws/', 'ws://xrobo-io.qiniuapi.com/v1/ws/#fragment']) test(`OTA metadata whitelist: ${url.split('?')[0]}`, async () => {
+  const f = fixture(), ota = f.options.ota
+  f.options.ota = async device => {
+    const result = await ota(device)
+    if (result.websocket != null) result.websocket.url = url
+    return result
+  }
+  const valid = ['ws://xrobo-io.qiniuapi.com/v1/ws/', 'wss://xrobo-io.qiniuapi.com/v1/ws'].includes(url)
+  let ran = false
+  const run = () => withOwnedResources(f.state, f.options, async () => { ran = true })
+  if (valid) { await run(); assert.equal(ran, true) } else { await assert.rejects(run(), /ota-config-invalid/); assert.equal(ran, false) }
+  assert.equal(f.removed, true)
+})
+test('OTA ws metadata never downgrades the actual answer socket', async () => {
+  let target = null
+  const task = collectAnswer({ createSocket: url => { target = url; return new FakeSocket([...start, ...finish]) }, device: { token: 'fake', mac: 'fake', client: 'fake' }, agentId: 'fake', question: '普通问题', readContext: () => ({ profile: '本人' }), timeoutMs: 20, closeMs: 5 })
+  await task
+  assert.equal(target, 'wss://xrobo-io.qiniuapi.com/v1/ws/')
+})

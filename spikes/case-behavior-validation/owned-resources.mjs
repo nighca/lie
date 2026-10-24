@@ -60,7 +60,8 @@ export async function withOwnedResources(state, options, run) {
       await save(state)
       checkAbort()
       result = await ota(device)
-      if (result.websocket?.url !== 'wss://xrobo-io.qiniuapi.com/v1/ws/' || typeof result.websocket?.token !== 'string' || !result.websocket.token) throw new Error('ota-config-invalid')
+      const upstream = new URL(result.websocket?.url ?? 'invalid:')
+      if (!['ws:', 'wss:'].includes(upstream.protocol) || upstream.hostname !== 'xrobo-io.qiniuapi.com' || !['/v1/ws', '/v1/ws/'].includes(upstream.pathname) || upstream.port || upstream.username || upstream.password || upstream.search || upstream.hash || typeof result.websocket?.token !== 'string' || !result.websocket.token) throw new Error('ota-config-invalid')
       device.token = result.websocket.token
       await save(state)
     }
