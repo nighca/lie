@@ -238,3 +238,5 @@
 2026-10-24 试玩阻塞排查：用户Chrome本地/线上开始后立即中断。root通过实际WSS验证本地有效测试Cookie能建立101、无Cookie拒绝（本地代理表现ECONNRESET），线上未配置返回503，未收音/推理。已提示用户在相同Chrome打开本地通行入口；同时优先委派只读status预检和错误说明修复，保持现有鉴权/公开语音待定边界，不能把未开放环境当成临时服务故障。
 
 2026-10-24 语音启动反馈修复验收：root复核提交2aeb511完整diff与周边生命周期，GET /api/voice/status复用既有鉴权，只返回状态、no-store且不建立上游；development插件才附固定本地入口。150项组合测试（gateway13/web61/core48/UI7/voice21）、全仓类型检查与构建通过；root内置浏览器用独立假配置环境验证缺权限显示入口说明、维持idle及08:00，无console错误、不收音/WS、不点击写Cookie。临时服务/假配置已移除。此项改善诊断与本地入口，不冒充线上真实语音已开放；有效测试Cookie的真实WS101已另行核实。
+
+2026-10-24 启动反馈修复已发布：源码69cb86d正常push，本地8787同SHA构建重启；真实本地status无Cookie为access-required、有效Cookie为ready，均带仅开发入口。cf dry-run仅ASSETS后部署Worker version 7aed7ae9-eed0-4214-bee2-7c60c1b29f09。公网status为unavailable，无开发入口头/Set-Cookie；内置浏览器点击开始最终显示当前环境尚未开放语音体验，保持08:00与idle，console无警告/错误。没有把此当成真实语音收音验收，Chrome需在同一浏览器手动取得本地通行Cookie后复试。
