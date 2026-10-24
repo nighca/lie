@@ -51,6 +51,8 @@
 
 - 新两项用户截图反馈：①首页插画下三步浅蓝胶囊视觉不协调，调查专项在Logo QA后承接scoped方案/优化，允许Application.vue home-flow及style.css home-flow，不碰intro默认flow-hint；②intro“本局可询问8分钟”数字两侧视觉留白，已派logo_easter_egg_design从d2852a8新WT研究CSS规范/官方支持及最小时长呈现实现，允许App.vue时长与专属CSS，不改原始文本/表单/JSON/转写。两者所有权分开，尚待交付；IAB排Logo→投稿弹窗，间距检查再排。
 
+- 新独立P3：盐糖案陶老师silver-bun和小岚mint-puffs青绿主题过近，用户希望稍区分；实际manifest两者accent均#78DDD7。已通知动画专项当前不混改silver waiting或重画，视觉owner后续提适当accent/卡片/服装调整层级和配色，若改服装须统一静态与动画。只登记待排，非已确定新配色。
+
 ## 服务、限制与接任第一步
 
 - 本地main验收环境已实际运行：用户launchd `dev.nighca.lie.main-preview`，plist ~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist，stable Node24.22.1在~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64，日志~/Library/Logs/LIE/main-preview.log；runner在owning main每1.5s看SHA，Vite8787→同源薄Worker8788，初启和lock变化npm ci，更新会重启自身服务，失败30s退避。独立于chat，不要在轮换时停止/重复启动。原项目私密.dev.vars仅复制至main的忽略目录，未输出内容/新建provider资源。版本/__lie/main-status已实测SHA与main一致，页面/三案/blue package200，voice/status ready，私密文件和异源Origin403。Node24.22.1全仓353测试（含8个runner生命周期/假凭据隔离）/类型/构建54资源通过。浏览器实际三案加载、console空；未自动收音，ready不是真人验收。main-preview原commit6a76307→e3c773b，本地9f3b607→162dde5；文档本身会推进main，需核下一实际SHA。
