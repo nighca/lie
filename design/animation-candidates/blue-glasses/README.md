@@ -1,6 +1,6 @@
 # 蓝衣眼镜动画候选
 
-2026-10-24，未激活生产。首版完成发起者review后，用户反馈微动偏小及袖口白弧遮臂；本次纯数据修订待发起者刷新5351实际复验，再交用户验收。使用内置imagegen，共3次首轮调用，0次额外修复调用；真实prompts、参考图和保留的原生输出见`generation-records.json`。所有PNG均原字节复制；没有脚本改像素、抠图或缩放导出。
+2026-10-24，未激活生产。首版完成发起者review后，用户反馈微动偏小及袖口白弧遮臂；本次纯数据修订已完成发起者实时四态与关键相位复验，待用户验收；见 `revision-review.md`。使用内置imagegen，共3次首轮调用，0次额外修复调用；真实prompts、参考图和保留的原生输出见`generation-records.json`。所有PNG均原字节复制；没有脚本改像素、抠图或缩放导出。
 
 ## 形象与部件
 
@@ -36,7 +36,7 @@ npm run appearances:generate
 - 首版391实际innerWidth=391。正式组件default/waiting/speaking的全页证据可用；listening的截图下半间歇截断，定相位页部分截图出现布局畸变，不能当作通过。已reset释放viewport；发起者随后以新选中tab、实际innerWidth=scrollWidth=391完成四态实时组件复验，见`initiator-review.md`及`owner-*-391.jpg`；早期截图不替代该证据。只保留可读证据，没有将坏截图归为通过。
 - 未另测本候选减少动态效果/隐藏暂停/资源失败/迟到换人/卸载；这些属既有通用组件能力与已有测试覆盖，不能把播放器单测当成本候选浏览器实测。发起者最终review仍需包含关键实际兼容检查。
 
-- 本次第二次托腮修订由发起者实际代验：其刷新5354定相位页检查waiting 25%/75%，确认白袖筒、右上臂台阶、左上臂黑悬线已消除，单套原画袖臂连接正常，左胸扣子与腰带重复碎片已清理。制作代理IAB调用返回“Browser is not available: iab”，没有声称亲自通过；没有重启其他owner的服务或占用viewport。其后发起者复验其余三态相反相位，default/listening正常，speaking 25%仍发现掌下胸前白衣碎片；本次拆同父袖片+精确skin后，发起者实际reload5354复验speaking 25%/75%，确认掌下游离白黑锯齿衣片已消除，袖口/皮肤连续，两个极值无明显脱接。制作代理没有声称亲自浏览器通过。实时播放、新391复验和最终用户截图由发起者继续补充。现存screenshots与initiator-review.md针对旧版本，不能代表本次修订。
+- 本次第二次托腮修订由发起者实际代验：其刷新5354定相位页检查waiting 25%/75%，确认白袖筒、右上臂台阶、左上臂黑悬线已消除，单套原画袖臂连接正常，左胸扣子与腰带重复碎片已清理。制作代理IAB调用返回“Browser is not available: iab”，没有声称亲自通过；没有重启其他owner的服务或占用viewport。其后发起者复验其余三态相反相位，default/listening正常，speaking 25%仍发现掌下胸前白衣碎片；本次拆同父袖片+精确skin后，发起者实际reload5354复验speaking 25%/75%，确认掌下游离白黑锯齿衣片已消除，袖口/皮肤连续，两个极值无明显脱接。制作代理没有声称亲自浏览器通过。实时四态与最终用户截图已由发起者补充，见 `revision-review.md`；本轮未新增391复验。现存screenshots与initiator-review.md针对旧版本，不能代表本次修订。
 
 ## 已知边界
 
