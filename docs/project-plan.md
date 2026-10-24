@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-更新：2026-10-24。当前快照基线为 reviewed local main `d3298e5`；候选/本地/线上分别列明。本页是执行入口，不是流水账。
+更新：2026-10-24。当前总览已随本地集成更新（2026-10-24）；候选/本地/线上分别列明。本页是执行入口，不是流水账。
 
 [历史索引](history/README.md)保留完整旧计划、决策演进及完成事件；通常无需先读历史。专题文档可能保留旧基线，当前调度以本页和最新review结果为准。
 
@@ -42,7 +42,7 @@
 | Web与UI | 首页A、接案、调查A、指认/结果/重开、离开确认和基础editor/play路由已本地；头像/卡片尺寸/指认卡间距/缓存304/滚动已修 | [开发入口](development.md)、[编辑器实现](game-editor-implementation.md)；调查新控制仍候选。 |
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
 | 八形象与音色 | 本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[manifest](../apps/web/public/appearances/manifest.json)。 |
-| 形象单一来源 | editorowner候选已做源manifest的name/voice/四态+canonical assets及自动runtime生成，测试/IAB标签检查已交；**尚待root review集成** | 当前正式design源仍未同步，不能以runtime正确掩盖；依赖集成后editorv2消费name。 |
+| 形象单一来源 | 已通过root完整review、255项回归/typecheck/build与35图字节审计，准备快进本地；源name/voice/四态+canonical assets及自动runtime生成齐备 | 唯一源为design清单，public为生成物；旧运行URL不变。editorv2以本次集成SHA为基线。 |
 | 编辑器基础/v2 | 基础草稿、同引擎试玩和URL分享已本地可测；v2原型已批准，生产实现等待单一来源依赖 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff→041c74a`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
 | 调查控制与语音反馈 | 设计`51776c8`与技术提案`20eb743`已交，待root归档/用户确认；未改正式UI | 自然时长、背景回看、底栏指认/时间/音量、“询问记录”；背景停止规则/窄屏固定底栏仍提案。 |
 | GitHub投稿 | 研究`9612c85`与独立实测`e94fdd2`已交；未登录IAB短链接遇登录门槛，9280B合成中文JSON的27334字符query被GitHub拒绝为过长 | [投稿方案](editor-official-submission-proposal.md)；正文/commit/PR表单全文预填仍未知，复制/下载为保底。 |
@@ -55,11 +55,11 @@
 
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
-| P1 | 形象单一源 / game_editor_implementation→root | 候选已交，root核完整diff/生成一致性/资源引用后集成；保留旧runtime URL与历史素材，不重新生图。 |
+| P1 | 形象单一源 / game_editor_implementation→root | 已完成root全diff/生成审计与255项检查，本地集成；35图字节/旧URL不变，新增仅改源清单与素材。 |
 | P1 | 编辑器v2正式落地 / game_editor_implementation | 已批准，无需再确认；从单一源review SHA开始，保持路由/草稿/分享，补有效回归和独立IAB；投稿诚实呈现未开放/手动步骤。 |
 | P1 | 调查体验整体确认 / root+视觉owner+用户 | root审`51776c8`/`20eb743`并给用户具体稿；用户确认前不改顶部/底部/回看规则。后续按真实输入/播放器音量实现，不把模拟条当测量。 |
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
-| P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题`aeed`仅准备，待root完整review才可单次有界推理；不覆盖首批、不重试。 |
+| P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题`aeed`已root差异review放行，代理正在单次有界真实执行；不覆盖首批、首不通过停、不重试。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
 | P1 | 单角色原画动画v2 / appearance_assets | 本文clean handoff后立即继续已授权coral-bob；沿四态语义补手靠耳和嘴开合，必要补手型/遮挡，先自然衔接与可见效果，桌面/391动态验收；不硬旋旧臂制造穿模、不批量其他人。 |
 | P2 | 里程碑发布 / root唯一integrator | 上述review成熟后统一发布，并核CI/CD、线上版本与voice状态；本地新版不等同线上8cad已更新。 |
