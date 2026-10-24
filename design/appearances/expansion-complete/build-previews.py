@@ -49,6 +49,6 @@ for identity, label in labels.items():
 ''')
 
 head='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>五套完整化素材索引</title><style>*{box-sizing:border-box}body{margin:0;padding:28px;width:1280px;background:#fff18a;color:#111b45;font-family:system-ui,-apple-system,'PingFang SC',sans-serif}h1{font-size:28px;margin:0 0 8px}p{font-size:13px;color:#52607a;margin:0 0 20px}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}a{color:inherit;text-decoration:none;background:#fffef7;border:2px solid #111b45;border-radius:20px;text-align:center;overflow:hidden;padding:12px}img{display:block;width:100%;height:300px;object-fit:contain}h2{font-size:17px;margin:10px 0 4px}small{font-size:11px;color:#52607a}.note{margin-top:24px;line-height:1.8}</style><h1>五套预置形象 · 四态完整化</h1><p>默认／聆听／等待／说话已备齐；点击人物查看同组四态及面部近看。尚未替换正式运行时资源。</p><div class="grid">'''
-    
+
 (root/'index.html').write_text(head+''.join(f'<a href="{identity}/index.html"><img src="{identity}/assets/default.png" alt="{label}"><h2>{label}</h2><small>{identity}</small></a>' for identity,label in labels.items())+'</div><p class="note">银发盘发默认按用户指定方向修订并经root review；其余四套默认不变。<br>所有状态使用同身份、同衣服、紧凑活动手势；静态状态不代表可信度或实时口型。</p></html>')
 print('Built five self-contained previews and source/QA READMEs')
