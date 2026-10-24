@@ -8,7 +8,7 @@
 
 已完成通用引擎、持续语音及三案本地可玩闭环；编辑器v2、统一头部/素材URL与新案复核已进入集成验收，当前重点是更新试玩、调查控制改稿与真人质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
 
-- **本地8787**：已更新首页A、三案、基础编辑/试玩/分享和玩家侦探头像；本地存在不等于线上已发布。
+- **本地8787**：更新新版三步编辑器/分享投稿准备、共用头部、“有人在说谎”和统一形象URL，保留三案与侦探头像；本地存在不等于线上已发布。
 - **线上**：[lie-game](https://lie-game.nighca.workers.dev/)仍为`8cad54ba99160aa578acd68b90ba52c51fa91569`里程碑，含首案三人四态/活动提示/稳定名单；语音已启用，真实合成PCM协议单轮通过，不等于真人完整验收。
 - **发布链**：main push后CI通过再部署同提交，CD已有两次真实成功记录；当前本地新功能尚未随线上版本发布。见[持续部署](continuous-deployment.md)。
 - **关键质量缺口**：整合版真人麦克风/外放/长会话/盲测、多用户隔离和正式费用硬限额未闭环；fake、文本detect或短WAV通过均不能替代。
@@ -57,8 +57,8 @@
 | --- | --- | --- |
 | P1 | 形象单一源 / game_editor_implementation→root | 单一源已本地；统一/id/生成URL及移除兼容字段已review，组合检查/IAB通过；35图字节/音色保留。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
 | P1 | 编辑器v2正式落地 / game_editor_implementation | 生产v2已本地集成，独立桌面/391验收通过；与统一header/URL的组合269项回归/typecheck/build和独立IAB1280/391通过，更新8787。官方投稿仍手动/private限制。 |
-| P1 | 统一产品头部 / remaining_character_states | ProductHeader/home+case与“有人在说谎”已review/组合IAB通过；保持调查离开确认。Editor复用候选正在独立短验。 |
-| P1 | 调查体验整体确认 / root+视觉owner+用户 | root审`51776c8`/`20eb743`并给用户具体稿；用户已批背景stop/关闭手动重开及窄屏固定底栏；v2候选507b已交并经独立1280/1004/391检查，root已看1004讲话稿；待用户确认视觉布局后生产。 |
+| P1 | 统一产品头部 / remaining_character_states | ProductHeader/home+case与“有人在说谎”已review/组合IAB通过；保持调查离开确认。Editor亦已复用共用header，独立1280/391及Web150项检查通过。 |
+| P1 | 调查体验整体确认 / root+视觉owner+用户 | 旧稿517/技术20eb已交；用户已批背景stop/关闭手动重开及窄屏固定底栏；v2候选507b已交并经独立1280/1004/391检查，root已看1004讲话稿；待用户确认视觉布局后生产。 |
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
 | P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题已实际完成且root逐答review为12PASS，清理6设备/1agent完成；证据已review并准备合入，不覆盖首批UNCERTAIN，不代替真人多轮。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
