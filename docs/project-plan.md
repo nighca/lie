@@ -8,7 +8,7 @@
 
 已完成通用引擎、持续语音及三案本地可玩闭环；编辑器v2、统一头部/素材URL已随32d89bf部署，当前重点是已集成调查控制与顾遥动画的用户验收、已批准移动v4及真人质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
 
-- **本地8787**：更新新版三步编辑器/分享投稿准备、共用头部、“有人在说谎”和统一形象URL，实际提供32d89bf的新调查窄屏v4/顾遥动画/资源取消修复/最新编辑器居中与双语README；JS/CSS/动画package与PNG200，47生成资源检查通过；本地存在不等于线上已发布。
+- **本地8787**：[固定main验收入口](http://127.0.0.1:8787/)已由用户launchd常驻，Vite直接读owning main；每1.5秒检查main变更后自动生成/更新，凭据沿既有本地薄Worker8788，不依赖chat。版本见[/__lie/main-status](http://127.0.0.1:8787/__lie/main-status)。目前包含调查已验四提交、编辑器10—17/PC复用/草稿组及蓝衣动画，待合候选不算main。实测页面/三案/54资源及语音配置ready，未代真人收音；见[本地开发](development.md)。
 - **线上**：[LIE](https://lie-game.nighca.workers.dev/)已确认部署 `32d89bf91f441168148884593a0f49b816ad7162`：新调查v4、顾遥动画/静态兼容、最新编辑器、统一品牌与双语README；[本轮部署验收](deployments/2026-10-24-animation-milestone.md)。配置ready不等于真人语音验收。
 - **发布链**：main push后CI通过再部署同提交；Actions40093890628实际deploy成功，CF deployment e914ca59/version d2f7139c #10承接100%流量，tag精确32d89bf；新bundle/CSS及47资源全200。见[本轮证据](deployments/2026-10-24-animation-milestone.md)。
 - **关键质量缺口**：整合版真人麦克风/外放/长会话/盲测、多用户隔离和正式费用硬限额未闭环；fake、文本detect或短WAV通过均不能替代。
@@ -39,7 +39,7 @@
 | --- | --- | --- |
 | 内容目录 | 本地三案：空盒里的纪念章3人480秒、压轴怎么是鸭叫4人600秒、盐和糖的小乌龙4人540秒；合计复用全部8形象 | [源内容](../content/games/)、[运行目录](../apps/web/public/games/index.json)；第二/第三案有界真实文本语义已复核，真人多轮仍待。 |
 | game-core | 动态人数/局隔离/人物上下文/预算/终局规则已实现并回归 | [架构](architecture.md)、`packages/game-core`；无新增规则DSL。 |
-| Web与UI | 本地main已追加调查反馈、Editor10—17/PC复用/草稿组及蓝衣动画；8787/线上仍最后核验32d89bf：调查窄屏v4、共享手绘品牌、自然时长/背景回看、居中×、逐字节奏与统一外框；343组合测试/类型/构建、独立IAB桌面/391通过 | [组合验收与限制](history/2026-10-24/combined-ui-animation.md)；线上已32d89bf。 |
+| Web与UI | 本地main已追加调查反馈、Editor10—17/PC复用/草稿组及蓝衣动画；8787现自动跟main，线上仍最后核验32d89bf：调查窄屏v4、共享手绘品牌、自然时长/背景回看、居中×、逐字节奏与统一外框；343组合测试/类型/构建、独立IAB桌面/391通过 | [组合验收与限制](history/2026-10-24/combined-ui-animation.md)；线上已32d89bf。 |
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
 | 八形象与音色 | 线上/本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[权威清单](../design/appearances/manifest.json)。 |
 | 形象单一来源 | 已集成并上线；name/voice/四态+canonical assets及自动runtime生成齐备，35图字节不变，兼容输出字段已删除 | 唯一源为design清单，public为生成物；统一/appearances/<id>/路径，新增仅加源条目和素材。 |
@@ -85,7 +85,7 @@
 
 - [开发/本地运行](development.md)、[架构](architecture.md)、[编辑器](game-editor-implementation.md)、[案件实测](case-live-validation.md)、[协作](../AGENTS.md)。普通`npm test`/`typecheck`/`build`不读取管理key、不自动发真实推理。
 - 总协调已由旧chat `01a1677a-5eff-7f22-87c6-d2c382569aee`接续至`01a16e3d-d2f9-75e0-a09f-d39d5ab927dd`，三个专项已通知，30分钟推进及4小时交接heartbeat已启用；当前唯一integrator/自动化ID见[交接登记](coordinator-handoff.md)，按[定时轮换](coordinator-rotation.md)创建全新接任chat、停旧任务并确认接手后归档旧chat。
-- 本地试玩`http://127.0.0.1:8787/`由root维护；独立实验使用自己的端口/tab，不操作用户会话/麦克风。候选链接与SHA仅供review，不能描述成线上已交付。
+- 本地试玩`http://127.0.0.1:8787/`由launchd运行main-preview脚本跟随main；root及后续接任者维护，轮换时不要停止它；独立实验使用自己的端口/tab，不操作用户会话/麦克风。候选链接与SHA仅供review，不能描述成线上已交付。
 - **root优先原位更新本页的决定、状态、owner/依赖和下一步**，新输入放进对应队列行，不在文尾追加整段过程日志；冲突先讨论，独立工作继续，不把沉默视为批准。
 - 完成事件/批准或否决的演变按实际日期追加[历史索引](history/README.md)对应文件，写明提交/证据与适用边界；本页只保留当前有效摘要和专题入口。
 - 任务交付后核实际diff/状态、有效检查与用户门禁再移动状态；本地集成、push、线上部署、真实供应商/真人验收始终分开。详细单integrator流程沿AGENTS，不在此复制。

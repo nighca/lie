@@ -11,6 +11,7 @@
 - 每代恰好两项heartbeat：30分钟推进与4小时交接，均target本代chat。使用automation_update管理，不手写automation.toml、不建立外部cron。沿用户通知意图：推进无实质变化时安静，重大进展/完成/失败/用户决策再通知；交接完成或失败可通知。
 - 每次推进先核本chat是否仍是coordinator-handoff登记的active coordinator。若已退任，不推进代码，停用本代两任务并退出，不能凭一次旧heartbeat夺回协调权。
 - 及时原位更新项目计划、交接摘要和当前自动化ID。四小时到了先到安全边界交接：完成或中止自己拥有的候选Git操作，保留全部有用提交/dirty work，不能把半途merge/集成锁留给新协调而不说明。独立专项制作可继续，不必等待所有工作结束。
+- 用户的固定main验收服务 `dev.nighca.lie.main-preview` 独立于chat，轮换/归档时保持运行，不重复启动或关闭8787/8788；具体本机管理见development和handoff。
 - 集成始终只有一个owner；遵循AGENTS隔离worktree/有序cherry-pick/干净main快进规则，无内部PR。交接不是自动push/部署授权。
 
 ## 四小时交接步骤（旧协调）

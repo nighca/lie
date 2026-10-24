@@ -14,11 +14,11 @@
 
 ## 仓库与已集成状态
 
-上次核验main基线：23b396cd84a34d7987e04b40bd81fde92bb609a6，clean；本交接文档会产生后续纯文档提交，接任者读实际HEAD。origin/main本地跟踪32d89bf，未在接手时fetch；最后有部署证据的线上版本32d89bf，不能当最新远程ref独立验证。
+上次核验main基线：162dde51d49ab232239bbcbdfa090ca301e94e27，clean；本交接文档会产生后续纯文档提交，接任者读实际HEAD。origin/main本地跟踪32d89bf，未在接手时fetch；最后有部署证据的线上版本32d89bf，不能当最新远程ref独立验证。
 
 887ac03已本地集成调查页用户验收四提交（原base62b3846；c0ba5b8→3cf9081→6b2c83e→cad5788；本地98303f8→cf06960→38b6ee3→aae203d+验收文档）。玩家输入黑波形、普通状态文案留空、48px固定slot/姓名32px增高、Vite本地8787代理。343测试/全仓类型/构建及47资源通过，IAB桌面/391布局核验通过；后续preview导航中止，未宣称全真人复验。未push/部署/更新8787。504a5dd/36e548d为反馈授权和接口协调文档。
 
-当前自有文档工作树：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie，当前分支已切为codex/integrate-blue-glasses（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
+当前自有文档工作树：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie，当前分支已切为codex/integrate-main-preview（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
 
 ## 专项与最高优先级执行
 
@@ -39,7 +39,8 @@
 
 ## 服务、限制与接任第一步
 
-- 本地8787原由旧root维护，最后文档版本32d89bf；本代未刷新。不要假定main更新就自动服务新包。5397/5398编辑器检查服务均已停；5351/5352/5355动画预览有专项owner，保留；本代5486/5488检查服务已停止；5489蓝衣检查服务本代结束时停止，5497Logo探索样稿保留，自己的IAB tab已关闭/viewport已reset。专项最新viewport消息优先，禁止占用户mic/草稿。
+- 本地main验收环境已实际运行：用户launchd `dev.nighca.lie.main-preview`，plist ~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist，stable Node24.22.1在~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64，日志~/Library/Logs/LIE/main-preview.log；runner在owning main每1.5s看SHA，Vite8787→同源薄Worker8788，初启和lock变化npm ci，更新会重启自身服务，失败30s退避。独立于chat，不要在轮换时停止/重复启动。原项目私密.dev.vars仅复制至main的忽略目录，未输出内容/新建provider资源。版本/__lie/main-status已实测SHA与main一致，页面/三案/blue package200，voice/status ready，私密文件和异源Origin403。Node24.22.1全仓353测试（含8个runner生命周期/假凭据隔离）/类型/构建54资源通过。浏览器实际三案加载、console空；未自动收音，ready不是真人验收。main-preview原commit6a76307→e3c773b，本地9f3b607→162dde5；文档本身会推进main，需核下一实际SHA。
+- 5397/5398编辑器检查服务已停，5398现由调查专项用于其隔离验收，确认最新owner消息；5351/5352/5355作者动画保留；root5486/5488/5489已停止。Logo5497探索服务保留，blue自建tab已关闭/媒体模拟和viewport reset；固定main8787用户测试tab保留，无root viewport持有。
 - 真人mic/外放/长会话、三案盲测、费用硬限额仍未闭环；fake/组件测试不能替代。应用鉴权临时停用/线上目标已有特定授权，正式访问限额仍暂缓。仓仍PRIVATE，未授权现在改可见性或代建投稿PR。宣传视频只研究，实际脚本/分镜/生成媒体/制作等用户明确放行。
 - 新协调先核仓库与最新用户决定、用紧凑wait_threads查三专项结果；优先review已交调查/编辑器本批并协调组件依赖，然后blue-glasses等已批准可执行事项。不要以记录误读阻止17条实施，也不要因接手重复派制作任务。
 - 若刚轮换失败：先核phase与是否已创建successor，遵循rotation恢复，不能双integrator。尚未到轮换时维持本chat协调和两任务，不提前归档。

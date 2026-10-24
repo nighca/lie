@@ -64,3 +64,5 @@
 - [编辑器反馈10—17及PC卡复用review](editor-feedback-integration.md)：原三提交完整复核、root344测试/类型/构建与桌面/391，新增保存状态组另交。
 
 - [蓝衣眼镜正式资源接入](../../animation/blue-glasses-game-integration.md)：用户批准候选逐字节接入、root345测试/54资源及游戏内静态回退与换人检查；Logo A方向仅独立预览，未改生产品牌。
+
+- 用户请求固定最新main本地环境：main-preview runner及8项生命周期/凭据隔离测试已review，root353测试/类型/构建通过；launchd常驻8787→本地8788已启用，实测main SHA、三案/动画200及voice ready，私密/异源403；后续主协调轮换须保留服务。参见[本地开发](../../development.md)。
