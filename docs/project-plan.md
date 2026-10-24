@@ -418,3 +418,6 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 
 
 2026-10-24 当前推进安排：root已review第二案b80完整profile增句与源/静态副本，候选e41533d静态内容5项及Web类型通过；不改固定真相或其他人物。新案owner接下一批准备：保留原问原文，duck05/06/07/08加salt01..08共12题、6角色，独立目录/锁/结果，单次上限、首不通过停，不覆盖第一批。离线准备和脚本review后才执行，不把静态通过当真实修复通过。编辑器v2可点原型已独立验收，等用户确认后生产；调查页5344整体稿正在视觉owner最后窄屏验收，背景弹层收音行为保留待确认。
+
+
+2026-10-24 形象库单一权威来源专项：用户review design/appearances/manifest.json指出音色/前三套四态不同步、路径混用assets和expansion-complete、中文名写死Editor.vue，强调新增应只改一处。root实际读取design/runtime/Editor来源确认目标当前未成立，不能用运行时已有正确配置掩盖源陈旧。已交editorowner独立appearance-catalog-source：design manifest唯一权威，加入8中文name与全部已配voiceId/四态，正式素材统一assets/<id>/；自动确定性生成runtime清单/素材并接build/dev，editor读name不维护map，新增只需放素材和增加源条目。源严格校验name/voice/状态/文件/ID，runtime当前容错独立；保留历史原稿及现有URL引用，不删其他owner依赖，不重新生图。任务含生成一致性、缺失资源、动态新增无需业务代码的有效自动检查、类型/构建及中文消费验收。此为用户明确设计目标的落实，不等原型视觉确认，也不改变游戏机制。调查页owner已收到文件边界协调，当前设计继续。
