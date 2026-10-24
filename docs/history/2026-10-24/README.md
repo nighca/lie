@@ -39,3 +39,5 @@
 - 用户明确批准删去publicDirectory/publicAvatar，不再为旧URL给长期清单加兼容元数据；统一/appearances/<id>/default、独立avatar及三状态路径，更新活跃引用，历史稿不驱动正式路径。已交视觉owner在editorQA后独立实现生成器/类型/源/引用迁移；editor/header两owner已协调文件边界，无aliases，不改源图字节或音色。
 
 - 用户确认调查稿背景回看stop语音/暂停、关闭手动重开，以及窄屏固定底栏；新意见为背景入口移人物栏、指认分隔为右小区并降权、语音改明确按钮及更明显玩家输入波形。已交视觉owner在统一URL迁移后继续改稿，未把整稿误记已批准或直接生产。
+
+- 用户希望直接与动画负责人讨论，root创建用户可见chat「LIE 人物动画设计与打磨」01a16d44-aeea-7552-b184-5118072e75f3并交接879/548素材、授权及最新聆听连接/等待托腮反馈，实际已active接手。原appearance子代理不再做动画，继续调查设计/URL；root通过消息及wait_threads同步review交付，聊天历史不自动共享，内部仍本地review集成不走PR。
