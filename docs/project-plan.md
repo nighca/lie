@@ -43,7 +43,7 @@
 | 浏览器语音/网关 | 持续语音、打断、关闭/迟到回包门控、server-only配置已实现；应用鉴权按用户授权临时停用 | [真实语音记录](realtime-voice-validation.md)、[线上预览边界](online-voice-preview.md)；并发分配/正式限额未做。 |
 | 八形象与音色 | 线上/本地runtime已齐8套默认/聆听/等待/说话+8voiceId，前三声用户已选；新增五声短中文真实合成链路通过，年龄/质感仍不等于用户耳验 | [新增音色](expanded-preset-voices.md)、[权威清单](../design/appearances/manifest.json)。 |
 | 形象单一来源 | 已集成并上线；name/voice/四态+canonical assets及自动runtime生成齐备，35图字节不变，兼容输出字段已删除 | 唯一源为design清单，public为生成物；统一/appearances/<id>/路径，新增仅加源条目和素材。 |
-| 编辑器基础/v2 | v2三步/唯一答案/必选形象/示例/分享投稿准备与共用header已集成上线 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff→041c74a`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
+| 编辑器基础/v2 | 用户专用「LIE 游戏编辑器体验与验收」chat `01a16d90-27cc-77c2-9e0a-4b28b1135371` 已建立，承接直接反馈/体验/验收，root仍负责review/集成；v2三步/唯一答案/必选形象/示例/分享投稿准备与共用header已集成上线 | [编辑分享方案](game-editor-proposal.md)、v2原型候选`fcb084f→36ff→041c74a`（待归档入口）；完整URL16000暂定，跨浏览器/聊天传递安全上限未验。 |
 | 调查控制与语音反馈 | v3已获用户批准，独立chat正实施；背景入口融入案名，按钮右侧状态与一条真实波形，插话优先玩家，无指认分隔线；未改正式UI | 自然时长、背景回看、底栏指认/时间/音量、“询问记录”；背景stop/关闭手动重开与窄屏固定底栏已批；实施后由root review集成。 |
 | GitHub投稿 | 研究`9612c85`与独立实测`e94fdd2`已交；未登录IAB短链接遇登录门槛，9280B合成中文JSON的27334字符query被GitHub拒绝为过长 | [投稿方案](editor-official-submission-proposal.md)；正文/commit/PR表单全文预填仍未知，复制/下载为保底。 |
 | 动画探索 | 第二轮54895已交，用户指出聆听臂连接/比例和等待未托腮；独立动画chat已交64127c1→c5e40f2→85b8f44修正候选；用户已批独立动画包由appearance引用，契约与播放器共同选型，有界Canvas/Pixi研究0faa4df已交，用户已批有限Canvas独立package与顾遥游戏接入；契约/流程稳定且单人接入测试后授权扩人逐一验收；当前静态仍生产基线 | 更明显待机、聆听手靠耳、说话嘴部开合；视觉时序不等于语音/中文口型同步。3D暂停扩大。 |
