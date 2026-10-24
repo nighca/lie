@@ -1,12 +1,17 @@
-# README 品牌素材
+# 正式品牌素材
 
-- `logo.svg`：原创几何 LIE 字标，深蓝圆角笔画、珊瑚色圆点，透明背景；原生 SVG 路径，不依赖字体、位图或外部资源。viewBox 为 400×160。SVG 自带可访问标题与描述。
-- `readme-hero.png`：README 横幅插画，不是应用截图；黄底与三个现有成人形象进行轻松对话，无案件答案、证据、按钮或未实现的功能。实际尺寸 1774×887，保留工具原始 PNG。
+2026-10-24 用户批准 B 微调中间版 `logo-b-refinements/shorter.svg`。`logo.svg` 保留该版所有路径、配色和比例，只将可访问名称与标题改为产品名 LIE；透明背景、440×235 viewBox，无字体或外部资源依赖。应用使用相同文件的副本 `../../apps/web/public/brand/logo.svg`，同时用于页眉与 favicon。
 
-这两项沿用用户已确认的中文 B 方向；独立字标是可维护矢量，横幅中的 LIE 字样则是生成插画的一部分，并非独立字标的像素复制。横幅没有需要翻译的英文宣传文案，只保留产品名 LIE。
+`readme-hero.png` 是 README 品牌插画，不是应用截图。可重建源为 `readme-hero.html`：正式 SVG 与 `../appearances/assets/` 中 coral-bob、sunny-moustache、blue-glasses 原始透明 PNG 通过 HTML/CSS 排版，再由内置浏览器导出 PNG。没有重新生成人物、脚本编辑位图或沿用旧图中嵌入的字标；画板为 1600×760 CSS 像素，实际文件为 1600×760 RGB PNG。人物下身自然出画，不作为单独立绘使用。
 
-## 生成与 QA
+## 历史与范围
 
-2026-10-23 使用内置 `image_gen.imagegen`，`transparent_background: false`。输入为 `../appearances/assets/` 中的 coral-bob、sunny-moustache、blue-glasses 三张现有形象；完整实际 prompt 位于 `prompts/readme-hero.txt`。原始输出：`/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-782c6c63-80ca-4df3-b8a4-eeaf8cd17186.png`，已原样复制进项目，无脚本编辑、裁切或去背景。
+`logo-options/`、`lettermark-options/`、`balanced-logo-options/`、`logo-b-refinements/` 保留探索过程；各目录的对比板是历史提案，不是新的正式替代品。`../../design/ui/` 与 `../../design/styleboards/` 的既有稿件含探索期字标，只作布局/风格依据，不逐张重做。
 
-已用 `view_image` 检查：LIE 清楚可读；恰好三名成人，脸与头发完整；配色、轮廓与现有形象一致；无案件、道具、指认结果或 UI 功能暗示。图中人物下身与最右侧肩部自然出画，是横幅构图，不作为单独人物立绘使用。SVG 已通过 XML 解析和外部资源检查；图片尺寸模式已读取核对。README 集成后仍需检查窄屏缩放、替代文本与首屏实际效果。
+旧 README 头图的 imagegen prompt 保存在 `prompts/readme-hero.txt`，仅记录被替换旧图的历史来源，不是当前 HTML 排版头图的生成指令。原始旧输出位于 `/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-782c6c63-80ca-4df3-b8a4-eeaf8cd17186.png`，不作为仓库运行依赖。
+
+## 验证
+
+SVG 已进行 XML 解析；正式版与用户选定稿的路径、圆点、配色及 viewBox 逐项相同，应用副本逐字节一致。README 本地图片引用已核对。应用保留页眉链接的 `LIE 首页` 可访问名称，图片使用空替代文本避免重复朗读。web 50 项测试、TypeScript 检查、生产构建通过。
+
+内置浏览器已查看头图：正式字标与中文清晰，三个脸部及头发完整；原始角色图片未修改，半身底部裁切属于横幅排版。应用隔离演示页已在内置浏览器确认标志加载为 116×62、favicon 引用正确且控制台无错误。favicon 复用完整标志，小尺寸细节有限，未另行设计图标。

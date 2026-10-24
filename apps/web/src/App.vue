@@ -51,7 +51,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 <template>
   <div class="game-shell">
     <header class="game-header">
-      <a class="wordmark" href="/" aria-label="LIE 首页">LiE <span>语音推理</span></a>
+      <a class="wordmark" href="/" aria-label="LIE 首页"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a>
       <h1 v-if="view.phase === 'interrogating'" class="header-title">{{ view.title }}</h1>
       <div v-if="view.phase === 'interrogating'" class="header-actions">
         <span class="interrogation-budget" aria-label="剩余询问时间">剩余 {{ remainingTime }}</span>

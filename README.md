@@ -1,4 +1,4 @@
-# LIE
+# <img src="design/brand/logo.svg" width="160" height="86" alt="LIE">
 
 **轻松开口，认真推理。**
 

@@ -6,7 +6,8 @@ h2 { font-size: 24px; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .game-shell { max-width: 1440px; margin: auto; padding: 24px 32px 32px; }
 .game-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
-.wordmark { display: inline-flex; align-items: center; gap: 16px; color: var(--lie-ink); text-decoration: none; font-size: 52px; font-weight: 900; letter-spacing: -4px; line-height: 1; flex-shrink: 0; }
+.wordmark { display: inline-flex; align-items: center; gap: 16px; color: var(--lie-ink); text-decoration: none; line-height: 1; flex-shrink: 0; }
+.wordmark img { display: block; width: 116px; height: 62px; object-fit: contain; }
 .wordmark span { position: relative; font-size: 18px; letter-spacing: 0; white-space: nowrap; }
 .wordmark span::after { content: ''; position: absolute; height: 5px; border-radius: 4px; background: var(--lie-coral); left: 0; right: 0; bottom: -9px; transform: rotate(-3deg); }
 .header-title { font-size: clamp(24px, 2.35vw, 34px); text-align: center; margin: 0; }
@@ -68,7 +69,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 @media (max-width: 700px) {
   .game-shell { padding: 16px; }
-  .wordmark { font-size: 40px; }
+  .wordmark img { width: 96px; height: 52px; }
   .wordmark span { font-size: 16px; }
   .header-actions { gap: 0; flex-wrap: wrap; }
   .header-actions .lie-button { padding-inline: 14px; }

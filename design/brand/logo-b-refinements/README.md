@@ -1,3 +1,5 @@
+> 2026-10-24 用户已批准中间版 `shorter.svg`，正式文件见 [../logo.svg](../logo.svg)。以下是当时的对比与验证记录。
+
 # B 方向：E 上横微调
 
 用户已选定 `../balanced-logo-options/comparison.png` 的 B 方向；本轮三个微调档位尚待确认，不替换现有 Logo 或应用。`comparison.png` 为中文对比板，展示基准重绘、上横略短、上横再短三个版本及缩小效果。
