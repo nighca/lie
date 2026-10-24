@@ -24,7 +24,9 @@
 
 **持续工作模式**：有一定工作量的执行、配置、运维、排障、浏览器和长检查须整项委派；root做调度/接口/决策/review/串行集成/报告且负责结果。隔离worktree、有序cherry-pick、clean main快进、内部无PR，详[AGENTS](../AGENTS.md)。此前一条环境通知因用户停止要求被自动审批拒绝，未重试，不绕道补发；固定环境任务已完成，不由root继续扩展配置。
 
-**临时夜间授权**：2026-10-25约00:20至08:30，小实现/排版/局部视觉修复可经实视/review自行推进，银发waiting也属此小修；不把旧候选或沉默写成通过。重大产品/玩法/架构/供应商/范围决定及宣传后置等门禁仍在。08:30不随换代延期，不新增提醒，用户会主动告知回来；过期后继续原有常规权限。
+**已同意的协调优化**：一次完整批量handoff；同一已验代码/资源的差异＋哈希及依赖/组合/相关环境不变可复用验证，变更/冲突只复验受影响项，文档批只核文档。候选仍从最新main构造，实质base变化影响验证才重建；隔离WT/真实review/唯一integrator不变。先用现有执行者，独立任务持续排队再评估专职测试验收，当前不新建chat。
+
+**用户已回来（2026-10-25澄清）**：临时夜间无法回应模式结束，此前有效已授权工作继续；原约00:20至08:30的小修授权作为历史保留，不能再假设用户睡眠或无法审批。重大产品/玩法/架构/供应商/范围决定及宣传后置门禁仍在，不把沉默当通过。
 
 ## 仓库与接任第一步
 
@@ -47,7 +49,7 @@
 | 结果投影 / root候选独立验证 | source `6ca375176fa922f9d5bef566277257c810598460`→候选`17fb2ee2f269c7c4d2de03cae2415f5af84a5542`，base345a313，原候选分支`codex/integrate-result-projection`。生产仅controller2行，7项专属测试纳入Web183测试、类型/构建/60资源检查全过，已纳入本地main `0a67498`。仅复制既有被指认者/正误，不改UI/玩法/动画契约；详[实施记录](result-projection-implementation.md)。 |
 | 命名迁移执行owner待排 | `CharacterPreset`/`@lie/character-animation`已批，`cb86dd6`未集成；保持appearanceId和公开`/appearances/`。fan＋Editor＋silver已main，依赖释放现eligible，待root整项排owner后，按[落地计划](character-preset-migration-plan.md)统一迁移；含runner命令与环境owner受控重启，不能覆盖新代码。 |
 
-约06:52三专项waiting flags均恢复为空，原因不可见，不写审批批准或拒绝。fan已review/独立验证并本地集成，动画三角色已完成QA/本地集成，下一批两人在制；Editor已root review/独立验证并本地集成至f433834。保持未测项目，不重发/绕过权限动作。
+约06:52三专项waiting flags均恢复为空，当时工具侧原因不可见；用户现明确此前数小时浏览器等待是权限申请待其审批，不是已证实工具故障，亦不能推断今后全部工具必然正常。fan已review/独立验证并本地集成，动画三角色已完成QA/本地集成，下一批两人在制；Editor已root review/独立验证并本地集成至f433834。保持未测项目，不重发/绕过权限动作。
 
 三角色已本地集成a4e9f7d，当前main3a1fa417另含邀请码设计文档；旧a440/bfb/051c及重建候选仅历史refs，不重放、不再当当前阻塞。完整最终35链、source/candidate review与通过/未测范围见[历史](history/2026-10-25/three-character-dawn-candidate.md#最终正式qa与本地集成)。三角色正式接入记录已在main。
 
@@ -57,7 +59,7 @@
 
 [结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
 
-06:43本代已实际成功向三个专项通知新协调ID，工具返回对应threadId；后续向本代完整批量handoff，保持原所有权、dirty工作、服务和viewport，不重启在制任务、不重发或绕过权限动作。约06:52三专项waiting flags已为空，原因不可见；最新实际交付见上表，不推断审批结论。前代root子agent全部completed，其句柄不随chat继承；本代只读审计交付与复核边界如上；保留refs/dirty工作与证据，不清目录。
+06:43本代已实际成功向三个专项通知新协调ID，工具返回对应threadId；后续向本代完整批量handoff，保持原所有权、dirty工作、服务和viewport，不重启在制任务、不重发或绕过权限动作。约06:52三专项waiting flags已为空，当时原因不可见；用户现澄清长等待为待其审批；最新实际交付见上表，不推断审批结论。前代root子agent全部completed，其句柄不随chat继承；本代只读审计交付与复核边界如上；保留refs/dirty工作与证据，不清目录。
 
 蓝衣/sunny/Logo/README/observer/投稿/home/CJK均已本地main，已完成链与检查见[当前成果](project-plan.md#已集成本地main的成果)和[归档快照](history/2026-10-25/README.md)，不要沿旧记录再次激活或宣称仍待合入。17条原“只记录”已经解除且完成本地集成，不是后续禁令。
 
