@@ -6,7 +6,7 @@
 
 ## 当前阶段与目标
 
-已完成通用引擎、持续语音及三案本地可玩闭环；当前重点是编辑器v2、形象库单一来源、调查控制体验和真实案件质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
+已完成通用引擎、持续语音及三案本地可玩闭环；编辑器v2、统一头部/素材URL与新案复核已进入集成验收，当前重点是更新试玩、调查控制改稿与真人质量验证。后续以review过的关键版本集中发布，最终让外部玩家独立体验。
 
 - **本地8787**：已更新首页A、三案、基础编辑/试玩/分享和玩家侦探头像；本地存在不等于线上已发布。
 - **线上**：[lie-game](https://lie-game.nighca.workers.dev/)仍为`8cad54ba99160aa578acd68b90ba52c51fa91569`里程碑，含首案三人四态/活动提示/稳定名单；语音已启用，真实合成PCM协议单轮通过，不等于真人完整验收。
@@ -55,12 +55,12 @@
 
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
-| P1 | 形象单一源 / game_editor_implementation→root | 已本地集成；35图字节保留；用户已批准移除兼容字段、统一/id/生成URL，视觉owner在editorQA后实施并协调活跃引用。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
-| P1 | 编辑器v2正式落地 / game_editor_implementation | 已批准，无需再确认；从单一源review SHA开始，保持路由/草稿/分享，补有效回归和独立IAB；投稿诚实呈现未开放/手动步骤。 |
-| P1 | 统一产品头部 / remaining_character_states | 用户已要求统一首页/案件左侧品牌，root核home CSS覆写造成差异；独立共用header+slots实现，保留导航确认，首页主文案改“有人在说谎”。editorv2交付后再协调接入，不抢其文件。 |
-| P1 | 调查体验整体确认 / root+视觉owner+用户 | root审`51776c8`/`20eb743`并给用户具体稿；用户已批背景stop/关闭手动重开及窄屏固定底栏；视觉v2改稿排在URL迁移后：背景移人物栏上方、指认右小分区降权、语音明确主按钮与玩家输入波形，改稿确认前不生产。 |
+| P1 | 形象单一源 / game_editor_implementation→root | 单一源已本地；统一/id/生成URL及移除兼容字段候选已review，组合检查通过、IAB收尾中；35图字节/音色保留。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
+| P1 | 编辑器v2正式落地 / game_editor_implementation | 生产v2已本地集成，独立桌面/391验收通过；与统一header/URL的组合267以上回归和真实浏览器检查收尾，随后更新8787。官方投稿仍手动/private限制。 |
+| P1 | 统一产品头部 / remaining_character_states | ProductHeader/home+case与“有人在说谎”已review，待组合QA后集成；保持调查离开确认。Editor接入共用header仍需最小跟进。 |
+| P1 | 调查体验整体确认 / root+视觉owner+用户 | root审`51776c8`/`20eb743`并给用户具体稿；用户已批背景stop/关闭手动重开及窄屏固定底栏；v2候选507b已交并经独立1280/1004/391检查，root已看1004讲话稿；待用户确认视觉布局后生产。 |
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
-| P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题`aeed`已root差异review放行，代理正在单次有界真实执行；不覆盖首批、首不通过停、不重试。 |
+| P1 | 新案后续语义复核 / remaining_character_states→root | 第一批第二案5PASS/1UNCERTAIN已归档；周乐披露澄清已main `a0c4b3d`链，固定真相未变。后续12题已实际完成且root逐答review为12PASS，清理6设备/1agent完成；证据归档候选待集成，不覆盖首批UNCERTAIN，不代替真人多轮。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
 | P1 | 单角色原画动画 / 独立chat | 用户可直接讨论的「LIE 人物动画设计与打磨」chat `01a16d44-aeea-7552-b184-5118072e75f3` 已接手；修正v2聆听手臂比例/连接及等待托腮。root负责进度协调、review与集成，原子代理不重复制作；不扩人。 |
 | P2 | 里程碑发布 / root唯一integrator | 上述review成熟后统一发布，并核CI/CD、线上版本与voice状态；本地新版不等同线上8cad已更新。 |
