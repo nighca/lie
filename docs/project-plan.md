@@ -60,6 +60,7 @@
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；game_editor_implementation已接独立实现：角色100ms/玩家70ms固定字素节奏、移除2400ms强追赶；保持历史/停止/打断/新轮补齐与减少动态效果，待review。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |
 | P1 | 整合版真人/盲测 / root协调用户与独立QA | 独立持续语音harness用户已确认多轮/打断；主应用真实收音/播放/外放/长会话及三案盲测仍待。须区分文本detect与真人，保护用户现有设备。 |
 | P1 | 单角色原画动画 / 独立chat | 用户可直接讨论的「LIE 人物动画设计与打磨」chat `01a16d44-aeea-7552-b184-5118072e75f3` 已接手；听臂连接/等待托腮及微动画已在候选修正，独立chat正修头部偏左/头颈缝，待用户验看；root负责进度协调、review与集成，原子代理不重复制作；不扩人。 |
+| P2 | 手绘风格细节恢复 / 独立视觉chat+root | 用户指出实际UI偏离screens-flow手绘质感；先对照原稿检查共享品牌下划线等细节，制作局部对照与推荐，保持已确认布局/交互和可读性；已同步调查设计负责人，不与页面外框修复重叠。 |
 | P2 | GitHub预填补验 / 独立UI实验+用户 | 等用户IAB登录；普通外部贡献链等实际公开及无上游写权限身份。只停预填/review，未经授权不建fork/branch/commit/PR；不向公开仓传项目私有正文。 |
 | P2 | 角色出戏边界 / root+语音/内容owner | 首案攻击问仍出现幕后元话语，工具层/独立顶层候选均未解决，候选未生产；已停止无限付费叠提示。目录只读识别deepseek-v4-flash不证明根因，不擅自换模型/供应商/剧情；见[沉浸调查](role-immersion-investigation.md)、[首案证据](case-behavior-validation.md)。 |
 | P2 | 启动等待/延迟质量 / 语音owner | 已有启动阶段拆分分析；在真实测量基础上评估AudioContext/WS/hello/mic/worklet，不擅自跨轮保活麦克风/连接。 |
