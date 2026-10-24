@@ -30,7 +30,7 @@
 
 - 06:43接任核验main clean为`940068638b9b8a49f9f1db11451783dd935dcddb`，此基线新增成果均未push；本地origin/main跟踪及最后实际部署证据为`32d89bf91f441168148884593a0f49b816ad7162`。本轮未fetch，不能冒称当前远程/线上最新版本。
 - owning main在`/Users/nighca/code/nighca/lie`；前代两个文档工作树`/Users/nighca/.codex/worktrees/coordinator-successor-registration/lie`及`/Users/nighca/.codex/worktrees/integrate-successor-registration/lie`制作前均clean，保留供接任复用或managed归档；重读实际HEAD/status。旧`investigation-review-takeover/lie`已不在worktree清单，不作为现存工作树操作。
-- 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。当前优先接silver及gray/plum正式游戏QA结果并协调命名依赖；所有待办见[队列](project-plan.md#仍需执行的队列)。
+- 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。三角色已main，当前优先整项安排eligible命名迁移及访问设计待用户确认、分享软折行待review/候选验证；所有待办见[队列](project-plan.md#仍需执行的队列)。
 - 旧命名候选`/private/tmp/lie-integrate-text-architecture` / `codex/integrate-preset-voices`保留refs；其中调查/预览改动已有main成果，禁止整批重放。原命名源`cb86dd6e25e22444dc93b892c2d609c0a0d6ac08`仅待按新main重新审阅。
 
 本代`share_boundary_audit`已完成代码级只读审计，root已实际review源码/完整探针并以绝对路径Node24.22.1独立执行探针（0.104s、exit0、全部PASS）：sharing＋navigation现有19/19通过，生产codec探针16000 URL与131072 UTF8字节边界、Unicode往返及无效/截断输入拒绝符合契约，未见需修复源码缺陷。19/19现有测试由执行者Node24.17.0运行，低于项目24.22.1，不称要求版本19项测试复验；root的24.22.1复核仅为探针。证据`/private/tmp/lie-share-boundary-audit.mjs`；无代码/服务/浏览器变动。仅Node/jsdom＋源码证据，未验真实reload、地址栏粘贴、network fragment、宿主/play回退或跨浏览器16k；16000仍暂定，且仍加载manifest/catalog，不称完全离线。
@@ -41,21 +41,19 @@
 | --- | --- |
 | 调查共享视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 已本地集成main `3a677358cc5fc69f215f13c44d51c5a9643eab2c`，source `7dfbba62697320ca9db97450bc7d973d3a5d5823`（base31db7c9，无额外依赖，五文件clean）。root全diff/context/七图review无blocker，candidate以f433834独立Node24.22.1验证Web186/186（17files，base新增7项，区别source179）、类型/构建8形象60资源通过，source patch完全一致，clean main快进。最终单人180/176及四人148.5窄回归通过；临时JSON删除，tab30/31/32关闭且viewport reset。5507/session81667原owner已仅对自有session Ctrl-C，exit130，lsof5507无输出确认停止；source7dfbba6 clean，fixture/tab/viewport已清，无其他进程动作。 |
 | 编辑器 `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 已本地集成main `f4338346e3ec20fd742f6a75ea4362f428c18b5b`（base3f52ee5，source60e0ed7/base4fde8d4）。root实际review全diff/context/五图，独立Node24.22.1下28测试/Web类型/构建及8形象60资源通过，候选source两文件树相等，clean main快进；未push/部署。[实施证据](game-editor-implementation.md)。final iframe1004/391冷/ready及反复切人通过，非顶层mobile；MutationObserver非Node来源未证实、console非全清。已清tab17/18、临时壳、停5402/5403，取消topslot并通知fan。 |
-| 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 正在新5504候选bfb2a33继续正式游戏IAB，完整交付尚缺；银发可显/减少动态静态回退、灰白六图记录仅部分QA。环境与组合检查见下文；不操作其branch/runtime。完成QA后按原canonical制mint/ochre，最多2角色并行，自验/clean/rootreview后集成，不自动发布。 |
-| 接入执行 `main_acceptance_environment` / root review | gray/plum正式source HEAD `822e9b5bb8064f10c00178f9c5643dff6f3418dd`，base5968661，12有序提交clean；root已review builder/verify/manifest/docs/图，无源码blocker，sourceowner372测试/类型/构建72资源/strict/hash通过。与18个silver提交合成下述30提交候选，未main/push。 |
+| 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | silver/gray/plum完整clean QA已review并main a4e9f7d，最终35链见历史。下一批mint/ochre已实际两并行，WT/分支mint-puffs-animation、ochre-freckles-animation，base73ba138，仅design候选；5358/5359作者预留未核监听，原canonical不改色、不起第三人。 |
+| 接入执行 `main_acceptance_environment` / root review | gray/plum正式source HEAD `822e9b5bb8064f10c00178f9c5643dff6f3418dd`，base5968661，12有序提交clean；root已review builder/verify/manifest/docs/图，无源码blocker，sourceowner372测试/类型/构建72资源/strict/hash通过。与18个silver提交合成的角色接入已随最终35链纳入main a4e9f7d，未push。 |
 | 开发WS调查 / review_blue_animation | source `929acef88f7f6b09221fa3993f986d2ffb85f54c`完整无凭据network矩阵已过，4自有端口关闭；诊断和[根因记录](dev-websocket-rejection.md)已纳入本地main `0a67498`。开发宿主丢非101仍是未修复限制，无生产/依赖补丁，不重做调查或冒称已修。 |
 | 结果投影 / root候选独立验证 | source `6ca375176fa922f9d5bef566277257c810598460`→候选`17fb2ee2f269c7c4d2de03cae2415f5af84a5542`，base345a313，原候选分支`codex/integrate-result-projection`。生产仅controller2行，7项专属测试纳入Web183测试、类型/构建/60资源检查全过，已纳入本地main `0a67498`。仅复制既有被指认者/正误，不改UI/玩法/动画契约；详[实施记录](result-projection-implementation.md)。 |
-| 命名迁移执行owner待排 | `CharacterPreset`/`@lie/character-animation`已批，`cb86dd6`未集成；保持appearanceId和公开`/appearances/`。fan＋Editor已main，待silver合main后，按[落地计划](character-preset-migration-plan.md)统一迁移；含runner命令与环境owner受控重启，不能覆盖新代码。 |
+| 命名迁移执行owner待排 | `CharacterPreset`/`@lie/character-animation`已批，`cb86dd6`未集成；保持appearanceId和公开`/appearances/`。fan＋Editor＋silver已main，依赖释放现eligible，待root整项排owner后，按[落地计划](character-preset-migration-plan.md)统一迁移；含runner命令与环境owner受控重启，不能覆盖新代码。 |
 
-约06:52三专项waiting flags均恢复为空，原因不可见，不写审批批准或拒绝。fan已review/独立验证并本地集成，动画继续原owner验收；Editor已root review/独立验证并本地集成至f433834。保持未测项目，不重发/绕过权限动作。
+约06:52三专项waiting flags均恢复为空，原因不可见，不写审批批准或拒绝。fan已review/独立验证并本地集成，动画三角色已完成QA/本地集成，下一批两人在制；Editor已root review/独立验证并本地集成至f433834。保持未测项目，不重发/绕过权限动作。
 
-旧三角色历史候选ref `codex/integrate-three-characters-current` / `a440ec99cc0b5fab81ec0fb17278df5b2eb847ef`保留，base `0a67498cb58f0dd8403a57556bd786c854150276`；旧30提交来源及哈希/静态不变证据见[前代快照](history/2026-10-25/coordinator-handoff-01a16e3d-d2f9-75e0-a09f-d39d5ab927dd.md)。旧review WT已不在清单，不按旧路径操作。当前QA源为下述bfb候选；新main组合由`three_character_environment`完成于新managed WT `three-character-integrate-dawn`，冻结clean候选 `051c441027030b8795cc14d7d998d85f14f55dd9`（base3a67735）：382测试/Web186、全类型、Web＋gateway构建79资源、3 strict/hash通过；root实际31log/tree对应review一致，尚未main，5504 QA源branch/runtime保持不动。
+三角色已本地集成a4e9f7d，当前main3a1fa417另含邀请码设计文档；旧a440/bfb/051c及重建候选仅历史refs，不重放、不再当当前阻塞。完整最终35链、source/candidate review与通过/未测范围见[历史](history/2026-10-25/three-character-dawn-candidate.md#最终正式qa与本地集成)。三角色正式接入记录已在main。
 
-本代环境恢复由`three_character_environment`整项负责：新managed WT `/Users/nighca/.codex/worktrees/three-character-qa-dawn/lie`，branch `codex/three-character-qa-dawn`，base `f4338346e3ec20fd742f6a75ea4362f428c18b5b`，重放30链至`eacd93ebd705915a9023648c55e591ec65e00795`，再附灰白部分QA至`bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`（环境handoff时clean；当前动画QA创建授权的untracked `apps/web/public/qa-three-character-iframe.html`，由动画owner最终删除，root不得擅清）。统一`http://127.0.0.1:5504`，PID24833/PTY77092，Node24.22.1纯demo gateway指127.0.0.1:1，HTTP200/79资源ready；Node24.22.1全仓379测试/类型/Web＋gateway构建/79资源及3专属strict均通过。root已成功通知动画专项实际WT/SHA/URL继续正式IAB，不占global viewport，旧5505不恢复。root已实际review22行附加证据＋6截图无blocker；3包＋16PNG逐字节同旧候选、35旧静态不变、Editor CSS保留。[本代有序31提交及检查](history/2026-10-25/three-character-dawn-candidate.md)。附加source `1f7bb995e6db44bf9b584171ef38313a1d02a4af`（base `5c02f2203b8aca411a0bd8155599e864da1a8f9c`，salt-pepper-beard-animation WT clean）仅灰白QA六图/记录，不是完整QA。
+专项接入记录位于main的`docs/animation/silver-bun-game-integration.md`与`gray-plum-game-integration.md`，详细来源按source HEAD取log，不重复长链。
 
-专项接入记录位于该候选的`docs/animation/silver-bun-game-integration.md`与`gray-plum-game-integration.md`（尚不在main），详细来源按source HEAD取log，不重复长链。
-
-共享窗口：当前无global viewport owner；fan已关tab30/31/32并reset，Editor slot已取消。动画继续独立tab/iframe，不获全局viewport授权。5504候选QA保持；旧5505不恢复，5507/session81667已由原owner停止并核无监听；5402/5403也已清，当前专属QA仅5504，其他保留preview不变。
+共享窗口：当前无global viewport owner；fan已关tab30/31/32并reset，Editor slot已取消。动画继续独立tab/iframe，不获全局viewport授权。5504已无监听（原因未知），旧5505不恢复，5507/session81667已由原owner停止并核无监听；5402/5403也已清，其他保留preview不变，不新增或停止其他服务。
 
 [结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
 
@@ -79,6 +77,8 @@
 
 仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；带有效期邀请码访问设计已由用户放行，仅限制玩游戏访问、不限频率，设计完成请用户确认后才可实施；费用预算/回收策略仍暂缓，不新增频率/并发限制或授权secret/资源/DB/DO/账号/部署，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
 
-Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416eafbfda102a90ed72aa4292，Node24.22.1生产encode）：normal539真实UI Unicode/换行/保留字符逐字相等及actual reload通过；恰16000 ASCII完整URL新blank tab fresh goto/reload intro通过、href16000；16001特定长度错误、损坏gzip错误及reload通过。root待实际review报告/四图，未称最终验收。network初始fragment捕获因PerformanceAPI missing TypeError一次停止，未重试CDP；跨浏览器/地址栏粘贴/外部传输/离线未验，16k仍暂定、128KiB仍仅Node。证据/private/tmp/lie-share-browser-results.md及同名前缀fixtures/四张jpg；自建tab19/20/21已关，无viewport/draft/voice/mic/provider/服务动作，旧browser3/tab1未动。动画当前仅三角色391 iframe四态观察、灰失败四态static及解除恢复单canvas通过，plum同类收尾；尚无完整clean handoff，不提前称整体PASS。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。
+Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416eafbfda102a90ed72aa4292，Node24.22.1生产encode）：normal539真实UI Unicode/换行/保留字符逐字相等及actual reload通过；恰16000 ASCII完整URL新blank tab fresh goto/reload intro通过、href16000；16001特定长度错误、损坏gzip错误及reload通过。root已实际review完整报告/四图，无codec blocker，局限保留。network初始fragment捕获因PerformanceAPI missing TypeError一次停止，未重试CDP；跨浏览器/地址栏粘贴/外部传输/离线未验，16k仍暂定、128KiB仍仅Node。证据/private/tmp/lie-share-browser-results.md及同名前缀fixtures/四张jpg；自建tab19/20/21已关，无viewport/draft/voice/mic/provider/服务动作，旧browser3/tab1未动。三角色完整QA已main，详细通过范围/未测边界见最终历史。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。
 
-新设计owner `invite_access_design`在同名managed WT、base73ba138，仅拥有新docs/invite-access-design.md；设计active待用户确认，不触实现，固定device多人隔离风险不由邀请码自动解决。新P2软折行bug见计划：15473无空格ASCII解码成功但intro横向溢出，待root review/安排修复，不混codec失败。
+邀请码[设计](invite-access-design.md)已root完整114行及实际契约/官方文档review，本地集成3a1fa417，仅文档待用户确认，未授权实现，固定device多人隔离风险不由邀请码自动解决。新P2软折行bug见计划：15473无空格ASCII解码成功但intro横向溢出，待root review/安排修复，不混codec失败。
+
+当前main已实际快进a4e9f7d，三角色候选refs仅追溯，不重放。QA源bfb临时壳已由owner删除且status clean、tabs28—33关闭/overrides清；环境回证：PTY77092已失效，Ctrl-C返回Unknown process id；PID24833不存在且5504无监听，原因未知，未发生本次成功Ctrl-C停服。8787 main-status实返a4e9f7d＝当时main，三包HTTP200且同generated、79资源＋manifest共80文件，其他服务未触。分享软折行source c13e6194751334085094a10b773018a998341b01/base73 clean已交，仅.background/.public-background overflow-wrap:anywhere＋history；owner Node24.22.1 Web186/类型/构建60及1280/391 iframe两类文本通过，root source/图review与最新三角色79资源独立候选验证待做，未main。

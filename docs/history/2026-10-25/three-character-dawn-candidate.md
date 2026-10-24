@@ -85,3 +85,47 @@
 29. `0749f68da3e6a0a77ce7ee9e060091382acc9e2a`
 30. `27cab50152344d2fd5f326d4264eeba81717e2fd`
 31. `051c441027030b8795cc14d7d998d85f14f55dd9`
+
+## 最终正式QA与本地集成
+
+完整sourceQA：silver97548eaa、gray da1b0749→c4c3298e、plum a70eb0e；新增4提交仅34JPEG/3JSON/docs。root实际review四份full text/JSON/cancel trace、18新增关键图及旧gray六图，无blocker。三角色均desktop1280×720＋391 iframe四态通过；gray/plum失败四态static及unblock恢复单canvas，silver失败default/reduce四态及恢复通过；plum trace85032.303 canceled=true ERR_ABORTED，最终gray单canvas。direct game console空；iframe两条MutationObserver无source来源未知。true hidden/full waiting game400ms/更广race/真机touch未验，不把fake当live voice。
+
+独立最后候选3cbe10323280cffa7106f0e5539c9caf75646852/base73通过382测试（Web186）、类型、Web＋gateway构建79/strict；源/包及35旧静态字节相同。root再以最新fb6ae85重建35链，对3cbe仅访问intake三docs差异，功能/资产逐字一致；clean main已实际ff `a4e9f7d1e04a8c0d58f0f7cbec335e686913d36c`，未push/部署。QA源bfb临时壳删除/status clean，tabs28—33关闭/overrides清；环境回证：PTY77092失效，Ctrl-C返回Unknown process id；PID24833不存在/5504无监听，原因未知，不能称本次成功Ctrl-C停服。8787 main-status实返a4e9f7d＝当时main，三包HTTP200/字节同generated，79资源＋manifest共80文件，其他服务未触。
+
+最终准确35链来源 `/private/tmp/lie-three-character-integrated-reviewed-shas.txt`，保留source/candidate refs不重放：
+
+1. `acf184ddd4177cb4480364565b9e74f455543217`
+2. `5a036501021bf2cea2170dfca1133f1d38b3ecf6`
+3. `5ee2f54d7dfc5f94dd4ee62cd19808e8da52cb76`
+4. `8f6c11f440f23dc1d83c3a5587fdb384203184ab`
+5. `f2b982bbdea2847d01dd6d04a6bfd536af6441d3`
+6. `64eb6010592cc75e4a62fb4c498e3153f3ccd35d`
+7. `7f432403331b59dcb4ac1bb69d879ef503bb4293`
+8. `15b5c63d53d5d636e5837adeb9867c0edd63536e`
+9. `e5c7c1f9198c4c3506ef12998bd39decc81e570d`
+10. `ea6e718e714efcb96c10d6c16fefc23a8159ecb5`
+11. `f9af94dca4a7a6bfd024655231e907b79150d172`
+12. `f04445bc57202383f8ebb9731ed17042d506b279`
+13. `cb797295634cacf0af68219f8b6c850627070484`
+14. `9b7e29ae6b4d45e2c6959bfbfeca4dd0b15a56d8`
+15. `88470dbb3394a0e5a5052b6714cd8ab9cc79ffa0`
+16. `c35119d88293e3cf83a406b3d5320fc5cb6a08d0`
+17. `8fb7c5160f2f2ec1cfcf22012bbceb24ba44ea9e`
+18. `962841589d74c754753741a2b5f468f1024053fb`
+19. `91d3e813226dea5ff386ef98ba67bad0b8a45033`
+20. `f8ab9c7595db2be809cad839bccae73ca10a4341`
+21. `ce3ecc06e1b73b0b51fbcedd5c126d163838da18`
+22. `5c734733f45381dddc932a75fb9f74bcef7aac59`
+23. `14681d4f17cd280342dc1802c30980ddd80e3f27`
+24. `796dcacf016232a3e3a9117a4f3f3724c5c10eaf`
+25. `e17ad8f5e0fe0d1ec7079f7c4d0dbfefece4ee31`
+26. `89cfc0ff6915a43d8cce43b6339f81648cab9bdf`
+27. `a6393fb5c62992c973e9b1e486aaaac6e3433012`
+28. `b893d44abb18101366f2116f197d0f16d0bf16da`
+29. `a8b96014ae042e9105ee98a33729441e2956c4ab`
+30. `f597bf8c91df154244b0d37dc9d0b11a6ba64340`
+31. `c829ff506fcb33ad649653a57f9568dc51b7dff4`
+32. `145aa1bcfc0d168e1ca87b64d44fc120764c049d`
+33. `71975329a2a5147de730c4966701c154d3fe2444`
+34. `01b5c97a0155321ab9e5bac843d7b4cb3e89e724`
+35. `a4e9f7d1e04a8c0d58f0f7cbec335e686913d36c`
