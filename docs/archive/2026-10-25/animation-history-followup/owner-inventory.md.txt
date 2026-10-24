@@ -1,0 +1,80 @@
+# Animation history inventory — read-only, 2026-10-25
+
+Baseline main `b03c9d3f498b738a71f06ce7a3a964f240ebccc5`. Inspected 17 relevant extant worktrees (HEAD, docs/design/spikes status), plus 42 local branch refs matching animation/coral/character names and their non-main intermediate text objects. Compared Git blob identity against all objects reachable from main, including archived snapshots, not merely current path names. No Git mutation, browser use, service change or source edits. Temporary output only.
+
+## Already durable in main
+
+- Runtime selection original: `docs/archive/2026-10-25/snapshots/coral-runtime-research/docs/coral-runtime-evaluation.md.txt`, source `0faa4dff3196594cfe789d5ed59d43eb88848139`. Explicitly proposed Canvas vs Pixi comparison; not a production approval.
+- Coral layered v1/v2 and final next exploration: `docs/archive/2026-10-25/snapshots/coral-research/` from `85b8f44ae8c8ba6f74b6840b4735ff90351d674d`. Final `docs/coral-animation-next.md.txt` contains original micro-motion feedback section and headAlignment x20/y6 correction with author/independent-review limits. Existing archive includes v1/v2 prompts and their three JSON provenance records; does not include next/sources.json (below).
+- Comparison-preview URL/candidate-sharing protocol original: `spikes/animation-preview/README.md` (current main; source branch tip `e9deb6f3854d7c8e5838b34a3c83350507d2b70e`, main last-path commit `4c134c6448b519e7d4e53e22bb1d8f36835225e5`). Contains src/id/env precedence and fs root restrictions. Its older per-character approval sentence is historical context, superseded by current production-workflow. No separate chat-only protocol reconstructed.
+- Blue repair/review originals: `design/animation-candidates/blue-glasses/{README,revision-review,initiator-review,user-acceptance}.md`, `docs/animation/blue-glasses-game-integration.md`; current/main-history versions from source `8a4f7f988b640e7b7619aa9a9edcf2d8968dde21` already reachable.
+- Silver originals: `design/animation-candidates/silver-bun/{README,feedback-review,waiting-review,initiator-review,formal-dawn-review,prompts}.md`, provenance and attachments; `docs/animation/silver-bun-game-integration.md`. Earlier README from source `97548eaa3f324ffb46e8e5fec21185c06b4a3956` is separately archived as silver-earlier-status.
+- Gray originals: `design/animation-candidates/salt-pepper-beard/{README,initiator-review,formal-review,formal-dawn-review}.md` and provenance/generation records/native captures. This agent’s initial formal QA, browser blocker and subsequent parent recovery are durable there, not chat-only evidence. Source tip `c4c3298e48f97533eb383673bd4cd36264aa8ca9` has no unmapped design text.
+- Plum originals: `design/animation-candidates/plum-crop/{README,prompts,initiator-review,formal-dawn-review}.md` and provenance/attachments, with `docs/animation/gray-plum-game-integration.md`; source `a70eb0e3947535c50508de3b133bfa7fc17d3006` mapped.
+- Sunny originals: `design/animation-candidates/sunny-moustache/{README,initiator-review,user-acceptance}.md`, provenance/generation records and `docs/animation/sunny-moustache-game-integration.md`. Raw visibility report and synthetic screenshot already archived; true hidden remains unverified.
+
+## Unmapped historical originals: archive documents, do not merge obsolete application code
+
+These are exact tracked objects absent from main history, not reconstructed summaries. For archived superseded versions use the source commit/path below; no worktree needs to be restored or modified. Root archive owner should decide final status/index wording.
+
+| Original path | Exact source commit containing that version | Git blob | Recommendation |
+| --- | --- | --- | --- |
+| `docs/2d-animation-investigation.md` | `b2a7b603a28752a42261c5a1a79b9625b5a6a8d3` | `8dc7f449e4858278db84515fb13fff126c16fa5a` | Archive historical original; preserve proposal/unverified boundaries. |
+| `design/coral-animation-next/sources.json` | `64127c1c5fcc8511a0afffdede660fda841a5423` | `3644267bf3770e5c9cb671cedc4ff4e9cf583bf1` | Archive missing next provenance + two exact generation prompts; not included in existing three JSON copies. |
+| `docs/coral-animation-next.md` | `c5e40f29cd0e5681ddcd3996dd8ccc94acf719b1` | `b6878513f31843f56b632e582fa75a755a48c18a` | Superseded intermediate original (initial correction or pre-head-offset micro-motion); final archived text already summarizes/inherits its substance. Preserve version if all completed proposal revisions are required. |
+| `docs/coral-animation-next.md` | `64127c1c5fcc8511a0afffdede660fda841a5423` | `33affbae0456a761c97555e3ba9324967f8874ea` | Superseded intermediate original (initial correction or pre-head-offset micro-motion); final archived text already summarizes/inherits its substance. Preserve version if all completed proposal revisions are required. |
+| `docs/hunyuan-coral-animation.md` | `7bab57b09b144f76f0d9f7f03e7a5b7e8891c8e0` | `9e3ad145ee095b2b5fad10906959fd4459de95c4` | Archive historical original; preserve proposal/unverified boundaries. |
+| `spikes/cartoon-2d/README.md` | `b2a7b603a28752a42261c5a1a79b9625b5a6a8d3` | `80fc61ca8ba7b4b5a8412eb7253206db10ec4c62` | Archive study README; records production limits/reproduction and links needed to interpret abandoned route. |
+| `spikes/coral-layered-animation/README.md` | `bb9b031ae6a98354439cb9c8c92d64a0d3bd5afc` | `ae93fc39ed386103712c279f5f41a5247caa4930` | Archive study README; records production limits/reproduction and links needed to interpret abandoned route. |
+| `spikes/coral-blender/README.md` | `368ff5d4bddfd1c95103912aaf53e209640e5e53` | `01385147fa6478195b6c658c3d1be79b5ea3a0f6` | Archive study README; records production limits/reproduction and links needed to interpret abandoned route. |
+| `spikes/hunyuan-coral/README.md` | `7bab57b09b144f76f0d9f7f03e7a5b7e8891c8e0` | `3e60e4b59a58adc92aa606d22931d1c4a7723922` | Archive study README; records production limits/reproduction and links needed to interpret abandoned route. |
+
+Primary new omissions with substantive route comparison are `docs/2d-animation-investigation.md` (2026-10-24, proposed SVG/Rive/Spine/Live2D/Lottie/frame routes; explicitly not product approval) and `docs/hunyuan-coral-animation.md` (2026-10-24, user-provided model limited experiment, rough rig/weight failure and no face/lip sync). The Blender README describes the earlier programmatically built model, distinct from Hunyuan. Main has `docs/cartoon-3d-investigation.md` and `spikes/cartoon-3d/README.md`, but those are not byte-identical substitutes for these originals. Do not call their existence full original coverage.
+
+Existing filesystem path for next provenance: `/Users/nighca/.codex/worktrees/coral-animation-next/lie/design/coral-animation-next/sources.json`; same blob also in coral-runtime-evaluation WT. Other abandoned-study refs may no longer have a registered WT: use `git show <full source SHA>:<path>` directly from repository `/Users/nighca/code/nighca/lie`; do not invent a filesystem original.
+
+## Necessary attachment candidates retained in source refs
+
+- Hunyuan source `7bab57b09b144f76f0d9f7f03e7a5b7e8891c8e0`: `spikes/hunyuan-coral/renders/weight-failure.jpg`, `renders/browser-front.jpg`, `renders/source-front.jpg`, `renders/front.jpg`, `artifact-check.json` explain rejected weights vs final visual evidence; source tree also retains GLB and gesture MP4. Archive owner can preserve selected proof with original texts, rather than copy all runtime code/assets.
+- Coral next source `85b8f44ae8c8ba6f74b6840b4735ff90351d674d`: `design/coral-animation-next/previews/neck-{idle,listening,waiting,speaking}.jpg`, `{waiting,listening}-micro-{a,b}.jpg`, `micro-391.jpg` support final archived head-offset/micro-motion claims. Already known archive deliberately left old binaries in source refs; not newly missing originals, but retain refs until attachments decision.
+- Blender source `368ff5d4bddfd1c95103912aaf53e209640e5e53`: `spikes/coral-blender/{front,three-quarter,listening,speaking}.png`, `artifact-check.json`; heavy blend/GLB not automatically required by a text archive.
+
+## Frozen mint/ochre source handoffs — do not duplicate archive
+
+- Owner source `/Users/nighca/.codex/worktrees/mint-puffs-animation/lie`, branch `refs/heads/codex/mint-puffs-animation`, clean observed HEAD `b5c08960af2c3f2aad0b473f39d0f30cc5a9765e`.
+  - `design/animation-candidates/mint-puffs/README.md` (blob `0cf21d536c909f7471ef46badb2e78ef16fed3ed`) → include with reviewed original source handoff, not an omission requiring duplicate archive.
+  - `design/animation-candidates/mint-puffs/prompts.md` (blob `8bfc1be9769cdc594a171dbbe75172823156dc6a`) → include with reviewed original source handoff, not an omission requiring duplicate archive.
+  - `design/animation-candidates/mint-puffs/provenance.json` (blob `e4780970d79b86aaca08c60b8e56cc3cf17e7218`) → include with reviewed original source handoff, not an omission requiring duplicate archive.
+- Owner source `/Users/nighca/.codex/worktrees/ochre-freckles-animation/lie`, branch `refs/heads/codex/ochre-freckles-animation`, clean observed HEAD `0e4558eeaf65270ab75d2d36d3b7a6dea28f3583`.
+  - `design/animation-candidates/ochre-freckles/README.md` (blob `cc03bfc712e727eb559b3e36804792efcc8c433e`) → include with reviewed original source handoff, not an omission requiring duplicate archive.
+  - `design/animation-candidates/ochre-freckles/evidence/checks.txt` (blob `3869860193932adbf7d1d62ee5672a2e7de77efe`) → include with reviewed original source handoff, not an omission requiring duplicate archive.
+  - `design/animation-candidates/ochre-freckles/prompts.md` (blob `0fe3c930d2fb18d8ca70c82e4b48e860b4ad92d6`) → include with reviewed original source handoff, not an omission requiring duplicate archive.
+  - `design/animation-candidates/ochre-freckles/provenance.json` (blob `fbbf98f619fffa8da86e451f905a5b8fd4a7a9aa`) → include with reviewed original source handoff, not an omission requiring duplicate archive.
+- Also tracked ochre `generation-records.json` blob `edcb43cd4426bf3f7d397b0a94d3df51667b16c9`, source `0e4558eeaf65270ab75d2d36d3b7a6dea28f3583`; mint README original at `4c213f83f7ebdd498b2031ff005f7936393bf155` remains in source history.
+- Both README/prompts explicitly retain rejected generated-mouthless-head decision: duplicate canonical/generated neck/collar contours, final four unchanged canonical PNGs and runtime masks. Mint latest README additionally records waiting-head identity correction and remaining narrow acceptance boundaries. These are original owner records, not this report’s reconstructed approval. Root initiator review will accompany source.
+
+## Dirty/untracked and coverage limits
+
+- Relevant 17 WT `git status --porcelain --untracked-files=all -- docs design spikes` returned empty: no isolated nonignored untracked design/proposal file found in this scope. No ignored cache/log/credential scan was performed. No owner dirty file was read or altered.
+- This checks local surviving refs/worktrees, not deleted refs, arbitrary global home directories or every old chat. Known agent-chat design from this agent maps to formal-review.md; no additional child chat-only original is known to this agent. No claim of all-machine/chat completeness.
+- Existing archive index itself labels summaries as summaries and original snapshots as original. This report is a read-only inventory summary, not approval or a replacement for originals.
+
+## Inspected worktree heads
+
+- `/Users/nighca/.codex/worktrees/animation-comparison-preview/lie` — `e9deb6f3854d7c8e5838b34a3c83350507d2b70e`; relevant text files 58.
+- `/Users/nighca/.codex/worktrees/animation-resource-limits/lie` — `25130cc3e9799d8eb5869041a361ac4b63432ecf`; relevant text files 55.
+- `/Users/nighca/.codex/worktrees/blue-glasses-animation/lie` — `8a4f7f988b640e7b7619aa9a9edcf2d8968dde21`; relevant text files 60.
+- `/Users/nighca/.codex/worktrees/coral-animation-next/lie` — `85b8f44ae8c8ba6f74b6840b4735ff90351d674d`; relevant text files 75.
+- `/Users/nighca/.codex/worktrees/coral-game-animation/lie` — `f60ff43ff766ce8baf56da1791c6d3e2e1a9937c`; relevant text files 55.
+- `/Users/nighca/.codex/worktrees/coral-game-bridge/lie` — `323bd0a1c5b18e904f8f69542834e5f3093ec31b`; relevant text files 55.
+- `/Users/nighca/.codex/worktrees/coral-runtime-evaluation/lie` — `0faa4dff3196594cfe789d5ed59d43eb88848139`; relevant text files 76.
+- `/Users/nighca/.codex/worktrees/integrate-three-character-reviewed/lie` — `a4e9f7d1e04a8c0d58f0f7cbec335e686913d36c`; relevant text files 89.
+- `/Users/nighca/.codex/worktrees/mint-puffs-animation/lie` — `b5c08960af2c3f2aad0b473f39d0f30cc5a9765e`; relevant text files 72.
+- `/Users/nighca/.codex/worktrees/ochre-freckles-animation/lie` — `0e4558eeaf65270ab75d2d36d3b7a6dea28f3583`; relevant text files 73.
+- `/Users/nighca/.codex/worktrees/plum-crop-animation/lie` — `a70eb0e3947535c50508de3b133bfa7fc17d3006`; relevant text files 62.
+- `/Users/nighca/.codex/worktrees/salt-pepper-beard-animation/lie` — `c4c3298e48f97533eb383673bd4cd36264aa8ca9`; relevant text files 63.
+- `/Users/nighca/.codex/worktrees/silver-bun-animation/lie` — `97548eaa3f324ffb46e8e5fec21185c06b4a3956`; relevant text files 62.
+- `/Users/nighca/.codex/worktrees/sunny-moustache-animation/lie` — `dcf759331af83e97cdb7f06a3108f6d74acb8859`; relevant text files 62.
+- `/Users/nighca/.codex/worktrees/three-character-final-dawn/lie` — `3cbe10323280cffa7106f0e5539c9caf75646852`; relevant text files 89.
+- `/Users/nighca/.codex/worktrees/three-character-integrate-dawn/lie` — `051c441027030b8795cc14d7d998d85f14f55dd9`; relevant text files 86.
+- `/Users/nighca/.codex/worktrees/three-character-qa-dawn/lie` — `bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`; relevant text files 86.

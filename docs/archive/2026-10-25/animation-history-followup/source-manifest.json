@@ -1,0 +1,81 @@
+[
+  {
+    "archive": "snapshots/64127c1c/design/coral-animation-next/sources.json",
+    "source_commit": "64127c1c5fcc8511a0afffdede660fda841a5423",
+    "source_path": "design/coral-animation-next/sources.json",
+    "source_blob": "3644267bf3770e5c9cb671cedc4ff4e9cf583bf1",
+    "source_commit_date": "2026-10-24T17:52:32+08:00",
+    "sha256": "66dd049764d74f82415d5eb6615b39664782f9f99e2a616fbec07d51d6b28716",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "snapshots/b2a7b603/spikes/cartoon-2d/README.md.txt",
+    "source_commit": "b2a7b603a28752a42261c5a1a79b9625b5a6a8d3",
+    "source_path": "spikes/cartoon-2d/README.md",
+    "source_blob": "80fc61ca8ba7b4b5a8412eb7253206db10ec4c62",
+    "source_commit_date": "2026-10-24T13:31:23+08:00",
+    "sha256": "5a66507a6ade2416de6e358364b04d61faa605c9c00ae946c304a5a32d872248",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "snapshots/bb9b031a/spikes/coral-layered-animation/README.md.txt",
+    "source_commit": "bb9b031ae6a98354439cb9c8c92d64a0d3bd5afc",
+    "source_path": "spikes/coral-layered-animation/README.md",
+    "source_blob": "ae93fc39ed386103712c279f5f41a5247caa4930",
+    "source_commit_date": "2026-10-24T16:11:41+08:00",
+    "sha256": "1dfe09cf79c66992a8b440f4bcaa5dc434f8c70b6456c2c152ac96f25286dfb8",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "snapshots/368ff5d4/spikes/coral-blender/README.md.txt",
+    "source_commit": "368ff5d4bddfd1c95103912aaf53e209640e5e53",
+    "source_path": "spikes/coral-blender/README.md",
+    "source_blob": "01385147fa6478195b6c658c3d1be79b5ea3a0f6",
+    "source_commit_date": "2026-10-24T11:37:55+08:00",
+    "sha256": "220cbc7de0f276221b4905d581ab207a4a81f6e9eddcfc28dc5e5740e9e41b8e",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "snapshots/7bab57b0/spikes/hunyuan-coral/README.md.txt",
+    "source_commit": "7bab57b09b144f76f0d9f7f03e7a5b7e8891c8e0",
+    "source_path": "spikes/hunyuan-coral/README.md",
+    "source_blob": "3e60e4b59a58adc92aa606d22931d1c4a7723922",
+    "source_commit_date": "2026-10-24T14:23:51+08:00",
+    "sha256": "3d727b63324af6fed1d5b3be11bea04a626b8a87f52cb2c1b2b5c68b1980cd95",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "snapshots/368ff5d4/spikes/coral-blender/artifact-check.json",
+    "source_commit": "368ff5d4bddfd1c95103912aaf53e209640e5e53",
+    "source_path": "spikes/coral-blender/artifact-check.json",
+    "source_blob": "5eb9be4779b0b230c312382f6376470f2dd80554",
+    "source_commit_date": "2026-10-24T11:37:55+08:00",
+    "sha256": "630b99ceb0d8a0b7b676782f5ae3f196ee27ea5df36a9247c9de671fab960c87",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "snapshots/7bab57b0/spikes/hunyuan-coral/artifact-check.json",
+    "source_commit": "7bab57b09b144f76f0d9f7f03e7a5b7e8891c8e0",
+    "source_path": "spikes/hunyuan-coral/artifact-check.json",
+    "source_blob": "7c435af1894945f3a29ee8675f3cd2ebed4ee9b6",
+    "source_commit_date": "2026-10-24T14:23:51+08:00",
+    "sha256": "1c1e6f46a33465a11b2c4f45d475ff345c538e2457f6ae30f6712d64393987e6",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "snapshots/7bab57b0/spikes/hunyuan-coral/renders/weight-failure.jpg",
+    "source_commit": "7bab57b09b144f76f0d9f7f03e7a5b7e8891c8e0",
+    "source_path": "spikes/hunyuan-coral/renders/weight-failure.jpg",
+    "source_blob": "6865f1d623a1099708c4b1604868d66fa003d0dd",
+    "source_commit_date": "2026-10-24T14:23:51+08:00",
+    "sha256": "49390f035459d6a8b3882f8262e5b8d2b900afda01d5aaef04160e34f62757a4",
+    "status": "historical research/provenance/experiment evidence; not production approval"
+  },
+  {
+    "archive": "owner-inventory.md.txt",
+    "source_path": "/private/tmp/lie-animation-history-inventory.md",
+    "source_owner_chat": "01a16d44-aeea-7552-b184-5118072e75f3",
+    "sha256": "6be22d97a0cf4204c6051e200194e53cf8ba95fd989d3c416a270611bfa1ef50",
+    "status": "owner read-only inventory summary; original bytes; not original design or approval"
+  }
+]

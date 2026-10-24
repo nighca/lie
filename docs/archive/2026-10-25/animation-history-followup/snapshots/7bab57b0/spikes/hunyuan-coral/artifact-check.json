@@ -1,0 +1,35 @@
+{
+  "bytes": 2843036,
+  "meshCount": 1,
+  "skinCount": 1,
+  "jointCount": 7,
+  "embeddedImages": 2,
+  "clips": [
+    {
+      "name": "Idle",
+      "durationSeconds": 4.083333333333333,
+      "movingJoints": [
+        "head",
+        "spine"
+      ]
+    },
+    {
+      "name": "Listening",
+      "durationSeconds": 4.083333333333333,
+      "movingJoints": [
+        "head",
+        "spine"
+      ]
+    },
+    {
+      "name": "SpeakingGesture",
+      "durationSeconds": 4.083333333333333,
+      "movingJoints": [
+        "forearm.L",
+        "head",
+        "spine",
+        "upperarm.L"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "tool": "built-in image_gen",
+  "calls": [
+    {
+      "asset": "listening-arm.png",
+      "prompt": "Use case: background-extraction. Edit target: approved coral-bob listening illustration. Produce ONE isolated complete raised arm assembly, from coral jacket shoulder cap through bent sleeve and rolled cuff to bare forearm and cupped hand at ear. Preserve exact approved drawing style, anatomical proportions, hand size, colors and navy outlines. Keep the complete arm in the EXACT original position, orientation and size on the original 1254x1254 canvas: hand around x370-510 y280-465; elbow/cuff around x300-480 y600-745; shoulder cap around x475-550 y440. Include sleeve shoulder, but remove all torso, lapels, head, hair, earrings, other arm, legs and background to genuine alpha transparency. Reconstruct only the small hidden shoulder attachment as a rounded overlap tab, no new details. Keep cuff and forearm continuously connected as ONE cutout, do not separate into pieces, do not enlarge hand, no shadows/halo outside arm. Output same square framing with generous empty transparency. No text.",
+      "source": "/Users/nighca/code/nighca/lie/design/appearances/assets/coral-bob/listening.png",
+      "original": "/Users/nighca/.codex/generated_images/01a16d44-aeea-7552-b184-5118072e75f3/exec-c142e30b-2fc0-4b97-9fbb-d08d0f962f4b.png",
+      "sha256": "93602222407a2f4c3db2e73e2e445abc819e2e2da7b6c1260e57d41e11d00e20",
+      "bytes": 306325,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBounds": [
+        65,
+        69,
+        1202,
+        1077
+      ],
+      "visibleBoundsOver128": [
+        279,
+        207,
+        674,
+        974
+      ]
+    },
+    {
+      "asset": "waiting-arms.png",
+      "prompt": "Use case: background-extraction. Edit target approved waiting illustration. Output ONE transparent cutout of the TWO ARMS TOGETHER in their original exact relative placement: viewer-left coral shoulder sleeve, bent upright bare forearm, curled hand with index finger under chin; viewer-right coral sleeve and horizontally crossing forearm with hand supporting opposite elbow. Preserve the entire continuous linked assembly, original proportions, cuff/skin connections, navy outline, shading and drawing style. Remove head/hair/earrings/neck/chest/white top/lapels/trousers/background completely to alpha; keep only both arm assemblies, including both shoulder caps. Do not add a torso. Preserve original bent-arm silhouette and two hands; the index finger rests around x600 y365 on original 1254 square canvas, shoulders y450 and lowest cuffs y830. Same square canvas and original scale/position, ample empty transparency; no text, no exterior halo. Draw no new gestures, no raised palm.",
+      "source": "/Users/nighca/code/nighca/lie/design/appearances/assets/coral-bob/waiting.png",
+      "original": "/Users/nighca/.codex/generated_images/01a16d44-aeea-7552-b184-5118072e75f3/exec-a7ef5bce-56a5-4144-8abf-9117c98d12a2.png",
+      "sha256": "2c8de0fc32d63d4c1ad8cf912119629ee6e62c15eb8e1adf90e922e7545246cc",
+      "bytes": 497090,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "alphaBounds": [
+        0,
+        37,
+        1236,
+        1222
+      ],
+      "visibleBoundsOver128": [
+        236,
+        278,
+        1088,
+        1030
+      ]
+    }
+  ],
+  "references": [
+    {
+      "path": "design/coral-animation-next/references/default.png",
+      "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe"
+    },
+    {
+      "path": "design/coral-animation-next/references/listening.png",
+      "sha256": "e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea"
+    },
+    {
+      "path": "design/coral-animation-next/references/speaking.png",
+      "sha256": "ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d"
+    },
+    {
+      "path": "design/coral-animation-next/references/waiting.png",
+      "sha256": "2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e"
+    }
+  ]
+}

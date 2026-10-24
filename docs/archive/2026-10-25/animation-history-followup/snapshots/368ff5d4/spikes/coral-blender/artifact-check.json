@@ -1,0 +1,24 @@
+{
+  "generator": "Khronos glTF Blender I/O v5.2.41",
+  "bytes": 996320,
+  "sha256": "9fcdac348fda3fc2c172b990fe1ce5ec03c0a3184adc31696dbfb7eeb05f0778",
+  "meshes": 59,
+  "nodes": 63,
+  "skins": 0,
+  "images": 0,
+  "triangles": 49308,
+  "animations": [
+    {
+      "name": "ArmLeftAction",
+      "channels": 1
+    },
+    {
+      "name": "HeadPivotAction",
+      "channels": 1
+    },
+    {
+      "name": "SpeakingMouthAction",
+      "channels": 1
+    }
+  ]
+}
