@@ -60,6 +60,8 @@
 
 ## 必须保留的服务与环境
 
+- 本代约03:37分享边界只读QA自建IAB browser `3` / tab `1`清理未确认：仅打开`http://localhost:8787/play`见缺内容提示，后续CDP调用约272秒未返回被中断；close返回`Browser is not available: 3`，IAB inventory也不可用。浏览器恢复后仅核查/关闭此自建tab，禁止触碰他人tab或reset。无源码、草稿、viewport、mic/provider或服务改动，不推断产品bug/服务离线或其他专项等待原因，无审批/拒绝证据；未得边界/Unicode/refresh/网络结果。临时证据`/private/tmp/lie-share-boundary-qa-20261025/handoff.md`。
+
 - 用户launchd `dev.nighca.lie.main-preview`独立于chat：Vite8787、同源薄Worker8788，owning main每1.5s检查，lock变动先npm ci，失败30s退避；换代/归档不得停止或重复启动。实际SHA查`http://127.0.0.1:8787/__lie/main-status`；ready只证明配置可用，不是真人收音。
 - plist：`~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist`；Node24.22.1：`~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64`；日志：`~/Library/Logs/LIE/main-preview.log`。凭据只在忽略目录，勿输出，维护另派owner。[运行说明](development.md)
 - 保留动画作者预览5351/5352/5355、plum5356/gray5357及Logo探索5497，不重启旧模板。用户8787测试tab保留；全局viewport只按短窗口协调，释放时reset并关自建tab，不动用户会话/mic。
