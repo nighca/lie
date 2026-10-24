@@ -1,6 +1,6 @@
 # 蓝衣眼镜动画候选
 
-2026-10-24，未激活生产，尚待发起者独立review与用户逐人美术验收。使用内置imagegen，共3次首轮调用，0次额外修复调用；真实prompts、参考图和保留的原生输出见`generation-records.json`。所有PNG均原字节复制；没有脚本改像素、抠图或缩放导出。
+2026-10-24，未激活生产，已完成发起者独立review，尚待用户逐人美术验收。使用内置imagegen，共3次首轮调用，0次额外修复调用；真实prompts、参考图和保留的原生输出见`generation-records.json`。所有PNG均原字节复制；没有脚本改像素、抠图或缩放导出。
 
 ## 形象与部件
 
@@ -31,7 +31,7 @@ npm run appearances:generate
 - `node --experimental-transform-types design/animation-candidates/blue-glasses/verify.mjs`通过：严格v1解析、6份PNG实际头部尺寸/hash、960时刻有限变换/互斥嘴形、循环闭合、共用接触父链、100次在240ms settle完成前再次中断（setState前后advance(0)所有节点数值transform连续、每步数值有限、嘴形显隐互斥、所有部件显隐立即符合目标clip当前采样）、canonical源hash。Node仅strip类型不支持播放器parameter property，故明确使用其transform-types标志。
 - `npm run test --workspace=@lie/appearance-animation`：25/25通过。`npm run typecheck --workspace=@lie/appearance-animation`通过。没有运行全仓build，未更改应用或播放器代码。
 - IAB实际正式组件桌面四态播放、快速切换均能显示候选；console error/warn为空。额外用正式采样器逐态检查25%/75%截图，已实际逐图阅读。未见头颈/托腮接触大空隙、重影或裸露袖口截线。初版等待背带切缝、讲话手下夹带白衣区已修正。
-- 391实际innerWidth=391。正式组件default/waiting/speaking的全页证据可用；listening的截图下半间歇截断，定相位页部分截图出现布局畸变，不能当作通过。已reset释放viewport；391整体仍待发起者重新实际验看。只保留可读证据，没有将坏截图归为通过。
+- 391实际innerWidth=391。正式组件default/waiting/speaking的全页证据可用；listening的截图下半间歇截断，定相位页部分截图出现布局畸变，不能当作通过。已reset释放viewport；发起者随后以新选中tab、实际innerWidth=scrollWidth=391完成四态实时组件复验，见`initiator-review.md`及`owner-*-391.jpg`；早期截图不替代该证据。只保留可读证据，没有将坏截图归为通过。
 - 未另测本候选减少动态效果/隐藏暂停/资源失败/迟到换人/卸载；这些属既有通用组件能力与已有测试覆盖，不能把播放器单测当成本候选浏览器实测。发起者最终review仍需包含关键实际兼容检查。
 
 ## 已知边界
