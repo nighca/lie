@@ -23,7 +23,7 @@
 ## 专项与最高优先级执行
 
 - 调查/共享视觉：01a16d5c-de69-7452-b184-5118072e75f3；UI反馈1—9正在/已获正式实施授权，base887ac03，managed /Users/nighca/.codex/worktrees/investigation-ui-polish/lie /codex/investigation-ui-polish。负责Home/App/style/catalog公开characters接口/Application/Transcript/VoiceControl及相关测试；其子agent负责controller正常通知与三案reveal纯分段。禁止Editor和CharacterChoice。需完整clean handoff及桌面/391，root复核。
-- 编辑器：01a16d90-27cc-77c2-9e0a-4b28b1135371；反馈10—17+用户追加授权PC人物卡复用，base887ac03，codex/editor-feedback-polish（实际工作树交回时核）。拥有Editor/helper/editor tests与CharacterChoice.vue。CharacterChoice先以独立commit吸收原调查PC四条等价默认样式，再Editor复用，移动端各保留；调查style.css冗余四条删除须依赖该组件迁移SHA。catalog新characters fixture仅editor-navigation由编辑器改，其他catalog测试归调查owner。5397桌面/391/动画回退/投稿URL/草稿分享已专项自检，等待完整有序交付，不能省rootreview。
+- 编辑器：01a16d90-27cc-77c2-9e0a-4b28b1135371；反馈10—17+用户追加授权PC人物卡复用，base887ac03，codex/editor-feedback-polish（实际工作树交回时核）。拥有Editor/helper/editor tests与CharacterChoice.vue。CharacterChoice先以独立commit吸收原调查PC四条等价默认样式，再Editor复用，移动端各保留；调查style.css冗余四条删除须依赖该组件迁移SHA。catalog新characters fixture仅editor-navigation由编辑器改，其他catalog测试归调查owner。5397桌面/391/动画回退/投稿URL/草稿分享已专项自检，刚收到clean完整交付：/Users/nighca/.codex/worktrees/editor-feedback-polish/lie；有序7af9f884f0e90ddeb571fde392979d66d9274f7e（共享PC默认样式）→ead3505ee2a390b23d6a82c8fbc6ee5bbbdbee57（10—17及Editor卡）→dc4bf01f469b500584951a081aead0667ceaf5c3（catalog fixture）。Web168+UI35/类型/构建通过是专项报告，root尚未review，不能直接合入。5397server已停止。
 - 动画：01a16d44-aeea-7552-b184-5118072e75f3，保留独立制作/视觉验收权。用户并行角色制作上限2；最近sunny完成后在制plum-crop和salt-pepper-beard，均base62b3846，仅候选资产目录，不做命名迁移/激活manifest。交付/用户批准需实时核最新。
 - 三个专项已被用户授权向本协调同步；每次轮换由新协调通知新ID。常规交付完整批量，冲突/接口/viewport及时联系。
 
@@ -32,6 +32,7 @@
 - blue-glasses：用户视觉通过对象fdcb016583225167b358e1d70519ada75a8ff7e3，验收记录8a4f7f9；WT /Users/nighca/.codex/worktrees/blue-glasses-animation/lie /codex/blue-glasses-animation当时clean，原base0843fe5。已知修订c0b4f4b→1d4b2b3→fe8f313→b2efc4e→fdcb016→8a4f7f9（核实际log完整SHAs及初始依赖，不据简记直接cherry-pick）。排rootreview/正式激活，不自动把研究图当生产源。
 - silver-bun：WT同名 /codex/silver-bun-animation，base c9c2e765（已有dd35/f60显式依赖需核）；ordered24c7814→17be2c8→2ddc75e→c19e0d5→4f276ef→b561183→a965211→d68ad39。专项完整review/独立QA/桌面391/四态极值通过，交用户5352候选，尚无批准证据，不激活。
 - sunny-moustache：WT同名 /codex/sunny-moustache-animation，base62b3846，无额外依赖；ordered4e59d7d4f16ff3c02ae8f8642b0a8b213ae1014d→c891485→68c2f7b，专项交付clean。5PNG/20nodes、预算9435096、960sample/100interrupt及桌面/391四态复验，initiator-review.md和16截图；两个异源诊断区仍有324/14计数，不能夸称全覆盖。刚交用户5355待视觉批准，不激活。
+- 动画作者预览另有新增量待核完整SHA：animation-comparison-preview在cf28df8之后的两文件提交，支持src.<id>多候选比较及ANIMATION_PREVIEW_CANDIDATE_ROOTS环境配置；5351保留专项进程，不重放已有272c1ac依赖，不代表正式动画激活。
 - CharacterPreset命名：原owner cb86dd6e25e22444dc93b892c2d609c0a0d6ac08，旧候选1629830为其cherry-pick。批准内部源/类型/包改名，保持appearanceId和/appearances/公开兼容；待完整rootreview与按当前main再组合，不能覆盖新Editor/App或候选资产。所有制作owner仍按当前main既有appearance路径，不提前要求换源。
 - Logo小彩蛋：用户已授权独立subagent先设计，细节未定；先查旧任务是否曾派发，避免重复，未批准生产方案。其他 backlog和门禁见project-plan。
 
