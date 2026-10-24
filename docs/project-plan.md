@@ -66,7 +66,7 @@
 | P2 | 启动等待/延迟质量 / 语音owner | 已有启动阶段拆分分析；在真实测量基础上评估AudioContext/WS/hello/mic/worklet，不擅自跨轮保活麦克风/连接。 |
 | P2 | 依赖审计 / 工程owner待排 | 审计b3b3bc9与补丁0603879已交并root审查；Node24.22.1+精确Undici/Zod覆盖保持cf主线，独立审计归零/271测试通过，root在真实Node24.22.1下复验新UI组合：审计0、277测试/类型/构建通过，补丁已集成本地04844ab；已随32d89bf发布且远程Node24.22.1 CI/CD成功。开发代理WS拒绝握手挂断在旧依赖也复现，未当成通过。 |
 | P3 | 正确/错误指认状态图 / 视觉owner | 已登记未生成；正确应被看穿/懊恼/无奈，非开心；错误可不解/委屈/抗议，按人物处理。仅提交结果后显示，不提前泄题、不改变错误终局不揭晓。 |
-| P3 | 双语README / 文档owner | 默认英文README.md、README.zh-CN.md互链已review并随2de0f22本地集成，链接/命令对齐，已随32d89bf发布。 |
+| P3 | 双语README / root子agent logo_easter_egg_design | 双语互链已随32d89bf发布。用户新增：英文README头图仍为中文，需拆成同风格英文/中文两图，各README引用对应语言。已委派复用现有HTML/SVG源、局部翻译及渲染验收，不重画角色、不改正式Logo；待完整review交付，不抢占P1调查页。 |
 | P1 | UI反馈1—9 / 调查共享视觉专项 | 用户澄清原“只记录”不约束root，已正式授权安排实施；从887ac03分派首页/品牌/介绍卡片/转写/持续玩家波形/通知/结局分段。owner负责相关Web/UI文件，禁止编辑器/素材/命名迁移，交回完整review与桌面/391验收。见[17条范围](pending-ui-feedback.md)。 |
 | P1 | UI反馈10—17 / 编辑器专项 | 原三提交7af9f884→ead3505e→dc4bf01已root全diff review与本地集成；10—17/PC复用完成，独立344测试/全仓类型构建及IAB桌面/391对照通过，见[本批验收](history/2026-10-24/editor-feedback-integration.md)。保存状态+清草稿共同显隐followup b018ad7也已rootreview，本地de95ffa集成；独立Web169/类型/构建通过。用户在编辑器专项追加授权本批PC人物卡复用：编辑器owner持有CharacterChoice等价默认样式迁移，调查owner删除style.css冗余覆盖须依赖该提交；移动各自保留。catalog新characters接口与editor fixture分owner，root组合验。 |
 | P3 | Logo小彩蛋 / root子agent logo_easter_egg_design | 设计提案与A交互预览已review并本地收录；用户已选红点轻跳方向，5497可看560ms/3px样稿，root核原生链接/减弱动态模拟/原几何。仅design目录，正式Logo未改，待用户验收预览后再生产。 |

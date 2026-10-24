@@ -39,6 +39,8 @@
 - CharacterPreset命名：原owner cb86dd6e25e22444dc93b892c2d609c0a0d6ac08，旧候选1629830为其cherry-pick。批准内部源/类型/包改名，保持appearanceId和/appearances/公开兼容；待完整rootreview与按当前main再组合，不能覆盖新Editor/App或候选资产。所有制作owner仍按当前main既有appearance路径，不提前要求换源。
 - Logo小彩蛋：已查docs/design/tmp无既有提案，root现派子agent logo_easter_egg_design，仅独立design/brand/logo-easter-egg新目录设计2—3探索方案，可选本地HTML/SVG演示，不改生产/正式Logo/导航/素材。设计clean交付e5243fc+645fc41，rootreview后本地4ae9b4a+96c1766收录。用户已选A红点跳方向，仅批准先看交互预览；5497独立样稿server65404保留供验收，正式生产未授权。root已看桌面105x56/窄版88x47、0.56s dotJump、模拟减弱动态dotRest及原生#链接，console空；未改系统偏好/真实触屏，待用户预览反馈。其他backlog与门禁见project-plan。
 
+- README头图语言：用户新增要求英文README用英文图、中文README用中文图。P3已派logo_easter_egg_design从d791f7f独立worktree处理README及readme-hero源/图片，保持既有构图角色风格。调查专项已释放viewport，分配其短窗口渲染与视觉QA；不得误当Logo正式生产批准。待clean完整交付、rootreview/集成。
+
 ## 服务、限制与接任第一步
 
 - 本地main验收环境已实际运行：用户launchd `dev.nighca.lie.main-preview`，plist ~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist，stable Node24.22.1在~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64，日志~/Library/Logs/LIE/main-preview.log；runner在owning main每1.5s看SHA，Vite8787→同源薄Worker8788，初启和lock变化npm ci，更新会重启自身服务，失败30s退避。独立于chat，不要在轮换时停止/重复启动。原项目私密.dev.vars仅复制至main的忽略目录，未输出内容/新建provider资源。版本/__lie/main-status已实测SHA与main一致，页面/三案/blue package200，voice/status ready，私密文件和异源Origin403。Node24.22.1全仓353测试（含8个runner生命周期/假凭据隔离）/类型/构建54资源通过。浏览器实际三案加载、console空；未自动收音，ready不是真人验收。main-preview原commit6a76307→e3c773b，本地9f3b607→162dde5；文档本身会推进main，需核下一实际SHA。
