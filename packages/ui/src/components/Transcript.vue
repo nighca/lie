@@ -43,18 +43,18 @@ onMounted(followLatest)
 </template>
 
 <style scoped>
-.lie-transcript { border: 0; border-radius: 0; background: transparent; }
-.lie-transcript__log { max-height: clamp(280px, calc(100vh - 450px), 380px); overflow-y: auto; padding: 0 6px 12px 0; scrollbar-gutter: stable; }
-.lie-transcript__empty { margin: 0; padding: 24px; border: 3px solid var(--lie-ink); border-radius: 24px; background: var(--lie-surface); line-height: 1.8; }
-.lie-transcript__message { display: flex; align-items: flex-start; gap: 12px; width: 100%; max-width: none; margin: 0 0 20px; padding: 0; border: 0; border-radius: 0; background: transparent; }
-.lie-transcript__avatar { position: relative; flex-shrink: 0; width: 50px; height: 50px; border: 3px solid var(--lie-ink); border-radius: 50%; overflow: hidden; background: var(--lie-aqua); display: grid; place-items: center; font-size: 20px; font-weight: 800; }
-.lie-transcript__avatar img { position: absolute; width: 240%; max-width: none; height: auto; left: 50%; top: -3%; transform: translateX(-50%); }
-.lie-transcript__avatar svg { width: 36px; height: 36px; }
-.lie-transcript__bubble { position: relative; min-width: 0; padding: 14px 18px; border: 3px solid var(--lie-ink); border-radius: 24px; background: var(--lie-surface); flex: 1; }
-.lie-transcript__bubble::before { content: ''; position: absolute; width: 12px; height: 12px; top: 16px; left: -9px; transform: rotate(45deg); background: inherit; border-left: 3px solid var(--lie-ink); border-bottom: 3px solid var(--lie-ink); }
+.lie-transcript { display: flex; border: 0; border-radius: 0; background: transparent; }
+.lie-transcript__log { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; max-height: var(--lie-transcript-max-height, 420px); overflow-y: auto; padding: 0 6px 4px 0; scrollbar-gutter: stable; }
+.lie-transcript__empty { margin: 0; color: var(--lie-muted); line-height: 1.8; }
+.lie-transcript__message { position: relative; display: flex; flex-shrink: 0; align-self: flex-start; width: fit-content; max-width: calc(100% - 40px); margin: 0 0 14px 40px; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.lie-transcript__avatar { position: absolute; left: -40px; top: 7px; width: 30px; height: 30px; border: 2px solid var(--lie-ink); border-radius: 50%; overflow: hidden; background: var(--lie-aqua); display: grid; place-items: center; font-size: 14px; font-weight: 800; }
+.lie-transcript__avatar img { position: absolute; width: 210%; max-width: none; height: auto; left: 50%; top: -3%; transform: translateX(-50%); }
+.lie-transcript__avatar svg { width: 23px; height: 23px; }
+.lie-transcript__bubble { min-width: 0; padding: 12px 16px; border-radius: 18px 18px 18px 5px; background: #fff5d8; }
+.lie-transcript__message--mine { align-self: flex-end; }
 .lie-transcript__message--mine .lie-transcript__avatar { color: var(--lie-primary); background: var(--lie-soft-blue); }
-.lie-transcript__bubble strong { font-size: 14px; color: var(--lie-muted); }
+.lie-transcript__message--mine .lie-transcript__bubble { background: var(--lie-soft-blue); border-radius: 18px 18px 5px 18px; }
+.lie-transcript__bubble strong { font-size: 12px; color: var(--lie-muted); }
+.lie-transcript__bubble p { font-size: 16px; line-height: 1.7; font-weight: 600; margin-top: 4px; }
 .lie-transcript__interrupted { display: inline-block; margin-top: 4px; font-size: 12px; color: var(--lie-muted); }
-.lie-transcript__bubble p { font-weight: 600; margin-top: 4px; }
-@media (max-width: 700px) { .lie-transcript__log { max-height: 380px; } }
 </style>

@@ -30,7 +30,7 @@ const transcript = computed(() => view.value.history.map((entry) => ({
   mine: entry.role === 'user',
   avatar: entry.role === 'user' ? null : appearance(current.value?.appearanceId ?? null)?.avatar ?? null,
 })))
-const labels = { idle: '等待你开口', recording: '正在聆听', waiting: '等待回应 · 麦克风已开启', speaking: '正在说话 · 可直接开口打断', error: '语音暂时中断' }
+const labels = { idle: '等待你开口', recording: '正在聆听', waiting: '等待回答', speaking: '正在回答', error: '语音暂时中断' }
 const actionLabel = computed(() => {
   if (view.value.conversationActive) return view.value.busy ? '取消连接' : '结束对话'
   if (view.value.interrogationRemainingMs <= 0) return '询问时间已用完'
@@ -55,12 +55,11 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <a class="wordmark" href="/" aria-label="LIE 首页"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a>
       <h1 v-if="view.phase === 'interrogating'" class="header-title">{{ view.title }}</h1>
       <div v-if="view.phase === 'interrogating'" class="header-actions">
-        <span class="interrogation-budget" aria-label="剩余询问时间">剩余 {{ remainingTime }}</span>
         <UiButton variant="quiet" @click="controller.end()">结束本局</UiButton>
         <UiButton @click="controller.openAccusation()">最终指认</UiButton>
       </div>
+      <p v-if="demo" class="environment-note">演示模式 · 对话为模拟内容，不使用麦克风</p>
     </header>
-    <p class="environment-note">{{ demo ? '演示模式 · 对话为模拟内容，不使用麦克风' : '语音体验开发预览' }}</p>
 
     <main v-if="view.phase === 'loading' || view.phase === 'failed'" class="intro-card surface">
       <h1>{{ view.phase === 'loading' ? '正在准备案件…' : '案件暂时无法加载' }}</h1>
@@ -101,18 +100,18 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
             <img v-if="portrait != null" :key="portrait" :src="portrait" alt="人物形象" @error="portraitFailed">
             <span v-else class="portrait-initial">{{ current.name.slice(0, 1) }}</span>
           </div>
-          <div class="stage-caption"><h2>{{ current.name }}</h2><span>听听这位怎么说</span></div>
+          <div class="stage-caption"><h2>{{ current.name }}</h2></div>
         </section>
         <section class="conversation-copy">
-          <h2>与{{ current?.name }}对话</h2>
-          <p class="muted">自由开口提问，听听每个人的说法。</p>
+          <h2>对话转写</h2>
           <Transcript :messages="transcript" />
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>
-      <VoiceControl :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" @start="speak" />
-      <p class="muted conversation-hint">{{ view.conversationActive ? '对话持续进行中，停顿后会自动回答；你也可以直接开口打断。' : '点击一次开始多轮对话，再次点击结束。语音开启时计时，结束后暂停。' }}</p>
-      <p class="presentation-note">转写仅供回看 · 人物的表情和配色不代表是否撒谎</p>
+      <VoiceControl :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" @start="speak">
+        <template #meter><span v-if="view.conversationActive && !view.busy" class="conversation-hint">可直接开口打断</span></template>
+        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问时间</span><strong>{{ remainingTime }}</strong><small>{{ view.busy ? '连接准备不计时' : '所有人物共享' }}</small></div></template>
+      </VoiceControl>
     </main>
 
     <main v-else-if="view.phase === 'solved'" class="intro-card result-card surface">

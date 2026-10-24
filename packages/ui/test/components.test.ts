@@ -61,6 +61,18 @@ describe('shared controls', () => {
     expect(wrapper.findAll('button').every((button) => button.element.disabled)).toBe(true)
   })
 
+  it('composes caller-owned voice details without adding another conversation action', async () => {
+    const wrapper = mount(VoiceControl, { props: { status: 'recording', label: '正在聆听', actionLabel: '结束对话' }, slots: { details: '<span>剩余询问时间 02:30</span>' } })
+    wrappers.push(wrapper)
+    expect(wrapper.get('.lie-voice__details').text()).toBe('剩余询问时间 02:30')
+    expect(wrapper.findAll('button')).toHaveLength(1)
+    await wrapper.get('button').trigger('click')
+    expect(wrapper.emitted('start')).toHaveLength(1)
+    await wrapper.setProps({ status: 'waiting', label: '等待回答' })
+    expect(wrapper.get('.lie-voice__details').text()).toBe('剩余询问时间 02:30')
+    expect(wrapper.findAll('button')).toHaveLength(1)
+  })
+
   it('opens a native modal and requests closure on Escape', async () => {
     // jsdom lacks native modal methods; browser verification covers actual focus behavior.
     Object.defineProperties(HTMLDialogElement.prototype, {
