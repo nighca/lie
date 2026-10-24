@@ -1,0 +1,245 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@cloudflare/build-output-utils": {
+      "name": "@cloudflare/build-output-utils",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@cloudflare/config"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@cloudflare/build-output-utils",
+        "node_modules/cf/node_modules/@cloudflare/build-output-utils"
+      ],
+      "fixAvailable": true
+    },
+    "@cloudflare/config": {
+      "name": "@cloudflare/config",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "zod"
+      ],
+      "effects": [
+        "@cloudflare/build-output-utils",
+        "@cloudflare/vite-plugin",
+        "cf"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@cloudflare/config",
+        "node_modules/cf/node_modules/@cloudflare/config"
+      ],
+      "fixAvailable": {
+        "name": "cf",
+        "version": "0.8.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@cloudflare/runtime-types": {
+      "name": "@cloudflare/runtime-types",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "miniflare"
+      ],
+      "effects": [],
+      "range": ">=0.1.0",
+      "nodes": [
+        "node_modules/@cloudflare/runtime-types",
+        "node_modules/cf/node_modules/@cloudflare/runtime-types"
+      ],
+      "fixAvailable": true
+    },
+    "@cloudflare/vite-plugin": {
+      "name": "@cloudflare/vite-plugin",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@cloudflare/build-output-utils",
+        "@cloudflare/config",
+        "@cloudflare/runtime-types",
+        "miniflare"
+      ],
+      "effects": [],
+      "range": ">=1.13.0",
+      "nodes": [
+        "node_modules/@cloudflare/vite-plugin"
+      ],
+      "fixAvailable": {
+        "name": "@cloudflare/vite-plugin",
+        "version": "1.12.4",
+        "isSemVerMajor": true
+      }
+    },
+    "cf": {
+      "name": "cf",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@cloudflare/build-output-utils",
+        "@cloudflare/config",
+        "@cloudflare/runtime-types",
+        "miniflare"
+      ],
+      "effects": [],
+      "range": ">=0.9.0",
+      "nodes": [
+        "node_modules/cf"
+      ],
+      "fixAvailable": {
+        "name": "cf",
+        "version": "0.8.0",
+        "isSemVerMajor": true
+      }
+    },
+    "miniflare": {
+      "name": "miniflare",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "undici"
+      ],
+      "effects": [
+        "@cloudflare/runtime-types",
+        "@cloudflare/vite-plugin",
+        "cf"
+      ],
+      "range": ">=4.20250906.1",
+      "nodes": [
+        "node_modules/cf/node_modules/miniflare",
+        "node_modules/miniflare"
+      ],
+      "fixAvailable": {
+        "name": "miniflare",
+        "version": "4.20250906.0",
+        "isSemVerMajor": true
+      }
+    },
+    "undici": {
+      "name": "undici",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1243078,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "undici vulnerable to Denial of Service via unbounded memory in the EventSource parser",
+          "url": "https://github.com/advisories/GHSA-4qv8-2p9j-2685",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=7.0.0 <7.30.1"
+        },
+        {
+          "source": 1243081,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "undici vulnerable to Subresource Integrity bypass via non-lowercase algorithm tokens",
+          "url": "https://github.com/advisories/GHSA-f72v-6w45-q472",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-178"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": ">=7.15.0 <7.30.1"
+        },
+        {
+          "source": 1243113,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "undici vulnerable to Denial of Service via unhandled error on excessive content-encodings",
+          "url": "https://github.com/advisories/GHSA-xjj6-f33q-929c",
+          "severity": "high",
+          "cwe": [
+            "CWE-248",
+            "CWE-459"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=7.18.0 <7.30.1"
+        }
+      ],
+      "effects": [
+        "miniflare"
+      ],
+      "range": "7.0.0 - 7.30.0",
+      "nodes": [
+        "node_modules/cf/node_modules/undici",
+        "node_modules/miniflare/node_modules/undici"
+      ],
+      "fixAvailable": {
+        "name": "miniflare",
+        "version": "4.20250906.0",
+        "isSemVerMajor": true
+      }
+    },
+    "zod": {
+      "name": "zod",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1243066,
+          "name": "zod",
+          "dependency": "zod",
+          "title": "Zod can exhaust memory while validating oversized constrained collections",
+          "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5",
+          "severity": "high",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<4.6.6"
+        }
+      ],
+      "effects": [
+        "@cloudflare/config"
+      ],
+      "range": "<4.6.6",
+      "nodes": [
+        "node_modules/zod"
+      ],
+      "fixAvailable": {
+        "name": "cf",
+        "version": "0.8.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 6,
+      "critical": 0,
+      "total": 8
+    },
+    "dependencies": {
+      "prod": 89,
+      "dev": 155,
+      "optional": 65,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 270
+    }
+  }
+}
