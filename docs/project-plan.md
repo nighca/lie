@@ -47,10 +47,10 @@
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 银发waiting局部修订接入 / 动画专项＋main_acceptance_environment | 夜间小修授权可实视/review后推进，不能把旧版自动写批准。源到`e46f6cc`，夜间自验记录`79258ad`已补（无源改动）；从`31db7c9`的独立silver-bun-activation准备中，5504/IAB排Editor后，完整clean交付待交。 |
-| P1 | gray/plum扩人 / 动画专项 | gray局部袖口/衣摆/腰边mask/data返修，plum制作/复查；最多2角色并行。银发之后角色经agent实际视觉复查、clean交付、rootreview可集成，不再逐个等用户，不自动部署。 |
+| P1 | 银发waiting局部修订接入 / 动画专项＋main_acceptance_environment | 夜间小修授权可实视/review后推进，不能把旧版自动写批准。源到`e46f6cc`、夜间记录`79258ad`；activation clean `0404805`已交，root候选`28c2c92`（base31db7c9）372测试/类型/构建67资源/strictcheck/重建hash通过，仍等5504真实IAB，未集成。 |
+| P1 | gray/plum扩人 / 动画专项 | gray `fbc1471`、plum `31111b6`源码clean，等最后391四态窗口后完整交付，尚非正式资产；最多2角色并行。银发之后角色经agent实际视觉复查、clean交付、rootreview可集成，不再逐个等用户，不自动部署。 |
 | P2 | 指认弹窗可变人数扇卡 / 调查专项 | 从`31db7c9`新WT accusation-fan-layout实施，5507独占QA中；修4人换行裁切，hover/focus上移、触屏/窄屏可选，不硬人数、不靠hover提交，点击具体人才指认。与结果页设计独立。 |
-| P2 | 编辑器大形象位置跳动 / 编辑器专项 | portrait-alignment查出CSS130%/top与静态center及mobile intrinsic尺寸差异，正做Editor局部absolute/100%/contain/center修复；5402/5403保留，IAB排fan后，冷/热加载及桌面移动待终验。若触共享组件先协调，不关动画或重画掩盖。 |
+| P2 | 编辑器大形象位置跳动 / 编辑器专项 | portrait-alignment查出CSS130%/top与静态center及mobile intrinsic尺寸差异，Editor局部absolute/100%/contain/center候选28测试/类型/构建60资源通过；5402/5403保留，等fan后391/1004实际末回归，未集成。若触共享组件先协调，不关动画或重画掩盖。 |
 | P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`公开路径；按新main审迁移，必须纳入`scripts/main-preview.mjs`素材生成命令，与Editor/fan所有权协调。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
 | P2 | 编辑器分享/投稿端到端 / 编辑器＋用户 | 完整URL16000暂定上限待跨浏览器；GitHub待IAB登录、公开及无上游写权限身份实测，长query失败不等于短预填不支持。 |
