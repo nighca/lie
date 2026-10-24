@@ -77,6 +77,7 @@ describe('transcript presentation reveal', () => {
       vi.advanceTimersByTime(10)
       text += '新'
       reveal.update([answer('stream', text, true)], true)
+      reveal.update([answer('stream', text, true)], true)
     }
     expect(rows()[0].text).toBe('长'.repeat(24))
     const key = rows()[0].key

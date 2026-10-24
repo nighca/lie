@@ -39,3 +39,5 @@ ignored fixture：`apps/web/tmp/transcript-pacing.html`、`.ts`与`TranscriptPac
 夹具初版误用了Vue运行时模板，导致空页及runtime compilation警告；改成ignored预编译SFC后重新检查。夹具曾在回看历史时残留测量status，实际Transcript已经立即完整；已修测量状态重置，不改生产reveal。窄屏有一轮被该fixture HMR重置，已作废并重跑，表格只记录完成轮次。测试owner最终reset viewport并关闭自己的tab，未操作8787、外部Chrome、麦克风或付费服务。
 
 原始截图：`/private/tmp/lie-transcript-readable-desktop.jpg`、`/private/tmp/lie-transcript-readable-narrow.jpg`；实施owner已查看真实窄屏图。夹具文件保留在ignored tmp供复查，不进入正式产品。
+
+实施owner复看首批截图又发现ignored夹具漏导入共享UI tokens且容器缩成一字竖排，未接受这些图作为可见布局证据。补齐应用正常使用的`@lie/ui/style.css`并明确夹具容器宽后，测试owner重新检查：实际1280/SW1280，main760、h1720；实际391/SW391，main391、h1351、Transcript section351、玩家气泡305，中文正常横排。新观察窗口console warn/error为空，重新点击玩家/角色并截到两侧完整气泡，新角色50字约5076ms。主desktop/narrow截图已重取；旧坏图保留为`*-fixture-before-tokens.jpg`，不作为布局通过依据。此前表中计时仍为真实完成轮次，但布局判断只依据这次修正后图与DOM宽度。所有夹具修正均未改生产组件或重置正式会话。
