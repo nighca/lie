@@ -149,7 +149,7 @@ function download() {
       <div v-if="notice != null" role="alert" class="editor-notice"><UiNotice tone="error">{{ notice }}</UiNotice></div>
       <section v-if="showIssues && issues.length" class="error-summary" role="alert" aria-label="待补充内容"><strong>再补充这些，就能试玩或分享了</strong><ul><li v-for="(issue, index) in issues" :key="index"><button type="button" @click="goToIssue(issue)">{{ issue.message }}</button></li></ul></section>
       <fieldset class="editor-fields" :disabled="busy">
-        <div class="page-heading"><h1>{{ steps[step] }}</h1><span>随时切换，边写边改</span></div>
+        <div class="page-heading"><h1>{{ steps[step] }}</h1></div>
         <div v-if="step === 0" class="story-layout">
           <section class="panel form-panel" aria-label="故事设定">
             <label class="field">案件标题<input v-model="draft.title" name="title" data-field="title" :aria-invalid="invalid('title')" placeholder="给谜题起个名字"></label>
@@ -161,12 +161,11 @@ function download() {
         <div v-else-if="step === 1" class="character-layout">
           <nav class="character-rail" aria-label="编辑人物"><button v-for="person in draft.characters" :key="person.id" type="button" class="character-card" :aria-pressed="selectedId === person.id" :aria-label="`编辑${name(person)}`" @click="selectedId = person.id"><img v-if="appearance(person)" :src="appearance(person)!.avatar" alt="" :style="{ background: appearance(person)!.accent }"><span v-else class="portrait-initial">{{ name(person).slice(0, 1) }}</span><strong>{{ name(person) }}</strong><small>当前人物</small></button><button type="button" class="add-character" data-field="add-character" @click="addCharacter"><span>＋</span>添加人物</button></nav>
           <section v-if="character != null" class="panel character-editor" aria-label="人物编辑">
-            <div class="character-stage"><div class="portrait-halo"><img v-if="appearance(character)" :src="appearance(character)!.portrait" alt=""><span v-else class="portrait-initial">?</span></div><h2>{{ name(character) }}</h2><p>{{ appearance(character)?.name ?? '请选择预置形象' }}</p><button type="button" class="text-button" data-field="appearance" :aria-invalid="invalid('appearance')" @click="overlay = 'appearance'">{{ appearance(character) == null ? '选择形象' : '更换形象' }}</button></div>
+            <div class="editor-character-stage"><div class="portrait-halo"><img v-if="appearance(character)" :src="appearance(character)!.portrait" alt=""><span v-else class="portrait-initial">?</span></div><h2>{{ name(character) }}</h2><button type="button" class="appearance-choice" data-field="appearance" :aria-invalid="invalid('appearance')" @click="overlay = 'appearance'"><span class="appearance-name">{{ appearance(character)?.name ?? '未选择形象' }}</span><span class="appearance-action">{{ appearance(character) == null ? '选择形象' : '更换形象' }}</span></button><button type="button" class="delete-button" :aria-label="`删除${name(character)}`" @click="overlay = 'delete'">删除人物</button></div>
             <div class="character-fields">
               <label class="field">姓名<input v-model="character.name" :name="`name-${character.id}`" data-field="name" :aria-invalid="invalid('name')" placeholder="这个人物叫什么？"></label>
               <label class="answer-toggle"><input type="checkbox" data-field="answer" :aria-invalid="invalid('answer')" :checked="draft.ending.culpritId === character.id" @change="draft.ending.culpritId = ($event.target as HTMLInputElement).checked ? character.id : ''"><span><strong>将此人物设为案件答案</strong><small>玩家最终指认此人物，即挑战成功</small></span></label>
               <div class="field"><div class="field-heading"><label for="editor-profile">人物设定</label><button type="button" class="text-button" @click="overlay = 'example'">看完整示例</button></div><textarea id="editor-profile" v-model="character.profile" :name="`profile-${character.id}`" data-field="profile" :aria-invalid="invalid('profile')" rows="9" placeholder="你叫……你亲历了什么，知道什么，面对追问会怎么回答？"></textarea><p class="guidance-line"><span aria-hidden="true">✎</span><span>推荐用第二人称「你叫……」，写清亲历、所知和回答方式。完整设定不会直接展示给玩家。</span></p></div>
-              <div class="character-tools"><span>一份文本，写清这个人。</span><button type="button" class="delete-button" :aria-label="`删除${name(character)}`" @click="overlay = 'delete'">删除人物</button></div>
             </div>
           </section>
           <section v-else class="panel no-characters"><h2>故事还缺一位人物</h2><p>为他选个形象，再写下他的故事。</p><UiButton variant="secondary" @click="addCharacter">添加第一位人物</UiButton></section>

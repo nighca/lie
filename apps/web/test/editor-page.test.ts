@@ -140,6 +140,7 @@ describe('three-step editor', () => {
   it('confirms deletion, selects a neighbor and clears the deleted answer', async () => {
     const { wrapper, step, click } = page(game)
     await step(1)
+    expect(wrapper.get('.editor-character-stage .delete-button').attributes('aria-label')).toBe('删除甲')
     await click('删除人物'); await click('保留人物')
     expect(wrapper.findAll('.character-card')).toHaveLength(2)
     await click('删除人物'); await click('确认删除')
@@ -171,7 +172,7 @@ describe('three-step editor', () => {
     expect(document.activeElement).toBe(wrapper.get('[data-field=appearance]').element)
     expect((wrapper.get('[data-field=profile]').element as HTMLTextAreaElement).value).toBe('只属于乙的秘密。')
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(appearanceId)
-    await click('选择形象')
+    await wrapper.get('[data-field=appearance]').trigger('click')
     expect(wrapper.findAll('.editor-appearance')).toHaveLength(1)
     await click('新来的向导')
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(appearance.id)
@@ -230,10 +231,12 @@ describe('three-step editor', () => {
   })
 
   it('uses live catalog names for previously unknown IDs', async () => {
-    const { wrapper, step, click } = page()
-    await step(1); await click('更换形象')
+    const { wrapper, step } = page()
+    await step(1); await wrapper.get('[data-field=appearance]').trigger('click')
     expect(wrapper.get('.editor-appearance').text()).toBe('新来的向导')
     await wrapper.setProps({ appearances: [{ ...appearance, name: '来自清单的新名字' }] })
     expect(wrapper.get('.editor-appearance').text()).toBe('来自清单的新名字')
+    await wrapper.get('[aria-label=关闭]').trigger('click')
+    expect(wrapper.get('[data-field=appearance]').text()).toBe('来自清单的新名字更换形象')
   })
 })

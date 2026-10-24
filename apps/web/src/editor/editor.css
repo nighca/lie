@@ -10,7 +10,6 @@
 .editor-notice { margin-top: 20px; }
 .page-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; margin: 26px 0 22px; }
 .page-heading h1 { font-size: 27px; margin: 0; }
-.page-heading > span { font-size: 12px; color: #77734f; }
 .story-layout, .ending-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; align-items: start; }
 .panel { border: 2px solid var(--lie-ink); border-radius: 24px; background: var(--lie-surface); overflow: hidden; }
 .form-panel, .character-fields { padding: 27px 29px; min-width: 0; }
@@ -46,11 +45,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .add-character { display: flex; flex-direction: column; justify-content: center; gap: 3px; align-items: center; flex-shrink: 0; width: 108px; min-height: 77px; border: 2px dashed #b7b397; border-radius: 18px; background: #fff8c8; font: inherit; font-size: 12px; font-weight: 600; color: inherit; cursor: pointer; }
 .add-character > span { font-size: 25px; line-height: 1.1; }
 .character-editor { display: grid; grid-template-columns: minmax(185px, .72fr) minmax(0, 1.6fr); min-height: 492px; }
-.character-stage { display: flex; flex-direction: column; align-items: center; padding: 26px 18px 24px; background: #fff9df; border-right: 1px solid #e9e3cc; min-width: 0; }
+.editor-character-stage { display: flex; flex-direction: column; align-items: center; padding: 26px 18px 24px; background: #fff9df; border-right: 1px solid #e9e3cc; min-width: 0; }
 .portrait-halo { width: 100%; height: 285px; display: grid; place-items: center; }
 .portrait-halo img { width: 100%; height: 285px; object-fit: contain; }
-.character-stage h2 { font-size: 20px; margin: 12px 0 2px; overflow-wrap: anywhere; max-width: 100%; }
-.character-stage p { margin: 0 0 12px; color: var(--lie-muted); font-size: 12px; }
+.editor-character-stage h2 { font-size: 20px; margin: 12px 0 0; overflow-wrap: anywhere; max-width: 100%; }
+.appearance-choice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; max-width: 100%; margin-top: 20px; padding: 8px 11px; border: 1.5px solid #d1d9e8; border-radius: 12px; background: white; font: inherit; font-size: 12px; cursor: pointer; }
+.appearance-name { color: var(--lie-muted); overflow-wrap: anywhere; }
+.appearance-action { color: var(--lie-primary); font-weight: 700; }
+.appearance-choice:hover { border-color: var(--lie-primary); }
 .portrait-initial { display: grid; place-items: center; font-size: 30px; background: #eaf2ff; color: var(--lie-primary); }
 .field-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .text-button { border: 0; background: transparent; color: var(--lie-primary); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; padding: 2px 0; }
@@ -64,8 +66,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .guidance-line { display: flex; align-items: start; gap: 9px; color: var(--lie-muted); font-size: 12px; font-weight: 400; margin: 0; }
 .guidance-line > span:first-child { flex-shrink: 0; }
 .guidance-line > span:last-child { flex: 1; min-width: 0; }
-.character-tools { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 18px; color: var(--lie-muted); font-size: 12px; }
-.delete-button { border: 0; background: transparent; color: #9b5e55; font: inherit; font-size: 12px; cursor: pointer; }
+.delete-button { margin-top: 24px; padding: 7px 12px; border: 1.5px solid #dbc2ba; border-radius: 10px; background: transparent; color: #9b5e55; font: inherit; font-size: 12px; cursor: pointer; }
+.delete-button:hover { background: #fff0e9; border-color: #9b5e55; }
 .no-characters { padding: 58px 24px; text-align: center; }
 .no-characters h2 { margin: 12px 0; }
 .no-characters p { color: var(--lie-muted); }
@@ -97,7 +99,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
   .editor-steps small { display: none; }
   .page-heading { margin: 22px 0 17px; gap: 10px; }
   .page-heading h1 { font-size: 23px; }
-  .page-heading > span { font-size: 11px; }
   .story-layout, .ending-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .form-panel, .player-preview { padding: 22px 19px; }
   .panel { border-radius: 21px; }
@@ -111,17 +112,16 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
   .character-card small { font-size: 9px; }
   .add-character { width: 88px; min-height: 112px; border-radius: 15px; }
   .character-editor { display: block; }
-  .character-stage { display: grid; grid-template-columns: 68px minmax(0, 1fr) auto; grid-template-rows: 28px 24px; gap: 0 12px; padding: 17px 19px; border-right: 0; border-bottom: 1px solid #e9e3cc; }
+  .editor-character-stage { display: grid; grid-template-columns: 68px minmax(0, 1fr) auto; grid-template-rows: auto auto; gap: 8px 12px; padding: 17px 19px; border-right: 0; border-bottom: 1px solid #e9e3cc; }
   .portrait-halo { grid-area: 1 / 1 / 3 / 2; height: 58px; }
   .portrait-halo img, .portrait-halo .portrait-initial { width: 68px; height: 68px; object-fit: cover; object-position: center 10%; border-radius: 15px; }
-  .character-stage h2 { grid-area: 1 / 2; font-size: 17px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .character-stage p { grid-area: 2 / 2; margin: 0; font-size: 11px; }
-  .character-stage .text-button { grid-area: 1 / 3 / 3 / 4; font-size: 11px; }
+  .editor-character-stage h2 { grid-area: 1 / 2; font-size: 17px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .editor-character-stage .appearance-choice { grid-area: 2 / 2 / 3 / 4; justify-content: flex-start; justify-self: start; margin: 0; padding: 5px 8px; font-size: 11px; }
+  .editor-character-stage .delete-button { grid-area: 1 / 3; margin: 0; padding: 5px 8px; font-size: 11px; }
   .character-fields { padding: 22px 19px; }
   .answer-toggle { padding: 11px; gap: 9px; }
   .answer-toggle strong { font-size: 13px; }
   .answer-toggle small, .guidance-line { font-size: 11px; }
-  .character-tools { font-size: 11px; }
   .field-heading .text-button { font-size: 12px; }
   .appearance-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
   .editor-appearance img { height: 82px; }
