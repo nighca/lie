@@ -1,0 +1,22 @@
+[
+  {
+    "display": "none",
+    "src": "/appearances/salt-pepper-beard/default.png",
+    "state": "default"
+  },
+  {
+    "display": "none",
+    "src": "/appearances/salt-pepper-beard/listening.png",
+    "state": "listening"
+  },
+  {
+    "display": "none",
+    "src": "/appearances/salt-pepper-beard/waiting.png",
+    "state": "waiting"
+  },
+  {
+    "display": "none",
+    "src": "/appearances/salt-pepper-beard/speaking.png",
+    "state": "speaking"
+  }
+]
