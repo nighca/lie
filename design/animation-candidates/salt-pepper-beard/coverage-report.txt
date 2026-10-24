@@ -1,0 +1,8 @@
+default right reference default-source opaque 31413 uncovered-alpha 0 source-black 2949 outside-source-selection 0 first-gaps []
+default left reference default-source opaque 21281 uncovered-alpha 0 source-black 2190 outside-source-selection 0 first-gaps []
+listening right reference listening-source opaque 31465 uncovered-alpha 0 source-black 2986 outside-source-selection 0 first-gaps []
+listening left reference listening-source opaque 22213 uncovered-alpha 0 source-black 2626 outside-source-selection 0 first-gaps []
+waiting right reference waiting-source opaque 22892 uncovered-alpha 0 source-black 2049 outside-source-selection 0 first-gaps []
+waiting left reference waiting-source opaque 17738 uncovered-alpha 0 source-black 2424 outside-source-selection 0 first-gaps []
+speaking right reference speaking-source opaque 29367 uncovered-alpha 4 source-black 3199 outside-source-selection 63 first-gaps [(854, 904), (856, 912), (856, 914), (856, 916)]
+speaking left reference default-source opaque 21281 uncovered-alpha 0 source-black 2190 outside-source-selection 0 first-gaps []

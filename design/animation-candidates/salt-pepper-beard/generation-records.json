@@ -1,0 +1,16 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "pixelEdits": false,
+  "calls": [
+    {
+      "number": 1,
+      "prompt": "Use case: precise-object-edit. Asset type: transparent 2D animation lower-body background fill. Edit target supplied silver-haired bearded man wearing a coral red sweater and navy trousers. Preserve EXACT native 1254x1254 canvas, original torso/trouser scale, position, navy trouser shape, belt/waist and folds. Remove BOTH bare arms/hands and all sweater sleeves from the outside of the torso; rebuild the hidden pants silhouette behind the hands. Remove head above neck. Keep only sweater torso with continuous neck and trousers, all other pixels genuinely transparent alpha. No detached sleeve/skin fragments, no extra shapes, no white backdrop, no checkerboard, no text. Do not redesign colors, pants proportions or framing. This output is used only below the sweater hem as a clean lower-body fill; original canonical head/collar/shoulders/sleeves will be retained separately.",
+      "reference": "design/appearances/assets/salt-pepper-beard/default.png",
+      "output": "/Users/nighca/.codex/generated_images/01a16db1-d70a-7db0-b15a-494de957a66a/exec-7abf42c0-27d7-4b29-8c36-2400624cd31a.png",
+      "part": "lower-fill",
+      "adopted": true,
+      "usage": "Only y>=935 below native sweater hem; no generated collar or shoulders",
+      "transparent_background": true
+    }
+  ]
+}
