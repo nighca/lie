@@ -1,6 +1,6 @@
 # Plum-crop animation candidate
 
-2026-10-25. Owner: plum_animation_resume. Candidate-only files; canonical source images, production manifest, runtime and UI are unchanged. The user authorized coordinator visual review and integration of later characters without another individual user acceptance gate; this candidate still requires that actual visual review before activation.
+2026-10-25. Owner: plum_animation_resume. Candidate-only files; canonical source images, production manifest, runtime and UI are unchanged. The user authorized coordinator visual review and integration of later characters without another individual user acceptance gate; the initiator has now completed actual visual review and handed it off for coordinator integration review.
 
 ## Assembly
 
@@ -50,3 +50,7 @@ Only mask geometry changes: generated head stops at source y830 (logical423.2), 
 The initiator's actual 66e6a39 follow-up review confirmed the double-neck arc and finger triangle gone, the hand outline complete, and waist fragments reduced. It still identified a 1–2 screen-pixel speaking3s shoulder contour notch in /private/tmp/plum-shoulders-final.jpg, which the author viewed. Read-only source/transform analysis located the contour handoff near source x870/y460: the rotating arm mask closing segment entered a continuous original shoulder line. It was a real assembly handoff, not an original source fold; the approximate source940/485 location was refined using the inspection page's actual CSS crop.
 
 Current narrow correction adds a speaking-only shoulder-cap sprite on body-root, using the existing unmodified speaking-source, mask x840–980/y420–560, order43. The independent arm starts at y540, with 20px same-source overlap below the stable cap. This keeps the top shoulder outline continuous while retaining original arm motion. Other states, all existing transforms/tracks, all PNG bytes, mouth/crops and hand mask detail are unchanged. The read-only audit now also checks six original high-alpha shoulder ink points at each of 32 phases (192 body-anchored probes). It passes with prior checks. Final cap/arm composited contour is awaiting initiator actual review; no new author IAB pass is claimed.
+
+## Current reviewed handoff
+
+Initiator actual desktop, extrema/local detail, live transitions and isolated same-origin391 iframe review completed; see initiator-review.md and native evidence. The iframe host logged one unattributed MutationObserver error while direct author preview logged none; formal top-level game/console/fallback checks remain integration QA responsibilities. Earlier author-only pending-review notes are historical. Temporary iframe shell removed; no shared viewport modification.
