@@ -28,6 +28,7 @@ async function home(catalog: CaseSummary[]) {
 const catalog = Array.from({ length: 5 }, (_, index) => ({
   id: `case-${index + 1}`, title: `第${index + 1}个故事`, summary: `公开简介${index + 1}`,
   interrogationLimitSeconds: 480 + index * 60,
+  characters: Array.from({ length: index + 1 }, (_, person) => ({ name: `角色${person + 1}`, appearanceId: null })),
 }))
 
 describe('homepage presentation', () => {
@@ -38,11 +39,13 @@ describe('homepage presentation', () => {
     cards.forEach((card, index) => {
       expect(card.get('h3').text()).toBe(catalog[index].title)
       expect(card.get('p').text()).toBe(catalog[index].summary)
-      expect(card.get('.case-duration').text()).toBe(`${String(8 + index).padStart(2, '0')}:00 询问时间`)
+      expect(card.get('.case-cast').attributes('aria-label')).toContain(`${index + 1}位角色`)
+      expect(card.findAll('.case-cast__avatar')).toHaveLength(index + 1)
       expect(card.get('button').text()).toBe('查看案件')
     })
     expect(wrapper.get('.home-intro h1').text()).toBe('有人在说谎')
     expect(wrapper.get('.home-intro').text()).toContain('和角色语音对话')
+    expect(wrapper.get('.home-flow').text()).toBe('开口问话对照说法最终指认')
     expect(wrapper.get('.home-header button').text()).toBe('创作案件')
     expect(createController).toHaveBeenCalledTimes(0)
   })

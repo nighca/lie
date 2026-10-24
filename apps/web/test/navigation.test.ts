@@ -15,7 +15,7 @@ beforeEach(() => {
   })
 })
 afterEach(() => cleanup.splice(0).forEach((action) => action()))
-const catalog = [{ id: game.id, title: game.title, summary: '公开简介', interrogationLimitSeconds: 480 }]
+const catalog = [{ id: game.id, title: game.title, summary: '公开简介', interrogationLimitSeconds: 480, characters: game.characters.map(({ name, appearanceId }) => ({ name, appearanceId: appearanceId ?? null })) }]
 async function screen(path = '/', loadCatalog = async () => catalog) {
   const sessions: ReturnType<typeof setup>[] = []
   const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/', component: Application }] })
@@ -40,6 +40,9 @@ describe('case catalog', () => {
     expect(() => readCatalog([catalog[0], catalog[0]])).toThrow()
     expect(() => readCatalog([{ ...catalog[0], interrogationLimitSeconds: 0 }])).toThrow()
     expect(() => readCatalog([{ ...catalog[0], title: ' ' }])).toThrow()
+    expect(() => readCatalog([{ ...catalog[0], characters: [] }])).toThrow()
+    expect(() => readCatalog([{ ...catalog[0], characters: [{ name: ' ', appearanceId: null }] }])).toThrow()
+    expect(readCatalog([{ ...catalog[0], characters: [{ name: '甲', appearanceId: null, profile: 'private' }] }])[0].characters).toEqual([{ name: '甲', appearanceId: null }])
   })
 })
 

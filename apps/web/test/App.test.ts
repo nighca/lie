@@ -46,6 +46,17 @@ describe('game screens', () => {
     expect(controller.getView().phase).toBe('intro')
   })
 
+  it.each([1, 4, 7])('presents and starts an introduction with %i characters', async (count) => {
+    const characters = Array.from({ length: count }, (_, index) => ({ ...game.characters[0], id: `person-${index}`, name: `人物${index + 1}` }))
+    const { controller } = setup(undefined, { ...game, characters, ending: { ...game.ending, culpritId: characters[0].id } })
+    await controller.load('test')
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    expect(wrapper.findAll('.intro-character strong').map((name) => name.text())).toEqual(characters.map(({ name }) => name))
+    await wrapper.get('.intro-start').trigger('click')
+    expect(wrapper.findAll('.character-list button')).toHaveLength(count)
+  })
+
   it.each([[600, '10分钟'], [330, '5分30秒']])('uses natural language for a %s-second introduction', async (seconds, label) => {
     const { controller } = setup(undefined, { ...game, interrogationLimitSeconds: Number(seconds) })
     await controller.load('test')
@@ -116,7 +127,7 @@ describe('game screens', () => {
       expect(controls().findAll('button')).toHaveLength(2)
       expect(controls().get('button').text()).toBe('结束对话')
       expect(controls().get('button').attributes('aria-pressed')).toBe('true')
-      expect(controls().find('.lie-voice__waveform').exists()).toBe(false)
+      expect(controls().find('.lie-voice__waveform').exists()).toBe(true)
       expect(controls().find('[role="status"]').exists()).toBe(false)
     }
     await controls().get('button').trigger('click')

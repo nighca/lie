@@ -51,6 +51,10 @@ const remainingTime = computed(() => {
   const seconds = Math.ceil(view.value.interrogationRemainingMs / 1000)
   return `${Math.floor(seconds / 60).toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`
 })
+function fanStyle(index: number) {
+  const position = (index - (view.value.characters.length - 1) / 2) / Math.max(1, (view.value.characters.length - 1) / 2)
+  return { '--fan-angle': `${position * 8}deg`, '--fan-drop': `${Math.abs(position) * 14}px` }
+}
 function appearance(id: string | null) { return props.appearances.find((item) => item.id === id) ?? null }
 function usableImage(url: string | null) { return url != null && !brokenImages.value.has(url) }
 function portraitFailed(event: Event) {
@@ -63,7 +67,7 @@ const durationLabel = computed(() => {
   const remainder = seconds % 60
   return `${minutes > 0 ? `${minutes}分${remainder === 0 ? '钟' : ''}` : ''}${remainder > 0 ? `${remainder}秒` : ''}`
 })
-function openBackground() { props.controller.endConversation({ quiet: true }); backgroundOpen.value = true }
+function openBackground() { props.controller.endConversation(); backgroundOpen.value = true }
 function speak() { if (view.value.conversationActive) props.controller.endConversation(); else void props.controller.startConversation() }
 </script>
 
@@ -85,10 +89,10 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 
     <main v-else-if="view.phase === 'intro'" class="intro-card surface">
       <p class="eyebrow">一桩小谜题，几位有话说的人</p>
-      <h1 class="case-title">{{ view.title }}</h1>
+      <h1 class="case-title lie-handwritten-underline">{{ view.title }}</h1>
       <p class="background">{{ view.background }}</p>
-      <div class="intro-characters">
-        <div v-for="character in view.characters" :key="character.id" class="intro-character" :style="{ '--character-accent': appearance(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }">
+      <div class="intro-characters" :class="{ 'intro-characters--many': view.characters.length > 5 }">
+        <div v-for="(character, index) in view.characters" :key="character.id" class="intro-character" tabindex="0" :style="{ ...fanStyle(index), '--character-accent': appearance(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }">
           <span v-if="usableImage(appearance(character.appearanceId)?.avatar ?? null)" class="avatar-frame">
             <img :src="appearance(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(appearance(character.appearanceId)!.avatar)">
           </span>
@@ -135,7 +139,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 
     <main v-else-if="view.phase === 'solved'" class="intro-card result-card surface">
       <p class="eyebrow">指认正确</p>
-      <h1 class="case-title">谜题解开了！</h1>
+      <h1 class="case-title lie-handwritten-underline">谜题解开了！</h1>
       <div class="result-divider" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="result-story"><h2>完整经过</h2><p class="background">{{ view.reveal }}</p></div>
       <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
@@ -143,7 +147,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     </main>
     <main v-else-if="view.phase === 'lost'" class="intro-card result-card surface">
       <p class="eyebrow">本局失败</p>
-      <h1 class="case-title">指认不正确</h1>
+      <h1 class="case-title lie-handwritten-underline">指认不正确</h1>
       <p class="background">这次调查已结束。想再试一次，请重新开始一局。</p>
       <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
       <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>

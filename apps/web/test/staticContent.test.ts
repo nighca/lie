@@ -56,7 +56,8 @@ describe('bundled game content', () => {
       const source = await readFile(fileURLToPath(new NodeURL(`../public/games/${encodeURIComponent(entry.id)}.json`, import.meta.url)), 'utf8')
       const content = validateGame(JSON.parse(source))
       expect({ id: content.id, title: content.title, interrogationLimitSeconds: content.interrogationLimitSeconds }).toEqual({ id: entry.id, title: entry.title, interrogationLimitSeconds: entry.interrogationLimitSeconds })
-      expect(Object.keys(catalogData.find((item) => item.id === entry.id)!)).toEqual(['id', 'title', 'summary', 'interrogationLimitSeconds'])
+      expect(entry.characters).toEqual(content.characters.map(({ name, appearanceId }) => ({ name, appearanceId: appearanceId ?? null })))
+      expect(Object.keys(catalogData.find((item) => item.id === entry.id)!)).toEqual(['id', 'title', 'summary', 'interrogationLimitSeconds', 'characters'])
     }
   })
 

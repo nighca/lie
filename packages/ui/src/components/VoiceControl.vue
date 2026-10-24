@@ -20,11 +20,11 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{ start: []; cancel: []; interrupt: [] }>()
 const enabled = computed(() => props.active && !props.preparing)
-const showInput = computed(() => enabled.value && props.inputActive && props.status !== 'error')
-const level = computed(() => showInput.value ? props.inputLevel : 0)
+const showInput = computed(() => enabled.value && props.status !== 'error')
+const level = computed(() => showInput.value && props.inputActive ? props.inputLevel : 0)
 const samples = ref<number[]>(Array(24).fill(0))
-watch([showInput, level], ([next, value], [previous]) => {
-  const history = next === previous ? samples.value : Array(24).fill(0)
+watch([showInput, () => props.inputActive, level], ([visible, active, value], [wasVisible, wasActive]) => {
+  const history = visible && active && wasVisible && wasActive ? samples.value : Array(24).fill(0)
   samples.value = [...history.slice(1), value]
 })
 const feedbackLabel = computed(() => {

@@ -96,3 +96,6 @@
 .lie-notice { display: flex; gap: 12px; padding: 16px; border: 3px solid var(--lie-ink); border-radius: 20px; background: var(--lie-soft-blue); color: var(--lie-ink); font: 400 16px/1.65 var(--lie-font); overflow-wrap: anywhere; }
 .lie-notice strong { flex-shrink: 0; }
 .lie-notice[data-tone='error'] { border-left-width: 8px; }
+
+.lie-handwritten-underline { position: relative; isolation: isolate; }
+.lie-handwritten-underline::after { content: ''; position: absolute; z-index: -1; height: 10px; left: -2px; right: -3px; bottom: -5px; background: url('/brand/underline.svg') center / 100% 100% no-repeat; transform: rotate(-5deg); }

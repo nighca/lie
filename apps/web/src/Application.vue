@@ -101,7 +101,9 @@ function preview(game: GameDefinition) {
 }
 function selectCase(id: string) { void router.push({ path: '/', query: { game: id, ...(props.demo ? { demo: '1' } : {}) } }) }
 async function end() { if (await confirmLeave()) controller.value?.end() }
-function duration(seconds: number) { return `${Math.floor(seconds / 60).toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}` }
+function avatar(id: string | null) { return props.appearances.find((item) => item.id === id)?.avatar ?? null }
+const brokenAvatars = ref(new Set<string>())
+
 async function loadCatalog() {
   catalogStatus.value = 'loading'
   try { cases.value = await props.loadCatalog(); catalogStatus.value = 'ready' }
@@ -134,6 +136,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
           <img class="home-cast-blue" src="/appearances/blue-glasses/avatar.png" alt="">
           <span class="home-spark first">✦</span><span class="home-spark second">✦</span>
         </div>
+        <ol class="flow-hint home-flow" aria-label="调查流程"><li>开口问话</li><li>对照说法</li><li>最终指认</li></ol>
       </section>
       <section class="home-cases" aria-labelledby="cases-title"><h2 id="cases-title">选择案件</h2>
         <p v-if="catalogStatus === 'loading'" role="status">正在准备案件…</p>
@@ -141,7 +144,10 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
         <p v-else-if="cases.length === 0">新案件正在准备中。</p>
         <div v-else class="case-grid">
           <article v-for="(item, index) in cases" :key="item.id" class="surface case-card">
-            <div class="case-top"><span class="case-number" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><span class="case-duration">{{ duration(item.interrogationLimitSeconds) }} 询问时间</span></div>
+            <div class="case-top"><span class="case-number" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><div class="case-cast" role="img" :aria-label="`${item.characters.length}位角色：${item.characters.map((person) => person.name).join('、')}`">
+              <span class="case-cast__avatars" aria-hidden="true"><span v-for="(person, personIndex) in item.characters" :key="personIndex" class="case-cast__avatar"><img v-if="avatar(person.appearanceId) != null && !brokenAvatars.has(avatar(person.appearanceId)!)" :src="avatar(person.appearanceId)!" alt="" @error="brokenAvatars.add(avatar(person.appearanceId)!)"><span v-else>{{ person.name.slice(0, 1) }}</span></span></span>
+              <span aria-hidden="true">{{ item.characters.length }}位角色</span>
+            </div></div>
             <h3>{{ item.title }}</h3><p>{{ item.summary }}</p>
             <UiButton @click="selectCase(item.id)">查看案件</UiButton>
           </article>

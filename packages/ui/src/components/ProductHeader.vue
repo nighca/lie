@@ -6,7 +6,7 @@ const emit = defineEmits<{ navigateHome: [] }>()
 
 <template>
   <header class="lie-product-header">
-    <a class="lie-product-header__brand" href="/" aria-label="LIE 首页" @click.prevent="emit('navigateHome')"><img :src="logoUrl" width="105" height="56" alt=""><span>语音推理</span></a>
+    <a class="lie-product-header__brand" href="/" aria-label="LIE 首页" @click.prevent="emit('navigateHome')"><img :src="logoUrl" width="105" height="56" alt=""><span class="lie-handwritten-underline">语音推理</span></a>
     <div v-if="$slots.title || title != null" class="lie-product-header__title"><slot name="title"><h1>{{ title }}</h1></slot></div>
     <div v-if="$slots.actions" class="lie-product-header__actions"><slot name="actions" /></div>
     <div v-if="$slots.notice" class="lie-product-header__notice"><slot name="notice" /></div>
@@ -18,8 +18,7 @@ const emit = defineEmits<{ navigateHome: [] }>()
 .lie-product-header__brand { display: inline-flex; align-items: center; gap: 16px; color: var(--lie-ink); text-decoration: none; line-height: 1; flex-shrink: 0; }
 .lie-product-header__brand:focus-visible { outline: 3px solid var(--lie-ink); outline-offset: 5px; border-radius: 4px; }
 .lie-product-header__brand img { display: block; width: 105px; height: 56px; object-fit: contain; }
-.lie-product-header__brand span { position: relative; isolation: isolate; font-size: 18px; font-weight: 800; letter-spacing: .025em; white-space: nowrap; }
-.lie-product-header__brand span::after { content: ''; position: absolute; z-index: -1; height: 10px; background: url('/brand/underline.svg') center / 100% 100% no-repeat; left: -2px; right: -3px; bottom: -5px; }
+.lie-product-header__brand span { font-size: 18px; font-weight: 800; letter-spacing: .025em; white-space: nowrap; }
 .lie-product-header__title { font-size: clamp(24px, 2.35vw, 34px); text-align: center; margin: 0; min-width: 0; }
 .lie-product-header__title h1 { font: inherit; margin: 0; }
 .lie-product-header__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
