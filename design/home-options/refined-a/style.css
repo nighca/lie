@@ -1,0 +1,25 @@
+*{box-sizing:border-box}
+:root{--ink:#111b45;--blue:#075bfa;--yellow:#fff18a;--paper:#fffef7;--muted:#52607a}
+body{margin:0;background:var(--yellow);color:var(--ink);font-family:system-ui,-apple-system,'PingFang SC',sans-serif}
+.app{max-width:1440px;margin:auto;padding:24px 40px 48px}
+header{height:64px;display:flex;align-items:center;gap:16px}
+.logo{width:110px;height:60px}.brand-label{font-size:15px;font-weight:800;border-bottom:4px solid #ff665b;padding-bottom:4px}
+main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;margin-top:34px;align-items:start}
+.introduction{position:sticky;top:30px;padding:12px 0 0 12px;min-width:0}
+h1{font-size:52px;line-height:1.24;letter-spacing:-1.8px;margin:0 0 18px;font-weight:850}
+.introduction>p{font-size:19px;line-height:1.7;margin:0;color:var(--muted)}
+.cast{position:relative;height:334px;margin:18px -8px 0 -12px;overflow:hidden}
+.backdrop{position:absolute;inset:44px 15px 8px;background:#78ddd7;border:2px solid var(--ink);border-radius:48% 52% 35% 42%;transform:rotate(-4deg)}
+.cast img{position:absolute;width:310px;height:310px;object-fit:contain;top:26px;max-width:none}
+.cast .sunny{left:-38px;transform:rotate(-7deg)}.cast .coral{left:89px;top:0;z-index:2;width:330px;height:330px}.cast .blue{left:220px;transform:rotate(7deg)}
+.spark{position:absolute;color:var(--blue);font-size:36px;z-index:3}.spark.first{left:10px;top:5px;transform:rotate(-12deg)}.spark.second{right:4px;top:30px;font-size:26px;transform:rotate(14deg)}
+.section-heading{height:50px;display:flex;align-items:flex-start}h2{font-size:20px;line-height:1.4;margin:0;font-weight:850}
+.case-list{display:grid;gap:22px}.case{border:3px solid var(--ink);border-radius:26px;background:var(--paper);padding:23px 28px 25px;box-shadow:0 5px var(--ink);min-width:0}
+.case-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.case-index{display:grid;place-items:center;min-width:34px;height:28px;font-size:14px;font-weight:850;border-radius:9px;background:var(--yellow);border:1.5px solid var(--ink)}
+.budget,.pending-label{font-size:12px;color:var(--muted)}.pending-label{background:#eaf2ff;border-radius:20px;padding:5px 10px}
+h3{font-size:27px;line-height:1.35;letter-spacing:-.5px;margin:0 0 12px}.case p{font-size:15px;line-height:1.8;color:var(--muted);margin:0}.case-action{display:flex;justify-content:flex-end;align-items:center;min-height:50px;margin-top:20px}
+button{display:flex;align-items:center;justify-content:space-between;gap:38px;border:2px solid var(--ink);border-radius:15px;min-height:48px;padding:9px 17px;background:var(--blue);color:white;box-shadow:0 3px var(--ink);font:800 16px system-ui,-apple-system,'PingFang SC',sans-serif;cursor:default}
+.draft-label{font-size:12px;color:var(--muted)}.pending{background:#f4f7ff}.pending .case-index{background:#dce7ff}.pending .case-action{justify-content:flex-start}
+@media(min-width:1440px){.cast .sunny{left:-14px}.cast .coral{left:119px}.cast .blue{left:252px}}
+@media(max-width:900px){.app{padding:18px 20px 36px}header{height:56px}.logo{width:96px;height:52px}main{gap:28px;margin-top:26px}h1{font-size:40px}.introduction>p{font-size:16px}.cast{height:278px}.cast img{width:245px;height:245px}.cast .sunny{left:-52px}.cast .coral{left:32px;width:270px;height:270px}.cast .blue{left:132px}.case{padding:21px}.desktop-break{display:none}h3{font-size:23px}}
+@media(max-width:620px){.app{padding:16px 18px 32px}header{gap:12px}.brand-label{font-size:13px}.logo{width:90px;height:49px}main{display:block;margin-top:24px}.introduction{position:relative;top:auto;padding:0}h1{font-size:36px;line-height:1.27;margin-bottom:12px;letter-spacing:-1px}.introduction>p{font-size:15px;line-height:1.65}.introduction>p br{display:none}.cast{height:212px;margin:12px -4px 24px}.backdrop{inset:31px 10px 0}.cast img{width:215px;height:215px;top:19px}.cast .sunny{left:-30px}.cast .coral{left:64px;top:0;width:231px;height:231px}.cast .blue{left:159px}.spark.first{font-size:28px;top:2px}.spark.second{font-size:22px;right:4px;top:24px}.section-heading{height:40px}h2{font-size:18px}.case-list{gap:20px}.case{padding:20px 21px 22px;border-radius:23px}.case-top{margin-bottom:14px}h3{font-size:25px}.case p{font-size:14px}.case-action{margin-top:20px}.draft-label{font-size:11px}button{font-size:15px;gap:34px}}
