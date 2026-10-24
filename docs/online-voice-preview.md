@@ -34,3 +34,9 @@ node --use-system-ca apps/gateway/scripts/linx-preview-resources.ts --cleanup --
 脚本静态syntax、提示逐字对照、ignored路径检查通过；尚未执行setup，未创建供应商资源。实际执行后由操作者另记安全计数，不把setup成功当作真实语音或多人隔离验收。
 
 2026-10-24 root已逐行review后在 `/private/tmp/lie-integrate-text-architecture` 执行setup：create/configure/read/bind均HTTP200/code0，Memory_nomem/history0，1设备完成；实际私密state/secrets位于该worktree的 `apps/gateway/tmp/online-preview-{state,secrets}.json`。root核对三字段非空且0600，并确认agent/device均与本地环境不同；资源为线上试玩保留，不自动清理。此时尚未部署/推理，后续结果另记。
+
+## 正式地址验证（2026-10-24）
+
+源码c8f3d24已发布并部署，Worker version `aadc9f53-59ba-4c48-8b76-12b67322d735`。线上 `/api/voice/status` 返回ready，不需要应用Cookie；部署的是独立线上资源三项secrets，静态包扫描未发现其值。
+
+Root使用既有试听探针的有界逻辑，经 `wss://lie-game.nighca.workers.dev/api/voice` 只发正确Origin、不发供应商或Cookie凭据；一次本地合成PCM问题获得hello、tools/list、一次context、一次STT/TTS start-stop和129帧PCM，固定中文句匹配，2.58秒音频。安全计数结果见 `../spikes/voice-audition/results-online-preview.json`；没有真人收音，不宣称整合版真人或多人验收。1agent/1device仍为当前受控预览资源，访问与限额正式方案未实施。

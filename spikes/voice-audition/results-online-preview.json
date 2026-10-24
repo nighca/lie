@@ -1,0 +1,24 @@
+{
+  "route": "wss://lie-game.nighca.workers.dev/api/voice",
+  "input": "one locally synthesized PCM question; no human microphone",
+  "samples": [
+    {
+      "appearance": "blue-glasses",
+      "voiceId": "29ddb9582ae8481ebf11562f99aeaf95",
+      "hello": true,
+      "toolsList": true,
+      "contextCalls": 1,
+      "stt": 1,
+      "ttsStarts": 1,
+      "ttsStop": true,
+      "audioFrames": 129,
+      "openMs": 2017,
+      "helloMs": 2511,
+      "durationMs": 14454,
+      "audioBytes": 82560,
+      "audioSeconds": 2.58,
+      "sha256": "d09f1dc92971b13e80130249363a392c001cf5aec3847b0c6048130a4ea916c0",
+      "fixedLineMatched": true
+    }
+  ]
+}
