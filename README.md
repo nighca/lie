@@ -9,7 +9,7 @@ English · [简体中文](README.zh-CN.md)
 ![Vue 3](https://img.shields.io/badge/Vue-3-075BFA?style=flat-square&logo=vuedotjs&logoColor=white)
 ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-075BFA?style=flat-square&logo=typescript&logoColor=white)
 
-![LIE: a voice detective game with bright yellow and blue colors and original cartoon characters](design/brand/readme-hero.png)
+![LIE: a voice detective game with bright yellow and blue colors and original cartoon characters](design/brand/readme-hero.en.png)
 
 Talk freely with AI characters, compare their accounts, and identify who is responsible. The artwork is playful; the characters may leave things unsaid. What to ask, whom to question first, and which story to trust are up to you. The game interface is in Chinese.
 
