@@ -1,25 +1,32 @@
-# 预置形象素材 v1
+# 正式预置形象库
 
-依据用户已确认的中文 B 方向：明亮黄蓝、深蓝轮廓、亲切成人卡通。形象是可复用外观，不是案件角色；资源不含姓名、职业、秘密、真伪或罪责状态。案件通过 `appearanceId` 选择形象。
+`manifest.json` 是唯一权威清单；正式素材统一在 `assets/<id>/`。故事角色只通过稳定 `appearanceId` 引用预置；形象展示名不是案件姓名，颜色和表情不表示可信度或罪责。
 
-## 使用
+## 新增或修改一套形象
 
-`manifest.json` 是交接清单；`avatar` 和 `portrait` 均是相对此目录的 PNG 路径。集成者复制 `assets` 到应用静态目录后，将路径解析为站点 URL。首版与后续扩充均保持稳定 ID：
+1. 在 `assets/<id>/` 放入 `default.png`、`listening.png`、`waiting.png`、`speaking.png`。头像与默认图相同时直接引用default；确有独立头像时另放 `avatar.png`。
+2. 只修改本目录 `manifest.json`：填写 `id`、中文 `name`、`accent`、已授权配置的 `voiceId`、`avatar`、`portrait` 和三项 `portraits`。所有素材路径都相对此目录，固定为 `assets/<id>/<状态>.png`。
+3. 执行正常的 `npm run dev` / `npm test` / `npm run typecheck` / `npm run build` 即会自动生成。单独准备静态原型素材时运行 `npm run appearances:generate`；运行中修改源后重新生成并刷新或重启dev。
 
-| ID | 外观 | 主题色 |
-| --- | --- | --- |
-| `coral-bob` | 深蓝短发、珊瑚外套的成人女性 | `#FF665B` |
-| `sunny-moustache` | 宽脸、小胡子、黄色上衣的成人男性 | `#FFCF43` |
-| `blue-glasses` | 瘦高、圆眼镜、蓝色服装的成人男性 | `#075BFA` |
-| `silver-bun` | 银发盘发、水蓝开衫、圆润体型的年长女性 | `#78DDD7` |
-| `salt-pepper-beard` | 灰白短发短胡须、珊瑚套头衫的年长男性 | `#FF665B` |
-| `plum-crop` | 深肤色短卷发、紫色卫衣、紧实体型的年轻成人中性外观 | `#AFA0F5` |
+新增形象不修改业务代码或第二份清单。缺中文名/声音/状态、重复ID、资源缺失、状态画布不一致等会报错，校验失败不会改写已有生成物。中文名由前端直接消费；声音配置齐全不等于已完成真人试听。
 
-头像与立绘共享同一张透明 PNG，无额外下载。立绘使用 `object-fit: contain; object-position: center bottom`。头像容器使用 `overflow: hidden`，内部图片从上部取景；建议图片宽高为头像容器的约 240%，`max-width: none`，居中定位并用 `top: -3%`，覆盖容器的底部区域。不能仅用同宽正方形图片的 `object-fit: cover`，那会仍显示整个人物。最终按各容器比例在浏览器里检查头发、眼镜和下巴；这属于 CSS 展示裁切，不修改原 PNG。
+## 生成物与兼容 URL
 
-默认立绘为头部至大腿的静态插画，画布底边自然截断裤腿，不是完整全身。只覆盖默认展示；聆听、等待、说话的文字/图标由 UI 表达。没有动作矩阵、动画 SDK 或撒谎状态。主题色用于视觉区分，不能代表可信度。
+`apps/web/public/appearances/` **不纳入Git，是生成物**，包括应用manifest和图片，不可手工维护。标准Web npm生命周期覆盖根命令及直接workspace命令；build结束再逐字节检查实际dist产物，陈旧、缺失或多余文件会阻断构建和持续部署。`npm run appearances:check` 只检查、不修改；首次clone可先运行generate，缺少生成物不是另一份制作任务。
 
-## 生成记录
+当前8套保留已有运行时URL，避免破坏历史设计和原型引用。源清单的可选 `publicDirectory` 和 `publicAvatar` 只控制这些兼容输出位置；新形象可不填，默认输出 `/appearances/<id>/default.png` 等。正式源路径始终保持统一目录，不随兼容URL变化。
+
+当前正式库8套均有4态、voiceId和中文name。迁移复制已审阅的运行时原图，不缩放、裁切、重生成；32态图及3个独立头像逐字节一致。其他5套的avatar复用default，不再复制相同PNG。原先平铺 `assets/*.png`、`state-studies/`、`expansion-complete/`、prompts和sources.json均保留为历史出处，不能据旧批次的“仅默认图”描述推断当前正式能力。
+
+## 本次迁移验收（2026-10-24）
+
+- 对比迁移基线 `a0c4b3d`：运行时清单除新增 `name` 外完全相同，35张唯一PNG的SHA-256均一致；旧URL、voiceId、主题色及状态映射不变。
+- 根目录 `npm run typecheck`、`npm test`（255项，包括18项生成器测试）、`npm run build` 通过。删除生成目录后从标准Web dev命令启动，自动补齐8套35图；最终dist逐字节校验通过，网关直接使用该Web dist。
+- 视觉负责人独立用Codex内置浏览器只读检查5364编辑器：8个中文形象标签与对应ID正确，logo及8张默认图全部加载，未捕获console warn/error。当前浏览器画面仍为既有编辑器，不包含另案待实现的三步交互；动态未知ID名称变更由组件测试覆盖，不把这次只读检查当作来源机制的独立证明。未使用麦克风或付费语音。
+
+以下保留历史生成提示、初稿范围及QA。当时的相对路径、手工交接或未制作状态等说明属于旧批次；当前接入以上述权威清单与自动生成流程为准。
+
+## 历史生成记录（来源留档）
 
 2026-10-23，使用内置 `image_gen.imagegen`，三个请求均设置 `transparent_background: true`。未用 CLI、程序绘制、脚本裁图或去背景；复制工具原始 PNG 后保留 alpha。实际完整提示词见 `prompts/`，均为 `stylized-concept`。
 
@@ -39,7 +46,7 @@
 
 本批新增三张均为 1254×1254 RGBA，分别约 0.97 MB、0.97 MB、0.94 MB，均为默认静态立绘。保留原始 PNG，不新增动画、状态矩阵或业务字段；现有三套 ID 和图片保持不变。
 
-## QA 与限制
+## 历史批次 QA 与限制
 
 - 已逐张 `view_image` 检查成人造型、人物数量、轮廓、手部和边界，无文字、UI、道具或剧情线索；三人使用相同头至大腿构图、深蓝线条和静态友好表情。
 - 使用 Pillow 只读取 PNG 尺寸、模式和 alpha 信息，不做图像修改。PNG 为 RGBA，alpha 最小值 0、最大值 255，背景存在实际透明像素。

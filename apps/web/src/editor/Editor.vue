@@ -52,11 +52,6 @@ async function copy() {
   try { await navigator.clipboard.writeText(shareUrl.value); if (mounted) copied.value = true }
   catch { if (mounted) notice.value = '无法自动复制，请选中下方链接手动复制。' }
 }
-const appearanceNames: Record<string, string> = {
-  'coral-bob': '珊瑚短发', 'sunny-moustache': '阳光小胡子', 'blue-glasses': '蓝衣眼镜',
-  'silver-bun': '银发盘发', 'salt-pepper-beard': '灰白胡须', 'plum-crop': '紫衣短卷发',
-  'mint-puffs': '薄荷双丸子', 'ochre-freckles': '赭黄雀斑',
-}
 </script>
 
 <template>
@@ -77,7 +72,7 @@ const appearanceNames: Record<string, string> = {
             <article v-for="(character, index) in draft.characters" :key="character.id" class="editor-character"><div class="editor-section-heading"><h3>人物 {{ index + 1 }}</h3><UiButton variant="quiet" :aria-label="`删除人物 ${index + 1}`" @click="removeCharacter(draft, character.id)">删除人物</UiButton></div>
               <label>姓名<input v-model="character.name" :name="`name-${character.id}`" required></label>
               <label>人物设定<textarea v-model="character.profile" :name="`profile-${character.id}`" rows="5" placeholder="他是谁、知道什么、隐瞒什么，以及面对追问会怎么说。完整真相可以写在这里，不会直接展示给玩家。" required></textarea></label>
-              <fieldset class="editor-appearances"><legend>预置形象</legend><label v-for="appearance in appearances" :key="appearance.id" class="editor-appearance" :class="{ 'editor-appearance--selected': character.appearanceId === appearance.id }"><input v-model="character.appearanceId" type="radio" :name="`appearance-${character.id}`" :value="appearance.id"><img :src="appearance.avatar" alt=""><span>{{ appearanceNames[appearance.id] ?? appearance.id }}</span></label><label class="editor-no-appearance"><input v-model="character.appearanceId" type="radio" :name="`appearance-${character.id}`" :value="null">不使用形象</label></fieldset>
+              <fieldset class="editor-appearances"><legend>预置形象</legend><label v-for="appearance in appearances" :key="appearance.id" class="editor-appearance" :class="{ 'editor-appearance--selected': character.appearanceId === appearance.id }"><input v-model="character.appearanceId" type="radio" :name="`appearance-${character.id}`" :value="appearance.id"><img :src="appearance.avatar" alt=""><span>{{ appearance.name }}</span></label><label class="editor-no-appearance"><input v-model="character.appearanceId" type="radio" :name="`appearance-${character.id}`" :value="null">不使用形象</label></fieldset>
             </article><p v-if="draft.characters.length === 0">还没有人物，先添加一位吧。</p>
           </section>
           <section class="editor-panel" aria-labelledby="editor-ending-title"><h2 id="editor-ending-title">真相与结局</h2><p>以下内容不会在调查时直接展示给玩家。</p>

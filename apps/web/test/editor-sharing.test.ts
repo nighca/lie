@@ -22,7 +22,7 @@ describe('editor story sharing', () => {
     expect(new URL(url).search).toBe('')
   })
   it('accepts only installed preset IDs while keeping null appearances', async () => {
-    const appearance = { id: 'coral', avatar: '/a.png', portrait: '/p.png', accent: '#fff', voiceId: null, portraits: { listening: null, waiting: null, speaking: null } }
+    const appearance = { id: 'coral', name: '珊瑚形象', avatar: '/a.png', portrait: '/p.png', accent: '#fff', voiceId: null, portraits: { listening: null, waiting: null, speaking: null } }
     const content = { ...game, characters: game.characters.map((character) => ({ ...character, appearanceId: 'coral' })) }
     const url = await encodeGameLink(content, base)
     expect((await decodeSharedGame(new URL(url).hash, [appearance])).characters[0].appearanceId).toBe('coral')

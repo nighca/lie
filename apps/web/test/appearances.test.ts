@@ -4,7 +4,7 @@ import { readAppearances } from '../src/presentation/appearances'
 import { game, setup } from './helpers'
 
 function preset(id: string) {
-  return { id, avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456' }
+  return { id, name: `形象${id}`, avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456' }
 }
 
 describe('appearance voice configuration', () => {
@@ -85,5 +85,19 @@ describe('appearance state portraits', () => {
     for (const value of ['', '  ', 1, false, {}, []]) {
       expect(() => readAppearances([{ ...preset('invalid'), portraits: { [state]: value } }])).toThrow('Invalid appearance portrait')
     }
+  })
+})
+
+describe('appearance display names', () => {
+  it('reads authored Chinese names without deriving labels from IDs', () => {
+    expect(readAppearances([{ ...preset('unseen-id'), name: '新来的向导' }])[0].name).toBe('新来的向导')
+  })
+
+  it.each([null, '', '  ', 1, false, {}, []])('rejects an invalid display name %j', (name) => {
+    expect(() => readAppearances([{ ...preset('invalid'), name }])).toThrow('Invalid appearance name')
+  })
+
+  it('requires a display name in the catalog contract', () => {
+    expect(() => readAppearances([{ id: 'missing', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456' }])).toThrow('Invalid appearance name')
   })
 })

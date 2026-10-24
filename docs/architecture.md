@@ -67,13 +67,17 @@
 
 ## 形象资源与故事角色
 
-按用户提出的方向，把可复用“形象”与故事角色分开：形象库维护头像、默认立绘、主题色和可选的状态动作/动画；游戏角色通过 `appearanceId` 引用。相同形象可以在不同故事扮演不同身份，姓名、经历与秘密仍属于角色文本。
+可复用预置形象与故事角色分开。`design/appearances/manifest.json`是唯一权威输入，正式PNG统一放`design/appearances/assets/<id>/`，含default、listening、waiting、speaking四态；前三套另保留与默认立绘不同的avatar.png，其他形象头像可直接引用default。先前`state-studies/`、`expansion-complete/`及平铺原图保留为来源记录，不是需要同步维护的正式清单。
 
-形象预设现支持可选的 `voiceId`，解析后统一为字符串或 `null`。声音与头像/立绘一样按预设复用，案件仍只引用 `appearanceId`；未配置时沿用供应商默认。应用在创建对话 scope 时通过注入的预设查询固定该次音色，传给已有语音通道，切人关闭旧连接后取新预设；不修改共享 agent 默认。当前 runtime manifest 已按用户认可的声音配置 coral-bob → Bella 2.0、sunny-moustache → 龙三叔、blue-glasses → Alvin。用户已确认Alvin中文试听通过，沈禾继续使用龙三叔，龙飞/龙小诚两项替代候选未获采用；`appearance` 命名暂不迁移。
+源清单每套必须有稳定id、中文展示name、主题色、已配置voiceId、头像和完整四态路径。中文name只标识预置形象；案件角色的姓名、经历和秘密仍来自故事文本，相同形象可以扮演不同身份。Editor直接显示`appearance.name`，不维护ID到中文名的业务代码映射。新增预置形象只需加正式素材和一条源清单，不需修改引擎或UI。
 
-形象预设另支持可选 `portraits.listening / waiting / speaking`，缺省解析为 `null`。仅当前人物的大立绘根据已有会话状态切换：recording 对应 listening，waiting/speaking 同名；连接准备、结束或错误恢复默认 `portrait`。缺失或加载失败的状态图回默认，默认图失败显示人物首字；列表头像不随状态变化。状态只是语音生命周期的展示，不增加人声检测、心理/罪责判断或动画机制。正式素材映射仍待视觉选择，当前 manifest 未配置状态图。
+`scripts/appearances.mjs`校验源并确定性生成未跟踪的`apps/web/public/appearances/`，包含应用manifest与PNG；不可手改生成物。现有8套通过源清单中的可选`publicDirectory/publicAvatar`保留既有运行时URL；新形象省略兼容字段时默认输出`/appearances/<id>/...`。旧URL引用不要求重写历史原型或来源文档。
 
-首步仅落实引用边界、头像/默认立绘/主题色，不要求每个形象立即具备完整动画。聆听、等待、说话等展示状态来自真实对话状态，不表示系统测谎。具体素材 manifest 和可选动画形式由视觉与前端协同收敛，不在引擎加入情绪推断或动画框架。公共 UI 接收解析后的素材/插槽，不自行加载故事或平台配置。
+Web的predev、pretest、pretypecheck、prebuild钩子自动生成，覆盖根npm命令和直接workspace命令。postbuild按权威源逐字节检查实际dist/appearances，缺失、陈旧或多余产物会使构建失败，从而阻断CI部署。也可用`npm run appearances:generate`与`npm run appearances:check`显式生成/检查。运行中的dev修改了源时重新生成并刷新，或重启dev；直接运行Vite二进制及静态原型服务器前也先生成。
+
+正式库当前8套均已配声音与四态；这表示配置齐全，不替代真实试听或语义验收。运行时解析要求非空name，仍对voiceId、状态图保留原来的缺失容错：缺声音沿用供应商默认，缺/坏状态图回默认，默认图失败显示人物首字。源制作要求完整与运行时容错是不同边界，不把形象可空规则强制改入game-core。应用在创建对话scope时固定该形象voiceId，切人关闭旧连接后取新形象；不修改共享agent默认。
+
+大立绘按既有会话状态切换：recording对应listening，waiting/speaking同名；连接准备、结束或错误恢复default。列表头像不随状态变化。状态只表达语音生命周期，不增加测谎、心理推断、罪责状态或动画机制。公共UI接收解析后的素材或插槽，不自行加载故事或供应商配置。
 
 ## 运行位置与数据流
 

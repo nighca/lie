@@ -73,13 +73,16 @@ describe('bundled game content', () => {
     }
   })
 
-  it('registers every completed expansion with unchanged source assets and a shared state canvas', async () => {
+  it('generates every catalog preset with unchanged canonical assets and a shared state canvas', async () => {
     const runtime = readAppearances(appearanceData)
-    const completed = readAppearances(designAppearances).filter((item) => item.portrait.startsWith('expansion-complete/'))
+    const completed = readAppearances(designAppearances)
+    expect(runtime.map(({ id }) => id)).toEqual(completed.map(({ id }) => id))
     for (const source of completed) {
       const appearance = runtime.find((item) => item.id === source.id)
       expect(appearance, source.id).toBeDefined()
       expect(appearance!.accent).toBe(source.accent)
+      expect(appearance!.name).toBe(source.name)
+      expect(appearance!.voiceId).toBe(source.voiceId)
       const runtimePaths = { avatar: appearance!.avatar, default: appearance!.portrait, ...appearance!.portraits }
       const sourcePaths = { avatar: source.avatar, default: source.portrait, ...source.portraits }
       let canvas: number[] | null = null

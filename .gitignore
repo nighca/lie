@@ -9,3 +9,6 @@ tmp/
 node_modules/
 dist/
 coverage/
+
+# Generated from design/appearances; regenerate before web dev/check/build.
+/apps/web/public/appearances/

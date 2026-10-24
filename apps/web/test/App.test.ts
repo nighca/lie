@@ -173,8 +173,8 @@ describe('current character state portraits', () => {
   function createScene() {
     const content = { ...game, characters: game.characters.map((character, index) => ({ ...character, appearanceId: index === 0 ? 'red' : 'blue' })) }
     const appearances = readAppearances([
-      { id: 'red', avatar: '/red-avatar.png', portrait: '/red-default.png', accent: '#ff0000', portraits: { listening: '/red-listening.png', waiting: '/red-waiting.png', speaking: '/red-speaking.png' } },
-      { id: 'blue', avatar: '/blue-avatar.png', portrait: '/blue-default.png', accent: '#0000ff', portraits: { speaking: '/blue-speaking.png' } },
+      { id: 'red', name: '红色形象', avatar: '/red-avatar.png', portrait: '/red-default.png', accent: '#ff0000', portraits: { listening: '/red-listening.png', waiting: '/red-waiting.png', speaking: '/red-speaking.png' } },
+      { id: 'blue', name: '蓝色形象', avatar: '/blue-avatar.png', portrait: '/blue-default.png', accent: '#0000ff', portraits: { speaking: '/blue-speaking.png' } },
     ])
     return { ...setup(undefined, content), appearances }
   }

@@ -9,12 +9,10 @@ import { readAppearances } from '../src/presentation/appearances'
 import { setup } from './helpers'
 
 describe('shipped preset voices', () => {
-  it('configures eight distinct nonempty voices while retaining the first case choices', () => {
+  it('voices every catalog preset while retaining the first case choices', () => {
     const appearances = readAppearances(manifest)
-    expect(appearances).toHaveLength(8)
     expect(appearances.every(({ voiceId }) => voiceId != null)).toBe(true)
-    expect(new Set(appearances.map(({ voiceId }) => voiceId)).size).toBe(8)
-    expect(appearances.slice(0, 3).map(({ voiceId }) => voiceId)).toEqual([
+    expect(['coral-bob', 'sunny-moustache', 'blue-glasses'].map((id) => appearances.find((appearance) => appearance.id === id)?.voiceId)).toEqual([
       '535b81a1db504baa99fd726e01afee15', '2e7965636b0d4472ae51e75f419dff41', '29ddb9582ae8481ebf11562f99aeaf95',
     ])
   })

@@ -51,3 +51,14 @@ describe('editor page', () => {
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).title).toBe('新故事')
   })
 })
+
+describe('catalog-driven editor appearances', () => {
+  it('displays and updates the manifest name of a previously unknown preset ID', async () => {
+    const appearance = { id: 'new-guide', name: '新来的向导', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456', voiceId: 'existing-voice', portraits: { listening: null, waiting: null, speaking: null } }
+    const wrapper = mount(Editor, { props: { appearances: [appearance] } })
+    cleanup.push(() => wrapper.unmount())
+    expect(wrapper.get('.editor-appearance').text()).toBe('新来的向导')
+    await wrapper.setProps({ appearances: [{ ...appearance, name: '来自清单的新名字' }] })
+    expect(wrapper.get('.editor-appearance').text()).toBe('来自清单的新名字')
+  })
+})
