@@ -1,0 +1,8 @@
+from pathlib import Path
+root=Path(__file__).parent
+options=[('A','帽檐侦探','a-hat.svg','亲和的玩家化身，帽子提供角色感；最接近人物头像。'),('B','观察搭档','b-observer.svg','放大镜把“仔细问、仔细看”变成小动作；更活泼，但小图细节最多。'),('C','侦探席位','c-seat.svg','以角色剪影代表“这是我的位置”；不指定具体脸，缩小轮廓最简。')]
+columns=''
+for key,name,svg,note in options:
+ columns+=f'''<article><header><span class="letter">{key}</span><h2>{name}</h2></header><div class="large"><img src="{svg}" alt="{name}" width="96" height="96"></div><div class="sizes"><div><img src="{svg}" width="48" height="48" alt=""><span>48</span></div><div><img src="{svg}" width="30" height="30" alt=""><span>30</span></div><div><img src="{svg}" width="20" height="20" alt=""><span>20</span></div></div><p class="note">{note}</p><section class="transcript"><h3>对话转写</h3><div class="message mine"><img class="avatar" src="{svg}" alt="玩家头像"><div class="bubble"><strong>你</strong><p>我想再确认一下时间。</p></div></div><div class="message"><span class="npc"><img src="../appearances/assets/coral-bob.png" alt=""></span><div class="bubble"><strong>顾遥</strong><p>好，我按记得的顺序说。</p></div></div><div class="message mine"><img class="avatar" src="{svg}" alt="玩家头像"><div class="bubble"><strong>你</strong><p>请继续，我在听。</p></div></div></section></article>'''
+html='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>玩家侦探头像 · 三方向候选</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="preview.css"><h1>你的侦探头像 <small>三方向候选，尚未替换应用</small></h1><p class="intro">在30px圆形中保留角色感，用同一段假对白比较。没有头像选择器，也不是案件中的新角色。</p><main class="grid">'''+columns+'''</main><p class="footer">上方保留96 / 48 / 30 / 20px查看；转写内头像实际30×30 CSS像素。SVG均为原创原生路径，可编辑、无需字体或图生图。</p></html>'''
+(root/'index.html').write_text(html)
