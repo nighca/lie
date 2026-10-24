@@ -1,6 +1,7 @@
 import { createPcmPlayer, createVoiceChannel, openMicrophone } from '@lie/voice'
 import type { PcmFormat } from '@lie/voice'
 
+import { VoiceAvailabilityError } from './voice'
 import type { VoicePort } from './voice'
 
 export function createLiveVoicePort(dependencies = {
@@ -8,6 +9,7 @@ export function createLiveVoicePort(dependencies = {
   createPlayer: createPcmPlayer,
   openMic: openMicrophone,
   createContext: () => new AudioContext(),
+  fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]) }),
 }): VoicePort {
   return {
     create(scope) {
@@ -92,6 +94,19 @@ export function createLiveVoicePort(dependencies = {
       return {
         async open() {
           try {
+            let availability: unknown
+            let localTestEntry: string | null = null
+            try {
+              const response = await dependencies.fetchStatus(scope.signal)
+              if (!response.ok) throw new Error('Voice status check failed')
+              availability = (await response.json())?.status
+              if (response.headers.get('X-Lie-Local-Test-Entry') === '/__lie/dev-session' && ['127.0.0.1', 'localhost'].includes(location.hostname)) localTestEntry = '/__lie/dev-session'
+            } catch {
+              throw new VoiceAvailabilityError('check-failed')
+            }
+            if (!current()) return
+            if (availability === 'unavailable' || availability === 'access-required') throw new VoiceAvailabilityError(availability, availability === 'access-required' ? localTestEntry : null)
+            if (availability !== 'ready') throw new VoiceAvailabilityError('check-failed')
             context = dependencies.createContext()
             player = dependencies.createPlayer(context, answerDrained)
             const micReady = dependencies.openMic({ signal: scope.signal, onFrame(data) { if (capturing && current()) channel.input(data) } }).then(async (mic) => {

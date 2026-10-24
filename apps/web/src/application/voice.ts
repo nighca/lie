@@ -29,3 +29,9 @@ export interface Conversation {
 export interface VoicePort {
   create(scope: ConversationScope): Conversation
 }
+
+export class VoiceAvailabilityError extends Error {
+  constructor(readonly reason: 'unavailable' | 'access-required' | 'check-failed', readonly localTestEntry: string | null = null) {
+    super(reason)
+  }
+}

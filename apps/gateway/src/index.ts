@@ -28,6 +28,10 @@ export default {
     if (url.pathname === '/api/health' && request.method === 'GET') {
       return Response.json({ status: 'ok', storage: 'none' }, { headers: { 'Cache-Control': 'no-store' } })
     }
+    if (url.pathname === '/api/voice/status' && request.method === 'GET') {
+      if ((request.headers.get('Origin') != null && request.headers.get('Origin') !== url.origin) || request.headers.get('Sec-Fetch-Site') === 'cross-site' || url.search !== '') return new Response('Forbidden', { status: 403 })
+      return Response.json({ status: await voiceStatus(request, env) }, { headers: { 'Cache-Control': 'no-store' } })
+    }
     if (url.pathname === '/api/voice' && request.method === 'GET') return relayVoice(request, env)
     if (url.pathname.startsWith('/api/')) return Response.json({ error: 'Not found' }, { status: 404 })
     const response = await env.ASSETS.fetch(request)
@@ -38,15 +42,19 @@ export default {
   }
 } satisfies ExportedHandler<GatewayEnv>
 
+async function voiceStatus(request: Request, env: GatewayEnv): Promise<'unavailable' | 'access-required' | 'ready'> {
+  if (!env.VOICE_ACCESS_TOKEN || !env.LINX_WS_TOKEN || !env.LINX_DEVICE_ID || !env.LINX_AGENT_ID) return 'unavailable'
+  return await tokenMatches(readCookie(request), env.VOICE_ACCESS_TOKEN) ? 'ready' : 'access-required'
+}
+
 async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> {
   if (request.headers.get('Upgrade')?.toLowerCase() !== 'websocket') return new Response('WebSocket required', { status: 426 })
   if (request.headers.get('Origin') !== new URL(request.url).origin || new URL(request.url).search !== '') {
     return new Response('Forbidden', { status: 403 })
   }
-  if (!env.VOICE_ACCESS_TOKEN || !env.LINX_WS_TOKEN || !env.LINX_DEVICE_ID || !env.LINX_AGENT_ID) {
-    return new Response('Voice unavailable', { status: 503 })
-  }
-  if (!await tokenMatches(readCookie(request), env.VOICE_ACCESS_TOKEN)) return new Response('Forbidden', { status: 403 })
+  const status = await voiceStatus(request, env)
+  if (status === 'unavailable') return new Response('Voice unavailable', { status: 503 })
+  if (status === 'access-required') return new Response('Forbidden', { status: 403 })
   let response: Response
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
@@ -54,8 +62,8 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
     response = await fetch(upstreamUrl, {
       headers: {
         Upgrade: 'websocket', Authorization: `Bearer ${env.LINX_WS_TOKEN}`,
-        'Device-Id': env.LINX_DEVICE_ID, 'Client-Id': crypto.randomUUID(),
-        'Protocol-Version': '1', 'X-Agent-ID': env.LINX_AGENT_ID
+        'Device-Id': env.LINX_DEVICE_ID!, 'Client-Id': crypto.randomUUID(),
+        'Protocol-Version': '1', 'X-Agent-ID': env.LINX_AGENT_ID!
       },
       signal: controller.signal
     })

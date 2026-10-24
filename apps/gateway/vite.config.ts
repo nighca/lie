@@ -10,6 +10,10 @@ export default defineConfig({
     {
       name: 'lie-local-test-session',
       configureServer(server) {
+        server.middlewares.use('/api/voice/status', (request, response, next) => {
+          if (request.method === 'GET') response.setHeader('X-Lie-Local-Test-Entry', '/__lie/dev-session')
+          next()
+        })
         server.middlewares.use('/__lie/dev-session', (request, response) => {
           response.setHeader('Cache-Control', 'no-store')
           if (request.method !== 'GET' || request.headers['sec-fetch-site'] === 'cross-site') {

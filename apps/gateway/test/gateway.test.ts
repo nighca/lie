@@ -110,6 +110,33 @@ describe('gateway in workerd', () => {
     expect((await unconfigured.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders() })).status).toBe(503)
   }, 20000)
 
+  it('reports availability without opening upstream, exposing secrets or issuing access', async () => {
+    const checked = await runtime(credentials, `let calls = 0; export default { fetch(request) {
+      if (new URL(request.url).pathname === '/count') return Response.json({calls});
+      calls++; return new Response('Unexpected upstream request', {status: 500});
+    } }`)
+    const upstream = await checked.getWorker('upstream')
+    for (const cookie of ['', 'other=value', 'lie_voice_access=wrong', 'lie_voice_access=invited-test-token']) {
+      const response = await checked.dispatchFetch(`${testOrigin}/api/voice/status`, { headers: { Cookie: cookie } })
+      expect(response.status).toBe(200)
+      expect(await response.json()).toEqual({ status: cookie === 'lie_voice_access=invited-test-token' ? 'ready' : 'access-required' })
+      expect(response.headers.get('Cache-Control')).toBe('no-store')
+      expect(response.headers.get('Set-Cookie')).toBeNull()
+      expect(response.headers.get('X-Lie-Local-Test-Entry')).toBeNull()
+    }
+    expect(await (await upstream.fetch('https://upstream.test/count')).json()).toEqual({ calls: 0 })
+    for (const headers of [{ Origin: 'https://elsewhere.example' }, { 'Sec-Fetch-Site': 'cross-site' }]) {
+      expect((await checked.dispatchFetch(`${testOrigin}/api/voice/status`, { headers })).status).toBe(403)
+    }
+  }, 20000)
+
+  it.each(Object.keys(credentials))('reports unavailable when %s is not configured', async (key) => {
+    const unconfigured = await runtime({ ...credentials, [key]: '' })
+    const response = await unconfigured.dispatchFetch(`${testOrigin}/api/voice/status`)
+    expect(await response.json()).toEqual({ status: 'unavailable' })
+    expect(response.headers.get('Set-Cookie')).toBeNull()
+  }, 20000)
+
   it('uses only fixed upstream/header credentials and preserves text/binary and close', async () => {
     const response = await gateway.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders() })
     expect(response.status).toBe(101)

@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import type { VoiceChannelOptions } from '@lie/voice'
 
 import { createLiveVoicePort } from '../src/application/liveVoice'
+import { VoiceAvailabilityError } from '../src/application/voice'
 import type { ConversationScope } from '../src/application/voice'
 
 function setupBridge(voiceId: string | null = null) {
@@ -18,6 +19,7 @@ function setupBridge(voiceId: string | null = null) {
   const scope: ConversationScope = { sessionId: 'session', characterId: 'one', voiceId, epoch: 1, signal: abort.signal, isCurrent: () => current, readContext, onEvent }
   let onFrame: (data: Uint8Array) => void = () => {}
   const dependencies = {
+    fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready' }))),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
     createPlayer(_context: AudioContext, onIdle: () => void = () => {}) { drained = onIdle; return player },
     openMic: vi.fn(async (value: { onFrame(data: Uint8Array): void }): Promise<{ stop(): Promise<void> }> => { onFrame = value.onFrame; return { stop: stopMic } }),
@@ -35,6 +37,36 @@ describe('continuous browser voice and device bridge', () => {
     if (voiceId == null) expect(Object.hasOwn(bridge.options(), 'voiceId')).toBe(false)
     else expect(bridge.options().voiceId).toBe(voiceId)
     bridge.connection.close()
+  })
+
+  it.each(['unavailable', 'access-required'])('reports %s before preparing devices or opening WebSocket', async (status) => {
+    const bridge = setupBridge()
+    bridge.dependencies.fetchStatus.mockResolvedValue(new Response(JSON.stringify({ status }), { headers: { 'X-Lie-Local-Test-Entry': '/__lie/dev-session' } }))
+    await expect(bridge.connection.open()).rejects.toMatchObject({ reason: status, localTestEntry: status === 'access-required' ? '/__lie/dev-session' : null })
+    expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
+    expect(bridge.channel.open).not.toHaveBeenCalled()
+    expect(bridge.context.resume).not.toHaveBeenCalled()
+  })
+
+  it.each(['network', 'unexpected-response', 'null-response', 'http-failure'])('keeps %s failures explicit instead of opening capture', async (failure) => {
+    const bridge = setupBridge()
+    if (failure === 'network') bridge.dependencies.fetchStatus.mockRejectedValue(new Error('network'))
+    else bridge.dependencies.fetchStatus.mockResolvedValue(new Response(JSON.stringify(failure === 'null-response' ? null : { status: 'unknown' }), { status: failure === 'http-failure' ? 500 : 200 }))
+    await expect(bridge.connection.open()).rejects.toBeInstanceOf(VoiceAvailabilityError)
+    expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
+    expect(bridge.channel.open).not.toHaveBeenCalled()
+  })
+
+  it('cancels a pending availability check without preparing capture', async () => {
+    const bridge = setupBridge()
+    let ready!: (response: Response) => void
+    bridge.dependencies.fetchStatus.mockImplementation(() => new Promise((resolve) => { ready = resolve }))
+    const opening = bridge.connection.open()
+    bridge.expire(); bridge.connection.close()
+    ready(new Response(JSON.stringify({ status: 'ready' })))
+    await opening
+    expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
+    expect(bridge.channel.open).not.toHaveBeenCalled()
   })
 
   it('keeps capture and one channel open across drained answers and an interruption', async () => {
@@ -79,6 +111,7 @@ describe('continuous browser voice and device bridge', () => {
     let ready!: () => void
     bridge.channel.open.mockImplementation(() => new Promise<void>((resolve) => { ready = resolve }))
     const opening = bridge.connection.open()
+    await vi.waitFor(() => expect(bridge.dependencies.openMic).toHaveBeenCalledOnce())
     expect(bridge.dependencies.openMic).toHaveBeenCalledOnce()
     expect(bridge.context.resume).toHaveBeenCalledOnce()
     bridge.frame(new Uint8Array([1, 2]))
@@ -103,6 +136,7 @@ describe('continuous browser voice and device bridge', () => {
     let grant!: (value: { stop(): Promise<void> }) => void
     bridge.dependencies.openMic = vi.fn(() => new Promise((resolve) => { grant = resolve }))
     const opening = bridge.connection.open()
+    await vi.waitFor(() => expect(bridge.dependencies.openMic).toHaveBeenCalledOnce())
     bridge.expire(); bridge.connection.close()
     grant({ stop: bridge.stopMic })
     await opening

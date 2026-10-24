@@ -106,7 +106,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <h2>与{{ current?.name }}对话</h2>
           <p class="muted">自由开口提问，听听每个人的说法。</p>
           <Transcript :messages="transcript" />
-          <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
+          <UiNotice v-if="view.notice != null">{{ view.notice }} <a v-if="view.voiceAccessEntry != null" :href="view.voiceAccessEntry">打开本地测试入口（将写入测试 Cookie）</a></UiNotice>
         </section>
       </div>
       <VoiceControl :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" @start="speak" />

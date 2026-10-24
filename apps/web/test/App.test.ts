@@ -2,6 +2,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it } from 'vitest'
 
 import App from '../src/App.vue'
+import { VoiceAvailabilityError } from '../src/application/voice'
 import { readAppearances } from '../src/presentation/appearances'
 import { game, setup } from './helpers'
 
@@ -58,6 +59,20 @@ describe('game screens', () => {
     await controls().get('button').trigger('click')
     expect(turns[0].closed).toBe(true)
     expect(controls().get('button').text()).toBe('开始对话')
+  })
+
+  it('explains local access requirements and offers an explicit cookie-writing entry without starting capture', async () => {
+    const { controller, voice } = setup()
+    voice.create = () => ({ async open() { throw new VoiceAvailabilityError('access-required', '/__lie/dev-session') }, close() {} })
+    await controller.load('test'); controller.start()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    await wrapper.get('[aria-label="语音对话控制"] button').trigger('click'); await flushPromises()
+    expect(wrapper.text()).toContain('语音体验需要访问权限')
+    const entry = wrapper.get('a[href="/__lie/dev-session"]')
+    expect(entry.text()).toContain('将写入测试 Cookie')
+    expect(wrapper.get('[aria-label="语音对话控制"]').text()).toContain('等待你开口')
+    expect(wrapper.get('[aria-label="语音对话控制"] button').text()).toBe('开始对话')
   })
 
   it('offers cancellation while microphone and service preparation is pending', async () => {
