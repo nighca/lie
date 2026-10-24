@@ -397,3 +397,8 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 
 
 2026-10-24 对话控制条两项反馈：用户建议进一步区分玩家讲话与角色回答，展示收音/播放波形；考虑剩余时间移至最左，与音量变化并列便于感知。与实时STT待办同属语音反馈组，不改变已批准语音启用总时长计费口径（含静音/等待/回答）。五音色代理已交付，空出执行位后立即交其做voice-feedback独立调研/交互样片及接口方案，覆盖等待/玩家讲话/思考/播放/打断、真实输入输出音量来源及清理；假数据样片须标注，不把装饰波形当真实音频。先给具体布局与能力证据，再协调生产UI/语音接口实施，不占用户8787或引入新付费实验。
+
+
+2026-10-24 五音色root验收与新案实测启动：用户要求立即落实此前review/验证安排。root已读8ca39da完整实现/测试/manifest差异，确认仅新五voiceId、首案三声不变；复核五份安全results及WAV单声道16k/16bit/PCM长度与SHA全部相等，候选重跑10项探针安全测试、Web124项、Web类型和构建通过。五份短中文真实合成链路通过不等于用户耳听年龄质感通过；准备本地集成，未push。
+
+新案脚本原始run/settings/matrix/prepare/owned-resources/answer已root逐文件review；执行owner在独立case-live-execution从review main创建，原三提交一次cherry并修OTA官方ws metadata白名单，实际socket仍固定wss；root核2beb057补丁，24项离线和16实际core上下文prepare通过。已放行单次最多16答、逐答人工语义判读、首FAIL/UNCERTAIN/协议异常停、finally只清自建资源，不重试、不改模型/提示、不碰用户设备。此项是detect单轮真实模型语义验证，不是麦克风/真人多轮验收。
