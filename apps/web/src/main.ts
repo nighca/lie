@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import type { GameDefinition } from '@lie/game-core'
 
 import '@lie/ui/style.css'
 import Application from './Application.vue'
@@ -18,8 +19,9 @@ async function main() {
     const response = await fetch('/appearances/manifest.json')
     if (response.ok) appearances = readAppearances(await response.json())
   } catch { /* Presentation assets are optional; names remain available. */ }
-  const createController = () => createGameController({
+  const createController = (game: GameDefinition | null = null) => createGameController({
     async readGame(gameId) {
+      if (game != null) return game
       const response = await fetch(`/games/${encodeURIComponent(gameId)}.json`)
       if (!response.ok) throw new Error('Game load failed')
       return response.json()
