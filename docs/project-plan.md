@@ -1,10 +1,10 @@
 # LIE — 当前项目计划
 
-更新：2026-10-25，依据06:43接任核验本地 main `940068638b9b8a49f9f1db11451783dd935dcddb`；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
+更新：2026-10-25，依据07:03:31 Asia/Shanghai核验本地 main `3a677358cc5fc69f215f13c44d51c5a9643eab2c`；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
 
 ## 当前轮换交接
 
-2026-10-25 06:43 Asia/Shanghai，新协调`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）核实前代release及clean main后认领active/唯一integrator，已实际通知三个专项保持owner并向本代完整批量交付。本代恰好两次mode=create产生`lie`/`lie-2`，ACTIVE且target本chat，每30分钟/4小时；工具自动分配历史ID，以target＋created_at区分，不能按旧快照暂停它们。前代`lie-3`/`lie-4`仍PAUSED。详[登记](coordinator-handoff.md)、[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)。本轮仅文档，无应用改动/push/部署。本代接任时（约06:41—06:42）分别紧凑wait核三专项仍actual waitingOnApproval、无新完整handoff、原因不可见，正式游戏IAB未交付；不把通知成功当验收。保留owner/dirty工作/候选refs/服务；17条不重做。08:30截止不延长，重大门禁与队列不变。
+2026-10-25 06:43 Asia/Shanghai，新协调`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）核实前代release及clean main后认领active/唯一integrator，已实际通知三个专项保持owner并向本代完整批量交付。本代恰好两次mode=create产生`lie`/`lie-2`，ACTIVE且target本chat，每30分钟/4小时；工具自动分配历史ID，以target＋created_at区分，不能按旧快照暂停它们。前代`lie-3`/`lie-4`仍PAUSED。详[登记](coordinator-handoff.md)、[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)。本代已本地集成Editor定位修复与fan扇卡至`3a67735`，未push/部署。约06:52三专项waiting flags均恢复为空，原因不可见，不代表审批批准或拒绝；fan已review/独立验证并本地集成、Editor已review/独立验证并本地集成、动画正式游戏QA仍未完整交付。保留owner/dirty工作/候选refs/服务；17条不重做。08:30截止不延长，重大门禁与队列不变。
 
 ## 授权与执行方式
 
@@ -17,7 +17,7 @@
 
 | 入口 | 当前事实 |
 | --- | --- |
-| 本地main | 接任基线`9400686`已含下表成果；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
+| 本地main | 当前main `3a677358cc5fc69f215f13c44d51c5a9643eab2c`已含下表成果；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
 | 远程/线上 | 本地origin/main跟踪及最后实际部署证据均为`32d89bf91f441168148884593a0f49b816ad7162`；本轮未fetch/重验远端，不能冒称最新remote。见[部署证据](deployments/2026-10-24-animation-milestone.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |
@@ -40,6 +40,8 @@
 | 三案引擎、持续语音、调查v3/v4、共享品牌、逐字转写与静态回退 | [组合验收](history/2026-10-24/combined-ui-animation.md)、[真实语音边界](realtime-voice-validation.md) |
 | 调查输入反馈及UI1—9（人数头像/扇卡/笔触/标签/静音波形/通知/分段） | [输入反馈](history/2026-10-24/coordinator-takeover.md)、[1—9](history/2026-10-24/ui-polish-acceptance.md)；17条旧“只记录”已解除 |
 | 编辑器10—17、PC卡复用、草稿状态组、窄屏步骤连接线、投稿弹窗局部排版 | [编辑器验收](history/2026-10-24/editor-feedback-integration.md)、[实施文档](game-editor-implementation.md) |
+| 指认可变人数扇卡 | main `3a67735`；root实际review七图/完整diff，独立Node24.22.1 Web186/类型/构建8形象60资源通过；1/4/7人数及键盘/触屏回归见[验收记录](history/2026-10-25/accusation-fan-layout.md)。 |
+| 编辑器大形象定位稳定 | main `f433834`；root全diff/context/五图review，Node24.22.1独立28测试/Web类型/构建及8形象60资源通过；[实施记录](game-editor-implementation.md)。iframe验收限制见交接。 |
 | 顾遥/蓝衣/阳光小胡子动画与多候选作者预览 | [顾遥](animation/coral-game-integration.md)、[蓝衣](animation/blue-glasses-game-integration.md)、[小胡子](animation/sunny-moustache-game-integration.md) |
 | Logo红点彩蛋、README双语头图 | [Logo记录](../design/brand/logo-easter-egg/README.md)、[双语头图及详细集成快照](history/2026-10-25/README.md) |
 | 首页流程去胶囊、开局时长CSS中西文留白 | [首页](history/2026-10-25/home-flow-typography.md)、[CJK实测](cjk-numeric-spacing.md) |
@@ -47,15 +49,13 @@
 
 ## 仍需执行的队列
 
-同优先级按依赖/空闲owner调度，不重派已在制工作；专项chat ID及当代执行者在交接登记。本代接任时（约06:41—06:42）root紧凑wait核fan/Editor/动画三个专项仍实际waitingOnApproval，无新完整handoff，正式游戏QA未交付；新cursor首次changed=true不代表交付完成；flag不等于拒绝，原因不推测。只读排查结论：等待状态原因不可见，保留未测项目，未重发/绕过/变更权限。
+同优先级按依赖/空闲owner调度，不重派已在制工作；专项chat ID及当代执行者在交接登记。约06:52三专项waiting flags均为空，原因不可见，不推断审批结论；按下表实际交付推进，未测项保持。
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 银发waiting接入 / 动画专项＋root review | 三角色新候选`a440ec9`（base0a67498）已重建并过全仓379/类型/构建79资源；原素材review/哈希保持，5504正式游戏IAB仍待交，角色未main。完整来源见交接候选登记，不复制旧链。 |
-| P1 | gray/plum接入与扩人 / 动画专项＋main_acceptance_environment | 正式activation source HEAD `822e9b5` clean（base5968661，12有序提交）已root实际源码/图review；纳入同一新候选a440ec9，含结果投影的组合检查已通过，5505正式游戏IAB未交付；06:37动画专项仍实际waitingOnApproval，未main。之后按原canonical制mint/ochre，最多2角色并行。 |
-| P2 | 指认弹窗可变人数扇卡 / 调查专项 | 从`31db7c9`新WT accusation-fan-layout实施，5507 waitingOnApproval，仍持viewport未释放；修4人换行裁切，hover/focus上移、触屏/窄屏可选，不硬人数、不靠hover提交，点击具体人才指认。与结果页设计独立。 |
-| P2 | 编辑器大形象位置跳动 / 编辑器专项 | 局部CSS候选28测试/类型/构建60资源通过；自有同源iframe初轮1004下216.23×285、391下317×160居中通过，尚需多角色反复切换/cleanup完整handoff。当前waitingOnApproval，顶层slot未取消，未集成；不改共享组件或资产掩盖。 |
-| P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；等fan＋Editor＋silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |
+| P1 | 银发waiting接入 / 动画专项＋root review | 三角色新候选`a440ec9`（base0a67498）已重建并过全仓379/类型/构建79资源；原素材review/哈希保持，旧候选目录消失、5504/5505无监听阻塞；`three_character_environment`已在新WT以f433834重放30链至eacd93e、附灰白部分QA至bfb2a33 clean，单套5504纯local demo HTTP200/79资源ready；动画专项已获root成功通知继续正式IAB，Node24.22.1全仓379测试/类型/Web＋gateway构建/79资源及3专属strict均通过，旧5505不恢复，角色未main。完整来源见交接候选登记，不复制旧链。 |
+| P1 | gray/plum接入与扩人 / 动画专项＋main_acceptance_environment | 正式activation source HEAD `822e9b5` clean（base5968661，12有序提交）已root实际源码/图review；当前恢复候选bfb2a33（basef433834），含结果投影的组合检查已通过，统一新5504正式游戏IAB未完整交付；约06:52 waiting flag已清空，原因不可见，未main。新source `1f7bb99`仅灰白QA六图/22行记录，root已实际review无blocker，非全部QA；之后按原canonical制mint/ochre，最多2角色并行。 |
+| P2 | CharacterPreset内部命名迁移 / root排执行owner | 已批`CharacterPreset`/`@lie/character-animation`，原`cb86dd6`尚未集成。保留appearanceId键及`/appearances/`；fan＋Editor已main，等silver合main后按最新基线一个owner统一执行，纳入runner命令及环境owner受控重启。[落地提案](character-preset-migration-plan.md)，本轮未实施。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
 | P2 | 编辑器分享/投稿端到端 / 编辑器＋用户 | 本代`share_boundary_audit`已完成代码级只读审计，root已实际review源码/完整探针并用绝对路径Node24.22.1独立执行探针全部PASS（0.104s、exit0）：现有sharing＋navigation 19/19、生产codec URL/UTF8字节边界及Unicode/坏输入探针通过，未见需修复源码缺陷；19/19测试仍仅执行者Node24.17.0证据，不称要求版本19项测试复验。证据`/private/tmp/lie-share-boundary-audit.mjs`，无代码/服务/浏览器变动。仅Node/jsdom＋源码证据，真实reload/地址栏粘贴/network fragment/宿主play回退及跨浏览器16k未验；仍加载manifest/catalog，不称完全离线。完整URL16000仍为暂定上限，待实际边界及跨浏览器验证。前代约03:37有界IAB只打开`http://localhost:8787/play`并见缺少案件内容提示；随后CDP基线调用约272秒未返回而中断，无16000/Unicode/refresh/网络结果，无审批或拒绝证据，不构成产品bug或边界PASS，不扩大矩阵或预算结论。临时证据`/private/tmp/lie-share-boundary-qa-20261025/handoff.md`，自建tab清理未确认，见交接资源注记。GitHub仍待IAB登录、公开及无上游写权限身份实测，长query失败不等于短预填不支持。 |
 | P2 | 角色出戏边界 / 语音内容owner | 攻击问仍有幕后元话语，候选未解决且未生产；停止无限付费叠提示，不擅换模型/供应商/剧情。[调查](role-immersion-investigation.md) |
@@ -73,3 +73,5 @@
 - **实测与费用**：付费模型复核先审脚本/固定矩阵、设单次上限，首FAIL/UNCERTAIN/协议异常即停，只清自建资源。开发优先IAB，Chrome例外仅已授权灵矽控制台。普通测试/类型/构建不读取管理key、不自动发真实推理。
 
 原位维护决定/owner/依赖/下一步；已完成流水移[历史](history/2026-10-25/README.md)。记录、本地集成、push、部署与真人验收分别报告。
+
+三角色当前候选`bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c`仍基于f433834；main新增fan后须后续重建/影响验证。动画正持5504 QA，勿动其branch/runtime。本批文档source base为3f52ee5，并非当前main；root需按最新main候选集成。

@@ -46,3 +46,7 @@
 ## 06:43主协调接任
 
 [01a17012接任证据](coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)：main9400686已release后唯一接任、本代两任务ACTIVE/target与created_at、三个专项通知成功；自动分配历史lie/lie-2 ID的差异必须按新target识别。仅文档，不构成应用或正式IAB验收。
+
+## 清晨三角色环境恢复候选
+
+[候选有序31提交与检查](three-character-dawn-candidate.md)：base f433834，候选bfb2a33 clean，环境组合检查通过、正式游戏IAB仍待完整交付；不等于main或发布。
