@@ -6,6 +6,7 @@ import type { GameController } from './application/controller'
 import type { Appearance } from './presentation/appearances'
 
 const props = defineProps<{ controller: GameController; appearances: readonly Appearance[]; demo: boolean }>()
+const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: [] }>()
 const view = ref(props.controller.getView())
 const unsubscribe = props.controller.subscribe((value) => { view.value = value })
 onUnmounted(unsubscribe)
@@ -52,10 +53,10 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 <template>
   <div class="game-shell">
     <header class="game-header">
-      <a class="wordmark" href="/" aria-label="LIE 首页"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a>
+      <a class="wordmark" href="/" aria-label="LIE 首页" @click.prevent="emit('navigateHome')"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a>
       <h1 v-if="view.phase === 'interrogating'" class="header-title">{{ view.title }}</h1>
       <div v-if="view.phase === 'interrogating'" class="header-actions">
-        <UiButton variant="quiet" @click="controller.end()">结束本局</UiButton>
+        <UiButton variant="quiet" @click="emit('requestEnd')">结束本局</UiButton>
         <UiButton @click="controller.openAccusation()">最终指认</UiButton>
       </div>
       <p v-if="demo" class="environment-note">演示模式 · 对话为模拟内容，不使用麦克风</p>
@@ -64,7 +65,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     <main v-if="view.phase === 'loading' || view.phase === 'failed'" class="intro-card surface">
       <h1>{{ view.phase === 'loading' ? '正在准备案件…' : '案件暂时无法加载' }}</h1>
       <p role="status">{{ view.notice }}</p>
-      <p v-if="view.phase === 'failed'">请刷新页面重试。</p>
+      <div v-if="view.phase === 'failed'" class="result-actions"><UiButton @click="emit('retry')">重试</UiButton><UiButton variant="secondary" @click="emit('navigateHome')">返回案件列表</UiButton></div>
     </main>
 
     <main v-else-if="view.phase === 'intro'" class="intro-card surface">
@@ -83,6 +84,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <ol class="flow-hint" aria-label="调查流程"><li>开口问话</li><li>对照说法</li><li>最终指认</li></ol>
       <p class="muted">本局共 {{ remainingTime }} 询问时间，跨人物共享。语音开启时计时，结束对话后暂停，连接准备不计时。</p>
       <UiButton class="intro-start" @click="controller.start()">接案，开始调查</UiButton>
+      <UiButton variant="quiet" @click="emit('navigateHome')">返回案件列表</UiButton>
     </main>
 
     <main v-else-if="view.phase === 'interrogating'" class="investigation">
@@ -120,16 +122,19 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <div class="result-divider" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="result-story"><h2>完整经过</h2><p class="background">{{ view.reveal }}</p></div>
       <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
+      <UiButton variant="secondary" @click="emit('navigateHome')">返回案件列表</UiButton>
     </main>
     <main v-else-if="view.phase === 'lost'" class="intro-card result-card surface">
       <p class="eyebrow">本局失败</p>
       <h1 class="case-title">指认不正确</h1>
       <p class="background">这次调查已结束。想再试一次，请重新开始一局。</p>
       <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
+      <UiButton variant="secondary" @click="emit('navigateHome')">返回案件列表</UiButton>
     </main>
     <main v-else class="intro-card surface">
       <h1>本局已结束</h1><p>这次的对话已经停止。准备好后，可以重新接案。</p>
       <UiButton @click="controller.restart()">重新开始一局</UiButton>
+      <UiButton variant="secondary" @click="emit('navigateHome')">返回案件列表</UiButton>
     </main>
 
     <UiDialog :open="view.accusationOpen" title="最终指认" @close="controller.closeAccusation()">

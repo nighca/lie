@@ -11,9 +11,10 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "vue": "3.5.44",
-    "@lie/ui": "0.0.0",
     "@lie/game-core": "0.0.0",
-    "@lie/voice": "0.0.0"
+    "@lie/ui": "0.0.0",
+    "@lie/voice": "0.0.0",
+    "vue": "3.5.44",
+    "vue-router": "5.4.0"
   }
 }

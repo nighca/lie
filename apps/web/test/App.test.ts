@@ -31,7 +31,7 @@ describe('game screens', () => {
     expect(wrapper.text()).toContain('本局失败')
     expect(wrapper.get('main h1').text()).toBe('指认不正确')
     expect(wrapper.get('dialog').element.open).toBe(false)
-    expect(wrapper.get('main').findAll('button').map((button) => button.text())).toEqual(['重新开始一局'])
+    expect(wrapper.get('main').findAll('button').map((button) => button.text())).toEqual(['重新开始一局', '返回案件列表'])
     expect(wrapper.text()).not.toContain(game.ending.reveal)
     await click('重新开始一局')
     expect(controller.getView().phase).toBe('intro')
