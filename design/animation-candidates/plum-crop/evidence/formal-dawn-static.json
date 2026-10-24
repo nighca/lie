@@ -1,0 +1,22 @@
+[
+  {
+    "display": "none",
+    "src": "/appearances/plum-crop/default.png",
+    "state": "default"
+  },
+  {
+    "display": "none",
+    "src": "/appearances/plum-crop/listening.png",
+    "state": "listening"
+  },
+  {
+    "display": "none",
+    "src": "/appearances/plum-crop/waiting.png",
+    "state": "waiting"
+  },
+  {
+    "display": "none",
+    "src": "/appearances/plum-crop/speaking.png",
+    "state": "speaking"
+  }
+]

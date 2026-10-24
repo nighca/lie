@@ -1,0 +1,42 @@
+{
+  "truncated": false,
+  "hasMore": false,
+  "events": [
+    {
+      "method": "Network.requestWillBeSent",
+      "sequence": 1740,
+      "requestId": "85032.303",
+      "timestamp": 257219.76442,
+      "url": "http://127.0.0.1:5504/appearances/plum-crop/animation/package.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "sequence": 1741,
+      "requestId": "85032.304",
+      "timestamp": 257219.767273,
+      "url": "http://127.0.0.1:5504/appearances/plum-crop/default.png"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "sequence": 1744,
+      "requestId": "85032.324",
+      "timestamp": 257220.122701,
+      "url": "http://127.0.0.1:5504/appearances/salt-pepper-beard/animation/package.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "sequence": 1745,
+      "requestId": "85032.325",
+      "timestamp": 257220.123266,
+      "url": "http://127.0.0.1:5504/appearances/salt-pepper-beard/default.png"
+    },
+    {
+      "method": "Network.loadingFailed",
+      "sequence": 1747,
+      "requestId": "85032.303",
+      "timestamp": 257220.134102,
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    }
+  ]
+}
