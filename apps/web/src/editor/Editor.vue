@@ -5,7 +5,7 @@ import { ProductHeader, UiButton, UiNotice } from '@lie/ui'
 
 import type { Appearance } from '../presentation/appearances'
 import EditorDialog from './EditorDialog.vue'
-import { createDraft, draftGame, draftIssues, loadDraft, removeCharacter, saveDraft, type DraftCharacter, type DraftIssue } from './draft'
+import { createDraft, draftGame, draftIssues, DRAFT_KEY, loadDraft, removeCharacter, saveDraft, type DraftCharacter, type DraftIssue } from './draft'
 import { PROFILE_EXAMPLE } from './example'
 import { encodeGameLink, SHARE_URL_LIMIT } from './share'
 import { prepareSubmission } from './submission'
@@ -19,12 +19,13 @@ const notice = ref<string | null>(null)
 const saveStatus = ref('草稿仅保存在此浏览器')
 const busy = ref(false)
 const showIssues = ref(false)
-const overlay = ref<'example' | 'appearance' | 'share' | 'submission' | 'delete' | null>(null)
+const overlay = ref<'example' | 'appearance' | 'share' | 'submission' | 'delete' | 'clear' | null>(null)
 const shareUrl = ref<string | null>(null)
 const submission = ref<ReturnType<typeof prepareSubmission> | null>(null)
 const copied = ref(false)
 const form = ref<HTMLElement | null>(null)
 let mounted = true
+let clearingDraft = false
 try {
   const stored = loadDraft(localStorage)
   if (stored != null) { draft.value = stored; saveStatus.value = '已恢复此浏览器的草稿' }
@@ -39,6 +40,7 @@ function appearance(person: DraftCharacter) { return props.appearances.find((pre
 function invalid(field: string) { return showIssues.value && issues.value.some((issue) => issue.field === field && (issue.characterId == null || issue.characterId === selectedId.value)) }
 function name(person: DraftCharacter) { return person.name.trim() || `人物 ${draft.value.characters.indexOf(person) + 1}` }
 watch(draft, () => {
+  if (clearingDraft) return
   shareUrl.value = null
   copied.value = false
   try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存到此浏览器' }
@@ -77,6 +79,23 @@ function deleteCharacter() {
   selectedId.value = draft.value.characters[Math.min(index, draft.value.characters.length - 1)]?.id ?? null
   overlay.value = null
   void focus(character.value == null ? 'add-character' : 'name')
+}
+function clearDraft() {
+  try { localStorage.removeItem(DRAFT_KEY) }
+  catch { notice.value = '无法清除本地草稿，内容已保留，请重试。'; return }
+  clearingDraft = true
+  draft.value = createDraft(props.appearances[0]?.id ?? null)
+  clearingDraft = false
+  selectedId.value = draft.value.characters[0].id
+  step.value = 0
+  showIssues.value = false
+  notice.value = null
+  shareUrl.value = null
+  submission.value = null
+  copied.value = false
+  saveStatus.value = '本地草稿已清除，开始编辑后自动保存'
+  overlay.value = null
+  void focus('title')
 }
 function chooseAppearance(id: string) {
   if (character.value != null) character.value.appearanceId = id
@@ -120,7 +139,7 @@ function download() {
 <template>
   <div class="editor-shell">
     <ProductHeader class="editor-header" @navigate-home="!busy && emit('leave')">
-      <template #actions><UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton></template>
+      <template #actions><UiButton variant="quiet" :disabled="busy" @click="overlay = 'clear'">清除草稿</UiButton><UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton></template>
       <template #notice><p class="editor-save" role="status">{{ saveStatus }}</p></template>
     </ProductHeader>
     <nav class="editor-steps" aria-label="创作步骤">
@@ -160,9 +179,10 @@ function download() {
         <div v-if="step < 2" class="quick-actions"><button type="button" class="text-button" @click="preview">试玩</button><button type="button" class="text-button" @click="share">分享案件</button></div>
       </fieldset>
     </main>
-    <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', appearance: '选择预置形象', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？' }[overlay]" @close="overlay = null">
+    <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', appearance: '选择预置形象', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？', clear: '清除本地草稿？' }[overlay]" @close="overlay = null">
       <template v-if="overlay === 'example'"><p>这是写给角色的扮演资料，仍是一份纯文本。</p><p class="example-text">{{ PROFILE_EXAMPLE }}</p><p class="muted">示例不会替换你正在写的内容。</p></template>
       <div v-else-if="overlay === 'appearance'" class="appearance-grid"><button v-for="preset in appearances" :key="preset.id" type="button" class="editor-appearance" :aria-pressed="character?.appearanceId === preset.id" @click="chooseAppearance(preset.id)"><img :src="preset.avatar" alt=""><span>{{ preset.name }}</span></button><p v-if="appearances.length === 0">预置形象暂未加载，请稍后重新打开编辑器。草稿仍保留在此浏览器。</p></div>
+      <template v-else-if="overlay === 'clear'"><p>将清除当前案件的全部编辑内容和此浏览器保存的草稿，重新开始创作。此操作无法撤销，已分享的链接不受影响。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留草稿</UiButton><UiButton @click="clearDraft">确认清除</UiButton></div></template>
       <template v-else-if="overlay === 'delete'"><p>将删除{{ character == null ? '' : name(character) }}的设定。如果他是案件答案，需要重新选择；此操作无法撤销。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留人物</UiButton><UiButton @click="deleteCharacter">确认删除</UiButton></div></template>
       <template v-else-if="overlay === 'share' && shareUrl != null"><p>朋友打开链接就能玩。修改草稿后需要重新生成链接，旧链接保留当时的内容。</p><label class="field">完整分享链接<textarea :value="shareUrl" readonly rows="4" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><p class="muted">{{ shareUrl.length.toLocaleString('en-US') }} / {{ SHARE_URL_LIMIT.toLocaleString('en-US') }} 字符</p><UiButton @click="copy(shareUrl)">{{ copied ? '已复制' : '复制分享链接' }}</UiButton></template>
       <template v-else-if="overlay === 'submission' && submission != null"><UiNotice>当前源码仓库仍为私有，外部投稿暂未开放。你可以先保存案件文件；有仓库访问权限的作者可继续在 GitHub 操作。</UiNotice><p>这里帮你准备文件，不会自动创建 PR。文件将包含完整真相和人物设定，提交前请确认愿意公开。</p><label class="field">文件路径<input :value="submission.filename" readonly></label><label class="field">案件 JSON<textarea :value="submission.json" readonly rows="7" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><div class="dialog-actions"><UiButton variant="secondary" @click="download">下载 JSON</UiButton><UiButton variant="secondary" @click="copy(submission.json)">{{ copied ? '已复制' : '复制 JSON' }}</UiButton></div><ol class="submission-steps"><li>保存或复制上面的文件。</li><li>打开 GitHub 新建文件页，登录后粘贴 JSON。无写权限时按 GitHub 提示 fork。</li><li>提交到自己的新分支，再向 nighca/lie 的 main 创建 Pull Request；有写权限也请使用新分支。</li></ol><p class="muted">PR 由维护者审阅并补齐官方目录后收录，提交不等于上线。</p><a :href="submission.url" target="_blank" rel="noopener noreferrer" class="github-link">打开 GitHub 新建文件页 ↗</a></template>
