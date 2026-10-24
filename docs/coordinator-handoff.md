@@ -41,7 +41,7 @@
 
 - README头图语言：用户新增要求英文README用英文图、中文README用中文图。P3已派logo_easter_egg_design从d791f7f独立worktree处理README及readme-hero源/图片，保持既有构图角色风格。子agent无IAB能力，已协调调查专项在其P1交付后代渲染；README任务与新获批准的Logo正式接入分开。待clean完整交付、rootreview/集成。
 
-- 语音启动等待：review_blue_animation在等待Logo依赖期间，从0adf883独立managed WT做离线源码调查/测量方案，仅新docs/voice-startup-audit.md及必要离线证据，不改生产/不mic或provider。复用已有voice-conversation-proposal分析，交当前关键路径、可并行机会及权限/取消边界、度量缺口与排序清单；rootreview后再安排实施，Logo就绪时可安全边界切换。
+- 语音启动等待：原WT /Users/nighca/.codex/worktrees/voice-startup-audit/lie，codex/voice-startup-audit，base0adf883，唯一e14adeb71260bd86879ab05500b45dd79180eb61 clean。root已读全文及liveVoice/channel/microphone实际控制流，随本轮本地收录docs/voice-startup-audit.md：status gate后早已三支并行，ready含hello和tools/list；不重复安排已实现并行。下一步候选为本地无内容observer，尚未实施/无真实计时；不mic/provider。执行owner review_blue_animation回空闲，Logo仍待调查集成。
 
 ## 服务、限制与接任第一步
 
