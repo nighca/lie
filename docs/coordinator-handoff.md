@@ -55,6 +55,8 @@
 
 - 两种指认状态新增UX前置：用户指出现solved/lost结果页无角色，倾向在结果页增加“被用户指认的角色”形象并按正误播对应状态；合并结果到指认界面仅备选，不当成定案。已通知调查视觉/动画owner；后续排结果页局部方案→结果角色投影与资源播放契约→素材/呈现联合接入。已核core AccusationResult已有characterId/correct、accuse后currentCharacterId=null，GameView未提供结果角色；用result.characterId而不是最后询问角色/真实culprit。错误终局不揭真凶或完整经过保持。当前仅方案倾向和待办补充，无实现/新稿批准。
 
+- 新P2指认弹窗：4人3列导致第4人落下行/裁切，用户建议沿介绍页扇形+hover上移。已通知调查视觉owner后续排期，键盘focus/触屏/窄屏/更多人数要清晰可选；不硬人数、hover不提交，点具体人原accuse规则保持。与结果页角色/两状态任务独立，不据此合并指认与结果。
+
 ## 服务、限制与接任第一步
 
 - 本地main验收环境已实际运行：用户launchd `dev.nighca.lie.main-preview`，plist ~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist，stable Node24.22.1在~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64，日志~/Library/Logs/LIE/main-preview.log；runner在owning main每1.5s看SHA，Vite8787→同源薄Worker8788，初启和lock变化npm ci，更新会重启自身服务，失败30s退避。独立于chat，不要在轮换时停止/重复启动。原项目私密.dev.vars仅复制至main的忽略目录，未输出内容/新建provider资源。版本/__lie/main-status已实测SHA与main一致，页面/三案/blue package200，voice/status ready，私密文件和异源Origin403。Node24.22.1全仓353测试（含8个runner生命周期/假凭据隔离）/类型/构建54资源通过。浏览器实际三案加载、console空；未自动收音，ready不是真人验收。main-preview原commit6a76307→e3c773b，本地9f3b607→162dde5；文档本身会推进main，需核下一实际SHA。
