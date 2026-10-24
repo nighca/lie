@@ -3,18 +3,21 @@
     "id": "coral-bob",
     "avatar": "/appearances/coral-bob.png",
     "portrait": "/appearances/coral-bob.png",
-    "accent": "#FF665B"
+    "accent": "#FF665B",
+    "voiceId": "535b81a1db504baa99fd726e01afee15"
   },
   {
     "id": "sunny-moustache",
     "avatar": "/appearances/sunny-moustache.png",
     "portrait": "/appearances/sunny-moustache.png",
-    "accent": "#FFCF43"
+    "accent": "#FFCF43",
+    "voiceId": "2e7965636b0d4472ae51e75f419dff41"
   },
   {
     "id": "blue-glasses",
     "avatar": "/appearances/blue-glasses.png",
     "portrait": "/appearances/blue-glasses.png",
-    "accent": "#075BFA"
+    "accent": "#075BFA",
+    "voiceId": "29ddb9582ae8481ebf11562f99aeaf95"
   }
 ]
