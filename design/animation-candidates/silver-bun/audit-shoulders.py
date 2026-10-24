@@ -57,3 +57,29 @@ for y in range(745,991):
             count+=1
             assert inside(x,y),f'listening cardigan clipped at {x},{y}'
 print(f'PASS: listening retains all {count} aqua cardigan pixels in left waist/hem band')
+node=next(node for node in package['nodes'] if node['id']=='right-neutral')
+polygon=node['sprite']['mask']
+image=Image.open(root/package['assets']['default-source']['src'])
+skin=set()
+for y in range(1000,1226):
+    for x in range(920,1041):
+        r,g,b,a=image.getpixel((x,y))
+        if a>=128 and r>150 and 70<g<210 and b<145:
+            skin.add((x,y))
+near_skin={(x+dx,y+dy) for x,y in skin for dx in range(-8,9) for dy in range(-8,9) if dx*dx+dy*dy<=64}
+count=0
+for x,y in near_skin:
+    if 920<=x<=1040 and 1000<=y<=1225 and image.getpixel((x,y))[3]>=128:
+        count+=1
+        assert inside(x,y),f'neutral right arm skin/nearby ink clipped at {x},{y}'
+print(f'PASS: neutral forearm/hand retains {count} opaque skin/nearby ink pixels (8px skin neighbourhood)')
+node=next(node for node in package['nodes'] if node['id']=='listen-arm')
+polygon=node['sprite']['mask']
+image=Image.open(root/package['assets']['listening-source']['src'])
+count=0
+for y in range(675,741):
+    for x in range(260,471):
+        if image.getpixel((x,y))[3]>=128:
+            count+=1
+            assert inside(x,y),f'listening elbow contour clipped at {x},{y}'
+print(f'PASS: listening elbow retains all {count} opaque lower-arc pixels, including ink')
