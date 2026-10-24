@@ -56,6 +56,24 @@ describe('home and case navigation', () => {
     expect(sessions[0].turns).toHaveLength(0)
   })
 
+  it('keeps the shared brand link behind the active investigation leave guard', async () => {
+    const { wrapper, router, sessions, click } = await screen('/?game=test')
+    await click('接案，开始调查')
+    const session = sessions[0]
+    await wrapper.get('a[aria-label="LIE 首页"]').trigger('click')
+    await flushPromises()
+    expect(router.currentRoute.value.query.game).toBe('test')
+    expect(wrapper.text()).toContain('结束这次调查？')
+    await click('继续调查')
+    expect(session.controller.getView().phase).toBe('interrogating')
+    await wrapper.get('a[aria-label="LIE 首页"]').trigger('click')
+    await flushPromises()
+    await click('确认结束')
+    expect(router.currentRoute.value.path).toBe('/')
+    expect(router.currentRoute.value.query).toEqual({ demo: '1' })
+    expect(wrapper.get('.home-intro h1').text()).toBe('有人在说谎')
+  })
+
   it('retries a failed catalog independently of direct case loading', async () => {
     let fail = true
     const { wrapper, router, click } = await screen('/', async () => {

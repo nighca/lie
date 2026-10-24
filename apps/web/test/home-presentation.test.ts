@@ -38,6 +38,7 @@ describe('homepage presentation', () => {
       expect(card.get('.case-duration').text()).toBe(`${String(8 + index).padStart(2, '0')}:00 询问时间`)
       expect(card.get('button').text()).toBe('查看案件')
     })
+    expect(wrapper.get('.home-intro h1').text()).toBe('有人在说谎')
     expect(wrapper.get('.home-intro').text()).toContain('和角色语音对话')
     expect(wrapper.get('.home-header button').text()).toBe('创作案件')
     expect(createController).toHaveBeenCalledTimes(0)

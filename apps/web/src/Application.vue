@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onUnmounted, ref, shallowRef, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { UiButton, UiDialog } from '@lie/ui'
+import { ProductHeader, UiButton, UiDialog } from '@lie/ui'
 import type { GameDefinition } from '@lie/game-core'
 
 import App from './App.vue'
@@ -119,14 +119,13 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
   </div>
   <div v-else class="game-shell home-shell">
-    <header class="game-header home-header">
-      <a class="wordmark" href="/" aria-label="LIE 首页" @click.prevent="home"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a>
-      <UiButton class="home-create" variant="quiet" @click="editor">创作案件</UiButton>
-      <p v-if="demo" class="environment-note">演示模式 · 对话为模拟内容，不使用麦克风</p>
-    </header>
+    <ProductHeader class="home-header" @navigate-home="home">
+      <template #actions><UiButton variant="quiet" @click="editor">创作案件</UiButton></template>
+      <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>
+    </ProductHeader>
     <main class="home-content">
       <section class="home-intro" aria-label="产品介绍">
-        <h1>有人，<br>有话没说完。</h1>
+        <h1>有人在说谎</h1>
         <p>和角色语音对话，<br>找出藏起真相的人。</p>
         <div class="home-cast" aria-hidden="true">
           <div class="home-cast-backdrop"></div>

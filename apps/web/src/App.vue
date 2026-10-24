@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onUnmounted, ref } from 'vue'
-import { CharacterChoice, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
+import { CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
 
 import type { GameController } from './application/controller'
 import type { Appearance } from './presentation/appearances'
@@ -53,15 +53,13 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 
 <template>
   <div class="game-shell">
-    <header class="game-header">
-      <a class="wordmark" href="/" aria-label="LIE 首页" @click.prevent="emit('navigateHome')"><img src="/brand/logo.svg" width="116" height="62" alt=""> <span>语音推理</span></a>
-      <h1 v-if="view.phase === 'interrogating'" class="header-title">{{ view.title }}</h1>
-      <div v-if="view.phase === 'interrogating'" class="header-actions">
+    <ProductHeader :title="view.phase === 'interrogating' ? view.title : null" @navigate-home="emit('navigateHome')">
+      <template v-if="view.phase === 'interrogating'" #actions>
         <UiButton variant="quiet" @click="emit('requestEnd')">结束本局</UiButton>
         <UiButton @click="controller.openAccusation()">最终指认</UiButton>
-      </div>
-      <p v-if="demo" class="environment-note">演示模式 · 对话为模拟内容，不使用麦克风</p>
-    </header>
+      </template>
+      <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>
+    </ProductHeader>
 
     <main v-if="view.phase === 'loading' || view.phase === 'failed'" class="intro-card surface">
       <h1>{{ view.phase === 'loading' ? '正在准备案件…' : '案件暂时无法加载' }}</h1>

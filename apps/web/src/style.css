@@ -5,15 +5,12 @@ h1 { font-size: 36px; }
 h2 { font-size: 24px; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .game-shell { max-width: 1440px; margin: auto; padding: 24px; }
-.game-header { position: relative; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px; }
+.game-shell > .lie-product-header { margin-bottom: 20px; }
 .wordmark { display: inline-flex; align-items: center; gap: 16px; color: var(--lie-ink); text-decoration: none; line-height: 1; flex-shrink: 0; }
 .wordmark img { display: block; width: 105px; height: 56px; object-fit: contain; }
 .wordmark span { position: relative; font-size: 18px; letter-spacing: 0; white-space: nowrap; }
 .wordmark span::after { content: ''; position: absolute; height: 5px; border-radius: 4px; background: var(--lie-coral); left: 0; right: 0; bottom: -9px; transform: rotate(-3deg); }
-.header-title { font-size: clamp(24px, 2.35vw, 34px); text-align: center; margin: 0; }
-.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .muted { color: var(--lie-muted); font-size: 14px; }
-.environment-note { position: absolute; left: 0; bottom: -18px; margin: 0; color: var(--lie-muted); font-size: 11px; line-height: 16px; }
 .surface { background: var(--lie-surface); border: 3px solid var(--lie-ink); border-radius: 28px; box-shadow: 0 6px 0 #111b451a; }
 .intro-card { max-width: 1040px; margin: 24px auto; padding: 36px 48px 40px; text-align: center; }
 .eyebrow { color: var(--lie-muted); font-size: 16px; font-weight: 600; margin: 0 0 12px; }
@@ -64,8 +61,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .result-divider span { display: block; width: 16px; height: 16px; background: var(--lie-aqua); border-radius: 3px; transform: rotate(20deg); }
 .result-divider span:nth-child(2) { background: var(--lie-coral); transform: rotate(-15deg); }
 @media (max-width: 1000px) {
-  .game-header { flex-wrap: wrap; }
-  .header-title { order: 3; width: 100%; text-align: left; }
   .investigation { height: auto; min-height: 0; grid-template-columns: minmax(240px, .85fr) minmax(320px, 1fr); grid-template-rows: auto 440px auto; }
   .character-list { grid-column: 1 / -1; grid-row: auto; flex-direction: row; }
   .character-list > .lie-character { flex: 0 0 104px; }
@@ -73,13 +68,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 @media (max-width: 700px) {
   .game-shell { padding: 16px; }
-  .game-header { gap: 12px; }
   .wordmark { gap: 8px; }
   .wordmark img { width: 88px; height: 47px; }
   .wordmark span { font-size: 14px; }
-  .header-title { font-size: 24px; }
-  .header-actions { gap: 8px; }
-  .header-actions .lie-button { min-height: 40px; border-width: 2px; border-radius: 12px; padding: 6px 8px; font-size: 14px; }
   .intro-card { margin: 24px auto; padding: 28px 20px; }
   .intro-characters { gap: 8px; }
   .intro-character { flex-basis: min(140px, calc((100% - 8px) / 2)); }
@@ -101,11 +92,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .home-shell { padding: 24px 40px 48px; }
-.home-header { margin-bottom: 0; }
-.home-header .wordmark img { width: 110px; height: 60px; }
-.home-header .wordmark span { font-size: 15px; font-weight: 800; }
-.home-header .wordmark span::after { height: 4px; bottom: -8px; transform: none; }
-.home-create.lie-button { min-height: 42px; padding: 8px 14px; border-width: 2px; border-radius: 14px; font-size: 14px; }
+.home-shell > .lie-product-header { margin-bottom: 0; }
 .home-content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; margin: 34px 0 0; align-items: start; }
 .home-intro { position: sticky; top: 30px; padding: 12px 0 0 12px; min-width: 0; }
 .home-intro h1 { font-size: 52px; line-height: 1.24; letter-spacing: -1.8px; margin: 0 0 18px; font-weight: 850; }
@@ -138,8 +125,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 @media (max-width: 900px) {
   .home-shell { padding: 18px 20px 36px; }
-  .home-header { min-height: 56px; }
-  .home-header .wordmark img { width: 96px; height: 52px; }
   .home-content { gap: 28px; margin-top: 26px; }
   .home-intro h1 { font-size: 40px; }
   .home-intro > p { font-size: 16px; }
@@ -153,10 +138,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 @media (max-width: 620px) {
   .home-shell { padding: 16px 18px 32px; }
-  .home-header { flex-wrap: nowrap; gap: 12px; }
-  .home-header .wordmark img { width: 90px; height: 49px; }
-  .home-header .wordmark span { font-size: 13px; }
-  .home-create.lie-button { padding: 6px 10px; min-height: 38px; font-size: 13px; }
   .home-content { display: block; margin-top: 24px; }
   .home-intro { position: relative; top: auto; padding: 0; }
   .home-intro h1 { font-size: 36px; line-height: 1.27; margin-bottom: 12px; letter-spacing: -1px; }

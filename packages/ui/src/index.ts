@@ -1,3 +1,4 @@
+export { default as ProductHeader } from './components/ProductHeader.vue'
 export { default as UiButton } from './components/UiButton.vue'
 export { default as CharacterChoice } from './components/CharacterChoice.vue'
 export { default as Transcript } from './components/Transcript.vue'
