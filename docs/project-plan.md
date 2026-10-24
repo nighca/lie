@@ -367,3 +367,5 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 2026-10-24 15:08 心跳集成：root完整review编辑器路由dfcad（Application/main/8项路由测试），补App可选returnLabel默认原文案，五处返回按钮统一，预览为返回编辑器。全仓215项/typecheck/build通过；再review第三案正文/亲历/路径/测试，顺序66b→7a→7e追加（未重复183补丁），Web117项/typecheck/build通过，总组合218项；第三案540s/四人/8形象覆盖，真实模型/声音未验。root独立IAB5318填写并生成518字符真实链接、试玩进入调查、返回触发确认、确认后草稿恢复、分享新tab打开/刷新接案、刷新临时preview回editor；console error/warn空，未收音/真实服务。发现单人物接案卡扩至660只见头发，另派c4c小修并review，root复验200×203脸完整；Web类型/build再过。截图/private/tmp/lie-editor-route-bounded-intro.jpg。此批本地合入，不等于8787/线上已更新；跨浏览器16000最终安全上限仍待验。首页A优化待用户确认，头像三候选待root审阅；混元3D样片待root视觉/源码验收。
 
 2026-10-24 首页A优化稿正式批准：用户确认“就按这个做”，不再询问视觉确认。appearance_assets开始从review main f26894d独立实施正式Application首页与home样式，产品介绍与动态案件列表同等权重，按归档refined-a还原，统一多案；接现有三案目录与创作案件入口，保留已review编辑器路由/快照/离开确认。桌面/窄屏/更多卡片独立验收，rootreview后协调本地试玩更新与里程碑发布；不能把静态设计图或本地目录当线上已上线。
+
+2026-10-24 头像A批准与首页收尾：用户明确选择A帽檐侦探，已交视觉owner实施。root完整review首页54c（仅home模板/CSS/3测试/标题同步）候选221项/typecheck/build通过；追加头像设计源两提交及runtime030，实际XML确认A路径与色值完全一致，无脚本/外链，UI18及全仓typecheck/完整build通过。头像仅玩家默认fallback，30px内联SVG自带圆框避免双圈，NPC及逐字逻辑不变；root已看实际组件桌面截图，子代理391/30px实测。准备将获批首页、三案、编辑分享与玩家头像合入并更新8787；尚未push/线上仍旧版，真实新案语义/音色及跨浏览器最终上限另验。
