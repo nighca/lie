@@ -58,3 +58,9 @@ QA子代理CUA实际发现只有Chrome；创建iab返回 `Browser is not availab
 | 可读性、窄屏、键盘焦点、原生dialog | CSS/语义代码检查不足以判断实际表现 | **未验收**；需root IAB截图/焦点观察，不能用jsdom通过替代 |
 
 首页/案件列表整体动线待用户确认；对话页三版候选尚未选定。本审计不对未选稿作还原度裁决。默认玩家头像刚在本地修复、线上尚未发，不重复列问题；声音已获认可，不追加付费音色采样。QA完成本轮报告后由root review、排优先级与安排实现，后续修复仍需独立复验。
+
+## 审计环境更正（后续证据）
+
+初次补齐workspace symlink后，原Vite进程仍保留失败解析缓存，root IAB tab20实际出现 `Failed to resolve @lie/voice`，所以先前“入口可用”的汇报不成立。这是QA环境前提缺失，不是产品bug，也不算用户动线验收。
+
+已停止旧进程并在同一独立5195以 `--force` 重启（session86080）。实际HTTP逐项复核首页、`src/main.ts`、`application/controller.ts`、`application/liveVoice.ts`及ui/game-core/voice三workspace的真实源码模块，全部200且无Failed to resolve import。产品源码未修改，三个workspace symlink均只在ignored node_modules。已请root reload独立tab20；仍需真实DOM/截图确认才能标记浏览器验收完成。旧commit未改写。
