@@ -37,7 +37,7 @@ async function screen(path = '/') {
   await router.push(path)
   const catalog = [{ id: officialGame.id, title: officialGame.title, summary: '官方简介', interrogationLimitSeconds: 480, characters: officialGame.characters.map(({ name, appearanceId }) => ({ name, appearanceId: appearanceId ?? null })) }]
   const wrapper = mount(Application, { props: {
-    appearances: [{ id: 'blue', name: '蓝衣眼镜', avatar: '/a.png', portrait: '/p.png', accent: '#123456', voiceId: null, animation: null, portraits: { listening: null, waiting: null, speaking: null } }], demo: true,
+    characterPresets: [{ id: 'blue', name: '蓝衣眼镜', avatar: '/a.png', portrait: '/p.png', accent: '#123456', voiceId: null, animation: null, portraits: { listening: null, waiting: null, speaking: null } }], demo: true,
     loadCatalog: async () => catalog,
     createController: (game: GameDefinition | null) => { const next = setup(undefined, game ?? officialGame); sessions.push({ setup: next, source: game }); return next.controller },
   }, global: { plugins: [router] } })

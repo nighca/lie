@@ -1,29 +1,29 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { AnimatedPortrait } from '@lie/ui'
-import type { AnimationState } from '@lie/appearance-animation'
-import { readAppearances } from '../../apps/web/src/presentation/appearances'
-import type { Appearance } from '../../apps/web/src/presentation/appearances'
+import type { AnimationState } from '@lie/character-animation'
+import { readCharacterPresets } from '../../apps/web/src/presentation/characterPresets'
+import type { CharacterPreset } from '../../apps/web/src/presentation/characterPresets'
 const query = new URLSearchParams(location.search)
-const candidateAppearance = query.get('appearance') ?? 'coral-bob'
+const candidatePreset = query.get('appearance') ?? 'coral-bob'
 const candidateSource = query.get('src')
 const configuredSources: Record<string, string> = JSON.parse(import.meta.env.VITE_ANIMATION_PREVIEW_CANDIDATES ?? '{}')
 const candidateSources = new Map(Object.entries(configuredSources))
 for (const [key, value] of query) {
   if (key.startsWith('src.')) candidateSources.set(key.slice(4), value)
 }
-if (candidateSource != null) candidateSources.set(candidateAppearance, candidateSource)
-const selected = ref(candidateAppearance), entries = ref<readonly Appearance[]>([])
+if (candidateSource != null) candidateSources.set(candidatePreset, candidateSource)
+const selected = ref(candidatePreset), entries = ref<readonly CharacterPreset[]>([])
 const state = ref<AnimationState>('default')
-const appearance = computed(() => entries.value.find(value => value.id === selected.value) ?? null)
-const source = computed(() => candidateSources.get(selected.value) ?? appearance.value?.animation ?? null)
-const animatedAppearances = computed(() => entries.value.filter(item => item.animation != null || candidateSources.has(item.id)))
-const portrait = computed(() => state.value === 'default' ? appearance.value?.portrait : appearance.value?.portraits[state.value] ?? appearance.value?.portrait)
-onMounted(async () => { entries.value = readAppearances(await (await fetch('/appearances/manifest.json')).json()) })
+const characterPreset = computed(() => entries.value.find(value => value.id === selected.value) ?? null)
+const source = computed(() => candidateSources.get(selected.value) ?? characterPreset.value?.animation ?? null)
+const animatedPresets = computed(() => entries.value.filter(item => item.animation != null || candidateSources.has(item.id)))
+const portrait = computed(() => state.value === 'default' ? characterPreset.value?.portrait : characterPreset.value?.portraits[state.value] ?? characterPreset.value?.portrait)
+onMounted(async () => { entries.value = readCharacterPresets(await (await fetch('/appearances/manifest.json')).json()) })
 </script>
 <template>
   <h1>人物动画制作验收</h1><p>正式组件与契约 · 本页无麦克风或语音连接，讲话嘴形为合成时序。</p>
-  <nav class="characters" aria-label="动画人物"><button v-for="item in animatedAppearances" :key="item.id" :aria-pressed="selected === item.id" @click="selected = item.id">{{ item.name }}</button></nav>
+  <nav class="characters" aria-label="动画人物"><button v-for="item in animatedPresets" :key="item.id" :aria-pressed="selected === item.id" @click="selected = item.id">{{ item.name }}</button></nav>
   <nav><label>人物 <select v-model="selected"><option v-for="item in entries" :key="item.id" :value="item.id">{{ item.name }}</option></select></label><button v-for="pose in (['default','listening','waiting','speaking'] as const)" :key="pose" :aria-pressed="state === pose" @click="state = pose">{{ pose }}</button></nav>
   <main><section><h2>静态参考</h2><div class="stage"><img :src="portrait" alt="原静态图"></div></section><section><h2>动画 / 失败与无动画时回静态</h2><div class="stage"><AnimatedPortrait :src="source" :state="state"><img :src="portrait" alt="静态回退"></AnimatedPortrait></div></section></main>
 </template>

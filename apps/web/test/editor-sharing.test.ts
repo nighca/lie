@@ -21,11 +21,11 @@ describe('editor story sharing', () => {
     expect(restored).toEqual({ ...game, title: content.title, background: content.background })
     expect(new URL(url).search).toBe('')
   })
-  it('accepts only installed preset IDs while keeping null appearances', async () => {
-    const appearance = { id: 'coral', name: '珊瑚形象', avatar: '/a.png', portrait: '/p.png', accent: '#fff', voiceId: null, animation: null, portraits: { listening: null, waiting: null, speaking: null } }
+  it('accepts only installed preset IDs while keeping null characterPresets', async () => {
+    const characterPreset = { id: 'coral', name: '珊瑚形象', avatar: '/a.png', portrait: '/p.png', accent: '#fff', voiceId: null, animation: null, portraits: { listening: null, waiting: null, speaking: null } }
     const content = { ...game, characters: game.characters.map((character) => ({ ...character, appearanceId: 'coral' })) }
     const url = await encodeGameLink(content, base)
-    expect((await decodeSharedGame(new URL(url).hash, [appearance])).characters[0].appearanceId).toBe('coral')
+    expect((await decodeSharedGame(new URL(url).hash, [characterPreset])).characters[0].appearanceId).toBe('coral')
     await expect(decodeSharedGame(new URL(url).hash, [])).rejects.toThrow('不可用的人物形象')
   })
   it.each(['', '#game=', '#game=abc!', '#game=a', '#game=aGVsbG8', '#game=H4sI'])('rejects missing, corrupt or truncated data %s', async (hash) => {

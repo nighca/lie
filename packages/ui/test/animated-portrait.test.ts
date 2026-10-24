@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import AnimatedPortrait from '../src/components/AnimatedPortrait.vue'
 
 const mock = vi.hoisted(() => ({ load: vi.fn(), render: vi.fn(), dispose: vi.fn(), setState: vi.fn(), advance: vi.fn() }))
-vi.mock('@lie/appearance-animation', () => ({
+vi.mock('@lie/character-animation', () => ({
   loadAnimationPackage: mock.load,
   createCanvasRenderer: () => ({ render: mock.render, dispose: mock.dispose }),
   AnimationTimeline: class { setState = mock.setState; advance = mock.advance },

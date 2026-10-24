@@ -10,5 +10,5 @@ node_modules/
 dist/
 coverage/
 
-# Generated from design/appearances; regenerate before web dev/check/build.
+# Generated from design/character-presets; regenerate before web dev/check/build.
 /apps/web/public/appearances/

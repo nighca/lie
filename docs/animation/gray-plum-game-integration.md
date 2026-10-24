@@ -9,7 +9,7 @@
 - gray：`bb4fbd3a02a1951500528d1f919dd928132bc885` → `2a2b619511499b8e305f73a518b7bb0991a42de2` → `fbc147191234a61e4063e55fda62557bac5224f1` → `33e7e2670317b9b0d65a847cbcb52b6edaa4c554`。实际桌面四态25/75、肩腋/腰袖局部与正式AnimatedPortrait作者页实播记录见候选initiator-review及gray-final/gray-live-final原生图。
 - plum：`cea0307acaf7bb598bb60355d1500f5010f01aad` → `66e6a390a364bcde4220e389dd1e72926f3a10d3` → `31111b6f3fc9af51ffbbf34858cf1c53c5afd9a2` → `b91dfccec7dee2996687eed154313927cf8cebe8`。实际桌面1s/3s、颈部/肩帽/手指/腰袖与Canvas作者页播放/100ms中断记录见initiator-review和plum-extrema/shoulders-cap/waist/live-final原生图；作者页不是游戏Vue组件。
 
-正式源分别是 `design/appearances/assets/{salt-pepper-beard,plum-crop}/animation/package.json` 和各自引用的五份PNG，全部原字节复制；manifest仅这两条新增animation引用。原八份静态四态图和头像引用均不变，未动其他人物、UI、runtime、引擎、案件或命名。plum作者inspection.html另以独立commit将唯一runtime绝对import改为当前工作树相对路径，不扩大Vite文件访问范围。
+正式源分别是 `design/character-presets/assets/{salt-pepper-beard,plum-crop}/animation/package.json` 和各自引用的五份PNG，全部原字节复制；manifest仅这两条新增animation引用。原八份静态四态图和头像引用均不变，未动其他人物、UI、runtime、引擎、案件或命名。plum作者inspection.html另以独立commit将唯一runtime绝对import改为当前工作树相对路径，不扩大Vite文件访问范围。
 
 | 角色 | Package SHA256 | PNG/节点 | 画布+活动纹理像素 | PNG压缩字节 |
 |---|---|---|---:|---:|

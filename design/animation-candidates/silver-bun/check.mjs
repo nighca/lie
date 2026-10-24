@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import crypto from 'node:crypto'
-import { readAnimationPackage } from '../../../packages/appearance-animation/src/package.ts'
-import { sampleClip, AnimationTimeline } from '../../../packages/appearance-animation/src/playback.ts'
+import { readAnimationPackage } from '../../../packages/character-animation/src/package.ts'
+import { sampleClip, AnimationTimeline } from '../../../packages/character-animation/src/playback.ts'
 const dir=new URL('./',import.meta.url)
 const data=readAnimationPackage(JSON.parse(fs.readFileSync(new URL('package.json',dir))))
 for(const [id,asset] of Object.entries(data.assets)) {
@@ -12,7 +12,7 @@ for(const [id,asset] of Object.entries(data.assets)) {
 const provenance=JSON.parse(fs.readFileSync(new URL('provenance.json',dir)))
 for(const item of provenance.sources) assert.equal(crypto.createHash('sha256').update(fs.readFileSync(new URL(`parts/${item.id}.png`,dir))).digest('hex'),item.sha256)
 for(const [state,expected] of Object.entries(provenance.originalCanonicalStates)) {
- const source=new URL(`../../appearances/assets/silver-bun/${state}.png`,dir)
+ const source=new URL(`../../character-presets/assets/silver-bun/${state}.png`,dir)
  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(source)).digest('hex'),expected,`canonical ${state} unchanged`)
 }
 function assertPose(pose,state) {

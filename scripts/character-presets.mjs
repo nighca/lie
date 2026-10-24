@@ -1,7 +1,7 @@
 import { readFile, readdir, mkdir, writeFile, rm, realpath, lstat } from 'node:fs/promises'
 import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { readAnimationPackage } from '../packages/appearance-animation/src/package.ts'
+import { readAnimationPackage } from '../packages/character-animation/src/package.ts'
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url))
 const states = ['listening', 'waiting', 'speaking']
@@ -31,21 +31,21 @@ async function files(directory, prefix = '') {
   const result = []
   for (const entry of entries) {
     const path = prefix ? `${prefix}/${entry.name}` : entry.name
-    if (entry.isSymbolicLink()) throw new Error(`Generated appearance output must not contain symlinks: ${path}`)
+    if (entry.isSymbolicLink()) throw new Error(`Generated characterPreset output must not contain symlinks: ${path}`)
     if (entry.isDirectory()) result.push(...await files(join(directory, entry.name), path))
     else result.push(path)
   }
   return result.sort()
 }
 
-/** Builds or checks generated public assets from the single authored appearance catalog. */
-export async function syncAppearances({ sourceDirectory = join(projectRoot, 'design/appearances'), outputDirectory = join(projectRoot, 'apps/web/public/appearances'), check = false } = {}) {
+/** Builds or checks generated public assets from the single authored characterPreset catalog. */
+export async function syncCharacterPresets({ sourceDirectory = join(projectRoot, 'design/character-presets'), outputDirectory = join(projectRoot, 'apps/web/public/appearances'), check = false } = {}) {
   const source = resolve(sourceDirectory)
   const output = resolve(outputDirectory)
-  if (source === output || source.startsWith(`${output}${sep}`) || output.startsWith(`${source}${sep}`)) throw new Error('Appearance source and output must be separate directory trees')
+  if (source === output || source.startsWith(`${output}${sep}`) || output.startsWith(`${source}${sep}`)) throw new Error('CharacterPreset source and output must be separate directory trees')
   const realSource = await realpath(source)
   const manifest = JSON.parse(await readFile(join(source, 'manifest.json'), 'utf8'))
-  if (!Array.isArray(manifest) || manifest.length === 0) throw new Error('Appearance manifest must be a nonempty array')
+  if (!Array.isArray(manifest) || manifest.length === 0) throw new Error('CharacterPreset manifest must be a nonempty array')
   const ids = new Set()
   const outputs = new Map()
   const runtime = []
@@ -65,10 +65,10 @@ export async function syncAppearances({ sourceDirectory = join(projectRoot, 'des
     return `/appearances/${path}`
   }
   for (const raw of manifest) {
-    const item = object(raw, 'Appearance')
-    const id = segment(item.id, 'Appearance id')
+    const item = object(raw, 'CharacterPreset')
+    const id = segment(item.id, 'CharacterPreset id')
     for (const field of Object.keys(item)) if (!sourceFields.has(field)) throw new Error(`${id}: unexpected field ${field}`)
-    if (ids.has(id)) throw new Error(`Duplicate appearance id: ${id}`)
+    if (ids.has(id)) throw new Error(`Duplicate characterPreset id: ${id}`)
     ids.add(id)
     const name = text(item.name, `${id}.name`)
     const voiceId = text(item.voiceId, `${id}.voiceId`)
@@ -122,7 +122,7 @@ export async function syncAppearances({ sourceDirectory = join(projectRoot, 'des
     differences.push(`${path} (obsolete)`)
     if (!check) await rm(join(output, path))
   }
-  if (check && differences.length > 0) throw new Error(`Stale generated appearance output:\n${differences.join('\n')}`)
+  if (check && differences.length > 0) throw new Error(`Stale generated characterPreset output:\n${differences.join('\n')}`)
   return { count: runtime.length, assets: outputs.size - 1, differences }
 }
 
@@ -136,8 +136,8 @@ if (process.argv[1] != null && resolve(process.argv[1]) === fileURLToPath(import
       if (!check || args[outputIndex + 1] == null) throw new Error('--output is only available with --check and a directory')
       allowed.add('--output'); allowed.add(args[outputIndex + 1])
     }
-    if (args.some((arg) => !allowed.has(arg))) throw new Error('Usage: appearances.mjs [--check [--output directory]]')
-    const result = await syncAppearances({ check, ...(outputIndex < 0 ? {} : { outputDirectory: resolve(args[outputIndex + 1]) }) })
-    console.log(`${check ? 'Checked' : 'Generated'} ${result.count} appearances (${result.assets} assets)`)
+    if (args.some((arg) => !allowed.has(arg))) throw new Error('Usage: character-presets.mjs [--check [--output directory]]')
+    const result = await syncCharacterPresets({ check, ...(outputIndex < 0 ? {} : { outputDirectory: resolve(args[outputIndex + 1]) }) })
+    console.log(`${check ? 'Checked' : 'Generated'} ${result.count} character presets (${result.assets} assets)`)
   } catch (error) { console.error(error.message); process.exitCode = 1 }
 }

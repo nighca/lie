@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import App from '../src/App.vue'
 import { VoiceAvailabilityError } from '../src/application/voice'
-import { readAppearances } from '../src/presentation/appearances'
+import { readCharacterPresets } from '../src/presentation/characterPresets'
 import { game, setup } from './helpers'
 
 const cleanup: (() => void)[] = []
@@ -19,7 +19,7 @@ describe('game screens', () => {
   it('ends a wrong accusation in failure and permits only a fresh attempt before a correct result', async () => {
     const { controller } = setup()
     await controller.load('test')
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     async function click(text: string) {
       const button = wrapper.findAll('button').find((item) => (item.attributes('aria-label') ?? item.text()) === text)
@@ -50,7 +50,7 @@ describe('game screens', () => {
     const characters = Array.from({ length: count }, (_, index) => ({ ...game.characters[0], id: `person-${index}`, name: `人物${index + 1}` }))
     const { controller } = setup(undefined, { ...game, characters, ending: { ...game.ending, culpritId: characters[0].id } })
     await controller.load('test')
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     expect(wrapper.get('main').findAll('.intro-character strong').map((name) => name.text())).toEqual(characters.map(({ name }) => name))
     await wrapper.get('.intro-start').trigger('click')
@@ -61,7 +61,7 @@ describe('game screens', () => {
     const characters = Array.from({ length: count }, (_, index) => ({ ...game.characters[0], id: `person-${index}`, name: `人物${index + 1}` }))
     const { controller } = setup(undefined, { ...game, characters, ending: { ...game.ending, culpritId: characters[count - 1].id } })
     await controller.load('test'); controller.start(); controller.openAccusation()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const cards = wrapper.findAll('.accusation-choices button')
     expect(cards.map((card) => card.attributes('aria-label'))).toEqual(characters.map(({ name }) => `指认 ${name}`))
@@ -75,7 +75,7 @@ describe('game screens', () => {
   it.each([[600, '10分钟'], [330, '5分30秒']])('uses natural language for a %s-second introduction', async (seconds, label) => {
     const { controller } = setup(undefined, { ...game, interrogationLimitSeconds: Number(seconds) })
     await controller.load('test')
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     expect(wrapper.get('.muted').text()).toBe(`本局可询问${label}`)
   })
@@ -85,7 +85,7 @@ describe('game screens', () => {
     let now = 0
     const { controller, turns } = setup({ now: () => now, setTimeout, clearTimeout })
     await controller.load('test'); controller.start(); await controller.startConversation()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     now = 2000
     await wrapper.get('[aria-label="查看案件背景"]').trigger('click')
@@ -111,7 +111,7 @@ describe('game screens', () => {
     let now = 0
     const { controller } = setup({ now: () => now, setTimeout, clearTimeout })
     await controller.load('test'); controller.start(); await controller.startConversation()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     now = 480000
     await wrapper.get('[aria-label="查看案件背景"]').trigger('click')
@@ -125,7 +125,7 @@ describe('game screens', () => {
   it('uses one start/end action through listening, waiting and speaking, with a shared time display', async () => {
     const { controller, turns } = setup()
     await controller.load('test'); controller.start()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const controls = () => wrapper.get('[aria-label="语音对话控制"]')
     expect(controls().get('[aria-label="剩余询问时间"]').text()).toContain('08:00')
@@ -155,7 +155,7 @@ describe('game screens', () => {
   it('clears the active capture and counting marker after a voice error', async () => {
     const { controller, turns } = setup()
     await controller.load('test'); controller.start(); await controller.startConversation()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const controls = wrapper.get('[aria-label="语音对话控制"]')
     expect(controls.get('button').attributes('aria-pressed')).toBe('true')
@@ -170,7 +170,7 @@ describe('game screens', () => {
     const { controller, voice } = setup()
     voice.create = () => ({ async open() { throw new VoiceAvailabilityError('unavailable') }, close() {} })
     await controller.load('test'); controller.start()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     await wrapper.get('[aria-label="语音对话控制"] button').trigger('click'); await flushPromises()
     expect(wrapper.text()).toContain('当前环境尚未开放语音体验')
@@ -182,7 +182,7 @@ describe('game screens', () => {
     vi.useFakeTimers()
     const { controller, turns } = setup()
     await controller.load('test'); controller.start(); await controller.startConversation()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     turns[0].scope.onEvent({ type: 'assistantText', text: '保留这段已经显示的文字。' })
     turns[0].scope.onEvent({ type: 'interrupted' })
@@ -202,7 +202,7 @@ describe('game screens', () => {
     vi.useFakeTimers()
     const { controller, turns } = setup()
     await controller.load('test'); controller.start(); await controller.startConversation()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const text = '角色回复'.repeat(30)
     turns[0].scope.onEvent({ type: 'assistantText', text }); await wrapper.vm.$nextTick()
@@ -230,7 +230,7 @@ describe('game screens', () => {
     const create = voice.create
     voice.create = (scope) => ({ ...create(scope), open: () => new Promise((resolve) => { ready = resolve }) })
     await controller.load('test'); controller.start()
-    const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const controls = wrapper.get('[aria-label="语音对话控制"]')
     await controls.get('button').trigger('click')
@@ -251,20 +251,20 @@ describe('game screens', () => {
 describe('current character state portraits', () => {
   function createScene() {
     const content = { ...game, characters: game.characters.map((character, index) => ({ ...character, appearanceId: index === 0 ? 'red' : 'blue' })) }
-    const appearances = readAppearances([
+    const characterPresets = readCharacterPresets([
       { id: 'red', name: '红色形象', avatar: '/red-avatar.png', portrait: '/red-default.png', accent: '#ff0000', portraits: { listening: '/red-listening.png', waiting: '/red-waiting.png', speaking: '/red-speaking.png' } },
       { id: 'blue', name: '蓝色形象', avatar: '/blue-avatar.png', portrait: '/blue-default.png', accent: '#0000ff', portraits: { speaking: '/blue-speaking.png' } },
     ])
-    return { ...setup(undefined, content), appearances }
+    return { ...setup(undefined, content), characterPresets }
   }
 
   it('uses the default while preparing, then follows listening, waiting and speaking until the conversation ends', async () => {
-    const { controller, turns, voice, appearances } = createScene()
+    const { controller, turns, voice, characterPresets } = createScene()
     let ready!: () => void
     const create = voice.create
     voice.create = (scope) => ({ ...create(scope), open: () => new Promise((resolve) => { ready = resolve }) })
     await controller.load('test'); controller.start()
-    const wrapper = mount(App, { props: { controller, appearances, demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets, demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const portrait = () => wrapper.get('.portrait-backdrop img').attributes('src')
     expect(portrait()).toBe('/red-default.png')
@@ -292,9 +292,9 @@ describe('current character state portraits', () => {
   })
 
   it('selects the new character resources, falls back for missing states and keeps list avatars unchanged', async () => {
-    const { controller, turns, appearances } = createScene()
+    const { controller, turns, characterPresets } = createScene()
     await controller.load('test'); controller.start()
-    const wrapper = mount(App, { props: { controller, appearances, demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets, demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const portrait = () => wrapper.get('.portrait-backdrop img').attributes('src')
     const avatars = () => wrapper.findAll('.character-list img').map((image) => image.attributes('src'))
@@ -315,9 +315,9 @@ describe('current character state portraits', () => {
   })
 
   it('falls back from a failed state image without poisoning the default or another character', async () => {
-    const { controller, turns, appearances } = createScene()
+    const { controller, turns, characterPresets } = createScene()
     await controller.load('test'); controller.start(); await controller.startConversation()
-    const wrapper = mount(App, { props: { controller, appearances, demo: true } })
+    const wrapper = mount(App, { props: { controller, characterPresets, demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const portrait = () => wrapper.get('.portrait-backdrop img')
     const failedListening = portrait()

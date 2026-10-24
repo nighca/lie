@@ -12,8 +12,8 @@ def inside(x,y,poly):
  return r
 poses=json.loads(subprocess.check_output(['node','--experimental-transform-types','--input-type=module','-e',"""
 import fs from 'node:fs';
-import {readAnimationPackage} from './packages/appearance-animation/src/package.ts';
-import {sampleClip} from './packages/appearance-animation/src/playback.ts';
+import {readAnimationPackage} from './packages/character-animation/src/package.ts';
+import {sampleClip} from './packages/character-animation/src/playback.ts';
 const data=readAnimationPackage(JSON.parse(fs.readFileSync('design/animation-candidates/silver-bun/package.json')));
 console.log(JSON.stringify(Object.fromEntries(['default','listening','waiting'].map(state=>[state,Array.from({length:32},(_,i)=>sampleClip(data,data.clips[data.states[state]],i/8))]))));
 """],cwd=root.parents[2]))

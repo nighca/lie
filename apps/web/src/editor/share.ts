@@ -1,6 +1,6 @@
 import { validateGame, type GameDefinition } from '@lie/game-core'
 
-import type { Appearance } from '../presentation/appearances'
+import type { CharacterPreset } from '../presentation/characterPresets'
 
 export const SHARE_URL_LIMIT = 16_000
 export const CONTENT_BYTES_LIMIT = 128 * 1024
@@ -46,7 +46,7 @@ export async function encodeGameLink(game: GameDefinition, baseUrl: string): Pro
   return url.href
 }
 /** Shared stories supply text and preset IDs only; never import arbitrary asset URLs. */
-export async function decodeSharedGame(fragment: string, appearances: readonly Appearance[]): Promise<GameDefinition> {
+export async function decodeSharedGame(fragment: string, characterPresets: readonly CharacterPreset[]): Promise<GameDefinition> {
   if (typeof DecompressionStream === 'undefined') throw new Error('当前浏览器暂不支持打开分享案件，请更新浏览器后重试')
   if (fragment.length > SHARE_URL_LIMIT) throw new Error('分享链接过长')
   const encoded = new URLSearchParams(fragment.replace(/^#/, '')).get('game')
@@ -55,7 +55,7 @@ export async function decodeSharedGame(fragment: string, appearances: readonly A
     const compressed = base64ToBytes(encoded)
     const bytes = await readLimited(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip')), CONTENT_BYTES_LIMIT)
     const game = validateGame(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)))
-    if (game.characters.some((character) => character.appearanceId != null && !appearances.some((appearance) => appearance.id === character.appearanceId))) throw new Error('分享案件使用了当前不可用的人物形象')
+    if (game.characters.some((character) => character.appearanceId != null && !characterPresets.some((characterPreset) => characterPreset.id === character.appearanceId))) throw new Error('分享案件使用了当前不可用的人物形象')
     return game
   } catch (error) {
     if (error instanceof Error && (error.message.startsWith('案件内容过大') || error.message.startsWith('分享案件使用'))) throw error

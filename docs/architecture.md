@@ -69,13 +69,13 @@
 
 ## 形象资源与故事角色
 
-可复用预置形象与故事角色分开。`design/appearances/manifest.json`是唯一权威输入，正式PNG统一放`design/appearances/assets/<id>/`，含default、listening、waiting、speaking四态；前三套另保留与默认立绘不同的avatar.png，其他形象头像可直接引用default。先前`state-studies/`、`expansion-complete/`及平铺原图保留为来源记录，不是需要同步维护的正式清单。
+可复用预置形象与故事角色分开。`design/character-presets/manifest.json`是唯一权威输入，正式PNG统一放`design/character-presets/assets/<id>/`，含default、listening、waiting、speaking四态；前三套另保留与默认立绘不同的avatar.png，其他形象头像可直接引用default。先前`state-studies/`、`expansion-complete/`及平铺原图保留为来源记录，不是需要同步维护的正式清单。
 
-源清单每套必须有稳定id、中文展示name、主题色、已配置voiceId、头像和完整四态路径。中文name只标识预置形象；案件角色的姓名、经历和秘密仍来自故事文本，相同形象可以扮演不同身份。Editor直接显示`appearance.name`，不维护ID到中文名的业务代码映射。新增预置形象只需加正式素材和一条源清单，不需修改引擎或UI。
+源清单每套必须有稳定id、中文展示name、主题色、已配置voiceId、头像和完整四态路径。中文name只标识预置形象；案件角色的姓名、经历和秘密仍来自故事文本，相同形象可以扮演不同身份。Editor直接显示`characterPreset.name`，不维护ID到中文名的业务代码映射。新增预置形象只需加正式素材和一条源清单，不需修改引擎或UI。
 
-`scripts/appearances.mjs`校验源并确定性生成未跟踪的`apps/web/public/appearances/`，包含应用manifest与PNG；不可手改生成物。所有形象固定输出`/appearances/<id>/{default,listening,waiting,speaking}.png`；独立头像为同目录`avatar.png`，否则复用default。源规格不包含额外运行时目录/头像兼容字段，生成器不保留旧URL别名；正式应用和当前样片须使用清单或统一路径。历史原型/来源文档仅保留历史性质，不为其维持长期映射。
+`scripts/character-presets.mjs`校验源并确定性生成未跟踪的`apps/web/public/appearances/`，包含应用manifest与PNG；不可手改生成物。所有形象固定输出`/appearances/<id>/{default,listening,waiting,speaking}.png`；独立头像为同目录`avatar.png`，否则复用default。源规格不包含额外运行时目录/头像兼容字段，生成器不保留旧URL别名；正式应用和当前样片须使用清单或统一路径。历史原型/来源文档仅保留历史性质，不为其维持长期映射。
 
-Web的predev、pretest、pretypecheck、prebuild钩子自动生成，覆盖根npm命令和直接workspace命令。postbuild按权威源逐字节检查实际dist/appearances，缺失、陈旧或多余产物会使构建失败，从而阻断CI部署。也可用`npm run appearances:generate`与`npm run appearances:check`显式生成/检查。运行中的dev修改了源时重新生成并刷新，或重启dev；直接运行Vite二进制及静态原型服务器前也先生成。
+Web的predev、pretest、pretypecheck、prebuild钩子自动生成，覆盖根npm命令和直接workspace命令。postbuild按权威源逐字节检查实际dist/appearances，缺失、陈旧或多余产物会使构建失败，从而阻断CI部署。也可用`npm run character-presets:generate`与`npm run character-presets:check`显式生成/检查。运行中的dev修改了源时重新生成并刷新，或重启dev；直接运行Vite二进制及静态原型服务器前也先生成。
 
 正式库当前8套均已配声音与四态；这表示配置齐全，不替代真实试听或语义验收。运行时解析要求非空name，仍对voiceId、状态图保留原来的缺失容错：缺声音沿用供应商默认，缺/坏状态图回默认，默认图失败显示人物首字。源制作要求完整与运行时容错是不同边界，不把形象可空规则强制改入game-core。应用在创建对话scope时固定该形象voiceId，切人关闭旧连接后取新形象；不修改共享agent默认。
 

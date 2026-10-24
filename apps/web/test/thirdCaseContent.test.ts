@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 
 import authoredCase from '../../../content/games/salt-sugar-mixup.json'
 import shippedCase from '../public/games/salt-sugar-mixup.json'
-import appearances from '../public/appearances/manifest.json'
+import characterPresets from '../public/appearances/manifest.json'
 
 describe('third case static integration', () => {
   it('ships the same source text and references existing resources for all four people', async () => {
@@ -15,9 +15,9 @@ describe('third case static integration', () => {
     expect(game.characters).toHaveLength(4)
     expect(game.interrogationLimitSeconds).toBe(540)
     for (const character of game.characters) {
-      const appearance = appearances.find((item) => item.id === character.appearanceId)
-      expect(appearance).toBeDefined()
-      for (const path of [appearance!.avatar, appearance!.portrait, ...Object.values(appearance!.portraits)]) {
+      const characterPreset = characterPresets.find((item) => item.id === character.appearanceId)
+      expect(characterPreset).toBeDefined()
+      for (const path of [characterPreset!.avatar, characterPreset!.portrait, ...Object.values(characterPreset!.portraits)]) {
         const asset = await readFile(fileURLToPath(new NodeURL(`../public${path}`, import.meta.url)))
         expect(asset.byteLength).toBeGreaterThan(0)
       }

@@ -89,3 +89,9 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 ```
 
 不要在常驻服务已运行时另开 `npm run dev:main` 或占8787/8788；单实例检查会拒绝重复运行。main更新会重启开发服务，Vite通常重连后刷新，必要时手动刷新；游戏局内状态不跨刷新保留，本地编辑草稿仍按原浏览器存储规则恢复。
+
+### 人物预设命名迁移的 runner 切换
+
+正式源为 `design/character-presets/`，生成命令为 `npm run character-presets:generate`，生成入口为 `scripts/character-presets.mjs`；公开 URL 仍是 `/appearances/`。`main-preview.mjs` 启动时固定生成命令，运行中的旧 runner 不会随 Git 轮询重载自身代码。因此本次迁移合入干净 main 后，由环境执行 owner 在协调者给出的服务窗口执行一次现有 launchd 的 `kickstart -k`，使原 runner 加载新命令；不要新增 daemon、旧命令 shim 或并行实例。
+
+切换前核对 main SHA、干净状态和现有 launchd owner，保留原 plist、日志、端口与私密配置；切换后等待原服务完成锁文件安装和资源生成，核 `/__lie/main-status` 与集成 SHA 一致、8787/8788 均只监听回环，逐项核源/public/dist 的清单投影和资源字节，且前端访问网关私密路径仍返回403。只核状态/拒绝结果，不打印私密文件内容；不调用语音或新建供应商资源。若启动失败，依据原日志排查，不启动第二套服务或删除尚存活的锁。本次实施候选验证与集成后的真实常驻服务验收分别记录，不以候选测试代替已重启证明。

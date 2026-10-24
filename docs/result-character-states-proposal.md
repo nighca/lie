@@ -18,17 +18,17 @@ result: { characterId: string; correct: boolean } | null
 
 ## 兼容方案与待确认点
 
-[动画类型](../packages/appearance-animation/src/types.ts)当前只有default/listening/waiting/speaking；[严格解析器](../packages/appearance-animation/src/package.ts)第95–96行只允许并要求这四态。直接在包里增加两态会被当前parser拒绝，不能先投素材再假定播放器支持。
+[动画类型](../packages/character-animation/src/types.ts)当前只有default/listening/waiting/speaking；[严格解析器](../packages/character-animation/src/package.ts)第95–96行只允许并要求这四态。直接在包里增加两态会被当前parser拒绝，不能先投素材再假定播放器支持。
 
 1. **最小第一步**：结果页先显示被指认者的现有default立绘/idle动画，用文案区分correct/wrong。无需改动画契约，但不能把它称为已完成两套新人物反应。
 2. **拟议兼容扩展**：保留原四态必填，新增两个可选结果态（最终命名待定），旧包缺少时统一解析到default。类型应区分必需基础态与可选结果态，避免将全部旧包、旧预置或自定义案件变成必须六态。Timeline统一解析有效clip，沿用现有采样/加载/取消/回退，不为单个人物加分支。新parser向后读取旧包；旧strict runtime仍会拒绝新字段，所以runtime和新资源要组合验证，不能宣称旧页面无条件向前兼容。
 3. 若视觉只需静态两种表情，可只扩充可选结果静态图，不先扩播放状态机；这仍需要内容工具链契约review。为结果另造一套播放器或复制人物规则没有必要。
 
-[现有Timeline](../packages/appearance-animation/src/playback.ts)第53–57行按state选clip，sampleClip已支持loop:false后保持末帧；如视觉选择一次短动作，可复用此能力，无需因新场景引入新引擎。动作是一次后停、持续小循环还是仅静态，两种反应的表情/身体语义与强度，需视觉owner给方案并确认。建议用“被指认正确/错误”的人物视角命名，避免把玩家胜负情绪直接套在角色上。合并指认界面、扩大规则或增加额外结局仍是独立产品决定。
+[现有Timeline](../packages/character-animation/src/playback.ts)第53–57行按state选clip，sampleClip已支持loop:false后保持末帧；如视觉选择一次短动作，可复用此能力，无需因新场景引入新引擎。动作是一次后停、持续小循环还是仅静态，两种反应的表情/身体语义与强度，需视觉owner给方案并确认。建议用“被指认正确/错误”的人物视角命名，避免把玩家胜负情绪直接套在角色上。合并指认界面、扩大规则或增加额外结局仍是独立产品决定。
 
 ## 静态回退、减少动态与窄屏
 
-[AnimatedPortrait](../packages/ui/src/components/AnimatedPortrait.vue)第14–26、44–56行已有reduce静态slot、加载/版本/尺寸/渲染失败回退、隐藏暂停、卸载与迟到换人隔离，可直接沿用。结果无动画时先回default立绘，缺图回姓名首字。若reduce也必须显示对应的正确/错误表情，则应为清单提供可选结果静态图：需要一起review [Appearance读取](../apps/web/src/presentation/appearances.ts)、[源清单类型](../design/appearances/manifest.types.ts)及[生成器](../scripts/appearances.mjs)的严格字段、固定路径、实际PNG与确定性输出；未具备的角色仍回default。
+[AnimatedPortrait](../packages/ui/src/components/AnimatedPortrait.vue)第14–26、44–56行已有reduce静态slot、加载/版本/尺寸/渲染失败回退、隐藏暂停、卸载与迟到换人隔离，可直接沿用。结果无动画时先回default立绘，缺图回姓名首字。若reduce也必须显示对应的正确/错误表情，则应为清单提供可选结果静态图：需要一起review [CharacterPreset读取](../apps/web/src/presentation/characterPresets.ts)、[源清单类型](../design/character-presets/manifest.types.ts)及[生成器](../scripts/character-presets.mjs)的严格字段、固定路径、实际PNG与确定性输出；未具备的角色仍回default。
 
 AnimatedPortrait第68–69行是display:contents和绝对定位130%高canvas；调查img也有同样取景。当前结果卡只是文本流，不能直接嵌canvas而没有定位/尺寸容器。建议结果场景独立的明确尺寸舞台，统一img/canvas取景；391下人物和长经过上下排、正常纵向滚动、不遮返回/重新开始操作，焦点与姓名可访问。具体裁切/比例由整体视觉方案确定，不能顺手改调查舞台或Editor布局。
 
@@ -37,8 +37,8 @@ AnimatedPortrait第68–69行是display:contents和绝对定位130%高canvas；�
 | Owner | 独占范围 | 依赖与交付 |
 | --- | --- | --- |
 | 应用接入owner | controller.ts、App.vue、style.css及controller/App/导航测试 | 保持result.characterId与wrong终局约束；待fan/Editor当前App与style所有权释放后串行接入 |
-| 动画契约owner | appearance-animation types/package/playback及测试；AnimatedPortrait必要类型/测试 | 视觉和契约确认后，先实现旧包兼容与缺态回退，不触voice或规则 |
-| 内容工具链owner | Appearance读取、manifest.types、appearances生成器及测试 | 仅在确认结果静态资源需求后增加可选字段；与动画契约先对齐名称/路径 |
+| 动画契约owner | character-animation types/package/playback及测试；AnimatedPortrait必要类型/测试 | 视觉和契约确认后，先实现旧包兼容与缺态回退，不触voice或规则 |
+| 内容工具链owner | CharacterPreset读取、manifest.types、character-presets生成器及测试 | 仅在确认结果静态资源需求后增加可选字段；与动画契约先对齐名称/路径 |
 | 视觉owner | 独立单人候选目录、两种反应及静态/末帧方案 | 先方向确认，再逐人成品验收；未批准资产不写正式manifest |
 
 主协调持有集成队列，统一分派共享App/style，不允许各owner并行覆盖这些文件；新动画资源和契约先分别review，再组合接入。此文档不替代当前活跃owner的交付，也不自动启动实施。

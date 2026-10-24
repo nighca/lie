@@ -10,9 +10,9 @@ import { decodeSharedGame, SHARE_URL_LIMIT } from './editor/share'
 import type { CaseSummary } from './application/catalog'
 import type { GameController } from './application/controller'
 import { observeNavigationLifecycle } from './application/navigationLifecycle'
-import type { Appearance } from './presentation/appearances'
+import type { CharacterPreset } from './presentation/characterPresets'
 
-const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; loadCatalog: () => Promise<CaseSummary[]>; appearances: readonly Appearance[]; demo: boolean }>()
+const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; loadCatalog: () => Promise<CaseSummary[]>; characterPresets: readonly CharacterPreset[]; demo: boolean }>()
 const route = useRoute()
 const router = useRouter()
 const controller = shallowRef<GameController | null>(null)
@@ -61,7 +61,7 @@ async function loadCurrent() {
     shareLoading.value = true
     try {
       if (new URL(route.fullPath, window.location.origin).href.length > SHARE_URL_LIMIT) throw new Error('分享链接过长，请向作者索取可用链接')
-      const game = await decodeSharedGame(route.hash, props.appearances)
+      const game = await decodeSharedGame(route.hash, props.characterPresets)
       if (revision !== currentRevision) return
       shareLoading.value = false
       attach(game.id, game)
@@ -101,7 +101,7 @@ function preview(game: GameDefinition) {
 }
 function selectCase(id: string) { void router.push({ path: '/', query: { game: id, ...(props.demo ? { demo: '1' } : {}) } }) }
 async function end() { if (await confirmLeave()) controller.value?.end() }
-function avatar(id: string | null) { return props.appearances.find((item) => item.id === id)?.avatar ?? null }
+function avatar(id: string | null) { return props.characterPresets.find((item) => item.id === id)?.avatar ?? null }
 const brokenAvatars = ref(new Set<string>())
 
 async function loadCatalog() {
@@ -115,8 +115,8 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
 </script>
 
 <template>
-  <App v-if="controller != null" :key="instance" :controller="controller" :appearances="appearances" :demo="demo" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" />
-  <Editor v-else-if="route.path === '/editor'" :appearances="appearances" @preview="preview" @leave="home" />
+  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" />
+  <Editor v-else-if="route.path === '/editor'" :character-presets="characterPresets" @preview="preview" @leave="home" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
   </div>

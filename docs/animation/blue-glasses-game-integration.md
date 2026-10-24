@@ -4,8 +4,8 @@
 
 ## 来源与接入边界
 
-- 正式源为 `design/appearances/assets/blue-glasses/animation/package.json` 和其引用的6份 `parts/*.png`，均从已批准候选原字节复制。package SHA256：`1b2702529a50c58537dd3b5abccae3f1acc306da0061a7efd5f56a97cc2f8f53`。
-- 仅在 `design/appearances/manifest.json` 的 blue-glasses 条目增加 `animation: "assets/blue-glasses/animation/package.json"`，生成器输出 `/appearances/blue-glasses/animation/package.json`。生成物不提交。
+- 正式源为 `design/character-presets/assets/blue-glasses/animation/package.json` 和其引用的6份 `parts/*.png`，均从已批准候选原字节复制。package SHA256：`1b2702529a50c58537dd3b5abccae3f1acc306da0061a7efd5f56a97cc2f8f53`。
+- 仅在 `design/character-presets/manifest.json` 的 blue-glasses 条目增加 `animation: "assets/blue-glasses/animation/package.json"`，生成器输出 `/appearances/blue-glasses/animation/package.json`。生成物不提交。
 - 6份1254×1254活动PNG、19节点、4态循环；画布加活动资源预算为11,007,612像素，低于严格解析器33,554,432限制。PNG压缩合计4,490,323字节。停用 waiting-arms 只留在候选来源记录，不进入正式资源。
 - 制作prompt、来源/部件SHA256及历史截图保存在候选目录。本次不修改静态四态、头像、其他人物、引擎、UI、案件或provider；继续使用当前appearance目录，命名迁移另行协调。
 - 浏览器通过既有通用清单/加载器自动启用动画，沿用静态四态回退和既有语音状态映射。无需新增人物ID分支或公开内容序列化字段。

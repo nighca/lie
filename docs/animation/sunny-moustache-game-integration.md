@@ -5,7 +5,7 @@
 ## 接入范围
 
 - 原始候选来自 `62b3846eecce8e902cd8bfe1764c87a337551e4b`，顺序为 `4e59d7d4f16ff3c02ae8f8642b0a8b213ae1014d` → `c8914851ac57ee95d4f367ca7871f635f2d6f626` → `68c2f7b4927f17b71e44cc02fda354a5682e737f` → `dcf759331af83e97cdb7f06a3108f6d74acb8859`，均只含本角色候选与来源/验收记录。
-- 把已批准的 package 和其引用的五份 PNG 原字节复制至 `design/appearances/assets/sunny-moustache/animation/`；仅给 manifest 的 sunny-moustache 条目增加 `animation: "assets/sunny-moustache/animation/package.json"`。
+- 把已批准的 package 和其引用的五份 PNG 原字节复制至 `design/character-presets/assets/sunny-moustache/animation/`；仅给 manifest 的 sunny-moustache 条目增加 `animation: "assets/sunny-moustache/animation/package.json"`。
 - package SHA256：`baa81c21f615780b3a4e35d6f89c96281dd08c29d7cf29fe9abbcdbba560414c`。五份1254×1254 PNG、20节点、4态循环，画布加全部活动PNG为9,435,096像素，低于严格解析器33,554,432上限；PNG压缩总量4,303,793字节。
 - 生成器输出 `/appearances/sunny-moustache/animation/package.json`，生成物不提交。没有改动静态五图、其他人物、UI、runtime、案件、供应商、引擎或命名；沿用既有通用动画加载和静态回退。
 

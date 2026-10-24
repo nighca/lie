@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
 
-import { syncAppearances } from './appearances.mjs'
+import { syncCharacterPresets } from './character-presets.mjs'
 
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+nmhsAAAAASUVORK5CYII=', 'base64')
 function entry(id = 'fixture-guide') {
@@ -15,7 +15,7 @@ function entry(id = 'fixture-guide') {
   }
 }
 async function fixture(t) {
-  const directory = await mkdtemp(join(tmpdir(), 'lie-appearances-'))
+  const directory = await mkdtemp(join(tmpdir(), 'lie-characterPresets-'))
   t.after(() => rm(directory, { recursive: true, force: true }))
   const sourceDirectory = join(directory, 'source')
   const outputDirectory = join(directory, 'output')
@@ -29,12 +29,12 @@ async function fixture(t) {
   return { sourceDirectory, outputDirectory, assets, manifest }
 }
 
-test('a new appearance needs only assets and one source entry; generated names and voices are preserved', async (t) => {
+test('a new characterPreset needs only assets and one source entry; generated names and voices are preserved', async (t) => {
   const f = await fixture(t)
-  await syncAppearances(f)
+  await syncCharacterPresets(f)
   await f.assets('another-new-person')
   await f.manifest([entry(), { ...entry('another-new-person'), name: '另一个中文名' }])
-  assert.equal((await syncAppearances(f)).count, 2)
+  assert.equal((await syncCharacterPresets(f)).count, 2)
   const runtime = JSON.parse(await readFile(join(f.outputDirectory, 'manifest.json'), 'utf8'))
   assert.equal(runtime[1].name, '另一个中文名')
   assert.equal(runtime[1].voiceId, 'existing-authorized-voice')
@@ -46,30 +46,30 @@ test('a new appearance needs only assets and one source entry; generated names a
 
 test('generation is deterministic and leaves unchanged files unchanged', async (t) => {
   const f = await fixture(t)
-  await syncAppearances(f)
+  await syncCharacterPresets(f)
   const before = await readFile(join(f.outputDirectory, 'manifest.json'))
-  assert.deepEqual((await syncAppearances(f)).differences, [])
+  assert.deepEqual((await syncCharacterPresets(f)).differences, [])
   assert.deepEqual(await readFile(join(f.outputDirectory, 'manifest.json')), before)
-  assert.deepEqual((await syncAppearances({ ...f, check: true })).differences, [])
+  assert.deepEqual((await syncCharacterPresets({ ...f, check: true })).differences, [])
 })
 
 test('checks reject stale metadata, bytes and obsolete output; generation repairs them', async (t) => {
   const f = await fixture(t)
-  await syncAppearances(f)
+  await syncCharacterPresets(f)
   await writeFile(join(f.outputDirectory, 'manifest.json'), '[]\n')
-  await assert.rejects(syncAppearances({ ...f, check: true }), /manifest.json/)
-  await syncAppearances(f)
+  await assert.rejects(syncCharacterPresets({ ...f, check: true }), /manifest.json/)
+  await syncCharacterPresets(f)
   await writeFile(join(f.outputDirectory, 'fixture-guide/default.png'), 'stale')
-  await assert.rejects(syncAppearances({ ...f, check: true }), /fixture-guide\/default.png/)
+  await assert.rejects(syncCharacterPresets({ ...f, check: true }), /fixture-guide\/default.png/)
   await writeFile(join(f.outputDirectory, 'obsolete.png'), png)
-  await assert.rejects(syncAppearances({ ...f, check: true }), /obsolete.png \(obsolete\)/)
-  await syncAppearances(f)
-  assert.deepEqual((await syncAppearances({ ...f, check: true })).differences, [])
+  await assert.rejects(syncCharacterPresets({ ...f, check: true }), /obsolete.png \(obsolete\)/)
+  await syncCharacterPresets(f)
+  assert.deepEqual((await syncCharacterPresets({ ...f, check: true })).differences, [])
   await assert.rejects(readFile(join(f.outputDirectory, 'obsolete.png')), { code: 'ENOENT' })
 })
 
 for (const [label, mutate, message] of [
-  ['duplicate IDs', (item) => [item, item], /Duplicate appearance id/],
+  ['duplicate IDs', (item) => [item, item], /Duplicate characterPreset id/],
   ['missing name', (item) => [{ ...item, name: null }], /\.name/],
   ['empty name', (item) => [{ ...item, name: '  ' }], /\.name/],
   ['missing voice', (item) => [{ ...item, voiceId: null }], /\.voiceId/],
@@ -77,15 +77,15 @@ for (const [label, mutate, message] of [
   ['missing states', (item) => [{ ...item, portraits: null }], /\.portraits/],
   ['missing speaking', (item) => [{ ...item, portraits: { listening: item.portraits.listening, waiting: item.portraits.waiting } }], /\.speaking/],
   ['noncanonical paths', (item) => [{ ...item, portrait: '../outside.png' }], /\.portrait/],
-  ['unsafe ID', (item) => [{ ...item, id: '../outside' }], /Appearance id/],
+  ['unsafe ID', (item) => [{ ...item, id: '../outside' }], /CharacterPreset id/],
   ['unknown source field', (item) => [{ ...item, displayLabel: 'typo' }], /unexpected field displayLabel/],
 ]) {
   test(`invalid source (${label}) cannot change existing output`, async (t) => {
     const f = await fixture(t)
-    await syncAppearances(f)
+    await syncCharacterPresets(f)
     const before = await readFile(join(f.outputDirectory, 'manifest.json'))
     await f.manifest(mutate(entry()))
-    await assert.rejects(syncAppearances(f), message)
+    await assert.rejects(syncCharacterPresets(f), message)
     assert.deepEqual(await readFile(join(f.outputDirectory, 'manifest.json')), before)
   })
 }
@@ -94,20 +94,20 @@ test('missing resources, invalid PNG and mismatched canvases are rejected before
   const f = await fixture(t)
   const speaking = join(f.sourceDirectory, 'assets/fixture-guide/speaking.png')
   await rm(speaking)
-  await assert.rejects(syncAppearances(f), { code: 'ENOENT' })
+  await assert.rejects(syncCharacterPresets(f), { code: 'ENOENT' })
   await writeFile(speaking, 'not-png')
-  await assert.rejects(syncAppearances(f), /expected PNG/)
+  await assert.rejects(syncCharacterPresets(f), /expected PNG/)
   const differentSize = Buffer.from(png)
   differentSize.writeUInt32BE(2, 16)
   await writeFile(speaking, differentSize)
-  await assert.rejects(syncAppearances(f), /state canvas must match default/)
+  await assert.rejects(syncCharacterPresets(f), /state canvas must match default/)
 })
 
 test('a distinct avatar has one canonical URL in the same preset directory', async (t) => {
   const f = await fixture(t)
   await writeFile(join(f.sourceDirectory, 'assets/fixture-guide/avatar.png'), png)
   await f.manifest([{ ...entry(), avatar: 'assets/fixture-guide/avatar.png' }])
-  assert.equal((await syncAppearances(f)).assets, 5)
+  assert.equal((await syncCharacterPresets(f)).assets, 5)
   const runtime = JSON.parse(await readFile(join(f.outputDirectory, 'manifest.json'), 'utf8'))
   assert.equal(runtime[0].avatar, '/appearances/fixture-guide/avatar.png')
   assert.equal(runtime[0].portrait, '/appearances/fixture-guide/default.png')
@@ -116,11 +116,11 @@ test('a distinct avatar has one canonical URL in the same preset directory', asy
 
 test('source and output trees cannot overlap or traverse symlinks', async (t) => {
   const f = await fixture(t)
-  await assert.rejects(syncAppearances({ ...f, outputDirectory: f.sourceDirectory }), /separate directory trees/)
+  await assert.rejects(syncCharacterPresets({ ...f, outputDirectory: f.sourceDirectory }), /separate directory trees/)
   const sourceAsset = join(f.sourceDirectory, 'assets/fixture-guide/speaking.png')
   await rm(sourceAsset)
   await symlink(join(f.sourceDirectory, 'assets/fixture-guide/default.png'), sourceAsset)
-  await assert.rejects(syncAppearances(f), /expected a regular asset/)
+  await assert.rejects(syncCharacterPresets(f), /expected a regular asset/)
 })
 
 async function animationFixture(f) {
@@ -133,17 +133,17 @@ async function animationFixture(f) {
   return { path, base, data }
 }
 
-test('animated and static appearances coexist; shared parts are copied once with unchanged bytes', async t => {
+test('animated and static characterPresets coexist; shared parts are copied once with unchanged bytes', async t => {
   const f = await fixture(t), animation = await animationFixture(f)
   await f.assets('another-person')
   await f.manifest([{ ...entry(), animation: 'assets/fixture-guide/animation/package.json' }, entry('another-person')])
-  await syncAppearances(f)
+  await syncCharacterPresets(f)
   const runtime = JSON.parse(await readFile(join(f.outputDirectory, 'manifest.json'), 'utf8'))
   assert.equal(runtime[0].animation, '/appearances/fixture-guide/animation/package.json')
   assert.equal(runtime[1].animation, undefined)
   assert.deepEqual(await readFile(join(f.outputDirectory, 'fixture-guide/animation/package.json')), await readFile(animation.path))
   assert.deepEqual(await readFile(join(f.outputDirectory, 'fixture-guide/animation/parts/body.png')), png)
-  await f.manifest([entry(), entry('another-person')]); await syncAppearances(f)
+  await f.manifest([entry(), entry('another-person')]); await syncCharacterPresets(f)
   await assert.rejects(readFile(join(f.outputDirectory, 'fixture-guide/animation/package.json')), { code: 'ENOENT' })
 })
 
@@ -154,12 +154,12 @@ for (const [label, mutate] of [
   ['wrong dimensions', data => { data.assets.body.width = 2 }],
 ]) {
   test(`bad animation (${label}) cannot change existing generated output`, async t => {
-    const f = await fixture(t); await syncAppearances(f)
+    const f = await fixture(t); await syncCharacterPresets(f)
     const before = await readFile(join(f.outputDirectory, 'manifest.json'))
     const animation = await animationFixture(f); mutate(animation.data)
     await writeFile(animation.path, JSON.stringify(animation.data))
     await f.manifest([{ ...entry(), animation: 'assets/fixture-guide/animation/package.json' }])
-    await assert.rejects(syncAppearances(f))
+    await assert.rejects(syncCharacterPresets(f))
     assert.deepEqual(await readFile(join(f.outputDirectory, 'manifest.json')), before)
   })
 }

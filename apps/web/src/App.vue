@@ -3,9 +3,9 @@ import { computed, onUnmounted, ref } from 'vue'
 import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
 
 import type { GameController } from './application/controller'
-import type { Appearance } from './presentation/appearances'
+import type { CharacterPreset } from './presentation/characterPresets'
 
-const props = withDefaults(defineProps<{ controller: GameController; appearances: readonly Appearance[]; demo: boolean; returnLabel?: string }>(), { returnLabel: '返回案件列表' })
+const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; returnLabel?: string }>(), { returnLabel: '返回案件列表' })
 const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: [] }>()
 const view = ref(props.controller.getView())
 const voiceFeedback = ref(props.controller.getVoiceFeedback())
@@ -19,14 +19,14 @@ const unsubscribe = props.controller.subscribe((value) => {
 onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
 const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)
-const currentAppearance = computed(() => appearance(current.value?.appearanceId ?? null))
+const currentCharacterPreset = computed(() => characterPreset(current.value?.appearanceId ?? null))
 const portraitState = computed(() => {
   if (!view.value.conversationActive || view.value.busy) return 'default'
   const status = view.value.voiceStatus
   return status === 'recording' ? 'listening' : status === 'waiting' || status === 'speaking' ? status : 'default'
 })
 const portrait = computed(() => {
-  const preset = currentAppearance.value
+  const preset = currentCharacterPreset.value
   if (preset == null) return null
   const stateImage = portraitState.value === 'default' ? null : preset.portraits[portraitState.value]
   if (usableImage(stateImage)) return stateImage
@@ -39,7 +39,7 @@ const transcript = computed(() => view.value.history.map((entry) => ({
   interrupted: entry.interrupted,
   pending: entry.id === 'pending-answer',
   mine: entry.role === 'user',
-  avatar: entry.role === 'user' ? null : appearance(current.value?.appearanceId ?? null)?.avatar ?? null,
+  avatar: entry.role === 'user' ? null : characterPreset(current.value?.appearanceId ?? null)?.avatar ?? null,
 })))
 const labels = { idle: '等待你开口', recording: '正在聆听', waiting: '等待回答', speaking: '正在回答', error: '语音暂时中断' }
 const actionLabel = computed(() => {
@@ -55,7 +55,7 @@ function fanStyle(index: number) {
   const position = (index - (view.value.characters.length - 1) / 2) / Math.max(1, (view.value.characters.length - 1) / 2)
   return { '--fan-angle': `${position * 8}deg`, '--fan-drop': `${Math.abs(position) * 14}px` }
 }
-function appearance(id: string | null) { return props.appearances.find((item) => item.id === id) ?? null }
+function characterPreset(id: string | null) { return props.characterPresets.find((item) => item.id === id) ?? null }
 function usableImage(url: string | null) { return url != null && !brokenImages.value.has(url) }
 function portraitFailed(event: Event) {
   const url = (event.currentTarget as HTMLImageElement).getAttribute('src')
@@ -92,9 +92,9 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <h1 class="case-title lie-handwritten-underline">{{ view.title }}</h1>
       <p class="background">{{ view.background }}</p>
       <div class="intro-characters" :class="{ 'intro-characters--many': view.characters.length > 5 }">
-        <div v-for="(character, index) in view.characters" :key="character.id" class="intro-character" tabindex="0" :style="{ ...fanStyle(index), '--character-accent': appearance(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }">
-          <span v-if="usableImage(appearance(character.appearanceId)?.avatar ?? null)" class="avatar-frame">
-            <img :src="appearance(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(appearance(character.appearanceId)!.avatar)">
+        <div v-for="(character, index) in view.characters" :key="character.id" class="intro-character" tabindex="0" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }">
+          <span v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" class="avatar-frame">
+            <img :src="characterPreset(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(characterPreset(character.appearanceId)!.avatar)">
           </span>
           <span v-else class="initial-avatar">{{ character.name.slice(0, 1) }}</span>
           <strong>{{ character.name }}</strong>
@@ -109,16 +109,16 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     <main v-else-if="view.phase === 'interrogating'" class="investigation">
       <div class="conversation-layout">
         <nav class="character-list" aria-label="选择询问人物">
-          <CharacterChoice v-for="character in view.characters" :key="character.id" :name="character.name" :selected="view.currentCharacterId === character.id" :style="{ '--character-accent': appearance(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.selectCharacter(character.id)">
+          <CharacterChoice v-for="character in view.characters" :key="character.id" :name="character.name" :selected="view.currentCharacterId === character.id" :style="{ '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.selectCharacter(character.id)">
             <template #avatar>
-              <img v-if="usableImage(appearance(character.appearanceId)?.avatar ?? null)" :src="appearance(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(appearance(character.appearanceId)!.avatar)">
+              <img v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" :src="characterPreset(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(characterPreset(character.appearanceId)!.avatar)">
               <span v-else>{{ character.name.slice(0, 1) }}</span>
             </template>
           </CharacterChoice>
         </nav>
-        <section v-if="current != null" class="character-stage" :style="{ '--character-accent': appearance(current.appearanceId)?.accent ?? 'var(--lie-aqua)' }" :aria-label="`${current.name}的人物形象`">
+        <section v-if="current != null" class="character-stage" :style="{ '--character-accent': characterPreset(current.appearanceId)?.accent ?? 'var(--lie-aqua)' }" :aria-label="`${current.name}的人物形象`">
           <div class="portrait-backdrop">
-            <AnimatedPortrait :src="currentAppearance?.animation ?? null" :state="portraitState" :label="current.name">
+            <AnimatedPortrait :src="currentCharacterPreset?.animation ?? null" :state="portraitState" :label="current.name">
               <img v-if="portrait != null" :key="portrait" :src="portrait" alt="人物形象" @error="portraitFailed">
               <span v-else class="portrait-initial">{{ current.name.slice(0, 1) }}</span>
             </AnimatedPortrait>
@@ -166,8 +166,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <p class="accusation-question">你认为谁是这次事件的责任人？</p>
       <p class="accusation-hint">点击人物提交指认</p>
       <div class="intro-characters accusation-choices" :class="{ 'intro-characters--many': view.characters.length > 5 }">
-        <button v-for="(character, index) in view.characters" :key="character.id" type="button" class="intro-character accusation-character" :aria-label="`指认 ${character.name}`" :style="{ ...fanStyle(index), '--character-accent': appearance(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.accuse(character.id)">
-          <span v-if="usableImage(appearance(character.appearanceId)?.avatar ?? null)" class="avatar-frame"><img :src="appearance(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(appearance(character.appearanceId)!.avatar)"></span>
+        <button v-for="(character, index) in view.characters" :key="character.id" type="button" class="intro-character accusation-character" :aria-label="`指认 ${character.name}`" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.accuse(character.id)">
+          <span v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" class="avatar-frame"><img :src="characterPreset(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(characterPreset(character.appearanceId)!.avatar)"></span>
           <span v-else class="initial-avatar">{{ character.name.slice(0, 1) }}</span>
           <strong>指认 {{ character.name }}</strong>
         </button>

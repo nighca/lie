@@ -1,6 +1,6 @@
-# @lie/appearance-animation
+# @lie/character-animation
 
-Independent, bounded Canvas 2D animation player. It does not depend on Vue, game content, voice providers or a particular character. The current package name is retained for the agreed implementation sequence; the approved CharacterPreset naming migration follows game integration.
+Independent, bounded Canvas 2D animation player. It does not depend on Vue, game content, voice providers or a particular character.
 
 - `readAnimationPackage(unknown)` validates schema version 1 and all internal references.
 - `sampleClip(package, clip, seconds)` is deterministic and host independent.
@@ -8,7 +8,7 @@ Independent, bounded Canvas 2D animation player. It does not depend on Vue, game
 - `createCanvasRenderer(canvas, package, images)` draws decoded shared parts with hierarchy, independent order, crop and polygon masks.
 - `loadAnimationPackage(url, signal)` fetches/decodes local package-relative parts and validates dimensions. The caller owns cancellation and decoded resource lifetime.
 
-The Vue `AnimatedPortrait` wrapper lives in `@lie/ui`. Static fallback belongs to its slot and the existing appearance manifest. See [contract](../../docs/animation/contract.md) and [production workflow](../../docs/animation/production-workflow.md).
+The Vue `AnimatedPortrait` wrapper lives in `@lie/ui`. Static fallback belongs to its slot and the character preset manifest. See [contract](../../docs/animation/contract.md) and [production workflow](../../docs/animation/production-workflow.md).
 
 ```ts
 const { data, images } = await loadAnimationPackage(packageUrl, abort.signal)

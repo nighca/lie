@@ -11,7 +11,7 @@ it('animates a final player transcript while waiting for an answer, then flushes
   vi.useFakeTimers()
   const { controller, turns } = setup()
   await controller.load('test'); controller.start()
-  const wrapper = mount(App, { props: { controller, appearances: [], demo: false } })
+  const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
   cleanup.push(() => { wrapper.unmount(); controller.dispose() })
   await controller.startConversation()
   await wrapper.vm.$nextTick()

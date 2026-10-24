@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { AnimationTimeline, createCanvasRenderer, readAnimationPackage, sampleClip } from '../src/index'
 
-const source = JSON.parse(readFileSync(new URL('../../../design/appearances/assets/coral-bob/animation/package.json', import.meta.url), 'utf8'))
+const source = JSON.parse(readFileSync(new URL('../../../design/character-presets/assets/coral-bob/animation/package.json', import.meta.url), 'utf8'))
 function fixture() { return structuredClone(source) }
 
 describe('versioned animation contract', () => {

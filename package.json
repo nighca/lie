@@ -17,10 +17,10 @@
     "build": "npm run build --workspace @lie/web && npm run build --workspace @lie/gateway",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test:main-preview": "node --test scripts/main-preview.test.mjs",
-    "test": "npm run test:main-preview && npm run test:appearances && npm run test --workspaces --if-present",
-    "appearances:generate": "node scripts/appearances.mjs",
-    "appearances:check": "node scripts/appearances.mjs --check",
-    "test:appearances": "node --test scripts/appearances.test.mjs"
+    "test": "npm run test:main-preview && npm run test:character-presets && npm run test --workspaces --if-present",
+    "character-presets:generate": "node scripts/character-presets.mjs",
+    "character-presets:check": "node scripts/character-presets.mjs --check",
+    "test:character-presets": "node --test scripts/character-presets.test.mjs"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "6.0.10",

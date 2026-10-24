@@ -8,8 +8,8 @@ import { DRAFT_KEY } from '../src/editor/draft'
 import * as sharing from '../src/editor/share'
 import { game as sourceGame } from './helpers'
 
-const appearance = { id: 'new-guide', name: '新来的向导', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456', voiceId: 'existing-voice', animation: null, portraits: { listening: null, waiting: null, speaking: null } }
-const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: appearance.id })) }
+const characterPreset = { id: 'new-guide', name: '新来的向导', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456', voiceId: 'existing-voice', animation: null, portraits: { listening: null, waiting: null, speaking: null } }
+const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: characterPreset.id })) }
 const cleanup: (() => void)[] = []
 beforeEach(() => {
   Object.defineProperty(HTMLDialogElement.prototype, 'close', { configurable: true, value(this: HTMLDialogElement) { this.open = false } })
@@ -18,7 +18,7 @@ beforeEach(() => {
 afterEach(() => { cleanup.splice(0).forEach((action) => action()); localStorage.clear(); vi.restoreAllMocks() })
 function page(stored: unknown = null) {
   if (stored != null) localStorage.setItem(DRAFT_KEY, JSON.stringify(stored))
-  const wrapper = mount(Editor, { props: { appearances: [appearance] }, attachTo: document.body })
+  const wrapper = mount(Editor, { props: { characterPresets: [characterPreset] }, attachTo: document.body })
   cleanup.push(() => wrapper.unmount())
   async function click(text: string) {
     const button = wrapper.findAll('button').find((button) => button.text() === text)
@@ -181,18 +181,18 @@ describe('three-step editor', () => {
     expect(wrapper.get('.error-summary').text()).not.toContain('人物设定')
   })
 
-  it.each([null, 'removed-preset'])('preserves restored content with appearance %s and locates the selection', async (appearanceId) => {
-    const stored = { ...game, characters: game.characters.map((person, index) => ({ ...person, appearanceId: index === 1 ? appearanceId : appearance.id })) }
+  it.each([null, 'removed-preset'])('preserves restored content with characterPreset %s and locates the selection', async (appearanceId) => {
+    const stored = { ...game, characters: game.characters.map((person, index) => ({ ...person, appearanceId: index === 1 ? appearanceId : characterPreset.id })) }
     const { wrapper, click } = page(stored)
     await click('分享案件')
     expect((wrapper.get('[data-field=name]').element as HTMLInputElement).value).toBe('乙')
-    expect(document.activeElement).toBe(wrapper.get('[data-field=appearance]').element)
+    expect(document.activeElement).toBe(wrapper.get('[data-field=preset]').element)
     expect((wrapper.get('[data-field=profile]').element as HTMLTextAreaElement).value).toBe('只属于乙的秘密。')
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(appearanceId)
-    await wrapper.get('[data-field=appearance]').trigger('click')
-    expect(wrapper.findAll('.editor-appearance')).toHaveLength(1)
+    await wrapper.get('[data-field=preset]').trigger('click')
+    expect(wrapper.findAll('.editor-preset')).toHaveLength(1)
     await click('新来的向导')
-    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(appearance.id)
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(characterPreset.id)
   })
 
   it('uses the shared idle portrait and preserves a static fallback', async () => {
@@ -200,7 +200,7 @@ describe('three-step editor', () => {
     await step(1)
     expect(wrapper.getComponent(AnimatedPortrait).props()).toMatchObject({ src: null, state: 'default', label: '甲' })
     expect(wrapper.get('.portrait-halo img').attributes('src')).toBe('/portrait.png')
-    await wrapper.setProps({ appearances: [{ ...appearance, animation: '/appearances/new-guide/animation/package.json' }] })
+    await wrapper.setProps({ characterPresets: [{ ...characterPreset, animation: '/appearances/new-guide/animation/package.json' }] })
     expect(wrapper.getComponent(AnimatedPortrait).props('src')).toBe('/appearances/new-guide/animation/package.json')
   })
 
@@ -264,11 +264,11 @@ describe('three-step editor', () => {
 
   it('uses live catalog names for previously unknown IDs', async () => {
     const { wrapper, step } = page()
-    await step(1); await wrapper.get('[data-field=appearance]').trigger('click')
-    expect(wrapper.get('.editor-appearance').text()).toBe('新来的向导')
-    await wrapper.setProps({ appearances: [{ ...appearance, name: '来自清单的新名字' }] })
-    expect(wrapper.get('.editor-appearance').text()).toBe('来自清单的新名字')
+    await step(1); await wrapper.get('[data-field=preset]').trigger('click')
+    expect(wrapper.get('.editor-preset').text()).toBe('新来的向导')
+    await wrapper.setProps({ characterPresets: [{ ...characterPreset, name: '来自清单的新名字' }] })
+    expect(wrapper.get('.editor-preset').text()).toBe('来自清单的新名字')
     await wrapper.get('[aria-label=关闭]').trigger('click')
-    expect(wrapper.get('[data-field=appearance]').text()).toBe('更换形象')
+    expect(wrapper.get('[data-field=preset]').text()).toBe('更换预设')
   })
 })

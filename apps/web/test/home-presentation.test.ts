@@ -17,7 +17,7 @@ async function home(catalog: CaseSummary[]) {
   await router.push('/?demo=1')
   const createController = vi.fn(() => setup().controller)
   const wrapper = mount(Application, {
-    props: { appearances: [], demo: true, loadCatalog: async () => catalog, createController },
+    props: { characterPresets: [], demo: true, loadCatalog: async () => catalog, createController },
     global: { plugins: [router] },
   })
   cleanup.push(() => wrapper.unmount())

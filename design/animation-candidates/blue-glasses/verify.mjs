@@ -2,8 +2,8 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
-import { readAnimationPackage } from '../../../packages/appearance-animation/src/package.ts'
-import { sampleClip, AnimationTimeline } from '../../../packages/appearance-animation/src/playback.ts'
+import { readAnimationPackage } from '../../../packages/character-animation/src/package.ts'
+import { sampleClip, AnimationTimeline } from '../../../packages/character-animation/src/playback.ts'
 const root = new URL('./',import.meta.url)
 const data=readAnimationPackage(JSON.parse(readFileSync(new URL('package.json',root))))
 const provenance=JSON.parse(readFileSync(new URL('provenance.json',root)))
@@ -66,5 +66,5 @@ for(let i=0;i<100;i++) {
  const elapsed=[.09,.17,.21][i%3]
  checkInterruptedPose(timeline.advance(elapsed),state,elapsed)
 }
-for(const [state,entry] of Object.entries(provenance.sources))assert.equal(hash(readFileSync(fileURLToPath(new URL(`../../appearances/assets/blue-glasses/${state}.png`,root)))),entry.sha256)
+for(const [state,entry] of Object.entries(provenance.sources))assert.equal(hash(readFileSync(fileURLToPath(new URL(`../../character-presets/assets/blue-glasses/${state}.png`,root)))),entry.sha256)
 console.log(`PASS: strict contract; ${Object.keys(data.assets).length} native PNG sizes/hashes; 960 samples; loop closure; exclusive mouths; contact hierarchy; 100 interruptions (all-channel continuity, finite transforms, target visibility and exclusive mouths); canonical source hashes`)

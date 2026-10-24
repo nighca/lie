@@ -4,11 +4,11 @@
 
 ## 单一来源与目录
 
-`design/appearances/manifest.json`继续唯一维护id/name/accent/voiceId/头像与静态四态。条目可选`animation: "assets/<id>/animation/package.json"`。缺省无动画，仍为合法静态人物。案件继续只引用appearanceId，不知道节点或播放器。
+`design/character-presets/manifest.json`继续唯一维护id/name/accent/voiceId/头像与静态四态。条目可选`animation: "assets/<id>/animation/package.json"`。缺省无动画，仍为合法静态人物。案件继续只引用appearanceId，不知道节点或播放器。
 
 动画包独立于清单，内部不重复人物姓名、音色、主题色、故事或供应商信息。PNG位于包内`parts/<asset-id>.png`；资源共享发生在同一包的所有clip间。源生成器严格校验JSON/引用/实际PNG尺寸，原样复制JSON及被引用PNG，输出`/appearances/<id>/animation/package.json`及相对parts路径。生成物不手改、不跟踪。旧静态四态的路径与字节保持不变。
 
-生产机器契约的权威定义为`packages/appearance-animation/src/types.ts`与`package.ts`的严格解析器；未知版本、字段、坏引用、非有限数值、循环父链、重复轨道、不合法路径均拒绝，不执行数据中的JS。
+生产机器契约的权威定义为`packages/character-animation/src/types.ts`与`package.ts`的严格解析器；未知版本、字段、坏引用、非有限数值、循环父链、重复轨道、不合法路径均拒绝，不执行数据中的JS。
 
 | 字段 | 规格 |
 | --- | --- |
@@ -38,7 +38,7 @@ v1每包最多32个assets，canvas面积与所有assets声明面积合计最多3
 
 ## 播放器与Vue边界
 
-独立`@lie/appearance-animation`不依赖Vue或游戏规则。时间推进由宿主传delta秒；采样和状态机可离线测试。Canvas后端只负责矩阵、遮罩、绘制顺序，不读取案件、管理凭据、音频或角色ID。
+独立`@lie/character-animation`不依赖Vue或游戏规则。时间推进由宿主传delta秒；采样和状态机可离线测试。Canvas后端只负责矩阵、遮罩、绘制顺序，不读取案件、管理凭据、音频或角色ID。
 
 `@lie/ui`的`AnimatedPortrait`参数为`src:string|null`、`state`四态、可选label（默认人物形象）；默认slot是原有静态img/首字回退。加载完成前或版本/资源/尺寸/Canvas失败，始终保留slot。source变化取消旧加载，晚到结果不得覆盖新人物；卸载取消RAF、请求和解码引用，Object URL在解码成功、失败或取消时即释放。
 

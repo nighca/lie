@@ -18,7 +18,7 @@ function positive(value: unknown, label: string): number { const result = number
 function boolean(value: unknown, label: string): boolean { if (typeof value !== 'boolean') throw Error(`${label}: expected boolean`); return value }
 function size(value: unknown, label: string): number { const result = positive(value, label); if (!Number.isSafeInteger(result) || result > 8192) throw Error(`${label}: invalid canvas dimension`); return result }
 
-/** Parses the versioned, non-executable appearance animation contract. All references are checked before playback. */
+/** Parses the versioned, non-executable characterPreset animation contract. All references are checked before playback. */
 export function readAnimationPackage(value: unknown): AnimationPackage {
   const root = object(value, 'Animation')
   fields(root, ['schemaVersion', 'canvas', 'assets', 'nodes', 'clips', 'states', 'transitions'], 'Animation')

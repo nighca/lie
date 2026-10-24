@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import { AnimationTimeline, createCanvasRenderer, loadAnimationPackage } from '@lie/appearance-animation'
-import type { AnimationState } from '@lie/appearance-animation'
+import { AnimationTimeline, createCanvasRenderer, loadAnimationPackage } from '@lie/character-animation'
+import type { AnimationState } from '@lie/character-animation'
 
 const props = withDefaults(defineProps<{ src: string | null; state: AnimationState; label?: string }>(), { label: '人物形象' })
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -44,7 +44,7 @@ watch([() => props.src, reduced, canvas], async ([src, motion, element], _, onCl
   onCleanup(() => { active = false; stop(); controller.abort(); document.removeEventListener('visibilitychange', visibilityChanged); renderer?.dispose(); images?.clear(); timeline = null })
   try {
     const url = new URL(src, window.location.href)
-    if (url.origin !== window.location.origin) throw Error('Animation must use local appearance assets')
+    if (url.origin !== window.location.origin) throw Error('Animation must use local characterPreset assets')
     const loaded = await loadAnimationPackage(url, controller.signal)
     if (!active) return
     images = loaded.images

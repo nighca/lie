@@ -1,6 +1,6 @@
 # CharacterPreset 命名迁移落地计划
 
-2026-10-25，只读评估与执行提案，核对基线`08cf274bcd733afa0ace90dddcd870743b8e4331`。**尚未实施命名迁移**。本文延续[原范围调查](character-preset-migration.md)，补齐新消费者、并行所有权和常驻runner依赖；旧调查中的资产数量/在制状态不代表当前事实。
+2026-10-25，只读评估与执行提案，核对基线`08cf274bcd733afa0ace90dddcd870743b8e4331`。**本任务已完成实施候选，待root review/本地集成及其后runner受控切换**。本文延续[原范围调查](character-preset-migration.md)，补齐新消费者、并行所有权和常驻runner依赖；旧调查中的资产数量/在制状态不代表当前事实。
 
 ## 已批准边界
 
@@ -43,4 +43,4 @@
 
 ## 本轮检查与限制
 
-只读核原提交diff、当前消费者、manifest/目录数量、runner循环与已在制候选工具。本批仅保存文档计划与当前入口校准，未改生产代码或既有候选refs，未开服务/browser、使用mic/provider，也未宣称迁移测试通过。本文是执行方案，不是已完成迁移或新产品批准；具体开始由root在依赖交付后分派。
+只读核原提交diff、当前消费者、manifest/目录数量、runner循环与已在制候选工具。本批仅保存文档计划与当前入口校准，未改生产代码或既有候选refs，未开服务/browser、使用mic/provider，也未宣称迁移测试通过。原计划及批准边界继续保留；当前候选的实施、兼容与浏览器证据见[实施验收记录](character-preset-migration-implementation.md)，不以候选通过代替main集成或常驻runner切换。

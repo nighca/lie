@@ -51,7 +51,7 @@ sources=[]
 for p in sorted((d/'parts').glob('*.png')):
  b=p.read_bytes();w,h=struct.unpack('>II',b[16:24]);assets[p.stem]=dict(src='parts/'+p.name,width=w,height=h)
  im=Image.open(p)
- sources.append(dict(id=p.stem,mode=im.mode,alphaExtrema=list(im.getchannel('A').getextrema()),sha256=hashlib.sha256(b).hexdigest(),width=w,height=h,origin='/Users/nighca/.codex/generated_images/01a16e95-7926-79e0-a8ae-6f56388db3d8/exec-7ec2e3ee-5d07-4ed0-b3b3-9f81361a655f.png' if p.stem=='head' else str((d/'../../appearances/assets/plum-crop'/f'{p.stem.replace("-source","")}.png').resolve())))
+ sources.append(dict(id=p.stem,mode=im.mode,alphaExtrema=list(im.getchannel('A').getextrema()),sha256=hashlib.sha256(b).hexdigest(),width=w,height=h,origin='/Users/nighca/.codex/generated_images/01a16e95-7926-79e0-a8ae-6f56388db3d8/exec-7ec2e3ee-5d07-4ed0-b3b3-9f81361a655f.png' if p.stem=='head' else str((d/'../../character-presets/assets/plum-crop'/f'{p.stem.replace("-source","")}.png').resolve())))
 data=dict(schemaVersion=1,canvas=dict(width=1254,height=1254),assets=assets,nodes=nodes,clips=clips,states={s:s for s in clips},transitions=[])
 (d/'package.json').write_text(json.dumps(data,indent=2)+'\n')
-(d/'provenance.json').write_text(json.dumps(dict(sources=sources,generationCalls=1,originalCanonicalStates={s:hashlib.sha256((d/'../../appearances/assets/plum-crop'/f'{s}.png').resolve().read_bytes()).hexdigest() for s in clips}),indent=2)+'\n')
+(d/'provenance.json').write_text(json.dumps(dict(sources=sources,generationCalls=1,originalCanonicalStates={s:hashlib.sha256((d/'../../character-presets/assets/plum-crop'/f'{s}.png').resolve().read_bytes()).hexdigest() for s in clips}),indent=2)+'\n')

@@ -203,3 +203,31 @@ test('concurrent dead-lock reclaimers launch only one service group', async (t) 
     assert.equal(outcomes.filter((result) => result.status === 'rejected').length, 1)
   }
 })
+
+test('default runner generates the current character preset source before launching services', async (t) => {
+  const f = await fixture(t)
+  await mkdir(join(f.root, 'scripts'))
+  await mkdir(join(f.root, 'node_modules/vite/bin'), { recursive: true })
+  await mkdir(join(f.root, 'bin'))
+  await writeFile(join(f.root, 'scripts/character-presets.mjs'), "import { appendFileSync } from 'node:fs';appendFileSync('events', JSON.stringify({event:'generate'})+'\\n')")
+  await writeFile(join(f.root, 'node_modules/vite/bin/vite.js'), "require('node:fs').appendFileSync('events', JSON.stringify({event:'web'})+'\\n');setInterval(()=>{},1000)")
+  const npm = join(f.root, 'bin/npm')
+  await writeFile(npm, `#!${process.execPath}\nconst fs=require('node:fs'); const install=process.argv[2]==='ci'; fs.appendFileSync('events',JSON.stringify({event:install?'install':'gateway'})+'\\n'); if(!install)setInterval(()=>{},1000)`, { mode: 0o755 })
+  const previous = process.env.PATH
+  process.env.PATH = `${join(f.root, 'bin')}:${previous}`
+  const controller = new AbortController()
+  const done = runMainPreview({ root: f.root, pollMs: 30, signal: controller.signal })
+  void done.catch(() => {})
+  try {
+    await until(async () => {
+      const events = await f.events()
+      return events.some(({ event }) => event === 'web') && events.some(({ event }) => event === 'gateway')
+    })
+    const events = (await f.events()).map(({ event }) => event)
+    assert.deepEqual(events.slice(0, 2), ['install', 'generate'])
+  } finally {
+    controller.abort()
+    await done
+    process.env.PATH = previous
+  }
+})

@@ -17,6 +17,6 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "@lie/appearance-animation": "0.0.0"
+    "@lie/character-animation": "0.0.0"
   }
 }

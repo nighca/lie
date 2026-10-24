@@ -4,7 +4,7 @@
 
 ## 1. 任务与来源
 
-发起者指定独立worktree、reviewed base/契约依赖SHA、单个人物owner和允许目录，默认下一人为blue-glasses。源始终从canonical `design/appearances/assets/<id>/{default,listening,waiting,speaking}.png`读取。先实际查看四态，写明靠耳/托腮/说话等原姿势语义和身份特征；不重新设计脸、服装或画风。
+发起者指定独立worktree、reviewed base/契约依赖SHA、单个人物owner和允许目录，默认下一人为blue-glasses。源始终从canonical `design/character-presets/assets/<id>/{default,listening,waiting,speaking}.png`读取。先实际查看四态，写明靠耳/托腮/说话等原姿势语义和身份特征；不重新设计脸、服装或画风。
 
 未批准人物的工作放`design/animation-candidates/<id>/**`，不改生产manifest/其他角色/引擎/UI。该目录可含候选package/parts、原生浏览器截图、来源hash、实际prompts和自检记录。银发之后人物经实际自验及root独立review通过后可迁入canonical animation目录并激活一条引用。用户已批准扩人制作，不等于每个成品已美术通过。
 

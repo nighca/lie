@@ -56,4 +56,4 @@
 }
 ```
 
-本目录保存官方源 JSON。当前应用还使用 `apps/web/public/games/` 副本及首页案件目录，增加源文件不会自动加入官方列表；收录和资源同步由维护者处理。用户自创案件通过链接携带完整快照，独立于官方列表；编辑器投稿准备的是可供维护者 review 的 JSON，不会自动提交 PR 或自动发布。预置形象制作入口见 [`design/appearances/README.md`](../../design/appearances/README.md)。
+本目录保存官方源 JSON。当前应用还使用 `apps/web/public/games/` 副本及首页案件目录，增加源文件不会自动加入官方列表；收录和资源同步由维护者处理。用户自创案件通过链接携带完整快照，独立于官方列表；编辑器投稿准备的是可供维护者 review 的 JSON，不会自动提交 PR 或自动发布。预置形象制作入口见 [`design/character-presets/README.md`](../../design/character-presets/README.md)。

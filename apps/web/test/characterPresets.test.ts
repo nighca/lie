@@ -1,37 +1,37 @@
 import { describe, expect, it } from 'vitest'
 
-import { readAppearances } from '../src/presentation/appearances'
+import { readCharacterPresets } from '../src/presentation/characterPresets'
 import { game, setup } from './helpers'
 
 function preset(id: string) {
   return { id, name: `形象${id}`, avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456' }
 }
 
-describe('appearance voice configuration', () => {
+describe('characterPreset voice configuration', () => {
   it('normalizes legacy, explicit default and opaque provider voices', () => {
-    const appearances = readAppearances([
+    const characterPresets = readCharacterPresets([
       preset('legacy'),
       { ...preset('default'), voiceId: null },
       { ...preset('configured'), voiceId: '  vendor:voice/warm  ' },
     ])
-    expect(appearances.map(({ voiceId }) => voiceId)).toEqual([null, null, 'vendor:voice/warm'])
+    expect(characterPresets.map(({ voiceId }) => voiceId)).toEqual([null, null, 'vendor:voice/warm'])
   })
 
   it.each(['', '  \t ', 10, true, {}, []])('rejects an invalid configured voice %j', (voiceId) => {
-    expect(() => readAppearances([{ ...preset('invalid'), voiceId }])).toThrow('Invalid appearance voiceId')
+    expect(() => readCharacterPresets([{ ...preset('invalid'), voiceId }])).toThrow('Invalid characterPreset voiceId')
   })
 
-  it('fixes the selected appearance voice for one scope and uses the new appearance after switching', async () => {
-    const appearances = readAppearances([
+  it('fixes the selected characterPreset voice for one scope and uses the new characterPreset after switching', async () => {
+    const characterPresets = readCharacterPresets([
       { ...preset('warm'), voiceId: 'warm-voice' },
       { ...preset('bright'), voiceId: 'bright-voice' },
     ])
-    const content = { ...game, characters: game.characters.map((character, index) => ({ ...character, appearanceId: appearances[index].id })) }
-    const { controller, turns } = setup(undefined, content, (id) => appearances.find((appearance) => appearance.id === id)?.voiceId ?? null)
+    const content = { ...game, characters: game.characters.map((character, index) => ({ ...character, appearanceId: characterPresets[index].id })) }
+    const { controller, turns } = setup(undefined, content, (id) => characterPresets.find((characterPreset) => characterPreset.id === id)?.voiceId ?? null)
     await controller.load('test'); controller.start(); await controller.startConversation()
     const previous = turns[0]
     expect(previous.scope.voiceId).toBe('warm-voice')
-    appearances[0].voiceId = 'replacement-voice'
+    characterPresets[0].voiceId = 'replacement-voice'
     expect(previous.scope.voiceId).toBe('warm-voice')
     controller.selectCharacter('two'); await controller.startConversation()
     expect(turns[1].scope.voiceId).toBe('bright-voice')
@@ -43,18 +43,18 @@ describe('appearance voice configuration', () => {
   })
 
   it('reuses the same preset voice across different characters', async () => {
-    const appearances = readAppearances([{ ...preset('shared'), voiceId: 'shared-voice' }])
+    const characterPresets = readCharacterPresets([{ ...preset('shared'), voiceId: 'shared-voice' }])
     const content = { ...game, characters: game.characters.map((character) => ({ ...character, appearanceId: 'shared' })) }
-    const { controller, turns } = setup(undefined, content, (id) => appearances.find((appearance) => appearance.id === id)?.voiceId ?? null)
+    const { controller, turns } = setup(undefined, content, (id) => characterPresets.find((characterPreset) => characterPreset.id === id)?.voiceId ?? null)
     await controller.load('test'); controller.start(); await controller.startConversation()
     controller.selectCharacter('two'); await controller.startConversation()
     expect(turns.map(({ scope }) => scope.voiceId)).toEqual(['shared-voice', 'shared-voice'])
     controller.dispose()
   })
 
-  it('keeps provider defaults for null and unknown appearances', async () => {
-    const appearances = readAppearances([{ ...preset('known'), voiceId: 'known-voice' }])
-    const { controller, turns } = setup(undefined, game, (id) => appearances.find((appearance) => appearance.id === id)?.voiceId ?? null)
+  it('keeps provider defaults for null and unknown characterPresets', async () => {
+    const characterPresets = readCharacterPresets([{ ...preset('known'), voiceId: 'known-voice' }])
+    const { controller, turns } = setup(undefined, game, (id) => characterPresets.find((characterPreset) => characterPreset.id === id)?.voiceId ?? null)
     await controller.load('test'); controller.start(); await controller.startConversation()
     controller.selectCharacter('two'); await controller.startConversation()
     expect(turns.map(({ scope }) => scope.voiceId)).toEqual([null, null])
@@ -62,53 +62,53 @@ describe('appearance voice configuration', () => {
   })
 })
 
-describe('appearance state portraits', () => {
+describe('characterPreset state portraits', () => {
   it('normalizes absent, null and partial state sets while retaining the default portrait', () => {
-    const appearances = readAppearances([
+    const characterPresets = readCharacterPresets([
       preset('legacy'),
       { ...preset('default'), portraits: null },
       { ...preset('partial'), portraits: { listening: '/listen.png', speaking: null } },
     ])
-    expect(appearances.map(({ portraits }) => portraits)).toEqual([
+    expect(characterPresets.map(({ portraits }) => portraits)).toEqual([
       { listening: null, waiting: null, speaking: null },
       { listening: null, waiting: null, speaking: null },
       { listening: '/listen.png', waiting: null, speaking: null },
     ])
-    expect(appearances[2].portrait).toBe('/portrait.png')
+    expect(characterPresets[2].portrait).toBe('/portrait.png')
   })
 
   it.each([false, 'image.png', 1, []])('rejects a non-object state set %j', (portraits) => {
-    expect(() => readAppearances([{ ...preset('invalid'), portraits }])).toThrow('Invalid appearance portraits')
+    expect(() => readCharacterPresets([{ ...preset('invalid'), portraits }])).toThrow('Invalid characterPreset portraits')
   })
 
   it.each(['listening', 'waiting', 'speaking'])('rejects invalid %s URLs', (state) => {
     for (const value of ['', '  ', 1, false, {}, []]) {
-      expect(() => readAppearances([{ ...preset('invalid'), portraits: { [state]: value } }])).toThrow('Invalid appearance portrait')
+      expect(() => readCharacterPresets([{ ...preset('invalid'), portraits: { [state]: value } }])).toThrow('Invalid characterPreset portrait')
     }
   })
 })
 
-describe('appearance display names', () => {
+describe('characterPreset display names', () => {
   it('reads authored Chinese names without deriving labels from IDs', () => {
-    expect(readAppearances([{ ...preset('unseen-id'), name: '新来的向导' }])[0].name).toBe('新来的向导')
+    expect(readCharacterPresets([{ ...preset('unseen-id'), name: '新来的向导' }])[0].name).toBe('新来的向导')
   })
 
   it.each([null, '', '  ', 1, false, {}, []])('rejects an invalid display name %j', (name) => {
-    expect(() => readAppearances([{ ...preset('invalid'), name }])).toThrow('Invalid appearance name')
+    expect(() => readCharacterPresets([{ ...preset('invalid'), name }])).toThrow('Invalid characterPreset name')
   })
 
   it('requires a display name in the catalog contract', () => {
-    expect(() => readAppearances([{ id: 'missing', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456' }])).toThrow('Invalid appearance name')
+    expect(() => readCharacterPresets([{ id: 'missing', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456' }])).toThrow('Invalid characterPreset name')
   })
 })
 
 
-describe('optional appearance animation', () => {
-  it('keeps static appearances and resolves an animated appearance in one catalog', () => {
-    const values = readAppearances([preset('static'), { ...preset('moving'), animation: '/appearances/moving/animation/package.json' }])
+describe('optional characterPreset animation', () => {
+  it('keeps static characterPresets and resolves an animated characterPreset in one catalog', () => {
+    const values = readCharacterPresets([preset('static'), { ...preset('moving'), animation: '/appearances/moving/animation/package.json' }])
     expect(values.map(value => value.animation)).toEqual([null, '/appearances/moving/animation/package.json'])
   })
   it.each(['', 'https://example.net/animation/package.json', '/appearances/other/animation/package.json', 2, {}])('rejects invalid animation references %j', animation => {
-    expect(() => readAppearances([{ ...preset('moving'), animation }])).toThrow('Invalid appearance animation')
+    expect(() => readCharacterPresets([{ ...preset('moving'), animation }])).toThrow('Invalid characterPreset animation')
   })
 })

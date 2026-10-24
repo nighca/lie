@@ -1,6 +1,6 @@
 # Coral animation integration handoff
 
-The version 1 contract and production workflow are implemented by the independent `@lie/appearance-animation` package. The agreed `CharacterPreset` / `@lie/character-animation` naming migration follows game integration. `AnimatedPortrait` in `@lie/ui` provides Vue lifecycle handling and its existing static portrait slot remains the fallback.
+The version 1 contract and production workflow are implemented by the independent `@lie/character-animation` package. The agreed `CharacterPreset` / `@lie/character-animation` naming migration follows game integration. `AnimatedPortrait` in `@lie/ui` provides Vue lifecycle handling and its existing static portrait slot remains the fallback.
 
 ## Source and integration boundary
 
@@ -8,7 +8,7 @@ The version 1 contract and production workflow are implemented by the independen
 - The generator validates the package and 11 shared PNG parts before writing public output, then emits `/appearances/coral-bob/animation/package.json` in the runtime manifest.
 - Coral shares 21 nodes across the four required states. The reviewed micro motion and common head alignment are carried into the data. Part provenance is in `design/animation-production/coral-bob/provenance.json`.
 - The existing static images remain source assets. Other appearances omit the optional animation reference and normalize to `null`.
-- The game page now wraps the existing portrait image/span in `<AnimatedPortrait :src="currentAppearance?.animation ?? null" :state="portraitState">`. The same derived state drives animation and static fallback: inactive/busy/error → default, recording → listening, waiting/speaking → their matching state. Switching to a static character cancels and disposes the animation. Application CSS is unchanged by the bridge.
+- The game page now wraps the existing portrait image/span in `<AnimatedPortrait :src="currentCharacterPreset?.animation ?? null" :state="portraitState">`. The same derived state drives animation and static fallback: inactive/busy/error → default, recording → listening, waiting/speaking → their matching state. Switching to a static character cancels and disposes the animation. Application CSS is unchanged by the bridge.
 
 ## Verified on 2026-10-24
 

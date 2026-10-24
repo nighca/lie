@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { readAnimationPackage } from '../../../packages/appearance-animation/src/package.ts'
-import { AnimationTimeline, sampleClip } from '../../../packages/appearance-animation/src/playback.ts'
+import { readAnimationPackage } from '../../../packages/character-animation/src/package.ts'
+import { AnimationTimeline, sampleClip } from '../../../packages/character-animation/src/playback.ts'
 const root=new URL('./',import.meta.url)
 const data=readAnimationPackage(JSON.parse(readFileSync(new URL('package.json',root))))
 const provenance=JSON.parse(readFileSync(new URL('provenance.json',root)))
@@ -17,7 +17,7 @@ for(const [id,asset] of Object.entries(data.assets)) {
  assert.deepEqual(provenance.parts[id].alphaExtrema,[0,255])
 }
 for(const [state,meta] of Object.entries(provenance.sources)) {
- const original=readFileSync(new URL(`../../appearances/assets/salt-pepper-beard/${state}.png`,root))
+ const original=readFileSync(new URL(`../../character-presets/assets/salt-pepper-beard/${state}.png`,root))
  assert.equal(hash(original),meta.sha256)
  assert.equal(meta.sha256,provenance.parts[state+'-source'].sha256)
 }

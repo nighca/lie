@@ -9,11 +9,11 @@
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview --host 127.0.0.1 --port 4174 --strictPort",
     "test": "vitest run",
-    "predev": "node ../../scripts/appearances.mjs",
-    "prebuild": "node ../../scripts/appearances.mjs",
-    "pretypecheck": "node ../../scripts/appearances.mjs",
-    "pretest": "node ../../scripts/appearances.mjs",
-    "postbuild": "node ../../scripts/appearances.mjs --check --output dist/appearances"
+    "predev": "node ../../scripts/character-presets.mjs",
+    "prebuild": "node ../../scripts/character-presets.mjs",
+    "pretypecheck": "node ../../scripts/character-presets.mjs",
+    "pretest": "node ../../scripts/character-presets.mjs",
+    "postbuild": "node ../../scripts/character-presets.mjs --check --output dist/appearances"
   },
   "dependencies": {
     "@lie/game-core": "0.0.0",

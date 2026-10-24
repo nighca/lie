@@ -1,0 +1,1 @@
+{"name":"@lie/character-animation","version":"0.0.0","private":true,"type":"module","exports":{".":"./src/index.ts","./contract":"./src/package.ts"},"scripts":{"typecheck":"tsc --project tsconfig.json","test":"vitest run"}}

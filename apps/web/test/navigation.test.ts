@@ -21,7 +21,7 @@ async function screen(path = '/', loadCatalog = async () => catalog) {
   const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/', component: Application }] })
   await router.push(path)
   const wrapper = mount(Application, { props: {
-    appearances: [], demo: true, loadCatalog,
+    characterPresets: [], demo: true, loadCatalog,
     createController: () => { const next = setup(); sessions.push(next); return next.controller },
   }, global: { plugins: [router] } })
   cleanup.push(() => wrapper.unmount())

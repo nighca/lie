@@ -1,9 +1,9 @@
 /**
- * design/appearances/manifest.json 的单条正式预置形象。
- * 这是制作源规格；前端 Appearance 使用生成后的站点 URL，并保留资源缺失容错。
- * 路径、唯一性、PNG 画布和文件存在性由 scripts/appearances.mjs 进一步校验。
+ * design/character-presets/manifest.json 的单条正式预置形象。
+ * 这是制作源规格；前端 CharacterPreset 使用生成后的站点 URL，并保留资源缺失容错。
+ * 路径、唯一性、PNG 画布和文件存在性由 scripts/character-presets.mjs 进一步校验。
  */
-export interface AppearanceManifestEntry {
+export interface CharacterPresetManifestEntry {
   /** 稳定引用 ID，只用小写字母、数字和连字符；案件通过 appearanceId 引用。 */
   id: string
   /** 编辑器展示的中文形象名，如“珊瑚短发”；不是案件内的人物姓名。 */
@@ -30,4 +30,4 @@ export interface AppearanceManifestEntry {
 }
 
 /** 完整权威清单；非空、ID 唯一等跨条目约束由生成器校验。 */
-export type AppearanceManifest = readonly AppearanceManifestEntry[]
+export type CharacterPresetManifest = readonly CharacterPresetManifestEntry[]

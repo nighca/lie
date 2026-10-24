@@ -6,7 +6,7 @@ root=Path(__file__).resolve().parent
 repo=root.parents[2]
 gen=Path('/Users/nighca/.codex/generated_images/01a16db7-5ef1-7342-b690-7847489750d7')
 files={'head':gen/'exec-0d6778c7-bc4c-4ebd-8a3b-195b1c0ed108.png','mouths':gen/'exec-cc23c077-ca28-4f1b-8ba6-9896060af9a8.png'}
-for state in ['default','listening','waiting','speaking']:files[state+'-source']=repo/'design/appearances/assets/silver-bun'/f'{state}.png'
+for state in ['default','listening','waiting','speaking']:files[state+'-source']=repo/'design/character-presets/assets/silver-bun'/f'{state}.png'
 assets={};sources=[]
 for name,p in files.items():
  dest=root/'parts'/f'{name}.png';shutil.copyfile(p,dest);im=Image.open(p)
@@ -66,4 +66,4 @@ for state in ['idle','listening','waiting','speaking']:
  clips[state]=dict(duration=4,loop=True,visibility=vis,tracks=tracks)
 data=dict(schemaVersion=1,canvas=dict(width=1254,height=1254),assets=assets,nodes=nodes,clips=clips,states=dict(default='idle',listening='listening',waiting='waiting',speaking='speaking'),transitions=[])
 (root/'package.json').write_text(json.dumps(data,indent=2)+'\n')
-(root/'provenance.json').write_text(json.dumps({'sources':sources,'originalCanonicalStates':{s:hashlib.sha256((repo/'design/appearances/assets/silver-bun'/f'{s}.png').read_bytes()).hexdigest() for s in ['default','listening','waiting','speaking']}},indent=2)+'\n')
+(root/'provenance.json').write_text(json.dumps({'sources':sources,'originalCanonicalStates':{s:hashlib.sha256((repo/'design/character-presets/assets/silver-bun'/f'{s}.png').read_bytes()).hexdigest() for s in ['default','listening','waiting','speaking']}},indent=2)+'\n')

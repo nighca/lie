@@ -44,7 +44,7 @@ async function stopChildren(children) {
 
 export async function runMainPreview({ root = projectRoot, pollMs = 1500, signal, commands = {
   install: ['npm', 'ci'],
-  generate: [process.execPath, 'scripts/appearances.mjs'],
+  generate: [process.execPath, 'scripts/character-presets.mjs'],
   services: [
     ['npm', 'run', 'dev', '--workspace', '@lie/gateway'],
     [process.execPath, 'node_modules/vite/bin/vite.js', 'apps/web', '--host', '127.0.0.1', '--port', '8787', '--strictPort']
@@ -114,7 +114,7 @@ export async function runMainPreview({ root = projectRoot, pollMs = 1500, signal
         children = [generation]
         const result = await Promise.race([generation.done, aborted])
         if (signal?.aborted) break
-        if (result.code !== 0) throw new Error('Appearance generation failed; preview remains stopped')
+        if (result.code !== 0) throw new Error('CharacterPreset generation failed; preview remains stopped')
         children = []
         try { if (readMain(root).sha !== current.sha) continue } catch { continue }
         const env = { ...process.env, LIE_GATEWAY_PORT: '8788', LIE_VOICE_GATEWAY_URL: 'http://127.0.0.1:8788', LIE_MAIN_SHA: current.sha }

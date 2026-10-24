@@ -51,9 +51,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .portrait-halo { position: relative; overflow: hidden; width: 100%; height: 285px; display: grid; place-items: center; }
 .portrait-halo img, .portrait-halo :deep(canvas) { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; object-fit: contain; object-position: center; transform: none; }
 .editor-character-stage h2 { font-size: 28px; font-weight: 800; line-height: 1.3; text-align: center; margin: 20px 0 0; overflow-wrap: anywhere; max-width: 100%; }
-.appearance-choice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; max-width: 100%; margin-top: 8px; padding: 4px 0; border: 0; background: transparent; font: inherit; font-size: 12px; cursor: pointer; }
-.appearance-action { color: var(--lie-muted); font-weight: 700; }
-.appearance-choice:hover .appearance-action { text-decoration: underline; }
+.preset-choice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; max-width: 100%; margin-top: 8px; padding: 4px 0; border: 0; background: transparent; font: inherit; font-size: 12px; cursor: pointer; }
+.preset-action { color: var(--lie-muted); font-weight: 700; }
+.preset-choice:hover .preset-action { text-decoration: underline; }
 .portrait-initial { display: grid; place-items: center; font-size: 30px; background: #eaf2ff; color: var(--lie-primary); }
 .field-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .text-button { border: 0; background: transparent; color: var(--lie-primary); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; padding: 2px 0; }
@@ -85,10 +85,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .error-summary strong { font-size: 14px; }
 .error-summary ul { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 20px; }
 .error-summary button { font: inherit; font-size: 12px; border: 0; background: transparent; padding: 2px 0; color: #9a4e3e; text-align: left; text-decoration: underline; cursor: pointer; }
-.appearance-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.editor-appearance { border: 2px solid #d5d7df; border-radius: 13px; padding: 8px; min-width: 0; background: white; color: inherit; font: inherit; font-size: 12px; cursor: pointer; }
-.editor-appearance[aria-pressed=true] { border-color: var(--lie-primary); background: #eaf2ff; }
-.editor-appearance img { display: block; width: 100%; height: 100px; object-fit: contain; margin-bottom: 5px; }
+.preset-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.editor-preset { border: 2px solid #d5d7df; border-radius: 13px; padding: 8px; min-width: 0; background: white; color: inherit; font: inherit; font-size: 12px; cursor: pointer; }
+.editor-preset[aria-pressed=true] { border-color: var(--lie-primary); background: #eaf2ff; }
+.editor-preset img { display: block; width: 100%; height: 100px; object-fit: contain; margin-bottom: 5px; }
 .example-text { background: #f5f7fb; border-radius: 15px; padding: 18px; }
 .submission-layout { display: grid; gap: 14px; }
 .submission-intro, .submission-note { margin: 0; color: var(--lie-muted); font-size: 14px; line-height: 1.7; }
@@ -137,8 +137,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
   .answer-toggle strong { font-size: 13px; }
   .answer-toggle small, .guidance-line { font-size: 11px; }
   .field-heading .text-button { font-size: 12px; }
-  .appearance-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
-  .editor-appearance img { height: 82px; }
+  .preset-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+  .editor-preset img { height: 82px; }
   .final-actions { gap: 9px; }
   .final-actions .lie-button { padding: 8px 11px; font-size: 13px; }
   .final-actions .lie-button--quiet { flex-basis: 100%; order: 3; }
