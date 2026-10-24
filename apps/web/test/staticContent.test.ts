@@ -1,3 +1,6 @@
+import { stat } from 'node:fs/promises'
+import { fileURLToPath, URL as NodeURL } from 'node:url'
+
 import { validateGame } from '@lie/game-core'
 import { describe, expect, it } from 'vitest'
 
@@ -21,4 +24,18 @@ describe('bundled game content', () => {
     }
     expect(game.characters).toHaveLength(3)
   })
+
+  it('resolves every default and configured state asset from the shipped static resources', async () => {
+    for (const appearance of readAppearances(appearanceData)) {
+      const paths = new Set([appearance.avatar, appearance.portrait, ...Object.values(appearance.portraits)])
+      for (const path of paths) {
+        if (path == null) continue
+        expect(path).toMatch(/^\/appearances\//)
+        const file = await stat(fileURLToPath(new NodeURL(`../public${path}`, import.meta.url)))
+        expect(file.isFile()).toBe(true)
+        expect(file.size).toBeGreaterThan(0)
+      }
+    }
+  })
+
 })

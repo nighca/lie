@@ -2,9 +2,14 @@
   {
     "id": "coral-bob",
     "avatar": "/appearances/coral-bob.png",
-    "portrait": "/appearances/coral-bob.png",
+    "portrait": "/appearances/coral-bob-v2/default.png",
     "accent": "#FF665B",
-    "voiceId": "535b81a1db504baa99fd726e01afee15"
+    "voiceId": "535b81a1db504baa99fd726e01afee15",
+    "portraits": {
+      "listening": "/appearances/coral-bob-v2/listening.png",
+      "waiting": "/appearances/coral-bob-v2/waiting.png",
+      "speaking": "/appearances/coral-bob-v2/speaking.png"
+    }
   },
   {
     "id": "sunny-moustache",
