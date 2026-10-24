@@ -64,6 +64,7 @@ describe('editor and shared case application routes', () => {
     expect(router.currentRoute.value.path).toBe('/editor/preview')
     expect(sessions[0].source).toEqual(customGame)
     expect(wrapper.text()).toContain(customGame.title)
+    expect(wrapper.findAll('button').some((button) => button.text() === '返回编辑器')).toBe(true)
     await click('接案，开始调查'); await click('开始模拟对话')
     const leaving = router.push('/editor'); await settle()
     await click('继续调查'); await leaving
