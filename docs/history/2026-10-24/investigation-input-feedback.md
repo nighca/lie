@@ -9,3 +9,11 @@
 - 独立IAB验证：临时受控组件展示页（模拟数值，不连接麦克风/供应商），切换前后反馈区48px，文字/波形中心都为y173；实际调查演示页桌面姓名区32px/14px；391×844无水平溢出，底栏bottom=844，窄屏姓名区40px。临时展示页已删除，不提交。
 - 截图：`/private/tmp/lie-input-only/desktop.png`、`/private/tmp/lie-input-only/mobile.png`。
 - 本次只验证UI状态与布局；不作为真实供应商语音或真人输入验收。main集成/8787更新/线上发布由主协调chat独立完成。
+
+## 预览反馈后的垂直居中修正
+
+用户指出5394状态文字仍偏上。根因是全局旧`.lie-voice__status { flex: 1 }`让文字span撑满48px，首次验收只量元素框中心遗漏实际字行位置。组件状态明确`flex: none; line-height: 20px`，避免全局旧值影响。
+
+新增开发展示入口`/voice-feedback-preview.html`，复用正式VoiceControl与全局UI样式，可切换角色回答文字/模拟玩家输入波形/等待玩家/关闭；明确标记模拟音量、不使用麦克风或供应商，未接入产品路由或生产构建入口。
+
+独立IAB复核：桌面反馈slot中心、20px文字span中心及Range文字行中心均y280.4375；32px波形中心也是y280.4375。391px窄屏slot/波形中心均y802，文字Range中心y801.5（0.5px取整差）；没有状态与波形共存。UI35项与Web构建再次通过。截图`/private/tmp/lie-input-only/status-centered.png`、`/private/tmp/lie-input-only/wave-centered.png`。

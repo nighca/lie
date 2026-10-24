@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>语音反馈 · 展示验证</title>
+<style>
+body { margin: 0; background: #fff18b; }
+main { max-width: 1100px; margin: 48px auto; padding: 0 20px; }
+label { display: block; margin: 20px 0 40px; }
+@media (max-width: 700px) { main { margin: 24px auto; } }
+</style>
+<div id="app"></div>
+<script type="module">
+import { createApp, h, ref, onUnmounted } from 'vue'
+import VoiceControl from '../../packages/ui/src/components/VoiceControl.vue'
+import UiButton from '../../packages/ui/src/components/UiButton.vue'
+import '../../packages/ui/style.css'
+
+createApp({ setup() {
+  const mode = ref('speaking')
+  const level = ref(0)
+  const timer = setInterval(() => { level.value = mode.value === 'input' ? .01 + Math.random() * .11 : 0 }, 80)
+  onUnmounted(() => clearInterval(timer))
+  return () => h('main', [
+    h('h1', '语音反馈展示'),
+    h('p', '本页复用正式组件与全局样式。波形为模拟玩家音量，不使用麦克风，不连接语音服务。'),
+    h('label', ['展示状态 ', h('select', { value: mode.value, onChange: event => { mode.value = event.target.value } }, [
+      h('option', { value: 'speaking' }, '角色回答 · 只显示文字'),
+      h('option', { value: 'input' }, '玩家讲话 · 只显示黑色波形'),
+      h('option', { value: 'recording' }, '等待玩家 · 只显示文字'),
+      h('option', { value: 'off' }, '对话关闭 · 留空'),
+    ])]),
+    h(VoiceControl, { active: mode.value !== 'off', status: mode.value === 'speaking' ? 'speaking' : 'recording', label: mode.value === 'speaking' ? '正在回答' : '正在聆听', actionLabel: mode.value === 'off' ? '开启对话' : '结束对话', inputActive: mode.value === 'input', inputLevel: level.value }, {
+      details: () => h('strong', '06:04'),
+      answer: () => h(UiButton, { variant: 'secondary' }, () => '我有答案了 →'),
+    }),
+  ])
+} }).mount('#app')
+</script>
+</html>

@@ -65,7 +65,7 @@ function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(va
 .lie-voice__actions :deep(.lie-button) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; min-width: 146px; border: 2px solid var(--lie-ink); border-radius: 14px; padding: 10px 16px; font-size: 14px; font-weight: 800; box-shadow: 0 3px var(--lie-ink); }
 .lie-voice__actions svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 .lie-voice__feedback { display: flex; flex: 1; flex-direction: column; justify-content: center; max-width: 390px; min-width: 0; height: 48px; }
-.lie-voice__status { font-size: 13px; font-weight: 800; }
+.lie-voice__status { flex: none; font-size: 13px; line-height: 20px; font-weight: 800; }
 .lie-voice__waveform { display: flex; align-items: center; gap: 3px; height: 32px; overflow: hidden; }
 .lie-voice__waveform i { flex: 1; min-width: 2px; max-width: 8px; border-radius: 3px; background: #202020; }
 .lie-voice__static-meter { display: none; width: 100%; }
