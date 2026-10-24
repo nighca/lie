@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LIE · 红圆点彩蛋预览</title>
+<style>
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #111b45; background: #fff18a; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 32px 20px; }
+main { max-width: 880px; margin: auto; }
+h1 { font-size: clamp(25px, 4vw, 36px); margin: 12px 0; }
+p { line-height: 1.75; }
+.badge { font-size: 13px; font-weight: 700; }
+.panel { background: #fffef7; border: 2px solid #111b45; border-radius: 20px; padding: 24px; margin: 24px 0; }
+.panel h2 { font-size: 15px; margin: 0 0 24px; }
+.brand { display: inline-flex; align-items: center; gap: 16px; color: inherit; text-decoration: none; line-height: 1; }
+.brand svg { display: block; width: 105px; height: 56px; overflow: hidden; }
+.brand span { font-size: 18px; font-weight: 800; white-space: nowrap; position: relative; isolation: isolate; }
+.brand span::after { content: ''; position: absolute; z-index: -1; height: 10px; background: url('../../../apps/web/public/brand/underline.svg') center / 100% 100% no-repeat; left: -2px; right: -3px; bottom: -5px; }
+.brand:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #075bfa; outline-offset: 6px; border-radius: 4px; }
+.compact .brand { gap: 8px; }
+.compact svg { width: 88px; height: 47px; }
+.compact .brand span { font-size: 14px; }
+.playing circle { animation: dotJump 560ms ease-in-out; }
+@keyframes dotJump { 0%, 64.3%, 100% { transform: translateY(0); } 26.8% { transform: translateY(-12.57px); } }
+@keyframes dotRest { 0%, 99% { stroke: #111b45; stroke-width: 4px; } 100% { stroke: none; } }
+.simulate-reduced .playing circle { animation-name: dotRest; }
+@media (prefers-reduced-motion: reduce) { .playing circle { animation-name: dotRest; } }
+.controls { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 28px; }
+button { font: inherit; font-weight: 700; color: #111b45; background: #fff18a; border: 2px solid #111b45; border-radius: 10px; padding: 9px 14px; cursor: pointer; min-height: 44px; }
+label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+input { width: 18px; height: 18px; accent-color: #075bfa; }
+.note { font-size: 13px; color: #44506b; margin-bottom: 0; }
+#preview-home { scroll-margin-top: 24px; }
+@media (max-width: 480px) { body { padding: 24px 16px; } .panel { padding: 20px; } }
+</style>
+</head>
+<body>
+<main>
+<div class="badge">探索预览 · A 方向已选 · 正式页面未改</div>
+<h1>红圆点，轻轻跳一下。</h1>
+<p>鼠标经过或键盘聚焦 Logo 看一次；触屏按下也能触发。只动红点，约 560 毫秒，桌面最高跳 3 像素。悬停不循环。</p>
+<section class="panel">
+<h2>桌面原尺寸 · 105 × 56</h2>
+<a class="brand" href="#preview-home" aria-label="LIE 首页"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 235" aria-hidden="true" focusable="false"><title>LIE</title><path fill="#111B45" d="M65 31C49 30 42 39 40 56L29 174C27 192 36 202 54 203L143 205C159 205 168 197 169 182C170 168 162 159 146 159L92 158C84 158 81 154 82 147L92 58C94 41 84 32 69 31Z"/><path fill="#075BFA" d="M216 89C201 89 194 97 193 110L185 184C183 198 190 206 203 206L218 206C230 205 237 198 238 185L245 111C247 96 239 89 225 89Z"/><circle fill="#FF665B" cx="221" cy="55" r="23"/><path fill="#111B45" d="M295 43L371 28C388 25 398 35 398 49C399 62 393 70 380 72L319 85C314 86 313 88 313 93L314 101C314 104 315 106 320 105L368 97C382 95 389 103 390 115C391 128 384 136 371 138L322 147C317 148 315 151 315 155L315 161C315 164 317 166 322 165L383 158C400 156 410 164 411 179C412 195 403 203 389 204L297 209C276 210 265 198 266 177L266 78C267 57 276 47 295 43Z"/></svg>
+<span>语音推理</span></a>
+</section>
+<section class="panel compact">
+<h2>窄屏原尺寸 · 88 × 47</h2>
+<a class="brand" href="#preview-home" aria-label="LIE 首页"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 235" aria-hidden="true" focusable="false"><title>LIE</title><path fill="#111B45" d="M65 31C49 30 42 39 40 56L29 174C27 192 36 202 54 203L143 205C159 205 168 197 169 182C170 168 162 159 146 159L92 158C84 158 81 154 82 147L92 58C94 41 84 32 69 31Z"/><path fill="#075BFA" d="M216 89C201 89 194 97 193 110L185 184C183 198 190 206 203 206L218 206C230 205 237 198 238 185L245 111C247 96 239 89 225 89Z"/><circle fill="#FF665B" cx="221" cy="55" r="23"/><path fill="#111B45" d="M295 43L371 28C388 25 398 35 398 49C399 62 393 70 380 72L319 85C314 86 313 88 313 93L314 101C314 104 315 106 320 105L368 97C382 95 389 103 390 115C391 128 384 136 371 138L322 147C317 148 315 151 315 155L315 161C315 164 317 166 322 165L383 158C400 156 410 164 411 179C412 195 403 203 389 204L297 209C276 210 265 198 266 177L266 78C267 57 276 47 295 43Z"/></svg>
+<span>语音推理</span></a>
+</section>
+<div class="controls">
+<button type="button" id="replay">两种尺寸再播一次</button>
+<label><input type="checkbox" id="reduced">模拟减弱动态</label>
+</div>
+<p class="note">模拟只作用于此预览；系统若已开启减弱动态，这里也会遵循。减弱动态以静止细描边代替跳动，不修改系统设置。</p>
+<p class="note">预览中的 Logo 是普通链接，点击或 Enter 会立即跳到下方本地“首页占位”，动画随导航中止；不等动作播完。正式应用的首页导航、离开调查确认都未改动。</p>
+<section class="panel" id="preview-home">
+<h2>本地首页占位</h2>
+<p>这里仅验证链接能直接导航，并不是正式应用首页。浏览器仍可右键或在新标签页打开 Logo 链接。</p>
+<a href="#">回到预览顶部</a>
+</section>
+</main>
+<script>
+const brands = document.querySelectorAll('.brand')
+const reduced = document.querySelector('#reduced')
+const motionPreference = matchMedia('(prefers-reduced-motion: reduce)')
+function stop() {
+  for (const brand of brands) brand.classList.remove('playing')
+}
+function play(brand) {
+  if (!brand.classList.contains('playing')) brand.classList.add('playing')
+}
+for (const brand of brands) {
+  brand.addEventListener('pointerenter', () => play(brand))
+  brand.addEventListener('pointerdown', () => play(brand))
+  brand.addEventListener('focus', () => play(brand))
+  brand.addEventListener('pointerleave', () => brand.classList.remove('playing'))
+  brand.addEventListener('pointercancel', () => brand.classList.remove('playing'))
+  brand.addEventListener('blur', () => brand.classList.remove('playing'))
+  brand.addEventListener('animationend', () => brand.classList.remove('playing'))
+}
+document.querySelector('#replay').addEventListener('click', () => {
+  for (const brand of brands) play(brand)
+})
+reduced.addEventListener('change', () => {
+  stop()
+  document.documentElement.classList.toggle('simulate-reduced', reduced.checked)
+})
+motionPreference.addEventListener('change', stop)
+window.addEventListener('hashchange', stop)
+window.addEventListener('pagehide', stop)
+</script>
+</body>
+</html>
