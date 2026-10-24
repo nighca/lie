@@ -62,7 +62,7 @@ describe('transcript follows the latest visible content', () => {
     Object.defineProperty(log, 'scrollHeight', { configurable: true, get: () => height })
     await wrapper.setProps({ messages: [{ id: 'reply', speaker: '甲', text: '逐字展示会让文本持续增高。'.repeat(20) }] })
     height = 400
-    await vi.advanceTimersByTimeAsync(32)
+    await vi.advanceTimersByTimeAsync(50)
     expect(log.scrollTop).toBe(400)
     const partial = wrapper.get('article p').text()
     expect(partial.length).toBeGreaterThan(0)

@@ -13,6 +13,25 @@ function setup() {
 const answer = (id: string, text: string, pending = false): RevealMessage => ({ id, speaker: '人物', text, pending })
 
 describe('transcript presentation reveal', () => {
+  it.each([40, 60])('gives a %i-character answer readable pacing without exceeding bounded catchup', (length) => {
+    const { reveal, rows } = setup()
+    const text = '字'.repeat(length)
+    reveal.update([], true)
+    reveal.update([answer('reply', text)], true)
+    vi.advanceTimersByTime(800)
+    expect(rows()[0].text.length).toBeGreaterThan(0)
+    expect(rows()[0].text.length).toBeLessThan(length)
+    let elapsed = 800
+    while (rows()[0].text !== text && elapsed < 2400) {
+      vi.advanceTimersByTime(50)
+      elapsed += 50
+    }
+    expect(elapsed).toBeGreaterThanOrEqual(1800)
+    expect(rows()[0].text).toBe(text)
+    expect(vi.getTimerCount()).toBe(0)
+    reveal.dispose()
+  })
+
   it('shows mounted history and user messages immediately, revealing only newly received answers', () => {
     const { reveal, rows } = setup()
     const history = answer('old', '已有历史')
@@ -27,7 +46,7 @@ describe('transcript presentation reveal', () => {
     vi.advanceTimersByTime(64)
     expect(rows()[2].text.length).toBeGreaterThan(0)
     expect(rows()[2].text.length).toBeLessThan(response.text.length)
-    vi.advanceTimersByTime(800)
+    vi.advanceTimersByTime(2400)
     expect(rows()[2].text).toBe(response.text)
     expect(vi.getTimerCount()).toBe(0)
     reveal.dispose()
@@ -45,17 +64,17 @@ describe('transcript presentation reveal', () => {
     reveal.update([answer('final-id', '这段角色回复还在继续，现在又收到更多文字。')], true)
     expect(rows()[0].key).toBe(key)
     expect(rows()[0].text).toBe(partial)
-    vi.advanceTimersByTime(800)
+    vi.advanceTimersByTime(2400)
     expect(rows()[0].text).toBe('这段角色回复还在继续，现在又收到更多文字。')
     reveal.dispose()
   })
 
-  it('caps catchup at the original 800ms deadline despite continuously arriving chunks and never queues old rounds', () => {
+  it('caps catchup at the original 2400ms deadline despite continuously arriving chunks and never queues old rounds', () => {
     const { reveal, rows } = setup()
     reveal.update([], true)
     let text = '长'.repeat(400)
     reveal.update([answer('stream', text, true)], true)
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 23; i++) {
       vi.advanceTimersByTime(100)
       text += '后续文字'.repeat(20)
       reveal.update([answer('stream', text, true)], true)
@@ -65,7 +84,7 @@ describe('transcript presentation reveal', () => {
     reveal.update([answer('stream', text), answer('new', '下一轮新回复')], true)
     expect(rows()[0].text).toBe(text)
     expect(rows()[1].text).toBe('')
-    vi.advanceTimersByTime(32)
+    vi.advanceTimersByTime(50)
     expect(rows()[1].text.length).toBeGreaterThan(0)
     reveal.dispose()
   })
@@ -75,12 +94,12 @@ describe('transcript presentation reveal', () => {
     reveal.update([], true)
     const old = answer('old', '旧回复'.repeat(100))
     reveal.update([old], true)
-    vi.advanceTimersByTime(32)
+    vi.advanceTimersByTime(50)
     expect(rows()[0].text.length).toBeLessThan(old.text.length)
     reveal.update([old, { ...answer('user', '新问题'), mine: true }, answer('new', '新回复正在展示')], true)
     expect(rows()[0].text).toBe(old.text)
     expect(rows()[2].text).toBe('')
-    vi.advanceTimersByTime(32)
+    vi.advanceTimersByTime(50)
     expect(rows()[2].text.length).toBeGreaterThan(0)
     reveal.dispose()
   })
@@ -91,7 +110,7 @@ describe('transcript presentation reveal', () => {
     reveal.update([], true)
     reveal.update([answer('emoji', clusters.join(''))], true)
     for (let i = 1; i <= clusters.length; i++) {
-      vi.advanceTimersByTime(32)
+      vi.advanceTimersByTime(50)
       expect(rows()[0].text).toBe(clusters.slice(0, i).join(''))
     }
     reveal.dispose()

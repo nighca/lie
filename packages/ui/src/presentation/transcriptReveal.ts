@@ -9,8 +9,8 @@ export interface RevealMessage {
 
 export interface RevealRow<T> { key: number; message: T; text: string }
 
-const frameMs = 32
-const maxCatchupMs = 800
+const frameMs = 50
+const maxCatchupMs = 2400
 const segmenter = typeof Intl.Segmenter === 'function' ? new Intl.Segmenter('zh', { granularity: 'grapheme' }) : null
 const graphemes = (text: string) => segmenter == null ? [text] : Array.from(segmenter.segment(text), (part) => part.segment)
 

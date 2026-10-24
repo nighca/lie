@@ -65,9 +65,9 @@ onMounted(followLatest)
 .lie-transcript__avatar--detective { border: 0; background: transparent; }
 .lie-transcript__avatar--detective svg { width: 30px; height: 30px; }
 .lie-transcript__bubble { min-width: 0; padding: 12px 16px; border-radius: 18px 18px 18px 5px; background: #fff5d8; }
-.lie-transcript__message--mine { align-self: flex-end; }
-.lie-transcript__message--mine .lie-transcript__avatar { color: var(--lie-primary); background: var(--lie-soft-blue); }
-.lie-transcript__message--mine .lie-transcript__bubble { background: var(--lie-soft-blue); border-radius: 18px 18px 5px 18px; }
+.lie-transcript__message--mine { align-self: flex-end; margin-left: 0; margin-right: 40px; }
+.lie-transcript__message--mine .lie-transcript__avatar { left: auto; right: -40px; color: var(--lie-primary); background: var(--lie-soft-blue); }
+.lie-transcript__message--mine .lie-transcript__bubble { background: var(--lie-soft-blue); border-radius: 18px 18px 5px 18px; overflow-wrap: anywhere; }
 .lie-transcript__bubble strong { font-size: 12px; color: var(--lie-muted); }
 .lie-transcript__bubble p { font-size: 16px; line-height: 1.7; font-weight: 600; margin-top: 4px; }
 .lie-transcript__interrupted { display: inline-block; margin-top: 4px; font-size: 12px; color: var(--lie-muted); }
