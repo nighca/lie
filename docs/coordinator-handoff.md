@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-核验：2026-10-24 23:25 Asia/Shanghai。本页为滚动入口，轮换前必须核对实际状态并更新；详细任务以project-plan和用户最新输入为准。
+核验：2026-10-24 23:58 Asia/Shanghai。本页为滚动入口，轮换前必须核对实际状态并更新；详细任务以project-plan和用户最新输入为准。
 
 ## 协调权与定时任务
 
@@ -16,11 +16,11 @@
 
 ## 仓库与已集成状态
 
-上次核验main基线：78c7530ca5254ffe1391c25a95a2fb69084c577a，clean；本交接文档会产生后续纯文档提交，接任者读实际HEAD。origin/main本地跟踪32d89bf，未在接手时fetch；最后有部署证据的线上版本32d89bf，不能当最新远程ref独立验证。
+上次核验main基线：c845f2212a51109d7f7a48da2eee87c868fd7e53，clean；本交接文档会产生后续纯文档提交，接任者读实际HEAD。origin/main本地跟踪32d89bf，未在接手时fetch；最后有部署证据的线上版本32d89bf，不能当最新远程ref独立验证。
 
 887ac03已本地集成调查页用户验收四提交（原base62b3846；c0ba5b8→3cf9081→6b2c83e→cad5788；本地98303f8→cf06960→38b6ee3→aae203d+验收文档）。玩家输入黑波形、普通状态文案留空、48px固定slot/姓名32px增高、Vite本地8787代理。343测试/全仓类型/构建及47资源通过，IAB桌面/391布局核验通过；后续preview导航中止，未宣称全真人复验。未push/部署/更新8787。504a5dd/36e548d为反馈授权和接口协调文档。
 
-当前自有文档工作树：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie，当前分支已切为codex/integrate-animation-preview-sources（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
+当前自有文档工作树：/Users/nighca/.codex/worktrees/investigation-review-takeover/lie，当前分支已切为codex/integrate-sunny-moustache（旧分支保留纯文档历史）；与main按review顺序线性。旧候选/private/tmp/lie-integrate-text-architecture / codex/integrate-preset-voices /21eadee留存，含1629830命名→e31cdd8输入反馈→272c1ac预览选源→21eadee居中；不可整批重放已合调查改动。
 
 ## 专项与最高优先级执行
 
@@ -34,7 +34,7 @@
 - blue-glasses root已完成独立source/diff/截图review；子agentreview_blue_animation额外核现main parser/PNG/重建/960sample/100interrupt/生成演练通过，无阻塞。已派同agent新managed /Users/nighca/.codex/worktrees/blue-glasses-activation/lie /codex/blue-glasses-activation从925b1da实施9候选提交+正式源animation package/6PNG+manifest仅blue引用；其clean完整交付已rootreview，canonical激活集成fff0507；root全仓345测试/类型/构建54资源及游戏内桌面391/减弱动态/资源故障/换人恢复通过，准备本地main合入；无真实语音。详见blue-glasses-game-integration.md。精确原9候选链：c89ab1ecc1cb4a96b791be75f933202d7280cfad→199015e9a4bb691a9701422df18e282dd4f9e54d→0843fe5e3e77f9cfc1accd032b7abfece4b3046a→c0b4f4b2dbbab989de32f6207a16cc82798be39e→1d4b2b306ea923e8ba56bcc526b86b2acaf63b8e→fe8f313b844a85b66da324ad04839cb69e65f023→b2efc4e8c027ea83fe703c42f8928ec75ebe24d0→fdcb016583225167b358e1d70519ada75a8ff7e3→8a4f7f988b640e7b7619aa9a9edcf2d8968dde21。不要重放通用runtime2993ad7/00dcd60。
 - blue-glasses原验收：用户视觉通过对象fdcb016583225167b358e1d70519ada75a8ff7e3，验收记录8a4f7f9；WT /Users/nighca/.codex/worktrees/blue-glasses-animation/lie /codex/blue-glasses-animation当时clean，原base0843fe5。已知修订c0b4f4b→1d4b2b3→fe8f313→b2efc4e→fdcb016→8a4f7f9（核实际log完整SHAs及初始依赖，不据简记直接cherry-pick）。排rootreview/正式激活，不自动把研究图当生产源。
 - silver-bun仍未批准，禁止激活。原d68ad397d6d5af486cc34fce2db127d96f88393c后修订ordered b54ad7cd1279627bb11b8d9d63211684837763e9→f40541f9fdb05f2c7967aed1e8e5c097fa9f824d→7509b19e0adc618c487167c7b3feda75ab4e8d25→9133ca3aaa013c819d92170e09ef5da81bd7253d，专项clean交付，嘴位与增强动作/袖缝修正、父级桌面和391实视通过，PNG/provenance/crop/scale未改。用户最新仅waiting像整人左右晃，要求局部呼吸，故本轮只返修waiting（去侧转/局部纵向呼吸/腰下固定是专项拟案），其余状态不重开。plum已安全暂停，灰白bb4fbd3a02a1951500528d1f919dd928132bc885待父级实视，保持最多2人物；待新clean证据/用户终验。
-- sunny-moustache：WT同名 /codex/sunny-moustache-animation，base62b3846，无额外依赖；ordered4e59d7d4f16ff3c02ae8f8642b0a8b213ae1014d→c891485→68c2f7b，专项交付clean。5PNG/20nodes、预算9435096、960sample/100interrupt及桌面/391四态复验，initiator-review.md和16截图；两个异源诊断区仍有324/14计数，不能夸称全覆盖。用户已明确视觉批准，独立记录dcf759331af83e97cdb7f06a3108f6d74acb8859追加于68c2f7b；独立只读review已完成（960samples/100interrupt/current parser/重建通过）；main_acceptance_environment现负责从78c7530新managed WT正式接入，仅sunny正式源+manifest+证据，不改runtime/UI/命名。IAB子agent不可用，浏览器检查待协调专项执行；不再误标待批准。
+- sunny-moustache已review本地集成：激活WT /Users/nighca/.codex/worktrees/sunny-moustache-activation/lie，base78c7530，ordered7b1b4db16c7427e81c4e0ffaeaf49e116df2e077→3e1f594d59096990e8c53475fee4f4dbbcbe6b67→b803545fbadf8163810658870b5fabf431315f3e→0b5847f04d586325dbfc91da3ea5a6543505bd8b→b57494881104ad877f1f2d82b440b5588ae3e27f clean；原批准dcf7593。root实际源/装配/验证/来源/manifest/原生图review，当前main候选d91b9ab独立369测试/全类型构建60资源/960sample100interrupt/重建和六文件逐字节同、静态五图不变通过；IAB5501桌面391/八极值/两回退恢复/换人/console通过，1280×720既有舞台裁切与真实隐藏恢复未验须保留，详sunny-moustache-game-integration.md。5501服务仍由main_acceptance_environment持有，review后停止自有服务，未push。
 - 动画作者预览三提交cf28df834cc7d9c2ff480edde83accb38de08081→67448426aee22f5886c09883b1163653164f309e→e9deb6f3854d7c8e5838b34a3c83350507d2b70e已root核clean/full diff与参考截图review，当前main候选53e0817→10037ce→4c134c6；独立Node24.22.1 Vite预览build43modules及Preview.vue vue-tsc通过，随本轮记录本地集成，未push。支持src.<id>、ANIMATION_PREVIEW_CANDIDATE_ROOTS及VITE_ANIMATION_PREVIEW_CANDIDATES，source按selected绑定，不再全局错源。保留5351/5352/5355现服务以及plum5356/gray5357，不重启旧模板。
 - CharacterPreset命名：原owner cb86dd6e25e22444dc93b892c2d609c0a0d6ac08，旧候选1629830为其cherry-pick。批准内部源/类型/包改名，保持appearanceId和/appearances/公开兼容；待完整rootreview与按当前main再组合，不能覆盖新Editor/App或候选资产。所有制作owner仍按当前main既有appearance路径，不提前要求换源。
 - Logo小彩蛋：用户已验收5497 A红点轻跳并明确“就按这个效果实现吧”，正式实施已授权，不再询问。原设计e5243fc+645fc41已本地收录；现派review_blue_animation负责正式接入及组件/浏览器QA。ProductHeader调查1—9本轮已集成、依赖解锁，实施agent先将当前语音observer在安全边界交付，再从实际新main建managed WT做Logo。保持正式SVG几何、105x56/88x47、560ms/3px、原导航及减弱动态；仅组件/必要测试/探索README状态，root review/单队列集成。5497样稿保留。
@@ -43,7 +43,7 @@
 
 - 语音启动observer已review本地集成：源WT /Users/nighca/.codex/worktrees/voice-startup-observer/lie，basecd9a017，ordered5e465594529ba8b7bd14c43863a6c38711933147→c96bf4dc85042089d323a42d0be11f4abeb760f2，clean。root核完整10文件diff/周边；独立review发现远端握手close误标cancelled的P2，追加修正后1000/1013 failed与caller/abort cancelled复核通过。当前main候选eb4ac0e→355210b全仓369测试/Web176/voice34、全类型构建54资源通过。本地可选DI observer默认无记录/输出/联网，有限stage/result+单open elapsed，无内容/ID；迟到权限/异步stop未结束不虚报cleanup completed。无真实阶段数据/加速承诺，不动gate/生命周期。Logo已恢复独立5503实施，等待调查专项sunny后另批IAB QA。
 
-- 编辑器追加验收：用户确认其余部分（含步骤线）无问题。单独P2待办为1004×676官方投稿弹窗视觉层级/间距优化，owner编辑器专项待排；保持手动GitHub/仅复制JSON契约，未启动，不与已验收本批混淆。
+- 编辑器追加验收：用户确认其余部分（含步骤线）无问题。单独P2待办为1004×676官方投稿弹窗视觉层级/间距优化，owner编辑器专项已从c845f22启动隔离scoped排版，等待Logo后独立viewport窗口；保持手动GitHub/仅复制JSON契约，不与已验收本批混淆。
 
 - 新独立P2：编辑器大形象有/无动画预置垂直位置不同，切动画先低后上移。用户仅要求记录排查，当前不实施。根因未验证（fallback/canvas定位只是猜测），空白截图不算复现；后续由编辑器+动画UI核冷/热加载、定位/透明留白/缩放锚点、桌面移动及共享调查页。目标静态→idle无跳跃/呈现基准一致，不关动画、不做新资产、不重开其他已验收部分。
 

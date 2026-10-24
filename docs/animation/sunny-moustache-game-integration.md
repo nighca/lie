@@ -1,6 +1,6 @@
 # 阳光小胡子动画正式资源接入
 
-2026-10-24。用户明确确认“阳光小胡子验收没问题”，批准对象是候选源码 `c8914851ac57ee95d4f367ca7871f635f2d6f626`、发起者复验 `68c2f7b4927f17b71e44cc02fda354a5682e737f`；记录见 `design/animation-candidates/sunny-moustache/user-acceptance.md`。本次从 reviewed main `78c7530ca5254ffe1391c25a95a2fb69084c577a` 准备接入，尚未集成 main 或发布。
+2026-10-24。用户明确确认“阳光小胡子验收没问题”，批准对象是候选源码 `c8914851ac57ee95d4f367ca7871f635f2d6f626`、发起者复验 `68c2f7b4927f17b71e44cc02fda354a5682e737f`；记录见 `design/animation-candidates/sunny-moustache/user-acceptance.md`。本次从 reviewed main `78c7530ca5254ffe1391c25a95a2fb69084c577a` 准备接入，经本轮总协调review与组合验证后本地集成，未push/发布。
 
 ## 接入范围
 
@@ -32,3 +32,12 @@
 - 页面隐藏/恢复时暂停与继续，无异常加速；检查console error/warn并记录，结束reset viewport并关闭自建tab。
 
 本次没有访问麦克风、真实供应商或付费模型。嘴为合成开闭时序，没有音素同步、自然抬放transition、眨眼或网格变形；状态专用附件立即切换，数值由既有240ms settle衔接。等待上胸/头手同接触组，腰腹独立呼吸，不声称全关节独立活动。
+
+
+## 总协调组合review与独立IAB回验
+
+root实际读取候选装配/verify/coverage/provenance/生成记录/批准、正式manifest及接入差异，检查原生torso、等待/聆听极值及391游戏截图。当前main `c845f22`上的五提交候选末尾 `d91b9ab71fffa0220979327c2ba26951de57eab9` 独立全仓369测试（Web176/voice34）、类型和Web/gateway构建通过，8人物/60资源通过；tmp重建与批准包逐字节相同，六文件候选/正式/public/dist相同、原静态五图不变。原源提交顺序见上文，未混入未批准银发。
+
+调查专项在独立5501实际IAB回验：1280×720无横溢、单canvas；实际391×844/DPR1（innerWidth=scrollWidth=391，底栏844）；四态25%/75%八张完整canvas图无明显背景洞、缺手、颈腰分离，聆听腋下保留已批准的层叠纹理，不作全像素coverage保证。减弱动态和阻断sunny包均回静态，恢复偏好/解除阻断并换人切回后恢复单canvas；demo结束回default，console warn/error空。源码未变，所有block/cache/media/device override已清，自建tabs关闭、viewport reset。原生证据和报告在 `/private/tmp/lie-sunny-qa/`，截图扩展名可能为png但原生内容是JPEG。
+
+明确限制：1280×720短桌面舞台裁到腰部、双手下端不可见，属于既有130% canvas/低高舞台布局，不能称该视口全身完整；完整canvas极值和391图双手完整。真实页面隐藏/恢复未验证，IAB后台tab仍visibilityState=visible、协议不支持visibility override，未造假hidden或记PASS；共享runtime单测与真实生命周期证据分开。无真人麦克风/供应商/口型同步验收。
