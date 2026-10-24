@@ -51,6 +51,7 @@ describe('three-step editor', () => {
     await click('清除草稿')
     await click('确认清除')
     expect(localStorage.getItem(DRAFT_KEY)).toBeNull()
+    expect(wrapper.find('.editor-draft-status').exists()).toBe(false)
     expect(localStorage.getItem('other-setting')).toBe('keep')
     expect(wrapper.get('h1').text()).toBe('故事设定')
     expect((wrapper.get('[name=title]').element as HTMLInputElement).value).toBe('')
@@ -64,11 +65,22 @@ describe('three-step editor', () => {
     wrapper.unmount()
     const fresh = page()
     expect((fresh.wrapper.get('[name=title]').element as HTMLInputElement).value).toBe('')
+    expect(fresh.wrapper.find('.editor-draft-status').exists()).toBe(false)
     await fresh.wrapper.get('[name=title]').setValue('新的谜题')
+    expect(fresh.wrapper.get('.editor-draft-status').text()).toContain('草稿已保存到此浏览器')
+    expect(fresh.wrapper.get('.editor-draft-status button').text()).toBe('清除草稿')
     const saved = JSON.parse(localStorage.getItem(DRAFT_KEY)!)
     expect(saved.title).toBe('新的谜题')
     expect(saved.id).not.toBe(game.id)
     expect(saved.ending).toEqual({ culpritId: '', reveal: '' })
+  })
+
+  it('groups a failed save with the draft clearing action', async () => {
+    const { wrapper } = page()
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked') })
+    await wrapper.get('[name=title]').setValue('未保存的故事')
+    expect(wrapper.get('.editor-draft-status [role=status]').text()).toBe('草稿未能保存，请勿关闭页面')
+    expect(wrapper.get('.editor-draft-status button').text()).toBe('清除草稿')
   })
 
   it('preserves the current case if browser storage refuses draft removal', async () => {
@@ -89,6 +101,7 @@ describe('three-step editor', () => {
     const share = wrapper.findAll('button').find((button) => button.text() === '分享案件')!
     await share.trigger('click')
     expect(wrapper.get('.lie-product-header__actions button').attributes('disabled')).toBeDefined()
+    expect(wrapper.get('.editor-draft-status button').attributes('disabled')).toBeDefined()
     await wrapper.get('.lie-product-header__brand').trigger('click')
     expect(wrapper.emitted('leave')).toBeUndefined()
     finish('https://lie.example/play#game=encoded')
@@ -242,7 +255,8 @@ describe('three-step editor', () => {
   it('leaves a damaged draft untouched until editing starts', async () => {
     localStorage.setItem(DRAFT_KEY, 'damaged')
     const { wrapper } = page()
-    expect(wrapper.text()).toContain('本地草稿无法读取')
+    expect(wrapper.get('.editor-draft-status [role=status]').text()).toBe('本地草稿无法读取')
+    expect(wrapper.get('.editor-draft-status button').text()).toBe('清除草稿')
     expect(localStorage.getItem(DRAFT_KEY)).toBe('damaged')
     await wrapper.get('[name=title]').setValue('新故事')
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).title).toBe('新故事')

@@ -16,7 +16,7 @@ const draft = ref(createDraft(props.appearances[0]?.id ?? null))
 const step = ref(0)
 const selectedId = ref<string | null>(null)
 const notice = ref<string | null>(null)
-const saveStatus = ref('草稿仅保存在此浏览器')
+const saveStatus = ref<string | null>(null)
 const busy = ref(false)
 const showIssues = ref(false)
 const overlay = ref<'example' | 'appearance' | 'share' | 'submission' | 'delete' | 'clear' | null>(null)
@@ -29,7 +29,7 @@ let clearingDraft = false
 try {
   const stored = loadDraft(localStorage)
   if (stored != null) { draft.value = stored; saveStatus.value = '已恢复此浏览器的草稿' }
-} catch { notice.value = '本地草稿无法读取。你仍可创作新案件；开始编辑后会保存新的草稿。' }
+} catch { saveStatus.value = '本地草稿无法读取'; notice.value = '本地草稿无法读取。你仍可创作新案件；开始编辑后会保存新的草稿。' }
 selectedId.value = draft.value.characters[0]?.id ?? null
 const character = computed(() => draft.value.characters.find((person) => person.id === selectedId.value) ?? null)
 const answer = computed(() => draft.value.characters.find((person) => person.id === draft.value.ending.culpritId) ?? null)
@@ -93,7 +93,7 @@ function clearDraft() {
   shareUrl.value = null
   submission.value = null
   copied.value = false
-  saveStatus.value = '本地草稿已清除，开始编辑后自动保存'
+  saveStatus.value = null
   overlay.value = null
   void focus('title')
 }
@@ -130,8 +130,8 @@ async function copy(text: string) {
 <template>
   <div class="editor-shell">
     <ProductHeader class="editor-header" @navigate-home="!busy && emit('leave')">
-      <template #actions><UiButton variant="quiet" :disabled="busy" @click="overlay = 'clear'">清除草稿</UiButton><UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton></template>
-      <template #notice><p class="editor-save" role="status">{{ saveStatus }}</p></template>
+      <template #actions><UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton></template>
+      <template v-if="saveStatus != null" #notice><div class="editor-draft-status"><p role="status">{{ saveStatus }}</p><button type="button" :disabled="busy" @click="overlay = 'clear'">清除草稿</button></div></template>
     </ProductHeader>
     <nav class="editor-steps" aria-label="创作步骤">
       <button v-for="(label, index) in steps" :key="label" type="button" :disabled="busy" :aria-current="step === index ? 'step' : false" @click="step = index"><span>{{ index + 1 }}</span>{{ label }}<small v-if="!issues.some((issue) => issue.step === index)" aria-label="内容已填写">✓</small></button>
