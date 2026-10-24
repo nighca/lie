@@ -178,14 +178,16 @@ async function copy(text: string) {
       <template v-else-if="overlay === 'clear'"><p>将清除当前案件的全部编辑内容和此浏览器保存的草稿，重新开始创作。此操作无法撤销，已分享的链接不受影响。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留草稿</UiButton><UiButton @click="clearDraft">确认清除</UiButton></div></template>
       <template v-else-if="overlay === 'delete'"><p>将删除{{ character == null ? '' : name(character) }}的设定。如果他是案件答案，需要重新选择；此操作无法撤销。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留人物</UiButton><UiButton @click="deleteCharacter">确认删除</UiButton></div></template>
       <template v-else-if="overlay === 'share' && shareUrl != null"><p>朋友打开链接就能玩。修改草稿后需要重新生成链接，旧链接保留当时的内容。</p><label class="field">完整分享链接<textarea :value="shareUrl" readonly rows="4" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><p class="muted">{{ shareUrl.length.toLocaleString('en-US') }} / {{ SHARE_URL_LIMIT.toLocaleString('en-US') }} 字符</p><UiButton @click="copy(shareUrl)">{{ copied ? '已复制' : '复制分享链接' }}</UiButton></template>
-      <template v-else-if="overlay === 'submission' && submission != null">
-        <p>把案件投稿到官方案件库。内容包含完整真相和人物设定，提交前请确认愿意公开。</p>
-        <a :href="submission.url" target="_blank" rel="noopener noreferrer" class="github-link">打开 GitHub 新建文件页 ↗</a>
-        <ol class="submission-steps"><li>复制下方 JSON，打开上面的 GitHub 链接。</li><li>登录后按 GitHub 提示 fork 仓库，粘贴 JSON 并提交到自己的分支。</li><li>向 nighca/lie 的 main 发起 Pull Request，交给维护者审阅。</li></ol>
-        <label class="field">案件 JSON<textarea :value="submission.json" readonly rows="7" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label>
-        <UiButton variant="secondary" @click="copy(submission.json)">{{ copied ? '已复制' : '复制 JSON' }}</UiButton>
-        <p class="muted">这里不会自动创建 PR。维护者审阅并收录后，案件才会上线。</p>
-      </template>
+      <div v-else-if="overlay === 'submission' && submission != null" class="submission-layout">
+        <p class="submission-intro">案件包含完整真相和人物设定，投稿前请确认愿意公开。</p>
+        <div class="submission-actions">
+          <UiButton @click="copy(submission.json)">{{ copied ? '已复制' : '复制 JSON' }}</UiButton>
+          <a :href="submission.url" target="_blank" rel="noopener noreferrer" class="github-link">打开 GitHub 新建文件页 ↗</a>
+        </div>
+        <ol class="submission-steps"><li>复制案件 JSON，打开上面的 GitHub 链接。</li><li>登录后按提示 fork 仓库，粘贴 JSON 并提交到自己的分支。</li><li>向 nighca/lie 的 main 发起 Pull Request。</li></ol>
+        <label class="field submission-json">案件 JSON<textarea :value="submission.json" readonly rows="6" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label>
+        <p class="submission-note">这里不会自动创建 PR。维护者审阅并收录后，案件才会上线。</p>
+      </div>
       <p v-if="notice != null" role="alert">{{ notice }}</p>
     </EditorDialog>
   </div>
