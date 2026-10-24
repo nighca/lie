@@ -249,3 +249,5 @@
 2026-10-24 临时停用鉴权review：root复核9b47ee8全diff/周边代码与测试，删除应用Cookie闸门、本地issuer、无用binding和入口提示；provider配置检查与Origin/query/固定上游/时长帧限制保留。组合146项测试（gateway11/web59/core48/ui7/voice21）、类型检查/构建及音色探针语法检查通过。Alvin官方zh/en与单答中文PCM证据已复核，3.16秒WAV格式与私密state不存在独立核对，粗犷候选仅官方标签初筛，仍待听选。
 
 2026-10-24 临时开放本地实测：a3c68b4已正常push并同步8787，无Cookie GET status=ready、真实WS=101；不收音/推理。线上鉴权停用部署被自动审批拒绝，理由为需用户明确确认公网目标与访问控制范围；已请求确认，未重试或变相部署，线上仍69cb86d。三款用户认可音色的实际manifest映射已root review/逐项解析，Web59项回归与构建通过，沈禾维持龙三叔，粗犷备选待听选。
+
+2026-10-24 用户明确扩展线上授权：允许将临时停用应用鉴权版本部署到 https://lie-game.nighca.workers.dev/，并启用线上真实语音；不再受前次审批缺少公网范围确认阻塞。当前地址未主动对外分享，先使用与本地隔离的专用线上agent/device供受控试玩；访问与限额正式方案继续归档待评估，不新增DB/DO/邀请系统。root负责cf生产secret绑定与部署，接入代理准备独立资源脚本，先代码review后setup，管理key不进入Worker或浏览器。
