@@ -45,6 +45,8 @@
 
 - 编辑器追加验收：用户确认其余部分（含步骤线）无问题。单独P2待办为1004×676官方投稿弹窗视觉层级/间距优化，owner编辑器专项待排；保持手动GitHub/仅复制JSON契约，未启动，不与已验收本批混淆。
 
+- 新独立P2：编辑器大形象有/无动画预置垂直位置不同，切动画先低后上移。用户仅要求记录排查，当前不实施。根因未验证（fallback/canvas定位只是猜测），空白截图不算复现；后续由编辑器+动画UI核冷/热加载、定位/透明留白/缩放锚点、桌面移动及共享调查页。目标静态→idle无跳跃/呈现基准一致，不关动画、不做新资产、不重开其他已验收部分。
+
 ## 服务、限制与接任第一步
 
 - 本地main验收环境已实际运行：用户launchd `dev.nighca.lie.main-preview`，plist ~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist，stable Node24.22.1在~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64，日志~/Library/Logs/LIE/main-preview.log；runner在owning main每1.5s看SHA，Vite8787→同源薄Worker8788，初启和lock变化npm ci，更新会重启自身服务，失败30s退避。独立于chat，不要在轮换时停止/重复启动。原项目私密.dev.vars仅复制至main的忽略目录，未输出内容/新建provider资源。版本/__lie/main-status已实测SHA与main一致，页面/三案/blue package200，voice/status ready，私密文件和异源Origin403。Node24.22.1全仓353测试（含8个runner生命周期/假凭据隔离）/类型/构建54资源通过。浏览器实际三案加载、console空；未自动收音，ready不是真人验收。main-preview原commit6a76307→e3c773b，本地9f3b607→162dde5；文档本身会推进main，需核下一实际SHA。
