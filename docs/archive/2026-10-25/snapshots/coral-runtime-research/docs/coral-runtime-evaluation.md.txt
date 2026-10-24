@@ -1,0 +1,90 @@
+# 顾遥播放器有界选型与动画包契约草案
+
+2026-10-24。**选型建议与契约草案，尚未获用户确认生产实现。** 用户已批准：动画包独立维护，由appearance引用；正式规格与播放器选型一起确定；现在执行一次有界验证。本文不代表批准采购、外部上传、扩其他形象或替换生产人物。
+
+## 结论与建议
+
+**建议第一版采用有限功能的Canvas 2D数据播放器。** 同一份顾遥研究数据已由Canvas和PixiJS 8.22.0实际渲染：图层复用、父子关节、前后遮挡、托腮裁切、换嘴及循环均能完成。PixiJS接管场景树和GPU渲染，但本次仍由我们共同实现轨道采样、状态调度和数值混合，未减少这部分核心职责。当前只有一个活动大立绘、小量透明PNG和小幅关节运动，尚无实证要求引入GPU场景底座。
+
+这不是决定自研完整动画编辑器/骨骼引擎：第一版建议只做所需的资源加载、层级变换、轨道采样、离散换图、命名clip播放和明确制作的状态过渡；不在此范围加入通用IK、网格蒙皮、图形编辑器或任意动画脚本。若后续目标包含复杂软变形、频繁美术编辑或更大动作，完整工具链的价值会上升，应重新比较。
+
+本次没有解决自然抬放手的制作问题：数值混合对共享部件连续，但姿态专用手臂的显隐仍会瞬间切换；**替换渲染库不会自动生成缺失的手臂路径、补画或接触约束**。正式过渡应有专门clip/换部件时机，不使用当前研究页的简单混合冒充完成。
+
+## 实测边界
+
+- worktree `/Users/nighca/.codex/worktrees/coral-runtime-evaluation/lie`，branch `codex/coral-runtime-evaluation`，显式base `85b8f44ae8c8ba6f74b6840b4735ff90351d674d`，承接已交顾遥修正，不改旧提交。
+- 仅新增`spikes/coral-runtime-evaluation/**`、`design/coral-runtime-evaluation/**`、本文。生产manifest、静态四态、应用和根依赖不变。
+- 实验依赖仅`spikes/coral-runtime-evaluation/package.json`及其lock；`pixi.js`精确固定8.22.0，npm `--ignore-scripts`安装，node_modules不提交。没有安装商业制作软件、创建新供应商账号、上传私有素材或调用语音。
+- 单份研究fixture包括11张既有PNG、21个装配节点、5个clip（含rest）、一份appearance引用；Canvas与Pixi共享已解码的Image集合和同一采样结果。嘴部与普通部件引用均复用，不为每个状态重新携带图片。
+- Canvas通过矩阵栈/裁切绘图；Pixi使用Container/Sprite、裁剪Texture、Graphics遮罩和RenderLayer，将逻辑父子与绘制顺序分开。两适配器共用研究轨道解释器，不能把解释器的能力算作Pixi原生动画能力。
+- 微动参数从前一研究样片提取，采样为121点/周期的线性轨道。这只是适配比较fixture，不规定正式生产必须使用这种采样密度；当前mouth字段也只是研究用，未冻结为正式契约。
+
+实验fixture可用`python3 spikes/coral-runtime-evaluation/generate-fixture.py`从版本化的前轮数值生成；生成器只写JSON，不修改位图。
+
+## 如何复核
+
+在此worktree根执行：
+
+```sh
+npm install --prefix spikes/coral-runtime-evaluation --workspaces=false --ignore-scripts
+node --test spikes/coral-runtime-evaluation/model.test.mjs
+python3 -m http.server 5347 --bind 127.0.0.1
+```
+
+打开[双播放器比较](http://127.0.0.1:5347/spikes/coral-runtime-evaluation/)。同一时钟与姿势，暂停/时间条可以对照两边；切换数值过渡可看出共享部件插值与专用手型离散切换的区别。保留旧5346样片，不碰用户8787或麦克风。
+
+本机首次前240帧CPU调用均值观测Canvas约0.22ms、Pixi约1.15ms；这里只计JS调用及提交，不是GPU完成耗时、完整帧耗时或公平的跨设备基准。首帧编译/上传、顺序、浏览器和GPU都会影响结果，**不按这个数字判定通用性能优劣**。
+
+另一轮391启动观测Canvas约0.50ms、Pixi约0.68ms，进一步说明单次提交耗时会变化，不能据此得出固定倍数结论。
+
+实验加载官方完整`pixi.mjs`发行文件：2,200,191字节，离线gzip 470,302字节；不是按需生产bundle，也不代表浏览器实际网络压缩。研究JSON 88,252字节，离线gzip 14,378字节。PNG为双方共同成本，不以源npm包磁盘大小冒充Web下载量。Canvas解释器/适配器也不是完整生产播放器，不能以当前代码行数当最终维护预算。
+
+## 其他成熟方案：官方资料核对，未实际迁移
+
+| 方案 | 已有能力 | 对本项目的代价与限制 |
+| --- | --- | --- |
+| PixiJS | PNG资源缓存、场景父子变换、图层、遮罩、逐帧更新；本次实际跑通 | 是渲染底座，仍需时间轨道与状态播放逻辑；8.x GPU初始化失败需有明确静态回退。 |
+| Spine | 多动画共用骨架/slot/attachment；AnimationState提供循环、队列、跨动画混合及多轨；可用IK，Essential不含IK | 要重新装配和制作原生时间线；官方runtime集成/分发有Editor许可要求，Trial不能当正式集成授权。当前停止在资料评估。 |
+| Rive | PNG资产、骨骼/mesh、IK、多timeline、状态机过渡；Web JS/TS/WASM运行时 | 仍需重新制作artboard/rig与状态机；作者工作流及是否接受品牌splash需要产品决定。本次未开账号、导入/上传或导出实测。 |
+
+Rive价格页与导出文档存在时效冲突：2026-10-24实时[pricing](https://rive.app/pricing)显示免费可导出.riv、带Rive splash，付费可移除；[导出文档](https://rive.app/docs/editor/exporting/exporting-for-runtime)仍写付费导出。免费实际导出未操作验证，不将任何一方搜索摘要当成功证据。其[Web runtime许可](https://github.com/rive-app/rive-wasm/blob/master/LICENSE)为MIT，不等于制作服务或品牌展示条件也没有约束。
+
+Spine依据：[导出与版本](https://us.esotericsoftware.com/spine-export/)、[数据格式](https://us.esotericsoftware.com/spine-json-format)、[动画播放/混合](https://us.esotericsoftware.com/spine-applying-animations)、[IK](https://us.esotericsoftware.com/spine-ik-constraints)、[正式许可](https://us.esotericsoftware.com/spine-editor-license)。
+
+Pixi依据：[场景层级](https://pixijs.com/8.x/guides/concepts/scene-graph)、[绘制层与逻辑父子分离](https://pixijs.com/8.x/guides/concepts/render-layers)、[Assets缓存](https://pixijs.com/8.x/guides/components/assets)、[Renderer能力](https://pixijs.com/8.x/guides/components/renderers)。Rive能力依据：[位图资产](https://rive.app/docs/editor/fundamentals/assets-overview)、[骨骼](https://rive.app/docs/editor/manipulating-shapes/bones)、[状态机过渡](https://rive.app/docs/editor/state-machine/transitions)、[IK](https://rive.app/docs/editor/constraints/ik-constraint)。
+
+两种完整方案可复用透明PNG，但既有Canvas参数不能直接当原生项目；重新装配、锚点、遮挡和过渡制作的工作量为推断，未实际制作验证。正式选择其一时，应采用其原生资源格式及小量appearance状态映射，不维护平行的自定义时间线格式。
+
+## 待确认的第一版契约
+
+已确认的组织关系：`design/appearances/manifest.json`仍是形象元数据唯一源，新增可选`animation`相对路径引用独立包；未配置时沿用四态PNG。运行时缺失解析为null。音色、名称、主题色、头像和静态回退不复制进动画包，也不放进故事角色文本。
+
+以下仅是**Canvas方案草案**，正式TypeScript类型/JSON校验器在用户确认选型后实现；本次fixture不是完整schema规范：
+
+```text
+appearance.animation → 动画包描述JSON
+  schemaVersion       格式版本，用于校验与拒绝不支持版本
+  canvas              统一坐标尺寸，渲染时等比适配容器
+  assets              稳定部件ID → 相对PNG资源、可选sprite取样区域
+  rig                 节点ID、父节点、关节/锚点、默认变换
+  slots               部件挂载、绘制顺序、必要的遮挡配置
+  clips               命名动画：时长、循环、节点轨道、离散换图/显隐
+  states              default/listening/waiting/speaking → clip
+  transitions         需要时明确from/to → 专用过渡clip
+```
+
+- idle是默认状态对应的循环clip，不必让应用增加一个新的会话状态；`default`与当前正式静态default语义衔接。
+- clip引用共享节点与资产；特殊手势允许专用部件/接触组，不能强迫所有姿势共用同一条刚性臂。
+- 建议轨道只支持所需的平移、旋转、缩放、显隐与attachment换图。插值模式及过渡中断/从当前姿势续接等规则需在正式契约中写清，不能允许任意JS表达式。
+- 口型视觉控制与真实音频解耦：首版只提供明确可控的嘴部slot；当前合成音节节奏不自动获得真实语音同步身份。
+- 通用播放器承担加载校验、采样、播放/暂停、状态切换、资源销毁和减少动态效果；Vue只传已存在的会话状态及生命周期，不包含顾遥ID/部件坐标。
+- 正式回退规则：不支持版本、资源损坏或初始化失败回既有静态四态；不在正式Web静默执行任意脚本或更换runtime。源制作应严格验证，运行时回退与制作要求区分。
+- 若改选Spine/Rive，上述外部appearance引用保持，包内换其原生文件与状态映射；不要求它们实现这里自定义的rig/clip JSON。
+
+## 检查与已知边界
+
+7项Node自动检查覆盖引用完整性、坏引用拒绝、跨状态采样隔离、循环/负时间、头手共享父变换、嘴形排他与离散切换，以及父节点显隐继承；脚本语法检查通过。独立代码review发现Canvas父显隐未继承、pagehide销毁后BFCache恢复仍调用的问题，均已修正并由review者复核、独立重跑7项通过。真实BFCache未浏览器实测，不把代码路径修正说成端到端通过。
+
+本人IAB实际看到四态Canvas/Pixi画面基本一致，讲话0.26秒两边开嘴、托腮遮罩与接触组均可读；391×844实际width/scrollWidth均391，两卡纵向排列。时间/帧推进，暂停/时间条/恢复均实际操作。最终桌面实际1280×900且scrollWidth1280，391×844且scrollWidth391；原生full-page JPEG位于`design/coral-runtime-evaluation/previews/`，最终恢复viewport、保留比较tab，旧5346不变。未见console warn/error。没有做像素级差异阈值测试，GPU与Canvas边缘插值本来可能不同，不能宣称像素完全相同。
+
+这是研究比较，不是可直接发布的组件：未测试真实低端设备、GPU context loss、全部导航/BFCache生命周期、正式静态回退、运行时包完整类型校验、实时语音口型或自然抬放过渡。reduced-motion沿停止时钟/固定相位实现，本次未实际切系统设置复验。现有肩袖硬线/低alpha雾等资产限制仍在。用户确认“Canvas有限播放器＋独立数据包”后，才编写正式契约并实施生产接入。

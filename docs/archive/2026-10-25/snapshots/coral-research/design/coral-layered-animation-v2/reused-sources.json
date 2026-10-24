@@ -1,0 +1,74 @@
+[
+  {
+    "file": "design/coral-layered-animation/assets/body-first-attempt.png",
+    "sha256": "3e5e409143d717c40b36df9b4a3e0de9a85591d74dc67e3daab0a18f214270e1",
+    "bytes": 702524,
+    "usage": "historical-attempt"
+  },
+  {
+    "file": "design/coral-layered-animation/assets/body.png",
+    "sha256": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27",
+    "bytes": 586088,
+    "usage": "runtime"
+  },
+  {
+    "file": "design/coral-layered-animation/assets/fore-right.png",
+    "sha256": "be316b025b810d7e10494a905182930f1eefc9743139f8578bc063c226f7c812",
+    "bytes": 1006698,
+    "usage": "runtime"
+  },
+  {
+    "file": "design/coral-layered-animation/assets/upper-right.png",
+    "sha256": "b2f3eba89e09dff9f8c5cf4fcd2256482b962a2fd67ade413b4be6e6147ceede",
+    "bytes": 430982,
+    "usage": "runtime"
+  },
+  {
+    "file": "design/coral-layered-animation/assets/head.png",
+    "sha256": "b7a5d8e0354d07bc58544cebfc3b2be494d1bdc4f2bfc106a78585eaa7cd21f7",
+    "bytes": 634539,
+    "usage": "reference"
+  },
+  {
+    "file": "design/coral-layered-animation/assets/upper-left.png",
+    "sha256": "9efca1877d071c44702416992f91dc0df39bf28aaac92aa7126e878acb516c85",
+    "bytes": 500989,
+    "usage": "runtime"
+  },
+  {
+    "file": "design/coral-layered-animation/assets/fore-right-first-attempt.png",
+    "sha256": "f61cad9209603efea9aef29cd36c731011e8f30ae84adc11f83b25461612a5a5",
+    "bytes": 1022021,
+    "usage": "historical-attempt"
+  },
+  {
+    "file": "design/coral-layered-animation/assets/fore-left.png",
+    "sha256": "c48cc45a0bd343c753fd1328a6a1182640f79423f7fcc13cdc7e1df206c7112c",
+    "bytes": 351109,
+    "usage": "runtime"
+  },
+  {
+    "file": "apps/web/public/appearances/coral-bob-v2/speaking.png",
+    "sha256": "ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d",
+    "bytes": 894325,
+    "usage": "reference"
+  },
+  {
+    "file": "apps/web/public/appearances/coral-bob-v2/listening.png",
+    "sha256": "e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea",
+    "bytes": 906498,
+    "usage": "reference"
+  },
+  {
+    "file": "apps/web/public/appearances/coral-bob-v2/waiting.png",
+    "sha256": "2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e",
+    "bytes": 778821,
+    "usage": "reference"
+  },
+  {
+    "file": "apps/web/public/appearances/coral-bob-v2/default.png",
+    "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "bytes": 873526,
+    "usage": "reference"
+  }
+]

@@ -1,0 +1,233 @@
+[
+  {
+    "id": "head",
+    "prompt": "Use case: precise-object-edit / identity-preserve. Edit target: the referenced isolated coral-bob head PNG, a painted flat cartoon adult woman with dark navy bob hair, coral triangular earrings, warm peach skin. Produce an animation base layer: REMOVE ONLY THE MOUTH/lips line and fill that tiny mouth area with seamlessly matching surrounding cheek/chin skin tones. Keep EXACT head outer silhouette, eyes, eyebrows, nose, face identity, hair strands, ears, earrings, shadows, size, orientation, and 1254x1254 canvas placement. No neck or body, no new expression, no moving or recentering the head. This is a neutral mouthless face base for independent mouth animation. Transparent background, preserve true alpha and clean original-style navy outlines. Do not introduce checkerboard, text, teeth, white background, glow, new clothing, or a different character.",
+    "source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-18d9b59f-ec5e-4813-87c8-72afc362f408.png",
+    "file": "design/coral-layered-animation-v2/assets/head.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "fb92081b74134fd8397e0239f2a9603bb8b99f06ee82efc6ed1ce129e3ca925e",
+    "bbox32": [
+      78,
+      45,
+      1181,
+      810
+    ],
+    "bbox200": [
+      79,
+      46,
+      1180,
+      809
+    ],
+    "reference": "design/coral-layered-animation/assets/head.png",
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "active": true,
+    "bytes": 715802
+  },
+  {
+    "id": "closed",
+    "prompt": "Use case: precise-object-edit. Reference image: coral-bob cartoon head, style/identity reference only. Create exactly ONE isolated closed-mouth sprite for this same adult woman: the same small coral red lips in a friendly asymmetrical closed smile, gently rising toward image-right, dark navy smile seam, original coral lower-lip shading. ONLY the lips/mouth outline, no surrounding peach skin patch, no face/nose/chin/head, no eyes, no teeth, no extra mouths. Make the complete mouth compact and centered with generous real transparent margin on all sides, landscape mouth shape about twice as wide as tall. Clean painted-flat cartoon navy outline matching source, not photorealistic, not a sticker border. True transparent background; no text/checkerboard/glow. This will be positioned over a mouthless head for bone-layer animation. Preserve the existing character's mouth design rather than inventing a realistic lip shape.",
+    "source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-444f0988-7083-4934-9530-8116745cc037.png",
+    "file": "design/coral-layered-animation-v2/assets/closed.png",
+    "dimensions": [
+      1774,
+      887
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "a8b4f55e14fe4e4397bb530869d4843db49ea8356378070af76a52c4028dc3c9",
+    "bbox32": [
+      614,
+      348,
+      1234,
+      586
+    ],
+    "bbox200": [
+      615,
+      349,
+      1233,
+      585
+    ],
+    "reference": "design/coral-layered-animation/assets/head.png",
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "active": true,
+    "bytes": 134597
+  },
+  {
+    "id": "open",
+    "prompt": "Use case: precise-object-edit. Reference: approved coral-bob speaking portrait, style/identity reference. Produce exactly ONE isolated OPEN SPEAKING MOUTH sprite for that same adult cartoon woman. Her small friendly mouth lifted toward image-right, dark navy upper smile outline, dark interior, narrow ivory upper teeth and a little coral tongue/lower lip. Not laughing, not shouting, not surprise, a natural medium-open syllable. ONLY the mouth and lips, true transparent background through all surrounding space, no peach cheek patch, no nose/face/head/chin/eyes, no sticker border, no text/checkerboard. Center the complete isolated mouth with generous transparent padding, keep flat painted cartoon linework matching the referenced adult face. Width roughly twice its opening height. It must combine over a separate mouthless face and alternate naturally with her closed coral smile, not become a huge emoji grin.",
+    "source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-673baa8a-3698-4b4c-a393-a40d4720a51b.png",
+    "file": "design/coral-layered-animation-v2/assets/open.png",
+    "dimensions": [
+      1774,
+      887
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "05304f3ab8527b1a64a6c781b1271f10feebea07118cfd0659bff67744a4cc26",
+    "bbox32": [
+      705,
+      323,
+      1161,
+      613
+    ],
+    "bbox200": [
+      706,
+      325,
+      1161,
+      612
+    ],
+    "reference": "apps/web/public/appearances/coral-bob-v2/speaking.png",
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "active": true,
+    "bytes": 139653
+  },
+  {
+    "id": "listen-upper",
+    "prompt": "Use case: precise-object-edit / animation-layer separation. Edit target: approved coral-bob listening portrait. Extract/redraw ONLY HER IMAGE-LEFT UPPER ARM AND CORAL BLAZER SLEEVE as one isolated transparent bitmap layer. Preserve exactly the listening pose's bent sleeve: shoulder at upper image-right of this isolated piece, elbow/cuff at lower image-left. Rolled coral cuff at elbow, navy outlines and angular coral shadows matching the reference. Reconstruct hidden attachment at shoulder behind lapel as a rounded sleeve cap with a little overlap allowance. NO forearm, hand, head, hair, torso, lapel, white shirt, other arm, jewelry, props, text or background. It is the sleeve segment from shoulder to elbow only, not the entire person. Keep original sleeve silhouette and fold directions, do not straighten into the relaxed standing sleeve. Center this complete isolated piece with transparent padding and make its shoulder and cuff attachment ends easy to overlap. True alpha transparent background, no checkerboard or glow.",
+    "source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-16fa28ef-f3ec-4c47-a92e-cf50a566f928.png",
+    "file": "design/coral-layered-animation-v2/assets/listen-upper.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "4c7dd052e53aa83cdd5324c130c2b263de97bb647ade0761a110d4173daab178",
+    "bbox32": [
+      315,
+      140,
+      1032,
+      1130
+    ],
+    "bbox200": [
+      317,
+      141,
+      1031,
+      1129
+    ],
+    "reference": "apps/web/public/appearances/coral-bob-v2/listening.png",
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "active": true,
+    "bytes": 468058
+  },
+  {
+    "id": "listen-fore",
+    "prompt": "Use case: precise-object-edit / animation-layer separation. Edit target: approved coral-bob LISTENING portrait. Extract/redraw ONLY the IMAGE-LEFT exposed forearm and raised open hand beside her ear, from just below the rolled sleeve elbow to complete five fingers. Preserve EXACT approved listening hand gesture, warm peach skin, same navy contour weight and angular coral-peach shading, no realism. It is a long diagonal-up forearm, elbow lower-left, wrist/palm upper-right, fingers upright beside the ear and palm cupped slightly toward the listener. Reconstruct a smoothly rounded elbow root hidden in the sleeve with short overlap allowance. NO sleeve/clothing, torso, hair, face, earring or other arm; no extra hands or duplicated fingers. Complete five-finger hand visible with natural anatomy and generous margin. Put this one isolated piece in true transparent background, no text/checkerboard/glow/shadow. Keep the reference's compact listening gesture, not a greeting wave, not an accusation or emotional guilt signal.",
+    "source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-3f580184-d5b7-4987-9c5b-f175bfd774e8.png",
+    "file": "design/coral-layered-animation-v2/assets/listen-fore.png",
+    "dimensions": [
+      1239,
+      1269
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "sha256": "2888028c1464d6e3f8c9800b1c5b53d18dcfdd9c89fb94170ece7aed21bc46d6",
+    "bbox32": [
+      315,
+      77,
+      1049,
+      1196
+    ],
+    "bbox200": [
+      316,
+      78,
+      1049,
+      1196
+    ],
+    "reference": "apps/web/public/appearances/coral-bob-v2/listening.png",
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "active": true,
+    "bytes": 449866
+  },
+  {
+    "id": "speak-fore",
+    "prompt": "Use case: precise-object-edit / animation-layer separation. Edit target: coral-bob approved SPEAKING portrait. Produce ONLY the IMAGE-RIGHT exposed forearm and upturned explaining hand, from elbow near image-lower-left through forearm sloping up-right to compact open palm and five fingers extending image-right. Keep its conversational palm-up gesture EXACTLY like reference; warm peach skin, navy clean contour, simple coral shadow wedges. A natural adult woman's hand, compact relaxed fingers, no pointed accusation. Reconstruct rounded hidden elbow root for overlap into a separate sleeve. No sleeve/clothes, torso/head/hair/earrings, other limbs or extra hands. Preserve same original drawing style, not realistic or simplified icon. Put entire isolated forearm+hand centered with generous transparent margin; true alpha transparent background, no checkerboard, no text, no glow or cast shadow. It will be independently jointed at an elbow for small conversation gestures; avoid extreme bent wrist or splayed fingers.",
+    "source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-c87c1b0a-5117-4d5b-b6a0-818c9cb4582f.png",
+    "file": "design/coral-layered-animation-v2/assets/speak-fore.png",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      254
+    ],
+    "sha256": "5441a0ab98ef5ac282b6ce3e080632399128a94abda3d34100843f5dcb152ed4",
+    "bbox32": [
+      291,
+      104,
+      1484,
+      919
+    ],
+    "bbox200": [
+      292,
+      105,
+      1483,
+      918
+    ],
+    "reference": "apps/web/public/appearances/coral-bob-v2/speaking.png",
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "active": true,
+    "bytes": 924008
+  },
+  {
+    "id": "speak-fore-cleanup-attempt",
+    "source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-b4a8d9cf-c774-4e78-ab2e-4091981f2276.png",
+    "prompt": "Use case: background-extraction / precise-object-edit. Edit ONLY the supplied isolated cartoon forearm+hand PNG. Remove all purple/peach glow, hazy halo and semi-transparent cloud outside the navy silhouette. Keep the exact same palm-up hand anatomy, pose, size, full image placement, skin interior, shadows and navy contour. All space outside the drawn outer contour must have alpha exactly zero. Interior skin and navy line should be fully opaque. No new background, no black/white/checkerboard pixels, no vignette or glow, no smoothing into surrounding space. Do not crop, enlarge, rotate or redraw a different hand. Output transparent PNG, preserve the same 1536x1024 frame. This is the only alpha-cleanup attempt for a bone-layer animation sprite.",
+    "file": "design/coral-layered-animation-v2/assets/speak-fore-cleanup-attempt.png",
+    "active": false,
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "mode": "RGBA",
+    "alpha": [
+      0,
+      254
+    ],
+    "sha256": "07e305c785f41c0cbb51fb010af912015cbebeca5277e854ee24a0cb96edbabf",
+    "bbox32": [
+      291,
+      104,
+      1484,
+      919
+    ],
+    "bbox200": [
+      292,
+      105,
+      1483,
+      918
+    ],
+    "reference": "design/coral-layered-animation-v2/assets/speak-fore.png",
+    "tool": "image_gen.imagegen",
+    "transparent_background": true,
+    "bytes": 927870
+  }
+]

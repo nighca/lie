@@ -1,0 +1,6 @@
+Use case: background-extraction / precise-object-edit
+Asset type: original illustration head layer for a 2D cutout rig.
+Input Image 1 is the edit target, the approved coral-bob adult woman illustration. Preserve her exact face, navy asymmetric bob hair strands/highlights, coral triangle earrings, expression, adult proportions, outline weight and colors. Do not redesign or simplify her.
+Primary request: isolate ONLY her complete head including all hair, face and both earrings. Remove the torso, clothing, arms and legs completely to transparent. Cut below the chin where her neck begins; the neck is a separate torso layer. Preserve all existing head details faithfully.
+Registration: retain the SAME square canvas, camera scale and EXACT original head position in the upper half, approximately head bounding box x315..890 y20..440 on the 1254-square source. DO NOT center/enlarge this isolated part; leave the rest of the original square fully transparent. This is a registered animation layer, not a new centered portrait.
+True transparent background, clean anti-aliased alpha edges. No text, labels, guides, checkerboard, shadows, extra objects, invented hand/neck or separate icons. Output one single isolated head layer, not a sprite sheet or comparison.

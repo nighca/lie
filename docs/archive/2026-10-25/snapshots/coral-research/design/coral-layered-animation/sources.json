@@ -1,0 +1,224 @@
+{
+  "base": "3bf89144863038b90899d0e82f31760c971de37b",
+  "original": "../appearances/assets/coral-bob.png",
+  "original_sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+  "generation_count": 8,
+  "assets": [
+    {
+      "id": "head",
+      "active": true,
+      "file": "assets/head.png",
+      "prompt": "prompts/head.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "../appearances/assets/coral-bob.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-f04d9d62-0051-4206-a1ef-07e62d5d8c4b.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "significant_alpha_bbox_gt32": [
+        118,
+        45,
+        1138,
+        756
+      ],
+      "sha256": "b7a5d8e0354d07bc58544cebfc3b2be494d1bdc4f2bfc106a78585eaa7cd21f7",
+      "bytes": 634539
+    },
+    {
+      "id": "body-first-attempt",
+      "active": false,
+      "file": "assets/body-first-attempt.png",
+      "prompt": "prompts/body.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "../appearances/assets/coral-bob.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-6e5a072c-61a2-4cb7-93de-1ac2443093d7.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "significant_alpha_bbox_gt32": [
+        310,
+        228,
+        962,
+        1254
+      ],
+      "sha256": "3e5e409143d717c40b36df9b4a3e0de9a85591d74dc67e3daab0a18f214270e1",
+      "bytes": 702524
+    },
+    {
+      "id": "body",
+      "active": true,
+      "file": "assets/body.png",
+      "prompt": "prompts/body-correction.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "assets/body-first-attempt.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-8b5fb416-9230-4750-b94b-f727540ab216.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "significant_alpha_bbox_gt32": [
+        369,
+        227,
+        965,
+        1254
+      ],
+      "sha256": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27",
+      "bytes": 586088
+    },
+    {
+      "id": "upper-left",
+      "active": true,
+      "file": "assets/upper-left.png",
+      "prompt": "prompts/upper-left.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "../appearances/assets/coral-bob.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-55b6df11-45f0-45a7-8b74-0d07fe0e08e0.png",
+      "dimensions": [
+        1104,
+        1425
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "significant_alpha_bbox_gt32": [
+        275,
+        113,
+        903,
+        1223
+      ],
+      "sha256": "9efca1877d071c44702416992f91dc0df39bf28aaac92aa7126e878acb516c85",
+      "bytes": 500989
+    },
+    {
+      "id": "fore-left",
+      "active": true,
+      "file": "assets/fore-left.png",
+      "prompt": "prompts/fore-left.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "../appearances/assets/coral-bob.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-71c62ea7-e697-4e76-8451-7ff89b1cafdd.png",
+      "dimensions": [
+        1123,
+        1401
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "significant_alpha_bbox_gt32": [
+        317,
+        131,
+        826,
+        1349
+      ],
+      "sha256": "c48cc45a0bd343c753fd1328a6a1182640f79423f7fcc13cdc7e1df206c7112c",
+      "bytes": 351109
+    },
+    {
+      "id": "upper-right",
+      "active": true,
+      "file": "assets/upper-right.png",
+      "prompt": "prompts/upper-right.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "../appearances/assets/coral-bob.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-daf69689-df96-4fed-80c6-e8a8f6e8a9fc.png",
+      "dimensions": [
+        1246,
+        1263
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "significant_alpha_bbox_gt32": [
+        432,
+        116,
+        847,
+        1051
+      ],
+      "sha256": "b2f3eba89e09dff9f8c5cf4fcd2256482b962a2fd67ade413b4be6e6147ceede",
+      "bytes": 430982
+    },
+    {
+      "id": "fore-right-first-attempt",
+      "active": false,
+      "file": "assets/fore-right-first-attempt.png",
+      "prompt": "prompts/fore-right.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "../appearances/assets/coral-bob.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-6b2b8a47-b049-40b9-8629-0662fabd72fe.png",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "significant_alpha_bbox_gt32": [
+        172,
+        59,
+        862,
+        1490
+      ],
+      "sha256": "f61cad9209603efea9aef29cd36c731011e8f30ae84adc11f83b25461612a5a5",
+      "bytes": 1022021
+    },
+    {
+      "id": "fore-right",
+      "active": true,
+      "file": "assets/fore-right.png",
+      "prompt": "prompts/fore-right-alpha-correction.txt",
+      "tool": "image_gen.imagegen",
+      "transparent_background": true,
+      "edit_reference": "assets/fore-right-first-attempt.png",
+      "generated_source": "/Users/nighca/.codex/generated_images/01a16847-d9d7-7520-b05b-68e81fdf240e/exec-1a0b74cb-8ae7-4f75-87f6-30693b5909e5.png",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "significant_alpha_bbox_gt32": [
+        172,
+        58,
+        863,
+        1490
+      ],
+      "sha256": "be316b025b810d7e10494a905182930f1eefc9743139f8578bc063c226f7c812",
+      "bytes": 1006698
+    }
+  ]
+}

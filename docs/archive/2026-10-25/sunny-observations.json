@@ -1,0 +1,58 @@
+{
+  "scope": "SIMULATION ONLY, same-origin iframe of actual 8787 game; no provider/mic",
+  "topLevel": {
+    "hidden": false,
+    "visibilityState": "visible",
+    "events": [],
+    "draws": 543,
+    "pendingRaf": 1,
+    "maxPendingRaf": 1
+  },
+  "iframe": {
+    "before": {
+      "draws": 29,
+      "pending": 1
+    },
+    "cycles": [
+      {
+        "hiddenStartDraws": 29,
+        "hiddenEndDraws": 29,
+        "hiddenPending": 0,
+        "restoredDraws": 44,
+        "restoredPending": 1
+      },
+      {
+        "hiddenStartDraws": 44,
+        "hiddenEndDraws": 44,
+        "hiddenPending": 0,
+        "restoredDraws": 60,
+        "restoredPending": 1
+      },
+      {
+        "hiddenStartDraws": 60,
+        "hiddenEndDraws": 60,
+        "hiddenPending": 0,
+        "restoredDraws": 75,
+        "restoredPending": 1
+      }
+    ],
+    "allEventsTrusted": false,
+    "maxPendingRaf": 1,
+    "canvasCount": 1,
+    "canvasDisplay": "block",
+    "actualVisibilityAfterOverrideRemoval": "visible"
+  },
+  "consoleWarnError": [],
+  "unsupported": [
+    "This method is not supported through raw CDP. (Page.addScriptToEvaluateOnNewDocument)",
+    "IAB visibility is not supported in a subagent thread (second tab creation attempt)"
+  ],
+  "cleanup": {
+    "ownedTab1Closed": true,
+    "secondTabCreated": false,
+    "ownServerStarted": false,
+    "viewportChanged": false,
+    "existingServicesStopped": false,
+    "productionFilesChanged": false
+  }
+}

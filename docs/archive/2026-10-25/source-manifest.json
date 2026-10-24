@@ -1,0 +1,394 @@
+[
+  {
+    "archive": "snapshots/earlier-naming-candidate/design/appearances/README.md.txt",
+    "source_worktree": "/private/tmp/lie-integrate-text-architecture",
+    "source_commit": "21eadee61b9928182898a225bf356a9c9a39e71b",
+    "source_path": "design/appearances/README.md",
+    "source_blob": "3c3abd3d8c2077721959b98ee8f679a75d5311b4",
+    "sha256": "98f3bf3089ad5ad8fa1b4fcf4096b2e278ab515789c5e4757b33efdaac30f2fa",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T21:00:02+08:00"
+  },
+  {
+    "archive": "snapshots/earlier-naming-candidate/design/character-presets/README.md.txt",
+    "source_worktree": "/private/tmp/lie-integrate-text-architecture",
+    "source_commit": "21eadee61b9928182898a225bf356a9c9a39e71b",
+    "source_path": "design/character-presets/README.md",
+    "source_blob": "091adff563b27691c27f2db70b416d04cde325fb",
+    "sha256": "af88a3c96ba53779648492a6f8b8d7fb682778c63bf80cdfed422a8e9f257205",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T21:00:02+08:00"
+  },
+  {
+    "archive": "snapshots/earlier-naming-candidate/docs/animation/contract.md.txt",
+    "source_worktree": "/private/tmp/lie-integrate-text-architecture",
+    "source_commit": "21eadee61b9928182898a225bf356a9c9a39e71b",
+    "source_path": "docs/animation/contract.md",
+    "source_blob": "a2f9e4b0a551be8a8d007f1549bde1032c5d0e2a",
+    "sha256": "ecb3e426551e83387019ea706e198fb8c684ad0961c34a75f909a0b2da0f1ff0",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T21:00:02+08:00"
+  },
+  {
+    "archive": "snapshots/earlier-naming-candidate/docs/animation/coral-game-integration.md.txt",
+    "source_worktree": "/private/tmp/lie-integrate-text-architecture",
+    "source_commit": "21eadee61b9928182898a225bf356a9c9a39e71b",
+    "source_path": "docs/animation/coral-game-integration.md",
+    "source_blob": "1bdc6eaf1d4922ed5f8072fa8ace0d32d53286cb",
+    "sha256": "df24782fe74cff45d175db66f24bc922bd74b996a4eb23fc284ad12315f8cff6",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T21:00:02+08:00"
+  },
+  {
+    "archive": "snapshots/earlier-naming-candidate/docs/animation/production-workflow.md.txt",
+    "source_worktree": "/private/tmp/lie-integrate-text-architecture",
+    "source_commit": "21eadee61b9928182898a225bf356a9c9a39e71b",
+    "source_path": "docs/animation/production-workflow.md",
+    "source_blob": "91cd5c566098cadf7ec250f73101772e1c2d41c8",
+    "sha256": "3c465f1ecfad1ecd19d09fe8a4e7a48fbce0ca4e9db9ea87e057ca39f935a7d4",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T21:00:02+08:00"
+  },
+  {
+    "archive": "snapshots/earlier-naming-candidate/docs/architecture.md.txt",
+    "source_worktree": "/private/tmp/lie-integrate-text-architecture",
+    "source_commit": "21eadee61b9928182898a225bf356a9c9a39e71b",
+    "source_path": "docs/architecture.md",
+    "source_blob": "89918e5d027fb7f2cbe6e70eadd88632db8ebb56",
+    "sha256": "7040d27a2d1e46dc5c6c4bd88041a263fc54c3d1d1a6970172f3192a3ca2c6f9",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T21:00:02+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/README.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/README.md",
+    "source_blob": "d71e51e2ab48922897151c062656761adfd95187",
+    "sha256": "a4a4c931245bfe8e9483bfc2a3699e54d2cb2f2b2edeed3c862e7811f84c7ee7",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/prompts/closed.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/prompts/closed.txt",
+    "source_blob": "918ad2fd0adecccfdf0f07f1293303db10df68b9",
+    "sha256": "d3b77071489ff8d3df1bd693d3e550b040a7b13f1e630346d3d425004ffc1cf7",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/prompts/head.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/prompts/head.txt",
+    "source_blob": "ba0d19f8f7c9f5ff8b906d2fa334d631cc880706",
+    "sha256": "cad42feb3ca637fe0a4af44804018be143d483493c63e86fe49515c259a21bb6",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/prompts/listen-fore.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/prompts/listen-fore.txt",
+    "source_blob": "d9f81f51ac13db40a64cc71d83920711f047a817",
+    "sha256": "66f1ee230692d8c8d230d059b3b2b08536a78ea8f120d01eb68f0e1341972943",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/prompts/listen-upper.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/prompts/listen-upper.txt",
+    "source_blob": "65066835bada0df78fd6528a0afd6df8eadf8b7f",
+    "sha256": "d4df82dcfb42d3146729194c50484e0a07e4dbbac7a62edc6f62e97a60e7c1ed",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/prompts/open.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/prompts/open.txt",
+    "source_blob": "6d4d5d47d61cd49394ff0cd363fd86bc734cc8e9",
+    "sha256": "287a7f7e68be492df4f0ca48779825ebbc3931ad981f217c6d870c6c38bfb5f7",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/prompts/speak-fore-cleanup-attempt.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/prompts/speak-fore-cleanup-attempt.txt",
+    "source_blob": "6aac0c268c62d0e7fab0d87bbe81ca91e7f742c3",
+    "sha256": "2600223f820d266164e6bab4d4bd400e7ebcece36c975ea89b873008f3fdb984",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/prompts/speak-fore.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/prompts/speak-fore.txt",
+    "source_blob": "57e8c11e6acc366fc6a1d389e226c3714eec7dad",
+    "sha256": "87aea7c643db91f74055d0a114cc3d48db331d4b5b328ef06611ee14d050c7b9",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/README.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/README.md",
+    "source_blob": "c1bf3d9a4d6e9fb3600c5ee48e322fbc75cfd373",
+    "sha256": "8af638b113a21c5d2fc4ca98662392f7e917a0f01451b754e86ec6c16e06c55c",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/body-correction.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/body-correction.txt",
+    "source_blob": "48bf24662eb431c91ba1d9d67fe4c1bb14849d1a",
+    "sha256": "5d760311586a562d9339c2c0098d6fc8bc41e29131e5fcb60cf765326225b5fb",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/body.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/body.txt",
+    "source_blob": "536172a62ce5fb22543d49b68d6a9ec7dfaf709b",
+    "sha256": "98d14dd7b831abb0935802d658cbcdcc49c4b9e5b4858c1b2b017045449fae89",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/fore-left.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/fore-left.txt",
+    "source_blob": "cef23b23ee7be104708e232a93e18418c5cc4c88",
+    "sha256": "0b36c9c6183f8816f6502f3eaac58016d96f9bf117835da1ec371a33e3a746a4",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/fore-right-alpha-correction.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/fore-right-alpha-correction.txt",
+    "source_blob": "a97012743bb31d7df3a76b5509a97ebc5139944e",
+    "sha256": "b66d8c4660758191dc5655d9cf2c7a4f69e9e80223bb543b7177616d36f3f62f",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/fore-right.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/fore-right.txt",
+    "source_blob": "00052c43f8677cc67a70c35e35a55529c9be96fe",
+    "sha256": "49ee28a6f388fd3c7b5131a72b68d52f2ac831b8e5c01dd232cfef9936cd923f",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/head.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/head.txt",
+    "source_blob": "cefea0270333f8c3fb074097e1acea35b539b3df",
+    "sha256": "ff39575ae3e9ea2514be6ab3800d91a490bd50cb5df14cc680ae16cd915993d6",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/upper-left.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/upper-left.txt",
+    "source_blob": "999db7ab0cd533dbb6377ad16e6b10f1d89978c3",
+    "sha256": "c21717cf15ef445c2f250b8eedc532915857d61ddc634979357e7bd75e8aef27",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/prompts/upper-right.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/prompts/upper-right.txt",
+    "source_blob": "89e5893a11fda78650da6dd3d7223580a627542a",
+    "sha256": "8165c3870ea336c03bb3d98c60ff97b3e416819fb68b619bf8916b621b3733bd",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/docs/coral-animation-next.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "docs/coral-animation-next.md",
+    "source_blob": "db2047a02894c93c23940b5934c0411f6f6ca1ee",
+    "sha256": "5f1fae777f6f130023cd004c6eb8aae9a3971fa4766a759722c1948363eba354",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/docs/coral-layered-animation-v2.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "docs/coral-layered-animation-v2.md",
+    "source_blob": "5c7fada97487de072f161f1bf6d2ea49c5c8b227",
+    "sha256": "139d3245aee48366dd9455d527cbd5909a18f7c11545dc2d796b5126deac9cb6",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/docs/coral-layered-animation.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "docs/coral-layered-animation.md",
+    "source_blob": "d57c4dc9c55cc569612fe3938cb2e53e1ebddfbd",
+    "sha256": "94c1b900c52ae1f885164463348c2a542504fa564f9da53f91269013f20104d2",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-runtime-research/docs/coral-runtime-evaluation.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-runtime-evaluation/lie",
+    "source_commit": "0faa4dff3196594cfe789d5ed59d43eb88848139",
+    "source_path": "docs/coral-runtime-evaluation.md",
+    "source_blob": "29aa20ea4b438abd1109acc7094f21ec938e1670",
+    "sha256": "abf0b0270724c5ed28e76d7591d60a85070a2fa6e6f9a9ee2dedac2615a05011",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:27:38+08:00"
+  },
+  {
+    "archive": "snapshots/investigation-controls/design/investigation-controls-v2/README.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/investigation-controls-v3/lie",
+    "source_commit": "c7f12842beac0554e0574de6b91000b99d7defb9",
+    "source_path": "design/investigation-controls-v2/README.md",
+    "source_blob": "6e5db03ee2c1b7c8850df349bdb299f12eabab69",
+    "sha256": "6eccc0051cb879f1c33a6bc12dbd70cfc27a696e5d066e2a6605cd33b36f8d74",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:43:28+08:00"
+  },
+  {
+    "archive": "snapshots/investigation-controls/design/investigation-controls-v3/README.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/investigation-controls-v3/lie",
+    "source_commit": "c7f12842beac0554e0574de6b91000b99d7defb9",
+    "source_path": "design/investigation-controls-v3/README.md",
+    "source_blob": "4272ada79d58824635b522391560243f95d916a5",
+    "sha256": "c72929e64d34602c7d1c63d416492c2401952684b660fcf7a037e583c62e1856",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-24T18:43:28+08:00"
+  },
+  {
+    "archive": "snapshots/silver-earlier-status/design/animation-candidates/silver-bun/README.md.txt",
+    "source_worktree": "/Users/nighca/.codex/worktrees/silver-bun-animation/lie",
+    "source_commit": "97548eaa3f324ffb46e8e5fec21185c06b4a3956",
+    "source_path": "design/animation-candidates/silver-bun/README.md",
+    "source_blob": "169fa43b259d67cb68883ad774dbab1b209d6797",
+    "sha256": "3d5bfecf3ea3d5c75c2e55c0d67f627ac99c9f130c973a4984fee1d7f52e522a",
+    "status": "historical snapshot; superseded or earlier candidate; not current approval",
+    "source_commit_date": "2026-10-25T07:11:57+08:00"
+  },
+  {
+    "archive": "coverage-design-preparation.md",
+    "source_path": "/private/tmp/lie-coverage-design-preparation.md",
+    "sha256": "6d16cda6adf60e85d31415f9ac4c9018ccb6be4edf2a48546087d8b2a0d72d27",
+    "status": "original owner handoff; limitations retained",
+    "source_sha256": "c0f481dd9094f1a075d3041b6d6436569622c2436ffc6053a7e64027161d0a68",
+    "normalization": "Removed one extra blank line at EOF; content unchanged."
+  },
+  {
+    "archive": "share-browser-results.md",
+    "source_path": "/private/tmp/lie-share-browser-results.md",
+    "sha256": "36b53f29a9df15886bb677b6cc723b89900ea449fb7139ab2d768a2e39c82056",
+    "status": "original owner handoff; limitations retained"
+  },
+  {
+    "archive": "share-boundary-incomplete.md",
+    "source_path": "/private/tmp/lie-share-boundary-qa-20261025/handoff.md",
+    "sha256": "9abb7c16a670459f461c042e6e28bfa33851d663b6c57d8cb0c86dca450c3018",
+    "status": "original owner handoff; limitations retained"
+  },
+  {
+    "archive": "sunny-visibility.md",
+    "source_path": "/private/tmp/lie-sunny-visibility-qa-20261025/handoff.md",
+    "sha256": "62cae09e479911d75769b1317f3279259566da2415530e84341e14370dd97df5",
+    "status": "original owner handoff; limitations retained"
+  },
+  {
+    "archive": "sunny-observations.json",
+    "source_path": "/private/tmp/lie-sunny-visibility-qa-20261025/observations.json",
+    "sha256": "baa155ccdc51fa8aa547c901c613dbdc32321ec83ce07a93b9ea4a92692e11c9",
+    "status": "original owner handoff; limitations retained"
+  },
+  {
+    "archive": "evidence/lie-share-browser-16000.jpg",
+    "source_path": "/private/tmp/lie-share-browser-16000.jpg",
+    "sha256": "0ec51fcb483c88e0b8e89e49eaa36defe6acf7ba28d37ebb9e8fd08dfdd53882",
+    "status": "native screenshot, historical QA; sunny image is synthetic simulation only"
+  },
+  {
+    "archive": "evidence/lie-share-browser-16001.jpg",
+    "source_path": "/private/tmp/lie-share-browser-16001.jpg",
+    "sha256": "d782d5078e08b89a8c4bce02d6c880ded9e71de12ddf71ce936b89ee5707bde5",
+    "status": "native screenshot, historical QA; sunny image is synthetic simulation only"
+  },
+  {
+    "archive": "evidence/lie-share-browser-damaged.jpg",
+    "source_path": "/private/tmp/lie-share-browser-damaged.jpg",
+    "sha256": "c9f5dc20a33135eb9abbadd707f648121b952ec651c50bfb10f3226bdb5b4d28",
+    "status": "native screenshot, historical QA; sunny image is synthetic simulation only"
+  },
+  {
+    "archive": "evidence/lie-share-browser-normal.jpg",
+    "source_path": "/private/tmp/lie-share-browser-normal.jpg",
+    "sha256": "716dd89a946c90ed70b2f516ae01750c745264eed6438c9def5315dced1d3776",
+    "status": "native screenshot, historical QA; sunny image is synthetic simulation only"
+  },
+  {
+    "archive": "evidence/sunny-iframe-simulation.jpg",
+    "source_path": "/private/tmp/lie-sunny-visibility-qa-20261025/iframe-simulation.jpg",
+    "sha256": "296b2af4efeeb362a871af4ae4324714d2c17ef3cd61d27feeaf627638dd6340",
+    "status": "native screenshot, historical QA; sunny image is synthetic simulation only"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation/sources.json",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation/sources.json",
+    "source_blob": "3ecbde865606ded6f7aa218c773154df35ba7e15",
+    "sha256": "22639428c3fc29e68a4098afdcc113e292b0535346c7733c05abd085bc3c5076",
+    "status": "historical provenance only; asset paths refer to original source tree",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/sources.json",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/sources.json",
+    "source_blob": "709426f5eae258c11359460a8719378bb11ed147",
+    "sha256": "05cad130710fa2b230b5befe147856d85e74ca94df1dd14ed3c162a073104620",
+    "status": "historical provenance only; asset paths refer to original source tree",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  },
+  {
+    "archive": "snapshots/coral-research/design/coral-layered-animation-v2/reused-sources.json",
+    "source_worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+    "source_commit": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+    "source_path": "design/coral-layered-animation-v2/reused-sources.json",
+    "source_blob": "7aff3bc05a4730e3640426e6c8877939a86770dd",
+    "sha256": "118952497a73ac5d05393c2fc158e3ef30434b1405562198d4fc06733d0e8353",
+    "status": "historical provenance only; asset paths refer to original source tree",
+    "source_commit_date": "2026-10-24T18:05:28+08:00"
+  }
+]
