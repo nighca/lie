@@ -32,3 +32,5 @@ node --use-system-ca apps/gateway/scripts/linx-preview-resources.ts --cleanup --
 ## 验证状态
 
 脚本静态syntax、提示逐字对照、ignored路径检查通过；尚未执行setup，未创建供应商资源。实际执行后由操作者另记安全计数，不把setup成功当作真实语音或多人隔离验收。
+
+2026-10-24 root已逐行review后在 `/private/tmp/lie-integrate-text-architecture` 执行setup：create/configure/read/bind均HTTP200/code0，Memory_nomem/history0，1设备完成；实际私密state/secrets位于该worktree的 `apps/gateway/tmp/online-preview-{state,secrets}.json`。root核对三字段非空且0600，并确认agent/device均与本地环境不同；资源为线上试玩保留，不自动清理。此时尚未部署/推理，后续结果另记。
