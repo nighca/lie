@@ -105,3 +105,7 @@ All 32-phase seam checks, strict package/hash/Timeline tests and prior read-only
 
 
 The same enlarged-motion review then found a speaking 3s shirt-edge zigzag below the palm, screenshot `/private/tmp/silver-feedback-waist-fixed.jpg`, also viewed by the subagent. It comes from the original speaking-arm polygon including speaking-source white-shirt pixels in x810–880/y620–810; rotating that fragment independently exposes its edge over the default-source shirt. Its inner polygon now follows the original hand/sleeve edge instead of including the unrelated white shirt. This is separate from the torso overlap at x875+; no extra torso node is introduced. The source audit now rejects every opaque light-shirt pixel in that bounded band while retaining all 1,225 warm palm/finger pixels in x810–880/y695–755 (alpha≥200, red>170, 70<green<210, blue<145). This threshold targets actual skin, excluding two dark shirt-boundary antialias pixels around y785/796; navy outline/colour acceptance remains visual. PNGs and all approved transforms/trajectories remain unchanged.
+
+## Latest initiator feedback review
+
+Final source `7509b19` completed independent source review and actual initiator face/open-mouth, eight full-body phases, enlarged seams and live four-state desktop/391 checks. See `feedback-review.md` and native silver-feedback screenshots. Previous initiator review describes older amplitude/placement; user visual approval of this revision remains pending. No activation.
