@@ -7,11 +7,13 @@ import type { Appearance } from '../../apps/web/src/presentation/appearances'
 const query = new URLSearchParams(location.search)
 const candidateAppearance = query.get('appearance') ?? 'coral-bob'
 const candidateSource = query.get('src')
+const candidateSources = new Map([...query.entries()].filter(([key]) => key.startsWith('src.')).map(([key, value]) => [key.slice(4), value]))
+if (candidateSource != null) candidateSources.set(candidateAppearance, candidateSource)
 const selected = ref(candidateAppearance), entries = ref<readonly Appearance[]>([])
 const state = ref<AnimationState>('default')
 const appearance = computed(() => entries.value.find(value => value.id === selected.value) ?? null)
-const source = computed(() => selected.value === candidateAppearance && candidateSource != null ? candidateSource : appearance.value?.animation ?? null)
-const animatedAppearances = computed(() => entries.value.filter(item => item.animation != null || item.id === candidateAppearance && candidateSource != null))
+const source = computed(() => candidateSources.get(selected.value) ?? appearance.value?.animation ?? null)
+const animatedAppearances = computed(() => entries.value.filter(item => item.animation != null || candidateSources.has(item.id)))
 const portrait = computed(() => state.value === 'default' ? appearance.value?.portrait : appearance.value?.portraits[state.value] ?? appearance.value?.portrait)
 onMounted(async () => { entries.value = readAppearances(await (await fetch('/appearances/manifest.json')).json()) })
 </script>
