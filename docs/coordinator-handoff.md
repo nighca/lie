@@ -39,9 +39,9 @@
 - CharacterPreset命名：原owner cb86dd6e25e22444dc93b892c2d609c0a0d6ac08，旧候选1629830为其cherry-pick。批准内部源/类型/包改名，保持appearanceId和/appearances/公开兼容；待完整rootreview与按当前main再组合，不能覆盖新Editor/App或候选资产。所有制作owner仍按当前main既有appearance路径，不提前要求换源。
 - Logo小彩蛋：用户已验收5497 A红点轻跳并明确“就按这个效果实现吧”，正式实施已授权，不再询问。原设计e5243fc+645fc41已本地收录；现派review_blue_animation负责正式接入及组件/浏览器QA。ProductHeader调查1—9本轮已集成、依赖解锁，实施agent先将当前语音observer在安全边界交付，再从实际新main建managed WT做Logo。保持正式SVG几何、105x56/88x47、560ms/3px、原导航及减弱动态；仅组件/必要测试/探索README状态，root review/单队列集成。5497样稿保留。
 
-- README头图语言：用户新增要求英文README用英文图、中文README用中文图。P3已派logo_easter_egg_design从d791f7f独立worktree处理README及readme-hero源/图片，保持既有构图角色风格。子agent无IAB能力，已协调调查专项在其P1交付后代渲染；README任务与新获批准的Logo正式接入分开。待clean完整交付、rootreview/集成。
+- README双语头图完成：WT /Users/nighca/.codex/worktrees/readme-english-hero/lie，base d791f7f，唯一bc4b4e23f2b095c1ea7e829d61906182249c56c9 clean。root核完整三文件diff/HTML仅本地化/1600×760图片目视；中文README/HTML/PNG逐字节未变、两README图片路径有效，随本轮本地集成，未push。调查专项IAB5499 fonts/4图decode/console空，原生JPEG经sips转PNG无缩放，非无损导出；可重建HTML保留。5499交付服务仍在，清理需owner执行。
 
-- 语音启动等待：原WT /Users/nighca/.codex/worktrees/voice-startup-audit/lie，codex/voice-startup-audit，base0adf883，唯一e14adeb71260bd86879ab05500b45dd79180eb61 clean。root已读全文及liveVoice/channel/microphone实际控制流，随本轮本地收录docs/voice-startup-audit.md：status gate后早已三支并行，ready含hello和tools/list；不重复安排已实现并行。下一步候选为本地无内容observer，尚未实施/无真实计时；不mic/provider。review_blue_animation现从cd9a017做最小本地可选阶段observer，默认无记录/输出/联网，内部startup.ts+liveVoice/channel/microphone+必要测试；不改UI/controller/生命周期。等clean交付review；Logo依赖已解锁，待其安全边界切换。
+- 语音启动等待：原WT /Users/nighca/.codex/worktrees/voice-startup-audit/lie，codex/voice-startup-audit，base0adf883，唯一e14adeb71260bd86879ab05500b45dd79180eb61 clean。root已读全文及liveVoice/channel/microphone实际控制流，随本轮本地收录docs/voice-startup-audit.md：status gate后早已三支并行，ready含hello和tools/list；不重复安排已实现并行。下一步候选为本地无内容observer，尚未实施/无真实计时；不mic/provider。review_blue_animation现从cd9a017做最小本地可选阶段observer，默认无记录/输出/联网，内部startup.ts+liveVoice/channel/microphone+必要测试；不改UI/controller/生命周期。clean5e465594529ba8b7bd14c43863a6c38711933147交回，独立review发现握手远端onclose误标cancelled的P2，已要求原owner安全边界后追加修复commit（不改交回原提交）；尚未集成。Logo依赖已解锁，修完observer再恢复。
 
 - 编辑器追加验收：用户确认其余部分（含步骤线）无问题。单独P2待办为1004×676官方投稿弹窗视觉层级/间距优化，owner编辑器专项待排；保持手动GitHub/仅复制JSON契约，未启动，不与已验收本批混淆。
 
