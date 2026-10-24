@@ -39,7 +39,7 @@
 
 | Owner / chat | 当前交付与边界 |
 | --- | --- |
-| 调查共享视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 已本地集成main `3a677358cc5fc69f215f13c44d51c5a9643eab2c`，source `7dfbba62697320ca9db97450bc7d973d3a5d5823`（base31db7c9，无额外依赖，五文件clean）。root全diff/context/七图review无blocker，candidate以f433834独立Node24.22.1验证Web186/186（17files，base新增7项，区别source179）、类型/构建8形象60资源通过，source patch完全一致，clean main快进。最终单人180/176及四人148.5窄回归通过；临时JSON删除，tab30/31/32关闭且viewport reset。5507/session81667已由root成功授权原owner仅停止本服务并核无监听，清理待owner回证，root不自行kill。 |
+| 调查共享视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 已本地集成main `3a677358cc5fc69f215f13c44d51c5a9643eab2c`，source `7dfbba62697320ca9db97450bc7d973d3a5d5823`（base31db7c9，无额外依赖，五文件clean）。root全diff/context/七图review无blocker，candidate以f433834独立Node24.22.1验证Web186/186（17files，base新增7项，区别source179）、类型/构建8形象60资源通过，source patch完全一致，clean main快进。最终单人180/176及四人148.5窄回归通过；临时JSON删除，tab30/31/32关闭且viewport reset。5507/session81667原owner已仅对自有session Ctrl-C，exit130，lsof5507无输出确认停止；source7dfbba6 clean，fixture/tab/viewport已清，无其他进程动作。 |
 | 编辑器 `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 已本地集成main `f4338346e3ec20fd742f6a75ea4362f428c18b5b`（base3f52ee5，source60e0ed7/base4fde8d4）。root实际review全diff/context/五图，独立Node24.22.1下28测试/Web类型/构建及8形象60资源通过，候选source两文件树相等，clean main快进；未push/部署。[实施证据](game-editor-implementation.md)。final iframe1004/391冷/ready及反复切人通过，非顶层mobile；MutationObserver非Node来源未证实、console非全清。已清tab17/18、临时壳、停5402/5403，取消topslot并通知fan。 |
 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 正在新5504候选bfb2a33继续正式游戏IAB，完整交付尚缺；银发可显/减少动态静态回退、灰白六图记录仅部分QA。环境与组合检查见下文；不操作其branch/runtime。完成QA后按原canonical制mint/ochre，最多2角色并行，自验/clean/rootreview后集成，不自动发布。 |
 | 接入执行 `main_acceptance_environment` / root review | gray/plum正式source HEAD `822e9b5bb8064f10c00178f9c5643dff6f3418dd`，base5968661，12有序提交clean；root已review builder/verify/manifest/docs/图，无源码blocker，sourceowner372测试/类型/构建72资源/strict/hash通过。与18个silver提交合成下述30提交候选，未main/push。 |
@@ -55,7 +55,7 @@
 
 专项接入记录位于该候选的`docs/animation/silver-bun-game-integration.md`与`gray-plum-game-integration.md`（尚不在main），详细来源按source HEAD取log，不重复长链。
 
-共享窗口：当前无global viewport owner；fan已关tab30/31/32并reset，Editor slot已取消。动画继续独立tab/iframe，不获全局viewport授权。5504候选QA保持；旧5505不恢复，5507/session81667清理已授权原owner，待停服/无监听回证。
+共享窗口：当前无global viewport owner；fan已关tab30/31/32并reset，Editor slot已取消。动画继续独立tab/iframe，不获全局viewport授权。5504候选QA保持；旧5505不恢复，5507/session81667已由原owner停止并核无监听；5402/5403也已清，当前专属QA仅5504，其他保留preview不变。
 
 [结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
 
@@ -78,4 +78,3 @@
 真人mic/外放/长会话/三案盲测、新增五声音色耳验、分享长URL跨浏览器、GitHub外部投稿端到端及费用硬限额未闭环；sunny真实隐藏恢复未验/1280×720舞台裁切保留。fake、文本detect、短WAV、ready或专项QA不等于用户/真人验收。
 
 仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；正式访问/并发/费用/回收策略暂缓，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
-
