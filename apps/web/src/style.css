@@ -4,7 +4,7 @@ h1, h2 { line-height: 1.2; overflow-wrap: anywhere; }
 h1 { font-size: 36px; }
 h2 { font-size: 24px; }
 button, a { -webkit-tap-highlight-color: transparent; }
-.game-shell { max-width: 1440px; margin: auto; padding: 24px; }
+.game-shell, .editor-shell { max-width: 1440px; margin: auto; padding: 24px; }
 .game-shell > .lie-product-header { margin-bottom: 20px; }
 .muted { color: var(--lie-muted); font-size: 14px; }
 .surface { background: var(--lie-surface); border: 3px solid var(--lie-ink); border-radius: 28px; box-shadow: 0 6px 0 #111b451a; }
@@ -63,7 +63,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .investigation > .lie-voice { grid-column: 1 / -1; }
 }
 @media (max-width: 700px) {
-  .game-shell { padding: 16px; }
+  .game-shell, .editor-shell { padding: 16px; }
   .intro-card { margin: 24px auto; padding: 28px 20px; }
   .intro-characters { gap: 8px; }
   .intro-character { flex-basis: min(140px, calc((100% - 8px) / 2)); }
@@ -84,10 +84,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .accusation-character .avatar-frame, .accusation-character .initial-avatar { height: 150px; }
 }
 
-.home-shell { padding: 24px 40px 48px; }
 .home-shell > .lie-product-header { margin-bottom: 0; }
 .home-content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; margin: 34px 0 0; align-items: start; }
-.home-intro { position: sticky; top: 30px; padding: 12px 0 0 12px; min-width: 0; }
+.home-intro { position: sticky; top: 30px; padding: 12px 0 0; min-width: 0; }
 .home-intro h1 { font-size: 52px; line-height: 1.24; letter-spacing: -1.8px; margin: 0 0 18px; font-weight: 850; }
 .home-intro > p { font-size: 19px; line-height: 1.7; margin: 0; color: var(--lie-muted); }
 .home-cast { position: relative; height: 334px; margin: 18px -8px 0 -12px; overflow: hidden; }
@@ -117,7 +116,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .home-cast .home-cast-blue { left: 252px; }
 }
 @media (max-width: 900px) {
-  .home-shell { padding: 18px 20px 36px; }
   .home-content { gap: 28px; margin-top: 26px; }
   .home-intro h1 { font-size: 40px; }
   .home-intro > p { font-size: 16px; }
@@ -130,7 +128,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .case-card h3 { font-size: 23px; }
 }
 @media (max-width: 620px) {
-  .home-shell { padding: 16px 18px 32px; }
   .home-content { display: block; margin-top: 24px; }
   .home-intro { position: relative; top: auto; padding: 0; }
   .home-intro h1 { font-size: 36px; line-height: 1.27; margin-bottom: 12px; letter-spacing: -1px; }

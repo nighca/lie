@@ -1,4 +1,4 @@
-.editor-shell { max-width: 1200px; padding: 18px 28px 48px; margin: auto; color: var(--lie-ink); }
+.editor-shell { color: var(--lie-ink); }
 .editor-header { margin-bottom: 30px; }
 .editor-steps { display: flex; justify-content: center; gap: 48px; padding: 16px 0; border-block: 1px solid #e1d77b; }
 .editor-steps button { display: flex; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; color: #77734f; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
@@ -91,7 +91,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 .github-link { display: inline-block; color: var(--lie-primary); font-weight: 700; margin-top: 8px; }
 @media (max-width: 850px) { .character-editor { grid-template-columns: minmax(155px, .65fr) minmax(0, 1.6fr); } .character-fields { padding: 24px 20px; } }
 @media (max-width: 670px) {
-  .editor-shell { padding: 14px 16px 32px; }
   .editor-steps { gap: 18px; justify-content: space-between; padding: 13px 0; }
   .editor-steps button { gap: 5px; font-size: 12px; }
   .editor-steps button > span { width: 24px; height: 24px; font-size: 12px; border-radius: 8px; }
