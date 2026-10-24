@@ -365,3 +365,5 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 2026-10-24 14:29 心跳推进：root逐文件审查editor e209的Editor/draft/share与27项测试及周边，结合已交IAB证据，组合207项（11/106/51/18/21）、全仓typecheck/完整build通过。仅独立模块，当前Application未接/editor和/play；马上分配路由集成，不能说编辑器已正式可玩。完整URL16000暂定，接收页还需校验完整URL而非仅fragment，跨浏览器矩阵待验。root另实看首页A优化桌面与源布局/README，产品介绍和列表等宽、统一多案卡片，6cf候选归档，待用户看优化稿再正式替换首页。第三案与混元动画交付均已收到，rootreview队列继续。
 
 2026-10-24 15:08 心跳集成：root完整review编辑器路由dfcad（Application/main/8项路由测试），补App可选returnLabel默认原文案，五处返回按钮统一，预览为返回编辑器。全仓215项/typecheck/build通过；再review第三案正文/亲历/路径/测试，顺序66b→7a→7e追加（未重复183补丁），Web117项/typecheck/build通过，总组合218项；第三案540s/四人/8形象覆盖，真实模型/声音未验。root独立IAB5318填写并生成518字符真实链接、试玩进入调查、返回触发确认、确认后草稿恢复、分享新tab打开/刷新接案、刷新临时preview回editor；console error/warn空，未收音/真实服务。发现单人物接案卡扩至660只见头发，另派c4c小修并review，root复验200×203脸完整；Web类型/build再过。截图/private/tmp/lie-editor-route-bounded-intro.jpg。此批本地合入，不等于8787/线上已更新；跨浏览器16000最终安全上限仍待验。首页A优化待用户确认，头像三候选待root审阅；混元3D样片待root视觉/源码验收。
+
+2026-10-24 首页A优化稿正式批准：用户确认“就按这个做”，不再询问视觉确认。appearance_assets开始从review main f26894d独立实施正式Application首页与home样式，产品介绍与动态案件列表同等权重，按归档refined-a还原，统一多案；接现有三案目录与创作案件入口，保留已review编辑器路由/快照/离开确认。桌面/窄屏/更多卡片独立验收，rootreview后协调本地试玩更新与里程碑发布；不能把静态设计图或本地目录当线上已上线。
