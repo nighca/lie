@@ -1,0 +1,49 @@
+{
+  "sources": [
+    {
+      "id": "default-source",
+      "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+      "width": 1254,
+      "height": 1254,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "origin": "../../appearances/assets/mint-puffs/default.png"
+    },
+    {
+      "id": "listening-source",
+      "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+      "width": 1254,
+      "height": 1254,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "origin": "../../appearances/assets/mint-puffs/listening.png"
+    },
+    {
+      "id": "speaking-source",
+      "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+      "width": 1254,
+      "height": 1254,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "origin": "../../appearances/assets/mint-puffs/speaking.png"
+    },
+    {
+      "id": "waiting-source",
+      "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+      "width": 1254,
+      "height": 1254,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "origin": "../../appearances/assets/mint-puffs/waiting.png"
+    }
+  ],
+  "generationCalls": 1
+}
