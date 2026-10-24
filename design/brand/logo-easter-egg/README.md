@@ -91,3 +91,18 @@ A 方向已获用户选择，以下保留原提案确认事项供 review；接�
 鼠标进入/键盘聚焦/触摸pointerdown触发；播放中重复触发不会重启。鼠标pointerdown不额外重播，click仍立即交原调用方导航。560ms、SVG上移12.57单位（桌面约3px）、64.3%前已落回，不循环。animationend/失焦/pointerleave/pointercancel恢复静止；卸载撤销媒体监听，无JS计时器或队列。系统reduce下同一560ms时段仅静止4单位深蓝细圈；运行中改变系统偏好立即结束当前播放，下次交互按新媒体条件执行。
 
 组件测试核对真实静态SVG的viewBox与所有路径/圆点属性、标签下划线、首页事件、单次触发、触摸取消、媒体改变和监听释放。Node24.22.1下UI38、Web172测试，全仓类型检查及Web生产构建/54资源严格check通过。浏览器窗口由有IAB访问能力的独立调查专项执行；以下只追加其实际回交证据，不将组件测试当浏览器效果验收。
+
+
+## 独立 IAB 验收与收尾（2026-10-25）
+
+以下为有IAB访问能力的调查专项实际回交，实施代理未将自己的组件测试冒充实时浏览器检查。验收服务为隔离候选 `http://127.0.0.1:5503/`，源码 `141039c5ae4bd7ca2205dd2508958e02461723c3` 后追加修复 `6c6ce23a8f0aa6bada18ef506afca97d3cbb9220`。
+
+- 原生hover结束后mousePressed使链接取得普通焦点，曾实际复现误重播P2。修复仅允许`:focus-visible`焦点触发后，在同页原生窄回归确认：hover结束→mousePressed时focus-visible=false、playing=false；Shift+Tab键盘焦点时focus-visible=true、playing=true；blur后false。保留原焦点圈、touch按下、首页事件，未改导航拦截范围。
+- 单工具内原生mouseMoved并发RAF采样，圆点最大SVG位移12.5696单位，对应实测2.99956 CSS px；duration560ms、iteration1，其他3路径transform均none。结束playing=false，继续悬停不循环。原3路径与圆点的几何/填色逐项匹配正式静态logo。
+- 桌面logo105×56；实际391×844下innerWidth=scrollWidth=391、logo88×47，原下划线保留。原生截图：`/private/tmp/lie-logo-qa/desktop.png`、`/private/tmp/lie-logo-qa/mobile.png`。
+- reduce下采样为静止stroke、transform=none、rest动画560ms，结束playing=false；新鲜路由运行中改reduce，首RAF已playing=false。
+- Enter触发原调查离开确认；取消留在当前调查；原生点击确认后回到首页（demo=1）。没有开启麦克风、真实provider或demo语音。
+- 触摸验证边界：IAB不支持原生dispatchTouchEvent，使用原生PointerEvent构造器模拟touch pointerdown→pointercancel/pointerleave，在DOM微任务后playing为true→false。只证明事件模拟路径，未声称真机触摸/拖动手势通过。
+- console warn/error均为空。QA结束已清除media/touch模拟、reset viewport并关闭专用tab，没有改候选文件或其他页面/服务。
+
+修复后实施代理再跑UI38、Web172测试、UI类型检查及Web构建/54资源check均通过；全仓类型检查在首次实现阶段已通过。实施代理已停止自有5503/session79752并检查该端口无监听。正式资源和README hero均未改。此交付仍不代表已合main、已推送或部署。
