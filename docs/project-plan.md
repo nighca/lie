@@ -331,3 +331,7 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 2026-10-24 12:51 首案表现收尾候选：root完整审查ce007与ec82，8个新runtime文件逐字节核对源图，组合168项（11/76/51/9/21）、全仓类型/完整构建通过。root独立IAB三卡top/height两态完全相同，假语音启用提示与停止后关闭提示正确，console空；活动截图/private/tmp/lie-active-status-integrated.jpg。子代理391/1280/短屏与8态映射证据另列；root不把其曾共享依赖检查当独立保证，已以自己候选重跑。准备串行集成/发布“首案三人四态+活动态/稳定卡片”里程碑。逐字效果由独立代理继续，首页两稿和新增5人素材收尾不受影响。
 
 2026-10-24 12:56 首案表现里程碑已发布：root正常fetch确认远端a5ed祖先后push8cad54ba99160aa578acd68b90ba52c51fa91569；Actions40064095283 success，Cloudflare活动version e080fa33-d69f-4d82-9b68-de4f92643a90承载100%，消息同SHA。线上manifest三人均含listening/waiting/speaking，voice/status仍ready；本地8787同步构建/重启health ok。root本次未收音/重测真实回答。CI/CD实际第二次自动发布验证完成，验收记录仅本地随后续里程碑push。逐字feba已交付待root完整review；五人20图已交付待root整体review，视觉已独立开两版首页设计，不假称第二案可玩。
+
+2026-10-24 13:13 用户强调并行推进，首页两版重设计优先，不被3D服务准备阻塞。视觉负责人正在独立home-options工作树制作A/B各一案与两案实稿；第二案仅筹备占位，未注册为可玩。root已完整审查逐字展示feba062六文件并在9a2a53a候选上集成：新角色回复渐显、玩家与历史即时、pending转正式保留进度、打断/停止补全、减少动态效果及滚动跟随。类型检查、178项测试（gateway11/web77/core51/ui18/voice21）与完整构建通过；网关首次沙箱监听EPERM后获权限重跑11项通过。子代理内置浏览器模拟证据已交付，root本轮未另做浏览器或真实服务验收；本地合入后尚未发布/更新8787。
+
+3D路线调整：用户否定程序建模样片的美术质量，同意探索单张coral-bob原图生成粗模再Blender修整。root已核实fal Meshy7.1带贴图单次标价1.20美元，建议首轮一次、2美元上限；具体供应商、素材外传及花费授权仍待用户确认，未上传或调用。API key可存已忽略tmp/fal-api-key，不进入版本库。
