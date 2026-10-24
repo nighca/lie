@@ -69,7 +69,7 @@
 | P3 | 双语README / root子agent logo_easter_egg_design | 双语互链已随32d89bf发布。用户新增：英文README头图仍为中文，需拆成同风格英文/中文两图，各README引用对应语言。已委派复用现有HTML/SVG源、局部翻译及渲染验收，不重画角色、不改正式Logo；待完整review交付，不抢占P1调查页。 |
 | P1 | UI反馈1—9 / 调查共享视觉专项 | 用户澄清原“只记录”不约束root，已正式授权安排实施；从887ac03分派首页/品牌/介绍卡片/转写/持续玩家波形/通知/结局分段。owner负责相关Web/UI文件，禁止编辑器/素材/命名迁移，交回完整review与桌面/391验收。见[17条范围](pending-ui-feedback.md)。 |
 | P1 | UI反馈10—17 / 编辑器专项 | 原三提交7af9f884→ead3505e→dc4bf01已root全diff review与本地集成；10—17/PC复用完成，独立344测试/全仓类型构建及IAB桌面/391对照通过，见[本批验收](history/2026-10-24/editor-feedback-integration.md)。保存状态+清草稿共同显隐followup b018ad7也已rootreview，本地de95ffa集成；独立Web169/类型/构建通过。用户在编辑器专项追加授权本批PC人物卡复用：编辑器owner持有CharacterChoice等价默认样式迁移，调查owner删除style.css冗余覆盖须依赖该提交；移动各自保留。catalog新characters接口与editor fixture分owner，root组合验。 |
-| P3 | Logo小彩蛋 / root子agent logo_easter_egg_design | 用户已验收5497红点轻跳预览并明确“就按这个效果实现”，正式接入已授权。review_blue_animation负责ProductHeader同几何560ms/3px、键盘/触屏及减弱动态实现与QA；先准备，待调查1—9的ProductHeader下划线变更review集成后再从新main开工，避免重叠。root review/集成，当前正式页眉尚未改动。 |
+| P3 | Logo小彩蛋 / root子agent review_blue_animation | 用户已验收5497红点轻跳预览并明确“就按这个效果实现”，正式接入已授权。review_blue_animation负责ProductHeader同几何560ms/3px、键盘/触屏及减弱动态实现与QA；先准备，待调查1—9的ProductHeader下划线变更review集成后再从新main开工，避免重叠。root review/集成，当前正式页眉尚未改动。 |
 | P2 | 人物预设统一命名 / root+appearance_assets | CharacterPreset与@lie/character-animation已批；动画接入前置已满足，只读盘点7e47d7a已review；采用内部类型/模块/制作目录/包名统一，保留已有appearanceId序列化键与/appearances/公开路径以免破坏草稿/分享且无需兼容层；原owner已交cb86dd6，旧候选1629830含迁移且尚未合入main；本轮优先调查页，不重复回放旧候选的调查提交，不再重问定名。 |
 
 ## 当前需用户确认或外部协助

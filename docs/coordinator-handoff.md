@@ -39,7 +39,7 @@
 - CharacterPreset命名：原owner cb86dd6e25e22444dc93b892c2d609c0a0d6ac08，旧候选1629830为其cherry-pick。批准内部源/类型/包改名，保持appearanceId和/appearances/公开兼容；待完整rootreview与按当前main再组合，不能覆盖新Editor/App或候选资产。所有制作owner仍按当前main既有appearance路径，不提前要求换源。
 - Logo小彩蛋：用户已验收5497 A红点轻跳并明确“就按这个效果实现吧”，正式实施已授权，不再询问。原设计e5243fc+645fc41已本地收录；现派review_blue_animation负责正式接入及组件/浏览器QA。ProductHeader仍由调查1—9 owner持有，实施agent先只读准备，等待其review集成SHA后新managed WT开工。保持正式SVG几何、105x56/88x47、560ms/3px、原导航及减弱动态；仅组件/必要测试/探索README状态，root review/单队列集成。5497样稿保留。
 
-- README头图语言：用户新增要求英文README用英文图、中文README用中文图。P3已派logo_easter_egg_design从d791f7f独立worktree处理README及readme-hero源/图片，保持既有构图角色风格。调查专项已释放viewport，分配其短窗口渲染与视觉QA；不得误当Logo正式生产批准。待clean完整交付、rootreview/集成。
+- README头图语言：用户新增要求英文README用英文图、中文README用中文图。P3已派logo_easter_egg_design从d791f7f独立worktree处理README及readme-hero源/图片，保持既有构图角色风格。子agent无IAB能力，已协调调查专项在其P1交付后代渲染；README任务与新获批准的Logo正式接入分开。待clean完整交付、rootreview/集成。
 
 ## 服务、限制与接任第一步
 
