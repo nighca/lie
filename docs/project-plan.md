@@ -55,7 +55,7 @@
 
 | 优先 | 工作/owner | 当前状态、下一步与依赖 |
 | --- | --- | --- |
-| P1 | 形象单一源 / game_editor_implementation→root | 已完成root全diff/生成审计与255项检查，本地集成；35图字节/旧URL不变，新增仅改源清单与素材。 |
+| P1 | 形象单一源 / game_editor_implementation→root | 已本地集成；35图字节/旧URL不变，新增仅改源清单与素材。字段注释见design/appearances/manifest.types.ts，源JSON参与Web类型检查。 |
 | P1 | 编辑器v2正式落地 / game_editor_implementation | 已批准，无需再确认；从单一源review SHA开始，保持路由/草稿/分享，补有效回归和独立IAB；投稿诚实呈现未开放/手动步骤。 |
 | P1 | 调查体验整体确认 / root+视觉owner+用户 | root审`51776c8`/`20eb743`并给用户具体稿；用户确认前不改顶部/底部/回看规则。后续按真实输入/播放器音量实现，不把模拟条当测量。 |
 | P1 | 角色降速/玩家文本 / 语音owner，root协调UI | partial无官方证据先走final-only回退提案；角色约100ms/玩家整句约70ms及取消追赶上限是待实施参数，不偷改现50/2400。处理字素、历史、停止/打断/切人、reduced-motion和ARIA。 |

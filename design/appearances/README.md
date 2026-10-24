@@ -2,6 +2,8 @@
 
 `manifest.json` 是唯一权威清单；正式素材统一在 `assets/<id>/`。故事角色只通过稳定 `appearanceId` 引用预置；形象展示名不是案件姓名，颜色和表情不表示可信度或罪责。
 
+字段规格见 [`manifest.types.ts`](manifest.types.ts) 的 `AppearanceManifestEntry`，每个字段均有注释。源JSON通过Web类型检查中的静态契约核对；路径格式、唯一性、PNG尺寸和文件存在性由生成器进一步校验。前端运行时的 `Appearance` 是另一层契约，不应拿其可空资源容错作为正式素材可缺项的依据。
+
 ## 新增或修改一套形象
 
 1. 在 `assets/<id>/` 放入 `default.png`、`listening.png`、`waiting.png`、`speaking.png`。头像与默认图相同时直接引用default；确有独立头像时另放 `avatar.png`。

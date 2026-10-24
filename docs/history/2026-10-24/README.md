@@ -31,3 +31,5 @@
 
 - root完成形象源1a787a3全diff/周边审查并在候选重跑255项测试、全仓类型和Web/Worker构建，dist逐字节检查通过；独立核八条runtime除name外字段不变、35张PNG字节不变。该依赖合入后立即交editorowner实施已批准v2。
 - root核aeed后续验证相对原脚本完整差异，放行12原题/6隔离身份单次执行，代理已启动；尚无通过结论，不把启动等同验收。
+
+- 用户要求查看源manifest规格。补充design/appearances/manifest.types.ts逐字段注释，区分制作源必填与运行时容错，加入JSON satisfies静态契约并从素材README链接。Web类型检查和18项生成器检查通过；路径/PNG/跨条目约束仍由生成器验证，不把TS字符串类型夸大为资源校验。
