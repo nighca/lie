@@ -24,6 +24,12 @@
 - The user explicitly authorized parallel implementation of the game editor and URL sharing on 2026-10-24. Its initial scope is text fields, preset appearances, same-engine preview, compressed fragment links, and browser-local draft saving; no accounts, cloud sync, uploaded assets, or work version/publishing management. User-created case submission through GitHub PR is a separately proposed contribution channel under investigation; do not confuse it with the AI development no-PR integration workflow or grant GitHub access/create submissions without authorization.
 - Delegate concrete implementation and investigation tasks to independent subagents where practical. The root agent prioritizes intake responsiveness, scheduling, interface coordination, local review, integration and acceptance; a delegated task remains its initiator's responsibility. Do not wait for user reminders to inspect or integrate completed work. Keep the established worktree, ownership and single-integrator safeguards.
 
+## Cross-chat coordination
+
+- Batch routine feedback, implementation progress, test results, approvals and proposed project-plan updates into one complete review handoff. Include dependencies, full ordered commit SHAs, file scope, checks, limitations and relevant decision/status changes; avoid duplicate handoffs, acknowledgments and per-item plan notifications.
+- Send an immediate cross-chat message only for an actual ownership conflict, blocking interface/dependency, shared-resource coordination, or a decision that requires prompt attention from the coordinator or user. This batching does not delay replies to the user within the specialist chat.
+- The root agent updates the central project plan when reviewing and integrating the batch. Record routine intake within the specialist task until handoff; resolve consequential conflicts before dependent work continues. Batch browser checks into an agreed viewport window and release it once finished.
+
 ## Before parallel work
 
 - Inspect repository instructions, status, branches, and remotes. Protect unrelated and uncommitted changes; never stash, discard, overwrite, or commit them without their owner's agreement.
