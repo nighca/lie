@@ -58,9 +58,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .game-shell .background-dialog .lie-button { border-width: 2px; border-radius: 15px; min-height: 46px; font-size: 14px; }
 .accusation-question { font-size: 24px; font-weight: 800; text-align: center; margin: 0; }
 .accusation-hint { color: var(--lie-muted); text-align: center; margin: 8px 0 0; }
-.accusation-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 28px 0; }
-.accusation-character .avatar-frame, .accusation-character .initial-avatar { height: 200px; }
-.accusation-character .lie-button { width: calc(100% - 16px); border-radius: 18px; font-size: 18px; padding-inline: 12px; margin: 12px 8px 16px; }
+.accusation-choices { margin: 16px auto 8px; padding-block: 24px; }
+.accusation-character { width: min(100%, 180px); justify-self: center; padding: 0; font: inherit; color: inherit; text-align: center; cursor: pointer; }
+.accusation-character strong { padding: 10px 8px; font-size: 18px; line-height: 1.4; overflow-wrap: anywhere; }
+.accusation-character:hover, .accusation-character:focus-visible { border-color: var(--lie-primary); }
 .result-card .eyebrow { display: inline-block; color: var(--lie-ink); background: var(--lie-soft-blue); padding: 6px 20px; border-radius: 99px; }
 .result-story { max-width: 46em; margin: auto; }
 .result-card h2 { font-size: 20px; width: fit-content; padding: 6px 16px; margin: 24px 0 0; border-radius: 99px; background: var(--lie-soft-blue); }
@@ -96,8 +97,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .interrogation-budget > span { font-size: 11px; }
   .game-shell--investigating { padding-bottom: calc(175px + env(safe-area-inset-bottom)); }
   .game-shell .background-dialog.lie-dialog { padding: 22px 20px; }
-  .accusation-choices { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
-  .accusation-character .avatar-frame, .accusation-character .initial-avatar { height: 150px; }
 }
 
 .home-shell > .lie-product-header { margin-bottom: 0; }
@@ -203,15 +202,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .game-shell .character-list .lie-character__copy strong { font-size: 12px; line-height: 22px; }
 }
 
-.game-shell .accusation-dialog.lie-dialog { width: min(660px, calc(100% - 32px)); padding: 26px 28px; border-width: 2px; border-radius: 26px; }
+.game-shell .accusation-dialog.lie-dialog { overflow-y: auto; width: min(660px, calc(100% - 32px)); padding: 26px 28px; border-width: 2px; border-radius: 26px; }
 .game-shell .accusation-dialog .lie-dialog__header h2 { font-size: 24px; }
 @media (max-width: 700px) {
   .game-shell .accusation-dialog.lie-dialog { padding: 22px 20px; }
   .accusation-dialog .accusation-question { font-size: 18px; }
-  .accusation-dialog .accusation-choices { grid-template-columns: minmax(0, 1fr); gap: 12px; margin: 20px 0; }
-  .accusation-dialog .accusation-character { display: flex; align-items: center; }
-  .accusation-dialog .accusation-character .avatar-frame, .accusation-dialog .accusation-character .initial-avatar { width: 94px; height: 88px; flex-shrink: 0; }
-  .accusation-dialog .accusation-character .lie-button { flex: 1; width: auto; min-width: 0; margin: 12px; font-size: 14px; min-height: 42px; padding: 8px; }
+  .accusation-dialog .accusation-choices { gap: 12px; margin: 20px 0; padding: 4px 0; }
+  .accusation-dialog .accusation-character strong { font-size: 14px; }
 }
 .game-shell--investigating .lie-product-header__actions .lie-button--quiet { min-height: 0; padding: 8px 0; border: 0; background: transparent; color: var(--lie-muted); box-shadow: none; font-size: 13px; font-weight: 400; }
 @media (max-width: 700px) {

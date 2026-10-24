@@ -22,7 +22,7 @@ describe('game screens', () => {
     const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     async function click(text: string) {
-      const button = wrapper.findAll('button').find((item) => item.text() === text)
+      const button = wrapper.findAll('button').find((item) => (item.attributes('aria-label') ?? item.text()) === text)
       expect(button, text).toBeDefined()
       await button!.trigger('click')
     }
@@ -52,9 +52,24 @@ describe('game screens', () => {
     await controller.load('test')
     const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
-    expect(wrapper.findAll('.intro-character strong').map((name) => name.text())).toEqual(characters.map(({ name }) => name))
+    expect(wrapper.get('main').findAll('.intro-character strong').map((name) => name.text())).toEqual(characters.map(({ name }) => name))
     await wrapper.get('.intro-start').trigger('click')
     expect(wrapper.findAll('.character-list button')).toHaveLength(count)
+  })
+
+  it.each([1, 4, 7])('offers all %i accusation cards and submits only on activation', async (count) => {
+    const characters = Array.from({ length: count }, (_, index) => ({ ...game.characters[0], id: `person-${index}`, name: `人物${index + 1}` }))
+    const { controller } = setup(undefined, { ...game, characters, ending: { ...game.ending, culpritId: characters[count - 1].id } })
+    await controller.load('test'); controller.start(); controller.openAccusation()
+    const wrapper = mount(App, { props: { controller, appearances: [], demo: true } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const cards = wrapper.findAll('.accusation-choices button')
+    expect(cards.map((card) => card.attributes('aria-label'))).toEqual(characters.map(({ name }) => `指认 ${name}`))
+    await cards[0].trigger('mouseenter')
+    await cards[0].trigger('focus')
+    expect(controller.getView()).toMatchObject({ phase: 'interrogating', accusationOpen: true })
+    await cards[count - 1].trigger('click')
+    expect(controller.getView().phase).toBe('solved')
   })
 
   it.each([[600, '10分钟'], [330, '5分30秒']])('uses natural language for a %s-second introduction', async (seconds, label) => {

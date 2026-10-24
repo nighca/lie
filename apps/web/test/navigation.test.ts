@@ -27,7 +27,7 @@ async function screen(path = '/', loadCatalog = async () => catalog) {
   cleanup.push(() => wrapper.unmount())
   await flushPromises()
   async function click(text: string) {
-    const button = wrapper.findAll('button').find((item) => item.text() === text && (item.element.closest('dialog') == null || item.element.closest('dialog')!.open))
+    const button = wrapper.findAll('button').find((item) => (item.attributes('aria-label') ?? item.text()) === text && (item.element.closest('dialog') == null || item.element.closest('dialog')!.open))
     expect(button, text).toBeDefined()
     await button!.trigger('click'); await flushPromises()
   }
