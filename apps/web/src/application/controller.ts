@@ -18,6 +18,7 @@ export interface GameView {
   notice: string | null
   accusationOpen: boolean
   reveal: string | null
+  result: { readonly characterId: string; readonly correct: boolean } | null
 }
 
 export interface ConversationClock {
@@ -75,6 +76,7 @@ export function createGameController(options: ControllerOptions) {
       conversationActive: active != null,
       interrogationRemainingMs: remainingMs(),
       reveal: session?.phase === 'solved' ? session.result!.reveal : null,
+      result: session?.result == null ? null : { characterId: session.result.characterId, correct: session.result.correct },
     }
   }
 
