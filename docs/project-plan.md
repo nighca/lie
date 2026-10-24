@@ -369,3 +369,5 @@ root已补Blender实际IAB：重新提供本地静态dist后GLB加载、三轨�
 2026-10-24 首页A优化稿正式批准：用户确认“就按这个做”，不再询问视觉确认。appearance_assets开始从review main f26894d独立实施正式Application首页与home样式，产品介绍与动态案件列表同等权重，按归档refined-a还原，统一多案；接现有三案目录与创作案件入口，保留已review编辑器路由/快照/离开确认。桌面/窄屏/更多卡片独立验收，rootreview后协调本地试玩更新与里程碑发布；不能把静态设计图或本地目录当线上已上线。
 
 2026-10-24 头像A批准与首页收尾：用户明确选择A帽檐侦探，已交视觉owner实施。root完整review首页54c（仅home模板/CSS/3测试/标题同步）候选221项/typecheck/build通过；追加头像设计源两提交及runtime030，实际XML确认A路径与色值完全一致，无脚本/外链，UI18及全仓typecheck/完整build通过。头像仅玩家默认fallback，30px内联SVG自带圆框避免双圈，NPC及逐字逻辑不变；root已看实际组件桌面截图，子代理391/30px实测。准备将获批首页、三案、编辑分享与玩家头像合入并更新8787；尚未push/线上仍旧版，真实新案语义/音色及跨浏览器最终上限另验。
+
+2026-10-24 15:24 本地试玩已实际更新：root将已review候选快进main a1a652a，干净local-preview分支从8cad快进相同SHA，保留ignored私有绑定；Web构建重跑、8787以session73226重启成功。root独立IAB实际首页三案+创作入口、首案接案/返回正常，console空，截图/private/tmp/lie-local-home-milestone.jpg；health ok与voice/status只读检查，未收音/真实推理。玩家默认头像A已在该构建内，原SVG路径/色值逐项相等，真实组件桌面/391截图另已review。首页/三案/编辑分享/头像在8787可测；source未push、线上仍8cad，不等同正式发布。
