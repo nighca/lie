@@ -17,3 +17,9 @@
 新增开发展示入口`/voice-feedback-preview.html`，复用正式VoiceControl与全局UI样式，可切换角色回答文字/模拟玩家输入波形/等待玩家/关闭；明确标记模拟音量、不使用麦克风或供应商，未接入产品路由或生产构建入口。
 
 独立IAB复核：桌面反馈slot中心、20px文字span中心及Range文字行中心均y280.4375；32px波形中心也是y280.4375。391px窄屏slot/波形中心均y802，文字Range中心y801.5（0.5px取整差）；没有状态与波形共存。UI35项与Web构建再次通过。截图`/private/tmp/lie-input-only/status-centered.png`、`/private/tmp/lie-input-only/wave-centered.png`。
+
+## 真实麦克风开发预览
+
+用户要求5394预览直接使用真实麦克风。Web Vite开发服务器将`/api/voice`（含`/status`与WebSocket）代理至现有本机8787网关；不改写Host/Origin，不改变网关同源校验，不引入前端凭据。移除`demo=1`使用原有liveVoice路径。真实入口`http://127.0.0.1:5394/?game=empty-medal-box`，仍由用户点击开启与授权麦克风。
+
+验证：代理status返回200/ready；正确同源WebSocket返回101后立即关闭，无音频发送；异源握手未建立连接（Vite关闭socket）。IAB确认无演示标记、操作为“开启对话”，没有替用户开启录音。此验证不等于真人麦克风或角色回答完成验收。需本机8787网关保持运行；代理配置仅开发服务器生效。
