@@ -11,7 +11,7 @@ import { encodeGameLink, SHARE_URL_LIMIT } from '../src/editor/share'
 import * as sharing from '../src/editor/share'
 import { game as officialGame, setup } from './helpers'
 
-const customGame = { ...officialGame, id: 'custom-private-id', title: '玩家创作的谜题', characters: officialGame.characters.map((character) => ({ ...character, appearanceId: null })) }
+const customGame = { ...officialGame, id: 'custom-private-id', title: '玩家创作的谜题', characters: officialGame.characters.map((character) => ({ ...character, appearanceId: 'blue' })) }
 const cleanup: (() => void)[] = []
 beforeEach(() => {
   Object.defineProperties(HTMLDialogElement.prototype, {
@@ -36,7 +36,7 @@ async function screen(path = '/') {
   const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/:pathMatch(.*)*', component: Application }] })
   await router.push(path)
   const wrapper = mount(Application, { props: {
-    appearances: [], demo: true,
+    appearances: [{ id: 'blue', name: '蓝衣眼镜', avatar: '/a.png', portrait: '/p.png', accent: '#123456', voiceId: null, portraits: { listening: null, waiting: null, speaking: null } }], demo: true,
     loadCatalog: async () => [{ id: officialGame.id, title: officialGame.title, summary: '官方简介', interrogationLimitSeconds: 480 }],
     createController: (game: GameDefinition | null) => { const next = setup(undefined, game ?? officialGame); sessions.push({ setup: next, source: game }); return next.controller },
   }, global: { plugins: [router] } })
@@ -60,7 +60,7 @@ describe('editor and shared case application routes', () => {
     await click('创作案件')
     expect(router.currentRoute.value.path).toBe('/editor')
     expect(sessions).toHaveLength(0)
-    await click('试玩当前案件')
+    await click('试玩')
     expect(router.currentRoute.value.path).toBe('/editor/preview')
     expect(sessions[0].source).toEqual(customGame)
     expect(wrapper.text()).toContain(customGame.title)
@@ -157,7 +157,7 @@ describe('editor and shared case application routes', () => {
     expect(refreshed.sessions[0].source).toEqual(customGame)
     localStorage.setItem(DRAFT_KEY, JSON.stringify(customGame))
     const preview = await screen('/editor')
-    await preview.click('试玩当前案件')
+    await preview.click('试玩')
     window.dispatchEvent(new Event('pagehide'))
     window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true }))
     await settle()

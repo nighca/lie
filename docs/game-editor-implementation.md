@@ -23,6 +23,18 @@ A temporary, ignored developer fixture mounts the real editor with the actual ei
 
 ## Explicitly outside this change
 
-- OAuth, automatic fork/branch/commit or GitHub PR submission. The user's official-case contribution idea is being evaluated separately.
+- OAuth, automatic fork/branch/commit or GitHub PR submission. The approved manual contribution helper prepares JSON and opens GitHub for the author's explicit confirmation.
 - New voice authorization or quota logic. Author and recipient use the agreed existing gateway.
 - Importing arbitrary asset URLs, attachment uploads, accounts, cloud drafts, and a public story directory.
+
+## Approved v2 production editor (2026-10-24)
+
+The user approved the three-step prototype through `041c74a`: story setup, focused character editing and the ending. Steps remain freely navigable without required-field gates. Public story and successful ending previews render plain text. Character cards reserve the same image and label dimensions whether selected or not; desktop navigation scrolls vertically and narrow navigation horizontally.
+
+Each character has one profile text; the complete second-person example matches the engine's existing role prompt and never overwrites author text. New characters default to the first catalog preset. Existing null or unavailable IDs are restored unchanged with all text intact; authoring validation requires a valid preset before trial, sharing or contribution. This rule lives in `draftIssues`/`draftGame`, not the core schema or shared-game decoder. Field issues retain their step/person target and focus the relevant editor control. Incomplete drafts remain saveable under the same `lie-editor-draft` key.
+
+Answer checkboxes inside character editing still control a single `ending.culpritId`: choosing another person replaces the answer, unchecking leaves an incomplete draft, deletion clears it. Ending shows a read-only answer summary. Removing the selected person first requires local confirmation and selects the nearest remaining person. A fresh draft has no preselected answer. Free step changes are not game departure events; the existing preview route continues to own investigation departure confirmation and voice cleanup.
+
+The final step offers **share** as primary, **trial** as secondary and **contribute** as a weaker separate action. Earlier steps offer quiet trial/share shortcuts. Sharing uses the unchanged native gzip encoder and limits. Contribution validates the same complete draft, displays the exact normalized JSON, offers copy/download, and opens a short GitHub new-file URL with `filename` only. It does not place JSON in the query, request OAuth, send credentials, fork, commit or create PRs. Current private-repository restrictions are stated in the dialog, along with user-controlled new-branch/PR steps and maintenance review/catalog work before inclusion. A successful copy or opened GitHub page is never represented as a submitted case.
+
+Additional automated coverage includes free navigation and local restore, adding/focusing/removing characters, answer replacement/cancel/deletion, invalid restored preset preservation and repair, cross-step issue focus and updates, full example preservation, immutable preview snapshots, final action hierarchy, share generation, dynamic catalog names and safe short contribution filenames. Existing route tests exercise actual gzip and fake-voice lifecycle separately. The implementation owner's available browser inventory exposes only Chrome; no external Chrome fallback or paid service was used. Independent IAB review of this production version remains required and is not inferred from the earlier prototype acceptance.

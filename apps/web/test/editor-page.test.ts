@@ -1,62 +1,169 @@
-import { mount } from '@vue/test-utils'
-import { afterEach, describe, expect, it } from 'vitest'
+import { mount, flushPromises } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import Editor from '../src/editor/Editor.vue'
 import { DRAFT_KEY } from '../src/editor/draft'
+import * as sharing from '../src/editor/share'
 import { game as sourceGame } from './helpers'
 
-const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: null })) }
-
+const appearance = { id: 'new-guide', name: '新来的向导', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456', voiceId: 'existing-voice', portraits: { listening: null, waiting: null, speaking: null } }
+const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: appearance.id })) }
 const cleanup: (() => void)[] = []
-afterEach(() => { cleanup.splice(0).forEach((action) => action()); localStorage.clear() })
-function page() {
-  const wrapper = mount(Editor, { props: { appearances: [] } })
+beforeEach(() => {
+  Object.defineProperty(HTMLDialogElement.prototype, 'close', { configurable: true, value(this: HTMLDialogElement) { this.open = false } })
+  Object.defineProperty(HTMLDialogElement.prototype, 'showModal', { configurable: true, value(this: HTMLDialogElement) { this.open = true } })
+})
+afterEach(() => { cleanup.splice(0).forEach((action) => action()); localStorage.clear(); vi.restoreAllMocks() })
+function page(stored: unknown = null) {
+  if (stored != null) localStorage.setItem(DRAFT_KEY, JSON.stringify(stored))
+  const wrapper = mount(Editor, { props: { appearances: [appearance] }, attachTo: document.body })
   cleanup.push(() => wrapper.unmount())
-  return wrapper
+  async function click(text: string) {
+    const button = wrapper.findAll('button').find((button) => button.text() === text)
+    expect(button, text).toBeDefined()
+    await button!.trigger('click'); await flushPromises()
+  }
+  async function step(index: number) { await wrapper.findAll('.editor-steps button')[index].trigger('click') }
+  return { wrapper, click, step }
 }
 
-describe('editor page', () => {
-  it('autosaves incomplete edits and restores them when the page is reopened', async () => {
-    const first = page()
-    await first.get('input[name="title"]').setValue('我的小谜题')
-    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).title).toBe('我的小谜题')
-    first.unmount()
+describe('three-step editor', () => {
+  it('freely switches steps and characters while autosaving incomplete text', async () => {
+    const { wrapper, step, click } = page()
+    await wrapper.get('[name=title]').setValue('我的小谜题')
+    await step(2)
+    await wrapper.get('[name=reveal]').setValue('先写真相')
+    await step(1)
+    await wrapper.get('[data-field=name]').setValue('小林')
+    await wrapper.get('[data-field=profile]').setValue('人物文字')
+    await click('＋添加人物')
+    expect(document.activeElement).toBe(wrapper.get('[data-field=name]').element)
+    await wrapper.get('[data-field=name]').setValue('小周')
+    await wrapper.findAll('.character-card')[0].trigger('click')
+    expect((wrapper.get('[data-field=profile]').element as HTMLTextAreaElement).value).toBe('人物文字')
+    await step(0)
+    expect((wrapper.get('[name=title]').element as HTMLInputElement).value).toBe('我的小谜题')
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).ending.reveal).toBe('先写真相')
+    wrapper.unmount()
     const restored = page()
-    expect((restored.get('input[name="title"]').element as HTMLInputElement).value).toBe('我的小谜题')
-    expect(restored.text()).toContain('已恢复')
+    expect(restored.wrapper.text()).toContain('已恢复')
+    await restored.step(2)
+    expect((restored.wrapper.get('[name=reveal]').element as HTMLTextAreaElement).value).toBe('先写真相')
   })
-  it('emits a validated playable snapshot without owning game rules', async () => {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(game))
-    const wrapper = page()
-    await wrapper.findAll('button').find((button) => button.text() === '试玩当前案件')!.trigger('click')
+
+  it('uses one global answer checkbox and a read-only ending summary', async () => {
+    const { wrapper, step } = page(game)
+    await step(1)
+    expect((wrapper.get('[data-field=answer]').element as HTMLInputElement).checked).toBe(true)
+    await wrapper.findAll('.character-card')[1].trigger('click')
+    await wrapper.get('[data-field=answer]').setValue(true)
+    await wrapper.findAll('.character-card')[0].trigger('click')
+    expect((wrapper.get('[data-field=answer]').element as HTMLInputElement).checked).toBe(false)
+    await step(2)
+    expect(wrapper.get('.answer-summary strong').text()).toBe('乙')
+    expect(wrapper.findAll('.answer-summary')).toHaveLength(1)
+    await step(1)
+    await wrapper.findAll('.character-card')[1].trigger('click')
+    await wrapper.get('[data-field=answer]').setValue(false)
+    await step(2)
+    expect(wrapper.get('.answer-empty').text()).toContain('还没有选定')
+  })
+
+  it('confirms deletion, selects a neighbor and clears the deleted answer', async () => {
+    const { wrapper, step, click } = page(game)
+    await step(1)
+    await click('删除人物'); await click('保留人物')
+    expect(wrapper.findAll('.character-card')).toHaveLength(2)
+    await click('删除人物'); await click('确认删除')
+    expect(wrapper.findAll('.character-card')).toHaveLength(1)
+    expect((wrapper.get('[data-field=name]').element as HTMLInputElement).value).toBe('乙')
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).ending.culpritId).toBe('')
+    await click('删除人物'); await click('确认删除')
+    expect(wrapper.get('.no-characters').text()).toContain('添加第一位人物')
+  })
+
+  it('locates cross-step validation and keeps the issue list current as fields are fixed', async () => {
+    const { wrapper, step, click } = page()
+    await step(2); await click('试玩')
+    expect(document.activeElement).toBe(wrapper.get('[data-field=title]').element)
+    await wrapper.get('[name=title]').setValue('新案件')
+    expect(wrapper.get('.error-summary').text()).not.toContain('请填写案件标题')
+    const profileIssue = wrapper.findAll('.error-summary button').find((button) => button.text().includes('人物设定'))!
+    await profileIssue.trigger('click'); await flushPromises()
+    expect(document.activeElement).toBe(wrapper.get('[data-field=profile]').element)
+    await wrapper.get('[data-field=profile]').setValue('你叫小林。')
+    expect(wrapper.get('.error-summary').text()).not.toContain('人物设定')
+  })
+
+  it.each([null, 'removed-preset'])('preserves restored content with appearance %s and locates the selection', async (appearanceId) => {
+    const stored = { ...game, characters: game.characters.map((person, index) => ({ ...person, appearanceId: index === 1 ? appearanceId : appearance.id })) }
+    const { wrapper, click } = page(stored)
+    await click('分享案件')
+    expect((wrapper.get('[data-field=name]').element as HTMLInputElement).value).toBe('乙')
+    expect(document.activeElement).toBe(wrapper.get('[data-field=appearance]').element)
+    expect((wrapper.get('[data-field=profile]').element as HTMLTextAreaElement).value).toBe('只属于乙的秘密。')
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(appearanceId)
+    await click('选择形象')
+    expect(wrapper.findAll('.editor-appearance')).toHaveLength(1)
+    await click('新来的向导')
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).characters[1].appearanceId).toBe(appearance.id)
+  })
+
+  it('shows a full second-person example without replacing authored text', async () => {
+    const { wrapper, step, click } = page(game)
+    await step(1); await click('看完整示例')
+    expect(wrapper.get('.example-text').text()).toContain('舞台左侧的蓝色抽屉')
+    expect(wrapper.get('.example-text').text()).toContain('你只说自己亲历的事')
+    await wrapper.get('[aria-label=关闭]').trigger('click')
+    expect((wrapper.get('[data-field=profile]').element as HTMLTextAreaElement).value).toBe('只属于甲的秘密。')
+  })
+
+  it('emits an independent validated snapshot through the existing preview contract', async () => {
+    const { wrapper, click } = page(game)
+    await click('试玩')
     expect(wrapper.emitted('preview')?.[0]).toEqual([game])
-    await wrapper.get('input[name="title"]').setValue('改名')
+    await wrapper.get('[name=title]').setValue('改名')
     expect((wrapper.emitted('preview')![0][0] as typeof game).title).toBe(game.title)
   })
-  it('requires choosing a new correct character after deleting the original answer', async () => {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(game))
-    const wrapper = page()
-    await wrapper.get('[aria-label="删除人物 1"]').trigger('click')
-    expect((wrapper.get('select[name="culprit"]').element as HTMLSelectElement).value).toBe('')
-    await wrapper.findAll('button').find((button) => button.text() === '试玩当前案件')!.trigger('click')
-    expect(wrapper.text()).toContain('请选择正确指认的人物')
-    expect(wrapper.emitted('preview')).toBeUndefined()
+
+  it('puts share, trial and manual contribution on the final step and prepares a short GitHub link', async () => {
+    const { wrapper, step, click } = page(game)
+    await step(2)
+    expect(wrapper.get('.final-actions .lie-button--primary').text()).toBe('分享案件')
+    expect(wrapper.get('.final-actions .lie-button--secondary').text()).toBe('试玩')
+    await click('投稿给官方')
+    expect(wrapper.get('dialog').text()).toContain('外部投稿暂未开放')
+    expect(wrapper.get('dialog').text()).toContain('不会自动创建 PR')
+    const exported = JSON.parse((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
+    expect(exported).toEqual(game)
+    const link = new URL(wrapper.get('.github-link').attributes('href')!)
+    expect(link.searchParams.get('filename')).toBe('content/games/test.json')
+    expect([...link.searchParams.keys()]).toEqual(['filename'])
   })
-  it('leaves a damaged draft untouched until the user starts editing', async () => {
+
+  it('opens share with the generated URL and clears it after further editing', async () => {
+    vi.spyOn(sharing, 'encodeGameLink').mockResolvedValue('https://lie.example/play#game=abc')
+    const { wrapper, click } = page(game)
+    await click('分享案件')
+    expect((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value).toBe('https://lie.example/play#game=abc')
+    await wrapper.get('[aria-label=关闭]').trigger('click')
+    await wrapper.get('[name=title]').setValue('改了')
+    await click('分享案件')
+    expect(sharing.encodeGameLink).toHaveBeenLastCalledWith(expect.objectContaining({ title: '改了' }), location.origin)
+  })
+
+  it('leaves a damaged draft untouched until editing starts', async () => {
     localStorage.setItem(DRAFT_KEY, 'damaged')
-    const wrapper = page()
+    const { wrapper } = page()
     expect(wrapper.text()).toContain('本地草稿无法读取')
     expect(localStorage.getItem(DRAFT_KEY)).toBe('damaged')
-    await wrapper.get('input[name="title"]').setValue('新故事')
+    await wrapper.get('[name=title]').setValue('新故事')
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).title).toBe('新故事')
   })
-})
 
-describe('catalog-driven editor appearances', () => {
-  it('displays and updates the manifest name of a previously unknown preset ID', async () => {
-    const appearance = { id: 'new-guide', name: '新来的向导', avatar: '/avatar.png', portrait: '/portrait.png', accent: '#123456', voiceId: 'existing-voice', portraits: { listening: null, waiting: null, speaking: null } }
-    const wrapper = mount(Editor, { props: { appearances: [appearance] } })
-    cleanup.push(() => wrapper.unmount())
+  it('uses live catalog names for previously unknown IDs', async () => {
+    const { wrapper, step, click } = page()
+    await step(1); await click('更换形象')
     expect(wrapper.get('.editor-appearance').text()).toBe('新来的向导')
     await wrapper.setProps({ appearances: [{ ...appearance, name: '来自清单的新名字' }] })
     expect(wrapper.get('.editor-appearance').text()).toBe('来自清单的新名字')

@@ -1,121 +1,175 @@
 <script setup lang="ts">
-import { onUnmounted, ref, watch } from 'vue'
-import { UiButton, UiNotice } from '@lie/ui'
+import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 import type { GameDefinition } from '@lie/game-core'
+import { UiButton, UiNotice } from '@lie/ui'
 
 import type { Appearance } from '../presentation/appearances'
-import { createDraft, draftGame, loadDraft, removeCharacter, saveDraft } from './draft'
+import EditorDialog from './EditorDialog.vue'
+import { createDraft, draftGame, draftIssues, loadDraft, removeCharacter, saveDraft, type DraftCharacter, type DraftIssue } from './draft'
+import { PROFILE_EXAMPLE } from './example'
 import { encodeGameLink, SHARE_URL_LIMIT } from './share'
+import { prepareSubmission } from './submission'
 
 const props = defineProps<{ appearances: readonly Appearance[] }>()
 const emit = defineEmits<{ preview: [game: GameDefinition]; leave: [] }>()
 const draft = ref(createDraft(props.appearances[0]?.id ?? null))
+const step = ref(0)
+const selectedId = ref<string | null>(null)
 const notice = ref<string | null>(null)
-const noticeElement = ref<HTMLElement | null>(null)
 const saveStatus = ref('草稿仅保存在此浏览器')
 const busy = ref(false)
+const showIssues = ref(false)
+const overlay = ref<'example' | 'appearance' | 'share' | 'submission' | 'delete' | null>(null)
 const shareUrl = ref<string | null>(null)
+const submission = ref<ReturnType<typeof prepareSubmission> | null>(null)
 const copied = ref(false)
+const form = ref<HTMLElement | null>(null)
 let mounted = true
 try {
   const stored = loadDraft(localStorage)
   if (stored != null) { draft.value = stored; saveStatus.value = '已恢复此浏览器的草稿' }
 } catch { notice.value = '本地草稿无法读取。你仍可创作新案件；开始编辑后会保存新的草稿。' }
+selectedId.value = draft.value.characters[0]?.id ?? null
+const character = computed(() => draft.value.characters.find((person) => person.id === selectedId.value) ?? null)
+const answer = computed(() => draft.value.characters.find((person) => person.id === draft.value.ending.culpritId) ?? null)
+const issues = computed(() => draftIssues(draft.value, props.appearances))
+const minutes = computed({ get: () => draft.value.interrogationLimitSeconds / 60, set: (value: number) => { draft.value.interrogationLimitSeconds = Math.round(Number(value) * 60) } })
+const steps = ['故事设定', '故事人物', '真相结局']
+function appearance(person: DraftCharacter) { return props.appearances.find((preset) => preset.id === person.appearanceId) ?? null }
+function invalid(field: string) { return showIssues.value && issues.value.some((issue) => issue.field === field && (issue.characterId == null || issue.characterId === selectedId.value)) }
+function name(person: DraftCharacter) { return person.name.trim() || `人物 ${draft.value.characters.indexOf(person) + 1}` }
 watch(draft, () => {
   shareUrl.value = null
   copied.value = false
   try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存到此浏览器' }
   catch { saveStatus.value = '草稿未能保存，请勿关闭页面'; notice.value = '浏览器不允许保存草稿或存储空间不足。' }
 }, { deep: true, flush: 'sync' })
-watch(notice, (value) => { if (value != null) noticeElement.value?.focus() }, { flush: 'post' })
 onUnmounted(() => { mounted = false })
+async function focus(field: string) {
+  await nextTick()
+  const target = form.value?.querySelector<HTMLElement>(`[data-field="${field}"]`)
+  target?.focus()
+  target?.scrollIntoView?.({ block: 'nearest' })
+}
+function goToIssue(issue: DraftIssue) {
+  step.value = issue.step
+  if (issue.characterId != null) selectedId.value = issue.characterId
+  if (issue.field === 'answer' && character.value == null) selectedId.value = draft.value.characters[0]?.id ?? null
+  void focus(issue.field)
+}
+function validated(): GameDefinition | null {
+  notice.value = null
+  showIssues.value = true
+  if (issues.value.length > 0) { goToIssue(issues.value[0]); return null }
+  try { return draftGame(draft.value, props.appearances) }
+  catch (error) { notice.value = error instanceof Error ? error.message : '请检查案件内容'; return null }
+}
 function addCharacter() {
-  draft.value.characters.push({ id: crypto.randomUUID(), name: '', profile: '', appearanceId: props.appearances[0]?.id ?? null })
+  const person = { id: crypto.randomUUID(), name: '', profile: '', appearanceId: props.appearances[0]?.id ?? null }
+  draft.value.characters.push(person)
+  selectedId.value = person.id
+  void focus('name')
+}
+function deleteCharacter() {
+  if (character.value == null) return
+  const index = draft.value.characters.indexOf(character.value)
+  removeCharacter(draft.value, character.value.id)
+  selectedId.value = draft.value.characters[Math.min(index, draft.value.characters.length - 1)]?.id ?? null
+  overlay.value = null
+  void focus(character.value == null ? 'add-character' : 'name')
+}
+function chooseAppearance(id: string) {
+  if (character.value != null) character.value.appearanceId = id
+  overlay.value = null
 }
 function preview() {
-  notice.value = null
-  try { emit('preview', draftGame(draft.value, props.appearances)) }
-  catch (error) { notice.value = error instanceof Error ? error.message : '请检查案件内容' }
+  const game = validated()
+  if (game != null) emit('preview', game)
 }
 async function share() {
-  notice.value = null
+  const game = validated()
+  if (game == null) return
   busy.value = true
   try {
-    const url = await encodeGameLink(draftGame(draft.value, props.appearances), location.origin)
-    if (mounted) { shareUrl.value = url; copied.value = false }
-  } catch (error) {
-    if (mounted) notice.value = error instanceof Error ? error.message : '当前浏览器无法生成分享链接'
-  } finally { if (mounted) busy.value = false }
+    const url = await encodeGameLink(game, location.origin)
+    if (mounted) { shareUrl.value = url; copied.value = false; overlay.value = 'share' }
+  } catch (error) { if (mounted) notice.value = error instanceof Error ? error.message : '当前浏览器无法生成分享链接' }
+  finally { if (mounted) busy.value = false }
 }
-async function copy() {
-  if (shareUrl.value == null) return
-  try { await navigator.clipboard.writeText(shareUrl.value); if (mounted) copied.value = true }
-  catch { if (mounted) notice.value = '无法自动复制，请选中下方链接手动复制。' }
+function contribute() {
+  const game = validated()
+  if (game == null) return
+  try { submission.value = prepareSubmission(game); copied.value = false; overlay.value = 'submission' }
+  catch (error) { notice.value = error instanceof Error ? error.message : '无法准备投稿文件' }
+}
+async function copy(text: string) {
+  try { await navigator.clipboard.writeText(text); if (mounted) copied.value = true }
+  catch { if (mounted) notice.value = '无法自动复制，请选中下方内容手动复制。' }
+}
+function download() {
+  if (submission.value == null) return
+  const url = URL.createObjectURL(new Blob([submission.value.json], { type: 'application/json' }))
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = submission.value.filename.split('/').at(-1)!
+  anchor.click()
+  setTimeout(() => URL.revokeObjectURL(url), 0)
 }
 </script>
 
 <template>
   <div class="editor-shell">
-    <header class="editor-header"><a href="/" class="wordmark" aria-label="LIE 首页" @click.prevent="emit('leave')"><img src="/brand/logo.svg" width="116" height="62" alt=""></a><div><p class="editor-eyebrow">让你的故事，也有话可聊。</p><h1>创作案件</h1></div><UiButton variant="quiet" @click="emit('leave')">返回首页</UiButton></header>
-    <main>
-      <p class="editor-description">写一个小谜题，为每位人物安排各自知道的事。玩家将用语音问话，最后做出一次指认。</p>
-      <p class="editor-save" role="status">{{ saveStatus }}</p>
-      <div v-if="notice != null" ref="noticeElement" tabindex="-1"><UiNotice tone="error">{{ notice }}</UiNotice></div>
-      <form @submit.prevent="preview">
-        <fieldset :disabled="busy" class="editor-fields">
-          <section class="editor-panel" aria-labelledby="editor-case-title"><h2 id="editor-case-title">故事从这里开始</h2>
-            <label>案件标题<input v-model="draft.title" name="title" placeholder="给谜题起个名字" required></label>
-            <label>公共背景<textarea v-model="draft.background" name="background" rows="5" placeholder="所有人都知道的背景。会在接案时展示给玩家。" required></textarea></label>
-            <label class="editor-duration">共享询问时长（秒）<input v-model.number="draft.interrogationLimitSeconds" name="duration" type="number" min="1" step="1" required><small>包含对话中的停顿、等待与回答，切换人物不会重置。</small></label>
+    <header class="editor-header">
+      <a href="/" class="wordmark" aria-label="LIE 首页" @click.prevent="!busy && emit('leave')"><img src="/brand/logo.svg" width="94" height="48" alt=""></a>
+      <strong>创作案件</strong><span class="editor-save" role="status">{{ saveStatus }}</span>
+      <UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton>
+    </header>
+    <nav class="editor-steps" aria-label="创作步骤">
+      <button v-for="(label, index) in steps" :key="label" type="button" :disabled="busy" :aria-current="step === index ? 'step' : false" @click="step = index"><span>{{ index + 1 }}</span>{{ label }}<small v-if="!issues.some((issue) => issue.step === index)" aria-label="内容已填写">✓</small></button>
+    </nav>
+    <main ref="form">
+      <div v-if="notice != null" role="alert" class="editor-notice"><UiNotice tone="error">{{ notice }}</UiNotice></div>
+      <section v-if="showIssues && issues.length" class="error-summary" role="alert" aria-label="待补充内容"><strong>再补充这些，就能试玩或分享了</strong><ul><li v-for="(issue, index) in issues" :key="index"><button type="button" @click="goToIssue(issue)">{{ issue.message }}</button></li></ul></section>
+      <fieldset class="editor-fields" :disabled="busy">
+        <div class="page-heading"><h1>{{ steps[step] }}</h1><span>随时切换，边写边改</span></div>
+        <div v-if="step === 0" class="story-layout">
+          <section class="panel form-panel" aria-label="故事设定">
+            <label class="field">案件标题<input v-model="draft.title" name="title" data-field="title" :aria-invalid="invalid('title')" placeholder="给谜题起个名字"></label>
+            <label class="field">公共背景<textarea v-model="draft.background" name="background" data-field="background" :aria-invalid="invalid('background')" rows="7" placeholder="发生了什么？玩家要查明什么？只写所有人都知道的信息。"></textarea><small>玩家接案时会读到这段话。秘密留给人物设定。</small></label>
+            <div class="field"><label for="editor-duration">共享询问时间</label><div class="duration-options"><button v-for="value in [5, 8, 10]" :key="value" type="button" :aria-pressed="minutes === value" @click="minutes = value">{{ value }} 分钟</button><label class="duration-custom"><input id="editor-duration" v-model.number="minutes" name="duration" data-field="duration" :aria-invalid="invalid('duration')" type="number" min="0" step="any">分钟</label></div><small>包含停顿、等待和回答，所有人物共享；结束对话后暂停。</small></div>
           </section>
-          <section class="editor-panel" aria-labelledby="editor-characters-title"><div class="editor-section-heading"><h2 id="editor-characters-title">故事里的人</h2><UiButton variant="secondary" @click="addCharacter">添加人物</UiButton></div>
-            <article v-for="(character, index) in draft.characters" :key="character.id" class="editor-character"><div class="editor-section-heading"><h3>人物 {{ index + 1 }}</h3><UiButton variant="quiet" :aria-label="`删除人物 ${index + 1}`" @click="removeCharacter(draft, character.id)">删除人物</UiButton></div>
-              <label>姓名<input v-model="character.name" :name="`name-${character.id}`" required></label>
-              <label>人物设定<textarea v-model="character.profile" :name="`profile-${character.id}`" rows="5" placeholder="他是谁、知道什么、隐瞒什么，以及面对追问会怎么说。完整真相可以写在这里，不会直接展示给玩家。" required></textarea></label>
-              <fieldset class="editor-appearances"><legend>预置形象</legend><label v-for="appearance in appearances" :key="appearance.id" class="editor-appearance" :class="{ 'editor-appearance--selected': character.appearanceId === appearance.id }"><input v-model="character.appearanceId" type="radio" :name="`appearance-${character.id}`" :value="appearance.id"><img :src="appearance.avatar" alt=""><span>{{ appearance.name }}</span></label><label class="editor-no-appearance"><input v-model="character.appearanceId" type="radio" :name="`appearance-${character.id}`" :value="null">不使用形象</label></fieldset>
-            </article><p v-if="draft.characters.length === 0">还没有人物，先添加一位吧。</p>
+          <aside class="panel player-preview" aria-label="接案内容预览"><span class="preview-badge">玩家接案时看到的内容</span><h2>{{ draft.title || '你的案件标题' }}</h2><p>{{ draft.background || '故事从这里开始……' }}</p><div class="preview-portraits"><template v-for="person in draft.characters" :key="person.id"><img v-if="appearance(person)" :src="appearance(person)!.avatar" :alt="name(person)"></template></div><div class="preview-time">{{ draft.characters.length }} 位人物 · 共享询问 {{ minutes }} 分钟</div></aside>
+        </div>
+        <div v-else-if="step === 1" class="character-layout">
+          <nav class="character-rail" aria-label="编辑人物"><button v-for="person in draft.characters" :key="person.id" type="button" class="character-card" :aria-pressed="selectedId === person.id" :aria-label="`编辑${name(person)}`" @click="selectedId = person.id"><img v-if="appearance(person)" :src="appearance(person)!.avatar" alt="" :style="{ background: appearance(person)!.accent }"><span v-else class="portrait-initial">{{ name(person).slice(0, 1) }}</span><strong>{{ name(person) }}</strong><small>当前人物</small></button><button type="button" class="add-character" data-field="add-character" @click="addCharacter"><span>＋</span>添加人物</button></nav>
+          <section v-if="character != null" class="panel character-editor" aria-label="人物编辑">
+            <div class="character-stage"><div class="portrait-halo"><img v-if="appearance(character)" :src="appearance(character)!.portrait" alt=""><span v-else class="portrait-initial">?</span></div><h2>{{ name(character) }}</h2><p>{{ appearance(character)?.name ?? '请选择预置形象' }}</p><button type="button" class="text-button" data-field="appearance" :aria-invalid="invalid('appearance')" @click="overlay = 'appearance'">{{ appearance(character) == null ? '选择形象' : '更换形象' }}</button></div>
+            <div class="character-fields">
+              <label class="field">姓名<input v-model="character.name" :name="`name-${character.id}`" data-field="name" :aria-invalid="invalid('name')" placeholder="这个人物叫什么？"></label>
+              <label class="answer-toggle"><input type="checkbox" data-field="answer" :aria-invalid="invalid('answer')" :checked="draft.ending.culpritId === character.id" @change="draft.ending.culpritId = ($event.target as HTMLInputElement).checked ? character.id : ''"><span><strong>将此人物设为案件答案</strong><small>玩家最终指认此人物，即挑战成功</small></span></label>
+              <div class="field"><div class="field-heading"><label for="editor-profile">人物设定</label><button type="button" class="text-button" @click="overlay = 'example'">看完整示例</button></div><textarea id="editor-profile" v-model="character.profile" :name="`profile-${character.id}`" data-field="profile" :aria-invalid="invalid('profile')" rows="9" placeholder="你叫……你亲历了什么，知道什么，面对追问会怎么回答？"></textarea><p class="guidance-line"><span aria-hidden="true">✎</span><span>推荐用第二人称「你叫……」，写清亲历、所知和回答方式。完整设定不会直接展示给玩家。</span></p></div>
+              <div class="character-tools"><span>一份文本，写清这个人。</span><button type="button" class="delete-button" :aria-label="`删除${name(character)}`" @click="overlay = 'delete'">删除人物</button></div>
+            </div>
           </section>
-          <section class="editor-panel" aria-labelledby="editor-ending-title"><h2 id="editor-ending-title">真相与结局</h2><p>以下内容不会在调查时直接展示给玩家。</p>
-            <label>正确指认的人物<select v-model="draft.ending.culpritId" name="culprit" required><option disabled value="">请选择人物</option><option v-for="(character, index) in draft.characters" :key="character.id" :value="character.id">{{ character.name || `人物 ${index + 1}` }}</option></select></label>
-            <label>完整经过<textarea v-model="draft.ending.reveal" name="reveal" rows="5" placeholder="正确指认后揭晓的完整经过。错误指认会结束本局，不揭晓真相。" required></textarea></label>
-          </section>
-        </fieldset>
-        <div class="editor-actions"><UiButton :disabled="busy" @click="preview">试玩当前案件</UiButton><UiButton variant="secondary" :busy="busy" @click="share">生成分享链接</UiButton></div>
-      </form>
-      <section v-if="shareUrl != null" class="editor-panel editor-share" aria-label="分享链接"><h2>把谜题交给朋友</h2><p>链接包含完整案件。修改草稿后，请重新生成链接；之前发出的链接仍保留当时的内容。</p><label>完整分享链接<textarea :value="shareUrl" readonly rows="3" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><p>{{ shareUrl.length.toLocaleString('en-US') }} / {{ SHARE_URL_LIMIT.toLocaleString('en-US') }} 字符</p><UiButton @click="copy">{{ copied ? '已复制' : '复制分享链接' }}</UiButton></section>
+          <section v-else class="panel no-characters"><h2>故事还缺一位人物</h2><p>为他选个形象，再写下他的故事。</p><UiButton variant="secondary" @click="addCharacter">添加第一位人物</UiButton></section>
+        </div>
+        <div v-else class="ending-layout">
+          <section class="panel form-panel"><h2>案件答案</h2><div v-if="answer" class="answer-summary"><img v-if="appearance(answer)" :src="appearance(answer)!.avatar" alt=""><div><strong>{{ name(answer) }}</strong><span>在人物编辑中设定</span></div></div><div v-else class="answer-empty"><p>还没有选定案件答案</p><button type="button" class="text-button" @click="step = 1">返回人物编辑</button></div><label class="field">完整经过<textarea v-model="draft.ending.reveal" name="reveal" data-field="reveal" :aria-invalid="invalid('reveal')" rows="9" placeholder="谁做了什么，为什么？把这个谜题的完整经过写在这里。"></textarea><small>仅在正确指认后揭晓。指认错误会结束本局，不揭晓真相。</small></label></section>
+          <aside class="panel player-preview" aria-label="结局内容预览"><span class="preview-badge">正确指认后的揭晓</span><h2>谜底在这里</h2><p>{{ draft.ending.reveal || '写下完整经过，给玩家一个恍然大悟的结局。' }}</p></aside>
+        </div>
+        <footer class="step-footer"><UiButton v-if="step > 0" variant="quiet" @click="step--">上一步</UiButton><span v-else></span><UiButton v-if="step < 2" variant="secondary" @click="step++">下一步：{{ steps[step + 1] }}</UiButton><div v-else class="final-actions"><UiButton variant="quiet" @click="contribute">投稿给官方</UiButton><UiButton variant="secondary" @click="preview">试玩</UiButton><UiButton :busy="busy" @click="share">分享案件</UiButton></div></footer>
+        <div v-if="step < 2" class="quick-actions"><button type="button" class="text-button" @click="preview">试玩</button><button type="button" class="text-button" @click="share">分享案件</button></div>
+      </fieldset>
     </main>
+    <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', appearance: '选择预置形象', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？' }[overlay]" @close="overlay = null">
+      <template v-if="overlay === 'example'"><p>这是写给角色的扮演资料，仍是一份纯文本。</p><p class="example-text">{{ PROFILE_EXAMPLE }}</p><p class="muted">示例不会替换你正在写的内容。</p></template>
+      <div v-else-if="overlay === 'appearance'" class="appearance-grid"><button v-for="preset in appearances" :key="preset.id" type="button" class="editor-appearance" :aria-pressed="character?.appearanceId === preset.id" @click="chooseAppearance(preset.id)"><img :src="preset.avatar" alt=""><span>{{ preset.name }}</span></button><p v-if="appearances.length === 0">预置形象暂未加载，请稍后重新打开编辑器。草稿仍保留在此浏览器。</p></div>
+      <template v-else-if="overlay === 'delete'"><p>将删除{{ character == null ? '' : name(character) }}的设定。如果他是案件答案，需要重新选择；此操作无法撤销。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留人物</UiButton><UiButton @click="deleteCharacter">确认删除</UiButton></div></template>
+      <template v-else-if="overlay === 'share' && shareUrl != null"><p>朋友打开链接就能玩。修改草稿后需要重新生成链接，旧链接保留当时的内容。</p><label class="field">完整分享链接<textarea :value="shareUrl" readonly rows="4" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><p class="muted">{{ shareUrl.length.toLocaleString('en-US') }} / {{ SHARE_URL_LIMIT.toLocaleString('en-US') }} 字符</p><UiButton @click="copy(shareUrl)">{{ copied ? '已复制' : '复制分享链接' }}</UiButton></template>
+      <template v-else-if="overlay === 'submission' && submission != null"><UiNotice>当前源码仓库仍为私有，外部投稿暂未开放。你可以先保存案件文件；有仓库访问权限的作者可继续在 GitHub 操作。</UiNotice><p>这里帮你准备文件，不会自动创建 PR。文件将包含完整真相和人物设定，提交前请确认愿意公开。</p><label class="field">文件路径<input :value="submission.filename" readonly></label><label class="field">案件 JSON<textarea :value="submission.json" readonly rows="7" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><div class="dialog-actions"><UiButton variant="secondary" @click="download">下载 JSON</UiButton><UiButton variant="secondary" @click="copy(submission.json)">{{ copied ? '已复制' : '复制 JSON' }}</UiButton></div><ol class="submission-steps"><li>保存或复制上面的文件。</li><li>打开 GitHub 新建文件页，登录后粘贴 JSON。无写权限时按 GitHub 提示 fork。</li><li>提交到自己的新分支，再向 nighca/lie 的 main 创建 Pull Request；有写权限也请使用新分支。</li></ol><p class="muted">PR 由维护者审阅并补齐官方目录后收录，提交不等于上线。</p><a :href="submission.url" target="_blank" rel="noopener noreferrer" class="github-link">打开 GitHub 新建文件页 ↗</a></template>
+      <p v-if="notice != null" role="alert">{{ notice }}</p>
+    </EditorDialog>
   </div>
 </template>
 
-<style scoped>
-.editor-shell { max-width: 1060px; margin: auto; padding: 24px 28px 64px; color: var(--lie-ink); }
-.editor-header { display: flex; align-items: center; gap: 24px; margin-bottom: 28px; }
-.editor-header > .lie-button { margin-left: auto; }
-.editor-header h1, .editor-eyebrow { margin: 0; }
-.editor-eyebrow { font-size: 14px; margin-bottom: 4px; }
-.editor-description { font-size: 18px; line-height: 1.7; max-width: 760px; }
-.editor-save { color: var(--lie-muted); font-size: 14px; }
-.editor-fields { border: 0; padding: 0; margin: 0; min-width: 0; }
-.editor-panel { background: var(--lie-surface); border: 2px solid var(--lie-ink); border-radius: 24px; padding: 26px; margin-top: 24px; }
-.editor-panel h2 { margin: 0 0 18px; font-size: 22px; }
-.editor-panel p { line-height: 1.6; }
-.editor-panel label:not(.editor-appearance):not(.editor-no-appearance) { display: flex; flex-direction: column; gap: 8px; font-weight: 700; margin: 18px 0; }
-.editor-panel input:not([type=radio]), .editor-panel textarea, .editor-panel select { border: 2px solid #b2b5c2; border-radius: 12px; background: white; color: inherit; font: inherit; font-weight: 400; padding: 12px; min-width: 0; }
-.editor-panel input:focus, .editor-panel textarea:focus, .editor-panel select:focus { outline: 3px solid #a8c6ff; border-color: var(--lie-primary); }
-.editor-panel textarea { resize: vertical; line-height: 1.6; }
-.editor-duration input { max-width: 160px; }
-.editor-duration small { font-weight: 400; line-height: 1.6; }
-.editor-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.editor-section-heading h2, .editor-section-heading h3 { margin: 0; }
-.editor-character { margin-top: 24px; border-top: 1px solid #d9d9dd; padding-top: 20px; }
-.editor-appearances { display: flex; gap: 10px; flex-wrap: wrap; border: 0; margin: 20px 0 0; padding: 0; }
-.editor-appearances legend { font-weight: 700; margin-bottom: 10px; }
-.editor-appearance { display: flex; position: relative; flex-direction: column; align-items: center; width: 106px; border: 2px solid #d5d7df; border-radius: 12px; padding: 8px; cursor: pointer; gap: 6px; font-size: 12px; }
-.editor-appearance input { position: absolute; top: 5px; left: 5px; }
-.editor-appearance img { width: 64px; height: 64px; object-fit: cover; border-radius: 50%; }
-.editor-appearance--selected { border-color: var(--lie-primary); background: #eaf1ff; }
-.editor-no-appearance { display: flex; align-items: center; gap: 6px; }
-.editor-actions { display: flex; gap: 16px; padding: 28px 0 0; flex-wrap: wrap; }
-.editor-share textarea { font-size: 13px; overflow-wrap: anywhere; }
-@media (max-width: 620px) { .editor-shell { padding: 16px 14px 40px; } .editor-header { flex-wrap: wrap; gap: 12px; } .editor-header .wordmark img { width: 84px; height: auto; } .editor-header h1 { font-size: 24px; } .editor-eyebrow { display: none; } .editor-panel { padding: 18px; border-radius: 18px; } .editor-appearance { width: 94px; } .editor-header > .lie-button { padding: 8px; } }
-</style>
+<style scoped src="./editor.css"></style>
