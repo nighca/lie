@@ -124,7 +124,7 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 | 状态／端口 | owner与消费者 | WT／源码HEAD；PID／原PTY；停止条件 |
 | --- | --- | --- |
 | 保留8787 / 8788及内部子监听 | root／用户固定main | owning main及apps/gateway；HEAD `6e52462f…`；PID54878／54957，workerd54990；launchd，PTY不适用。内部50360/50366/50367均为同网关回环子监听。只有明确服务turn可维护。 |
-| 保留5355（用户8角色检查） | 动画 `01a16d44…`／用户检查，deliverable tab45；原用户tab18未改 | final-two-character-game/lie，HEAD `72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`；新PTY82389，PID未交不猜测。owner精确停止旧PID4072后复用同端口，8人各canvas1/fallback0，logs0。用户结束或迁至稳定main入口后由该owner停止；在此之前保留WT。 |
+| 保留5355（用户8角色检查） | 动画 `01a16d44…`／用户检查，deliverable tab45；原用户tab18未改 | final-two-character-game/lie，HEAD `72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`；当前PTY8486，PID未交不猜测（后续owner受控复用同端口，取代先前PTY82389采样）。默认页保持旧8人，tab47 query覆盖5修订供用户验收，修订WT通过显式fs allow接入同server，不另开端口。用户结束或迁至稳定入口后由该owner停止；此前保留source及两lane/父证据WT，不按旧PID/session操作。 |
 | 已关闭5359 | 动画 `01a16d44…`／mint本批制作与QA已完成 | mint-puffs-animation/lie；采样HEAD `dbecc26cfdf347d3e7bca8a35f76a38392ddf99f`；原PID54935、旧PTY失效后由owner精确TERM，最终无LISTEN。不重复停止。 |
 | 已关闭5544 | root下verify_editor_candidate／正式QA已完成 | final-two-character-game/lie；最终HEAD `72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`；原PID35694、原session19829。owner已删除临时壳、原会话Ctrl-C退出130，lsof核无监听，WT clean。不重复停止。 |
 | 已关闭5358 | 动画／ochre本批制作与QA已完成 | 原PID48081，ochre-freckles-animation；动画owner通过原PTY Ctrl-C停止并最终核无LISTEN，本owner未发信号，不自行重启。 |
