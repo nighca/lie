@@ -1,0 +1,47 @@
+{
+  "measuredBase": "57ff7d5984126932ba0367c6b47bfe911d03a480",
+  "comparisonMain": "713bbe7427320bcda33d26594c78ac25336e3457",
+  "sameVoiceSources": true,
+  "files": [
+    {
+      "file": "apps/web/src/application/controller.ts",
+      "measuredBaseBlob": "c2feaa7405cf5573571d95c1f6457f210037cd90",
+      "currentMainBlob": "c2feaa7405cf5573571d95c1f6457f210037cd90"
+    },
+    {
+      "file": "apps/web/src/application/liveVoice.ts",
+      "measuredBaseBlob": "03b3eb3b4c99c24f6d6e9493b69b1d1e17d751c6",
+      "currentMainBlob": "03b3eb3b4c99c24f6d6e9493b69b1d1e17d751c6"
+    },
+    {
+      "file": "apps/web/src/application/voice.ts",
+      "measuredBaseBlob": "56cedd7995d2e9688318574dd65963a439a90a08",
+      "currentMainBlob": "56cedd7995d2e9688318574dd65963a439a90a08"
+    },
+    {
+      "file": "packages/voice/src/channel.ts",
+      "measuredBaseBlob": "7aba9f94d8fefdddb9c7972cec041b823afa688b",
+      "currentMainBlob": "7aba9f94d8fefdddb9c7972cec041b823afa688b"
+    },
+    {
+      "file": "packages/voice/src/startup.ts",
+      "measuredBaseBlob": "1f3824e58cdf47768a5a15cb9747cac9d040bcb6",
+      "currentMainBlob": "1f3824e58cdf47768a5a15cb9747cac9d040bcb6"
+    },
+    {
+      "file": "packages/voice/src/microphone.ts",
+      "measuredBaseBlob": "393f9909da09394a7d9a0f63d2c551d5184aaa33",
+      "currentMainBlob": "393f9909da09394a7d9a0f63d2c551d5184aaa33"
+    },
+    {
+      "file": "packages/voice/src/player.ts",
+      "measuredBaseBlob": "34c6256c3558bc8403ddbcdd9932fab3077e0042",
+      "currentMainBlob": "34c6256c3558bc8403ddbcdd9932fab3077e0042"
+    },
+    {
+      "file": "apps/gateway/src/index.ts",
+      "measuredBaseBlob": "b5073c03af607eeccf7c5ad52677abe8173592e8",
+      "currentMainBlob": "b5073c03af607eeccf7c5ad52677abe8173592e8"
+    }
+  ]
+}

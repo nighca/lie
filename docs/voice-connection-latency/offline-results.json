@@ -1,0 +1,286 @@
+{
+  "source": "57ff7d5984126932ba0367c6b47bfe911d03a480",
+  "notice": "Synthetic clocks and fake devices/transport; no browser, network, provider or speedup measurement.",
+  "results": [
+    {
+      "kind": "synthetic-dependency-clock",
+      "name": "transport-bound",
+      "inputsMs": {
+        "name": "transport-bound",
+        "status": 80,
+        "playback": 20,
+        "microphone": 250,
+        "channel": 400,
+        "expected": 480
+      },
+      "listenStartMs": 480,
+      "events": [
+        {
+          "stage": "startup",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "status",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "statusHeaders",
+          "result": "completed",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "status",
+          "result": "completed",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "playbackResume",
+          "result": "started",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "playbackResume",
+          "result": "completed",
+          "elapsedMs": 100
+        },
+        {
+          "stage": "listenStart",
+          "result": "completed",
+          "elapsedMs": 480
+        },
+        {
+          "stage": "startup",
+          "result": "completed",
+          "elapsedMs": 480
+        },
+        {
+          "stage": "firstForwardedPcm",
+          "result": "completed",
+          "elapsedMs": 480
+        },
+        {
+          "stage": "cleanup",
+          "result": "started",
+          "elapsedMs": 480
+        },
+        {
+          "stage": "cleanup",
+          "result": "completed",
+          "elapsedMs": 480
+        }
+      ]
+    },
+    {
+      "kind": "synthetic-dependency-clock",
+      "name": "capture-bound",
+      "inputsMs": {
+        "name": "capture-bound",
+        "status": 80,
+        "playback": 20,
+        "microphone": 700,
+        "channel": 400,
+        "expected": 780
+      },
+      "listenStartMs": 780,
+      "events": [
+        {
+          "stage": "startup",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "status",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "statusHeaders",
+          "result": "completed",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "status",
+          "result": "completed",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "playbackResume",
+          "result": "started",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "playbackResume",
+          "result": "completed",
+          "elapsedMs": 100
+        },
+        {
+          "stage": "listenStart",
+          "result": "completed",
+          "elapsedMs": 780
+        },
+        {
+          "stage": "startup",
+          "result": "completed",
+          "elapsedMs": 780
+        },
+        {
+          "stage": "firstForwardedPcm",
+          "result": "completed",
+          "elapsedMs": 780
+        },
+        {
+          "stage": "cleanup",
+          "result": "started",
+          "elapsedMs": 780
+        },
+        {
+          "stage": "cleanup",
+          "result": "completed",
+          "elapsedMs": 780
+        }
+      ]
+    },
+    {
+      "kind": "synthetic-dependency-clock",
+      "name": "playback-bound",
+      "inputsMs": {
+        "name": "playback-bound",
+        "status": 80,
+        "playback": 900,
+        "microphone": 250,
+        "channel": 400,
+        "expected": 980
+      },
+      "listenStartMs": 980,
+      "events": [
+        {
+          "stage": "startup",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "status",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "statusHeaders",
+          "result": "completed",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "status",
+          "result": "completed",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "playbackResume",
+          "result": "started",
+          "elapsedMs": 80
+        },
+        {
+          "stage": "playbackResume",
+          "result": "completed",
+          "elapsedMs": 980
+        },
+        {
+          "stage": "listenStart",
+          "result": "completed",
+          "elapsedMs": 980
+        },
+        {
+          "stage": "startup",
+          "result": "completed",
+          "elapsedMs": 980
+        },
+        {
+          "stage": "firstForwardedPcm",
+          "result": "completed",
+          "elapsedMs": 980
+        },
+        {
+          "stage": "cleanup",
+          "result": "started",
+          "elapsedMs": 980
+        },
+        {
+          "stage": "cleanup",
+          "result": "completed",
+          "elapsedMs": 980
+        }
+      ]
+    },
+    {
+      "kind": "synthetic-dependency-clock",
+      "name": "status-bound",
+      "inputsMs": {
+        "name": "status-bound",
+        "status": 1000,
+        "playback": 20,
+        "microphone": 250,
+        "channel": 400,
+        "expected": 1400
+      },
+      "listenStartMs": 1400,
+      "events": [
+        {
+          "stage": "startup",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "status",
+          "result": "started",
+          "elapsedMs": 0
+        },
+        {
+          "stage": "statusHeaders",
+          "result": "completed",
+          "elapsedMs": 1000
+        },
+        {
+          "stage": "status",
+          "result": "completed",
+          "elapsedMs": 1000
+        },
+        {
+          "stage": "playbackResume",
+          "result": "started",
+          "elapsedMs": 1000
+        },
+        {
+          "stage": "playbackResume",
+          "result": "completed",
+          "elapsedMs": 1020
+        },
+        {
+          "stage": "listenStart",
+          "result": "completed",
+          "elapsedMs": 1400
+        },
+        {
+          "stage": "startup",
+          "result": "completed",
+          "elapsedMs": 1400
+        },
+        {
+          "stage": "firstForwardedPcm",
+          "result": "completed",
+          "elapsedMs": 1400
+        },
+        {
+          "stage": "cleanup",
+          "result": "started",
+          "elapsedMs": 1400
+        },
+        {
+          "stage": "cleanup",
+          "result": "completed",
+          "elapsedMs": 1400
+        }
+      ]
+    }
+  ]
+}

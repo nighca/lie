@@ -1,0 +1,27 @@
+{
+  "source": "57ff7d5984126932ba0367c6b47bfe911d03a480",
+  "kind": "local-loopback-python-urllib-http-only-no-browser-no-provider",
+  "samples": [
+    {
+      "sample": 1,
+      "httpStatus": 200,
+      "status": "ready",
+      "headersMs": 380.702,
+      "completeMs": 380.775
+    },
+    {
+      "sample": 2,
+      "httpStatus": 200,
+      "status": "ready",
+      "headersMs": 81.428,
+      "completeMs": 81.498
+    },
+    {
+      "sample": 3,
+      "httpStatus": 200,
+      "status": "ready",
+      "headersMs": 14.104,
+      "completeMs": 14.154
+    }
+  ]
+}
