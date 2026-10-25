@@ -68,6 +68,7 @@ export function draftGame(draft: EditorDraft, characterPresets: readonly Charact
 }
 
 export function saveDraft(storage: Pick<Storage, 'setItem'>, draft: EditorDraft) {
+  if (!Number.isFinite(draft.interrogationLimitSeconds)) throw new RangeError('询问时长过大，草稿未能保存。请修改询问时长后重试。')
   storage.setItem(DRAFT_KEY, JSON.stringify(draft))
 }
 /** Drafts may be incomplete; validate their editable shape, not playable content. */

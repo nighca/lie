@@ -52,6 +52,20 @@ describe('three-step editor', () => {
     expect((wrapper.get('[data-field=name]').element as HTMLInputElement).value).toBe('保留的姓名')
   })
 
+  it('keeps the previous draft on an overflowing duration and saves all edits after the author fixes it', async () => {
+    const { wrapper } = page(game)
+    const original = localStorage.getItem(DRAFT_KEY)
+    await wrapper.get('input[name=duration]').setValue('1e308')
+    await wrapper.get('input[name=title]').setValue('内存中的新标题')
+    expect(wrapper.text()).toContain('草稿未能保存，请勿关闭页面')
+    expect(wrapper.text()).toContain('请修改询问时长后重试')
+    expect(localStorage.getItem(DRAFT_KEY)).toBe(original)
+    await wrapper.get('input[name=duration]').setValue('10')
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!)).toMatchObject({ title: '内存中的新标题', interrogationLimitSeconds: 600 })
+    expect(wrapper.get('.editor-draft-status').text()).toContain('草稿已保存至此设备')
+    expect(wrapper.find('[role=alert]').exists()).toBe(false)
+  })
+
   it('uses the shared product brand, draft notice and existing leave event', async () => {
     const { wrapper, click } = page(game)
     expect(wrapper.get('.lie-product-header__brand span').text()).toBe('语音推理')

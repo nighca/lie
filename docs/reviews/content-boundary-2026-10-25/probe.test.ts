@@ -15,18 +15,21 @@ const cleanup: (() => void)[] = []
 beforeEach(() => { localStorage.clear(); vi.stubGlobal('fetch', vi.fn(() => { throw Error('No network in review') })) })
 afterEach(() => { cleanup.splice(0).forEach(f => f()); expect(fetch).not.toHaveBeenCalled(); localStorage.clear(); vi.unstubAllGlobals() })
 
-it('CB01: entering finite 1e308 minutes writes an unrestorable null duration and discards saved author text after remount', async () => {
+it('CB01: overflowing duration preserves prior draft and recovers all in-memory edits after correction', async () => {
   const draft = createRemixDraft(game); draft.title = 'saved story must survive invalid duration'
-  localStorage.setItem(DRAFT_KEY, JSON.stringify(draft))
+  const original = JSON.stringify(draft); localStorage.setItem(DRAFT_KEY, original)
   const first = mount(Editor, { props: { characterPresets: [preset] } }); cleanup.push(() => first.unmount())
   await first.get('input[name=duration]').setValue('1e308')
-  const saved = JSON.parse(localStorage.getItem(DRAFT_KEY)!)
-  expect(saved.interrogationLimitSeconds).toBeNull()
-  expect(first.text()).toContain('草稿已保存至此设备')
-  expect(() => loadDraft(localStorage)).toThrow('草稿无法读取')
+  await first.get('input[name=title]').setValue('new text still in memory')
+  expect(localStorage.getItem(DRAFT_KEY)).toBe(original)
+  expect(first.text()).toContain('草稿未能保存，请勿关闭页面')
+  expect(first.text()).toContain('请修改询问时长后重试')
+  expect(loadDraft(localStorage)?.title).toBe(draft.title)
   const fresh = mount(Editor, { props: { characterPresets: [preset] } }); cleanup.push(() => fresh.unmount())
-  expect((fresh.get('input[name=title]').element as HTMLInputElement).value).toBe('')
-  expect(fresh.text()).toContain('本地草稿无法读取')
+  expect((fresh.get('input[name=title]').element as HTMLInputElement).value).toBe(draft.title)
+  await first.get('input[name=duration]').setValue('10')
+  expect(loadDraft(localStorage)).toMatchObject({ title: 'new text still in memory', interrogationLimitSeconds: 600 })
+  expect(first.find('[role=alert]').exists()).toBe(false)
 })
 
 it('CB02: valid prototype-like role IDs survive fragment normalization and core history writes without prototype pollution', async () => {

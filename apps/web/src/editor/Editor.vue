@@ -48,8 +48,8 @@ watch(draft, () => {
   if (clearingDraft) return
   shareUrl.value = null
   invalidateCopy()
-  try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存至此设备' }
-  catch { saveStatus.value = '草稿未能保存，请勿关闭页面'; notice.value = '浏览器不允许保存草稿或存储空间不足。' }
+  try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存至此设备'; notice.value = null }
+  catch (error) { saveStatus.value = '草稿未能保存，请勿关闭页面'; notice.value = error instanceof RangeError ? error.message : '浏览器不允许保存草稿或存储空间不足。' }
 }, { deep: true, flush: 'sync' })
 function invalidateCopy() { copyRevision++; copied.value = false }
 watch([overlay, shareUrl, submission], invalidateCopy, { flush: 'sync' })

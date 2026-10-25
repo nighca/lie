@@ -32,6 +32,19 @@ describe('editor drafts', () => {
     expect(storage.getItem(DRAFT_KEY)).toBeTruthy()
     expect(() => draftGame(draft, characterPresets)).toThrow('标题')
   })
+  it.each([NaN, Infinity, -Infinity])('preserves saved raw bytes when an editable duration %s cannot be represented in JSON', (duration) => {
+    const draft = editable()
+    const original = JSON.stringify(draft)
+    let raw = original
+    const storage = { setItem: (_key: string, value: string) => { raw = value } }
+    draft.interrogationLimitSeconds = duration
+    expect(() => saveDraft(storage, draft)).toThrow('询问时长过大')
+    expect(raw).toBe(original)
+    draft.interrogationLimitSeconds = 600
+    draft.title = '修正后的新草稿'
+    saveDraft(storage, draft)
+    expect(loadDraft({ getItem: () => raw })).toEqual(draft)
+  })
   it('drops the answer selection when that person is deleted, without choosing another answer', () => {
     const draft = editable()
     removeCharacter(draft, game.ending.culpritId)
