@@ -32,7 +32,7 @@ let copyRevision = 0
 let clearingDraft = false
 try {
   const stored = loadDraft(localStorage)
-  if (stored != null) { draft.value = stored; saveStatus.value = '已恢复此浏览器的草稿' }
+  if (stored != null) { draft.value = stored; saveStatus.value = '草稿已保存至此设备' }
 } catch { saveStatus.value = '本地草稿无法读取'; notice.value = '本地草稿无法读取。你仍可创作新案件；开始编辑后会保存新的草稿。' }
 selectedId.value = draft.value.characters[0]?.id ?? null
 const character = computed(() => draft.value.characters.find((person) => person.id === selectedId.value) ?? null)
@@ -48,7 +48,7 @@ watch(draft, () => {
   if (clearingDraft) return
   shareUrl.value = null
   invalidateCopy()
-  try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存到此浏览器' }
+  try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存至此设备' }
   catch { saveStatus.value = '草稿未能保存，请勿关闭页面'; notice.value = '浏览器不允许保存草稿或存储空间不足。' }
 }, { deep: true, flush: 'sync' })
 function invalidateCopy() { copyRevision++; copied.value = false }
