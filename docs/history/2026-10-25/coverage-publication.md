@@ -10,4 +10,10 @@
 
 已确认发布：**abb12dbf7a40689be593c2a1e580f23cfcc5611e**。[中文README](https://github.com/nighca/lie/blob/main/README.zh-CN.md)、[workflow](https://github.com/nighca/lie/actions/workflows/ci.yml)。徽章是明确标注来源的本地SVG快照，CI上传14天artifact，不自动改trackedbadge。
 
-当前CI包含既有自动部署步骤；push只证明远程main发布，不代表CI/部署完成。独立owner继续只读核验，最后已证实线上部署仍32d89bf，结果据真实回执另记。未手动dispatch/deploy、未新建Cloudflare资源/凭据、未操作用户8787/8788/5355或麦克风。后续当前状态文档会推进本地HEAD，不自动再次push。
+## 实际CI、附件与自动部署结果
+
+独立owner已只读核验[本次CI运行40147932644](https://github.com/nighca/lie/actions/runs/40147932644)，08:47:18 Asia/Shanghai完成，headSha=abb12db，conclusion=success。root另外实际执行gh run view核对同SHA和全部步骤：npm ci、typecheck、coverage、artifact上传、build、dry run、latest-main与deploy均success。
+
+[覆盖率附件12580624367](https://github.com/nighca/lie/actions/runs/40147932644/artifacts/12580624367)已由独立owner读取ZIP内summary，sourceSha=abb12db且dirty=false，358+30=388测试；应用45文件1501/1630=92.08%、Node263/288=91.32%仍独立分母，未改tracked快照。该owner亦用gh实际读远端双README和SVG，引用正确，SVG为92.08%，blob `d3198483eab9358cd5264c8176bdc0cc44fcadd2`；连接器404不影响该已核实结果，不猜其原因。
+
+既有自动部署日志确认Deployed lie-game triggers，Current Version ID `24e508bf-42e6-4cc8-80f1-8a72e4c2d4c4`，地址[lie-game.nighca.workers.dev](https://lie-game.nighca.workers.dev)。因此本轮已确认发布及自动部署SHA均为abb12db；这不是整合真人麦克风/provider/多人隔离验收。未手动dispatch/deploy、重跑workflow、新建Cloudflare资源/凭据或操作用户8787/8788/5355。后续状态文档推进本地HEAD，不自动再次push；root发布turn已释放，唯一integrator仍按交接登记。

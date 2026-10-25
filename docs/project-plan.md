@@ -4,7 +4,7 @@
 
 ## 当前轮换交接
 
-当前仍由`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）担任active协调/唯一integrator，本代`lie`/`lie-2`为ACTIVE且target本chat，前代`lie-3`/`lie-4`保持PAUSED；[登记](coordinator-handoff.md)及[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)保留创建/通知事实。用户已回来，临时无法回应模式结束；此前数小时浏览器等待经用户澄清为待其审批，不推断后续工具必然正常。Editor定位、fan及银发/灰白/紫发正式QA均已main；历史设计归档已完成本轮收集并入库，入口见[归档](archive/README.md)。当前命名迁移已完整交付，已review并本地集成main c0ddd791，用户批准的一次受控runner切换已完成，8787/8788回环服务及79资源核验通过；mint/ochre已完成正式游戏QA和root实际review，8人基线已本地main dd16638；新微动作/头比例修订独立待用户验收后PR。重大门禁与既有有效授权保留，未push/部署。
+当前仍由`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）担任active协调/唯一integrator，本代`lie`/`lie-2`为ACTIVE且target本chat，前代`lie-3`/`lie-4`保持PAUSED；[登记](coordinator-handoff.md)及[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)保留创建/通知事实。用户已回来，临时无法回应模式结束；此前数小时浏览器等待经用户澄清为待其审批，不推断后续工具必然正常。Editor定位、fan及银发/灰白/紫发正式QA均已main；历史设计归档已完成本轮收集并入库，入口见[归档](archive/README.md)。当前命名迁移已完整交付，已review并本地集成main c0ddd791，用户批准的一次受控runner切换已完成，8787/8788回环服务及79资源核验通过；mint/ochre已完成正式游戏QA和root实际review，8人基线已本地main dd16638；新微动作/头比例修订独立待用户验收后PR。已按用户授权发布abb12db且CI/自动部署成功；后续状态文档仅本地更新，重大门禁与暂停项保留。
 
 ## 授权与执行方式
 
@@ -23,7 +23,7 @@
 | --- | --- |
 | 本地main | `abb12dbf7a40689be593c2a1e580f23cfcc5611e`已普通push并由ls-remote确认；含8人原动画基线、覆盖率badge及fresh coverage顺序修复。后续状态文档提交会推进本地HEAD，不等于再次发布；auth和新动画修订未进入main。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
-| 远程/线上 | GitHub main已确认`abb12dbf7a40689be593c2a1e580f23cfcc5611e`；此前fetch remote32d89bf为祖先，无分叉。现有CI（含自动部署）已由本次push触发，结果由独立owner只读核验；最后已确认部署仍32d89bf，不将push当新版本部署成功。[本次发布证据](history/2026-10-25/coverage-publication.md)。 |
+| 远程/线上 | GitHub及已确认自动部署均为`abb12dbf7a40689be593c2a1e580f23cfcc5611e`；[CI40147932644](https://github.com/nighca/lie/actions/runs/40147932644)全步骤success，coverage artifact已核388测试/92.08%，deploy版本24e508bf。后续本地状态文档不自动再push，不把部署当真人语音验收。[发布证据](history/2026-10-25/coverage-publication.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |
 
 ## 已确认的产品与技术约定
@@ -47,6 +47,7 @@
 | 指认可变人数扇卡 | main `3a67735`；root实际review七图/完整diff，独立Node24.22.1 Web186/类型/构建8形象60资源通过；1/4/7人数及键盘/窄屏回归见[验收记录](history/2026-10-25/accusation-fan-layout.md)。 |
 | 编辑器大形象定位稳定 | main `f433834`；root全diff/context/五图review，Node24.22.1独立28测试/Web类型/构建及8形象60资源通过；[实施记录](game-editor-implementation.md)。iframe验收限制见交接。 |
 | 分享长连续正文软折行 | main `163bd0d`；保留完整文本和显式换行，1280/391 iframe无横溢；root全diff/两图review及独立Node24.22.1 Web186/类型/构建79资源通过。[记录](history/2026-10-25/share-long-text-wrap.md)。 |
+| CharacterPreset内部命名迁移 | 已main c0ddd791并随abb12db发布；174文件＋runner fixture修复，保留appearanceId与/appearances/，79旧资源原字节不变。用户批准的一次常驻runner切换已完成并核验，后续禁止重复启停。[实施验收](character-preset-migration-implementation.md)。 |
 | 测试覆盖率统计与双语README badge | main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`；[范围/命令/限制](coverage/README.md)、[采样计数](coverage/summary.json)。clean source4f5ba19实测应用45文件/358测试，lines1501/1630=92.08%；Node脚本30测试另报263/288=91.32%，不混分母；AnimatedPortrait模板分支映射0限制公开。root完整13files/上下文/快照/计数review，源与候选collector/依赖/所有覆盖源码身份相同，复用真实采样及独立两轮review；独立3脚本语法、45生产源码/原始报告/快照/SVG/链接一致通过。CI上传14天artifact、不自动改tracked badge，未远程执行、未push/部署。 |
 | 最后两人正式接入，8/8角色动画基线 | main `dd1663853f7e153efb2c977dd74b89b415f0e20c`；[接入](animation/mint-ochre-game-integration.md)、[正式游戏QA及18图](animation/mint-ochre-formal-game-qa/README.md)。root全source/context/6代表图审查，候选代码/依赖/正式资产与source72c4a93身份相同，复用388测试/types/build/IAB；独立两包采样/100中断及10新增runtime原字节/40链接通过。8787实际状态返回dd16638，旧79资源保留；新视觉问题独立修订，不称已获用户最终视觉通过。未push/部署。 |
 | 银发/灰白/紫发三角色动画正式接入 | main `a4e9f7d1e04a8c0d58f0f7cbec335e686913d36c`，完整clean QA/root实际图及trace review、382测试/Web186及类型/构建79/strict通过；[最终35链及实测边界](history/2026-10-25/three-character-dawn-candidate.md)。未push/部署。 |
@@ -64,7 +65,6 @@
 | --- | --- | --- |
 | 暂缓 | 邀请码与访问鉴权 / 用户明确暂停实施 | 用户因额外复杂度决定先暂缓，root不再推进此项；独立chat `01a17076-a9f2-7f11-aaf3-7f7c801fee37`保留供以后讨论。已interrupt原实施者，仅安全收尾：最后原PTY52545 Ctrl-C退出130、5544无监听，自建tab已关，WT/commits/ignored测试材料原处保留；[完整暂停handoff与三图](archive/2026-10-25/invite-access-paused/README.md)已审查存档，不继续开发/QA/配置/集成。设计原批准记录保留但不再构成当前实施许可；所有auth代码未main，不随本轮push发布。待用户明确重启后再排期；rootpackage/CI test:access接线同步后置。[交接](history/2026-10-25/invite-specialist-chat-handoff.md)。 |
 | P1 | 新一批动画微动作/头比例修订 / 动画专项两lane | 用户在动画chat明确：silver、salt、plum、mint、ochre waiting动作太小；mint default/listening也小；ochre speaking头大小跳变。现有8人基线继续集成，不被此批阻塞。前增强候选A c4881b3/B78031e8及父证据1bf177f已被用户否定：强scaleY造成头部拉伸、与其他动作不协调，不再是待验可用候选，保留仅追溯。专项继续2lane按具体角色其他clip风格重做waiting，以刚性微转/位移、局部身体起伏和接触约束为方向，mint default/listen亦复查；新完成后再统一5355验收。**用户确认后才单独提PR并处理main/游戏接入**，这是该批内部无PR规则的明确例外，不现在开PR、不提前合入/发布。已核用户原消息，起点可用已审main dd16638；5355和在用WT由原owner持有。 |
-| P2 | CharacterPreset内部命名迁移 / character_preset_migration＋root review | owner已交 `79b5503`→`354f58b`，base2982e6a，174文件迁移＋runner test fixture修复；source388全检、79资源原字节及真实IAB通过。独立review发现含空格Node路径的shebang问题，已修且目标测试通过；root `integrate-character-preset-dawn/lie`从666e9c9有序cherry至候选 `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`，最终独立1目标test/79原字节/93链接/生产身份核验通过，388/type/build/IAB复用；已本地main c0ddd791。保持appearanceId与/appearances/；用户已明确允许现在受控切换，实施owner已完成一次受控切换，服务SHA实返3c54a9e6、8787/8788仅回环、79资源+manifest字节一致、实际私密路径403；记录见[实施验收](character-preset-migration-implementation.md)，不得重复启动8787/8788。[计划](character-preset-migration-plan.md)。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
 | P2 | 编辑器分享/投稿端到端 / 编辑器＋root review | Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416eafbfda102a90ed72aa4292，Node24.22.1生产encode）：normal539真实UI Unicode/换行/保留字符逐字相等及actual reload通过；恰16000 ASCII完整URL新blank tab fresh goto/reload intro通过、href16000；16001特定长度错误、损坏gzip错误及reload通过。root已实际review完整报告/四图，无codec blocker，局限保留。network初始fragment捕获因PerformanceAPI missing TypeError一次停止，未重试CDP；跨浏览器/地址栏粘贴/外部传输/离线未验，16k仍暂定、128KiB仍仅Node。证据/private/tmp/lie-share-browser-results.md及同名前缀fixtures/四张jpg；自建tab19/20/21已关，无viewport/draft/voice/mic/provider/服务动作，旧browser3/tab1未动。 GitHub投稿仍受PRIVATE及用户权限门禁。 |
 | P2 | 角色出戏边界 / 语音内容owner | 攻击问仍有幕后元话语，候选未解决且未生产；停止无限付费叠提示，不擅换模型/供应商/剧情。[调查](role-immersion-investigation.md) |

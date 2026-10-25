@@ -79,7 +79,7 @@
 
 ## 最新发布与结果页设计授权
 
-用户授权的普通push已成功：远端32d89bf快进到 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，ls-remote实返该SHA，本地同SHA且clean。发布完整预检在独立publication-readiness WT通过388项测试、全types、Web/gateway build、8/8动画89assets+manifest90文件；fresh coverage发现生成清单晚于discovery的入口缺陷，唯一fix源fad5d862已实际review后cherry为abb12db。root比对应用/collector/依赖/CI/正式资源身份相同，后续暂停/归档docs不影响验证。CI已触发并委派只读跟进，未确认其结果前不称新部署成功；[发布记录](history/2026-10-25/coverage-publication.md)说明边界。
+用户授权的普通push已成功：远端32d89bf快进到 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，ls-remote实返该SHA，本地同SHA且clean。发布完整预检在独立publication-readiness WT通过388项测试、全types、Web/gateway build、8/8动画89assets+manifest90文件；fresh coverage发现生成清单晚于discovery的入口缺陷，唯一fix源fad5d862已实际review后cherry为abb12db。root比对应用/collector/依赖/CI/正式资源身份相同，后续暂停/归档docs不影响验证。CI40147932644与既有自动部署已实际success，root另核headSha/所有步骤；附件summary由独立owner读ZIP确认388/92.08%，远端README/SVG正确。部署版本24e508bf，已确认发布/部署SHA均abb12db，未做真人语音验收；publication turn已释放，后续文档仅本地未再push。[发布记录](history/2026-10-25/coverage-publication.md)说明边界。
 
 结果页设计此前send_message自动审批拒绝（认为缺少明确用户授权），未绕过。用户随后明确选中该拒绝说明并回复“重试一下，我来了”，据此重试向调查视觉专项01a16d5c-de69-7452-8d6a-280d15a87e9e分派成功，紧凑状态实际已开始。仅设计文档/现有素材HTML原型，新paths design/result-scene-proposal/**、docs/result-scene-visual-proposal.md，基abb12db；桌面/391及必要5507 QA/用后停由专项整项承担。root做实际review，应用实现/新素材/契约仍待用户确认，不能据本设计任务开工；auth暂停、新动画修订门禁不变。
 
