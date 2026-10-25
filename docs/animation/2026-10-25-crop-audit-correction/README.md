@@ -1,5 +1,7 @@
 # Correct local crop bounds in the three waiting checkers
 
+Current follow-up: [approved two-row seam fix](../2026-10-25-silver-seam-fix/README.md) resolves the silver crop-edge failure with unchanged checker predicates and native Canvas validation. Prior failures and proposal/pending checkpoints below remain historical evidence.
+
 Supplement to frozen integration candidate22b2ee8b635b2e6944d3801721673bc5122dfa3b. The user’s visual approval remains recorded; no approved package, PNG, renderer, public output, mask, motion, probe region or threshold was changed. No PR publication turn has been granted.
 
 ## Defect and correction

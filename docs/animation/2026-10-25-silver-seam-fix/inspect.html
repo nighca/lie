@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Silver seam fix verification</title>
+<style>body{margin:16px;font:15px system-ui;color:#111b45;background:#fff18a}h1{font-size:22px;margin:0 0 8px}nav{display:flex;gap:12px;align-items:center;margin:10px 0}main{display:grid;grid-template-columns:repeat(2,560px);gap:20px}.stage{position:relative;width:527.171875px;height:398.40625px;overflow:hidden;background:#fff18a}.stage:before{content:'';position:absolute;inset:16% 5% 4%;background:#d2efea;border-radius:49% 51% 42% 58%;transform:rotate(-6deg)}.stage canvas{position:absolute;width:527.171875px;height:517.921875px;object-fit:contain;object-position:50% 0;left:0;top:0}.zoom{position:relative;width:560px;height:360px;overflow:hidden;background:#fffef7}.zoom canvas{position:absolute;width:5016px;height:5016px;left:-2080px;top:-2320px;image-rendering:pixelated}h2{font-size:16px}pre{white-space:pre-wrap;max-width:1150px;font:12px monospace}.zoom-only .stage{display:none}.zoom-only h1{font-size:18px}</style>
+<h1>Silver waiting — exact phase, actual renderer</h1><p>Only the approved button crop/local-y change; masks, motion tracks and native PNGs unchanged. Left: frozen before-fix rigid revision. Right: approved two-row crop overlap fix. Native pixel reads on transparent canvas; zoom is CSS only.</p><nav><label>Time <select id="time"><option>2.375</option><option selected>2.5</option><option>2.625</option><option>3.375</option><option>3.5</option><option>3.625</option></select></label><a id="normal" href="?">Game size</a><a id="zoom" href="?zoom=1">4× native detail</a></nav><main></main><details><summary>Native Canvas diagnostics</summary><pre id="result">Loading…</pre></details>
+<script type="module">
+import {readAnimationPackage,sampleClip,createCanvasRenderer} from '../../../packages/character-animation/src/index.ts'
+const base=new URL('../../../design/animation-candidates/silver-bun/',import.meta.url)
+const current=readAnimationPackage(await(await fetch(new URL('package.json',base))).json())
+const before=readAnimationPackage(await(await fetch(new URL('./before-fix-package.json',import.meta.url))).json())
+const images=new Map(await Promise.all(Object.entries(current.assets).map(async([id,a])=>{const im=new Image;im.src=new URL(a.src,base);await im.decode();return[id,im]})))
+const query=new URLSearchParams(location.search);const time=Number(query.get('t')??2.5);document.querySelector('#time').value=String(time)
+if(query.get('zoom')==='1')document.body.classList.add('zoom-only')
+for(const mode of ['normal','zoom'])document.querySelector('#'+mode).href='?t='+time+(mode==='zoom'?'&zoom=1':'')
+document.querySelector('select').onchange=e=>location.search='?t='+e.target.value+(query.get('zoom')==='1'?'&zoom=1':'')
+const coords=[[594,625],[596,625],[598,625],[594,626],[596,626],[598,626],[594,627],[596,627],[598,627]]
+const records=[]
+for(const[label,data]of[['before-fix',before],['fixed',current]]){
+ const sec=document.createElement('section');sec.innerHTML='<h2>'+label+' t='+time+'s</h2><div class="stage"></div><h2>Native detail ×4; ROI x520–660,y580–670</h2><div class="zoom"></div>';document.querySelector('main').append(sec)
+ const clip=data.clips[data.states.waiting],pose=sampleClip(data,clip,time);let actual
+ for(const container of sec.querySelectorAll('.stage,.zoom')){const canvas=document.createElement('canvas');container.append(canvas);createCanvasRenderer(canvas,data,images).render(pose);actual=canvas}
+ const ctx=actual.getContext('2d'),pixel=(x,y)=>Array.from(ctx.getImageData(x,y,1,1).data)
+ const row={label,time,points:coords.map(([x,y])=>({x,y,rgba:pixel(x,y)})),roi:{x:588,y:620,width:20,height:16,alphaRows:[]},layers:[]}
+ for(let y=620;y<636;y++){const alphas=[];for(let x=588;x<608;x++)alphas.push(pixel(x,y)[3]);row.roi.alphaRows.push(alphas)}
+ if(label==='fixed')for(const id of ['waiting-button','waiting-wrist-cloth-backing','waiting-hand','waiting-torso','waiting-cuff-front']){
+  if(!data.nodes.some(n=>n.id===id))continue
+  const canvas=document.createElement('canvas'),subset={...data,nodes:data.nodes.map(n=>n.id===id?n:Object.fromEntries(Object.entries(n).filter(([k])=>k!=='sprite')))}
+  createCanvasRenderer(canvas,subset,images).render(pose);const c=canvas.getContext('2d');row.layers.push({id,points:coords.map(([x,y])=>({x,y,rgba:Array.from(c.getImageData(x,y,1,1).data)}))})
+ }
+ records.push(row)
+}
+let sweep=null
+if(query.get('sweep')==='1'){
+ const roi={x:588,y:620,width:20,height:16},frames=[]
+ const runs=[['before-fix',before],['fixed',current]].map(([label,data])=>{const canvas=document.createElement('canvas'),renderer=createCanvasRenderer(canvas,data,images),context=canvas.getContext('2d');context.beginPath();context.rect(roi.x,roi.y,roi.width,roi.height);context.clip();return{label,data,renderer,context}})
+ let firstFixedFailure=null
+ for(let i=0;i<=960;i++){
+  const t=i/240,entry={time:t}
+  for(const run of runs){const clip=run.data.clips[run.data.states.waiting];run.renderer.render(sampleClip(run.data,clip,t));const pixels=run.context.getImageData(594,624,6,5).data;let min=255;for(let j=3;j<pixels.length;j+=4)min=Math.min(min,pixels[j]);entry[run.label]=min;if(run.label==='fixed'&&min<240)firstFixedFailure={time:t,min}}
+  frames.push(entry);if(firstFixedFailure)break
+ }
+ sweep={roi,nativeInterior:{x:594,y:624,width:6,height:5},samples:frames.length,secondsStep:1/240,firstFixedFailure,beforeMin:Math.min(...frames.map(f=>f['before-fix'])),fixedMin:Math.min(...frames.map(f=>f.fixed)),frames}
+}
+document.querySelector('#result').textContent=JSON.stringify({sweep,renderer:'packages/character-animation/src/canvas.ts',gameMeasurement:{viewport:[1280,720],dpr:2,stage:[527.171875,398.40625],canvasElement:[527.171875,517.921875],objectFitSquare:517.921875},records},null,2)
+</script>

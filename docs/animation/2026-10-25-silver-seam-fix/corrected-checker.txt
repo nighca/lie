@@ -1,0 +1,24 @@
+(node:93948) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:93973) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions; 33 real full-parent rigid head/contact matrices: column lengths invariant/orthogonal, head-to-hand relation constant, fixed lower body and torso has no head rotation
+{
+  "role": "silver-bun",
+  "period": 4,
+  "nonzeroAlphaPixels": 1242971,
+  "waitingBounds": [
+    320.7186214609117,
+    14.66682876231101,
+    965.5,
+    1253.5
+  ]
+}
+Native alpha >0 at pixel centers; not antialiased color/duplicate-contour judgement. Parent browser artistic review and user confirmation remain required.
+PASS local crop counterexample: opaque atlas outside left/right/top/bottom excluded from alpha and ordered-color sampling; crop origin, mask and uncropped bounds checked.
+PASS 460911 native-alpha waist/contact interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
+PASS 78078 neck skin interior probes with4px skin margin, following contact world matrices over33 phases; alpha only, collar/outline color requires native Canvas review.
+PASS 94710 dense original upper-sleeve cloth probes at33 full-parent phases, including the formerly missing silver triangles.
+PASS 198 original wrist-arc dark-ink probes through33 sampled ordered RGBA layer stacks; nearest-native pixel probes, not antialiased Canvas acceptance.
+PASS entire original cardigan-button ROI excluded from moving hand; native button belongs exclusively to stable body parent.
+PASS exact visible native sprite and full-parent world matrix identity for720 nonwaiting real sampled poses; 3600 rendered-node comparisons

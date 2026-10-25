@@ -1,5 +1,7 @@
 # Character-specific rigid motion: accepted parent review
 
+Current follow-up: [approved two-row seam fix](../2026-10-25-silver-seam-fix/README.md) resolves the silver crop-edge failure with unchanged checker predicates and native Canvas validation. Prior failures and proposal/pending checkpoints below remain historical evidence.
+
 Subsequent verifier correction: [crop audit](../2026-10-25-crop-audit-correction/README.md). Prior crop-sensitive alpha/ordered proofs are withdrawn; corrected gray/plum checks pass, silver seam predicate fails at two phases and is pending coordinator disposition. This does not revoke the user’s visual approval.
 
 User accepted this final revision on 2026-10-25: “我验收过了，没问题了”. The former pending gate below describes the pre-acceptance checkpoint; current formal integration evidence is in [game integration](../2026-10-25-rigid-motion-game-integration/README.md).

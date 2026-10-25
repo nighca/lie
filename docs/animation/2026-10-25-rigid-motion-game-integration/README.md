@@ -1,5 +1,7 @@
 # Accepted rigid-motion batch: formal game integration
 
+Current follow-up: [approved two-row seam fix](../2026-10-25-silver-seam-fix/README.md) resolves the silver crop-edge failure with unchanged checker predicates and native Canvas validation. Prior failures and proposal/pending checkpoints below remain historical evidence.
+
 Subsequent verifier correction: [crop audit](../2026-10-25-crop-audit-correction/README.md). Prior crop-sensitive alpha/ordered proofs are withdrawn; corrected gray/plum checks pass, silver seam predicate fails at two phases and is pending coordinator disposition. This does not revoke the user’s visual approval.
 
 ## User approval and scope
