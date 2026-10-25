@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，08:00 Asia/Shanghai状态核验基线 main `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`。本页登记协调权、未完成交付和保留资源；[项目计划](project-plan.md)列授权/队列，[历史索引](history/2026-10-25/README.md)只供追溯。文档提交会推进main，后续操作须重读实际HEAD。
+2026-10-25，09:17 Asia/Shanghai审查候选基线 main `03fcb06b40ad9dc85ce92af5c1dd6723afc10d4a`。本页登记协调权、未完成交付和保留资源；[项目计划](project-plan.md)列授权/队列，[历史索引](history/2026-10-25/README.md)只供追溯。文档提交会推进main，后续操作须重读实际HEAD。
 
 ## 协调权登记（2026-10-25 06:43 Asia/Shanghai接任）
 
@@ -77,21 +77,18 @@
 
 覆盖率与双语README badge已本地main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`，root完整13files与计数/原始报告/SFC上下文实际review，候选与source47deba1覆盖源码/collector/依赖完全相同，复用clean4f5ba19真实388测试采样及两轮独立review；独立3脚本语法/45文件分母/SVG及快照逐字/链接通过。应用lines92.08%（1501/1630）、Node脚本91.32%（263/288）另报；[范围/命令与Vue映射限制](coverage/README.md)公开。CI上传14天artifact，不自动改trackedbadge，远程CI未运行，未push/部署；不重做已完成调查/采样。
 
-## 宣传视频准备研究（研究不受制作后置门禁阻塞）
+## 09:17质量、设计与研究批次（当前状态覆盖下文旧交付采样）
 
-用户再次澄清可先调研制作方案/工具依赖，为将来制作准备，只是不真的制作。root已找到并完整读2026-10-24原9cf490af[初步研究](archive/2026-10-25/history-followup/snapshots/9cf490af/docs/promo-video-production-research.md.txt)，原文已默认仓库归档；此前当前计划只列制作gate而遗漏研究成果入口，现补正。root/design_document_archive已接整项增量复核，独立WT/basef95e4ef，仅新增现行docs/promo-video-production-research.md及必要来源索引；旧版保持原字节、不重做已有调查。需复核旧工具/许可及Node24.17→24.22.1、产品8人Canvas动画已上线等过时措辞，未实测采音链不称通过。
+本轮候选从clean main03fcb06构造，root唯一integrator，有序cherry审查报告216c035→323b5e3→93760fc、QA0a25d05、预算调查384a10c、结果设计0c65ea1→e743283、宣传研究b8912bb。46文件仅docs/design，无生产修改；root实际完整文本/源码、代表截图及上下文review，候选与各source全部交付目录字节一致，六共享资源/旧归档原文hash、JSON和新增文档链接通过；独立Node24.22.1预算探针实返65536转发/65537断1009，三人长设定72905、40条历史76208。原首轮探针也已独立跑过，不把fake当provider成功。全应用测试不为此文档批重跑。
 
-研究已授权可独立推进，不需等待产品成熟或确认正式制作；不写脚本/分镜/台词、不安装工具/请求采集权限/录屏录音/生成媒体/上传素材/付费调用/制作/渲染。root实际review现行研究后归档，后续制作仍等用户明确放行。当前结果页设计已另收clean交付0c65ea1（result-scene-proposal WT、baseabb12db），root待实际完整review；无应用实施授权，不把待批设计当已实现。
+- 审查现行入口：[首轮代码审查](reviews/architecture-code-review-2026-10-25/README.md)、[预算调查](reviews/context-budget-2026-10-25/README.md)、[探索QA](qa/stable-exploration-2026-10-25/README.md)。无P1；CR02/QA001启动等待与预设失败不恢复合并修复；CR01超限context先防御明确失败，内容/历史政策仍用户门禁。QA002用户本chat明确选编辑器姓名唯一；QA003试玩返回步骤为待评估P3建议。
+- `/root/character_preset_migration`：WT character-preset-migration-dawn/lie，branch codex/preset-loading-recovery，base03fcb06；只Web清单加载/helper、main/Application/Editor必要接线与tests/docs。立即mount、有界fetch＋body、真实retry、resolver读最新表，保持draft。整项含5544单服务/IAB/清理，当前实际进程信息等完整handoff，不预写成功。该owner独占Editor.vue及加载相关测试。
+- `/root/stable_exploratory_qa`：新codex/editor-unique-names，base03fcb06；draft.ts＋editor-draft tests＋独立editor-unique-names.test.ts＋实施记录，trim后重名拒绝试玩/分享但可保存临时草稿；不改core或旧分享decode，不动Editor.vue、不另开服务。旧QA0a25d05冻结，源QA5544 PID14248/PTY26270已结束并恢复存储、关闭tabs1/2。
+- `/root/architecture_code_review`：新codex/context-frame-guard，base03fcb06；voice协议/channel与tests、liveVoice/voice.ts/controller最小typed reason/特定notice及tests，必要gateway合同测试，docs。保持64KiB/全故事历史/不自动retry；没有新增gate、截断、去重或provider调用。gateway现无voice包依赖，允许各自持有安全边界常量＋跨层边界测试，禁止不正确相对跨包import或为统一扩改package/lock。旧审查分支三SHA及预算分支384a10c冻结。
+- 结果设计用户原话已root read_thread核：整体无大问题，错误页短文案布局不协调。专项已完成760居中单列v2，root看过desktop/mobile/fallback原图，正确页不变，旧图/测量保留；仍无应用实现、新两态资产或契约授权。两回合5507均结束、tabs33/34关闭。后续用户在原专项确认，避免重复问原稿。
+- 宣传研究[现行简报](promo-video-production-research.md)完成：真实录制＋本地剪辑为优先建议，独立Remotion为多版备选；旧原文hash不变。仅方法/依赖/许可研究，不安装、脚本分镜、录屏、生成/渲染或制作。实际制作门禁保留。
 
-## 专职代码与架构审查
-
-用户进一步明确要求专职subagent做潜藏bug/架构意图落实/非预期耦合审查，root已spawn `/root/architecture_code_review`。固定main58b416d（应用同已发布abb12db），独立WT/branch，与浏览器探索QA分工；先核批准架构与真实依赖/接口，再以可达触发条件、精确源码行、最小fake验证及影响给结论，未证实疑点单列。allowed仅docs/reviews/architecture-code-review-2026-10-25/**报告/必要probe，不改生产，不开browser/server/端口、不调用provider或读secret，不复活暂停auth。P1立即反馈，其余完整clean batch由root实际review后排修。当前仅启动，不能写审查通过；子agent句柄跨换代不自动继承，届时取可恢复进度，保留其WT/refs/dirty。
-
-## 专职稳定版本探索测试
-
-用户最新明确要求启动专职subagent在稳定环境发现功能/设计/视觉问题；root核全backlog后实际spawn `/root/stable_exploratory_qa`。固定已发布abb12db，独立managed WT/unique branch，根侧不新增server；5544明确转交该QA owner按需启动，保护用户8787/8788、动画5355、设计5507、Editor5402及现有draft/浏览器会话。先隔离或可原样恢复测试draft再写入，做不到则报未测，不删除旧数据。
-
-allowed仅docs/qa/stable-exploration-2026-10-25/**报告/原生截图/必要fixture；系统走三案demo/两种终局、Editor/分享、状态边界、桌面/391与回退/键盘，不调用真实mic/provider，不把fake当真人或新动画验收。报告复现步骤/实际与预期/影响/版本/视口/证据及已知重复，P1立即报，常规完整batch；整项含环境和用后tab/fixture/服务清理。root负责实际review与排修，不准测试者自行改生产/main/push。当前只已启动，在测结果以完整交付为准；app子agent句柄不随四小时换代自动继承，届时取可恢复handoff，保持所有权。
+三执行agent句柄换代不自动继承；届时须取可恢复完整handoff，保护dirty/refs及服务，不重复派同一任务。当前运行时代码仍与已发布abb12db一致；本轮文档本地集成不新增push/部署授权。
 
 ## 最新发布与结果页设计授权
 
