@@ -1,0 +1,8 @@
+{
+  "base": "0621804a86806507878e4b3233268645d1481fbb",
+  "sha256": {
+    "apps/web/src/style.css": "ca7564976ec5556c3f4288baecf53b327487ec0f591a20bd65d8c47e6380efef",
+    "apps/web/src/App.vue": "87ccf1971c3aa93e861593bc74e728f4040f840cc7edc27d9e81006e452e08ef",
+    "packages/ui/src/components/ProductHeader.vue": "8ff0ad49c54cd6c8280121b9021523ae653050f466b6e5083945122153205a1f"
+  }
+}

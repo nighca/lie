@@ -250,7 +250,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 700px) {
-  .game-shell--investigating { width: 100%; height: 100dvh; min-width: 0; overflow: hidden; display: flex; flex-direction: column; padding: 16px 16px calc(132px + env(safe-area-inset-bottom)); }
+  .game-shell--investigating { width: 100%; height: 100dvh; min-height: min-content; min-width: 0; overflow: visible; display: flex; flex-direction: column; padding: 16px 16px calc(132px + env(safe-area-inset-bottom)); }
   .game-shell--investigating > .lie-product-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; min-height: 0; margin-bottom: 12px; flex-shrink: 0; }
   .game-shell--investigating .lie-product-header__brand { grid-column: 1; grid-row: 1; }
   .game-shell--investigating .lie-product-header__actions { grid-column: 2; grid-row: 1; }
@@ -259,7 +259,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .game-shell--investigating .investigation-title { flex-direction: row; align-items: baseline; justify-content: space-between; width: 100%; padding: 0; gap: 8px; font-size: 20px; line-height: 1.35; }
   .game-shell--investigating .investigation-title > span { min-width: 0; overflow-wrap: anywhere; }
   .game-shell--investigating .investigation-title small { flex-shrink: 0; font-size: 10px; }
-  .game-shell--investigating .investigation { flex: 1; min-height: 0; height: auto; grid-template-columns: minmax(0, 1fr) 148px; grid-template-rows: 168px minmax(0, 1fr); gap: 12px; }
+  .game-shell--investigating .investigation { flex: 1; min-height: 360px; height: auto; grid-template-columns: minmax(0, 1fr) 148px; grid-template-rows: 168px minmax(0, 1fr); gap: 12px; }
   .game-shell--investigating .character-list { grid-column: 1; grid-row: 1; width: 100%; min-width: 0; flex-direction: column; gap: 6px; overflow: auto; padding: 2px 0 4px; }
   .game-shell--investigating .character-list > .lie-character { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: stretch; width: 100%; height: auto; min-height: 44px; flex: 0 0 auto; border-radius: 13px; }
   .game-shell--investigating .character-list .lie-character__avatar { width: 40px; height: 40px; flex-shrink: 0; align-self: center; border-radius: 10px 0 0 10px; }
@@ -280,7 +280,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .game-shell--investigating .investigation > .lie-voice { position: fixed; left: 0; right: 0; bottom: 0; width: 100%; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 34px 48px; gap: 8px 14px; padding: 10px 16px calc(14px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; }
 }
 @media (max-height: 700px) and (max-width: 700px) {
-  .game-shell--investigating .investigation { grid-template-rows: 136px minmax(0, 1fr); gap: 10px; }
+  .game-shell--investigating .investigation { min-height: 326px; grid-template-rows: 136px minmax(0, 1fr); gap: 10px; }
   .game-shell--investigating .character-stage { height: 136px; }
   .game-shell--investigating .character-list { gap: 4px; }
   .game-shell--investigating .character-list > .lie-character { min-height: 40px; }
@@ -316,4 +316,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (min-width: 1151px) {
   .game-shell--investigating .portrait-backdrop :is(img, canvas) { top: 32px; }
+}
+
+@media (min-width: 851px) {
+  .game-shell--investigating { display: flex; flex-direction: column; height: 100dvh; min-height: min-content; }
+  .game-shell--investigating > .lie-product-header { flex-shrink: 0; }
+  .game-shell--investigating .investigation { flex: 1; height: auto; }
 }
