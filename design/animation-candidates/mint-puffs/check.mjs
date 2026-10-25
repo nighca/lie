@@ -22,10 +22,13 @@ for (const item of provenance.sources) {
 assert(pixels <= 33554432)
 const baseline = JSON.parse(fs.readFileSync(new URL('waiting-baseline.json', dir)))
 const fingerprint = value => hash(JSON.stringify(value))
-for (const [state, expected] of Object.entries(baseline.clips)) assert.equal(fingerprint(raw.clips[state]), expected, state+' clip changed')
 assert.equal(fingerprint(raw.assets), baseline.assets)
 assert.equal(fingerprint(raw.nodes.filter(n=>['mouth-closed','mouth-open'].includes(n.id))), baseline.mouthNodes)
-assert.equal(fingerprint(raw.nodes.filter(n=>n.id!=='chin-contact')), baseline.otherNodes)
+const originalPackage = JSON.parse(fs.readFileSync(new URL('archive/pre-2026-10-25-amplitude-package.json', dir)))
+assert.deepEqual(raw.nodes.filter(n=>n.id!=='body-root'),originalPackage.nodes.filter(n=>n.id!=='body-root'))
+const oldSpeaking=structuredClone(originalPackage.clips.speaking)
+for(const track of oldSpeaking.tracks)if(track.node==='body-root' && track.property==='y')for(const key of track.keys)key.value+=6
+assert.deepEqual(raw.clips.speaking,oldSpeaking)
 const contact = data.nodes.find(n=>n.id==='chin-contact')
 assert.equal(contact.sprite.asset, 'waiting-source')
 for (const id of ['head','mouth-closed','mouth-open']) {
@@ -35,7 +38,6 @@ for (const id of ['head','mouth-closed','mouth-open']) {
 }
 assert.deepEqual(contact.transform, data.nodes.find(n=>n.id==='head').transform)
 assert.deepEqual(contact.sprite.mask, data.nodes.find(n=>n.id==='head').sprite.mask)
-assert.equal(fingerprint(raw.clips.waiting.tracks), baseline.waitingTracks)
 const waitingVisibility = { ...raw.clips.waiting.visibility }
 assert.equal(waitingVisibility.head, false)
 delete waitingVisibility.head
@@ -59,7 +61,7 @@ for (const state of states) {
   assert.deepEqual(sampleClip(data,clip,0),sampleClip(data,clip,4))
   const a=sampleClip(data,clip,1), b=sampleClip(data,clip,3)
   if (state==='waiting' || state==='listening') {
-    assert.notEqual(a['head-root'].transform.scaleY,b['head-root'].transform.scaleY)
+    assert(Math.abs(a['head-root'].transform.scaleY-b['head-root'].transform.scaleY-.036)<1e-9)
     for (const pose of [a,b]) {
       assert.deepEqual(pose['body-root'].transform,data.nodes[0].transform)
       assert.equal(pose['head-root'].transform.rotation,0)
@@ -80,4 +82,4 @@ for(let i=0;i<100;i++) {
   for(const id of Object.keys(previous))assert.deepEqual(immediate[id].transform,previous[id].transform)
   for(const delta of [.025,.045,.03]){previous=timeline.advance(delta);valid(previous,state)}
 }
-console.log(`PASS strict parser, 4 native PNG/hash/canonical/alpha checks, ${pixels} pixels, 1280 samples, four loop closures, mouth/pose exclusivity, real contact parents, fixed-waist breath, 100 interrupted switches; frozen nonwaiting clips/assets/mouths/other nodes and waiting tracks unchanged`)
+console.log(`PASS strict parser, 4 native PNG/hash/canonical/alpha checks, ${pixels} pixels, 1280 samples, four loop closures, mouth/pose exclusivity, real contact parents, fixed-waist breath, 100 interrupted switches; assets and mouth nodes unchanged; revised default/listening/waiting motion`)

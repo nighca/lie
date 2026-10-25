@@ -64,7 +64,7 @@ for state in poses:
     for x in range(x0,x1,4):
      if ref.getpixel((x,y))[3]>=240:
       count+=1
-      assert alpha(pose,x,y+10)>=128,(state,name,phase/8,x,y,'missing opaque material')
+      assert alpha(pose,x,y+16)>=128,(state,name,phase/8,x,y,'missing opaque material')
   assert count>100,(state,name,'empty source probes',count)
   counts[state+'/'+name]=count
 # Actual nontransparent source hair bounds through the complete head->head-root->body-root chain.
