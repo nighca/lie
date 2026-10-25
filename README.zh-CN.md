@@ -81,6 +81,8 @@ npm run build
 
 ## 架构
 
+[模块规格与对外接口](docs/architecture-design.md)。
+
 ```mermaid
 flowchart LR
     Content["静态案件与人物资源"]

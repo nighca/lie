@@ -81,6 +81,8 @@ Local and online development previews support real voice. Application authentica
 
 ## Architecture
 
+[Module specifications and interfaces](docs/architecture-design.md) · Chinese technical reference.
+
 ```mermaid
 flowchart LR
     Content["Static cases and character resources"]
