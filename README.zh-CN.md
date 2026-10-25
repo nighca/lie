@@ -82,9 +82,23 @@ npm run build
 
 ```mermaid
 flowchart LR
-    Content["静态故事 JSON · 独立形象素材"] --> Browser["浏览器：Vue 界面、游戏规则、逐角色历史"]
-    Browser <-->|"同源 WebSocket · 端侧 MCP"| Worker["薄 Cloudflare Worker"]
-    Worker <-->|"鉴权 · 文本与音频"| Linx["灵矽：语音与模型"]
+    Content["静态案件与人物资源"]
+    subgraph Browser["浏览器"]
+        Web["apps/web<br/>页面与对话编排"]
+        Core["packages/game-core<br/>内容、会话与角色上下文"]
+        UI["packages/ui<br/>公共组件与视觉样式"]
+        Voice["packages/voice<br/>协议、麦克风与播放"]
+        Animation["packages/character-animation<br/>动画包与 Canvas 播放器"]
+        Web --> Core
+        Web --> UI
+        Web --> Voice
+        UI --> Animation
+    end
+    Gateway["apps/gateway<br/>静态资源与薄语音网关"]
+    Linx["灵矽<br/>语音与语言模型"]
+    Content --> Web
+    Voice <-->|"同源 WebSocket · 端侧 MCP"| Gateway
+    Gateway <-->|"鉴权 · 文本与音频"| Linx
 ```
 
 故事以公共背景和各角色设定的纯文本为主，只保留程序需要的少量元数据；形象通过独立资源配置复用。同一玩法下，新增故事通过内容包与配置完成。游戏内容和单局逻辑在浏览器运行，完整答案可被开发者工具检查；平台管理凭据留在托管端。无需游戏数据库或传统常驻服务端。
@@ -95,6 +109,7 @@ flowchart LR
 | [packages/game-core](packages/game-core) | 独立 TypeScript 内容校验、会话、指认与角色上下文 |
 | [packages/ui](packages/ui) | 统一视觉的公共 Vue 组件 |
 | [packages/voice](packages/voice) | 灵矽协议、PCM、麦克风与播放 |
+| [packages/character-animation](packages/character-animation) | 独立动画包校验、状态播放与 Canvas 渲染 |
 | [apps/gateway](apps/gateway) | 静态资源与薄语音网关，不处理案件规则 |
 
 ## 继续了解

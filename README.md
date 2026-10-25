@@ -82,9 +82,23 @@ Local and online development previews support real voice. Application authentica
 
 ```mermaid
 flowchart LR
-    Content["Static story JSON · reusable appearances"] --> Browser["Browser: Vue UI, game rules, per-character history"]
-    Browser <-->|"Same-origin WebSocket · client MCP"| Worker["Thin Cloudflare Worker"]
-    Worker <-->|"Authentication · text and audio"| Linx["Linx: voice and language models"]
+    Content["Static cases and character resources"]
+    subgraph Browser["Browser"]
+        Web["apps/web<br/>Pages and conversation orchestration"]
+        Core["packages/game-core<br/>Content, sessions and role context"]
+        UI["packages/ui<br/>Shared components and styling"]
+        Voice["packages/voice<br/>Protocol, microphone and playback"]
+        Animation["packages/character-animation<br/>Animation packages and Canvas player"]
+        Web --> Core
+        Web --> UI
+        Web --> Voice
+        UI --> Animation
+    end
+    Gateway["apps/gateway<br/>Static assets and thin voice relay"]
+    Linx["Linx<br/>Voice and language models"]
+    Content --> Web
+    Voice <-->|"Same-origin WebSocket · client MCP"| Gateway
+    Gateway <-->|"Authentication · text and audio"| Linx
 ```
 
 Stories primarily contain plain-text public backgrounds and character profiles, with only the metadata the engine needs. Additional cases use content packages and presentation configuration. Game content and session logic run in the browser; complete answers are inspectable in developer tools. Provider management credentials stay on the hosted side. No game database or traditional always-running server is required.
@@ -95,6 +109,7 @@ Stories primarily contain plain-text public backgrounds and character profiles, 
 | [packages/game-core](packages/game-core) | Independent TypeScript content validation, sessions, accusation and role context |
 | [packages/ui](packages/ui) | Shared Vue components and visual styling |
 | [packages/voice](packages/voice) | Linx protocol, PCM, microphone capture and playback |
+| [packages/character-animation](packages/character-animation) | Independent animation package validation, state playback and Canvas rendering |
 | [apps/gateway](apps/gateway) | Static assets and thin voice transport; no case rules |
 
 ## More about the project
