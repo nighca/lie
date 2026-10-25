@@ -1,5 +1,7 @@
 # Ochre freckles four-state animation candidate
 
+Current 2026-10-25 user-requested revision: see [revision-2026-10-25.md](revision-2026-10-25.md). The earlier assembly/validation below records the integrated baseline and is superseded only where that revision explicitly says so. This revision requires user visual approval before separate integration.
+
 2026-10-25. Owned by ochre_animation. Candidate-only work; no production manifest, canonical static PNG, shared runtime or game UI changes. The user's current authorization permits author self-check, initiator review and formal game QA followed by coordinator integration; the older per-character user approval wording is superseded. This candidate does not activate itself.
 
 ## Assembly and source fidelity

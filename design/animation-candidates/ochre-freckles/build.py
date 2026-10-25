@@ -45,9 +45,10 @@ sprite('waiting-lower','waiting-source',9,[[200,942],[1100,942],[1100,1254],[200
 sprite('waiting-contact','waiting-source',20,[[200,380],[555,380],[555,335],[700,335],[700,375],[1100,375],[1100,958],[200,958]],'contact-root')
 # Original heads preserve gaze, identity and exact waiting chin contact.
 headmask=[[380,0],[800,0],[800,340],[695,350],[690,360],[694,375],[693,390],[700,402],[715,415],[720,420],[710,425],[660,440],[590,445],[575,410],[550,400],[380,400]]
-for state in ['default','listening','waiting','speaking']:
+for state in ['default','listening','waiting']:
  mask=[[x+10 if state=='listening' and 340<=y<=375 and x>650 else x,y] for x,y in headmask]
  sprite('head-'+state,state+'-source',30,mask,'head-root')
+sprite('mouth-open','speaking-source',35,[[0,15],[86,0],[98,5],[94,46],[76,64],[30,64],[0,45]],'head-root',{**identity,'x':590,'y':291},[590,291,100,66])
 attachments=[n['id'] for n in nodes if 'sprite'in n]
 def wave(node,prop,base,amp,d=4):return dict(node=node,property=prop,interpolation='linear',keys=[dict(time=d*i/4,value=v) for i,v in enumerate([base,base+amp,base,base-amp,base])])
 clips={}
@@ -55,15 +56,15 @@ for state in ['default','listening','waiting','speaking']:
  visible=['head-'+state]
  if state=='default':visible+=['body','left-arm','right-arm']
  elif state=='listening':visible+=['listening-body','listening-arm','listening-right']
- elif state=='speaking':visible+=['body','left-arm','speaking-fill','speaking-arm','speaking-cap']
+ elif state=='speaking':visible=['head-default'];visible+=['body','left-arm','speaking-fill','speaking-arm','speaking-cap']
  else:visible=['head-waiting','waiting-contact','waiting-lower']
  tracks=[wave('body-root','y',960,3.5),wave('head-root','rotation',0,1.05),wave('head-root','y',430,1.2),wave('left-root','rotation',0,1),wave('right-root','rotation',0,-1)]
  if state=='listening':tracks=[wave('body-root','y',960,3.5),wave('contact-root','rotation',0,.8),wave('contact-root','y',430,1.2),wave('right-root','rotation',0,-1)]
- if state=='waiting':tracks=[wave('contact-root','y',950,0),wave('contact-root','pivotY',950,0),dict(node='contact-root',property='scaleY',interpolation='linear',keys=[dict(time=i/4,value=round(1+.006*math.sin(i*math.pi/8),8)) for i in range(17)])]
+ if state=='waiting':tracks=[wave('body-root','y',972,0),wave('contact-root','y',950,0),wave('contact-root','pivotY',950,0),dict(node='contact-root',property='scaleY',interpolation='linear',keys=[dict(time=i/4,value=round(1+.018*math.sin(i*math.pi/8),8)) for i in range(17)])]
  if state=='speaking':
   tracks.append(wave('speaking-root','rotation',0,-1.6))
   times=[0,.15,.33,.52,.71,.9,1.1,1.3,1.51,1.72,1.94,2.14,2.36,2.57,2.77,2.98,3.2,3.4,3.61,3.81,4]
-  for id,opened in [('head-speaking',True),('head-default',False)]:tracks.append(dict(node=id,property='visible',interpolation='step',keys=[dict(time=t,value=(i%2==1)==opened) for i,t in enumerate(times)]))
+  tracks.append(dict(node='mouth-open',property='visible',interpolation='step',keys=[dict(time=t,value=i%2==1) for i,t in enumerate(times)]))
  clips[state]=dict(duration=4,loop=True,visibility={id:id in visible for id in attachments},tracks=tracks)
 assets={};parts={}
 for p in sorted((root/'parts').glob('*-source.png')):
