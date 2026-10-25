@@ -1,0 +1,11 @@
+# Waiting visibility revision — 2026-10-25
+
+Status: **pending parent visual review and explicit user acceptance**. This revision does not block the original eight-character integration. Do not activate, merge, push, or open a PR for this revision before the user confirms it. Older team-acceptance notes refer to the original package.
+
+Base: `772dfa5281bda039bbe3e248e4bc81ebcbdf2846`. The exact previous package is archived in [baseline-package.json](archive/2026-10-25-waiting-visibility/baseline-package.json). PNG bytes, masks, node assembly, all non-waiting clips and runtime code remain unchanged.
+
+Waiting upper/contact-group scaleY now ranges **0.985–1.015**, 2.5 times the previous ±0.006. Period remains 4s and the same 17 sine keys/linear sampling. No horizontal drift or rotation is introduced. The head, mouth and contacting hands retain their shared parent. The lower body keeps its exact previous world matrix throughout. At source y250 the vertical breath spans 18 logical pixels peak to peak, versus 7.2 previously.
+
+[Checks](waiting-revision-checks.txt): strict contract/native PNG/canonical hashes, four-state sampling/loop closure/interrupted switching; exact baseline diff whitelist; generator reproduces package bytes; 33 real sampler full-parent phases with fixed lower body/stable upper anchor/no side sway. Every nonzero native alpha pixel retained by the runtime mask/crop is transformed for bounds: minimum y **4.682625**, maximum y1253.5; no hair overflow. 69993 opaque waist-interior probes find no transparency across the upper/lower join. Existing source-seam audit was rerun for silver/plum. These are nearest-source-alpha checks, not antialiased Canvas color or duplicate-contour acceptance.
+
+Use [waiting-inspection.html](waiting-inspection.html) through the existing5355 same-origin preview: default shows original/current positive and negative extrema using the actual sampler/Canvas; `?samples=32` shows the 32 new phases, `?detail=shoulders`, `?detail=waist`, `?detail=face` zoom the contact/waist/hair regions. No service was started, no shared viewport changed. Parent owns the actual browser review and native screenshots; this author does not claim browser or user acceptance.

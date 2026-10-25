@@ -1,0 +1,32 @@
+PASS generator rebuild byte-identical package; provenance unchanged.
+$ node --experimental-transform-types design/animation-candidates/silver-bun/check.mjs
+(node:92862) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: strict contract, PNG/canonical hashes, finite four-state sampling, exclusive mouths, loops, continuous micro motion, contact parents, numeric continuity on interrupted switching and target limb visibility
+
+$ python3 design/animation-candidates/silver-bun/check-waiting-revision.py
+(node:92864) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS only waiting scaleY keys (plus plum static upper offset) changed; other states/assets/nodes exact baseline; 33 sampled full-parent fixed lower-body/waist/no side-sway; nonempty masked native-alpha bounds
+{
+  "role": "silver-bun",
+  "amplitude": 0.015,
+  "period": 4,
+  "nonzeroAlphaPixels": 1241900,
+  "waitingBounds": [
+    325.675,
+    4.682625000000112,
+    965.5,
+    1253.5
+  ],
+  "headVerticalPeakToPeakAtY250": 18.0
+}
+Native alpha >0 at pixel centers; no antialias/color/duplicate contour judgement. Browser artistic acceptance and user confirmation remain required.
+PASS 69993 native-alpha waist interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
+
+(node:92894) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: default internal sleeve seams covered at all 32 real sampler phases (125ms), full parent transforms and source alpha
+PASS: listening internal sleeve seams covered at all 32 real sampler phases (125ms), full parent transforms and source alpha
+PASS: waiting internal sleeve seams covered at all 32 real sampler phases (125ms), full parent transforms and source alpha
+Read-only nearest-source-alpha coverage, not antialiased Canvas image comparison; outer silhouette, colour/duplicate lines and artistic acceptance require browser review.
