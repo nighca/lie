@@ -1,0 +1,92 @@
+{
+  "inputs": [
+    {
+      "name": "lie-gameplay-complete-preview.mp4",
+      "sha256": "4e9d9badf30c66bfe89e199d9cacfdcdb67bcf4d404b4c88f12137601cb29afc"
+    },
+    {
+      "name": "lie-create-preview-share.mp4",
+      "sha256": "d61398d0140d7027d53ac83d81cf4bc8dde4b64c65724c3be30bb0dff6e1345c"
+    }
+  ],
+  "gameplayBoundarySeconds": 114.03333333333333,
+  "creationDurationSeconds": 73.4,
+  "gameplayAudioSamples": 5473600,
+  "creationSilentSamples": 3523200,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 800,
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "r_frame_rate": "30/1",
+        "duration": "187.433333",
+        "nb_frames": "5623"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 1,
+        "r_frame_rate": "0/0",
+        "duration": "187.433000",
+        "nb_frames": "8787"
+      }
+    ],
+    "format": {
+      "duration": "187.433333",
+      "size": "11646788"
+    }
+  },
+  "outputSha256": "5d662845a39ad08db9a7936651bd85eabecee406d800bbd7113f48f1c5b69c2a",
+  "decode": "ffmpeg -xerror passed",
+  "command": [
+    "ffmpeg",
+    "-v",
+    "error",
+    "-y",
+    "-i",
+    "/Users/nighca/.codex/visualizations/2026/10/25/01a17226-5e5a-7193-b5b7-e522519a3e0c/promo-video/joint-gameplay-take03/lie-gameplay-complete-preview.mp4",
+    "-i",
+    "media/promo-video/lie-create-preview-share.mp4",
+    "-f",
+    "lavfi",
+    "-i",
+    "anullsrc=r=48000:cl=mono",
+    "-filter_complex",
+    "[0:v]fps=30,tpad=stop=2:stop_mode=clone,format=yuv420p,setsar=1,setpts=N/(30*TB)[v0];[0:a]aresample=48000,apad=whole_len=5473600,atrim=end_sample=5473600,asetpts=PTS-STARTPTS[a0];[1:v]fps=30,format=yuv420p,setsar=1,setpts=N/(30*TB)[v1];[2:a]atrim=end_sample=3523200,asetpts=PTS-STARTPTS[a1];[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]",
+    "-map",
+    "[v]",
+    "-map",
+    "[a]",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "fast",
+    "-crf",
+    "20",
+    "-r",
+    "30",
+    "-fps_mode",
+    "cfr",
+    "-pix_fmt",
+    "yuv420p",
+    "-color_range",
+    "tv",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "192k",
+    "-ar",
+    "48000",
+    "-ac",
+    "1",
+    "-movflags",
+    "+faststart",
+    "media/promo-video/lie-demo.mp4"
+  ],
+  "ffmpegVersion": "ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers"
+}

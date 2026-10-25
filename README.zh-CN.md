@@ -14,7 +14,7 @@
 
 与 AI 角色自由语音交流，对照各自的说法，最后选出事件的责任人。画面轻松，人物却未必把话说全——问什么、先问谁、相信哪一句，由你决定。游戏界面使用中文。
 
-[开始游戏](https://lie.agency/) · [创作案件](https://lie.agency/editor)
+[开始游戏](https://lie.agency/) · [创作案件](https://lie.agency/editor) · [观看演示视频（3:07，含声音）](media/promo-video/lie-demo.mp4)
 
 ## 一局怎么玩
 

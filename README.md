@@ -14,7 +14,7 @@ English · [简体中文](README.zh-CN.md)
 
 Talk freely with AI characters, compare their accounts, and identify who is responsible. The artwork is playful; the characters may leave things unsaid. What to ask, whom to question first, and which story to trust are up to you. The game interface is in Chinese.
 
-[Play LIE](https://lie.agency/) · [Create a case](https://lie.agency/editor)
+[Play LIE](https://lie.agency/) · [Create a case](https://lie.agency/editor) · [Watch the demo (3:07, with audio)](media/promo-video/lie-demo.mp4)
 
 ## Play a case
 
