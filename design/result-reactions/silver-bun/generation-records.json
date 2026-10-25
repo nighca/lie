@@ -1,0 +1,138 @@
+{
+  "owner": "result_lane_two",
+  "base": "365269b6185be586b69c0fac2b7ba15defeb7a6f",
+  "approval": "User approved Coral strengthened sample and delegated self acceptance of remaining characters 2026-10-25",
+  "prompts": {
+    "correct": "Edit target: silver-haired older woman head sprite. Keep EXACT 1362x1155 transparent canvas, same hair silhouette, bun, ears, turquoise earrings, neck, face outline, proportions and registration. Change ONLY facial expression: visibly caught out, rueful embarrassed resignation, inner brows raised with slightly drooping outer ends, eyelids lowered, small asymmetric sheepish closed smile with clearly drawn dark-edged coral lips. Expressive and readable, warm cartoon style, not crying, not villainous, no text or sweat symbols. Add a complete mouth in the existing blank mouth position centered below the nose, retaining original face anatomy. Preserve all non-face pixels as closely as possible, no body, no head rotation or resizing. Real transparent background.",
+    "wrong": "Edit target: original silver-haired older woman head sprite. Keep EXACT 1362x1155 transparent canvas, original head silhouette, bun, ears, earrings, neck, face outline and pixel registration. Change ONLY expression to a clear animated surprised questioning 'Me?!': eyes somewhat wider with brows visibly raised and asymmetric, left brow lifted, small rounded parted coral mouth with dark outline centered in the existing blank mouth area below nose. Warm friendly puzzled surprise, not anger, blame or fear. Complete mouth readily visible at small size. Preserve original illustration lines/palette, all hair, neck, jewelry, proportions and head orientation. No body, no head resizing, no text or punctuation. Real transparency."
+  },
+  "generatedInputs": {
+    "correct": "exec-4945332e-538f-405e-bfe4-fbe1b9e20f6b.png",
+    "wrong": "exec-4a9bbae6-7a36-4fa0-83ca-f592a4babbc9.png"
+  },
+  "files": {
+    "endpoint-review.png": {
+      "sha256": "06d34bab50d533bd3aaa89bdf5c27c8a96fa305d781c1e090db86e49857797fd",
+      "width": 65536,
+      "height": 4293001768,
+      "mode": "RGB",
+      "alphaExtrema": null
+    },
+    "accused-wrongly.png": {
+      "sha256": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "accused-correctly.png": {
+      "sha256": "3784dcd30dc7d3dabd717f5d6cadfb546c61cd9b3ce277f99aaa9f1914396ae9",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/result-wrong-head.png": {
+      "sha256": "2d052113a5fa09cadba34e5887803966f07179416b4b4591b83ae8fdd2935fab",
+      "width": 1362,
+      "height": 1155,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/speaking-source.png": {
+      "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/waiting-source.png": {
+      "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/default-source.png": {
+      "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/listening-source.png": {
+      "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/head.png": {
+      "sha256": "cf884ae64a094939821ff061f76c2e9084fafe4d54d9b57a1f8d2b50addc7914",
+      "width": 1362,
+      "height": 1155,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/mouths.png": {
+      "sha256": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/result-correct-head.png": {
+      "sha256": "f7234a5ee50a8b2998db181b2a9377298b98ff2aba1f0cdb8558089fd3283ec6",
+      "width": 1362,
+      "height": 1155,
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  },
+  "terminalExport": "Native formal Canvas renderer sampleClip(duration), browser canvas.toDataURL image/png; no raster edit",
+  "selfReview": {
+    "endpoints": "clear rueful vs questioning expressions, original identity, shoulder/neck and palm/sleeve joins intact",
+    "motion": "rigid head nod/tilt and independent arm release/question gesture; no scaling",
+    "oldStates": "exact original clips and sprites retained",
+    "browser": "Native endpoint, t=.30, t=.75 and replay inspected in own IAB tab1; early preview missing abort signal corrected before exports."
+  },
+  "service": {
+    "owner": "result_lane_two",
+    "port": 5357,
+    "pid": 53348,
+    "pty": 99017,
+    "tab": "1",
+    "source": "this worktree at base plus candidate",
+    "stopCondition": "lane QA complete"
+  }
+}
