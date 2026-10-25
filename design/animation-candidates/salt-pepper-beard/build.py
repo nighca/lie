@@ -42,7 +42,7 @@ def clip(s,d):
  else:visible+=['lower-fill','body-default','arm-left','arm-right']
  tracks=[] if s=='waiting' else [wave('body-root','y',[930,926,930,934,930],d),wave('body-root','rotation',[0,.4,.08,-.4,0],d)]
  if s=='waiting':
-  tracks += [wave('contact-root','y',[915,915],d),wave('contact-root','pivotY',[915,915],d),wave('contact-root','scaleY',[round(1+.006*math.sin(2*math.pi*i/16),8) for i in range(17)],d)]
+  tracks += [wave('contact-root','y',[915,915],d),wave('contact-root','pivotY',[915,915],d),wave('contact-root','scaleY',[round(1+.015*math.sin(2*math.pi*i/16),8) for i in range(17)],d)]
  elif s=='listening':tracks += [wave('contact-root','rotation',[0,.95,.15,-.85,0],d),wave('contact-root','y',[395,393.8,395,396.2,395],d)]
  else:tracks += [wave('head-root','rotation',[0,1.6,.25,-1.3,0],d),wave('head-root','y',[395,393.5,395,396.5,395],d)]
  if s!='waiting':tracks += [wave('left-root','rotation',[0,.9,-.2,-1.4,0],d),wave('right-root','rotation',[0,-1.3,.25,1.1,0],d)]

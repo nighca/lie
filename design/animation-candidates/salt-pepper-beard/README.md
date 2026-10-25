@@ -1,3 +1,5 @@
+> Current waiting visibility revision: [pending-user candidate](waiting-visibility-revision.md). Original accepted package is preserved in its linked archive; historical acceptance below does not approve this revision.
+
 # 灰白胡须动画候选
 
 当前正式资源接入候选见[组合接入记录](../../../docs/animation/gray-plum-game-integration.md)，尚待总协调review及顶层游戏QA；下列内容保留来源制作/代验历史。
