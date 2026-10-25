@@ -25,3 +25,11 @@
 Owner `/root/character_preset_migration`，自有WT `/Users/nighca/.codex/worktrees/character-preset-migration-dawn/lie`，runtime冻结 `397b0328c79b82b6de97622edd198955fef7a944`。root确认UI释放后，本任务再次lsof确认5544无监听，才启动单一Node24 Vite（没有gateway），127.0.0.1:5544 / PID50243 / 原PTY session61290；consumer为上述自建标签，stop条件为本轮验收完成。已原会话Ctrl-C，exit130；最终lsof无监听且精确PID已退出。标签已显式关闭，未设置viewport override，无需reset；临时 apps/web/__spacing-qa.html已删除，源码保存在本目录便于重放。
 
 未访问Editor/语音/草稿，无storage写入、mic/provider/语音API或语音WS调用（仅Vite自身HMR）；未操作8787/8788/5355、其他服务和用户标签。未改UI owner工作树或packages/ui，最终仅追加本目录证据，生产提交保持冻结。
+
+## 已审 Header 依赖组合追加检查
+
+root 在原矩阵收尾后要求追加已审 header `4567e2f9862abffc6c94ef88da8e4c316e7e28b6`，其依赖已在 root 候选 `1bde284`。本分支按授权 cherry 为 `7c62ed365cc768a56038e2ebff3e40c2404aa6d8`；此依赖不属于本任务提交，集成时不可重复重放。原 `397b032` 及 header source 均未改写。
+
+仅实际复查391×844、1280×844：[组合JSON](combined-header.json)、[391截图](combined-header-391.png)、[1280截图](combined-header-1280.png)。两宽 header 实测均64px，流程/案件/标题/列表几何、滚动尺寸与原矩阵对应值完全相同；391间距仍32px、PC仍0margin及内部列表滚动，无composition问题。组合截图宿主页面保持了原生自动滚动位置，因此顶部工具栏/header部分不在截图范围；实际viewport与完整几何以JSON记录为准，未将宿主截图尺寸冒充iframe尺寸。
+
+第二次服务：先核5544空，再启动同WT/冻结组合7c62ed3，PID69163 / 原PTY46596；自建Chrome tab1910329701。验完显式关tab，原PTY Ctrl-C exit130；精确PID与5544最终均不存在。未设置viewport override，临时夹具再次删除，无用户storage/其他服务动作。本次依赖仅局部header，未扩大重跑原5尺寸或应用套件。

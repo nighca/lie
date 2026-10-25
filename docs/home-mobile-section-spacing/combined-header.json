@@ -1,0 +1,272 @@
+[
+  {
+    "width": "391",
+    "header": {
+      "bottom": 80,
+      "height": 64,
+      "left": 16,
+      "right": 375,
+      "top": 16,
+      "width": 359,
+      "x": 16,
+      "y": 16
+    },
+    "result": [
+      {
+        "name": "candidate",
+        "viewport": [
+          391,
+          844
+        ],
+        "scrollY": 0,
+        "listScrollTop": 0,
+        "flow": {
+          "x": 16,
+          "y": 434.46875,
+          "width": 359,
+          "height": 22.3984375,
+          "top": 434.46875,
+          "right": 375,
+          "bottom": 456.8671875,
+          "left": 16
+        },
+        "cases": {
+          "x": 16,
+          "y": 488.8671875,
+          "width": 359,
+          "height": 1124.5625,
+          "top": 488.8671875,
+          "right": 375,
+          "bottom": 1613.4296875,
+          "left": 16
+        },
+        "heading": {
+          "x": 16,
+          "y": 488.8671875,
+          "width": 359,
+          "height": 40,
+          "top": 488.8671875,
+          "right": 375,
+          "bottom": 528.8671875,
+          "left": 16
+        },
+        "list": {
+          "x": 16,
+          "y": 528.8671875,
+          "width": 359,
+          "height": 1084.5625,
+          "top": 528.8671875,
+          "right": 375,
+          "bottom": 1613.4296875,
+          "left": 16
+        },
+        "sectionGap": 32,
+        "titleListGap": 0,
+        "casesMarginTop": "32px",
+        "document": {
+          "client": 844,
+          "scroll": 1629,
+          "width": 391
+        },
+        "listOverflow": "visible",
+        "listScroll": 1085,
+        "listClient": 1085
+      },
+      {
+        "name": "baseline",
+        "viewport": [
+          391,
+          844
+        ],
+        "scrollY": 0,
+        "listScrollTop": 0,
+        "flow": {
+          "x": 16,
+          "y": 434.46875,
+          "width": 359,
+          "height": 22.3984375,
+          "top": 434.46875,
+          "right": 375,
+          "bottom": 456.8671875,
+          "left": 16
+        },
+        "cases": {
+          "x": 16,
+          "y": 456.8671875,
+          "width": 359,
+          "height": 1124.5625,
+          "top": 456.8671875,
+          "right": 375,
+          "bottom": 1581.4296875,
+          "left": 16
+        },
+        "heading": {
+          "x": 16,
+          "y": 456.8671875,
+          "width": 359,
+          "height": 40,
+          "top": 456.8671875,
+          "right": 375,
+          "bottom": 496.8671875,
+          "left": 16
+        },
+        "list": {
+          "x": 16,
+          "y": 496.8671875,
+          "width": 359,
+          "height": 1084.5625,
+          "top": 496.8671875,
+          "right": 375,
+          "bottom": 1581.4296875,
+          "left": 16
+        },
+        "sectionGap": 0,
+        "titleListGap": 0,
+        "casesMarginTop": "0px",
+        "document": {
+          "client": 844,
+          "scroll": 1597,
+          "width": 391
+        },
+        "listOverflow": "visible",
+        "listScroll": 1085,
+        "listClient": 1085
+      }
+    ]
+  },
+  {
+    "width": "1280",
+    "header": {
+      "bottom": 88,
+      "height": 64,
+      "left": 24,
+      "right": 1256,
+      "top": 24,
+      "width": 1232,
+      "x": 24,
+      "y": 24
+    },
+    "result": [
+      {
+        "name": "candidate",
+        "viewport": [
+          1280,
+          844
+        ],
+        "scrollY": 0,
+        "listScrollTop": 0,
+        "flow": {
+          "x": 24,
+          "y": 657.0703125,
+          "width": 588,
+          "height": 22.3984375,
+          "top": 657.0703125,
+          "right": 612,
+          "bottom": 679.46875,
+          "left": 24
+        },
+        "cases": {
+          "x": 668,
+          "y": 122,
+          "width": 588,
+          "height": 698,
+          "top": 122,
+          "right": 1256,
+          "bottom": 820,
+          "left": 668
+        },
+        "heading": {
+          "x": 668,
+          "y": 122,
+          "width": 588,
+          "height": 50,
+          "top": 122,
+          "right": 1256,
+          "bottom": 172,
+          "left": 668
+        },
+        "list": {
+          "x": 668,
+          "y": 172,
+          "width": 588,
+          "height": 648,
+          "top": 172,
+          "right": 1256,
+          "bottom": 820,
+          "left": 668
+        },
+        "sectionGap": -557.46875,
+        "titleListGap": 0,
+        "casesMarginTop": "0px",
+        "document": {
+          "client": 844,
+          "scroll": 844,
+          "width": 1280
+        },
+        "listOverflow": "auto",
+        "listScroll": 1105,
+        "listClient": 648
+      },
+      {
+        "name": "baseline",
+        "viewport": [
+          1280,
+          844
+        ],
+        "scrollY": 0,
+        "listScrollTop": 0,
+        "flow": {
+          "x": 24,
+          "y": 657.0703125,
+          "width": 588,
+          "height": 22.3984375,
+          "top": 657.0703125,
+          "right": 612,
+          "bottom": 679.46875,
+          "left": 24
+        },
+        "cases": {
+          "x": 668,
+          "y": 122,
+          "width": 588,
+          "height": 698,
+          "top": 122,
+          "right": 1256,
+          "bottom": 820,
+          "left": 668
+        },
+        "heading": {
+          "x": 668,
+          "y": 122,
+          "width": 588,
+          "height": 50,
+          "top": 122,
+          "right": 1256,
+          "bottom": 172,
+          "left": 668
+        },
+        "list": {
+          "x": 668,
+          "y": 172,
+          "width": 588,
+          "height": 648,
+          "top": 172,
+          "right": 1256,
+          "bottom": 820,
+          "left": 668
+        },
+        "sectionGap": -557.46875,
+        "titleListGap": 0,
+        "casesMarginTop": "0px",
+        "document": {
+          "client": 844,
+          "scroll": 844,
+          "width": 1280
+        },
+        "listOverflow": "auto",
+        "listScroll": 1105,
+        "listClient": 648
+      }
+    ]
+  }
+]
