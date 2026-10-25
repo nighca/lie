@@ -42,7 +42,7 @@
 | 修复组合通过 / Editor＋root | RSM-01保存失败试玩返回保留编辑/步骤/人物（含QA003）、RSM-02复制意图隔离已实现；97a1803→8e09327补失活立绘卸载、激活重建，最多缓存一份Editor、离开范围清理，改编替换key失效。root完整review；最终候选aa6fc190 **Web288/types/build89通过**，已root审[组合报告](editor-state-recovery/combined-verification.md)、本地ff并发布48316544，CI/deploy成功及线上产物身份已核；[发布记录](releases/2026-10-25-main-refresh.md)。旧[review](reviews/remix-state-review-2026-10-25/README.md)错误探针归档，不当修复后验收。 |
 | 后续审查已归档，原生QA待工具 / character_preset_migration＋architecture_code_review | 稳定8787状态实际SHA600、无ready字段；工具本轮无IAB，7个native case未执行，无草稿/tab/service动作，[前置事实](qa/native-share-editor-600-2026-10-25/README.md)。voice生命周期源码review及实际controller/bridge/channel组合4项有限fake探针通过，未证实新bug，[完整范围/结果](reviews/voice-lifecycle-2026-10-25/README.md)；不替代原生设备/真实provider，不重复已修项或全suite/build。生产代码未改，未push；等IAB可用窗口再排原生矩阵。 |
 | 进行中 输入边界审查 / architecture_code_review＋root | 从main2e24d32审查自编案件导入/分享解码、core校验与Editor恢复，先对照既有review避免重复，最多3个有源码依据的离线探针；确定的小缺陷可修并相关验证，契约/玩法重大选择仍讨论。不启动服务或真实provider，不push；待完整批量handoff。 |
-| 待新批交付 Hackathon修订 / 专项chat＋root | 巡检发现用户在专项chat继续修订初稿后的13项提交，已请owner核对完整有序SHA/clean与文档链接后批量交付；root正在实际全文审查，尚未集成这批。移动端可用已由用户在专项明确确认，应与尚未验的长会话/盲测边界区分。 |
+| 已审 Hackathon修订 / 专项chat＋root | 初稿后14项有序提交84c4194至f753890已root全文review并cherry为779824f至9615f29，顶部入口冲突按owner最终稿处理，两文档与source逐字相同，49个本地链接目标存在；历史稿与内部依据完整保留。移动端可用已由用户在专项确认；不扩为长会话/盲测全通过。仅文档，未push。 |
 | 已核 favicon / root | HTML已使用正式brand/logo.svg，正式站对应hash SVG返回200/image/svg+xml，响应体SHA与URL及源Logo一致，immutable一年缓存；无需新增图标或改代码。 |
 | 已审候选归档 离线分享/Editor QA / character_preset_migration | source877ac94889b2ea140263997575751d1d32861e10四文件已root全文review并候选fd4b257归档；[8离线场景/边界](qa/released-share-editor-2026-10-25/README.md)，无新confirmed缺陷。固定483探针本轮不重跑；真实reload/popstate/BFCache/dialog未验，CUA未暴露IAB、不回退Chrome/启5544，不冒称原生QA。 |
 | P1 真人/盲测/多用户 / root协调用户＋QA | mic/外放/长会话、三案盲测、固定device多人隔离、正式费用硬限额未闭环。fake/短WAV/ready不替代，新增声仍按用户真实耳验范围，不后台保活mic。 |
@@ -63,7 +63,7 @@
 | 目录＋完整官方案eager打包 | 已main792e182；[证据](bundled-case-catalog.md)，目录/三案单一源，unknown失败，自编/分享优先，无官方/games请求；46相关测试/types/build89及有界实际浏览器通过，JS gzip增12824B。图片/语音仍运行时，不称整站离线。 |
 | 结果页A | 已main7b4d96a；[实施](result-scene-implementation.md)，真实被指认者default/首字回退、wrong终局不泄真相，correct完整经过；组合Web220/24files/types/build89通过，root原图review，B/C未授权。 |
 | 稳定探索QA首轮 | [报告11图](qa/stable-exploration-2026-10-25/README.md)：无P1、两P2已按上表修复、P3仍建议。测试固定abb12db/demo；不当真人provider验收。 |
-| Draft已root审 / Hackathon亮点文档 | 独立chat01a17114-7dbb-74c2-ab1d-fd24725c9d65交[四维初稿](hackathon/项目亮点.md)，source67c3da2b0f09b9c8ac67fdbb2e64e70946a1f3be已root全文review，文档候选0c6286b收录。保留Draft、待用户讨论/赛制补充，集成不等用户批准；无发布/视频制作。 |
+| Draft已root审 / Hackathon亮点文档 | 独立chat01a17114-7dbb-74c2-ab1d-fd24725c9d65交[四维讨论稿](hackathon/项目亮点.md)，初稿及后续用户直接修订已root实际review并收录，最新source f753890；[编写说明](hackathon/编写说明.md)保留原始基线、用户意图、历史证据和有序提交。保留讨论稿/赛制待补充状态；无发布/视频制作。 |
 | 宣传准备研究 | [方法/依赖研究](promo-video-production-research.md)已完成，不再排待做。实际视频严格后置；原研究与拒绝/替代设计按[归档](archive/README.md)保留。 |
 
 ## 当前门禁与资源

@@ -64,3 +64,7 @@
 | CI及正式环境 | 当前.github/workflows/ci.yml对main push触发，串行lie-production且不取消旧run：Node24.22.1/npm ci → 全workspace typecheck → coverage（应用＋脚本，always上传14d覆盖率artifact）→ Web/Gateway build → cf prebuilt dry-run → latest-main核对 → 部署。核同一发布SHA的完整run、latest=true及真实deploy step成功后再报已部署；新main可令旧run跳过部署。缺secret/CI失败按真实状态报，不读取或输出secret，不自行修账号/手工部署。 |
 
 CI使用现有GitHub secrets及固定Worker lie-game，`--provision=false`；本轮授权覆盖push带来的既有自动部署，未增加手工Cloudflare部署或新资源。覆盖率14天artifact是既有报告政策，不是已否决的旧资源retention方案。准备阶段仅读CI与文档检查，不跑旧base全suite/build或启动服务；后续组合验证/CI监测另按冻结候选执行。
+
+## 本轮后续排期
+
+从实际main2e24d32巡检：正式结果600已完成，纠正计划顶部仍在制旧措辞；favicon已用Logo且正式hash SVG身份核对相同，无需改代码。Hackathon专项初稿后用户直接修订14链已实际全文review并在隔离候选有序cherry（779824f至9615f29），两文件source身份及49本地链接通过；移动端可用是用户已确认事实，不能继续标成整体未验。当前architecture_code_review负责自编内容输入边界有界离线审查，原voice审查不重做；待完整handoff后root继续review。唯一integrator仍本root，不启动新服务、不push，实际main更新后读Git。
