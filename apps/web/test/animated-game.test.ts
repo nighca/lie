@@ -14,7 +14,16 @@ vi.mock('@lie/character-animation', async importOriginal => ({
   loadAnimationPackage: animation.load,
   createCanvasRenderer: () => ({ render: animation.render, dispose: animation.dispose }),
 }))
-const data = readAnimationPackage(dataSource)
+const data = readAnimationPackage({
+  ...structuredClone(dataSource),
+  schemaVersion: 1,
+  states: {
+    default: dataSource.states.default,
+    listening: dataSource.states.listening,
+    waiting: dataSource.states.waiting,
+    speaking: dataSource.states.speaking,
+  },
+})
 const cleanup: (() => void)[] = []
 beforeEach(() => {
   vi.resetAllMocks()
