@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "characters": 8,
+  "results": [
+    {
+      "id": "coral-bob",
+      "name": "珊瑚短发",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 13,
+      "packageSha256": "2a9dd8ab80b63bcd04b1983cb29e1a789ff42ce81ec581c3e37b1ca73f4d4d73",
+      "terminalSha256": {
+        "accusedCorrectly": "a0eb5e5078a73f9f264cd0af8ea3927e5fe574d08443437be04d085db1546647",
+        "accusedWrongly": "ff0020fbfe45a86fb1e9b442d42604b9ca4eca01bd257036676729bcf6abc567"
+      }
+    },
+    {
+      "id": "sunny-moustache",
+      "name": "阳光小胡子",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 7,
+      "packageSha256": "b41854000a35dd22fb2ce7ca4645b0273da3b5d31e4c9895a264128665b161d3",
+      "terminalSha256": {
+        "accusedCorrectly": "0a6d9eec45c21f0a9b75c79ebeb5dabd8052d743d32f7e1b805f276036fbe88e",
+        "accusedWrongly": "2fcc13885cca3f00988cff1e37f515b6d65a9fbcb564d1c79e969048ae7facb9"
+      }
+    },
+    {
+      "id": "blue-glasses",
+      "name": "蓝衣眼镜",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 8,
+      "packageSha256": "0982454a5c4a0c55e52dc4c830c5de5b789acfa470973d2274747eae45739a2c",
+      "terminalSha256": {
+        "accusedCorrectly": "a6d343d709ea7ddbe660c803e6ce2a33e76448cfee681e408e935f96d3e8d997",
+        "accusedWrongly": "93cd3a84803e6c847c1a93ba28852a5aea3c061101aeea466ce58789a71128e3"
+      }
+    },
+    {
+      "id": "silver-bun",
+      "name": "银发盘发",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 8,
+      "packageSha256": "b0e246adb7722a1f9b079e015579dffff7a5fec55b329639dc359a1b6a0e68bd",
+      "terminalSha256": {
+        "accusedCorrectly": "3784dcd30dc7d3dabd717f5d6cadfb546c61cd9b3ce277f99aaa9f1914396ae9",
+        "accusedWrongly": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2"
+      }
+    },
+    {
+      "id": "salt-pepper-beard",
+      "name": "灰白胡须",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 7,
+      "packageSha256": "7efcd0fac2067d5fed1de4822fabb38fec7e47e29eb66dcef2231e4b702bbe63",
+      "terminalSha256": {
+        "accusedCorrectly": "81e399391d4034ee294f69129633192dc785bb017beb3b8e34a4941734092720",
+        "accusedWrongly": "3540982067063ffd217bd48c81be30e3199987e76414258eda4f1ac56ddb9442"
+      }
+    },
+    {
+      "id": "plum-crop",
+      "name": "紫衣短卷发",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 7,
+      "packageSha256": "ac4513455a6e2e40138eaf720a47ce030c57f674f5f4cfcd5c3817749cff892e",
+      "terminalSha256": {
+        "accusedCorrectly": "e2cd98ae59b427c28d30b769d0a3998c1904d22946e987a9fde48b46ea873722",
+        "accusedWrongly": "ee43ed473f1fe8c46f78eecf77b2ee77a8d87a161ea54c6dd5e5d6e66c6e8f2d"
+      }
+    },
+    {
+      "id": "mint-puffs",
+      "name": "薄荷双丸子",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 6,
+      "packageSha256": "6ea79c2f4ada90424247497392b02e98acbef264e6d62bbab525fb42fc8f63a6",
+      "terminalSha256": {
+        "accusedCorrectly": "8b72540ee5304da9d004f7abc572795ad3645c62524b9babfe78df1026061516",
+        "accusedWrongly": "67e3d234c9c3c8d9754839fcfa3afa6380682579f142983ef1aa6c5926d76293"
+      }
+    },
+    {
+      "id": "ochre-freckles",
+      "name": "赭黄雀斑",
+      "status": "passed",
+      "originalClipsAndParts": "unchanged",
+      "rigidSamples": 242,
+      "assets": 6,
+      "packageSha256": "3f02b70a576d24d82d14e1cbd72c798205092706ff983f35c6f288f1cce7ac3c",
+      "terminalSha256": {
+        "accusedCorrectly": "1b0b2d40cb15c44e88caf68c5bb06d50558f6f2d13d024f406fc345d0845d112",
+        "accusedWrongly": "ccfa00d59c99d28a8c493473afee0325eae6d5b40d26ec40af5e476f9052c356"
+      }
+    }
+  ]
+}

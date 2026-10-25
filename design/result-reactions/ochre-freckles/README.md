@@ -19,3 +19,8 @@ Node24 `--experimental-transform-types design/result-reactions/ochre-freckles/ch
 ## 服务协调
 
 本角色未启动服务或新tab。此前lane sunny私有5356服务 PID57333 / 原PTY79237 已因图片专项优先turn立即 Ctrl-C 停止（exit130），lsof确认无listener，自己的tab1已关闭。未动5355、8787、8788或他人tab。后续只用父协调的5355验收，不自行开新端口。sunny较早README写“临时保留”是停止前快照，本段记录覆盖其当前服务状态，不修改已交付sunny提交。
+
+
+## 发起者完成验收
+
+2026-10-25 父专项已在既有5355实际看原始/正确/错误端点及55%动作中段，检查头颈与袖手接缝；两张终态由正式Canvas renderer原生导出，末帧像素一致通过。当前已自行验收，可交主协调常规本地集成，不再处于上文历史pending状态。parent-mid.jpg、parent-end.jpg与generation-records.json保存证据。正式游戏接入另由组合UI验证，不将此素材验收冒充App集成。

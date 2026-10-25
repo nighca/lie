@@ -23,3 +23,8 @@ Silver and Plum native terminal exports, t=.30/.35 and .75 actual Canvas inspect
 Temporary Vite service consumer was only this lane's Silver/Plum QA. Worktree: `/Users/nighca/.codex/worktrees/result-reactions-lane-two/lie`; base above plus candidate changes. Port 5357, exact PID 53348, original PTY 99017, own IAB tab 1. Stopped using Ctrl-C in original PTY (exit 130), lsof confirmed no listener; tab closed. No service or tab retained. Early private preview missed required AbortSignal; it was corrected before either terminal export. No new port will be started; parent owns same-origin 5355 QA. Parent 5355 and launchd 8787/8788 were untouched.
 
 No main mutation, push, PR, shared contract, generator, preset activation or App/style changes. Imagegen skill followed; no Python raster editing (PIL only read dimensions/alpha/mime).
+
+
+## 发起者完成验收
+
+2026-10-25 父专项已在既有5355实际看原始/正确/错误端点及55%动作中段，检查头颈与袖手接缝；两张终态由正式Canvas renderer原生导出，末帧像素一致通过。当前已自行验收，可交主协调常规本地集成，不再处于上文历史pending状态。parent-mid.jpg、parent-end.jpg与generation-records.json保存证据。正式游戏接入另由组合UI验证，不将此素材验收冒充App集成。

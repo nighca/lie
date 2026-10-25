@@ -8,11 +8,27 @@
     "name": "阳光小胡子"
   },
   {
+    "id": "blue-glasses",
+    "name": "蓝衣眼镜"
+  },
+  {
     "id": "silver-bun",
     "name": "银发盘发"
   },
   {
+    "id": "salt-pepper-beard",
+    "name": "灰白胡须"
+  },
+  {
     "id": "plum-crop",
     "name": "紫衣短卷发"
+  },
+  {
+    "id": "mint-puffs",
+    "name": "薄荷双丸子"
+  },
+  {
+    "id": "ochre-freckles",
+    "name": "赭黄雀斑"
   }
 ]

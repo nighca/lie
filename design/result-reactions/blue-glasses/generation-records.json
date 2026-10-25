@@ -33,5 +33,46 @@
         255
       ]
     }
-  ]
+  ],
+  "parentAcceptance": {
+    "status": "self-accepted after actual Canvas endpoint and 55% motion review",
+    "reviewer": "initiator /root",
+    "nativeTerminalExport": "formal createCanvasRenderer at clip.duration from existing5355, browser PNG dataURL unmodified",
+    "motion": "clear rueful/questioning expressions; head/neck and shoulder/sleeve/palm joins checked, no size animation",
+    "service": "existing parent5355 PID1851 PTY55257; private tab61; no new listener"
+  },
+  "parentExportFiles": {
+    "accused-correctly.png": {
+      "format": "PNG",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "a6d343d709ea7ddbe660c803e6ce2a33e76448cfee681e408e935f96d3e8d997"
+    },
+    "accused-wrongly.png": {
+      "format": "PNG",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "93cd3a84803e6c847c1a93ba28852a5aea3c061101aeea466ce58789a71128e3"
+    },
+    "parent-mid.jpg": {
+      "format": "JPEG",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "5102e89a448036acce5ec682b61787798690c6a3f5b21f19decd0f6ef4d916b2"
+    },
+    "parent-end.jpg": {
+      "format": "JPEG",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "10aa1a2c1e72d42da8ec62d477060423bda7c995773171311f106f15b0f4987d"
+    }
+  }
 }

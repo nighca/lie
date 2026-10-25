@@ -79,5 +79,46 @@
     }
   },
   "design": "New result-only torso and independent arms share original default/speaking pixels. Full generated image only used through original head mask, original body pixels retained. No scale tracks or whole-person horizontal sway.",
-  "nextOwner": "Parent /root: same-origin5355 browser seams, native terminal export and final acceptance"
+  "nextOwner": "Parent /root: same-origin5355 browser seams, native terminal export and final acceptance",
+  "parentAcceptance": {
+    "status": "self-accepted after actual Canvas endpoint and 55% motion review",
+    "reviewer": "initiator /root",
+    "nativeTerminalExport": "formal createCanvasRenderer at clip.duration from existing5355, browser PNG dataURL unmodified",
+    "motion": "clear rueful/questioning expressions; head/neck and shoulder/sleeve/palm joins checked, no size animation",
+    "service": "existing parent5355 PID1851 PTY55257; private tab61; no new listener"
+  },
+  "parentExportFiles": {
+    "accused-correctly.png": {
+      "format": "PNG",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "8b72540ee5304da9d004f7abc572795ad3645c62524b9babfe78df1026061516"
+    },
+    "accused-wrongly.png": {
+      "format": "PNG",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "67e3d234c9c3c8d9754839fcfa3afa6380682579f142983ef1aa6c5926d76293"
+    },
+    "parent-mid.jpg": {
+      "format": "JPEG",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "f71b55e6380467622036564bd6241c13e9a7cf4dcdadfbc548936a5a93620e86"
+    },
+    "parent-end.jpg": {
+      "format": "JPEG",
+      "size": [
+        1280,
+        720
+      ],
+      "sha256": "e59471b5d5af83d9eea93610e5442a1c3e71ee6bbab596e80a09676de8067722"
+    }
+  }
 }
