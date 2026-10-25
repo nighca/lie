@@ -1,0 +1,26 @@
+{
+  "base": "5a9a31c26b1e8f7be57b4147c2886b785b052111",
+  "sources": [
+    {
+      "path": "apps/web/public/brand/logo.svg",
+      "sha256": "162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb"
+    },
+    {
+      "path": "apps/web/public/brand/underline.svg",
+      "sha256": "faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9"
+    },
+    {
+      "path": "design/character-presets/assets/sunny-moustache/default.png",
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/default.png",
+      "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe"
+    },
+    {
+      "path": "design/character-presets/assets/blue-glasses/default.png",
+      "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17"
+    }
+  ],
+  "context": "Existing preset images resized to 384px with macOS sips; static reconstructed layout rendered with QuickLook, not application screenshots."
+}
