@@ -1,0 +1,98 @@
+{
+  "source": "abb12dbf7a40689be593c2a1e580f23cfcc5611e",
+  "screenshots": [
+    {
+      "file": "01-correct-result-desktop.jpg",
+      "width": 1290,
+      "height": 986,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "02-narrow-game.jpg",
+      "width": 1280,
+      "height": 1067,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "03-budget-expired.jpg",
+      "width": 1280,
+      "height": 741,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "04-editor-long-title.jpg",
+      "width": 1280,
+      "height": 1067,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "05-intro-long-title.jpg",
+      "width": 1280,
+      "height": 1067,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "06-blocked-fallback.jpg",
+      "width": 1280,
+      "height": 741,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "07-duplicate-names.jpg",
+      "width": 1280,
+      "height": 741,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "08-preview-return-step.jpg",
+      "width": 1280,
+      "height": 1793,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "09-preset-reopen-no-recovery.jpg",
+      "width": 1280,
+      "height": 975,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "10-long-transcript.jpg",
+      "width": 1280,
+      "height": 741,
+      "format": "JPEG",
+      "edited": false
+    },
+    {
+      "file": "11-storage-restored.jpg",
+      "width": 1290,
+      "height": 986,
+      "format": "JPEG",
+      "edited": false
+    }
+  ],
+  "browser": "Codex in-app browser",
+  "service": {
+    "origin": "http://127.0.0.1:5544",
+    "pid": 14248,
+    "session": 26270,
+    "exitCode": 130,
+    "finalListenerCheck": "no LISTEN",
+    "finalPidCheck": "not present"
+  },
+  "storage": {
+    "key": "lie-editor-draft",
+    "original": "absent",
+    "backup": "same-tab sessionStorage, harness-owned key",
+    "restore": "exact equality checked before removing backup"
+  },
+  "provider": "demo only; gateway transport points to loopback port 9; no gateway launched"
+}

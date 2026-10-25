@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>Stable QA harness</title>
+<p id="status"></p><button id="backup">Backup editor draft</button><button id="restore">Restore editor draft</button><button id="desktop">1280 × 900</button><button id="narrow">391 × 1000</button><iframe id="app" src="/?demo=1" style="width:1280px;height:900px;border:1px solid #aaa"></iframe>
+<script>
+const key='lie-editor-draft', backupKey='lie-stable-qa-original-draft-20261025';
+const status=document.getElementById('status');
+function show(){status.textContent=sessionStorage.getItem(backupKey)===null?'No backup captured':'Backup captured; original '+(JSON.parse(sessionStorage.getItem(backupKey))===null?'absent':'present');}
+document.getElementById('backup').onclick=()=>{if(sessionStorage.getItem(backupKey)===null)sessionStorage.setItem(backupKey,JSON.stringify(localStorage.getItem(key)));show()};
+document.getElementById('restore').onclick=()=>{const backup=sessionStorage.getItem(backupKey);if(backup===null)return;const original=JSON.parse(backup);if(original===null)localStorage.removeItem(key);else localStorage.setItem(key,original);if(localStorage.getItem(key)!==original)throw Error('Restore mismatch');sessionStorage.removeItem(backupKey);status.textContent='Original draft restored exactly; QA backup removed';};
+document.getElementById('desktop').onclick=()=>{document.getElementById('app').style.width='1280px';document.getElementById('app').style.height='900px'};
+document.getElementById('narrow').onclick=()=>{document.getElementById('app').style.width='391px';document.getElementById('app').style.height='1000px'};
+show();
+</script>
