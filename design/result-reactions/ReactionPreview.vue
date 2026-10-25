@@ -16,8 +16,8 @@ function checkTerminals() {
 }
 const exports = ref<Record<string, string>>({})
 const panels: { state: ResultAnimationState; title: string; reaction: string; symbol: string; file: string }[] = [
-  { state: 'accusedCorrectly', title: '指认正确', reaction: '被看穿了，轻轻垂头、松肩。', symbol: '✓', file: 'accused-correctly' },
-  { state: 'accusedWrongly', title: '指认错误', reaction: '“我？”轻微歪头、抬手疑问。', symbol: '×', file: 'accused-wrongly' },
+  { state: 'accusedCorrectly', title: '指认正确', reaction: '“好吧，被你看穿了。”垂头、松肩。', symbol: '✓', file: 'accused-correctly' },
+  { state: 'accusedWrongly', title: '指认错误', reaction: '“我？！”挑眉、歪头、抬手疑问。', symbol: '×', file: 'accused-wrongly' },
 ]
 onMounted(async () => {
   const loaded = await loadAnimationPackage(new URL(src, location.href), new AbortController().signal)
@@ -35,7 +35,7 @@ onMounted(async () => {
 
 <template>
   <main>
-    <h1>珊瑚短发 · 结果反应样片</h1>
+    <h1>珊瑚短发 · 结果反应样片（加强版）</h1>
     <p>两种反应各播放一次后停住。此页验收人物表情与动作，正式结果页稍后接入。</p>
     <nav><button @click="version++">重播样片</button><label><input v-model="staticOnly" type="checkbox">只看静态终态</label></nav>
     <div class="panels">

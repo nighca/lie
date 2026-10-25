@@ -4,6 +4,75 @@
     {
       "id": "accused-correctly-head",
       "file": "design/result-reactions/coral-bob/parts/accused-correctly-head.png",
+      "source": "/Users/nighca/.codex/generated_images/01a16d44-aeea-7552-b184-5118072e75f3/exec-45f16c15-fb8c-4244-8b7f-4c6e7269a7ad.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "bounds": [
+        55,
+        42,
+        1188,
+        1039
+      ],
+      "sha256": "b76c16a2091d129eaaab9d9e6eea30d1bd6e9791ce31c2dfc5a2e64f0f10b121"
+    },
+    {
+      "id": "accused-wrongly-head",
+      "file": "design/result-reactions/coral-bob/parts/accused-wrongly-head.png",
+      "source": "/Users/nighca/.codex/generated_images/01a16d44-aeea-7552-b184-5118072e75f3/exec-7258420f-904d-4d16-b208-1aa8242fd848.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "bounds": [
+        76,
+        42,
+        1187,
+        1037
+      ],
+      "sha256": "084a335c07b05916117a67976821ec693f1594d12a23035e63ffb87d54dd9bdc"
+    }
+  ],
+  "originalPackageSha256": "f3f2321b98fbced68c606b3513e93c27756a3e3aa7380ed2067dcf49b41fb818",
+  "rendering": {
+    "originalParts": "11 byte-identical files reused",
+    "newHeadRegistration": {
+      "sourceCanvas": [
+        1254,
+        1254
+      ],
+      "crop": [
+        60,
+        35,
+        1150,
+        790
+      ],
+      "x": 291.8,
+      "y": 28.55,
+      "scaleX": 0.53,
+      "scaleY": 0.53
+    },
+    "terminalImages": "native Canvas renderer exports of clip end poses; no raster editing",
+    "sourcePromptIntent": {
+      "accused-correctly-head": "More expressive playful Ah, you caught me resignation: half-lidded downward/side gaze, one raised inner brow, larger legible crooked coral closed mouth. Preserve head silhouette, source canvas/registration, hair, skin, ink and transparency. No neck/body/text/symbols/tears.",
+      "accused-wrongly-head": "Livelier Me?! You must be mistaken questioning surprise: higher asymmetrical eyebrows, wider eyes, larger oval mouth with navy border and dark interior. Preserve exact head silhouette, hair, chin, ears, earrings, angle, colors, canvas and registration. No neck/body/text/symbols/sweat/tears."
+    }
+  },
+  "previousSources": [
+    {
+      "id": "accused-correctly-head",
+      "file": "design/result-reactions/coral-bob/parts/accused-correctly-head.png",
       "source": "/Users/nighca/.codex/generated_images/01a16d44-aeea-7552-b184-5118072e75f3/exec-d3972e37-33ac-4183-b40c-ac5a3103113a.png",
       "size": [
         1254,
@@ -44,29 +113,6 @@
       "sha256": "4871e31051e43bb7b2ec2be2b46a7240665a07d505dd401f1353326163428d2c"
     }
   ],
-  "originalPackageSha256": "f3f2321b98fbced68c606b3513e93c27756a3e3aa7380ed2067dcf49b41fb818",
-  "rendering": {
-    "originalParts": "11 byte-identical files reused",
-    "newHeadRegistration": {
-      "sourceCanvas": [
-        1254,
-        1254
-      ],
-      "crop": [
-        60,
-        35,
-        1150,
-        790
-      ],
-      "x": 291.8,
-      "y": 28.55,
-      "scaleX": 0.53,
-      "scaleY": 0.53
-    },
-    "terminalImages": "native Canvas renderer exports of clip end poses; no raster editing",
-    "sourcePromptIntent": {
-      "accused-correctly-head": "Preserve exact original identity/hair/head canvas; subtle rueful embarrassed resignation, closed coral mouth; no tears, villain expression, body or neck; transparent.",
-      "accused-wrongly-head": "Preserve exact original identity/hair/head canvas; restrained questioning eyebrow asymmetry, small parted coral mouth, me?; no rage, exaggerated shock, body or neck; transparent."
-    }
-  }
+  "revision": "User requested more expressive faces and slightly larger gestures; revision 2 pending review",
+  "tool": "built-in image_gen image edit; no fallback CLI"
 }

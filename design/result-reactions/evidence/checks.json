@@ -16,9 +16,9 @@
     "speak-fore": "5441a0ab98ef5ac282b6ce3e080632399128a94abda3d34100843f5dcb152ed4",
     "listening-arm": "93602222407a2f4c3db2e73e2e445abc819e2e2da7b6c1260e57d41e11d00e20",
     "waiting-arms": "2c8de0fc32d63d4c1ad8cf912119629ee6e62c15eb8e1adf90e922e7545246cc",
-    "accused-correctly-head": "4a40512e55d0761aaa3a8d5e40a7982bfcd937bdc09424ccd2c2f23d2a5d6852",
-    "accused-wrongly-head": "4871e31051e43bb7b2ec2be2b46a7240665a07d505dd401f1353326163428d2c",
-    "accused-correctly-terminal": "68d24be0316098897cb6bacced76d787976b9c143670c6ed4f33d88a605da5f6",
-    "accused-wrongly-terminal": "433ff3f9b870a6cc0668e7f0a5c0d6fdc2ad21164c96df2c49b603ebd71eceb9"
+    "accused-correctly-head": "b76c16a2091d129eaaab9d9e6eea30d1bd6e9791ce31c2dfc5a2e64f0f10b121",
+    "accused-wrongly-head": "084a335c07b05916117a67976821ec693f1594d12a23035e63ffb87d54dd9bdc",
+    "accused-correctly-terminal": "a0eb5e5078a73f9f264cd0af8ea3927e5fe574d08443437be04d085db1546647",
+    "accused-wrongly-terminal": "ff0020fbfe45a86fb1e9b442d42604b9ca4eca01bd257036676729bcf6abc567"
   }
 }
