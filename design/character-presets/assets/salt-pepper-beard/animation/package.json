@@ -47,6 +47,20 @@
       "visible": true
     },
     {
+      "id": "waiting-breath-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
       "id": "contact-root",
       "parent": "body-root",
       "transform": {
@@ -958,7 +972,7 @@
     },
     {
       "id": "contact-waiting",
-      "parent": "contact-root",
+      "parent": "waiting-breath-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -982,8 +996,72 @@
             380
           ],
           [
-            550,
-            420
+            497,
+            400
+          ],
+          [
+            482,
+            450
+          ],
+          [
+            472,
+            500
+          ],
+          [
+            447,
+            560
+          ],
+          [
+            427,
+            620
+          ],
+          [
+            437,
+            641
+          ],
+          [
+            452,
+            655
+          ],
+          [
+            475,
+            666
+          ],
+          [
+            500,
+            670
+          ],
+          [
+            523,
+            668
+          ],
+          [
+            531,
+            648
+          ],
+          [
+            538,
+            560
+          ],
+          [
+            558,
+            520
+          ],
+          [
+            583,
+            490
+          ],
+          [
+            598,
+            450
+          ],
+          [
+            613,
+            400
+          ],
+          [
+            608,
+            380
           ],
           [
             650,
@@ -1013,6 +1091,90 @@
       }
     },
     {
+      "id": "waiting-hand",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 9,
+        "mask": [
+          [
+            500,
+            350
+          ],
+          [
+            600,
+            345
+          ],
+          [
+            630,
+            385
+          ],
+          [
+            625,
+            430
+          ],
+          [
+            606,
+            470
+          ],
+          [
+            580,
+            510
+          ],
+          [
+            558,
+            560
+          ],
+          [
+            538,
+            600
+          ],
+          [
+            535,
+            645
+          ],
+          [
+            530,
+            690
+          ],
+          [
+            410,
+            690
+          ],
+          [
+            420,
+            620
+          ],
+          [
+            443,
+            560
+          ],
+          [
+            468,
+            500
+          ],
+          [
+            478,
+            450
+          ],
+          [
+            493,
+            400
+          ]
+        ]
+      }
+    },
+    {
       "id": "neck-waiting",
       "parent": "contact-root",
       "transform": {
@@ -1031,19 +1193,75 @@
         "mask": [
           [
             450,
-            320
+            310
           ],
           [
-            760,
-            320
+            724,
+            310
           ],
           [
-            780,
-            500
+            726,
+            330
+          ],
+          [
+            731,
+            350
+          ],
+          [
+            737,
+            355
+          ],
+          [
+            735,
+            365
+          ],
+          [
+            739,
+            370
+          ],
+          [
+            745,
+            380
+          ],
+          [
+            737,
+            390
+          ],
+          [
+            728,
+            400
+          ],
+          [
+            716,
+            410
+          ],
+          [
+            702,
+            420
+          ],
+          [
+            686,
+            430
+          ],
+          [
+            666,
+            440
+          ],
+          [
+            638,
+            450
+          ],
+          [
+            611,
+            460
+          ],
+          [
+            604,
+            470
           ],
           [
             500,
-            520
+            500
           ]
         ]
       }
@@ -1287,6 +1505,78 @@
           ]
         ]
       }
+    },
+    {
+      "id": "waiting-cuff-front",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 10,
+        "mask": [
+          [
+            410,
+            608
+          ],
+          [
+            420,
+            610
+          ],
+          [
+            430,
+            630
+          ],
+          [
+            445,
+            646
+          ],
+          [
+            465,
+            658
+          ],
+          [
+            490,
+            664
+          ],
+          [
+            510,
+            663
+          ],
+          [
+            525,
+            659
+          ],
+          [
+            531,
+            642
+          ],
+          [
+            550,
+            685
+          ],
+          [
+            550,
+            740
+          ],
+          [
+            390,
+            740
+          ],
+          [
+            390,
+            608
+          ]
+        ]
+      }
     }
   ],
   "clips": {
@@ -1307,10 +1597,12 @@
         "arm-right-listening": false,
         "body-waiting-lower": false,
         "contact-waiting": false,
+        "waiting-hand": false,
         "neck-waiting": false,
         "sleeve-speaking": false,
         "hem-speaking": false,
-        "arm-speaking": false
+        "arm-speaking": false,
+        "waiting-cuff-front": false
       },
       "tracks": [
         {
@@ -1494,10 +1786,12 @@
         "arm-right-listening": true,
         "body-waiting-lower": false,
         "contact-waiting": false,
+        "waiting-hand": false,
         "neck-waiting": false,
         "sleeve-speaking": false,
         "hem-speaking": false,
-        "arm-speaking": false
+        "arm-speaking": false,
+        "waiting-cuff-front": false
       },
       "tracks": [
         {
@@ -1681,27 +1975,14 @@
         "arm-right-listening": false,
         "body-waiting-lower": true,
         "contact-waiting": true,
+        "waiting-hand": true,
         "neck-waiting": true,
         "sleeve-speaking": false,
         "hem-speaking": false,
-        "arm-speaking": false
+        "arm-speaking": false,
+        "waiting-cuff-front": true
       },
       "tracks": [
-        {
-          "node": "contact-root",
-          "property": "y",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 915
-            },
-            {
-              "time": 4.8,
-              "value": 915
-            }
-          ]
-        },
         {
           "node": "contact-root",
           "property": "pivotY",
@@ -1709,86 +1990,92 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 915
+              "value": 420
             },
             {
               "time": 4.8,
-              "value": 915
+              "value": 420
             }
           ]
         },
         {
           "node": "contact-root",
-          "property": "scaleY",
+          "property": "y",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 1.0
-            },
-            {
-              "time": 0.3,
-              "value": 1.0022961
-            },
-            {
-              "time": 0.6,
-              "value": 1.00424264
-            },
-            {
-              "time": 0.8999999999999999,
-              "value": 1.00554328
+              "value": 420
             },
             {
               "time": 1.2,
-              "value": 1.006
-            },
-            {
-              "time": 1.5,
-              "value": 1.00554328
-            },
-            {
-              "time": 1.7999999999999998,
-              "value": 1.00424264
-            },
-            {
-              "time": 2.1,
-              "value": 1.0022961
+              "value": 419.4
             },
             {
               "time": 2.4,
-              "value": 1.0
-            },
-            {
-              "time": 2.6999999999999997,
-              "value": 0.9977039
-            },
-            {
-              "time": 3.0,
-              "value": 0.99575736
-            },
-            {
-              "time": 3.3,
-              "value": 0.99445672
+              "value": 420
             },
             {
               "time": 3.5999999999999996,
-              "value": 0.994
-            },
-            {
-              "time": 3.9,
-              "value": 0.99445672
-            },
-            {
-              "time": 4.2,
-              "value": 0.99575736
-            },
-            {
-              "time": 4.5,
-              "value": 0.9977039
+              "value": 420.8
             },
             {
               "time": 4.8,
-              "value": 1.0
+              "value": 420
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": 0.8
+            },
+            {
+              "time": 2.4,
+              "value": 0.15
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": -1
+            },
+            {
+              "time": 4.8,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "waiting-breath-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.2,
+              "value": -1.8
+            },
+            {
+              "time": 2.4,
+              "value": -0.2
+            },
+            {
+              "time": 3.5999999999999996,
+              "value": 1.5
+            },
+            {
+              "time": 4.8,
+              "value": 0
             }
           ]
         }
@@ -1811,10 +2098,12 @@
         "arm-right-listening": false,
         "body-waiting-lower": false,
         "contact-waiting": false,
+        "waiting-hand": false,
         "neck-waiting": false,
         "sleeve-speaking": true,
         "hem-speaking": true,
-        "arm-speaking": true
+        "arm-speaking": true,
+        "waiting-cuff-front": false
       },
       "tracks": [
         {
