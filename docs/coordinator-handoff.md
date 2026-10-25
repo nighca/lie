@@ -79,7 +79,7 @@
 
 ## 最新用户决定：暂停鉴权、授权推送
 
-2026-10-25用户明确邀请码/鉴权额外复杂度高，先暂缓实现；chat留待以后讨论，root先推进其他工作。已interrupt原实施agent并只授权其自有5544/tab安全收尾与完整暂停handoff，不继续开发/修复/测试/配置；全部WT/commits/dirty与已有必要证据保存，所有auth实现未main。新chat已通知暂停、不归档，以下早先“继续原整项/待接线”记录被本决定覆盖，不能凭其恢复。需用户明确重启才再实施，费用/provider/secret门禁不变。
+2026-10-25用户明确邀请码/鉴权额外复杂度高，先暂缓实现；chat留待以后讨论，root先推进其他工作。已interrupt原实施agent并只授权其自有5544/tab安全收尾与完整暂停handoff，不继续开发/修复/测试/配置；全部WT/commits/dirty与已有必要证据保存，所有auth实现未main。新chat已通知暂停、不归档，以下早先“继续原整项/待接线”记录被本决定覆盖，不能凭其恢复。需用户明确重启才再实施，费用/provider/secret门禁不变。 原owner完整暂停回执已审查并保存至[暂停归档](archive/2026-10-25/invite-access-paused/README.md)：父3ed266a、Gatewayb16dc18、Web00bf976，源码无dirty、源收件箱4文件untracked保留；最后5544原PTY52545已退出130且lsof无监听，自建tab已关，未触其他服务。auth源码不合，最后proxy未父review、最终全组合未测，保留三WT/refs及ignored材料，不能按已有测试自动恢复。
 
 用户另明确“推送吧，我看看效果”，root持唯一publication turn按AGENTS发布流程推送已main成果（含badge），现有CI包含自动部署步骤；不纳入auth或待验动画修订，不改远程历史、不强推。fetch/普通push真实结果另记，不能把本授权当已发布。
 
@@ -96,6 +96,8 @@
 已实际读取动画chat用户本轮原文：原8人继续集成；新问题另批处理，silver/salt/plum/mint/ochre waiting、mint default/listening幅度、ochre speaking头大小。动画专项最多2lane、只改各candidate，自验后5355供用户验收。**该新批必须用户确认后才单独PR**，是用户明确的局部例外；不现在开PR，不提前合main/游戏。已通知专项实际基线dd16638，保留在用final-two-character-game WT/5355，不把新问题当原8人阻塞。旧表中“尚未正式激活”已被本节取代。
 
 动画新批现明确**待用户验收**：A WT `animation-breathing-revision/lie`，branch `codex/animation-breathing-revision`，base772dfa5，有序5381633→85329b1→HEAD `c4881b3e21cb7967295545b259329c594bb9f85c`；B WT `animation-mint-ochre-revision/lie`，branch同WT名，basedd16638，有序6a5cf31→73a8420→bb5779e→HEAD `78031e87340fdc0a6d2ada6c8330c8fb17ddc038`。父证据WT `two-character-formal-qa/lie` branch `codex/animation-revision-parent-qa`，basedd16638→HEAD `1bf177ff2f1733fd240bc569fc3d8a785ffe4c1c`，包含14原生图/报告/preview-url.txt。root已实际核三WT/HEAD均clean，仅记录owner交付，不当root视觉通过；**这7个源提交及父证据提交都不得自动集成**，待用户确认后单独PR。保留三WT及source final-two72c4a93和5355：当前原PTY8486，默认页仍旧8人，tab47 query覆盖5修订，48/49由owner关闭。该回执取代旧5355 session82389采样，不按旧session发信号，不动预览或任意资源。
+
+**动画后续反馈覆盖旧“待验”状态**：用户否定增强候选强scaleY导致头部拉伸、与各角色其他动作风格不协调，要求按具体角色设计waiting；专项已撤回A c4881b3/B78031e8作为可验收候选，父证据1bf177f亦仅历史。仍2lane在各自candidate重做，原8人main不受影响；root已通知当前真实协调ID未换，旧7source/父证据不自动集成，新完成仍须用户确认后单独PR。
 
 邀请码核心修订已main772dfa5，实施owner invite_access_design含共享token/离线CLI、隔离Gateway/Web及5544本地QA/服务收尾。root保留package/lock所有权，coverage源47deba1已两轮独立review及root实际全diff审查并本地main e40a54f；邀请码新增Node测试test:access由root在鉴权最终候选集成时串行接npm test和CI，CI已用coverage不能仅改test主链而漏测。源码变动以各owner最终clean handoff为准，不重复派工或擅写其WT。
 

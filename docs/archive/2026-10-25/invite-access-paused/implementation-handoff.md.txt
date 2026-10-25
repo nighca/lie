@@ -1,0 +1,57 @@
+# 邀请码与访问鉴权：暂停保存
+
+2026-10-25，用户明确暂缓实施；本材料仅保存已有进度与必要证据，不授权恢复、集成实现或生产启用。owner `/root/invite_access_design`；root是唯一main集成者。现有设计及旧版归档已在main，本收件箱尚未commit，待root审查保存。没有继续开发/测试或新浏览器操作。
+
+## 保留代码
+
+共同original base：`772dfa5281bda039bbe3e248e4bc81ebcbdf2846`。
+
+- 父WT `/Users/nighca/.codex/worktrees/invite-access-design/lie`，`codex/invite-access-implementation`，HEAD `3ed266a62124a988a097dfb09406dd4d20c64a3f`。暂停前代码clean；本收件箱是安全收尾产生的唯一untracked资料，无源码dirty。
+- Gateway WT `/Users/nighca/.codex/worktrees/invite-access-gateway/lie`，`codex/invite-access-gateway`，HEAD `b16dc185c56f0cbba0e203466188d12a935de140`，clean；最后proxy测试尚未由父review/cherry-pick。
+- Web WT `/Users/nighca/.codex/worktrees/invite-access-web/lie`，`codex/invite-access-web`，HEAD `00bf9769c4ddc8f68809782c37dd9c46569dea90`，clean。
+
+父branch ordered commits：
+
+1. `80b8557672a671ab585f7bc31a99b17e1ff80619` shared/access/token与原生测试。
+2. `eb2ea3ab176bf05a32c6b6d75bf44d9455581742` scripts/invites离线CLI与测试。
+3. `3875846032ec568039fb179aa165d19cbcce04f5` shared decoder pinned Worker类型兼容。
+4. `c0b1c3f43ee293dfb1f2949f9000ed2df6739d3b` gateway访问实现，来源`076fdc3ffc12663de22df0813785a4338745ecb8`。
+5. `7fd76f8c104428a1d2fc0258886ee8254f91921c` Web入口，来源`5c4be6ea5d0be6caf3f5f978d9a44d54b7e987d4`。
+6. `da84420af1c2fc0b1c6ec86ee675065a1e697204` slow-load401回intro竞态修复，来源`00bf9769c4ddc8f68809782c37dd9c46569dea90`。
+7. `3ed266a62124a988a097dfb09406dd4d20c64a3f` cf text binding显式启动配置，来源`be0a39b214383eeb114a3d333447475fa913dcd5`。
+
+Gateway其他依赖副本`016d45d45d1b1282026c5826d9ba8a8e9b578afc`/`e807f8a70f6c5ddd7004acbc508eef451ee90f43`对应父80/387；`c84d78dbac4755860b7e9f8e8c13998253804f10`对应父7fd。以后若明确恢复，勿把这些重复播放；本轮不恢复。
+
+文件ownership：父shared/access、scripts/invites与此保存材料；Gateway仅gateway access/index/config/README/tests；Web仅apps/web gate/相关应用接线/Vite/tests/style。没有改root package/lock、game-core、玩法或角色资源，没有main/push/部署。
+
+## 已有验证的准确范围
+
+- 父Node24.22.1执行 `node --test shared/access/token.test.ts scripts/invites.test.mjs`：7测试PASS，含独立Node createHmac签名输入向量；没有真实key/token入库。
+- 父组合后Gateway19 tests/2files及gateway/script tsc PASS；当时包含真实workerd既有WS跨exp仍echo、新WS401、握手跨exp清上游、无资格零上游、Cookie/同源/请求上限和缓存回归。
+- 父组合Web210tests/19files、Web typecheck、production Web+gateway build及79资源检查PASS（生产构建在最后config修复前）。父实际review了Web slow-load问题并由子agent增量修复。
+- 最后config修复的3项factory测试、Gateway tsc由子agent实际通过；父实际dev启动确认GET access/status从错误503变为required。最终全组合没有再次全检。
+- Gateway子agent交最后proxy1测试PASS：实际Web Vite配置+Node HTTP bridge真实handleAccess，保留Host/Origin/Cookie、Set-Cookie往返、伪Origin403；两个ephemeral监听finally关闭。父尚未review/pick，不冒充workerd+浏览器完整代理联测。
+- 根test主链及CI auth测试接线尚未做，由root保留root package/lock/CI所有权；现CI coverage流程不能假定已包含新增Node7测试。
+
+## 浏览器事实与必要截图
+
+IAB创建明确返回 `Browser is not available: iab`；一次inventory仅Chrome可用。root明确授权有界fallback；新建Chrome tab `1910329530`，仅本地5544，未动用户tab、全局viewport、mic或provider。
+
+实际通过：首页/官方介绍匿名；官方开局门槛；无效码提示、回车提交、输入清空；有效码兑换后真正进入调查；CDP只读确认本地`lie_access_dev`为host-only、Path=/、HttpOnly、SameSite=Strict、Secure=false；刷新后无需重输即可新开局。仅清理该测试Cookie，未打印其值或其他Cookie。
+
+实际分享：独立虚构分享标题可匿名打开；开局门槛/已签过期码提示正确；取消后完整fragment不变。实际编辑器：匿名新建本轮独立虚构草稿可保存/预览，接案仍需码；取消返回后草稿存在。没有调用语音按钮。
+
+[无效码桌面](evidence/invalid.png)、[有效码开局](evidence/granted.png)、[窄屏iframe](evidence/narrow-iframe.png)均为原生PNG并已目视；截图中无凭证。窄屏为同源391×844 iframe，dialog rect left20/right371/width351，document clientWidth/scrollWidth均391，按钮可见且Escape取消通过；不是顶层移动设备/触摸或IAB验收。
+
+未测：真实浏览器HTTPS生产Secure Cookie、浏览器禁Cookie、真实provider/mic、真实多人隔离、IAB。最后proxy只为子agent自动化结果，固定8787/8788未动。不得把以上fake/workerd或UI入口当liveprovider。
+
+本轮创建的5544虚构草稿`邀请码编辑器试玩验证`留在该origin浏览器存储；为遵守暂停“不删草稿”，已取消清除对话框，没有删除。未保存或恢复任何旧局。
+
+## 安全收尾与保留项
+
+- 5544消费者为本轮邀请码QA；源码父branch当时HEAD3ed266a。第一服务原PTY59002、观察PID94680，因inline text配置不生效已原PTY Ctrl-C退出130并核无监听；第二服务原PTY52545、观察PID16632，显式非敏感启动flags后成功。暂停收尾再次向52545 Ctrl-C，实际退出130，随后lsof5544无监听。未用kill/批杀；打断过的一次ps/停服调用结果不作为关闭依据，以本次明确PTY退出和lsof为准。
+- 自建Chrome tab1910329530在暂停前已实际close；无viewport override。没有其他自建待清tab或后台服务，两个子agent已completed，没有唤醒继续同项。
+- 自有ignored `apps/gateway/.dev.vars`保留原处，只有独立测试配置/开发key，没有provider或生产材料；不输出、不配置8787/8788/5355。临时私密目录`/private/tmp/lie-invite-access-qa-UlhR5z`及指针`/private/tmp/lie-invite-access-qa-directory`保留，含测试key/invite/UI fixtures；不得提交/传播其中凭证。临时iframe壳`apps/web/dist/invite-access-qa.html`（ignored构建输出）保留，不删除在制文件。
+- build/node_modules/.cloudflare缓存仍ignored，不是设计唯一证据；必要截图已复制本收件箱。现行设计与旧完整设计原文保持原位/既有archive。
+
+后续仅等待用户重新明确启动；不能因为代码已有commit、测试通过或专项chat保留而自动恢复。root可审查归档本保存材料，但暂停代码不代表已获main集成/上线许可。

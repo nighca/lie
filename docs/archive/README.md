@@ -13,6 +13,7 @@
 | 决策与完成证据 | [历史索引](../history/README.md)、[当前计划与门禁](../project-plan.md) |
 | 归档补存 | [2026-10-25盘点、原文与待交付范围](2026-10-25/README.md) |
 | 历史提交与chat补查 | [第二轮31份中间版本、chat范围及旧dirty映射](2026-10-25/history-followup/README.md) |
+| 暂停实现保存 | [邀请码完整暂停handoff、来源与三张必要截图](2026-10-25/invite-access-paused/README.md)，代码未合入，恢复须用户明确重启。 |
 | 专项历史补交 | [动画研究README、来源与失败证据](2026-10-25/animation-history-followup/README.md)；[编辑器原型与聊天设计回收](../archive-inbox/editor-history-2026-10-25/README.md)；[调查页、品牌与移动端历史设计](../archive-inbox/investigation-visual-history/README.md) |
 
 完成交付时，作者列出文档、必要附件及未完成草稿；标注日期、来源、提案/已批准/已否决/被替代/未验证状态和替代关系。发起者实际review并集成默认分支，确认文档可追溯后再清理worktree。进行中的材料仍由原owner完整交付。

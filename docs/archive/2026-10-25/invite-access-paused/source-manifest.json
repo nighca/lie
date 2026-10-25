@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-25",
+  "status": "paused-unintegrated-implementation",
+  "owner": "/root/invite_access_design",
+  "sourceHead": "3ed266a62124a988a097dfb09406dd4d20c64a3f",
+  "sourceDirectory": "/Users/nighca/.codex/worktrees/invite-access-design/lie/docs/archive-inbox/invite-access-paused-2026-10-25",
+  "files": [
+    {
+      "source": "README.md",
+      "stored": "implementation-handoff.md.txt",
+      "sha256": "aa7727fc96c78f8ca27181f422b3bdea232b48eef15dd41a488b86dfa3712dc1"
+    },
+    {
+      "source": "evidence/invalid.png",
+      "stored": "evidence/invalid.png",
+      "sha256": "d411a1f8de5fad8f1f3d4ef8c899872b8c676f8dce6d58625fd1c171fd84366a"
+    },
+    {
+      "source": "evidence/granted.png",
+      "stored": "evidence/granted.png",
+      "sha256": "eea8b5041a5dfddcfee58c1b2f199e9d5ca9f2f73d67664a56507a5fbeb12a43"
+    },
+    {
+      "source": "evidence/narrow-iframe.png",
+      "stored": "evidence/narrow-iframe.png",
+      "sha256": "960c6f9f483d3c3cc3b14438bbe9cc5549bf94613c855bf6fc3fe86d7b7b4fe3"
+    }
+  ]
+}
