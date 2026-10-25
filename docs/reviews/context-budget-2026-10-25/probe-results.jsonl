@@ -1,0 +1,9 @@
+{"kind":"normal","characters":3,"contentBytes":395,"shareUrlCharacters":364,"contextJsonBytes":785,"wireBytes":929,"deduplicatedWireBytes":868}
+{"kind":"large","characters":3,"contentBytes":36383,"shareUrlCharacters":476,"contextJsonBytes":72761,"wireBytes":72905,"deduplicatedWireBytes":36856}
+{"kind":"history-growth","entries":40,"charactersPerEntry":600,"wireBytes":76208,"allHistoryRetained":true}
+{"kind":"escaping","text":"人","jsLength":1,"textBytes":3,"wireBytes":117,"wireBytesWithLongId":418}
+{"kind":"escaping","text":"\"","jsLength":1,"textBytes":1,"wireBytes":116,"wireBytesWithLongId":417}
+{"kind":"escaping","text":"\\","jsLength":1,"textBytes":1,"wireBytes":116,"wireBytesWithLongId":417}
+{"kind":"escaping","text":"\n","jsLength":1,"textBytes":1,"wireBytes":116,"wireBytesWithLongId":417}
+{"kind":"wire-boundary","wireBytes":65536,"forwarded":1,"closeCodes":[1000]}
+{"kind":"wire-boundary","wireBytes":65537,"forwarded":0,"closeCodes":[1009]}
