@@ -3,7 +3,7 @@ import { computed, onUnmounted, ref, watch } from 'vue'
 import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
 
 import type { GameController } from './application/controller'
-import { splitBackgroundCharacterNames } from './presentation/backgroundCharacterNames'
+import CharacterNameText from './presentation/CharacterNameText.vue'
 import type { CharacterPreset } from './presentation/characterPresets'
 
 const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; allowRemix?: boolean; returnLabel?: string }>(), { allowRemix: true, returnLabel: '返回案件列表' })
@@ -21,10 +21,10 @@ onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
 const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)
 const currentCharacterPreset = computed(() => characterPreset(current.value?.appearanceId ?? null))
-const backgroundParts = computed(() => splitBackgroundCharacterNames(view.value.background, view.value.characters.map((character) => ({
+const characterNames = computed(() => view.value.characters.map((character) => ({
   name: character.name,
   accent: characterPreset(character.appearanceId)?.accent ?? null,
-}))))
+})))
 const resultCharacter = computed(() => view.value.characters.find((character) => character.id === view.value.result?.characterId) ?? null)
 const resultCharacterPreset = computed(() => characterPreset(resultCharacter.value?.appearanceId ?? null))
 const resultPortrait = computed(() => {
@@ -109,7 +109,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     <main v-else-if="view.phase === 'intro'" class="intro-card surface">
       <p class="eyebrow">一桩小谜题，几位有话说的人</p>
       <h1 class="case-title lie-handwritten-underline">{{ view.title }}</h1>
-      <p class="background"><template v-for="(part, index) in backgroundParts" :key="index"><mark v-if="part.highlighted" class="background-character-name" :style="part.accent == null ? null : { '--background-name-accent': part.accent }">{{ part.text }}</mark><template v-else>{{ part.text }}</template></template></p>
+      <p class="background"><CharacterNameText :text="view.background" :characters="characterNames" /></p>
       <div class="intro-characters" :class="{ 'intro-characters--many': view.characters.length > 5 }">
         <div v-for="(character, index) in view.characters" :key="character.id" class="intro-character" tabindex="0" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }">
           <span v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" class="avatar-frame">
@@ -144,7 +144,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           </div>
         </section>
         <section class="conversation-copy">
-          <h2>{{ current == null ? '询问记录' : `${current.name}的询问记录` }}</h2>
+          <h2><template v-if="current != null"><CharacterNameText :text="current.name" :characters="characterNames" />的询问记录</template><template v-else>询问记录</template></h2>
           <Transcript :key="view.currentCharacterId ?? ''" :messages="transcript" :animate="view.conversationActive && !view.busy" />
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
@@ -169,7 +169,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <figcaption><span>你指认了</span><strong>{{ resultCharacter.name }}</strong></figcaption>
         </figure>
         <section v-if="view.phase === 'solved'" class="result-story" aria-label="完整经过">
-          <h2>完整经过</h2><p v-for="(paragraph, index) in resultParagraphs" :key="index">{{ paragraph }}</p>
+          <h2>完整经过</h2><p v-for="(paragraph, index) in resultParagraphs" :key="index"><CharacterNameText :text="paragraph" :characters="characterNames" /></p>
         </section>
         <section v-else class="result-story" aria-label="调查结果">
           <h2>这次调查已结束</h2><p>想再试一次，请重新开始一局。</p>
@@ -188,7 +188,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     </main>
 
     <UiDialog class="background-dialog" :open="backgroundOpen && view.phase === 'interrogating'" :title="view.title" @close="backgroundOpen = false">
-      <p class="public-background"><template v-for="(part, index) in backgroundParts" :key="index"><mark v-if="part.highlighted" class="background-character-name" :style="part.accent == null ? null : { '--background-name-accent': part.accent }">{{ part.text }}</mark><template v-else>{{ part.text }}</template></template></p>
+      <p class="public-background"><CharacterNameText :text="view.background" :characters="characterNames" /></p>
       <template #actions><UiButton @click="backgroundOpen = false">继续调查</UiButton></template>
     </UiDialog>
     <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="我有答案了" @close="controller.closeAccusation()">
@@ -198,7 +198,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         <button v-for="(character, index) in view.characters" :key="character.id" type="button" class="intro-character accusation-character" :aria-label="`指认 ${character.name}`" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.accuse(character.id)">
           <span v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" class="avatar-frame"><img :src="characterPreset(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(characterPreset(character.appearanceId)!.avatar)"></span>
           <span v-else class="initial-avatar">{{ character.name.slice(0, 1) }}</span>
-          <strong>指认 {{ character.name }}</strong>
+          <strong>指认 <CharacterNameText :text="character.name" :characters="characterNames" /></strong>
         </button>
       </div>
       <template #actions><UiButton variant="secondary" @click="controller.closeAccusation()">返回调查</UiButton></template>

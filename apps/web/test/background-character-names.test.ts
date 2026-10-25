@@ -38,7 +38,7 @@ describe('public background character names', () => {
     expect(opening.findAll('mark').map((mark) => mark.text())).toEqual(['沈禾', '顾遥', '顾遥', '沈禾'])
     controller.start(); await controller.startConversation()
     turns[0].scope.onEvent({ type: 'userText', text: '沈禾和顾遥在一起吗？' }); await wrapper.vm.$nextTick()
-    expect(wrapper.get('.conversation-copy').find('mark').exists()).toBe(false)
+    expect(wrapper.get('.conversation-copy [role=log]').find('mark').exists()).toBe(false)
     await wrapper.get('[aria-label="查看案件背景"]').trigger('click')
     const modal = wrapper.get('.background-dialog')
     expect(modal.get('.public-background').element.textContent).toBe(content.background)
@@ -50,14 +50,13 @@ describe('public background character names', () => {
     await modal.get('footer button').trigger('click')
     expect(controller.getView().conversationActive).toBe(false)
     controller.openAccusation(); controller.accuse('one'); await wrapper.vm.$nextTick()
-    expect(wrapper.get('.result-story').find('mark').exists()).toBe(false)
     expect(content.background).toBe('  沈禾把白盒给顾遥。\n顾遥又问沈禾；  旁人并不在场。\n')
   })
 
   it('uses neutral marks without presets and responds to arriving, updated and removed themes', async () => {
     const { controller, wrapper } = createScene(content, [])
     await controller.load('test'); await wrapper.vm.$nextTick()
-    const accents = () => wrapper.get('.background').findAll('mark').map((mark) => (mark.element as HTMLElement).style.getPropertyValue('--background-name-accent'))
+    const accents = () => wrapper.get('.background').findAll('mark').map((mark) => (mark.element as HTMLElement).style.getPropertyValue('--character-name-accent'))
     expect(accents()).toEqual(['', '', '', ''])
     await wrapper.setProps({ characterPresets: presets })
     expect(accents()).toEqual(['#ffcf43', '#ff665b', '#ff665b', '#ffcf43'])
@@ -72,7 +71,7 @@ describe('public background character names', () => {
     const source = { ...content, background: '沈禾和沈禾。', characters: content.characters.map((person) => ({ ...person, name: '沈禾' })) }
     const { controller, wrapper } = createScene(source)
     await controller.load('test'); await wrapper.vm.$nextTick()
-    const accents = () => wrapper.get('.background').findAll('mark').map((mark) => (mark.element as HTMLElement).style.getPropertyValue('--background-name-accent'))
+    const accents = () => wrapper.get('.background').findAll('mark').map((mark) => (mark.element as HTMLElement).style.getPropertyValue('--character-name-accent'))
     expect(accents()).toEqual(['', ''])
     await wrapper.setProps({ characterPresets: [presets[0]] })
     expect(accents()).toEqual(['', ''])
