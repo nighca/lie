@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: only the exact same-origin voice path is correlated; raw URLs and IDs are not persisted
+ok 1 - only the exact same-origin voice path is correlated; raw URLs and IDs are not persisted
+  ---
+  duration_ms: 1.977083
+  type: 'test'
+  ...
+# Subtest: handshake classification reads no request or response headers
+ok 2 - handshake classification reads no request or response headers
+  ---
+  duration_ms: 1.342875
+  type: 'test'
+  ...
+# Subtest: frame errors preserve only finite categories and bounded status or net error codes
+ok 3 - frame errors preserve only finite categories and bounded status or net error codes
+  ---
+  duration_ms: 0.973833
+  type: 'test'
+  ...
+# Subtest: loading failure carries only correlated network code, blocked reason and cancellation boolean
+ok 4 - loading failure carries only correlated network code, blocked reason and cancellation boolean
+  ---
+  duration_ms: 0.326375
+  type: 'test'
+  ...
+# Subtest: not-ready never asks a question; cleanup cannot replace the primary failure; reuse never starts again
+ok 5 - not-ready never asks a question; cleanup cannot replace the primary failure; reuse never starts again
+  ---
+  duration_ms: 0.277
+  type: 'test'
+  ...
+# Subtest: the first thrown cause is preserved locally even when cleanup also fails, with no raw error serialization
+ok 6 - the first thrown cause is preserved locally even when cleanup also fails, with no raw error serialization
+  ---
+  duration_ms: 0.078875
+  type: 'test'
+  ...
+# Subtest: success, incomplete answer and cleanup-only error are distinct; each path cleans once
+ok 7 - success, incomplete answer and cleanup-only error are distinct; each path cleans once
+  ---
+  duration_ms: 0.137916
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 59.892958
