@@ -77,6 +77,12 @@
 
 覆盖率与双语README badge已本地main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`，root完整13files与计数/原始报告/SFC上下文实际review，候选与source47deba1覆盖源码/collector/依赖完全相同，复用clean4f5ba19真实388测试采样及两轮独立review；独立3脚本语法/45文件分母/SVG及快照逐字/链接通过。应用lines92.08%（1501/1630）、Node脚本91.32%（263/288）另报；[范围/命令与Vue映射限制](coverage/README.md)公开。CI上传14天artifact，不自动改trackedbadge，远程CI未运行，未push/部署；不重做已完成调查/采样。
 
+## 最新发布与结果页设计授权
+
+用户授权的普通push已成功：远端32d89bf快进到 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，ls-remote实返该SHA，本地同SHA且clean。发布完整预检在独立publication-readiness WT通过388项测试、全types、Web/gateway build、8/8动画89assets+manifest90文件；fresh coverage发现生成清单晚于discovery的入口缺陷，唯一fix源fad5d862已实际review后cherry为abb12db。root比对应用/collector/依赖/CI/正式资源身份相同，后续暂停/归档docs不影响验证。CI已触发并委派只读跟进，未确认其结果前不称新部署成功；[发布记录](history/2026-10-25/coverage-publication.md)说明边界。
+
+结果页设计此前send_message自动审批拒绝（认为缺少明确用户授权），未绕过。用户随后明确选中该拒绝说明并回复“重试一下，我来了”，据此重试向调查视觉专项01a16d5c-de69-7452-8d6a-280d15a87e9e分派成功，紧凑状态实际已开始。仅设计文档/现有素材HTML原型，新paths design/result-scene-proposal/**、docs/result-scene-visual-proposal.md，基abb12db；桌面/391及必要5507 QA/用后停由专项整项承担。root做实际review，应用实现/新素材/契约仍待用户确认，不能据本设计任务开工；auth暂停、新动画修订门禁不变。
+
 ## 最新用户决定：暂停鉴权、授权推送
 
 2026-10-25用户明确邀请码/鉴权额外复杂度高，先暂缓实现；chat留待以后讨论，root先推进其他工作。已interrupt原实施agent并只授权其自有5544/tab安全收尾与完整暂停handoff，不继续开发/修复/测试/配置；全部WT/commits/dirty与已有必要证据保存，所有auth实现未main。新chat已通知暂停、不归档，以下早先“继续原整项/待接线”记录被本决定覆盖，不能凭其恢复。需用户明确重启才再实施，费用/provider/secret门禁不变。 原owner完整暂停回执已审查并保存至[暂停归档](archive/2026-10-25/invite-access-paused/README.md)：父3ed266a、Gatewayb16dc18、Web00bf976，源码无dirty、源收件箱4文件untracked保留；最后5544原PTY52545已退出130且lsof无监听，自建tab已关，未触其他服务。auth源码不合，最后proxy未父review、最终全组合未测，保留三WT/refs及ignored材料，不能按已有测试自动恢复。
