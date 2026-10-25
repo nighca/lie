@@ -32,9 +32,23 @@
       "parent": null,
       "transform": {
         "x": 650,
-        "y": 866,
+        "y": 862,
         "pivotX": 650,
         "pivotY": 850,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "chest-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
         "rotation": 0,
         "scaleX": 1,
         "scaleY": 1
@@ -249,7 +263,7 @@
     },
     {
       "id": "listening-body",
-      "parent": "head-root",
+      "parent": "chest-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -265,7 +279,7 @@
         "order": 10,
         "mask": [
           [
-            0,
+            540,
             415
           ],
           [
@@ -274,11 +288,39 @@
           ],
           [
             1254,
-            1254
+            866
           ],
           [
             0,
-            1254
+            866
+          ],
+          [
+            0,
+            750
+          ],
+          [
+            500,
+            750
+          ],
+          [
+            496,
+            700
+          ],
+          [
+            503,
+            660
+          ],
+          [
+            500,
+            650
+          ],
+          [
+            500,
+            620
+          ],
+          [
+            535,
+            550
           ]
         ],
         "crop": [
@@ -348,22 +390,66 @@
           ],
           [
             580,
-            540
+            500
           ],
           [
-            330,
+            540,
+            565
+          ],
+          [
+            510,
             650
           ],
           [
-            270,
-            630
+            503,
+            660
           ],
           [
-            340,
-            475
+            498,
+            670
           ],
           [
-            390,
+            494,
+            680
+          ],
+          [
+            490,
+            690
+          ],
+          [
+            484,
+            700
+          ],
+          [
+            475,
+            710
+          ],
+          [
+            462,
+            720
+          ],
+          [
+            450,
+            730
+          ],
+          [
+            440,
+            740
+          ],
+          [
+            250,
+            760
+          ],
+          [
+            250,
+            580
+          ],
+          [
+            330,
+            470
+          ],
+          [
+            368,
             415
           ]
         ]
@@ -371,7 +457,7 @@
     },
     {
       "id": "waiting-body",
-      "parent": "head-root",
+      "parent": "chest-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -387,7 +473,7 @@
         "order": 10,
         "mask": [
           [
-            0,
+            705,
             415
           ],
           [
@@ -396,11 +482,39 @@
           ],
           [
             1254,
-            1254
+            866
           ],
           [
             0,
-            1254
+            866
+          ],
+          [
+            0,
+            740
+          ],
+          [
+            510,
+            740
+          ],
+          [
+            610,
+            735
+          ],
+          [
+            635,
+            700
+          ],
+          [
+            640,
+            650
+          ],
+          [
+            670,
+            530
+          ],
+          [
+            705,
+            480
           ]
         ],
         "crop": [
@@ -522,6 +636,110 @@
           ]
         ]
       }
+    },
+    {
+      "id": "waiting-arm-contact",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 42,
+        "mask": [
+          [
+            565,
+            335
+          ],
+          [
+            710,
+            335
+          ],
+          [
+            710,
+            480
+          ],
+          [
+            675,
+            530
+          ],
+          [
+            645,
+            650
+          ],
+          [
+            640,
+            720
+          ],
+          [
+            620,
+            780
+          ],
+          [
+            500,
+            810
+          ],
+          [
+            350,
+            810
+          ],
+          [
+            350,
+            420
+          ],
+          [
+            560,
+            420
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-support",
+      "parent": "chest-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 45,
+        "mask": [
+          [
+            450,
+            750
+          ],
+          [
+            795,
+            750
+          ],
+          [
+            835,
+            885
+          ],
+          [
+            480,
+            885
+          ],
+          [
+            440,
+            835
+          ]
+        ]
+      }
     }
   ],
   "clips": {
@@ -537,6 +755,8 @@
         "waiting-lower": false,
         "chin-contact": false,
         "speaking-body": false,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
         "mouth-closed": true,
         "mouth-open": false
       },
@@ -548,71 +768,71 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.25,
-              "value": 867.913417
+              "value": 863.913417
             },
             {
               "time": 0.5,
-              "value": 869.535534
+              "value": 865.535534
             },
             {
               "time": 0.75,
-              "value": 870.619398
+              "value": 866.619398
             },
             {
               "time": 1.0,
-              "value": 871.0
+              "value": 867.0
             },
             {
               "time": 1.25,
-              "value": 870.619398
+              "value": 866.619398
             },
             {
               "time": 1.5,
-              "value": 869.535534
+              "value": 865.535534
             },
             {
               "time": 1.75,
-              "value": 867.913417
+              "value": 863.913417
             },
             {
               "time": 2.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.25,
-              "value": 864.086583
+              "value": 860.086583
             },
             {
               "time": 2.5,
-              "value": 862.464466
+              "value": 858.464466
             },
             {
               "time": 2.75,
-              "value": 861.380602
+              "value": 857.380602
             },
             {
               "time": 3.0,
-              "value": 861.0
+              "value": 857.0
             },
             {
               "time": 3.25,
-              "value": 861.380602
+              "value": 857.380602
             },
             {
               "time": 3.5,
-              "value": 862.464466
+              "value": 858.464466
             },
             {
               "time": 3.75,
-              "value": 864.086583
+              "value": 860.086583
             },
             {
               "time": 4.0,
-              "value": 866.0
+              "value": 862.0
             }
           ]
         },
@@ -780,6 +1000,8 @@
         "waiting-lower": false,
         "chin-contact": false,
         "speaking-body": false,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
         "mouth-closed": true,
         "mouth-open": false
       },
@@ -791,71 +1013,146 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 4.0,
-              "value": 866.0
+              "value": 862.0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0.0
+            },
+            {
+              "time": 0.25,
+              "value": 0.401818
+            },
+            {
+              "time": 0.5,
+              "value": 0.742462
+            },
+            {
+              "time": 0.75,
+              "value": 0.970074
+            },
+            {
+              "time": 1.0,
+              "value": 1.05
+            },
+            {
+              "time": 1.25,
+              "value": 0.970074
+            },
+            {
+              "time": 1.5,
+              "value": 0.742462
+            },
+            {
+              "time": 1.75,
+              "value": 0.401818
+            },
+            {
+              "time": 2.0,
+              "value": 0.0
+            },
+            {
+              "time": 2.25,
+              "value": -0.401818
+            },
+            {
+              "time": 2.5,
+              "value": -0.742462
+            },
+            {
+              "time": 2.75,
+              "value": -0.970074
+            },
+            {
+              "time": 3.0,
+              "value": -1.05
+            },
+            {
+              "time": 3.25,
+              "value": -0.970074
+            },
+            {
+              "time": 3.5,
+              "value": -0.742462
+            },
+            {
+              "time": 3.75,
+              "value": -0.401818
+            },
+            {
+              "time": 4.0,
+              "value": -0.0
             }
           ]
         },
@@ -866,221 +1163,146 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 858.0
+              "value": 445.0
             },
             {
               "time": 0.25,
-              "value": 858.0
+              "value": 445.306147
             },
             {
               "time": 0.5,
-              "value": 858.0
+              "value": 445.565685
             },
             {
               "time": 0.75,
-              "value": 858.0
+              "value": 445.739104
             },
             {
               "time": 1.0,
-              "value": 858.0
+              "value": 445.8
             },
             {
               "time": 1.25,
-              "value": 858.0
+              "value": 445.739104
             },
             {
               "time": 1.5,
-              "value": 858.0
+              "value": 445.565685
             },
             {
               "time": 1.75,
-              "value": 858.0
+              "value": 445.306147
             },
             {
               "time": 2.0,
-              "value": 858.0
+              "value": 445.0
             },
             {
               "time": 2.25,
-              "value": 858.0
+              "value": 444.693853
             },
             {
               "time": 2.5,
-              "value": 858.0
+              "value": 444.434315
             },
             {
               "time": 2.75,
-              "value": 858.0
+              "value": 444.260896
             },
             {
               "time": 3.0,
-              "value": 858.0
+              "value": 444.2
             },
             {
               "time": 3.25,
-              "value": 858.0
+              "value": 444.260896
             },
             {
               "time": 3.5,
-              "value": 858.0
+              "value": 444.434315
             },
             {
               "time": 3.75,
-              "value": 858.0
+              "value": 444.693853
             },
             {
               "time": 4.0,
-              "value": 858.0
+              "value": 445.0
             }
           ]
         },
         {
-          "node": "head-root",
-          "property": "pivotY",
+          "node": "chest-root",
+          "property": "y",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 858.0
+              "value": 1.2
             },
             {
               "time": 0.25,
-              "value": 858.0
+              "value": 1.108655
             },
             {
               "time": 0.5,
-              "value": 858.0
+              "value": 0.848528
             },
             {
               "time": 0.75,
-              "value": 858.0
+              "value": 0.45922
             },
             {
               "time": 1.0,
-              "value": 858.0
+              "value": 0.0
             },
             {
               "time": 1.25,
-              "value": 858.0
+              "value": -0.45922
             },
             {
               "time": 1.5,
-              "value": 858.0
+              "value": -0.848528
             },
             {
               "time": 1.75,
-              "value": 858.0
+              "value": -1.108655
             },
             {
               "time": 2.0,
-              "value": 858.0
+              "value": -1.2
             },
             {
               "time": 2.25,
-              "value": 858.0
+              "value": -1.108655
             },
             {
               "time": 2.5,
-              "value": 858.0
+              "value": -0.848528
             },
             {
               "time": 2.75,
-              "value": 858.0
+              "value": -0.45922
             },
             {
               "time": 3.0,
-              "value": 858.0
+              "value": -0.0
             },
             {
               "time": 3.25,
-              "value": 858.0
+              "value": 0.45922
             },
             {
               "time": 3.5,
-              "value": 858.0
+              "value": 0.848528
             },
             {
               "time": 3.75,
-              "value": 858.0
+              "value": 1.108655
             },
             {
               "time": 4.0,
-              "value": 858.0
-            }
-          ]
-        },
-        {
-          "node": "head-root",
-          "property": "scaleY",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 1.0
-            },
-            {
-              "time": 0.25,
-              "value": 1.006888
-            },
-            {
-              "time": 0.5,
-              "value": 1.012728
-            },
-            {
-              "time": 0.75,
-              "value": 1.01663
-            },
-            {
-              "time": 1.0,
-              "value": 1.018
-            },
-            {
-              "time": 1.25,
-              "value": 1.01663
-            },
-            {
-              "time": 1.5,
-              "value": 1.012728
-            },
-            {
-              "time": 1.75,
-              "value": 1.006888
-            },
-            {
-              "time": 2.0,
-              "value": 1.0
-            },
-            {
-              "time": 2.25,
-              "value": 0.993112
-            },
-            {
-              "time": 2.5,
-              "value": 0.987272
-            },
-            {
-              "time": 2.75,
-              "value": 0.98337
-            },
-            {
-              "time": 3.0,
-              "value": 0.982
-            },
-            {
-              "time": 3.25,
-              "value": 0.98337
-            },
-            {
-              "time": 3.5,
-              "value": 0.987272
-            },
-            {
-              "time": 3.75,
-              "value": 0.993112
-            },
-            {
-              "time": 4.0,
-              "value": 1.0
+              "value": 1.2
             }
           ]
         }
@@ -1098,6 +1320,8 @@
         "waiting-lower": true,
         "chin-contact": true,
         "speaking-body": false,
+        "waiting-arm-contact": true,
+        "waiting-support": true,
         "mouth-closed": true,
         "mouth-open": false,
         "head": false
@@ -1110,71 +1334,146 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 1.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.25,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.5,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 3.75,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 4.0,
-              "value": 866.0
+              "value": 862.0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0.0
+            },
+            {
+              "time": 0.25,
+              "value": 0.363549
+            },
+            {
+              "time": 0.5,
+              "value": 0.671751
+            },
+            {
+              "time": 0.75,
+              "value": 0.877686
+            },
+            {
+              "time": 1.0,
+              "value": 0.95
+            },
+            {
+              "time": 1.25,
+              "value": 0.877686
+            },
+            {
+              "time": 1.5,
+              "value": 0.671751
+            },
+            {
+              "time": 1.75,
+              "value": 0.363549
+            },
+            {
+              "time": 2.0,
+              "value": 0.0
+            },
+            {
+              "time": 2.25,
+              "value": -0.363549
+            },
+            {
+              "time": 2.5,
+              "value": -0.671751
+            },
+            {
+              "time": 2.75,
+              "value": -0.877686
+            },
+            {
+              "time": 3.0,
+              "value": -0.95
+            },
+            {
+              "time": 3.25,
+              "value": -0.877686
+            },
+            {
+              "time": 3.5,
+              "value": -0.671751
+            },
+            {
+              "time": 3.75,
+              "value": -0.363549
+            },
+            {
+              "time": 4.0,
+              "value": -0.0
             }
           ]
         },
@@ -1185,221 +1484,146 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 858.0
+              "value": 445.0
             },
             {
               "time": 0.25,
-              "value": 858.0
+              "value": 445.22961
             },
             {
               "time": 0.5,
-              "value": 858.0
+              "value": 445.424264
             },
             {
               "time": 0.75,
-              "value": 858.0
+              "value": 445.554328
             },
             {
               "time": 1.0,
-              "value": 858.0
+              "value": 445.6
             },
             {
               "time": 1.25,
-              "value": 858.0
+              "value": 445.554328
             },
             {
               "time": 1.5,
-              "value": 858.0
+              "value": 445.424264
             },
             {
               "time": 1.75,
-              "value": 858.0
+              "value": 445.22961
             },
             {
               "time": 2.0,
-              "value": 858.0
+              "value": 445.0
             },
             {
               "time": 2.25,
-              "value": 858.0
+              "value": 444.77039
             },
             {
               "time": 2.5,
-              "value": 858.0
+              "value": 444.575736
             },
             {
               "time": 2.75,
-              "value": 858.0
+              "value": 444.445672
             },
             {
               "time": 3.0,
-              "value": 858.0
+              "value": 444.4
             },
             {
               "time": 3.25,
-              "value": 858.0
+              "value": 444.445672
             },
             {
               "time": 3.5,
-              "value": 858.0
+              "value": 444.575736
             },
             {
               "time": 3.75,
-              "value": 858.0
+              "value": 444.77039
             },
             {
               "time": 4.0,
-              "value": 858.0
+              "value": 445.0
             }
           ]
         },
         {
-          "node": "head-root",
-          "property": "pivotY",
+          "node": "chest-root",
+          "property": "y",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 858.0
+              "value": 1.2
             },
             {
               "time": 0.25,
-              "value": 858.0
+              "value": 1.108655
             },
             {
               "time": 0.5,
-              "value": 858.0
+              "value": 0.848528
             },
             {
               "time": 0.75,
-              "value": 858.0
+              "value": 0.45922
             },
             {
               "time": 1.0,
-              "value": 858.0
+              "value": 0.0
             },
             {
               "time": 1.25,
-              "value": 858.0
+              "value": -0.45922
             },
             {
               "time": 1.5,
-              "value": 858.0
+              "value": -0.848528
             },
             {
               "time": 1.75,
-              "value": 858.0
+              "value": -1.108655
             },
             {
               "time": 2.0,
-              "value": 858.0
+              "value": -1.2
             },
             {
               "time": 2.25,
-              "value": 858.0
+              "value": -1.108655
             },
             {
               "time": 2.5,
-              "value": 858.0
+              "value": -0.848528
             },
             {
               "time": 2.75,
-              "value": 858.0
+              "value": -0.45922
             },
             {
               "time": 3.0,
-              "value": 858.0
+              "value": -0.0
             },
             {
               "time": 3.25,
-              "value": 858.0
+              "value": 0.45922
             },
             {
               "time": 3.5,
-              "value": 858.0
+              "value": 0.848528
             },
             {
               "time": 3.75,
-              "value": 858.0
+              "value": 1.108655
             },
             {
               "time": 4.0,
-              "value": 858.0
-            }
-          ]
-        },
-        {
-          "node": "head-root",
-          "property": "scaleY",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 1.0
-            },
-            {
-              "time": 0.25,
-              "value": 1.006888
-            },
-            {
-              "time": 0.5,
-              "value": 1.012728
-            },
-            {
-              "time": 0.75,
-              "value": 1.01663
-            },
-            {
-              "time": 1.0,
-              "value": 1.018
-            },
-            {
-              "time": 1.25,
-              "value": 1.01663
-            },
-            {
-              "time": 1.5,
-              "value": 1.012728
-            },
-            {
-              "time": 1.75,
-              "value": 1.006888
-            },
-            {
-              "time": 2.0,
-              "value": 1.0
-            },
-            {
-              "time": 2.25,
-              "value": 0.993112
-            },
-            {
-              "time": 2.5,
-              "value": 0.987272
-            },
-            {
-              "time": 2.75,
-              "value": 0.98337
-            },
-            {
-              "time": 3.0,
-              "value": 0.982
-            },
-            {
-              "time": 3.25,
-              "value": 0.98337
-            },
-            {
-              "time": 3.5,
-              "value": 0.987272
-            },
-            {
-              "time": 3.75,
-              "value": 0.993112
-            },
-            {
-              "time": 4.0,
-              "value": 1.0
+              "value": 1.2
             }
           ]
         }
@@ -1417,6 +1641,8 @@
         "waiting-lower": false,
         "chin-contact": false,
         "speaking-body": true,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
         "mouth-closed": true,
         "mouth-open": false
       },
@@ -1428,71 +1654,71 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 0.25,
-              "value": 867.14805
+              "value": 863.14805
             },
             {
               "time": 0.5,
-              "value": 868.12132
+              "value": 864.12132
             },
             {
               "time": 0.75,
-              "value": 868.771639
+              "value": 864.771639
             },
             {
               "time": 1.0,
-              "value": 869.0
+              "value": 865.0
             },
             {
               "time": 1.25,
-              "value": 868.771639
+              "value": 864.771639
             },
             {
               "time": 1.5,
-              "value": 868.12132
+              "value": 864.12132
             },
             {
               "time": 1.75,
-              "value": 867.14805
+              "value": 863.14805
             },
             {
               "time": 2.0,
-              "value": 866.0
+              "value": 862.0
             },
             {
               "time": 2.25,
-              "value": 864.85195
+              "value": 860.85195
             },
             {
               "time": 2.5,
-              "value": 863.87868
+              "value": 859.87868
             },
             {
               "time": 2.75,
-              "value": 863.228361
+              "value": 859.228361
             },
             {
               "time": 3.0,
-              "value": 863.0
+              "value": 859.0
             },
             {
               "time": 3.25,
-              "value": 863.228361
+              "value": 859.228361
             },
             {
               "time": 3.5,
-              "value": 863.87868
+              "value": 859.87868
             },
             {
               "time": 3.75,
-              "value": 864.85195
+              "value": 860.85195
             },
             {
               "time": 4.0,
-              "value": 866.0
+              "value": 862.0
             }
           ]
         },
