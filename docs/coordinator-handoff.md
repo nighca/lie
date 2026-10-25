@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：48316544发布/CI/线上静态交付已核完成，本报告经root审查本地归档，不自动二次push。调查连接提示loading已获局部App.vue notice/style turn；用户已在动画专项批准R方向，契约/珊瑚样片在制，设计source1c354425待root全文review入库、具体样片验收另记，App/style释放后再授结果接入。两任务不混入本次线上核验。Hackathon仍Draft，鉴权/视频/付费等其他边界保留。
+下一步：48316544发布/CI/线上静态交付已核完成，本报告经root审查本地归档，不自动二次push。调查连接提示loading持有App.vue/style turn，并新增试玩结果隐藏改编（仅preview，official/shared保留），同时授Application及相邻路由测试；Editor旧turn已释放，避免并发写App；用户已在动画专项批准R方向，契约/珊瑚样片在制，设计source1c354425待root全文review入库、具体样片验收另记，App/style释放后再授结果接入。两任务不混入本次线上核验。Hackathon仍Draft，鉴权/视频/付费等其他边界保留。
 
 ## 当前owner与恢复入口
 
