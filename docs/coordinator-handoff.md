@@ -38,6 +38,7 @@ Root仅调度、接口/决策、实际完整review、隔离候选有序cherry-pi
 | `/root/older_male_voice` | older-male-voice；codex/older-male-voice；base30822 | 三提交调查已root实际review并main`8ac8a7eb64a257d3aca320762bf1872fe401c1c5`；[候选入口](older-male-voice/available-candidates.md)。龙天未占用/龙三叔与sunny同声公开试听已交用户，等待选声；当前龙楠voiceId a42e04fcefac4e9492581fbc95f3fce3未改。无manifest写turn或新增付费/管理资源许可；先真人耳验再配置。 |
 | `/root/architecture_code_review` | animation-rigid-code-review；报告分支分别codex/animation-rigid-code-review、codex/cache-delivery-review | 刚性report ordered`5db35590e159fd55061cfdf686d29ff6b050cc5e`→`10039f40f4b63e535665020e04da5c924dea9cc9`；cache report`06026043ffc548b61efd7220ee622ace1d68b4d5`，均已root实际review并纳入本批候选；原报告冻结历史结论保留，不能代替23链动画final review。refs保留。初始code review/帧守卫已main不重做。 |
 | `/root/production_release_compatibility` | production-release-compatibility；codex/production-release-compatibility；明确依赖be83810 | 实施CI有限旧hash保留及安全清单验证，current＋最多2旧代、每代80MiB/512files/合并240MiB上限、artifact TTL14天，不承诺14天在线页寿命；source dirty/候选未交，保护WT。不启服务/远程workflow/上传/部署。cf auth只读未登录，套餐预算未知。 |
+| `/root/case_content_revision` | 独立codex/case-content-revision；base3aaa329540dc53bfbc3a95adf66191e9c1576904；实际WT/HEAD随handoff | 用户新要求贺宁不因普通追问过早自认、三案背景去防御性穷举；已spawn整项执行，仅content/games三案＋public/games三份跟踪同步/专属docs/tests，必要私有口径悬空引用修正；不改答案/人数/时限/引擎/catalog。无真实推理/mic/新服务授权；source在制，保护dirty并等完整clean交付。 |
 | Editor `01a16d90-27cc-77c2-9e0a-4b28b1135371` / stable_exploratory_qa | 旧Editor/稳定QA/目录打包WT refs保留 | 已main的定位/姓名唯一/目录三案/稳定QA成果不重派。分享真实浏览器范围与剩余未知见计划；QA003仅P3改进。无当前新的服务启动许可。 |
 
 ## 服务与浏览器保留
