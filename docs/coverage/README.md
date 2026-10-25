@@ -20,7 +20,7 @@ npm run coverage
 npm run coverage:snapshot
 ```
 
-`coverage:snapshot` requires a clean collection from the current HEAD and unchanged application/test/collector files. Review and commit the three small files in `docs/coverage/` (`application-lines.svg`, `summary.json`, `summary.md`) through the ordinary integration workflow. It does not commit, push or deploy. Spawned Node commands use `process.execPath` and argument arrays, including when the runtime path contains spaces.
+`coverage:snapshot` requires a clean collection from the current HEAD and unchanged application/test/collector files, including newly created untracked files. The three snapshot outputs may themselves be dirty without invalidating the sampled source. Review and commit the three small files in `docs/coverage/` (`application-lines.svg`, `summary.json`, `summary.md`) through the ordinary integration workflow. It does not commit, push or deploy. Spawned Node commands use `process.execPath` and argument arrays, including when the runtime path contains spaces.
 
 Full local HTML, LCOV, detailed JSON and ordinary-discovery/result files remain ignored under `coverage/`. Open `coverage/application/index.html` for per-file application reporting; script LCOV and native summary are under `coverage/scripts/`. `coverage/report/` contains the generated SVG, portable metadata and readable summary.
 

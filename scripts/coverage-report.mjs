@@ -45,7 +45,7 @@ for (const name of ['apps/web/src/App.vue', 'apps/web/src/editor/Editor.vue', 'p
   sfc.push({ path: name, sourceLines: lines.length, templateBranchCount: templateBranches.length, templateExample: templateBranches.length ? { line: templateBranches[0][1].loc.start.line, source: lines[templateBranches[0][1].loc.start.line - 1].trim() } : null, branchExamples: examples.map(([id, branch]) => ({ line: branch.loc.start.line, counts: data.b[id], source: lines[branch.loc.start.line - 1].trim() })) })
 }
 const metric = (total, covered) => ({ total, covered, pct: Number((100 * covered / total).toFixed(2)) })
-const scripts = Object.fromEntries(['Line', 'Branch', 'Function'].map((key) => [key.toLowerCase() + 's', metric(native.coverage.totals[`total${key}Count`], native.coverage.totals[`covered${key}Count`])]))
+const scripts = Object.fromEntries([['Line', 'lines'], ['Branch', 'branches'], ['Function', 'functions']].map(([key, name]) => [name, metric(native.coverage.totals[`total${key}Count`], native.coverage.totals[`covered${key}Count`])]))
 const summary = { ...sample, application: { scope: 'Six workspaces, production src .ts/.vue; excludes declarations and UI demo', files: files.length, tests: tests.numTotalTests, ordinaryTestTemplates: ordinary.length, totals: application.total, uncoveredFiles: Object.entries(application).filter(([name, value]) => name !== 'total' && value.lines.total > 0 && value.lines.covered === 0).map(([name]) => relative(root, name)) }, scripts: { scope: ['scripts/main-preview.mjs', 'scripts/character-presets.mjs'], tests: native.tests.counts.tests, totals: scripts }, vueRemapping: sfc }
 const output = new URL('../coverage/report/', import.meta.url)
 await mkdir(output, { recursive: true })
@@ -61,7 +61,8 @@ if (process.argv.includes('--snapshot')) {
   assert.equal(sample.dirty, false, 'Commit implementation before collecting a tracked snapshot')
   const head = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim()
   assert.equal(head, sample.sourceSha, 'Collect again from the current implementation commit')
-  execFileSync('git', ['diff', '--exit-code', 'HEAD', '--', 'apps', 'packages', 'scripts', 'package.json', 'package-lock.json', 'vitest.coverage.config.ts'], { cwd: root })
+  const changes = execFileSync('git', ['status', '--porcelain', '--untracked-files=all', '--', 'apps', 'packages', 'scripts', 'package.json', 'package-lock.json', 'vitest.coverage.config.ts'], { cwd: root, encoding: 'utf8' }).trim()
+  assert.equal(changes, '', 'Source or tests changed after collection, including untracked files')
   await mkdir(new URL('../docs/coverage/', import.meta.url), { recursive: true })
   for (const name of ['summary.json', 'application-lines.svg', 'summary.md']) await copyFile(new URL(name, output), new URL(`../docs/coverage/${name}`, import.meta.url))
 }
