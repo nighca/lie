@@ -187,3 +187,11 @@ production_performance已IAB自建tab1实测线上：冷禁cache首页15请求�
 验收必须实际构建改1PNG/part验证整个引用链换hash、oldJS+fixedmanifest兼容、所有引用存在、相对parts正确、缺失hash不能HTML200+immutable、HTML/fixedmanifest/API/WS/404不长缓存；cf实际产物/本地响应合同，不只_headers文本。若实际证明纯资产规则不满足404/SPA，额外预授gateway cloudflare.config.ts/src/index.ts及tests最小新静态namespace guard/404/cache策略，不能全站Worker-first/新增缓存框架/存储或动API/WS/secret。图片无损另量实际收益/可用工具，保留RGBA/alpha/ICC/gAMA/sRGB；不得为压缩偷偷加重依赖/降低89字节源校验。
 
 动画正式冻结源22b2ee8b635b2e6944d3801721673bc5122dfa3b仅5正式packageJSON变化、PNG/generator不变；先不阻塞独立hash管线实现，后root实际review动画并与perf按最终输入摘要组合复验。性能5544稳定回合已给但启动前需核监听/真实登记，不按授予推断在监听。线上只读/no语音，不main/push/deploy/PR；完整报告/clean handoff交root。
+
+## 最新用户小需求：背景人物姓名高亮
+
+用户截图指开场故事背景，希望人物姓名渲染自动识别高亮，主题色可结合人物。root已回应开场介绍＋调查中背景统一，官方/分享/Editor试玩同引擎覆盖，无作者标记。已向原调查专项01a16d5c-de69-7452-8d6a-280d15a87e9e整项分派：reviewed main e22250347ae737437b930934512295316bfe93fc起新codex/background-character-names独立WT，旧结果d97a冻结已main不重放。独占App.vue/style.css仅背景、新presentation分段helper或局部Vue组件、独立tests、docs/background-character-names.md与精简原生证据；不动Application/main/loader/preset parser/Vite/gateway/动画等性能或动画owner文件。
+
+以view.characters真实姓名字面匹配、重叠最长优先、正则特殊字符字面处理；不用模型/NLP/别名推断，不加行为。浅主题底/下划线＋字重、深蓝前景保持可读，无preset或异步主题未到中性回退、恢复后响应；旧同名不同主题歧义也中性。仅两处public background，不扩询问转写/结果真相/Editor textarea。Vue安全文本节点，禁止v-html，拼回文本/空白/换行/复制完全一致。已有开背景停语音/暂停计时规则不变。
+
+测试实际App两入口、同段多人重复/长短前缀/特殊与HTML字面/无preset及迟到/同名主题歧义/原文一致；Web相关tests/types/build89、实际1280/391排版无横溢与回退由原owner整项完成。5507仅其稳定单服务回合，启动前核监听/登记source/PID/PTY/consumer/stop，demo transport9、不gateway/mic/provider，保护draft/他人tab/全局viewport/8787/88/5355/5544；完成原PTY停/核端口/清tab/fixture。完整clean batch交root实际review后串行集成，不main/push/部署/PR。
