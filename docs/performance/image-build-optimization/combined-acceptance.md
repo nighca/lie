@@ -42,6 +42,6 @@
 
 占用归属只读核验：PID57333、PPID92300、TTY`??`，command为`node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5356 --strictPort`，cwd `/Users/nighca/.codex/worktrees/result-reactions-lane-one/lie`，当前checkout HEAD `e362243bc600c1443451503ec79d422b4285c149`、status clean。HEAD是观察时checkout身份，不能推断为该进程最初启动SHA。PPID是Codex app-server；未读取环境/凭据。未找到当前PID的任务台账/原PTY/消费者证据，**原tool session/PTY和实际消费者UNKNOWN**，已交root协调animation owner。旧历史5356 PID记录不冒充此新进程。
 
-首次交付仅离线保存[5356预览脚本](preview-build.mjs)，当时未运行；后续按上述追加验收运行并停止。它按实际cf config/bundle/assets构造Miniflare并打印owner/SHA/PID/消费者/停止条件。待owner明确释放后仍需重查listener，再开始桌面+391px、WebP MIME/hash/缺失404/immutable、开案/切人/canvas/正误结果与静态fallback检查；本机Worker头不能写成线上已部署验证，浏览器也不推导LCP改善。浏览器证据将新增提交，不amend这批冻结代码。
+首次交付仅离线保存[5356预览脚本](preview-build.mjs)，当时未运行；后续按上述追加验收运行并停止。它按实际cf config/bundle/assets构造Miniflare并打印owner/SHA/PID/消费者/停止条件。原owner明确释放后已重查listener，并完成桌面+391px、WebP MIME/hash/缺失404/immutable、开案/切人/canvas/正误结果及静态fallback检查，详见[浏览器与清理闭环](browser-acceptance.md)。本机Worker头仍不代表线上已部署验证，也不推导LCP改善。浏览器证据已作为新增提交归档，原4个冻结提交未amend。
 
 无main集成/push/deploy，本批服务已按追加验收停止，无mic/provider/新账号/费用。原始源PNG、固定生成PNG以及已批准动画/结果玩法保持不变。当前只有结果契约，无新结果原画在该base，因此可选结果资源的构建闭合由fixture验证；当前实际正误结果沿用default派生图。
