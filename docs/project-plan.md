@@ -1,5 +1,7 @@
 # LIE — 当前项目计划
 
+> 最新发布规则（2026-10-25）：用户明确要求当前main推送，且后续每次已审验证合入main后默认普通push，由唯一integrator按AGENTS的fetch/分歧审验/普通推送流程执行并检查既有CI/CD。此授权覆盖推送触发的现有自动部署，不授权手工部署或额外账号资源操作；下文旧“单次/不自动push”措辞保留历史，不能覆盖新决定。本次发布从已验main2b0a1c5加本规则文档开始，远端前态a64；实际推送/CI/CD结果另核，不提前称成功。后续报告并入下一正常批次，避免报告触发循环发布。
+
 2026-10-25，本轮已审main基线 `b3874d9f3ddd7a9d7ac91e380bed10f9c55bc3dd`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
 已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。当前已证远端/CI/CD/线上静态部署a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，见[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)；旧483见[历史发布核验](releases/2026-10-25-main-refresh.md)；静态指纹同本地已验产物，不等真人功能验证。后续36a已含龙三叔配置，本轮归档基线main b3874d9f3ddd7a9d7ac91e380bed10f9c55bc3dd已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
