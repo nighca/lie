@@ -1,0 +1,1202 @@
+[
+  {
+    "kind": "response",
+    "requestId": "43676.77",
+    "type": "Image",
+    "timestamp": 267016.313541,
+    "url": "http://127.0.0.1:5544/static/61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218/appearances/sunny-moustache/default.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "963360",
+      "Content-Type": "image/png",
+      "ETag": "\"6d6aea7720b4b6151e636d39a0c567ed\""
+    },
+    "timing": {
+      "connectEnd": 0.575,
+      "connectStart": 0.453,
+      "dnsEnd": 0.453,
+      "dnsStart": 0.446,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 7.646,
+      "receiveHeadersStart": 7.466,
+      "requestTime": 267016.303466,
+      "sendEnd": 0.603,
+      "sendStart": 0.592,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.76",
+    "type": "Fetch",
+    "timestamp": 267016.31381,
+    "url": "http://127.0.0.1:5544/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/package.json",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Encoding": "gzip",
+      "Content-Type": "application/json",
+      "ETag": "\"2d78dffc0ffb86e970f7a883cb8fbee0\""
+    },
+    "timing": {
+      "connectEnd": 0.621,
+      "connectStart": 0.471,
+      "dnsEnd": 0.471,
+      "dnsStart": 0.347,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 7.855,
+      "receiveHeadersStart": 7.823,
+      "requestTime": 267016.30335,
+      "sendEnd": 0.683,
+      "sendStart": 0.659,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 2704,
+    "requestId": "43676.76",
+    "timestamp": 267016.311888
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 963544,
+    "requestId": "43676.77",
+    "timestamp": 267016.3181
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.78",
+    "type": "Fetch",
+    "timestamp": 267016.32477,
+    "url": "http://127.0.0.1:5544/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/shared-torso.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "665293",
+      "Content-Type": "image/png",
+      "ETag": "\"25db4293fd73f0ec08e6982a34d74a07\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 6.036,
+      "receiveHeadersStart": 5.987,
+      "requestTime": 267016.31828,
+      "sendEnd": 0.975,
+      "sendStart": 0.914,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.79",
+    "type": "Fetch",
+    "timestamp": 267016.327745,
+    "url": "http://127.0.0.1:5544/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/default-source.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "963360",
+      "Content-Type": "image/png",
+      "ETag": "\"4456c76042646c34ea5a3e30578c5060\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 8.671,
+      "receiveHeadersStart": 8.641,
+      "requestTime": 267016.318688,
+      "sendEnd": 0.689,
+      "sendStart": 0.674,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.80",
+    "type": "Fetch",
+    "timestamp": 267016.33061,
+    "url": "http://127.0.0.1:5544/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/listening-source.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "944718",
+      "Content-Type": "image/png",
+      "ETag": "\"43fd64648f1d5f842bf45f80382c04ed\""
+    },
+    "timing": {
+      "connectEnd": 0.675,
+      "connectStart": 0.497,
+      "dnsEnd": 0.497,
+      "dnsStart": 0.488,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 11.283,
+      "receiveHeadersStart": 11.255,
+      "requestTime": 267016.318936,
+      "sendEnd": 0.722,
+      "sendStart": 0.694,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 665477,
+    "requestId": "43676.78",
+    "timestamp": 267016.332243
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 963544,
+    "requestId": "43676.79",
+    "timestamp": 267016.333602
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 944902,
+    "requestId": "43676.80",
+    "timestamp": 267016.334648
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.81",
+    "type": "Image",
+    "timestamp": 267016.339232,
+    "url": "blob:http://127.0.0.1:5544/216034c9-d6c7-4ba0-aaf8-652f0a35cfaa",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "665293",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.81",
+    "timestamp": 267016.339309
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.82",
+    "type": "Image",
+    "timestamp": 267016.33965,
+    "url": "blob:http://127.0.0.1:5544/1e9eb2e9-872b-4c0f-857d-ed1a6768d5ea",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "963360",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.82",
+    "timestamp": 267016.33957
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.83",
+    "type": "Image",
+    "timestamp": 267016.34067,
+    "url": "blob:http://127.0.0.1:5544/ba337508-bc33-4065-a60a-8486ec4bbbdf",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "944718",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.83",
+    "timestamp": 267016.340706
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.84",
+    "type": "Fetch",
+    "timestamp": 267016.351432,
+    "url": "http://127.0.0.1:5544/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/waiting-source.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "813393",
+      "Content-Type": "image/png",
+      "ETag": "\"d2f77695eb8b88df1977db3724596c5b\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 3.545,
+      "receiveHeadersStart": 3.491,
+      "requestTime": 267016.346681,
+      "sendEnd": 0.512,
+      "sendStart": 0.201,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 813577,
+    "requestId": "43676.84",
+    "timestamp": 267016.35558
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.86",
+    "type": "Image",
+    "timestamp": 267016.356837,
+    "url": "blob:http://127.0.0.1:5544/2109ca31-e1ce-479e-b6f1-388980620b72",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "813393",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.86",
+    "timestamp": 267016.356792
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.85",
+    "type": "Fetch",
+    "timestamp": 267016.360374,
+    "url": "http://127.0.0.1:5544/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/speaking-source.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "917029",
+      "Content-Type": "image/png",
+      "ETag": "\"8bd70f017bc1fd57ff45f3ab8688abbe\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 4.99,
+      "receiveHeadersStart": 4.939,
+      "requestTime": 267016.354883,
+      "sendEnd": 0.294,
+      "sendStart": 0.266,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 917213,
+    "requestId": "43676.85",
+    "timestamp": 267016.362229
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.87",
+    "type": "Image",
+    "timestamp": 267016.363486,
+    "url": "blob:http://127.0.0.1:5544/316f4102-0897-4bde-940c-522652664510",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "917029",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.87",
+    "timestamp": 267016.363601
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.88",
+    "type": "Fetch",
+    "timestamp": 267034.738834,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/package.json",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Encoding": "gzip",
+      "Content-Type": "application/json",
+      "ETag": "\"5ac2a351aea5e7a649e6eb7fb6f3e743\""
+    },
+    "timing": {
+      "connectEnd": 1.293,
+      "connectStart": 0.63,
+      "dnsEnd": 0.63,
+      "dnsStart": 0.445,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 25.739,
+      "receiveHeadersStart": 25.668,
+      "requestTime": 267034.712262,
+      "sendEnd": 1.495,
+      "sendStart": 1.418,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 18527,
+    "requestId": "43676.88",
+    "timestamp": 267034.740935
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.89",
+    "type": "Image",
+    "timestamp": 267034.742025,
+    "url": "http://127.0.0.1:5544/static/0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe/appearances/coral-bob/default.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "873526",
+      "Content-Type": "image/png",
+      "ETag": "\"e0559f10dc9eafb42beba5fee29ae252\""
+    },
+    "timing": {
+      "connectEnd": 0.663,
+      "connectStart": 0.467,
+      "dnsEnd": 0.467,
+      "dnsStart": 0.459,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 26.043,
+      "receiveHeadersStart": 26.018,
+      "requestTime": 267034.71497,
+      "sendEnd": 0.8,
+      "sendStart": 0.764,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 873710,
+    "requestId": "43676.89",
+    "timestamp": 267034.745793
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.90",
+    "type": "Fetch",
+    "timestamp": 267034.761254,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/body.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "586088",
+      "Content-Type": "image/png",
+      "ETag": "\"d114d28405d2d92df3ac48bb8d1b0f75\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 9.195,
+      "receiveHeadersStart": 9.145,
+      "requestTime": 267034.749018,
+      "sendEnd": 2.128,
+      "sendStart": 1.942,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.91",
+    "type": "Fetch",
+    "timestamp": 267034.762409,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/upper-left.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "500989",
+      "Content-Type": "image/png",
+      "ETag": "\"75ff79d4a0de95f81fa05eecab548c3f\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 12.042,
+      "receiveHeadersStart": 11.948,
+      "requestTime": 267034.749428,
+      "sendEnd": 3.73,
+      "sendStart": 2.51,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.92",
+    "type": "Fetch",
+    "timestamp": 267034.76695,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/fore-left.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "351109",
+      "Content-Type": "image/png",
+      "ETag": "\"70d66e7c2fb856e74ee2aa898bcaf35c\""
+    },
+    "timing": {
+      "connectEnd": 3.89,
+      "connectStart": 3.655,
+      "dnsEnd": 3.655,
+      "dnsStart": 3.643,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 16.149,
+      "receiveHeadersStart": 16.001,
+      "requestTime": 267034.749763,
+      "sendEnd": 4.071,
+      "sendStart": 3.968,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 501173,
+    "requestId": "43676.91",
+    "timestamp": 267034.769276
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 351293,
+    "requestId": "43676.92",
+    "timestamp": 267034.769652
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 586272,
+    "requestId": "43676.90",
+    "timestamp": 267034.769818
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.93",
+    "type": "Image",
+    "timestamp": 267034.772334,
+    "url": "blob:http://127.0.0.1:5544/215c4f21-bc78-40bb-b3b0-8398875e0918",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "500989",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.93",
+    "timestamp": 267034.772289
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.94",
+    "type": "Image",
+    "timestamp": 267034.772504,
+    "url": "blob:http://127.0.0.1:5544/b4c74dfe-bf53-41ae-a94d-762ebbbfb9d8",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "351109",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.94",
+    "timestamp": 267034.772476
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.95",
+    "type": "Image",
+    "timestamp": 267034.773267,
+    "url": "blob:http://127.0.0.1:5544/11ff0533-c3c9-4b3b-a497-5717af8b4e25",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "586088",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.95",
+    "timestamp": 267034.773328
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.96",
+    "type": "Fetch",
+    "timestamp": 267034.781342,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/upper-right.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "430982",
+      "Content-Type": "image/png",
+      "ETag": "\"886f4a2640fd743ece2e1a418bbe4660\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 2.362,
+      "receiveHeadersStart": 2.293,
+      "requestTime": 267034.778066,
+      "sendEnd": 0.256,
+      "sendStart": 0.212,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 431166,
+    "requestId": "43676.96",
+    "timestamp": 267034.782349
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.98",
+    "type": "Image",
+    "timestamp": 267034.783092,
+    "url": "blob:http://127.0.0.1:5544/23825e6d-12b6-4b10-85af-deddb1277c78",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "430982",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.98",
+    "timestamp": 267034.783105
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.97",
+    "type": "Fetch",
+    "timestamp": 267034.784385,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/fore-right.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "1006698",
+      "Content-Type": "image/png",
+      "ETag": "\"40e8125cd97b53de9d25f9750d54e02e\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 2.183,
+      "receiveHeadersStart": 2.158,
+      "requestTime": 267034.781938,
+      "sendEnd": 0.158,
+      "sendStart": 0.137,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 1006883,
+    "requestId": "43676.97",
+    "timestamp": 267034.787401
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.100",
+    "type": "Image",
+    "timestamp": 267034.78916,
+    "url": "blob:http://127.0.0.1:5544/b99e433d-982a-412e-bab1-d22d38ea466b",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "1006698",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.100",
+    "timestamp": 267034.78918
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.99",
+    "type": "Fetch",
+    "timestamp": 267034.791319,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/head.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "715802",
+      "Content-Type": "image/png",
+      "ETag": "\"46361f5dc3e66cb8e3faac3936d5355f\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 2.853,
+      "receiveHeadersStart": 2.81,
+      "requestTime": 267034.788142,
+      "sendEnd": 0.619,
+      "sendStart": 0.515,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 715986,
+    "requestId": "43676.99",
+    "timestamp": 267034.793015
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.102",
+    "type": "Image",
+    "timestamp": 267034.794624,
+    "url": "blob:http://127.0.0.1:5544/bb5700fd-d9c2-49a3-a0e6-53f8d53e6353",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "715802",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.102",
+    "timestamp": 267034.794625
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.101",
+    "type": "Fetch",
+    "timestamp": 267034.801069,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/closed.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "134597",
+      "Content-Type": "image/png",
+      "ETag": "\"2dc835adc4656e7fa5caf994fbb0e5aa\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 6.113,
+      "receiveHeadersStart": 6.083,
+      "requestTime": 267034.794674,
+      "sendEnd": 0.544,
+      "sendStart": 0.465,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 134781,
+    "requestId": "43676.101",
+    "timestamp": 267034.802584
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.103",
+    "type": "Fetch",
+    "timestamp": 267034.804121,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/open.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "139653",
+      "Content-Type": "image/png",
+      "ETag": "\"187a733aaf684f4f43132163461b76aa\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 2.45,
+      "receiveHeadersStart": 2.398,
+      "requestTime": 267034.800339,
+      "sendEnd": 0.205,
+      "sendStart": 0.17,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.104",
+    "type": "Image",
+    "timestamp": 267034.804392,
+    "url": "blob:http://127.0.0.1:5544/290ec364-497d-45f0-b1b4-3e35617439bd",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "134597",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.104",
+    "timestamp": 267034.804353
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 139837,
+    "requestId": "43676.103",
+    "timestamp": 267034.804315
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.105",
+    "type": "Image",
+    "timestamp": 267034.804879,
+    "url": "blob:http://127.0.0.1:5544/85e5daaa-ddb3-414f-b1e1-7f3c63f08500",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "139653",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.105",
+    "timestamp": 267034.804871
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.106",
+    "type": "Fetch",
+    "timestamp": 267034.817002,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/speak-fore.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "924008",
+      "Content-Type": "image/png",
+      "ETag": "\"5e27ac7878cdb851d140e15627d1b9f0\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 4.961,
+      "receiveHeadersStart": 4.922,
+      "requestTime": 267034.807208,
+      "sendEnd": 0.197,
+      "sendStart": 0.162,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.107",
+    "type": "Fetch",
+    "timestamp": 267034.817444,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/listening-arm.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "306325",
+      "Content-Type": "image/png",
+      "ETag": "\"9e33be1d33805f184505527e8cb14165\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 4.336,
+      "receiveHeadersStart": 4.284,
+      "requestTime": 267034.810785,
+      "sendEnd": 0.332,
+      "sendStart": 0.287,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 306509,
+    "requestId": "43676.107",
+    "timestamp": 267034.816867
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 924192,
+    "requestId": "43676.106",
+    "timestamp": 267034.818481
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.109",
+    "type": "Image",
+    "timestamp": 267034.819292,
+    "url": "blob:http://127.0.0.1:5544/20cd6daf-6ec7-434f-9a8f-35aefa49a662",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "306325",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.109",
+    "timestamp": 267034.819242
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.110",
+    "type": "Image",
+    "timestamp": 267034.819481,
+    "url": "blob:http://127.0.0.1:5544/55c8b809-c37a-4975-8117-9c2c2328e218",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "924008",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.110",
+    "timestamp": 267034.819601
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.108",
+    "type": "Fetch",
+    "timestamp": 267034.821447,
+    "url": "http://127.0.0.1:5544/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/waiting-arms.png",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "CF-Cache-Status": "HIT",
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Length": "497090",
+      "Content-Type": "image/png",
+      "ETag": "\"238c41a30388b6ec900be2cc94964b31\""
+    },
+    "timing": {
+      "connectEnd": -1,
+      "connectStart": -1,
+      "dnsEnd": -1,
+      "dnsStart": -1,
+      "proxyEnd": -1,
+      "proxyStart": -1,
+      "pushEnd": 0,
+      "pushStart": 0,
+      "receiveHeadersEnd": 2.841,
+      "receiveHeadersStart": 2.792,
+      "requestTime": 267034.818223,
+      "sendEnd": 0.232,
+      "sendStart": 0.21,
+      "sslEnd": -1,
+      "sslStart": -1,
+      "workerFetchStart": -1,
+      "workerReady": -1,
+      "workerRespondWithSettled": -1,
+      "workerStart": -1
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 497274,
+    "requestId": "43676.108",
+    "timestamp": 267034.823059
+  },
+  {
+    "kind": "response",
+    "requestId": "43676.111",
+    "type": "Image",
+    "timestamp": 267034.824146,
+    "url": "blob:http://127.0.0.1:5544/28c3263d-8867-442b-9b7f-14dde825ec8f",
+    "status": 200,
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "headers": {
+      "Content-Length": "497090",
+      "Content-Type": "image/png"
+    }
+  },
+  {
+    "kind": "finished",
+    "encodedDataLength": 0,
+    "requestId": "43676.111",
+    "timestamp": 267034.824124
+  }
+]

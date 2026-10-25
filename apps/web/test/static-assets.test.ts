@@ -53,6 +53,7 @@ it('keeps unchanged URLs stable and changes the complete entry chain for changed
     expect(part.entry).not.toBe(image.entry)
     expect(part.plan.manifestUrl).not.toBe(image.plan.manifestUrl)
     expect(part.plan.urls.get('/appearances/guide/animation/package.json')).not.toBe(image.plan.urls.get('/appearances/guide/animation/package.json'))
+    await expect(readFile(join(root, 'dist', image.plan.urls.get('/appearances/guide/animation/parts/body.png')!))).rejects.toMatchObject({ code: 'ENOENT' })
     expect(part.plan.urls.get('/appearances/guide/animation/parts/body.png')!.split('/')[2]).toBe(part.plan.urls.get('/appearances/guide/animation/package.json')!.split('/')[2])
     await put('public/brand/logo.svg', '<svg><path/></svg>')
     const brand = await run()

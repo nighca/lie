@@ -1,0 +1,774 @@
+{
+  "package-lock.json": {
+    "sha256": "2efd70fe940997ce63746a05a6d5574974560a67d6a737f4801e9f9e254e82e0",
+    "bytes": 141480
+  },
+  "apps/web/dist/index.html": {
+    "sha256": "c0bdd46a43afb8e3e9bb3cd5905a057cf7f05dc987e1fa5302da361a6134d189",
+    "bytes": 546
+  },
+  "apps/gateway/.cloudflare/output/v0/workers/default/worker.config.json": {
+    "sha256": "81ae6385a2ff3ea873d09a2b594b9838ed46e22b0161d16162ffe4f29083775f",
+    "bytes": 529
+  },
+  "apps/gateway/.cloudflare/output/v0/workers/default/bundle/index.js": {
+    "sha256": "821cc7be4321ee4313ffb4fd6009399ad69d7ee4cbbfd4dd1a100b51e838b5b1",
+    "bytes": 5068
+  },
+  "apps/web/dist/appearances/blue-glasses/animation/package.json": {
+    "sha256": "1b2702529a50c58537dd3b5abccae3f1acc306da0061a7efd5f56a97cc2f8f53",
+    "bytes": 37656
+  },
+  "apps/web/dist/appearances/blue-glasses/animation/parts/default-source.png": {
+    "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "bytes": 864556
+  },
+  "apps/web/dist/appearances/blue-glasses/animation/parts/listening-source.png": {
+    "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+    "bytes": 858019
+  },
+  "apps/web/dist/appearances/blue-glasses/animation/parts/shared-torso.png": {
+    "sha256": "2a4ad43d7ecd09f47a790757941d8dd77d803bdd8460d13d5ffc32f4cf8d6226",
+    "bytes": 585690
+  },
+  "apps/web/dist/appearances/blue-glasses/animation/parts/speaking-source.png": {
+    "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+    "bytes": 854387
+  },
+  "apps/web/dist/appearances/blue-glasses/animation/parts/waiting-source.png": {
+    "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+    "bytes": 762985
+  },
+  "apps/web/dist/appearances/blue-glasses/animation/parts/waiting-torso.png": {
+    "sha256": "3527476e1c65d0463fd991d7fe5f2b69313ac534a45bd9ed5be7742439bd6ac0",
+    "bytes": 564686
+  },
+  "apps/web/dist/appearances/blue-glasses/avatar.png": {
+    "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "bytes": 864556
+  },
+  "apps/web/dist/appearances/blue-glasses/default.png": {
+    "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "bytes": 864556
+  },
+  "apps/web/dist/appearances/blue-glasses/listening.png": {
+    "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+    "bytes": 858019
+  },
+  "apps/web/dist/appearances/blue-glasses/speaking.png": {
+    "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+    "bytes": 854387
+  },
+  "apps/web/dist/appearances/blue-glasses/waiting.png": {
+    "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+    "bytes": 762985
+  },
+  "apps/web/dist/appearances/coral-bob/animation/package.json": {
+    "sha256": "f3f2321b98fbced68c606b3513e93c27756a3e3aa7380ed2067dcf49b41fb818",
+    "bytes": 165054
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/body.png": {
+    "sha256": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27",
+    "bytes": 586088
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/closed.png": {
+    "sha256": "a8b4f55e14fe4e4397bb530869d4843db49ea8356378070af76a52c4028dc3c9",
+    "bytes": 134597
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/fore-left.png": {
+    "sha256": "c48cc45a0bd343c753fd1328a6a1182640f79423f7fcc13cdc7e1df206c7112c",
+    "bytes": 351109
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/fore-right.png": {
+    "sha256": "be316b025b810d7e10494a905182930f1eefc9743139f8578bc063c226f7c812",
+    "bytes": 1006698
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/head.png": {
+    "sha256": "fb92081b74134fd8397e0239f2a9603bb8b99f06ee82efc6ed1ce129e3ca925e",
+    "bytes": 715802
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/listening-arm.png": {
+    "sha256": "93602222407a2f4c3db2e73e2e445abc819e2e2da7b6c1260e57d41e11d00e20",
+    "bytes": 306325
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/open.png": {
+    "sha256": "05304f3ab8527b1a64a6c781b1271f10feebea07118cfd0659bff67744a4cc26",
+    "bytes": 139653
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/speak-fore.png": {
+    "sha256": "5441a0ab98ef5ac282b6ce3e080632399128a94abda3d34100843f5dcb152ed4",
+    "bytes": 924008
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/upper-left.png": {
+    "sha256": "9efca1877d071c44702416992f91dc0df39bf28aaac92aa7126e878acb516c85",
+    "bytes": 500989
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/upper-right.png": {
+    "sha256": "b2f3eba89e09dff9f8c5cf4fcd2256482b962a2fd67ade413b4be6e6147ceede",
+    "bytes": 430982
+  },
+  "apps/web/dist/appearances/coral-bob/animation/parts/waiting-arms.png": {
+    "sha256": "2c8de0fc32d63d4c1ad8cf912119629ee6e62c15eb8e1adf90e922e7545246cc",
+    "bytes": 497090
+  },
+  "apps/web/dist/appearances/coral-bob/avatar.png": {
+    "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "bytes": 873526
+  },
+  "apps/web/dist/appearances/coral-bob/default.png": {
+    "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "bytes": 873526
+  },
+  "apps/web/dist/appearances/coral-bob/listening.png": {
+    "sha256": "e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea",
+    "bytes": 906498
+  },
+  "apps/web/dist/appearances/coral-bob/speaking.png": {
+    "sha256": "ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d",
+    "bytes": 894325
+  },
+  "apps/web/dist/appearances/coral-bob/waiting.png": {
+    "sha256": "2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e",
+    "bytes": 778821
+  },
+  "apps/web/dist/appearances/manifest.json": {
+    "sha256": "1289e2628baefdda0bb7e15662fc23f9594ecd6dbee229e733dbdeab5aee122b",
+    "bytes": 4201
+  },
+  "apps/web/dist/appearances/mint-puffs/animation/package.json": {
+    "sha256": "253b6fde321f82198c0664d35a5b4c94333c513c58fd406a92dc903dd7d9b0df",
+    "bytes": 37155
+  },
+  "apps/web/dist/appearances/mint-puffs/animation/parts/default-source.png": {
+    "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+    "bytes": 924784
+  },
+  "apps/web/dist/appearances/mint-puffs/animation/parts/listening-source.png": {
+    "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+    "bytes": 892808
+  },
+  "apps/web/dist/appearances/mint-puffs/animation/parts/speaking-source.png": {
+    "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+    "bytes": 924713
+  },
+  "apps/web/dist/appearances/mint-puffs/animation/parts/waiting-source.png": {
+    "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+    "bytes": 815457
+  },
+  "apps/web/dist/appearances/mint-puffs/default.png": {
+    "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+    "bytes": 924784
+  },
+  "apps/web/dist/appearances/mint-puffs/listening.png": {
+    "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+    "bytes": 892808
+  },
+  "apps/web/dist/appearances/mint-puffs/speaking.png": {
+    "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+    "bytes": 924713
+  },
+  "apps/web/dist/appearances/mint-puffs/waiting.png": {
+    "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+    "bytes": 815457
+  },
+  "apps/web/dist/appearances/ochre-freckles/animation/package.json": {
+    "sha256": "599dd7b604d5dff60709837247bc2fc1973d80e8240ca5708ef0fe6fde66526d",
+    "bytes": 41801
+  },
+  "apps/web/dist/appearances/ochre-freckles/animation/parts/default-source.png": {
+    "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+    "bytes": 945784
+  },
+  "apps/web/dist/appearances/ochre-freckles/animation/parts/listening-source.png": {
+    "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+    "bytes": 975320
+  },
+  "apps/web/dist/appearances/ochre-freckles/animation/parts/speaking-source.png": {
+    "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+    "bytes": 922181
+  },
+  "apps/web/dist/appearances/ochre-freckles/animation/parts/waiting-source.png": {
+    "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+    "bytes": 813873
+  },
+  "apps/web/dist/appearances/ochre-freckles/default.png": {
+    "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+    "bytes": 945784
+  },
+  "apps/web/dist/appearances/ochre-freckles/listening.png": {
+    "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+    "bytes": 975320
+  },
+  "apps/web/dist/appearances/ochre-freckles/speaking.png": {
+    "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+    "bytes": 922181
+  },
+  "apps/web/dist/appearances/ochre-freckles/waiting.png": {
+    "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+    "bytes": 813873
+  },
+  "apps/web/dist/appearances/plum-crop/animation/package.json": {
+    "sha256": "5e67782c83fa5b73c04dd91ae1da8eeb1d4d0489c63f898756fb200b3b2b44a6",
+    "bytes": 39228
+  },
+  "apps/web/dist/appearances/plum-crop/animation/parts/default-source.png": {
+    "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+    "bytes": 938610
+  },
+  "apps/web/dist/appearances/plum-crop/animation/parts/head.png": {
+    "sha256": "2d08b2b17687fad6f9fb54bb2a76be78f86ede46bd6a189362e8806ee1df98e0",
+    "bytes": 571971
+  },
+  "apps/web/dist/appearances/plum-crop/animation/parts/listening-source.png": {
+    "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+    "bytes": 912539
+  },
+  "apps/web/dist/appearances/plum-crop/animation/parts/speaking-source.png": {
+    "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+    "bytes": 911753
+  },
+  "apps/web/dist/appearances/plum-crop/animation/parts/waiting-source.png": {
+    "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+    "bytes": 794910
+  },
+  "apps/web/dist/appearances/plum-crop/default.png": {
+    "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+    "bytes": 938610
+  },
+  "apps/web/dist/appearances/plum-crop/listening.png": {
+    "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+    "bytes": 912539
+  },
+  "apps/web/dist/appearances/plum-crop/speaking.png": {
+    "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+    "bytes": 911753
+  },
+  "apps/web/dist/appearances/plum-crop/waiting.png": {
+    "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+    "bytes": 794910
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/animation/package.json": {
+    "sha256": "5ab6cc080aa9a09aefc6df88da131fd8c2c7fb0c57f4de26307dc20064c42a64",
+    "bytes": 41001
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/animation/parts/default-source.png": {
+    "sha256": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+    "bytes": 967539
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/animation/parts/listening-source.png": {
+    "sha256": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+    "bytes": 969724
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/animation/parts/lower-fill.png": {
+    "sha256": "5c345cf374a9cd43fdb440879cc0b5fb63cca4b639079814015b660eec34e4a7",
+    "bytes": 558838
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/animation/parts/speaking-source.png": {
+    "sha256": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+    "bytes": 923644
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/animation/parts/waiting-source.png": {
+    "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+    "bytes": 816048
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/default.png": {
+    "sha256": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+    "bytes": 967539
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/listening.png": {
+    "sha256": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+    "bytes": 969724
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/speaking.png": {
+    "sha256": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+    "bytes": 923644
+  },
+  "apps/web/dist/appearances/salt-pepper-beard/waiting.png": {
+    "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+    "bytes": 816048
+  },
+  "apps/web/dist/appearances/silver-bun/animation/package.json": {
+    "sha256": "be2eb0fe31534d371dd1ebe960363a75b418122ebf006f2712ddfe94fca0b22a",
+    "bytes": 33685
+  },
+  "apps/web/dist/appearances/silver-bun/animation/parts/default-source.png": {
+    "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+    "bytes": 990099
+  },
+  "apps/web/dist/appearances/silver-bun/animation/parts/head.png": {
+    "sha256": "cf884ae64a094939821ff061f76c2e9084fafe4d54d9b57a1f8d2b50addc7914",
+    "bytes": 1011518
+  },
+  "apps/web/dist/appearances/silver-bun/animation/parts/listening-source.png": {
+    "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+    "bytes": 952614
+  },
+  "apps/web/dist/appearances/silver-bun/animation/parts/mouths.png": {
+    "sha256": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",
+    "bytes": 277402
+  },
+  "apps/web/dist/appearances/silver-bun/animation/parts/speaking-source.png": {
+    "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+    "bytes": 977501
+  },
+  "apps/web/dist/appearances/silver-bun/animation/parts/waiting-source.png": {
+    "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+    "bytes": 903363
+  },
+  "apps/web/dist/appearances/silver-bun/default.png": {
+    "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+    "bytes": 990099
+  },
+  "apps/web/dist/appearances/silver-bun/listening.png": {
+    "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+    "bytes": 952614
+  },
+  "apps/web/dist/appearances/silver-bun/speaking.png": {
+    "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+    "bytes": 977501
+  },
+  "apps/web/dist/appearances/silver-bun/waiting.png": {
+    "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+    "bytes": 903363
+  },
+  "apps/web/dist/appearances/sunny-moustache/animation/package.json": {
+    "sha256": "baa81c21f615780b3a4e35d6f89c96281dd08c29d7cf29fe9abbcdbba560414c",
+    "bytes": 38377
+  },
+  "apps/web/dist/appearances/sunny-moustache/animation/parts/default-source.png": {
+    "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "bytes": 963360
+  },
+  "apps/web/dist/appearances/sunny-moustache/animation/parts/listening-source.png": {
+    "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+    "bytes": 944718
+  },
+  "apps/web/dist/appearances/sunny-moustache/animation/parts/shared-torso.png": {
+    "sha256": "315270e0a6c53f2cd36d540e6e2b988475876e91255b790f73ec9b90a598daa8",
+    "bytes": 665293
+  },
+  "apps/web/dist/appearances/sunny-moustache/animation/parts/speaking-source.png": {
+    "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+    "bytes": 917029
+  },
+  "apps/web/dist/appearances/sunny-moustache/animation/parts/waiting-source.png": {
+    "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+    "bytes": 813393
+  },
+  "apps/web/dist/appearances/sunny-moustache/avatar.png": {
+    "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "bytes": 963360
+  },
+  "apps/web/dist/appearances/sunny-moustache/default.png": {
+    "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "bytes": 963360
+  },
+  "apps/web/dist/appearances/sunny-moustache/listening.png": {
+    "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+    "bytes": 944718
+  },
+  "apps/web/dist/appearances/sunny-moustache/speaking.png": {
+    "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+    "bytes": 917029
+  },
+  "apps/web/dist/appearances/sunny-moustache/waiting.png": {
+    "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+    "bytes": 813393
+  },
+  "apps/web/dist/assets/index-BcQJfu9i.css": {
+    "sha256": "287476f8573c117ef42c51d0e2c5069792c4b2e8815b77c86d6f221663a09131",
+    "bytes": 52624
+  },
+  "apps/web/dist/assets/index-EkbRGxr3.js": {
+    "sha256": "4b053bffb6bed968bd42ddd81ba6c0859f93ae10d7ca43795ff2f2c31258d3f8",
+    "bytes": 214153
+  },
+  "apps/web/dist/brand/logo.svg": {
+    "sha256": "162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb",
+    "bytes": 879
+  },
+  "apps/web/dist/brand/underline.svg": {
+    "sha256": "faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9",
+    "bytes": 344
+  },
+  "apps/web/dist/games/duck-finale.json": {
+    "sha256": "7b359c2bb3d7db9e0176acdf6338b14d10d07f00b10f1ad7e3844b0c99cfdd61",
+    "bytes": 12085
+  },
+  "apps/web/dist/games/empty-medal-box.json": {
+    "sha256": "eb2c2b4ec4d8e5e21efff959360905c71aada77e1f0922c65b0523da74402bdc",
+    "bytes": 9292
+  },
+  "apps/web/dist/games/salt-sugar-mixup.json": {
+    "sha256": "4e0dfffdd760a0c347b06205f8bb317a0c29f7e9893d1001e46bea2c744339ee",
+    "bytes": 10924
+  },
+  "apps/web/dist/static/0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe/appearances/coral-bob/avatar.png": {
+    "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "bytes": 873526
+  },
+  "apps/web/dist/static/0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe/appearances/coral-bob/default.png": {
+    "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "bytes": 873526
+  },
+  "apps/web/dist/static/11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087/appearances/salt-pepper-beard/default.png": {
+    "sha256": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+    "bytes": 967539
+  },
+  "apps/web/dist/static/162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb/brand/logo.svg": {
+    "sha256": "162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb",
+    "bytes": 879
+  },
+  "apps/web/dist/static/18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af/appearances/ochre-freckles/listening.png": {
+    "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+    "bytes": 975320
+  },
+  "apps/web/dist/static/19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9/appearances/mint-puffs/speaking.png": {
+    "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+    "bytes": 924713
+  },
+  "apps/web/dist/static/219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c/appearances/blue-glasses/speaking.png": {
+    "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+    "bytes": 854387
+  },
+  "apps/web/dist/static/2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092/appearances/sunny-moustache/listening.png": {
+    "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+    "bytes": 944718
+  },
+  "apps/web/dist/static/2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4/appearances/mint-puffs/listening.png": {
+    "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+    "bytes": 892808
+  },
+  "apps/web/dist/static/2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e/appearances/coral-bob/waiting.png": {
+    "sha256": "2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e",
+    "bytes": 778821
+  },
+  "apps/web/dist/static/2bae4d0584c1803919d8c984bc57da1e2ee95f4076b3fe299cf6b8bd560f5873/appearances/silver-bun/animation/package.json": {
+    "sha256": "be2eb0fe31534d371dd1ebe960363a75b418122ebf006f2712ddfe94fca0b22a",
+    "bytes": 33685
+  },
+  "apps/web/dist/static/2bae4d0584c1803919d8c984bc57da1e2ee95f4076b3fe299cf6b8bd560f5873/appearances/silver-bun/animation/parts/default-source.png": {
+    "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+    "bytes": 990099
+  },
+  "apps/web/dist/static/2bae4d0584c1803919d8c984bc57da1e2ee95f4076b3fe299cf6b8bd560f5873/appearances/silver-bun/animation/parts/head.png": {
+    "sha256": "cf884ae64a094939821ff061f76c2e9084fafe4d54d9b57a1f8d2b50addc7914",
+    "bytes": 1011518
+  },
+  "apps/web/dist/static/2bae4d0584c1803919d8c984bc57da1e2ee95f4076b3fe299cf6b8bd560f5873/appearances/silver-bun/animation/parts/listening-source.png": {
+    "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+    "bytes": 952614
+  },
+  "apps/web/dist/static/2bae4d0584c1803919d8c984bc57da1e2ee95f4076b3fe299cf6b8bd560f5873/appearances/silver-bun/animation/parts/mouths.png": {
+    "sha256": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",
+    "bytes": 277402
+  },
+  "apps/web/dist/static/2bae4d0584c1803919d8c984bc57da1e2ee95f4076b3fe299cf6b8bd560f5873/appearances/silver-bun/animation/parts/speaking-source.png": {
+    "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+    "bytes": 977501
+  },
+  "apps/web/dist/static/2bae4d0584c1803919d8c984bc57da1e2ee95f4076b3fe299cf6b8bd560f5873/appearances/silver-bun/animation/parts/waiting-source.png": {
+    "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+    "bytes": 903363
+  },
+  "apps/web/dist/static/3972faf2da4160bb93d0a6b0735c907a590deb673787ff2be599f27fe659fbf7/appearances/manifest.json": {
+    "sha256": "3972faf2da4160bb93d0a6b0735c907a590deb673787ff2be599f27fe659fbf7",
+    "bytes": 7657
+  },
+  "apps/web/dist/static/3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff/appearances/silver-bun/default.png": {
+    "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+    "bytes": 990099
+  },
+  "apps/web/dist/static/568e9da9f2aa977b112197372b9580464edf709aa0f56a11d9086567f01e07ff/appearances/salt-pepper-beard/animation/package.json": {
+    "sha256": "5ab6cc080aa9a09aefc6df88da131fd8c2c7fb0c57f4de26307dc20064c42a64",
+    "bytes": 41001
+  },
+  "apps/web/dist/static/568e9da9f2aa977b112197372b9580464edf709aa0f56a11d9086567f01e07ff/appearances/salt-pepper-beard/animation/parts/default-source.png": {
+    "sha256": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+    "bytes": 967539
+  },
+  "apps/web/dist/static/568e9da9f2aa977b112197372b9580464edf709aa0f56a11d9086567f01e07ff/appearances/salt-pepper-beard/animation/parts/listening-source.png": {
+    "sha256": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+    "bytes": 969724
+  },
+  "apps/web/dist/static/568e9da9f2aa977b112197372b9580464edf709aa0f56a11d9086567f01e07ff/appearances/salt-pepper-beard/animation/parts/lower-fill.png": {
+    "sha256": "5c345cf374a9cd43fdb440879cc0b5fb63cca4b639079814015b660eec34e4a7",
+    "bytes": 558838
+  },
+  "apps/web/dist/static/568e9da9f2aa977b112197372b9580464edf709aa0f56a11d9086567f01e07ff/appearances/salt-pepper-beard/animation/parts/speaking-source.png": {
+    "sha256": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+    "bytes": 923644
+  },
+  "apps/web/dist/static/568e9da9f2aa977b112197372b9580464edf709aa0f56a11d9086567f01e07ff/appearances/salt-pepper-beard/animation/parts/waiting-source.png": {
+    "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+    "bytes": 816048
+  },
+  "apps/web/dist/static/61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218/appearances/sunny-moustache/avatar.png": {
+    "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "bytes": 963360
+  },
+  "apps/web/dist/static/61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218/appearances/sunny-moustache/default.png": {
+    "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "bytes": 963360
+  },
+  "apps/web/dist/static/6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74/appearances/plum-crop/default.png": {
+    "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+    "bytes": 938610
+  },
+  "apps/web/dist/static/725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7/appearances/ochre-freckles/waiting.png": {
+    "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+    "bytes": 813873
+  },
+  "apps/web/dist/static/76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121/appearances/plum-crop/waiting.png": {
+    "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+    "bytes": 794910
+  },
+  "apps/web/dist/static/7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46/appearances/blue-glasses/listening.png": {
+    "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+    "bytes": 858019
+  },
+  "apps/web/dist/static/7bbfe4962b253c2599524315afff616350c8c1eb896cfc84351faf76fbef1270/appearances/ochre-freckles/animation/package.json": {
+    "sha256": "599dd7b604d5dff60709837247bc2fc1973d80e8240ca5708ef0fe6fde66526d",
+    "bytes": 41801
+  },
+  "apps/web/dist/static/7bbfe4962b253c2599524315afff616350c8c1eb896cfc84351faf76fbef1270/appearances/ochre-freckles/animation/parts/default-source.png": {
+    "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+    "bytes": 945784
+  },
+  "apps/web/dist/static/7bbfe4962b253c2599524315afff616350c8c1eb896cfc84351faf76fbef1270/appearances/ochre-freckles/animation/parts/listening-source.png": {
+    "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+    "bytes": 975320
+  },
+  "apps/web/dist/static/7bbfe4962b253c2599524315afff616350c8c1eb896cfc84351faf76fbef1270/appearances/ochre-freckles/animation/parts/speaking-source.png": {
+    "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+    "bytes": 922181
+  },
+  "apps/web/dist/static/7bbfe4962b253c2599524315afff616350c8c1eb896cfc84351faf76fbef1270/appearances/ochre-freckles/animation/parts/waiting-source.png": {
+    "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+    "bytes": 813873
+  },
+  "apps/web/dist/static/81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8/appearances/plum-crop/speaking.png": {
+    "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+    "bytes": 911753
+  },
+  "apps/web/dist/static/85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0/appearances/mint-puffs/waiting.png": {
+    "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+    "bytes": 815457
+  },
+  "apps/web/dist/static/8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398/appearances/silver-bun/speaking.png": {
+    "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+    "bytes": 977501
+  },
+  "apps/web/dist/static/92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78/appearances/plum-crop/listening.png": {
+    "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+    "bytes": 912539
+  },
+  "apps/web/dist/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/package.json": {
+    "sha256": "baa81c21f615780b3a4e35d6f89c96281dd08c29d7cf29fe9abbcdbba560414c",
+    "bytes": 38377
+  },
+  "apps/web/dist/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/default-source.png": {
+    "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "bytes": 963360
+  },
+  "apps/web/dist/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/listening-source.png": {
+    "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+    "bytes": 944718
+  },
+  "apps/web/dist/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/shared-torso.png": {
+    "sha256": "315270e0a6c53f2cd36d540e6e2b988475876e91255b790f73ec9b90a598daa8",
+    "bytes": 665293
+  },
+  "apps/web/dist/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/speaking-source.png": {
+    "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+    "bytes": 917029
+  },
+  "apps/web/dist/static/96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6/appearances/sunny-moustache/animation/parts/waiting-source.png": {
+    "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+    "bytes": 813393
+  },
+  "apps/web/dist/static/9759436fdb62b70e90c14a44dbac2c63ca0b79474903a53a253b5b9d38bd3bc3/appearances/blue-glasses/animation/package.json": {
+    "sha256": "1b2702529a50c58537dd3b5abccae3f1acc306da0061a7efd5f56a97cc2f8f53",
+    "bytes": 37656
+  },
+  "apps/web/dist/static/9759436fdb62b70e90c14a44dbac2c63ca0b79474903a53a253b5b9d38bd3bc3/appearances/blue-glasses/animation/parts/default-source.png": {
+    "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "bytes": 864556
+  },
+  "apps/web/dist/static/9759436fdb62b70e90c14a44dbac2c63ca0b79474903a53a253b5b9d38bd3bc3/appearances/blue-glasses/animation/parts/listening-source.png": {
+    "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+    "bytes": 858019
+  },
+  "apps/web/dist/static/9759436fdb62b70e90c14a44dbac2c63ca0b79474903a53a253b5b9d38bd3bc3/appearances/blue-glasses/animation/parts/shared-torso.png": {
+    "sha256": "2a4ad43d7ecd09f47a790757941d8dd77d803bdd8460d13d5ffc32f4cf8d6226",
+    "bytes": 585690
+  },
+  "apps/web/dist/static/9759436fdb62b70e90c14a44dbac2c63ca0b79474903a53a253b5b9d38bd3bc3/appearances/blue-glasses/animation/parts/speaking-source.png": {
+    "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+    "bytes": 854387
+  },
+  "apps/web/dist/static/9759436fdb62b70e90c14a44dbac2c63ca0b79474903a53a253b5b9d38bd3bc3/appearances/blue-glasses/animation/parts/waiting-source.png": {
+    "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+    "bytes": 762985
+  },
+  "apps/web/dist/static/9759436fdb62b70e90c14a44dbac2c63ca0b79474903a53a253b5b9d38bd3bc3/appearances/blue-glasses/animation/parts/waiting-torso.png": {
+    "sha256": "3527476e1c65d0463fd991d7fe5f2b69313ac534a45bd9ed5be7742439bd6ac0",
+    "bytes": 564686
+  },
+  "apps/web/dist/static/976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d/appearances/sunny-moustache/waiting.png": {
+    "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+    "bytes": 813393
+  },
+  "apps/web/dist/static/9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4/appearances/silver-bun/listening.png": {
+    "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+    "bytes": 952614
+  },
+  "apps/web/dist/static/ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db/appearances/blue-glasses/waiting.png": {
+    "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+    "bytes": 762985
+  },
+  "apps/web/dist/static/af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17/appearances/blue-glasses/avatar.png": {
+    "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "bytes": 864556
+  },
+  "apps/web/dist/static/af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17/appearances/blue-glasses/default.png": {
+    "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "bytes": 864556
+  },
+  "apps/web/dist/static/b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d/appearances/ochre-freckles/default.png": {
+    "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+    "bytes": 945784
+  },
+  "apps/web/dist/static/b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640/appearances/salt-pepper-beard/listening.png": {
+    "sha256": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+    "bytes": 969724
+  },
+  "apps/web/dist/static/ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d/appearances/coral-bob/speaking.png": {
+    "sha256": "ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d",
+    "bytes": 894325
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/package.json": {
+    "sha256": "f3f2321b98fbced68c606b3513e93c27756a3e3aa7380ed2067dcf49b41fb818",
+    "bytes": 165054
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/body.png": {
+    "sha256": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27",
+    "bytes": 586088
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/closed.png": {
+    "sha256": "a8b4f55e14fe4e4397bb530869d4843db49ea8356378070af76a52c4028dc3c9",
+    "bytes": 134597
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/fore-left.png": {
+    "sha256": "c48cc45a0bd343c753fd1328a6a1182640f79423f7fcc13cdc7e1df206c7112c",
+    "bytes": 351109
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/fore-right.png": {
+    "sha256": "be316b025b810d7e10494a905182930f1eefc9743139f8578bc063c226f7c812",
+    "bytes": 1006698
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/head.png": {
+    "sha256": "fb92081b74134fd8397e0239f2a9603bb8b99f06ee82efc6ed1ce129e3ca925e",
+    "bytes": 715802
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/listening-arm.png": {
+    "sha256": "93602222407a2f4c3db2e73e2e445abc819e2e2da7b6c1260e57d41e11d00e20",
+    "bytes": 306325
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/open.png": {
+    "sha256": "05304f3ab8527b1a64a6c781b1271f10feebea07118cfd0659bff67744a4cc26",
+    "bytes": 139653
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/speak-fore.png": {
+    "sha256": "5441a0ab98ef5ac282b6ce3e080632399128a94abda3d34100843f5dcb152ed4",
+    "bytes": 924008
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/upper-left.png": {
+    "sha256": "9efca1877d071c44702416992f91dc0df39bf28aaac92aa7126e878acb516c85",
+    "bytes": 500989
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/upper-right.png": {
+    "sha256": "b2f3eba89e09dff9f8c5cf4fcd2256482b962a2fd67ade413b4be6e6147ceede",
+    "bytes": 430982
+  },
+  "apps/web/dist/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/parts/waiting-arms.png": {
+    "sha256": "2c8de0fc32d63d4c1ad8cf912119629ee6e62c15eb8e1adf90e922e7545246cc",
+    "bytes": 497090
+  },
+  "apps/web/dist/static/c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f/appearances/salt-pepper-beard/speaking.png": {
+    "sha256": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+    "bytes": 923644
+  },
+  "apps/web/dist/static/ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf/appearances/salt-pepper-beard/waiting.png": {
+    "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+    "bytes": 816048
+  },
+  "apps/web/dist/static/d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a/appearances/ochre-freckles/speaking.png": {
+    "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+    "bytes": 922181
+  },
+  "apps/web/dist/static/e2338913faac638adc846f5de6788c256e1afde96e79d9e089a348bdc100e6b0/appearances/mint-puffs/animation/package.json": {
+    "sha256": "253b6fde321f82198c0664d35a5b4c94333c513c58fd406a92dc903dd7d9b0df",
+    "bytes": 37155
+  },
+  "apps/web/dist/static/e2338913faac638adc846f5de6788c256e1afde96e79d9e089a348bdc100e6b0/appearances/mint-puffs/animation/parts/default-source.png": {
+    "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+    "bytes": 924784
+  },
+  "apps/web/dist/static/e2338913faac638adc846f5de6788c256e1afde96e79d9e089a348bdc100e6b0/appearances/mint-puffs/animation/parts/listening-source.png": {
+    "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+    "bytes": 892808
+  },
+  "apps/web/dist/static/e2338913faac638adc846f5de6788c256e1afde96e79d9e089a348bdc100e6b0/appearances/mint-puffs/animation/parts/speaking-source.png": {
+    "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+    "bytes": 924713
+  },
+  "apps/web/dist/static/e2338913faac638adc846f5de6788c256e1afde96e79d9e089a348bdc100e6b0/appearances/mint-puffs/animation/parts/waiting-source.png": {
+    "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+    "bytes": 815457
+  },
+  "apps/web/dist/static/e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854/appearances/sunny-moustache/speaking.png": {
+    "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+    "bytes": 917029
+  },
+  "apps/web/dist/static/e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4/appearances/silver-bun/waiting.png": {
+    "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+    "bytes": 903363
+  },
+  "apps/web/dist/static/e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea/appearances/coral-bob/listening.png": {
+    "sha256": "e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea",
+    "bytes": 906498
+  },
+  "apps/web/dist/static/e9e2d5c9da4456d310a31e15eaf419e556a0c68957cd4fca9891c7cc73f705fb/appearances/plum-crop/animation/package.json": {
+    "sha256": "5e67782c83fa5b73c04dd91ae1da8eeb1d4d0489c63f898756fb200b3b2b44a6",
+    "bytes": 39228
+  },
+  "apps/web/dist/static/e9e2d5c9da4456d310a31e15eaf419e556a0c68957cd4fca9891c7cc73f705fb/appearances/plum-crop/animation/parts/default-source.png": {
+    "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+    "bytes": 938610
+  },
+  "apps/web/dist/static/e9e2d5c9da4456d310a31e15eaf419e556a0c68957cd4fca9891c7cc73f705fb/appearances/plum-crop/animation/parts/head.png": {
+    "sha256": "2d08b2b17687fad6f9fb54bb2a76be78f86ede46bd6a189362e8806ee1df98e0",
+    "bytes": 571971
+  },
+  "apps/web/dist/static/e9e2d5c9da4456d310a31e15eaf419e556a0c68957cd4fca9891c7cc73f705fb/appearances/plum-crop/animation/parts/listening-source.png": {
+    "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+    "bytes": 912539
+  },
+  "apps/web/dist/static/e9e2d5c9da4456d310a31e15eaf419e556a0c68957cd4fca9891c7cc73f705fb/appearances/plum-crop/animation/parts/speaking-source.png": {
+    "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+    "bytes": 911753
+  },
+  "apps/web/dist/static/e9e2d5c9da4456d310a31e15eaf419e556a0c68957cd4fca9891c7cc73f705fb/appearances/plum-crop/animation/parts/waiting-source.png": {
+    "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+    "bytes": 794910
+  },
+  "apps/web/dist/static/f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f/appearances/mint-puffs/default.png": {
+    "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+    "bytes": 924784
+  },
+  "apps/web/dist/static/faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9/brand/underline.svg": {
+    "sha256": "faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9",
+    "bytes": 344
+  }
+}

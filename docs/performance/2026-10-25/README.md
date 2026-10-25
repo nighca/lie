@@ -1,6 +1,6 @@
 # Production asset audit
 
-Status: measured baseline and implementation proposal; not implemented/deployed. Owner `root/production_performance`; root chat `01a17012-fa00-7170-ac0a-21c1900d71cd` remains integrator.
+Status: measured baseline preserved; implementation and bounded local acceptance complete in [implementation.md](implementation.md), not deployed. Cross-deployment retention is an explicit [release limitation](deployment-consistency.md). Owner `root/production_performance`; root chat `01a17012-fa00-7170-ac0a-21c1900d71cd` remains integrator.
 
 ## Identity and method
 
@@ -53,4 +53,4 @@ A separate warm reload used CDP Tracing.start categories `devtools.timeline,load
 
 ## Lifecycle
 
-No server/port/PID/PTY created. Self-created IAB tab1 temporary; cache override restored false, tracing ended; no viewport/throttle changed. Tab will be closed before handoff. No publication permission.
+No server/port/PID/PTY created. Self-created IAB tab1 temporary; cache override restored false, tracing ended; no viewport/throttle changed. Tab was subsequently closed after the implementation acceptance; see lifecycle in implementation.md. No publication permission.
