@@ -77,6 +77,12 @@
 
 覆盖率与双语README badge已本地main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`，root完整13files与计数/原始报告/SFC上下文实际review，候选与source47deba1覆盖源码/collector/依赖完全相同，复用clean4f5ba19真实388测试采样及两轮独立review；独立3脚本语法/45文件分母/SVG及快照逐字/链接通过。应用lines92.08%（1501/1630）、Node脚本91.32%（263/288）另报；[范围/命令与Vue映射限制](coverage/README.md)公开。CI上传14天artifact，不自动改trackedbadge，远程CI未运行，未push/部署；不重做已完成调查/采样。
 
+## 最新用户决定：暂停鉴权、授权推送
+
+2026-10-25用户明确邀请码/鉴权额外复杂度高，先暂缓实现；chat留待以后讨论，root先推进其他工作。已interrupt原实施agent并只授权其自有5544/tab安全收尾与完整暂停handoff，不继续开发/修复/测试/配置；全部WT/commits/dirty与已有必要证据保存，所有auth实现未main。新chat已通知暂停、不归档，以下早先“继续原整项/待接线”记录被本决定覆盖，不能凭其恢复。需用户明确重启才再实施，费用/provider/secret门禁不变。
+
+用户另明确“推送吧，我看看效果”，root持唯一publication turn按AGENTS发布流程推送已main成果（含badge），现有CI包含自动部署步骤；不纳入auth或待验动画修订，不改远程历史、不强推。fetch/普通push真实结果另记，不能把本授权当已发布。
+
 ## 邀请码独立专项chat
 
 用户明确要求独立chat跟进，已实际创建 `01a17076-a9f2-7f11-aaf3-7f7c801fee37`，标题“LIE 邀请码与访问鉴权”，local lie项目；不是主协调换代。两问题（8788作用、密钥是否属于gateway环境）与已批14天/公开浏览/play要码/简化到期规则均已交新chat先回答。可恢复执行进度、所有权、Node测试主链、failclosed影响与服务边界已完整转交，见[专项交接](history/2026-10-25/invite-specialist-chat-handoff.md)。

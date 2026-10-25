@@ -12,6 +12,7 @@
 - **整项委派**：有一定工作量即交subagent/专项，含环境、配置、排障、浏览器验收与长检查；root负责接收、排期、接口/用户决策、实际review、串行集成与报告，仍对结果负责。
 - **协调优化（用户同意）**：优先调度现有执行者，独立任务持续排队才考虑专职测试验收，不新建chat；常规handoff一次完整批量交付。root以实际差异＋哈希证明同一已验代码/资源身份及依赖/组合/相关环境未变后复用验证，仅实质变化/冲突重跑相关检查；文档批只核文档。候选仍基于最新main，main实质变化影响结果才重建/复验；隔离WT、实际review及唯一integrator不变。
 - **协作**：[AGENTS](../AGENTS.md)规定隔离worktree、唯一integrator、完整clean handoff、实际diff review及候选cherry-pick验证后main快进；内部不建PR，不自动push/部署。反馈批量交付，冲突/接口/共享viewport即时协调。
+- **本轮发布授权（2026-10-25）**：用户明确“推送吧，我看看效果”，授权发布已集成main的覆盖率badge等成果；root按fetch/祖先核验、实际review/验证、clean main普通push流程执行，现有CI包含自动部署步骤。邀请码实现暂缓、动画新修订待用户验收，二者未main，不随本次发布。远程确认SHA/CI结果另据实际记录，不把push当部署成功。
 - **开发服务生命周期（用户明确要求）**：各owner复用稳定端口、同源路径/多root预览并在用完后停止；启动登记owner/chat/WT/SHA/端口/PID/PTY/消费者/停止条件，根协调维护[当前服务登记](development.md#服务登记与生命周期)。本轮18个旧服务、5358/5359制作入口及5544正式QA共21个已关闭，证据见[清理记录](history/2026-10-25/development-service-cleanup.md)；保留用户8787/8788进程树；5355由动画专项复用供用户查看角色，来源切换由该owner登记。5544原session19829已Ctrl-C退出130并核无监听，不重复启停或按进程名批杀。
 - **设计文档入库（2026-10-25用户明确要求）**：所有完成的design/proposal及重要评审/决定必须纳入默认仓库历史；现行文档原位，备选/未采用/被替代材料可归档，入库不代表批准。[归档入口](archive/README.md)及[本次盘点](archive/2026-10-25/README.md)列补存与待owner交付范围；在制文档须随clean handoff交付，review/集成后才清理WT。
 - 每30分钟推进、每4小时写交接并建全新接任chat；核实接任成功后停旧任务/归档旧chat，失败不盲退、不双integrator。具体ID与[轮换流程](coordinator-rotation.md)见交接登记。
@@ -61,7 +62,7 @@
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 带有效期邀请码 / 独立专项chat接手、原执行整项收尾 | [方案](invite-access-design.md)：用户确认多人转发/重复使用、统一绝对截止默认14天可指定；home/intro/editor/share公开、所有play入口需码。用户授权按简单度选到期处理，明确删除续码恢复局：采用开局/新WS验exp，已连沿既有180秒上限不按exp强断，换码重新开局。root核同源现状、JWT区别、本机CLI；修订及旧版归档已main772dfa5；invite_access_design已从772dfa5整项实施共享token/CLI并隔离委派Gateway/Web，含5544同源QA与用完停服，不改rootpackage/lock。root在coverage集成后接邀请码test:access入npm test及CI（CI已改coverage，不能只接test主链而漏CI）；取最终clean批的精确Node命令。用户现要求独立chat `01a17076-a9f2-7f11-aaf3-7f7c801fee37`（LIE 邀请码与访问鉴权）跟进并回答8788用途、每gateway环境密钥归属；已创建并转交可恢复handoff。原root执行者完成当前组合QA/cleanup再交clean批，新chat先只读/用户讨论、不并行重复写；root保留最终review/唯一集成权。详[专项交接](history/2026-10-25/invite-specialist-chat-handoff.md)；不因此配置生产secret/新增资源/DB/DO/账号/部署，预算/回收及多人隔离风险独立保留。 |
+| 暂缓 | 邀请码与访问鉴权 / 用户明确暂停实施 | 用户因额外复杂度决定先暂缓，root不再推进此项；独立chat `01a17076-a9f2-7f11-aaf3-7f7c801fee37`保留供以后讨论。已interrupt原实施者，仅授权自有5544/tab安全收尾并保留全部WT/commits/dirty/已有证据，不继续开发/QA/配置/集成。设计原批准记录保留但不再构成当前实施许可；所有auth代码未main，不随本轮push发布。待用户明确重启后再排期；rootpackage/CI test:access接线同步后置。[交接](history/2026-10-25/invite-specialist-chat-handoff.md)。 |
 | P1 | 新一批动画微动作/头比例修订 / 动画专项两lane | 用户在动画chat明确：silver、salt、plum、mint、ochre waiting动作太小；mint default/listening也小；ochre speaking头大小跳变。现有8人基线继续集成，不被此批阻塞。两lane已clean交付并在5355新tab47供用户验收：A HEADc4881b3（base772dfa5），B HEAD78031e8（basedd16638）；父证据HEAD1bf177f独立保留，root仅核三WT clean/HEAD，未审为通过。**用户确认后才单独提PR并处理main/游戏接入**，这是该批内部无PR规则的明确例外，不现在开PR、不提前合入/发布。已核用户原消息，起点可用已审main dd16638；5355和在用WT由原owner持有。 |
 | P2 | CharacterPreset内部命名迁移 / character_preset_migration＋root review | owner已交 `79b5503`→`354f58b`，base2982e6a，174文件迁移＋runner test fixture修复；source388全检、79资源原字节及真实IAB通过。独立review发现含空格Node路径的shebang问题，已修且目标测试通过；root `integrate-character-preset-dawn/lie`从666e9c9有序cherry至候选 `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`，最终独立1目标test/79原字节/93链接/生产身份核验通过，388/type/build/IAB复用；已本地main c0ddd791。保持appearanceId与/appearances/；用户已明确允许现在受控切换，实施owner已完成一次受控切换，服务SHA实返3c54a9e6、8787/8788仅回环、79资源+manifest字节一致、实际私密路径403；记录见[实施验收](character-preset-migration-implementation.md)，不得重复启动8787/8788。[计划](character-preset-migration-plan.md)。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
@@ -76,7 +77,7 @@
 ## 保留的门禁与外部依赖
 
 - **官方投稿/仓库**：未来公开现`nighca/lie`，不另设投稿仓；目前仍PRIVATE，未授权改可见性或代理建fork/commit/PR。用户本人GitHub确认，无LIE OAuth/PAT；玩家贡献PR不改变内部无PR集成。不要向公开仓发送项目私有正文。[投稿研究](editor-official-submission-proposal.md)
-- **公开访问/费用**：临时无应用鉴权语音有特定线上授权，带有效期邀请码核心设计已获用户确认（默认14天、限制游戏、不限频率、不恢复局；到期处理授权按简单度选），修订review后可排期实施；不授权secret/资源/DB/DO/账号/部署，费用预算/回收策略仍暂缓，本次不新增频率/并发限制；额度不足断连不是即时硬止付。[公开方案](public-voice-launch-proposal.md)、[额度](linx-quota-investigation.md)
+- **公开访问/费用**：临时无应用鉴权语音有特定线上授权，带有效期邀请码核心设计已获用户确认（默认14天、限制游戏、不限频率、不恢复局；到期处理授权按简单度选），**用户现因复杂度明确暂缓实施**，chat保留、代码/证据保存、只做自有服务安全收尾，须明确重启才继续；不授权secret/资源/DB/DO/账号/部署，费用预算/回收策略仍暂缓，本次不新增频率/并发限制；额度不足断连不是即时硬止付。[公开方案](public-voice-launch-proposal.md)、[额度](linx-quota-investigation.md)
 - **宣传视频严格后置**：只批准制作方法/工具依赖研究；脚本、分镜、录屏、旁白/音乐、生成媒体和制作必须等用户判断产品成熟并明确放行。空闲或夜间小修授权不替代。
 - **实测与费用**：付费模型复核先审脚本/固定矩阵、设单次上限，首FAIL/UNCERTAIN/协议异常即停，只清自建资源。开发优先IAB，Chrome例外仅已授权灵矽控制台。普通测试/类型/构建不读取管理key、不自动发真实推理。
 

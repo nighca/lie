@@ -26,3 +26,7 @@
 候选接口ACCESS_MODE默认closed、缺key failclosed；生产INVITE_SIGNING_KEY；dev-only ACCESS_DEVELOPMENT_ORIGIN＋INVITE_DEVELOPMENT_SIGNING_KEY。合main会自动进入用户常驻预览，若缺新配置可能锁play；root须在集成前协调本机独立devkey/service turn，不静默破坏当前环境、不因此擅设生产secret。新chat已收到提醒。真实provider、多用户device隔离、预算和生产启用仍独立，不把fake或代码检查当已验证。
 
 本次已完成创建及完整初始提示/可恢复进度转交，并通知旧执行owner保持当前整项责任；实际代码验收和后续写权释放仍待原owner最终完整批交付。无密钥、token、Cookie或认证header入本记录。
+
+## 后续用户决定：暂缓实施
+
+2026-10-25用户因额外复杂度明确暂停邀请码/访问鉴权实施，chat保留供以后讨论，root继续其他工作。本节覆盖上面的继续实施/后续接写安排：原owner已interrupt，仅执行自有5544/tab安全收尾和暂停handoff；新chat已通知不实施/测试/配置/启服务。全部WT/commit/dirty及已有证据保留，auth实现未main、不随用户本轮已main成果push。rootpackage/CI接线同步后置，须用户明确重启后再排期。
