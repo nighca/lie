@@ -12,6 +12,7 @@
 - **整项委派**：有一定工作量即交subagent/专项，含环境、配置、排障、浏览器验收与长检查；root负责接收、排期、接口/用户决策、实际review、串行集成与报告，仍对结果负责。
 - **协调优化（用户同意）**：优先调度现有执行者，独立任务持续排队才考虑专职测试验收，不新建chat；常规handoff一次完整批量交付。root以实际差异＋哈希证明同一已验代码/资源身份及依赖/组合/相关环境未变后复用验证，仅实质变化/冲突重跑相关检查；文档批只核文档。候选仍基于最新main，main实质变化影响结果才重建/复验；隔离WT、实际review及唯一integrator不变。
 - **协作**：[AGENTS](../AGENTS.md)规定隔离worktree、唯一integrator、完整clean handoff、实际diff review及候选cherry-pick验证后main快进；内部不建PR，不自动push/部署。反馈批量交付，冲突/接口/共享viewport即时协调。
+- **开发服务生命周期（用户明确要求）**：各owner复用稳定端口、同源路径/多root预览并在用完后停止；启动登记owner/chat/WT/SHA/端口/PID/PTY/消费者/停止条件，根协调维护[当前服务登记](development.md#服务登记与生命周期)。本轮18个旧服务及5358/5359两制作入口共20个已关闭，证据见[清理记录](history/2026-10-25/development-service-cleanup.md)；保留用户8787/8788进程树、5355用户tab18。5544正式QA已完成，由原session19829收尾，最终退出回执待owner交，不计入20，不重复启停或按进程名批杀。
 - **设计文档入库（2026-10-25用户明确要求）**：所有完成的design/proposal及重要评审/决定必须纳入默认仓库历史；现行文档原位，备选/未采用/被替代材料可归档，入库不代表批准。[归档入口](archive/README.md)及[本次盘点](archive/2026-10-25/README.md)列补存与待owner交付范围；在制文档须随clean handoff交付，review/集成后才清理WT。
 - 每30分钟推进、每4小时写交接并建全新接任chat；核实接任成功后停旧任务/归档旧chat，失败不盲退、不双integrator。具体ID与[轮换流程](coordinator-rotation.md)见交接登记。
 

@@ -65,12 +65,14 @@
 
 ## 必须保留的服务与环境
 
+**当前服务规则与盘点以[development登记](development.md#服务登记与生命周期)为准**：稳定端口优先复用，用完停服；历史端口不再默认永久保留。根侧未新启服务、未发停止信号；18个历史服务＋5358/5359两制作入口共20个已关闭。保留用户8787/8788进程树、5355用户tab18；5544正式QA已完成，原owner在session19829收尾，退出回执未到前不计已停，不重复操作。证据及未知源码/PTY字段见[清理记录](history/2026-10-25/development-service-cleanup.md)，不交叉操作。以下旧记录只供归属追溯，不覆盖本轮登记。
+
 - 前代约03:37分享边界只读QA自建IAB browser `3` / tab `1`清理未确认：仅打开`http://localhost:8787/play`见缺内容提示，后续CDP调用约272秒未返回被中断；close返回`Browser is not available: 3`，IAB inventory也不可用；04:07一次inventory仍返回`Browser is not available: iab`，之后未重试/reset。浏览器恢复后仅核查/关闭此自建tab，禁止触碰他人tab或reset。无源码、草稿、viewport、mic/provider或服务改动，不推断产品bug/服务离线或其他专项等待原因，无审批/拒绝证据；未得边界/Unicode/refresh/网络结果。临时证据`/private/tmp/lie-share-boundary-qa-20261025/handoff.md`。
 
 - 用户launchd `dev.nighca.lie.main-preview`独立于chat：Vite8787、同源薄Worker8788，owning main每1.5s检查，lock变动先npm ci，失败30s退避；换代/归档不得停止或重复启动。实际SHA查`http://127.0.0.1:8787/__lie/main-status`；ready只证明配置可用，不是真人收音。
 - plist：`~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist`；Node24.22.1：`~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64`；日志：`~/Library/Logs/LIE/main-preview.log`。凭据只在忽略目录，勿输出，维护另派owner。[运行说明](development.md)
-- 保留动画作者预览5351/5352/5355、plum5356/gray5357及Logo探索5497的资源与既有owner记录，不重启旧模板。用户8787测试tab保留；全局viewport只按短窗口协调，释放时reset并关自建tab，不动用户会话/mic。
-- 06:37只读lsof见8787/8788、5402/5403、5507与5351/5352/5355/5356/5357监听；5504/5505及5497本次未见监听，不推断原因、不重启。5504/5505为专项历史游戏QA端口，后续先问owner。旧CJK5501/README5499/Logo5503/投稿5401/root5486/5488/5489的停止证据保留前代快照，不能套用到新进程；5398用途需问owner。所有监听只读观察，不擅停未知服务。
+- 当前动画历史入口仅5355因用户现有tab18保留；5351/5352/5357及其他旧动画入口本轮已核销，5356/Logo5497未见监听，不按旧“保留”文字继续闲置运行。用户8787测试tab保留；全局viewport按短窗口协调，不动用户会话/mic。
+- Editor5402/5403与调查5507当前无监听；旧5398已由调查owner本轮停止。CJK5501/README5499/Logo5503/投稿5401/root5486/5488/5489等历史停止记录只供追溯，不套用到新进程；当前用途/监听以development登记为准，不擅停未知服务。
 - 前代sunny只读QA：8787真实游戏单canvas/单RAF与切人正常；3次合成iframe暂停恢复无重复RAF，真实visibility因IAB子agent能力限制仍未验，不当PASS。未用mic/provider，自有tab已清理；临时证据`/private/tmp/lie-sunny-visibility-qa-20261025/handoff.md`及同目录`observations.json`。
 
 覆盖率[准备方案](archive/2026-10-25/coverage-design-preparation.md)已完整归档；managed WT coverage-reporting/lie从现main c0ddd791开始，已整项委派design_document_archive实施本地快照badge/真实scope报告且无外部权限；迁移package/lock及目录依赖已释放，保留无实测百分比/SFC remap待验/脚本另报边界，不重做已完成调查。
