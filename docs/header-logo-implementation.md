@@ -11,3 +11,5 @@ ProductHeader 移除右侧“语音推理”，保留原 Logo SVG 路径、圆�
 5544临时服务原PTY78961停止exit130，lsof核无listener后已交还主协调排队；未碰8787/8788/5355或用户tab/草稿。测试首次命令config路径重复导致启动失败，修正后曾因默认沙箱无法写Vite缓存失败，授权owned-WT执行后59项通过；无审批拒绝。
 
 源branch codex/header-logo-implementation，base8aa7ec967dfad45bf1646cdd27c6d909bebec437，WT /Users/nighca/.codex/worktrees/background-character-names/lie。仅ProductHeader、删除旧品牌文字断言、本文档与两张真实截图。由主协调审阅/集成/发布，本chat未改main/push。
+
+后续用户直接消息01a17278-d172-74e0-b3ab-f9af2dae748e要求再向左约20px；追加28b77d1仅伪元素left45.6%→30.9%，桌面62.016→42.024px（左移19.992px），114px框等比左移16.758px。其余几何与层级字节一致，UItypes通过；root实际审此一行，未为纯水平偏移重复完整build/截图。上图保留4567时状态。组合5项Header测试及spacing与Header几何复验通过。

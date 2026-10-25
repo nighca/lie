@@ -137,3 +137,5 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 2026-10-25 首页滚动验收5544：owner home_scroll，WT `/Users/nighca/.codex/worktrees/home-scroll/lie`，source b9ef3cb→cf5c0fc，PID42659 / PTY85261；真实IAB消费结束后Ctrl-C exit130、listener已核消失，自建tab关闭/viewport复原。后续2188f59语音组合QA起前5544无监听，本轮inventory无IAB，未启动服务/新PID/PTY；不占用该端口。8787/8788及5355保持保护。
 
 组合语音提示补验追加：owner home_scroll，自有Chrome tab1910329686，source1973ee5/runtime2188f59，Vite5544 PID10172/PTY45505。root另给Chrome回合后执行，结束原PTY Ctrl-C exit130、lsof无监听，临时入口与符号链接已移除，tab关闭/viewport及reduce复原；无真实语音。视频专项获用户新授权一次≤60秒真实线上短测窗口，其他agents不得占用同一provider，专项完成后负责停止并交还；不变更现有agent/device或常驻服务。
+
+本批5544串行回执：UI头部own IAB48，PTY78961 Ctrl-C exit130、lsof无监听/tab关与viewport reset后释放；spacing owner character_preset_migration，原矩阵source397b032 PID50243/PTY61290、组合7c62ed3 PID69163/PTY46596，两次均原session Ctrl-C exit130/精确PID退出/监听无，Chrome1910329694及1910329701关闭，临时夹具入口删除，无viewport覆盖/storage动作。服务资源已交还，仍保护8787/8788/5355。

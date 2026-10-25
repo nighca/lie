@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `8aa7ec967dfad45bf1646cdd27c6d909bebec437`。CI40180923871/attempt1与CD40181053281均success，Worker `6897531f-262f-4e53-976d-ee58ff637752`；[发布证据](releases/2026-10-25-cream-notice-home/README.md)。奶油提示与首页滚动已上线；后续归档/头部实施会继续推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `6fc17ae7bdc536580edb75a557728350da457476`。CI40181625130/attempt1与CD40181791578均success，Worker `91a5354f-f0f4-40b0-af3e-e87241bdf253`；[发布证据](releases/2026-10-25-header-audio-archive/README.md)。运行输入与8aa相同；后续头部与移动间距修复会继续推进HEAD，操作前读实际Git。
 
 ## 协调权、自动化与发布
 
@@ -26,8 +26,8 @@
 | architecture_code_review | 单JSON/CI-CD已验发布；本批原始发布材料来自该owner，CI artifact/restored256与Web251为不同集合。后续审查按新source身份，不重复已验全suite |
 | character_preset_migration | 调查立绘加载占位source8b98887已clean交付、root完整审查并候选fe56783；36项目标测试root复验通过，沿用source UI/Web类型检查；仅调查页启用slot，无服务启动，IAB不可用，原生视觉未测。[证据](investigation-portrait-loading.md)。 |
 | hackathon_case | 新增第四案source b7b20e3→2cbae8f，root完整内容/八文件diff审查、候选c1da7a9→5c87845；仅新增04 JSON为运行变更，root2项专项复验通过。源Web357/脚本33/types/build身份可复用；真实模型/盲测未验。[交付](hackathon-case/README.md)。 |
-| 头部UI专项01a16d5c | 原头部9431922仍未批准；用户在专项要求下划线位于Logo右下方、带完整页面对比，新proposal0c4a268已完整审查归档；用户随后明确批准并要求左移接触，专项已接ProductHeader局部实施。语音A用户已批准，e214c0e三稿归档并由character owner完成实现；两项门禁独立。 |
-| 宣传视频01a17226 | 用户已授权实际制作并直接沟通；72c5b49完整创作→试玩→退出→分享→接收方73.4秒无音轨录像已审，独立审验3ea6ee→3cb876归档。用户明确允许删除前三段旧MP4，历史/截图/原帧保留。[当前素材](promo-video/2026-10-25/complete-create-preview-share.md)。离线音频3877c69→3c81036已审，三PCM逐样本对齐，不是AI回答；用户新消息01a1726b-4cff-7682-a910-192a26afa48c明确“测吧”，root已给专项一次≤60秒单角色单问不重试的现有线上资源turn；异常finally先处理，一答/错误/超时停并清理。其他agents不占provider，不能据此声称无外部访客或费用硬上限；短测在制，非结果通过。无公开上传许可。 |
+| 头部UI专项01a16d5c | 原头部9431922仍未批准；用户在专项要求下划线位于Logo右下方、带完整页面对比，新proposal0c4a268已完整审查归档；用户随后明确批准并要求左移接触，专项4567e2f→28b77d1已完成ProductHeader局部及再左移20px并完整审查入候选；UI59/types/build/IAB桌面手机和root5项测试通过。语音A用户已批准，e214c0e三稿归档并由character owner完成实现；两项门禁独立。 |
+| 宣传视频01a17226 | 用户已授权实际制作并直接沟通；72c5b49完整创作→试玩→退出→分享→接收方73.4秒无音轨录像已审，独立审验3ea6ee→3cb876归档。用户明确允许删除前三段旧MP4，历史/截图/原帧保留。[当前素材](promo-video/2026-10-25/complete-create-preview-share.md)。离线音频3877c69→3c81036已审，三PCM逐样本对齐，不是AI回答；用户新消息01a1726b-4cff-7682-a910-192a26afa48c明确“测吧”，root已给专项一次≤60秒单角色单问不重试的现有线上资源turn；异常finally先处理，一答/错误/超时停并清理。其他agents不占provider，不能据此声称无外部访客或费用硬上限；唯一短测已失败并释放：恰好1WS/虚拟mic、未ready、未question/STT/TTS；3ctx closed/3tracks ended/WSclosed/接口恢复，原因未定，不重试。新增dcc52a1由architecture只读审验，尚未集成。后续用户逐次明确批准的诊断：临时tab1006无open/hello；用户确认同机同案普通操作成功；用户指定现有tab后原生WS返回101/UI进入对话，但录制wrapper/locator异常，未question，不称有声片完成。所有该轮资源已停止并保留用户tab；最新材料待批次review，不能据此实施生产修复。无公开上传许可。 |
 | home_scroll / character_preset_migration | 首页source b9ef3cb→cf5c0fc、语音A777c392均已完整审查入候选；前者真实IAB验收，后者357测试/types/build及root4项通过。组合QA追加48b4b22已在独立Chrome补验并完整审查：三尺寸/reduce/取消迟到完成/首页四案滚动通过；使用真实App/controller＋fake transport，非真实语音。5544 PID10172/PTy45505原session停止exit130并核空监听，tab/临时入口/viewport清理完成。 |
 | native QA | 最新QA child仅一次合法inventory，只有Chrome extension无IAB，原因未知且本次无锁定错误；native7全部未测，无草稿/tab/service动作，不借用视频chat的browser id。[范围](qa/native-share-editor-600-2026-10-25/README.md)，home_scroll先规划独立Chrome原生补验，5544须等UI头部窗口释放；不重跑旧jsdom冒充进展 |
 | 真人/内容QA | 贺宁真实模型、三案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |
@@ -41,3 +41,5 @@
 鉴权明确暂停；视频现已获用户明确制作授权，专chat01a17226-5e5a-7193-b5b7-e522519a3e0c与用户直接确认创意细节，旧仅研究门禁不再适用；投稿为GitHub网页辅助、作者确认，用户计划公开仓不等本批已改visibility，无OAuth/token/自动PR。旧版本retention未采用；不扩为账号工件、历史、WT或凭据清理。[当前待办](project-plan.md#当前待办与门禁)包含出戏/宿主WS/真实visibility等未验边界。用户确认移动可用不等全设备长会话/盲测通过。
 
 本归档批不重跑构建、测试、线上八响应或真实provider。root已独立核线上八SHA同源产物并正常TLS GET首页/JS；本归档者仅复核CD最终状态及必要证据关联、脚本/JSON/文档，不新增部署结论。
+
+当前正常实施候选：移动首页spacing397b032→19fba4c→58dedce（中间Header4567显式依赖已含，不重放），root已读完整diff/fixture/全部JSON并查看320/391对照，组合几何身份核验通过。新Header4567→28b已审，root5项测试通过；最新28b仅left横向微调，无框尺寸变化，未为一行参数重复整套浏览器/构建。

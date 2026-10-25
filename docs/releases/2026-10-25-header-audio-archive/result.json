@@ -1,0 +1,32 @@
+{
+  "publishedSha": "6fc17ae7bdc536580edb75a557728350da457476",
+  "ci": {
+    "id": 40181625130,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40181625130"
+  },
+  "cd": {
+    "id": 40181791578,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40181791578",
+    "deployJob": 121134203212,
+    "allSteps": "completed/success"
+  },
+  "artifact": {
+    "id": 12593583665,
+    "sourceRun": 40181625130,
+    "sourceAttempt": 1,
+    "sourceSha": "6fc17ae7bdc536580edb75a557728350da457476",
+    "digest": "sha256:3aae843a4ceecbe51e9c2f1e2ebc7d54038ed71879e42ac655f4c1b8fe9afb7e",
+    "verifiedRestoredFiles": 256
+  },
+  "workerVersion": "91a5354f-f0f4-40b0-af3e-e87241bdf253",
+  "staticValidation": "REUSED from8aa; git diff apps/packages/content/scripts/.github/package.json/package-lock.json empty. No new lie.agency requests. Source assets unchanged by design/media/docs batch.",
+  "nativeVoiceQA": "NOT RUN",
+  "readOnlyApiIssue": "One list-runs request returned EOF; bounded backoff read succeeded, no workflow retry or state change.",
+  "limits": "No local build/browser/provider/services/manual deploy/permissions/Git mutation; ignored evidence only, next normal archival batch."
+}
