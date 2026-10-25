@@ -38,6 +38,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .portrait-backdrop { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 .portrait-backdrop::before { content: ''; position: absolute; inset: 16% 5% 4%; background: color-mix(in srgb, var(--character-accent) 38%, var(--lie-surface)); border-radius: 49% 51% 42% 58%; transform: rotate(-6deg); }
 .portrait-backdrop img { position: absolute; height: 130%; width: 100%; max-width: none; object-fit: contain; object-position: 50% 0; left: 50%; top: 0; transform: translateX(-50%); }
+.portrait-loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--lie-muted); font-size: 14px; font-weight: 700; }
 .portrait-initial { position: absolute; inset: 0; display: grid; place-items: center; font-size: 110px; font-weight: 800; }
 .conversation-copy { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 24px; border: 2px solid var(--lie-ink); border-radius: 28px; background: var(--lie-surface); }
 .conversation-copy h2 { flex-shrink: 0; margin: 0 0 16px; padding-bottom: 16px; border-bottom: 1px solid #111b451c; font-size: 20px; }

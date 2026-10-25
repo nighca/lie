@@ -258,3 +258,69 @@ it('resumes frames when switching an ordinary completed nonloop clip to another 
   expect(mock.load).toHaveBeenCalledOnce()
   wrapper.unmount()
 })
+
+
+describe('opt-in pending portrait slot', () => {
+  function loadingPortrait(src: string | null = '/appearances/example/animation/package.json') {
+    return mount(AnimatedPortrait, { props: { src, state: 'default' }, slots: { default: '<img src="/static.png" alt="静态人物">', loading: '<span role="status">人物加载中…</span>' } })
+  }
+  it('shows accessible pending content until the first successful frame without mounting the static image', async () => {
+    let finish!: (value: unknown) => void
+    mock.load.mockReturnValueOnce(new Promise(resolve => { finish = resolve }))
+    const wrapper = loadingPortrait()
+    expect(wrapper.get('[role="status"]').text()).toBe('人物加载中…')
+    expect(wrapper.find('img').exists()).toBe(false)
+    expect(wrapper.get('canvas').element.style.display).toBe('none')
+    finish({ data: {}, images: new Map() }); await flushPromises()
+    expect(mock.render).toHaveBeenCalledOnce()
+    expect(wrapper.find('[role="status"]').exists()).toBe(false)
+    expect(wrapper.get('canvas').element.style.display).toBe('')
+    wrapper.unmount()
+  })
+  it.each(['load', 'render'])('replaces pending content with static fallback after %s failure', async failure => {
+    if (failure === 'load') mock.load.mockRejectedValueOnce(Error('missing package'))
+    else mock.render.mockImplementationOnce(() => { throw Error('canvas unavailable') })
+    const wrapper = loadingPortrait()
+    expect(wrapper.find('[role="status"]').exists()).toBe(true)
+    await flushPromises()
+    expect(wrapper.get('img').attributes('src')).toBe('/static.png')
+    expect(wrapper.find('[role="status"]').exists()).toBe(false)
+    wrapper.unmount()
+  })
+  it.each(['no animation', 'reduced motion', 'unavailable preference'])('uses static content directly with %s', async mode => {
+    if (mode === 'reduced motion') media.matches = true
+    if (mode === 'unavailable preference') vi.stubGlobal('matchMedia', null)
+    const wrapper = loadingPortrait(mode === 'no animation' ? null : '/appearances/example/animation/package.json')
+    await flushPromises()
+    expect(wrapper.find('[role="status"]').exists()).toBe(false)
+    expect(wrapper.get('img').attributes('src')).toBe('/static.png')
+    expect(mock.load).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
+  it('keeps new pending content through stale responses, respects changed motion preference and aborts on unmount', async () => {
+    let oldDone!: (value: unknown) => void
+    let newDone!: (value: unknown) => void
+    let resumedDone!: (value: unknown) => void
+    mock.load.mockReturnValueOnce(new Promise(resolve => { oldDone = resolve }))
+    const wrapper = loadingPortrait(); await flushPromises()
+    const oldSignal = mock.load.mock.calls.at(-1)![1]
+    mock.load.mockReturnValueOnce(new Promise(resolve => { newDone = resolve }))
+    await wrapper.setProps({ src: '/appearances/new/animation/package.json' })
+    expect(oldSignal.aborted).toBe(true)
+    oldDone({ data: {}, images: new Map() }); await flushPromises()
+    expect(wrapper.find('[role="status"]').exists()).toBe(true)
+    expect(mock.render).not.toHaveBeenCalled()
+    changeMotion(true); await flushPromises()
+    expect(wrapper.find('[role="status"]').exists()).toBe(false)
+    expect(wrapper.find('img').exists()).toBe(true)
+    newDone({ data: {}, images: new Map() }); await flushPromises()
+    expect(mock.render).not.toHaveBeenCalled()
+    mock.load.mockReturnValueOnce(new Promise(resolve => { resumedDone = resolve }))
+    changeMotion(false); await flushPromises()
+    expect(wrapper.find('[role="status"]').exists()).toBe(true)
+    const signal = mock.load.mock.calls.at(-1)![1]
+    wrapper.unmount(); expect(signal.aborted).toBe(true)
+    resumedDone({ data: {}, images: new Map() }); await flushPromises()
+    expect(mock.render).not.toHaveBeenCalled()
+  })
+})

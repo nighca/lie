@@ -142,6 +142,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         <section v-if="current != null" class="character-stage" :style="{ '--character-accent': characterPreset(current.appearanceId)?.accent ?? 'var(--lie-aqua)' }" :aria-label="`${current.name}的人物形象`">
           <div class="portrait-backdrop">
             <AnimatedPortrait :src="currentCharacterPreset?.animation ?? null" :state="portraitState" :label="current.name">
+              <template #loading><span class="portrait-loading" role="status">人物加载中…</span></template>
               <img v-if="portrait != null" :key="portrait" :src="portrait" alt="人物形象" @error="portraitFailed">
               <span v-else class="portrait-initial">{{ current.name.slice(0, 1) }}</span>
             </AnimatedPortrait>

@@ -71,6 +71,7 @@ watch([() => props.src, reduced, canvas, resultState], async ([src, motion, elem
   <div class="animated-portrait" :class="{ 'animated-portrait--contain': fit === 'contain' }">
     <canvas ref="canvas" v-show="ready" role="img" :aria-label="label"></canvas>
     <slot v-if="fallback"></slot>
+    <slot v-else-if="!ready" name="loading"></slot>
   </div>
 </template>
 
