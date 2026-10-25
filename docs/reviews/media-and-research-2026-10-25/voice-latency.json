@@ -1,0 +1,68 @@
+{
+  "base": "57ff7d5984126932ba0367c6b47bfe911d03a480",
+  "ordered": [
+    "ecd555c37a4e476538f36615dc077f28c83d8c81",
+    "008fb4263ad5c7f7d4967ecfd04b0b9a86098aca"
+  ],
+  "scope": [
+    "docs/voice-connection-latency/README.md",
+    "docs/voice-connection-latency/browser-probe.js",
+    "docs/voice-connection-latency/critical-path.test.ts",
+    "docs/voice-connection-latency/http-only-results.json",
+    "docs/voice-connection-latency/native-results.json",
+    "docs/voice-connection-latency/official-docs.md",
+    "docs/voice-connection-latency/offline-results.json",
+    "docs/voice-connection-latency/source-identity.json",
+    "docs/voice-connection-latency/vitest.config.mts"
+  ],
+  "identity8": "pass",
+  "computedNativeTableMs": [
+    {
+      "scenario": "first-open-a",
+      "status": 47.8,
+      "socketOpen": 2004.0,
+      "hello": 470.7,
+      "toolsList": 1,
+      "capture": 370.2,
+      "gum": 210.6,
+      "worklet": 9.3,
+      "playbackResume": 0.3,
+      "listen": 2536.2
+    },
+    {
+      "scenario": "manual-restart-a",
+      "status": 42.3,
+      "socketOpen": 1331.4,
+      "hello": 423.6,
+      "toolsList": 0.7,
+      "capture": 267.5,
+      "gum": 137.4,
+      "worklet": 3.5,
+      "playbackResume": 0.2,
+      "listen": 1799.6
+    },
+    {
+      "scenario": "active-switch-a-to-b",
+      "status": 27.1,
+      "socketOpen": 1241.1,
+      "hello": 416.5,
+      "toolsList": 0.5,
+      "capture": 232,
+      "gum": 116.6,
+      "worklet": 1.9,
+      "playbackResume": 0.3,
+      "listen": 1687.5
+    }
+  ],
+  "jsonSyntaxLinksWhitelist": "pass",
+  "probeSyntax": "pass",
+  "fakeRecordedMs": [
+    480,
+    780,
+    980,
+    1400
+  ],
+  "testsNotRerun": true,
+  "finalHEAD": "008fb4263ad5c7f7d4967ecfd04b0b9a86098aca",
+  "status": ""
+}

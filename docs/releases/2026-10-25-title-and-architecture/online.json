@@ -1,0 +1,28 @@
+{
+  "sha": "713bbe7427320bcda33d26594c78ac25336e3457",
+  "rows": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalURL": "https://lie.agency/",
+      "bytes": 546,
+      "sha256": "407d29d1ab9266f98fe26387023b5be05808f3f4858ae67770eeba839b5d4a35",
+      "normalTLS": true,
+      "immutable": false
+    },
+    {
+      "path": "/assets/index-D9CZV3Z9.js",
+      "status": 200,
+      "finalURL": "https://lie.agency/assets/index-D9CZV3Z9.js",
+      "bytes": 237593,
+      "sha256": "6b42e9b1035871264dad97d63d1ecfa2234a8458837e938aaa8eaca3bdc6a2cb",
+      "normalTLS": true,
+      "immutable": true
+    }
+  ],
+  "initialHTMLTitle": "LIE · 语音推理",
+  "brandPresentInNewJS": true,
+  "oldHomePrefixConstructionAbsent": true,
+  "pageTitleSourceSha256": "3ba1376e385c8b761cc8ac10b832ceadddb38449390b125956ade981f7fac631",
+  "scope": "Normal TLS static homepage/newJS only; no native browser navigation; combine with existing27 routed-title tests, no new local test rerun"
+}
