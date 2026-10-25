@@ -108,8 +108,8 @@ for phase in phases['speaking']:
 print(f'{covered} closed-mouth ink pixels covered by opaque native patch; boundary max RGB delta={max(boundary)}, mean={sum(boundary)/len(boundary):.3f}; 33 speech phases retain one default head texture and registered local mouth')
 
 head=next(n for n in data['nodes'] if n['id']=='head-waiting');im=images['waiting-source']
-hair=[(x,y) for y in range(450) for x in range(im.width) if im.getpixel((x,y))[3]>=200 and inside(x,y,head['sprite']['mask'])]
+hair=[(x,y) for y in range(450) for x in range(im.width) if im.getpixel((x,y))[3]>0 and inside(x,y,head['sprite']['mask'])]
 assert len(hair)>1000
 minimum=min(min(mappt(phase['world']['head-waiting'],x,y)[1] for x,y in hair) for phase in phases['waiting'])
 assert minimum>=3,('waiting hair crop risk',minimum)
-print(f'33 waiting phases, every alpha>=200 head pixel: minY={minimum:.3f}; lower body identity; only upper contact group translated12px without lateral motion')
+print(f'33 waiting phases, every alpha>0 head pixel: minY={minimum:.3f}; lower body identity; only upper contact group translated15px without lateral motion')
