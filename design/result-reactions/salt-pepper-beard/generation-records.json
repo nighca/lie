@@ -1,0 +1,37 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "source": "design/character-presets/assets/salt-pepper-beard/animation/parts/default-source.png",
+  "states": [
+    {
+      "state": "accusedCorrectly",
+      "prompt": "Use case: identity-preserve. Edit target supplied transparent1254x1254 silver-haired bearded coral-sweater game sprite. Change ONLY facial expression to clearly read 'oh, you caught me': inner eyebrows raised, eyes narrowed in a resigned downcast glance, visibly wry small closed asymmetric mouth under moustache replacing happy grin. Lively comic sheepish embarrassment, not crying/sad tragedy. Maintain EXACT head/hair/beard outer silhouettes, moustache/beard shading, face angle/nose/ears/skin, original1254canvas and exact registration. Entire neck, body, sweater, sleeves and hands identical in size and position. Same navy ink playful cartoon. True transparent background. No tears/sweat/words/icons/props.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-24d91d4a-334f-4a5f-a170-bb51eeda0738.png",
+      "savedPath": "parts/accused-correctly-source.png",
+      "sha256": "7185af30d4825167ac83f6265912ac200dcf242452e112702438c07b5088ff06",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "state": "accusedWrongly",
+      "prompt": "Use case: identity-preserve. Edit target supplied transparent1254x1254 silver-haired bearded coral sweater game sprite. Change ONLY eyes, eyebrows and mouth to vivid friendly 'Me?!' puzzled surprise: one high arched eyebrow, other slightly knitted, widened attentive eyes, visibly open small rounded questioning mouth underneath moustache with pink tongue. Not smile, not angry/frightened. Keep EXACT1254canvas/registration, original head/hair/beard/moustache outer silhouette, ears/nose/skin shading, face direction, neck, entire sweater/body/arms/hands identical in position and size. Preserve white beard edge, crisp navy ink cartoon style. Real alpha transparency. No symbols, text, tears/sweat or props.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-ae42a4ae-02c7-4afb-b8b9-daa13672aabe.png",
+      "savedPath": "parts/accused-wrongly-source.png",
+      "sha256": "b34f845453b977c2cc6344233c6839d932b7dd0c4d83a9439aba25e0eaa419f3",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ]
+}
