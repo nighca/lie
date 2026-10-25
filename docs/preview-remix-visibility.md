@@ -24,3 +24,7 @@ Dependencies were installed offline with Node 24.22.1/npm 11, without install sc
 ## Handoff
 
 Owner: `/root/preview_remix_visibility`; parent owns review/integration. Worktree: `/Users/nighca/.codex/worktrees/preview-remix-visibility/lie`; branch: `codex/preview-remix-visibility`. Files: `apps/web/src/Application.vue`, `apps/web/test/editor-navigation.test.ts`, this document. No other production scope, no main updates, push, PR or deploy. Preserve the source commit during review.
+
+## Parent composition acceptance
+
+2026-10-25: parent applied the agreed App allowRemix default-true gate and reviewed the complete child diff/surrounding code/tests/status. Final composition passes the entire web suite (31 files / 288 tests), web types and production build (8 presets / 89 assets). IAB actual Application memory routes additionally verified all six source/outcome combinations; preview returns to the same draft bytes and official/shared remix into new drafts. Browser storage is a per-fixture-window in-memory replacement, protecting real user drafts. See [native evidence](../design/preview-remix-visibility/README.md). This supersedes the pending-parent status above without rewriting the child validation history.

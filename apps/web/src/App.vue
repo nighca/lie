@@ -6,7 +6,7 @@ import type { GameController } from './application/controller'
 import { splitBackgroundCharacterNames } from './presentation/backgroundCharacterNames'
 import type { CharacterPreset } from './presentation/characterPresets'
 
-const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; returnLabel?: string }>(), { returnLabel: '返回案件列表' })
+const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; allowRemix?: boolean; returnLabel?: string }>(), { allowRemix: true, returnLabel: '返回案件列表' })
 const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: []; remix: [] }>()
 const view = ref(props.controller.getView())
 const voiceFeedback = ref(props.controller.getVoiceFeedback())
@@ -178,7 +178,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <footer class="result-actions">
         <UiButton @click="controller.restart()">重新开始一局</UiButton>
         <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
-        <UiButton variant="quiet" class="remix-link" @click="emit('remix')">我要改编</UiButton>
+        <UiButton v-if="allowRemix" variant="quiet" class="remix-link" @click="emit('remix')">我要改编</UiButton>
       </footer>
     </main>
     <main v-else class="intro-card surface">

@@ -1,0 +1,11 @@
+# 试玩结果入口：组合实际验收
+
+2026-10-25。reviewed base48316544ea9fd22afbf1eee8db6f81e326026821；子任务原290db0d9bc774c56ac3af62d7e0a35cda18e2195经父全文review后cherry为af8141a（不可重复重放child原提交）。
+
+实际Application+App+Editor+真实memoryRouter，IAB44六个391×844临时iframe：preview/official/shared × correct/wrong。checks.json证明两种preview结果仅重开/返回编辑器，其他四种均保留我要改编；原生点击preview返回后原稿字节相等、标题恢复；官方/分享点击改编均实际进入Editor并创建草稿。子任务测试额外覆盖programmatic remix旁路、选人/profile/步骤恢复以及现有外部草稿/存储失败保护。
+
+四张PNG为原生CDP截图并已逐张查看：preview-correct、preview-wrong、official-correct、shared-wrong。正确结果长文需滚动，使用原生Tab聚焦返回按钮使底部操作区可见；保留自然滚动和焦点环，未拼图/裁改内容。截图仅逐一显示iframe原点，不改AppDOM或globalviewport。
+
+保护用户draft：qa-entry.ts在每个临时iframe的window上用独立Map实现localStorage，先覆盖、再mountApplication/Editor；所有seed/写稿都限fixture内存，未读取或修改真实浏览器localStorage。窗口关闭后覆盖与内存销毁，不影响用户标签。两fixture文件可复制回apps/web/__preview_result_qa.html/.ts复验，实际临时文件已删除且不进生产入口。
+
+本轮最终组合Web31files288tests、types、build8presets89assets通过；保留原静态hashunderline构建warning且产物存在。未用真人mic/provider/keys。5507共用loading回合PID30999/原PTY27840，完成原PTY Ctrl-C exit1、核无监听，IAB43/44均关闭；media reduce已恢复features=[]，无globalviewport/network/cache残留。完整服务/source取舍见连接loading文档。

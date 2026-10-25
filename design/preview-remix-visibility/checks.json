@@ -1,0 +1,84 @@
+[
+  {
+    "id": "preview-correct",
+    "title": "谜题解开了！",
+    "actions": [
+      "重新开始一局",
+      "返回编辑器"
+    ],
+    "height": 1231,
+    "editorVisible": true,
+    "editorTitle": "空盒里的纪念章",
+    "previewOriginalDraftPreserved": true,
+    "remixDraftCreated": null
+  },
+  {
+    "id": "preview-wrong",
+    "title": "指认不正确",
+    "actions": [
+      "重新开始一局",
+      "返回编辑器"
+    ],
+    "height": 844,
+    "editorVisible": true,
+    "editorTitle": "空盒里的纪念章",
+    "previewOriginalDraftPreserved": true,
+    "remixDraftCreated": null
+  },
+  {
+    "id": "official-correct",
+    "title": "谜题解开了！",
+    "actions": [
+      "重新开始一局",
+      "返回案件列表",
+      "我要改编"
+    ],
+    "height": 1295,
+    "editorVisible": true,
+    "editorTitle": "空盒里的纪念章",
+    "previewOriginalDraftPreserved": null,
+    "remixDraftCreated": true
+  },
+  {
+    "id": "official-wrong",
+    "title": "指认不正确",
+    "actions": [
+      "重新开始一局",
+      "返回案件列表",
+      "我要改编"
+    ],
+    "height": 846,
+    "editorVisible": true,
+    "editorTitle": "空盒里的纪念章",
+    "previewOriginalDraftPreserved": null,
+    "remixDraftCreated": true
+  },
+  {
+    "id": "shared-correct",
+    "title": "谜题解开了！",
+    "actions": [
+      "重新开始一局",
+      "返回案件列表",
+      "我要改编"
+    ],
+    "height": 1295,
+    "editorVisible": true,
+    "editorTitle": "空盒里的纪念章",
+    "previewOriginalDraftPreserved": null,
+    "remixDraftCreated": true
+  },
+  {
+    "id": "shared-wrong",
+    "title": "指认不正确",
+    "actions": [
+      "重新开始一局",
+      "返回案件列表",
+      "我要改编"
+    ],
+    "height": 846,
+    "editorVisible": true,
+    "editorTitle": "空盒里的纪念章",
+    "previewOriginalDraftPreserved": null,
+    "remixDraftCreated": true
+  }
+]
