@@ -11,13 +11,6 @@
     "wrong": "exec-4a9bbae6-7a36-4fa0-83ca-f592a4babbc9.png"
   },
   "files": {
-    "endpoint-review.png": {
-      "sha256": "06d34bab50d533bd3aaa89bdf5c27c8a96fa305d781c1e090db86e49857797fd",
-      "width": 65536,
-      "height": 4293001768,
-      "mode": "RGB",
-      "alphaExtrema": null
-    },
     "accused-wrongly.png": {
       "sha256": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2",
       "width": 1254,
@@ -117,6 +110,14 @@
         0,
         255
       ]
+    },
+    "endpoint-review.jpg": {
+      "sha256": "06d34bab50d533bd3aaa89bdf5c27c8a96fa305d781c1e090db86e49857797fd",
+      "width": 1280,
+      "height": 781,
+      "mode": "RGB",
+      "alphaExtrema": null,
+      "format": "JPEG"
     }
   },
   "terminalExport": "Native formal Canvas renderer sampleClip(duration), browser canvas.toDataURL image/png; no raster edit",
