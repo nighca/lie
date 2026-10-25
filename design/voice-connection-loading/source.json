@@ -1,0 +1,7 @@
+{
+  "base": "48316544ea9fd22afbf1eee8db6f81e326026821",
+  "finalAppSha256": "1fac81756f82c28af6fbad042cc140f0e853eef7673ca483448ffba5e9ff2b00",
+  "noticeMarkupSha256": "60d63def34a5af5f0500f168c626918618026d6c05ccd67bde7e70e1215b118b",
+  "cssSha256": "f1675821ab70c9d3962c6a87ec4f6e5b543a0eae0353e5bfbb13e7e8a2121226",
+  "proofScope": "Loading captures preceded only the independent allowRemix prop/result-button changes; notice subtree, CSS, controller and dependencies are identical."
+}

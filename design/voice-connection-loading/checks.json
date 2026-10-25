@@ -1,0 +1,167 @@
+[
+  {
+    "label": "motion-phase-A",
+    "frames": [
+      {
+        "id": "desktop",
+        "text": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "spinnerHidden": "true",
+        "animationName": "voice-connection-spin",
+        "animationDuration": "1.1s",
+        "animationTransform": "matrix(0.990371, 0.138435, -0.138435, 0.990371, 0, 0)",
+        "activeAnimations": 1,
+        "reduced": false,
+        "centerRatio": 0.5499893223234624,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "取消连接"
+      },
+      {
+        "id": "mobile",
+        "text": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "spinnerHidden": "true",
+        "animationName": "voice-connection-spin",
+        "animationDuration": "1.1s",
+        "animationTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "activeAnimations": 1,
+        "reduced": false,
+        "centerRatio": 0.5499851895734598,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "取消连接"
+      }
+    ]
+  },
+  {
+    "label": "motion-phase-B",
+    "frames": [
+      {
+        "id": "desktop",
+        "text": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "spinnerHidden": "true",
+        "animationName": "voice-connection-spin",
+        "animationDuration": "1.1s",
+        "animationTransform": "matrix(1, 0, 0, 1, 0, 0)",
+        "activeAnimations": 1,
+        "reduced": false,
+        "centerRatio": 0.5499893223234624,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "取消连接"
+      },
+      {
+        "id": "mobile",
+        "text": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "spinnerHidden": "true",
+        "animationName": "voice-connection-spin",
+        "animationDuration": "1.1s",
+        "animationTransform": "matrix(0.869409, 0.494094, -0.494094, 0.869409, 0, 0)",
+        "activeAnimations": 1,
+        "reduced": false,
+        "centerRatio": 0.5499851895734598,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "取消连接"
+      }
+    ]
+  },
+  {
+    "label": "reduced-motion",
+    "frames": [
+      {
+        "id": "desktop",
+        "text": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "spinnerHidden": "true",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "animationTransform": "none",
+        "activeAnimations": 0,
+        "reduced": true,
+        "centerRatio": 0.5499893223234624,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "取消连接"
+      },
+      {
+        "id": "mobile",
+        "text": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "spinnerHidden": "true",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "animationTransform": "none",
+        "activeAnimations": 0,
+        "reduced": true,
+        "centerRatio": 0.5499851895734598,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "取消连接"
+      }
+    ]
+  },
+  {
+    "label": "ready-and-cancelled-late-ready",
+    "frames": [
+      {
+        "id": "desktop",
+        "text": null,
+        "spinnerHidden": null,
+        "animationName": null,
+        "animationDuration": null,
+        "animationTransform": null,
+        "activeAnimations": 0,
+        "reduced": false,
+        "centerRatio": null,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "结束对话"
+      },
+      {
+        "id": "mobile",
+        "text": null,
+        "spinnerHidden": null,
+        "animationName": null,
+        "animationDuration": null,
+        "animationTransform": null,
+        "activeAnimations": 0,
+        "reduced": false,
+        "centerRatio": null,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "开启对话"
+      }
+    ]
+  },
+  {
+    "label": "failed-no-loader",
+    "frames": [
+      {
+        "id": "desktop",
+        "text": null,
+        "spinnerHidden": null,
+        "animationName": null,
+        "animationDuration": null,
+        "animationTransform": null,
+        "activeAnimations": 0,
+        "reduced": false,
+        "centerRatio": null,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "结束对话"
+      },
+      {
+        "id": "mobile",
+        "text": null,
+        "spinnerHidden": null,
+        "animationName": null,
+        "animationDuration": null,
+        "animationTransform": null,
+        "activeAnimations": 0,
+        "reduced": false,
+        "centerRatio": null,
+        "overflow": false,
+        "budget": "08:00",
+        "action": "开启对话"
+      }
+    ]
+  }
+]

@@ -299,9 +299,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .voice-connection-notice { position: fixed; z-index: 6; top: 55dvh; left: 50%; transform: translate(-50%, -50%); width: min(560px, calc(100% - 32px)); display: flex; align-items: center; gap: 20px; padding: 18px 20px; border: 2px solid var(--lie-ink); border-radius: 20px; background: var(--lie-ink); color: var(--lie-surface); box-shadow: 0 5px 0 #111b4533; }
 .voice-connection-notice > div { min-width: 0; flex: 1; }
-.voice-connection-notice strong { display: block; font-size: 20px; line-height: 1.4; }
+.voice-connection-notice strong { display: flex; align-items: center; gap: 10px; font-size: 20px; line-height: 1.4; }
 .voice-connection-notice p { margin: 5px 0 0; font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
-.voice-connection-notice .lie-button { flex-shrink: 0; white-space: nowrap; }
+.voice-connection-notice .lie-button { flex-shrink: 0; white-space: nowrap; min-height: 42px; background: transparent; border-color: #fffef54d; color: var(--lie-surface); box-shadow: none; }
+.voice-connection-notice .lie-button:hover { background: #fffef514; }
+.voice-connection-notice__spinner { flex: 0 0 20px; width: 20px; height: 20px; border: 2px solid #fffef533; border-top-color: var(--lie-aqua); border-right-color: var(--lie-aqua); border-radius: 50%; animation: voice-connection-spin 1.1s linear infinite; }
+@keyframes voice-connection-spin { to { transform: rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) {
+  .voice-connection-notice__spinner { animation: none; }
+}
 @media (max-width: 700px) {
   .voice-connection-notice { gap: 12px; padding: 14px; border-radius: 16px; }
   .voice-connection-notice strong { font-size: 18px; }
