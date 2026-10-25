@@ -141,3 +141,7 @@ Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416
 ## 姓名唯一修复review完成
 
 source dfd89c424c6a48ef57a31c0f7584a335c244c113，WT editor-unique-names/lie，base03fcb06，clean四文件，生产仅draft.ts六行。root实际全diff/context/测试review，从main b065af0新候选有序cherry为10c57c2；apps/packages/scripts/package/lock/CI与source身份全同，仅已审设计/报告文档多出，复用源Node24.22.1六文件59测试/Web types/build89资源，无重复安装/全套测试。trim后同名的每个人物各有错误定位，临时草稿可保存，试玩/分享阻止，改名恢复；旧同名分享可读。独立浏览器组合未验、不冒称PASS，加载恢复未完成，后续组合需复核。未push/部署，source WT/refs暂保留。
+
+## 最新用户优化：首页静态案件目录
+
+用户明确希望静态案件列表构建期打包、首页无异步列表请求。root检查现main：main.ts loadCatalog fetch /games/index.json、Application加载状态/重试；三案摘要仅小型静态JSON，适合同步打包。已将整项准备/实施/tests/build/browser/cleanup委派stable_exploratory_qa，但先只读，等待character_preset_migration清单恢复完整clean交付＋root review集成后再给正式dependencySHA/main.ts＋Application.vue写turn；loading owner已冻结生产不扩展，最终handoff将到。实现只目录摘要，不扩成全故事/图像打包，不复制两份手工目录，不改core/voice/provider/结果App/style。5544必须等loading原PTY3817停止及监听核销后再用，不能开新端口。新任务预定branch codex/bundled-case-catalog，实际WT/base/SHAs待分配；当前并未实现或验收。
