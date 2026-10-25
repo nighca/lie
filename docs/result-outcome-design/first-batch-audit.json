@@ -1,0 +1,192 @@
+{
+  "parent": "458aaf85af8bb71aead85596fced9ddd3524ad59",
+  "base": "365269b6185be586b69c0fac2b7ba15defeb7a6f",
+  "runtimeMain": "462d8a4ddebe1df3703caace2f2db2aa5c8eeb89",
+  "snapshot": "/private/tmp/lie-first-batch-audit-53kugyb7",
+  "characters": [
+    {
+      "id": "sunny-moustache",
+      "source": "e362243bc600c1443451503ec79d422b4285c149",
+      "assets": 7,
+      "oldPNGsUnchanged": 5,
+      "newAssets": 2,
+      "oldNodes": 20,
+      "newNodes": 2,
+      "pixelsIncludingCanvas": 12580128,
+      "resultClips": {
+        "accusedCorrectly": {
+          "clip": "accused-correctly",
+          "duration": 1.2,
+          "loop": false
+        },
+        "accusedWrongly": {
+          "clip": "accused-wrongly",
+          "duration": 1.1,
+          "loop": false
+        }
+      },
+      "check": {
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidResultSamples": 242,
+        "terminalHold": true,
+        "assets": 7,
+        "sha256": {
+          "shared-torso": "315270e0a6c53f2cd36d540e6e2b988475876e91255b790f73ec9b90a598daa8",
+          "default-source": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+          "listening-source": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+          "waiting-source": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+          "speaking-source": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+          "accused-correctly-source": "6588615504a5852646e88ba2b0d64b5ad4e70170bc3dd15ed39c2a755df22a04",
+          "accused-wrongly-source": "ff2e4c920fe9c1f79721761ed44aaf6fe5ac9f8e6279d307bfb566ebb12066e8",
+          "accused-correctly-terminal": "0a6d9eec45c21f0a9b75c79ebeb5dabd8052d743d32f7e1b805f276036fbe88e",
+          "accused-wrongly-terminal": "2fcc13885cca3f00988cff1e37f515b6d65a9fbcb564d1c79e969048ae7facb9"
+        }
+      }
+    },
+    {
+      "id": "silver-bun",
+      "source": "6f83ce9cf661c13610d052c919a783eab4e724d4",
+      "assets": 8,
+      "oldPNGsUnchanged": 6,
+      "newAssets": 2,
+      "oldNodes": 19,
+      "newNodes": 2,
+      "pixelsIncludingCanvas": 14154438,
+      "resultClips": {
+        "accusedCorrectly": {
+          "clip": "result-correct",
+          "duration": 1.2,
+          "loop": false
+        },
+        "accusedWrongly": {
+          "clip": "result-wrong",
+          "duration": 1.2,
+          "loop": false
+        }
+      },
+      "check": {
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidResultSamples": 242,
+        "terminalHold": true,
+        "assets": 8,
+        "sha256": {
+          "head": "cf884ae64a094939821ff061f76c2e9084fafe4d54d9b57a1f8d2b50addc7914",
+          "mouths": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",
+          "default-source": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+          "listening-source": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+          "waiting-source": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+          "speaking-source": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+          "result-correct-head": "f7234a5ee50a8b2998db181b2a9377298b98ff2aba1f0cdb8558089fd3283ec6",
+          "result-wrong-head": "2d052113a5fa09cadba34e5887803966f07179416b4b4591b83ae8fdd2935fab",
+          "accused-correctly-terminal": "3784dcd30dc7d3dabd717f5d6cadfb546c61cd9b3ce277f99aaa9f1914396ae9",
+          "accused-wrongly-terminal": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2"
+        }
+      }
+    },
+    {
+      "id": "plum-crop",
+      "source": "4fa81cacf2a78bf3dc7f77087ffee4b9d3f4f14f",
+      "assets": 7,
+      "oldPNGsUnchanged": 5,
+      "newAssets": 2,
+      "oldNodes": 20,
+      "newNodes": 2,
+      "pixelsIncludingCanvas": 12580128,
+      "resultClips": {
+        "accusedCorrectly": {
+          "clip": "result-correct",
+          "duration": 1.2,
+          "loop": false
+        },
+        "accusedWrongly": {
+          "clip": "result-wrong",
+          "duration": 1.2,
+          "loop": false
+        }
+      },
+      "check": {
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidResultSamples": 242,
+        "terminalHold": true,
+        "assets": 7,
+        "sha256": {
+          "default-source": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+          "head": "2d08b2b17687fad6f9fb54bb2a76be78f86ede46bd6a189362e8806ee1df98e0",
+          "listening-source": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+          "speaking-source": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+          "waiting-source": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+          "result-correct-head": "f0718e7eb0868a7305310a5503d19cc91b6028808ae35b23a68df6ce62e1a564",
+          "result-wrong-head": "27b03042166b9fcf746001b76579ad449cf44e55398dd82cae5065a67156117a",
+          "accused-correctly-terminal": "e2cd98ae59b427c28d30b769d0a3998c1904d22946e987a9fde48b46ea873722",
+          "accused-wrongly-terminal": "ee43ed473f1fe8c46f78eecf77b2ee77a8d87a161ea54c6dd5e5d6e66c6e8f2d"
+        }
+      }
+    }
+  ],
+  "unified": {
+    "status": "passed",
+    "characters": 4,
+    "results": [
+      {
+        "id": "coral-bob",
+        "name": "珊瑚短发",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 13,
+        "packageSha256": "2a9dd8ab80b63bcd04b1983cb29e1a789ff42ce81ec581c3e37b1ca73f4d4d73",
+        "terminalSha256": {
+          "accusedCorrectly": "a0eb5e5078a73f9f264cd0af8ea3927e5fe574d08443437be04d085db1546647",
+          "accusedWrongly": "ff0020fbfe45a86fb1e9b442d42604b9ca4eca01bd257036676729bcf6abc567"
+        }
+      },
+      {
+        "id": "sunny-moustache",
+        "name": "阳光小胡子",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 7,
+        "packageSha256": "b41854000a35dd22fb2ce7ca4645b0273da3b5d31e4c9895a264128665b161d3",
+        "terminalSha256": {
+          "accusedCorrectly": "0a6d9eec45c21f0a9b75c79ebeb5dabd8052d743d32f7e1b805f276036fbe88e",
+          "accusedWrongly": "2fcc13885cca3f00988cff1e37f515b6d65a9fbcb564d1c79e969048ae7facb9"
+        }
+      },
+      {
+        "id": "silver-bun",
+        "name": "银发盘发",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 8,
+        "packageSha256": "b0e246adb7722a1f9b079e015579dffff7a5fec55b329639dc359a1b6a0e68bd",
+        "terminalSha256": {
+          "accusedCorrectly": "3784dcd30dc7d3dabd717f5d6cadfb546c61cd9b3ce277f99aaa9f1914396ae9",
+          "accusedWrongly": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2"
+        }
+      },
+      {
+        "id": "plum-crop",
+        "name": "紫衣短卷发",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 7,
+        "packageSha256": "ac4513455a6e2e40138eaf720a47ce030c57f674f5f4cfcd5c3817749cff892e",
+        "terminalSha256": {
+          "accusedCorrectly": "e2cd98ae59b427c28d30b769d0a3998c1904d22946e987a9fde48b46ea873722",
+          "accusedWrongly": "ee43ed473f1fe8c46f78eecf77b2ee77a8d87a161ea54c6dd5e5d6e66c6e8f2d"
+        }
+      }
+    ]
+  },
+  "limits": [
+    "No browser/Canvas raster re-render: terminal PNG file identity/dimensions and sampled end pose verified; actual component endpoint-to-PNG pixel equality remains source-parent458 browser evidence",
+    "No artwork edits, encoding, activation, credentials or services; provenance paths/prompts are records, not authenticated imagegen attestations",
+    "Recorded lane service statuses are historical; parent first-batch-review supersedes temporary retained-lane wording; no scan performed"
+  ]
+}

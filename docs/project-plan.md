@@ -2,7 +2,7 @@
 
 2026-10-25，基线已审本地main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
-已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。已证远端/CI/线上部署48316544ea9fd22afbf1eee8db6f81e326026821，见[发布核验](releases/2026-10-25-main-refresh.md)；静态指纹同本地已验产物，不等真人功能验证。后续36a已含龙三叔配置，最新已确认main 9a6635ce1fb85b3fc85aaa634828674c8bbf7b5a已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
+已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。已证远端/CI/线上部署48316544ea9fd22afbf1eee8db6f81e326026821，见[发布核验](releases/2026-10-25-main-refresh.md)；静态指纹同本地已验产物，不等真人功能验证。后续36a已含龙三叔配置，本轮归档基线main 870cbd524ab21e243e072866ce70288932192834已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
 
 ## 已批准的产品与架构
 
@@ -13,6 +13,8 @@
 编辑器三步自由往返、必选预设、唯一答案、同引擎试玩、压缩fragment、本地草稿，无账号/云同步/上传资产/发布版本管理。新编辑草稿姓名trim后唯一，临时未完成草稿仍可保存；旧同名分享可读。三人是作者内容原则，不是core人数硬限制。
 
 ## 当前队列与下一步
+
+用户最新授权：本次合完、review后由唯一root执行普通push并发布线上；当前三位design只归档，待[本批审计](result-outcome-design/first-batch-audit.md)review/ff，不提前声称发布成功。
 
 当前发布批次：两owner修复/小UI已root审查、组合288/types/build89通过并发布48316544，CI实际部署及线上入口静态指纹已核；[发布preflight与验证复用](coordinator-handoff.md#本轮单次发布准备)明确检查范围。后续连接loading及R结果视觉分阶段生产独立推进，不混入此次已发布SHA。
 
@@ -28,7 +30,7 @@
 | 已main 年长男声 / older_male_voice＋root | 用户认为两候选仍年轻，**若无更合适先龙三叔并接受sunny同声，按现有支持候选实施已获授权**。voiceId2e7965636b0d4472ae51e75f419dff41；source7058f31368629d850ae8270a4339539eee8542f6已完整root review/独立单字段哈希核验，**main36a06de已实现**，其余7预设相等、不改sunny；source36tests/Webtypes/build89通过，候选应用资源依赖同源复用。已随48316544发布，未真人耳验扩展，不扩provider/克隆或付费样本。旧[候选](older-male-voice/available-candidates.md)仍待选择措辞已被此次决定覆盖。 |
 | 已main，待真实模型回归 / case_content_revision | sourcea549bbe，root完整12files/三案11profiles/ending/context/docs review、候选411f8d8与source应用/tests/依赖同源；Core51/Web17/types/build89复用，root独立三对byte/其他字段原样通过，main7249。背景154→112/189→132/161→111；贺宁普通施压不自曝口径已调，**未真实模型回归，不能称实测修好**。原文/备选/矩阵已[入库](case-content-revision-2026-10-25/README.md)，无服务/provider。 |
 | 已main / 性能、首帧、视觉 | mainc334e67；最终Web245/UI43/Gateway16/types/build89及40Miniflare，实际builtWorker有界开局/切人无staticfirst；[组合](performance/2026-10-25/combined-visual-verification.md)与[浏览器边界](performance/2026-10-25/combined-first-render-verification.md)保留。92hash输出/46parts、原89资源字节保留；源warm13资源零transfer不是线上新部署，PNG全81实测5.28%/66.73s，root已读完整报告并独立8项/源SHA汇总核验，同意暂不接构建；sourcea46的研究文档经fe32d46归档，已main299，不改生产。[PNG证据](performance/2026-10-25/png-lossless/README.md)。背景字面最长匹配/歧义中性、标题“{姓名}的询问记录”，不重派。 |
-| R及加强样片已批，后7在制 / 动画视觉＋root | 用户已直接批准加强版374，后7按自行验收后常规集成，无须逐位等用户；后7最多2lane制作；结果App/CSS接入turn已授动画parent01a16d44，从main462仅结果区/专用CSS/tests，5355串行验收。33fe/374及直接用户授权3c024bb已root技术review，独立候选归档，不激活正式manifest，5355用户消费者保留。结果契约已root审/组合验证并main365（未推），不是新16static/16oneshot已全完成；[批准方向](result-outcome-design/approval.md)和实际后续验收分别保存。 |
+| 首批三位design已审，待本批归档ff / 动画parent＋root | 用户批准珊瑚374及后7自行验收。sunny e362、silver174→6f、plum4fa、父补证458已root逐文件review，候选da68bfd的57design路径同父来源；当前870 reader实际4人968采样通过，生产/canonical零变化，[审计与归档报告](result-outcome-design/first-batch-audit.md)。本次root读报告后归档ff，正式manifest激活/结果App＋CSS仍由动画parent实施；另4位不冒称完成，5355用户消费者保留。用户已新增授权本次合完review后root普通push并发布线上，尚未执行。 |
 | 已main462d8a4未推 / 调查页高度＋character_preset_migration | source7c5ab232→候选1dc7e996，相main9a6635ce仅12行高度CSS；原测量/fixture身份与JSON断言复核、Webbuild99modules/strict89通过。[短报告](investigation-viewport-height-combined.md)。原IAB45–47按身份范围复用，本轮无browser/service；5507 PID29602/PTY38417 exit1、无监听、tabs/temp清。 |
 | 讨论，不可实施 / 单JSON增加内置案 | 用户提出简化新增案；root建议summary回正文、可选order缺省末尾按ID、derive catalog/去副本/去三案测试硬编码，字段和排序尚未用户确认。[短提案](builtin-case-json-proposal.md)，不改schema/内容。 |
 | 已main未推 q90 / 图片专项＋architecture_code_review＋root | 用户已批准q90/m6/alpha_q100、不缩放/原PNG保留。图片六源提交及CI拆分组成746718a，实际Web334/types/build89及81图/92hash/8包46parts闭包通过，9,746,332B、50cache hits；[组合报告与独立审计](performance/image-build-optimization/combined-main-verification.md)。root已实际审查报告并本地集成，未push/deploy；源IAB4图仅同hash静态资源范围复用。 |
