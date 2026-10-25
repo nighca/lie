@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { AnimationTimeline, createCanvasRenderer, loadAnimationPackage } from '@lie/character-animation'
 import type { AnimationState } from '@lie/character-animation'
 
 const props = withDefaults(defineProps<{ src: string | null; state: AnimationState; label?: string }>(), { label: '人物形象' })
 const canvas = ref<HTMLCanvasElement | null>(null)
 const ready = ref(false)
-const reduced = ref(false)
+const failed = ref(false)
+const media = typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null
+const reduced = ref(media?.matches ?? true)
+const fallback = computed(() => props.src == null || reduced.value || failed.value)
 let timeline: AnimationTimeline | null = null
-let media: MediaQueryList | null = null
 const motionChanged = () => { reduced.value = media?.matches ?? false }
 
 onMounted(() => {
-  if (typeof window.matchMedia !== 'function') { reduced.value = true; return }
-  media = window.matchMedia('(prefers-reduced-motion: reduce)')
-  motionChanged()
-  media.addEventListener('change', motionChanged)
+  media?.addEventListener('change', motionChanged)
 })
 onUnmounted(() => { media?.removeEventListener('change', motionChanged) })
 
 watch(() => props.state, state => { timeline?.setState(state) })
 watch([() => props.src, reduced, canvas], async ([src, motion, element], _, onCleanup) => {
   ready.value = false
+  failed.value = false
   timeline = null
   if (src == null || motion || element == null) return
   const controller = new AbortController()
@@ -29,7 +29,7 @@ watch([() => props.src, reduced, canvas], async ([src, motion, element], _, onCl
   let renderer: ReturnType<typeof createCanvasRenderer> | null = null
   let images: Map<string, HTMLImageElement> | null = null
   const stop = () => { if (frame != null) cancelAnimationFrame(frame); frame = null; last = null }
-  const fail = () => { stop(); controller.abort(); ready.value = false; renderer?.dispose(); renderer = null; images?.clear(); timeline = null }
+  const fail = () => { stop(); controller.abort(); ready.value = false; failed.value = true; renderer?.dispose(); renderer = null; images?.clear(); timeline = null }
   const draw = (now: number) => {
     frame = null
     if (!active || document.hidden || timeline == null || renderer == null) return
@@ -54,13 +54,13 @@ watch([() => props.src, reduced, canvas], async ([src, motion, element], _, onCl
     ready.value = true
     if (!document.hidden) frame = requestAnimationFrame(draw)
   } catch { if (active) fail() }
-}, { immediate: true, flush: 'post' })
+}, { immediate: true, flush: 'sync' })
 </script>
 
 <template>
   <div class="animated-portrait">
     <canvas ref="canvas" v-show="ready" role="img" :aria-label="label"></canvas>
-    <slot v-if="!ready"></slot>
+    <slot v-if="fallback"></slot>
   </div>
 </template>
 

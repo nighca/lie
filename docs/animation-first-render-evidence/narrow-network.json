@@ -1,0 +1,17 @@
+{
+  "scope": "391px stage before first animated frame",
+  "events": [
+    {
+      "method": "Fetch.requestPaused",
+      "sequence": 945,
+      "url": "http://127.0.0.1:5544/appearances/sunny-moustache/animation/package.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "sequence": 946,
+      "url": "http://127.0.0.1:5544/appearances/sunny-moustache/animation/package.json"
+    }
+  ],
+  "hasMore": false,
+  "truncated": false
+}

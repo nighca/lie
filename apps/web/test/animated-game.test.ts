@@ -46,7 +46,7 @@ describe('animated character in the game page', () => {
     const wrapper = show(controller, characterPresets)
     const portrait = () => wrapper.getComponent(AnimatedPortrait)
     expect(portrait().props('state')).toBe('default')
-    expect(wrapper.get('.portrait-backdrop img').attributes('src')).toBe('/red.png')
+    expect(wrapper.find('.portrait-backdrop img').exists()).toBe(false)
     await controller.startConversation(); await wrapper.vm.$nextTick()
     expect(portrait().props('state')).toBe('listening')
     finish({ data, images: new Map() }); await flushPromises()
