@@ -177,3 +177,13 @@ source d494e433031a3632d7510cfb50a2abc0c92390e5，WT bundled-case-catalog/lie，
 source d97a13b11ed5e38f9bdc3acfe39c9c83aa91d43a（WT result-scene-implementation/lie，base30385c2，clean18files）已root实际完整diff/周边源码/所有新增tests/完整证据和wrong桌面、长文到底、真实图失败3图审查，无blocker。从main c540b70有序cherry为7b4d96a759fb61455c8a9fa03897155e0f59b621，editor-navigation同文件不同hunk自动合并，root核同步catalog prop与wrong『本局结束』同时保留。独立architecture_code_review在固定候选Node24.22.1验证完整Web220 tests/24files、Web types/build8presets89assets strict，前后HEAD固定/tracked clean，不起服务；root独立核App/style/lock/两形象hash同源QA，原IAB视觉/键盘/回退可复用，不把它说成重做真实组合IAB/真人语音。数据只actual result.characterId，wrong仍终局无真相，A静态default无动画契约新状态；B/C素材未授权。完整记录docs/result-scene-implementation.md与design/result-scene-implementation/**七原生图及测量，设计旧0c65/e743不重放。
 
 5507 Vite PID44546/原PTY30600消费者tab35/36均关闭，网络/媒体override清空，原PTY退出1且lsof无监听（不记退出0）；临时shell已删除，无草稿改动或保留服务，不重复停止旧PID。当前下一可执行优先为production_performance真实基线报告及最小scope确认、已验收动画正式QA完整handoff；鉴权仍暂停，视频只研究，所有push/部署门禁保留。
+
+## 性能专项首轮结果与正式实施turn
+
+production_performance已IAB自建tab1实测线上：冷禁cache首页15请求、8 PNG合计7468258字节、最大990099；JS index-B01MnLa4.js/CSS index-r2kXdcrw.css已hash，但响应仍public,max-age=0,must-revalidate。暖reload JS/CSS/3avatar明确304约205–234ms；其他图有效200但实际仅277–407bytes，不能误报全图重下。线上manifest→games/index链本地已eager修复，不重做。rawtrace尚待正式报告，不编CWV。根已核官方Cloudflare_headers默认/覆盖与Worker-first差别，未把官方默认当实测替代。
+
+已批准其修正最小方案整项实施，从reviewed main e6cc3aa新实施branch或clean自有WT切branch（原d2审计commit先冻结）：独占Web vite.config、新build/static-assets.mjs/独立tests、characterPresets/characterPresetLoader及必要URL/virtual module类型/vitest接线、public/_headers或生成等效、gateway缓存合同test/fixture、docs/performance。旧fixed manifest/原89资源必须原bytes保留且原strict仍通过；新内容寻址manifest/PNG/整包animation（package+parts全digest、内部原bytes/相对src不变）放独立/static namespace，不能宽松接收任意外部URL。Vite transform替换在正常JS/CSS hash计算前完成，禁止事后patch旧hashchunk；资源变更URL与消费链hash都变，稳定bytes则稳定URL。DEV仍旧路径；不改App/style/Application/main/catalog/动画素材/manifest/generator/rootpackage/lock。
+
+验收必须实际构建改1PNG/part验证整个引用链换hash、oldJS+fixedmanifest兼容、所有引用存在、相对parts正确、缺失hash不能HTML200+immutable、HTML/fixedmanifest/API/WS/404不长缓存；cf实际产物/本地响应合同，不只_headers文本。若实际证明纯资产规则不满足404/SPA，额外预授gateway cloudflare.config.ts/src/index.ts及tests最小新静态namespace guard/404/cache策略，不能全站Worker-first/新增缓存框架/存储或动API/WS/secret。图片无损另量实际收益/可用工具，保留RGBA/alpha/ICC/gAMA/sRGB；不得为压缩偷偷加重依赖/降低89字节源校验。
+
+动画正式冻结源22b2ee8b635b2e6944d3801721673bc5122dfa3b仅5正式packageJSON变化、PNG/generator不变；先不阻塞独立hash管线实现，后root实际review动画并与perf按最终输入摘要组合复验。性能5544稳定回合已给但启动前需核监听/真实登记，不按授予推断在监听。线上只读/no语音，不main/push/deploy/PR；完整报告/clean handoff交root。
