@@ -1,0 +1,87 @@
+{
+  "source": "56b2adad7c0ec02c37d9e614f8bb37d37145629f",
+  "declaredBase": "4bd7ada61f4b68373768641c45078acde8673891",
+  "checks": [
+    "81/81 source bytes, base identity, dimensions, mode, PNG CRC/chunks, RGBA/alpha SHA and pixel counts independently verified",
+    "50 full variant rows/81 aliases and 5 sample rows/4 unique sources structurally consistent; repeated sample outputs equal, independent timing retained",
+    "all 8 summary path groups, source/variant byte totals, savings, variant CPU/wall sums and batch time match full measurement",
+    "90-output metadata closure: 81 candidate image identities, 8 serialized package SHA/size, 46 safe relative parts, serialized manifest SHA/size/URL, preserved all non-asset fields; runtimeDecoderTested=false",
+    "all 6 retained WebP binaries SHA/bytes/dimensions/alpha/exact-or-lossy metrics independently verified; comparison PNG opens 1360x1550",
+    "network stage-to-summary mapping and HTTP record internal length/URL hash/avatar canonical identity consistent; observations remain relayed, not re-collected"
+  ],
+  "counts": {
+    "paths": 81,
+    "unique": 50,
+    "fullRows": 50,
+    "sampleRows": 5,
+    "sampleUnique": 4,
+    "outputs": 90,
+    "packages": 8,
+    "parts": 46
+  },
+  "chunks": {
+    "IHDR": 81,
+    "caBX": 81,
+    "IDAT": 108,
+    "IEND": 81
+  },
+  "chunkBytes": {
+    "IHDR": 1053,
+    "caBX": 1845054,
+    "IDAT": 64635806,
+    "IEND": 0
+  },
+  "dimensions": {
+    "(1254, 1254)": 72,
+    "(1774, 887)": 2,
+    "(1123, 1401)": 1,
+    "(1024, 1536)": 1,
+    "(1536, 1024)": 1,
+    "(1104, 1425)": 1,
+    "(1246, 1263)": 1,
+    "(1362, 1155)": 1,
+    "(2172, 724)": 1
+  },
+  "samples": [
+    {
+      "file": "coral-bob-webp-exact-m4.webp",
+      "bytes": 586048,
+      "sha256": "92945e28fbf26a1f3b63b8c41b01a4a596ac88de55c446cecef117ccd380f3a2"
+    },
+    {
+      "file": "coral-bob-webp-q95.webp",
+      "bytes": 170042,
+      "sha256": "486708d6654ea3a387d3c9369ed48d863e3d87f277b0734e5ce7f73cd40b3b8b"
+    },
+    {
+      "file": "coral-bob-webp-q90.webp",
+      "bytes": 140386,
+      "sha256": "7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d"
+    },
+    {
+      "file": "silver-bun-webp-exact-m4.webp",
+      "bytes": 637812,
+      "sha256": "db234964eaded861458ea9b4baeece52649e2b72cc0c85cb9c249e2df8c2b84b"
+    },
+    {
+      "file": "silver-bun-webp-q95.webp",
+      "bytes": 170886,
+      "sha256": "a1a12ac6bb79700c4066f56fc929f09c1f75c6bfb279b8e1de61d08c91eb0da8"
+    },
+    {
+      "file": "silver-bun-webp-q90.webp",
+      "bytes": 134112,
+      "sha256": "0b2a29ca6ca699091367e3866333cb8ed3d44e63065c8f16b9a29a786d485174"
+    }
+  ],
+  "comparison": {
+    "bytes": 787545,
+    "sha256": "24eec16cd8f5d335877212d5e40caa359402ac6181062724a793aef3a5ed13a8"
+  },
+  "limits": [
+    "No re-encoding/network/runtime/browser performed",
+    "Absent full candidate binaries: all 100 variant binary hashes/decoded-equality claims and 8 directory digests cannot be independently recomputed from metadata alone; 6 retained binaries independently decoded",
+    "No raw HAR: specialist-team-root IAB observations are relayed provenance, not this auditor/root direct measurement",
+    "Old strict-lossless proposal is historical and superseded by subsequent user q90 approval; audit does not reinstate proposal gate"
+  ]
+}
