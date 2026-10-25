@@ -1,5 +1,7 @@
 # 本地开发
 
+> 当前状态（2026-10-25）：用户已明确停用本地8787及配套8788。launchd已disable＋bootout，Web/Worker与自有内部监听全部释放，配置和凭据保留。下文原常驻运行说明仅供恢复参考，不代表服务仍运行；未经用户重新要求不得自动启动。[停用证据](history/2026-10-25/main-preview-stopped/README.md)。
+
 正式生产入口：[LIE](https://lie.agency/) · [编辑器](https://lie.agency/editor)。2026-10-25用户已启用该域名，指向现有Cloudflare正式Worker；本批仅文档修订，未改DNS/账号/Worker配置。平台原生地址`lie-game.nighca.workers.dev`继续作为原生入口与历史测量origin，不要求删除/重定向；[已核发布](releases/2026-10-25-main-refresh.md)的原始观测保留。
 
 域名文档检查（2026-10-25）：正常TLS普通GET `/`、`/editor`、`/play`均200，最终URL保持lie.agency、0重定向；三者返回同一SPA入口（546 bytes，SHA256 `d9841a11c0cf254cba0b3dc2843f48a249e46ebea9e22986eb4786766bea08cb`），仅证明路由回退交付，不代表已生成可玩分享或执行编辑/语音。只读源码核：分享以`location.origin`生成`/play#game=…`；voice/status用同源相对路径、WS由当前location派生；gateway严格比较请求Origin与请求URL origin，没有写死旧生产hostname，未放宽Origin/CORS。无应用测试/build、浏览器/草稿、API/WS/provider或服务操作。
@@ -110,7 +112,7 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 
 | 用途 | owner/chat | 首选端口与停止条件 |
 | --- | --- | --- |
-| 用户当前main | root `01a17012-fa00-7170-ac0a-21c1900d71cd`／既有launchd | 8787 Web、8788 Worker及其内部子监听。用户常驻环境，换代/归档保留；仅明确服务turn可受控维护，不另起daemon或副本。 |
+| 用户当前main（已停用） | root `01a17012-fa00-7170-ac0a-21c1900d71cd`／原launchd | 用户明确停用；8787 Web、8788 Worker及其自有内部监听已释放，launchd disabled/unloaded。配置保留，恢复须用户重新要求，不另起副本。 |
 | Editor验收 | Editor `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 5402，只有必要的受控代理才用5403；同源fixture复用，当前验收结束即停。 |
 | 调查UI验收 | 调查 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 5507；同源路径复用，当前验收结束即停。 |
 | 动画制作预览 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 5358 ochre、5359 mint；owner可在不影响当前制作的前提下合用一套多root服务，不强停在制消费者。制作/本批验收结束即停。 |
@@ -124,7 +126,7 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 
 | 端口 / 状态 | owner / 消费者 | 来源 / PID / PTY / 停止条件 |
 | --- | --- | --- |
-| 8787/8788，用户常驻受保护 | root协调、用户；既有launchd及网关内部子监听 | owning main动态跟随，真实版本查/__lie/main-status。旧盘点PID不沿用为当前PID；没有新明确服务turn不得停止、重启或复制实例。 |
+| 8787/8788，已停用 | root协调、用户；原launchd及网关内部子监听 | 用户明确允许停止后已disable/bootout；7原PID退出、5端口释放、runner正常清锁。恢复须用户明确要求，旧PID不沿用，不自动启动或复制。 |
 | 5355，正式结果统一八人页用户审看在用 | 动画01a16d44… / 用户tab60 | owner回执旧1851在PTY55257 Ctrl-C exit130、无listener后同端口切源。现PID37202/PTY40865，WT result-reactions-combined-qa/lie，启动f294＋built QA修订、最终source d7dd95a，LIE_RESULT_QA_BUILT_ASSETS=1、strict 127.0.0.1:5355。用户统一页/design/result-reactions/及tab60保留；制作61/实际App62已关，block/media/vision/viewport覆盖恢复；试玩空盒草稿保留未清。consumer结束后owner原PTY停并核listener。本轮主线组合仅离线，无扫描/启停/浏览器，不archive源WT。 |
 | 5356图片验收已结束；5357误占已停 | 图片owner；动画owner已释放误占 | 图片built轮PID92431/子92889/PTY39359 Ctrl-C exit130、listener/ps空、own tab2关、media/cache/Network override复原（owner回执）。5357曾误占已停，不是批准额外端口。5355动画用户消费者保留。本轮q90/CI候选746718a仅离线build/pack→restore/dry-run，无服务扫描/启停。 |
 | 5544，最终组合验收回合已结束 | character_preset_migration | root候选be83810实际built Worker；Node35404/workerd35876，原PTY13186退出130，PID/监听消失；Chrome1910329555关、Fetch/cache/Network清理。后续视觉/语音/当前最终动画组合均无新服务；首帧69515/74321及性能43122/53366是历史，不重复操作。 |

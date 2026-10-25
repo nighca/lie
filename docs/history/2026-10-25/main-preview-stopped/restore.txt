@@ -1,0 +1,3 @@
+launchctl enable gui/501/dev.nighca.lie.main-preview
+launchctl bootstrap gui/501 "$HOME/Library/LaunchAgents/dev.nighca.lie.main-preview.plist"
+launchctl print gui/501/dev.nighca.lie.main-preview

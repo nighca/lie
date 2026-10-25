@@ -38,7 +38,7 @@
 
 ## 资源与未取消门禁
 
-[服务台账](development.md#服务登记与生命周期)是端口恢复入口。8787/8788及内部子监听受保护，真实版本看main-status，不从Git推断运行ready。5355/PID37202/PTY40865、WT result-reactions-combined-qa/lie、用户tab60仍有消费者；不停止/切源/清用户草稿或归档其WT。其他旧端口沿owner退出回执，本批无扫描/启停/浏览器。
+[服务台账](development.md#服务登记与生命周期)是端口恢复入口。用户最新明确停用8787/8788，已正常disable/bootout及核对自有内部子监听/PID全部退出；配置保留，未经用户新要求不得自动恢复，不将旧常驻说明当仍运行。5355/PID37202/PTY40865、WT result-reactions-combined-qa/lie、用户tab60仍有消费者；不停止/切源/清用户草稿或归档其WT。其他旧端口沿owner退出回执，本批无扫描/启停/浏览器。
 
 鉴权明确暂停；视频现已获用户明确制作授权，专chat01a17226-5e5a-7193-b5b7-e522519a3e0c与用户直接确认创意细节，旧仅研究门禁不再适用；投稿为GitHub网页辅助、作者确认，用户计划公开仓不等本批已改visibility，无OAuth/token/自动PR。旧版本retention未采用；不扩为账号工件、历史、WT或凭据清理。[当前待办](project-plan.md#当前待办与门禁)包含出戏/宿主WS/真实visibility等未验边界。用户确认移动可用不等全设备长会话/盲测通过。
 

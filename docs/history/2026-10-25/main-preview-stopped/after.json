@@ -1,0 +1,24 @@
+{
+  "target": "gui/501/dev.nighca.lie.main-preview",
+  "loaded": false,
+  "launchctlPrintReturnCode": 113,
+  "launchctlPrintDiagnostic": "Bad request.\nCould not find service \"dev.nighca.lie.main-preview\" in domain for user gui: 501",
+  "disabled": "disabled",
+  "remainingPriorPIDs": [],
+  "listeners": {
+    "8787": [],
+    "8788": [],
+    "52599": [],
+    "52611": [],
+    "52616": []
+  },
+  "lockExists": false,
+  "preserved": {
+    "plistPreserved": true,
+    "plistBytesUnchanged": true,
+    "runtimeNodePreserved": true,
+    "sourceScriptPreserved": true,
+    "gatewayCredentialFilePreservedExistenceOnly": true
+  },
+  "additionalSignalsOrLockRemovalByReviewer": false
+}

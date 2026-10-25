@@ -1,0 +1,132 @@
+{
+  "uid": 501,
+  "label": "dev.nighca.lie.main-preview",
+  "target": "gui/501/dev.nighca.lie.main-preview",
+  "plist": "/Users/nighca/Library/LaunchAgents/dev.nighca.lie.main-preview.plist",
+  "plistSelected": {
+    "Label": "dev.nighca.lie.main-preview",
+    "ProgramArguments": [
+      "/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node",
+      "/Users/nighca/code/nighca/lie/scripts/main-preview.mjs"
+    ],
+    "WorkingDirectory": "/Users/nighca/code/nighca/lie",
+    "KeepAlive": {
+      "SuccessfulExit": false
+    },
+    "RunAtLoad": true,
+    "ThrottleInterval": 30,
+    "ExitTimeOut": null,
+    "StandardOutPath": "/Users/nighca/Library/Logs/LIE/main-preview.log",
+    "StandardErrorPath": "/Users/nighca/Library/Logs/LIE/main-preview.log"
+  },
+  "environmentKeysOnly": [
+    "PATH"
+  ],
+  "initialLaunchState": "running",
+  "initialDisabledSetting": "not-listed",
+  "runnerPID": 98703,
+  "ownedProcesses": [
+    {
+      "pid": 1925,
+      "ppid": 98703,
+      "pgid": 1925,
+      "command": "npm run dev",
+      "cwd": [
+        "p1925",
+        "fcwd",
+        "n/Users/nighca/code/nighca/lie"
+      ],
+      "listeners": []
+    },
+    {
+      "pid": 1926,
+      "ppid": 98703,
+      "pgid": 1926,
+      "command": "/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node node_modules/vite/bin/vite.js apps/web --host 127.0.0.1 --port 8787 --strictPort",
+      "cwd": [
+        "p1926",
+        "fcwd",
+        "n/Users/nighca/code/nighca/lie"
+      ],
+      "listeners": [
+        "COMMAND  PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME",
+        "node    1926 nighca   14u  IPv4 0x4c9a1949946a18a5      0t0  TCP 127.0.0.1:8787 (LISTEN)"
+      ]
+    },
+    {
+      "pid": 1940,
+      "ppid": 1925,
+      "pgid": 1925,
+      "command": "node /Users/nighca/code/nighca/lie/node_modules/.bin/cf dev",
+      "cwd": [
+        "p1940",
+        "fcwd",
+        "n/Users/nighca/code/nighca/lie/apps/gateway"
+      ],
+      "listeners": []
+    },
+    {
+      "pid": 1993,
+      "ppid": 1940,
+      "pgid": 1925,
+      "command": "npm exec vite",
+      "cwd": [
+        "p1993",
+        "fcwd",
+        "n/Users/nighca/code/nighca/lie/apps/gateway"
+      ],
+      "listeners": []
+    },
+    {
+      "pid": 2021,
+      "ppid": 1993,
+      "pgid": 1925,
+      "command": "node /Users/nighca/code/nighca/lie/node_modules/.bin/vite",
+      "cwd": [
+        "p2021",
+        "fcwd",
+        "n/Users/nighca/code/nighca/lie/apps/gateway"
+      ],
+      "listeners": [
+        "COMMAND  PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME",
+        "node    2021 nighca   39u  IPv4 0x814ccf1865e0d16c      0t0  TCP 127.0.0.1:52599 (LISTEN)",
+        "node    2021 nighca   41u  IPv4 0x5bb879849ac50d7e      0t0  TCP 127.0.0.1:8788 (LISTEN)"
+      ]
+    },
+    {
+      "pid": 2069,
+      "ppid": 2021,
+      "pgid": 1925,
+      "command": "/Users/nighca/code/nighca/lie/node_modules/@cloudflare/workerd-darwin-arm64/bin/workerd serve --binary --experimental --socket-addr=entry=127.0.0.1:0 --external-addr=loopback=127.0.0.1:52599 --control-fd=3 - --debug-port=127.0.0.1:0",
+      "cwd": [
+        "p2069",
+        "fcwd",
+        "n/Users/nighca/code/nighca/lie/apps/gateway"
+      ],
+      "listeners": [
+        "COMMAND  PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME",
+        "workerd 2069 nighca   13u  IPv4 0x511c70f788cf7098      0t0  TCP 127.0.0.1:52611 (LISTEN)",
+        "workerd 2069 nighca   48u  IPv4 0x60b4f0849bed9358      0t0  TCP 127.0.0.1:52616 (LISTEN)"
+      ]
+    },
+    {
+      "pid": 98703,
+      "ppid": 1,
+      "pgid": 98703,
+      "command": "/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node /Users/nighca/code/nighca/lie/scripts/main-preview.mjs",
+      "cwd": [
+        "p98703",
+        "fcwd",
+        "n/Users/nighca/code/nighca/lie"
+      ],
+      "listeners": []
+    }
+  ],
+  "protectedPortsListeners": [
+    "COMMAND  PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME",
+    "node    1926 nighca   14u  IPv4 0x4c9a1949946a18a5      0t0  TCP 127.0.0.1:8787 (LISTEN)",
+    "node    2021 nighca   41u  IPv4 0x5bb879849ac50d7e      0t0  TCP 127.0.0.1:8788 (LISTEN)"
+  ],
+  "lockDirectory": "/Users/nighca/code/nighca/lie/.git/main-preview.lock",
+  "lockOwner": "98703"
+}

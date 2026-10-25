@@ -1,0 +1,22 @@
+[
+  {
+    "command": [
+      "launchctl",
+      "disable",
+      "gui/501/dev.nighca.lie.main-preview"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "launchctl",
+      "bootout",
+      "gui/501/dev.nighca.lie.main-preview"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

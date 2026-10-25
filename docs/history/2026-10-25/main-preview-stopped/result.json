@@ -1,0 +1,41 @@
+{
+  "result": "stopped and disabled; all verifications PASS",
+  "label": "dev.nighca.lie.main-preview",
+  "priorState": "running",
+  "priorDisabledOverride": "not-listed",
+  "currentLoaded": false,
+  "currentDisabled": true,
+  "disabledEvidenceLine": "\"dev.nighca.lie.main-preview\" => disabled",
+  "priorPIDsExited": [
+    1925,
+    1926,
+    1940,
+    1993,
+    2021,
+    2069,
+    98703
+  ],
+  "portsReleased": [
+    8787,
+    8788,
+    52599,
+    52611,
+    52616
+  ],
+  "lockRemovedByRunner": true,
+  "configsPreserved": {
+    "plistPreserved": true,
+    "plistBytesUnchanged": true,
+    "runtimeNodePreserved": true,
+    "sourceScriptPreserved": true,
+    "gatewayCredentialFilePreservedExistenceOnly": true
+  },
+  "restoreCommands": [
+    "launchctl enable gui/501/dev.nighca.lie.main-preview",
+    "launchctl bootstrap gui/501 \"$HOME/Library/LaunchAgents/dev.nighca.lie.main-preview.plist\"",
+    "launchctl print gui/501/dev.nighca.lie.main-preview"
+  ],
+  "notExecutedRestore": true,
+  "unknowns": [],
+  "verificationCorrection": "First local checker expected true, while this macOS prints disabled; corrected accepted format after inspecting exact label line. Service operations both returned0; no repeated stop/kill/lock deletion."
+}
