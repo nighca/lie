@@ -1,0 +1,9 @@
+{
+  "base": "2268f84f02576d4384f0d30f9f117a70164f135a",
+  "status": "proposal-awaiting-user-confirmation",
+  "sha256": {
+    "apps/web/public/brand/logo.svg": "162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb",
+    "apps/web/public/brand/underline.svg": "faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9",
+    "packages/ui/src/components/ProductHeader.vue": "8ff0ad49c54cd6c8280121b9021523ae653050f466b6e5083945122153205a1f"
+  }
+}
