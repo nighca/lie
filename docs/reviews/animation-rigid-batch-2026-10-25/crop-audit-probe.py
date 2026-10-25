@@ -2,11 +2,11 @@
 Never rewrites author sources, PNGs or evidence. Requires Pillow/numpy and Node24.
 """
 from pathlib import Path
-import sys
+import sys, subprocess
 root=Path(sys.argv[1])
 for role in sys.argv[2:] or ['silver-bun','salt-pepper-beard','plum-crop']:
  p=root/'design/animation-candidates'/role/'check-waiting-revision.py'
- text=p.read_text()
+ text=subprocess.check_output(['git','-C',str(root),'show','22b2ee8b635b2e6944d3801721673bc5122dfa3b:'+str(p.relative_to(root))],text=True)
  old="if 'crop' in sp:u=u+sp['crop'][0];v=v+sp['crop'][1]"
  new="if 'crop' in sp:\n   included &= (u>=0)&(u<sp['crop'][2])&(v>=0)&(v<sp['crop'][3])\n   u=u+sp['crop'][0];v=v+sp['crop'][1]"
  assert text.count(old)==2
