@@ -77,6 +77,14 @@
 
 覆盖率[准备方案](archive/2026-10-25/coverage-design-preparation.md)已完整归档；managed WT coverage-reporting/lie从现main c0ddd791开始，已整项委派design_document_archive实施本地快照badge/真实scope报告且无外部权限；迁移package/lock及目录依赖已释放，保留无实测百分比/SFC remap待验/脚本另报边界，不重做已完成调查。
 
+## 最新批次交付（8人基线与独立修订）
+
+8/8角色基线已实际main `dd1663853f7e153efb2c977dd74b89b415f0e20c`，clean未push/部署；8787的main-status实际同SHA（默认curl受本机代理影响，no-proxy＋获准本机网络只读查询成功；不据沙箱连接失败猜服务故障）。root候选从772dfa5依序接8个source提交，源72c4a93全部应用/依赖/正式资源身份相同，复用388/type/build/IAB；实际review完整构建器/验证器/来源/正式QA和6图，独立mint1280/ochre960采样、每人100中断、10新正式文件原字节及40链接通过。Ochre验证器首次仅受沙箱写ignored poses.json拒绝，获准同一隔离输出后exit0，不当应用失败；未增新服务。详细有序源链按[接入记录](animation/mint-ochre-game-integration.md)及source72c4a93 log追溯。
+
+已实际读取动画chat用户本轮原文：原8人继续集成；新问题另批处理，silver/salt/plum/mint/ochre waiting、mint default/listening幅度、ochre speaking头大小。动画专项最多2lane、只改各candidate，自验后5355供用户验收。**该新批必须用户确认后才单独PR**，是用户明确的局部例外；不现在开PR，不提前合main/游戏。已通知专项实际基线dd16638，保留在用final-two-character-game WT/5355，不把新问题当原8人阻塞。旧表中“尚未正式激活”已被本节取代。
+
+邀请码核心修订已main772dfa5，实施owner invite_access_design含共享token/离线CLI、隔离Gateway/Web及5544本地QA/服务收尾。root保留package/lock所有权，coverage源47deba1已两轮独立review通过但root尚待实际全diff审查；邀请码新增Node测试test:access主链由root在coverage集成后串行接入，不能漏CI。源码变动以各owner最终clean handoff为准，不重复派工或擅写其WT。
+
 ## 不可丢失的质量与批准边界
 
 真人mic/外放/长会话/三案盲测、新增五声音色耳验、分享长URL跨浏览器、GitHub外部投稿端到端及费用硬限额未闭环；sunny真实隐藏恢复未验/1280×720舞台裁切保留。fake、文本detect、短WAV、ready或专项QA不等于用户/真人验收。
