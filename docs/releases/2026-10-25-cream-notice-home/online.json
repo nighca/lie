@@ -1,0 +1,42 @@
+{
+  "origin": "https://lie.agency",
+  "rows": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalUrl": "https://lie.agency/",
+      "sha256": "98aa67575171b074e74827130fb0167985ce893cecad36095a7feaf8b78669ca",
+      "bytes": 546,
+      "mime": "text/html",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/assets/index-BEN7xLYe.js",
+      "status": 200,
+      "finalUrl": "https://lie.agency/assets/index-BEN7xLYe.js",
+      "sha256": "b9de28d06f020d803ecae51d7d4455b1049b3cd222e2c07ff70d97f3936223df",
+      "bytes": 237682,
+      "mime": "text/javascript",
+      "cacheControl": "public, max-age=31536000, immutable"
+    },
+    {
+      "path": "/assets/index-kF8w8SLq.css",
+      "status": 200,
+      "finalUrl": "https://lie.agency/assets/index-kF8w8SLq.css",
+      "sha256": "5e0bc673e88691b7a9774259aa37c9e495cf47e67340328089b39dd7383cfb12",
+      "bytes": 56940,
+      "mime": "text/css",
+      "cacheControl": "public, max-age=31536000, immutable"
+    }
+  ],
+  "newNoticeCopyPresent": true,
+  "cssRules": {
+    "creamNotice": true,
+    "notice360": true,
+    "homeDesktop621": true,
+    "homeViewport": true,
+    "caseScroll": true,
+    "reducedMotion": true
+  },
+  "scope": "Exactly HTTPS home/JS/CSS; static identity only. Native voice QA NOT RUN, no browser/provider."
+}

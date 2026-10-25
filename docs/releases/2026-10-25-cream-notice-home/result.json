@@ -1,0 +1,33 @@
+{
+  "publishedSha": "8aa7ec967dfad45bf1646cdd27c6d909bebec437",
+  "remoteMainExact": true,
+  "ci": {
+    "id": 40180923871,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40180923871"
+  },
+  "cd": {
+    "id": 40181053281,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40181053281",
+    "deployJob": 121132008581,
+    "allSteps": "completed/success"
+  },
+  "artifact": {
+    "id": 12593464394,
+    "sourceRun": 40180923871,
+    "sourceAttempt": 1,
+    "sourceSha": "8aa7ec967dfad45bf1646cdd27c6d909bebec437",
+    "digest": "sha256:c8b2af70d12b0ea40e4ebfae601d5e833d16ac55c977abe6e113bbe282f1c2b0",
+    "verifiedRestoredFiles": 256
+  },
+  "workerVersion": "6897531f-262f-4e53-976d-ee58ff637752",
+  "scope": "Normal TLS home and referenced JS/CSS response bytes/hashes; new cream notice copy/rules, desktop621 home viewport/case-scroll/reduced-motion rules present",
+  "probeCorrection": "Initial regex expected min-width:621px, but minifier uses equivalent width>=621px; accepted equivalent syntax and reran static probe successfully. No product failure. Six HTTP responses across two three-request passes.",
+  "nativeVoiceQA": "NOT RUN",
+  "limits": "Static evidence only; no browser/native behavior, provider, services, manual deploy/rerun/permission changes. No tracked changes/main/push; next normal archival batch only."
+}

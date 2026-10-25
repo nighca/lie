@@ -135,3 +135,5 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 保留所有在制/依赖WT、refs及ignored必要材料：特别是动画23链可恢复Git对象及两lane/父QA/旧formal来源、发布兼容61→cad→14a、语音新任务、改编方案、首帧和年长声调查。最新[只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/worktree-status.json)有时间边界：原browser-architecture dirty及invite-access-design未跟踪归档材料不清；动画sourceWT其后缺失更新见[handoff](coordinator-handoff.md)。服务退出不授权清理它们。前代分享自建tab清理unknown不能按复用的browser/tab号码盲关，须先核实际归属。所有生产维护、真人mic/provider及用户draft另守授权边界。
 
 2026-10-25 首页滚动验收5544：owner home_scroll，WT `/Users/nighca/.codex/worktrees/home-scroll/lie`，source b9ef3cb→cf5c0fc，PID42659 / PTY85261；真实IAB消费结束后Ctrl-C exit130、listener已核消失，自建tab关闭/viewport复原。后续2188f59语音组合QA起前5544无监听，本轮inventory无IAB，未启动服务/新PID/PTY；不占用该端口。8787/8788及5355保持保护。
+
+组合语音提示补验追加：owner home_scroll，自有Chrome tab1910329686，source1973ee5/runtime2188f59，Vite5544 PID10172/PTY45505。root另给Chrome回合后执行，结束原PTY Ctrl-C exit130、lsof无监听，临时入口与符号链接已移除，tab关闭/viewport及reduce复原；无真实语音。视频专项获用户新授权一次≤60秒真实线上短测窗口，其他agents不得占用同一provider，专项完成后负责停止并交还；不变更现有agent/device或常驻服务。

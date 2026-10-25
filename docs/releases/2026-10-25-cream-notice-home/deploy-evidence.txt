@@ -1,0 +1,11 @@
+deploy	Download only that CI attempt's build	2026-10-25T09:32:47.8642434Z   artifact-ids: 12593464394
+deploy	Download only that CI attempt's build	2026-10-25T09:32:47.8642936Z   run-id: 40180923871
+deploy	Download only that CI attempt's build	2026-10-25T09:32:48.2792262Z - production-build-8aa7ec967dfad45bf1646cdd27c6d909bebec437-40180923871-1 (ID: 12593464394, Size: 113336216, Expected Digest: sha256:c8b2af70d12b0ea40e4ebfae601d5e833d16ac55c977abe6e113bbe282f1c2b0)
+deploy	Download only that CI attempt's build	2026-10-25T09:32:55.4002253Z SHA256 digest of downloaded artifact is c8b2af70d12b0ea40e4ebfae601d5e833d16ac55c977abe6e113bbe282f1c2b0
+deploy	Restore and check every build byte	2026-10-25T09:32:55.4853348Z   CI_HEAD_SHA: 8aa7ec967dfad45bf1646cdd27c6d909bebec437
+deploy	Restore and check every build byte	2026-10-25T09:32:55.4853664Z   CI_RUN_ID: 40180923871
+deploy	Restore and check every build byte	2026-10-25T09:32:55.4853893Z   CI_RUN_ATTEMPT: 1
+deploy	Restore and check every build byte	2026-10-25T09:32:56.1561295Z Restored 256 verified build files
+deploy	Deploy the verified CI build	2026-10-25T09:33:01.7338896Z   CI_HEAD_SHA: 8aa7ec967dfad45bf1646cdd27c6d909bebec437
+deploy	Deploy the verified CI build	2026-10-25T09:33:10.4551385Z │  Deployed lie-game triggers (0.61 sec)
+deploy	Deploy the verified CI build	2026-10-25T09:33:10.4553157Z │  Current Version ID: 6897531f-262f-4e53-976d-ee58ff637752
