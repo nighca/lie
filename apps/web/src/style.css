@@ -40,8 +40,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .portrait-backdrop::before { content: ''; position: absolute; inset: 16% 5% 4%; background: color-mix(in srgb, var(--character-accent) 38%, var(--lie-surface)); border-radius: 49% 51% 42% 58%; transform: rotate(-6deg); }
 .portrait-backdrop img { position: absolute; height: 130%; width: 100%; max-width: none; object-fit: contain; object-position: 50% 0; left: 50%; top: 0; transform: translateX(-50%); }
 .portrait-initial { position: absolute; inset: 0; display: grid; place-items: center; font-size: 110px; font-weight: 800; }
-.stage-caption { padding: 12px 8px 0; }
-.stage-caption h2 { font-size: 28px; margin: 0; }
 .conversation-copy { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 24px; border: 2px solid var(--lie-ink); border-radius: 28px; background: var(--lie-surface); }
 .conversation-copy h2 { flex-shrink: 0; margin: 0 0 16px; padding-bottom: 16px; border-bottom: 1px solid #111b451c; font-size: 20px; }
 .conversation-copy > .lie-transcript { flex: 1; min-height: 0; --lie-transcript-max-height: none; }
@@ -126,8 +124,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .character-list { padding: 4px 2px 8px; }
   .character-list > .lie-character { flex-basis: 104px; }
   .character-stage { grid-column: 1; width: 100%; max-width: 420px; margin: auto; height: 252px; }
-  .stage-caption { padding-top: 4px; }
-  .stage-caption h2 { font-size: 24px; }
   .conversation-copy { padding: 18px; }
   .conversation-copy h2 { margin-bottom: 12px; padding-bottom: 12px; }
   .interrogation-budget { display: flex; align-items: baseline; gap: 8px; }
@@ -270,7 +266,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .game-shell--investigating .character-list .lie-character__copy { display: grid; place-items: center; flex: 1; min-height: 40px; padding: 4px 8px; text-align: center; }
   .game-shell--investigating .character-list .lie-character__copy strong { font-size: 13px; line-height: 1.4; }
   .game-shell--investigating .character-stage { grid-column: 2; grid-row: 1; width: 100%; max-width: none; height: 168px; min-height: 0; margin: 0; }
-  .game-shell--investigating .stage-caption { display: none; }
   .game-shell--investigating .conversation-copy { grid-column: 1 / -1; grid-row: 2; min-height: 0; overflow: hidden; border-radius: 22px; padding: 14px 12px 12px; }
   .game-shell--investigating .conversation-copy h2 { font-size: 16px; margin: 0 0 10px; padding: 0 2px 10px; }
   .game-shell--investigating .lie-transcript__log { padding: 0 4px 0 0; overscroll-behavior: contain; scrollbar-width: thin; }

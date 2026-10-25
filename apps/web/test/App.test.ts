@@ -129,7 +129,7 @@ describe('game screens', () => {
     cleanup.push(() => { wrapper.unmount(); controller.dispose() })
     const controls = () => wrapper.get('[aria-label="语音对话控制"]')
     expect(controls().get('[aria-label="剩余询问时间"]').text()).toContain('08:00')
-    expect(wrapper.get('.conversation-copy h2').text()).toBe('询问记录')
+    expect(wrapper.get('.conversation-copy h2').text()).toBe('甲的询问记录')
     expect(controls().findAll('button')).toHaveLength(2)
     expect(controls().get('button').attributes('aria-pressed')).toBe('false')
     expect(controls().text()).not.toContain('计时中')

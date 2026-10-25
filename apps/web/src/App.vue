@@ -137,10 +137,9 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
               <span v-else class="portrait-initial">{{ current.name.slice(0, 1) }}</span>
             </AnimatedPortrait>
           </div>
-          <div class="stage-caption"><h2>{{ current.name }}</h2></div>
         </section>
         <section class="conversation-copy">
-          <h2>询问记录</h2>
+          <h2>{{ current == null ? '询问记录' : `${current.name}的询问记录` }}</h2>
           <Transcript :key="view.currentCharacterId ?? ''" :messages="transcript" :animate="view.conversationActive && !view.busy" />
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>

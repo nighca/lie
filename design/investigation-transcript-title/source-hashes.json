@@ -1,0 +1,6 @@
+{
+  "apps/web/src/App.vue": "1fec16493b35c1603f3f0c169e4b67bb70b4b598f648abc3c36e9f28f32a62f1",
+  "apps/web/src/style.css": "db0c51c1ecfcac5de2258484aa5f373a1879fc6c4165d4be0d989d3e562ab69b",
+  "apps/web/test/App.test.ts": "b21aa9dced941921d12c8a025283b14d7788ef0b73a3c29c101a56263a2ba316",
+  "apps/web/test/investigation-transcript-title.test.ts": "47de6de47da33c09b47b77ae7dfebce015794e27df251db437aedf0fbeac62cc"
+}
