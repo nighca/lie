@@ -1,0 +1,12 @@
+{
+  "source": "a0e1a326a08df47c44d28a6cd42c100996a6b599",
+  "sourcePaths": [
+    "docs/project-plan.md",
+    "docs/coordinator-handoff.md"
+  ],
+  "sha256": {
+    "project-plan.md": "24b826d102bb82d82c331e8a2f07816b0c6ec1397b573613d0c6358b58402436",
+    "coordinator-handoff.md": "9880f19f99d6d6e8fb792ade7318a5d15983f2127f58135c3b3056af5bef0b9c"
+  },
+  "status": "Historical exact pre-refresh snapshots; newer current pages and release evidence override stale statuses"
+}

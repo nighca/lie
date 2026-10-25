@@ -1,0 +1,87 @@
+{
+  "origin": "https://lie.agency",
+  "rows": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalUrl": "https://lie.agency/",
+      "mime": "text/html",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "bytes": 546,
+      "sha256": "058cb0d694ea25502c435863cc8d34de0b115c62713728607a32b43e44418914",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/editor",
+      "status": 200,
+      "finalUrl": "https://lie.agency/editor",
+      "mime": "text/html",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "bytes": 546,
+      "sha256": "058cb0d694ea25502c435863cc8d34de0b115c62713728607a32b43e44418914",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/?game=duck-finale",
+      "status": 200,
+      "finalUrl": "https://lie.agency/?game=duck-finale",
+      "mime": "text/html",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "bytes": 546,
+      "sha256": "058cb0d694ea25502c435863cc8d34de0b115c62713728607a32b43e44418914",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/assets/index-DolkqYbF.js",
+      "status": 200,
+      "finalUrl": "https://lie.agency/assets/index-DolkqYbF.js",
+      "mime": "text/javascript",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "bytes": 227906,
+      "sha256": "b43e1ec691545aa278e71995ad3f541b3d1476f0044073586ece310c96e3d369",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/assets/index-SHxHMED-.css",
+      "status": 200,
+      "finalUrl": "https://lie.agency/assets/index-SHxHMED-.css",
+      "mime": "text/css",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "bytes": 56250,
+      "sha256": "59a6d29e6bf5dbebf94a2f2914202f9c70f8401e8a6710a2bd6a4e5745b01586",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/static/21d97c04ac9d87fa58636a243fef27e6cf52b19537aeb83c93efe48d5d1096ff/appearances/manifest.json",
+      "status": 200,
+      "finalUrl": "https://lie.agency/static/21d97c04ac9d87fa58636a243fef27e6cf52b19537aeb83c93efe48d5d1096ff/appearances/manifest.json",
+      "mime": "application/json",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "bytes": 10065,
+      "sha256": "21d97c04ac9d87fa58636a243fef27e6cf52b19537aeb83c93efe48d5d1096ff",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp",
+      "status": 200,
+      "finalUrl": "https://lie.agency/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp",
+      "mime": "image/webp",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "bytes": 140386,
+      "sha256": "7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/default.webp",
+      "status": 200,
+      "finalUrl": "https://lie.agency/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/default.webp",
+      "mime": "image/webp",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "bytes": 140386,
+      "sha256": "7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d",
+      "localCandidateEqual": true
+    }
+  ],
+  "presets": 8,
+  "scope": "Read-only HTTPS HTML/static routes and content/hash/cache; no browser, game interaction, voice/API/WS or provider"
+}

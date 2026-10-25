@@ -118,7 +118,7 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 
 PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已控制该进程。端口分配也不证明当前已有服务在跑；每轮实际状态看下表。CF开发服务器附带的workerd/内部RPC端口属于8788同一受保护进程树，不作为闲置独立预览批杀。
 
-### 当前登记（2026-10-25，基线main7249a6f；轮换已暂停）
+### 当前登记（2026-10-25，本次文档基线a0e1a326；轮换已暂停）
 
 用户约10:44暂停四小时换chat，root01a17012继续active/唯一integrator；准备文档不授权停止用户常驻环境或其他owner服务。这是root完整交付事实的更新，不是本次新做端口扫描。PID/PTY仅属于原启动会话，操作前仍须owner实际核对；源码HEAD不证明dirty运行字节。历史21服务清理及所有原始回执已在[清理记录](history/2026-10-25/development-service-cleanup.md)和[整理前原文](history/2026-10-25/coordinator-state-before-refresh-30822d3/development.md)保留，不按历史PID重复停止。
 
@@ -128,7 +128,7 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 | 5355，正式结果统一八人页用户审看在用 | 动画01a16d44… / 用户tab60 | owner回执旧1851在PTY55257 Ctrl-C exit130、无listener后同端口切源。现PID37202/PTY40865，WT result-reactions-combined-qa/lie，启动f294＋built QA修订、最终source d7dd95a，LIE_RESULT_QA_BUILT_ASSETS=1、strict 127.0.0.1:5355。用户统一页/design/result-reactions/及tab60保留；制作61/实际App62已关，block/media/vision/viewport覆盖恢复；试玩空盒草稿保留未清。consumer结束后owner原PTY停并核listener。本轮主线组合仅离线，无扫描/启停/浏览器，不archive源WT。 |
 | 5356图片验收已结束；5357误占已停 | 图片owner；动画owner已释放误占 | 图片built轮PID92431/子92889/PTY39359 Ctrl-C exit130、listener/ps空、own tab2关、media/cache/Network override复原（owner回执）。5357曾误占已停，不是批准额外端口。5355动画用户消费者保留。本轮q90/CI候选746718a仅离线build/pack→restore/dry-run，无服务扫描/启停。 |
 | 5544，最终组合验收回合已结束 | character_preset_migration | root候选be83810实际built Worker；Node35404/workerd35876，原PTY13186退出130，PID/监听消失；Chrome1910329555关、Fetch/cache/Network清理。后续视觉/语音/当前最终动画组合均无新服务；首帧69515/74321及性能43122/53366是历史，不重复操作。 |
-| 5507，height验收已结束 | 调查01a16d5c… | 旧background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听，tabs37/38已清。新语音回合source fc635b5＋dba2d641，PID50346/PTY39627，消费者IAB39；原PTY Ctrl-C exit1、lsof核无监听、tab39/临时入口清理，无override；已main9b17538；居中PID85753/PTY22271 exit1、无监听/tab40清；PC位置PID8323/PTY85340 exit1、无监听/tab41/temp清，已main14ca。最新姓名间距source0f12453，PID97700/PTY27003停止/无listener、tab42及临时入口清。旧loading/preview回合source5afa：PID30999/PTY27840 Ctrl-C exit1、无listener、IAB43/44关/reduce恢复/4tmp清（owner回执）。height source7c5ab232回合PID29602/PTY38417 Ctrl-C exit1、无监听、IAB45/46/47关、两临时入口清（owner回执）；归档fixture保留design目录。本轮候选1dc7e996仅离线build/strict89，无扫描/启停，已root集成main462d8a4（未推）。 |
+| 5507，height验收已结束 | 调查01a16d5c… | 旧background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听，tabs37/38已清。新语音回合source fc635b5＋dba2d641，PID50346/PTY39627，消费者IAB39；原PTY Ctrl-C exit1、lsof核无监听、tab39/临时入口清理，无override；已main9b17538；居中PID85753/PTY22271 exit1、无监听/tab40清；PC位置PID8323/PTY85340 exit1、无监听/tab41/temp清，已main14ca。最新姓名间距source0f12453，PID97700/PTY27003停止/无listener、tab42及临时入口清。旧loading/preview回合source5afa：PID30999/PTY27840 Ctrl-C exit1、无listener、IAB43/44关/reduce恢复/4tmp清（owner回执）。height source7c5ab232回合PID29602/PTY38417 Ctrl-C exit1、无监听、IAB45/46/47关、两临时入口清（owner回执）；归档fixture保留design目录。本轮候选1dc7e996仅离线build/strict89，无扫描/启停，该高度修复已随a0e发布（历史退出回执不变）。 |
 | 5402/5403，Editor固定分配 | Editor01a16d90… | 改编验收原exec/session23758已退出、无listener，自建tab及临时public/remix-qa.html已清（owner交付/协调确认，本轮未扫描/停进程）。改编已main eafee859、动画已main299；quiet CTA最终验收原session54417已Ctrl-C/无listener，自建tab/fixture清（源quiet-refinement.md回执）；本轮47tests/types/build89组合仅离线，无新服务。最新状态恢复source97a1803→8e09327，原exec89431停止/无listener、tab26/temp清（owner回执）；最终组合Web288/types/build89仅离线，无新服务。最新姓名/草稿提示source335回合exec57157已Ctrl-C、tab29关闭、storage恢复原字节、lsof无listener（owner回执）；本轮329/types/build89仅离线，未启动/扫描服务。后续仅owner按需启用用后停。 |
 | 5358/5359及18旧服务，历史清理完结 | 原调查/Editor/动画owner | 既有21服务清理回执存档，不为复用固定端口自动常驻或重复关闭历史进程。 |
 

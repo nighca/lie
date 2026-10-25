@@ -1,0 +1,16 @@
+{
+  "observedAtUTC": "2026-10-25T07:43:33.291635+00:00",
+  "method": "gh run view 40171731533 --repo nighca/lie --json databaseId,headSha,status,conclusion,url,jobs",
+  "runId": 40171731533,
+  "headSha": "a0e1a326a08df47c44d28a6cd42c100996a6b599",
+  "status": "completed",
+  "conclusion": "success",
+  "deployJobId": 121103798852,
+  "deployJobStatus": "completed",
+  "deployJobConclusion": "success",
+  "deployJobCompletedAt": "2026-10-25T07:10:35Z",
+  "returnedStepCount": 12,
+  "allReturnedStepsCompletedSuccess": true,
+  "url": "https://github.com/nighca/lie/actions/runs/40171731533",
+  "provenance": "Independent read-only gh response observed by character_preset_migration in this archive task; selected fields retained, no rerun or workflow write"
+}

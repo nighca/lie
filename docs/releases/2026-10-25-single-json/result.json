@@ -1,0 +1,41 @@
+{
+  "publishedSha": "a0e1a326a08df47c44d28a6cd42c100996a6b599",
+  "ci": {
+    "attempt": 1,
+    "conclusion": "success",
+    "headSha": "a0e1a326a08df47c44d28a6cd42c100996a6b599",
+    "status": "completed",
+    "url": "https://github.com/nighca/lie/actions/runs/40171557739"
+  },
+  "cdAggregate": {
+    "conclusion": null,
+    "head_sha": "a0e1a326a08df47c44d28a6cd42c100996a6b599",
+    "html_url": "https://github.com/nighca/lie/actions/runs/40171731533",
+    "id": 40171731533,
+    "run_attempt": 1,
+    "status": "in_progress",
+    "updated_at": "2026-10-25T07:09:42Z"
+  },
+  "cdJob": {
+    "id": 121103798852,
+    "conclusion": "success",
+    "completedAt": "2026-10-25T07:10:35Z",
+    "steps": "all completed/success including actual Deploy"
+  },
+  "artifact": {
+    "id": 12590287145,
+    "sourceRun": 40171557739,
+    "attempt": 1,
+    "digest": "sha256:9f3be6a4194fd8fe64fe80709c300f2007227207f5670a2d83cd37d117a277d2",
+    "restoredVerifiedFiles": 256
+  },
+  "workerVersion": "a1e6ed12-5aeb-4f97-a94c-5caa2f52c7c6",
+  "sourceIdentity": "76c90a29ea4038802f0cb2ee547cee1ed0fc2322 equals published SHA for apps/packages/scripts/content/design/dependencies/workflows",
+  "onlineEvidence": "online.json",
+  "limits": [
+    "CD aggregate remains in_progress / conclusion null; reason unknown, no retries",
+    "HTTPS static inspection only, no browser/gameplay/voice/API/WS/provider",
+    "No workflow triggered, rerun, manual deployment, Git mutation, commit or push"
+  ],
+  "archivePolicy": "Retain necessary sanitized evidence in next normal repository batch; no report-only publication."
+}
