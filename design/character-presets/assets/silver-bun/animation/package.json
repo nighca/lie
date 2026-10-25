@@ -52,6 +52,20 @@
       "visible": true
     },
     {
+      "id": "waiting-breath-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
       "id": "torso",
       "parent": "body-root",
       "transform": {
@@ -471,7 +485,7 @@
     },
     {
       "id": "waiting-torso",
-      "parent": "head-root",
+      "parent": "waiting-breath-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -488,6 +502,50 @@
         "mask": [
           [
             580,
+            375
+          ],
+          [
+            570,
+            392
+          ],
+          [
+            556,
+            441
+          ],
+          [
+            559,
+            502
+          ],
+          [
+            521,
+            583
+          ],
+          [
+            493,
+            648
+          ],
+          [
+            598,
+            654
+          ],
+          [
+            608,
+            525
+          ],
+          [
+            635,
+            466
+          ],
+          [
+            646,
+            418
+          ],
+          [
+            635,
+            382
+          ],
+          [
+            635,
             375
           ],
           [
@@ -851,7 +909,7 @@
     },
     {
       "id": "waiting-arms",
-      "parent": "head-root",
+      "parent": "waiting-breath-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -959,48 +1017,36 @@
             718
           ],
           [
-            605,
-            654
+            586,
+            664
           ],
           [
-            615,
-            525
+            577,
+            675
           ],
           [
-            642,
-            466
+            560,
+            676
           ],
           [
-            653,
-            418
+            540,
+            671
           ],
           [
-            642,
-            382
+            520,
+            660
           ],
           [
-            594,
-            363
+            505,
+            647
           ],
           [
-            563,
-            392
+            495,
+            634
           ],
           [
-            549,
-            441
-          ],
-          [
-            552,
-            502
-          ],
-          [
-            514,
-            583
-          ],
-          [
-            486,
-            648
+            488,
+            618
           ],
           [
             466,
@@ -1013,6 +1059,210 @@
           [
             480,
             449
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-hand",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 41,
+        "mask": [
+          [
+            594,
+            363
+          ],
+          [
+            642,
+            382
+          ],
+          [
+            653,
+            418
+          ],
+          [
+            642,
+            466
+          ],
+          [
+            615,
+            525
+          ],
+          [
+            611,
+            626
+          ],
+          [
+            592,
+            626
+          ],
+          [
+            592,
+            668
+          ],
+          [
+            608,
+            672
+          ],
+          [
+            605,
+            704
+          ],
+          [
+            480,
+            704
+          ],
+          [
+            486,
+            648
+          ],
+          [
+            514,
+            583
+          ],
+          [
+            552,
+            502
+          ],
+          [
+            549,
+            441
+          ],
+          [
+            563,
+            392
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-wrist-cloth-backing",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 586,
+        "y": 626,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 38,
+        "crop": [
+          613,
+          626,
+          6,
+          42
+        ]
+      }
+    },
+    {
+      "id": "waiting-button",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 592,
+        "y": 626,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 39,
+        "crop": [
+          592,
+          626,
+          25,
+          42
+        ]
+      }
+    },
+    {
+      "id": "waiting-cuff-front",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 50,
+        "mask": [
+          [
+            480,
+            610
+          ],
+          [
+            488,
+            613
+          ],
+          [
+            495,
+            629
+          ],
+          [
+            505,
+            642
+          ],
+          [
+            520,
+            655
+          ],
+          [
+            540,
+            666
+          ],
+          [
+            560,
+            671
+          ],
+          [
+            577,
+            670
+          ],
+          [
+            586,
+            659
+          ],
+          [
+            620,
+            690
+          ],
+          [
+            620,
+            745
+          ],
+          [
+            450,
+            745
+          ],
+          [
+            450,
+            610
           ]
         ]
       }
@@ -1135,6 +1385,10 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
+        "waiting-hand": false,
         "torso": true,
         "waiting-torso": false,
         "listening-torso": false,
@@ -1288,6 +1542,10 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
+        "waiting-hand": false,
         "torso": false,
         "waiting-torso": false,
         "listening-torso": true,
@@ -1414,6 +1672,10 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": true,
+        "waiting-button": true,
+        "waiting-cuff-front": true,
+        "waiting-hand": true,
         "torso": false,
         "waiting-torso": true,
         "listening-torso": false,
@@ -1444,16 +1706,31 @@
         },
         {
           "node": "head-root",
-          "property": "rotation",
+          "property": "pivotX",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 0
+              "value": 625
             },
             {
               "time": 4.0,
-              "value": 0
+              "value": 625
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "x",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 625
+            },
+            {
+              "time": 4.0,
+              "value": 625
             }
           ]
         },
@@ -1464,11 +1741,11 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 850
+              "value": 430
             },
             {
               "time": 4.0,
-              "value": 850
+              "value": 430
             }
           ]
         },
@@ -1479,86 +1756,77 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 850
+              "value": 430
+            },
+            {
+              "time": 1.0,
+              "value": 429.6
+            },
+            {
+              "time": 2.0,
+              "value": 430
+            },
+            {
+              "time": 3.0,
+              "value": 430.4
             },
             {
               "time": 4.0,
-              "value": 850
+              "value": 430
             }
           ]
         },
         {
           "node": "head-root",
-          "property": "scaleY",
+          "property": "rotation",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 1.0
-            },
-            {
-              "time": 0.25,
-              "value": 1.002296
-            },
-            {
-              "time": 0.5,
-              "value": 1.004243
-            },
-            {
-              "time": 0.75,
-              "value": 1.005543
+              "value": 0
             },
             {
               "time": 1.0,
-              "value": 1.006
-            },
-            {
-              "time": 1.25,
-              "value": 1.005543
-            },
-            {
-              "time": 1.5,
-              "value": 1.004243
-            },
-            {
-              "time": 1.75,
-              "value": 1.002296
+              "value": 0.95
             },
             {
               "time": 2.0,
-              "value": 1.0
-            },
-            {
-              "time": 2.25,
-              "value": 0.997704
-            },
-            {
-              "time": 2.5,
-              "value": 0.995757
-            },
-            {
-              "time": 2.75,
-              "value": 0.994457
+              "value": 0.1
             },
             {
               "time": 3.0,
-              "value": 0.994
-            },
-            {
-              "time": 3.25,
-              "value": 0.994457
-            },
-            {
-              "time": 3.5,
-              "value": 0.995757
-            },
-            {
-              "time": 3.75,
-              "value": 0.997704
+              "value": -1.05
             },
             {
               "time": 4.0,
-              "value": 1.0
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "waiting-breath-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": -1.2
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": 1.2
+            },
+            {
+              "time": 4.0,
+              "value": 0
             }
           ]
         }
@@ -1568,6 +1836,10 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
+        "waiting-hand": false,
         "torso": true,
         "waiting-torso": false,
         "listening-torso": false,
