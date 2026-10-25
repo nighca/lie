@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `2268f84f02576d4384f0d30f9f117a70164f135a`。CI40175520817/attempt1与CD40175677095均success，Worker `45919e35-3bf2-4a33-a550-199c0d18ceaf`；[发布证据](releases/2026-10-25-portrait-loading/README.md)。新案件与设计交付会继续推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `5a9a31c26b1e8f7be57b4147c2886b785b052111`。CI40176764338/attempt1与CD40176928339均success，Worker `b1866411-b431-4f59-80f1-a6bd0f9e6eed`；[发布证据](releases/2026-10-25-hackathon-case/README.md)。新设计归档会继续推进HEAD，操作前读实际Git。
 
 ## 协调权、自动化与发布
 
@@ -26,7 +26,7 @@
 | architecture_code_review | 单JSON/CI-CD已验发布；本批原始发布材料来自该owner，CI artifact/restored256与Web251为不同集合。后续审查按新source身份，不重复已验全suite |
 | character_preset_migration | 调查立绘加载占位source8b98887已clean交付、root完整审查并候选fe56783；36项目标测试root复验通过，沿用source UI/Web类型检查；仅调查页启用slot，无服务启动，IAB不可用，原生视觉未测。[证据](investigation-portrait-loading.md)。 |
 | hackathon_case | 新增第四案source b7b20e3→2cbae8f，root完整内容/八文件diff审查、候选c1da7a9→5c87845；仅新增04 JSON为运行变更，root2项专项复验通过。源Web357/脚本33/types/build身份可复用；真实模型/盲测未验。[交付](hackathon-case/README.md)。 |
-| 头部UI专项01a16d5c | Logo下划线效果图制作中，用户要求先看图确认；不得直接改正式ProductHeader。 |
+| 头部UI专项01a16d5c | Logo效果图source9431922已交、root实际review与查看PNG、候选a6ea1bc归档，待用户确认；语音连接提示三版浅色紧凑设计继续制作，两项均不直接改正式组件。 |
 | 宣传视频01a17226 | 已创建专chat并承接研究，用户直接沟通创意；旧仅研究门禁已被用户新授权取代。 |
 | native QA | 最近600端点SHA匹配，无ready字段；本会话IAB不可用/设备锁定返回，native7未测，无草稿/tab/service动作。[范围](qa/native-share-editor-600-2026-10-25/README.md)，等原生窗口，不回退Chrome或重跑旧jsdom冒充进展 |
 | 真人/内容QA | 贺宁真实模型、三案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |

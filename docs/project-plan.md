@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-2026-10-25，最近完成CI/CD核验的发布为 `2268f84f02576d4384f0d30f9f117a70164f135a`。CI40175520817/attempt1与CD40175677095均success，Worker `45919e35-3bf2-4a33-a550-199c0d18ceaf`；[发布证据](releases/2026-10-25-portrait-loading/README.md)。新案件与设计交付会继续推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `5a9a31c26b1e8f7be57b4147c2886b785b052111`。CI40176764338/attempt1与CD40176928339均success，Worker `b1866411-b431-4f59-80f1-a6bd0f9e6eed`；[发布证据](releases/2026-10-25-hackathon-case/README.md)。新设计归档会继续推进HEAD，操作前读实际Git。
 
 用户暂停四小时换chat，root `01a17012-fa00-7170-ac0a-21c1900d71cd`继续active/唯一integrator；lie ACTIVE、lie-2 PAUSED，实际toml更新时间见[handoff](coordinator-handoff.md)。每次实际review/验证合main后由root按fetch/分歧审验/普通push流程默认推送并监测既有CI/CD；报告并入下一正常批次，避免报告循环。此授权不扩成手工部署、账号资源或真实provider操作。
 
@@ -23,8 +23,9 @@
 | 优先 / owner | 当前状态及下一步 |
 | --- | --- |
 | 调查立绘加载占位 / 已发布2268 | [实现与验证](investigation-portrait-loading.md)：动画未就绪显示居中“人物加载中…”，无动画/失败/reduce沿用静态回退，舞台尺寸不变；仅调查页启用。source8b98887完整审查，候选fe56783的36目标测试root复验通过；原生视觉未测，CI/CD及线上新JS身份已确认，未冒充真人验收。 |
-| 头部Logo下划线 / UI专项01a16d5c | 用户要求效果图确认：移除右侧“语音推理”，将既有红色手绘下划线移到Logo下方，保留现有品牌路径/比例。已委派制作推荐图及真实头部/窄屏上下文；仅设计，待用户确认后才能改正式组件。 |
-| 第四案Hackathon作弊 / root已审待本批发布 | 《这真是今天做的吗》3人/480秒，source b7b20e3→2cbae8f、候选c1da7a9→5c87845。仅新增04 JSON运行变更，原有1216产品文件未变；[内容与验证](hackathon-case/README.md)另附。Web357/脚本33/全types/正式build通过，root候选2项真glob/首页开局指认改编分享复验通过；真实AI/盲测未做。合入后默认push。 |
+| 头部Logo下划线 / 待用户确认 | [效果图与参数](header-logo-underline-design.md)已出并展示；source9431922完整审查后归档候选a6ea1bc，保留Logo/下划线原几何与参考图。桌面/391为静态矢量上下文，不是App截图；尚未批准，正式组件未改。 |
+| 语音连接提示视觉 / UI专项01a16d5c | 用户反馈居中提示颜色深、移动端偏大；已安排三版浅色紧凑设计及短文案、桌面/391上下文对比，保留显著“连上后再说话”提醒与取消操作。仅设计，用户选定后再实施，不改语音状态机；先交既有头部稿避免新需求拖延旧交付。 |
+| 第四案Hackathon作弊 / 已发布5a9a31c | 《这真是今天做的吗》3人/480秒，source b7b20e3→2cbae8f、候选c1da7a9→5c87845。仅新增04 JSON运行变更，原有1216产品文件未变；[内容与验证](hackathon-case/README.md)另附。Web357/脚本33/全types/正式build通过，root候选2项真glob/首页开局指认改编分享复验通过；真实AI/盲测未做。CI/CD与线上新JS身份均确认。 |
 | P1 真人/真实模型 / root协调用户与QA | 贺宁口径改动已入库，真实模型回归未闭环；三案盲测、mic/外放/长会话、固定device多人隔离、费用硬限额仍缺证据。先确定实际矩阵/费用上限/停止清理边界，再执行；fake/短WAV/ready不替代。 |
 | 原生分享/Editor生命周期 / QA | 最近600常驻状态SHA吻合但无ready字段，工具无IAB且设备锁定返回；7个native case未测、无草稿/tab/service动作。[实际前置](qa/native-share-editor-600-2026-10-25/README.md)。等可用窗口再排，旧8jsdom不重跑当进展。16k URL预算仍暂定；跨浏览器/外部传输/旧fragment网络边界未全验。 |
 | Hackathon新平台定位 / 已发布 | source25e447d已审查集成并随9e1发布；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。保持讨论稿，不衍生视频制作许可。 |
