@@ -1,0 +1,5 @@
+silver-bun: 241 real sampler head ancestry samples retain uniform constant scale; target clips contain no scaling tracks
+salt-pepper-beard: 241 real sampler head ancestry samples retain uniform constant scale; target clips contain no scaling tracks
+plum-crop: 241 real sampler head ancestry samples retain uniform constant scale; target clips contain no scaling tracks
+mint-puffs: 723 real sampler head ancestry samples retain uniform constant scale; target clips contain no scaling tracks
+ochre-freckles: 482 real sampler head ancestry samples retain uniform constant scale; target clips contain no scaling tracks
