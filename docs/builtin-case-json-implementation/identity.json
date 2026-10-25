@@ -1,0 +1,28 @@
+{
+  "base": "4b3aa05562c9356cfac5293de60960c25df0400b",
+  "cases": [
+    {
+      "file": "content/games/01-empty-medal-box.json",
+      "id": "empty-medal-box",
+      "sha256": "5fcd34bd75aae1929a6c551a34edee3d84934766efd4d8819cb404ba87507bca",
+      "storyUnchangedExceptSummary": true
+    },
+    {
+      "file": "content/games/02-duck-finale.json",
+      "id": "duck-finale",
+      "sha256": "ae2276d967942081f776740f6cdc7587e5413709d2120ea490c68274720dd98a",
+      "storyUnchangedExceptSummary": true
+    },
+    {
+      "file": "content/games/03-salt-sugar-mixup.json",
+      "id": "salt-sugar-mixup",
+      "sha256": "b032af22556be1bfefe548881ca00a014101906d498869bab73bb076c2848522",
+      "storyUnchangedExceptSummary": true
+    }
+  ],
+  "protectedFilesIdentical": 158,
+  "webFilesEqualWorkerAssets": 251,
+  "staticFiles": 124,
+  "publicGamesRemoved": true,
+  "qaExcluded": true
+}

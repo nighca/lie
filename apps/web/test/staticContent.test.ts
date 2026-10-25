@@ -5,11 +5,9 @@ import { accuse, buildCharacterContext, createGameSession, getInterrogationRemai
 import { describe, expect, it } from 'vitest'
 
 import designCharacterPresets from '../../../design/character-presets/manifest.json'
-import authoredCase from '../../../content/games/empty-medal-box.json'
-import authoredDuckCase from '../../../content/games/duck-finale.json'
-import caseData from '../public/games/empty-medal-box.json'
-import duckCaseData from '../public/games/duck-finale.json'
-import catalogData from '../../../content/case-catalog.json'
+import authoredCase from '../../../content/games/01-empty-medal-box.json'
+import authoredDuckCase from '../../../content/games/02-duck-finale.json'
+import { readBundledCase } from '../src/application/bundledCases'
 import { caseCatalog } from '../src/application/catalog'
 import gameConfig from '../src/game-config.json'
 import characterPresetData from '../public/appearances/manifest.json'
@@ -17,9 +15,8 @@ import { readCharacterPresets } from '../src/presentation/characterPresets'
 
 describe('bundled game content', () => {
   it('validates the actual case and resolves each configured presentation', () => {
-    expect(caseData).toEqual(authoredCase)
-    expect(gameConfig.defaultGameId).toBe(caseData.id)
-    const game = validateGame(caseData)
+    expect(gameConfig.defaultGameId).toBe(authoredCase.id)
+    const game = validateGame(authoredCase)
     const characterPresets = readCharacterPresets(characterPresetData)
     for (const character of game.characters) {
       const characterPreset = characterPresets.find((item) => item.id === character.appearanceId)
@@ -31,8 +28,7 @@ describe('bundled game content', () => {
   })
 
   it('runs the actual four-character second case with its own budget and terminal accusation', () => {
-    expect(duckCaseData).toEqual(authoredDuckCase)
-    const game = validateGame(duckCaseData)
+    const game = validateGame(authoredDuckCase)
     expect(game.characters).toHaveLength(4)
     const running = startSession(createGameSession(game, { sessionId: 'duck-case', now: 1 }), 2)
     expect(getInterrogationRemainingMs(running)).toBe(600_000)
@@ -52,15 +48,13 @@ describe('bundled game content', () => {
   })
 
   it('keeps public catalog cards in sync with their actual content packages', async () => {
-    expect(caseCatalog).toEqual(catalogData)
     expect(new Set(caseCatalog.map(({ id }) => id)).size).toBe(caseCatalog.length)
     for (const entry of caseCatalog) {
       expect(entry.summary.trim()).not.toBe('')
-      const source = await readFile(fileURLToPath(new NodeURL(`../public/games/${encodeURIComponent(entry.id)}.json`, import.meta.url)), 'utf8')
-      const content = validateGame(JSON.parse(source))
+      const content = validateGame(readBundledCase(entry.id))
       expect({ id: content.id, title: content.title, interrogationLimitSeconds: content.interrogationLimitSeconds }).toEqual({ id: entry.id, title: entry.title, interrogationLimitSeconds: entry.interrogationLimitSeconds })
       expect(entry.characters).toEqual(content.characters.map(({ name, appearanceId }) => ({ name, appearanceId: appearanceId ?? null })))
-      expect(Object.keys(catalogData.find((item) => item.id === entry.id)!)).toEqual(['id', 'title', 'summary', 'interrogationLimitSeconds', 'characters'])
+      expect(Object.keys(entry)).toEqual(['id', 'title', 'summary', 'interrogationLimitSeconds', 'characters'])
     }
   })
 

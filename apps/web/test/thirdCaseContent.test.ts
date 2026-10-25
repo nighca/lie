@@ -4,14 +4,12 @@ import { fileURLToPath, URL as NodeURL } from 'node:url'
 import { accuse, appendDialogue, buildCharacterContext, consumeInterrogationTime, createGameSession, getInterrogationRemainingMs, selectCharacter, startSession, validateGame } from '@lie/game-core'
 import { describe, expect, it } from 'vitest'
 
-import authoredCase from '../../../content/games/salt-sugar-mixup.json'
-import shippedCase from '../public/games/salt-sugar-mixup.json'
+import authoredCase from '../../../content/games/03-salt-sugar-mixup.json'
 import characterPresets from '../public/appearances/manifest.json'
 
 describe('third case static integration', () => {
   it('ships the same source text and references existing resources for all four people', async () => {
-    expect(shippedCase).toEqual(authoredCase)
-    const game = validateGame(shippedCase)
+    const game = validateGame(authoredCase)
     expect(game.characters).toHaveLength(4)
     expect(game.interrogationLimitSeconds).toBe(540)
     for (const character of game.characters) {
@@ -25,7 +23,7 @@ describe('third case static integration', () => {
   })
 
   it('uses each selected character context and one shared nine-minute budget', () => {
-    const game = validateGame(shippedCase)
+    const game = validateGame(authoredCase)
     let session = startSession(createGameSession(game, { sessionId: 'third', now: 1 }), 2)
     expect(getInterrogationRemainingMs(session)).toBe(540_000)
     for (const character of game.characters) {
@@ -41,7 +39,7 @@ describe('third case static integration', () => {
   })
 
   it('ends each wrong selection without revealing and reveals only the fixed responsible person', () => {
-    const game = validateGame(shippedCase)
+    const game = validateGame(authoredCase)
     for (const character of game.characters) {
       const running = startSession(createGameSession(game, { sessionId: character.id, now: 1 }), 2)
       const result = accuse(running, character.id, 3)

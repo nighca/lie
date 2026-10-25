@@ -165,6 +165,7 @@ async function copy(text: string) {
         <div v-if="step === 0" class="story-layout">
           <section class="panel form-panel" aria-label="故事设定">
             <label class="field">案件标题<input v-model="draft.title" name="title" data-field="title" :aria-invalid="invalid('title')" placeholder="给谜题起个名字"></label>
+            <label class="field">案件简介<input v-model="draft.summary" name="summary" data-field="summary" placeholder="用一两句话介绍这个谜题"><small>用于官方案件卡片；投稿时必填，试玩和分享可留空。</small></label>
             <label class="field">公共背景<textarea v-model="draft.background" name="background" data-field="background" :aria-invalid="invalid('background')" rows="7" placeholder="发生了什么？玩家要查明什么？只写所有人都知道的信息。"></textarea><small>玩家接案时会读到这段话。秘密留给人物设定。</small></label>
             <div class="field"><label for="editor-duration">共享询问时间</label><div class="duration-options"><button v-for="value in [5, 8, 10]" :key="value" type="button" :aria-pressed="minutes === value" @click="minutes = value">{{ value }} 分钟</button><label class="duration-custom"><input id="editor-duration" v-model.number="minutes" name="duration" data-field="duration" :aria-invalid="invalid('duration')" type="number" min="0" step="any">分钟</label></div><small>包含停顿、等待和回答，所有人物共享；结束对话后暂停。</small></div>
           </section>

@@ -45,6 +45,20 @@ describe('editor drafts', () => {
     saveDraft(storage, draft)
     expect(loadDraft({ getItem: () => raw })).toEqual(draft)
   })
+  it('restores old drafts without summary and retains new summary across saves, play snapshots and remixes', () => {
+    const { summary, ...legacy } = game
+    const restored = loadDraft({ getItem: () => JSON.stringify(legacy) })!
+    expect(restored.summary).toBe('')
+    expect(draftGame(restored, characterPresets).summary).toBe('')
+    restored.summary = '作者简介\n逐字保留'
+    let raw = ''
+    saveDraft({ setItem: (_key, value) => { raw = value } }, restored)
+    const played = draftGame(loadDraft({ getItem: () => raw })!, characterPresets)
+    expect(played.summary).toBe(restored.summary)
+    expect(createRemixDraft(played).summary).toBe(restored.summary)
+    expect(createRemixDraft(legacy).summary).toBe('')
+  })
+
   it('drops the answer selection when that person is deleted, without choosing another answer', () => {
     const draft = editable()
     removeCharacter(draft, game.ending.culpritId)

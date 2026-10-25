@@ -8,6 +8,7 @@
 | --- | --- |
 | `id` | 非空游戏标识。`loadGame(gameId, read)` 要求加载结果的 `id` 与请求值完全相同。核心不校验全站重名或文件路径；官方静态资源加载和投稿文件名另有边界。 |
 | `title` | 非空案件标题，展示给玩家。 |
+| `summary` | 手写公开简介纯文本；旧草稿/分享可省略，试玩和分享允许留空；官方编号JSON和投稿要求非空，不从background截取。 |
 | `background` | 非空公共背景，一份纯文本。玩家接案时阅读，每位角色的上下文也包含同一份背景。不要放希望角色或玩家暂不知道的真相。 |
 | `interrogationLimitSeconds` | 正安全整数秒，即 `Number.isSafeInteger(value) && value > 0`。每局所有人物共享语音启用时间；包含停顿、等待和回答，连接准备不计，结束对话后暂停，切人不重置。到期停止询问、进入指认，不自动判负或揭晓。 |
 | `characters` | 非空人物数组。引擎没有固定三人限制，也不为人数另设上限；人物多寡由各案内容和实际使用体验决定。 |
@@ -39,6 +40,7 @@
 {
   "id": "cup-story",
   "title": "蓝杯在哪里",
+  "summary": "谢幕后蓝杯失踪了，问问整理道具的小林。",
   "background": "谢幕后，桌上的蓝杯不见了。请问清楚它被谁收到了哪里。",
   "interrogationLimitSeconds": 480,
   "characters": [
@@ -56,4 +58,6 @@
 }
 ```
 
-本目录保存官方源 JSON。当前应用还使用 `apps/web/public/games/` 副本及首页案件目录，增加源文件不会自动加入官方列表；收录和资源同步由维护者处理。用户自创案件通过链接携带完整快照，独立于官方列表；编辑器投稿准备的是可供维护者 review 的 JSON，不会自动提交 PR 或自动发布。预置形象制作入口见 [`design/character-presets/README.md`](../../design/character-presets/README.md)。
+本目录是官方案件唯一内容源。新增官方案件只增加一个合法 `NN-<id>.json`（例如`04-new-story.json`），无需修改目录、import或registry；首页与开局共用eager glob。文件ID须与JSON内部id完全相同，原有`?game=<id>` URL不受前缀影响。前缀至少两位、正安全整数，按数值排序；支持100等超过两位序号，缺号可以保留。重复前缀（01/001视为同号）、重复id、命名/内容错误或缺少非空summary会使构建明确失败。没有order字段。
+
+Editor故事步骤可写简介，本地草稿、试玩快照、分享fragment、改编和投稿JSON均保留。旧草稿恢复时缺简介补空字符串，旧分享缺字段继续可读；试玩/分享不因此被阻止。投稿前要求作者填写简介，文件名建议当前最大序号+1（最少两位）；作者仍在GitHub网页最终确认，发生并发同号由维护者合入时核对，不提供分配服务、OAuth或自动PR。已删除独立case-catalog和public/games副本。预置形象见[制作入口](../../design/character-presets/README.md)；[批准与历史](../../docs/builtin-case-json-proposal.md)。

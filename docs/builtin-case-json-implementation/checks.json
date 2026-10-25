@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-25",
+  "base": "4b3aa05562c9356cfac5293de60960c25df0400b",
+  "node": "24.22.1",
+  "applicationTests": 596,
+  "nativeScriptTests": 33,
+  "webTests": 356,
+  "coreTests": 52,
+  "workspaceTypes": "PASS",
+  "webBuildModules": 100,
+  "gatewayBuildModules": 4,
+  "fallbackBuildModules": 2,
+  "strictPresets": 8,
+  "strictAssets": 121,
+  "finalBuild": {
+    "encoded": 0,
+    "cacheHits": 82
+  },
+  "singleAddedFile": {
+    "fixture": "single-file-fixture.json",
+    "test": "single-file-probe.test.ts",
+    "passed": 1,
+    "temporaryOfficialFileRemoved": true,
+    "nextSequence": 101
+  },
+  "duplicatePrefixActualBuild": {
+    "exit": 1,
+    "diagnostic": "01-empty-medal-box.json: duplicate numeric prefix 1"
+  },
+  "browserAcceptance": "NOT RUN: IAB unavailable; no Chrome fallback",
+  "remoteCI": "NOT RUN",
+  "liveProvider": "NOT RUN"
+}

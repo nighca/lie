@@ -1,9 +1,10 @@
-import type { GameDefinition } from '@lie/game-core'
+import { readOfficialCases } from './officialCases'
 
-const cases = Object.values(import.meta.glob<GameDefinition>('../../../../content/games/*.json', { eager: true, import: 'default' }))
+export const officialCases = readOfficialCases(import.meta.glob('../../../../content/games/*.json', { eager: true, import: 'default' }))
+export const nextOfficialCaseSequence = (officialCases.at(-1)?.sequence ?? 0) + 1
 
-export function readBundledCase(gameId: string): GameDefinition {
-  const game = cases.find((entry) => entry.id === gameId)
-  if (game == null) throw new Error(`Unknown official case: ${gameId}`)
-  return game
+export function readBundledCase(gameId: string) {
+  const entry = officialCases.find(({ game }) => game.id === gameId)
+  if (entry == null) throw new Error(`Unknown official case: ${gameId}`)
+  return entry.game
 }

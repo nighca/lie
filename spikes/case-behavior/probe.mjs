@@ -22,7 +22,7 @@ for (const name of ['content', 'session', 'context']) {
   await writeFile(new URL(`${name}.mjs`, dir), output)
 }
 const { buildCharacterContext } = await import(new URL('context.mjs', dir))
-const game = JSON.parse(await readFile(new URL('../../content/games/empty-medal-box.json', import.meta.url), 'utf8'))
+const game = JSON.parse(await readFile(new URL('../../content/games/01-empty-medal-box.json', import.meta.url), 'utf8'))
 if (process.argv.includes('--offline-check')) {
   for (const character of game.characters) {
     const context = buildCharacterContext(game, character.id, [])

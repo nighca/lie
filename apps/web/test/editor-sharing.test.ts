@@ -21,6 +21,14 @@ describe('editor story sharing', () => {
     expect(restored).toEqual({ ...game, title: content.title, background: content.background })
     expect(new URL(url).search).toBe('')
   })
+  it('preserves summaries and accepts legacy fragments that omitted them', async () => {
+    const { summary, ...legacy } = game
+    expect((await decodeSharedGame(await fragment(legacy), [])).summary).toBeUndefined()
+    for (const summary of ['', '作者写的简介\n第二行']) {
+      const url = await encodeGameLink({ ...game, summary }, base)
+      expect((await decodeSharedGame(new URL(url).hash, [])).summary).toBe(summary)
+    }
+  })
   it('accepts only installed preset IDs while keeping null characterPresets', async () => {
     const characterPreset = { id: 'coral', name: '珊瑚形象', avatar: '/a.png', portrait: '/p.png', accent: '#fff', voiceId: null, animation: null, portraits: { listening: null, waiting: null, speaking: null } }
     const content = { ...game, characters: game.characters.map((character) => ({ ...character, appearanceId: 'coral' })) }

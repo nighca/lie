@@ -20,8 +20,9 @@ const { buildCharacterContext } = await import(new URL('context.mjs', temporary)
 assert.equal(matrix.length, 12)
 assert.equal(new Set(matrix.map(row => row.id)).size, matrix.length)
 const games = new Map()
+const caseFiles = { 'duck-finale': '02-duck-finale.json', 'salt-sugar-mixup': '03-salt-sugar-mixup.json' }
 for (const id of new Set(matrix.map(row => row.gameId))) {
-  games.set(id, validateGame(JSON.parse(await readFile(new URL(`../../../content/games/${id}.json`, import.meta.url), 'utf8'))))
+  games.set(id, validateGame(JSON.parse(await readFile(new URL(`../../../content/games/${caseFiles[id]}`, import.meta.url), 'utf8'))))
 }
 const prepared = matrix.map(row => {
   const game = games.get(row.gameId)
@@ -38,7 +39,7 @@ const prepared = matrix.map(row => {
   return { id: row.id, gameId: row.gameId, characterId: row.characterId, question: row.question, context }
 })
 await writeFile(new URL('prepared-contexts.json', temporary), JSON.stringify(prepared, null, 2))
-const sourceFiles = ['packages/game-core/src/content.ts', 'packages/game-core/src/session.ts', 'packages/game-core/src/context.ts', 'content/games/duck-finale.json', 'content/games/salt-sugar-mixup.json', 'spikes/case-behavior-validation/matrix.mjs', 'spikes/case-behavior-validation/followup/matrix.mjs']
+const sourceFiles = ['packages/game-core/src/content.ts', 'packages/game-core/src/session.ts', 'packages/game-core/src/context.ts', 'content/games/02-duck-finale.json', 'content/games/03-salt-sugar-mixup.json', 'spikes/case-behavior-validation/matrix.mjs', 'spikes/case-behavior-validation/followup/matrix.mjs']
 const hashes = Object.fromEntries(await Promise.all(sourceFiles.map(async path => [path, hash(await readFile(new URL(`../../../${path}`, import.meta.url)))])))
 await writeFile(new URL('prepared-hashes.json', temporary), JSON.stringify(hashes, null, 2))
 console.log(JSON.stringify({ offline: 'passed', targets: prepared.length, games: games.size, otherProfilesAndEnding: 'excluded', providerCalls: 0 }))

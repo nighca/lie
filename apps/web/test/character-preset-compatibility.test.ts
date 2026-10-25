@@ -16,9 +16,9 @@ describe('persisted preset references from before the naming migration', () => {
     let stored = text
     const storage = { getItem: (key: string) => key === DRAFT_KEY ? stored : null, setItem: (key: string, value: string) => { expect(key).toBe('lie-editor-draft'); stored = value } }
     const draft = loadDraft(storage)!
-    expect(draft).toEqual(JSON.parse(text))
+    expect(draft).toEqual({ ...JSON.parse(text), summary: '' })
     saveDraft(storage, draft)
-    expect(JSON.parse(stored)).toEqual(JSON.parse(text))
+    expect(JSON.parse(stored)).toEqual({ ...JSON.parse(text), summary: '' })
   })
   it('keeps missing and retired preset references editable and locates their selector', () => {
     for (const text of [legacyDrafts.incomplete, legacyDrafts.invalidPreset]) {
@@ -29,7 +29,7 @@ describe('persisted preset references from before the naming migration', () => {
   it('opens the baseline gzip link and re-shares the same story and voice references', async () => {
     const game = await decodeSharedGame(new URL(legacyShare.link).hash, presets)
     expect(game).toEqual(legacyShare.game)
-    expect(draftGame(loadDraft({ getItem: () => legacyDrafts.complete })!, presets)).toEqual(game)
+    expect(draftGame(loadDraft({ getItem: () => legacyDrafts.complete })!, presets)).toEqual({ ...game, summary: '' })
     const shared = await encodeGameLink(game, 'https://lie.example')
     expect(await decodeSharedGame(new URL(shared).hash, presets)).toEqual(game)
     const gzip = Buffer.from(new URL(shared).hash.slice('#game='.length), 'base64url')

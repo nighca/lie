@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { AnimatedPortrait, CharacterChoice } from '@lie/ui'
 
+import { nextOfficialCaseSequence } from '../src/application/bundledCases'
 import Editor from '../src/editor/Editor.vue'
 import { DRAFT_KEY } from '../src/editor/draft'
 import * as sharing from '../src/editor/share'
@@ -74,6 +75,16 @@ describe('three-step editor', () => {
     await wrapper.get('input[name=title]').setValue('新的可保存草稿')
     expect(wrapper.text()).toContain(message)
     expect(wrapper.get('.editor-draft-status').text()).toContain('草稿已保存至此设备')
+  })
+
+  it('edits the optional story summary and carries it into preview and submission JSON', async () => {
+    const { wrapper, click, step } = page(game)
+    await wrapper.get('input[name=summary]').setValue('新的公开简介')
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).summary).toBe('新的公开简介')
+    await click('试玩')
+    expect(wrapper.emitted('preview')?.[0]?.[0]).toMatchObject({ summary: '新的公开简介' })
+    await step(2); await click('投稿给官方')
+    expect(JSON.parse((wrapper.get('.submission-json textarea').element as HTMLTextAreaElement).value).summary).toBe('新的公开简介')
   })
 
   it('uses the shared product brand, draft notice and existing leave event', async () => {
@@ -284,7 +295,7 @@ describe('three-step editor', () => {
     const exported = JSON.parse((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
     expect(exported).toEqual(game)
     const link = new URL(wrapper.get('.github-link').attributes('href')!)
-    expect(link.searchParams.get('filename')).toBe('content/games/test.json')
+    expect(link.searchParams.get('filename')).toBe(`content/games/${String(nextOfficialCaseSequence).padStart(2, '0')}-test.json`)
     expect([...link.searchParams.keys()]).toEqual(['filename'])
   })
 

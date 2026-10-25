@@ -1,0 +1,19 @@
+{
+  "id": "single-json-proof",
+  "title": "单文件临时发现验证",
+  "summary": "只增加这一个编号JSON",
+  "background": "仅用于验证自动发现的临时案件。",
+  "interrogationLimitSeconds": 60,
+  "characters": [
+    {
+      "id": "proof-person",
+      "name": "验证人物",
+      "profile": "你只用于本地验证，不是真实官方故事。",
+      "appearanceId": "blue-glasses"
+    }
+  ],
+  "ending": {
+    "culpritId": "proof-person",
+    "reveal": "临时验证结束。"
+  }
+}

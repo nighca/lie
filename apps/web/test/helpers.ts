@@ -5,7 +5,7 @@ import { createGameController } from '../src/application/controller'
 import type { ConversationScope, VoicePort } from '../src/application/voice'
 
 export const game: GameDefinition = {
-  interrogationLimitSeconds: 480, id: 'test', title: '测试案件', background: '大家知道的背景。',
+  interrogationLimitSeconds: 480, id: 'test', title: '测试案件', summary: '测试简介', background: '大家知道的背景。',
   characters: [
     { id: 'one', name: '甲', profile: '只属于甲的秘密。', appearanceId: null },
     { id: 'two', name: '乙', profile: '只属于乙的秘密。', appearanceId: 'blue' },

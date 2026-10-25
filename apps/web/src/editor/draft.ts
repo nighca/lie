@@ -6,6 +6,7 @@ export interface DraftCharacter { id: string; name: string; profile: string; app
 export interface EditorDraft {
   id: string
   title: string
+  summary: string
   background: string
   interrogationLimitSeconds: number
   characters: DraftCharacter[]
@@ -15,12 +16,13 @@ export const DRAFT_KEY = 'lie-editor-draft'
 export function createDraft(appearanceId: string | null = null): EditorDraft {
   const id = crypto.randomUUID()
   const characterId = crypto.randomUUID()
-  return { id, title: '', background: '', interrogationLimitSeconds: 600, characters: [{ id: characterId, name: '', profile: '', appearanceId }], ending: { culpritId: '', reveal: '' } }
+  return { id, title: '', summary: '', background: '', interrogationLimitSeconds: 600, characters: [{ id: characterId, name: '', profile: '', appearanceId }], ending: { culpritId: '', reveal: '' } }
 }
 export function createRemixDraft(source: GameDefinition): EditorDraft {
   return {
     id: crypto.randomUUID(),
     title: source.title,
+    summary: source.summary ?? '',
     background: source.background,
     interrogationLimitSeconds: source.interrogationLimitSeconds,
     characters: source.characters.map(({ id, name, profile, appearanceId }) => ({ id, name, profile, appearanceId })),
@@ -77,8 +79,9 @@ export function loadDraft(storage: Pick<Storage, 'getItem'>): EditorDraft | null
   if (text == null) return null
   const value = JSON.parse(text)
   if (value == null || typeof value !== 'object' || typeof value.id !== 'string' || typeof value.title !== 'string' || typeof value.background !== 'string' || typeof value.interrogationLimitSeconds !== 'number' || !Array.isArray(value.characters) || value.ending == null || typeof value.ending.culpritId !== 'string' || typeof value.ending.reveal !== 'string') throw new Error('草稿无法读取')
+  if (value.summary !== undefined && typeof value.summary !== 'string') throw new Error('草稿无法读取')
   for (const item of value.characters) {
     if (item == null || typeof item !== 'object' || typeof item.id !== 'string' || typeof item.name !== 'string' || typeof item.profile !== 'string' || (item.appearanceId !== null && typeof item.appearanceId !== 'string')) throw new Error('草稿无法读取')
   }
-  return { id: value.id, title: value.title, background: value.background, interrogationLimitSeconds: value.interrogationLimitSeconds, characters: value.characters.map((item: DraftCharacter) => ({ ...item })), ending: { culpritId: value.ending.culpritId, reveal: value.ending.reveal } }
+  return { id: value.id, title: value.title, summary: value.summary ?? '', background: value.background, interrogationLimitSeconds: value.interrogationLimitSeconds, characters: value.characters.map((item: DraftCharacter) => ({ ...item })), ending: { culpritId: value.ending.culpritId, reveal: value.ending.reveal } }
 }

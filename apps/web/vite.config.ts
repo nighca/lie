@@ -2,11 +2,12 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 import { staticAssets } from './build/static-assets.mjs'
+import { officialCases } from './build/official-cases'
 
 const gatewayUrl = process.env.LIE_VOICE_GATEWAY_URL ?? 'http://127.0.0.1:8787'
 
 export default defineConfig({
-  plugins: [staticAssets(), vue(), {
+  plugins: [officialCases(), staticAssets(), vue(), {
     name: 'lie-main-preview-status',
     apply: 'serve',
     configureServer(server) {

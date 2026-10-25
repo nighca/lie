@@ -13,7 +13,7 @@ The local server uses port 5176. `/` uses the real voice adapter and requires a 
 
 `http://127.0.0.1:5176/?demo=1` explicitly enables fake voice in Vite development mode. It captures no microphone and plays no audio. Click “模拟说话”, then “结束模拟发言” to exercise a fake turn. There is no preset-question selector or text composer. Production builds ignore this demo flag.
 
-The selected first game is 空盒里的纪念章. The public JSON mirrors `content/games/empty-medal-box.json`; actual model behavior and player blind tests are still pending. The default is selected in `src/game-config.json`, and `?game=<id>` selects another available static content package without changing engine/UI code. CharacterPreset IDs resolve through the independent presentation manifest. Eight reusable character presets come from `design/character-presets`; generated avatars, state portraits and optional animation use the stable `/appearances/` public paths. Missing images retain readable names/initials.
+The selected first game is 空盒里的纪念章. The canonical source is `content/games/01-empty-medal-box.json`; actual model behavior and player blind tests are still pending. The default is selected in `src/game-config.json`, and `?game=<id>` selects another bundled official content package without changing engine/UI code. CharacterPreset IDs resolve through the independent presentation manifest. Eight reusable character presets come from `design/character-presets`; generated avatars, state portraits and optional animation use the stable `/appearances/` public paths. Missing images retain readable names/initials.
 
 ## Controller and connection ownership
 
@@ -28,3 +28,5 @@ The real bridge owns its microphone, playback context and PCM player; scope chan
 ## Verification boundary
 
 Controller and critical Vue tests cover independent character histories, two sessions, late callbacks, cancelled opens, connection/load failure, wrong accusation and continued questioning, correct reveal and restart. Browser visual verification should use the Codex built-in browser. During this handoff that browser was unavailable while the Mac was locked, so visual/focus/zoom inspection of these screens remains outstanding.
+
+Official cases are discovered from `content/games/NN-<id>.json`, validated and numerically sorted during build. The homepage catalog is derived from those same JSON files, including their authored summaries; no public/games copy or separate registry is maintained. See [authoring](../../content/games/README.md).

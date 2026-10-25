@@ -2,11 +2,9 @@ import { validateGame } from '@lie/game-core'
 import { describe, expect, it } from 'vitest'
 
 import manifest from '../public/appearances/manifest.json'
-import medal from '../public/games/empty-medal-box.json'
-import duck from '../public/games/duck-finale.json'
-import sugar from '../public/games/salt-sugar-mixup.json'
 import { readCharacterPresets } from '../src/presentation/characterPresets'
 import { setup } from './helpers'
+import { officialCases } from '../src/application/bundledCases'
 
 describe('shipped preset voices', () => {
   it('voices every catalog preset with the approved shared mature voice', () => {
@@ -17,7 +15,7 @@ describe('shipped preset voices', () => {
     ])
   })
 
-  it.each([medal, duck, sugar])('resolves each character voice through real catalog mappings in $id', async (content) => {
+  it.each(officialCases.map(({ game }) => game))('resolves each character voice through real catalog mappings in $id', async (content) => {
     const characterPresets = readCharacterPresets(manifest)
     const game = validateGame(content)
     const { controller, turns } = setup(undefined, game, (id) => characterPresets.find((item) => item.id === id)?.voiceId ?? null)

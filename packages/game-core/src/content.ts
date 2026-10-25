@@ -16,6 +16,8 @@ export interface GameDefinition {
   readonly id: string
   /** 非空案件标题，供游戏界面展示。 */
   readonly title: string
+  /** 可选公开简介；旧分享可省略，官方收录/投稿另要求非空。 */
+  readonly summary?: string
   /** 非空公共背景纯文本，展示给玩家，也加入每位人物上下文。 */
   readonly background: string
   /** 每局跨人物共享的正安全整数秒额度；语音启用后含停顿、等待与回答，准备连接不计，结束对话暂停。 */
@@ -65,6 +67,7 @@ export function validateGame(data: unknown): GameDefinition {
   const game = readObject(data, 'game')
   const id = readText(game.id, 'game.id')
   const title = readText(game.title, 'game.title')
+  if (game.summary !== undefined && typeof game.summary !== 'string') throw new ContentValidationError('game.summary', 'Expected text')
   const background = readText(game.background, 'game.background')
   const interrogationLimitSeconds = game.interrogationLimitSeconds
   if (typeof interrogationLimitSeconds !== 'number' || !Number.isSafeInteger(interrogationLimitSeconds) || interrogationLimitSeconds <= 0) {
@@ -99,6 +102,7 @@ export function validateGame(data: unknown): GameDefinition {
   return {
     id,
     title,
+    ...(typeof game.summary === 'string' ? { summary: game.summary } : {}),
     background,
     interrogationLimitSeconds,
     characters,

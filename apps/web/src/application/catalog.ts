@@ -1,4 +1,4 @@
-import catalogData from '../../../../content/case-catalog.json'
+import { officialCases } from './bundledCases'
 
 export interface CaseSummary {
   id: string
@@ -8,4 +8,7 @@ export interface CaseSummary {
   characters: { name: string; appearanceId: string | null }[]
 }
 
-export const caseCatalog: readonly CaseSummary[] = catalogData
+export const caseCatalog: readonly CaseSummary[] = officialCases.map(({ game }) => ({
+  id: game.id, title: game.title, summary: game.summary, interrogationLimitSeconds: game.interrogationLimitSeconds,
+  characters: game.characters.map(({ name, appearanceId }) => ({ name, appearanceId })),
+}))

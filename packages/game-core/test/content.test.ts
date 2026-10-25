@@ -17,6 +17,14 @@ describe('static game content', () => {
     expect(game.characters[0]).not.toBe(character)
   })
 
+  it('preserves optional summary verbatim while keeping old content without it compatible', () => {
+    const old = twoCharacterPlaceholder()
+    expect(Object.hasOwn(validateGame(old), 'summary')).toBe(false)
+    expect(validateGame({ ...old, summary: '  简介\n第二行  ' }).summary).toBe('  简介\n第二行  ')
+    expect(validateGame({ ...old, summary: '' }).summary).toBe('')
+    expect(() => validateGame({ ...old, summary: 1 })).toThrow('game.summary')
+  })
+
   it.each([twoCharacterPlaceholder, threeCharacterPlaceholder])('accepts valid different character counts', (fixture) => {
     const data = fixture()
     expect(validateGame(data)).toEqual(data)
