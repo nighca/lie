@@ -27,10 +27,15 @@ it('keeps the global wait-to-speak notice until capture preparation actually res
   try {
     await controller.load('test'); controller.start(); await flushPromises()
     await wrapper.get('.lie-voice__actions button').trigger('click')
-    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('甲 · 连接成功后再说话')
+    expect(wrapper.get('[aria-label="语音连接提示"]').attributes('role')).toBe('status')
+    expect(wrapper.get('.voice-connection-notice strong').text()).toBe('正在连接…')
+    expect(wrapper.get('.voice-connection-notice p').text()).toBe('连好后再说话')
+    expect(wrapper.get('.voice-connection-notice__spinner').attributes('aria-hidden')).toBe('true')
+    expect(wrapper.get('.voice-connection-notice button').text()).toBe('取消')
+    expect(wrapper.get('.voice-connection-notice button').attributes('aria-label')).toBe('取消连接')
     expect(wrapper.get('.lie-voice').attributes('data-conversation')).toBe('inactive')
     attempts[0].scope.onEvent({ type: 'listening' }); await flushPromises()
-    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('正在连接语音')
+    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('正在连接…')
     attempts[0].ready(); await flushPromises()
     expect(wrapper.find('[aria-label="语音连接提示"]').exists()).toBe(false)
     expect(wrapper.get('.lie-voice').attributes('data-conversation')).toBe('active')
@@ -65,14 +70,16 @@ it('replaces the connection notice with the existing failure feedback without re
   } finally { cleanup() }
 })
 
-it('updates the visible connection target when switching and stops it when background opens', async () => {
+it('keeps the connection card while switching and stops it when background opens', async () => {
   const { controller, wrapper, attempts, cleanup } = scene()
   Object.defineProperty(HTMLDialogElement.prototype, 'showModal', { configurable: true, value(this: HTMLDialogElement) { this.open = true } })
   try {
     await controller.load('test'); controller.start(); await flushPromises()
     await wrapper.get('.lie-voice__actions button').trigger('click')
     await wrapper.findAll('.character-list button')[1].trigger('click')
-    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('乙 · 连接成功后再说话')
+    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('连好后再说话')
+    expect(controller.getView().currentCharacterId).toBe('two')
+    expect(attempts).toHaveLength(2)
     expect(attempts[0].closed).toBe(true)
     await wrapper.get('[aria-label="查看案件背景"]').trigger('click')
     expect(wrapper.find('[aria-label="语音连接提示"]').exists()).toBe(false)

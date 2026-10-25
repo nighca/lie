@@ -100,8 +100,9 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     </ProductHeader>
 
     <section v-if="view.phase === 'interrogating' && view.conversationActive && view.busy" class="voice-connection-notice" role="status" aria-label="语音连接提示">
-      <div><strong><span class="voice-connection-notice__spinner" aria-hidden="true"></span>正在连接语音</strong><p>{{ current?.name }} · 连接成功后再说话</p></div>
-      <UiButton variant="secondary" @click="controller.endConversation()">取消连接</UiButton>
+      <span class="voice-connection-notice__spinner" aria-hidden="true"></span>
+      <div><strong>正在连接…</strong><p>连好后再说话</p></div>
+      <UiButton variant="secondary" aria-label="取消连接" @click="controller.endConversation()">取消</UiButton>
     </section>
 
     <main v-if="view.phase === 'loading' || view.phase === 'failed'" class="intro-card surface">
