@@ -1,0 +1,74 @@
+{
+  "correct-desktop": {
+    "path": "docs/result-game-ui/evidence/correct-desktop.jpg",
+    "format": "JPEG",
+    "size": [
+      1280,
+      902
+    ],
+    "sha256": "bde3e72dcba754b98695b792624c695a893ed7da99061c157e6b13de74110f13"
+  },
+  "correct-reduced": {
+    "path": "docs/result-game-ui/evidence/correct-reduced.jpg",
+    "format": "JPEG",
+    "size": [
+      1280,
+      902
+    ],
+    "sha256": "7506abdb53109979049c2a8703a7c4a4e38644882b5785c5c8f1fe9325b761fa"
+  },
+  "wrong-desktop": {
+    "path": "docs/result-game-ui/evidence/wrong-desktop.jpg",
+    "format": "JPEG",
+    "size": [
+      1280,
+      900
+    ],
+    "sha256": "a042f08cad014e18d10bf3a85e492c1b1ca7425275636c62acf17dbb0264f3ad"
+  },
+  "wrong-narrow": {
+    "path": "docs/result-game-ui/evidence/wrong-narrow.jpg",
+    "format": "JPEG",
+    "size": [
+      391,
+      876
+    ],
+    "sha256": "4adc7191f0f78309808784fdd27437b369df9a3b08d401cf4636cba0e1e915fc"
+  },
+  "preview-correct-narrow": {
+    "path": "docs/result-game-ui/evidence/preview-correct-narrow.jpg",
+    "format": "JPEG",
+    "size": [
+      391,
+      1258
+    ],
+    "sha256": "9dbfb1b688e05cb1dd4f02c80ef6bc00c87295e66856c5e9cb4c0df49fcceb8c"
+  },
+  "correct-keyboard": {
+    "path": "docs/result-game-ui/evidence/correct-keyboard.jpg",
+    "format": "JPEG",
+    "size": [
+      391,
+      220
+    ],
+    "sha256": "c8bbaaa9b30adacf2a0eed1f3e5b2144a09473788f9e43a03215b6752d8e0564"
+  },
+  "preview-wrong-fallback": {
+    "path": "docs/result-game-ui/evidence/preview-wrong-fallback.jpg",
+    "format": "JPEG",
+    "size": [
+      391,
+      844
+    ],
+    "sha256": "198da0617995bae035745a46eb076b1e6c66cbbd349446276344a5e6277ba9f0"
+  },
+  "wrong-gray": {
+    "path": "docs/result-game-ui/evidence/wrong-gray.jpg",
+    "format": "JPEG",
+    "size": [
+      391,
+      844
+    ],
+    "sha256": "49582240b4e69f5f540b464cc8359bbc0111d0c5e2b47c45888b9d1ca37f1e00"
+  }
+}
