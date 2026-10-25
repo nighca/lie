@@ -27,9 +27,13 @@ const characterNames = computed(() => view.value.characters.map((character) => (
 })))
 const resultCharacter = computed(() => view.value.characters.find((character) => character.id === view.value.result?.characterId) ?? null)
 const resultCharacterPreset = computed(() => characterPreset(resultCharacter.value?.appearanceId ?? null))
+const resultState = computed(() => view.value.result?.correct === true ? 'accusedCorrectly' : 'accusedWrongly')
 const resultPortrait = computed(() => {
-  const url = resultCharacterPreset.value?.portrait ?? null
-  return usableImage(url) ? url : null
+  const preset = resultCharacterPreset.value
+  const stateImage = preset?.portraits[resultState.value] ?? null
+  if (usableImage(stateImage)) return stateImage
+  const image = preset?.portrait ?? null
+  return usableImage(image) ? image : null
 })
 const resultParagraphs = computed(() => view.value.reveal?.split('\n\n') ?? [])
 const resultHeading = ref<HTMLElement | null>(null)
@@ -155,16 +159,31 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       </VoiceControl>
     </main>
 
-    <main v-else-if="view.phase === 'solved' || view.phase === 'lost'" class="result-card surface" :class="{ 'result-card--wrong': view.phase === 'lost' }">
+    <main v-else-if="view.phase === 'solved' || view.phase === 'lost'" class="result-card surface" :class="{ 'result-card--wrong': !view.result?.correct }">
+      <div class="result-pattern" aria-hidden="true"></div>
       <header class="result-heading">
-        <p class="eyebrow">{{ view.phase === 'solved' ? '指认正确' : '本局结束' }}</p>
-        <h1 ref="resultHeading" class="case-title lie-handwritten-underline" tabindex="-1">{{ view.phase === 'solved' ? '谜题解开了！' : '指认不正确' }}</h1>
+        <svg class="result-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <template v-if="view.result?.correct">
+            <path class="result-mark__seal" d="M50 2 60 12 75 8 79 23 94 28 89 43 98 55 85 65 85 81 69 83 60 97 47 89 33 96 25 82 9 78 13 62 2 50 14 39 12 23 28 20 38 6Z" />
+            <path class="result-mark__stroke" d="m27 51 16 17 32-37" />
+          </template>
+          <template v-else>
+            <circle class="result-mark__seal" cx="50" cy="50" r="43" />
+            <path class="result-mark__stroke" d="m32 32 36 36m0-36L32 68" />
+          </template>
+        </svg>
+        <div class="result-heading-copy">
+          <p class="eyebrow">{{ view.phase === 'solved' ? '指认正确' : '本局结束' }}</p>
+          <h1 ref="resultHeading" class="case-title lie-handwritten-underline" tabindex="-1">{{ view.phase === 'solved' ? '谜题解开了！' : '指认不正确' }}</h1>
+        </div>
       </header>
       <div class="result-content">
         <figure v-if="resultCharacter != null" class="result-character" :style="{ '--character-accent': resultCharacterPreset?.accent ?? 'var(--lie-aqua)' }">
           <div class="result-portrait">
-            <img v-if="resultPortrait != null" :key="resultPortrait" :src="resultPortrait" alt="" @error="portraitFailed">
-            <span v-else class="result-initial" aria-hidden="true">{{ resultCharacter.name.slice(0, 1) }}</span>
+            <AnimatedPortrait :src="resultCharacterPreset?.animation ?? null" :state="resultState" :label="resultCharacter.name" fit="contain">
+              <img v-if="resultPortrait != null" :key="resultPortrait" :src="resultPortrait" alt="" @error="portraitFailed">
+              <span v-else class="result-initial" aria-hidden="true">{{ resultCharacter.name.slice(0, 1) }}</span>
+            </AnimatedPortrait>
           </div>
           <figcaption><span>你指认了</span><strong>{{ resultCharacter.name }}</strong></figcaption>
         </figure>

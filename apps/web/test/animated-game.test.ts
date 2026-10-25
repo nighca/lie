@@ -23,10 +23,10 @@ beforeEach(() => {
   animation.load.mockResolvedValue({ data, images: new Map() })
 })
 afterEach(() => { cleanup.splice(0).forEach(action => action()); vi.unstubAllGlobals() })
-function scene() {
-  const content = { ...game, characters: game.characters.map((character, index) => ({ ...character, appearanceId: index === 0 ? 'coral-bob' : 'blue-glasses' })) }
+function scene(culpritId = game.ending.culpritId) {
+  const content = { ...game, ending: { ...game.ending, culpritId }, characters: game.characters.map((character, index) => ({ ...character, appearanceId: index === 0 ? 'coral-bob' : 'blue-glasses' })) }
   const characterPresets = readCharacterPresets([
-    { id: 'coral-bob', name: '珊瑚短发', avatar: '/red-avatar.png', portrait: '/red.png', portraits: { listening: '/red-listening.png', waiting: '/red-waiting.png', speaking: '/red-speaking.png' }, accent: '#ff0000', animation: '/appearances/coral-bob/animation/package.json' },
+    { id: 'coral-bob', name: '珊瑚短发', avatar: '/red-avatar.png', portrait: '/red.png', portraits: { listening: '/red-listening.png', waiting: '/red-waiting.png', speaking: '/red-speaking.png', accusedCorrectly: '/red-correct.webp', accusedWrongly: '/red-wrong.webp' }, accent: '#ff0000', animation: '/appearances/coral-bob/animation/package.json' },
     { id: 'blue-glasses', name: '蓝衣眼镜', avatar: '/blue-avatar.png', portrait: '/blue.png', portraits: { speaking: '/blue-speaking.png' }, accent: '#0000ff' },
   ])
   return { ...setup(undefined, content), characterPresets }
@@ -88,5 +88,66 @@ describe('animated character in the game page', () => {
     expect(wrapper.get('.portrait-backdrop img').attributes('src')).toBe('/red-listening.png')
     turns[1].scope.onEvent({ type: 'userText', text: '问题。' }); await wrapper.vm.$nextTick()
     expect(wrapper.get('.portrait-backdrop img').attributes('src')).toBe('/red-waiting.png')
+  })
+})
+
+
+describe('result reactions in the game page', () => {
+  it.each([true, false])('plays the actual accused character reaction when correct=%s and unmounts it on restart', async (correct) => {
+    const resultData = readAnimationPackage({
+      ...dataSource,
+      schemaVersion: 2,
+      states: { ...dataSource.states, accusedCorrectly: 'correct', accusedWrongly: 'wrong' },
+      clips: {
+        ...dataSource.clips,
+        correct: { ...dataSource.clips.rest, loop: false },
+        wrong: { ...dataSource.clips.rest, loop: false },
+      },
+    })
+    animation.load.mockResolvedValue({ data: resultData, images: new Map() })
+    const { controller, characterPresets } = scene(correct ? 'one' : 'two')
+    await controller.load('test'); controller.start()
+    controller.selectCharacter('two')
+    controller.openAccusation(); controller.accuse('one')
+    const wrapper = show(controller, characterPresets)
+    await flushPromises()
+    const portrait = wrapper.getComponent(AnimatedPortrait)
+    expect(portrait.props('state')).toBe(correct ? 'accusedCorrectly' : 'accusedWrongly')
+    expect(portrait.props('fit')).toBe('contain')
+    expect(portrait.props('label')).toBe('甲')
+    expect(portrait.props('src')).toBe('/appearances/coral-bob/animation/package.json')
+    expect(wrapper.get('.result-character figcaption strong').text()).toBe('甲')
+    expect(wrapper.get('.result-mark__stroke').attributes('d')).toBe(correct ? 'm27 51 16 17 32-37' : 'm32 32 36 36m0-36L32 68')
+    expect(wrapper.get('.result-portrait canvas').isVisible()).toBe(true)
+    controller.restart(); await flushPromises()
+    expect(wrapper.findComponent(AnimatedPortrait).exists()).toBe(false)
+    expect(animation.dispose).toHaveBeenCalledOnce()
+  })
+
+  it.each(['legacy package', 'failed load', 'static only'])('uses the corresponding static reaction with a %s', async (mode) => {
+    if (mode === 'failed load') animation.load.mockRejectedValue(new Error('missing resource'))
+    const { controller, characterPresets } = scene()
+    const contentPresets = mode === 'static only' ? characterPresets.map(preset => ({ ...preset, animation: null })) : characterPresets
+    await controller.load('test'); controller.start(); controller.openAccusation(); controller.accuse('one')
+    const wrapper = show(controller, contentPresets)
+    await flushPromises()
+    expect(wrapper.get('.result-portrait img').attributes('src')).toBe('/red-correct.webp')
+    expect(wrapper.get('.result-portrait canvas').isVisible()).toBe(false)
+    expect(animation.render).not.toHaveBeenCalled()
+    await wrapper.get('.result-portrait img').trigger('error')
+    expect(wrapper.get('.result-portrait img').attributes('src')).toBe('/red.png')
+    await wrapper.get('.result-portrait img').trigger('error')
+    expect(wrapper.get('.result-initial').text()).toBe('甲')
+  })
+
+  it('uses the wrong-result static when that character was accused incorrectly', async () => {
+    const { controller, characterPresets } = scene('two')
+    await controller.load('test'); controller.start(); controller.openAccusation(); controller.accuse('one')
+    const wrapper = show(controller, characterPresets)
+    await flushPromises()
+    expect(wrapper.get('.result-portrait img').attributes('src')).toBe('/red-wrong.webp')
+    expect(wrapper.getComponent(AnimatedPortrait).props('state')).toBe('accusedWrongly')
+    expect(wrapper.get('.result-story').text()).toBe('这次调查已结束想再试一次，请重新开始一局。')
+    expect(wrapper.get('.result-story').text()).not.toContain(game.ending.reveal)
   })
 })
