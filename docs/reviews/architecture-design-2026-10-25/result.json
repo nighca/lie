@@ -1,0 +1,18 @@
+{
+  "base": "57ff7d5984126932ba0367c6b47bfe911d03a480",
+  "ordered": [
+    "a6fe6a99f37481edb1586cdf1a25625b73444588",
+    "44d549e0d9dd5d6c9fc5a5dcb904de2164a33db4"
+  ],
+  "sourceHEAD": "44d549e0d9dd5d6c9fc5a5dcb904de2164a33db4",
+  "status": "",
+  "scope": [
+    "README.md",
+    "README.zh-CN.md",
+    "docs/architecture-design.md"
+  ],
+  "localLinksChecked": 124,
+  "fencesAndWhitespace": "pass",
+  "testsRun": false,
+  "findings": []
+}

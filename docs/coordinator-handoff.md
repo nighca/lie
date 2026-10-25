@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `e130912a86fa7431886cba03dc15cea510f4282a`。CI40190425237与CD40190596028均attempt1/success，Worker `938c40ed-a35c-47e4-9306-d14fcad0d501`；[发布证据](releases/2026-10-25-combined-demo/README.md)。有声演示片和中英文README链接已入库；运行输入与b1相同，复用正式TLS新标题验证。后续正常批次会推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `57ff7d5984126932ba0367c6b47bfe911d03a480`。CI40192248318与CD40192362559均attempt1/success，Worker `e3bf4fa2-93b6-4276-b076-08af4c5ccd19`；[发布证据](releases/2026-10-25-final-materials/README.md)。README架构/亮点、四案事实与英文专题文件名已发布；运行输入与e130/b1相同。后续正常批次会推进HEAD，操作前读实际Git。
 
 ## 协调权、自动化与发布
 
@@ -31,6 +31,7 @@
 | home_scroll / character_preset_migration | 首页source b9ef3cb→cf5c0fc、语音A777c392均已审查并随8aa发布；前者真实IAB验收，后者357测试/types/build及root4项通过。组合QA追加48b4b22已在独立Chrome补验并完整审查：三尺寸/reduce/取消迟到完成/首页四案滚动通过；使用真实App/controller＋fake transport，非真实语音。5544 PID10172/PTy45505原session停止exit130并核空监听，tab/临时入口/viewport清理完成。 |
 | native QA | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
 | 真人/内容QA | 用户最新将贺宁/Hackathon两案真实模型短测交自己，root不再安排；四案全盲测/硬件/长会话/多人隔离和费用硬限额仍未全验，不借此执行新推理。 |
+| 连接延迟01a17319 | 新chat01a17319-1ea3-7be0-9c3c-04c999169591已建，首次/同人重启/active切人阶段测量与优化；现只读/离线，真实3次/90s提案须先与用户约定空闲窗口，不假定其亲测结束。无资源/配置变更。 |
 | PR CI与预览01a1730f | 新chat01a1730f-9304-7d51-bf5b-8c20c3d37920已创建，用户先方案确认，未授实施/部署；负责逐PR CI与可跳转预览、fork/凭据/清理/成本等具体方案，root审查入库。 |
 
 旧完整owner/base/有序SHA/失败和WT恢复入口保存在[整理前两页原文及来源SHA](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)，更早[只读WT/ref清单](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)有原时间边界，不当当前WT clean/存在证明。不得因刷新文档清理他人dirty/refs/ignored材料。

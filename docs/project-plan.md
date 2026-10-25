@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-2026-10-25，最近完成CI/CD核验的发布为 `e130912a86fa7431886cba03dc15cea510f4282a`。CI40190425237与CD40190596028均attempt1/success，Worker `938c40ed-a35c-47e4-9306-d14fcad0d501`；[发布证据](releases/2026-10-25-combined-demo/README.md)。有声演示片和中英文README链接已入库；运行输入与b1相同，复用正式TLS新标题验证。后续正常批次会推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `57ff7d5984126932ba0367c6b47bfe911d03a480`。CI40192248318与CD40192362559均attempt1/success，Worker `e3bf4fa2-93b6-4276-b076-08af4c5ccd19`；[发布证据](releases/2026-10-25-final-materials/README.md)。README架构/亮点、四案事实与英文专题文件名已发布；运行输入与e130/b1相同。后续正常批次会推进HEAD，操作前读实际Git。
 
 用户暂停四小时换chat，root `01a17012-fa00-7170-ac0a-21c1900d71cd`继续active/唯一integrator；lie ACTIVE、lie-2 PAUSED，实际toml更新时间见[handoff](coordinator-handoff.md)。每次实际review/验证合main后由root按fetch/分歧审验/普通push流程默认推送并监测既有CI/CD；报告并入下一正常批次，避免报告循环。此授权不扩成手工部署、账号资源或真实provider操作。
 
@@ -29,13 +29,16 @@
 | PC首页双滚动 / 已发布8aa7ec9 | source b9ef3cb→cf5c0fc完整审查；PC视口约束，仅案件列表内滚；移动端维持自然页面滚动。真实IAB尺寸/第四案可达见[验收](home-scroll/README.md)。两轮5544验收均已原PTY停止并核空监听，组合Chrome亦验证第四案可达。 |
 | 移动首页分区间距 / 已发布2f5496d | source397b032→19fba4c、显式Header依赖4567后58dedce已完整审查；≤620px案件区上边距32px，标题与列表关系保持；真实Chrome iframe320/391/620移动和621/1280桌面对照/滚动通过，391/1280与新Header组合几何相同。[证据](home-mobile-section-spacing/README.md)。两轮5544均停止核空、临时入口/tab清理。 |
 | 首案改名 / 已发布b1f4af8 | 用户明确改为《消失的纪念章》，仅canonical title及当前README改变；ID/URL保持。37项相关测试与root单字段身份检查通过，CI/CD及新TLS JS已核验。[记录](case-title-rename/README.md)。 |
-| 评审亮点文档事实同步 / 专项01a17114 | 用户时间紧，root已核旧稿仍三案/首案旧名/旧状态描述；source d01613c已审查，同批纳入英文更名4bc5081及用户在专项明确催合入的README三提交28b0625→7daa237→9f207e4；root保留新案名/视频，补齐两版README第四案、同步中央英文链接。只做文档，待组合审查完成后普通push及新CI/CD。 |
+| 评审亮点文档事实同步 / 专项01a17114 | 用户时间紧，root已核旧稿仍三案/首案旧名/旧状态描述；source d01613c已审查，同批纳入英文更名4bc5081及用户在专项明确催合入的README三提交28b0625→7daa237→9f207e4；root保留新案名/视频，补齐两版README第四案、同步中央英文链接。已随57ff7d5合main、普通push且CI/CD通过；185当前链接/双语拓扑/四案身份组合核对通过，不重复实现。 |
 | P1 真人/真实模型 / root协调用户与QA | 用户最新明确将贺宁和Hackathon两案真实模型短测交由自己，不再由root安排/调用provider；设定修订已入库，效果待用户反馈。其余四案完整盲测、mic/外放/长会话、固定device多人隔离和费用硬限额仍未全闭环，不借此授权新推理；fake/短WAV不替代。 |
 | 原生分享/Editor生命周期 / 已完成有限验收 | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
 | Hackathon新平台定位 / 已发布 | source25e447d已审查集成并随9e1发布；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。保持讨论稿，不衍生视频制作许可。 |
 | 出戏/启动/宿主WS / 工程与内容待排 | [出戏调查](role-immersion-investigation.md)未闭环，[WS非101诊断](dev-websocket-rejection.md)未修vendor；不默认付费叠prompt/换provider。真实visibility/广泛race/硬件touch、silver/mint同accent区分等旧边界保留，不按合成事件声称通过。 |
 | 投稿 / Editor＋root | GitHub网页辅助、作者确认；用户计划公开源码不等实际visibility已操作，本批不查/改可见性。无OAuth/PAT/token输入或自动PR；[投稿范围](editor-official-submission-proposal.md)。 |
 | 截止前待取舍 / root与用户 | 评审材料已随57ff7d5发布且CI/CD通过；贺宁/第四案短测用户自行负责。外部投稿可用性、Safari/iOS跨设备分享、多人隔离/费用边界仍未闭环。用户已授权独立chat设计PR CI与逐PR可跳转预览，先方案确认，不等实施/部署许可。 |
+| 当前实现架构规格 / 专项01a17114＋root | 用户在专题明确要求新增各模块规格/对外接口文档及README入口。source a6fe6a9→44d549e及用户最新简化开头f94b83b已clean交付并全文审查，候选030187b→a75d39a；docs/architecture-design.md区分六模块公开/内部/HTTP接口，不修改原批准架构或应用。独立实际源码规格审验通过、124本地链接及围栏/空白通过；root全文及周边核对完成，不跑无关应用suite。待本批首页title修正一并正常合入/push。 |
+| 首页浏览器标题 / character_preset_migration | 用户要求精确为“LIE · 语音推理”，去掉“首页”。source b4b445f已clean交付并全文审查，候选1c05d6d；静态HTML原本正确，根因是挂载后router标题。其他路由规则不变，原目标2文件27测试通过，root组合复验27通过。待本批普通push/CI-CD。 |
+| 角色语音连接耗时 / 专项01a17319-1ea3-7be0-9c3c-04c999169591 | 用户明确新建独立chat，聚焦首次连接与active切人自动重连耗时。已创建并交时序/现有startup观测入口，先离线拆阶段、复用证据；最小真实测量提案3次/每次15s/总90s、ready即止不发问，需与用户约定空闲窗口避免同device冲突。未建窗口/资源，不改provider/计费/并行连接策略；保留角色隔离与真实ready语义。 |
 | PR合入前CI与预览 / 专项01a1730f-9304-7d51-bf5b-8c20c3d37920 | 用户明确新建独立chat，先给方案确认：每PR检查、最好每PR预览并可从PR跳转。已创建并交实际main57ff基线，研究同仓/fork、权限与凭据隔离、产物复用、URL和生命周期、语音范围/成本及PR入口；仅方案，确认前不改workflow/部署/资源/账号。 |
 | 暂停鉴权 | 用户明确暂停，[设计与候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。 |
 | 宣传视频制作 / 专项01a17226-5e5a-7193-b5b7-e522519a3e0c | 73.4秒创作分享片及37.53秒合成双向试片已归档。用户主导的take03完成三角色真实问答→正确指认→首页，source1545c1f已root全文审查及[独立复核](reviews/joint-gameplay-1545-2026-10-25/README.md)：PCM/编码/哈希/7881帧索引通过，7ctxclosed/9tracksended、四API引用恢复；[完整记录与失败备选](promo-video/2026-10-25/joint-gameplay-recording/README.md)保留。录屏存在段间hold，具体指认点击瞬间未完整动态捕获，不能声称连续或精确口型；外围finally/observer源码未全保存，仅核终态回执。用户在专项新明确要求试玩前＋创作后、有声合成成片入库并README链接，source1ae1fa3已root全文审查、接缝/末帧实际看图及[独立身份审验](reviews/combined-demo-1ae-2026-10-25/README.md)通过；[成片与复现](promo-video/2026-10-25/combined-demo/README.md)187.433秒、1280×800/30fps/H264/AAC，试玩双方声音保留、创作段原无声。两README已加链接，特定成片入库许可覆盖其中实际人声，原WAV/失败素材仍仅本地；已随e130912合main并普通push，精确CI/CD均success；成片保留原录制名称与已知hold，不再重录打磨。发布窗口已释放，无新provider操作或公开平台上传许可。 |

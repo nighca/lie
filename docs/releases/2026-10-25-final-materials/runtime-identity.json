@@ -1,0 +1,65 @@
+{
+  "base": "e130912a86fa7431886cba03dc15cea510f4282a",
+  "sha": "57ff7d5984126932ba0367c6b47bfe911d03a480",
+  "objects": [
+    {
+      "path": "apps",
+      "object": "ac623e66e181618993b8144c091bcb8bbb623a5c",
+      "equal": true
+    },
+    {
+      "path": "packages",
+      "object": "bda644dc3c6704ed7fe237ca899ebbe367e8390e",
+      "equal": true
+    },
+    {
+      "path": "scripts",
+      "object": "611f0fbc27cb81b25926212f0fe9106fc898ba57",
+      "equal": true
+    },
+    {
+      "path": "content",
+      "object": "5934c831b75f8447bdb423e773836b62753ceb5a",
+      "equal": true
+    },
+    {
+      "path": "design",
+      "object": "e89f54848dcc7f6a65e9202a012a96dd849794bc",
+      "equal": true
+    },
+    {
+      "path": ".github",
+      "object": "976b1fd7684cfc5999bee3494befc8250ce5aed9",
+      "equal": true
+    },
+    {
+      "path": "package.json",
+      "object": "04d77f7a86ddb335232ed2b96448cfe79f3ac8a1",
+      "equal": true
+    },
+    {
+      "path": "package-lock.json",
+      "object": "ace0d60809d80f6240e71ebda6c5bc1851338732",
+      "equal": true
+    }
+  ],
+  "changedPaths": [
+    "README.md",
+    "README.zh-CN.md",
+    "docs/coordinator-handoff.md",
+    "docs/hackathon/authoring-notes.md",
+    "docs/hackathon/project-highlights.md",
+    "docs/project-plan.md",
+    "docs/releases/2026-10-25-combined-demo/README.md",
+    "docs/releases/2026-10-25-combined-demo/artifacts.json",
+    "docs/releases/2026-10-25-combined-demo/cd-final.json",
+    "docs/releases/2026-10-25-combined-demo/ci-final.json",
+    "docs/releases/2026-10-25-combined-demo/deploy-evidence.txt",
+    "docs/releases/2026-10-25-combined-demo/result.json",
+    "docs/releases/2026-10-25-combined-demo/runtime-identity.json",
+    "docs/reviews/final-materials-2026-10-25/README.md",
+    "docs/reviews/final-materials-2026-10-25/candidate-check.json",
+    "docs/reviews/final-materials-2026-10-25/result.json"
+  ],
+  "tlsReuse": "e130 and b1 runtime identity, reuse b1 fresh homepage/JS proof of 消失的纪念章 / empty-medal-box; no new GET/build"
+}

@@ -1,0 +1,28 @@
+{
+  "base": "57ff7d5984126932ba0367c6b47bfe911d03a480",
+  "architectureOrderedSource": [
+    "a6fe6a99f37481edb1586cdf1a25625b73444588",
+    "44d549e0d9dd5d6c9fc5a5dcb904de2164a33db4",
+    "f94b83b87ce7c086fa1f15e5b6d73552ec119266"
+  ],
+  "titleSource": "b4b445f26a01904e227dbfb3347a7ac3c13f4062",
+  "rootTitleTests": {
+    "files": 2,
+    "passed": 27,
+    "failed": 0,
+    "runtime": "Node24.22.1/Vitest5.0.5",
+    "pretest": "8presets/121assets generated"
+  },
+  "localLinks": 173,
+  "fourTitlesAndDemoPreserved": true,
+  "newUserChats": {
+    "prProposal": "01a1730f-9304-7d51-bf5b-8c20c3d37920",
+    "voiceLatency": "01a17319-1ea3-7be0-9c3c-04c999169591"
+  },
+  "providerOrServices": false,
+  "limitations": [
+    "No new native browser verification",
+    "No app full suite/build in this batch",
+    "PR CI/preview remains proposal only"
+  ]
+}
