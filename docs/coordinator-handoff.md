@@ -65,7 +65,7 @@
 
 ## 必须保留的服务与环境
 
-**当前服务规则与盘点以[development登记](development.md#服务登记与生命周期)为准**：稳定端口优先复用，用完停服；历史端口不再默认永久保留。根侧未新启服务、未发停止信号；18个历史服务＋5358/5359两制作入口共20个已关闭。保留用户8787/8788进程树、5355用户tab18；5544正式QA已完成，原owner在session19829收尾，退出回执未到前不计已停，不重复操作。证据及未知源码/PTY字段见[清理记录](history/2026-10-25/development-service-cleanup.md)，不交叉操作。以下旧记录只供归属追溯，不覆盖本轮登记。
+**当前服务规则与盘点以[development登记](development.md#服务登记与生命周期)为准**：稳定端口优先复用，用完停服；历史端口不再默认永久保留。根侧未新启服务、未发停止信号；18个历史服务＋5358/5359制作入口＋5544正式QA共21个已关闭。保留用户8787/8788进程树；5355仍由动画专项独占，用于用户查看角色，来源切换由该owner登记。5544原owner已在session19829 Ctrl-C退出130并核无监听，不重复操作。证据及未知源码/PTY字段见[清理记录](history/2026-10-25/development-service-cleanup.md)，不交叉操作。以下旧记录只供归属追溯，不覆盖本轮登记。
 
 - 前代约03:37分享边界只读QA自建IAB browser `3` / tab `1`清理未确认：仅打开`http://localhost:8787/play`见缺内容提示，后续CDP调用约272秒未返回被中断；close返回`Browser is not available: 3`，IAB inventory也不可用；04:07一次inventory仍返回`Browser is not available: iab`，之后未重试/reset。浏览器恢复后仅核查/关闭此自建tab，禁止触碰他人tab或reset。无源码、草稿、viewport、mic/provider或服务改动，不推断产品bug/服务离线或其他专项等待原因，无审批/拒绝证据；未得边界/Unicode/refresh/网络结果。临时证据`/private/tmp/lie-share-boundary-qa-20261025/handoff.md`。
 

@@ -113,7 +113,7 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 | Editor验收 | Editor `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 5402，只有必要的受控代理才用5403；同源fixture复用，当前验收结束即停。 |
 | 调查UI验收 | 调查 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 5507；同源路径复用，当前验收结束即停。 |
 | 动画制作预览 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 5358 ochre、5359 mint；owner可在不影响当前制作的前提下合用一套多root服务，不强停在制消费者。制作/本批验收结束即停。 |
-| 本轮正式游戏QA例外 | root下 `verify_editor_candidate` | 5544，`final-two-character-game/lie`；当前组合游戏验收需要的有界例外，临时iframe壳在同server提供，验完停，不再开附加端口。 |
+| 正式游戏QA | root下 `verify_editor_candidate` | 5544，`final-two-character-game/lie`；当前组合游戏验收需要的有界例外，临时iframe壳在同server提供，验完停，不再开附加端口。 |
 
 PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已控制该进程。端口分配也不证明当前已有服务在跑；每轮实际状态看下表。CF开发服务器附带的workerd/内部RPC端口属于8788同一受保护进程树，不作为闲置独立预览批杀。
 
@@ -124,11 +124,11 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 | 状态／端口 | owner与消费者 | WT／源码HEAD；PID／原PTY；停止条件 |
 | --- | --- | --- |
 | 保留8787 / 8788及内部子监听 | root／用户固定main | owning main及apps/gateway；HEAD `6e52462f…`；PID54878／54957，workerd54990；launchd，PTY不适用。内部50360/50366/50367均为同网关回环子监听。只有明确服务turn可维护。 |
-| 保留5355（有消费者的历史例外） | 动画 `01a16d44…`／用户现有tab18 | animation-comparison-preview/lie；当前checkout HEAD不可读取，不能把历史ref当现存源码证明；PID4072，原PTY未留存。用户不再使用后由动画owner核实并停止，不盲杀。 |
+| 保留5355（用户8角色检查） | 动画 `01a16d44…`／用户检查，deliverable tab45；原用户tab18未改 | final-two-character-game/lie，HEAD `72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`；新PTY82389，PID未交不猜测。owner精确停止旧PID4072后复用同端口，8人各canvas1/fallback0，logs0。用户结束或迁至稳定main入口后由该owner停止；在此之前保留WT。 |
 | 已关闭5359 | 动画 `01a16d44…`／mint本批制作与QA已完成 | mint-puffs-animation/lie；采样HEAD `dbecc26cfdf347d3e7bca8a35f76a38392ddf99f`；原PID54935、旧PTY失效后由owner精确TERM，最终无LISTEN。不重复停止。 |
-| 5544待退出回执（本轮隔离QA例外） | root下verify_editor_candidate／正式QA已完成 | final-two-character-game/lie；采样HEAD `a2983073171a3c07632a024a1294ba1a14855fec`，QA最终记录c5de95c；原PID35694、原session19829。owner正在同一会话删临时壳并停止，未收到最终退出回执前不写已停。 |
+| 已关闭5544 | root下verify_editor_candidate／正式QA已完成 | final-two-character-game/lie；最终HEAD `72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`；原PID35694、原session19829。owner已删除临时壳、原会话Ctrl-C退出130，lsof核无监听，WT clean。不重复停止。 |
 | 已关闭5358 | 动画／ochre本批制作与QA已完成 | 原PID48081，ochre-freckles-animation；动画owner通过原PTY Ctrl-C停止并最终核无LISTEN，本owner未发信号，不自行重启。 |
 | 未监听5402 / 5403 / 5507 | Editor／调查首选分配 | 只分配，不空闲常驻；Editor本轮保留0、调查保留0，无未知归属。 |
 | 已释放18旧端口 | 调查6＋Editor5＋动画7 | 调查5368/5369/5370/5392/5398/5394与Editor5371–5375有owner最终退出回执；动画5346/5347/5348/5350/5351/5352/5357经owner精确TERM、根侧获准最后一次只读扫描确认无监听。详清理记录，不按旧PID再停。 |
 
-18个旧服务加本轮5358/5359共20个已关闭；5544最后收尾尚待owner退出回执，未把它计入20。未发现其他未知归属LIE监听；5355当前源码HEAD及部分历史PTY未知已如实列出，有明确owner/消费者而非无主进程。前代root5486/5488/5489、旧5356等本次未见监听，只记录观察，不认领历史停止。固定main SHA随正常集成更新，需用`/__lie/main-status`和实际main对照。5544最终退出由原owner单独回执闭环，不阻塞本轮规则与历史清理交付，不为此重复扫端口或发停止信号。
+18个旧服务加本轮5358/5359及5544共21个已关闭，5544最终退出回执已通过原owner完整handoff闭环。未发现其他未知归属LIE监听；5355当前源码HEAD及部分历史PTY未知已如实列出，有明确owner/消费者而非无主进程。前代root5486/5488/5489、旧5356等本次未见监听，只记录观察，不认领历史停止。固定main SHA随正常集成更新，需用`/__lie/main-status`和实际main对照。5355已按随后owner完整回执更新为8角色检查入口，其他PID仍为08:10快照。旧5355受控切换至同端口新服务，不计作额外消除的闲置服务；不新增端口。

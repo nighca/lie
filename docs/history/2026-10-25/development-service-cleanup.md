@@ -26,10 +26,10 @@
 
 - 5355有明确消费者：用户现有tab18。动画owner负责待用户不再使用后核并停；其cwd为animation-comparison-preview/lie，当前checkout HEAD读取失败，保留为unknown，不能以旧ref猜测现存文件版本。root不动用户tab。
 - 动画最终batch确认5358/5359两个本轮制作入口也已关闭：5358原PTY Ctrl-C；5359旧PTY失效，重新核原PID54935后精确TERM。owner最终核两端口均无LISTEN；连同上面18旧服务，共20个关闭。根侧未再扫或重复停止。
-- 5544正式QA已完成，最终QA记录c5de95c；verify_editor_candidate正通过原session19829删临时壳并停止服务。本批尚未收到最终退出回执，因此不计为第21个已关闭服务，也不延迟规则交付或发第二次信号。原PID35694、采样checkout HEAD见development。
+- 后续5544最终回执：verify_editor_candidate已删除精确临时壳，通过原session19829 Ctrl-C退出130，lsof核5544无监听，WT clean。完整回执提交`72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`的`docs/animation/mint-ochre-game-integration.md`；此前QA源c5de95c已纳入该候选，不重复重放。连同前述20个共21个已关闭，不再发送信号。
 - 8787/8788为用户launchd固定环境及子进程，只允许明确服务turn维护。无新增daemon或并行服务。
 
-未发现其他未知归属LIE监听。前代root5486/5488/5489等当前未见监听，不能因此认领历史停止或按旧PID操作。当前保留的5355和main有明确消费者；5544仅剩原owner收尾退出回执，不把此回执与本轮清理规则交付绑定，之后按原owner完整handoff单独闭环。
+未发现其他未知归属LIE监听。前代root5486/5488/5489等当前未见监听，不能因此认领历史停止或按旧PID操作。当前保留的5355和main有明确消费者；5544已收到最终退出回执。随后动画owner因用户查看全部8角色需求，精确停止旧5355 PID4072后复用同端口：来源final-two-character-game HEAD72c4a93，PTY82389，新PID尚未交不猜测；8人UI逐一切换canvas1/fallback0，logs0。用户tab45已交付，原tab18未改；保留WT及5355直到用户结束或移交稳定main。该受控来源切换不计作额外消除闲置服务。
 
 ## 落地规则
 
