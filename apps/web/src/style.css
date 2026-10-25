@@ -179,6 +179,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .case-card .lie-button { margin-top: 20px; align-self: flex-end; min-height: 48px; padding: 9px 17px; border-width: 2px; border-radius: 15px; font-size: 16px; box-shadow: 0 3px var(--lie-ink); }
 .case-card .lie-button::after { content: '→'; margin-left: 38px; }
 .catalog-error { padding: 24px; }
+@media (min-width: 621px) {
+  .home-shell { display: flex; flex-direction: column; height: 100dvh; }
+  .home-shell > .lie-product-header { flex-shrink: 0; }
+  .home-content { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); align-items: stretch; }
+  .home-intro { position: static; display: flex; flex-direction: column; min-height: 0; }
+  .home-intro > h1, .home-intro > p, .home-flow { flex-shrink: 0; }
+  .home-cast { flex: 0 1 334px; min-height: 0; }
+  .home-cases { display: flex; flex-direction: column; min-height: 0; }
+  .home-cases h2 { flex-shrink: 0; }
+  .case-grid { min-height: 0; overflow-y: auto; overscroll-behavior-y: contain; grid-auto-rows: max-content; scrollbar-gutter: stable; padding: 2px 8px 8px 2px; }
+}
 @media (min-width: 1440px) {
   .home-cast .home-cast-sunny { left: -14px; }
   .home-cast .home-cast-coral { left: 119px; }

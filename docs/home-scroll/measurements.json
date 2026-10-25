@@ -1,0 +1,381 @@
+{
+  "before": {
+    "viewport": [
+      1280,
+      800
+    ],
+    "pageHeight": 1291,
+    "listHeight": 1095,
+    "listOverflow": "visible"
+  },
+  "after": [
+    {
+      "elements": [
+        {
+          "bottom": 800,
+          "height": 800,
+          "overflow": "visible",
+          "scroll": 800,
+          "selector": ".home-shell",
+          "top": 0
+        },
+        {
+          "bottom": 776,
+          "height": 654,
+          "overflow": "visible",
+          "scroll": 654,
+          "selector": ".home-intro",
+          "top": 122
+        },
+        {
+          "bottom": 633.0625,
+          "height": 334,
+          "overflow": "hidden",
+          "scroll": 354,
+          "selector": ".home-cast",
+          "top": 299.0625
+        },
+        {
+          "bottom": 776,
+          "height": 654,
+          "overflow": "visible",
+          "scroll": 654,
+          "selector": ".home-cases",
+          "top": 122
+        },
+        {
+          "bottom": 776,
+          "height": 604,
+          "overflow": "auto",
+          "scroll": 1105,
+          "selector": ".case-grid",
+          "top": 172
+        }
+      ],
+      "height": 800,
+      "page": 800,
+      "pageWidth": 1280,
+      "width": 1280
+    },
+    {
+      "elements": [
+        {
+          "bottom": 900,
+          "height": 900,
+          "overflow": "visible",
+          "scroll": 900,
+          "selector": ".home-shell",
+          "top": 0
+        },
+        {
+          "bottom": 876,
+          "height": 754,
+          "overflow": "visible",
+          "scroll": 754,
+          "selector": ".home-intro",
+          "top": 122
+        },
+        {
+          "bottom": 633.0625,
+          "height": 334,
+          "overflow": "hidden",
+          "scroll": 354,
+          "selector": ".home-cast",
+          "top": 299.0625
+        },
+        {
+          "bottom": 876,
+          "height": 754,
+          "overflow": "visible",
+          "scroll": 754,
+          "selector": ".home-cases",
+          "top": 122
+        },
+        {
+          "bottom": 876,
+          "height": 704,
+          "overflow": "auto",
+          "scroll": 1078,
+          "selector": ".case-grid",
+          "top": 172
+        }
+      ],
+      "height": 900,
+      "page": 900,
+      "pageWidth": 1440,
+      "width": 1440
+    },
+    {
+      "elements": [
+        {
+          "bottom": 600,
+          "height": 600,
+          "overflow": "visible",
+          "scroll": 600,
+          "selector": ".home-shell",
+          "top": 0
+        },
+        {
+          "bottom": 576,
+          "height": 454,
+          "overflow": "visible",
+          "scroll": 454,
+          "selector": ".home-intro",
+          "top": 122
+        },
+        {
+          "bottom": 529.609375,
+          "height": 231,
+          "overflow": "hidden",
+          "scroll": 354,
+          "selector": ".home-cast",
+          "top": 299.0625
+        },
+        {
+          "bottom": 576,
+          "height": 454,
+          "overflow": "visible",
+          "scroll": 454,
+          "selector": ".home-cases",
+          "top": 122
+        },
+        {
+          "bottom": 576,
+          "height": 404,
+          "overflow": "auto",
+          "scroll": 1105,
+          "selector": ".case-grid",
+          "top": 172
+        }
+      ],
+      "height": 600,
+      "page": 600,
+      "pageWidth": 1280,
+      "width": 1280
+    },
+    {
+      "elements": [
+        {
+          "bottom": 600,
+          "height": 600,
+          "overflow": "visible",
+          "scroll": 600,
+          "selector": ".home-shell",
+          "top": 0
+        },
+        {
+          "bottom": 576,
+          "height": 462,
+          "overflow": "visible",
+          "scroll": 462,
+          "selector": ".home-intro",
+          "top": 114
+        },
+        {
+          "bottom": 529.609375,
+          "height": 264,
+          "overflow": "hidden",
+          "scroll": 285,
+          "selector": ".home-cast",
+          "top": 265.96875
+        },
+        {
+          "bottom": 576,
+          "height": 462,
+          "overflow": "visible",
+          "scroll": 462,
+          "selector": ".home-cases",
+          "top": 114
+        },
+        {
+          "bottom": 576,
+          "height": 412,
+          "overflow": "auto",
+          "scroll": 1114,
+          "selector": ".case-grid",
+          "top": 164
+        }
+      ],
+      "height": 600,
+      "page": 600,
+      "pageWidth": 900,
+      "width": 900
+    },
+    {
+      "elements": [
+        {
+          "bottom": 600,
+          "height": 600,
+          "overflow": "visible",
+          "scroll": 600,
+          "selector": ".home-shell",
+          "top": 0
+        },
+        {
+          "bottom": 584,
+          "height": 478,
+          "overflow": "visible",
+          "scroll": 478,
+          "selector": ".home-intro",
+          "top": 106
+        },
+        {
+          "bottom": 537.609375,
+          "height": 280,
+          "overflow": "hidden",
+          "scroll": 285,
+          "selector": ".home-cast",
+          "top": 257.96875
+        },
+        {
+          "bottom": 584,
+          "height": 478,
+          "overflow": "visible",
+          "scroll": 478,
+          "selector": ".home-cases",
+          "top": 106
+        },
+        {
+          "bottom": 584,
+          "height": 428,
+          "overflow": "auto",
+          "scroll": 1222,
+          "selector": ".case-grid",
+          "top": 156
+        }
+      ],
+      "height": 600,
+      "page": 600,
+      "pageWidth": 621,
+      "width": 621
+    },
+    {
+      "elements": [
+        {
+          "bottom": 1521.796875,
+          "height": 1522,
+          "overflow": "visible",
+          "scroll": 1522,
+          "selector": ".home-shell",
+          "top": 0
+        },
+        {
+          "bottom": 456.859375,
+          "height": 353,
+          "overflow": "visible",
+          "scroll": 353,
+          "selector": ".home-intro",
+          "top": 104
+        },
+        {
+          "bottom": 410.46875,
+          "height": 212,
+          "overflow": "hidden",
+          "scroll": 246,
+          "selector": ".home-cast",
+          "top": 198.46875
+        },
+        {
+          "bottom": 1505.796875,
+          "height": 1049,
+          "overflow": "visible",
+          "scroll": 1049,
+          "selector": ".home-cases",
+          "top": 456.859375
+        },
+        {
+          "bottom": 1505.796875,
+          "height": 1009,
+          "overflow": "visible",
+          "scroll": 1009,
+          "selector": ".case-grid",
+          "top": 496.859375
+        }
+      ],
+      "height": 800,
+      "page": 1522,
+      "pageWidth": 620,
+      "width": 620
+    },
+    {
+      "elements": [
+        {
+          "bottom": 1597.359375,
+          "height": 1597,
+          "overflow": "visible",
+          "scroll": 1597,
+          "selector": ".home-shell",
+          "top": 0
+        },
+        {
+          "bottom": 456.859375,
+          "height": 353,
+          "overflow": "visible",
+          "scroll": 353,
+          "selector": ".home-intro",
+          "top": 104
+        },
+        {
+          "bottom": 410.46875,
+          "height": 212,
+          "overflow": "hidden",
+          "scroll": 246,
+          "selector": ".home-cast",
+          "top": 198.46875
+        },
+        {
+          "bottom": 1581.359375,
+          "height": 1125,
+          "overflow": "visible",
+          "scroll": 1125,
+          "selector": ".home-cases",
+          "top": 456.859375
+        },
+        {
+          "bottom": 1581.359375,
+          "height": 1085,
+          "overflow": "visible",
+          "scroll": 1085,
+          "selector": ".case-grid",
+          "top": 496.859375
+        }
+      ],
+      "height": 844,
+      "page": 1597,
+      "pageWidth": 391,
+      "width": 391
+    }
+  ],
+  "shortWindows": [
+    {
+      "flowBottom": 376,
+      "lastTitleHeight": 36,
+      "listHeight": 204,
+      "page": 400,
+      "viewport": [
+        1280,
+        400
+      ]
+    },
+    {
+      "flowBottom": 384,
+      "lastTitleHeight": 31,
+      "listHeight": 228,
+      "page": 400,
+      "viewport": [
+        621,
+        400
+      ]
+    }
+  ],
+  "desktopListScroll": {
+    "viewport": [
+      1280,
+      600
+    ],
+    "pageY": 0,
+    "listY": 701,
+    "listBottom": 576,
+    "lastButtonBottom": 540.3125
+  }
+}
