@@ -1,4 +1,4 @@
-import { accuse, appendDialogue, buildCharacterContext, consumeInterrogationTime, createGameSession, endSession, getInterrogationRemainingMs, loadGame, restartSession, selectCharacter, startSession } from '@lie/game-core'
+import { accuse, appendDialogue, buildCharacterContext, consumeInterrogationTime, createGameSession, endSession, getInterrogationRemainingMs, loadGame, restartSession, selectCharacter, startSession, validateGame } from '@lie/game-core'
 import type { DialogueEntry, GameSession } from '@lie/game-core'
 
 import { VoiceAvailabilityError } from './voice'
@@ -204,6 +204,10 @@ export function createGameController(options: ControllerOptions) {
 
   return {
     getView,
+    getRemixSource() {
+      if (loadState != null || session == null || (session.phase !== 'solved' && session.phase !== 'lost')) return null
+      return validateGame(session.game)
+    },
     getVoiceFeedback: (): VoiceFeedback => ({ ...voiceFeedback }),
     subscribeVoiceFeedback(listener: (feedback: VoiceFeedback) => void) {
       feedbackListeners.add(listener)

@@ -8,6 +8,7 @@ describe('accusation result projection', () => {
     const content = { ...game, ending: { ...game.ending, culpritId: correct ? 'two' : 'one' } }
     const { controller, turns } = setup(undefined, content)
     try {
+      expect(controller.getRemixSource()).toBeNull()
       expect(controller.getView().result).toBeNull()
       await controller.load('test')
       controller.start()
@@ -30,6 +31,12 @@ describe('accusation result projection', () => {
       expect(JSON.stringify(view)).not.toContain(game.characters[0].profile)
       expect(JSON.stringify(view)).not.toContain(game.characters[1].profile)
       if (!correct) expect(JSON.stringify(view)).not.toContain(game.ending.reveal)
+      const source = controller.getRemixSource()!
+      expect(source).toEqual(content)
+      Object.assign(source.characters[0], { profile: '改写' })
+      Object.assign(source.ending, { reveal: '改写' })
+      expect(controller.getRemixSource()).toEqual(content)
+      expect(controller.getView()).toEqual(view)
       previous.scope.onEvent({ type: 'assistantText', text: '旧人物的迟到回答。' })
       previous.scope.onEvent({ type: 'error' })
       await controller.startConversation()
@@ -75,9 +82,11 @@ describe('accusation result projection', () => {
       expect(() => controller.end()).toThrow('invalid-phase')
       expect(controller.getView().result?.correct).toBe(correct)
       controller.restart()
+      expect(controller.getRemixSource()).toBeNull()
       expect(controller.getView()).toMatchObject({ phase: 'intro', result: null, reveal: null })
       controller.start()
       controller.end()
+      expect(controller.getRemixSource()).toBeNull()
       expect(controller.getView()).toMatchObject({ phase: 'ended', result: null, reveal: null })
     } finally {
       controller.dispose()

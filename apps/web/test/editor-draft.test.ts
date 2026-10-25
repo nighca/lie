@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest'
 
-import { createDraft, draftGame, draftIssues, DRAFT_KEY, loadDraft, removeCharacter, saveDraft } from '../src/editor/draft'
+import { createDraft, createRemixDraft, draftGame, draftIssues, DRAFT_KEY, loadDraft, removeCharacter, saveDraft } from '../src/editor/draft'
 import { decodeSharedGame, encodeGameLink } from '../src/editor/share'
 import { game as sourceGame } from './helpers'
 
@@ -10,6 +10,18 @@ const game = { ...sourceGame, characters: sourceGame.characters.map((character) 
 
 function editable() { return JSON.parse(JSON.stringify(game)) }
 describe('editor drafts', () => {
+  it('copies only static authoring fields into an independent new case', () => {
+    const source = { ...game, title: '标题 🌊\n第二行', history: ['私密对话'], usedMs: 1234 }
+    const draft = createRemixDraft(source)
+    expect(draft.id).not.toBe(source.id)
+    expect(createRemixDraft(source).id).not.toBe(draft.id)
+    expect({ ...draft, id: source.id }).toEqual({ ...game, title: source.title })
+    draft.characters[0].profile = '改写'
+    draft.ending.reveal = '改写'
+    expect(source.characters[0].profile).toBe(game.characters[0].profile)
+    expect(source.ending.reveal).toBe(game.ending.reveal)
+    expect(createRemixDraft(sourceGame).characters[0].appearanceId).toBeNull()
+  })
   it('saves and restores an incomplete draft without requiring playable fields', () => {
     const draft = createDraft()
     const values = new Map<string, string>()

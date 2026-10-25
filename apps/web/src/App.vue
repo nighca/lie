@@ -7,7 +7,7 @@ import { splitBackgroundCharacterNames } from './presentation/backgroundCharacte
 import type { CharacterPreset } from './presentation/characterPresets'
 
 const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; returnLabel?: string }>(), { returnLabel: '返回案件列表' })
-const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: [] }>()
+const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: []; remix: [] }>()
 const view = ref(props.controller.getView())
 const voiceFeedback = ref(props.controller.getVoiceFeedback())
 const unsubscribeFeedback = props.controller.subscribeVoiceFeedback((value) => { voiceFeedback.value = value })
@@ -177,6 +177,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       </div>
       <footer class="result-actions">
         <UiButton @click="controller.restart()">重新开始一局</UiButton>
+        <UiButton variant="secondary" @click="emit('remix')">改编游戏</UiButton>
         <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
       </footer>
     </main>

@@ -17,6 +17,16 @@ export function createDraft(appearanceId: string | null = null): EditorDraft {
   const characterId = crypto.randomUUID()
   return { id, title: '', background: '', interrogationLimitSeconds: 600, characters: [{ id: characterId, name: '', profile: '', appearanceId }], ending: { culpritId: '', reveal: '' } }
 }
+export function createRemixDraft(source: GameDefinition): EditorDraft {
+  return {
+    id: crypto.randomUUID(),
+    title: source.title,
+    background: source.background,
+    interrogationLimitSeconds: source.interrogationLimitSeconds,
+    characters: source.characters.map(({ id, name, profile, appearanceId }) => ({ id, name, profile, appearanceId })),
+    ending: { culpritId: source.ending.culpritId, reveal: source.ending.reveal },
+  }
+}
 export function removeCharacter(draft: EditorDraft, id: string) {
   draft.characters = draft.characters.filter((character) => character.id !== id)
   if (draft.ending.culpritId === id) draft.ending.culpritId = ''

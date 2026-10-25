@@ -6,6 +6,7 @@ import type { GameDefinition } from '@lie/game-core'
 
 import App from './App.vue'
 import Editor from './editor/Editor.vue'
+import { createRemixDraft, DRAFT_KEY, saveDraft, type EditorDraft } from './editor/draft'
 import { decodeSharedGame, SHARE_URL_LIMIT } from './editor/share'
 import type { CaseSummary } from './application/catalog'
 import type { GameController } from './application/controller'
@@ -21,6 +22,12 @@ const instance = ref(0)
 const confirmation = ref(false)
 const shareLoading = ref(false)
 const shareError = ref<string | null>(null)
+const remixOpen = ref(false)
+const remixError = ref<string | null>(null)
+const remixChanged = ref(false)
+let pendingRemix: EditorDraft | null = null
+let observedDraft: string | null = null
+let draftRead = false
 let previewGame: GameDefinition | null = null
 let revision = 0
 let resolveConfirmation: ((answer: boolean) => void) | null = null
@@ -33,6 +40,7 @@ function discard() {
   shareLoading.value = false
   shareError.value = null
   answer(false)
+  cancelRemix()
   unsubscribe?.()
   unsubscribe = null
   controller.value?.dispose()
@@ -101,6 +109,45 @@ function preview(game: GameDefinition) {
   previewGame = game
   void router.push({ path: '/editor/preview', query: demoQuery() })
 }
+function cancelRemix() {
+  remixOpen.value = false
+  remixError.value = null
+  remixChanged.value = false
+  pendingRemix = null
+  observedDraft = null
+  draftRead = false
+}
+function remix() {
+  const source = controller.value?.getRemixSource()
+  if (source == null) return
+  pendingRemix = createRemixDraft(source)
+  remixOpen.value = true
+  checkRemix(false)
+}
+function checkRemix(replace: boolean) {
+  if (pendingRemix == null) return
+  let raw: string | null
+  try { raw = localStorage.getItem(DRAFT_KEY) }
+  catch {
+    draftRead = false
+    remixError.value = '无法读取此浏览器的草稿，请重试。当前案件尚未改编。'
+    return
+  }
+  remixError.value = null
+  const changed = draftRead && raw !== observedDraft
+  const canSave = !changed && (raw == null || (replace && draftRead))
+  observedDraft = raw
+  draftRead = true
+  remixChanged.value = changed
+  if (!canSave) return
+  try { saveDraft(localStorage, pendingRemix) }
+  catch {
+    remixError.value = '无法保存改编草稿，请重试。当前案件尚未改编。'
+    return
+  }
+  cancelRemix()
+  editor()
+}
 function selectCase(id: string) { void router.push({ path: '/', query: { game: id, ...(props.demo ? { demo: '1' } : {}) } }) }
 async function end() { if (await confirmLeave()) controller.value?.end() }
 function avatar(id: string | null) { return props.characterPresets.find((item) => item.id === id)?.avatar ?? null }
@@ -111,7 +158,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
 </script>
 
 <template>
-  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" />
+  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
   <Editor v-else-if="route.path === '/editor'" :character-presets="characterPresets" :preset-status="presetStatus" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
@@ -149,5 +196,12 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
       </section>
     </main>
   </div>
+  <UiDialog :open="remixOpen" title="改编游戏" @close="cancelRemix">
+    <p>改编会打开完整案件，包括答案、结局和人物设定。</p>
+    <p>此浏览器如有草稿，继续将替换它，无法撤销。选择“保留草稿”可取消改编。</p>
+    <p v-if="remixChanged" role="status">草稿刚刚发生了变化，请再次确认是否替换。</p>
+    <p v-if="remixError != null" role="alert">{{ remixError }}</p>
+    <template #actions><UiButton variant="secondary" @click="cancelRemix">保留草稿</UiButton><UiButton @click="checkRemix(true)">{{ remixError != null ? '重试' : '替换草稿并改编' }}</UiButton></template>
+  </UiDialog>
   <UiDialog class="leave-confirmation" :open="confirmation" title="结束这次调查？" @close="answer(false)"><p>离开会结束本局，调查进度不会保留。</p><template #actions><UiButton variant="secondary" @click="answer(false)">继续调查</UiButton><UiButton @click="answer(true)">确认结束</UiButton></template></UiDialog>
 </template>

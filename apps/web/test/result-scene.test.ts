@@ -35,7 +35,7 @@ describe('accused character result scene', () => {
     expect(document.activeElement).toBe(wrapper.get('main h1').element)
     expect(wrapper.get('main h1').text()).toBe(correct ? '谜题解开了！' : '指认不正确')
     expect(wrapper.get<HTMLDialogElement>('.accusation-dialog').element.open).toBe(false)
-    expect(wrapper.findAll('.result-actions button').map((button) => button.text())).toEqual(['重新开始一局', '返回我的案件'])
+    expect(wrapper.findAll('.result-actions button').map((button) => button.text())).toEqual(['重新开始一局', '改编游戏', '返回我的案件'])
     if (correct) {
       expect(wrapper.findAll('.result-story p').map((paragraph) => paragraph.text())).toEqual(['第一段真相。', '第二段经过。'])
     } else {
