@@ -1,0 +1,37 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "source": "design/character-presets/assets/ochre-freckles/animation/parts/default-source.png",
+  "states": [
+    {
+      "state": "accusedCorrectly",
+      "prompt": "Use case: identity-preserve. Edit target supplied transparent1254x1254 freckled auburn-haired yellow hoodie game character. Change ONLY eyebrows, eyelids, eyes and mouth to a vivid, slightly comic embarrassed 'you caught me' expression. Inner brow corners raised, half-lidded eyes glancing down, small wobbly asymmetric closed mouth replacing happy smile. Sheepish and resigned, not crying, no anger. Keep EXACT canvas1254x1254 and position/scale, same auburn hair/head silhouette, ears/nose/freckles, face angle, neck, hoodie/whole body/sleeves and hands identical. Crisp navy ink cartoon style and palette unchanged. Real transparent background, no text/symbols/tears/sweat/props.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-b5e2e622-804c-44bf-96ad-6cb0b408617a.png",
+      "savedPath": "parts/accused-correctly-source.png",
+      "sha256": "e799f1c0c94a02bbe5ace3401c2757ad3175472f4295fabc07b3a377126a7924",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "state": "accusedWrongly",
+      "prompt": "Use case: identity-preserve. Edit target supplied transparent1254x1254 auburn-haired freckled yellow hoodie game sprite. Change ONLY face expression into vivid friendly puzzled 'Me?!' surprise: one eyebrow raised high, other slightly lowered, widened eyes looking forward and clearly open small O mouth with pink tongue. Playful questioning surprise, no anger or fright. Keep EXACT1254x1254 canvas, registration/head angle, hair/head silhouettes, ears/nose/freckles, neck, whole hoodie/body/sleeves/hands same size/positions. Same crisp navy ink cartoon and color palette. True transparent background. No text/question marks/tears/sweat/props.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-6ce96d1e-9426-4a8e-bad0-8761daf3b934.png",
+      "savedPath": "parts/accused-wrongly-source.png",
+      "sha256": "af4958a44c1b1e959f8b2925554bbf368b19b422d19f9204951fac3b81e88b81",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ]
+}
