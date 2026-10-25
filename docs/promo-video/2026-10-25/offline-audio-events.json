@@ -1,0 +1,27 @@
+[
+  {
+    "at": 1792920701267,
+    "contextTime": 0.128,
+    "type": "record-start"
+  },
+  {
+    "at": 1792920701267,
+    "type": "virtual-mic-request"
+  },
+  {
+    "at": 1792920701268,
+    "contextTime": 0.128,
+    "duration": 4.613,
+    "type": "question"
+  },
+  {
+    "at": 1792920706286,
+    "duration": 1,
+    "frequency": 660,
+    "type": "calibration-tone"
+  },
+  {
+    "at": 1792920707687,
+    "type": "record-stop"
+  }
+]

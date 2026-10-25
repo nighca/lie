@@ -1,0 +1,36 @@
+{
+  "offlineOnly": true,
+  "realProviderUsed": false,
+  "questionOffset": 0.001,
+  "outputToneOffset": 5.019,
+  "tracks": {
+    "input": {
+      "samples": 307968,
+      "sampleRate": 48000,
+      "seconds": 6.416,
+      "questionRms": 0.10473285229636457,
+      "outputToneRms": 0.0,
+      "peak": 0.529144287109375
+    },
+    "output": {
+      "samples": 307968,
+      "sampleRate": 48000,
+      "seconds": 6.416,
+      "questionRms": 0.0,
+      "outputToneRms": 0.06788237255614975,
+      "peak": 0.09600830078125
+    },
+    "mix": {
+      "samples": 307968,
+      "sampleRate": 48000,
+      "seconds": 6.416,
+      "questionRms": 0.10473285229636457,
+      "outputToneRms": 0.06788237255614975,
+      "peak": 0.529144287109375
+    }
+  },
+  "maxMixDifferencePcm16": 0,
+  "waveformChecksPassed": true,
+  "sampleAlignmentPassed": true,
+  "strictDecodePassed": true
+}
