@@ -22,7 +22,7 @@ reduce 媒体覆盖下初始六场景实测为 true、CSS/WAAPI 动画数均0；
 
 浏览器日志保留一条无来源 URL 的 MutationObserver.observe 参数错误（首次打开对照页时）。本原型没有 MutationObserver 引用，不能据此归因或宣称全程零错误；最终 DOM、资源和键盘检查均完成。初版下划线绝对资源路径404已修正为原型相对路径并成功加载；故意缺图404保留。没有重试或绕过浏览器权限。
 
-## 必要截图
+## 初版必要截图（错误页已由下方 v2 取代）
 
 原生 IAB CDP 捕获，DPR2：1280×878 输出2560×1756，391×844 输出782×1688。保留原始 PNG，无改图。部分窄屏离屏裁切上边包含少量 QA 外层灰底/标题边缘，画布尺寸以实际DOM测量为准；长页底部图为键盘自动滚动后的画面，不能当作初始首屏。
 
@@ -42,3 +42,17 @@ reduce 媒体覆盖下初始六场景实测为 true、CSS/WAAPI 动画数均0；
 owner：调查/视觉 chat `01a16d5c-de69-7452-8d6a-280d15a87e9e`。独立工作树 `/Users/nighca/.codex/worktrees/result-scene-proposal/lie`、branch `codex/result-scene-proposal`、base如上；运行内容是此目录设计原型，无应用改动。
 
 只启动一套 `python3 -m http.server 5507 --bind 127.0.0.1`，PID95633、原PTY/session12356；消费者仅本次tab33设计排版验收，停止条件为截图/测量完成。实际已关闭tab33，媒体覆盖清除，原PTY Ctrl-C退出0并显示 Keyboard interrupt received, exiting；lsof核5507无监听。没有保留服务或未知归属，没有新增端口，未动8787/8788/5355或他人tab/全局viewport。以后需要审阅时按固定5507登记并按需启动，不把此链接当常驻在线承诺。
+
+
+## 用户反馈后的错误页 v2
+
+用户表示两稿整体无大问题，建议错误页因正文少进一步调整布局。现在错误页为最大760px宽的居中单列卡片：桌面舞台260×230，短说明在姓名下方，操作在底部；手机舞台仍220×180，文案居中。正确页不变，原稿与原测量保留，不将本次布局细化解释为新素材或应用实施批准。
+
+- [桌面错误 v2](previews/desktop-wrong-v2.png)
+- [391错误 v2](previews/mobile-wrong-v2.png)
+- [391缺图长姓名 v2](previews/mobile-fallback-v2.png)
+- [v2 实际测量](wrong-revision-measurements.json)
+
+1280画布卡宽760，左右260/260，卡底805.23<878；391画布左右16/16，普通卡底739.68、长姓名回退卡底771.58<844。两宽scrollWidth等于innerWidth；正确页卡宽1040/左右120、舞台310实测保持。手机普通末按钮bottom713.68<844，原生Tab到返回按钮focus-visible。三图原生PNG已保存，桌面与手机普通图实际看过；fallback由尺寸和首字DOM沿用检查，不额外宣称本轮逐图美术验收。
+
+本轮仍只用5507，PID66158、原PTY/session2561，消费者仅自建tab34；已关tab34、原PTY Ctrl-C退出0、lsof核无监听。不动用户页面或全局viewport，无保留服务。前版日志与范围限制仍适用；本次不重复运行无变化的长文/reduce/应用测试。

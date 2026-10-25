@@ -26,7 +26,14 @@ h2 { font-size: 18px; margin: 6px 0 14px; line-height: 1.5; }
 .result-actions { display: flex; gap: 16px; margin-top: 30px; padding-top: 24px; border-top: 1px solid #111b451c; }
 .result-actions > :first-child { flex: 1; }
 .result-actions button { font-weight: 700; }
-body[data-result="wrong"] .result-content { align-items: center; }
+body[data-result="wrong"] .result-card { max-width: 760px; padding-top: 28px; }
+body[data-result="wrong"] h1 { margin-bottom: 20px; }
+body[data-result="wrong"] .result-content { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 18px; }
+body[data-result="wrong"] .character { width: min(100%, 260px); }
+body[data-result="wrong"] .portrait-stage { height: 230px; }
+body[data-result="wrong"] .result-story { max-width: 34em; text-align: center; }
+body[data-result="wrong"] .result-story h2 { margin: 0 0 8px; }
+body[data-result="wrong"] .result-actions { margin-top: 24px; }
 :focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 5px; }
 @media (max-width: 1100px) { .result-card { margin-left: 24px; margin-right: 24px; } }
 @media (max-width: 600px) {
@@ -45,5 +52,7 @@ body[data-result="wrong"] .result-content { align-items: center; }
   .result-story { font-size: 16px; line-height: 1.85; }
   .result-actions { flex-direction: column; gap: 12px; margin-top: 24px; padding-top: 20px; }
   .result-actions button { width: 100%; min-height: 48px; }
+  body[data-result="wrong"] .character { width: min(100%, 220px); }
+  body[data-result="wrong"] .portrait-stage { height: 180px; }
 }
 .lie-handwritten-underline::after { background-image: url('../../apps/web/public/brand/underline.svg'); }
