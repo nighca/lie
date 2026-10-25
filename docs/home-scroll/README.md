@@ -16,7 +16,7 @@
 - 1280×800、1440×900、1280×600、900×600、621×600、1280×400、621×400：document 高等于视口、无横向溢出（400px 短屏另测高度）；列表可内部滚动。621px 窄双列包含自然换行标题。
 - 1280×600 在列表区域实际向下滚动，页面 scrollY 仍 0，列表 scrollTop 701；最后案件按钮 bottom 540.3125，处于列表 bottom 576 内，第四案可达。
 - 620×800、391×844：页面正常延展，列表 overflow visible，没有额外嵌套滚动。
-- 已目视 1280×600 短屏实际截图：Header、左侧文字、插画、流程均在视口内。原始测量见 [measurements.json](measurements.json)；[PC 列表底部截图](desktop-list-bottom.png)、[移动端截图](mobile.png)。
+- 已目视 1280×600 短屏实际截图：Header、左侧文字、插画、流程均在视口内。原始测量见 [measurements.json](measurements.json)；[PC 列表底部截图](desktop-list-bottom.png)。移动端以真实布局测量为证，viewport 切换后立即截取的图出现旧栅格缩放，因此未将该图作为有效证据保留。
 - `git diff --check` 通过。CSS 由 Vite 实际加载并应用；没有新增镜像 CSS 断言的低价值单测，没有重跑与本次首页 CSS 无关的全应用测试或正式资源压缩构建。
 - 未做真实语音、供应商、手机真机或无限极小窗口验收。浏览器页已关闭，viewport 已 reset；未访问其他人的 Chrome tab/草稿。
 
