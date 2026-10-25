@@ -1,0 +1,147 @@
+{
+  "events": [
+    {
+      "at": 1792922086247,
+      "id": 1,
+      "state": "running",
+      "type": "audio-created"
+    },
+    {
+      "at": 1792922086252,
+      "id": 1,
+      "state": "running",
+      "type": "audio-state"
+    },
+    {
+      "at": 1792922086333,
+      "duration": 4.613,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792922104802,
+      "contextTime": 18.405333333333335,
+      "type": "record-start"
+    },
+    {
+      "at": 1792922106097,
+      "id": 2,
+      "state": "running",
+      "type": "audio-created"
+    },
+    {
+      "at": 1792922106097,
+      "type": "voice-socket-created"
+    },
+    {
+      "at": 1792922106097,
+      "state": "running",
+      "type": "virtual-mic-request"
+    },
+    {
+      "at": 1792922106100,
+      "id": 3,
+      "state": "running",
+      "type": "audio-created"
+    },
+    {
+      "at": 1792922106101,
+      "id": 2,
+      "state": "running",
+      "type": "audio-state"
+    },
+    {
+      "at": 1792922106101,
+      "id": 3,
+      "state": "running",
+      "type": "audio-state"
+    },
+    {
+      "at": 1792922106103,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922108532,
+      "type": "voice-error"
+    },
+    {
+      "at": 1792922108533,
+      "code": 1000,
+      "reason": "Aborted",
+      "type": "voice-local-close"
+    },
+    {
+      "at": 1792922108536,
+      "clean": false,
+      "code": 1006,
+      "type": "voice-close"
+    },
+    {
+      "at": 1792922108536,
+      "id": 3,
+      "state": "closed",
+      "type": "audio-state"
+    },
+    {
+      "at": 1792922108536,
+      "id": 2,
+      "state": "closed",
+      "type": "audio-state"
+    },
+    {
+      "at": 1792922109338,
+      "contextTime": 22.944,
+      "type": "record-stop"
+    },
+    {
+      "at": 1792922109338,
+      "code": 1000,
+      "reason": "other",
+      "type": "voice-local-close"
+    },
+    {
+      "at": 1792922109338,
+      "contexts": [
+        "closed",
+        "closed",
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "diagnostic-complete",
+      "sockets": [
+        3
+      ],
+      "tracks": [
+        "ended",
+        "ended",
+        "ended"
+      ],
+      "type": "cleanup"
+    },
+    {
+      "at": 1792922109338,
+      "id": 1,
+      "state": "closed",
+      "type": "audio-state"
+    }
+  ],
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed",
+      "closed",
+      "closed"
+    ],
+    "socketCount": 1,
+    "sockets": [
+      3
+    ],
+    "stopped": true,
+    "tracks": [
+      "ended",
+      "ended",
+      "ended"
+    ]
+  }
+}

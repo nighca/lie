@@ -1,0 +1,30 @@
+{
+  "input": {
+    "samples": 217728,
+    "sampleRate": 48000,
+    "peakPcm16": 0
+  },
+  "output": {
+    "samples": 217728,
+    "sampleRate": 48000,
+    "peakPcm16": 0
+  },
+  "mix": {
+    "samples": 217728,
+    "sampleRate": 48000,
+    "peakPcm16": 0
+  },
+  "video": {
+    "frames": 268,
+    "all1280x800": false,
+    "actualDeviceSize": [
+      1470,
+      779
+    ]
+  },
+  "wavDecode": {
+    "input": 0,
+    "output": 0,
+    "mix": 0
+  }
+}
