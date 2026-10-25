@@ -1,0 +1,132 @@
+{
+  "runtime": "2188f59f250b2e4472a0d815b654c13cec254e29",
+  "browser": "Chrome extension",
+  "cards": [
+    {
+      "aria": "取消连接",
+      "background": "rgb(255, 254, 247)",
+      "button": {
+        "bottom": 462,
+        "height": 44,
+        "left": 750,
+        "right": 806,
+        "top": 418,
+        "width": 56,
+        "x": 750,
+        "y": 418
+      },
+      "card": {
+        "bottom": 476,
+        "height": 72,
+        "left": 460,
+        "right": 820,
+        "top": 404,
+        "width": 360,
+        "x": 460,
+        "y": 404
+      },
+      "color": "rgb(17, 27, 69)",
+      "copy": "正在连接…\n\n连好后再说话\n\n取消",
+      "horizontal": 1280,
+      "spinner": "voice-connection-spin",
+      "viewport": [
+        1280,
+        800
+      ]
+    },
+    {
+      "aria": "取消连接",
+      "background": "rgb(255, 254, 247)",
+      "button": {
+        "bottom": 486.1953125,
+        "height": 44,
+        "left": 281.5,
+        "right": 337.5,
+        "top": 442.1953125,
+        "width": 56,
+        "x": 281.5,
+        "y": 442.1953125
+      },
+      "card": {
+        "bottom": 498.1953125,
+        "height": 68,
+        "left": 39.5,
+        "right": 351.5,
+        "top": 430.1953125,
+        "width": 312,
+        "x": 39.5,
+        "y": 430.1953125
+      },
+      "color": "rgb(17, 27, 69)",
+      "copy": "正在连接…\n\n连好后再说话\n\n取消",
+      "horizontal": 391,
+      "spinner": "voice-connection-spin",
+      "viewport": [
+        391,
+        844
+      ]
+    },
+    {
+      "aria": "取消连接",
+      "background": "rgb(255, 254, 247)",
+      "button": {
+        "bottom": 242,
+        "height": 44,
+        "left": 234,
+        "right": 290,
+        "top": 198,
+        "width": 56,
+        "x": 234,
+        "y": 198
+      },
+      "card": {
+        "bottom": 254,
+        "height": 68,
+        "left": 16,
+        "right": 304,
+        "top": 186,
+        "width": 288,
+        "x": 16,
+        "y": 186
+      },
+      "color": "rgb(17, 27, 69)",
+      "copy": "正在连接…\n\n连好后再说话\n\n取消",
+      "horizontal": 320,
+      "spinner": "voice-connection-spin",
+      "viewport": [
+        320,
+        400
+      ]
+    }
+  ],
+  "reducedMotion": {
+    "matches": true,
+    "animation": "none",
+    "spinner": [
+      18,
+      18
+    ]
+  },
+  "lifecycle": {
+    "cancel": {
+      "notice": false,
+      "voice": "inactive",
+      "action": "开启模拟对话"
+    },
+    "lateReady": {
+      "notice": false,
+      "voice": "inactive",
+      "action": "开启模拟对话"
+    },
+    "ready": {
+      "notice": false,
+      "voice": "active",
+      "action": "结束对话"
+    },
+    "failed": {
+      "notice": false,
+      "voice": "inactive",
+      "feedback": "语音暂时中断"
+    }
+  }
+}
