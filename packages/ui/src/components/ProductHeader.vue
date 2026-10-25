@@ -32,7 +32,7 @@ const emit = defineEmits<{ navigateHome: [] }>()
 <style scoped>
 .lie-product-header { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px; }
 .lie-product-header__brand { position: relative; isolation: isolate; display: block; width: 136px; height: 64px; color: var(--lie-ink); text-decoration: none; line-height: 1; flex-shrink: 0; }
-.lie-product-header__brand::after { content: ''; position: absolute; z-index: 0; left: 45.6%; top: 70.3%; width: 50%; height: 14.1%; background: url('/brand/underline.svg') center / 100% 100% no-repeat; transform: rotate(-8deg); pointer-events: none; }
+.lie-product-header__brand::after { content: ''; position: absolute; z-index: 0; left: 30.9%; top: 70.3%; width: 50%; height: 14.1%; background: url('/brand/underline.svg') center / 100% 100% no-repeat; transform: rotate(-8deg); pointer-events: none; }
 .lie-product-header__brand:focus-visible { outline: 3px solid var(--lie-ink); outline-offset: 5px; border-radius: 4px; }
 .lie-product-header__logo { position: relative; z-index: 1; display: block; width: 105px; height: 56px; overflow: hidden; }
 .lie-product-header__logo--playing circle { animation: lie-logo-dot-jump 560ms ease-in-out; }
