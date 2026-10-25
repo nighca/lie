@@ -1,5 +1,7 @@
 # PNG lossless compression feasibility (read-only)
 
+Historical estimate below. The later [complete Node/zlib corpus measurement](png-lossless/README.md) constructs actual candidate bytes and verifies CRC/filtered/RGBA/alpha identity: 81 PNGs, 5.28% potential saving, 66.73s compression time. That is the current evidence and recommendation; this older3.92% estimate is preserved as history. Neither experiment changes production assets or build behavior.
+
 No PNG was rewritten, generated, reduced, resized, quantized, or AI-edited. The immutable pipeline copies original PNG bytes, so its pixel/alpha/color interpretation and metadata remain byte-identical by construction; the original strict byte check is retained.
 
 Available compression tools checked: no `oxipng`, `optipng`, `pngcrush` or ImageMagick on PATH. System `sips` exists, but was not used because re-encoding can alter metadata. Python3.13.11 with zlib1.2.12 is available without installation.

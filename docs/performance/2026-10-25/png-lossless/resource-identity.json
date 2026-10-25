@@ -1,0 +1,79 @@
+{
+  "sourcePngFiles": 81,
+  "sourcePublicDerivedByteEqual": true,
+  "packages": 8,
+  "relativeParts": 46,
+  "derivedOutputs": 92,
+  "manifestUrl": "/static/4c0b4d28c65deab8a4ca7225a4cb1a1d1d88696c79b74ee20625d36afbd5781d/appearances/manifest.json",
+  "uniquePngByteHashes": 50,
+  "compressionMedianMs": 781.0753750000003,
+  "compressionP95Ms": 1330.6219590000037,
+  "compressionMaxMs": 2579.495209,
+  "groups": {
+    "animationParts": {
+      "count": 46,
+      "originalBytes": 35080450,
+      "savingBytes": 1989022,
+      "compressionMs": 37576.91570899998
+    },
+    "avatars": {
+      "count": 3,
+      "originalBytes": 2701442,
+      "savingBytes": 151940,
+      "compressionMs": 2726.0667079999967
+    },
+    "staticStates": {
+      "count": 32,
+      "originalBytes": 28704881,
+      "savingBytes": 1369013,
+      "compressionMs": 26423.10533400003
+    }
+  },
+  "firstCaseAssetWindow": {
+    "scope": "three original avatars plus sunny animation parts; byte sum only, not a measured page load",
+    "files": [
+      "design/character-presets/assets/sunny-moustache/avatar.png",
+      "design/character-presets/assets/coral-bob/avatar.png",
+      "design/character-presets/assets/blue-glasses/avatar.png",
+      "design/character-presets/assets/sunny-moustache/animation/parts/shared-torso.png",
+      "design/character-presets/assets/sunny-moustache/animation/parts/default-source.png",
+      "design/character-presets/assets/sunny-moustache/animation/parts/listening-source.png",
+      "design/character-presets/assets/sunny-moustache/animation/parts/waiting-source.png",
+      "design/character-presets/assets/sunny-moustache/animation/parts/speaking-source.png"
+    ],
+    "originalBytes": 7005235,
+    "savingBytes": 482737
+  },
+  "largestSavings": [
+    {
+      "path": "design/character-presets/assets/coral-bob/animation/parts/fore-right.png",
+      "originalBytes": 1006698,
+      "recompressedBytes": 928088,
+      "savingBytes": 78610
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/animation/parts/head.png",
+      "originalBytes": 715802,
+      "recompressedBytes": 637628,
+      "savingBytes": 78174
+    },
+    {
+      "path": "design/character-presets/assets/sunny-moustache/animation/parts/default-source.png",
+      "originalBytes": 963360,
+      "recompressedBytes": 887310,
+      "savingBytes": 76050
+    },
+    {
+      "path": "design/character-presets/assets/sunny-moustache/avatar.png",
+      "originalBytes": 963360,
+      "recompressedBytes": 887310,
+      "savingBytes": 76050
+    },
+    {
+      "path": "design/character-presets/assets/sunny-moustache/default.png",
+      "originalBytes": 963360,
+      "recompressedBytes": 887310,
+      "savingBytes": 76050
+    }
+  ]
+}
