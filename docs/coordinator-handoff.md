@@ -20,7 +20,7 @@
 
 下一步：实际main基线b3874d9，线上已证a64不变。正式结果激活/UI六链候选cb2已root完整review；本轮完整coverage捕获两项canonical升级导致的runtime legacy fixture失败，root授权单测试文件修复ab7，随后579应用＋33脚本/CI17/types/真实Web+Gatewaybuild/strict121及8包62refs/40源SHA/81旧PNG/124static身份、QA隔离全部通过。[最终报告与独立审计](result-game-ui/final-main-verification.md)已由root实际审查并本地集成，未push。源App/391/reduce/failure/preview及gallery按相同生产/静态资源身份复用，无新browser/provider。5355现PID37202/PTY40865，source combined-qa d7、tab60用户统一页消费者保留；旧1851由owner已停，详development，不能沿旧记录推定新服务结束。单JSON内置案仍仅讨论。
 
-本轮后续审查已从600分派：character_preset_migration补尚未实际IAB验证的分享/Editor原生生命周期，先只读核8787 runner实际版本与工具可用性，保护用户标签和原草稿；architecture_code_review只读查voice controller/session竞态与计时，有限fake-provider探针。两者独立docs分支，不动生产/常驻服务，不新端口/Chrome回退/真实付费调用；缺陷须有实际证据，完成后root按批审查归档。本轮无再次push授权，鉴权/视频实际制作和未定单JSON排序仍保留原门禁。
+本轮后续审查已从600分派：character_preset_migration补尚未实际IAB验证的分享/Editor原生生命周期，先只读核8787 runner实际版本与工具可用性，保护用户标签和原草稿；architecture_code_review只读查voice controller/session竞态与计时，有限fake-provider探针。QA本轮前置已查：8787状态实际SHA600（无ready字段），一次inventory未暴露IAB并报Mac锁定，未执行native/草稿/tab；[具体未测范围](qa/native-share-editor-600-2026-10-25/README.md)留待工具可用窗口，不立即请求用户解锁或重复工具。code review继续在制。两者独立docs分支，不动生产/常驻服务，不新端口/Chrome回退/真实付费调用；缺陷须有实际证据，完成后root按批审查归档。本轮无再次push授权，鉴权/视频实际制作和未定单JSON排序仍保留原门禁。
 
 ## 当前owner与恢复入口
 
