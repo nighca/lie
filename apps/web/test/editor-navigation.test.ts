@@ -76,6 +76,32 @@ describe('editor and shared case application routes', () => {
     expect((wrapper.get('input[name="title"]').element as HTMLInputElement).value).toBe(customGame.title)
   })
 
+  it.each([true, false])('retains in-memory edits, step and selected character across preview (save fails=%s)', async (fails) => {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(customGame))
+    const { wrapper, router, sessions, click } = await screen('/editor')
+    const write = fails ? vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('quota') }) : null
+    await wrapper.get('input[name="title"]').setValue('尚未丢失的编辑C')
+    await wrapper.findAll('.editor-steps button')[1].trigger('click')
+    await click('编辑乙')
+    await wrapper.get('[data-field="profile"]').setValue('乙的新设定C')
+    await click('试玩')
+    expect(sessions[0].source).toMatchObject({ title: '尚未丢失的编辑C', characters: [expect.anything(), expect.objectContaining({ profile: '乙的新设定C' })] })
+    write?.mockRestore()
+    await click('返回编辑器')
+    expect(wrapper.get('main h1').text()).toBe('故事人物')
+    expect((wrapper.get('[data-field="name"]').element as HTMLInputElement).value).toBe('乙')
+    expect((wrapper.get('[data-field="profile"]').element as HTMLTextAreaElement).value).toBe('乙的新设定C')
+    await wrapper.findAll('.editor-steps button')[0].trigger('click')
+    expect((wrapper.get('input[name="title"]').element as HTMLInputElement).value).toBe('尚未丢失的编辑C')
+    if (fails) {
+      expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).title).toBe(customGame.title)
+      expect(wrapper.text()).toContain('草稿未能保存')
+    }
+    await router.push('/'); await settle()
+    await router.push('/editor'); await settle()
+    expect((wrapper.get('input[name="title"]').element as HTMLInputElement).value).toBe(fails ? customGame.title : '尚未丢失的编辑C')
+  })
+
   it('redirects refreshed preview URLs to the editor without loading an official game', async () => {
     localStorage.setItem(DRAFT_KEY, JSON.stringify(customGame))
     const { wrapper, router, sessions } = await screen('/editor/preview?game=do-not-fetch')
@@ -191,6 +217,10 @@ describe('remixing a completed case', () => {
     expect({ ...draft, id: source.id }).toEqual(source)
     expect((result.wrapper.get('input[name="title"]').element as HTMLInputElement).value).toBe(source.title)
     expect(result.sessions).toHaveLength(1)
+    if (kind === 'preview') {
+      await result.wrapper.get('input[name="title"]').setValue('继续编辑新改编稿')
+      expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).id).toBe(draft.id)
+    }
   })
   it.each(['{broken', '', JSON.stringify({ title: '未完成' })])('preserves exact existing bytes on cancellation: %s', async (raw) => {
     const result = await screen('/?game=test')

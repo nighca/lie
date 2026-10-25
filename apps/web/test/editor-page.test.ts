@@ -21,7 +21,7 @@ function page(stored: unknown = null) {
   const wrapper = mount(Editor, { props: { characterPresets: [characterPreset] }, attachTo: document.body })
   cleanup.push(() => wrapper.unmount())
   async function click(text: string) {
-    const button = wrapper.findAll('button').find((button) => button.text() === text)
+    const button = wrapper.findAll('button').find((button) => button.attributes('aria-label') === text || button.text() === text)
     expect(button, text).toBeDefined()
     await button!.trigger('click'); await flushPromises()
   }
@@ -252,6 +252,29 @@ describe('three-step editor', () => {
     expect(sharing.encodeGameLink).toHaveBeenLastCalledWith(expect.objectContaining({ title: '改了' }), location.origin)
   })
 
+  it.each([['share', false], ['share', true], ['same-share', false], ['submission', false]])('ignores an old copy completion in a reopened %s dialog (reject=%s)', async (next, reject) => {
+    vi.spyOn(sharing, 'encodeGameLink').mockImplementation(async (game) => `https://lie.example/play#${game.title}`)
+    let complete!: () => void
+    const writeText = vi.fn().mockResolvedValue(null).mockImplementationOnce(() => new Promise<void>((resolve, fail) => { complete = () => reject ? fail(new Error('old denied')) : resolve() }))
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
+    const { wrapper, click, step } = page(game)
+    await click('分享案件')
+    const original = (wrapper.get('dialog textarea').element as HTMLTextAreaElement).value
+    await click('复制分享链接')
+    await wrapper.get('[aria-label=关闭]').trigger('click')
+    if (next !== 'same-share') await wrapper.get('[name=title]').setValue('新内容')
+    if (next === 'submission') { await step(2); await click('投稿给官方') }
+    else await click('分享案件')
+    complete(); await flushPromises()
+    expect(writeText).toHaveBeenCalledTimes(1)
+    expect(writeText).toHaveBeenCalledWith(original)
+    expect(wrapper.get('dialog').text()).not.toContain('已复制')
+    expect(wrapper.get('dialog').text()).not.toContain('无法自动复制')
+    await click(next === 'submission' ? '复制 JSON' : '复制分享链接')
+    expect(writeText).toHaveBeenLastCalledWith((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
+    expect(wrapper.get('dialog').text()).toContain('已复制')
+  })
+
   it('leaves a damaged draft untouched until editing starts', async () => {
     localStorage.setItem(DRAFT_KEY, 'damaged')
     const { wrapper } = page()
@@ -262,12 +285,15 @@ describe('three-step editor', () => {
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).title).toBe('新故事')
   })
 
-  it('uses live catalog names for previously unknown IDs', async () => {
+  it('uses live accessible names on image-only preset choices', async () => {
     const { wrapper, step } = page()
     await step(1); await wrapper.get('[data-field=preset]').trigger('click')
-    expect(wrapper.get('.editor-preset').text()).toBe('新来的向导')
+    expect(wrapper.get('.editor-preset').attributes('aria-label')).toBe('新来的向导')
+    expect(wrapper.get('.editor-preset').text()).toBe('')
+    expect(wrapper.get('.editor-preset img').attributes('src')).toBe(characterPreset.avatar)
+    expect(wrapper.get('.editor-preset').attributes('aria-pressed')).toBe('true')
     await wrapper.setProps({ characterPresets: [{ ...characterPreset, name: '来自清单的新名字' }] })
-    expect(wrapper.get('.editor-preset').text()).toBe('来自清单的新名字')
+    expect(wrapper.get('.editor-preset').attributes('aria-label')).toBe('来自清单的新名字')
     await wrapper.get('[aria-label=关闭]').trigger('click')
     expect(wrapper.get('[data-field=preset]').text()).toBe('更换预设')
   })

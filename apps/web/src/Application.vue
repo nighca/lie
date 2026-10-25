@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, ref, shallowRef, watch } from 'vue'
+import { KeepAlive, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ProductHeader, UiButton, UiDialog } from '@lie/ui'
 import type { GameDefinition } from '@lie/game-core'
@@ -19,6 +19,7 @@ const route = useRoute()
 const router = useRouter()
 const controller = shallowRef<GameController | null>(null)
 const instance = ref(0)
+const editorRevision = ref(0)
 const confirmation = ref(false)
 const shareLoading = ref(false)
 const shareError = ref<string | null>(null)
@@ -146,6 +147,7 @@ function checkRemix(replace: boolean) {
     return
   }
   cancelRemix()
+  editorRevision.value++
   editor()
 }
 function selectCase(id: string) { void router.push({ path: '/', query: { game: id, ...(props.demo ? { demo: '1' } : {}) } }) }
@@ -158,12 +160,14 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
 </script>
 
 <template>
+  <KeepAlive v-if="route.path === '/editor' || route.path === '/editor/preview'" :max="1">
+    <Editor v-if="route.path === '/editor'" :key="editorRevision" :character-presets="characterPresets" :preset-status="presetStatus" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
+  </KeepAlive>
   <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
-  <Editor v-else-if="route.path === '/editor'" :character-presets="characterPresets" :preset-status="presetStatus" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
   </div>
-  <div v-else class="game-shell home-shell">
+  <div v-else-if="route.path !== '/editor' && route.path !== '/editor/preview'" class="game-shell home-shell">
     <ProductHeader class="home-header" @navigate-home="home">
       <template #actions><UiButton variant="quiet" @click="editor">创作案件</UiButton></template>
       <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>

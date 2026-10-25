@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onDeactivated, onUnmounted, ref, watch } from 'vue'
 import type { GameDefinition } from '@lie/game-core'
 import { AnimatedPortrait, CharacterChoice, ProductHeader, UiButton, UiNotice } from '@lie/ui'
 
@@ -26,6 +26,7 @@ const submission = ref<ReturnType<typeof prepareSubmission> | null>(null)
 const copied = ref(false)
 const form = ref<HTMLElement | null>(null)
 let mounted = true
+let copyRevision = 0
 let clearingDraft = false
 try {
   const stored = loadDraft(localStorage)
@@ -43,10 +44,13 @@ function name(person: DraftCharacter) { return person.name.trim() || `人物 ${d
 watch(draft, () => {
   if (clearingDraft) return
   shareUrl.value = null
-  copied.value = false
+  invalidateCopy()
   try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存到此浏览器' }
   catch { saveStatus.value = '草稿未能保存，请勿关闭页面'; notice.value = '浏览器不允许保存草稿或存储空间不足。' }
 }, { deep: true, flush: 'sync' })
+function invalidateCopy() { copyRevision++; copied.value = false }
+watch([overlay, shareUrl, submission], invalidateCopy, { flush: 'sync' })
+onDeactivated(invalidateCopy)
 onUnmounted(() => { mounted = false })
 async function focus(field: string) {
   await nextTick()
@@ -93,7 +97,6 @@ function clearDraft() {
   notice.value = null
   shareUrl.value = null
   submission.value = null
-  copied.value = false
   saveStatus.value = null
   overlay.value = null
   void focus('title')
@@ -112,19 +115,20 @@ async function share() {
   busy.value = true
   try {
     const url = await encodeGameLink(game, location.origin)
-    if (mounted) { shareUrl.value = url; copied.value = false; overlay.value = 'share' }
+    if (mounted) { shareUrl.value = url; overlay.value = 'share' }
   } catch (error) { if (mounted) notice.value = error instanceof Error ? error.message : '当前浏览器无法生成分享链接' }
   finally { if (mounted) busy.value = false }
 }
 function contribute() {
   const game = validated()
   if (game == null) return
-  try { submission.value = prepareSubmission(game); copied.value = false; overlay.value = 'submission' }
+  try { submission.value = prepareSubmission(game); overlay.value = 'submission' }
   catch (error) { notice.value = error instanceof Error ? error.message : '无法准备投稿文件' }
 }
 async function copy(text: string) {
-  try { await navigator.clipboard.writeText(text); if (mounted) copied.value = true }
-  catch { if (mounted) notice.value = '无法自动复制，请选中下方内容手动复制。' }
+  const revision = ++copyRevision
+  try { await navigator.clipboard.writeText(text); if (mounted && revision === copyRevision) copied.value = true }
+  catch { if (mounted && revision === copyRevision) notice.value = '无法自动复制，请选中下方内容手动复制。' }
 }
 </script>
 
@@ -175,7 +179,7 @@ async function copy(text: string) {
     </main>
     <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', preset: '选择人物预设', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？', clear: '清除本地草稿？' }[overlay]" @close="overlay = null">
       <template v-if="overlay === 'example'"><p>这是写给角色的扮演资料，仍是一份纯文本。</p><p class="example-text">{{ PROFILE_EXAMPLE }}</p><p class="muted">示例不会替换你正在写的内容。</p></template>
-      <div v-else-if="overlay === 'preset'" class="preset-grid"><button v-for="preset in characterPresets" :key="preset.id" type="button" class="editor-preset" :aria-pressed="character?.appearanceId === preset.id" @click="chooseCharacterPreset(preset.id)"><img :src="preset.avatar" alt=""><span>{{ preset.name }}</span></button><div v-if="characterPresets.length === 0"><p role="status">{{ presetStatus === 'loading' ? '正在加载人物预设…' : '人物预设暂未加载，请重新加载。草稿仍保留在此浏览器。' }}</p><UiButton v-if="presetStatus !== 'loading'" @click="emit('retry-presets')">重新加载预设</UiButton></div></div>
+      <div v-else-if="overlay === 'preset'" class="preset-grid"><button v-for="preset in characterPresets" :key="preset.id" type="button" class="editor-preset" :aria-label="preset.name" :aria-pressed="character?.appearanceId === preset.id" @click="chooseCharacterPreset(preset.id)"><img :src="preset.avatar" alt=""></button><div v-if="characterPresets.length === 0"><p role="status">{{ presetStatus === 'loading' ? '正在加载人物预设…' : '人物预设暂未加载，请重新加载。草稿仍保留在此浏览器。' }}</p><UiButton v-if="presetStatus !== 'loading'" @click="emit('retry-presets')">重新加载预设</UiButton></div></div>
       <template v-else-if="overlay === 'clear'"><p>将清除当前案件的全部编辑内容和此浏览器保存的草稿，重新开始创作。此操作无法撤销，已分享的链接不受影响。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留草稿</UiButton><UiButton @click="clearDraft">确认清除</UiButton></div></template>
       <template v-else-if="overlay === 'delete'"><p>将删除{{ character == null ? '' : name(character) }}的设定。如果他是案件答案，需要重新选择；此操作无法撤销。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留人物</UiButton><UiButton @click="deleteCharacter">确认删除</UiButton></div></template>
       <template v-else-if="overlay === 'share' && shareUrl != null"><p>朋友打开链接就能玩。修改草稿后需要重新生成链接，旧链接保留当时的内容。</p><label class="field">完整分享链接<textarea :value="shareUrl" readonly rows="4" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><p class="muted">{{ shareUrl.length.toLocaleString('en-US') }} / {{ SHARE_URL_LIMIT.toLocaleString('en-US') }} 字符</p><UiButton @click="copy(shareUrl)">{{ copied ? '已复制' : '复制分享链接' }}</UiButton></template>
