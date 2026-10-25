@@ -1,19 +1,19 @@
-PASS generator rebuilt byte-identical package; all native PNG bytes unchanged; original provenance retained.
+PASS generator package bytes and all native PNG hashes unchanged; original provenance retained.
 $ node --experimental-transform-types design/animation-candidates/silver-bun/check.mjs
-(node:36289) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:98451) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 PASS: strict contract, PNG/canonical hashes, finite four-state sampling, exclusive mouths, loops, continuous micro motion, contact parents, numeric continuity on interrupted switching and target limb visibility
 
 $ python3 design/animation-candidates/silver-bun/check-waiting-revision.py
-(node:36291) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:98453) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:36296) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:98471) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions; 33 real full-parent rigid head/contact matrices: column lengths invariant/orthogonal, head-to-hand relation constant, fixed lower body and torso has no head rotation
 {
   "role": "silver-bun",
   "period": 4,
-  "nonzeroAlphaPixels": 1188990,
+  "nonzeroAlphaPixels": 1242921,
   "waitingBounds": [
     320.7186214609117,
     14.66682876231101,
@@ -24,4 +24,7 @@ PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions
 Native alpha >0 at pixel centers; not antialiased color/duplicate-contour judgement. Parent browser artistic review and user confirmation remain required.
 PASS 460911 native-alpha waist/contact interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
 PASS 78078 neck skin interior probes with4px skin margin, following contact world matrices over33 phases; alpha only, collar/outline color requires native Canvas review.
+PASS 94710 dense original upper-sleeve cloth probes at33 full-parent phases, including the formerly missing silver triangles.
+PASS 198 original wrist-arc dark-ink probes through33 sampled ordered RGBA layer stacks; nearest-native pixel probes, not antialiased Canvas acceptance.
+PASS entire original cardigan-button ROI excluded from moving hand; native button belongs exclusively to stable body parent.
 PASS exact visible native sprite and full-parent world matrix identity for720 nonwaiting real sampled poses; 3600 rendered-node comparisons
