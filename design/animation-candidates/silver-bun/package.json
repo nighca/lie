@@ -52,6 +52,20 @@
       "visible": true
     },
     {
+      "id": "waiting-breath-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
       "id": "torso",
       "parent": "body-root",
       "transform": {
@@ -471,7 +485,7 @@
     },
     {
       "id": "waiting-torso",
-      "parent": "head-root",
+      "parent": "waiting-breath-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -488,6 +502,50 @@
         "mask": [
           [
             580,
+            375
+          ],
+          [
+            570,
+            392
+          ],
+          [
+            556,
+            441
+          ],
+          [
+            559,
+            502
+          ],
+          [
+            521,
+            583
+          ],
+          [
+            493,
+            648
+          ],
+          [
+            598,
+            654
+          ],
+          [
+            608,
+            525
+          ],
+          [
+            635,
+            466
+          ],
+          [
+            646,
+            418
+          ],
+          [
+            635,
+            382
+          ],
+          [
+            635,
             375
           ],
           [
@@ -851,7 +909,7 @@
     },
     {
       "id": "waiting-arms",
-      "parent": "head-root",
+      "parent": "waiting-breath-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -867,16 +925,8 @@
         "order": 40,
         "mask": [
           [
-            411,
-            444
-          ],
-          [
-            375,
-            491
-          ],
-          [
-            365,
-            574
+            366.65765765765764,
+            620
           ],
           [
             369,
@@ -919,28 +969,12 @@
             713
           ],
           [
-            951,
-            608
+            952.9428571428572,
+            620
           ],
           [
-            924,
-            530
-          ],
-          [
-            866,
-            476
-          ],
-          [
-            820,
-            446
-          ],
-          [
-            796,
-            491
-          ],
-          [
-            824,
-            600
+            827.2967032967033,
+            620
           ],
           [
             839,
@@ -963,12 +997,48 @@
             654
           ],
           [
-            615,
-            525
+            607.6356589147287,
+            620
+          ],
+          [
+            498.0615384615385,
+            620
+          ],
+          [
+            486,
+            648
+          ],
+          [
+            474.3333333333333,
+            620
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-hand",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 41,
+        "mask": [
+          [
+            594,
+            363
           ],
           [
             642,
-            466
+            382
           ],
           [
             653,
@@ -976,43 +1046,35 @@
           ],
           [
             642,
-            382
+            466
           ],
           [
-            594,
-            363
+            615,
+            525
           ],
           [
-            563,
-            392
+            606.7054263565891,
+            632
           ],
           [
-            549,
-            441
-          ],
-          [
-            552,
-            502
+            492.89230769230767,
+            632
           ],
           [
             514,
             583
           ],
           [
-            486,
-            648
+            552,
+            502
           ],
           [
-            466,
-            600
+            549,
+            441
           ],
           [
-            485,
-            501
-          ],
-          [
-            480,
-            449
+            563,
+            392
           ]
         ]
       }
@@ -1135,6 +1197,7 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-hand": false,
         "torso": true,
         "waiting-torso": false,
         "listening-torso": false,
@@ -1288,6 +1351,7 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-hand": false,
         "torso": false,
         "waiting-torso": false,
         "listening-torso": true,
@@ -1414,6 +1478,7 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-hand": true,
         "torso": false,
         "waiting-torso": true,
         "listening-torso": false,
@@ -1444,16 +1509,31 @@
         },
         {
           "node": "head-root",
-          "property": "rotation",
+          "property": "pivotX",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 0
+              "value": 625
             },
             {
               "time": 4.0,
-              "value": 0
+              "value": 625
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "x",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 625
+            },
+            {
+              "time": 4.0,
+              "value": 625
             }
           ]
         },
@@ -1464,11 +1544,11 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 850
+              "value": 430
             },
             {
               "time": 4.0,
-              "value": 850
+              "value": 430
             }
           ]
         },
@@ -1479,86 +1559,77 @@
           "keys": [
             {
               "time": 0.0,
-              "value": 850
+              "value": 430
+            },
+            {
+              "time": 1.0,
+              "value": 429.6
+            },
+            {
+              "time": 2.0,
+              "value": 430
+            },
+            {
+              "time": 3.0,
+              "value": 430.4
             },
             {
               "time": 4.0,
-              "value": 850
+              "value": 430
             }
           ]
         },
         {
           "node": "head-root",
-          "property": "scaleY",
+          "property": "rotation",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 1.0
-            },
-            {
-              "time": 0.25,
-              "value": 1.00574
-            },
-            {
-              "time": 0.5,
-              "value": 1.010607
-            },
-            {
-              "time": 0.75,
-              "value": 1.013858
+              "value": 0
             },
             {
               "time": 1.0,
-              "value": 1.015
-            },
-            {
-              "time": 1.25,
-              "value": 1.013858
-            },
-            {
-              "time": 1.5,
-              "value": 1.010607
-            },
-            {
-              "time": 1.75,
-              "value": 1.00574
+              "value": 0.95
             },
             {
               "time": 2.0,
-              "value": 1.0
-            },
-            {
-              "time": 2.25,
-              "value": 0.99426
-            },
-            {
-              "time": 2.5,
-              "value": 0.989393
-            },
-            {
-              "time": 2.75,
-              "value": 0.986142
+              "value": 0.1
             },
             {
               "time": 3.0,
-              "value": 0.985
-            },
-            {
-              "time": 3.25,
-              "value": 0.986142
-            },
-            {
-              "time": 3.5,
-              "value": 0.989393
-            },
-            {
-              "time": 3.75,
-              "value": 0.99426
+              "value": -1.05
             },
             {
               "time": 4.0,
-              "value": 1.0
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "waiting-breath-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": -1.2
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": 1.2
+            },
+            {
+              "time": 4.0,
+              "value": 0
             }
           ]
         }
@@ -1568,6 +1639,7 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-hand": false,
         "torso": true,
         "waiting-torso": false,
         "listening-torso": false,

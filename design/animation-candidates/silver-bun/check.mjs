@@ -25,18 +25,19 @@ for(const state of Object.keys(data.states)) {
  const clip=data.clips[data.states[state]],a=sampleClip(data,clip,1),b=sampleClip(data,clip,3)
  if(state==='waiting'){
   assert.equal(a['body-root'].transform.y,800);assert.equal(b['body-root'].transform.y,800)
-  assert.equal(a['head-root'].transform.rotation,0);assert.equal(b['head-root'].transform.rotation,0)
-  assert.notEqual(a['head-root'].transform.scaleY,b['head-root'].transform.scaleY)
+  assert.notEqual(a['head-root'].transform.rotation,b['head-root'].transform.rotation)
+  assert.equal(a['head-root'].transform.scaleY,1);assert.equal(b['head-root'].transform.scaleY,1)
  }else{
   assert.notEqual(a['body-root'].transform.y,b['body-root'].transform.y)
   assert.notEqual(a['head-root'].transform.rotation,b['head-root'].transform.rotation)
  }
- for(let t=0;t<4;t+=.025){const pose=sampleClip(data,clip,t);assert.notEqual(pose['mouth-closed'].visible,pose['mouth-open'].visible);if(state==='waiting'){assert.deepEqual(pose['body-root'].transform,data.nodes.find(node=>node.id==='body-root').transform);assert.deepEqual(pose['waiting-lower-body'].transform,data.nodes.find(node=>node.id==='waiting-lower-body').transform);assert.equal(pose['head-root'].transform.rotation,0);assert.equal(pose['head-root'].transform.x,625);assert.equal(pose['head-root'].transform.pivotY,850);assert.equal(pose['head-root'].transform.y,850);assert.equal(pose['head-root'].transform.scaleX,1)}for(const n of Object.values(pose))for(const v of Object.values(n.transform))assert(Number.isFinite(v))}
+ for(let t=0;t<4;t+=.025){const pose=sampleClip(data,clip,t);assert.notEqual(pose['mouth-closed'].visible,pose['mouth-open'].visible);if(state==='waiting'){assert.deepEqual(pose['body-root'].transform,data.nodes.find(node=>node.id==='body-root').transform);assert.deepEqual(pose['waiting-lower-body'].transform,data.nodes.find(node=>node.id==='waiting-lower-body').transform);assert.equal(pose['head-root'].transform.x,625);assert.equal(pose['head-root'].transform.pivotY,430);assert.equal(pose['head-root'].transform.scaleX,1);assert.equal(pose['head-root'].transform.scaleY,1)}for(const n of Object.values(pose))for(const v of Object.values(n.transform))assert(Number.isFinite(v))}
  assert.deepEqual(sampleClip(data,clip,0),sampleClip(data,clip,4))
 }
-for(const id of ['listen-arm','listening-torso','waiting-arms','waiting-torso','mouth-closed','mouth-open'])assert.equal(data.nodes.find(n=>n.id===id).parent,'head-root')
+for(const id of ['listen-arm','listening-torso','waiting-hand','mouth-closed','mouth-open'])assert.equal(data.nodes.find(n=>n.id===id).parent,'head-root')
 assert.deepEqual(data.nodes.find(node=>node.id==='listening-torso').transform,data.nodes.find(node=>node.id==='listen-arm').transform)
 assert.deepEqual(data.nodes.find(node=>node.id==='waiting-torso').transform,data.nodes.find(node=>node.id==='waiting-arms').transform)
+for(const id of ['waiting-arms','waiting-torso'])assert.equal(data.nodes.find(n=>n.id===id).parent,'waiting-breath-root')
 assert.equal(data.nodes.find(node=>node.id==='waiting-lower-body').parent,'body-root')
 assert.equal(data.nodes.find(node=>node.id==='waiting-lower-body').visible,false)
 const torso=data.nodes.find(node=>node.id==='torso')

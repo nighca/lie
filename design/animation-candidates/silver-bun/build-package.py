@@ -22,6 +22,7 @@ def node(id,parent=None,transform=None,asset=None,order=0,mask=None,crop=None,vi
   if crop:n['sprite']['crop']=crop
  nodes.append(n)
 node('body-root',transform=t(650,800,650,800))
+node('waiting-breath-root','body-root')
 node('torso','body-root',asset='default-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[900,680],[925,800],[920,880],[938,950],[915,968],[918,1000],[925,1100],[931,1200],[940,1254],[374,1254],[382,972],[375,912],[433,759],[440,650],[330,530],[350,460],[420,420],[578,395]])
 left=[[420,438],[505,452],[489,538],[477,685],[448,784],[407,867],[397,942],[400,990],[390,1040],[411,1165],[375,1218],[278,1180],[268,1090],[293,1000],[289,856],[298,780],[286,732],[318,671],[340,546],[367,480]]
 right=[[818,456],[896,481],[934,552],[953,710],[990,788],[1000,864],[1030,1060],[1075,1194],[1020,1245],[935,1245],[932,1220],[922,1150],[925,1100],[915,1000],[915,885],[884,817],[875,673],[856,560]]
@@ -42,24 +43,28 @@ def waist_mask(polygon,boundary,upper):
  return result
 waiting_mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[875,680],[900,800],[940,975],[950,1254],[374,1254],[382,972],[385,912],[443,759],[440,650],[330,530],[350,460],[420,420],[578,395]]
 node('waiting-lower-body','body-root',asset='waiting-source',order=9,mask=waist_mask(waiting_mask,842,False),visible=False)
-node('waiting-torso','head-root',asset='waiting-source',order=10,mask=waist_mask(waiting_mask,858,True),visible=False)
+waiting_torso=waiting_mask[:1]+[[570,392],[556,441],[559,502],[521,583],[493,648],[598,654],[608,525],[635,466],[646,418],[635,382],[635,375]]+waiting_mask[1:]
+node('waiting-torso','waiting-breath-root',asset='waiting-source',order=10,mask=waist_mask(waiting_torso,858,True),visible=False)
 node('listening-torso','head-root',asset='listening-source',order=10,mask=[[580,375],[715,375],[745,400],[850,425],[945,530],[900,680],[925,800],[920,880],[938,950],[915,968],[918,1000],[925,1100],[931,1200],[940,1254],[374,1254],[355,1000],[355,950],[385,875],[425,800],[460,720],[470,650],[470,560],[440,500],[420,420],[578,395]],visible=False)
 node('mouth-closed','head-root',t(631.2,326.8,295,130,s=.16,r=-9),asset='mouths',order=31,crop=[245,235,590,260])
 node('mouth-open','head-root',t(633.6,329.4,310,190,s=.16,r=-9),asset='mouths',order=31,crop=[1380,170,620,380],visible=False)
 node('listen-arm','head-root',asset='listening-source',order=40,mask=[[419,253],[446,251],[465,278],[472,315],[493,332],[511,365],[504,407],[485,432],[480,500],[480,575],[480,650],[470,680],[450,710],[420,735],[380,750],[330,750],[290,725],[265,690],[265,630],[275,580],[308,537],[339,514],[369,463],[405,411],[398,389],[380,345],[382,313],[397,278]],visible=False)
-node('waiting-arms','head-root',asset='waiting-source',order=40,mask=[[411,444],[375,491],[365,574],[369,685],[382,746],[415,794],[455,820],[539,827],[720,845],[854,868],[922,850],[957,800],[968,713],[951,608],[924,530],[866,476],[820,446],[796,491],[824,600],[839,691],[762,733],[637,742],[589,718],[605,654],[615,525],[642,466],[653,418],[642,382],[594,363],[563,392],[549,441],[552,502],[514,583],[486,648],[466,600],[485,501],[480,449]],visible=False)
+node('waiting-arms','waiting-breath-root',asset='waiting-source',order=40,mask=[[411,444],[375,491],[365,574],[369,685],[382,746],[415,794],[455,820],[539,827],[720,845],[854,868],[922,850],[957,800],[968,713],[951,608],[924,530],[866,476],[820,446],[796,491],[824,600],[839,691],[762,733],[637,742],[589,718],[605,654],[615,525],[642,466],[653,418],[642,382],[594,363],[563,392],[549,441],[552,502],[514,583],[486,648],[466,600],[485,501],[480,449]],visible=False)
+waiting_arms=next(n for n in nodes if n['id']=='waiting-arms')
+waiting_arms['sprite']['mask']=waist_mask(waiting_arms['sprite']['mask'],620,False)
+node('waiting-hand','head-root',asset='waiting-source',order=41,mask=waist_mask([[594,363],[642,382],[653,418],[642,466],[615,525],[605,654],[486,648],[514,583],[552,502],[549,441],[563,392]],632,True),visible=False)
 node('speak-arm','body-root',t(880,530,880,530),asset='speaking-source',order=40,mask=[[820,450],[947,500],[974,600],[1030,610],[1060,680],[1040,770],[1000,870],[924,900],[900,870],[886,842],[864,810],[864,780],[860,752],[852,740],[842,728],[832,716],[831,714],[829.75,713],[832,704],[850,698],[854,690],[858,680],[864,650]],visible=False)
 def track(n,p,vals,d=4):return dict(node=n,property=p,interpolation='linear',keys=[dict(time=d*i/(len(vals)-1),value=v) for i,v in enumerate(vals)])
 clips={}
 for state in ['idle','listening','waiting','speaking']:
- vis={'torso':state not in ['waiting','listening'],'waiting-torso':state=='waiting','listening-torso':state=='listening','left-neutral':state not in ['listening','waiting'],'right-neutral':state not in ['waiting','speaking'],'listen-arm':state=='listening','waiting-arms':state=='waiting','speak-arm':state=='speaking','mouth-open':False,'mouth-closed':True}
+ vis={'waiting-hand':state=='waiting','torso':state not in ['waiting','listening'],'waiting-torso':state=='waiting','listening-torso':state=='listening','left-neutral':state not in ['listening','waiting'],'right-neutral':state not in ['waiting','speaking'],'listen-arm':state=='listening','waiting-arms':state=='waiting','speak-arm':state=='speaking','mouth-open':False,'mouth-closed':True}
  head_tilt=.85 if state in ['waiting','listening'] else 1.2
  tracks=[track('body-root','y',[800,796,800,804,800]),track('head-root','rotation',[0,head_tilt,0,-head_tilt,0]),track('head-root','y',[390,388.5,390,391.5,390])]
  if state not in ['waiting','listening']:tracks += [track('left-neutral','rotation',[0,1.2,0,-1.2,0])]
  if state not in ['waiting','speaking']:tracks += [track('right-neutral','rotation',[0,-1.2,0,1.2,0])]
  if state=='waiting':
   vis['waiting-lower-body']=True
-  tracks=[track('body-root','y',[800,800]),track('head-root','rotation',[0,0]),track('head-root','pivotY',[850,850]),track('head-root','y',[850,850]),track('head-root','scaleY',[round(1+.015*math.sin(i*math.pi/8),6) for i in range(17)])]
+  tracks=[track('body-root','y',[800,800]),track('head-root','pivotX',[625,625]),track('head-root','x',[625,625]),track('head-root','pivotY',[430,430]),track('head-root','y',[430,429.6,430,430.4,430]),track('head-root','rotation',[0,.95,.1,-1.05,0]),track('waiting-breath-root','y',[0,-1.2,0,1.2,0])]
  if state=='speaking':
   tracks += [track('speak-arm','rotation',[0,1.9,0,-1.9,0])]
   for n,invert in [('mouth-open',False),('mouth-closed',True)]:tracks.append(dict(node=n,property='visible',interpolation='step',keys=[dict(time=i*.25,value=(i%3!=0)^invert) for i in range(17)]))
