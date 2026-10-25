@@ -1,0 +1,49 @@
+{
+  "base": "2e24d32c098773728ae18c636c0492d622ce859d",
+  "beforeEvidenceCommit": "3c44d530e4776b28cd842a53e5d0d1b4215d64e7",
+  "implementationCommit": "5ceb7d5de718d8c0a7aeab4a4159562f3e5526a6",
+  "node": "24.22.1",
+  "tests": [
+    {
+      "name": "CB01: overflowing duration preserves prior draft and recovers all in-memory edits after correction",
+      "status": "passed"
+    },
+    {
+      "name": "CB02: valid prototype-like role IDs survive fragment normalization and core history writes without prototype pollution",
+      "status": "passed"
+    },
+    {
+      "name": "CB03: gzip-valid invalid UTF8 is rejected without touching an unrelated saved draft",
+      "status": "passed"
+    }
+  ],
+  "sourceAndRegressionSha256": {
+    "apps/web/src/editor/draft.ts": "db411345a6f30b2c280a46edc8b35da07b53db48f6276427e75198777751e2df",
+    "apps/web/src/editor/Editor.vue": "c37adb279be8068fff7f41adca04ee83bb7fc48246181e50aaaff1936b9c204f",
+    "apps/web/test/editor-draft.test.ts": "2c012732fef8b97d0575d636216fe17cef630ccaea126f344f975bc1170d70fa",
+    "apps/web/test/editor-page.test.ts": "b29194791bc9d83196ee6df4a3142c5415f953b1fd06b623e8badd9fa20867b3"
+  },
+  "affectedChecks": {
+    "webFiles": [
+      "editor-draft.test.ts",
+      "editor-page.test.ts",
+      "editor-navigation.test.ts",
+      "editor-sharing.test.ts"
+    ],
+    "passedTests": 78,
+    "typecheck": "PASS",
+    "pretypecheck": "8 presets / 121 assets generated"
+  },
+  "recovery": {
+    "rawDraftUntouchedOnInvalidDuration": true,
+    "actionableDurationWarning": true,
+    "remountRestoresPriorStory": true,
+    "correctingDurationSavesLatestInMemoryTitle": true,
+    "resolvedNoticeCleared": true
+  },
+  "boundaries": [
+    "No new duration upper bound/core contract change",
+    "No production data/user storage access",
+    "No full suite/build/encoding/network/listener/browser/provider/push"
+  ]
+}
