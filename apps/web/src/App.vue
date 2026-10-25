@@ -3,6 +3,7 @@ import { computed, onUnmounted, ref, watch } from 'vue'
 import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
 
 import type { GameController } from './application/controller'
+import { splitBackgroundCharacterNames } from './presentation/backgroundCharacterNames'
 import type { CharacterPreset } from './presentation/characterPresets'
 
 const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; returnLabel?: string }>(), { returnLabel: '返回案件列表' })
@@ -20,6 +21,10 @@ onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
 const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)
 const currentCharacterPreset = computed(() => characterPreset(current.value?.appearanceId ?? null))
+const backgroundParts = computed(() => splitBackgroundCharacterNames(view.value.background, view.value.characters.map((character) => ({
+  name: character.name,
+  accent: characterPreset(character.appearanceId)?.accent ?? null,
+}))))
 const resultCharacter = computed(() => view.value.characters.find((character) => character.id === view.value.result?.characterId) ?? null)
 const resultCharacterPreset = computed(() => characterPreset(resultCharacter.value?.appearanceId ?? null))
 const resultPortrait = computed(() => {
@@ -99,7 +104,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     <main v-else-if="view.phase === 'intro'" class="intro-card surface">
       <p class="eyebrow">一桩小谜题，几位有话说的人</p>
       <h1 class="case-title lie-handwritten-underline">{{ view.title }}</h1>
-      <p class="background">{{ view.background }}</p>
+      <p class="background"><template v-for="(part, index) in backgroundParts" :key="index"><mark v-if="part.highlighted" class="background-character-name" :style="part.accent == null ? null : { '--background-name-accent': part.accent }">{{ part.text }}</mark><template v-else>{{ part.text }}</template></template></p>
       <div class="intro-characters" :class="{ 'intro-characters--many': view.characters.length > 5 }">
         <div v-for="(character, index) in view.characters" :key="character.id" class="intro-character" tabindex="0" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }">
           <span v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" class="avatar-frame">
@@ -178,7 +183,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     </main>
 
     <UiDialog class="background-dialog" :open="backgroundOpen && view.phase === 'interrogating'" :title="view.title" @close="backgroundOpen = false">
-      <p class="public-background">{{ view.background }}</p>
+      <p class="public-background"><template v-for="(part, index) in backgroundParts" :key="index"><mark v-if="part.highlighted" class="background-character-name" :style="part.accent == null ? null : { '--background-name-accent': part.accent }">{{ part.text }}</mark><template v-else>{{ part.text }}</template></template></p>
       <template #actions><UiButton @click="backgroundOpen = false">继续调查</UiButton></template>
     </UiDialog>
     <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="我有答案了" @close="controller.closeAccusation()">

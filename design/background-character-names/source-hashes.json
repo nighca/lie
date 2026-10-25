@@ -1,0 +1,12 @@
+{
+  "base": "e22250347ae737437b930934512295316bfe93fc",
+  "helperCommit": "d21f5ea8c0207f0c550b97486e89718f539cb61f",
+  "temporaryFixtureSha256": "814dc058aebc189a68a5ab22ad467021133a27cc5aee8f368b91b433bb809994",
+  "sources": {
+    "apps/web/src/App.vue": "ff40af0b0f196a0e4abf4bdf01d4d5c6629bb9d75067b53623911b6de391127f",
+    "apps/web/src/style.css": "e68d8cb93587166c26d8158655ed04dbe124299c2ed3343cf06a70dfa1bb109e",
+    "apps/web/src/presentation/backgroundCharacterNames.ts": "5a6e451482a58da9990951bfe974e72a796dc9c4183e689a38d878a3c35053c5",
+    "apps/web/test/backgroundCharacterNames.test.ts": "3cee27f5b85ee3440193b08b5db4db2cfa4c080dedd993750cc982e54d95a849",
+    "apps/web/test/background-character-names.test.ts": "3134104023a3b9bb9b34d19072ca9d32f80220286e83fbae810b7617b2c6954f"
+  }
+}
