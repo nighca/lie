@@ -1,0 +1,29 @@
+{
+  "source": "2e24d32c098773728ae18c636c0492d622ce859d",
+  "node": "24.22.1",
+  "results": [
+    {
+      "name": "CB01: entering finite 1e308 minutes writes an unrestorable null duration and discards saved author text after remount",
+      "status": "passed"
+    },
+    {
+      "name": "CB02: valid prototype-like role IDs survive fragment normalization and core history writes without prototype pollution",
+      "status": "passed"
+    },
+    {
+      "name": "CB03: gzip-valid invalid UTF8 is rejected without touching an unrelated saved draft",
+      "status": "passed"
+    }
+  ],
+  "CB01": {
+    "inputMinutes": "1e308",
+    "inputIsFinite": true,
+    "secondsAfterMultiplication": "Infinity",
+    "storedSeconds": null,
+    "displayedStatus": "\u8349\u7a3f\u5df2\u4fdd\u5b58\u81f3\u6b64\u8bbe\u5907",
+    "loadDraft": "throws \u8349\u7a3f\u65e0\u6cd5\u8bfb\u53d6",
+    "remountedTitle": "",
+    "originalDraftTextLostFromNormalRecovery": true
+  },
+  "scope": "Actual Editor/share/core; jsdom storage only; zero fetch/no browser/service"
+}
