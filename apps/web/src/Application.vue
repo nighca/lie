@@ -11,8 +11,9 @@ import type { CaseSummary } from './application/catalog'
 import type { GameController } from './application/controller'
 import { observeNavigationLifecycle } from './application/navigationLifecycle'
 import type { CharacterPreset } from './presentation/characterPresets'
+import type { PresetLoadStatus } from './presentation/characterPresetLoader'
 
-const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; loadCatalog: () => Promise<CaseSummary[]>; characterPresets: readonly CharacterPreset[]; demo: boolean }>()
+const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; loadCatalog: () => Promise<CaseSummary[]>; characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus; loadCharacterPresets?: () => Promise<readonly CharacterPreset[] | null>; demo: boolean }>()
 const route = useRoute()
 const router = useRouter()
 const controller = shallowRef<GameController | null>(null)
@@ -50,7 +51,7 @@ function attach(gameId: string, game: GameDefinition | null) {
 async function loadCurrent() {
   discard()
   if (route.path !== '/editor/preview') previewGame = null
-  if (route.path === '/editor') return
+  if (route.path === '/editor') { void props.loadCharacterPresets?.(); return }
   if (route.path === '/editor/preview') {
     if (previewGame == null) { void router.replace({ path: '/editor', query: demoQuery() }); return }
     attach(previewGame.id, previewGame)
@@ -61,7 +62,10 @@ async function loadCurrent() {
     shareLoading.value = true
     try {
       if (new URL(route.fullPath, window.location.origin).href.length > SHARE_URL_LIMIT) throw new Error('分享链接过长，请向作者索取可用链接')
-      const game = await decodeSharedGame(route.hash, props.characterPresets)
+      const presets = props.loadCharacterPresets == null ? props.characterPresets : await props.loadCharacterPresets()
+      if (revision !== currentRevision) return
+      if (presets == null) throw new Error('人物预设加载失败，请重试')
+      const game = await decodeSharedGame(route.hash, presets)
       if (revision !== currentRevision) return
       shareLoading.value = false
       attach(game.id, game)
@@ -116,7 +120,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
 
 <template>
   <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" />
-  <Editor v-else-if="route.path === '/editor'" :character-presets="characterPresets" @preview="preview" @leave="home" />
+  <Editor v-else-if="route.path === '/editor'" :character-presets="characterPresets" :preset-status="presetStatus" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
   </div>

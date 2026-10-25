@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, h, onUnmounted } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import type { GameDefinition } from '@lie/game-core'
 
@@ -8,17 +8,13 @@ import { readCatalog } from './application/catalog'
 import { createGameController } from './application/controller'
 import { createDemoVoicePort } from './application/demoVoice'
 import { createLiveVoicePort } from './application/liveVoice'
-import { readCharacterPresets } from './presentation/characterPresets'
+import { createCharacterPresetLoader } from './presentation/characterPresetLoader'
 import './style.css'
 
 const demo = import.meta.env.DEV && new URLSearchParams(location.search).get('demo') === '1'
 
 async function main() {
-  let characterPresets: ReturnType<typeof readCharacterPresets> = []
-  try {
-    const response = await fetch('/appearances/manifest.json')
-    if (response.ok) characterPresets = readCharacterPresets(await response.json())
-  } catch { /* Presentation assets are optional; names remain available. */ }
+  const presets = createCharacterPresetLoader()
   const createController = (game: GameDefinition | null = null) => createGameController({
     async readGame(gameId) {
       if (game != null) return game
@@ -27,22 +23,31 @@ async function main() {
       return response.json()
     },
     voice: demo ? createDemoVoicePort() : createLiveVoicePort(),
-    resolveVoiceId: (appearanceId) => characterPresets.find((characterPreset) => characterPreset.id === appearanceId)?.voiceId ?? null,
+    resolveVoiceId: (appearanceId) => presets.state.presets.find((characterPreset) => characterPreset.id === appearanceId)?.voiceId ?? null,
     now: Date.now,
     newSessionId: () => crypto.randomUUID(),
   })
   const router = createRouter({ history: createWebHistory(), routes: [{ path: '/:pathMatch(.*)*', component: Application }] })
-  const app = createApp(Application, {
-    createController, characterPresets, demo,
-    async loadCatalog() {
-      const response = await fetch('/games/index.json')
-      if (!response.ok) throw new Error('Catalog load failed')
-      return readCatalog(await response.json())
+  const loadCatalog = async () => {
+    const response = await fetch('/games/index.json')
+    if (!response.ok) throw new Error('Catalog load failed')
+    return readCatalog(await response.json())
+  }
+  const app = createApp({
+    setup() {
+      onUnmounted(presets.cancel)
+      return () => h(Application, {
+        createController, loadCatalog, demo,
+        characterPresets: presets.state.presets,
+        presetStatus: presets.state.status,
+        loadCharacterPresets: presets.load,
+      })
     },
   })
   app.use(router)
   await router.isReady()
   app.mount('#app')
+  void presets.load()
 }
 
 void main()
