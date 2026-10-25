@@ -15,7 +15,7 @@
 
 ## 当前映射与目录证据
 
-reviewed base `30822d3779102de249c3daca0800cb4316bff53f` 的 `apps/web/public/appearances/manifest.json`：salt-pepper-beard → `a42e04fcefac4e9492581fbc95f3fce3`；既有已提交中文 WAV 在 [原五声记录](../expanded-preset-voices.md)，名称“睿智青年男 / 龙楠”，灵矽标签 middle/chenwen。该样本被用户实际听感否定，不能用标签继续主张适配。
+reviewed base `30822d3779102de249c3daca0800cb4316bff53f` 的 canonical `design/character-presets/manifest.json`（构建时生成公开 appearances 清单）：salt-pepper-beard → `a42e04fcefac4e9492581fbc95f3fce3`；既有已提交中文 WAV 在 [原五声记录](../expanded-preset-voices.md)，名称“睿智青年男 / 龙楠”，灵矽标签 middle/chenwen。该样本被用户实际听感否定，不能用标签继续主张适配。
 
 复用此前 Alvin 调查留下的公开目录快照 `/private/tmp/lie-shared-ui-kit/spikes/voice-audition/tmp/catalog-alvin.json`（226 项；日期依据 [原验收记录](../voice-audition-validation.md) 2026-10-24，本文件无独立 capturedAt）。未重新 GET 目录、未读取 key。保留完整公开中文男声子集及快照 SHA-256 于 [catalog-evidence.json](catalog-evidence.json)，避免临时文件成为唯一证据。原完整快照不进仓库；其余音色与本调查无关。
 
