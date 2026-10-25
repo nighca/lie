@@ -6,13 +6,13 @@ const root = fileURLToPath(new URL('../', import.meta.url))
 const node = (args) => execFileSync(process.execPath, args, { cwd: root, stdio: 'inherit' })
 await rm(new URL('../coverage/', import.meta.url), { recursive: true, force: true })
 await mkdir(new URL('../coverage/scripts/', import.meta.url), { recursive: true })
+node(['scripts/character-presets.mjs'])
 const discovery = []
 for (const directory of ['apps/web', 'apps/gateway', 'packages/ui', 'packages/game-core', 'packages/voice', 'packages/character-animation']) {
   const output = execFileSync(process.execPath, ['node_modules/vitest/vitest.mjs', 'list', '--root', directory, '--json'], { cwd: root, encoding: 'utf8' })
   discovery.push(...JSON.parse(output))
 }
 await writeFile(new URL('../coverage/ordinary-discovery.json', import.meta.url), JSON.stringify(discovery))
-node(['scripts/character-presets.mjs'])
 node(['node_modules/vitest/vitest.mjs', 'run', '--config', 'vitest.coverage.config.ts', '--coverage'])
 node([
   '--test', '--experimental-test-coverage',
