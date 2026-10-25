@@ -1,0 +1,2239 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "assets": {
+    "default-source": {
+      "src": "parts/default-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "listening-source": {
+      "src": "parts/listening-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "speaking-source": {
+      "src": "parts/speaking-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "waiting-source": {
+      "src": "parts/waiting-source.png",
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  "nodes": [
+    {
+      "id": "body-root",
+      "parent": null,
+      "transform": {
+        "x": 640,
+        "y": 960,
+        "pivotX": 640,
+        "pivotY": 960,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "contact-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 630,
+        "y": 430,
+        "pivotX": 630,
+        "pivotY": 430,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "head-root",
+      "parent": "contact-root",
+      "transform": {
+        "x": 630,
+        "y": 430,
+        "pivotX": 630,
+        "pivotY": 430,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "left-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 420,
+        "y": 520,
+        "pivotX": 420,
+        "pivotY": 520,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "right-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 870,
+        "y": 520,
+        "pivotX": 870,
+        "pivotY": 520,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "speaking-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 870,
+        "y": 650,
+        "pivotX": 870,
+        "pivotY": 650,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "body",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 10,
+        "mask": [
+          [
+            558,
+            390
+          ],
+          [
+            575,
+            405
+          ],
+          [
+            590,
+            425
+          ],
+          [
+            650,
+            435
+          ],
+          [
+            675,
+            355
+          ],
+          [
+            690,
+            375
+          ],
+          [
+            790,
+            370
+          ],
+          [
+            865,
+            425
+          ],
+          [
+            905,
+            475
+          ],
+          [
+            867,
+            550
+          ],
+          [
+            830,
+            680
+          ],
+          [
+            832,
+            740
+          ],
+          [
+            841,
+            770
+          ],
+          [
+            843,
+            780
+          ],
+          [
+            839,
+            800
+          ],
+          [
+            834,
+            820
+          ],
+          [
+            842,
+            840
+          ],
+          [
+            848,
+            860
+          ],
+          [
+            853,
+            880
+          ],
+          [
+            856,
+            900
+          ],
+          [
+            862,
+            920
+          ],
+          [
+            868,
+            940
+          ],
+          [
+            866,
+            960
+          ],
+          [
+            870,
+            1020
+          ],
+          [
+            850,
+            1040
+          ],
+          [
+            855,
+            1080
+          ],
+          [
+            868,
+            1120
+          ],
+          [
+            878,
+            1160
+          ],
+          [
+            887,
+            1200
+          ],
+          [
+            898,
+            1254
+          ],
+          [
+            420,
+            1254
+          ],
+          [
+            420,
+            1040
+          ],
+          [
+            415,
+            960
+          ],
+          [
+            424,
+            880
+          ],
+          [
+            450,
+            840
+          ],
+          [
+            470,
+            780
+          ],
+          [
+            460,
+            740
+          ],
+          [
+            436,
+            700
+          ],
+          [
+            435,
+            620
+          ],
+          [
+            410,
+            510
+          ],
+          [
+            450,
+            430
+          ],
+          [
+            535,
+            390
+          ],
+          [
+            575,
+            388
+          ]
+        ]
+      }
+    },
+    {
+      "id": "listening-body",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 10,
+        "mask": [
+          [
+            540,
+            390
+          ],
+          [
+            575,
+            405
+          ],
+          [
+            590,
+            425
+          ],
+          [
+            650,
+            435
+          ],
+          [
+            675,
+            355
+          ],
+          [
+            690,
+            375
+          ],
+          [
+            790,
+            370
+          ],
+          [
+            887,
+            425
+          ],
+          [
+            927,
+            475
+          ],
+          [
+            889,
+            550
+          ],
+          [
+            839,
+            680
+          ],
+          [
+            841,
+            740
+          ],
+          [
+            850,
+            770
+          ],
+          [
+            852,
+            780
+          ],
+          [
+            848,
+            800
+          ],
+          [
+            843,
+            820
+          ],
+          [
+            851,
+            840
+          ],
+          [
+            857,
+            860
+          ],
+          [
+            862,
+            880
+          ],
+          [
+            865,
+            900
+          ],
+          [
+            871,
+            920
+          ],
+          [
+            877,
+            940
+          ],
+          [
+            875,
+            960
+          ],
+          [
+            879,
+            1020
+          ],
+          [
+            854,
+            1040
+          ],
+          [
+            859,
+            1080
+          ],
+          [
+            872,
+            1120
+          ],
+          [
+            882,
+            1160
+          ],
+          [
+            891,
+            1200
+          ],
+          [
+            902,
+            1254
+          ],
+          [
+            395,
+            1254
+          ],
+          [
+            395,
+            1040
+          ],
+          [
+            390,
+            960
+          ],
+          [
+            399,
+            880
+          ],
+          [
+            425,
+            840
+          ],
+          [
+            445,
+            780
+          ],
+          [
+            435,
+            740
+          ],
+          [
+            418,
+            700
+          ],
+          [
+            417,
+            620
+          ],
+          [
+            392,
+            510
+          ],
+          [
+            432,
+            430
+          ],
+          [
+            517,
+            390
+          ],
+          [
+            575,
+            388
+          ]
+        ]
+      }
+    },
+    {
+      "id": "left-arm",
+      "parent": "left-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 12,
+        "mask": [
+          [
+            390,
+            480
+          ],
+          [
+            445,
+            515
+          ],
+          [
+            470,
+            620
+          ],
+          [
+            485,
+            720
+          ],
+          [
+            490,
+            780
+          ],
+          [
+            470,
+            840
+          ],
+          [
+            450,
+            880
+          ],
+          [
+            425,
+            900
+          ],
+          [
+            421,
+            950
+          ],
+          [
+            393,
+            1000
+          ],
+          [
+            390,
+            1254
+          ],
+          [
+            240,
+            1254
+          ],
+          [
+            240,
+            1000
+          ],
+          [
+            285,
+            880
+          ],
+          [
+            280,
+            730
+          ],
+          [
+            310,
+            600
+          ]
+        ]
+      }
+    },
+    {
+      "id": "right-arm",
+      "parent": "right-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 12,
+        "mask": [
+          [
+            835,
+            440
+          ],
+          [
+            920,
+            460
+          ],
+          [
+            1015,
+            650
+          ],
+          [
+            1050,
+            1254
+          ],
+          [
+            908,
+            1254
+          ],
+          [
+            892,
+            1220
+          ],
+          [
+            882,
+            1180
+          ],
+          [
+            888,
+            1140
+          ],
+          [
+            890,
+            1080
+          ],
+          [
+            895,
+            1030
+          ],
+          [
+            885,
+            960
+          ],
+          [
+            875,
+            940
+          ],
+          [
+            865,
+            920
+          ],
+          [
+            857,
+            900
+          ],
+          [
+            853,
+            880
+          ],
+          [
+            848,
+            860
+          ],
+          [
+            842,
+            840
+          ],
+          [
+            833,
+            820
+          ],
+          [
+            840,
+            800
+          ],
+          [
+            842,
+            780
+          ],
+          [
+            843,
+            770
+          ],
+          [
+            810,
+            740
+          ],
+          [
+            810,
+            650
+          ]
+        ]
+      }
+    },
+    {
+      "id": "listening-right",
+      "parent": "right-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 12,
+        "mask": [
+          [
+            835,
+            440
+          ],
+          [
+            920,
+            460
+          ],
+          [
+            1015,
+            650
+          ],
+          [
+            1050,
+            1254
+          ],
+          [
+            917,
+            1254
+          ],
+          [
+            901,
+            1220
+          ],
+          [
+            891,
+            1180
+          ],
+          [
+            897,
+            1140
+          ],
+          [
+            899,
+            1080
+          ],
+          [
+            904,
+            1030
+          ],
+          [
+            894,
+            960
+          ],
+          [
+            884,
+            940
+          ],
+          [
+            874,
+            920
+          ],
+          [
+            866,
+            900
+          ],
+          [
+            862,
+            880
+          ],
+          [
+            857,
+            860
+          ],
+          [
+            851,
+            840
+          ],
+          [
+            842,
+            820
+          ],
+          [
+            849,
+            800
+          ],
+          [
+            851,
+            780
+          ],
+          [
+            852,
+            770
+          ],
+          [
+            810,
+            740
+          ],
+          [
+            810,
+            650
+          ]
+        ]
+      }
+    },
+    {
+      "id": "listening-arm",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 32,
+        "mask": [
+          [
+            375,
+            210
+          ],
+          [
+            480,
+            210
+          ],
+          [
+            535,
+            370
+          ],
+          [
+            500,
+            420
+          ],
+          [
+            470,
+            490
+          ],
+          [
+            465,
+            550
+          ],
+          [
+            480,
+            630
+          ],
+          [
+            460,
+            700
+          ],
+          [
+            420,
+            735
+          ],
+          [
+            280,
+            750
+          ],
+          [
+            235,
+            700
+          ],
+          [
+            230,
+            580
+          ],
+          [
+            285,
+            485
+          ],
+          [
+            330,
+            470
+          ],
+          [
+            368,
+            415
+          ]
+        ]
+      }
+    },
+    {
+      "id": "speaking-arm",
+      "parent": "speaking-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 32,
+        "mask": [
+          [
+            870.0,
+            650
+          ],
+          [
+            1025.6756756756756,
+            650
+          ],
+          [
+            1030,
+            660
+          ],
+          [
+            1030,
+            880
+          ],
+          [
+            980,
+            930
+          ],
+          [
+            880,
+            930
+          ],
+          [
+            815,
+            865
+          ],
+          [
+            800,
+            805
+          ],
+          [
+            765,
+            775
+          ],
+          [
+            725,
+            770
+          ],
+          [
+            690,
+            750
+          ],
+          [
+            665,
+            725
+          ],
+          [
+            655,
+            690
+          ],
+          [
+            664,
+            670
+          ],
+          [
+            681,
+            676
+          ],
+          [
+            704,
+            694
+          ],
+          [
+            732,
+            705
+          ],
+          [
+            765,
+            704
+          ],
+          [
+            790,
+            686
+          ],
+          [
+            812,
+            658
+          ],
+          [
+            829.2307692307693,
+            650
+          ],
+          [
+            854.0,
+            650
+          ],
+          [
+            854,
+            650
+          ],
+          [
+            856,
+            662
+          ],
+          [
+            840,
+            690
+          ],
+          [
+            831,
+            717
+          ],
+          [
+            839,
+            747
+          ],
+          [
+            878,
+            779
+          ],
+          [
+            900,
+            790
+          ],
+          [
+            905,
+            725
+          ],
+          [
+            870,
+            650
+          ]
+        ]
+      }
+    },
+    {
+      "id": "speaking-fill",
+      "parent": "speaking-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 31,
+        "mask": [
+          [
+            825,
+            650
+          ],
+          [
+            1040,
+            650
+          ],
+          [
+            1040,
+            925
+          ],
+          [
+            890,
+            925
+          ],
+          [
+            865,
+            875
+          ],
+          [
+            815,
+            815
+          ],
+          [
+            810,
+            775
+          ],
+          [
+            825,
+            745
+          ]
+        ]
+      }
+    },
+    {
+      "id": "speaking-cap",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 33,
+        "mask": [
+          [
+            825,
+            420
+          ],
+          [
+            980,
+            420
+          ],
+          [
+            1030,
+            670
+          ],
+          [
+            825,
+            670
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-lower",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 9,
+        "mask": [
+          [
+            200,
+            942
+          ],
+          [
+            1100,
+            942
+          ],
+          [
+            1100,
+            1254
+          ],
+          [
+            200,
+            1254
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-contact",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 20,
+        "mask": [
+          [
+            200,
+            380
+          ],
+          [
+            555,
+            380
+          ],
+          [
+            555,
+            335
+          ],
+          [
+            700,
+            335
+          ],
+          [
+            700,
+            375
+          ],
+          [
+            1100,
+            375
+          ],
+          [
+            1100,
+            958
+          ],
+          [
+            200,
+            958
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-default",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 30,
+        "mask": [
+          [
+            380,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            800,
+            340
+          ],
+          [
+            695,
+            350
+          ],
+          [
+            690,
+            360
+          ],
+          [
+            694,
+            375
+          ],
+          [
+            693,
+            390
+          ],
+          [
+            700,
+            402
+          ],
+          [
+            715,
+            415
+          ],
+          [
+            720,
+            420
+          ],
+          [
+            710,
+            425
+          ],
+          [
+            660,
+            440
+          ],
+          [
+            590,
+            445
+          ],
+          [
+            575,
+            410
+          ],
+          [
+            550,
+            400
+          ],
+          [
+            380,
+            400
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-listening",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 30,
+        "mask": [
+          [
+            380,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            810,
+            340
+          ],
+          [
+            705,
+            350
+          ],
+          [
+            700,
+            360
+          ],
+          [
+            704,
+            375
+          ],
+          [
+            693,
+            390
+          ],
+          [
+            700,
+            402
+          ],
+          [
+            715,
+            415
+          ],
+          [
+            720,
+            420
+          ],
+          [
+            710,
+            425
+          ],
+          [
+            660,
+            440
+          ],
+          [
+            590,
+            445
+          ],
+          [
+            575,
+            410
+          ],
+          [
+            550,
+            400
+          ],
+          [
+            380,
+            400
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-waiting",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 30,
+        "mask": [
+          [
+            380,
+            0
+          ],
+          [
+            800,
+            0
+          ],
+          [
+            800,
+            340
+          ],
+          [
+            695,
+            350
+          ],
+          [
+            690,
+            360
+          ],
+          [
+            694,
+            375
+          ],
+          [
+            693,
+            390
+          ],
+          [
+            700,
+            402
+          ],
+          [
+            715,
+            415
+          ],
+          [
+            720,
+            420
+          ],
+          [
+            710,
+            425
+          ],
+          [
+            660,
+            440
+          ],
+          [
+            590,
+            445
+          ],
+          [
+            575,
+            410
+          ],
+          [
+            550,
+            400
+          ],
+          [
+            380,
+            400
+          ]
+        ]
+      }
+    },
+    {
+      "id": "mouth-open",
+      "parent": "head-root",
+      "transform": {
+        "x": 590,
+        "y": 291,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 35,
+        "mask": [
+          [
+            0,
+            15
+          ],
+          [
+            86,
+            0
+          ],
+          [
+            98,
+            5
+          ],
+          [
+            94,
+            46
+          ],
+          [
+            76,
+            64
+          ],
+          [
+            30,
+            64
+          ],
+          [
+            0,
+            45
+          ]
+        ],
+        "crop": [
+          590,
+          291,
+          100,
+          66
+        ]
+      }
+    }
+  ],
+  "clips": {
+    "default": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "body": true,
+        "listening-body": false,
+        "left-arm": true,
+        "right-arm": true,
+        "listening-right": false,
+        "listening-arm": false,
+        "speaking-arm": false,
+        "speaking-fill": false,
+        "speaking-cap": false,
+        "waiting-lower": false,
+        "waiting-contact": false,
+        "head-default": true,
+        "head-listening": false,
+        "head-waiting": false,
+        "mouth-open": false
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 960
+            },
+            {
+              "time": 1.0,
+              "value": 963.5
+            },
+            {
+              "time": 2.0,
+              "value": 960
+            },
+            {
+              "time": 3.0,
+              "value": 956.5
+            },
+            {
+              "time": 4.0,
+              "value": 960
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": 1.05
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": -1.05
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 430
+            },
+            {
+              "time": 1.0,
+              "value": 431.2
+            },
+            {
+              "time": 2.0,
+              "value": 430
+            },
+            {
+              "time": 3.0,
+              "value": 428.8
+            },
+            {
+              "time": 4.0,
+              "value": 430
+            }
+          ]
+        },
+        {
+          "node": "left-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": 1
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": -1
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": -1
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": 1
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    "listening": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "body": false,
+        "listening-body": true,
+        "left-arm": false,
+        "right-arm": false,
+        "listening-right": true,
+        "listening-arm": true,
+        "speaking-arm": false,
+        "speaking-fill": false,
+        "speaking-cap": false,
+        "waiting-lower": false,
+        "waiting-contact": false,
+        "head-default": false,
+        "head-listening": true,
+        "head-waiting": false,
+        "mouth-open": false
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 960
+            },
+            {
+              "time": 1.0,
+              "value": 963.5
+            },
+            {
+              "time": 2.0,
+              "value": 960
+            },
+            {
+              "time": 3.0,
+              "value": 956.5
+            },
+            {
+              "time": 4.0,
+              "value": 960
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": 0.8
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": -0.8
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 430
+            },
+            {
+              "time": 1.0,
+              "value": 431.2
+            },
+            {
+              "time": 2.0,
+              "value": 430
+            },
+            {
+              "time": 3.0,
+              "value": 428.8
+            },
+            {
+              "time": 4.0,
+              "value": 430
+            }
+          ]
+        },
+        {
+          "node": "right-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": -1
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": 1
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    "waiting": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "body": false,
+        "listening-body": false,
+        "left-arm": false,
+        "right-arm": false,
+        "listening-right": false,
+        "listening-arm": false,
+        "speaking-arm": false,
+        "speaking-fill": false,
+        "speaking-cap": false,
+        "waiting-lower": true,
+        "waiting-contact": true,
+        "head-default": false,
+        "head-listening": false,
+        "head-waiting": true,
+        "mouth-open": false
+      },
+      "tracks": [
+        {
+          "node": "contact-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 965
+            },
+            {
+              "time": 1.0,
+              "value": 965
+            },
+            {
+              "time": 2.0,
+              "value": 965
+            },
+            {
+              "time": 3.0,
+              "value": 965
+            },
+            {
+              "time": 4.0,
+              "value": 965
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "pivotY",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 950
+            },
+            {
+              "time": 1.0,
+              "value": 950
+            },
+            {
+              "time": 2.0,
+              "value": 950
+            },
+            {
+              "time": 3.0,
+              "value": 950
+            },
+            {
+              "time": 4.0,
+              "value": 950
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
+          "property": "scaleY",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 1.0
+            },
+            {
+              "time": 0.25,
+              "value": 1.0068883
+            },
+            {
+              "time": 0.5,
+              "value": 1.01272792
+            },
+            {
+              "time": 0.75,
+              "value": 1.01662983
+            },
+            {
+              "time": 1.0,
+              "value": 1.018
+            },
+            {
+              "time": 1.25,
+              "value": 1.01662983
+            },
+            {
+              "time": 1.5,
+              "value": 1.01272792
+            },
+            {
+              "time": 1.75,
+              "value": 1.0068883
+            },
+            {
+              "time": 2.0,
+              "value": 1.0
+            },
+            {
+              "time": 2.25,
+              "value": 0.9931117
+            },
+            {
+              "time": 2.5,
+              "value": 0.98727208
+            },
+            {
+              "time": 2.75,
+              "value": 0.98337017
+            },
+            {
+              "time": 3.0,
+              "value": 0.982
+            },
+            {
+              "time": 3.25,
+              "value": 0.98337017
+            },
+            {
+              "time": 3.5,
+              "value": 0.98727208
+            },
+            {
+              "time": 3.75,
+              "value": 0.9931117
+            },
+            {
+              "time": 4.0,
+              "value": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    "speaking": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "body": true,
+        "listening-body": false,
+        "left-arm": true,
+        "right-arm": false,
+        "listening-right": false,
+        "listening-arm": false,
+        "speaking-arm": true,
+        "speaking-fill": true,
+        "speaking-cap": true,
+        "waiting-lower": false,
+        "waiting-contact": false,
+        "head-default": true,
+        "head-listening": false,
+        "head-waiting": false,
+        "mouth-open": false
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 960
+            },
+            {
+              "time": 1.0,
+              "value": 963.5
+            },
+            {
+              "time": 2.0,
+              "value": 960
+            },
+            {
+              "time": 3.0,
+              "value": 956.5
+            },
+            {
+              "time": 4.0,
+              "value": 960
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": 1.05
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": -1.05
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 430
+            },
+            {
+              "time": 1.0,
+              "value": 431.2
+            },
+            {
+              "time": 2.0,
+              "value": 430
+            },
+            {
+              "time": 3.0,
+              "value": 428.8
+            },
+            {
+              "time": 4.0,
+              "value": 430
+            }
+          ]
+        },
+        {
+          "node": "left-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": 1
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": -1
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": -1
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": 1
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "speaking-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": -1.6
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": 1.6
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "mouth-open",
+          "property": "visible",
+          "interpolation": "step",
+          "keys": [
+            {
+              "time": 0,
+              "value": false
+            },
+            {
+              "time": 0.15,
+              "value": true
+            },
+            {
+              "time": 0.33,
+              "value": false
+            },
+            {
+              "time": 0.52,
+              "value": true
+            },
+            {
+              "time": 0.71,
+              "value": false
+            },
+            {
+              "time": 0.9,
+              "value": true
+            },
+            {
+              "time": 1.1,
+              "value": false
+            },
+            {
+              "time": 1.3,
+              "value": true
+            },
+            {
+              "time": 1.51,
+              "value": false
+            },
+            {
+              "time": 1.72,
+              "value": true
+            },
+            {
+              "time": 1.94,
+              "value": false
+            },
+            {
+              "time": 2.14,
+              "value": true
+            },
+            {
+              "time": 2.36,
+              "value": false
+            },
+            {
+              "time": 2.57,
+              "value": true
+            },
+            {
+              "time": 2.77,
+              "value": false
+            },
+            {
+              "time": 2.98,
+              "value": true
+            },
+            {
+              "time": 3.2,
+              "value": false
+            },
+            {
+              "time": 3.4,
+              "value": true
+            },
+            {
+              "time": 3.61,
+              "value": false
+            },
+            {
+              "time": 3.81,
+              "value": true
+            },
+            {
+              "time": 4,
+              "value": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "states": {
+    "default": "default",
+    "listening": "listening",
+    "waiting": "waiting",
+    "speaking": "speaking"
+  },
+  "transitions": []
+}
