@@ -1,6 +1,6 @@
 # 公共角色姓名高亮
 
-2026-10-25，用户明确授权跨只读入口复用原姓名高亮机制。当前状态：公共组件/消费者实施及自动验证通过，真实IAB已完成，待旧global规则清理turn与主协调组合审查。原始基线3fdec3de47d9e27e0ecd3f91be7e1e248158fd02；parent WT /Users/nighca/.codex/worktrees/page-titles/lie，分支codex/character-name-highlights；标题分支/提交保持冻结，没有作为未审依赖重放。
+2026-10-25，用户明确授权跨只读入口复用原姓名高亮机制。当前状态：公共组件/消费者及同批草稿布局实施、自审和实际验收完成，clean交付主协调；旧未引用global规则由root在姓名＋height候选中统一清理并组合验证，尚未集成/发布本批。原始基线3fdec3de47d9e27e0ecd3f91be7e1e248158fd02；parent WT /Users/nighca/.codex/worktrees/page-titles/lie，分支codex/character-name-highlights；标题分支/提交保持冻结，没有作为未审依赖重放。
 
 ## 公共接口与匹配
 
@@ -35,7 +35,7 @@ Editor使用原始草稿name做字面匹配，不新增trim/内容限制；既�
 
 root最新main911718e0已含调查连接loading和preview隐藏改编。parent仍从指定3fdec做独立最小消费者diff，不改App结果button gate、Application或loading规则；root候选需要与这些已审差异及标题批组合，不能以本分支声称最新功能已发布。
 
-style.css仍由height owner持有；当前新scoped组件是唯一活动高亮样式，旧global未被引用但按约定待释放后移除，最终交付不能保留两套正式维护样式。暂无服务/浏览器/临时数据。
+style.css由height owner持有；新scoped组件是唯一活动高亮样式，旧global .background-character-name未被引用。主协调随后明确接管该单行删除：在姓名＋height组合时亲自清理并跑组合Web/types/build，本分支不为此等待或并发改style.css。最终正式组合不保留旧样式/alias。
 
 ## 同批实际验收（待旧规则清理后最终构建）
 
@@ -52,3 +52,11 @@ style.css仍由height owner持有；当前新scoped组件是唯一活动高亮�
 全部为本地demo，未打开语音/真实mic/provider/付费。截图上沿为自有测试包装页，下面两块是不同iframe，不能当原生手机或“当前main全功能组合”截图。3fdec基线的旧开发预览title和preview改编按钮仍可出现在该源证据中；它们由独立已交付标题批与root已审5afa来源修复，本批不覆盖这些区域，root组合时必须保留最新行为。
 
 清理：tab29关闭，原exec57157 Ctrl-C退出、lsof5402无listener；临时public/character-name-qa.html删除，专项原始storage已在关闭前按原字节恢复，无用户storage变动。尚未main/push/PR/deploy。
+
+## 最终 clean handoff
+
+root指示既有检查按差异复用，不因未变生产代码重复全套/启动服务：公共高亮消费者完整33files298项/types/build89通过；草稿提示布局独立提交后，editor-page/navigation/character-name-consumers合计52项及types通过。真实IAB在布局提交后进行；最后只有文档/证据追加，没有生产后改。后续旧global删除及与title/preview gate/loading/height的合并由root独立组合验证，不能将本批298当最新全项目组合结果。
+
+交付基线3fdec3de47d9e27e0ecd3f91be7e1e248158fd02；父有序277b215（子source0723的cherry，不重复播放原source）→1a43868（消费者与回归）→db2c9a0（草稿布局/原行为回归）→8b8ba7c（实测证据）→最终handoff记录提交。无未审标题或调查source依赖。本批未改Application/main.ts/controller/全局style.css/公共动画或预设契约，不撤销其后独立功能。
+
+子WT clean保留原source0723与base，parent WT clean保留该批线性提交；标准ignored node_modules/生成预设资源不属于交付。没有运行中的自建服务/标签，临时fixture已删除且专项storage恢复。不会main/push/PR/deploy。主协调负责最终审查、单行旧规则清理、有序集成和报告。
