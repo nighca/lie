@@ -13,3 +13,5 @@ validate.mjs整8通过（1936个刚性结果采样）、原四态素材完整保
 主协调首批额外独立审计的原脚本和result已按其要求归档evidence/root-first-batch-audit；它针对当时冻结首批3source+4人catalog，不说成完整八人/浏览器审计。原tmp路径不再是唯一证据。
 
 服务只有现父5355/PID1851/PTY55257；父QA own tab61与用户交付tab60，前者完成后关闭。两个lane曾使用的5356/5357已原PTY停、own tabs关并分别listener核空；不得再占图片5356，也不新开端口/扩fs.allow。后续App整合时5355切换源需要明确协调，且应保留同一八人页面可访问。
+
+补充真实统一页矩阵：发起者逐个点击8个角色，均等到Canvas实际可见；每次切换静态，16个img均自然解码1254且URL属于当前所选形象，标题/选中项正确，gallery-eight-switches.json为DOM实测记录。桌面1280×900、reduce静态及391×844截图见evidence/gallery-eight-*；391实测scrollWidth=clientWidth=391。所有临时media/viewport override已恢复，private制作tab61已关闭，用户tab60保留。同一页面使用PNG艺术源验收，正式生产WebP与游戏UI需组合检查，不能互相替代。

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "珊瑚短发",
+    "id": "coral-bob",
+    "heading": "珊瑚短发",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/coral-bob/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/coral-bob/accused-wrongly.png"
+      }
+    ]
+  },
+  {
+    "name": "阳光小胡子",
+    "id": "sunny-moustache",
+    "heading": "阳光小胡子",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/sunny-moustache/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/sunny-moustache/accused-wrongly.png"
+      }
+    ]
+  },
+  {
+    "name": "蓝衣眼镜",
+    "id": "blue-glasses",
+    "heading": "蓝衣眼镜",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/blue-glasses/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/blue-glasses/accused-wrongly.png"
+      }
+    ]
+  },
+  {
+    "name": "银发盘发",
+    "id": "silver-bun",
+    "heading": "银发盘发",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/silver-bun/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/silver-bun/accused-wrongly.png"
+      }
+    ]
+  },
+  {
+    "name": "灰白胡须",
+    "id": "salt-pepper-beard",
+    "heading": "灰白胡须",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/salt-pepper-beard/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/salt-pepper-beard/accused-wrongly.png"
+      }
+    ]
+  },
+  {
+    "name": "紫衣短卷发",
+    "id": "plum-crop",
+    "heading": "紫衣短卷发",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/plum-crop/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/plum-crop/accused-wrongly.png"
+      }
+    ]
+  },
+  {
+    "name": "薄荷双丸子",
+    "id": "mint-puffs",
+    "heading": "薄荷双丸子",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/mint-puffs/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/mint-puffs/accused-wrongly.png"
+      }
+    ]
+  },
+  {
+    "name": "赭黄雀斑",
+    "id": "ochre-freckles",
+    "heading": "赭黄雀斑",
+    "images": [
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/ochre-freckles/accused-correctly.png"
+      },
+      {
+        "loaded": true,
+        "src": "/design/result-reactions/ochre-freckles/accused-wrongly.png"
+      }
+    ]
+  }
+]
