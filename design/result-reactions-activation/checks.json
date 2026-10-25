@@ -1,0 +1,51 @@
+{
+  "base": "870cbd524ab21e243e072866ce70288932192834",
+  "source": "73e55f527729417ae5296526cc602aed2ca926ef",
+  "oldPngFilesUnchanged": 81,
+  "characters": [
+    {
+      "id": "coral-bob",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    },
+    {
+      "id": "sunny-moustache",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    },
+    {
+      "id": "blue-glasses",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    },
+    {
+      "id": "silver-bun",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    },
+    {
+      "id": "salt-pepper-beard",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    },
+    {
+      "id": "plum-crop",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    },
+    {
+      "id": "mint-puffs",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    },
+    {
+      "id": "ochre-freckles",
+      "allSourceFilesIdentical": true,
+      "oldPackageRecordsIdentical": true
+    }
+  ],
+  "productionResultStaticWebP": 16,
+  "productionNewPartWebP": 16,
+  "productionAllAnimationPartReferences": 62,
+  "productionManifest": "apps/web/dist/static/21d97c04ac9d87fa58636a243fef27e6cf52b19537aeb83c93efe48d5d1096ff/appearances/manifest.json"
+}

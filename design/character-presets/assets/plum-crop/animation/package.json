@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "canvas": {
     "width": 1254,
     "height": 1254
@@ -27,6 +27,16 @@
     },
     "waiting-source": {
       "src": "parts/waiting-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "result-correct-head": {
+      "src": "parts/result-correct-head.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "result-wrong-head": {
+      "src": "parts/result-wrong-head.png",
       "width": 1254,
       "height": 1254
     }
@@ -1617,6 +1627,94 @@
           ]
         ]
       }
+    },
+    {
+      "id": "result-correct-head",
+      "parent": "head-root",
+      "transform": {
+        "x": 257,
+        "y": -25,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 0.54,
+        "scaleY": 0.54
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "result-correct-head",
+        "order": 30,
+        "mask": [
+          [
+            240,
+            50
+          ],
+          [
+            940,
+            50
+          ],
+          [
+            940,
+            830
+          ],
+          [
+            500,
+            830
+          ],
+          [
+            500,
+            790
+          ],
+          [
+            250,
+            700
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-wrong-head",
+      "parent": "head-root",
+      "transform": {
+        "x": 257,
+        "y": -25,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 0.54,
+        "scaleY": 0.54
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "result-wrong-head",
+        "order": 30,
+        "mask": [
+          [
+            240,
+            50
+          ],
+          [
+            940,
+            50
+          ],
+          [
+            940,
+            830
+          ],
+          [
+            500,
+            830
+          ],
+          [
+            500,
+            790
+          ],
+          [
+            250,
+            700
+          ]
+        ]
+      }
     }
   ],
   "clips": {
@@ -2487,13 +2585,260 @@
           ]
         }
       ]
+    },
+    "result-correct": {
+      "duration": 1.2,
+      "loop": false,
+      "visibility": {
+        "torso": true,
+        "left-neutral": true,
+        "right-neutral": true,
+        "listen-arm": false,
+        "waiting-torso": false,
+        "waiting-arms": false,
+        "speak-arm": false,
+        "mouth-open": false,
+        "waiting-cuff-front": false,
+        "head": false,
+        "waiting-head": false,
+        "waiting-neck-backing": false,
+        "waiting-hand": false,
+        "speaking-shoulder-cap": false,
+        "waiting-lower-body": false,
+        "listening-torso": false,
+        "mouth-closed": false,
+        "result-correct-head": true,
+        "result-wrong-head": false
+      },
+      "tracks": [
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.25,
+              "value": -1
+            },
+            {
+              "time": 0.7,
+              "value": 3.8
+            },
+            {
+              "time": 1.2,
+              "value": 2.6
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 440
+            },
+            {
+              "time": 0.4,
+              "value": 442
+            },
+            {
+              "time": 0.8,
+              "value": 447
+            },
+            {
+              "time": 1.2,
+              "value": 445
+            }
+          ]
+        },
+        {
+          "node": "left-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": -2.4
+            },
+            {
+              "time": 1.2,
+              "value": -1.5
+            }
+          ]
+        },
+        {
+          "node": "right-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 2.2
+            },
+            {
+              "time": 1.2,
+              "value": 1.3
+            }
+          ]
+        }
+      ]
+    },
+    "result-wrong": {
+      "duration": 1.2,
+      "loop": false,
+      "visibility": {
+        "torso": true,
+        "left-neutral": true,
+        "right-neutral": false,
+        "listen-arm": false,
+        "waiting-torso": false,
+        "waiting-arms": false,
+        "speak-arm": true,
+        "mouth-open": false,
+        "waiting-cuff-front": false,
+        "head": false,
+        "waiting-head": false,
+        "waiting-neck-backing": false,
+        "waiting-hand": false,
+        "speaking-shoulder-cap": true,
+        "waiting-lower-body": false,
+        "listening-torso": false,
+        "mouth-closed": false,
+        "result-correct-head": false,
+        "result-wrong-head": true
+      },
+      "tracks": [
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.25,
+              "value": -3.6
+            },
+            {
+              "time": 0.7,
+              "value": 0.6
+            },
+            {
+              "time": 1.2,
+              "value": -2.1
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 440
+            },
+            {
+              "time": 0.4,
+              "value": 437
+            },
+            {
+              "time": 0.8,
+              "value": 440
+            },
+            {
+              "time": 1.2,
+              "value": 439
+            }
+          ]
+        },
+        {
+          "node": "left-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 2
+            },
+            {
+              "time": 1.2,
+              "value": 1.4
+            }
+          ]
+        },
+        {
+          "node": "right-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 2.2
+            },
+            {
+              "time": 1.2,
+              "value": 1.3
+            }
+          ]
+        },
+        {
+          "node": "speak-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.35,
+              "value": -3.8
+            },
+            {
+              "time": 0.8,
+              "value": 1
+            },
+            {
+              "time": 1.2,
+              "value": -2.2
+            }
+          ]
+        }
+      ]
     }
   },
   "states": {
     "default": "default",
     "listening": "listening",
     "waiting": "waiting",
-    "speaking": "speaking"
+    "speaking": "speaking",
+    "accusedCorrectly": "result-correct",
+    "accusedWrongly": "result-wrong"
   },
   "transitions": []
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "canvas": {
     "width": 1254,
     "height": 1254
@@ -22,6 +22,16 @@
     },
     "waiting-source": {
       "src": "parts/waiting-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "result-correct-head": {
+      "src": "parts/result-correct-head.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "result-wrong-head": {
+      "src": "parts/result-wrong-head.png",
       "width": 1254,
       "height": 1254
     }
@@ -737,6 +747,386 @@
           [
             440,
             835
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-torso",
+      "parent": "body-root",
+      "visible": false,
+      "transform": {
+        "x": 650,
+        "y": 850,
+        "pivotX": 650,
+        "pivotY": 850,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "sprite": {
+        "asset": "default-source",
+        "order": 10,
+        "mask": [
+          [
+            420,
+            480
+          ],
+          [
+            580,
+            415
+          ],
+          [
+            750,
+            415
+          ],
+          [
+            850,
+            470
+          ],
+          [
+            880,
+            540
+          ],
+          [
+            855,
+            650
+          ],
+          [
+            850,
+            850
+          ],
+          [
+            940,
+            1254
+          ],
+          [
+            380,
+            1254
+          ],
+          [
+            420,
+            950
+          ],
+          [
+            470,
+            850
+          ],
+          [
+            505,
+            720
+          ],
+          [
+            510,
+            630
+          ],
+          [
+            480,
+            550
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-left-arm",
+      "parent": "body-root",
+      "visible": false,
+      "transform": {
+        "x": 440,
+        "y": 520,
+        "pivotX": 440,
+        "pivotY": 520,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "sprite": {
+        "asset": "default-source",
+        "order": 20,
+        "mask": [
+          [
+            420,
+            480
+          ],
+          [
+            480,
+            550
+          ],
+          [
+            515,
+            630
+          ],
+          [
+            510,
+            720
+          ],
+          [
+            470,
+            810
+          ],
+          [
+            440,
+            900
+          ],
+          [
+            410,
+            1100
+          ],
+          [
+            410,
+            1254
+          ],
+          [
+            250,
+            1254
+          ],
+          [
+            250,
+            900
+          ],
+          [
+            275,
+            700
+          ],
+          [
+            330,
+            600
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-right-arm",
+      "parent": "body-root",
+      "visible": false,
+      "transform": {
+        "x": 870,
+        "y": 520,
+        "pivotX": 870,
+        "pivotY": 520,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "sprite": {
+        "asset": "default-source",
+        "order": 21,
+        "mask": [
+          [
+            850,
+            470
+          ],
+          [
+            960,
+            500
+          ],
+          [
+            1030,
+            750
+          ],
+          [
+            1080,
+            1254
+          ],
+          [
+            910,
+            1254
+          ],
+          [
+            900,
+            1000
+          ],
+          [
+            860,
+            900
+          ],
+          [
+            850,
+            850
+          ],
+          [
+            855,
+            650
+          ],
+          [
+            880,
+            540
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-question-arm",
+      "parent": "body-root",
+      "visible": false,
+      "transform": {
+        "x": 870,
+        "y": 520,
+        "pivotX": 870,
+        "pivotY": 520,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 40,
+        "mask": [
+          [
+            850,
+            470
+          ],
+          [
+            960,
+            500
+          ],
+          [
+            1020,
+            650
+          ],
+          [
+            1040,
+            800
+          ],
+          [
+            1010,
+            930
+          ],
+          [
+            900,
+            930
+          ],
+          [
+            830,
+            850
+          ],
+          [
+            810,
+            790
+          ],
+          [
+            720,
+            760
+          ],
+          [
+            700,
+            680
+          ],
+          [
+            750,
+            630
+          ],
+          [
+            840,
+            630
+          ],
+          [
+            880,
+            540
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-correct-head",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "result-correct-head",
+        "order": 30,
+        "mask": [
+          [
+            0,
+            0
+          ],
+          [
+            1254,
+            0
+          ],
+          [
+            1254,
+            431
+          ],
+          [
+            747,
+            431
+          ],
+          [
+            750,
+            493
+          ],
+          [
+            575,
+            493
+          ],
+          [
+            580,
+            431
+          ],
+          [
+            0,
+            431
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-wrong-head",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "result-wrong-head",
+        "order": 30,
+        "mask": [
+          [
+            0,
+            0
+          ],
+          [
+            1254,
+            0
+          ],
+          [
+            1254,
+            431
+          ],
+          [
+            747,
+            431
+          ],
+          [
+            750,
+            493
+          ],
+          [
+            575,
+            493
+          ],
+          [
+            580,
+            431
+          ],
+          [
+            0,
+            431
           ]
         ]
       }
@@ -2047,13 +2437,260 @@
           ]
         }
       ]
+    },
+    "result-correct": {
+      "duration": 1.2,
+      "loop": false,
+      "visibility": {
+        "default-body": false,
+        "listening-body": false,
+        "listening-lower": false,
+        "listen-contact": false,
+        "waiting-body": false,
+        "waiting-lower": false,
+        "chin-contact": false,
+        "speaking-body": false,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
+        "mouth-closed": false,
+        "mouth-open": false,
+        "head": false,
+        "result-torso": true,
+        "result-left-arm": true,
+        "result-right-arm": true,
+        "result-question-arm": false,
+        "result-correct-head": true,
+        "result-wrong-head": false
+      },
+      "tracks": [
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.25,
+              "value": -0.8
+            },
+            {
+              "time": 0.7,
+              "value": 3.2
+            },
+            {
+              "time": 1.2,
+              "value": 2.4
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 445
+            },
+            {
+              "time": 0.4,
+              "value": 447
+            },
+            {
+              "time": 0.8,
+              "value": 451
+            },
+            {
+              "time": 1.2,
+              "value": 449
+            }
+          ]
+        },
+        {
+          "node": "result-left-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": -1.8
+            },
+            {
+              "time": 1.2,
+              "value": -1
+            }
+          ]
+        },
+        {
+          "node": "result-right-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 1.8
+            },
+            {
+              "time": 1.2,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    "result-wrong": {
+      "duration": 1.2,
+      "loop": false,
+      "visibility": {
+        "default-body": false,
+        "listening-body": false,
+        "listening-lower": false,
+        "listen-contact": false,
+        "waiting-body": false,
+        "waiting-lower": false,
+        "chin-contact": false,
+        "speaking-body": false,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
+        "mouth-closed": false,
+        "mouth-open": false,
+        "head": false,
+        "result-torso": true,
+        "result-left-arm": true,
+        "result-right-arm": false,
+        "result-question-arm": true,
+        "result-correct-head": false,
+        "result-wrong-head": true
+      },
+      "tracks": [
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.25,
+              "value": -3.2
+            },
+            {
+              "time": 0.7,
+              "value": 0.8
+            },
+            {
+              "time": 1.2,
+              "value": -1.8
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 445
+            },
+            {
+              "time": 0.4,
+              "value": 443
+            },
+            {
+              "time": 0.8,
+              "value": 445
+            },
+            {
+              "time": 1.2,
+              "value": 444
+            }
+          ]
+        },
+        {
+          "node": "result-left-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 1.6
+            },
+            {
+              "time": 1.2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "node": "result-right-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 1.8
+            },
+            {
+              "time": 1.2,
+              "value": 1
+            }
+          ]
+        },
+        {
+          "node": "result-question-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.35,
+              "value": -3
+            },
+            {
+              "time": 0.8,
+              "value": 0.5
+            },
+            {
+              "time": 1.2,
+              "value": -1.5
+            }
+          ]
+        }
+      ]
     }
   },
   "states": {
     "default": "default",
     "listening": "listening",
     "waiting": "waiting",
-    "speaking": "speaking"
+    "speaking": "speaking",
+    "accusedCorrectly": "result-correct",
+    "accusedWrongly": "result-wrong"
   },
   "transitions": []
 }

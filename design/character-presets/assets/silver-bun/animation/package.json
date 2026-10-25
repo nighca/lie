@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "canvas": {
     "width": 1254,
     "height": 1254
@@ -34,6 +34,16 @@
       "src": "parts/speaking-source.png",
       "width": 1254,
       "height": 1254
+    },
+    "result-correct-head": {
+      "src": "parts/result-correct-head.png",
+      "width": 1362,
+      "height": 1155
+    },
+    "result-wrong-head": {
+      "src": "parts/result-wrong-head.png",
+      "width": 1362,
+      "height": 1155
     }
   },
   "nodes": [
@@ -1378,6 +1388,110 @@
           ]
         ]
       }
+    },
+    {
+      "id": "result-correct-head",
+      "parent": "head-root",
+      "transform": {
+        "x": 307,
+        "y": -15,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 0.45,
+        "scaleY": 0.45
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "result-correct-head",
+        "order": 30,
+        "mask": [
+          [
+            0,
+            0
+          ],
+          [
+            1362,
+            0
+          ],
+          [
+            1362,
+            1155
+          ],
+          [
+            1030,
+            1155
+          ],
+          [
+            1030,
+            925
+          ],
+          [
+            540,
+            925
+          ],
+          [
+            540,
+            1155
+          ],
+          [
+            0,
+            1155
+          ]
+        ]
+      }
+    },
+    {
+      "id": "result-wrong-head",
+      "parent": "head-root",
+      "transform": {
+        "x": 307,
+        "y": -15,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 0.45,
+        "scaleY": 0.45
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "result-wrong-head",
+        "order": 30,
+        "mask": [
+          [
+            0,
+            0
+          ],
+          [
+            1362,
+            0
+          ],
+          [
+            1362,
+            1155
+          ],
+          [
+            1030,
+            1155
+          ],
+          [
+            1030,
+            925
+          ],
+          [
+            540,
+            925
+          ],
+          [
+            540,
+            1155
+          ],
+          [
+            0,
+            1155
+          ]
+        ]
+      }
     }
   ],
   "clips": {
@@ -2138,13 +2252,256 @@
           ]
         }
       ]
+    },
+    "result-correct": {
+      "duration": 1.2,
+      "loop": false,
+      "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
+        "waiting-hand": false,
+        "torso": true,
+        "waiting-torso": false,
+        "listening-torso": false,
+        "left-neutral": true,
+        "right-neutral": true,
+        "listen-arm": false,
+        "waiting-arms": false,
+        "speak-arm": false,
+        "mouth-open": false,
+        "mouth-closed": false,
+        "head": false,
+        "result-correct-head": true,
+        "result-wrong-head": false
+      },
+      "tracks": [
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.28,
+              "value": -0.8
+            },
+            {
+              "time": 0.72,
+              "value": 3.4
+            },
+            {
+              "time": 1.2,
+              "value": 2.5
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 390
+            },
+            {
+              "time": 0.3,
+              "value": 391
+            },
+            {
+              "time": 0.75,
+              "value": 397
+            },
+            {
+              "time": 1.2,
+              "value": 395
+            }
+          ]
+        },
+        {
+          "node": "left-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": -2.5
+            },
+            {
+              "time": 1.2,
+              "value": -1.6
+            }
+          ]
+        },
+        {
+          "node": "right-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 2.5
+            },
+            {
+              "time": 1.2,
+              "value": 1.5
+            }
+          ]
+        }
+      ]
+    },
+    "result-wrong": {
+      "duration": 1.2,
+      "loop": false,
+      "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
+        "waiting-hand": false,
+        "torso": true,
+        "waiting-torso": false,
+        "listening-torso": false,
+        "left-neutral": true,
+        "right-neutral": false,
+        "listen-arm": false,
+        "waiting-arms": false,
+        "speak-arm": true,
+        "mouth-open": false,
+        "mouth-closed": false,
+        "head": false,
+        "result-correct-head": false,
+        "result-wrong-head": true
+      },
+      "tracks": [
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.28,
+              "value": -3.8
+            },
+            {
+              "time": 0.72,
+              "value": 1.1
+            },
+            {
+              "time": 1.2,
+              "value": -1.8
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 390
+            },
+            {
+              "time": 0.3,
+              "value": 387
+            },
+            {
+              "time": 0.75,
+              "value": 389
+            },
+            {
+              "time": 1.2,
+              "value": 389
+            }
+          ]
+        },
+        {
+          "node": "left-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 2.2
+            },
+            {
+              "time": 1.2,
+              "value": 1.2
+            }
+          ]
+        },
+        {
+          "node": "right-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.65,
+              "value": 2.5
+            },
+            {
+              "time": 1.2,
+              "value": 1.5
+            }
+          ]
+        },
+        {
+          "node": "speak-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 0.3,
+              "value": -4.5
+            },
+            {
+              "time": 0.75,
+              "value": -1
+            },
+            {
+              "time": 1.2,
+              "value": -2.4
+            }
+          ]
+        }
+      ]
     }
   },
   "states": {
     "default": "idle",
     "listening": "listening",
     "waiting": "waiting",
-    "speaking": "speaking"
+    "speaking": "speaking",
+    "accusedCorrectly": "result-correct",
+    "accusedWrongly": "result-wrong"
   },
   "transitions": []
 }

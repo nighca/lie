@@ -9,7 +9,9 @@
     "portraits": {
       "listening": "assets/coral-bob/listening.png",
       "waiting": "assets/coral-bob/waiting.png",
-      "speaking": "assets/coral-bob/speaking.png"
+      "speaking": "assets/coral-bob/speaking.png",
+      "accusedCorrectly": "assets/coral-bob/accused-correctly.png",
+      "accusedWrongly": "assets/coral-bob/accused-wrongly.png"
     },
     "animation": "assets/coral-bob/animation/package.json"
   },
@@ -23,7 +25,9 @@
     "portraits": {
       "listening": "assets/sunny-moustache/listening.png",
       "waiting": "assets/sunny-moustache/waiting.png",
-      "speaking": "assets/sunny-moustache/speaking.png"
+      "speaking": "assets/sunny-moustache/speaking.png",
+      "accusedCorrectly": "assets/sunny-moustache/accused-correctly.png",
+      "accusedWrongly": "assets/sunny-moustache/accused-wrongly.png"
     },
     "animation": "assets/sunny-moustache/animation/package.json"
   },
@@ -37,7 +41,9 @@
     "portraits": {
       "listening": "assets/blue-glasses/listening.png",
       "waiting": "assets/blue-glasses/waiting.png",
-      "speaking": "assets/blue-glasses/speaking.png"
+      "speaking": "assets/blue-glasses/speaking.png",
+      "accusedCorrectly": "assets/blue-glasses/accused-correctly.png",
+      "accusedWrongly": "assets/blue-glasses/accused-wrongly.png"
     },
     "animation": "assets/blue-glasses/animation/package.json"
   },
@@ -51,7 +57,9 @@
     "portraits": {
       "listening": "assets/silver-bun/listening.png",
       "waiting": "assets/silver-bun/waiting.png",
-      "speaking": "assets/silver-bun/speaking.png"
+      "speaking": "assets/silver-bun/speaking.png",
+      "accusedCorrectly": "assets/silver-bun/accused-correctly.png",
+      "accusedWrongly": "assets/silver-bun/accused-wrongly.png"
     },
     "animation": "assets/silver-bun/animation/package.json"
   },
@@ -65,7 +73,9 @@
     "portraits": {
       "listening": "assets/salt-pepper-beard/listening.png",
       "waiting": "assets/salt-pepper-beard/waiting.png",
-      "speaking": "assets/salt-pepper-beard/speaking.png"
+      "speaking": "assets/salt-pepper-beard/speaking.png",
+      "accusedCorrectly": "assets/salt-pepper-beard/accused-correctly.png",
+      "accusedWrongly": "assets/salt-pepper-beard/accused-wrongly.png"
     },
     "animation": "assets/salt-pepper-beard/animation/package.json"
   },
@@ -79,7 +89,9 @@
     "portraits": {
       "listening": "assets/plum-crop/listening.png",
       "waiting": "assets/plum-crop/waiting.png",
-      "speaking": "assets/plum-crop/speaking.png"
+      "speaking": "assets/plum-crop/speaking.png",
+      "accusedCorrectly": "assets/plum-crop/accused-correctly.png",
+      "accusedWrongly": "assets/plum-crop/accused-wrongly.png"
     },
     "animation": "assets/plum-crop/animation/package.json"
   },
@@ -93,7 +105,9 @@
     "portraits": {
       "listening": "assets/mint-puffs/listening.png",
       "waiting": "assets/mint-puffs/waiting.png",
-      "speaking": "assets/mint-puffs/speaking.png"
+      "speaking": "assets/mint-puffs/speaking.png",
+      "accusedCorrectly": "assets/mint-puffs/accused-correctly.png",
+      "accusedWrongly": "assets/mint-puffs/accused-wrongly.png"
     },
     "animation": "assets/mint-puffs/animation/package.json"
   },
@@ -107,7 +121,9 @@
     "portraits": {
       "listening": "assets/ochre-freckles/listening.png",
       "waiting": "assets/ochre-freckles/waiting.png",
-      "speaking": "assets/ochre-freckles/speaking.png"
+      "speaking": "assets/ochre-freckles/speaking.png",
+      "accusedCorrectly": "assets/ochre-freckles/accused-correctly.png",
+      "accusedWrongly": "assets/ochre-freckles/accused-wrongly.png"
     },
     "animation": "assets/ochre-freckles/animation/package.json"
   }
