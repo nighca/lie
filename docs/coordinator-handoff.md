@@ -77,6 +77,10 @@
 
 覆盖率与双语README badge已本地main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`，root完整13files与计数/原始报告/SFC上下文实际review，候选与source47deba1覆盖源码/collector/依赖完全相同，复用clean4f5ba19真实388测试采样及两轮独立review；独立3脚本语法/45文件分母/SVG及快照逐字/链接通过。应用lines92.08%（1501/1630）、Node脚本91.32%（263/288）另报；[范围/命令与Vue映射限制](coverage/README.md)公开。CI上传14天artifact，不自动改trackedbadge，远程CI未运行，未push/部署；不重做已完成调查/采样。
 
+## 专职代码与架构审查
+
+用户进一步明确要求专职subagent做潜藏bug/架构意图落实/非预期耦合审查，root已spawn `/root/architecture_code_review`。固定main58b416d（应用同已发布abb12db），独立WT/branch，与浏览器探索QA分工；先核批准架构与真实依赖/接口，再以可达触发条件、精确源码行、最小fake验证及影响给结论，未证实疑点单列。allowed仅docs/reviews/architecture-code-review-2026-10-25/**报告/必要probe，不改生产，不开browser/server/端口、不调用provider或读secret，不复活暂停auth。P1立即反馈，其余完整clean batch由root实际review后排修。当前仅启动，不能写审查通过；子agent句柄跨换代不自动继承，届时取可恢复进度，保留其WT/refs/dirty。
+
 ## 专职稳定版本探索测试
 
 用户最新明确要求启动专职subagent在稳定环境发现功能/设计/视觉问题；root核全backlog后实际spawn `/root/stable_exploratory_qa`。固定已发布abb12db，独立managed WT/unique branch，根侧不新增server；5544明确转交该QA owner按需启动，保护用户8787/8788、动画5355、设计5507、Editor5402及现有draft/浏览器会话。先隔离或可原样恢复测试draft再写入，做不到则报未测，不删除旧数据。
