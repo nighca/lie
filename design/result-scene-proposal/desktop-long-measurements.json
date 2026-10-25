@@ -1,0 +1,20 @@
+{
+  "id": "desktop-long",
+  "innerWidth": 1280,
+  "innerHeight": 878,
+  "scrollWidth": 1280,
+  "scrollHeight": 1217,
+  "scrollY": 339.5,
+  "focus": "返回案件列表",
+  "buttonTop": 747.0234375,
+  "buttonBottom": 803.0234375,
+  "focusVisible": true,
+  "paragraphs": 6,
+  "clip": {
+    "x": 24,
+    "y": 5673.8984375,
+    "width": 1280,
+    "height": 878,
+    "scale": 1
+  }
+}

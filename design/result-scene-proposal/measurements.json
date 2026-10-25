@@ -1,0 +1,170 @@
+[
+  {
+    "id": "desktop-correct",
+    "innerWidth": 1280,
+    "innerHeight": 878,
+    "scrollWidth": 1280,
+    "scrollHeight": 878,
+    "scrollY": 0,
+    "cardLeft": 120,
+    "cardRight": 120,
+    "stageHeight": 310,
+    "paragraphs": 4,
+    "name": "顾遥",
+    "portraitLoaded": true,
+    "initialVisible": false,
+    "actions": [
+      {
+        "label": "重新开始一局",
+        "height": 56
+      },
+      {
+        "label": "返回案件列表",
+        "height": 56
+      }
+    ],
+    "animations": 0,
+    "gameFetch": true,
+    "wrongHasTruth": null
+  },
+  {
+    "id": "desktop-wrong",
+    "innerWidth": 1280,
+    "innerHeight": 878,
+    "scrollWidth": 1280,
+    "scrollHeight": 878,
+    "scrollY": 0,
+    "cardLeft": 120,
+    "cardRight": 120,
+    "stageHeight": 310,
+    "paragraphs": 1,
+    "name": "沈禾",
+    "portraitLoaded": true,
+    "initialVisible": false,
+    "actions": [
+      {
+        "label": "重新开始一局",
+        "height": 56
+      },
+      {
+        "label": "返回案件列表",
+        "height": 56
+      }
+    ],
+    "animations": 0,
+    "gameFetch": false,
+    "wrongHasTruth": false
+  },
+  {
+    "id": "mobile-correct",
+    "innerWidth": 391,
+    "innerHeight": 844,
+    "scrollWidth": 391,
+    "scrollHeight": 1214,
+    "scrollY": 0,
+    "cardLeft": 16,
+    "cardRight": 16,
+    "stageHeight": 180,
+    "paragraphs": 4,
+    "name": "顾遥",
+    "portraitLoaded": true,
+    "initialVisible": false,
+    "actions": [
+      {
+        "label": "重新开始一局",
+        "height": 52.3984375
+      },
+      {
+        "label": "返回案件列表",
+        "height": 52.3984375
+      }
+    ],
+    "animations": 0,
+    "gameFetch": true,
+    "wrongHasTruth": null
+  },
+  {
+    "id": "mobile-wrong",
+    "innerWidth": 391,
+    "innerHeight": 844,
+    "scrollWidth": 391,
+    "scrollHeight": 844,
+    "scrollY": 0,
+    "cardLeft": 16,
+    "cardRight": 16,
+    "stageHeight": 180,
+    "paragraphs": 1,
+    "name": "沈禾",
+    "portraitLoaded": true,
+    "initialVisible": false,
+    "actions": [
+      {
+        "label": "重新开始一局",
+        "height": 52.3984375
+      },
+      {
+        "label": "返回案件列表",
+        "height": 52.3984375
+      }
+    ],
+    "animations": 0,
+    "gameFetch": false,
+    "wrongHasTruth": false
+  },
+  {
+    "id": "mobile-long",
+    "innerWidth": 391,
+    "innerHeight": 844,
+    "scrollWidth": 391,
+    "scrollHeight": 2018,
+    "scrollY": 1174,
+    "cardLeft": 16,
+    "cardRight": 16,
+    "stageHeight": 180,
+    "paragraphs": 6,
+    "name": "来自社区摄影社的特别来宾顾遥",
+    "portraitLoaded": true,
+    "initialVisible": false,
+    "actions": [
+      {
+        "label": "重新开始一局",
+        "height": 52.3984375
+      },
+      {
+        "label": "返回案件列表",
+        "height": 52.3984375
+      }
+    ],
+    "animations": 0,
+    "gameFetch": true,
+    "wrongHasTruth": null
+  },
+  {
+    "id": "mobile-fallback",
+    "innerWidth": 391,
+    "innerHeight": 844,
+    "scrollWidth": 391,
+    "scrollHeight": 844,
+    "scrollY": 0,
+    "cardLeft": 16,
+    "cardRight": 16,
+    "stageHeight": 180,
+    "paragraphs": 1,
+    "name": "来自社区摄影社的特别来宾沈禾",
+    "portraitLoaded": false,
+    "initialVisible": true,
+    "actions": [
+      {
+        "label": "重新开始一局",
+        "height": 52.3984375
+      },
+      {
+        "label": "返回案件列表",
+        "height": 52.3984375
+      }
+    ],
+    "animations": 0,
+    "gameFetch": false,
+    "wrongHasTruth": false
+  }
+]

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>结果页布局提案</title><link rel="stylesheet" href="../../packages/ui/style.css"><link rel="stylesheet" href="scene.css"></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html" aria-label="返回设计对照页"><img src="../brand/logo-b-refinements/shorter.svg" alt="LIE"><span class="lie-handwritten-underline">语音推理</span></a></header>
+<main class="result-card">
+  <header class="result-heading"><p class="result-badge" id="badge"></p><h1 class="lie-handwritten-underline" id="heading"></h1></header>
+  <div class="result-content">
+    <figure class="character"><div class="portrait-stage"><img id="portrait" alt=""><span class="initial" id="initial" hidden></span></div><figcaption><span>你指认了</span><strong id="name"></strong></figcaption></figure>
+    <section class="result-story" aria-labelledby="story-heading"><h2 id="story-heading"></h2><div id="story"></div></section>
+  </div>
+  <footer class="result-actions"><button class="lie-button lie-button--primary" type="button">重新开始一局</button><button class="lie-button lie-button--secondary" type="button">返回案件列表</button></footer>
+</main>
+<script type="module" src="scene.js"></script>
+</body></html>
