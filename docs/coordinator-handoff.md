@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**最新远端main、CI/CD及线上静态指纹已核为a64bf6c1674b9755dbacc4d7519e92675ee5f4bf**（[最新证据](releases/2026-10-25-q90-ci-cd/success.md)）；原48316544为历史，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：实际main基线b3874d9，线上已证a64不变。正式结果激活/UI六链候选cb2已root完整review；本轮完整coverage捕获两项canonical升级导致的runtime legacy fixture失败，root授权单测试文件修复ab7，随后579应用＋33脚本/CI17/types/真实Web+Gatewaybuild/strict121及8包62refs/40源SHA/81旧PNG/124static身份、QA隔离全部通过。[最终报告与独立审计](result-game-ui/final-main-verification.md)供root实际审查后ff，未提前main/push。源App/391/reduce/failure/preview及gallery按相同生产/静态资源身份复用，无新browser/provider。5355现PID37202/PTY40865，source combined-qa d7、tab60用户统一页消费者保留；旧1851由owner已停，详development，不能沿旧记录推定新服务结束。单JSON内置案仍仅讨论。
+下一步：实际main基线b3874d9，线上已证a64不变。正式结果激活/UI六链候选cb2已root完整review；本轮完整coverage捕获两项canonical升级导致的runtime legacy fixture失败，root授权单测试文件修复ab7，随后579应用＋33脚本/CI17/types/真实Web+Gatewaybuild/strict121及8包62refs/40源SHA/81旧PNG/124static身份、QA隔离全部通过。[最终报告与独立审计](result-game-ui/final-main-verification.md)已由root实际审查并本地集成，未push。源App/391/reduce/failure/preview及gallery按相同生产/静态资源身份复用，无新browser/provider。5355现PID37202/PTY40865，source combined-qa d7、tab60用户统一页消费者保留；旧1851由owner已停，详development，不能沿旧记录推定新服务结束。单JSON内置案仍仅讨论。
 
 ## 当前owner与恢复入口
 
