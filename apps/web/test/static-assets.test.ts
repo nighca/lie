@@ -22,8 +22,8 @@ it('keeps unchanged URLs stable and changes the complete entry chain for changed
     await put('style.css', "body {background: url('/brand/logo.svg')}")
     await put('entry.js', "import './style.css'; import manifest from 'virtual:lie-preset-manifest'; document.body.dataset.manifest = manifest; document.body.dataset.image = '/appearances/guide/default.png'")
     const run = async () => {
-      await build({ root, configFile: false, plugins: [staticAssets()], logLevel: 'silent', build: { minify: false } })
-      const plan = await fingerprintAssets(join(root, 'public'))
+      await build({ root, configFile: false, plugins: [staticAssets({ optimizeImage: async bytes => ({ bytes, extension: '.png' }) })], logLevel: 'silent', build: { minify: false } })
+      const plan = await fingerprintAssets(join(root, 'public'), { optimizeImage: async bytes => ({ bytes, extension: '.png' }) })
       const entry = (await readdir(join(root, 'dist/assets'))).find(name => name.endsWith('.js'))!
       const js = await readFile(join(root, 'dist/assets', entry), 'utf8')
       expect(js).toContain(plan.manifestUrl)
@@ -74,21 +74,57 @@ it('fingerprints result terminal portraits independently and all animation attac
     await put(animation.slice(1), '{"schemaVersion":2}')
     await put(part.slice(1), 'shared-result-face')
     await put('appearances/manifest.json', JSON.stringify([{ id: 'guide', portraits: { accusedCorrectly: right, accusedWrongly: wrong }, animation }]))
-    const first = await fingerprintAssets(root)
+    const first = await fingerprintAssets(root, { optimizeImage: async bytes => ({ bytes, extension: '.png' }) })
     const [preset] = JSON.parse(first.outputs.get(first.manifestUrl.slice(1))!.toString())
     expect(preset.portraits.accusedCorrectly).toBe(first.urls.get(right))
     expect(preset.portraits.accusedWrongly).toBe(first.urls.get(wrong))
     await put(right.slice(1), 'updated-right-terminal')
-    const changed = await fingerprintAssets(root)
+    const changed = await fingerprintAssets(root, { optimizeImage: async bytes => ({ bytes, extension: '.png' }) })
     expect(changed.manifestUrl).not.toBe(first.manifestUrl)
     expect(changed.urls.get(right)).not.toBe(first.urls.get(right))
     expect(changed.urls.get(wrong)).toBe(first.urls.get(wrong))
     expect(changed.urls.get(animation)).toBe(first.urls.get(animation))
     await put(part.slice(1), 'updated-result-face')
-    const attachments = await fingerprintAssets(root)
+    const attachments = await fingerprintAssets(root, { optimizeImage: async bytes => ({ bytes, extension: '.png' }) })
     expect(attachments.manifestUrl).not.toBe(changed.manifestUrl)
     expect(attachments.urls.get(animation)).not.toBe(changed.urls.get(animation))
     expect(attachments.urls.get(part)!.split('/')[2]).toBe(attachments.urls.get(animation)!.split('/')[2])
     expect(attachments.urls.get(right)).toBe(changed.urls.get(right))
+  } finally { await rm(root, { recursive: true, force: true }) }
+})
+
+it('hashes compressed final bytes, rewrites every state and relative part, and encodes duplicate source bytes once', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'lie-derived-'))
+  const put = async (path: string, bytes: string) => { await mkdir(dirname(join(root, path)), { recursive: true }); await writeFile(join(root, path), bytes) }
+  try {
+    await put('brand/logo.svg', '<svg/>')
+    await put('appearances/guide/default.png', 'same-source')
+    await put('appearances/guide/accused-correctly.png', 'result-source')
+    await put('appearances/guide/animation/parts/body.png', 'same-source')
+    await put('appearances/guide/animation/package.json', JSON.stringify({ schemaVersion: 2, assets: { body: { src: 'parts/body.png', width: 1, height: 1 } } }))
+    const original = [{ id: 'guide', avatar: '/appearances/guide/default.png', portrait: '/appearances/guide/default.png', portraits: { accusedCorrectly: '/appearances/guide/accused-correctly.png' }, animation: '/appearances/guide/animation/package.json' }]
+    await put('appearances/manifest.json', JSON.stringify(original))
+    let encoded = 0
+    const optimizeImage = async (bytes: Buffer): Promise<{ bytes: Buffer; extension: '.webp' }> => { encoded++; return { bytes: Buffer.from(`q90:${bytes}`), extension: '.webp' } }
+    const plan = await fingerprintAssets(root, { optimizeImage })
+    expect(encoded).toBe(2)
+    const manifestBytes = plan.outputs.get(plan.manifestUrl.slice(1))!
+    const manifest = JSON.parse(manifestBytes.toString())[0]
+    expect(manifest.portrait).toMatch(/\/default\.webp$/)
+    expect(manifest.portraits.accusedCorrectly).toMatch(/\/accused-correctly\.webp$/)
+    const image = plan.outputs.get(manifest.portrait.slice(1))!
+    const { createHash } = await import('node:crypto')
+    expect(manifest.portrait.split('/')[2]).toBe(createHash('sha256').update(image).digest('hex'))
+    expect(plan.manifestUrl.split('/')[2]).toBe(createHash('sha256').update(manifestBytes).digest('hex'))
+    const pkg = JSON.parse(plan.outputs.get(manifest.animation.slice(1))!.toString())
+    expect(pkg.assets.body.src).toBe('parts/body.webp')
+    const part = new URL(pkg.assets.body.src, `https://example.test${manifest.animation}`).pathname.slice(1)
+    expect(plan.outputs.get(part)).toEqual(image)
+    expect(await readFile(join(root, 'appearances/manifest.json'), 'utf8')).toBe(JSON.stringify(original))
+    const changedPolicy = await fingerprintAssets(root, { optimizeImage: async bytes => ({ bytes: Buffer.from(`changed:${bytes}`), extension: '.webp' }) })
+    expect(changedPolicy.manifestUrl).not.toBe(plan.manifestUrl)
+    expect(changedPolicy.urls.get('/appearances/guide/animation/package.json')).not.toBe(manifest.animation)
+    await put('appearances/guide/animation/package.json', JSON.stringify({ assets: { body: { src: '../../../brand/logo.svg' } } }))
+    await expect(fingerprintAssets(root, { optimizeImage })).rejects.toThrow('Unsafe animation')
   } finally { await rm(root, { recursive: true, force: true }) }
 })

@@ -28,6 +28,13 @@ jobs:
           node-version: 24.22.1
           cache: npm
       - run: npm ci
+      - name: Cache pinned image tools and verified derivatives
+        uses: actions/cache@v5
+        with:
+          path: tmp/image-build
+          key: ${{ runner.os }}-${{ runner.arch }}-lie-images-v1-${{ hashFiles('apps/web/build/image-tools.mjs', 'apps/web/build/image-optimize.mjs', 'apps/web/build/image-codec.mjs') }}-${{ hashFiles('design/character-presets/assets/**/*.png') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-lie-images-v1-${{ hashFiles('apps/web/build/image-tools.mjs', 'apps/web/build/image-optimize.mjs', 'apps/web/build/image-codec.mjs') }}-
       - run: npm run typecheck
       - name: Test with application and separate script coverage
         run: npm run coverage

@@ -1,0 +1,4246 @@
+{
+  "base": "56b2adad7c0ec02c37d9e614f8bb37d37145629f",
+  "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+  "python": "3.13.11",
+  "pillow": "12.0.0",
+  "cwebp": "1.6.0\nlibsharpyuv: 0.4.2",
+  "mode": "q90-full",
+  "inventory": [
+    {
+      "path": "blue-glasses/animation/parts/default-source.png",
+      "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+      "bytes": 864556,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "a4439f1a3de60595d9f07bb71e7d70c3b830edb6b6ae8928cd409e2376be9876"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 842606,
+          "sha256": "db8691cc84cf80086041404234aae7a1ae28ad8208af5a4053adb06d0a7aab54"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "1397ebfc0efba0cccbe6abf45b95edb4f93ab7b7003699cb46f5e1e57d510437",
+      "alphaSha256": "12f401fa11c045373e1f04654dff5ddc4d7fbc90b073b2ae8677b9917055582a",
+      "transparentPixels": 973083,
+      "partialAlphaPixels": 597295
+    },
+    {
+      "path": "blue-glasses/animation/parts/listening-source.png",
+      "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+      "bytes": 858019,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "1018a4cf0d44f1e187f6cd042c006280b6ff4048eaa91f96743b8f2b84a86ce5"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 834296,
+          "sha256": "696cc0ffa789ac1da5afde698c22cc57f5da3e102e4939e66c61888ecc21cf9e"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "15353e5ef2d479f2b49f45576f0345746a9f95a4c40ccf488616a4a71c043d2c",
+      "alphaSha256": "923a0ad729c225c7601f9dd129b947a3db09f8c7ec1e3c2f8d313babdc084de1",
+      "transparentPixels": 984638,
+      "partialAlphaPixels": 586132
+    },
+    {
+      "path": "blue-glasses/animation/parts/shared-torso.png",
+      "sha256": "2a4ad43d7ecd09f47a790757941d8dd77d803bdd8460d13d5ffc32f4cf8d6226",
+      "bytes": 585690,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "f5f5d5530bf8fa0632b480d18e362ffbc8739e7f0041f894db4f6345514439fb"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 561967,
+          "sha256": "1c463f9044240a29cceb214fb90c707f250a214bceac9214dbe770b68dc21d39"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "42afc07f62127e11c15743bd957c128fdcbfa7734c239e58ccebbc1fc9d781f2",
+      "alphaSha256": "400482740517b0e7257c1e0aa74044aa6c096ef02bd9c8d322b37b0055a3b3ae",
+      "transparentPixels": 1161688,
+      "partialAlphaPixels": 409957
+    },
+    {
+      "path": "blue-glasses/animation/parts/speaking-source.png",
+      "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+      "bytes": 854387,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "7d0597a2e4c5d779059d088c033c630de2bb8c880ca30a44343f0e2db3616e1e"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 832437,
+          "sha256": "ab5db043704b1148a9f41f1fea9f96a7dfd999e7694d69b6db5a675ee6f5c764"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "bda628783c2b1073d29742bfabbe19d9f80693595d222032e97adfc882aa96ed",
+      "alphaSha256": "01ab6828fd8ef6df0aced68bfd38140f6516300aa40f0dd5dfd206213b27f7de",
+      "transparentPixels": 1002479,
+      "partialAlphaPixels": 568459
+    },
+    {
+      "path": "blue-glasses/animation/parts/waiting-source.png",
+      "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+      "bytes": 762985,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "4a102547197fd4328fea5b3118b2e700fc244383d16a8597a7e205919779de31"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 739262,
+          "sha256": "0a3faf21a81318f4d93a86123ff9c421cbb2eab7475e576a8b9f8523336ffb94"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "f6f2808dd8ebc44c9079b106a811bfb30038bf191675cf1dc20e6656cd731051",
+      "alphaSha256": "26b6c2f002f2a2bbe846b5b46fc9265a84c968a493e9af23aa071cc90b24e000",
+      "transparentPixels": 1059555,
+      "partialAlphaPixels": 512210
+    },
+    {
+      "path": "blue-glasses/animation/parts/waiting-torso.png",
+      "sha256": "3527476e1c65d0463fd991d7fe5f2b69313ac534a45bd9ed5be7742439bd6ac0",
+      "bytes": 564686,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "3aea76574be21e40f34a1fda557d6eb3f7c29cb1ee734c2ee3bea4a766e0e9b9"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 542736,
+          "sha256": "1c49c7a8d0fc8b1824d1643d337f0d434fcaa4693be445f1b7f3f148e5b893ab"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "66b75852c148098a85624cf729bc3b2e503e723b90e3e2676ceecdb6c88eda41",
+      "alphaSha256": "49cbde6d04a4b6dc5a78cc689ab89646b5c6269ab2531bd4fa69cdc8ecae64df",
+      "transparentPixels": 1169085,
+      "partialAlphaPixels": 402559
+    },
+    {
+      "path": "blue-glasses/avatar.png",
+      "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+      "bytes": 864556,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "a4439f1a3de60595d9f07bb71e7d70c3b830edb6b6ae8928cd409e2376be9876"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 842606,
+          "sha256": "db8691cc84cf80086041404234aae7a1ae28ad8208af5a4053adb06d0a7aab54"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "1397ebfc0efba0cccbe6abf45b95edb4f93ab7b7003699cb46f5e1e57d510437",
+      "alphaSha256": "12f401fa11c045373e1f04654dff5ddc4d7fbc90b073b2ae8677b9917055582a",
+      "transparentPixels": 973083,
+      "partialAlphaPixels": 597295
+    },
+    {
+      "path": "blue-glasses/default.png",
+      "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+      "bytes": 864556,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "a4439f1a3de60595d9f07bb71e7d70c3b830edb6b6ae8928cd409e2376be9876"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 842606,
+          "sha256": "db8691cc84cf80086041404234aae7a1ae28ad8208af5a4053adb06d0a7aab54"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "1397ebfc0efba0cccbe6abf45b95edb4f93ab7b7003699cb46f5e1e57d510437",
+      "alphaSha256": "12f401fa11c045373e1f04654dff5ddc4d7fbc90b073b2ae8677b9917055582a",
+      "transparentPixels": 973083,
+      "partialAlphaPixels": 597295
+    },
+    {
+      "path": "blue-glasses/listening.png",
+      "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+      "bytes": 858019,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "1018a4cf0d44f1e187f6cd042c006280b6ff4048eaa91f96743b8f2b84a86ce5"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 834296,
+          "sha256": "696cc0ffa789ac1da5afde698c22cc57f5da3e102e4939e66c61888ecc21cf9e"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "15353e5ef2d479f2b49f45576f0345746a9f95a4c40ccf488616a4a71c043d2c",
+      "alphaSha256": "923a0ad729c225c7601f9dd129b947a3db09f8c7ec1e3c2f8d313babdc084de1",
+      "transparentPixels": 984638,
+      "partialAlphaPixels": 586132
+    },
+    {
+      "path": "blue-glasses/speaking.png",
+      "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+      "bytes": 854387,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "7d0597a2e4c5d779059d088c033c630de2bb8c880ca30a44343f0e2db3616e1e"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 832437,
+          "sha256": "ab5db043704b1148a9f41f1fea9f96a7dfd999e7694d69b6db5a675ee6f5c764"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "bda628783c2b1073d29742bfabbe19d9f80693595d222032e97adfc882aa96ed",
+      "alphaSha256": "01ab6828fd8ef6df0aced68bfd38140f6516300aa40f0dd5dfd206213b27f7de",
+      "transparentPixels": 1002479,
+      "partialAlphaPixels": 568459
+    },
+    {
+      "path": "blue-glasses/waiting.png",
+      "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+      "bytes": 762985,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "4a102547197fd4328fea5b3118b2e700fc244383d16a8597a7e205919779de31"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 739262,
+          "sha256": "0a3faf21a81318f4d93a86123ff9c421cbb2eab7475e576a8b9f8523336ffb94"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "f6f2808dd8ebc44c9079b106a811bfb30038bf191675cf1dc20e6656cd731051",
+      "alphaSha256": "26b6c2f002f2a2bbe846b5b46fc9265a84c968a493e9af23aa071cc90b24e000",
+      "transparentPixels": 1059555,
+      "partialAlphaPixels": 512210
+    },
+    {
+      "path": "coral-bob/animation/parts/body.png",
+      "sha256": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27",
+      "bytes": 586088,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "7b163a52b9650d1bea485384d64a79c2813fe27f4be0c1f5c7c2b5da716b8288"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 562365,
+          "sha256": "96c6fbcbc491a8875d43d401d8f99950a20bc5d623d967b70108234d40b055f4"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "ed674ecc354a11bb8feab5e2c42ebed6c683b9b7bcc81ab28fb62384655058fe",
+      "alphaSha256": "b7b60c66d7335c9978960cbbe507827b1498d651f2ff436cee995c020a4f791b",
+      "transparentPixels": 1137029,
+      "partialAlphaPixels": 434478
+    },
+    {
+      "path": "coral-bob/animation/parts/closed.png",
+      "sha256": "a8b4f55e14fe4e4397bb530869d4843db49ea8356378070af76a52c4028dc3c9",
+      "bytes": 134597,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "671396889d4700ee67f8a14f26e1e7fa4989b093560650b6240f4200259ae235"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "4969c6a36ba4f1b3b65fd57a65ff1324d7340746a362805c2dd8fc6c4c81bfbd"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 110874,
+          "sha256": "909e0fe7bae2e374469678ad8e4a2ca511e9ea63685ff23f11517675577fd2d8"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "21ea4c5967de92de17a991992693f3f65b954725178b6e9c1c4d5959cabe2a7f",
+      "alphaSha256": "aef397af096f79458acfa0ef20937c1a605c33a56157dd380dfb0e05017ff5d8",
+      "transparentPixels": 1512301,
+      "partialAlphaPixels": 60835
+    },
+    {
+      "path": "coral-bob/animation/parts/fore-left.png",
+      "sha256": "c48cc45a0bd343c753fd1328a6a1182640f79423f7fcc13cdc7e1df206c7112c",
+      "bytes": 351109,
+      "size": [
+        1123,
+        1401
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "201228cac7df449910af8f30bbee484616939d3e8507fb5398cb04552bcd6892"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "1b043a241eb79937f1a8f17296e55509771ad03620a4fbfdc479946c171aba7d"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 327386,
+          "sha256": "13c1c873e1e0e5205d17e6523b83469423043fa5b9daa7ec9f28202a474a4700"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b08b8b5314a07e2a9f0e3b5c8895f635b8f505658c6fd6ec71fdf9e2f59da20d",
+      "alphaSha256": "ec44e55de880a5029a3092b8ac31645540d4d9fb696136cb921732adf48fa154",
+      "transparentPixels": 1350186,
+      "partialAlphaPixels": 222192
+    },
+    {
+      "path": "coral-bob/animation/parts/fore-right.png",
+      "sha256": "be316b025b810d7e10494a905182930f1eefc9743139f8578bc063c226f7c812",
+      "bytes": 1006698,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "2ed8050ac67acba9dca69da1fc15ec5071abdc3b9bb692fa3fd53bd9936f5a9e"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "fa7129c57253cf7acf67e85f8cea7725144bd296aa567d0ceb3244639b07dfb3"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "e9817220e4bae4be590c2b39d50a2f7c6c39beabdaa3a0c762c109c0b3864b9b"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "778bd5e6345ff8e4f76c941f6e8a535b50260920e842dfe49fc500f60a10ec3d"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "fa7e0697d9a8d7b3f9814eef34e0f3d61ad163644a0f8256015781b7171f7391"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "5bec39c30a511d87dc30b5a660297621834809889b730c83635c22a56f80ba41"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "e69b1ff971cec8134bfdd76d1ba411905e5839a6962b04cd07af6a6abc4e1764"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "e50b8cc5ac5a58f154da973626f2fa9c61f235c2e4abf02017adc496a6d0fcfe"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "606856a948d96506a784580e97f2c39c71a77c5308901592435d91729423021b"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "33a2397cf0608652bdc5a48f913cb4d45778dff2d8cabcb2620edc9a0db8302c"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "1f49c852977dae9221be6ea43d66a7e877a340aea915ee1c35b40b898ef3b08e"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "a20d00efe984abbecbd25db3e19ea85835b4351cafe65f167d3c92c9cf908f7f"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "eeda717cdbc44e7bed3300f1ab6cd28698d9f257312062ac3197811f601c843b"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "8e9fbdde6e29848de5016a6f5a25a8de6da0ae9ac7b09dd7535fdf7dc943b801"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "b6b639a8cffcd9acf0a2b7cb76f1949744af1ade54c57106fa87090c78b5adc2"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "8dd2c178a420511dcee9f0978d80178d1e88f3e1abd34b5f791c2d64e55ff2f9"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65303,
+          "sha256": "2c410738331249cef73994f07d014a972328954f1cd44b682ece2f3e5e7e09ed"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "ec6fbd296fd66e0016e2a759161a50bc6a3f9d4a9bd9bbd6f159004ca8f52617",
+      "alphaSha256": "32792ecd95619119c26e0f729180a6475480cd217fce18dd4016473acd29f0a7",
+      "transparentPixels": 1287771,
+      "partialAlphaPixels": 285093
+    },
+    {
+      "path": "coral-bob/animation/parts/head.png",
+      "sha256": "fb92081b74134fd8397e0239f2a9603bb8b99f06ee82efc6ed1ce129e3ca925e",
+      "bytes": 715802,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "f8589f41dd0cb285c256f8418fda122ff7c5f66496e022d54d1963599293cccc"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 693852,
+          "sha256": "0a835caf1cded35b275eca5b361c233b355c385b4468c094bc2797ea32e795a0"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "cec9046e30da58659cc2b74fcea57ace45153a5c804c36d19a8ffc41f04f327d",
+      "alphaSha256": "d27d56b11f9126a955fa61c30a26c532b6ae8ea1ea8ca55f71fcf66d76697356",
+      "transparentPixels": 1036609,
+      "partialAlphaPixels": 534023
+    },
+    {
+      "path": "coral-bob/animation/parts/listening-arm.png",
+      "sha256": "93602222407a2f4c3db2e73e2e445abc819e2e2da7b6c1260e57d41e11d00e20",
+      "bytes": 306325,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "a7af8a28160217957d235949c4c4de58ad98633f520f3bf398675a410fa6dbcc"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 284375,
+          "sha256": "b894fd775385f4ebddc3f3c7386a360f47e45b9106aa14947b4d95bd5de503a9"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b2787c6afe9fd5ecb2e8f51a8f026f5f18b43d63d1916229f7eaf1d63c3c39f7",
+      "alphaSha256": "d41cfdf4db2cc4b3de90fcd75721f167a12e4e8a181f4a52df7b7430f24101f2",
+      "transparentPixels": 1405191,
+      "partialAlphaPixels": 166445
+    },
+    {
+      "path": "coral-bob/animation/parts/open.png",
+      "sha256": "05304f3ab8527b1a64a6c781b1271f10feebea07118cfd0659bff67744a4cc26",
+      "bytes": 139653,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "671396889d4700ee67f8a14f26e1e7fa4989b093560650b6240f4200259ae235"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "5c27a417714999fdee403312a80c4e1f991055f481f5cbcb751a2a908cddd99f"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 115930,
+          "sha256": "a411613f80e76390629c47681f58f905a93c5b5aec8874d14051750f45b316db"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "902b4a1f5dd738ec60ee98325c6c4505d9476cf9c67424835e63215c4d405831",
+      "alphaSha256": "eecddf41395c9ab377449d5bdd207b2348ca1473e822fa32ff73a4b00545892b",
+      "transparentPixels": 1513637,
+      "partialAlphaPixels": 59521
+    },
+    {
+      "path": "coral-bob/animation/parts/speak-fore.png",
+      "sha256": "5441a0ab98ef5ac282b6ce3e080632399128a94abda3d34100843f5dcb152ed4",
+      "bytes": 924008,
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "cd40f07399cb9ca14dbe9edba9616687b4495bfadd417bd28d164c353bccea08"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "92af85186f4986690a952a44ac2deccdc07f738e4748583d7eb02bdd557600ca"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "0f685f8fd00abe5b6778019d8a59ae3bed9eba21adb94ca5239739cdb738ce2f"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "92296fccf3b08f5be849adc2ff93f21dbd85c85909cc1c5254fbcaae0be20473"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "f0ba38295d7c009709f86d58305fd670773dd770113fe1f4a3b31cb6c5963030"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "daf71055b6580c6525154616ff7fa19b9e3de531d2a506a9c4854092ba958cf4"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "178ee97ffe272fb202ec689b69d068fe6e4c558620784a6e0b9afd1d8c1372fa"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "88a161dc89a05e56ed951491ef72fa341d94b9ad0ab6a83686bbe25672232369"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "f30aa6463f503e5dcc7388878814359faceb9b50a5702bdac8183a00481b0bb5"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "062954391c56ef2855b2f5a39b879f92bb510c375d087b77d33a184830543c8a"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "56d45ce6ad18c15a7b7ec494249fbc3fea267b6d9fd04217a4f6ff69eb7d3233"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "4360262cd69a7000e8abefb82319f277b15749db0c66a6c0526e20ce0c422581"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "12a757e6e7568838632e825b5c92ddac9f585603cd732bd2260ce2171ba84081"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "f13d67f464d3d2e27a43571488860e5c9804991d5ca08fe98efaf3b62a67d78b"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 65536,
+          "sha256": "6e8d9d6d0b7aa847149d157f98b1dc531b37a0266812fcae2eb40e7292669769"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 49934,
+          "sha256": "dc9b67eb9caa0d592f6a017c0af6667973c6cca3c9ba75e5df40ed830023c2cd"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b4b66fcd68f82efaf22a62cda780aba46c3c045f230de0f3d1fde3cc4d41ced2",
+      "alphaSha256": "890845c4b519b3d05a83e7e5e332099474d93dabefe0127226ea1796d2ba87d5",
+      "transparentPixels": 1301765,
+      "partialAlphaPixels": 271099
+    },
+    {
+      "path": "coral-bob/animation/parts/upper-left.png",
+      "sha256": "9efca1877d071c44702416992f91dc0df39bf28aaac92aa7126e878acb516c85",
+      "bytes": 500989,
+      "size": [
+        1104,
+        1425
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "8efb5b136e55ac6e924d5fe27ba87d9f111bd1f8080971d4c316b861288658b0"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "436e83966844aa5a73fa363032c47351283cf4718fc3983cf980b4add6e38f15"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 479039,
+          "sha256": "05aed35f30152eccbc77ea54421db4d29bd3ee5cd4f68e45ad707c917d88bb3e"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b26bac050c91d06646942d9070a802d83bfe95f11753d638ff6e086c2bd36e73",
+      "alphaSha256": "d622f94e8269161f4f8475eef6c28ecfb0bd4b15210b7548ed40e11cbae9402f",
+      "transparentPixels": 1185112,
+      "partialAlphaPixels": 387763
+    },
+    {
+      "path": "coral-bob/animation/parts/upper-right.png",
+      "sha256": "b2f3eba89e09dff9f8c5cf4fcd2256482b962a2fd67ade413b4be6e6147ceede",
+      "bytes": 430982,
+      "size": [
+        1246,
+        1263
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27776555ab7587aa9402550c7f8e99b6b341c29b3466c625631bb81260e97293"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "fbb4404a8b2419c46bb376386f14e46d54702b22756f5ba219f31f3203988406"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 407259,
+          "sha256": "6daa01b3867d3e1ede9dd91b1cb2a6ed88c6ac733ccaa3bd60eda097a8f59599"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "0d5af405bbddd37a40ad9a0ce520a77230e886dbc6c811446da85e4e5a0da51c",
+      "alphaSha256": "e909831dd85163753c890ddbd5e3cedd8057e42ba5fd4c7f1a6cf106d04da698",
+      "transparentPixels": 1273593,
+      "partialAlphaPixels": 299207
+    },
+    {
+      "path": "coral-bob/animation/parts/waiting-arms.png",
+      "sha256": "2c8de0fc32d63d4c1ad8cf912119629ee6e62c15eb8e1adf90e922e7545246cc",
+      "bytes": 497090,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "bf2eac4a03dc5d861ec68cd447a290aa83b0411d24712904ba66c344cf3486c2"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 475140,
+          "sha256": "d891bcbe7fe931e8943d820502f7c9ce565d16afdb934a8a3988251ced2aaf6e"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "969f3e5b673c58c7712ca75123de81e7b7eedeac48c9b843bee9a59258826c52",
+      "alphaSha256": "ba5e0395b7e37746a7bb5613ebf39dc0097051863457d96c03236d2aac881611",
+      "transparentPixels": 1263021,
+      "partialAlphaPixels": 307856
+    },
+    {
+      "path": "coral-bob/avatar.png",
+      "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+      "bytes": 873526,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "2653168deeee3922eeff583e6c4156dcbf1a1666723516d20188cfb97397609a"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 851576,
+          "sha256": "adfc7a0b9a9553032d540e6457cc936454eebdbf749e829cd134a95894656d8c"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "fbe92afc88b2e9d7fec8218db20c91c826235ba35fafe673435b5bc827f05f37",
+      "alphaSha256": "312bb6e451fbcf289f3ef87c7e907e575fe61243a63b83ecdeb6a7987972288c",
+      "transparentPixels": 977562,
+      "partialAlphaPixels": 593022
+    },
+    {
+      "path": "coral-bob/default.png",
+      "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+      "bytes": 873526,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "2653168deeee3922eeff583e6c4156dcbf1a1666723516d20188cfb97397609a"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 851576,
+          "sha256": "adfc7a0b9a9553032d540e6457cc936454eebdbf749e829cd134a95894656d8c"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "fbe92afc88b2e9d7fec8218db20c91c826235ba35fafe673435b5bc827f05f37",
+      "alphaSha256": "312bb6e451fbcf289f3ef87c7e907e575fe61243a63b83ecdeb6a7987972288c",
+      "transparentPixels": 977562,
+      "partialAlphaPixels": 593022
+    },
+    {
+      "path": "coral-bob/listening.png",
+      "sha256": "e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea",
+      "bytes": 906498,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "bf98f11c343039327830d8437320b01f5493f5408c022eabeca45078973f38fa"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 884548,
+          "sha256": "03c52c484532f70d62717dc40fcea4cf42c83a9e612582d94cf6e83a374f9877"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "845348580d33a6c01864f9553bae4f09d57413ec0c63385b88116c43467cb256",
+      "alphaSha256": "2c8e2ec6adad83ce21d84117be8b1a5d8b885c289bee0cec649d4edf5480d608",
+      "transparentPixels": 968077,
+      "partialAlphaPixels": 602444
+    },
+    {
+      "path": "coral-bob/speaking.png",
+      "sha256": "ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d",
+      "bytes": 894325,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "9eb3ab331b00d209dd198bdf2a86662936dd1e7f4d185d2a7501d862c6e11554"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 870602,
+          "sha256": "859aa0f1cfec523c4930a85f580fb58e902ffd9b3fd04e7abdf7eac7810d3ac9"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "ebb9adb341c1ff222b1fdacafa9506fc0fd1dfdcc44a8c17b0e48459ea45e83d",
+      "alphaSha256": "ccd9e20cbf4fb69bc37fea7f7ac3ab2ccb1975073bd7393edd6228501481e1b4",
+      "transparentPixels": 972272,
+      "partialAlphaPixels": 598235
+    },
+    {
+      "path": "coral-bob/waiting.png",
+      "sha256": "2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e",
+      "bytes": 778821,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "b3e77da51293f4337333c5b455c05d052a2825ab1f976c05ed2f2554f8ae6a02"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 756871,
+          "sha256": "b6aa5ac6f54e81e31b5958d01b392ed406833b7529ec853ca7916d5b95e49784"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "6aa5259e3e9698ee66a0e39a905eff07cdd33b1514b289c3518df175a2759be7",
+      "alphaSha256": "d7b91f0c8a14422028c742ab7e19e600317be914aec32021af44b71d8134b756",
+      "transparentPixels": 1042125,
+      "partialAlphaPixels": 529300
+    },
+    {
+      "path": "mint-puffs/animation/parts/default-source.png",
+      "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+      "bytes": 924784,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "db517dafec5e0ee402271504b5c88def0296acc82e39e215da8b3c9681689ce7"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 902834,
+          "sha256": "642c55e4b7d70dbaf997474f6ffa9f2959b63510cdbfda8ac3e7f67715c37b1a"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "cad3795bb9df0112278f7b50a9bc1c41ad3702ad361f996dca28a14fe19bcbe9",
+      "alphaSha256": "5442fc0128ddca7eccc09b8597a59808b6ae33ac10b3c1d375f709bc2b23e587",
+      "transparentPixels": 937356,
+      "partialAlphaPixels": 633489
+    },
+    {
+      "path": "mint-puffs/animation/parts/listening-source.png",
+      "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+      "bytes": 892808,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "0406dc74578de4dedd78abb1eef884fb3210e6d206e90f1cf26caf9c2b425c9f"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 870858,
+          "sha256": "d98ca6e2fa2f5e366f88ba7e946d0d47d7d3f4d4d7fdf923d497bf4ccaf0b780"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "84b89b58a6bccef064ba0f3adb6e5ff0939ca5475695cdf1a47034fb6c7e3540",
+      "alphaSha256": "5507dc80143adfd4dd0882b6a4b53e26a57423d9413d1829971bf9069a2fd28f",
+      "transparentPixels": 965901,
+      "partialAlphaPixels": 604580
+    },
+    {
+      "path": "mint-puffs/animation/parts/speaking-source.png",
+      "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+      "bytes": 924713,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "65aa61de713f71d774456fdc4a424aeb97f01b64441eb932cb2c95c721e6ab5e"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 902763,
+          "sha256": "ec99c40ab264f1e4139fe937f713bc84528193e684051f5b468939cdfddee2a6"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "45e06fd972e5fd063e5da40d02e9c6e6461bed555fde08554f39b2cb1b14fa29",
+      "alphaSha256": "a1dd73e56eb9c41f915bffc45c940b002cb9eceb3ea350622e17af0253a97ae8",
+      "transparentPixels": 966747,
+      "partialAlphaPixels": 603657
+    },
+    {
+      "path": "mint-puffs/animation/parts/waiting-source.png",
+      "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+      "bytes": 815457,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "80177c224bef70743f84dd448bcdef56aed8882f80335be87d0c90830e5d493c"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 791734,
+          "sha256": "a83b25f6b66415f2016d400a3ae9f4035e55f4ccea95acf023a8837c8ec42e4e"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "e498f127ee492a2affe27f64e44ca3f71149c2b7e8e10515dc3da672e9f91f5c",
+      "alphaSha256": "553a39d6aab39104704986cf44812f70fd0874e7eec66bda6836a87d83284d7c",
+      "transparentPixels": 1032098,
+      "partialAlphaPixels": 539064
+    },
+    {
+      "path": "mint-puffs/default.png",
+      "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+      "bytes": 924784,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "db517dafec5e0ee402271504b5c88def0296acc82e39e215da8b3c9681689ce7"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 902834,
+          "sha256": "642c55e4b7d70dbaf997474f6ffa9f2959b63510cdbfda8ac3e7f67715c37b1a"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "cad3795bb9df0112278f7b50a9bc1c41ad3702ad361f996dca28a14fe19bcbe9",
+      "alphaSha256": "5442fc0128ddca7eccc09b8597a59808b6ae33ac10b3c1d375f709bc2b23e587",
+      "transparentPixels": 937356,
+      "partialAlphaPixels": 633489
+    },
+    {
+      "path": "mint-puffs/listening.png",
+      "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+      "bytes": 892808,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "0406dc74578de4dedd78abb1eef884fb3210e6d206e90f1cf26caf9c2b425c9f"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 870858,
+          "sha256": "d98ca6e2fa2f5e366f88ba7e946d0d47d7d3f4d4d7fdf923d497bf4ccaf0b780"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "84b89b58a6bccef064ba0f3adb6e5ff0939ca5475695cdf1a47034fb6c7e3540",
+      "alphaSha256": "5507dc80143adfd4dd0882b6a4b53e26a57423d9413d1829971bf9069a2fd28f",
+      "transparentPixels": 965901,
+      "partialAlphaPixels": 604580
+    },
+    {
+      "path": "mint-puffs/speaking.png",
+      "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+      "bytes": 924713,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "65aa61de713f71d774456fdc4a424aeb97f01b64441eb932cb2c95c721e6ab5e"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 902763,
+          "sha256": "ec99c40ab264f1e4139fe937f713bc84528193e684051f5b468939cdfddee2a6"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "45e06fd972e5fd063e5da40d02e9c6e6461bed555fde08554f39b2cb1b14fa29",
+      "alphaSha256": "a1dd73e56eb9c41f915bffc45c940b002cb9eceb3ea350622e17af0253a97ae8",
+      "transparentPixels": 966747,
+      "partialAlphaPixels": 603657
+    },
+    {
+      "path": "mint-puffs/waiting.png",
+      "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+      "bytes": 815457,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "80177c224bef70743f84dd448bcdef56aed8882f80335be87d0c90830e5d493c"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 791734,
+          "sha256": "a83b25f6b66415f2016d400a3ae9f4035e55f4ccea95acf023a8837c8ec42e4e"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "e498f127ee492a2affe27f64e44ca3f71149c2b7e8e10515dc3da672e9f91f5c",
+      "alphaSha256": "553a39d6aab39104704986cf44812f70fd0874e7eec66bda6836a87d83284d7c",
+      "transparentPixels": 1032098,
+      "partialAlphaPixels": 539064
+    },
+    {
+      "path": "ochre-freckles/animation/parts/default-source.png",
+      "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+      "bytes": 945784,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "9f62f3fa455d5bd5b63244aa018d3331a401a705c9814888939fae2f11e7d48a"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 923834,
+          "sha256": "635879d175743ec69d90b12eab00a690df660957e56fe2660a4410cb3998dc81"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "63376205529340f186e1917811495ad7b314bd4482069895005f1f48b82f75c6",
+      "alphaSha256": "42fa5b7b64bcac982fee04ea1cb7948baf370ce79ddb96d5c39471c1deb8bc82",
+      "transparentPixels": 962916,
+      "partialAlphaPixels": 607800
+    },
+    {
+      "path": "ochre-freckles/animation/parts/listening-source.png",
+      "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+      "bytes": 975320,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "68f65bd34f82d2c4882bac03729a0b78567f12978b1d1849fbf047f4743c1c5e"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 951597,
+          "sha256": "808dc9436dc225152f175772dd36e6e56830a7ead37e6bdae28dfb7d66c34d45"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "fa1adbcdc527c1c27a093e7f7205ba462939d750f1c1a801f34e06b844dcd538",
+      "alphaSha256": "aaa0b9c5e29b30fe597634b8e43be1da2087b2ce6127f1f18492a28f0dbf2856",
+      "transparentPixels": 958211,
+      "partialAlphaPixels": 613254
+    },
+    {
+      "path": "ochre-freckles/animation/parts/speaking-source.png",
+      "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+      "bytes": 922181,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "9c18b8c5d1728e12917a5c55792ef5f8901c3ed3b9d805a71719657f29869dab"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 898458,
+          "sha256": "6422dee737c144cc49f6c518b78f688200a60ae4cfc15e6496b03b7a91bdc528"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "3d7b4224bf4d995a7ba37f2886658a3e3aa747b95dce9428b4e6811fab4a04b8",
+      "alphaSha256": "e381d10bad948b5b240cd856b4c99cb6e4ae86fbcd5f2f5fa86cb61b78ad579b",
+      "transparentPixels": 992781,
+      "partialAlphaPixels": 578649
+    },
+    {
+      "path": "ochre-freckles/animation/parts/waiting-source.png",
+      "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+      "bytes": 813873,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "94404f62696631db99b898c4e89eb1a4e9b113c8a1b9f17d670b94f3c4b7f34f"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 790150,
+          "sha256": "1a50752b85042a0ac1e404113bb8294c829c9020944eeff3c2be379b5a28e44b"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "6b7a6a39f955784c17eacbd360e6f5365fde93df6c8ca7a3396bf0d41a936bbc",
+      "alphaSha256": "78e5b222295dc7ab90db3916921e747494f87c78faa4d2ae6ca770d6e8131012",
+      "transparentPixels": 1068711,
+      "partialAlphaPixels": 502956
+    },
+    {
+      "path": "ochre-freckles/default.png",
+      "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+      "bytes": 945784,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "9f62f3fa455d5bd5b63244aa018d3331a401a705c9814888939fae2f11e7d48a"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 923834,
+          "sha256": "635879d175743ec69d90b12eab00a690df660957e56fe2660a4410cb3998dc81"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "63376205529340f186e1917811495ad7b314bd4482069895005f1f48b82f75c6",
+      "alphaSha256": "42fa5b7b64bcac982fee04ea1cb7948baf370ce79ddb96d5c39471c1deb8bc82",
+      "transparentPixels": 962916,
+      "partialAlphaPixels": 607800
+    },
+    {
+      "path": "ochre-freckles/listening.png",
+      "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+      "bytes": 975320,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "68f65bd34f82d2c4882bac03729a0b78567f12978b1d1849fbf047f4743c1c5e"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 951597,
+          "sha256": "808dc9436dc225152f175772dd36e6e56830a7ead37e6bdae28dfb7d66c34d45"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "fa1adbcdc527c1c27a093e7f7205ba462939d750f1c1a801f34e06b844dcd538",
+      "alphaSha256": "aaa0b9c5e29b30fe597634b8e43be1da2087b2ce6127f1f18492a28f0dbf2856",
+      "transparentPixels": 958211,
+      "partialAlphaPixels": 613254
+    },
+    {
+      "path": "ochre-freckles/speaking.png",
+      "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+      "bytes": 922181,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "9c18b8c5d1728e12917a5c55792ef5f8901c3ed3b9d805a71719657f29869dab"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 898458,
+          "sha256": "6422dee737c144cc49f6c518b78f688200a60ae4cfc15e6496b03b7a91bdc528"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "3d7b4224bf4d995a7ba37f2886658a3e3aa747b95dce9428b4e6811fab4a04b8",
+      "alphaSha256": "e381d10bad948b5b240cd856b4c99cb6e4ae86fbcd5f2f5fa86cb61b78ad579b",
+      "transparentPixels": 992781,
+      "partialAlphaPixels": 578649
+    },
+    {
+      "path": "ochre-freckles/waiting.png",
+      "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+      "bytes": 813873,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "94404f62696631db99b898c4e89eb1a4e9b113c8a1b9f17d670b94f3c4b7f34f"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 790150,
+          "sha256": "1a50752b85042a0ac1e404113bb8294c829c9020944eeff3c2be379b5a28e44b"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "6b7a6a39f955784c17eacbd360e6f5365fde93df6c8ca7a3396bf0d41a936bbc",
+      "alphaSha256": "78e5b222295dc7ab90db3916921e747494f87c78faa4d2ae6ca770d6e8131012",
+      "transparentPixels": 1068711,
+      "partialAlphaPixels": 502956
+    },
+    {
+      "path": "plum-crop/animation/parts/default-source.png",
+      "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+      "bytes": 938610,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "9182581d48b931522e333efb24f6dec111e53420cb0d2041b6b84515693dd9ac"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 916660,
+          "sha256": "d8815957dc361e337c612957c578fdb865b36c99a9965eb48866db9e6b536b51"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "02b0989bfe8263fb4eda8d3a88068e732614dd27d5b93bdea23d7f1cbcfe535f",
+      "alphaSha256": "41cf1cc4d8d1717447ce09a8f7725beb4ef872abcca530412e2798267bdadbb7",
+      "transparentPixels": 932939,
+      "partialAlphaPixels": 637585
+    },
+    {
+      "path": "plum-crop/animation/parts/head.png",
+      "sha256": "2d08b2b17687fad6f9fb54bb2a76be78f86ede46bd6a189362e8806ee1df98e0",
+      "bytes": 571971,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "9a7afb47c374654552ce58220cbbfa1bfe8161e2cd602f47738f28b0af901093"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 550021,
+          "sha256": "43fe1d9f21e2b010e104322ea017d82ef60709cc9a98738a330f96aa17aae791"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b848fd4bb281f7708d37b7ee3f467f82a1a45a5c860d3cb41b815b829f1aae65",
+      "alphaSha256": "079c77c0d3027fa9c8bb6e906741e1195b1869284f148d9574f034820bc25cd6",
+      "transparentPixels": 1183420,
+      "partialAlphaPixels": 387746
+    },
+    {
+      "path": "plum-crop/animation/parts/listening-source.png",
+      "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+      "bytes": 912539,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "1ad982dc6e719517b1f03bf20700b1581bc87840c9c8fc452a6b818b8e7a7461"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 890589,
+          "sha256": "fa912cdb48dee8b58fe56199d2253bc94dec20c2341448626827b0e8f17203a4"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "25680c00abb5f32af009a2781c197d9230371e5d29f56ae0ca09b99ef0277a2b",
+      "alphaSha256": "5a39a9ba6311cd4dafdc91f4174071a0ff8bc087b282aa0e144a9b572a9e1e94",
+      "transparentPixels": 954607,
+      "partialAlphaPixels": 616164
+    },
+    {
+      "path": "plum-crop/animation/parts/speaking-source.png",
+      "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+      "bytes": 911753,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "dc7591250f352d2558c961473dc10662ceaebe293a739068304d5b0a8de4acfb"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 888030,
+          "sha256": "9b4888784abeff4a8b4f9d0bcf36ae743b4ae6b96ef67a94d5add063653ee0c4"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "aa13859ce98523578e621bc901c7ce1620081a649020a5e2d691a21c8b593424",
+      "alphaSha256": "95b6a5b3836cb1e0885094b37f845fdafd2ad3c1901b341fcfb929b3ab6c43d8",
+      "transparentPixels": 963520,
+      "partialAlphaPixels": 607072
+    },
+    {
+      "path": "plum-crop/animation/parts/waiting-source.png",
+      "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+      "bytes": 794910,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "2ebdf7da260e337feb7a0c294846d1e6da128135fbd1e4fe2b3b9dcc58135a62"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 771187,
+          "sha256": "a44a14d124d1fbd5bbcd9a8a1b0caaa01ed000dd2738a0041b7986eeeabf066b"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "0e922a68b4f0cf3fac77439e859fa013ee25020a039c70863e935e5978ce6741",
+      "alphaSha256": "786205439f31508a8af9245add8ae2bbf70822d1b994b71503802872501a51b9",
+      "transparentPixels": 1032051,
+      "partialAlphaPixels": 539415
+    },
+    {
+      "path": "plum-crop/default.png",
+      "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+      "bytes": 938610,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "9182581d48b931522e333efb24f6dec111e53420cb0d2041b6b84515693dd9ac"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 916660,
+          "sha256": "d8815957dc361e337c612957c578fdb865b36c99a9965eb48866db9e6b536b51"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "02b0989bfe8263fb4eda8d3a88068e732614dd27d5b93bdea23d7f1cbcfe535f",
+      "alphaSha256": "41cf1cc4d8d1717447ce09a8f7725beb4ef872abcca530412e2798267bdadbb7",
+      "transparentPixels": 932939,
+      "partialAlphaPixels": 637585
+    },
+    {
+      "path": "plum-crop/listening.png",
+      "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+      "bytes": 912539,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "1ad982dc6e719517b1f03bf20700b1581bc87840c9c8fc452a6b818b8e7a7461"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 890589,
+          "sha256": "fa912cdb48dee8b58fe56199d2253bc94dec20c2341448626827b0e8f17203a4"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "25680c00abb5f32af009a2781c197d9230371e5d29f56ae0ca09b99ef0277a2b",
+      "alphaSha256": "5a39a9ba6311cd4dafdc91f4174071a0ff8bc087b282aa0e144a9b572a9e1e94",
+      "transparentPixels": 954607,
+      "partialAlphaPixels": 616164
+    },
+    {
+      "path": "plum-crop/speaking.png",
+      "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+      "bytes": 911753,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "dc7591250f352d2558c961473dc10662ceaebe293a739068304d5b0a8de4acfb"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 888030,
+          "sha256": "9b4888784abeff4a8b4f9d0bcf36ae743b4ae6b96ef67a94d5add063653ee0c4"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "aa13859ce98523578e621bc901c7ce1620081a649020a5e2d691a21c8b593424",
+      "alphaSha256": "95b6a5b3836cb1e0885094b37f845fdafd2ad3c1901b341fcfb929b3ab6c43d8",
+      "transparentPixels": 963520,
+      "partialAlphaPixels": 607072
+    },
+    {
+      "path": "plum-crop/waiting.png",
+      "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+      "bytes": 794910,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "2ebdf7da260e337feb7a0c294846d1e6da128135fbd1e4fe2b3b9dcc58135a62"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 771187,
+          "sha256": "a44a14d124d1fbd5bbcd9a8a1b0caaa01ed000dd2738a0041b7986eeeabf066b"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "0e922a68b4f0cf3fac77439e859fa013ee25020a039c70863e935e5978ce6741",
+      "alphaSha256": "786205439f31508a8af9245add8ae2bbf70822d1b994b71503802872501a51b9",
+      "transparentPixels": 1032051,
+      "partialAlphaPixels": 539415
+    },
+    {
+      "path": "salt-pepper-beard/animation/parts/default-source.png",
+      "sha256": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+      "bytes": 967539,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "8fe567aedd4b3e99674c76d51bab5c8dc2729e3ba66bff99deece2914ed594d3"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 943816,
+          "sha256": "02a96c7eec6e48798bc2860c2f3350e307951c0aa69c74c0344c52d2bb9ed6fe"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "e8ec6803206a427555d21f39c1712a46c3b58c2738c54e708c1b65e1cfb852a2",
+      "alphaSha256": "cc4d83b6eec968799a911006ea1cbdd35666e37734c886dc5dd9e68aff79deae",
+      "transparentPixels": 912589,
+      "partialAlphaPixels": 658356
+    },
+    {
+      "path": "salt-pepper-beard/animation/parts/listening-source.png",
+      "sha256": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+      "bytes": 969724,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "66787a74ad4a52779f4c50a674d6499a86b26628a02fb06ae02d64e8d77f9952"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 947774,
+          "sha256": "2cd919943436a3454652f0a12dc3f0246cc4161189aa500dc9388c54e3cb8337"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "2939576b41674aaf04221d520d0f3ad7b8ff36de5c79ea5723040eceed245617",
+      "alphaSha256": "89a3d8b3af39955593a1d3e663c598270f06f9a526dc55811fe67a10e64406bc",
+      "transparentPixels": 916254,
+      "partialAlphaPixels": 655313
+    },
+    {
+      "path": "salt-pepper-beard/animation/parts/lower-fill.png",
+      "sha256": "5c345cf374a9cd43fdb440879cc0b5fb63cca4b639079814015b660eec34e4a7",
+      "bytes": 558838,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "a71a6b0a6637aca4cd8a681460d6bdecee8a6ba4dc044a99bb415ec5eade75b4"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 536888,
+          "sha256": "e10b9f9b957b231309c90cf94e90d4e3661644bcdcddb0a2ed7e9059fc9bb423"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b55bbeb07deb7c527b77ff342b6a210e254c3d2b93b31aad5c3026da0d7fe248",
+      "alphaSha256": "fb50466830aa8c0ddc34c4b3e4965cf7a98cf50f154e5afe445f0234c102da3b",
+      "transparentPixels": 1156023,
+      "partialAlphaPixels": 415967
+    },
+    {
+      "path": "salt-pepper-beard/animation/parts/speaking-source.png",
+      "sha256": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+      "bytes": 923644,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "365c070617e89e06a35cf0726ac2aaa2b6a26e19d0d6a7e2166dd5aad43857ca"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 901694,
+          "sha256": "522e9c2e38b7b9bef809b02b76e627bbfb57ca821b02bc346d26c9afe87898ab"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "87c9b4ae4bbf9a5e559de1ae58f2b1543591b0aacc229f91f805a24d20d7ed13",
+      "alphaSha256": "f5a8ab4df10277b2a469b61b99133b3b3e13cfee71cd0bc84f33553d8b501a97",
+      "transparentPixels": 953519,
+      "partialAlphaPixels": 617895
+    },
+    {
+      "path": "salt-pepper-beard/animation/parts/waiting-source.png",
+      "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+      "bytes": 816048,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "84315d00f9865de21c35cf8f530dcfd2e59c112cca980878ccde036164a78532"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 792325,
+          "sha256": "325c83cea7633e09160e0766b2969d43ff672a4c25ff9eea299443348d8531a0"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "0cad3ebac67c6d7bcdeb7cf21bca0237ebe50f2e095fdabaa143951331d2d4c1",
+      "alphaSha256": "ccf7fe8beb2b920fa2948d3b4688cc42881a0b4dff03ba6d181c66f86b404611",
+      "transparentPixels": 1026363,
+      "partialAlphaPixels": 545066
+    },
+    {
+      "path": "salt-pepper-beard/default.png",
+      "sha256": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+      "bytes": 967539,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "8fe567aedd4b3e99674c76d51bab5c8dc2729e3ba66bff99deece2914ed594d3"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 943816,
+          "sha256": "02a96c7eec6e48798bc2860c2f3350e307951c0aa69c74c0344c52d2bb9ed6fe"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "e8ec6803206a427555d21f39c1712a46c3b58c2738c54e708c1b65e1cfb852a2",
+      "alphaSha256": "cc4d83b6eec968799a911006ea1cbdd35666e37734c886dc5dd9e68aff79deae",
+      "transparentPixels": 912589,
+      "partialAlphaPixels": 658356
+    },
+    {
+      "path": "salt-pepper-beard/listening.png",
+      "sha256": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+      "bytes": 969724,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "66787a74ad4a52779f4c50a674d6499a86b26628a02fb06ae02d64e8d77f9952"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 947774,
+          "sha256": "2cd919943436a3454652f0a12dc3f0246cc4161189aa500dc9388c54e3cb8337"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "2939576b41674aaf04221d520d0f3ad7b8ff36de5c79ea5723040eceed245617",
+      "alphaSha256": "89a3d8b3af39955593a1d3e663c598270f06f9a526dc55811fe67a10e64406bc",
+      "transparentPixels": 916254,
+      "partialAlphaPixels": 655313
+    },
+    {
+      "path": "salt-pepper-beard/speaking.png",
+      "sha256": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+      "bytes": 923644,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "365c070617e89e06a35cf0726ac2aaa2b6a26e19d0d6a7e2166dd5aad43857ca"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 901694,
+          "sha256": "522e9c2e38b7b9bef809b02b76e627bbfb57ca821b02bc346d26c9afe87898ab"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "87c9b4ae4bbf9a5e559de1ae58f2b1543591b0aacc229f91f805a24d20d7ed13",
+      "alphaSha256": "f5a8ab4df10277b2a469b61b99133b3b3e13cfee71cd0bc84f33553d8b501a97",
+      "transparentPixels": 953519,
+      "partialAlphaPixels": 617895
+    },
+    {
+      "path": "salt-pepper-beard/waiting.png",
+      "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+      "bytes": 816048,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "84315d00f9865de21c35cf8f530dcfd2e59c112cca980878ccde036164a78532"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 792325,
+          "sha256": "325c83cea7633e09160e0766b2969d43ff672a4c25ff9eea299443348d8531a0"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "0cad3ebac67c6d7bcdeb7cf21bca0237ebe50f2e095fdabaa143951331d2d4c1",
+      "alphaSha256": "ccf7fe8beb2b920fa2948d3b4688cc42881a0b4dff03ba6d181c66f86b404611",
+      "transparentPixels": 1026363,
+      "partialAlphaPixels": 545066
+    },
+    {
+      "path": "silver-bun/animation/parts/default-source.png",
+      "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+      "bytes": 990099,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "56c6003149942f9cb7fe27074ce4946a3813f87b1bc0a7b7999ab3362a6414cc"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 966376,
+          "sha256": "bceaa7d0826326c74ced538a23f43202a4eda2540941424fd4341d7f3e193275"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "9037074a75de929062bd60fadadba04bc49b11906cfcae330af44a2961147b96",
+      "alphaSha256": "ccfa1f51cfedaf27d2375c92e883c34fc8f849188020f6bf8d3e463f6f076938",
+      "transparentPixels": 921964,
+      "partialAlphaPixels": 648676
+    },
+    {
+      "path": "silver-bun/animation/parts/head.png",
+      "sha256": "cf884ae64a094939821ff061f76c2e9084fafe4d54d9b57a1f8d2b50addc7914",
+      "bytes": 1011518,
+      "size": [
+        1362,
+        1155
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "d4dd4d534d4fe9ce50d05d1f68b0bb9ce99d5e73018a061355578bd8c022c80c"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "4f53fe29b30ed001ce7f3927f90a533a56a960a6ccd616471bad66d42c4909c2"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 989568,
+          "sha256": "ff15dfd9e9b96ea377a04f5cc04b126c321b1d19d0ccf64b026d274556d0fd55"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "2bb8dddb108bd11c19704ada14ac8f4152bccbd60dd5b6c518cd851f8c2b5007",
+      "alphaSha256": "9c3e6b8aeab0ac4f420909e371f37d4d2d37eb7b39f4da79a78f29587120a197",
+      "transparentPixels": 908655,
+      "partialAlphaPixels": 662412
+    },
+    {
+      "path": "silver-bun/animation/parts/listening-source.png",
+      "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+      "bytes": 952614,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "c136571dd10598c42e2ff2a5f8e06fbd793b9f5885cdaaced7c5a50da09c9d8d"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 930664,
+          "sha256": "c52040a88f7e706377055aaa71ef8710abd891d5d58ffb26d393142d2f939f0a"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "a072d01a3e5b99144e1b7f47c44940485460aa7b9983bdca0addc86a7112efeb",
+      "alphaSha256": "f9b442b0533199c73ddc8069ab818cf1fe3f36209ebeb4a4c46492848f7d76cf",
+      "transparentPixels": 949764,
+      "partialAlphaPixels": 621160
+    },
+    {
+      "path": "silver-bun/animation/parts/mouths.png",
+      "sha256": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",
+      "bytes": 277402,
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "5c7dc6a1c4b11c2547a74b90c6a99a83031d3dc4c5e4d377740c3ae80f90fecb"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "be2b0c57148700b027edbdb0d4fe93082fe67e548cbf1d00858b999ffc0d879b"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 253679,
+          "sha256": "aeaa85cd02c620bcd3617040be52412661d3fc2d3e7f95ec2a3e22413d829445"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "cfc28baffb2a90296a6bdb14c57e59ade256c162edbcb50e1c985886d6716eae",
+      "alphaSha256": "a826c304fede959c32618b25a0d351b192327e5fed824412d86f40ee6675e67e",
+      "transparentPixels": 1419021,
+      "partialAlphaPixels": 152603
+    },
+    {
+      "path": "silver-bun/animation/parts/speaking-source.png",
+      "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+      "bytes": 977501,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "d4475d987e4daa147a4ffa9981842dada0c556a656ad6d4dd7eaaa9eac9bb6f6"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 953778,
+          "sha256": "a94ad07a0c4082d4caa2aa7a7d0bb20558ace3888da9cb7f73a1d0de72cb7c09"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "347b53c3bfec07a156d94e70260e41b8ae38dd8154291dcecd7696173aa37842",
+      "alphaSha256": "f5e4d7765fc3a9ea2a56134755521fff2113e51eb390e3e1d9c88cc810749cee",
+      "transparentPixels": 936228,
+      "partialAlphaPixels": 634795
+    },
+    {
+      "path": "silver-bun/animation/parts/waiting-source.png",
+      "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+      "bytes": 903363,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "2b3358b2058a17dc106d6eb39bfb2b84d1e39b03712ebe0790bdad5e855bba75"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 879640,
+          "sha256": "207ee62f5b28a23dbf5708b04c8253419b48a4083f51814b42adad501a41cb8d"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "2b9433b369568bcb60822b656cc303f159d2024f5d90eab6a00d8bfb9b805906",
+      "alphaSha256": "db77b600ca35a54e1555e2865df0b56f627b0b52c5c5ce0887c5305b6052118b",
+      "transparentPixels": 999556,
+      "partialAlphaPixels": 571697
+    },
+    {
+      "path": "silver-bun/default.png",
+      "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+      "bytes": 990099,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "56c6003149942f9cb7fe27074ce4946a3813f87b1bc0a7b7999ab3362a6414cc"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 966376,
+          "sha256": "bceaa7d0826326c74ced538a23f43202a4eda2540941424fd4341d7f3e193275"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "9037074a75de929062bd60fadadba04bc49b11906cfcae330af44a2961147b96",
+      "alphaSha256": "ccfa1f51cfedaf27d2375c92e883c34fc8f849188020f6bf8d3e463f6f076938",
+      "transparentPixels": 921964,
+      "partialAlphaPixels": 648676
+    },
+    {
+      "path": "silver-bun/listening.png",
+      "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+      "bytes": 952614,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "c136571dd10598c42e2ff2a5f8e06fbd793b9f5885cdaaced7c5a50da09c9d8d"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 930664,
+          "sha256": "c52040a88f7e706377055aaa71ef8710abd891d5d58ffb26d393142d2f939f0a"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "a072d01a3e5b99144e1b7f47c44940485460aa7b9983bdca0addc86a7112efeb",
+      "alphaSha256": "f9b442b0533199c73ddc8069ab818cf1fe3f36209ebeb4a4c46492848f7d76cf",
+      "transparentPixels": 949764,
+      "partialAlphaPixels": 621160
+    },
+    {
+      "path": "silver-bun/speaking.png",
+      "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+      "bytes": 977501,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "d4475d987e4daa147a4ffa9981842dada0c556a656ad6d4dd7eaaa9eac9bb6f6"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 953778,
+          "sha256": "a94ad07a0c4082d4caa2aa7a7d0bb20558ace3888da9cb7f73a1d0de72cb7c09"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "347b53c3bfec07a156d94e70260e41b8ae38dd8154291dcecd7696173aa37842",
+      "alphaSha256": "f5e4d7765fc3a9ea2a56134755521fff2113e51eb390e3e1d9c88cc810749cee",
+      "transparentPixels": 936228,
+      "partialAlphaPixels": 634795
+    },
+    {
+      "path": "silver-bun/waiting.png",
+      "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+      "bytes": 903363,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "2b3358b2058a17dc106d6eb39bfb2b84d1e39b03712ebe0790bdad5e855bba75"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 879640,
+          "sha256": "207ee62f5b28a23dbf5708b04c8253419b48a4083f51814b42adad501a41cb8d"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "2b9433b369568bcb60822b656cc303f159d2024f5d90eab6a00d8bfb9b805906",
+      "alphaSha256": "db77b600ca35a54e1555e2865df0b56f627b0b52c5c5ce0887c5305b6052118b",
+      "transparentPixels": 999556,
+      "partialAlphaPixels": 571697
+    },
+    {
+      "path": "sunny-moustache/animation/parts/default-source.png",
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+      "bytes": 963360,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "eb906ef14f3aaf71cc79086e700537b70f726d3e54f6fa3940dbf2234c8c0a26"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 939637,
+          "sha256": "ea8c6936709ea3391aed56b78e212e6a2de408c3e3253e27a13edd5dced97759"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "acffa5ecbfe5a98cef932915a80eb340f80e9f18eb6b836deba7c1f97c4f9b60",
+      "alphaSha256": "da8988b91db6414ec1fa509b3959e26a3b19ab93841a0edb5cad1c5a8144cf4c",
+      "transparentPixels": 866355,
+      "partialAlphaPixels": 704490
+    },
+    {
+      "path": "sunny-moustache/animation/parts/listening-source.png",
+      "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+      "bytes": 944718,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "75bdfd604babee7289db7309c6c3bb607e57f4781440a08ab272176f1ba83d4c"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 922768,
+          "sha256": "a7805be0ed26715e3c4a42fe269425ccf1efa6582ae3249b56fd3085708c6132"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "ebaa8193bdf619e5e38c18b3ccb68726f76a27e5d06225001a75a33a7ecf47b8",
+      "alphaSha256": "abe99e6f4e815254c7cd97cba01ae3812ca31ac2ac7fd0c43171e6c13e6cdbb6",
+      "transparentPixels": 876321,
+      "partialAlphaPixels": 694812
+    },
+    {
+      "path": "sunny-moustache/animation/parts/shared-torso.png",
+      "sha256": "315270e0a6c53f2cd36d540e6e2b988475876e91255b790f73ec9b90a598daa8",
+      "bytes": 665293,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "57579a55aaebf84d013a9b0d54ea6714566cb8815fcadeacca00e88a1877cade"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 641570,
+          "sha256": "bdab77152a9b949ce83f26852a107c8cc977faff8e7db0c016c5f100f28af27c"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "3b12dee76ffc82b20616d61ed29a6bd8f18f89a627114a55e5879abb322aaa55",
+      "alphaSha256": "e276b627818b3dc525d1908034666b25fde4eb418cfc378f34ac264305b01923",
+      "transparentPixels": 1074765,
+      "partialAlphaPixels": 496749
+    },
+    {
+      "path": "sunny-moustache/animation/parts/speaking-source.png",
+      "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+      "bytes": 917029,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "25d8990dc08090a716cbc9da3f04c388244d78d0a444ef0133c6ee6636b01e2a"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 895079,
+          "sha256": "1a5bbe86eb7e855ad1bcd65b7891741009affe209b81814b1dda6976d568cfd2"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "6d63ce7e3b9839dc2e4e624d80d525a056fb2563e09d55f345a2f34bfd556a45",
+      "alphaSha256": "140beb56130bc92f86602cfd021cd090cd2c94d1dd39ae2839d00a113c2f78e4",
+      "transparentPixels": 904889,
+      "partialAlphaPixels": 666130
+    },
+    {
+      "path": "sunny-moustache/animation/parts/waiting-source.png",
+      "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+      "bytes": 813393,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "e751e44bf0d6c8ffb8f249d0fb8858da4075bbd4e72527e85c55ac71f3acdfd8"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 789670,
+          "sha256": "96579f4150e7fbec047c600d3af22b393196146939b69e586e9455e0df1c3a67"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b2fae72a7770bd67c49f707ec5fe07101ba8e8c93705d4d53b8ef7061b86fca6",
+      "alphaSha256": "b66744bbb1baa1862ee7bf1dc1af8e4bc9804fc437327a19e5fdbb3023291add",
+      "transparentPixels": 981449,
+      "partialAlphaPixels": 589922
+    },
+    {
+      "path": "sunny-moustache/avatar.png",
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+      "bytes": 963360,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "eb906ef14f3aaf71cc79086e700537b70f726d3e54f6fa3940dbf2234c8c0a26"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 939637,
+          "sha256": "ea8c6936709ea3391aed56b78e212e6a2de408c3e3253e27a13edd5dced97759"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "acffa5ecbfe5a98cef932915a80eb340f80e9f18eb6b836deba7c1f97c4f9b60",
+      "alphaSha256": "da8988b91db6414ec1fa509b3959e26a3b19ab93841a0edb5cad1c5a8144cf4c",
+      "transparentPixels": 866355,
+      "partialAlphaPixels": 704490
+    },
+    {
+      "path": "sunny-moustache/default.png",
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+      "bytes": 963360,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "eb906ef14f3aaf71cc79086e700537b70f726d3e54f6fa3940dbf2234c8c0a26"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 939637,
+          "sha256": "ea8c6936709ea3391aed56b78e212e6a2de408c3e3253e27a13edd5dced97759"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "acffa5ecbfe5a98cef932915a80eb340f80e9f18eb6b836deba7c1f97c4f9b60",
+      "alphaSha256": "da8988b91db6414ec1fa509b3959e26a3b19ab93841a0edb5cad1c5a8144cf4c",
+      "transparentPixels": 866355,
+      "partialAlphaPixels": 704490
+    },
+    {
+      "path": "sunny-moustache/listening.png",
+      "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+      "bytes": 944718,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "75bdfd604babee7289db7309c6c3bb607e57f4781440a08ab272176f1ba83d4c"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 922768,
+          "sha256": "a7805be0ed26715e3c4a42fe269425ccf1efa6582ae3249b56fd3085708c6132"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "ebaa8193bdf619e5e38c18b3ccb68726f76a27e5d06225001a75a33a7ecf47b8",
+      "alphaSha256": "abe99e6f4e815254c7cd97cba01ae3812ca31ac2ac7fd0c43171e6c13e6cdbb6",
+      "transparentPixels": 876321,
+      "partialAlphaPixels": 694812
+    },
+    {
+      "path": "sunny-moustache/speaking.png",
+      "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+      "bytes": 917029,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 21881,
+          "sha256": "25d8990dc08090a716cbc9da3f04c388244d78d0a444ef0133c6ee6636b01e2a"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 895079,
+          "sha256": "1a5bbe86eb7e855ad1bcd65b7891741009affe209b81814b1dda6976d568cfd2"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "6d63ce7e3b9839dc2e4e624d80d525a056fb2563e09d55f345a2f34bfd556a45",
+      "alphaSha256": "140beb56130bc92f86602cfd021cd090cd2c94d1dd39ae2839d00a113c2f78e4",
+      "transparentPixels": 904889,
+      "partialAlphaPixels": 666130
+    },
+    {
+      "path": "sunny-moustache/waiting.png",
+      "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+      "bytes": 813393,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "chunks": [
+        {
+          "type": "IHDR",
+          "bytes": 13,
+          "sha256": "27fdb7a7f5c4342b92ec30c213b2d7c741ee2774fdae74cb5e15a490694df986"
+        },
+        {
+          "type": "caBX",
+          "bytes": 23654,
+          "sha256": "e751e44bf0d6c8ffb8f249d0fb8858da4075bbd4e72527e85c55ac71f3acdfd8"
+        },
+        {
+          "type": "IDAT",
+          "bytes": 789670,
+          "sha256": "96579f4150e7fbec047c600d3af22b393196146939b69e586e9455e0df1c3a67"
+        },
+        {
+          "type": "IEND",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "rgbaSha256": "b2fae72a7770bd67c49f707ec5fe07101ba8e8c93705d4d53b8ef7061b86fca6",
+      "alphaSha256": "b66744bbb1baa1862ee7bf1dc1af8e4bc9804fc437327a19e5fdbb3023291add",
+      "transparentPixels": 981449,
+      "partialAlphaPixels": 589922
+    }
+  ],
+  "uniqueCount": 50,
+  "rows": [
+    {
+      "source": "blue-glasses/animation/parts/default-source.png",
+      "aliases": [
+        "blue-glasses/animation/parts/default-source.png",
+        "blue-glasses/avatar.png",
+        "blue-glasses/default.png"
+      ],
+      "sha256": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+      "sourceBytes": 864556,
+      "variants": {
+        "webp-q90": {
+          "bytes": 144416,
+          "sha256": "516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1",
+          "wallSeconds": 3.896030834002886,
+          "cpuSeconds": 3.356825,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 582968,
+          "visibleRgbMAE": 2.0858138718867107,
+          "visibleMaxChannelError": 255,
+          "file": "af2b936dcc9d09ec-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "blue-glasses/animation/parts/listening-source.png",
+      "aliases": [
+        "blue-glasses/animation/parts/listening-source.png",
+        "blue-glasses/listening.png"
+      ],
+      "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+      "sourceBytes": 858019,
+      "variants": {
+        "webp-q90": {
+          "bytes": 141532,
+          "sha256": "e71ed92559d1432bc0f5f683101bbe29dd06c3c64618b040d4c73f57fa49b98c",
+          "wallSeconds": 3.727285084023606,
+          "cpuSeconds": 3.3285579999999997,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 564549,
+          "visibleRgbMAE": 2.1239639290238226,
+          "visibleMaxChannelError": 230,
+          "file": "7b4316cc472819c0-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "blue-glasses/animation/parts/shared-torso.png",
+      "aliases": [
+        "blue-glasses/animation/parts/shared-torso.png"
+      ],
+      "sha256": "2a4ad43d7ecd09f47a790757941d8dd77d803bdd8460d13d5ffc32f4cf8d6226",
+      "sourceBytes": 585690,
+      "variants": {
+        "webp-q90": {
+          "bytes": 88898,
+          "sha256": "42ef16b2941f4f296440c1bb107ae8346c5e77e9bd19ee6534cf50b24b7a2b66",
+          "wallSeconds": 2.6084010420017876,
+          "cpuSeconds": 2.5364980000000017,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 391137,
+          "visibleRgbMAE": 1.9964632400907436,
+          "visibleMaxChannelError": 255,
+          "file": "2a4ad43d7ecd09f4-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "blue-glasses/animation/parts/speaking-source.png",
+      "aliases": [
+        "blue-glasses/animation/parts/speaking-source.png",
+        "blue-glasses/speaking.png"
+      ],
+      "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+      "sourceBytes": 854387,
+      "variants": {
+        "webp-q90": {
+          "bytes": 142080,
+          "sha256": "237eb2c9cc197e2a15abc73d6cc44bce1502946b31fc80ac20977f908897373c",
+          "wallSeconds": 3.112399041012395,
+          "cpuSeconds": 3.064264999999998,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 536944,
+          "visibleRgbMAE": 2.1040435386942717,
+          "visibleMaxChannelError": 231,
+          "file": "219b1ff733c7d2af-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "blue-glasses/animation/parts/waiting-source.png",
+      "aliases": [
+        "blue-glasses/animation/parts/waiting-source.png",
+        "blue-glasses/waiting.png"
+      ],
+      "sha256": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+      "sourceBytes": 762985,
+      "variants": {
+        "webp-q90": {
+          "bytes": 120650,
+          "sha256": "4f85a2945b5dbb3c330a3c66dec8e8465ba102fc3c92dd975aefa08f8c2e7a68",
+          "wallSeconds": 2.9149798750295304,
+          "cpuSeconds": 2.8570470000000006,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 487144,
+          "visibleRgbMAE": 2.0929375397609826,
+          "visibleMaxChannelError": 255,
+          "file": "ac827cb8a85dac69-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "blue-glasses/animation/parts/waiting-torso.png",
+      "aliases": [
+        "blue-glasses/animation/parts/waiting-torso.png"
+      ],
+      "sha256": "3527476e1c65d0463fd991d7fe5f2b69313ac534a45bd9ed5be7742439bd6ac0",
+      "sourceBytes": 564686,
+      "variants": {
+        "webp-q90": {
+          "bytes": 85516,
+          "sha256": "2d2eb0c759071bd71e4cf2e414e850c11cc0f42448e8d641bf4198dde82d8676",
+          "wallSeconds": 2.5282754999934696,
+          "cpuSeconds": 2.416159000000001,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 377829,
+          "visibleRgbMAE": 2.074024223886282,
+          "visibleMaxChannelError": 235,
+          "file": "3527476e1c65d046-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/body.png",
+      "aliases": [
+        "coral-bob/animation/parts/body.png"
+      ],
+      "sha256": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27",
+      "sourceBytes": 586088,
+      "variants": {
+        "webp-q90": {
+          "bytes": 75656,
+          "sha256": "abf4adaed61d71fe7dc332865c09ed6b8dc91f168102706969570435a658e314",
+          "wallSeconds": 2.807407666987274,
+          "cpuSeconds": 2.6508940000000005,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 410045,
+          "visibleRgbMAE": 1.5431298752890443,
+          "visibleMaxChannelError": 233,
+          "file": "cbb674ca5531a36c-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/closed.png",
+      "aliases": [
+        "coral-bob/animation/parts/closed.png"
+      ],
+      "sha256": "a8b4f55e14fe4e4397bb530869d4843db49ea8356378070af76a52c4028dc3c9",
+      "sourceBytes": 134597,
+      "variants": {
+        "webp-q90": {
+          "bytes": 23072,
+          "sha256": "47044b0c1903bcb30e589a0565f3e82f5db87c7e5702449123a4a2aabc374a88",
+          "wallSeconds": 1.9500037499819882,
+          "cpuSeconds": 1.839302,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 59152,
+          "visibleRgbMAE": 2.475072260234825,
+          "visibleMaxChannelError": 255,
+          "file": "a8b4f55e14fe4e43-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/fore-left.png",
+      "aliases": [
+        "coral-bob/animation/parts/fore-left.png"
+      ],
+      "sha256": "c48cc45a0bd343c753fd1328a6a1182640f79423f7fcc13cdc7e1df206c7112c",
+      "sourceBytes": 351109,
+      "variants": {
+        "webp-q90": {
+          "bytes": 59418,
+          "sha256": "4bce8dee3b2bffcf0370e1e949e73a6c29c3c5024bbc73c88671ecfd3069c551",
+          "wallSeconds": 2.092277167015709,
+          "cpuSeconds": 2.0240279999999986,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 216953,
+          "visibleRgbMAE": 1.9578106723672004,
+          "visibleMaxChannelError": 255,
+          "file": "c48cc45a0bd343c7-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/fore-right.png",
+      "aliases": [
+        "coral-bob/animation/parts/fore-right.png"
+      ],
+      "sha256": "be316b025b810d7e10494a905182930f1eefc9743139f8578bc063c226f7c812",
+      "sourceBytes": 1006698,
+      "variants": {
+        "webp-q90": {
+          "bytes": 59184,
+          "sha256": "27ac1bf5265ef9b272c9fa2d85b7d1887b66664c954945a95fecd6bbfce41ce5",
+          "wallSeconds": 2.209960416017566,
+          "cpuSeconds": 2.094725,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 271172,
+          "visibleRgbMAE": 1.5976190225645666,
+          "visibleMaxChannelError": 64,
+          "file": "be316b025b810d7e-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/head.png",
+      "aliases": [
+        "coral-bob/animation/parts/head.png"
+      ],
+      "sha256": "fb92081b74134fd8397e0239f2a9603bb8b99f06ee82efc6ed1ce129e3ca925e",
+      "sourceBytes": 715802,
+      "variants": {
+        "webp-q90": {
+          "bytes": 88360,
+          "sha256": "9225db4b54ef6a46a593397ddd10a2b0f9da66f2adae28f0d8ea3f803c35ff70",
+          "wallSeconds": 3.970801791991107,
+          "cpuSeconds": 3.661130999999997,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 498339,
+          "visibleRgbMAE": 1.2492590443242328,
+          "visibleMaxChannelError": 236,
+          "file": "fb92081b74134fd8-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/listening-arm.png",
+      "aliases": [
+        "coral-bob/animation/parts/listening-arm.png"
+      ],
+      "sha256": "93602222407a2f4c3db2e73e2e445abc819e2e2da7b6c1260e57d41e11d00e20",
+      "sourceBytes": 306325,
+      "variants": {
+        "webp-q90": {
+          "bytes": 53862,
+          "sha256": "740a4c20f555186074c09f3b9cd235ce99a56a8f901866913dabdf6900bb8324",
+          "wallSeconds": 2.122354416991584,
+          "cpuSeconds": 2.001945000000001,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 162807,
+          "visibleRgbMAE": 2.344883709348075,
+          "visibleMaxChannelError": 237,
+          "file": "93602222407a2f4c-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/open.png",
+      "aliases": [
+        "coral-bob/animation/parts/open.png"
+      ],
+      "sha256": "05304f3ab8527b1a64a6c781b1271f10feebea07118cfd0659bff67744a4cc26",
+      "sourceBytes": 139653,
+      "variants": {
+        "webp-q90": {
+          "bytes": 21826,
+          "sha256": "55e7c0b640bdb7f10d2b7c415a828a0da3727402a34be5d0d4a37edcba7d010a",
+          "wallSeconds": 1.7831856249831617,
+          "cpuSeconds": 1.6845060000000034,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 57593,
+          "visibleRgbMAE": 2.0988186062558776,
+          "visibleMaxChannelError": 255,
+          "file": "05304f3ab8527b1a-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/speak-fore.png",
+      "aliases": [
+        "coral-bob/animation/parts/speak-fore.png"
+      ],
+      "sha256": "5441a0ab98ef5ac282b6ce3e080632399128a94abda3d34100843f5dcb152ed4",
+      "sourceBytes": 924008,
+      "variants": {
+        "webp-q90": {
+          "bytes": 56962,
+          "sha256": "78c313145f883642319df9465a8e52da2243359b6f468758345eecd369800f67",
+          "wallSeconds": 2.969091249979101,
+          "cpuSeconds": 2.488354000000002,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 261922,
+          "visibleRgbMAE": 1.606738989569616,
+          "visibleMaxChannelError": 61,
+          "file": "5441a0ab98ef5ac2-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/upper-left.png",
+      "aliases": [
+        "coral-bob/animation/parts/upper-left.png"
+      ],
+      "sha256": "9efca1877d071c44702416992f91dc0df39bf28aaac92aa7126e878acb516c85",
+      "sourceBytes": 500989,
+      "variants": {
+        "webp-q90": {
+          "bytes": 64896,
+          "sha256": "014c0a0243ba3bfda4bf230b3733f4bd1943f8eb1dd9ad6360dd35acba894efc",
+          "wallSeconds": 3.5057570000062697,
+          "cpuSeconds": 3.281027999999999,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 377374,
+          "visibleRgbMAE": 1.8614927542206923,
+          "visibleMaxChannelError": 239,
+          "file": "9efca1877d071c44-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/upper-right.png",
+      "aliases": [
+        "coral-bob/animation/parts/upper-right.png"
+      ],
+      "sha256": "b2f3eba89e09dff9f8c5cf4fcd2256482b962a2fd67ade413b4be6e6147ceede",
+      "sourceBytes": 430982,
+      "variants": {
+        "webp-q90": {
+          "bytes": 61792,
+          "sha256": "8fea5da7fdbff86905fec38f8496bb9007e85f52910997c10e94502eafdcd6b1",
+          "wallSeconds": 3.0469201669911854,
+          "cpuSeconds": 2.8185950000000037,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 286335,
+          "visibleRgbMAE": 2.072893376207216,
+          "visibleMaxChannelError": 240,
+          "file": "b2f3eba89e09dff9-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/animation/parts/waiting-arms.png",
+      "aliases": [
+        "coral-bob/animation/parts/waiting-arms.png"
+      ],
+      "sha256": "2c8de0fc32d63d4c1ad8cf912119629ee6e62c15eb8e1adf90e922e7545246cc",
+      "sourceBytes": 497090,
+      "variants": {
+        "webp-q90": {
+          "bytes": 94020,
+          "sha256": "3be4ae8ace95524dcdec20e3d778c2c99761f02c2b81af6cab4f687128c07e1b",
+          "wallSeconds": 2.928107792045921,
+          "cpuSeconds": 2.844807999999996,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 298408,
+          "visibleRgbMAE": 2.726201284888824,
+          "visibleMaxChannelError": 255,
+          "file": "2c8de0fc32d63d4c-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/avatar.png",
+      "aliases": [
+        "coral-bob/avatar.png",
+        "coral-bob/default.png"
+      ],
+      "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+      "sourceBytes": 873526,
+      "variants": {
+        "webp-q90": {
+          "bytes": 140386,
+          "sha256": "7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d",
+          "wallSeconds": 3.5757614170433953,
+          "cpuSeconds": 3.523877999999997,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 569876,
+          "visibleRgbMAE": 1.9449907051637605,
+          "visibleMaxChannelError": 255,
+          "file": "0ad2f768f9f807dd-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/listening.png",
+      "aliases": [
+        "coral-bob/listening.png"
+      ],
+      "sha256": "e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea",
+      "sourceBytes": 906498,
+      "variants": {
+        "webp-q90": {
+          "bytes": 131090,
+          "sha256": "b2d9157048d86b3b3857af460b45283fb511324a29d95646d357dadf9ea631fe",
+          "wallSeconds": 3.2246746249729767,
+          "cpuSeconds": 3.1460650000000046,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 583736,
+          "visibleRgbMAE": 1.9405768544606377,
+          "visibleMaxChannelError": 244,
+          "file": "e973cbefcf45c56f-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/speaking.png",
+      "aliases": [
+        "coral-bob/speaking.png"
+      ],
+      "sha256": "ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d",
+      "sourceBytes": 894325,
+      "variants": {
+        "webp-q90": {
+          "bytes": 142620,
+          "sha256": "211a94fd56ba16a709d1ffbc921176af85c31e756d0df9669f1a7909153be1ad",
+          "wallSeconds": 3.5614400829654187,
+          "cpuSeconds": 3.491167000000001,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 576608,
+          "visibleRgbMAE": 1.9897141828989544,
+          "visibleMaxChannelError": 250,
+          "file": "ba2df466dad419d3-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "coral-bob/waiting.png",
+      "aliases": [
+        "coral-bob/waiting.png"
+      ],
+      "sha256": "2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e",
+      "sourceBytes": 778821,
+      "variants": {
+        "webp-q90": {
+          "bytes": 107906,
+          "sha256": "c17ac253f5c6f954ffc5084bd925f3d2091b9befa4cf3fc7775d101e758a3986",
+          "wallSeconds": 3.3474385410081595,
+          "cpuSeconds": 3.265728000000001,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 506886,
+          "visibleRgbMAE": 1.8834966405287168,
+          "visibleMaxChannelError": 255,
+          "file": "2b838b4611a02db6-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "mint-puffs/animation/parts/default-source.png",
+      "aliases": [
+        "mint-puffs/animation/parts/default-source.png",
+        "mint-puffs/default.png"
+      ],
+      "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+      "sourceBytes": 924784,
+      "variants": {
+        "webp-q90": {
+          "bytes": 128884,
+          "sha256": "f9afb3cbbd6a979b0448e9f9bd659b9b47b9d57776c805067ddcac5a474d877c",
+          "wallSeconds": 3.3101491249981336,
+          "cpuSeconds": 3.2473969999999994,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 608760,
+          "visibleRgbMAE": 1.552767281734786,
+          "visibleMaxChannelError": 246,
+          "file": "f861c9b09dd26da4-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "mint-puffs/animation/parts/listening-source.png",
+      "aliases": [
+        "mint-puffs/animation/parts/listening-source.png",
+        "mint-puffs/listening.png"
+      ],
+      "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+      "sourceBytes": 892808,
+      "variants": {
+        "webp-q90": {
+          "bytes": 128174,
+          "sha256": "bdd882c623da9af3ee9f682a47566dc178ec7a3a8bf1184a0081e81123370e20",
+          "wallSeconds": 4.678320791048463,
+          "cpuSeconds": 4.559738999999999,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 578858,
+          "visibleRgbMAE": 1.6528753822440923,
+          "visibleMaxChannelError": 255,
+          "file": "2b44df563b93a952-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "mint-puffs/animation/parts/speaking-source.png",
+      "aliases": [
+        "mint-puffs/animation/parts/speaking-source.png",
+        "mint-puffs/speaking.png"
+      ],
+      "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+      "sourceBytes": 924713,
+      "variants": {
+        "webp-q90": {
+          "bytes": 128720,
+          "sha256": "be8561b0fe2e593db9faf63abbbf1b12ae29eef4c52af67a850a3c34b11c27e7",
+          "wallSeconds": 3.4521113749942742,
+          "cpuSeconds": 3.3750870000000086,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 577247,
+          "visibleRgbMAE": 1.6618034267187658,
+          "visibleMaxChannelError": 251,
+          "file": "19cc842e30cdab98-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "mint-puffs/animation/parts/waiting-source.png",
+      "aliases": [
+        "mint-puffs/animation/parts/waiting-source.png",
+        "mint-puffs/waiting.png"
+      ],
+      "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+      "sourceBytes": 815457,
+      "variants": {
+        "webp-q90": {
+          "bytes": 114880,
+          "sha256": "1a7d0991ec6e1de8735ce17069cdac8e87021859dc8feabd1351d9363e87d57b",
+          "wallSeconds": 3.7847972079762258,
+          "cpuSeconds": 3.713816999999997,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 509337,
+          "visibleRgbMAE": 1.6788029512957254,
+          "visibleMaxChannelError": 245,
+          "file": "85393b0a3bf216fd-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "ochre-freckles/animation/parts/default-source.png",
+      "aliases": [
+        "ochre-freckles/animation/parts/default-source.png",
+        "ochre-freckles/default.png"
+      ],
+      "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+      "sourceBytes": 945784,
+      "variants": {
+        "webp-q90": {
+          "bytes": 164050,
+          "sha256": "e725a98f6bf00dceb1debda466d8e31ae4c39ede376abd46d0a0afae791d8e3a",
+          "wallSeconds": 4.975147791963536,
+          "cpuSeconds": 4.706682000000006,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 584087,
+          "visibleRgbMAE": 2.4918307086614173,
+          "visibleMaxChannelError": 255,
+          "file": "b31013bc49144a7f-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "ochre-freckles/animation/parts/listening-source.png",
+      "aliases": [
+        "ochre-freckles/animation/parts/listening-source.png",
+        "ochre-freckles/listening.png"
+      ],
+      "sha256": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+      "sourceBytes": 975320,
+      "variants": {
+        "webp-q90": {
+          "bytes": 165698,
+          "sha256": "e36cc810f0054d9e8e35f6ebabc34babc0eabf7c27c18655bf646dd8e10a047d",
+          "wallSeconds": 6.471503750013653,
+          "cpuSeconds": 5.515301000000009,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 588430,
+          "visibleRgbMAE": 2.506707580110857,
+          "visibleMaxChannelError": 255,
+          "file": "18fc795432e49c98-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "ochre-freckles/animation/parts/speaking-source.png",
+      "aliases": [
+        "ochre-freckles/animation/parts/speaking-source.png",
+        "ochre-freckles/speaking.png"
+      ],
+      "sha256": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+      "sourceBytes": 922181,
+      "variants": {
+        "webp-q90": {
+          "bytes": 156288,
+          "sha256": "53235065ab2c5187a2b3641fb33757efa5e4f30679bcc68b0b71c8d5796ca91a",
+          "wallSeconds": 4.063825707999058,
+          "cpuSeconds": 3.981544000000005,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 557347,
+          "visibleRgbMAE": 2.463089170051834,
+          "visibleMaxChannelError": 255,
+          "file": "d681a2d49ffa41e3-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "ochre-freckles/animation/parts/waiting-source.png",
+      "aliases": [
+        "ochre-freckles/animation/parts/waiting-source.png",
+        "ochre-freckles/waiting.png"
+      ],
+      "sha256": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+      "sourceBytes": 813873,
+      "variants": {
+        "webp-q90": {
+          "bytes": 136954,
+          "sha256": "a2afb926be9233d99049c48e5f9aa6593090c2035b3e07f8eb3ba668ed9d99f2",
+          "wallSeconds": 5.8524629160529,
+          "cpuSeconds": 5.342343999999985,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 491350,
+          "visibleRgbMAE": 2.593109106367212,
+          "visibleMaxChannelError": 255,
+          "file": "725ecb0f77871e39-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "plum-crop/animation/parts/default-source.png",
+      "aliases": [
+        "plum-crop/animation/parts/default-source.png",
+        "plum-crop/default.png"
+      ],
+      "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+      "sourceBytes": 938610,
+      "variants": {
+        "webp-q90": {
+          "bytes": 131540,
+          "sha256": "d275e900f5d9c27f12e2304a27a7a600526e9f848e78d2b0085964a4c2dfc518",
+          "wallSeconds": 17.65631079103332,
+          "cpuSeconds": 8.370222000000005,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 602999,
+          "visibleRgbMAE": 1.69704768412039,
+          "visibleMaxChannelError": 255,
+          "file": "6882fdb4feaf3b4e-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "plum-crop/animation/parts/head.png",
+      "aliases": [
+        "plum-crop/animation/parts/head.png"
+      ],
+      "sha256": "2d08b2b17687fad6f9fb54bb2a76be78f86ede46bd6a189362e8806ee1df98e0",
+      "sourceBytes": 571971,
+      "variants": {
+        "webp-q90": {
+          "bytes": 76992,
+          "sha256": "d716bb1fefcf2117e1ff8f6e05066439f5c69474d16ae6a91e6efa78d7059e84",
+          "wallSeconds": 16.56383266596822,
+          "cpuSeconds": 7.354304000000003,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 369202,
+          "visibleRgbMAE": 1.6717922226562767,
+          "visibleMaxChannelError": 251,
+          "file": "2d08b2b17687fad6-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "plum-crop/animation/parts/listening-source.png",
+      "aliases": [
+        "plum-crop/animation/parts/listening-source.png",
+        "plum-crop/listening.png"
+      ],
+      "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+      "sourceBytes": 912539,
+      "variants": {
+        "webp-q90": {
+          "bytes": 131776,
+          "sha256": "d1d73425f7ebcbf54e454b06474ffedf4e5aedef5c7002f38d0dca5b2fc9a4ac",
+          "wallSeconds": 15.46716895798454,
+          "cpuSeconds": 9.029563999999999,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 589347,
+          "visibleRgbMAE": 1.75837758202799,
+          "visibleMaxChannelError": 255,
+          "file": "92b62ffcf2ffdaed-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "plum-crop/animation/parts/speaking-source.png",
+      "aliases": [
+        "plum-crop/animation/parts/speaking-source.png",
+        "plum-crop/speaking.png"
+      ],
+      "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+      "sourceBytes": 911753,
+      "variants": {
+        "webp-q90": {
+          "bytes": 130526,
+          "sha256": "958ecc739eb14f4f189589079484f9c6c474832b132c030db6a926bc6a915f8d",
+          "wallSeconds": 9.392999042000156,
+          "cpuSeconds": 7.062841999999998,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 576100,
+          "visibleRgbMAE": 1.7584007119915401,
+          "visibleMaxChannelError": 255,
+          "file": "81452f2169679498-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "plum-crop/animation/parts/waiting-source.png",
+      "aliases": [
+        "plum-crop/animation/parts/waiting-source.png",
+        "plum-crop/waiting.png"
+      ],
+      "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+      "sourceBytes": 794910,
+      "variants": {
+        "webp-q90": {
+          "bytes": 106852,
+          "sha256": "115cf9571637cde3db70afa87ee70ea8ce04a8a4dadaae83b7dfc390dde2e9d9",
+          "wallSeconds": 6.8557071249815635,
+          "cpuSeconds": 6.280887999999991,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 518318,
+          "visibleRgbMAE": 1.6915125555463042,
+          "visibleMaxChannelError": 241,
+          "file": "76e1541dea7d48a6-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "salt-pepper-beard/animation/parts/default-source.png",
+      "aliases": [
+        "salt-pepper-beard/animation/parts/default-source.png",
+        "salt-pepper-beard/default.png"
+      ],
+      "sha256": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+      "sourceBytes": 967539,
+      "variants": {
+        "webp-q90": {
+          "bytes": 145622,
+          "sha256": "2a6ef7120e8c6d63bd20ae6255ac9324ce5a3a9467d771a989df8ebaaf477785",
+          "wallSeconds": 10.293239250022452,
+          "cpuSeconds": 8.332185000000006,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 638191,
+          "visibleRgbMAE": 2.0178358111326453,
+          "visibleMaxChannelError": 255,
+          "file": "11df64ffede48a02-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "salt-pepper-beard/animation/parts/listening-source.png",
+      "aliases": [
+        "salt-pepper-beard/animation/parts/listening-source.png",
+        "salt-pepper-beard/listening.png"
+      ],
+      "sha256": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+      "sourceBytes": 969724,
+      "variants": {
+        "webp-q90": {
+          "bytes": 145588,
+          "sha256": "1c63950f7c776dbbcbcf67682bcfec37caaa3e8ec6885282286b28e124548375",
+          "wallSeconds": 7.839171333005652,
+          "cpuSeconds": 7.0445160000000095,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 614414,
+          "visibleRgbMAE": 1.9617835559578338,
+          "visibleMaxChannelError": 246,
+          "file": "b8e733673ccd4b20-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "salt-pepper-beard/animation/parts/lower-fill.png",
+      "aliases": [
+        "salt-pepper-beard/animation/parts/lower-fill.png"
+      ],
+      "sha256": "5c345cf374a9cd43fdb440879cc0b5fb63cca4b639079814015b660eec34e4a7",
+      "sourceBytes": 558838,
+      "variants": {
+        "webp-q90": {
+          "bytes": 70134,
+          "sha256": "1d772390b861076742b6418f991bb5ab5124364c34d9cec74a25803a2debcc3b",
+          "wallSeconds": 7.039887166989502,
+          "cpuSeconds": 5.6676979999999855,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 388618,
+          "visibleRgbMAE": 1.5221480312994455,
+          "visibleMaxChannelError": 233,
+          "file": "5c345cf374a9cd43-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "salt-pepper-beard/animation/parts/speaking-source.png",
+      "aliases": [
+        "salt-pepper-beard/animation/parts/speaking-source.png",
+        "salt-pepper-beard/speaking.png"
+      ],
+      "sha256": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+      "sourceBytes": 923644,
+      "variants": {
+        "webp-q90": {
+          "bytes": 134468,
+          "sha256": "a51d91dcb9351192c9df12f73f1282e0012ceac8ecaf7bb54b4e5e32a4929035",
+          "wallSeconds": 5.398032583994791,
+          "cpuSeconds": 5.224391000000022,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 584688,
+          "visibleRgbMAE": 2.0079445726985212,
+          "visibleMaxChannelError": 255,
+          "file": "c95bd5d34442a558-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "salt-pepper-beard/animation/parts/waiting-source.png",
+      "aliases": [
+        "salt-pepper-beard/animation/parts/waiting-source.png",
+        "salt-pepper-beard/waiting.png"
+      ],
+      "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+      "sourceBytes": 816048,
+      "variants": {
+        "webp-q90": {
+          "bytes": 113950,
+          "sha256": "32583d7826dfbbde2f400d91124a72ea6d87625e91c1f0614ed996b6cd343018",
+          "wallSeconds": 4.189644625002984,
+          "cpuSeconds": 3.888841999999989,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 519296,
+          "visibleRgbMAE": 2.0580801838800973,
+          "visibleMaxChannelError": 252,
+          "file": "ca3ef9c3872e101d-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "silver-bun/animation/parts/default-source.png",
+      "aliases": [
+        "silver-bun/animation/parts/default-source.png",
+        "silver-bun/default.png"
+      ],
+      "sha256": "3af28a6b68605ec3c8485ff4d41a0825e2e811638dc1879055a21c534fb160ff",
+      "sourceBytes": 990099,
+      "variants": {
+        "webp-q90": {
+          "bytes": 143674,
+          "sha256": "b83c0939aaaa5f18883ac63acba314e430892bf5cb66bdea78cfcbac9843b5cc",
+          "wallSeconds": 4.357076333020814,
+          "cpuSeconds": 4.257849999999996,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 608268,
+          "visibleRgbMAE": 1.6692967408190789,
+          "visibleMaxChannelError": 251,
+          "file": "3af28a6b68605ec3-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "silver-bun/animation/parts/head.png",
+      "aliases": [
+        "silver-bun/animation/parts/head.png"
+      ],
+      "sha256": "cf884ae64a094939821ff061f76c2e9084fafe4d54d9b57a1f8d2b50addc7914",
+      "sourceBytes": 1011518,
+      "variants": {
+        "webp-q90": {
+          "bytes": 134112,
+          "sha256": "0b2a29ca6ca699091367e3866333cb8ed3d44e63065c8f16b9a29a786d485174",
+          "wallSeconds": 4.195594791963231,
+          "cpuSeconds": 4.079935999999989,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 631275,
+          "visibleRgbMAE": 1.548416371311827,
+          "visibleMaxChannelError": 255,
+          "file": "cf884ae64a094939-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "silver-bun/animation/parts/listening-source.png",
+      "aliases": [
+        "silver-bun/animation/parts/listening-source.png",
+        "silver-bun/listening.png"
+      ],
+      "sha256": "9d42c2eee12eeb879f1b9a6e010b81004375e5f1eb2ad04aa9d921eb5d1704d4",
+      "sourceBytes": 952614,
+      "variants": {
+        "webp-q90": {
+          "bytes": 139030,
+          "sha256": "074b8c5dca0bc68c2f2e51037152ac39c3fb43bbe9732bdb2274993c39450421",
+          "wallSeconds": 4.044532000028994,
+          "cpuSeconds": 3.9793280000000006,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 593588,
+          "visibleRgbMAE": 1.7202117911035746,
+          "visibleMaxChannelError": 249,
+          "file": "9d42c2eee12eeb87-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "silver-bun/animation/parts/mouths.png",
+      "aliases": [
+        "silver-bun/animation/parts/mouths.png"
+      ],
+      "sha256": "30e4ccc6d7ebddd308332a98b3a5ac51840093d8813673606499997529c8a7d9",
+      "sourceBytes": 277402,
+      "variants": {
+        "webp-q90": {
+          "bytes": 53792,
+          "sha256": "d719255957b2213038e609e0a9f218374d51e9977e41134fba712fc00093dec9",
+          "wallSeconds": 2.768556000024546,
+          "cpuSeconds": 2.690643000000006,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 148136,
+          "visibleRgbMAE": 2.472577797755151,
+          "visibleMaxChannelError": 255,
+          "file": "30e4ccc6d7ebddd3-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "silver-bun/animation/parts/speaking-source.png",
+      "aliases": [
+        "silver-bun/animation/parts/speaking-source.png",
+        "silver-bun/speaking.png"
+      ],
+      "sha256": "8cf28850caca9db2df01768beccd5fe5ee50e26b51e484b4d5788a6481ae8398",
+      "sourceBytes": 977501,
+      "variants": {
+        "webp-q90": {
+          "bytes": 141272,
+          "sha256": "790e75913d60732b147557658e69c3f34e1628daed49256a923674f93f91678f",
+          "wallSeconds": 4.010502832999919,
+          "cpuSeconds": 3.930781999999998,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 592936,
+          "visibleRgbMAE": 1.6827401009186616,
+          "visibleMaxChannelError": 251,
+          "file": "8cf28850caca9db2-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "silver-bun/animation/parts/waiting-source.png",
+      "aliases": [
+        "silver-bun/animation/parts/waiting-source.png",
+        "silver-bun/waiting.png"
+      ],
+      "sha256": "e6bdf9bc68ecc4d0aa7cc861e6c9e054dd4e448e58f4eeb330feab7b59452db4",
+      "sourceBytes": 903363,
+      "variants": {
+        "webp-q90": {
+          "bytes": 126842,
+          "sha256": "dc9ba42515ced12735987d710506132373a39e98a0305a3e1437ac9a3399868a",
+          "wallSeconds": 3.8215327500365674,
+          "cpuSeconds": 3.719187000000022,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 548104,
+          "visibleRgbMAE": 1.7280676952434144,
+          "visibleMaxChannelError": 252,
+          "file": "e6bdf9bc68ecc4d0-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "sunny-moustache/animation/parts/default-source.png",
+      "aliases": [
+        "sunny-moustache/animation/parts/default-source.png",
+        "sunny-moustache/avatar.png",
+        "sunny-moustache/default.png"
+      ],
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+      "sourceBytes": 963360,
+      "variants": {
+        "webp-q90": {
+          "bytes": 135318,
+          "sha256": "68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822",
+          "wallSeconds": 5.583702125004493,
+          "cpuSeconds": 5.1774370000000065,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 654868,
+          "visibleRgbMAE": 1.7239227315017396,
+          "visibleMaxChannelError": 255,
+          "file": "61e062cbfb52ff47-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "sunny-moustache/animation/parts/listening-source.png",
+      "aliases": [
+        "sunny-moustache/animation/parts/listening-source.png",
+        "sunny-moustache/listening.png"
+      ],
+      "sha256": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+      "sourceBytes": 944718,
+      "variants": {
+        "webp-q90": {
+          "bytes": 135600,
+          "sha256": "e24d4feeb4f28374252b8b8389a5d0924c6aecbc0e9e3aa8e1368193995ceebf",
+          "wallSeconds": 4.1602538749575615,
+          "cpuSeconds": 4.058752000000008,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 657969,
+          "visibleRgbMAE": 1.7606092162875822,
+          "visibleMaxChannelError": 255,
+          "file": "2ac7ab556de5b27c-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "sunny-moustache/animation/parts/shared-torso.png",
+      "aliases": [
+        "sunny-moustache/animation/parts/shared-torso.png"
+      ],
+      "sha256": "315270e0a6c53f2cd36d540e6e2b988475876e91255b790f73ec9b90a598daa8",
+      "sourceBytes": 665293,
+      "variants": {
+        "webp-q90": {
+          "bytes": 82858,
+          "sha256": "e8b9d39aa0f844e52896ce9b53c6497b7f2c592e1dcf5f5f7ebf8caf557e5ecd",
+          "wallSeconds": 3.294098166981712,
+          "cpuSeconds": 3.1970779999999843,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 466409,
+          "visibleRgbMAE": 1.6023634307113397,
+          "visibleMaxChannelError": 255,
+          "file": "315270e0a6c53f2c-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "sunny-moustache/animation/parts/speaking-source.png",
+      "aliases": [
+        "sunny-moustache/animation/parts/speaking-source.png",
+        "sunny-moustache/speaking.png"
+      ],
+      "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+      "sourceBytes": 917029,
+      "variants": {
+        "webp-q90": {
+          "bytes": 128464,
+          "sha256": "d9f68795b2c90a527a3734ea987060cbf120f1f71f3ade613f2d210592a4427f",
+          "wallSeconds": 5.10605745902285,
+          "cpuSeconds": 4.7550869999999925,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 634354,
+          "visibleRgbMAE": 1.7864156682299148,
+          "visibleMaxChannelError": 255,
+          "file": "e5d2fea1e8a173a8-webp-q90.webp"
+        }
+      }
+    },
+    {
+      "source": "sunny-moustache/animation/parts/waiting-source.png",
+      "aliases": [
+        "sunny-moustache/animation/parts/waiting-source.png",
+        "sunny-moustache/waiting.png"
+      ],
+      "sha256": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+      "sourceBytes": 813393,
+      "variants": {
+        "webp-q90": {
+          "bytes": 113582,
+          "sha256": "84be997bfd560d2a603fa34fb474106e00a091e691cdd77329911b20e202eddb",
+          "wallSeconds": 3.775400167040061,
+          "cpuSeconds": 3.667027000000016,
+          "rgbaEqual": false,
+          "alphaEqual": true,
+          "sizeEqual": true,
+          "visibleChangedPixels": 564251,
+          "visibleRgbMAE": 1.8678260388980155,
+          "visibleMaxChannelError": 255,
+          "file": "976c04a0446268dc-webp-q90.webp"
+        }
+      }
+    }
+  ],
+  "wallSeconds": 272.1982159590116
+}

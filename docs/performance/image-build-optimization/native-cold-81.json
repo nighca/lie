@@ -1,0 +1,379 @@
+{
+  "wallMs": 74251.19041699999,
+  "stats": {
+    "encoded": 50,
+    "cached": 0,
+    "preserved": 0
+  },
+  "manifestUrl": "/static/30a60c44617ba8916468ba2d580434752c46415338ef9ca6a14a4441cf7a30b4/appearances/manifest.json",
+  "outputs": [
+    {
+      "path": "static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/package.json",
+      "bytes": 13516
+    },
+    {
+      "path": "static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/default-source.webp",
+      "bytes": 144416
+    },
+    {
+      "path": "static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/listening-source.webp",
+      "bytes": 141532
+    },
+    {
+      "path": "static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/shared-torso.webp",
+      "bytes": 88898
+    },
+    {
+      "path": "static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/speaking-source.webp",
+      "bytes": 142080
+    },
+    {
+      "path": "static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/waiting-source.webp",
+      "bytes": 120650
+    },
+    {
+      "path": "static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/waiting-torso.webp",
+      "bytes": 85516
+    },
+    {
+      "path": "static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/avatar.webp",
+      "bytes": 144416
+    },
+    {
+      "path": "static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/default.webp",
+      "bytes": 144416
+    },
+    {
+      "path": "static/e71ed92559d1432bc0f5f683101bbe29dd06c3c64618b040d4c73f57fa49b98c/appearances/blue-glasses/listening.webp",
+      "bytes": 141532
+    },
+    {
+      "path": "static/237eb2c9cc197e2a15abc73d6cc44bce1502946b31fc80ac20977f908897373c/appearances/blue-glasses/speaking.webp",
+      "bytes": 142080
+    },
+    {
+      "path": "static/4f85a2945b5dbb3c330a3c66dec8e8465ba102fc3c92dd975aefa08f8c2e7a68/appearances/blue-glasses/waiting.webp",
+      "bytes": 120650
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/package.json",
+      "bytes": 164860
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/body.webp",
+      "bytes": 75656
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/closed.webp",
+      "bytes": 23072
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/fore-left.webp",
+      "bytes": 59418
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/fore-right.webp",
+      "bytes": 59184
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/head.webp",
+      "bytes": 88360
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/listening-arm.webp",
+      "bytes": 53862
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/open.webp",
+      "bytes": 21826
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/speak-fore.webp",
+      "bytes": 56962
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/upper-left.webp",
+      "bytes": 64896
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/upper-right.webp",
+      "bytes": 61792
+    },
+    {
+      "path": "static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/waiting-arms.webp",
+      "bytes": 94020
+    },
+    {
+      "path": "static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp",
+      "bytes": 140386
+    },
+    {
+      "path": "static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/default.webp",
+      "bytes": 140386
+    },
+    {
+      "path": "static/b2d9157048d86b3b3857af460b45283fb511324a29d95646d357dadf9ea631fe/appearances/coral-bob/listening.webp",
+      "bytes": 131090
+    },
+    {
+      "path": "static/211a94fd56ba16a709d1ffbc921176af85c31e756d0df9669f1a7909153be1ad/appearances/coral-bob/speaking.webp",
+      "bytes": 142620
+    },
+    {
+      "path": "static/c17ac253f5c6f954ffc5084bd925f3d2091b9befa4cf3fc7775d101e758a3986/appearances/coral-bob/waiting.webp",
+      "bytes": 107906
+    },
+    {
+      "path": "static/edc5f721617f5cb2cbfed17336103006dcf384c836a432db6d33c43177cc9287/appearances/mint-puffs/animation/package.json",
+      "bytes": 14932
+    },
+    {
+      "path": "static/edc5f721617f5cb2cbfed17336103006dcf384c836a432db6d33c43177cc9287/appearances/mint-puffs/animation/parts/default-source.webp",
+      "bytes": 128884
+    },
+    {
+      "path": "static/edc5f721617f5cb2cbfed17336103006dcf384c836a432db6d33c43177cc9287/appearances/mint-puffs/animation/parts/listening-source.webp",
+      "bytes": 128174
+    },
+    {
+      "path": "static/edc5f721617f5cb2cbfed17336103006dcf384c836a432db6d33c43177cc9287/appearances/mint-puffs/animation/parts/speaking-source.webp",
+      "bytes": 128720
+    },
+    {
+      "path": "static/edc5f721617f5cb2cbfed17336103006dcf384c836a432db6d33c43177cc9287/appearances/mint-puffs/animation/parts/waiting-source.webp",
+      "bytes": 114880
+    },
+    {
+      "path": "static/f9afb3cbbd6a979b0448e9f9bd659b9b47b9d57776c805067ddcac5a474d877c/appearances/mint-puffs/default.webp",
+      "bytes": 128884
+    },
+    {
+      "path": "static/bdd882c623da9af3ee9f682a47566dc178ec7a3a8bf1184a0081e81123370e20/appearances/mint-puffs/listening.webp",
+      "bytes": 128174
+    },
+    {
+      "path": "static/be8561b0fe2e593db9faf63abbbf1b12ae29eef4c52af67a850a3c34b11c27e7/appearances/mint-puffs/speaking.webp",
+      "bytes": 128720
+    },
+    {
+      "path": "static/1a7d0991ec6e1de8735ce17069cdac8e87021859dc8feabd1351d9363e87d57b/appearances/mint-puffs/waiting.webp",
+      "bytes": 114880
+    },
+    {
+      "path": "static/ff0e161f8b3033b04aa4e34269e26042492151ec28b8b2446fe42b3d3c209d58/appearances/ochre-freckles/animation/package.json",
+      "bytes": 14197
+    },
+    {
+      "path": "static/ff0e161f8b3033b04aa4e34269e26042492151ec28b8b2446fe42b3d3c209d58/appearances/ochre-freckles/animation/parts/default-source.webp",
+      "bytes": 164050
+    },
+    {
+      "path": "static/ff0e161f8b3033b04aa4e34269e26042492151ec28b8b2446fe42b3d3c209d58/appearances/ochre-freckles/animation/parts/listening-source.webp",
+      "bytes": 165698
+    },
+    {
+      "path": "static/ff0e161f8b3033b04aa4e34269e26042492151ec28b8b2446fe42b3d3c209d58/appearances/ochre-freckles/animation/parts/speaking-source.webp",
+      "bytes": 156288
+    },
+    {
+      "path": "static/ff0e161f8b3033b04aa4e34269e26042492151ec28b8b2446fe42b3d3c209d58/appearances/ochre-freckles/animation/parts/waiting-source.webp",
+      "bytes": 136954
+    },
+    {
+      "path": "static/e725a98f6bf00dceb1debda466d8e31ae4c39ede376abd46d0a0afae791d8e3a/appearances/ochre-freckles/default.webp",
+      "bytes": 164050
+    },
+    {
+      "path": "static/e36cc810f0054d9e8e35f6ebabc34babc0eabf7c27c18655bf646dd8e10a047d/appearances/ochre-freckles/listening.webp",
+      "bytes": 165698
+    },
+    {
+      "path": "static/53235065ab2c5187a2b3641fb33757efa5e4f30679bcc68b0b71c8d5796ca91a/appearances/ochre-freckles/speaking.webp",
+      "bytes": 156288
+    },
+    {
+      "path": "static/a2afb926be9233d99049c48e5f9aa6593090c2035b3e07f8eb3ba668ed9d99f2/appearances/ochre-freckles/waiting.webp",
+      "bytes": 136954
+    },
+    {
+      "path": "static/f699932d421c6013d355e34125224a4252fbebc03bfcb0ab713230b9661ebf06/appearances/plum-crop/animation/package.json",
+      "bytes": 14623
+    },
+    {
+      "path": "static/f699932d421c6013d355e34125224a4252fbebc03bfcb0ab713230b9661ebf06/appearances/plum-crop/animation/parts/default-source.webp",
+      "bytes": 131540
+    },
+    {
+      "path": "static/f699932d421c6013d355e34125224a4252fbebc03bfcb0ab713230b9661ebf06/appearances/plum-crop/animation/parts/head.webp",
+      "bytes": 76992
+    },
+    {
+      "path": "static/f699932d421c6013d355e34125224a4252fbebc03bfcb0ab713230b9661ebf06/appearances/plum-crop/animation/parts/listening-source.webp",
+      "bytes": 131776
+    },
+    {
+      "path": "static/f699932d421c6013d355e34125224a4252fbebc03bfcb0ab713230b9661ebf06/appearances/plum-crop/animation/parts/speaking-source.webp",
+      "bytes": 130526
+    },
+    {
+      "path": "static/f699932d421c6013d355e34125224a4252fbebc03bfcb0ab713230b9661ebf06/appearances/plum-crop/animation/parts/waiting-source.webp",
+      "bytes": 106852
+    },
+    {
+      "path": "static/d275e900f5d9c27f12e2304a27a7a600526e9f848e78d2b0085964a4c2dfc518/appearances/plum-crop/default.webp",
+      "bytes": 131540
+    },
+    {
+      "path": "static/d1d73425f7ebcbf54e454b06474ffedf4e5aedef5c7002f38d0dca5b2fc9a4ac/appearances/plum-crop/listening.webp",
+      "bytes": 131776
+    },
+    {
+      "path": "static/958ecc739eb14f4f189589079484f9c6c474832b132c030db6a926bc6a915f8d/appearances/plum-crop/speaking.webp",
+      "bytes": 130526
+    },
+    {
+      "path": "static/115cf9571637cde3db70afa87ee70ea8ce04a8a4dadaae83b7dfc390dde2e9d9/appearances/plum-crop/waiting.webp",
+      "bytes": 106852
+    },
+    {
+      "path": "static/63a41cfa57acd99f1ab8e8e8e84cbe5ab72913a7fcca9b3b1a808e9479c31273/appearances/salt-pepper-beard/animation/package.json",
+      "bytes": 16144
+    },
+    {
+      "path": "static/63a41cfa57acd99f1ab8e8e8e84cbe5ab72913a7fcca9b3b1a808e9479c31273/appearances/salt-pepper-beard/animation/parts/default-source.webp",
+      "bytes": 145622
+    },
+    {
+      "path": "static/63a41cfa57acd99f1ab8e8e8e84cbe5ab72913a7fcca9b3b1a808e9479c31273/appearances/salt-pepper-beard/animation/parts/listening-source.webp",
+      "bytes": 145588
+    },
+    {
+      "path": "static/63a41cfa57acd99f1ab8e8e8e84cbe5ab72913a7fcca9b3b1a808e9479c31273/appearances/salt-pepper-beard/animation/parts/lower-fill.webp",
+      "bytes": 70134
+    },
+    {
+      "path": "static/63a41cfa57acd99f1ab8e8e8e84cbe5ab72913a7fcca9b3b1a808e9479c31273/appearances/salt-pepper-beard/animation/parts/speaking-source.webp",
+      "bytes": 134468
+    },
+    {
+      "path": "static/63a41cfa57acd99f1ab8e8e8e84cbe5ab72913a7fcca9b3b1a808e9479c31273/appearances/salt-pepper-beard/animation/parts/waiting-source.webp",
+      "bytes": 113950
+    },
+    {
+      "path": "static/2a6ef7120e8c6d63bd20ae6255ac9324ce5a3a9467d771a989df8ebaaf477785/appearances/salt-pepper-beard/default.webp",
+      "bytes": 145622
+    },
+    {
+      "path": "static/1c63950f7c776dbbcbcf67682bcfec37caaa3e8ec6885282286b28e124548375/appearances/salt-pepper-beard/listening.webp",
+      "bytes": 145588
+    },
+    {
+      "path": "static/a51d91dcb9351192c9df12f73f1282e0012ceac8ecaf7bb54b4e5e32a4929035/appearances/salt-pepper-beard/speaking.webp",
+      "bytes": 134468
+    },
+    {
+      "path": "static/32583d7826dfbbde2f400d91124a72ea6d87625e91c1f0614ed996b6cd343018/appearances/salt-pepper-beard/waiting.webp",
+      "bytes": 113950
+    },
+    {
+      "path": "static/717bd680e1275dc938c6e9a015d1ecfa4fad6dac3001a482f25168155581a8db/appearances/silver-bun/animation/package.json",
+      "bytes": 13136
+    },
+    {
+      "path": "static/717bd680e1275dc938c6e9a015d1ecfa4fad6dac3001a482f25168155581a8db/appearances/silver-bun/animation/parts/default-source.webp",
+      "bytes": 143674
+    },
+    {
+      "path": "static/717bd680e1275dc938c6e9a015d1ecfa4fad6dac3001a482f25168155581a8db/appearances/silver-bun/animation/parts/head.webp",
+      "bytes": 134112
+    },
+    {
+      "path": "static/717bd680e1275dc938c6e9a015d1ecfa4fad6dac3001a482f25168155581a8db/appearances/silver-bun/animation/parts/listening-source.webp",
+      "bytes": 139030
+    },
+    {
+      "path": "static/717bd680e1275dc938c6e9a015d1ecfa4fad6dac3001a482f25168155581a8db/appearances/silver-bun/animation/parts/mouths.webp",
+      "bytes": 53792
+    },
+    {
+      "path": "static/717bd680e1275dc938c6e9a015d1ecfa4fad6dac3001a482f25168155581a8db/appearances/silver-bun/animation/parts/speaking-source.webp",
+      "bytes": 141272
+    },
+    {
+      "path": "static/717bd680e1275dc938c6e9a015d1ecfa4fad6dac3001a482f25168155581a8db/appearances/silver-bun/animation/parts/waiting-source.webp",
+      "bytes": 126842
+    },
+    {
+      "path": "static/b83c0939aaaa5f18883ac63acba314e430892bf5cb66bdea78cfcbac9843b5cc/appearances/silver-bun/default.webp",
+      "bytes": 143674
+    },
+    {
+      "path": "static/074b8c5dca0bc68c2f2e51037152ac39c3fb43bbe9732bdb2274993c39450421/appearances/silver-bun/listening.webp",
+      "bytes": 139030
+    },
+    {
+      "path": "static/790e75913d60732b147557658e69c3f34e1628daed49256a923674f93f91678f/appearances/silver-bun/speaking.webp",
+      "bytes": 141272
+    },
+    {
+      "path": "static/dc9ba42515ced12735987d710506132373a39e98a0305a3e1437ac9a3399868a/appearances/silver-bun/waiting.webp",
+      "bytes": 126842
+    },
+    {
+      "path": "static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/package.json",
+      "bytes": 13774
+    },
+    {
+      "path": "static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/default-source.webp",
+      "bytes": 135318
+    },
+    {
+      "path": "static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/listening-source.webp",
+      "bytes": 135600
+    },
+    {
+      "path": "static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/shared-torso.webp",
+      "bytes": 82858
+    },
+    {
+      "path": "static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/speaking-source.webp",
+      "bytes": 128464
+    },
+    {
+      "path": "static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/waiting-source.webp",
+      "bytes": 113582
+    },
+    {
+      "path": "static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/avatar.webp",
+      "bytes": 135318
+    },
+    {
+      "path": "static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/default.webp",
+      "bytes": 135318
+    },
+    {
+      "path": "static/e24d4feeb4f28374252b8b8389a5d0924c6aecbc0e9e3aa8e1368193995ceebf/appearances/sunny-moustache/listening.webp",
+      "bytes": 135600
+    },
+    {
+      "path": "static/d9f68795b2c90a527a3734ea987060cbf120f1f71f3ade613f2d210592a4427f/appearances/sunny-moustache/speaking.webp",
+      "bytes": 128464
+    },
+    {
+      "path": "static/84be997bfd560d2a603fa34fb474106e00a091e691cdd77329911b20e202eddb/appearances/sunny-moustache/waiting.webp",
+      "bytes": 113582
+    },
+    {
+      "path": "static/162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb/brand/logo.svg",
+      "bytes": 879
+    },
+    {
+      "path": "static/faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9/brand/underline.svg",
+      "bytes": 344
+    },
+    {
+      "path": "static/30a60c44617ba8916468ba2d580434752c46415338ef9ca6a14a4441cf7a30b4/appearances/manifest.json",
+      "bytes": 7697
+    }
+  ]
+}
