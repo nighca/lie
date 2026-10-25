@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为3fdec3de47d9e27e0ecd3f91be7e1e248158fd02，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为d82791c535f8d48b53d17fe0212bf671e4c26f9a，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：root已完整review loading＋preview三链，候选b42e55b全部生产/依赖同source5afa，复用源288/types/IAB43/44，本轮build89/QA隔离通过，root审[身份报告](voice-connection-loading-combined.md)后本地ff，未称已main/发布。title最小Application import/调用两行已授Editor、未交；height从062在制且仅style调查布局，原sourceWT两未跟踪QA保护。公共角色名高亮已派Editor在title后做统一纯文本组件/helper/样式及App/Editor消费者，旧global样式等height释放另授清理；动画结果契约/珊瑚样片在制，图片chat01a1713b用户已批准q90/m6/alpha_q100且保留原图/构建自动处理，研究56b2adad clean待root全文review；构建转换turn已授，Linux编码器锁定/最终bytes hash须实测，动画package.ts/load.ts暂归结果契约，释放审/main后另授图片兼容接入，不自动push。入口lie.agency，最后已核线上48316544；其他门禁保留。
+下一步：loading＋preview已root审并main911、未推；title＋结果可选契约冻结候选8c0e8d9完成Web33files319/UI52/runtime43/generator23/全workspace types/Webbuild strict89（96modules），root读[组合报告](page-titles/result-contract-combined-verification.md)后ff。title Application只加两行、preview gate与loading保留；原90资源/manifest/声线不变，未新浏览器/结果视觉或真人验收。33fe珊瑚样片用户未通过，加强版374f289e233a3c50ed9bf9c2256dad5215db46ea（依赖33fe5d3，仅design/result-reactions14文件）已clean交回，root未review两版素材、用户待看，不纳此组合；5355 PID1851/tab60由用户在看保留；图片q90已批、81路径约9.75MB测得，构建实现中，package/load兼容待本候选ff后授。height、公共角色名高亮及草稿提示由现owner在制，原文件权不变。生产入口lie.agency、最后已核线上483；不自动push。
 
 ## 当前owner与恢复入口
 
@@ -38,7 +38,7 @@
 
 ## 资源与发布门禁
 
-服务唯一现行表见[development](development.md#服务登记与生命周期)；本批**无端口扫描/服务动作**。8787/8788及内部子监听为用户launchd常驻，继续保护。5355最新设计预览source1c354425、原PTY15660 exit130、无listener/tab59及mediaoverride清，PID未采集；旧a432回合99890/PTY38260 exit130/tab58属历史；5544最后Node35404/workerd35876/PTY13186 exit130、无listener/tab1910329555清；5507旧背景95357/PTY32844和标题PTY97605均exit1、无listener/tabs37/38清（第二PID未知）。5507连接居中验收85753/PTY22271已exit1、无监听/tab40清；桌面立绘回合PID8323/PTY85340已exit1、无监听/tab41/temp清（owner回执）；本轮动画组合无服务，不外推旧关闭到未来新进程。前代分享tab清理unknown仍保留，不按复用ID盲关。
+服务唯一现行表见[development](development.md#服务登记与生命周期)；本批**无端口扫描/服务动作**。8787/8788及内部子监听为用户launchd常驻，继续保护。5355当前珊瑚样片加强版用户审看仍在用，PID1851/tab60，owner保留消费者，不扫描/停止；source1c354425的旧设计PTY15660 exit130/tab59及mediaoverride清、PID未采集仅历史，不能推定新5355已关；旧a432回合99890/PTY38260 exit130/tab58属历史；5544最后Node35404/workerd35876/PTY13186 exit130、无listener/tab1910329555清；5507旧背景95357/PTY32844和标题PTY97605均exit1、无listener/tabs37/38清（第二PID未知）。5507连接居中验收85753/PTY22271已exit1、无监听/tab40清；桌面立绘回合PID8323/PTY85340已exit1、无监听/tab41/temp清（owner回执）；本轮动画组合无服务，不外推旧关闭到未来新进程。前代分享tab清理unknown仍保留，不按复用ID盲关。
 
 - 用户2026-10-25明确不需要旧版本兼容，旧资源可删除；retention三链未采用，14d/256MiB确认门禁取消，不接CLI/CI。现有hash构建只交付current资源，无需新增代码；旧页面尚未缓存的旧hash可失效，不fallback冒充旧hash。此批无线上删除；不授权删除Git设计历史/WT/凭据或广泛账号工件。cf套餐/共享额度仍未知，无新登录、账号写或secret read许可；仅本轮main push触发现有CI部署获授权，无额外手工部署。
 - 用户取消动画PR路线，恢复常规本地review/ff；原owner确认PR #1 CLOSED、mergedAt null，历史branch/head和审查保留，不再把OPEN或PR例外当当前状态。候选验证不等于main/发布；本轮单次main里程碑普通push及现有CI自动部署已完成48316544核验，非持续push或PR merge/手工部署许可；用户视觉已验不重复，旧FAIL/伪PASS及精确修复来源保留。
