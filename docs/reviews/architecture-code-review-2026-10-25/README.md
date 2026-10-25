@@ -9,7 +9,7 @@ Locations (repository-relative paths resolve from `/Users/nighca/code/nighca/lie
 - `apps/gateway/src/index.ts:87`: every relay frame above 65,536 UTF-8 bytes closes both peers with 1009.
 - `packages/game-core/src/context.ts:25`: profile is returned directly, and repeated in systemPrompt at line 36; background is repeated similarly.
 - `apps/web/src/application/liveVoice.ts:101`: the context tool serializes the complete context.
-- `packages/voice/src/channel.ts:162`: the tool string is embedded into a JSON-RPC reply.
+- `packages/voice/src/channel.ts:155`: the tool string is embedded into a JSON-RPC reply.
 - `apps/web/src/editor/share.ts:41`: author/share content accepts up to 128 KiB decompressed JSON, with no context wire-size check.
 
 Trigger: a valid custom case with a 12,000-character Chinese profile. This is below the authoring limit, and compresses to a 334-character full share URL. Open/play succeeds up to provider context discovery; when the provider calls the context tool, its reply is 72,901 bytes and the gateway disconnects before forwarding it. A sufficiently long accumulated history can hit the same transport boundary even with shorter profiles; that latter route was reasoned from the source, not separately run here.
@@ -48,6 +48,6 @@ Documentation discrepancy (not counted as a production defect): `packages/game-c
 
 ## Reproduce and handoff
 
-Run Node 24.22.1: `node docs/reviews/architecture-code-review-2026-10-25/probes.cjs [repository-root]`. Probe transpiles read-only source with the repository's installed TypeScript, then runs inert fake sockets/bootstrap. No new package dependency or persisted app state. Final results in [probe-results.jsonl](probe-results.jsonl). Initial probe ran on host Node24.17; final strengthened run and recorded results use bundled Node24.22.1. No npm test suite claimed.
+With the repository lockfile dependencies already installed, run Node 24.22.1: `node docs/reviews/architecture-code-review-2026-10-25/probes.cjs [repository-root]`. Probe transpiles read-only source with the repository's installed TypeScript, then runs inert fake sockets/bootstrap. No new package dependency or persisted app state. Final results in [probe-results.jsonl](probe-results.jsonl). Initial probe ran on host Node24.17; final strengthened run and recorded results use bundled Node24.22.1. No npm test suite claimed.
 
 Only this report, probe and small result file are intended for integration. The task-only node_modules symlink reused main's installed dependencies and was removed after the probes; no server was started, so stopped/retained/unknown services from this task are all zero. Temporary worktree must remain until root reviews this handoff; no other worktree or branch changed.
