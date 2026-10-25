@@ -1,6 +1,6 @@
 # 公共角色姓名高亮
 
-2026-10-25，用户明确授权跨只读入口复用原姓名高亮机制。当前状态：公共组件/消费者实施及自动验证通过，待旧global规则清理turn、真实IAB和主协调组合审查。原始基线3fdec3de47d9e27e0ecd3f91be7e1e248158fd02；parent WT /Users/nighca/.codex/worktrees/page-titles/lie，分支codex/character-name-highlights；标题分支/提交保持冻结，没有作为未审依赖重放。
+2026-10-25，用户明确授权跨只读入口复用原姓名高亮机制。当前状态：公共组件/消费者实施及自动验证通过，真实IAB已完成，待旧global规则清理turn与主协调组合审查。原始基线3fdec3de47d9e27e0ecd3f91be7e1e248158fd02；parent WT /Users/nighca/.codex/worktrees/page-titles/lie，分支codex/character-name-highlights；标题分支/提交保持冻结，没有作为未审依赖重放。
 
 ## 公共接口与匹配
 
@@ -36,3 +36,19 @@ Editor使用原始草稿name做字面匹配，不新增trim/内容限制；既�
 root最新main911718e0已含调查连接loading和preview隐藏改编。parent仍从指定3fdec做独立最小消费者diff，不改App结果button gate、Application或loading规则；root候选需要与这些已审差异及标题批组合，不能以本分支声称最新功能已发布。
 
 style.css仍由height owner持有；当前新scoped组件是唯一活动高亮样式，旧global未被引用但按约定待释放后移除，最终交付不能保留两套正式维护样式。暂无服务/浏览器/临时数据。
+
+## 同批实际验收（待旧规则清理后最终构建）
+
+在公共消费者1a43868＋草稿位置db2c9a0的实际源上，用5402自建tab29、同源1004×900和391×844 iframe做CSS断点验收；不改共享viewport，不冒称真实触屏设备。fixture只种入公开官方案例，先保存该专项origin原始DRAFT_KEY值，结束由可见“恢复专项原始草稿”按钮恢复，页面确认“专项原始草稿已按原字节恢复”。没有读取或触碰用户8787/8788草稿。
+
+[结构化DOM观测](evidence/observations.json)包括指定五处：两个Editor预览的原文/标记，询问标题，指认卡标签/正文与成功经过/失败普通文本。Editor背景每端三位姓名主题色正确，margin-inline计算1.68px，正文textContent保留原换行；两端Editor scrollWidth分别1004/391。
+
+- [草稿位置与背景](evidence/editor-background-status.png)：status在steps之后8px，水平center分别502/195.5，保留role=status与清除按钮，391无横向溢出。
+- [结局预览](evidence/editor-ending.png)：桌面与窄屏全文高亮可读，原textarea不高亮，答案摘要姓名也复用。为展示窄屏预览，聚焦分享按钮并按无操作的ArrowLeft使浏览器滚到该区域，未点击分享或传数据。
+- [询问标题](evidence/investigation-heading.png)、[指认卡](evidence/accusation.png)：前者只姓名mark，后缀原文保持；后者aria-label仍“指认 顾遥”、正文精确“指认 顾遥”，Space/Enter按钮操作正常；mark非可交互。
+- [桌面成功＋窄屏失败](evidence/result.png)和[窄屏成功](evidence/result-mobile-solved.png)：成功结果11处姓名mark，原四段不变；失败不含完整经过/没有正文mark。均能返回Editor，缓存步骤保留。
+- 一条无source/stack的MutationObserver.observe非Node TypeError被捕获，时间12:27:34.042+08；仅记录未归因，不声称console clean或扩修宿主/动画。此前RSM验收也有同类未归因记录。
+
+全部为本地demo，未打开语音/真实mic/provider/付费。截图上沿为自有测试包装页，下面两块是不同iframe，不能当原生手机或“当前main全功能组合”截图。3fdec基线的旧开发预览title和preview改编按钮仍可出现在该源证据中；它们由独立已交付标题批与root已审5afa来源修复，本批不覆盖这些区域，root组合时必须保留最新行为。
+
+清理：tab29关闭，原exec57157 Ctrl-C退出、lsof5402无listener；临时public/character-name-qa.html删除，专项原始storage已在关闭前按原字节恢复，无用户storage变动。尚未main/push/PR/deploy。

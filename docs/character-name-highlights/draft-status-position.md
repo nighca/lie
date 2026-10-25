@@ -5,3 +5,5 @@
 原saveStatus != null条件、role=status、busy禁用与overlay=clear点击行为全部保留。Editor局部flex-wrap + justify-content:center，13px muted文字、行间距6px、距步骤条8px；窄屏能换行，不挤步骤条。不写global style.css或ProductHeader共享组件。
 
 既有editor-page品牌/恢复测试改为检查新区域及其上方为创作步骤nav；清除取消/确认/失败、草稿出现与消失、缓存/预览等行为沿用原回归。相关3文件52项/types通过。桌面/391实际图与最终全套结果随本批公共高亮最终验收补齐。
+
+实际1004/391验收见[同批高亮验收](README.md)及[图片](evidence/editor-background-status.png)。两端status均位于steps下8px，整体居中，文案/清除同行；flex-wrap允许窄屏换行，未挤压步骤条，scrollWidth无横向溢出。原出现/隐藏与确认行为沿用自动回归。
