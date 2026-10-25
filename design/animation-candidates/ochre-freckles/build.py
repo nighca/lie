@@ -72,4 +72,4 @@ for p in sorted((root/'parts').glob('*-source.png')):
  parts[p.stem]=dict(sha256=hashlib.sha256(b).hexdigest(),width=w,height=h,mode=im.mode,alphaExtrema=list(im.getchannel('A').getextrema()))
 data=dict(schemaVersion=1,canvas=dict(width=1254,height=1254),assets=assets,nodes=nodes,clips=clips,states={s:s for s in clips},transitions=[])
 (root/'package.json').write_text(json.dumps(data,indent=2)+'\n')
-(root/'provenance.json').write_text(json.dumps(dict(parts=parts,generationCalls=1,repairCalls=0,generationRecords='generation-records.json',sources={s:hashlib.sha256((root/'../../appearances/assets/ochre-freckles'/f'{s}.png').read_bytes()).hexdigest() for s in clips}),indent=2)+'\n')
+(root/'provenance.json').write_text(json.dumps(dict(parts=parts,generationCalls=1,repairCalls=0,generationRecords='generation-records.json',sources={s:hashlib.sha256((root/'../../character-presets/assets/ochre-freckles'/f'{s}.png').read_bytes()).hexdigest() for s in clips}),indent=2)+'\n')

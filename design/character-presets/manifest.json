@@ -94,7 +94,8 @@
       "listening": "assets/mint-puffs/listening.png",
       "waiting": "assets/mint-puffs/waiting.png",
       "speaking": "assets/mint-puffs/speaking.png"
-    }
+    },
+    "animation": "assets/mint-puffs/animation/package.json"
   },
   {
     "id": "ochre-freckles",
@@ -107,6 +108,7 @@
       "listening": "assets/ochre-freckles/listening.png",
       "waiting": "assets/ochre-freckles/waiting.png",
       "speaking": "assets/ochre-freckles/speaking.png"
-    }
+    },
+    "animation": "assets/ochre-freckles/animation/package.json"
   }
 ]

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import crypto from 'node:crypto'
-import { readAnimationPackage } from '../../../packages/appearance-animation/src/package.ts'
-import { sampleClip, AnimationTimeline } from '../../../packages/appearance-animation/src/playback.ts'
+import { readAnimationPackage } from '../../../packages/character-animation/src/package.ts'
+import { sampleClip, AnimationTimeline } from '../../../packages/character-animation/src/playback.ts'
 const dir = new URL('./', import.meta.url)
 const raw = JSON.parse(fs.readFileSync(new URL('package.json', dir)))
 const data = readAnimationPackage(raw)

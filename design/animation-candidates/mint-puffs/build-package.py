@@ -52,7 +52,7 @@ assets={};sources=[]
 for p in sorted((d/'parts').glob('*-source.png')):
  b=p.read_bytes();w,h=struct.unpack('>II',b[16:24]);assets[p.stem]=dict(src='parts/'+p.name,width=w,height=h)
  im=Image.open(p)
- sources.append(dict(id=p.stem,sha256=hashlib.sha256(b).hexdigest(),width=w,height=h,alphaExtrema=list(im.getchannel('A').getextrema()),origin='../../appearances/assets/mint-puffs/'+p.stem.replace('-source','')+'.png'))
+ sources.append(dict(id=p.stem,sha256=hashlib.sha256(b).hexdigest(),width=w,height=h,alphaExtrema=list(im.getchannel('A').getextrema()),origin='../../character-presets/assets/mint-puffs/'+p.stem.replace('-source','')+'.png'))
 p=dict(schemaVersion=1,canvas=dict(width=1254,height=1254),assets=assets,nodes=nodes,clips=clips,states={s:s for s in clips},transitions=[])
 (d/'package.json').write_text(json.dumps(p,indent=2)+'\n')
 (d/'provenance.json').write_text(json.dumps(dict(sources=sources,generationCalls=1),indent=2)+'\n')

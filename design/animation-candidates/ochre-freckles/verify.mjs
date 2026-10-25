@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
-import { readAnimationPackage } from '../../../packages/appearance-animation/src/package.ts'
-import { sampleClip, AnimationTimeline } from '../../../packages/appearance-animation/src/playback.ts'
+import { readAnimationPackage } from '../../../packages/character-animation/src/package.ts'
+import { sampleClip, AnimationTimeline } from '../../../packages/character-animation/src/playback.ts'
 const root=new URL('./',import.meta.url),read=path=>readFileSync(new URL(path,root)),hash=bytes=>createHash('sha256').update(bytes).digest('hex')
 const data=readAnimationPackage(JSON.parse(read('package.json'))),provenance=JSON.parse(read('provenance.json'))
 for(const [id,asset] of Object.entries(data.assets)) {
@@ -10,7 +10,7 @@ for(const [id,asset] of Object.entries(data.assets)) {
  assert.deepEqual([...bytes.subarray(0,8)],[137,80,78,71,13,10,26,10]);assert.equal(bytes.subarray(12,16).toString(),'IHDR')
  assert.equal(bytes.readUInt32BE(16),asset.width);assert.equal(bytes.readUInt32BE(20),asset.height)
  assert.equal(hash(bytes),provenance.parts[id].sha256)
- const state=id.replace('-source',''),canonical=read(`../../appearances/assets/ochre-freckles/${state}.png`)
+ const state=id.replace('-source',''),canonical=read(`../../character-presets/assets/ochre-freckles/${state}.png`)
  assert.equal(hash(bytes),hash(canonical));assert.equal(hash(canonical),provenance.sources[state])
 }
 const heads=['head-default','head-listening','head-waiting','head-speaking']

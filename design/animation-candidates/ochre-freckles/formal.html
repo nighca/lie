@@ -13,6 +13,6 @@ createApp({setup(){const state=ref('default'),mode=ref('animation'),mounted=ref(
  h('button',{onClick:()=>{mode.value=mode.value==='bad'?'animation':'bad'}},'坏路径回退'),
  h('button',{onClick:()=>{mounted.value=!mounted.value}},'卸载/重挂')]),
  h('main',[
- h('section',[h('h2','原画 '+state.value),h('div',{class:'stage'},h('img',{src:'../../appearances/assets/ochre-freckles/'+state.value+'.png',alt:'原画'}))]),
- h('section',[h('h2','正式组件 '+state.value),h('div',{class:'stage'},mounted.value?h(AnimatedPortrait,{src:mode.value==='animation'?new URL('./package.json',location.href).pathname:mode.value==='bad'?'./missing-package.json':null,state:state.value,label:'赭色雀斑动画候选'},()=>h('img',{src:'../../appearances/assets/ochre-freckles/'+state.value+'.png',alt:'静态回退'})):h('p','组件已卸载'))])])])}}).mount('#app')
+ h('section',[h('h2','原画 '+state.value),h('div',{class:'stage'},h('img',{src:'../../character-presets/assets/ochre-freckles/'+state.value+'.png',alt:'原画'}))]),
+ h('section',[h('h2','正式组件 '+state.value),h('div',{class:'stage'},mounted.value?h(AnimatedPortrait,{src:mode.value==='animation'?new URL('./package.json',location.href).pathname:mode.value==='bad'?'./missing-package.json':null,state:state.value,label:'赭色雀斑动画候选'},()=>h('img',{src:'../../character-presets/assets/ochre-freckles/'+state.value+'.png',alt:'静态回退'})):h('p','组件已卸载'))])])])}}).mount('#app')
 </script>

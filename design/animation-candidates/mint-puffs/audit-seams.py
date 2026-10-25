@@ -34,7 +34,7 @@ def alpha(pose,x,y):
   im=images[sp['asset']];u=round(u);v=round(v)
   if 0<=u<im.width and 0<=v<im.height:result=max(result,im.getpixel((u,v))[3])
  return result
-js="""import fs from 'node:fs';import{readAnimationPackage}from './packages/appearance-animation/src/package.ts';import{sampleClip}from './packages/appearance-animation/src/playback.ts';const p=readAnimationPackage(JSON.parse(fs.readFileSync('design/animation-candidates/mint-puffs/package.json')));console.log(JSON.stringify(Object.fromEntries(Object.keys(p.states).map(s=>[s,Array.from({length:32},(_,i)=>sampleClip(p,p.clips[p.states[s]],i/8))]))));"""
+js="""import fs from 'node:fs';import{readAnimationPackage}from './packages/character-animation/src/package.ts';import{sampleClip}from './packages/character-animation/src/playback.ts';const p=readAnimationPackage(JSON.parse(fs.readFileSync('design/animation-candidates/mint-puffs/package.json')));console.log(JSON.stringify(Object.fromEntries(Object.keys(p.states).map(s=>[s,Array.from({length:32},(_,i)=>sampleClip(p,p.clips[p.states[s]],i/8))]))));"""
 env={**os.environ,'PATH':'/private/tmp/lie-toolchain-node/node-v24.22.1-darwin-arm64/bin:'+os.environ['PATH']}
 poses=json.loads(subprocess.check_output(['node','--experimental-transform-types','--input-type=module','-e',js],cwd=repo,env=env,text=True))
 contact=next(n for n in data['nodes'] if n['id']=='chin-contact')

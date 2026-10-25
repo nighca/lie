@@ -23,8 +23,8 @@ Use Node24.22.1 from `/private/tmp/lie-toolchain-node/node-v24.22.1-darwin-arm64
 - `python3 design/animation-candidates/ochre-freckles/build.py`
 - `node --experimental-transform-types design/animation-candidates/ochre-freckles/verify.mjs`
 - `python3 design/animation-candidates/ochre-freckles/audit.py`
-- `npm run typecheck --workspace @lie/appearance-animation`
-- `npm run test --workspace @lie/appearance-animation`
+- `npm run typecheck --workspace @lie/character-animation`
+- `npm run test --workspace @lie/character-animation`
 
 Final output is recorded in evidence/checks.txt. Strict readAnimationPackage parsing, actual PNG headers/dimensions/hashes and canonical identity pass. 960 samples remain finite with exclusive head and state-specific limbs; four loops close; 100 interrupted changes preserve exact numeric continuity; 33 full-parent waiting phases retain the fixed lower body, waist anchor and chin/arm contact. The 33-phase world poses are generated to ignored evidence/poses.json by verify.mjs and consumed by audit.py.
 

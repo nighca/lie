@@ -9,7 +9,7 @@
         0,
         255
       ],
-      "origin": "../../appearances/assets/mint-puffs/default.png"
+      "origin": "../../character-presets/assets/mint-puffs/default.png"
     },
     {
       "id": "listening-source",
@@ -20,7 +20,7 @@
         0,
         255
       ],
-      "origin": "../../appearances/assets/mint-puffs/listening.png"
+      "origin": "../../character-presets/assets/mint-puffs/listening.png"
     },
     {
       "id": "speaking-source",
@@ -31,7 +31,7 @@
         0,
         255
       ],
-      "origin": "../../appearances/assets/mint-puffs/speaking.png"
+      "origin": "../../character-presets/assets/mint-puffs/speaking.png"
     },
     {
       "id": "waiting-source",
@@ -42,7 +42,7 @@
         0,
         255
       ],
-      "origin": "../../appearances/assets/mint-puffs/waiting.png"
+      "origin": "../../character-presets/assets/mint-puffs/waiting.png"
     }
   ],
   "generationCalls": 1

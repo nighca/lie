@@ -15,7 +15,7 @@ Node 24.22.1 on PATH. Cached dependencies installed with `npm ci --ignore-script
 ```
 node --experimental-transform-types design/animation-candidates/mint-puffs/check.mjs
 python3 design/animation-candidates/mint-puffs/audit-seams.py
-npm run appearances:generate
+npm run character-presets:generate
 npx vite --config spikes/animation-preview/vite.config.ts --port 5359
 ```
 
