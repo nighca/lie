@@ -1,29 +1,27 @@
-PASS generator rebuild byte-identical package; provenance unchanged.
+PASS generator rebuilt byte-identical package; all native PNG bytes unchanged; original provenance retained.
 $ node --experimental-transform-types design/animation-candidates/plum-crop/check.mjs
-(node:92957) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:36327) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 PASS strict contract; 5 PNG dimensions/native hashes; canonical hashes; 960 finite samples; loop boundaries; mouth/limb exclusivity; contact parents; anchored waiting breath; 100 interrupted switches with every numeric channel continuous
 
 $ python3 design/animation-candidates/plum-crop/check-waiting-revision.py
-(node:92959) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:36375) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-PASS only waiting scaleY keys (plus plum static upper offset) changed; other states/assets/nodes exact baseline; 33 sampled full-parent fixed lower-body/waist/no side-sway; nonempty masked native-alpha bounds
+(node:36760) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions; 33 real full-parent rigid head/contact matrices: column lengths invariant/orthogonal, head-to-hand relation constant, fixed lower body and torso has no head rotation
 {
   "role": "plum-crop",
-  "amplitude": 0.015,
   "period": 4,
-  "nonzeroAlphaPixels": 940599,
+  "nonzeroAlphaPixels": 915013,
   "waitingBounds": [
     351.5,
-    6.227450000000122,
+    9.312081653368612,
     984.5,
     1253.5
-  ],
-  "headVerticalPeakToPeakAtY250": 18.0
+  ]
 }
-Native alpha >0 at pixel centers; no antialias/color/duplicate contour judgement. Browser artistic acceptance and user confirmation remain required.
-PASS 65538 native-alpha waist interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
-
-(node:93214) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
-(Use `node --trace-warnings ...` to show where the warning was created)
-PASS: static body/hand/sleeve silhouette coverage; no lowered-arm skin residue; 32 full-chain phases per state; 71136 internal opacity probes; 10002 speaking-hand skin pixels and 6 original-ink probes retained; 192 anchored shoulder probes retained. Geometry/nearest-alpha evidence only, not Canvas colour or visual acceptance.
+Native alpha >0 at pixel centers; not antialiased color/duplicate-contour judgement. Parent browser artistic review and user confirmation remain required.
+PASS 454938 native-alpha waist/contact interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
+PASS 40062 neck skin interior probes with4px skin margin, following contact world matrices over33 phases; alpha only, collar/outline color requires native Canvas review.
+PASS exact visible native sprite and full-parent world matrix identity for720 nonwaiting real sampled poses; 3840 rendered-node comparisons

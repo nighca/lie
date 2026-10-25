@@ -1,0 +1,2383 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "assets": {
+    "default-source": {
+      "src": "parts/default-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "head": {
+      "src": "parts/head.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "listening-source": {
+      "src": "parts/listening-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "speaking-source": {
+      "src": "parts/speaking-source.png",
+      "width": 1254,
+      "height": 1254
+    },
+    "waiting-source": {
+      "src": "parts/waiting-source.png",
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  "nodes": [
+    {
+      "id": "body-root",
+      "parent": null,
+      "transform": {
+        "x": 650,
+        "y": 800,
+        "pivotX": 650,
+        "pivotY": 800,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "waiting-breath-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "torso",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 10,
+        "mask": [
+          [
+            540,
+            420
+          ],
+          [
+            720,
+            405
+          ],
+          [
+            850,
+            440
+          ],
+          [
+            945,
+            485
+          ],
+          [
+            955,
+            560
+          ],
+          [
+            890,
+            600
+          ],
+          [
+            895,
+            760
+          ],
+          [
+            908,
+            840
+          ],
+          [
+            908,
+            860
+          ],
+          [
+            896,
+            880
+          ],
+          [
+            889,
+            900
+          ],
+          [
+            890,
+            910
+          ],
+          [
+            887,
+            920
+          ],
+          [
+            876,
+            932
+          ],
+          [
+            869,
+            950
+          ],
+          [
+            890,
+            1000
+          ],
+          [
+            904,
+            1050
+          ],
+          [
+            915,
+            1100
+          ],
+          [
+            927,
+            1150
+          ],
+          [
+            930,
+            1180
+          ],
+          [
+            937,
+            1200
+          ],
+          [
+            950,
+            1254
+          ],
+          [
+            410,
+            1254
+          ],
+          [
+            400,
+            1050
+          ],
+          [
+            408,
+            910
+          ],
+          [
+            450,
+            830
+          ],
+          [
+            465,
+            760
+          ],
+          [
+            465,
+            600
+          ],
+          [
+            375,
+            560
+          ],
+          [
+            380,
+            500
+          ]
+        ]
+      }
+    },
+    {
+      "id": "head-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 630,
+        "y": 440,
+        "pivotX": 630,
+        "pivotY": 440,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
+      "id": "head",
+      "parent": "head-root",
+      "transform": {
+        "x": 257,
+        "y": -25,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 0.54,
+        "scaleY": 0.54
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "head",
+        "order": 30,
+        "mask": [
+          [
+            240,
+            50
+          ],
+          [
+            940,
+            50
+          ],
+          [
+            940,
+            830
+          ],
+          [
+            500,
+            830
+          ],
+          [
+            500,
+            790
+          ],
+          [
+            250,
+            700
+          ]
+        ]
+      }
+    },
+    {
+      "id": "left-neutral",
+      "parent": "body-root",
+      "transform": {
+        "x": 430,
+        "y": 535,
+        "pivotX": 430,
+        "pivotY": 535,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 20,
+        "mask": [
+          [
+            390,
+            495
+          ],
+          [
+            455,
+            530
+          ],
+          [
+            480,
+            620
+          ],
+          [
+            503,
+            785
+          ],
+          [
+            455,
+            900
+          ],
+          [
+            408,
+            950
+          ],
+          [
+            390,
+            1055
+          ],
+          [
+            420,
+            1254
+          ],
+          [
+            250,
+            1254
+          ],
+          [
+            248,
+            1020
+          ],
+          [
+            275,
+            900
+          ],
+          [
+            268,
+            750
+          ],
+          [
+            300,
+            630
+          ]
+        ]
+      }
+    },
+    {
+      "id": "right-neutral",
+      "parent": "body-root",
+      "transform": {
+        "x": 910,
+        "y": 530,
+        "pivotX": 910,
+        "pivotY": 530,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 21,
+        "mask": [
+          [
+            870,
+            465
+          ],
+          [
+            955,
+            500
+          ],
+          [
+            1040,
+            780
+          ],
+          [
+            1060,
+            1254
+          ],
+          [
+            925,
+            1254
+          ],
+          [
+            915,
+            1040
+          ],
+          [
+            918,
+            950
+          ],
+          [
+            903,
+            930
+          ],
+          [
+            897,
+            920
+          ],
+          [
+            894,
+            910
+          ],
+          [
+            889,
+            900
+          ],
+          [
+            889,
+            890
+          ],
+          [
+            850,
+            775
+          ],
+          [
+            860,
+            600
+          ]
+        ]
+      }
+    },
+    {
+      "id": "listen-arm",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 40,
+        "mask": [
+          [
+            447,
+            235
+          ],
+          [
+            467,
+            247
+          ],
+          [
+            462,
+            273
+          ],
+          [
+            451,
+            306
+          ],
+          [
+            460,
+            327
+          ],
+          [
+            482,
+            342
+          ],
+          [
+            501,
+            334
+          ],
+          [
+            518,
+            331
+          ],
+          [
+            530,
+            341
+          ],
+          [
+            510,
+            378
+          ],
+          [
+            486,
+            402
+          ],
+          [
+            465,
+            422
+          ],
+          [
+            451,
+            463
+          ],
+          [
+            432,
+            526
+          ],
+          [
+            480,
+            545
+          ],
+          [
+            500,
+            650
+          ],
+          [
+            480,
+            755
+          ],
+          [
+            350,
+            785
+          ],
+          [
+            240,
+            740
+          ],
+          [
+            230,
+            600
+          ],
+          [
+            285,
+            520
+          ],
+          [
+            340,
+            460
+          ],
+          [
+            375,
+            380
+          ],
+          [
+            376,
+            312
+          ],
+          [
+            392,
+            279
+          ],
+          [
+            420,
+            247
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-torso",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 11,
+        "mask": [
+          [
+            535,
+            410
+          ],
+          [
+            550,
+            435
+          ],
+          [
+            542,
+            490
+          ],
+          [
+            527,
+            550
+          ],
+          [
+            510,
+            620
+          ],
+          [
+            504,
+            650
+          ],
+          [
+            583,
+            650
+          ],
+          [
+            586,
+            570
+          ],
+          [
+            608,
+            500
+          ],
+          [
+            646,
+            430
+          ],
+          [
+            656,
+            390
+          ],
+          [
+            725,
+            400
+          ],
+          [
+            860,
+            440
+          ],
+          [
+            965,
+            540
+          ],
+          [
+            1000,
+            745
+          ],
+          [
+            986.9615384615385,
+            858
+          ],
+          [
+            412.2,
+            858
+          ],
+          [
+            345,
+            810
+          ],
+          [
+            340,
+            600
+          ],
+          [
+            355,
+            500
+          ],
+          [
+            435,
+            450
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-arms",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 41,
+        "mask": [
+          [
+            591.4,
+            644
+          ],
+          [
+            625,
+            740
+          ],
+          [
+            760,
+            750
+          ],
+          [
+            835,
+            725
+          ],
+          [
+            930,
+            730
+          ],
+          [
+            995,
+            780
+          ],
+          [
+            990,
+            895
+          ],
+          [
+            870,
+            920
+          ],
+          [
+            720,
+            880
+          ],
+          [
+            590,
+            845
+          ],
+          [
+            480,
+            870
+          ],
+          [
+            375,
+            835
+          ],
+          [
+            340,
+            735
+          ],
+          [
+            353.0,
+            644
+          ]
+        ]
+      }
+    },
+    {
+      "id": "speak-arm",
+      "parent": "body-root",
+      "transform": {
+        "x": 910,
+        "y": 530,
+        "pivotX": 910,
+        "pivotY": 530,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 42,
+        "mask": [
+          [
+            870,
+            540
+          ],
+          [
+            970,
+            540
+          ],
+          [
+            1040,
+            655
+          ],
+          [
+            1030,
+            830
+          ],
+          [
+            970,
+            910
+          ],
+          [
+            880,
+            895
+          ],
+          [
+            845,
+            820
+          ],
+          [
+            835,
+            765
+          ],
+          [
+            830,
+            755
+          ],
+          [
+            825,
+            749
+          ],
+          [
+            820,
+            748
+          ],
+          [
+            810,
+            750
+          ],
+          [
+            800,
+            752
+          ],
+          [
+            790,
+            754
+          ],
+          [
+            780,
+            752
+          ],
+          [
+            770,
+            746
+          ],
+          [
+            760,
+            741
+          ],
+          [
+            750,
+            736
+          ],
+          [
+            740,
+            732
+          ],
+          [
+            735,
+            714
+          ],
+          [
+            730,
+            705
+          ],
+          [
+            725,
+            696
+          ],
+          [
+            720,
+            682
+          ],
+          [
+            715,
+            672
+          ],
+          [
+            710,
+            664
+          ],
+          [
+            718,
+            658
+          ],
+          [
+            725,
+            658
+          ],
+          [
+            735,
+            660
+          ],
+          [
+            745,
+            666
+          ],
+          [
+            750,
+            670
+          ],
+          [
+            752,
+            665
+          ],
+          [
+            755,
+            662
+          ],
+          [
+            765,
+            662
+          ],
+          [
+            775,
+            666
+          ],
+          [
+            785,
+            672
+          ],
+          [
+            795,
+            679
+          ],
+          [
+            805,
+            685
+          ],
+          [
+            815,
+            687
+          ],
+          [
+            820,
+            685
+          ],
+          [
+            825,
+            678
+          ],
+          [
+            829,
+            673
+          ],
+          [
+            829,
+            649
+          ],
+          [
+            832,
+            631
+          ],
+          [
+            837,
+            623
+          ],
+          [
+            845,
+            621
+          ],
+          [
+            851,
+            625
+          ],
+          [
+            857,
+            645
+          ],
+          [
+            867,
+            654
+          ],
+          [
+            873,
+            662
+          ],
+          [
+            879,
+            680
+          ],
+          [
+            875,
+            595
+          ]
+        ]
+      }
+    },
+    {
+      "id": "mouth-closed",
+      "parent": "head-root",
+      "transform": {
+        "x": 576,
+        "y": 294,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "default-source",
+        "order": 35,
+        "mask": [
+          [
+            0,
+            20
+          ],
+          [
+            104,
+            0
+          ],
+          [
+            110,
+            10
+          ],
+          [
+            97,
+            35
+          ],
+          [
+            65,
+            42
+          ],
+          [
+            20,
+            36
+          ]
+        ],
+        "crop": [
+          576,
+          294,
+          110,
+          52
+        ]
+      }
+    },
+    {
+      "id": "mouth-open",
+      "parent": "head-root",
+      "transform": {
+        "x": 579,
+        "y": 294,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 36,
+        "mask": [
+          [
+            0,
+            26
+          ],
+          [
+            92,
+            0
+          ],
+          [
+            98,
+            5
+          ],
+          [
+            90,
+            44
+          ],
+          [
+            65,
+            62
+          ],
+          [
+            35,
+            62
+          ],
+          [
+            13,
+            44
+          ]
+        ],
+        "crop": [
+          579,
+          294,
+          100,
+          65
+        ]
+      }
+    },
+    {
+      "id": "waiting-lower-body",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 9,
+        "mask": [
+          [
+            988.8076923076923,
+            842
+          ],
+          [
+            985,
+            875
+          ],
+          [
+            940,
+            930
+          ],
+          [
+            980,
+            1254
+          ],
+          [
+            405,
+            1254
+          ],
+          [
+            410,
+            1010
+          ],
+          [
+            450,
+            885
+          ],
+          [
+            389.8,
+            842
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-hand",
+      "parent": "head-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 42,
+        "mask": [
+          [
+            540,
+            350
+          ],
+          [
+            670,
+            350
+          ],
+          [
+            674,
+            380
+          ],
+          [
+            648,
+            400
+          ],
+          [
+            655,
+            410
+          ],
+          [
+            660,
+            420
+          ],
+          [
+            664,
+            440
+          ],
+          [
+            664,
+            450
+          ],
+          [
+            662,
+            460
+          ],
+          [
+            651,
+            470
+          ],
+          [
+            632,
+            480
+          ],
+          [
+            629,
+            490
+          ],
+          [
+            625,
+            500
+          ],
+          [
+            620,
+            510
+          ],
+          [
+            612,
+            520
+          ],
+          [
+            603,
+            530
+          ],
+          [
+            602,
+            540
+          ],
+          [
+            598,
+            570
+          ],
+          [
+            596,
+            600
+          ],
+          [
+            592,
+            640
+          ],
+          [
+            588.5714285714286,
+            660
+          ],
+          [
+            488.61538461538464,
+            660
+          ],
+          [
+            494,
+            625
+          ],
+          [
+            515,
+            550
+          ],
+          [
+            532,
+            470
+          ],
+          [
+            533,
+            410
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-head",
+      "parent": "head-root",
+      "transform": {
+        "x": 257,
+        "y": -25,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 0.54,
+        "scaleY": 0.54
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "head",
+        "order": 30,
+        "mask": [
+          [
+            240,
+            50
+          ],
+          [
+            940,
+            50
+          ],
+          [
+            940.0,
+            780
+          ],
+          [
+            472.22222222222223,
+            780
+          ],
+          [
+            250,
+            700
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-neck-backing",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 29,
+        "mask": [
+          [
+            644,
+            365
+          ],
+          [
+            685,
+            365
+          ],
+          [
+            694,
+            400
+          ],
+          [
+            696,
+            410
+          ],
+          [
+            710,
+            430
+          ],
+          [
+            715,
+            445
+          ],
+          [
+            710,
+            455
+          ],
+          [
+            700,
+            465
+          ],
+          [
+            685,
+            475
+          ],
+          [
+            665,
+            480
+          ],
+          [
+            640,
+            480
+          ],
+          [
+            609,
+            470
+          ],
+          [
+            634,
+            440
+          ],
+          [
+            644,
+            410
+          ]
+        ]
+      }
+    },
+    {
+      "id": "listening-torso",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "listening-source",
+        "order": 10,
+        "mask": [
+          [
+            540,
+            420
+          ],
+          [
+            720,
+            405
+          ],
+          [
+            850,
+            440
+          ],
+          [
+            945,
+            485
+          ],
+          [
+            955,
+            560
+          ],
+          [
+            890,
+            600
+          ],
+          [
+            895,
+            760
+          ],
+          [
+            908,
+            840
+          ],
+          [
+            908,
+            860
+          ],
+          [
+            896,
+            880
+          ],
+          [
+            889,
+            900
+          ],
+          [
+            890,
+            910
+          ],
+          [
+            887,
+            920
+          ],
+          [
+            876,
+            932
+          ],
+          [
+            869,
+            950
+          ],
+          [
+            890,
+            1000
+          ],
+          [
+            904,
+            1050
+          ],
+          [
+            915,
+            1100
+          ],
+          [
+            927,
+            1150
+          ],
+          [
+            930,
+            1180
+          ],
+          [
+            937,
+            1200
+          ],
+          [
+            950,
+            1254
+          ],
+          [
+            410,
+            1254
+          ],
+          [
+            400,
+            1050
+          ],
+          [
+            408,
+            910
+          ],
+          [
+            450,
+            830
+          ],
+          [
+            465,
+            760
+          ],
+          [
+            465,
+            600
+          ],
+          [
+            375,
+            560
+          ],
+          [
+            380,
+            500
+          ]
+        ]
+      }
+    },
+    {
+      "id": "speaking-shoulder-cap",
+      "parent": "body-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "speaking-source",
+        "order": 43,
+        "mask": [
+          [
+            840,
+            420
+          ],
+          [
+            980,
+            420
+          ],
+          [
+            980,
+            560
+          ],
+          [
+            840,
+            560
+          ]
+        ]
+      }
+    }
+  ],
+  "clips": {
+    "default": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "torso": true,
+        "left-neutral": true,
+        "right-neutral": true,
+        "listen-arm": false,
+        "waiting-torso": false,
+        "waiting-arms": false,
+        "speak-arm": false,
+        "mouth-open": false,
+        "head": true,
+        "waiting-head": false,
+        "waiting-neck-backing": false,
+        "waiting-hand": false,
+        "speaking-shoulder-cap": false,
+        "waiting-lower-body": false,
+        "listening-torso": false,
+        "mouth-closed": true
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 800
+            },
+            {
+              "time": 1,
+              "value": 804
+            },
+            {
+              "time": 2,
+              "value": 800
+            },
+            {
+              "time": 3,
+              "value": 796
+            },
+            {
+              "time": 4,
+              "value": 800
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": 1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": -1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 440
+            },
+            {
+              "time": 1,
+              "value": 441.5
+            },
+            {
+              "time": 2,
+              "value": 440
+            },
+            {
+              "time": 3,
+              "value": 438.5
+            },
+            {
+              "time": 4,
+              "value": 440
+            }
+          ]
+        },
+        {
+          "node": "left-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": 1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": -1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": -1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": 1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "speak-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": -1.9
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": 1.9
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    "listening": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "torso": false,
+        "left-neutral": false,
+        "right-neutral": true,
+        "listen-arm": true,
+        "waiting-torso": false,
+        "waiting-arms": false,
+        "speak-arm": false,
+        "mouth-open": false,
+        "head": true,
+        "waiting-head": false,
+        "waiting-neck-backing": false,
+        "waiting-hand": false,
+        "speaking-shoulder-cap": false,
+        "waiting-lower-body": false,
+        "listening-torso": true,
+        "mouth-closed": true
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 800
+            },
+            {
+              "time": 1,
+              "value": 804
+            },
+            {
+              "time": 2,
+              "value": 800
+            },
+            {
+              "time": 3,
+              "value": 796
+            },
+            {
+              "time": 4,
+              "value": 800
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": 0.85
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": -0.85
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 440
+            },
+            {
+              "time": 1,
+              "value": 441.5
+            },
+            {
+              "time": 2,
+              "value": 440
+            },
+            {
+              "time": 3,
+              "value": 438.5
+            },
+            {
+              "time": 4,
+              "value": 440
+            }
+          ]
+        },
+        {
+          "node": "left-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": 1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": -1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": -1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": 1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "speak-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": -1.9
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": 1.9
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    "waiting": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "torso": false,
+        "left-neutral": false,
+        "right-neutral": false,
+        "listen-arm": false,
+        "waiting-torso": true,
+        "waiting-arms": true,
+        "speak-arm": false,
+        "mouth-open": false,
+        "head": false,
+        "waiting-head": true,
+        "waiting-neck-backing": true,
+        "waiting-hand": true,
+        "speaking-shoulder-cap": false,
+        "waiting-lower-body": true,
+        "listening-torso": false,
+        "mouth-closed": true
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 800
+            },
+            {
+              "time": 1,
+              "value": 800
+            },
+            {
+              "time": 2,
+              "value": 800
+            },
+            {
+              "time": 3,
+              "value": 800
+            },
+            {
+              "time": 4,
+              "value": 800
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": 1.15
+            },
+            {
+              "time": 2,
+              "value": -0.15
+            },
+            {
+              "time": 3,
+              "value": -0.95
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 440
+            },
+            {
+              "time": 1,
+              "value": 441
+            },
+            {
+              "time": 2,
+              "value": 440
+            },
+            {
+              "time": 3,
+              "value": 439
+            },
+            {
+              "time": 4,
+              "value": 440
+            }
+          ]
+        },
+        {
+          "node": "waiting-breath-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": -0.8
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": 1.8
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    "speaking": {
+      "duration": 4,
+      "loop": true,
+      "visibility": {
+        "torso": true,
+        "left-neutral": true,
+        "right-neutral": false,
+        "listen-arm": false,
+        "waiting-torso": false,
+        "waiting-arms": false,
+        "speak-arm": true,
+        "mouth-open": false,
+        "head": true,
+        "waiting-head": false,
+        "waiting-neck-backing": false,
+        "waiting-hand": false,
+        "speaking-shoulder-cap": true,
+        "waiting-lower-body": false,
+        "listening-torso": false,
+        "mouth-closed": true
+      },
+      "tracks": [
+        {
+          "node": "body-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 800
+            },
+            {
+              "time": 1,
+              "value": 804
+            },
+            {
+              "time": 2,
+              "value": 800
+            },
+            {
+              "time": 3,
+              "value": 796
+            },
+            {
+              "time": 4,
+              "value": 800
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": 1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": -1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "head-root",
+          "property": "y",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 440
+            },
+            {
+              "time": 1,
+              "value": 441.5
+            },
+            {
+              "time": 2,
+              "value": 440
+            },
+            {
+              "time": 3,
+              "value": 438.5
+            },
+            {
+              "time": 4,
+              "value": 440
+            }
+          ]
+        },
+        {
+          "node": "left-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": 1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": -1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "right-neutral",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": -1.2
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": 1.2
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "speak-arm",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0
+            },
+            {
+              "time": 1,
+              "value": -1.9
+            },
+            {
+              "time": 2,
+              "value": 0
+            },
+            {
+              "time": 3,
+              "value": 1.9
+            },
+            {
+              "time": 4,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "mouth-open",
+          "property": "visible",
+          "interpolation": "step",
+          "keys": [
+            {
+              "time": 0,
+              "value": false
+            },
+            {
+              "time": 0.18,
+              "value": true
+            },
+            {
+              "time": 0.36,
+              "value": false
+            },
+            {
+              "time": 0.56,
+              "value": true
+            },
+            {
+              "time": 0.72,
+              "value": false
+            },
+            {
+              "time": 0.95,
+              "value": true
+            },
+            {
+              "time": 1.15,
+              "value": false
+            },
+            {
+              "time": 1.36,
+              "value": true
+            },
+            {
+              "time": 1.58,
+              "value": false
+            },
+            {
+              "time": 1.8,
+              "value": true
+            },
+            {
+              "time": 2.05,
+              "value": false
+            },
+            {
+              "time": 2.28,
+              "value": true
+            },
+            {
+              "time": 2.48,
+              "value": false
+            },
+            {
+              "time": 2.72,
+              "value": true
+            },
+            {
+              "time": 2.95,
+              "value": false
+            },
+            {
+              "time": 3.18,
+              "value": true
+            },
+            {
+              "time": 3.42,
+              "value": false
+            },
+            {
+              "time": 3.65,
+              "value": true
+            },
+            {
+              "time": 3.82,
+              "value": false
+            },
+            {
+              "time": 4,
+              "value": true
+            }
+          ]
+        },
+        {
+          "node": "mouth-closed",
+          "property": "visible",
+          "interpolation": "step",
+          "keys": [
+            {
+              "time": 0,
+              "value": true
+            },
+            {
+              "time": 0.18,
+              "value": false
+            },
+            {
+              "time": 0.36,
+              "value": true
+            },
+            {
+              "time": 0.56,
+              "value": false
+            },
+            {
+              "time": 0.72,
+              "value": true
+            },
+            {
+              "time": 0.95,
+              "value": false
+            },
+            {
+              "time": 1.15,
+              "value": true
+            },
+            {
+              "time": 1.36,
+              "value": false
+            },
+            {
+              "time": 1.58,
+              "value": true
+            },
+            {
+              "time": 1.8,
+              "value": false
+            },
+            {
+              "time": 2.05,
+              "value": true
+            },
+            {
+              "time": 2.28,
+              "value": false
+            },
+            {
+              "time": 2.48,
+              "value": true
+            },
+            {
+              "time": 2.72,
+              "value": false
+            },
+            {
+              "time": 2.95,
+              "value": true
+            },
+            {
+              "time": 3.18,
+              "value": false
+            },
+            {
+              "time": 3.42,
+              "value": true
+            },
+            {
+              "time": 3.65,
+              "value": false
+            },
+            {
+              "time": 3.82,
+              "value": true
+            },
+            {
+              "time": 4,
+              "value": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "states": {
+    "default": "default",
+    "listening": "listening",
+    "waiting": "waiting",
+    "speaking": "speaking"
+  },
+  "transitions": []
+}
