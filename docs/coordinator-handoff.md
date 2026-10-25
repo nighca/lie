@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为462d8a4ddebe1df3703caace2f2db2aa5c8eeb89，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 本轮main包含已验生产候选746718abb0742ecc7ac40aa23b4228df2c8e73db及文档报告fc35fbf；操作前读取实际HEAD，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：main462已含姓名/草稿、loading/preview、Coral档案及调查高度（[高度证据](investigation-viewport-height-combined.md)）；高度不再待ff。q90六源与CI/CD拆分已root完整review实现，冻结候选746718a完成Web334/runtime80/generator24/CI17、workspace types、真实Web/Gateway build/strict89、195文件产物交接及隔离cf dry-run；[组合报告/审计](performance/image-build-optimization/combined-main-verification.md)供root实际审查后ff，未提前称main或发布。远端Actions/Linux实际部署未验，线上仍483；不自动push。结果App/CSS turn已给动画parent01a16d44，从462仅结果区/专用CSS/tests、5355串行验收；5355用户消费者保留。图片5356 PID92431/子92889/PTY39359 exit130、listener/ps空、tab2关及override复原；5357误占已停非新增批准端口（源owner回执），本轮未扫描/启停。单JSON增加内置案仍仅[讨论提案](builtin-case-json-proposal.md)，字段/排序待确认，不eligible。
+下一步：main462已含姓名/草稿、loading/preview、Coral档案及调查高度（[高度证据](investigation-viewport-height-combined.md)）；高度不再待ff。q90六源与CI/CD拆分已root完整review实现，冻结候选746718a完成Web334/runtime80/generator24/CI17、workspace types、真实Web/Gateway build/strict89、195文件产物交接及隔离cf dry-run；[组合报告/审计](performance/image-build-optimization/combined-main-verification.md)已由root实际审查并本地集成，未发布。远端Actions/Linux实际部署未验，线上仍483；不自动push。结果App/CSS turn已给动画parent01a16d44，从462仅结果区/专用CSS/tests、5355串行验收；5355用户消费者保留。图片5356 PID92431/子92889/PTY39359 exit130、listener/ps空、tab2关及override复原；5357误占已停非新增批准端口（源owner回执），本轮未扫描/启停。单JSON增加内置案仍仅[讨论提案](builtin-case-json-proposal.md)，字段/排序待确认，不eligible。
 
 ## 当前owner与恢复入口
 
