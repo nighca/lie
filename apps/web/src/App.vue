@@ -177,8 +177,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       </div>
       <footer class="result-actions">
         <UiButton @click="controller.restart()">重新开始一局</UiButton>
-        <UiButton variant="secondary" @click="emit('remix')">改编游戏</UiButton>
         <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
+        <button type="button" class="remix-link" @click="emit('remix')">我要改编</button>
       </footer>
     </main>
     <main v-else class="intro-card surface">

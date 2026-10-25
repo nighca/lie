@@ -83,6 +83,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .result-card .result-actions { flex-wrap: nowrap; margin-top: 30px; padding-top: 24px; border-top: 1px solid #111b451c; }
 .result-card .result-actions > :first-child { flex: 1; }
 .result-card .result-actions .lie-button { font-weight: 700; }
+.result-card .remix-link { flex-shrink: 0; align-self: center; min-height: 44px; padding: 8px 0 8px 8px; border: 0; background: transparent; color: var(--lie-primary); font: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.result-card .remix-link:hover { text-decoration-thickness: 2px; }
+.result-card .remix-link:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 4px; border-radius: 4px; }
 .result-card--wrong { max-width: 760px; padding-top: 28px; }
 .result-card--wrong .case-title { margin-bottom: 20px; }
 .result-card--wrong .result-content { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 18px; }
@@ -103,6 +106,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .result-story p { line-height: 1.85; }
   .result-card .result-actions { flex-direction: column; gap: 12px; margin-top: 24px; padding-top: 20px; }
   .result-card .result-actions .lie-button { width: 100%; min-height: 48px; }
+  .result-card .remix-link { align-self: flex-end; }
 }
 @media (max-width: 850px) {
   .investigation { height: auto; min-height: 0; grid-template-columns: minmax(240px, .85fr) minmax(320px, 1fr); grid-template-rows: auto 440px auto; }

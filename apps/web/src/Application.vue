@@ -196,7 +196,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
       </section>
     </main>
   </div>
-  <UiDialog :open="remixOpen" title="改编游戏" @close="cancelRemix">
+  <UiDialog :open="remixOpen" title="改编案件" @close="cancelRemix">
     <p>改编会打开完整案件，包括答案、结局和人物设定。</p>
     <p>此浏览器如有草稿，继续将替换它，无法撤销。选择“保留草稿”可取消改编。</p>
     <p v-if="remixChanged" role="status">草稿刚刚发生了变化，请再次确认是否替换。</p>

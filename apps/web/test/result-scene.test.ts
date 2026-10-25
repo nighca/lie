@@ -35,13 +35,15 @@ describe('accused character result scene', () => {
     expect(document.activeElement).toBe(wrapper.get('main h1').element)
     expect(wrapper.get('main h1').text()).toBe(correct ? '谜题解开了！' : '指认不正确')
     expect(wrapper.get<HTMLDialogElement>('.accusation-dialog').element.open).toBe(false)
-    expect(wrapper.findAll('.result-actions button').map((button) => button.text())).toEqual(['重新开始一局', '改编游戏', '返回我的案件'])
+    expect(wrapper.findAll('.result-actions button').map((button) => button.text())).toEqual(['重新开始一局', '返回我的案件', '我要改编'])
     if (correct) {
       expect(wrapper.findAll('.result-story p').map((paragraph) => paragraph.text())).toEqual(['第一段真相。', '第二段经过。'])
     } else {
       expect(wrapper.get('.result-story').text()).toBe('这次调查已结束想再试一次，请重新开始一局。')
     }
-    await wrapper.get('.result-actions button:last-child').trigger('click')
+    await wrapper.get('.remix-link').trigger('click')
+    expect(wrapper.emitted('remix')).toEqual([[]])
+    await wrapper.findAll('.result-actions button').find((button) => button.text() === '返回我的案件')!.trigger('click')
     expect(wrapper.emitted('navigateHome')).toHaveLength(1)
     await wrapper.get('.result-actions button:first-child').trigger('click')
     expect(controller.getView().phase).toBe('intro')
