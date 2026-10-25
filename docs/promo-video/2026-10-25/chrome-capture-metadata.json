@@ -1,0 +1,29 @@
+{
+  "first": {
+    "deviceHeight": 800,
+    "deviceWidth": 1280,
+    "offsetTop": 0,
+    "pageScaleFactor": 1,
+    "scrollOffsetX": 0,
+    "scrollOffsetY": 0,
+    "timestamp": 1792918065.060907
+  },
+  "last": {
+    "deviceHeight": 800,
+    "deviceWidth": 1280,
+    "offsetTop": 0,
+    "pageScaleFactor": 1,
+    "scrollOffsetX": 0,
+    "scrollOffsetY": 204.5,
+    "timestamp": 1792918078.895773
+  },
+  "frames": 666,
+  "duration": 15.833333,
+  "output": {
+    "width": 1280,
+    "height": 800,
+    "fps": 30,
+    "codec": "h264",
+    "size": 1131122
+  }
+}
