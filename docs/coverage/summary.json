@@ -1,0 +1,153 @@
+{
+  "sourceSha": "fa27dc4f18f5b971da42ce8497eeba64c94ee9da",
+  "dirty": false,
+  "collectedAt": "2026-10-25T00:07:22.998Z",
+  "node": "v24.22.1",
+  "application": {
+    "scope": "Six workspaces, production src .ts/.vue; excludes declarations and UI demo",
+    "files": 45,
+    "tests": 358,
+    "ordinaryTestTemplates": 253,
+    "totals": {
+      "lines": {
+        "total": 1630,
+        "covered": 1501,
+        "skipped": 0,
+        "pct": 92.08
+      },
+      "statements": {
+        "total": 2265,
+        "covered": 2000,
+        "skipped": 0,
+        "pct": 88.3
+      },
+      "functions": {
+        "total": 514,
+        "covered": 439,
+        "skipped": 0,
+        "pct": 85.4
+      },
+      "branches": {
+        "total": 1694,
+        "covered": 1461,
+        "skipped": 0,
+        "pct": 86.24
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    },
+    "uncoveredFiles": [
+      "apps/gateway/src/index.ts",
+      "apps/web/src/main.ts",
+      "apps/web/src/application/demoVoice.ts"
+    ]
+  },
+  "scripts": {
+    "scope": [
+      "scripts/main-preview.mjs",
+      "scripts/character-presets.mjs"
+    ],
+    "tests": 30,
+    "totals": {
+      "lines": {
+        "total": 288,
+        "covered": 263,
+        "pct": 91.32
+      },
+      "branchs": {
+        "total": 163,
+        "covered": 138,
+        "pct": 84.66
+      },
+      "functions": {
+        "total": 29,
+        "covered": 23,
+        "pct": 79.31
+      }
+    }
+  },
+  "vueRemapping": [
+    {
+      "path": "apps/web/src/App.vue",
+      "sourceLines": 183,
+      "templateBranchCount": 72,
+      "templateExample": {
+        "line": 76,
+        "source": "<ProductHeader @navigate-home=\"emit('navigateHome')\">"
+      },
+      "branchExamples": [
+        {
+          "line": 21,
+          "counts": [
+            119,
+            0
+          ],
+          "source": "const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)"
+        },
+        {
+          "line": 17,
+          "counts": [
+            69,
+            122
+          ],
+          "source": "if (value.phase !== 'interrogating') backgroundOpen.value = false"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/editor/Editor.vue",
+      "sourceLines": 197,
+      "templateBranchCount": 100,
+      "templateExample": {
+        "line": 132,
+        "source": "<ProductHeader class=\"editor-header\" @navigate-home=\"!busy && emit('leave')\">"
+      },
+      "branchExamples": [
+        {
+          "line": 15,
+          "counts": [
+            26,
+            0
+          ],
+          "source": "const draft = ref(createDraft(props.characterPresets[0]?.id ?? null))"
+        },
+        {
+          "line": 31,
+          "counts": [
+            19,
+            7
+          ],
+          "source": "if (stored != null) { draft.value = stored; saveStatus.value = '已恢复此浏览器的草稿' }"
+        }
+      ]
+    },
+    {
+      "path": "packages/ui/src/components/AnimatedPortrait.vue",
+      "sourceLines": 71,
+      "templateBranchCount": 0,
+      "templateExample": null,
+      "branchExamples": [
+        {
+          "line": 12,
+          "counts": [
+            51,
+            0
+          ],
+          "source": "const motionChanged = () => { reduced.value = media?.matches ?? false }"
+        },
+        {
+          "line": 15,
+          "counts": [
+            1,
+            51
+          ],
+          "source": "if (typeof window.matchMedia !== 'function') { reduced.value = true; return }"
+        }
+      ]
+    }
+  ]
+}
