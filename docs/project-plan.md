@@ -38,3 +38,7 @@
 | 不采用旧资源保留 | 用户不需要旧版本兼容，14d/256MiB提案不接CI；[历史方案](archive/2026-10-25/release-retention-not-adopted/README.md)保留。允许旧产品资源删除不等广泛账号工件/Git历史/WT清理。 |
 
 8787/8788及内部监听受保护；5355/PID37202/PTY40865/tab60仍有动画用户消费者，沿owner回执保留，未扫描/启停。其他端口及历史退出看[服务台账](development.md#服务登记与生命周期)。保护所有在制/dirty/refs；完成设计和失败方案均入库后才讨论清理，归档不等批准。当前状态替代[原文快照](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)，旧发布/失败历史不被覆盖。
+
+最新发布阻断：d4c189b已push，CI40183215334 attempt1 coverage603通过/1失败；Editor测试仍读取已删除品牌span，CD40183344564 skipped，正式环境未由本次更新。source c350bba仅更新当前可访问品牌链接/SVG契约，26个Editor+5个Header测试通过，root目标失败用例复验通过；本批审查纠正后正常push，不绕过检查。
+
+视频最新直接授权：用户消息01a17289-fda3-7432-9cbc-da5aa6588ed0验收有声试片，要求用用户tab完成首页→对话→切人→指认→结局→首页录制。试片f62309c待完整review归档，未当正式整片；生产本轮CI/CD结束后再给≤5分钟录制窗口以免跨发布删旧资源影响画面，不自动重试/改配置，用户tab与原生记录按明确本轮范围保留。
