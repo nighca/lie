@@ -1,0 +1,1 @@
+2026-10-25 rigid split first draft: parent actual Canvas review found residual moving/static neck/collar black outlines at extrema. Preserves exact reviewed package and unmodified native parent screenshot. Not user-approved. The correction assigns the collar to clothing and restricts the moving hand to actual hand/forearm material. Assets unchanged ../../parts/.
