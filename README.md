@@ -12,7 +12,7 @@ English · [简体中文](README.zh-CN.md)
 
 ![LIE: a voice detective game with bright yellow and blue colors and original cartoon characters](design/brand/readme-hero.en.png)
 
-Talk freely with AI characters, compare their accounts, and identify who is responsible. The artwork is playful; the characters may leave things unsaid. What to ask, whom to question first, and which story to trust are up to you. The game interface is in Chinese.
+LIE is an AI voice detective game and a platform for creating your own mysteries. Talk freely with AI characters, compare their accounts, and identify who is responsible. The artwork is playful; the characters may leave things unsaid. What to ask, whom to question first, and which story to trust are up to you. Play and create in desktop or mobile browsers, with no app to install. The game interface is in Chinese.
 
 [Play LIE](https://lie.agency/) · [Create a case](https://lie.agency/editor) · [Watch the demo (3:07, with audio)](media/promo-video/lie-demo.mp4)
 
@@ -36,11 +36,11 @@ Case sizes vary; the engine does not hardcode three suspects.
 
 ## Make and share your own mystery
 
-The editor has three freely navigable steps: story setup, characters, and the ending. Write a public background and a plain-text profile for each character, choose reusable appearances, select the single correct target, and set the time budget. Eight presets provide portraits, state images and configured voices; appearance names are separate from story character names.
+The editor has three freely navigable steps: story setup, characters, and the ending. Write a public background and a plain-text profile for each character, choose reusable appearances, select the single correct target, and set the time budget. Eight presets provide distinctive portraits, animations for conversation states and configured voices; appearance names are separate from story character names.
 
-Incomplete drafts autosave in the current browser. Trial play uses the same game engine. Sharing compresses the complete case into the URL fragment, so a friend can open it without a story database or an account. The current full-link budget is 16,000 characters; cross-browser boundary acceptance is still pending. Editing a draft does not change links already sent.
+Incomplete drafts autosave in the current browser. Trial play uses the same game engine. Sharing compresses the complete case into the URL fragment, so a friend can open it without a story database or an account. The current full-link budget is 16,000 characters; cross-browser boundary acceptance is still pending. Players can remix a shared case in the editor. Editing a draft does not change links already sent.
 
-Official contribution preparation lets an author copy or download JSON and continue on GitHub. It does not automatically create a PR or publish a case; the current private repository is not open to external submissions. See the [editor implementation](docs/game-editor-implementation.md) and [case authoring guide](content/games/README.md).
+To submit a case for the official collection, the editor prepares case JSON and guides authors through creating a GitHub Pull Request for maintainer review. See the [editor implementation](docs/game-editor-implementation.md) and [case authoring guide](content/games/README.md).
 
 Coverage is a **snapshot of application lines**, with native scripts reported separately. See the [sample SHA, timestamp, scope and update command](docs/coverage/README.md) and [measured counts](docs/coverage/summary.json). CI uploads fresh reports as artifacts; it does not rewrite the tracked badge.
 
@@ -74,7 +74,7 @@ npm run build
 
 Automated checks cover content validation, accusation rules, character context, asynchronous ownership, voice transport, UI flows and Worker boundaries. Fake-provider success does not certify real microphone capture, recognition, playback or model behavior. Real-service evidence is recorded separately in the [validation log](docs/validation.md) and [case follow-up](docs/case-live-followup.md).
 
-[CI](https://github.com/nighca/lie/actions/workflows/ci.yml) performs checks, coverage, build and a deployment dry run. A separate [CD workflow](https://github.com/nighca/lie/actions/workflows/cd.yml) receives only a successful same-repository main CI run, verifies its exact SHA and artifact, then deploys that prebuilt output if the SHA is still main. CD does not rebuild or rerun tests. Manual runs start from CI; [handoff and permissions](docs/ci-cd.md) describe the boundary. The [latest verified release](docs/releases/2026-10-25-main-refresh.md) is historical deployment evidence, not proof these new workflows have run remotely. A private repository's CI badge may require login.
+[CI](https://github.com/nighca/lie/actions/workflows/ci.yml) performs checks, coverage, build and a deployment dry run. A separate [CD workflow](https://github.com/nighca/lie/actions/workflows/cd.yml) receives only a successful same-repository main CI run, verifies its exact SHA and artifact, then deploys that prebuilt output if the SHA is still main. CD does not rebuild or rerun tests. Manual runs start from CI; [handoff and permissions](docs/ci-cd.md) describe the boundary. The [latest verified release](docs/releases/2026-10-25-main-refresh.md) is historical deployment evidence, not proof these new workflows have run remotely.
 
 Local and online development previews support real voice. Application authentication is temporarily disabled by the project owner's decision; provider credentials remain on the Worker. Production access, concurrency allocation and account-wide spending controls are still deferred. A browser's questioning timer is not a hard provider spending cap. Continuous-voice user testing and bounded real-model checks do not establish unrestricted multi-user readiness; see the [online voice preview boundaries](docs/online-voice-preview.md).
 
@@ -101,7 +101,7 @@ flowchart LR
     Gateway <-->|"Authentication · text and audio"| Linx
 ```
 
-Stories primarily contain plain-text public backgrounds and character profiles, with only the metadata the engine needs. Additional cases use content packages and presentation configuration. Game content and session logic run in the browser; complete answers are inspectable in developer tools. Provider management credentials stay on the hosted side. No game database or traditional always-running server is required.
+Stories primarily contain plain-text public backgrounds and character profiles, with only the metadata the engine needs. Additional cases use content packages and presentation configuration. Game content and session logic run in the browser; complete answers are inspectable in developer tools. Provider management credentials stay on the hosted side. No game database or traditional always-running server is required. Shared case and character specifications connect authoring tools with the engine; a custom lightweight 2D skeletal animation format and Canvas player bring reusable characters to life.
 
 | Location | Responsibility |
 | --- | --- |
