@@ -1,6 +1,6 @@
 # CharacterPreset 命名迁移实施与验收
 
-2026-10-25。实施owner：character_preset_migration；独立工作树 `character-preset-migration-dawn/lie`，分支 `codex/character-preset-migration-dawn`，reviewed base `2982e6a77046d9f3c3744e529c08166149e3eddc`。命名与边界已批准，原[范围调查](character-preset-migration.md)和[落地计划](character-preset-migration-plan.md)继续保留；本记录为实施候选，不代表已集成main、已push、已部署或runner已切换。
+2026-10-25。实施owner：character_preset_migration；独立工作树 `character-preset-migration-dawn/lie`，分支 `codex/character-preset-migration-dawn`，reviewed base `2982e6a77046d9f3c3744e529c08166149e3eddc`。命名与边界已批准，原[范围调查](character-preset-migration.md)和[落地计划](character-preset-migration-plan.md)继续保留；本记录保留实施候选证据；2026-10-25 08:02（Asia/Shanghai）已完成root本地集成后的受控runner切换，见末节。未push或部署。
 
 ## 实施范围与保留边界
 
@@ -48,7 +48,7 @@
 
 自动审批曾拒绝一次递归扫描全部animation-candidates并替换相对源路径的写操作，理由是可能包含受保护mint/ochre在制目录；该操作未执行。随后先只读核明确8个文件与受保护目录无diff，再将写操作收窄到blue/sunny/silver/gray/plum五目录这8个已授权文件，获准且完成，不绕过边界。此后未再做宽范围候选写入。
 
-常驻runner仍未操作。root实际review并串行集成后，必须明确给本实施owner服务turn；owner负责一次原 `dev.nighca.lie.main-preview` launchd受控kickstart，以及8787/8788回环监听、`/__lie/main-status`=集成SHA、79资源与manifest、前端私密路径403（不输出body）和runner日志成功检查。步骤在[development](development.md)“人物预设命名迁移的runner切换”。不创建新daemon、不停其他服务、不删除活锁、不自动部署。服务结果在完成后以独立新提交追加，不把该尾巴转交root。
+首次候选交付时常驻runner未操作。root实际review并串行集成后，必须明确给本实施owner服务turn；owner负责一次原 `dev.nighca.lie.main-preview` launchd受控kickstart，以及8787/8788回环监听、`/__lie/main-status`=集成SHA、79资源与manifest、前端私密路径403（不输出body）和runner日志成功检查。步骤在[development](development.md)“人物预设命名迁移的runner切换”。不创建新daemon、不停其他服务、不删除活锁、不自动部署。服务结果在完成后以独立新提交追加，不把该尾巴转交root。
 
 ## 交付核验
 
@@ -60,4 +60,24 @@
 
 Root发现新增runner测试把 `process.execPath`直接写入shebang；正式运行时路径含`Application Support`空格，不能据无空格临时运行时通过而认定可移植。已将fixture改为`#!/usr/bin/env node`，受控PATH先含fixture bin、再含当前Node二进制目录，确保解析同一运行时；等待runner退出失败时仍由finally恢复原PATH。仅测试夹具变化，无生产代码、资源或依赖变化。
 
-使用实际 `/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node --test --test-name-pattern='default runner generates' scripts/main-preview.test.mjs`，1项通过、退出0；不重复388项、类型或构建。此修正以独立后续提交交付，不改写原候选commit。正式8787/8788仍未操作，继续等root服务turn。
+使用实际 `/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node --test --test-name-pattern='default runner generates' scripts/main-preview.test.mjs`，1项通过、退出0；不重复388项、类型或构建。此修正以独立后续提交交付，不改写原候选commit。该测试修正交付时正式8787/8788未操作，继续等root服务turn。
+
+## 2026-10-25 08:02：受控常驻服务切换完成
+
+用户明确授权“允许现在受控切换”，root给出唯一服务操作turn。root已将原两提交review/cherry-pick并本地集成到 `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`；本owner在操作前核owning checkout为干净main。只对既有 `gui/<uid>/dev.nighca.lie.main-preview` 执行 **一次** `launchctl kickstart -k`；未增加daemon、并行server、端口、shim，未修改plist/凭据/锁，也未停止其他作者服务。
+
+日志在切换前显示旧生成器路径已失效（旧runner仍调用scripts/appearances.mjs），以及launchd原失败退避；本次kickstart返回0。之后现有runner实际输出 `Generated 8 character presets (79 assets)`，启动集成SHA。检查期间root又推进文档main至 `3c54a9e61608a649a79d3694963df53f14bf6849`，同一新runner正常生成并随Git更新重启其自身子服务，日志记录该新SHA。没有再次手动kickstart或绕过原进程管理。
+
+最终[不含私密数据的核验JSON](character-preset-migration-evidence/live-cutover.json)记录：
+
+- `2026-10-25T00:02:25Z`（上海08:02:25）owning main干净，`/__lie/main-status`返回200、branch main及上述 `3c54a9e6…`，核验前后HEAD稳定。
+- `8788/api/health`返回200、status ok、storage none；未请求voice/status、voice WS或其他provider接口。
+- lsof确认8787、8788均只监听127.0.0.1。launchd运行PID=main-preview.lock owner（98703）；未清活锁。
+- 实际正式源、public以及8787 HTTP返回的79资源+manifest全部SHA-256等于迁移前快照，8个预设不变，80个公开对象均成功取回。
+- owning main不包含dist/appearances；这不是Vite源码服务的输入。本次没有为纯文档main重复build；源候选既有dist的79资源+manifest再次只读核对仍与相同快照完全相等，复用已验证的构建身份，不宣称main新建过dist。
+- 实际存在的 `apps/gateway/.dev.vars` 与 `.git/config` 的前端/@fs请求均返回 **403**，只检查code、不读取或输出私密文件及拒绝body。
+- `.dev.vars.local`、网关`.linx-api-key`、`.env`、`.cloudflare/private.json`本机均不存在；针对这些不存在的路径Vite返回200 text/html回退，故明确记录原code而不冒称403或存在私密文件。本次未为验收创建任何私密fixture，已有源码测试使用存在的fixture覆盖这些deny规则。
+
+诊断边界：最初受限shell的HTTP/ps被sandbox拒绝，URLError本身不证明服务未启动；改用获准的只读localhost核验。继承代理的localhost请求返回502后，验证helper仅对本地请求禁用代理，未改系统/runner配置；直连证据以上述最终记录为准。不存在路径的200导致初版“全部必须403”断言失败，随后仅对真实存在的保护文件要求403，保留实际结果而未修改应用保护逻辑。没有重复盲重启或触发新provider动作。
+
+本轮只追加验收文档及上述JSON，无生产代码、资源或依赖变化，未重复应用全检。服务已保留运行，未push/部署；将此独立后续提交交root复审/本地集成，服务操作turn完成。

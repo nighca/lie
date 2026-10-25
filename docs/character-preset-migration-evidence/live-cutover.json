@@ -1,0 +1,53 @@
+{
+  "checkedAtUtc": "2026-10-25T00:02:25.064844+00:00",
+  "mainSha": "3c54a9e61608a649a79d3694963df53f14bf6849",
+  "mainClean": true,
+  "frontendStatus": {
+    "code": 200,
+    "branch": "main",
+    "sha": "3c54a9e61608a649a79d3694963df53f14bf6849"
+  },
+  "gatewayHealth": {
+    "code": 200,
+    "status": "ok",
+    "storage": "none"
+  },
+  "resources": {
+    "presetCount": 8,
+    "assetCount": 79,
+    "sourcePublicHttpSha256": "all identical to pre-migration snapshot",
+    "httpObjects": 80,
+    "mainDistExists": false
+  },
+  "privatePathCodes": {
+    "apps/gateway/.dev.vars": {
+      "exists": true,
+      "code": 403
+    },
+    "apps/gateway/.dev.vars.local": {
+      "exists": false,
+      "code": 200
+    },
+    "apps/gateway/.linx-api-key": {
+      "exists": false,
+      "code": 200
+    },
+    "apps/gateway/.env": {
+      "exists": false,
+      "code": 200
+    },
+    "apps/gateway/.cloudflare/private.json": {
+      "exists": false,
+      "code": 200
+    },
+    ".git/config": {
+      "exists": true,
+      "code": 403
+    }
+  },
+  "listeners": {
+    "8787": "127.0.0.1 only",
+    "8788": "127.0.0.1 only"
+  },
+  "lockOwner": 98703
+}
