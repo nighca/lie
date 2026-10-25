@@ -5,7 +5,7 @@
 <h1>赭色雀斑 · 动画候选</h1><p>原画与动态对照；嘴形为合成时序。循环、相反极值和中断使用正式采样器与 Canvas 后端。</p>
 <nav><button data-state="default">default</button><button data-state="listening">listening</button><button data-state="waiting">waiting</button><button data-state="speaking">speaking</button><button id="pause">暂停</button><button id="interrupt">100ms 中断序列</button></nav><p><a href="?">播放</a> · <a href="?phase=extrema">极值</a> · <a href="?phase=extrema&detail=shoulders">肩颈</a> · <a href="?phase=extrema&detail=waist">腰线/衣摆</a> · <a href="?phase=extrema&detail=hands">手/袖口</a> · <a href="?phase=face&detail=face">嘴部</a></p><main></main>
 <script type="module">
-import {readAnimationPackage,sampleClip,AnimationTimeline,createCanvasRenderer} from '/@fs/Users/nighca/.codex/worktrees/ochre-freckles-animation/lie/packages/character-animation/src/index.ts';
+import {readAnimationPackage,sampleClip,AnimationTimeline,createCanvasRenderer} from '../../../packages/character-animation/src/index.ts';
 const query=new URLSearchParams(location.search),detail=query.get('detail'),phase=query.get('phase'),main=document.querySelector('main');
 if(detail)document.body.classList.add('detail',detail);
 const data=readAnimationPackage(await(await fetch('./package.json')).json()),images=new Map(await Promise.all(Object.entries(data.assets).map(async([id,asset])=>{const image=new Image();image.src=new URL(asset.src,location.href);await image.decode();return[id,image]})));

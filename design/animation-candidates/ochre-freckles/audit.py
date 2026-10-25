@@ -19,7 +19,9 @@ def visible(n,p):return p[n['id']]['visible'] and (n['parent'] is None or visibl
 def alpha(n,x,y,phase):
  sp=n['sprite'];x,y=inverse(phase['world'][n['id']],x,y)
  if 'mask'in sp and not inside(x,y,sp['mask']):return 0
- if 'crop'in sp:x+=sp['crop'][0];y+=sp['crop'][1]
+ if 'crop'in sp:
+  if not (0<=x<sp['crop'][2] and 0<=y<sp['crop'][3]):return 0
+  x+=sp['crop'][0];y+=sp['crop'][1]
  im=images[sp['asset']];x=int(x);y=int(y)
  return im.getpixel((x,y))[3] if 0<=x<im.width and 0<=y<im.height else 0
 report=[]
@@ -31,7 +33,8 @@ for state in ['default','listening','waiting']:
   for x in range(2,1252,3):
    if im.getpixel((x,y))[3]<245:continue
    probes+=1
-   if max(alpha(n,x,y,phase) for n in draws)<200:missing.append((x,y))
+   wx,wy=mappt(phase['world']['body-root'],x,y)
+   if max(alpha(n,wx,wy,phase) for n in draws)<200:missing.append((x,y))
  assert not missing,(state,missing)
  report.append(f'{state}: {probes} baseline opaque probes; missing={len(missing)}; regions={collections.Counter((x//50*50,y//50*50) for x,y in missing).most_common(12)}')
 # Full-chain interior probes at all 33 phases. Around neck, shoulders, wrists, armpits and waist.
@@ -81,3 +84,31 @@ assert lower_probes>100
 report.append(f'{lower_probes} actual pants/hand probes exclude lower silhouette contamination')
 print('\n'.join(report))
 assert not fail
+
+# Speech keeps one head texture/transform; only this bounded native-mouth selection toggles.
+mouth=next(n for n in data['nodes'] if n['id']=='mouth-open')
+assert mouth['parent']=='head-root'
+cx,cy,cw,ch=mouth['sprite']['crop'];poly=mouth['sprite']['mask']
+assert cx>=590 and cx+cw<=690 and cy>=291 and cy+ch<=357
+assert all(0<=x<=cw and 0<=y<=ch for x,y in poly)
+closed=images['default-source'];opened=images['speaking-source'];covered=0;boundary=[]
+for y in range(cy,cy+ch):
+ for x in range(cx,cx+cw):
+  original=closed.getpixel((x,y));patch=opened.getpixel((x,y));hit=inside(x-cx,y-cy,poly)
+  if 297<=y<=322 and 598<=x<=682 and original[3]>240 and max(original[:3])<100:
+   covered+=1;assert hit and patch[3]>=250,(x,y,'uncovered closed-mouth ink')
+  if hit and not all(inside(x-cx+dx,y-cy+dy,poly) for dx,dy in [(1,0),(-1,0),(0,1),(0,-1)]):
+   boundary.append(max(abs(original[i]-patch[i]) for i in range(3)))
+assert covered>200
+assert max(boundary)<=20,(max(boundary),'mouth patch boundary crosses a dark feature')
+for phase in phases['speaking']:
+ assert phase['pose']['head-default']['visible']
+ assert phase['world']['mouth-open']==phase['world']['head-default'][:4]+[phase['world']['head-default'][0]*cx+phase['world']['head-default'][2]*cy+phase['world']['head-default'][4],phase['world']['head-default'][1]*cx+phase['world']['head-default'][3]*cy+phase['world']['head-default'][5]]
+print(f'{covered} closed-mouth ink pixels covered by opaque native patch; boundary max RGB delta={max(boundary)}, mean={sum(boundary)/len(boundary):.3f}; 33 speech phases retain one default head texture and registered local mouth')
+
+head=next(n for n in data['nodes'] if n['id']=='head-waiting');im=images['waiting-source']
+hair=[(x,y) for y in range(450) for x in range(im.width) if im.getpixel((x,y))[3]>=200 and inside(x,y,head['sprite']['mask'])]
+assert len(hair)>1000
+minimum=min(min(mappt(phase['world']['head-waiting'],x,y)[1] for x,y in hair) for phase in phases['waiting'])
+assert minimum>=3,('waiting hair crop risk',minimum)
+print(f'33 waiting phases, every alpha>=200 head pixel: minY={minimum:.3f}; fixed lower body translated12px without loop motion')
