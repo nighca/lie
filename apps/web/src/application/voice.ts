@@ -28,7 +28,7 @@ export interface ConversationScope {
   onEvent(event: ConversationEvent): void
 }
 
-/** One continuous conversation; open prepares devices and capture, close releases them. */
+/** One continuous conversation; open resolves once transport, playback and microphone capture are ready; close releases them. */
 export interface Conversation {
   open(): Promise<void>
   close(): void

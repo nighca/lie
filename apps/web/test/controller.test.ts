@@ -71,7 +71,7 @@ describe('browser orchestration', () => {
     old.scope.onEvent({ type: 'assistantText', text: '迟到回包。' })
     old.scope.onEvent({ type: 'error' })
     expect(controller.getView().history).toEqual([])
-    expect(controller.getView().voiceStatus).toBe('idle')
+    expect(controller.getView()).toMatchObject({ busy: true, conversationActive: true })
     await controller.startConversation()
     expect(turns[1].scope.readContext().profile).toBe(game.characters[1].profile)
     controller.selectCharacter('one')
@@ -144,7 +144,7 @@ describe('browser orchestration', () => {
     opening.resolve()
     await starting
     expect(turns[0].closed).toBe(true)
-    expect(controller.getView()).toMatchObject({ currentCharacterId: 'two', busy: false, voiceStatus: 'idle' })
+    expect(controller.getView()).toMatchObject({ currentCharacterId: 'two', busy: false, voiceStatus: 'recording' })
     controller.dispose()
   })
 
@@ -374,7 +374,7 @@ describe('content-defined lists beyond three suspects', () => {
     expect(controller.getView()).toMatchObject({ phase: 'lost', reveal: null, accusationOpen: false })
     controller.openAccusation(); controller.accuse(`suspect-${count}`); await controller.startConversation()
     expect(controller.getView().phase).toBe('lost')
-    expect(turns).toHaveLength(2)
+    expect(turns).toHaveLength(4)
     controller.dispose()
   })
 })

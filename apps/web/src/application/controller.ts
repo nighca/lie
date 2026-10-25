@@ -137,6 +137,7 @@ export function createGameController(options: ControllerOptions) {
     publish()
   }
   function acceptEvent(event: ConversationEvent) {
+    if (busy && event.type !== 'closed' && event.type !== 'error') return
     if (enabledAt != null && remainingMs() <= 0) { expireBudget(); return }
     if (event.type === 'audioLevel') {
       publishFeedback({ inputLevel: event.inputLevel, outputLevel: event.outputLevel, inputActive: event.inputActive })
@@ -157,6 +158,48 @@ export function createGameController(options: ControllerOptions) {
         : '语音暂时中断。已显示转写保留，你可以重新开始对话。'
     }
     publish()
+  }
+
+  async function startConversation() {
+    const current = requireSession()
+    if (current.phase !== 'interrogating' || accusationOpen || active != null || getInterrogationRemainingMs(current) <= 0) return
+    stopVoice()
+    const epoch = voiceEpoch
+    const abort = new AbortController()
+    const characterId = current.currentCharacterId!
+    const appearanceId = current.game.characters.find((character) => character.id === characterId)!.appearanceId
+    const voiceId = options.resolveVoiceId?.(appearanceId) ?? null
+    const isCurrent = () => active?.epoch === epoch && session?.sessionId === current.sessionId && session.currentCharacterId === characterId && !abort.signal.aborted
+    try {
+      const connection = options.voice.create({
+        sessionId: current.sessionId, characterId, voiceId, epoch, signal: abort.signal, isCurrent,
+        readContext() {
+          if (!isCurrent()) throw new Error('Conversation is no longer active')
+          const live = requireSession()
+          return buildCharacterContext(live.game, characterId, live.histories[characterId])
+        },
+        onEvent(event) { if (isCurrent()) acceptEvent(event) },
+      })
+      active = { connection, abort, epoch }
+      busy = true
+      voiceStatus = 'waiting'
+      notice = null
+      publish()
+      await connection.open()
+      if (!isCurrent()) return
+      busy = false
+      voiceStatus = 'recording'
+      enabledAt = clock.now()
+      tickBudget(epoch)
+    } catch (error) {
+      if (voiceEpoch === epoch && !abort.signal.aborted) {
+        if (error instanceof VoiceAvailabilityError) {
+          stopVoice()
+          notice = error.reason === 'unavailable' ? '当前环境尚未开放语音体验。' : '暂时无法确认语音服务状态，请检查网络后重试。'
+          publish()
+        } else acceptEvent({ type: 'error' })
+      }
+    }
   }
 
   return {
@@ -198,52 +241,14 @@ export function createGameController(options: ControllerOptions) {
     },
     selectCharacter(characterId: string) {
       if (requireSession().currentCharacterId === characterId) return
+      const resume = active != null
       const expired = stopVoice()
       session = selectCharacter(requireSession(), characterId)
       if (expired) showExpiry()
       publish()
+      if (resume && !expired) void startConversation()
     },
-    async startConversation() {
-      const current = requireSession()
-      if (current.phase !== 'interrogating' || accusationOpen || active != null || getInterrogationRemainingMs(current) <= 0) return
-      stopVoice()
-      const epoch = voiceEpoch
-      const abort = new AbortController()
-      const characterId = current.currentCharacterId!
-      const appearanceId = current.game.characters.find((character) => character.id === characterId)!.appearanceId
-      const voiceId = options.resolveVoiceId?.(appearanceId) ?? null
-      const isCurrent = () => active?.epoch === epoch && session?.sessionId === current.sessionId && session.currentCharacterId === characterId && !abort.signal.aborted
-      const connection = options.voice.create({
-        sessionId: current.sessionId, characterId, voiceId, epoch, signal: abort.signal, isCurrent,
-        readContext() {
-          if (!isCurrent()) throw new Error('Conversation is no longer active')
-          const live = requireSession()
-          return buildCharacterContext(live.game, characterId, live.histories[characterId])
-        },
-        onEvent(event) { if (isCurrent()) acceptEvent(event) },
-      })
-      active = { connection, abort, epoch }
-      busy = true
-      voiceStatus = 'waiting'
-      notice = null
-      publish()
-      try {
-        await connection.open()
-        if (!isCurrent()) return
-        busy = false
-        voiceStatus = 'recording'
-        enabledAt = clock.now()
-        tickBudget(epoch)
-      } catch (error) {
-        if (isCurrent()) {
-          if (error instanceof VoiceAvailabilityError) {
-            stopVoice()
-            notice = error.reason === 'unavailable' ? '当前环境尚未开放语音体验。' : '暂时无法确认语音服务状态，请检查网络后重试。'
-            publish()
-          } else acceptEvent({ type: 'error' })
-        }
-      }
-    },
+    startConversation,
     endConversation() {
       if (stopVoice()) showExpiry()
       publish()
