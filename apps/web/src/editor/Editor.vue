@@ -140,7 +140,6 @@ async function copy(text: string) {
   <div class="editor-shell">
     <ProductHeader class="editor-header" @navigate-home="!busy && emit('leave')">
       <template #actions><UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton></template>
-      <template v-if="saveStatus != null" #notice><div class="editor-draft-status"><p role="status">{{ saveStatus }}</p><button type="button" :disabled="busy" @click="overlay = 'clear'">清除草稿</button></div></template>
     </ProductHeader>
     <nav class="editor-steps" aria-label="创作步骤">
       <template v-for="(label, index) in steps" :key="label">
@@ -148,6 +147,7 @@ async function copy(text: string) {
         <button type="button" :disabled="busy" :aria-current="step === index ? 'step' : false" @click="step = index"><span>{{ index + 1 }}</span>{{ label }}<small v-if="!issues.some((issue) => issue.step === index)" aria-label="内容已填写">✓</small></button>
       </template>
     </nav>
+    <div v-if="saveStatus != null" class="editor-draft-status"><p role="status">{{ saveStatus }}</p><button type="button" :disabled="busy" @click="overlay = 'clear'">清除草稿</button></div>
     <main ref="form">
       <div v-if="notice != null" role="alert" class="editor-notice"><UiNotice tone="error">{{ notice }}</UiNotice></div>
       <section v-if="showIssues && issues.length" class="error-summary" role="alert" aria-label="待补充内容"><strong>再补充这些，就能试玩或分享了</strong><ul><li v-for="(issue, index) in issues" :key="index"><button type="button" @click="goToIssue(issue)">{{ issue.message }}</button></li></ul></section>

@@ -1,6 +1,6 @@
 .editor-shell { color: var(--lie-ink); }
 .editor-header { margin-bottom: 30px; }
-.editor-draft-status { display: flex; align-items: baseline; gap: 12px; }
+.editor-draft-status { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 6px 12px; margin: 8px 0 0; color: var(--lie-muted); font-size: 13px; text-align: center; }
 .editor-draft-status p { margin: 0; }
 .editor-draft-status button { padding: 0; border: 0; background: transparent; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .editor-draft-status button:disabled { cursor: default; opacity: .5; }

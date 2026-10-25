@@ -55,7 +55,8 @@ describe('three-step editor', () => {
   it('uses the shared product brand, draft notice and existing leave event', async () => {
     const { wrapper, click } = page(game)
     expect(wrapper.get('.lie-product-header__brand span').text()).toBe('语音推理')
-    expect(wrapper.get('.lie-product-header__notice [role=status]').text()).toContain('已恢复')
+    expect(wrapper.get('.editor-draft-status [role=status]').text()).toContain('已恢复')
+    expect(wrapper.get('.editor-draft-status').element.previousElementSibling?.getAttribute('aria-label')).toBe('创作步骤')
     await wrapper.get('.lie-product-header__brand').trigger('click')
     await click('返回首页')
     expect(wrapper.emitted('leave')).toHaveLength(2)
