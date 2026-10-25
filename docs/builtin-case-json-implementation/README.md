@@ -28,3 +28,7 @@ Node 24.22.1 / npm 11.13.0，既有依赖无安装或 lock 变化。
 没有新的浏览器或真人供应商验收。浏览器inventory只有Chrome扩展，无IAB；遵循要求未回退Chrome、未创建tab/服务。组件集成证明功能，不声称原生布局或真人行为验证。root coverage 自有测试会短时启动其既有临时安全测试服务并自行关闭，没有新增开发服务或触碰稳定端口。
 
 Vite当前构建成功，但提示两个新增extensionless TS config imports在未来 native configLoader不受支持；当前锁定Vite loader可用，未为未来版本更改编译策略。已有underline.svg静态URL解析提示仍存在。未触发远程CI、推送、PR、Cloudflare操作或部署；合入由root实际审查执行。
+
+## root最终审查与组合核验
+
+root实际审查44路径完整变更及周边代码，核源WT clean/唯一提交76c90a29ea4038802f0cb2ee547cee1ed0fc2322；在main a6343bf上cherry为候选fadc08f5194bcc2ed38463e165c536854b150d4d，无冲突。原base4b至a634仅批准记录，候选apps/packages/content/scripts/spikes/lock与源提交逐字相同；据此按原范围复用源全量检查，不重复编码/全build。候选独立official-cases/editor-draft/editor-page三文件53/53通过（899ms）。root在源冻结WT独立运行verify.py，三案/原简介、158保护文件、251Web/Worker对应、124static闭包与原identity一致；rg核实际dist无临时案ID/标题（无匹配exit1是预期），正式目录仍仅三JSON。新原生浏览器未执行；不以组件替身称真人验证。另修正现行Hackathon稿指向已删除目录文件的链接，并为旧打包报告补迁移说明；不改历史测量与结果。root本地ff后以实际main为准，本轮未push。

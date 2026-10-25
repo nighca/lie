@@ -1,5 +1,7 @@
 # 官方目录与完整案件随代码打包
 
+> 当前实现已由[单JSON方案](builtin-case-json-implementation/README.md)取代独立目录与副本；下文保留原基线及测量证据，历史路径按当时提交理解。
+
 2026-10-25。用户明确要求：首页案件目录首次render即有，完整三案也一同打包，消除打开介绍时的案件网络等待。实施候选基于已审 main `1f168e3486591b8c64f971dc6a3da87bdb41d2a3`，独立 `codex/bundled-case-catalog`，WT `/Users/nighca/.codex/worktrees/bundled-case-catalog/lie`；待root审查/集成，未push、部署或PR。
 
 ## 数据与接口

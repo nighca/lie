@@ -68,3 +68,5 @@ CI使用现有GitHub secrets及固定Worker lie-game，`--provision=false`；本
 ## 本轮后续排期
 
 从实际main2e24d32巡检：正式结果600已完成，纠正计划顶部仍在制旧措辞；favicon已用Logo且正式hash SVG身份核对相同，无需改代码。Hackathon专项初稿后用户直接修订14链已实际全文review并在隔离候选有序cherry（779824f至9615f29），两文件source身份及49本地链接通过；移动端可用是用户已确认事实，不能继续标成整体未验。输入边界审查已发现并修复CB01异常时长草稿无法恢复：source四链至8f1193已root实际全文review，候选84f7b44上独立三probe通过、4源码/回归SHA一致、最终25page/types按相同环境范围复用；报告见reviews/content-boundary-2026-10-25，原voice审查不重做。唯一integrator仍本root，不启动新服务、不push，实际main更新后读Git。
+
+单JSON任务已按用户全部确认实施：source76c90a2由root完整review、有序cherry为fadc08f，基于main a6343bf（相对原4b仅批准文档）。完整源596应用/33脚本/types/Web+Gatewaybuild121通过；root独立53相关回归通过、生产/测试/依赖身份一致，原三案除迁入简介/改文件名不变，158保护文件及251输出闭包实际复核。现行新增案仅加编号JSON，旧id/链接/缺简介草稿分享兼容；投稿最大prefix+1仍作者网页确认。无新服务、原生浏览器未验、未push；实际main以Git更新后为准。[报告](builtin-case-json-implementation/README.md)。
