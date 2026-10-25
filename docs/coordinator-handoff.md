@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为365269b6185be586b69c0fac2b7ba15defeb7a6f，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为9a6635ce1fb85b3fc85aaa634828674c8bbf7b5a，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：title＋结果契约已main365、loading＋preview已main911，均未推。姓名/草稿提示＋旧global单行清理及图片研究/审计/QA归档候选fd4b257已root完整review，本轮Web35files329/types/build89（99modules）、源身份/旧引用0/样式1/资源与QA隔离通过，root读[短报告](character-name-highlights/combined-verification.md)后ff；未提前称main/发布。图片q90直接userturn01a17146-7aa5-7620-a59c-d8caf25d09be已批，package/load/generator最小PNG源guard lease已正式授；旧lossless推荐是历史。height仍在制独占布局，不阻塞本批；其文件不碰。动画加强374用户已批，后7最多2lane从365只design目录自行验收后常规集成，33fe/374素材档案root待review、不纳本批；5355用户消费者保留。生产入口lie.agency，线上最后已核483，不自动push。
+下一步：main9a已含姓名/草稿提示6b、loading/preview911及Coral档案33fe→374→3c；root242技术复验已完成，用户批准加强样片，后7仅design制作，不激活manifest。调查高度source7c5ab232已完整rootreview，候选1dc7e996本轮Webbuild/strict89及身份/JSON/QA隔离通过，待root读[短报告](investigation-viewport-height-combined.md)后ff，不提前称main。图片q90已批并持最小runtime/generator lease，5356新built验收turn由owner负责、最新PID待其batch；CI/CD拆分独立WT在制，已释放图片7行cache接口给其，代码仍待rootreview。单JSON增加内置案仅[讨论提案](builtin-case-json-proposal.md)，字段/排序待确认，不eligible。5355用户页保留；本轮无新服务/browser，线上仍483，不自动push。
 
 ## 当前owner与恢复入口
 
