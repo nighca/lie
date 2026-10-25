@@ -10,6 +10,7 @@
 | 交互与编辑器 | [首页流程](../home-case-flow-proposal.md)、[编辑器提案](../game-editor-proposal.md)、[指认结果提案](../result-character-states-proposal.md) |
 | 视觉与动画 | [视觉方向](../visual-direction.md)、[形象制作](../../design/appearances/README.md)、[动画契约](../animation/contract.md)、[制作流程](../animation/production-workflow.md) |
 | 待确认方案 | [邀请码设计](../invite-access-design.md)、[投稿研究](../editor-official-submission-proposal.md)、[公开语音方案](../public-voice-launch-proposal.md) |
+| 宣传视频研究 | [现行方法/依赖简报](../promo-video-production-research.md)（2026-10-25复核，仅研究）；[2026-10-24原文](2026-10-25/history-followup/snapshots/9cf490af/docs/promo-video-production-research.md.txt)（历史前提保留） |
 | 决策与完成证据 | [历史索引](../history/README.md)、[当前计划与门禁](../project-plan.md) |
 | 归档补存 | [2026-10-25盘点、原文与待交付范围](2026-10-25/README.md) |
 | 历史提交与chat补查 | [第二轮31份中间版本、chat范围及旧dirty映射](2026-10-25/history-followup/README.md) |
