@@ -1,0 +1,89 @@
+{
+  "base": "d4c189b22dbf09ae7b2ec0ec998b3a678f1d2823",
+  "browser": "Chrome extension",
+  "origin": "http://localhost:5544",
+  "initialDraft": null,
+  "finalDraft": null,
+  "cases": [
+    {
+      "case": "N1",
+      "url": "http://localhost:5544/play#game=H4sIAAAAAAAAE5XSTW8SQRjA8a9i5ryTwL50d_kGTbx5FA-zw2xdhV2yXUwMIVmxL9iulFhqKmC21Wja0ippoiKl8mGYmYUT_QhmGa0XE-P5mcNv_s9TBU4B5AAyTNvUsAp1m8hQzSor0NBkFWZlWbN0rOmGrQAJBE5QJCAHWDNO2vH8LOLtr4txJ4n6dNi8iaMGkMB6pVRC_lOQA_Rqk_fOWW_AWg3eaP1-HtHhS75zkJxMpmEdSMBC-PGa71XcFMIGe-yyk_R2WWNAhyHbO0ui_k3cakzDet5Nzs_pKJodR4txZ3444d-7rHlFR1ts_2y-HS3Gcd7Nu7PJG374mQ4v-OvtafiMlLxHzh06bCano9lxlHQ2hJ41tuioz9-HPP4gII4bEN_31lDgeO5dp-QE9wj23MI6yK1kMhLAD5GPcED8dZC7XxXhbF01DZyxYRZhBaqEWNDSDBNqyDazsqoUZA0BCbioRG5_ByRQ9j3bWaak10dsry8G07BOr4_47mT2ZUBHW0nUTzobSfOUbX5bjKO0RfuEjpoianIQzd--E1GFH5XLBPnIxWQ1pWHPR0VoeRaoSb-0hCCU0WQEZWzJUMWKBU2dKNBQ7YxuaBld0cw_WlH4L1oxENpUJba1BP9L8kACxC047hrIVQGuFMu-E6z-R0ifPCGoeJuS7-yIPrz9YzbppobuK3bRuon3Py4vRlD55THvvRBh2afnKbJW-wl-JJKO-wIAAA",
+      "background": "小岚看到一只猫🐈。\n第二行：阿湛去了哪里？\n\n这是中文、emoji 与空行的原生分享检查。"
+    },
+    {
+      "case": "N2",
+      "url": "http://localhost:5544/play#game=H4sIAAAAAAAAE5XSTW8SQRjA8a9i5ryTwL50d_kGTbx5FA-zw2xdhV2yXUwMIVmxL9iulFhqKmC21Wja0ippoiKl8mGYmYUT_QhmGa0XE-P5mcNv_s9TBU4B5AAyTNvUsAp1m8hQzSor0NBkFWZlWbN0rOmGrQAJBE5QJCAHWDNO2vH8LOLtr4txJ4n6dNi8iaMGkMB6pVRC_lOQA_Rqk_fOWW_AWg3eaP1-HtHhS75zkJxMpmEdSMBC-PGa71XcFMIGe-yyk_R2WWNAhyHbO0ui_k3cakzDet5Nzs_pKJodR4txZ3444d-7rHlFR1ts_2y-HS3Gcd7Nu7PJG374mQ4v-OvtafiMlLxHzh06bCano9lxlHQ2hJ41tuioz9-HPP4gII4bEN_31lDgeO5dp-QE9wj23MI6yK1kMhLAD5GPcED8dZC7XxXhbF01DZyxYRZhBaqEWNDSDBNqyDazsqoUZA0BCbioRG5_ByRQ9j3bWaak10dsry8G07BOr4_47mT2ZUBHW0nUTzobSfOUbX5bjKO0RfuEjpoianIQzd--E1GFH5XLBPnIxWQ1pWHPR0VoeRaoSb-0hCCU0WQEZWzJUMWKBU2dKNBQ7YxuaBld0cw_WlH4L1oxENpUJba1BP9L8kACxC047hrIVQGuFMu-E6z-R0ifPCGoeJuS7-yIPrz9YzbppobuK3bRuon3Py4vRlD55THvvRBh2afnKbJW-wl-JJKO-wIAAA",
+      "background": "小岚看到一只猫🐈。\n第二行：阿湛去了哪里？\n\n这是中文、emoji 与空行的原生分享检查。"
+    },
+    {
+      "case": "N3-back-damaged",
+      "error": "分享链接不完整或已损坏，请向作者索取完整链接"
+    },
+    {
+      "case": "N3-back-valid",
+      "title": "原生验收：猫与🌈"
+    },
+    {
+      "case": "N3-forward-damaged",
+      "error": "分享链接不完整或已损坏，请向作者索取完整链接"
+    },
+    {
+      "case": "N3-forward-corrected",
+      "background": "小岚看到一只猫🐈。\n第二行：阿湛去了哪里？\n\n这是中文、emoji 与空行的原生分享检查。"
+    },
+    {
+      "case": "N4-preview",
+      "url": "http://localhost:5544/editor/preview?demo=1",
+      "title": "原生验收：猫与🌈"
+    },
+    {
+      "case": "N4-back-editor",
+      "url": "http://localhost:5544/editor?demo=1",
+      "heading": "故事人物",
+      "name": null
+    },
+    {
+      "case": "N4-forward",
+      "url": "http://localhost:5544/editor?demo=1"
+    },
+    {
+      "case": "N5",
+      "unchanged": true,
+      "focus": {
+        "focused": "清除草稿",
+        "modal": false
+      }
+    },
+    {
+      "case": "N6",
+      "keyAfterConfirm": null,
+      "dom": {
+        "focusName": "title",
+        "modal": false,
+        "title": ""
+      }
+    }
+  ],
+  "narrow": [
+    {
+      "focused": "试玩",
+      "pageHeight": 3547,
+      "pageWidth": 391,
+      "scrollY": 2703,
+      "viewport": [
+        391,
+        844
+      ]
+    },
+    {
+      "focused": "试玩",
+      "pageHeight": 4671,
+      "pageWidth": 320,
+      "scrollY": 4271.5,
+      "viewport": [
+        320,
+        400
+      ]
+    }
+  ]
+}
