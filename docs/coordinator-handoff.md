@@ -32,7 +32,7 @@
 
 - 06:43接任核验main clean为`940068638b9b8a49f9f1db11451783dd935dcddb`，此基线新增成果均未push；本地origin/main跟踪及最后实际部署证据为`32d89bf91f441168148884593a0f49b816ad7162`。本轮未fetch，不能冒称当前远程/线上最新版本。
 - owning main在`/Users/nighca/code/nighca/lie`；前代两个文档工作树`/Users/nighca/.codex/worktrees/coordinator-successor-registration/lie`及`/Users/nighca/.codex/worktrees/integrate-successor-registration/lie`制作前均clean，保留供接任复用或managed归档；重读实际HEAD/status。旧`investigation-review-takeover/lie`已不在worktree清单，不作为现存工作树操作。
-- 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。三角色正式QA已main，本轮历史归档已完成入库，入口见[归档](archive/README.md)；当前命名迁移完整交付、已review并本地集成main c0ddd791，访问设计仍待用户确认（用户醒来不等于批准）、分享软折行已root review/独立验证并本地集成163bd0d；所有待办见[队列](project-plan.md#仍需执行的队列)。
+- 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。三角色正式QA已main，本轮历史归档已完成入库，入口见[归档](archive/README.md)；当前命名迁移完整交付、已review并本地集成main c0ddd791，邀请码核心设计现获用户逐项确认，默认14天、删除续局；到期处理按用户授权选择最简策略，修订review后排期实施、分享软折行已root review/独立验证并本地集成163bd0d；所有待办见[队列](project-plan.md#仍需执行的队列)。
 - 旧命名候选`/private/tmp/lie-integrate-text-architecture` / `codex/integrate-preset-voices`保留refs；其中调查/预览改动已有main成果，禁止整批重放。原命名源`cb86dd6e25e22444dc93b892c2d609c0a0d6ac08`已由最新79b5503→354f58b按新main重做，旧ref仅追溯，不再排重审或重放。
 
 本代`share_boundary_audit`已完成代码级只读审计，root已实际review源码/完整探针并以绝对路径Node24.22.1独立执行探针（0.104s、exit0、全部PASS）：sharing＋navigation现有19/19通过，生产codec探针16000 URL与131072 UTF8字节边界、Unicode往返及无效/截断输入拒绝符合契约，未见需修复源码缺陷。19/19现有测试由执行者Node24.17.0运行，低于项目24.22.1，不称要求版本19项测试复验；root的24.22.1复核仅为探针。证据`/private/tmp/lie-share-boundary-audit.mjs`；无代码/服务/浏览器变动。仅Node/jsdom＋源码证据，未验真实reload、地址栏粘贴、network fragment、宿主/play回退或跨浏览器16k；16000仍暂定，且仍加载manifest/catalog，不称完全离线。
@@ -51,7 +51,7 @@
 
 约06:52三专项waiting flags均恢复为空，当时工具侧原因不可见；用户现明确此前数小时浏览器等待是权限申请待其审批，不是已证实工具故障，亦不能推断今后全部工具必然正常。fan已review/独立验证并本地集成，动画三角色已完成QA/本地集成，下一批mint/ochre已clean交付待review及正式game QA；Editor已root review/独立验证并本地集成至f433834。保持未测项目，不重发/绕过权限动作。
 
-08:00 main c0ddd791已含三角色正式QA、邀请码设计、历史归档及命名迁移；邀请码仍待用户确认；旧a440/bfb/051c及重建候选仅历史refs，不重放、不再当当前阻塞。完整最终35链、source/candidate review与通过/未测范围见[历史](history/2026-10-25/three-character-dawn-candidate.md#最终正式qa与本地集成)。三角色正式接入记录已在main。
+08:00 main c0ddd791已含三角色正式QA、邀请码设计、历史归档及命名迁移；邀请码随后已获用户逐项确认（默认14天、删除续局，到期处理授权按简单度选），修订review后排期实施；旧a440/bfb/051c及重建候选仅历史refs，不重放、不再当当前阻塞。完整最终35链、source/candidate review与通过/未测范围见[历史](history/2026-10-25/three-character-dawn-candidate.md#最终正式qa与本地集成)。三角色正式接入记录已在main。
 
 专项接入记录位于main的`docs/animation/silver-bun-game-integration.md`与`gray-plum-game-integration.md`，详细来源按source HEAD取log，不重复长链。
 
@@ -81,10 +81,10 @@
 
 真人mic/外放/长会话/三案盲测、新增五声音色耳验、分享长URL跨浏览器、GitHub外部投稿端到端及费用硬限额未闭环；sunny真实隐藏恢复未验/1280×720舞台裁切保留。fake、文本detect、短WAV、ready或专项QA不等于用户/真人验收。
 
-仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；带有效期邀请码访问设计已由用户放行，仅限制玩游戏访问、不限频率，设计完成请用户确认后才可实施；费用预算/回收策略仍暂缓，不新增频率/并发限制或授权secret/资源/DB/DO/账号/部署，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
+仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；带有效期邀请码访问设计已由用户放行，仅限制玩游戏访问、不限频率，核心设计已获用户本轮逐项确认，默认14天、删除续局，到期处理可按简单度选，修订review后排期实施；费用预算/回收策略仍暂缓，不新增频率/并发限制或授权secret/资源/DB/DO/账号/部署，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
 
 Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416eafbfda102a90ed72aa4292，Node24.22.1生产encode）：normal539真实UI Unicode/换行/保留字符逐字相等及actual reload通过；恰16000 ASCII完整URL新blank tab fresh goto/reload intro通过、href16000；16001特定长度错误、损坏gzip错误及reload通过。root已实际review完整报告/四图，无codec blocker，局限保留。network初始fragment捕获因PerformanceAPI missing TypeError一次停止，未重试CDP；跨浏览器/地址栏粘贴/外部传输/离线未验，16k仍暂定、128KiB仍仅Node。证据/private/tmp/lie-share-browser-results.md及同名前缀fixtures/四张jpg；自建tab19/20/21已关，无viewport/draft/voice/mic/provider/服务动作，旧browser3/tab1未动。三角色完整QA已main，详细通过范围/未测边界见最终历史。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。
 
-邀请码[设计](invite-access-design.md)已root完整114行及实际契约/官方文档review，本地集成3a1fa417，仅文档待用户确认，未授权实现，固定device多人隔离风险不由邀请码自动解决。分享长正文软折行已本地集成163bd0d，原横溢是独立排版问题，不混codec失败。
+邀请码[设计](invite-access-design.md)已root完整114行及实际契约/官方文档review，本地集成3a1fa417，原版仅文档，用户现已确认核心范围并授权简化到期处理：默认14天、公开浏览创作/所有play需码、删除续局；开局及新WS校验exp，既有WS沿180秒，不新增到期强断计时。invite_access_design修订现行文档并归档旧版，root审查后排期实施；不是生产secret配置/部署授权，固定device多人隔离风险不由邀请码自动解决。分享长正文软折行已本地集成163bd0d，原横溢是独立排版问题，不混codec失败。
 
 历史三角色集成main为a4e9f7d（当前核验main c0ddd791），候选refs仅追溯，不重放。QA源bfb临时壳已由owner删除且status clean、tabs28—33关闭/overrides清；环境回证：PTY77092已失效，Ctrl-C返回Unknown process id；PID24833不存在且5504无监听，原因未知，未发生本次成功Ctrl-C停服。8787 main-status实返a4e9f7d＝当时main，三包HTTP200且同generated、79资源＋manifest共80文件，其他服务未触。分享软折行source c13e6194751334085094a10b773018a998341b01/base73 clean已交，仅.background/.public-background overflow-wrap:anywhere＋history；owner Node24.22.1 Web186/类型/构建60及1280/391 iframe两类文本通过，root已实际full两文件diff/context＋两截图review无blocker，独立候选163bd0deee6899df4a3d77cda562e511edb1a9cf已Node24.22.1 Web186/类型/构建79资源通过并本地main快进，未push/部署；iframe/触屏/跨浏览器及单独长reveal未验边界见专项记录。

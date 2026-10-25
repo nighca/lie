@@ -59,7 +59,7 @@
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 带有效期邀请码访问设计 / 待用户确认 | [方案](invite-access-design.md)已root完整review并本地集成3a1fa417，仅文档：推荐可复用/多人转发、统一绝对exp默认7天可指定；到期停voice暂停actions保留页内局，新码continue；home/intro/editor/share公开、所有play入口需码。均为建议待用户确认，未授权实现/secret/资源/DB/DO/账号/部署，预算/回收及多人隔离风险仍独立保留。 |
+| P1 | 带有效期邀请码 / 核心设计已获用户确认，修订后排期实施 | [方案](invite-access-design.md)：用户确认多人转发/重复使用、统一绝对截止默认14天可指定；home/intro/editor/share公开、所有play入口需码。用户授权按简单度选到期处理，明确删除续码恢复局：采用开局/新WS验exp，已连沿既有180秒上限不按exp强断，换码重新开局。root核同源现状、JWT区别、本机CLI；invite_access_design修订与归档旧版，root审查后按依赖分派实施；不因此配置生产secret/新增资源/DB/DO/账号/部署，预算/回收及多人隔离风险独立保留。 |
 | P2 | mint/ochre动画候选 / 动画专项→root review | 两人已source clean交付，同base73ba138，仅各候选目录；mint ordered `4c213f83`→`b5c08960`→`dbecc26c`，ochre `0e4558ee`→`17fefd8a`。父实视及独立checks已交；正式候选整项owner verify_editor_candidate，WT final-two-character-game/lie 从已main c0ddd791开始source review、五提交集成、正式资源激活候选及自动检查；准备独立5544 demo后交动画专项实际game QA，root最后审查/集成；尚未正式激活，不重派制作/不改色。 |
 | P2 | CharacterPreset内部命名迁移 / character_preset_migration＋root review | owner已交 `79b5503`→`354f58b`，base2982e6a，174文件迁移＋runner test fixture修复；source388全检、79资源原字节及真实IAB通过。独立review发现含空格Node路径的shebang问题，已修且目标测试通过；root `integrate-character-preset-dawn/lie`从666e9c9有序cherry至候选 `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`，最终独立1目标test/79原字节/93链接/生产身份核验通过，388/type/build/IAB复用；已本地main c0ddd791。保持appearanceId与/appearances/；用户已明确允许现在受控切换，实施owner已完成一次受控切换，服务SHA实返3c54a9e6、8787/8788仅回环、79资源+manifest字节一致、实际私密路径403；记录见[实施验收](character-preset-migration-implementation.md)，不得重复启动8787/8788。[计划](character-preset-migration-plan.md)。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
@@ -75,7 +75,7 @@
 ## 保留的门禁与外部依赖
 
 - **官方投稿/仓库**：未来公开现`nighca/lie`，不另设投稿仓；目前仍PRIVATE，未授权改可见性或代理建fork/commit/PR。用户本人GitHub确认，无LIE OAuth/PAT；玩家贡献PR不改变内部无PR集成。不要向公开仓发送项目私有正文。[投稿研究](editor-official-submission-proposal.md)
-- **公开访问/费用**：临时无应用鉴权语音有特定线上授权，带有效期邀请码访问设计现已放行（限制玩游戏功能、不限频率），实施待设计完成后用户确认；不授权secret/资源/DB/DO/账号/部署，费用预算/回收策略仍暂缓，本次不新增频率/并发限制；额度不足断连不是即时硬止付。[公开方案](public-voice-launch-proposal.md)、[额度](linx-quota-investigation.md)
+- **公开访问/费用**：临时无应用鉴权语音有特定线上授权，带有效期邀请码核心设计已获用户确认（默认14天、限制游戏、不限频率、不恢复局；到期处理授权按简单度选），修订review后可排期实施；不授权secret/资源/DB/DO/账号/部署，费用预算/回收策略仍暂缓，本次不新增频率/并发限制；额度不足断连不是即时硬止付。[公开方案](public-voice-launch-proposal.md)、[额度](linx-quota-investigation.md)
 - **宣传视频严格后置**：只批准制作方法/工具依赖研究；脚本、分镜、录屏、旁白/音乐、生成媒体和制作必须等用户判断产品成熟并明确放行。空闲或夜间小修授权不替代。
 - **实测与费用**：付费模型复核先审脚本/固定矩阵、设单次上限，首FAIL/UNCERTAIN/协议异常即停，只清自建资源。开发优先IAB，Chrome例外仅已授权灵矽控制台。普通测试/类型/构建不读取管理key、不自动发真实推理。
 
