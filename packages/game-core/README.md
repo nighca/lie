@@ -21,7 +21,7 @@ const result = accuse(running, selectedCharacterId, 102)
 - `createGameSession` 拷贝内容快照，阶段为 `intro`，无当前角色、无结果、逐人空历史。
 - `startSession` 仅接受 `intro`，进入 `interrogating` 并选择内容中的第一位角色。
 - `selectCharacter`、`appendDialogue`、`accuse` 和 `endSession` 仅接受 `interrogating`。
-- `accuse` 错误时仍在调查中，结果 `correct: false`、`reveal: null`；正确时进入 `solved`，停止当前人物并返回揭晓文本。
+- `accuse` 错误时进入终局 `lost`，结果 `correct: false`、`reveal: null`；正确时进入 `solved`，停止当前人物并返回揭晓文本。
 - `endSession` 进入 `ended`，不主动揭晓；`restartSession` 在任意阶段创建新开场、清空历史和结果。新局 ID、数字时间戳由调用方注入。
 - `appendDialogue` 只接受当前有效人物。条目为 `{id,role:'user'|'assistant',text,at,interrupted}`；本人同 ID 条目重复到达时返回原状态，不覆盖已有证词。
 

@@ -152,7 +152,9 @@ export function createGameController(options: ControllerOptions) {
     if (event.type === 'closed' || event.type === 'error') {
       stopVoice()
       voiceStatus = 'error'
-      notice = '语音暂时中断。已显示转写保留，你可以重新开始对话。'
+      notice = event.type === 'error' && event.reason === 'context-too-large'
+        ? '当前人物的设定或对话内容超出语音传输容量，无法继续本次对话。已显示转写保留；重新连接不会缩短这些内容。'
+        : '语音暂时中断。已显示转写保留，你可以重新开始对话。'
     }
     publish()
   }

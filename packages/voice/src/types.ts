@@ -17,7 +17,7 @@ export type VoiceEvent =
   | { type: 'tool'; state: 'start' | 'end'; name: string }
   | { type: 'interrupted' }
   | { type: 'closed'; code: number; reason: string }
-  | { type: 'error'; code: 'connection' | 'protocol' | 'timeout' | 'tool'; message: string }
+  | { type: 'error'; code: 'connection' | 'protocol' | 'timeout' | 'tool' | 'payload-too-large'; message: string }
 
 export type VoiceTool = {
   name: string

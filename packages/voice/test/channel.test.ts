@@ -351,3 +351,77 @@ it.each(['caller', 'abort'])('retains cancelled for %s closure before ready', as
   await expect(opening).rejects.toThrow()
   expect(events.at(-1)).toEqual({ stage: 'channelReady', result: 'cancelled' })
 })
+
+describe('outbound text frame budget', () => {
+  const reply = (text: string, id: string | number = 1) => JSON.stringify({ type: 'mcp', payload: { jsonrpc: '2.0', id, result: { content: [{ type: 'text', text }], isError: false } } })
+  const bytes = (text: string) => new TextEncoder().encode(text).byteLength
+
+  it.each([65536, 65537])('measures the complete actual tool reply at %i UTF-8 bytes', async (size) => {
+    const id = 'escaped-"\\人'
+    const prefix = '人"\\\n'
+    const text = prefix + 'x'.repeat(size - bytes(reply(prefix, id)))
+    const { channel, socket, events } = await ready([{ name: 'context', description: 'context', inputSchema: {}, execute: async () => text }])
+    try {
+      socket.message({ type: 'mcp', payload: { id, method: 'tools/call', params: { name: 'context' } } })
+      await vi.waitFor(() => expect(events.some(event => event.type === 'tool' && event.state === 'end') || events.some(event => event.type === 'closed')).toBe(true))
+      const frame = socket.sent.find(value => typeof value === 'string' && value === reply(text, id))
+      if (size === 65536) {
+        expect(frame).toBe(reply(text, id))
+        expect(events.some(event => event.type === 'error')).toBe(false)
+      } else {
+        expect(frame).toBeUndefined()
+        expect(events.filter(event => event.type === 'error')).toEqual([{ type: 'error', code: 'payload-too-large', message: 'Voice context exceeds the transport frame limit' }])
+        expect(events.filter(event => event.type === 'closed')).toHaveLength(1)
+      }
+      expect(socket.sent.every(value => typeof value !== 'string' || bytes(value) <= 65536)).toBe(true)
+    } finally { channel.close() }
+  })
+
+  it('rejects oversized discovery before readiness and settles once', async () => {
+    const { channel, socket, events } = fixture([{ name: 'context', description: '人'.repeat(22000), inputSchema: {}, execute: async () => '' }])
+    const opened = channel.open()
+    const rejected = expect(opened).rejects.toThrow('transport frame limit')
+    socket.connect(); socket.hello()
+    socket.message({ type: 'mcp', payload: { id: 1, method: 'tools/list' } })
+    await rejected
+    channel.close()
+    expect(events.filter(event => event.type === 'closed')).toHaveLength(1)
+    expect(events.some(event => event.type === 'ready')).toBe(false)
+    expect(socket.sent.every(value => typeof value !== 'string' || bytes(value) <= 65536)).toBe(true)
+  })
+
+  it('does not recursively send an oversized error envelope containing a huge RPC ID', async () => {
+    const { channel, socket, events } = await ready()
+    const initial = socket.sent.length
+    socket.message({ type: 'mcp', payload: { id: '\\'.repeat(33000), method: 'unknown' } })
+    channel.close()
+    expect(socket.sent).toHaveLength(initial)
+    expect(events.filter(event => event.type === 'error')).toHaveLength(1)
+    expect(events.filter(event => event.type === 'closed')).toHaveLength(1)
+  })
+
+  it('keeps small tool error replies working and checks their envelope budget', async () => {
+    const { channel, socket } = await ready([{ name: 'context', description: 'context', inputSchema: {}, execute: async () => { throw Error('private details') } }])
+    toolCall(socket)
+    await vi.waitFor(() => expect(socket.json().some(value => value.payload?.result?.isError === true)).toBe(true))
+    expect(JSON.stringify(socket.json())).not.toContain('private details')
+    expect(socket.sent.every(value => typeof value !== 'string' || bytes(value) <= 65536)).toBe(true)
+    channel.close()
+  })
+})
+
+it('contains an oversized tool-failure reply even when the inbound request fits the gateway', async () => {
+  const { channel, socket, events } = await ready([{ name: 'context', description: 'context', inputSchema: {}, execute: async () => { throw Error('private body') } }])
+  const id = '"'.repeat(32710)
+  const request = { type: 'mcp', payload: { id, method: 'tools/call', params: { name: 'context' } } }
+  expect(new TextEncoder().encode(JSON.stringify(request)).byteLength).toBeLessThanOrEqual(65536)
+  const before = socket.sent.length
+  const close = vi.spyOn(socket, 'close')
+  socket.message(request)
+  await vi.waitFor(() => expect(events.some(event => event.type === 'closed')).toBe(true))
+  channel.close()
+  expect(close).toHaveBeenCalledTimes(1)
+  expect(socket.sent).toHaveLength(before)
+  expect(events.filter(event => event.type === 'error')).toEqual([{ type: 'error', code: 'payload-too-large', message: 'Voice context exceeds the transport frame limit' }])
+  expect(JSON.stringify(events)).not.toContain('private body')
+})

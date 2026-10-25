@@ -313,3 +313,14 @@ it('records failed startup before a controller-like error consumer cancels the s
   await expect(opening).rejects.toThrow('network')
   expect(events.filter(event => event.stage === 'startup').map(event => event.result)).toEqual(['started', 'failed'])
 })
+
+it('propagates the specific frame limit cause and closes devices once through the caller', async () => {
+  const bridge = setupBridge()
+  await bridge.connection.open()
+  bridge.options().onEvent({ type: 'error', code: 'payload-too-large', message: 'Voice context exceeds the transport frame limit' })
+  expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'error', reason: 'context-too-large' })
+  bridge.connection.close(); bridge.connection.close()
+  expect(bridge.stopMic).toHaveBeenCalledTimes(1)
+  expect(bridge.channel.close).toHaveBeenCalledTimes(1)
+  expect(bridge.context.close).toHaveBeenCalledTimes(1)
+})

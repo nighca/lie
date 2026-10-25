@@ -1,3 +1,4 @@
+import { VOICE_TEXT_FRAME_BYTES_LIMIT } from './protocol'
 import { observeStartup } from './startup'
 import type { PcmFormat, VoiceChannel, VoiceChannelOptions, VoiceSocket } from './types'
 
@@ -52,7 +53,14 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
   }
 
   function send(value: object) {
-    if (socket?.readyState === 1 && state !== 'closed') socket.send(JSON.stringify(value))
+    if (socket?.readyState !== 1 || state === 'closed') return false
+    const text = JSON.stringify(value)
+    if (new TextEncoder().encode(text).byteLength > VOICE_TEXT_FRAME_BYTES_LIMIT) {
+      fail('payload-too-large', 'Voice context exceeds the transport frame limit')
+      return false
+    }
+    socket.send(text)
+    return true
   }
 
   function finishOpen(error: Error | null) {
@@ -95,7 +103,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
     emit({ type: 'closed', code, reason })
   }
 
-  function fail(code: 'connection' | 'protocol' | 'timeout', message: string) {
+  function fail(code: 'connection' | 'protocol' | 'timeout' | 'payload-too-large', message: string) {
     if (state === 'closed') return
     openingFailed = state === 'opening'
     emit({ type: 'error', code, message })
@@ -107,7 +115,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
   }
 
   function rpc(id: string | number, result: object, error = false) {
-    send({ type: 'mcp', payload: { jsonrpc: '2.0', id, [error ? 'error' : 'result']: result } })
+    return send({ type: 'mcp', payload: { jsonrpc: '2.0', id, [error ? 'error' : 'result']: result } })
   }
 
   async function handleMcp(payload: Record<string, unknown>) {
@@ -155,8 +163,9 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
       if (state !== 'closed') rpc(id, { content: [{ type: 'text', text }], isError: false })
     } catch {
       if (state !== 'closed') {
-        rpc(id, { content: [{ type: 'text', text: 'Tool unavailable' }], isError: true })
-        emit({ type: 'error', code: 'tool', message: 'Voice tool failed or timed out' })
+        if (rpc(id, { content: [{ type: 'text', text: 'Tool unavailable' }], isError: true })) {
+          emit({ type: 'error', code: 'tool', message: 'Voice tool failed or timed out' })
+        }
       }
     } finally {
       if (timer != null) clearTimeout(timer)

@@ -378,3 +378,18 @@ describe('content-defined lists beyond three suspects', () => {
     controller.dispose()
   })
 })
+
+it('preserves transcript and exposes frame-size failure without suggesting reconnect as a repair', async () => {
+  const { controller, turns } = setup()
+  await controller.load('test'); controller.start(); await controller.startConversation()
+  turns[0].scope.onEvent({ type: 'userText', text: '保留这段对话' })
+  turns[0].scope.onEvent({ type: 'error', reason: 'context-too-large' })
+  const view = controller.getView()
+  expect(view.notice).toContain('超出语音传输容量')
+  expect(view.notice).toContain('重新连接不会缩短')
+  expect(view.history.map(entry => entry.text)).toEqual(['保留这段对话'])
+  expect(view.conversationActive).toBe(false)
+  expect(turns[0].closed).toBe(true)
+  expect(turns).toHaveLength(1)
+  controller.dispose()
+})

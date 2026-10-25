@@ -126,7 +126,10 @@ export function createLiveVoicePort(dependencies: {
             try { playing = true; player!.enqueue(event.data, format) } catch { scope.onEvent({ type: 'error' }) }
           }
           if (event.type === 'closed') { finishStartup('failed'); scope.onEvent({ type: 'closed' }) }
-          if (event.type === 'error') { finishStartup('failed'); scope.onEvent({ type: 'error' }) }
+          if (event.type === 'error') {
+            finishStartup('failed')
+            scope.onEvent(event.code === 'payload-too-large' ? { type: 'error', reason: 'context-too-large' } : { type: 'error' })
+          }
         },
       })
       function close() {

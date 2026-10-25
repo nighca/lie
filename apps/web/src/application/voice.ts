@@ -15,7 +15,7 @@ export type ConversationEvent =
   | { type: 'listening' }
   | { type: 'interrupted' }
   | { type: 'closed' }
-  | { type: 'error' }
+  | { type: 'error'; reason?: 'context-too-large' }
 
 export interface ConversationScope {
   sessionId: string
