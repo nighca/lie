@@ -1,5 +1,7 @@
 # Animation motion revision: parent review, pending user acceptance
 
+> **Withdrawn after user feedback:** User rejected the strong vertical-scaling revision on2026-10-25: heads visibly stretch and waiting does not match each character's other-state motion. The candidate and screenshots below are historical, not ready for acceptance. Replacement work keeps heads/contact hands rigid, separates head/forearm motion from chest/shoulders, and adapts timing to each character. Original8-character main remains approved. The user gate and separate-PR requirement remain in force. Do not integrate the source chains below as a finished solution.
+
 User feedback2026-10-25: silver/salt/plum/mint/ochre waiting too subtle; mint default/listening too subtle; ochre speaking head size jumps. Original8-character integration explicitly proceeds separately and is already localmain dd1663853f7e153efb2c977dd74b89b415f0e20c. This revision is NOT approved for main/game. User explicitly requires personal acceptance first, then a separate PR for this batch. No PR/push/deploy or production asset activation has occurred.
 
 ## Frozen sources
