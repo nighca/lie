@@ -56,18 +56,18 @@ function world(pose) {
  return result
 }
 const waiting=data.clips[data.states.waiting]
-assert.equal(waiting.tracks.find(t=>t.node==='contact-root'&&t.property==='scaleY').keys.length,17)
+assert(!waiting.tracks.some(t=>t.property==='scaleX'||t.property==='scaleY'))
 const baseline=world(sampleClip(data,waiting,0)).get('body-waiting-lower')
 for(let i=0;i<=240;i++) {
  const matrices=world(sampleClip(data,waiting,waiting.duration*i/240)),lower=matrices.get('body-waiting-lower'),upper=matrices.get('contact-waiting')
  assert.deepEqual(lower,baseline,'waiting full-parent lower body remains fixed')
  assert(Math.abs(upper[1])<1e-12);assert(Math.abs(upper[2])<1e-12);assert.equal(upper[0],1)
  assert(Math.abs(upper[0]*620+upper[2]*915+upper[4]-620)<1e-9)
- assert(Math.abs(upper[1]*620+upper[3]*915+upper[5]-915)<1e-9,'waiting waist anchor stays fixed')
- assert.deepEqual(matrices.get('head-waiting'),matrices.get('contact-waiting'),'chin contact shares full parent transform')
+ assert.equal(upper[3],1,'torso never stretches')
+ assert.deepEqual(matrices.get('head-waiting'),matrices.get('waiting-hand'),'chin contact shares full parent transform')
 }
 assert.equal(data.nodes.find(node=>node.id==='head-root').parent,'contact-root')
-for(const id of ['arm-listening','contact-waiting','neck-waiting']) {
+for(const id of ['arm-listening','waiting-hand','neck-waiting']) {
  const node=data.nodes.find(node=>node.id===id)
  assert.equal(node.parent,'contact-root')
  assert.equal(node.sprite.asset,id==='arm-listening'?'listening-source':'waiting-source')
@@ -78,6 +78,7 @@ for(const id of ['sleeve-speaking','arm-speaking']) {
  assert.equal(node.parent,'speaking-root')
  assert.equal(node.sprite.asset,'speaking-source')
 }
+assert.equal(data.nodes.find(n=>n.id==='contact-waiting').parent,'waiting-breath-root')
 assert.equal(data.nodes.find(node=>node.id==='body-waiting-lower').parent,'body-root')
 assert.equal(data.nodes.find(node=>node.id==='body-waiting-lower').sprite.asset,'waiting-source')
 assert.equal(data.nodes.find(node=>node.id==='contact-waiting').sprite.asset,'waiting-source')
@@ -93,4 +94,4 @@ for(let i=0;i<100;i++) {
  const elapsed=[.09,.17,.21][i%3]
  checkPose(timeline.advance(elapsed),state,elapsed)
 }
-console.log(`PASS: strict v1 and pixel budget; ${Object.keys(data.assets).length} PNG dimensions/hashes/alpha; 4 canonical source hashes; 960 samples; 4 loop closures; single head/mouth and state attachments; contact registration; 241 full-parent waiting fixed-waist samples; 100 interrupted settles with continuous finite transforms and target visibility`)
+console.log(`PASS: strict v1 and pixel budget; ${Object.keys(data.assets).length} PNG dimensions/hashes/alpha; 4 canonical source hashes; 960 samples; 4 loop closures; single head/mouth and state attachments; contact registration; 241 full-parent waiting fixed-lower/contact samples; 100 interrupted settles with continuous finite transforms and target visibility`)

@@ -1,25 +1,27 @@
-PASS generator rebuild byte-identical package; provenance unchanged.
+PASS generator rebuilt byte-identical package; all native PNG bytes unchanged; original provenance retained.
 $ node --experimental-transform-types design/animation-candidates/salt-pepper-beard/verify.mjs
-(node:92953) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:36310) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-PASS: strict v1 and pixel budget; 5 PNG dimensions/hashes/alpha; 4 canonical source hashes; 960 samples; 4 loop closures; single head/mouth and state attachments; contact registration; 241 full-parent waiting fixed-waist samples; 100 interrupted settles with continuous finite transforms and target visibility
+PASS: strict v1 and pixel budget; 5 PNG dimensions/hashes/alpha; 4 canonical source hashes; 960 samples; 4 loop closures; single head/mouth and state attachments; contact registration; 241 full-parent waiting fixed-lower/contact samples; 100 interrupted settles with continuous finite transforms and target visibility
 
 $ python3 design/animation-candidates/salt-pepper-beard/check-waiting-revision.py
-(node:92955) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:36324) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-PASS only waiting scaleY keys (plus plum static upper offset) changed; other states/assets/nodes exact baseline; 33 sampled full-parent fixed lower-body/waist/no side-sway; nonempty masked native-alpha bounds
+(node:36325) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions; 33 real full-parent rigid head/contact matrices: column lengths invariant/orthogonal, head-to-hand relation constant, fixed lower body and torso has no head rotation
 {
   "role": "salt-pepper-beard",
-  "amplitude": 0.015,
   "period": 4.8,
-  "nonzeroAlphaPixels": 609447,
+  "nonzeroAlphaPixels": 607924,
   "waitingBounds": [
     254.5,
-    6.067500000000088,
+    17.968667600703036,
     1098.5,
     1253.5
-  ],
-  "headVerticalPeakToPeakAtY250": 19.95
+  ]
 }
-Native alpha >0 at pixel centers; no antialias/color/duplicate contour judgement. Browser artistic acceptance and user confirmation remain required.
-PASS 65208 native-alpha waist interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
+Native alpha >0 at pixel centers; not antialiased color/duplicate-contour judgement. Parent browser artistic review and user confirmation remain required.
+PASS 432861 native-alpha waist/contact interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
+PASS 64284 neck skin interior probes with4px skin margin, following contact world matrices over33 phases; alpha only, collar/outline color requires native Canvas review.
+PASS exact visible native sprite and full-parent world matrix identity for720 nonwaiting real sampled poses; 4080 rendered-node comparisons
