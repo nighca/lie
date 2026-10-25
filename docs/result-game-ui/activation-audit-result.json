@@ -1,0 +1,118 @@
+{
+  "source": "51d9bdbd2a9ed34d54b31d27df65ab948cbd8c82",
+  "base": "870cbd524ab21e243e072866ce70288932192834",
+  "artworkSource": "73e55f527729417ae5296526cc602aed2ca926ef",
+  "oldPNGsUnchanged": 81,
+  "copiedFiles": {
+    "design/character-presets/assets/coral-bob/animation/package.json": "2a9dd8ab80b63bcd04b1983cb29e1a789ff42ce81ec581c3e37b1ca73f4d4d73",
+    "design/character-presets/assets/coral-bob/accused-correctly.png": "a0eb5e5078a73f9f264cd0af8ea3927e5fe574d08443437be04d085db1546647",
+    "design/character-presets/assets/coral-bob/accused-wrongly.png": "ff0020fbfe45a86fb1e9b442d42604b9ca4eca01bd257036676729bcf6abc567",
+    "design/character-presets/assets/coral-bob/animation/parts/accused-correctly-head.png": "b76c16a2091d129eaaab9d9e6eea30d1bd6e9791ce31c2dfc5a2e64f0f10b121",
+    "design/character-presets/assets/coral-bob/animation/parts/accused-wrongly-head.png": "084a335c07b05916117a67976821ec693f1594d12a23035e63ffb87d54dd9bdc",
+    "design/character-presets/assets/sunny-moustache/animation/package.json": "b41854000a35dd22fb2ce7ca4645b0273da3b5d31e4c9895a264128665b161d3",
+    "design/character-presets/assets/sunny-moustache/accused-correctly.png": "0a6d9eec45c21f0a9b75c79ebeb5dabd8052d743d32f7e1b805f276036fbe88e",
+    "design/character-presets/assets/sunny-moustache/accused-wrongly.png": "2fcc13885cca3f00988cff1e37f515b6d65a9fbcb564d1c79e969048ae7facb9",
+    "design/character-presets/assets/sunny-moustache/animation/parts/accused-correctly-source.png": "6588615504a5852646e88ba2b0d64b5ad4e70170bc3dd15ed39c2a755df22a04",
+    "design/character-presets/assets/sunny-moustache/animation/parts/accused-wrongly-source.png": "ff2e4c920fe9c1f79721761ed44aaf6fe5ac9f8e6279d307bfb566ebb12066e8",
+    "design/character-presets/assets/blue-glasses/animation/package.json": "0982454a5c4a0c55e52dc4c830c5de5b789acfa470973d2274747eae45739a2c",
+    "design/character-presets/assets/blue-glasses/accused-correctly.png": "a6d343d709ea7ddbe660c803e6ce2a33e76448cfee681e408e935f96d3e8d997",
+    "design/character-presets/assets/blue-glasses/accused-wrongly.png": "93cd3a84803e6c847c1a93ba28852a5aea3c061101aeea466ce58789a71128e3",
+    "design/character-presets/assets/blue-glasses/animation/parts/accused-correctly-source.png": "92335e7905e75f16673c8342f24a15499c63af8863926fd80ffb93f097b08d07",
+    "design/character-presets/assets/blue-glasses/animation/parts/accused-wrongly-source.png": "665ec6c1b3c31d3e5be878ebf06cb87de0ec42f6593bf37544a8b640591b805b",
+    "design/character-presets/assets/silver-bun/animation/package.json": "b0e246adb7722a1f9b079e015579dffff7a5fec55b329639dc359a1b6a0e68bd",
+    "design/character-presets/assets/silver-bun/accused-correctly.png": "3784dcd30dc7d3dabd717f5d6cadfb546c61cd9b3ce277f99aaa9f1914396ae9",
+    "design/character-presets/assets/silver-bun/accused-wrongly.png": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2",
+    "design/character-presets/assets/silver-bun/animation/parts/result-correct-head.png": "f7234a5ee50a8b2998db181b2a9377298b98ff2aba1f0cdb8558089fd3283ec6",
+    "design/character-presets/assets/silver-bun/animation/parts/result-wrong-head.png": "2d052113a5fa09cadba34e5887803966f07179416b4b4591b83ae8fdd2935fab",
+    "design/character-presets/assets/salt-pepper-beard/animation/package.json": "7efcd0fac2067d5fed1de4822fabb38fec7e47e29eb66dcef2231e4b702bbe63",
+    "design/character-presets/assets/salt-pepper-beard/accused-correctly.png": "81e399391d4034ee294f69129633192dc785bb017beb3b8e34a4941734092720",
+    "design/character-presets/assets/salt-pepper-beard/accused-wrongly.png": "3540982067063ffd217bd48c81be30e3199987e76414258eda4f1ac56ddb9442",
+    "design/character-presets/assets/salt-pepper-beard/animation/parts/accused-correctly-source.png": "7185af30d4825167ac83f6265912ac200dcf242452e112702438c07b5088ff06",
+    "design/character-presets/assets/salt-pepper-beard/animation/parts/accused-wrongly-source.png": "b34f845453b977c2cc6344233c6839d932b7dd0c4d83a9439aba25e0eaa419f3",
+    "design/character-presets/assets/plum-crop/animation/package.json": "ac4513455a6e2e40138eaf720a47ce030c57f674f5f4cfcd5c3817749cff892e",
+    "design/character-presets/assets/plum-crop/accused-correctly.png": "e2cd98ae59b427c28d30b769d0a3998c1904d22946e987a9fde48b46ea873722",
+    "design/character-presets/assets/plum-crop/accused-wrongly.png": "ee43ed473f1fe8c46f78eecf77b2ee77a8d87a161ea54c6dd5e5d6e66c6e8f2d",
+    "design/character-presets/assets/plum-crop/animation/parts/result-correct-head.png": "f0718e7eb0868a7305310a5503d19cc91b6028808ae35b23a68df6ce62e1a564",
+    "design/character-presets/assets/plum-crop/animation/parts/result-wrong-head.png": "27b03042166b9fcf746001b76579ad449cf44e55398dd82cae5065a67156117a",
+    "design/character-presets/assets/mint-puffs/animation/package.json": "6ea79c2f4ada90424247497392b02e98acbef264e6d62bbab525fb42fc8f63a6",
+    "design/character-presets/assets/mint-puffs/accused-correctly.png": "8b72540ee5304da9d004f7abc572795ad3645c62524b9babfe78df1026061516",
+    "design/character-presets/assets/mint-puffs/accused-wrongly.png": "67e3d234c9c3c8d9754839fcfa3afa6380682579f142983ef1aa6c5926d76293",
+    "design/character-presets/assets/mint-puffs/animation/parts/result-correct-head.png": "ae8eab25a6d14efd12a78b3b38b52a745db19571bff179b88550ce3fa2476f75",
+    "design/character-presets/assets/mint-puffs/animation/parts/result-wrong-head.png": "d3fc78520512e69e8d07098d5244dcd79e2ad7e748f6dea2ad6219da3e69980e",
+    "design/character-presets/assets/ochre-freckles/animation/package.json": "3f02b70a576d24d82d14e1cbd72c798205092706ff983f35c6f288f1cce7ac3c",
+    "design/character-presets/assets/ochre-freckles/accused-correctly.png": "1b0b2d40cb15c44e88caf68c5bb06d50558f6f2d13d024f406fc345d0845d112",
+    "design/character-presets/assets/ochre-freckles/accused-wrongly.png": "ccfa00d59c99d28a8c493473afee0325eae6d5b40d26ec40af5e476f9052c356",
+    "design/character-presets/assets/ochre-freckles/animation/parts/accused-correctly-source.png": "e799f1c0c94a02bbe5ace3401c2757ad3175472f4295fabc07b3a377126a7924",
+    "design/character-presets/assets/ochre-freckles/animation/parts/accused-wrongly-source.png": "af4958a44c1b1e959f8b2925554bbf368b19b422d19f9204951fac3b81e88b81"
+  },
+  "characters": [
+    {
+      "id": "coral-bob",
+      "assetCount": 13,
+      "pixelsIncludingCanvas": 22020637,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    },
+    {
+      "id": "sunny-moustache",
+      "assetCount": 7,
+      "pixelsIncludingCanvas": 12580128,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    },
+    {
+      "id": "blue-glasses",
+      "assetCount": 8,
+      "pixelsIncludingCanvas": 14152644,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    },
+    {
+      "id": "silver-bun",
+      "assetCount": 8,
+      "pixelsIncludingCanvas": 14154438,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    },
+    {
+      "id": "salt-pepper-beard",
+      "assetCount": 7,
+      "pixelsIncludingCanvas": 12580128,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    },
+    {
+      "id": "plum-crop",
+      "assetCount": 7,
+      "pixelsIncludingCanvas": 12580128,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    },
+    {
+      "id": "mint-puffs",
+      "assetCount": 6,
+      "pixelsIncludingCanvas": 11007612,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    },
+    {
+      "id": "ochre-freckles",
+      "assetCount": 6,
+      "pixelsIncludingCanvas": 11007612,
+      "copiedFiles": 5,
+      "nonLoopResults": 2
+    }
+  ],
+  "strictRuns": [
+    "Generated 8 character presets (121 assets)",
+    "Checked 8 character presets (121 assets)"
+  ],
+  "snapshot": "/private/tmp/lie-activation-audit-xs0rujre",
+  "checksJSONInternallyConsistent": true,
+  "limits": [
+    "No re-encoding or build/browser/service; only temporary PNG copy generation and strict output check",
+    "verify.py built-dist section reviewed but not rerun: its historical WebP16/16/62 and manifest hash remain source-owner build evidence",
+    "40 exact design-source file identity permits reuse of prior8/1936 audit; not repeated",
+    "No sourceWT/dist/deps accessed or modified; no visual or Canvas terminal re-render"
+  ]
+}
