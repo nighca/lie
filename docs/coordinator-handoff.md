@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为d82791c535f8d48b53d17fe0212bf671e4c26f9a，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为365269b6185be586b69c0fac2b7ba15defeb7a6f，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：loading＋preview已root审并main911、未推；title＋结果可选契约冻结候选8c0e8d9完成Web33files319/UI52/runtime43/generator23/全workspace types/Webbuild strict89（96modules），root读[组合报告](page-titles/result-contract-combined-verification.md)后ff。title Application只加两行、preview gate与loading保留；原90资源/manifest/声线不变，未新浏览器/结果视觉或真人验收。33fe珊瑚样片用户未通过，加强版374f289e233a3c50ed9bf9c2256dad5215db46ea（依赖33fe5d3，仅design/result-reactions14文件）已clean交回，root未review两版素材、用户待看，不纳此组合；5355 PID1851/tab60由用户在看保留；图片q90已批、81路径约9.75MB测得，构建实现中，package/load兼容待本候选ff后授。height、公共角色名高亮及草稿提示由现owner在制，原文件权不变。生产入口lie.agency、最后已核线上483；不自动push。
+下一步：title＋结果契约已main365、loading＋preview已main911，均未推。姓名/草稿提示＋旧global单行清理及图片研究/审计/QA归档候选fd4b257已root完整review，本轮Web35files329/types/build89（99modules）、源身份/旧引用0/样式1/资源与QA隔离通过，root读[短报告](character-name-highlights/combined-verification.md)后ff；未提前称main/发布。图片q90直接userturn01a17146-7aa5-7620-a59c-d8caf25d09be已批，package/load/generator最小PNG源guard lease已正式授；旧lossless推荐是历史。height仍在制独占布局，不阻塞本批；其文件不碰。动画加强374用户已批，后7最多2lane从365只design目录自行验收后常规集成，33fe/374素材档案root待review、不纳本批；5355用户消费者保留。生产入口lie.agency，线上最后已核483，不自动push。
 
 ## 当前owner与恢复入口
 
