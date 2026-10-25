@@ -122,8 +122,8 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 | --- | --- | --- |
 | 8787/8788，用户常驻受保护 | root协调、用户；既有launchd及网关内部子监听 | owning main动态跟随，真实版本查/__lie/main-status。旧盘点PID不沿用为当前PID；没有新明确服务turn不得停止、重启或复制实例。 |
 | 5355，最新修复回合已结束 | 动画01a16d44… | approved-animation-rigid-batch/lie@a432b72；PID99890/原PTY38260 exit130、无监听，tab58关闭，无保留服务。旧d106精确归因PID52630/23642是历史，不重停。源23链未root fullreview，不因服务结束清WT/refs。 |
-| 5544，首帧回合已结束 | character_preset_migration | animation-first-render/lie@574cf3a；PID69515/原PTY74321最终shell退出1，端口/PID消失，Chrome1910329550关闭/覆盖清理。不能沿原摘要记130；perf43122/53366退出130属更早回合。未来重新分配/启动须重新核监听和登记。 |
-| 5507，冻结背景批回合已结束；新姓名位置在制 | 调查01a16d5c… | background-character-names/lie@19fed705；PID95357/原PTY32844退出1、无监听、tab37关闭。owner正独立追加大图姓名移除/询问标题，不据此猜测是否已再启服务；新PID/PTY/cleanup待新批handoff。 |
+| 5544，最终组合验收回合已结束 | character_preset_migration | root候选be83810实际built Worker；Node35404/workerd35876，原PTY13186退出130，PID/监听消失；Chrome1910329555关、Fetch/cache/Network清理。后续视觉组合无新服务；首帧69515/74321及性能43122/53366是历史，不重复操作。 |
+| 5507，背景与标题两回合均已结束 | 调查01a16d5c… | background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听；tabs37/38/临时入口均已清理，无覆盖/草稿改动。 |
 | 5402/5403，Editor固定分配 | Editor01a16d90… | 没有新增常驻要求；本次未做监听扫描，不把历史空闲当当前精确进程状态。仅owner按需启用并用后停。 |
 | 5358/5359及18旧服务，历史清理完结 | 原调查/Editor/动画owner | 既有21服务清理回执存档，不为复用固定端口自动常驻或重复关闭历史进程。 |
 

@@ -20,16 +20,16 @@
 
 ## 当前可执行队列
 
-各在制交付的完整base/ordered SHAs/WT见[交接](coordinator-handoff.md)及[最新恢复清单](history/2026-10-25/coordinator-state-before-refresh-30822d3/active-handoff-update-22b0b93.json)。下表状态来自root本次完整委派；未root审查、未测、未集成分别保留。
+各在制交付的完整base/ordered SHAs/WT见[交接](coordinator-handoff.md)及[最新恢复清单](history/2026-10-25/coordinator-state-before-refresh-30822d3/active-handoff-update-22b0b93.json)。本批代码候选d9d3e93经root实际review与执行者组合验证后供本地集成；报告记录实测范围，文档提交会推进HEAD，未push/部署。
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
-| P1 | 线上性能/cache / production_performance | clean三提交handoff已交，待root实际review。保留旧fixed89资源原字节，新增92hash输出/46parts，源码hash在Vite前替换、独立hashed manifest；source Web228/Gateway13＋transport3/types/build/cf dry-run通过，IAB同版warm13immutable请求0传输/仅HTML208B属执行者证据。冷首页8PNG7.47MB；PNG压缩仅调查约3.92%，未生成。**跨部署旧hash留存未实现，窄Worker-first冷请求计Worker费用/额度**，不是发布ready保证。5544/自建tab已清。root审查cache报告后决定有限旧hash兼容方案/发布限制，不能擅加新存储或部署。 |
+| P1 | 线上性能/cache / production_release_compatibility | hash管线/窄Worker长期缓存已root实际review并完成候选组合验证：[Web245与身份复用](performance/2026-10-25/combined-visual-verification.md)、[built Worker与首帧](performance/2026-10-25/combined-first-render-verification.md)。92派生输出/46parts、原89资源字节保留；暖13immutable零网络字节为源专项实测，非线上优化已发布。PNG只调查未压缩。后续已整项交production_release_compatibility，以be83810为明确依赖，独立codex/production-release-compatibility实现current＋最多2前代current-only artifact保留/CI打包顺序与安全清单校验，TTL14天不构成14天客户端保证，不新增服务/存储。当前cf未登录，账号套餐/预算未核；冷网络资产计Worker请求。未push/部署，待兼容候选完整review。 |
 | P1 | 刚性5角色动画 / 动画专项 | 原5人刚性视觉已用户通过，旧stretch仍拒绝。原20链22b后追加d106审计修正、6ed精确Canvas归因，再由root授权最小silver button crop `[592,624,25,44]` /transform.y624；clean source a432b72共23链已交，root尚未完成fullreview，未PR turn。灰/紫correctedPASS；银发旧phase20/28三unique点FAIL及t2.5 alpha127vsbase255/4×浅线证据保留，不能以旧伪PASS抹历史。无其他mask/包扩改许可；5355新修复回合PID99890/PTY38260退出130、无监听、tab58已关，无服务保留。 |
-| P2 | 动画首帧 / character_preset_migration | animation-first-render clean source `574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a`已交，root正在review未集成。nonnull pending不先static，srcnull/reduce/能力不足/失败仍回退；单watch/迟到取消/单RAF保持。source UI43＋Web35/types/build89，最终单watch另Web2；不当root复测。5544 PID69515/PTY74321最终shell退出1、端口/PID消失，独立Chrome1910329550已关/覆盖清理，不能沿旧摘要写exit130。 |
-| P2 | 背景人物姓名自动高亮 / 原调查视觉专项 | 背景批冻结 d21f5ea→`19fed70566951ad66fda49d7b61bf6f0923534b6`，source Web236/types/build89及IAB1280/391已交，未rootreview/main。仅两处背景安全字面/最长匹配、主题中性回退/原文一致。5507 PID95357/PTY32844退出1、无监听、tab37已关。原owner正独立追加下述姓名位置需求，保留冻结背景源；不要用新在制dirty覆盖已交批。 |
+| 完成 | 动画首帧 / character_preset_migration＋root review | source574cf3a已完整review并纳入本批候选；有动画pending不挂静态，srcnull/reduce/失败回退。UI43、Gateway16/40请求与实际built Worker开局/切人已验；最终组合Web245/types/build89通过。源391px/reduce/失败证据范围保留，不冒称本次完整组合新浏览器覆盖。[实施](animation-first-render.md)。5544最新35404/workerd35876、PTY13186退出130/无监听，独立tab及覆盖清理。 |
+| 完成 | 背景人物姓名自动高亮 / 原调查视觉专项＋root review | source d21f5ea→19fed705→09b10a4完整clean交付，root已review全部源码/tests/报告与代表原图，纳入本批候选；两背景入口字面最长匹配、主题/歧义中性、纯文本复制不变。最终Web245/types/build89通过；源IAB1280/391与身份复用边界见[组合记录](performance/2026-10-25/combined-visual-verification.md)。未push/部署。 |
 | P2 | 灰白胡子年长男声 / 等待用户试听选声 | 三提交调查已root实际review并main `8ac8a7eb64a257d3aca320762bf1872fe401c1c5`；[候选与公开试听](older-male-voice/available-candidates.md)已给用户。龙天当前未占用、龙三叔与sunny同声，真实年龄/自然度等用户耳验。原龙楠映射未改，无manifest写turn/付费生成/管理agentdevice或secret操作；不动首案声。若需进一步中文样本，仍先固定≤2候选/同短句/时长费用上限/首FAIL停及自建资源cleanup方案。 |
-| P2 | 专职代码review / architecture_code_review | 两项初始发现及CR01预算调查已审；CR01防御已main，CR02/QA001已main。刚性审查5db3559→10039f4与cache审查0602604新clean报告**待root实际review/入库**，不在本批提前集成或称已审。AR01已即时协调owner。后续按具体缺陷排修，不泛化重构。 |
+| P2 | 专职代码review / root review | 初始CR01/CR02修复已main。刚性审计5db3559→10039f4、cache报告0602604已root读完整报告/检查源码/证据并纳入本批，属于冻结历史审查，不等于23链动画最终review通过。银发AR01后续最小修复source a432b72待完整最终review；不泛化重构。[审计](reviews/animation-rigid-batch-2026-10-25/README.md)。 |
 | P1 | 真人/盲测/多用户质量 / root协调用户＋QA | 整合mic/外放/长会话、三案盲测、固定device多用户隔离、正式费用硬限额未闭环；新增声需耳验，fake/短WAV/配置ready不可替代。保护用户设备，不后台保活mic。 |
 | P2 | 分享/投稿后续 / Editor＋root | Node边界及有界IAB539/16000 URL往返、reload/损坏输入已测；跨浏览器、地址栏粘贴、外部传输、离线未验，16k暂定，128KiB仅Node。旧fragment网络捕获失败未补测；投稿受PRIVATE/用户GitHub权限门禁，不新增OAuth/PAT/代理投稿。证据出处保留在整理前快照。 |
 | P2 | 角色出戏 / 语音内容owner待排 | [调查](role-immersion-investigation.md)攻击问仍有幕后元话语，候选未解决未生产；停止无限付费叠提示，不擅换模型/供应商/剧情。 |
@@ -37,7 +37,7 @@
 | P3 | Editor返回步骤/主题/动画边界 / 对应owner待排 | QA003试玩返回步骤丢失仍P3建议，未扩大需求；silver/mint同accent的区分方案待定，不全面重画。真实visibility、广泛迟到race、硬件touch未验，1280×720既有舞台裁切保留；合成hidden事件不当真隐藏PASS。 |
 | 暂缓 | 邀请码/访问鉴权 | 用户因复杂度明确暂停，chat `01a17076-a9f2-7f11-aaf3-7f7c801fee37`保留。[暂停归档](archive/2026-10-25/invite-access-paused/README.md)及所有候选/ignored资料保留，代码未main；原设计确认不构成当前实施许可。需用户明确重启，root不再推进。 |
 | P2 | 结算后改编游戏 / 待排期，编辑器与结果页owner协调 | 用户要求先记需求：成功/失败结算页均提供“改编游戏”，点击进入现有编辑器，以本局完整案件内容预填（故事、人物、形象、答案及结局等），而非新空白模板；官方案、分享案与编辑器试玩沿用当前实际游戏快照。不携带本局转写/计时等运行状态，不修改原案件，后续复用现有编辑、试玩和分享流程。需保护已有本地草稿，至少不能静默覆盖，具体沿现有草稿机制确定；失败结果页本身仍不提前揭真相，主动改编会进入包含答案的作者内容。依赖当前App/style姓名调整及结果/编辑器入口所有权，按全backlog排期，未开始实施，不抢占进行中任务。 |
-| P2 | 调查页姓名移至询问记录标题 / 原调查视觉专项 | 用户明确移除大立绘下姓名，将旁侧标题改为“{当前人物姓名}的询问记录”，随切人同步，侧边选择卡姓名保留。已交App/style既有owner，先冻结背景高亮成果，再独立追加commit；检查桌面/391窄屏长姓名、舞台布局及标题语义，相关验证和5507临时服务清理整项交付，root实际review后集成。仅调查页，不扩结果/编辑器，当前待实施。 |
+| 完成 | 调查页姓名移至询问记录标题 / 原调查视觉专项＋root review | source09b10a4独立提交移除大立绘下姓名，标题随切人显示“{姓名}的询问记录”，侧卡姓名/舞台aria保留。root完整diff/tests/docs/桌面与长英文窄屏原图review；最终Web245/types/build89通过。5507两回合原PTY32844/97605均退出1且无监听、tabs37/38关、fixture清理，第二回合PID未记录不猜。[实施](investigation-transcript-title.md)。未push/部署。 |
 
 ## 已集成与已完成研究
 

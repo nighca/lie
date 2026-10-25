@@ -1,5 +1,7 @@
 # Independent accepted rigid-animation batch review — 2026-10-25
 
+后续状态：原22b审计发现保留。owner随后以d106修正crop检查、6ed完成真实Canvas归因，再由root授权最小silver button重叠修复并交a432b72；root已查看两张修复原图与精确delta，但完整23链final review/独立PR turn尚未完成。下文是冻结原报告，不将其历史限制改写为新PASS。
+
 Review owner: architecture_code_review. Frozen source: `/Users/nighca/.codex/worktrees/approved-animation-rigid-batch/lie`, `codex/approved-animation-rigid-batch`, base `8be6d0315a393281484d65fa903353d4ea666739`, head `22b2ee8b635b2e6944d3801721673bc5122dfa3b`. Report worktree starts at reviewed main `9316701433ba21017286c7023af5470275c23a28`. No source/Git/evidence changes in the animation worktree, and no service/browser/provider/microphone operation.
 
 ## Disposition

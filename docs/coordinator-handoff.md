@@ -23,7 +23,7 @@ Root仅调度、接口/决策、实际完整review、隔离候选有序cherry-pi
 
 本地基线30822已含结果页A（7b4d96a）、完整三案/目录打包（792e182）、清单恢复（1f168e3）、帧守卫（531c721）、姓名唯一（10c57c2）。最后已证origin/部署是`abb12dbf7a40689be593c2a1e580f23cfcc5611e`，[CI/部署证据](history/2026-10-25/coverage-publication.md)；此次未fetch，不声称远端仍未变化或本地新代码已部署。runner真实版本读8787的`/__lie/main-status`，不根据owning main SHA猜服务已跟上。
 
-下一可执行：root审性能clean完整交付及两份专职review报告；动画23链与首帧clean均已交待root实际review，不越PR gate；背景高亮冻结待审、同owner姓名位置追加在制；年长声调查已main，等待用户选声。改编游戏仅backlog，不能占当前App/style，不重复启动。所有实施候选仍从实际最新reviewed main构造，按影响检查组合；不把source summary代替root实际review。优先级及保留后续见[项目计划](project-plan.md#当前可执行队列)。
+下一可执行：性能/首帧/背景高亮/调查标题及两份review报告已完成root实际review与本批组合验证，见[最终组合](performance/2026-10-25/combined-visual-verification.md)。root待完成干净main快进，不自动push；后续生产发布兼容由production_release_compatibility在独立WT执行。动画23链仍待完整final review/PRturn。改编仅backlog，年长声等用户选声。
 
 ## 活跃所有权与可恢复交付
 
@@ -31,12 +31,13 @@ Root仅调度、接口/决策、实际完整review、隔离候选有序cherry-pi
 
 | owner / chat | WT / branch / base | 当前事实与下一步 |
 | --- | --- | --- |
-| `/root/production_performance` | production-performance；codex/production-performance-build；basee6cc3aa | ordered `cba8cf073f2b088bc52d47d2211346983fcc8085`→`d6700a757111f1eb57c6037211925ca1ad276ac6`→`bd724954e4ff8e518730fe8e0a0f15c712286424`，clean完整handoff待rootreview。原fixed89字节、92hash输出/46parts；source Web228/Gateway13＋transport3、types/build/cf dryrun通过，IABwarm13immutable0transfer/HTML208B；不是root独立复测。PNG只调查约3.92%未生成；跨deploy旧hash保留未实现，Worker-first冷计费/额度风险保留。5544/PID43122/PTY53366退出130、无监听/tab1已关。 |
+| `/root/production_performance` | production-performance；codex/production-performance-build；basee6cc3aa | ordered `cba8cf073f2b088bc52d47d2211346983fcc8085`→`d6700a757111f1eb57c6037211925ca1ad276ac6`→`bd724954e4ff8e518730fe8e0a0f15c712286424`，已root完整review，纳入代码候选d9d3e93并组合验证。原fixed89字节、92hash输出/46parts；source Web228/Gateway13＋transport3、types/build/cf dryrun通过，IABwarm13immutable0transfer/HTML208B；不是root独立复测。PNG只调查约3.92%未生成；跨deploy旧hash保留未实现，Worker-first冷计费/额度风险保留。5544/PID43122/PTY53366退出130、无监听/tab1已关。 |
 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | approved-animation-rigid-batch；codex/approved-animation-rigid-batch；base8be6d03 | 原20链22b→d106审计→`6ed94a059d4539add866b0f2dcd28f83c0b9b15d`精确Canvas→`a432b72bd9d7742c5b2d49306725be0fcd74e0d5`最小修复，共23链clean交。root已明确授权silver button crop[592,624,25,44]/transform.y624，未授其他mask/包扩改。旧crop伪PASS/grayplum correctedPASS/silver旧phase20/28失败保留；新完整source未root fullreview、无PR turn。5355 PID99890/PTY38260退出130、无监听、tab58关。 |
-| 调查视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | background-character-names；codex/background-character-names；basee222503 | 背景批冻结`d21f5ea8c0207f0c550b97486e89718f539cb61f`→`19fed70566951ad66fda49d7b61bf6f0923534b6`，source Web236/types/build89、IAB1280/391；未rootreview/main。5507 PID95357/32844退出1、无监听/tab37关。owner另加姓名位置：去调查大图下姓名、标题改“{姓名}的询问记录”、侧卡不变；保留冻结批，新在制dirty仍归owner，完整cleanup待新批回执。 |
-| `/root/character_preset_migration` | animation-first-render；codex/animation-first-render；base9316701433ba21017286c7023af5470275c23a28 | clean`574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a`已交，root正在review未集成。UI43＋Web35/types/build89，最终单watch另Web2均source结果。5544 PID69515/PTY74321最终shell退出1（不是130）、端口/PID消失，Chrome1910329550关/覆盖清理；无保留服务。 |
+| 调查视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | background-character-names；codex/background-character-names；basee222503 | 背景批冻结`d21f5ea8c0207f0c550b97486e89718f539cb61f`→`19fed70566951ad66fda49d7b61bf6f0923534b6`，source Web236/types/build89、IAB1280/391；root已完整review并纳入代码候选；09b10a4973d76da325f0cbb1a3204f11a11f68ba追加标题同批交付，最终Web245。5507 PID95357/32844退出1、无监听/tab37关。标题已clean完成；5507第二回合PTY97605退出1/无监听、tab38关，PID未记录。 |
+| `/root/character_preset_migration` | animation-first-render；codex/animation-first-render；base9316701433ba21017286c7023af5470275c23a28 | clean`574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a`已交，root已完整review并纳入代码候选d9d3e93。最终组合Web245/types/build89，UI43＋Web35/types/build89，最终单watch另Web2均source结果。5544 PID69515/PTY74321最终shell退出1（不是130）、端口/PID消失，Chrome1910329550关/覆盖清理；无保留服务。 |
 | `/root/older_male_voice` | older-male-voice；codex/older-male-voice；base30822 | 三提交调查已root实际review并main`8ac8a7eb64a257d3aca320762bf1872fe401c1c5`；[候选入口](older-male-voice/available-candidates.md)。龙天未占用/龙三叔与sunny同声公开试听已交用户，等待选声；当前龙楠voiceId a42e04fcefac4e9492581fbc95f3fce3未改。无manifest写turn或新增付费/管理资源许可；先真人耳验再配置。 |
-| `/root/architecture_code_review` | animation-rigid-code-review；报告分支分别codex/animation-rigid-code-review、codex/cache-delivery-review | 刚性report ordered`5db35590e159fd55061cfdf686d29ff6b050cc5e`→`10039f40f4b63e535665020e04da5c924dea9cc9`；cache report`06026043ffc548b61efd7220ee622ace1d68b4d5`，均clean已交，**待root实际review/入库**。不要当本docs批依赖或预先cherry报告；refs保留。初始code review/帧守卫已main不重做。 |
+| `/root/architecture_code_review` | animation-rigid-code-review；报告分支分别codex/animation-rigid-code-review、codex/cache-delivery-review | 刚性report ordered`5db35590e159fd55061cfdf686d29ff6b050cc5e`→`10039f40f4b63e535665020e04da5c924dea9cc9`；cache report`06026043ffc548b61efd7220ee622ace1d68b4d5`，均已root实际review并纳入本批候选；原报告冻结历史结论保留，不能代替23链动画final review。refs保留。初始code review/帧守卫已main不重做。 |
+| `/root/production_release_compatibility` | production-release-compatibility；codex/production-release-compatibility；明确依赖be83810 | 实施CI有限旧hash保留及安全清单验证，current＋最多2旧代、每代80MiB/512files/合并240MiB上限、artifact TTL14天，不承诺14天在线页寿命；source dirty/候选未交，保护WT。不启服务/远程workflow/上传/部署。cf auth只读未登录，套餐预算未知。 |
 | Editor `01a16d90-27cc-77c2-9e0a-4b28b1135371` / stable_exploratory_qa | 旧Editor/稳定QA/目录打包WT refs保留 | 已main的定位/姓名唯一/目录三案/稳定QA成果不重派。分享真实浏览器范围与剩余未知见计划；QA003仅P3改进。无当前新的服务启动许可。 |
 
 ## 服务与浏览器保留
@@ -45,7 +46,7 @@ Root仅调度、接口/决策、实际完整review、隔离候选有序cherry-pi
 
 - 8787/8788：用户launchd `dev.nighca.lie.main-preview`及内部子监听独立常驻，换代不得停/重复启动。维护需要明确服务turn；本次没有服务动作。
 - 5355：最新最小修复QA PID99890/PTY38260已exit130、无监听、tab58关闭，无服务保留；此前52630/23642、70007/8486等为历史，不据旧PID操作。保留approved-animation-rigid-batch、final-two-character-game、animation-breathing-revision、animation-mint-ochre-revision、two-character-formal-qa等依赖WT及refs，直到消费者/审查/PR解除；不要改别人的tab。
-- 5544：首帧最新69515/74321已最终退出1、端口/PID消失/Chrome1910329550关闭；性能上一回合43122/53366停服是更早历史。5507：背景批95357/32844已exit1/无监听/tab37关闭，新姓名位置任务是否再启动未知，待owner真实回执；5402/5403无新增常驻要求。不得把关闭证据外推到未来新进程。
+- 5544：最终组合Node35404/workerd35876/PTY13186退出130、PID及监听消失，独立Chrome1910329555已关闭/覆盖清除；69515与43122是历史。5507：背景95357/32844及标题PTY97605均exit1/无监听、tabs37/38关闭，标题PID未记录；5402/5403无新增常驻要求。不得把关闭证据外推到未来新进程。
 - 前代分享QA自建browser3/tab1曾清理未确认，记录在原handoff快照；后来同编号可能复用，不能据旧ID盲关用户/其他owner tab。真实hidden能力限制、旧临时探针路径等完整历史保留，不把遗留unknown改写成已清理。
 
 ## 新intake与配置指导
