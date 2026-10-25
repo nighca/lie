@@ -20,7 +20,7 @@
 
 单次Python/Pillow/Homebrew cwebp实验：编码wall244.28s/CPU204.59s，含逐可见像素误差计算的全批wall272.20s。该探针串行，与生产Node两worker编码和官方静态二进制是不同执行路径，不能用一个时间覆盖另一个。源与输出SHA连接两者，所有50官方工具实际产物SHA都与此实验相同。[复现工具](benchmark-q90.py)增加`--q90`全量模式，保持原图不改，单次批预算600s/每编码90s。
 
-## 构建实现（验收进行中）
+## 构建实现（本机验收完成，待主协调集成）
 
 独立实现WT `image-q90-build/lie`、branch `codex/image-q90-build`，初始base3fdec3de；正式最终组合base/提交以交付记录为准。只做build派生，固定public PNG及canonical完整保留；产物仍包含固定PNG兼容副本，因此上表是运行时图片URL冷字节节省，**不是部署整体包减少85%**。
 
@@ -36,7 +36,7 @@
 
 Node **24.22.1**、官方mac-arm64 cwebp/dwebp1.6.0。首次工具安装实际正常TLS/双SHA/版本校验：**12,725.93ms**；50独立源、2worker真实冷fingerprint：**74,251.19ms**、50encoded/0cached/0preserved、81WebP/总92派生输出；后续warm：**1,832.97ms**、0encoded/50cached/0preserved，50输出SHA与独立q90全量实验相同。sourcealpha由Node parser抽取与Pillow既存inventory全部81路径SHA匹配，主协调独立Node24.17.0执行；这条不是24.22完整build证据。无peak memory或Linux耗时结论。
 
-[原生冷记录](native-cold-81.json)与[热记录](native-warm-81.json)保留实际URL/统计。时间受二进制编译和机器并发影响，不承诺同样CI耗时；CI既有15分钟预算没有偷偷加大。候选完整build/Web suite、runtime混合PNG/WebP守卫与真实浏览器结果将在同目录交付，不以这些旧81记录替代新结果资源组合验收。
+[原生冷记录](native-cold-81.json)与[热记录](native-warm-81.json)保留实际URL/统计。时间受二进制编译和机器并发影响，不承诺同样CI耗时；CI既有15分钟预算没有偷偷加大。候选完整build/Web suite与混合PNG/WebP守卫已在[组合验收](combined-acceptance.md)通过，真实IAB和本地Worker HTTP见[浏览器验收](browser-acceptance.md)。不以这些原生旧81记录代替组合验收；未来新增结果原画仍需针对新增bytes验收。
 
 ## 官方工具供应
 

@@ -1,0 +1,330 @@
+{
+  "hasMore": false,
+  "truncated": false,
+  "rows": [
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/assets/index-h1-8LEHW.js"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/assets/index-C3hoq_bD.css"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/30a60c44617ba8916468ba2d580434752c46415338ef9ca6a14a4441cf7a30b4/appearances/manifest.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9/brand/underline.svg"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/2a6ef7120e8c6d63bd20ae6255ac9324ce5a3a9467d771a989df8ebaaf477785/appearances/salt-pepper-beard/default.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/b83c0939aaaa5f18883ac63acba314e430892bf5cb66bdea78cfcbac9843b5cc/appearances/silver-bun/default.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/d275e900f5d9c27f12e2304a27a7a600526e9f848e78d2b0085964a4c2dfc518/appearances/plum-crop/default.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/f9afb3cbbd6a979b0448e9f9bd659b9b47b9d57776c805067ddcac5a474d877c/appearances/mint-puffs/default.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/e725a98f6bf00dceb1debda466d8e31ae4c39ede376abd46d0a0afae791d8e3a/appearances/ochre-freckles/default.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb/brand/logo.svg"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/package.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/shared-torso.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/default-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/listening-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/d4de0d21-d877-4efd-ae07-123477f74d8f"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/8c0ff715-cc63-4906-9b20-540d41c31de6"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/9c4f4cc9-72ad-451c-bf08-24c9420083fa"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/waiting-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/bd6002b8-1a14-49f4-a4d4-aaf8a811d97a"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/speaking-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/741fdf18-2a70-444b-b650-4294f25efa54"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/package.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/body.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/upper-left.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/fore-left.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/fcc66f20-ee43-4125-94a8-0101517be0e9"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/ff13fc00-5a8c-470b-ada7-a41d6a13f95f"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/abe3733c-b1b7-4fff-b176-a80c8cf18b9d"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/upper-right.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/3dc680d9-8ca8-4d1f-93ea-c11ce846f2ef"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/fore-right.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/97952b9e-fd68-4de4-bea1-27f87187bbf7"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/head.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/686f7809-8447-4d78-8544-64d13a58c204"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/closed.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/e8db6bb8-a3e2-4446-92d2-06e5a61727a8"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/open.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/cee15d0c-b1ea-478f-b136-9a8d6aa2d3a3"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/speak-fore.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/f66687ab-8ac7-4785-9bd1-d04f64527b58"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/listening-arm.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/6dfc887d-915c-430c-9390-2e6627af43cc"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/waiting-arms.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/a9438b05-11ae-4250-9e0b-dbcd7b7a0dca"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/package.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/waiting-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/waiting-torso.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/shared-torso.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/a84d577e-ed20-46c0-9b02-605fc958ed3b"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/1c106374-75c4-49a0-91eb-628773f4070e"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/b535820c-1bc8-4e2d-8a87-7337b59a27fa"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/default-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/ef76a047-ca54-40d6-938c-ee5800f0a2ff"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/listening-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/094bbbb9-2a1f-43bd-bbb4-a564c7426a58"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/speaking-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/b71466f6-43bb-43f5-a006-fb913abba2c8"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/default.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/package.json"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/shared-torso.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/default-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/listening-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/6c3e7a66-e603-4951-8ed0-ec935c4982f9"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/387b10b0-64e0-4734-b025-d30a58f6688f"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/b6a9dcb5-b92c-4539-8588-a1801caa5981"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/waiting-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/72da86af-53fe-41c2-8b0d-df66b5de7164"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/speaking-source.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "blob:http://127.0.0.1:5356/0dedb831-14c3-4b28-b8ce-51ddb841a526"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/default.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/avatar.webp"
+    },
+    {
+      "method": "Network.requestWillBeSent",
+      "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/default.webp"
+    }
+  ]
+}

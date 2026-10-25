@@ -1,0 +1,212 @@
+[
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/package.json",
+    "status": 200,
+    "mime": "application/json",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/body.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/fore-left.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/upper-left.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/upper-right.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/fore-right.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/head.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/closed.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/open.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/speak-fore.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/listening-arm.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/382b5387358e741e4ef6340919953411a473875cbdcce62a55486bc33998e4eb/appearances/coral-bob/animation/parts/waiting-arms.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/package.json",
+    "status": 200,
+    "mime": "application/json",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/waiting-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/waiting-torso.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/shared-torso.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/default-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/listening-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/19ae331f52c0f2a62c86a159996c0bd09de408f1094735c46e3e8616013fc34a/appearances/blue-glasses/animation/parts/speaking-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/default.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/avatar.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/avatar.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/package.json",
+    "status": 200,
+    "mime": "application/json",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/shared-torso.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/default-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/listening-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/waiting-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/speaking-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/default.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  }
+]

@@ -1,0 +1,87 @@
+[
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/30a60c44617ba8916468ba2d580434752c46415338ef9ca6a14a4441cf7a30b4/appearances/manifest.json",
+    "status": 200,
+    "mime": "application/json",
+    "cache": false
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/avatar.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "135318"
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9/brand/underline.svg",
+    "status": 200,
+    "mime": "image/svg+xml",
+    "cache": false
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "140386"
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/avatar.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "144416"
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/d275e900f5d9c27f12e2304a27a7a600526e9f848e78d2b0085964a4c2dfc518/appearances/plum-crop/default.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "131540"
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/2a6ef7120e8c6d63bd20ae6255ac9324ce5a3a9467d771a989df8ebaaf477785/appearances/salt-pepper-beard/default.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "145622"
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/b83c0939aaaa5f18883ac63acba314e430892bf5cb66bdea78cfcbac9843b5cc/appearances/silver-bun/default.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "143674"
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/f9afb3cbbd6a979b0448e9f9bd659b9b47b9d57776c805067ddcac5a474d877c/appearances/mint-puffs/default.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "128884"
+  },
+  {
+    "type": "Image",
+    "url": "http://127.0.0.1:5356/static/e725a98f6bf00dceb1debda466d8e31ae4c39ede376abd46d0a0afae791d8e3a/appearances/ochre-freckles/default.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false,
+    "length": "164050"
+  },
+  {
+    "type": "Other",
+    "url": "http://127.0.0.1:5356/static/162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb/brand/logo.svg",
+    "status": 200,
+    "mime": "image/svg+xml",
+    "cache": false
+  }
+]

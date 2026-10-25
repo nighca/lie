@@ -1,0 +1,34 @@
+{
+  "canvases": [
+    {
+      "height": 0,
+      "width": 0
+    }
+  ],
+  "visibleImages": [
+    {
+      "displayWidth": 192,
+      "height": 1254,
+      "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/avatar.webp",
+      "width": 1254
+    },
+    {
+      "displayWidth": 192,
+      "height": 1254,
+      "url": "http://127.0.0.1:5356/static/7f78073790136fdf862ccff494aad125e5358b508d054ef0d1a65adfbfacdb3d/appearances/coral-bob/avatar.webp",
+      "width": 1254
+    },
+    {
+      "displayWidth": 192,
+      "height": 1254,
+      "url": "http://127.0.0.1:5356/static/516ad1f205ee7659504c411689eb53943c1b40978b6f20ad2731c182a28033e1/appearances/blue-glasses/avatar.webp",
+      "width": 1254
+    },
+    {
+      "displayWidth": 527.171875,
+      "height": 1254,
+      "url": "http://127.0.0.1:5356/static/68c35fc8147b4c03cf4b4fa42ae928679423812db48be99b0e305067003cd822/appearances/sunny-moustache/default.webp",
+      "width": 1254
+    }
+  ]
+}

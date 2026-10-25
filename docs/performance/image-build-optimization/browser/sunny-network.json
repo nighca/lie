@@ -1,0 +1,44 @@
+[
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/package.json",
+    "status": 200,
+    "mime": "application/json",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/shared-torso.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/default-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/listening-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/waiting-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  },
+  {
+    "type": "Fetch",
+    "url": "http://127.0.0.1:5356/static/9ec3a9cc0d17c3f15c0cdf456089e3def233a5568628ce9dadd78a9bb69ff99d/appearances/sunny-moustache/animation/parts/speaking-source.webp",
+    "status": 200,
+    "mime": "image/webp",
+    "cache": false
+  }
+]

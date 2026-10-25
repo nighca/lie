@@ -34,12 +34,14 @@
 
 图片缓存CI patch仅721提交的7行，在npm ci之后恢复`tmp/image-build`（actions/cache@v5，平台/helper/source键及restore prefix）。**此文件lease已交还root的新CI拆分owner，本专项不再写ci.yml。** 该owner可按新流程安排恢复/保存，但不能把缓存当build产物的唯一来源；无缓存时自动正常TLS下载锁定工具并编码。
 
-## 浏览器与服务状态（待补验）
+## 浏览器与服务状态（已完成，首次阻塞保留为历史）
 
-根协调授权单次127.0.0.1:5356的built ASSETS-only Worker验收，但实际启动前lsof发现它被他人占用，故本专项**尚未启动服务/创建tab或调用API/provider**，未切换端口、停止或复用未知进程。
+当前浏览器/HTTP已完成且服务清理闭环，见[追加验收](browser-acceptance.md)。以下首次阻塞为当时事实，已由原owner释放解决：
+
+根协调授权单次127.0.0.1:5356的built ASSETS-only Worker验收，首次启动前lsof发现它被他人占用，当时尚未启动服务/创建tab，未切换端口、停止或复用未知进程。
 
 占用归属只读核验：PID57333、PPID92300、TTY`??`，command为`node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5356 --strictPort`，cwd `/Users/nighca/.codex/worktrees/result-reactions-lane-one/lie`，当前checkout HEAD `e362243bc600c1443451503ec79d422b4285c149`、status clean。HEAD是观察时checkout身份，不能推断为该进程最初启动SHA。PPID是Codex app-server；未读取环境/凭据。未找到当前PID的任务台账/原PTY/消费者证据，**原tool session/PTY和实际消费者UNKNOWN**，已交root协调animation owner。旧历史5356 PID记录不冒充此新进程。
 
-仅离线保存[5356预览脚本](preview-build.mjs)，当前未运行。它按实际cf config/bundle/assets构造Miniflare并打印owner/SHA/PID/消费者/停止条件。待owner明确释放后仍需重查listener，再开始桌面+391px、WebP MIME/hash/缺失404/immutable、开案/切人/canvas/正误结果与静态fallback检查；本机Worker头不能写成线上已部署验证，浏览器也不推导LCP改善。浏览器证据将新增提交，不amend这批冻结代码。
+首次交付仅离线保存[5356预览脚本](preview-build.mjs)，当时未运行；后续按上述追加验收运行并停止。它按实际cf config/bundle/assets构造Miniflare并打印owner/SHA/PID/消费者/停止条件。待owner明确释放后仍需重查listener，再开始桌面+391px、WebP MIME/hash/缺失404/immutable、开案/切人/canvas/正误结果与静态fallback检查；本机Worker头不能写成线上已部署验证，浏览器也不推导LCP改善。浏览器证据将新增提交，不amend这批冻结代码。
 
-无main集成/push/deploy，无自有服务待清理，无mic/provider/新账号/费用。原始源PNG、固定生成PNG以及已批准动画/结果玩法保持不变。当前只有结果契约，无新结果原画在该base，因此可选结果资源的构建闭合由fixture验证；当前实际正误结果沿用default派生图。
+无main集成/push/deploy，本批服务已按追加验收停止，无mic/provider/新账号/费用。原始源PNG、固定生成PNG以及已批准动画/结果玩法保持不变。当前只有结果契约，无新结果原画在该base，因此可选结果资源的构建闭合由fixture验证；当前实际正误结果沿用default派生图。
