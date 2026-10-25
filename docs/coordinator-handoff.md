@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为b59a6f53a75a4ccb95adc5b730cd03934368c815，已含改编quiet入口、正式动画及PNG研究归档；本轮纯文档候选从此main隔离。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为843cd6ea9638195f1c81716c6a678747d78ee88e，已含改编quiet入口、正式动画及PNG研究归档；本轮纯文档候选从此main隔离。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 main7249已含原结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫，以及性能hash/cache、动画首帧、背景姓名高亮/询问记录标题（mainc334e67）和三案背景/贺宁口径内容修订。**已main不重做；本地新成果未push/部署。** 最后已证远程/CI/部署 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，本批未fetch，不声称远端实时未变。runner真实版本看8787的/__lie/main-status，不以Git HEAD推定运行字节。
 
-下一步：原Editor已获两项RSM修复＋预设卡隐藏可见名称整项实施，owns Editor/Application邻近helper/tests，可局部内存保留并顺带QA003返回step；原调查视觉已获姓名高亮间距实施，仅style.css背景姓名selector，不重叠。结果胜负辨识＋指认表情由动画owner出设计，新增视觉须用户确认后实施。已main成果不重做；Hackathon初稿仍Draft。原PR #1 CLOSED/mergedAt null，retention不采用、鉴权/视频/付费与push门禁不变。
+下一步：原Editor已获两项RSM修复＋预设卡隐藏可见名称整项实施，owns Editor/Application邻近helper/tests，可局部内存保留并顺带QA003返回step；原调查视觉已获姓名高亮间距实施，仅style.css背景姓名selector，不重叠。结果胜负辨识＋指认表情由动画owner出设计，新增视觉须用户确认后实施。已main成果不重做；Hackathon初稿仍Draft。原PR #1 CLOSED/mergedAt null，retention不采用、鉴权/视频/付费门禁不变；用户新增本轮单次main push授权，当前两owner修复/小UI合入后发布，不等结果设计审批。
 
 ## 当前owner与恢复入口
 
@@ -40,9 +40,23 @@ main7249已含原结果页A、官方三案同步打包、清单恢复、姓名�
 
 服务唯一现行表见[development](development.md#服务登记与生命周期)；本批**无端口扫描/服务动作**。8787/8788及内部子监听为用户launchd常驻，继续保护。5355最后99890/PTY38260 exit130、无listener/tab58清；5544最后Node35404/workerd35876/PTY13186 exit130、无listener/tab1910329555清；5507旧背景95357/PTY32844和标题PTY97605均exit1、无listener/tabs37/38清（第二PID未知）。5507连接居中验收85753/PTY22271已exit1、无监听/tab40清；桌面立绘回合PID8323/PTY85340已exit1、无监听/tab41/temp清（owner回执）；本轮动画组合无服务，不外推旧关闭到未来新进程。前代分享tab清理unknown仍保留，不按复用ID盲关。
 
-- 用户2026-10-25明确不需要旧版本兼容，旧资源可删除；retention三链未采用，14d/256MiB确认门禁取消，不接CLI/CI。现有hash构建只交付current资源，无需新增代码；旧页面尚未缓存的旧hash可失效，不fallback冒充旧hash。此批无线上删除；不授权删除Git设计历史/WT/凭据或广泛账号工件。cf套餐/共享额度仍未知，无新登录、账号写、secret read或部署许可。
-- 用户取消动画PR路线，恢复常规本地review/ff；原owner确认PR #1 CLOSED、mergedAt null，历史branch/head和审查保留，不再把OPEN或PR例外当当前状态。候选验证不等于main/发布，无main push/merge/deploy许可；用户视觉已验不重复，旧FAIL/伪PASS及精确修复来源保留。
+- 用户2026-10-25明确不需要旧版本兼容，旧资源可删除；retention三链未采用，14d/256MiB确认门禁取消，不接CLI/CI。现有hash构建只交付current资源，无需新增代码；旧页面尚未缓存的旧hash可失效，不fallback冒充旧hash。此批无线上删除；不授权删除Git设计历史/WT/凭据或广泛账号工件。cf套餐/共享额度仍未知，无新登录、账号写或secret read许可；仅本轮main push触发现有CI部署获授权，无额外手工部署。
+- 用户取消动画PR路线，恢复常规本地review/ff；原owner确认PR #1 CLOSED、mergedAt null，历史branch/head和审查保留，不再把OPEN或PR例外当当前状态。候选验证不等于main/发布；本轮单次main里程碑普通push及现有CI自动部署已获新授权，非PR merge/手工部署许可；用户视觉已验不重复，旧FAIL/伪PASS及精确修复来源保留。
 - 邀请码/访问鉴权用户明确暂停，chat01a17076及[候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。宣传研究已完成，脚本/分镜/录屏/生成媒体/实际制作仍后置用户成熟判断与明确授权。投稿仓PRIVATE、代理fork/OAuth/PAT/公开可见性未授权。域名lie.nighca.me仅指导，未DNS/账号操作。
 - fake/demo/文本detect/短WAV/ready不等真人mic、长会话、盲测、外放或多用户隔离；旧WS非101/真实visibility/mobile/分享跨浏览器等限制见计划与原证据。实际diff/hash/依赖/组合/环境身份才可复用检查。完成设计/失败方案入库后才谈清理，不动他人dirty/草稿/进程。
 
 2026-10-25纯文档验收：从main `b59a6f53a75a4ccb95adc5b730cd03934368c815`，root已全文review的source40260dc四文件＋Hackathon67c3da2全文按序cherry为 `b4aec645a6b3cf663c734d4f9f7a0db4b9818d56` → `0c6286b9940478185ca4195966093374f24ef641`（WT integrate-character-preset-dawn/lie，branch codex/integrate-review-documents）。独立Node24.22.1重放review的1套3探针通过（870ms），结果JSON与原记录逐字节相同；本候选相对main只有5个docs路径、新文档49个本地链接目标存在。与冻结299相比，相关Editor/draft/share/controller不变，Application仅改编弹窗标题变化，故本次复现仍成立。此后仅更新中央状态，本提交经root审查、本地ff后交付，实际HEAD读Git，不提前声称ff已执行；Hackathon仍Draft非用户批准。未重跑应用套件/build、网络/服务/browser/mic/provider，未main/push；probe使用fetch抛错替身并断言零调用。
+
+## 本轮单次发布准备
+
+2026-10-25用户明确“空了之后把当前main推到远端，这样正式环境验证”。唯一integrator/publisher仍root。当前已确认main `843cd6ea9638195f1c81716c6a678747d78ee88e`；先收Editor三项（隐藏预设可见名、RSM-01保留失败保存编辑并含QA003step、RSM-02复制意图隔离）及调查姓名间距，root实际review并合入，完成组合检查后执行本轮一次普通main push。不等结果胜负/指认表情新设计批准；该设计仍须用户确认再实施。此批文档准备不执行fetch/push/部署，root已有fetch在处理，远端abb12db仍仅最后确认记录，不是实时断言。鉴权、视频、付费、账号/凭据与其他服务边界不扩大。
+
+| 发布前检查 | 可复用与仍须完成 |
+| --- | --- |
+| 收件与范围 | 两owner clean完整handoff、基线/有序SHA/原图与服务清理回执；root读实际完整diff及周边，确认Editor/Application/helper/tests与调查style selector无越界/冲突；不测试未交dirty代码。 |
+| 最终隔离组合 | 新修复涉及Editor/Application状态，不能只沿用旧281结论：最终冻结候选运行完整Web suite（含新RSM/step/可访问命名回归）、Webtypes与生产build/strict89，核预设/动画/龙三叔字节及QA入口隔离。若出现实质冲突按影响补验，不无关重跑旧全套。 |
+| 已有证据复用 | 动画281/UI43/runtime33及8包46parts、quiet47/types/build89、原desktop/391检查可按实际diff/hash/依赖/环境身份复用；它们不能替代新Editor错误恢复组合验证。旧RSM三probe是错误复现，修复后预期不再满足错误断言，采用新正向回归，不追求原错误probe继续PASS。 |
+| Git发布前置 | root独占集成/发布turn，使用其fetch结果核本地/远端main及祖先关系；若需合并仅隔离候选普通merge并审/验；复核owning main clean及候选身份后ff，普通push，拒绝时按仓库规则处理，不force/盲重试。 |
+| CI及正式环境 | 当前.github/workflows/ci.yml对main push触发，串行lie-production且不取消旧run：Node24.22.1/npm ci → 全workspace typecheck → coverage（应用＋脚本，always上传14d覆盖率artifact）→ Web/Gateway build → cf prebuilt dry-run → latest-main核对 → 部署。核同一发布SHA的完整run、latest=true及真实deploy step成功后再报已部署；新main可令旧run跳过部署。缺secret/CI失败按真实状态报，不读取或输出secret，不自行修账号/手工部署。 |
+
+CI使用现有GitHub secrets及固定Worker lie-game，`--provision=false`；本轮授权覆盖push带来的既有自动部署，未增加手工Cloudflare部署或新资源。覆盖率14天artifact是既有报告政策，不是已否决的旧资源retention方案。准备阶段仅读CI与文档检查，不跑旧base全suite/build或启动服务；后续组合验证/CI监测另按冻结候选执行。

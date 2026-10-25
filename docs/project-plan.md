@@ -2,7 +2,7 @@
 
 2026-10-25，基线已审本地main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
-已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已确认main b59a6f53a75a4ccb95adc5b730cd03934368c815已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
+已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已确认main 843cd6ea9638195f1c81716c6a678747d78ee88e已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
 
 ## 已批准的产品与架构
 
@@ -13,6 +13,8 @@
 编辑器三步自由往返、必选预设、唯一答案、同引擎试玩、压缩fragment、本地草稿，无账号/云同步/上传资产/发布版本管理。新编辑草稿姓名trim后唯一，临时未完成草稿仍可保存；旧同名分享可读。三人是作者内容原则，不是core人数硬限制。
 
 ## 当前队列与下一步
+
+当前发布批次：上述两owner在制小UI/Editor修复完成后由root审查合入并执行此次授权；[发布preflight与验证复用](coordinator-handoff.md#本轮单次发布准备)明确检查范围。结果表情设计仍独立等用户确认，不阻塞这一批。
 
 完整owner/base/ordered SHAs/实际WT和检查边界见[handoff](coordinator-handoff.md)及[恢复清单](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)。新意图先与已分派文件协调，不重叠抢写。
 
@@ -50,7 +52,7 @@
 
 ## 当前门禁与资源
 
-- 无自动main push/部署；既有一次发布授权已完成。用户取消动画PR路线，原owner已确认PR #1 CLOSED/mergedAt null，历史branch保留，无merge；当前按常规本地候选review/ff，记录、main、push、CI、部署和真人验收分别报告。
+- **2026-10-25用户新授权：“空了之后把当前main推到远端，这样正式环境验证”。** 本轮单次main里程碑由root唯一integrator/publisher执行：先完成已派Editor三项（预设卡隐名、RSM-01含QA003、RSM-02）及调查姓名间距，实际review、组合检查、隔离合入后普通push；会触发现有CI自动部署，没有额外手工Cloudflare部署许可。不等新增结果视觉设计获批而无限延后。旧发布授权已结束，此次不是持续自动push授权；原动画PR #1 CLOSED/mergedAt null，不恢复PR路线。main、push、CI、部署和真人验证分别报告。
 - 用户已明确不采用旧版本资源保留，相关14天/256MiB策略门禁取消；允许旧产品资源删除不授权广泛账号工件/Git历史/WT清理，此批无实际删除。没有新账号、secret、资源、付费测试或生产维护许可。
 - 宣传仅[方法/依赖研究](promo-video-production-research.md)完成；实际脚本/分镜/录屏/配音音乐/生成媒体/制作须用户成熟判断后明确授权。投稿PRIVATE及[代理投稿方案](editor-official-submission-proposal.md)门禁保留。域名lie.nighca.me仅给Custom Domain指导，未DNS/账号操作。
 - [端口台账](development.md#服务登记与生命周期)保留用户8787/8788及内部子监听。本批不扫描/启停服务，5544/5355/旧5507仅沿原owner退出证据；5507居中验收85753/PTY22271已exit1且tab40清；桌面立绘PID8323/PTY85340已exit1/无监听、tab41清，当前动画组合无新服务；其他人dirty/WT/refs不清理。前代分享tab未知不盲关。
