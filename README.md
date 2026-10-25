@@ -14,7 +14,7 @@ English · [简体中文](README.zh-CN.md)
 
 Talk freely with AI characters, compare their accounts, and identify who is responsible. The artwork is playful; the characters may leave things unsaid. What to ask, whom to question first, and which story to trust are up to you. The game interface is in Chinese.
 
-[Play the development preview](https://lie-game.nighca.workers.dev/) · [Create a case](https://lie-game.nighca.workers.dev/editor)
+[Play LIE](https://lie.agency/) · [Create a case](https://lie.agency/editor)
 
 ## Play a case
 
@@ -74,7 +74,7 @@ npm run build
 
 Automated checks cover content validation, accusation rules, character context, asynchronous ownership, voice transport, UI flows and Worker boundaries. Fake-provider success does not certify real microphone capture, recognition, playback or model behavior. Real-service evidence is recorded separately in the [validation log](docs/validation.md) and [case follow-up](docs/case-live-followup.md).
 
-[GitHub Actions](https://github.com/nighca/lie/actions/workflows/ci.yml) runs a clean installation, checks, build and deployment dry run on `main` pushes or manual dispatch. If that commit is still the latest `main`, it deploys the verified build to Cloudflare using repository secrets. Older builds skip deployment. The [editor milestone deployment record](docs/deployments/2026-10-24-editor-milestone.md) distinguishes successful CI from the actual active deployment. A private repository's CI badge may require login.
+[GitHub Actions](https://github.com/nighca/lie/actions/workflows/ci.yml) runs a clean installation, checks, build and deployment dry run on `main` pushes or manual dispatch. If that commit is still the latest `main`, it deploys the verified build to Cloudflare using repository secrets. Older builds skip deployment. The [latest verified release](docs/releases/2026-10-25-main-refresh.md) distinguishes successful CI from the actual deployment; the [editor milestone record](docs/deployments/2026-10-24-editor-milestone.md) preserves earlier evidence. A private repository's CI badge may require login.
 
 Local and online development previews support real voice. Application authentication is temporarily disabled by the project owner's decision; provider credentials remain on the Worker. Production access, concurrency allocation and account-wide spending controls are still deferred. A browser's questioning timer is not a hard provider spending cap. Continuous-voice user testing and bounded real-model checks do not establish unrestricted multi-user readiness; see the [online voice preview boundaries](docs/online-voice-preview.md).
 

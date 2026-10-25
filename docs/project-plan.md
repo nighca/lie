@@ -2,7 +2,7 @@
 
 2026-10-25，基线已审本地main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
-已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。已证远端/CI/线上部署48316544ea9fd22afbf1eee8db6f81e326026821，见[发布核验](releases/2026-10-25-main-refresh.md)；静态指纹同本地已验产物，不等真人功能验证。后续36a已含龙三叔配置，最新已确认main 33042fdfa1ea12cd0ce55fbafebce1a9c295cd84已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
+已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。已证远端/CI/线上部署48316544ea9fd22afbf1eee8db6f81e326026821，见[发布核验](releases/2026-10-25-main-refresh.md)；静态指纹同本地已验产物，不等真人功能验证。后续36a已含龙三叔配置，最新已确认main af14e69370b38bdbd4c356b8cb002245b4dc3907已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
 
 ## 已批准的产品与架构
 
@@ -59,6 +59,6 @@
 
 - **2026-10-25本轮单次main发布授权已执行完成**：root普通push48316544，CI run40159380539全部success且deploy实际成功，线上首页/JS/CSS/logo/hashmanifest同已验产物；[完整发布核验](releases/2026-10-25-main-refresh.md)。此次不是持续自动push授权，发布后报告/新任务不自动二次push；没有额外手工Cloudflare部署许可。原PR #1 CLOSED/mergedAt null，不恢复PR路线；真人验证另记。
 - 用户已明确不采用旧版本资源保留，相关14天/256MiB策略门禁取消；允许旧产品资源删除不授权广泛账号工件/Git历史/WT清理，此批无实际删除。没有新账号、secret、资源、付费测试或生产维护许可。
-- 宣传仅[方法/依赖研究](promo-video-production-research.md)完成；实际脚本/分镜/录屏/配音音乐/生成媒体/制作须用户成熟判断后明确授权。投稿PRIVATE及[代理投稿方案](editor-official-submission-proposal.md)门禁保留。域名lie.nighca.me仅给Custom Domain指导，未DNS/账号操作。
+- 宣传仅[方法/依赖研究](promo-video-production-research.md)完成；实际脚本/分镜/录屏/配音音乐/生成媒体/制作须用户成熟判断后明确授权。投稿PRIVATE及[代理投稿方案](editor-official-submission-proposal.md)门禁保留。用户已启用正式域名[lie.agency](https://lie.agency/)并指向现有正式Worker，编辑器为[/editor](https://lie.agency/editor)；早先lie.nighca.me仅指导属于历史，本批未操作DNS/账号，原workers.dev保留为平台原生/历史观测地址。
 - [端口台账](development.md#服务登记与生命周期)保留用户8787/8788及内部子监听。本批不扫描/启停服务，5544/5355/旧5507仅沿原owner退出证据；5507居中验收85753/PTY22271已exit1且tab40清；桌面立绘PID8323/PTY85340已exit1/无监听、tab41清，当前动画组合无新服务；其他人dirty/WT/refs不清理。前代分享tab未知不盲关。
 - 真实mic/provider试验仍须明确矩阵、时长/费用上限、首FAIL/UNCERTAIN停止和自建资源清理；优先IAB，具体授权fallback才使用独立Chrome。原子agent句柄不会自动交给新chat；用户已暂停轮换，本root继续推进。

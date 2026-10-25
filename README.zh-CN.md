@@ -14,7 +14,7 @@
 
 与 AI 角色自由语音交流，对照各自的说法，最后选出事件的责任人。画面轻松，人物却未必把话说全——问什么、先问谁、相信哪一句，由你决定。游戏界面使用中文。
 
-[体验开发预览](https://lie-game.nighca.workers.dev/) · [创作案件](https://lie-game.nighca.workers.dev/editor)
+[开始游戏](https://lie.agency/) · [创作案件](https://lie.agency/editor)
 
 ## 一局怎么玩
 
@@ -74,7 +74,7 @@ npm run build
 
 自动化覆盖内容校验、指认规则、角色上下文、异步归属、语音协议、UI 流程和 Worker 边界。替身供应商通过不代表真实麦克风、识别、播放或模型行为通过；真实服务另行验收，证据见[验证记录](docs/validation.md)与[案件真实复核](docs/case-live-followup.md)。
 
-[GitHub Actions](https://github.com/nighca/lie/actions/workflows/ci.yml) 在 main push 或手动触发时执行干净安装、检查、构建与部署 dry run；若该提交仍为最新 main，则使用仓库 secrets 自动部署已验证的构建到 Cloudflare，旧构建跳过部署。[编辑器里程碑部署记录](docs/deployments/2026-10-24-editor-milestone.md)区分了 CI 成功与真实活动部署。私有仓库的 CI 徽章可能需要登录后才能显示。
+[GitHub Actions](https://github.com/nighca/lie/actions/workflows/ci.yml) 在 main push 或手动触发时执行干净安装、检查、构建与部署 dry run；若该提交仍为最新 main，则使用仓库 secrets 自动部署已验证的构建到 Cloudflare，旧构建跳过部署。[最新已核发布](docs/releases/2026-10-25-main-refresh.md)区分了 CI 成功与真实部署；[编辑器里程碑记录](docs/deployments/2026-10-24-editor-milestone.md)保留早期证据。私有仓库的 CI 徽章可能需要登录后才能显示。
 
 本地与线上开发预览已支持真实语音。应用访问鉴权按项目负责人决定临时关闭，供应商凭据仍保留在 Worker。正式访问、并发分配和账户级支出控制仍暂缓；浏览器内的询问倒计时不是供应商费用硬上限。持续语音真人试玩与受控模型检查不等于已具备不受限的多人正式服务能力；见[线上语音预览边界](docs/online-voice-preview.md)。
 

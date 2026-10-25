@@ -1,5 +1,9 @@
 # 本地开发
 
+正式生产入口：[LIE](https://lie.agency/) · [编辑器](https://lie.agency/editor)。2026-10-25用户已启用该域名，指向现有Cloudflare正式Worker；本批仅文档修订，未改DNS/账号/Worker配置。平台原生地址`lie-game.nighca.workers.dev`继续作为原生入口与历史测量origin，不要求删除/重定向；[已核发布](releases/2026-10-25-main-refresh.md)的原始观测保留。
+
+域名文档检查（2026-10-25）：正常TLS普通GET `/`、`/editor`、`/play`均200，最终URL保持lie.agency、0重定向；三者返回同一SPA入口（546 bytes，SHA256 `d9841a11c0cf254cba0b3dc2843f48a249e46ebea9e22986eb4786766bea08cb`），仅证明路由回退交付，不代表已生成可玩分享或执行编辑/语音。只读源码核：分享以`location.origin`生成`/play#game=…`；voice/status用同源相对路径、WS由当前location派生；gateway严格比较请求Origin与请求URL origin，没有写死旧生产hostname，未放宽Origin/CORS。无应用测试/build、浏览器/草稿、API/WS/provider或服务操作。
+
 使用 Node.js 24.22.1 或更新的 24.x 版本，以及 npm 11。在仓库根目录运行：
 
 ```sh

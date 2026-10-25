@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为33042fdfa1ea12cd0ce55fbafebce1a9c295cd84，已含改编quiet入口、正式动画及PNG研究归档；本轮已发布；后续只追加发布核验文档，不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为af14e69370b38bdbd4c356b8cb002245b4dc3907，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -42,7 +42,7 @@
 
 - 用户2026-10-25明确不需要旧版本兼容，旧资源可删除；retention三链未采用，14d/256MiB确认门禁取消，不接CLI/CI。现有hash构建只交付current资源，无需新增代码；旧页面尚未缓存的旧hash可失效，不fallback冒充旧hash。此批无线上删除；不授权删除Git设计历史/WT/凭据或广泛账号工件。cf套餐/共享额度仍未知，无新登录、账号写或secret read许可；仅本轮main push触发现有CI部署获授权，无额外手工部署。
 - 用户取消动画PR路线，恢复常规本地review/ff；原owner确认PR #1 CLOSED、mergedAt null，历史branch/head和审查保留，不再把OPEN或PR例外当当前状态。候选验证不等于main/发布；本轮单次main里程碑普通push及现有CI自动部署已完成48316544核验，非持续push或PR merge/手工部署许可；用户视觉已验不重复，旧FAIL/伪PASS及精确修复来源保留。
-- 邀请码/访问鉴权用户明确暂停，chat01a17076及[候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。宣传研究已完成，脚本/分镜/录屏/生成媒体/实际制作仍后置用户成熟判断与明确授权。投稿仓PRIVATE、代理fork/OAuth/PAT/公开可见性未授权。域名lie.nighca.me仅指导，未DNS/账号操作。
+- 邀请码/访问鉴权用户明确暂停，chat01a17076及[候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。宣传研究已完成，脚本/分镜/录屏/生成媒体/实际制作仍后置用户成熟判断与明确授权。投稿仓PRIVATE、代理fork/OAuth/PAT/公开可见性未授权。用户已启用正式域名[lie.agency](https://lie.agency/)（[编辑器](https://lie.agency/editor)），指向现有正式Worker；早先lie.nighca.me仅指导保留为历史，本批未改DNS/账号/Worker配置，旧workers.dev为平台原生/历史测量origin。
 - fake/demo/文本detect/短WAV/ready不等真人mic、长会话、盲测、外放或多用户隔离；旧WS非101/真实visibility/mobile/分享跨浏览器等限制见计划与原证据。实际diff/hash/依赖/组合/环境身份才可复用检查。完成设计/失败方案入库后才谈清理，不动他人dirty/草稿/进程。
 
 2026-10-25纯文档验收：从main `b59a6f53a75a4ccb95adc5b730cd03934368c815`，root已全文review的source40260dc四文件＋Hackathon67c3da2全文按序cherry为 `b4aec645a6b3cf663c734d4f9f7a0db4b9818d56` → `0c6286b9940478185ca4195966093374f24ef641`（WT integrate-character-preset-dawn/lie，branch codex/integrate-review-documents）。独立Node24.22.1重放review的1套3探针通过（870ms），结果JSON与原记录逐字节相同；本候选相对main只有5个docs路径、新文档49个本地链接目标存在。与冻结299相比，相关Editor/draft/share/controller不变，Application仅改编弹窗标题变化，故本次复现仍成立。此后仅更新中央状态，本提交经root审查、本地ff后交付，实际HEAD读Git，不提前声称ff已执行；Hackathon仍Draft非用户批准。未重跑应用套件/build、网络/服务/browser/mic/provider，未main/push；probe使用fetch抛错替身并断言零调用。

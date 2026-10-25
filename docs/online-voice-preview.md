@@ -1,5 +1,7 @@
 # 独立线上语音试玩资源
 
+> 当前正式入口（2026-10-25）：[LIE](https://lie.agency/) · [编辑器](https://lie.agency/editor)。用户已将lie.agency指向现有正式Worker；本批仅更新文档，未操作DNS/账号。本文以下部署、测试地址与“当前”均保留原日期口径，不代表最新状态；`lie-game.nighca.workers.dev`保留为平台原生地址/历史测量origin，不要求删除或重定向。最新已核发布见[48316544发布记录](releases/2026-10-25-main-refresh.md)，现行授权与待验范围见[项目计划](project-plan.md)。
+
 用户授权暂时停用应用鉴权并在线上启用真实语音；本脚本只准备灵矽专用资源，源码由root review后才执行setup。Cloudflare配置、部署和是否对外分享由root负责，本脚本不调用cf，不更改应用鉴权。
 
 `apps/gateway/scripts/linx-preview-resources.ts` 固定创建1个 `LIE-online-preview-*` generic agent和1个随机专属设备。系统提示与本地 `linx-check.ts` 完全相同，使用默认模型选择、不指定音色、不应用失败沉浸候选；Memory_nomem、history=0、disable_greeting、max_tokens=160和禁搜索沿用本地配置。只调用管理API/OTA，不建立WSS或推理。1device不是已验证的多人并发方案，线上此阶段供用户独立试玩。
