@@ -1,0 +1,85 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: lie-production
+  cancel-in-progress: false
+
+env:
+  CF_SEND_TELEMETRY: 'false'
+
+jobs:
+  deploy:
+    if: >-
+      github.repository == 'nighca/lie' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Verify successful main CI run and exact artifact
+        id: verified
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ci-release.mjs authorize
+      - name: Download only that CI attempt's build
+        if: steps.verified.outputs.current == 'true'
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: ${{ steps.verified.outputs.artifact_id }}
+          digest-mismatch: error
+          run-id: ${{ steps.verified.outputs.run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/verified-build
+      - name: Restore and check every build byte
+        if: steps.verified.outputs.current == 'true'
+        env:
+          ARTIFACT_DIR: ${{ runner.temp }}/verified-build
+          CI_HEAD_SHA: ${{ steps.verified.outputs.sha }}
+          CI_RUN_ID: ${{ steps.verified.outputs.run_id }}
+          CI_RUN_ATTEMPT: ${{ steps.verified.outputs.run_attempt }}
+        run: node scripts/ci-release.mjs restore
+      - name: Install the verified commit's locked deployment CLI
+        if: steps.verified.outputs.current == 'true'
+        run: npm ci --ignore-scripts
+      - name: Recheck latest main and CI attempt immediately before deployment
+        if: steps.verified.outputs.current == 'true'
+        id: latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/ci-release.mjs latest
+      - name: Deploy the verified CI build
+        if: steps.latest.outputs.current == 'true'
+        env:
+          CI_HEAD_SHA: ${{ steps.verified.outputs.sha }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo '::error::Configure the existing Cloudflare deployment secrets.'
+            exit 1
+          fi
+          npm exec --workspace @lie/gateway -- cf deploy --prebuilt --mode production --worker lie-game --provision=false --tag "git-$CI_HEAD_SHA" --message "Verified CI build $CI_HEAD_SHA"
+          echo "Deployed verified CI commit $CI_HEAD_SHA to lie-game." >> "$GITHUB_STEP_SUMMARY"

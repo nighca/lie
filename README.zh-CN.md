@@ -74,7 +74,7 @@ npm run build
 
 自动化覆盖内容校验、指认规则、角色上下文、异步归属、语音协议、UI 流程和 Worker 边界。替身供应商通过不代表真实麦克风、识别、播放或模型行为通过；真实服务另行验收，证据见[验证记录](docs/validation.md)与[案件真实复核](docs/case-live-followup.md)。
 
-[GitHub Actions](https://github.com/nighca/lie/actions/workflows/ci.yml) 在 main push 或手动触发时执行干净安装、检查、构建与部署 dry run；若该提交仍为最新 main，则使用仓库 secrets 自动部署已验证的构建到 Cloudflare，旧构建跳过部署。[最新已核发布](docs/releases/2026-10-25-main-refresh.md)区分了 CI 成功与真实部署；[编辑器里程碑记录](docs/deployments/2026-10-24-editor-milestone.md)保留早期证据。私有仓库的 CI 徽章可能需要登录后才能显示。
+[CI](https://github.com/nighca/lie/actions/workflows/ci.yml) 负责检查、覆盖率、构建和部署 dry run。独立的[CD workflow](https://github.com/nighca/lie/actions/workflows/cd.yml) 仅接收本仓 main 成功 CI，校验同一 SHA 与产物，确认仍为最新 main 后部署预构建产物，不重复构建或测试。手动重验从 CI 发起；[交接与权限](docs/ci-cd.md)说明边界。[最新已核发布](docs/releases/2026-10-25-main-refresh.md)保留历史部署证据，不代表新流程已远程执行。私有仓库的 CI 徽章可能需要登录后才能显示。
 
 本地与线上开发预览已支持真实语音。应用访问鉴权按项目负责人决定临时关闭，供应商凭据仍保留在 Worker。正式访问、并发分配和账户级支出控制仍暂缓；浏览器内的询问倒计时不是供应商费用硬上限。持续语音真人试玩与受控模型检查不等于已具备不受限的多人正式服务能力；见[线上语音预览边界](docs/online-voice-preview.md)。
 

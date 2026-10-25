@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: lie-production
+  group: lie-ci-${{ github.ref }}
   cancel-in-progress: false
 
 env:
@@ -35,6 +35,8 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-lie-images-v1-${{ hashFiles('apps/web/build/image-tools.mjs', 'apps/web/build/image-optimize.mjs', 'apps/web/build/image-codec.mjs') }}-${{ hashFiles('design/character-presets/assets/**/*.png') }}
           restore-keys: |
             ${{ runner.os }}-${{ runner.arch }}-lie-images-v1-${{ hashFiles('apps/web/build/image-tools.mjs', 'apps/web/build/image-optimize.mjs', 'apps/web/build/image-codec.mjs') }}-
+      - name: Check CI/CD handoff guards
+        run: node --test scripts/ci-release.test.mjs
       - run: npm run typecheck
       - name: Test with application and separate script coverage
         run: npm run coverage
@@ -49,32 +51,16 @@ jobs:
       - run: npm run build
       - name: Validate production build without uploading
         run: npm exec --workspace @lie/gateway -- cf deploy --prebuilt --mode production --worker lie-game --provision=false --dry-run
-      - name: Check whether this commit is still main
-        id: latest
-        if: github.ref == 'refs/heads/main'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          latest_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')
-          if [[ "$latest_sha" == "$GITHUB_SHA" ]]; then
-            echo 'current=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'current=false' >> "$GITHUB_OUTPUT"
-            echo 'A newer main commit exists; skipping deployment of this build.' >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Deploy verified production build
-        if: steps.latest.outputs.current == 'true'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
-            echo '::error::Configure repository secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID before enabling deployment.'
-            exit 1
-          fi
-          npm exec --workspace @lie/gateway -- cf deploy --prebuilt --mode production --worker lie-game --provision=false --tag "git-$GITHUB_SHA" --message "GitHub Actions commit $GITHUB_SHA"
-          echo "Deployed verified commit $GITHUB_SHA to lie-game." >> "$GITHUB_STEP_SUMMARY"
+      - name: Package verified production output
+        if: github.repository == 'nighca/lie' && github.ref == 'refs/heads/main'
+        run: node scripts/ci-release.mjs pack
+      - name: Upload verified production build
+        if: github.repository == 'nighca/lie' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/verified-build/
+          include-hidden-files: true
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
