@@ -2,7 +2,7 @@
 
 2026-10-25，基线已审本地main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
-已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已审main a128320174fdb0e0730156fc05cff2e6285925f5已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
+已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已确认main b59a6f53a75a4ccb95adc5b730cd03934368c815已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
 
 ## 已批准的产品与架构
 
@@ -26,12 +26,12 @@
 | 已main，待真实模型回归 / case_content_revision | sourcea549bbe，root完整12files/三案11profiles/ending/context/docs review、候选411f8d8与source应用/tests/依赖同源；Core51/Web17/types/build89复用，root独立三对byte/其他字段原样通过，main7249。背景154→112/189→132/161→111；贺宁普通施压不自曝口径已调，**未真实模型回归，不能称实测修好**。原文/备选/矩阵已[入库](case-content-revision-2026-10-25/README.md)，无服务/provider。 |
 | 已main / 性能、首帧、视觉 | mainc334e67；最终Web245/UI43/Gateway16/types/build89及40Miniflare，实际builtWorker有界开局/切人无staticfirst；[组合](performance/2026-10-25/combined-visual-verification.md)与[浏览器边界](performance/2026-10-25/combined-first-render-verification.md)保留。92hash输出/46parts、原89资源字节保留；源warm13资源零transfer不是线上新部署，PNG全81实测5.28%/66.73s，root已读完整报告并独立8项/源SHA汇总核验，同意暂不接构建；sourcea46的研究文档经fe32d46归档，已main299，不改生产。[PNG证据](performance/2026-10-25/png-lossless/README.md)。背景字面最长匹配/歧义中性、标题“{姓名}的询问记录”，不重派。 |
 | 设计中 结果辨识＋指认表情 / 动画视觉01a16d44 | 用户新增：结合“被正确/错误指认”的人物动画/表情，用颜色、图案等让成功/失败一眼可辨，不依赖先读标题；已交视觉专项统一设计，先核其既有方案/批准范围，提供两态并排推荐及窄屏/静态/减弱动效回退，方案入库后交用户确认新增视觉再实施。不靠单一颜色，不泄错误指认的真正答案，不改玩法。 |
-| 在审 改编状态隔离 / character_preset_migration | 冻结299基线，仅只读审改编/草稿/编辑器/分享的状态隔离与失败恢复；允许确定性离线probe，不改生产/启动服务，不重复已修CR01/02及QA001/002。完成报告须入库，root审查。 |
+| 已审报告，修复已派 Editor / 改编状态隔离 | [review](reviews/remix-state-review-2026-10-25/README.md) source40260dc已root全文及真实Editor/Application周边review；2026-10-25文档候选0c6286b独立重放3探针通过，结果JSON与原记录逐字节一致。RSM-01 P2保存失败试玩返回丢编辑、RSM-02 P3旧copy完成污染新链接已交原Editor整项修复，可用局部内存保留并顺带QA003返回step；owns Editor/Application邻近helper/tests，不扩云同步/多槽。probe确认错误存在，不称已修复。 |
 | P1 真人/盲测/多用户 / root协调用户＋QA | mic/外放/长会话、三案盲测、固定device多人隔离、正式费用硬限额未闭环。fake/短WAV/ready不替代，新增声仍按用户真实耳验范围，不后台保活mic。 |
 | P2 分享/投稿 / Editor＋root | 有界IAB539/16000 URL往返/reload/损坏输入已测；跨浏览器/地址栏粘贴/外部传输/离线/旧fragment网络补测未验，16k暂定、128KiB仅Node。投稿PRIVATE/用户GitHub门禁，不新增OAuth/PAT/代理投稿。 |
 | P2 出戏、启动延迟、开发WS / 工程/内容owner待排 | [出戏调查](role-immersion-investigation.md)尚未解决，不无限付费叠prompt/换provider。observer已main但非真人加速证据；[宿主WS非101](dev-websocket-rejection.md)仅诊断，未修vendor。 |
-| P3 已记录 两项阅读/选择小优化 / Editor＋调查视觉，待排 | 用户2026-10-25浏览器评论：①/editor人物预设选择卡片隐藏可见预设名（如“珊瑚短发”），只看形象选择；保留按钮可访问名称/选中态，人物自己的姓名不受影响。②案件介绍背景的高亮姓名两侧增加少量视觉间距，保留人物主题色、原文字/匹配规则，注意换行和标点。当前只记录，未实施；分别随对应owner下一批小改处理，不抢在制文件。 |
-| P3 Editor/视觉边界 / owner待排 | QA003试玩返回步骤丢失仅建议；silver/mint同accent区分待定，不全面重画。真实visibility/广泛race/硬件touch未验；1280×720既有舞台裁切，合成hidden不算真隐藏PASS。 |
+| 实施已派 两项阅读/选择小优化 / 原Editor＋调查视觉 | 用户2026-10-25要求：①Editor人物预设卡隐藏可见预设名，只看形象，保留按钮可访问名称/选中态与人物自己的姓名；已派原Editor，随RSM修复交付。②介绍背景高亮姓名两侧少量视觉间距，保留主题色/原文/匹配与换行标点；已派原调查视觉，仅style.css背景姓名selector。文件权不重叠，尚无实现交付，不提前记PASS。 |
+| P3 Editor/视觉边界 / owner待排 | QA003试玩返回step由Editor随RSM-01处理，未交付；silver/mint同accent区分待定，不全面重画。真实visibility/广泛race/硬件touch未验；1280×720既有舞台裁切，合成hidden不算真隐藏PASS。 |
 | 暂缓 鉴权 / 独立chat01a17076 | 用户明确暂停；[归档](archive/2026-10-25/invite-access-paused/README.md)及三候选/ignored材料保留，不恢复实现/QA/CI/部署，旧设计批准不替代重新启动许可。 |
 
 ## 已集成与已完成研究
@@ -45,7 +45,7 @@
 | 目录＋完整官方案eager打包 | 已main792e182；[证据](bundled-case-catalog.md)，目录/三案单一源，unknown失败，自编/分享优先，无官方/games请求；46相关测试/types/build89及有界实际浏览器通过，JS gzip增12824B。图片/语音仍运行时，不称整站离线。 |
 | 结果页A | 已main7b4d96a；[实施](result-scene-implementation.md)，真实被指认者default/首字回退、wrong终局不泄真相，correct完整经过；组合Web220/24files/types/build89通过，root原图review，B/C未授权。 |
 | 稳定探索QA首轮 | [报告11图](qa/stable-exploration-2026-10-25/README.md)：无P1、两P2已按上表修复、P3仍建议。测试固定abb12db/demo；不当真人provider验收。 |
-| 在制 Hackathon亮点文档 | 用户已要求独立chat01a17114-7dbb-74c2-ab1d-fd24725c9d65按商业价值与产品设计、架构设计、AI价值呈现、AI工程效率四维整理有证据初稿；文档隔离制作，最终交root审查入库，无发布/视频制作。 |
+| Draft已root审 / Hackathon亮点文档 | 独立chat01a17114-7dbb-74c2-ab1d-fd24725c9d65交[四维初稿](hackathon/项目亮点.md)，source67c3da2b0f09b9c8ac67fdbb2e64e70946a1f3be已root全文review，文档候选0c6286b收录。保留Draft、待用户讨论/赛制补充，集成不等用户批准；无发布/视频制作。 |
 | 宣传准备研究 | [方法/依赖研究](promo-video-production-research.md)已完成，不再排待做。实际视频严格后置；原研究与拒绝/替代设计按[归档](archive/README.md)保留。 |
 
 ## 当前门禁与资源
