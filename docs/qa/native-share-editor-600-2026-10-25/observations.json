@@ -1,0 +1,27 @@
+{
+  "sourceSHA": "600fb4dd5d60e7370cb1f6315c9c8628b7df0c99",
+  "origin": "http://127.0.0.1:8787",
+  "mainStatus": {
+    "request": "GET /__lie/main-status",
+    "curlExitCode": 0,
+    "response": { "branch": "main", "sha": "600fb4dd5d60e7370cb1f6315c9c8628b7df0c99" },
+    "readyFieldPresent": false,
+    "scope": "actual status endpoint responds; application mount and resource readiness not observed"
+  },
+  "browserInventory": {
+    "callsThisRound": 1,
+    "availableBrowserTypes": ["extension"],
+    "iabPresent": false,
+    "nativeAppError": "The Mac is locked and automatic unlock could not unlock it",
+    "action": "stopped native branches; no guessed browser ID or Chrome fallback",
+    "omissions": "Unrelated user browser tab inventory deliberately not copied"
+  },
+  "nativeCasesExecuted": 0,
+  "draftRead": false,
+  "draftWrite": false,
+  "tabsCreated": 0,
+  "servicesStartedOrChanged": 0,
+  "oldJSDOMCasesRerun": 0,
+  "confirmedNewFindings": [],
+  "outcome": "native acceptance unavailable; no product conclusion"
+}
