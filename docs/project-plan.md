@@ -30,12 +30,13 @@
 | 移动首页分区间距 / 已发布2f5496d | source397b032→19fba4c、显式Header依赖4567后58dedce已完整审查；≤620px案件区上边距32px，标题与列表关系保持；真实Chrome iframe320/391/620移动和621/1280桌面对照/滚动通过，391/1280与新Header组合几何相同。[证据](home-mobile-section-spacing/README.md)。两轮5544均停止核空、临时入口/tab清理。 |
 | 首案改名 / 已发布b1f4af8 | 用户明确改为《消失的纪念章》，仅canonical title及当前README改变；ID/URL保持。37项相关测试与root单字段身份检查通过，CI/CD及新TLS JS已核验。[记录](case-title-rename/README.md)。 |
 | 评审亮点文档事实同步 / 专项01a17114 | 用户时间紧，root已核旧稿仍三案/首案旧名/旧状态描述；source d01613c已审查，同批纳入英文更名4bc5081及用户在专项明确催合入的README三提交28b0625→7daa237→9f207e4；root保留新案名/视频，补齐两版README第四案、同步中央英文链接。只做文档，待组合审查完成后普通push及新CI/CD。 |
-| P1 真人/真实模型 / root协调用户与QA | 贺宁口径改动已入库，真实模型回归未闭环；四案盲测、mic/外放/长会话、固定device多人隔离、费用硬限额仍缺证据。先确定实际矩阵/费用上限/停止清理边界，再执行；fake/短WAV/ready不替代。 |
+| P1 真人/真实模型 / root协调用户与QA | 用户最新明确将贺宁和Hackathon两案真实模型短测交由自己，不再由root安排/调用provider；设定修订已入库，效果待用户反馈。其余四案完整盲测、mic/外放/长会话、固定device多人隔离和费用硬限额仍未全闭环，不借此授权新推理；fake/短WAV不替代。 |
 | 原生分享/Editor生命周期 / 已完成有限验收 | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
 | Hackathon新平台定位 / 已发布 | source25e447d已审查集成并随9e1发布；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。保持讨论稿，不衍生视频制作许可。 |
 | 出戏/启动/宿主WS / 工程与内容待排 | [出戏调查](role-immersion-investigation.md)未闭环，[WS非101诊断](dev-websocket-rejection.md)未修vendor；不默认付费叠prompt/换provider。真实visibility/广泛race/硬件touch、silver/mint同accent区分等旧边界保留，不按合成事件声称通过。 |
 | 投稿 / Editor＋root | GitHub网页辅助、作者确认；用户计划公开源码不等实际visibility已操作，本批不查/改可见性。无OAuth/PAT/token输入或自动PR；[投稿范围](editor-official-submission-proposal.md)。 |
-| 截止前待取舍 / root与用户 | 优先评审材料收尾；贺宁/第四案真人模型短测仍待具体矩阵与资源上限；外部投稿可用性、Safari/iOS跨设备分享、多人隔离/费用边界未闭环。投稿PR合入前CI是本次盘点提出的建议，尚未确认实施；不借常规定时推进擅改workflow/provider。 |
+| 截止前待取舍 / root与用户 | 评审材料已随57ff7d5发布且CI/CD通过；贺宁/第四案短测用户自行负责。外部投稿可用性、Safari/iOS跨设备分享、多人隔离/费用边界仍未闭环。用户已授权独立chat设计PR CI与逐PR可跳转预览，先方案确认，不等实施/部署许可。 |
+| PR合入前CI与预览 / 专项01a1730f-9304-7d51-bf5b-8c20c3d37920 | 用户明确新建独立chat，先给方案确认：每PR检查、最好每PR预览并可从PR跳转。已创建并交实际main57ff基线，研究同仓/fork、权限与凭据隔离、产物复用、URL和生命周期、语音范围/成本及PR入口；仅方案，确认前不改workflow/部署/资源/账号。 |
 | 暂停鉴权 | 用户明确暂停，[设计与候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。 |
 | 宣传视频制作 / 专项01a17226-5e5a-7193-b5b7-e522519a3e0c | 73.4秒创作分享片及37.53秒合成双向试片已归档。用户主导的take03完成三角色真实问答→正确指认→首页，source1545c1f已root全文审查及[独立复核](reviews/joint-gameplay-1545-2026-10-25/README.md)：PCM/编码/哈希/7881帧索引通过，7ctxclosed/9tracksended、四API引用恢复；[完整记录与失败备选](promo-video/2026-10-25/joint-gameplay-recording/README.md)保留。录屏存在段间hold，具体指认点击瞬间未完整动态捕获，不能声称连续或精确口型；外围finally/observer源码未全保存，仅核终态回执。用户在专项新明确要求试玩前＋创作后、有声合成成片入库并README链接，source1ae1fa3已root全文审查、接缝/末帧实际看图及[独立身份审验](reviews/combined-demo-1ae-2026-10-25/README.md)通过；[成片与复现](promo-video/2026-10-25/combined-demo/README.md)187.433秒、1280×800/30fps/H264/AAC，试玩双方声音保留、创作段原无声。两README已加链接，特定成片入库许可覆盖其中实际人声，原WAV/失败素材仍仅本地；已随e130912合main并普通push，精确CI/CD均success；成片保留原录制名称与已知hold，不再重录打磨。发布窗口已释放，无新provider操作或公开平台上传许可。 |
 | 不采用旧资源保留 | 用户不需要旧版本兼容，14d/256MiB提案不接CI；[历史方案](archive/2026-10-25/release-retention-not-adopted/README.md)保留。允许旧产品资源删除不等广泛账号工件/Git历史/WT清理。 |
