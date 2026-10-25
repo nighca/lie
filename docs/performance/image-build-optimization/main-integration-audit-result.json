@@ -1,0 +1,16 @@
+{
+  "source": "d3d71a70cb95005e3e9f63c1c40aa8ee82c20dca",
+  "canonicalMain": "462d8a4ddebe1df3703caace2f2db2aa5c8eeb89",
+  "jsonFilesFullyParsed": 11,
+  "paths": 81,
+  "uniqueSources": 50,
+  "allDistFiles": 190,
+  "bytes": 77277967,
+  "webpBytes": 9746332,
+  "savingPercent": 85.34094593521631,
+  "packages": 8,
+  "parts": 46,
+  "networkRecords": 47,
+  "checks": "PASS: all source SHA/size/RGBA/alpha, every output hash/dimensions/alpha, all 50 lossy metrics, summary arithmetic, 190 file identities, 92 final hashed outputs/8 directory digests/manifest/static target closure, native cold/warm metadata and browser URL/size/MIME consistency",
+  "limits": "Read-only current source WT dist verified via allFiles190; no re-encode/runtime parser/browser/network/service performed; timings/cache/browser DOM observations remain source-owner evidence, metadata does not independently repeat them"
+}
