@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：本轮base870已含q90/CI拆分已验生产组合；首批sunny/silver/plum design及统一页/父补证候选da68bfd已root全文review，57路径同parent458、生产/canonical零差异，当前reader4人968采样输出同历史462审计。[完整审计与当前输出](result-outcome-design/first-batch-audit.md)待root实际读后ff归档；正式激活与结果UI仍在动画parent，其他4位不称完成。用户刚明确授权本次合完review后由root普通push并发布线上，root独占发布turn；尚未执行，不能将此授权当已发布。5355用户页保留，图片5356已清/原lane5357已清均沿owner回执，本轮无扫描/服务。线上最后确认483；单JSON内置案仍仅讨论。
+下一步：本轮base870已含q90/CI拆分已验生产组合；首批sunny/silver/plum design及统一页/父补证候选da68bfd已root全文review，57路径同parent458、生产/canonical零差异，当前reader4人968采样输出同历史462审计。[完整审计与当前输出](result-outcome-design/first-batch-audit.md)已由root实际读报告并本地归档；正式激活与结果UI仍在动画parent，其他4位不称完成。用户刚明确授权本次合完review后由root普通push并发布线上，root独占发布turn；尚未执行，不能将此授权当已发布。5355用户页保留，图片5356已清/原lane5357已清均沿owner回执，本轮无扫描/服务。线上最后确认483；单JSON内置案仍仅讨论。
 
 ## 当前owner与恢复入口
 
