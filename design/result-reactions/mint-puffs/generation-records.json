@@ -1,0 +1,83 @@
+{
+  "owner": "result_lane_two",
+  "base": "365269b6185be586b69c0fac2b7ba15defeb7a6f",
+  "status": "pending-browser-seam-review-and-native-terminal-export",
+  "prompts": {
+    "correct": "Edit target mint sweater double hair puffs woman full transparent sprite. Keep EXACT 1254x1254 canvas and every body, clothes, hands, hair silhouette, face outline, head orientation, freckles and neck pixel registration unchanged. Change ONLY facial expression: clearly rueful embarrassed caught-out reaction, eyelids lowered, inner brow corners high with softened downturned outer ends, small crooked sheepish closed mouth, dark edged warm brown/coral lips. Complete expressive face readable at small scale. A reluctant 'okay, you caught me' expression, not cheerful celebration, not crying or villainous. Do not add text/symbols, do not move or resize anything. Preserve transparent background.",
+    "wrong": "Edit target original mint sweater double-puff-haired woman full transparent sprite. Keep EXACT original 1254x1254 canvas, head and body positions, size, hair puffs silhouette, outline, dark skin, freckles, neck, clothes, hands and palette. Change ONLY face to clearly lively surprised questioning 'Me?!': one raised eyebrow, other gently bent, eyes visibly wider, small open rounded mouth with dark outline and warm lips below nose. Friendly disbelief and curiosity, not fear, blame or anger. Readable small. No writing, symbols or extra objects. Do not move, resize or redraw body. Preserve exact original registration and true transparency."
+  },
+  "generatedInputs": {
+    "correct": "exec-b52c7bad-dd26-4c2d-ae96-4afbab243f0d.png",
+    "wrong": "exec-c29e49b4-3fc9-4c78-bbe6-4cef5dc12e8b.png"
+  },
+  "files": {
+    "parts/result-wrong-head.png": {
+      "sha256": "d3fc78520512e69e8d07098d5244dcd79e2ad7e748f6dea2ad6219da3e69980e",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/speaking-source.png": {
+      "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/waiting-source.png": {
+      "sha256": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/default-source.png": {
+      "sha256": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/listening-source.png": {
+      "sha256": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/result-correct-head.png": {
+      "sha256": "ae8eab25a6d14efd12a78b3b38b52a745db19571bff179b88550ce3fa2476f75",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  },
+  "design": "New result-only torso and independent arms share original default/speaking pixels. Full generated image only used through original head mask, original body pixels retained. No scale tracks or whole-person horizontal sway.",
+  "nextOwner": "Parent /root: same-origin5355 browser seams, native terminal export and final acceptance"
+}
