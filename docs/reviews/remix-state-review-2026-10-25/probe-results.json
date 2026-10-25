@@ -1,0 +1,24 @@
+{
+  "base": "29987714c8df1cd85fba88684680d902106ad673",
+  "node": "v24.22.1",
+  "observations": [
+    {
+      "probe": "RSM-01",
+      "previewTitle": "尚未保存的编辑C",
+      "afterReturnTitle": "已保存改编稿B",
+      "actual": "unsaved edit lost despite only internal preview/return"
+    },
+    {
+      "probe": "RSM-02",
+      "oldAndNewUrlsDiffer": true,
+      "clipboardCallCount": 1,
+      "clipboardWasOldUrl": true,
+      "newDialogSaysCopied": true
+    },
+    {
+      "probe": "static-isolation",
+      "independentDraftAndSnapshot": true,
+      "runtimeHistoryAbsent": true
+    }
+  ]
+}
