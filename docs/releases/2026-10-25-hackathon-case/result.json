@@ -1,0 +1,30 @@
+{
+  "publishedSha": "5a9a31c26b1e8f7be57b4147c2886b785b052111",
+  "ci": {
+    "id": 40176764338,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40176764338"
+  },
+  "cd": {
+    "id": 40176928339,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40176928339",
+    "deployJob": 121119503254,
+    "allSteps": "completed/success"
+  },
+  "artifact": {
+    "id": 12592966238,
+    "sourceRun": 40176764338,
+    "sourceAttempt": 1,
+    "sourceSha": "5a9a31c26b1e8f7be57b4147c2886b785b052111",
+    "digest": "sha256:a48c132ba25d7af4a40bbbd07449edd4954aaa81d7f1f88d72fe729c4da345b4",
+    "verifiedRestoredFiles": 256
+  },
+  "workerVersion": "b1866411-b431-4f59-80f1-a6bd0f9e6eed",
+  "scope": "Exactly homepage and referenced JS HTTPS requests; new case id/title/summary present, JS SHA equals reviewed source build 641ceb42be4cc78f0330ae4ba269c435608162c2e003d9b0766ec6e0e0fa054f",
+  "limits": "No browser/gameplay/provider, local build, workflow rerun/manual deploy, tracked changes or Git mutation. Necessary sanitized evidence reserved for next normal batch."
+}

@@ -1,0 +1,26 @@
+{
+  "origin": "https://lie.agency",
+  "rows": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalUrl": "https://lie.agency/",
+      "sha256": "9df2f9447ef9a319038085a899c02ce61a712b603a96e8aebbf570444f46603b",
+      "bytes": 546,
+      "mime": "text/html",
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/assets/index-CRRGYc8t.js",
+      "status": 200,
+      "finalUrl": "https://lie.agency/assets/index-CRRGYc8t.js",
+      "sha256": "641ceb42be4cc78f0330ae4ba269c435608162c2e003d9b0766ec6e0e0fa054f",
+      "bytes": 237681,
+      "mime": "text/javascript",
+      "cacheControl": "public, max-age=31536000, immutable"
+    }
+  ],
+  "newCaseIdTitleSummaryPresent": true,
+  "reviewedSourceJsFingerprintEqual": true,
+  "scope": "Exactly homepage and referenced JS, normal TLS. No browser/gameplay/voice/API/provider. No local old dist identity claimed."
+}
