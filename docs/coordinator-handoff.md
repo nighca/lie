@@ -153,3 +153,13 @@ CR01防御源bb947d0已root实际12文件全diff/周边channel关闭、liveVoice
 source860ead838d00082bee3349b445676a5c6bb92f2e（base03fcb06、clean12files）已root全diff/loader/三新增tests/周边生命周期/三原生截图与完整证据review，无blocker；从main d26cc4a有序cherry为候选1f168e3486591b8c64f971dc6a3da87bdb41d2a3。执行者在该真实候选离线安装217锁依赖（不链接source workspace），Node24.22.1独立组合12suite151测试/Web类型/构建8预设89资源通过，tracked clean；root再次核main d26cc4a clean且未移动后已ff到1f168e3，未push/部署。5544上一回合PID89520消失、原3817exit130/无监听、自建tab/网络/draft已恢复，服务回合结束。
 
 已给stable_exploratory_qa正式base1f168e3、新codex/bundled-case-catalog隔离WT及main.ts/Application.vue/目录测试独占turn，允许新preset-loading-main/navigation测试仅按catalog同步接口适配，保留恢复断言。范围为单一目录源content/case-catalog.json＋三份canonical content/games完整数据静态import，未知ID失败、不改变controller异步reader契约/corevalidate；Editor/分享snapshot优先，图片/voice保持。完整tests/type/build/bundle及屏蔽/games/*后三案intro/start的有界浏览器验收/cleanup由其整项负责，5544仅其单服务；明确IAB unavailable一次才允许独立Chrome fallback，不占他人tab/全局viewport/mic。App/style结果专项独占，原editor-navigation错指标签1行变更合成时保留。当前未交付实现/验收，不把正式开工当完成。
+
+## 静态目录与完整官方案完成review（当前批次）
+
+source d494e433031a3632d7510cfb50a2abc0c92390e5，WT bundled-case-catalog/lie，base1f168e3，clean21文件。root实际完整diff/周边代码/新增与适配tests/完整证据和直接刷新、自编分享、存储恢复三原图review，从clean main8be6d03有序cherry为792e182。候选生产/测试/依赖/内容/CI全部与source身份相同，仅状态docs多出，复用最终eager代码46 tests/Web types/build89、实际Chrome阻断/games/*三案intro/start及direct/reload、unknown、同ID自编/分享验证；root独立目录原字节/5截图hash/文档链接/真实JS两个artifact的hash/raw/同Node24 gzip验证通过。JS gzip66049→78873（+12824）；公开图片/manifest/voice仍运行时加载，不称整站离线。完整证据docs/bundled-case-catalog.md及同名-evidence目录。5544 PID49549/PTY73441已exit130且无监听/PID，原draft逐字恢复/备份删除/tab1910329544关闭/网络覆盖清零；无保留服务。代码结果UI尚独立在制，editor-navigation旧标签1行将与结果源合成后精准复验。该批local main快进不授予push/部署。
+
+## 动画专项最新用户验收通过（覆盖旧待验门禁）
+
+用户在01a16d44-aeea-7552-b184-5118072e75f3明确“我验收过了，没问题了”，root已读最新userMessage核实。新刚性修订A final76dfc7a15df1350b6778d336049c8a28427302c8、B final26bed1b30b495d9cbf23f6b2e412fc819bfbfb8c、父证据b2abf6f08e1bb1b4d693ec48e405bdb964763983 clean交待验现已通过视觉；旧stretch稿仍是被否定历史，不复活。已向原专项明确整项负责最终批准delta聚合、正式资源生成、checks/game QA/cleanup与完整handoff；不写App/style（结果owner）、Application/main/catalog（静态案owner）、voice/controller（已main防御），不动8787/8788。root仍唯一协调/最终integrator。
+
+用户原先单独PR例外有效，但remote已知abb12db、local多未发布修复与docs，不能直接把localmain后全部提交推成所谓单独动画PR。已要求专项先完成clean候选交root实际review，未给当前push/createPR turn；之后root按remote真实fetch状态指定只含动画任务的PR基线/分支，必要impact复验，专项才负责普通branchpush/建PR及attach_artifact。不自动推main/部署，不再问已通过的视觉门禁。当前5355 PID70007/原8486仍用户tab50消费，默认旧8、query新刚性5，51/52已关，保留source/QA/服务WT及refs；完整链/36原生图/head采样在父证据目录待后续正式handoff入库，不能清理。

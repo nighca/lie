@@ -58,3 +58,7 @@ IAB一次返回 `Browser is not available: iab`，按root授权使用独立Chrom
 清除本tab网络阻断/cache override并Network.disable。回临时helper按原字节恢复原draft，实际[恢复一致确认](bundled-case-catalog-evidence/storage-restored.jpg)，删除自有sessionStorage备份后关闭唯一自建tab。删除本WT精确临时 `apps/web/public/bundle-qa-storage.html`，不提交临时壳或原用户数据。
 
 原session73441 Ctrl-C退出130；最终lsof无5544监听、精确PID49549不存在。未触8787/8788 launchd、5355动画、5507视觉、5402 Editor或其他owner服务。无保留server/tab/override；WT仅预期source/tests/docs变更，等待root唯一integrator审查有序cherry-pick。
+
+## 主协调审查
+
+root已核源d494e433031a3632d7510cfb50a2abc0c92390e5 clean、完整21文件diff及周边加载/导航/引擎reader/测试，实际查看直接刷新、自编分享、存储恢复原生图。候选从reviewed main8be6d03有序cherry为792e1822fad4ce9600df0c43ac4d45b4c2b2e493；全部apps/packages/content/scripts/package/lock/CI对source git diff为空，额外仅已审状态文档，复用源46测试/Web类型/构建89资源与有界浏览器证据，不声称root重跑这些检查。独立核目录移动原字节、5图SHA256/文档链接、两个实际JS产物SHA/raw/相同Node24 gzip值全部通过，diff --check通过。main快进前再次检查实际SHA/clean；本轮仅本地集成，不自动push/部署。
