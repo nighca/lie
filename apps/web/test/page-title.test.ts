@@ -70,6 +70,18 @@ describe('page titles', () => {
     controller.restart(); await nextTick()
     expect(state.page.title).toBe(previous)
   })
+  it('does not rewrite the same title for unrelated controller publications', async () => {
+    const state = binding('/', { game: 'test' })
+    const { controller } = setup()
+    cleanup.push(() => controller.dispose())
+    state.controller.value = controller
+    await controller.load('test'); await nextTick()
+    const writes: string[] = []
+    Object.defineProperty(state.page, 'title', { configurable: true, set(value: string) { writes.push(value) } })
+    controller.start(); await nextTick()
+    controller.openAccusation(); await nextTick()
+    expect(writes).toEqual([`正在调查 · ${game.title} · ${BRAND_TITLE}`])
+  })
   it('ignores old controller loads completing after route and controller replacement', async () => {
     const state = binding('/', { game: '<untrusted query>' })
     let release!: (game: unknown) => void

@@ -11,6 +11,7 @@ import { decodeSharedGame, SHARE_URL_LIMIT } from './editor/share'
 import type { CaseSummary } from './application/catalog'
 import type { GameController } from './application/controller'
 import { observeNavigationLifecycle } from './application/navigationLifecycle'
+import { usePageTitle } from './application/pageTitle'
 import type { CharacterPreset } from './presentation/characterPresets'
 import type { PresetLoadStatus } from './presentation/characterPresetLoader'
 
@@ -157,6 +158,7 @@ function avatar(id: string | null) { return props.characterPresets.find((item) =
 const brokenAvatars = ref(new Set<string>())
 
 watch(() => route.fullPath, loadCurrent, { immediate: true })
+usePageTitle(route, controller, shareError)
 onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard() })
 </script>
 

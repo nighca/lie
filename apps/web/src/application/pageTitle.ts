@@ -1,4 +1,4 @@
-import { shallowRef, watch, watchEffect, type Ref } from 'vue'
+import { shallowRef, watch, type Ref } from 'vue'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 
 import type { GameController, GameView } from './controller'
@@ -27,7 +27,5 @@ export function usePageTitle(route: Pick<RouteLocationNormalizedLoaded, 'path' |
     game.value = current?.getView() ?? null
     if (current != null) onCleanup(current.subscribe((view) => { game.value = view }))
   }, { immediate: true, flush: 'sync' })
-  watchEffect(() => {
-    page.title = getPageTitle({ path: route.path, hasGame: route.query.game != null, game: game.value, shareFailed: shareError.value != null })
-  })
+  watch(() => getPageTitle({ path: route.path, hasGame: route.query.game != null, game: game.value, shareFailed: shareError.value != null }), (title) => { page.title = title }, { immediate: true })
 }
