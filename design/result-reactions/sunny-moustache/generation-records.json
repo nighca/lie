@@ -1,0 +1,37 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "source": "design/character-presets/assets/sunny-moustache/animation/parts/default-source.png",
+  "states": [
+    {
+      "state": "accusedCorrectly",
+      "prompt": "Use case: identity-preserve. Edit target: the supplied transparent 1254x1254 game character sprite, sunny moustache. Change ONLY eyes, eyebrows and mouth inside the face into a distinctly readable embarrassed, rueful 'you caught me' expression: brows inner corners raised, eyes slightly narrowed and glancing down, small asymmetric sheepish closed mouth under the moustache. Make it lively and clear at small size, mild comic resignation rather than grief. Keep exactly the SAME 1254x1254 canvas and registration, hair outline, entire head outline, ears, nose, moustache, skin shading, neck, yellow polo and full body/arms/hands in identical positions and sizes. No movement or resizing of any silhouette. Preserve navy ink cartoon style. Real transparent background. No text, tears, sweat, icons, props or other character.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-514a0c41-7b26-4a80-874a-1e6094d5e80f.png",
+      "savedPath": "parts/accused-correctly-source.png",
+      "sha256": "6588615504a5852646e88ba2b0d64b5ad4e70170bc3dd15ed39c2a755df22a04",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "state": "accusedWrongly",
+      "prompt": "Use case: identity-preserve. Edit target supplied transparent 1254x1254 sunny moustache game sprite. Change ONLY eyes, eyebrows and mouth inside the face to a lively, clearly readable surprised 'Me?!' reaction to being accused incorrectly. Lift one eyebrow high, arch the other, widen eyes slightly with gaze forward, small open rounded questioning mouth beneath moustache. Friendly puzzled surprise, not angry or scared. Keep exact 1254x1254 canvas, registration, original hair/head silhouette, ears, nose, moustache, skin shading, neck, yellow polo, whole body and arms/hands identically positioned and sized. Navy cartoon linework unchanged. No added text/question mark/sweat/tears/props. Real transparent background.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-93b025b4-cbca-45c5-bf58-fb7b5a4b0618.png",
+      "savedPath": "parts/accused-wrongly-source.png",
+      "sha256": "ff2e4c920fe9c1f79721761ed44aaf6fe5ac9f8e6279d307bfb566ebb12066e8",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "originalClipsAndParts": "unchanged",
+  "rigidResultSamples": 242,
+  "terminalHold": true,
+  "assets": 7,
+  "sha256": {
+    "shared-torso": "315270e0a6c53f2cd36d540e6e2b988475876e91255b790f73ec9b90a598daa8",
+    "default-source": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "listening-source": "2ac7ab556de5b27c7a5d31455a1c519bbc04958ddd498be14a5cb5ea66ceb092",
+    "waiting-source": "976c04a0446268dcb59d89cc8c952148d8bb7379e14e8616eaaa924e7c797c5d",
+    "speaking-source": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854",
+    "accused-correctly-source": "6588615504a5852646e88ba2b0d64b5ad4e70170bc3dd15ed39c2a755df22a04",
+    "accused-wrongly-source": "ff2e4c920fe9c1f79721761ed44aaf6fe5ac9f8e6279d307bfb566ebb12066e8",
+    "accused-correctly-terminal": "0a6d9eec45c21f0a9b75c79ebeb5dabd8052d743d32f7e1b805f276036fbe88e",
+    "accused-wrongly-terminal": "2fcc13885cca3f00988cff1e37f515b6d65a9fbcb564d1c79e969048ae7facb9"
+  }
+}
