@@ -13,7 +13,7 @@ The local server uses port 5176. `/` uses the real voice adapter and requires a 
 
 `http://127.0.0.1:5176/?demo=1` explicitly enables fake voice in Vite development mode. It captures no microphone and plays no audio. Click “模拟说话”, then “结束模拟发言” to exercise a fake turn. There is no preset-question selector or text composer. Production builds ignore this demo flag.
 
-The selected first game is 空盒里的纪念章. The canonical source is `content/games/01-empty-medal-box.json`; actual model behavior and player blind tests are still pending. The default is selected in `src/game-config.json`, and `?game=<id>` selects another bundled official content package without changing engine/UI code. CharacterPreset IDs resolve through the independent presentation manifest. Eight reusable character presets come from `design/character-presets`; generated avatars, state portraits and optional animation use the stable `/appearances/` public paths. Missing images retain readable names/initials.
+The selected first game is 消失的纪念章. The canonical source is `content/games/01-empty-medal-box.json`; actual model behavior and player blind tests are still pending. The default is selected in `src/game-config.json`, and `?game=<id>` selects another bundled official content package without changing engine/UI code. CharacterPreset IDs resolve through the independent presentation manifest. Eight reusable character presets come from `design/character-presets`; generated avatars, state portraits and optional animation use the stable `/appearances/` public paths. Missing images retain readable names/initials.
 
 ## Controller and connection ownership
 

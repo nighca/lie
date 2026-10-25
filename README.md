@@ -28,7 +28,7 @@ The questioning budget is shared across all characters. It counts time while voi
 
 | Case | Characters | Questioning budget |
 | --- | ---: | ---: |
-| **空盒里的纪念章** — a medal disappears before a photography club group photo | 3 | 8 minutes |
+| **消失的纪念章** — a medal disappears before a photography club group photo | 3 | 8 minutes |
 | **压轴怎么是鸭叫** — a puppet show's piano finale unexpectedly becomes duck quacks | 4 | 10 minutes |
 | **盐和糖的小乌龙** — a community baking session produces unexpectedly salty cookies | 4 | 9 minutes |
 
