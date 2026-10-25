@@ -65,6 +65,7 @@
 | --- | --- | --- |
 | 暂缓 | 邀请码与访问鉴权 / 用户明确暂停实施 | 用户因额外复杂度决定先暂缓，root不再推进此项；独立chat `01a17076-a9f2-7f11-aaf3-7f7c801fee37`保留供以后讨论。已interrupt原实施者，仅安全收尾：最后原PTY52545 Ctrl-C退出130、5544无监听，自建tab已关，WT/commits/ignored测试材料原处保留；[完整暂停handoff与三图](archive/2026-10-25/invite-access-paused/README.md)已审查存档，不继续开发/QA/配置/集成。设计原批准记录保留但不再构成当前实施许可；所有auth代码未main，不随本轮push发布。待用户明确重启后再排期；rootpackage/CI test:access接线同步后置。[交接](history/2026-10-25/invite-specialist-chat-handoff.md)。 |
 | P1 | 新一批动画微动作/头比例修订 / 动画专项两lane | 用户在动画chat明确：silver、salt、plum、mint、ochre waiting动作太小；mint default/listening也小；ochre speaking头大小跳变。现有8人基线继续集成，不被此批阻塞。前增强候选A c4881b3/B78031e8及父证据1bf177f已被用户否定：强scaleY造成头部拉伸、与其他动作不协调，不再是待验可用候选，保留仅追溯。专项继续2lane按具体角色其他clip风格重做waiting，以刚性微转/位移、局部身体起伏和接触约束为方向，mint default/listen亦复查；新完成后再统一5355验收。**用户确认后才单独提PR并处理main/游戏接入**，这是该批内部无PR规则的明确例外，不现在开PR、不提前合入/发布。已核用户原消息，起点可用已审main dd16638；5355和在用WT由原owner持有。 |
+| P2 | 宣传视频准备研究 / design_document_archive增量复核 | 用户再次确认可提前调研制作方案，只暂缓实际制作。2026-10-24[初步工具链/依赖研究原文](archive/2026-10-25/history-followup/snapshots/9cf490af/docs/promo-video-production-research.md.txt)已完成并归档（source9cf490af）：当时推荐真实录制+本地剪辑，多版本时再评估独立Remotion，含采音/字幕/可编辑工程/依赖/许可成本边界。此前仅列制作gate、未列研究成果是当前dashboard遗漏，现补正。已委派原owner独立WT从f95e4ef增量复核官方资料/旧Node与产品静态→动画等过时项，产出现行docs/promo-video-production-research.md；只研究文档/工具存在性，不安装/录屏/脚本分镜/生成媒体/付费调用或制作，root实际review后入库。研究可独立推进，不等产品成熟或制作授权。 |
 | P2 | 专职代码与架构审查 / architecture_code_review | 用户明确要求专职subagent检查潜藏bug、架构不合理/实现偏离已批设计及非预期耦合，已spawn `/root/architecture_code_review`。固定58b416d（生产同已发布abb12db），独立WT/branch，检查purecore/应用生命周期与异步隔离/voice+gateway/editor分享与动画资源/模块依赖。只在新docs/reviews/architecture-code-review-2026-10-25/**保存报告与必要有限fake probe，不改生产、不启服务/浏览器或读secret；具体可达触发条件/源码行/影响/验证证据/最小改进方向，排除已知重复与未批proposal。P1即时报告，其余clean完整batch；root复核后排修，不自动实施重构或恢复鉴权。 |
 | P2 | 稳定版本系统探索QA / stable_exploratory_qa | 用户明确要求专职subagent主动发现功能缺陷、设计不合理及视觉瑕疵，已实际spawn `/root/stable_exploratory_qa`。固定已发布abb12db的独立WT，单一5544按需测试服务、独立tab/391 iframe，保护所有原draft/用户服务；假voice/demo测试三官方案/正确错误终局/Editor与分享/导航竞态/回退/视觉及键盘。只新docs/qa/stable-exploration-2026-10-25/**报告与原生证据，不修生产、不调用真人mic/provider；不混入已在修动画或未实施结果设计。按复现/影响排优先，P1即时报告，其他完整batch；测试后恢复自有fixture/tab，原PTY停5544并核退出，root实际review后排修。当前环境核验/在测，不能称测试已通过。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
@@ -80,7 +81,7 @@
 
 - **官方投稿/仓库**：未来公开现`nighca/lie`，不另设投稿仓；目前仍PRIVATE，未授权改可见性或代理建fork/commit/PR。用户本人GitHub确认，无LIE OAuth/PAT；玩家贡献PR不改变内部无PR集成。不要向公开仓发送项目私有正文。[投稿研究](editor-official-submission-proposal.md)
 - **公开访问/费用**：临时无应用鉴权语音有特定线上授权，带有效期邀请码核心设计已获用户确认（默认14天、限制游戏、不限频率、不恢复局；到期处理授权按简单度选），**用户现因复杂度明确暂缓实施**，chat保留、代码/证据保存、只做自有服务安全收尾，须明确重启才继续；不授权secret/资源/DB/DO/账号/部署，费用预算/回收策略仍暂缓，本次不新增频率/并发限制；额度不足断连不是即时硬止付。[公开方案](public-voice-launch-proposal.md)、[额度](linx-quota-investigation.md)
-- **宣传视频严格后置**：只批准制作方法/工具依赖研究；脚本、分镜、录屏、旁白/音乐、生成媒体和制作必须等用户判断产品成熟并明确放行。空闲或夜间小修授权不替代。
+- **宣传视频制作后置，准备研究可推进**：制作方法/工具依赖研究已授权，初步研究已完成、现增量复核；不能把制作gate当研究阻塞。脚本、分镜、录屏、旁白/音乐、生成媒体和实际制作仍须用户判断产品成熟并明确放行，研究完成/空闲不替代。
 - **实测与费用**：付费模型复核先审脚本/固定矩阵、设单次上限，首FAIL/UNCERTAIN/协议异常即停，只清自建资源。开发优先IAB，Chrome例外仅已授权灵矽控制台。普通测试/类型/构建不读取管理key、不自动发真实推理。
 
 原位维护决定/owner/依赖/下一步；已完成流水移[历史](history/2026-10-25/README.md)。记录、本地集成、push、部署与真人验收分别报告。

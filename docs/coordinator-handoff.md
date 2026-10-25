@@ -77,6 +77,12 @@
 
 覆盖率与双语README badge已本地main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`，root完整13files与计数/原始报告/SFC上下文实际review，候选与source47deba1覆盖源码/collector/依赖完全相同，复用clean4f5ba19真实388测试采样及两轮独立review；独立3脚本语法/45文件分母/SVG及快照逐字/链接通过。应用lines92.08%（1501/1630）、Node脚本91.32%（263/288）另报；[范围/命令与Vue映射限制](coverage/README.md)公开。CI上传14天artifact，不自动改trackedbadge，远程CI未运行，未push/部署；不重做已完成调查/采样。
 
+## 宣传视频准备研究（研究不受制作后置门禁阻塞）
+
+用户再次澄清可先调研制作方案/工具依赖，为将来制作准备，只是不真的制作。root已找到并完整读2026-10-24原9cf490af[初步研究](archive/2026-10-25/history-followup/snapshots/9cf490af/docs/promo-video-production-research.md.txt)，原文已默认仓库归档；此前当前计划只列制作gate而遗漏研究成果入口，现补正。root/design_document_archive已接整项增量复核，独立WT/basef95e4ef，仅新增现行docs/promo-video-production-research.md及必要来源索引；旧版保持原字节、不重做已有调查。需复核旧工具/许可及Node24.17→24.22.1、产品8人Canvas动画已上线等过时措辞，未实测采音链不称通过。
+
+研究已授权可独立推进，不需等待产品成熟或确认正式制作；不写脚本/分镜/台词、不安装工具/请求采集权限/录屏录音/生成媒体/上传素材/付费调用/制作/渲染。root实际review现行研究后归档，后续制作仍等用户明确放行。当前结果页设计已另收clean交付0c65ea1（result-scene-proposal WT、baseabb12db），root待实际完整review；无应用实施授权，不把待批设计当已实现。
+
 ## 专职代码与架构审查
 
 用户进一步明确要求专职subagent做潜藏bug/架构意图落实/非预期耦合审查，root已spawn `/root/architecture_code_review`。固定main58b416d（应用同已发布abb12db），独立WT/branch，与浏览器探索QA分工；先核批准架构与真实依赖/接口，再以可达触发条件、精确源码行、最小fake验证及影响给结论，未证实疑点单列。allowed仅docs/reviews/architecture-code-review-2026-10-25/**报告/必要probe，不改生产，不开browser/server/端口、不调用provider或读secret，不复活暂停auth。P1立即反馈，其余完整clean batch由root实际review后排修。当前仅启动，不能写审查通过；子agent句柄跨换代不自动继承，届时取可恢复进度，保留其WT/refs/dirty。
