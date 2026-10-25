@@ -144,3 +144,5 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 5544静态目录/案件打包回合完成：WT bundled-case-catalog/lie@d494e43，PID49549/原73441已Ctrl-C exit130、核无监听/PID消失；消费者独立Chrome1910329544已关，原draft逐字恢复/备份删除、网络覆盖清除、临时helper删除。当前该回合无保留服务，不重复停旧PID；后续仅分配不能自动常驻。5355用户新动画视觉已验收，原owner仍保留至正式QA/交付协调，不由root停止。
 
 结果页A实施5507回合关闭：WT result-scene-implementation/lie@d97a13b，Vite PID44546/原30600由owner Ctrl-C退出1，lsof无监听；消费者自建tabs35/36已关，网络/媒体覆盖清除、临时shell删除，无draft改动，无保留server，不把非0退出写成正常0。性能任务只读线上起步，5507未自动再分配，不得用旧PTY/PID继续停止。
+
+5544性能cf产物回合已关闭：production-performance/lie@d6700a7，Miniflare PID43122/原53366，owner Ctrl-C exit130且lsof空/PID消失，IAB3/tab1已关、cacheDisabled恢复false，无draft/mic/provider。下一回合root明确给character_preset_migration的animation-first-render（base9316701），仅首帧/切人/失败验证；启动先核监听并实际登记，不按分配推断在监听，完成原PTY停与全cleanup。

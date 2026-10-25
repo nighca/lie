@@ -195,3 +195,11 @@ production_performance已IAB自建tab1实测线上：冷禁cache首页15请求�
 以view.characters真实姓名字面匹配、重叠最长优先、正则特殊字符字面处理；不用模型/NLP/别名推断，不加行为。浅主题底/下划线＋字重、深蓝前景保持可读，无preset或异步主题未到中性回退、恢复后响应；旧同名不同主题歧义也中性。仅两处public background，不扩询问转写/结果真相/Editor textarea。Vue安全文本节点，禁止v-html，拼回文本/空白/换行/复制完全一致。已有开背景停语音/暂停计时规则不变。
 
 测试实际App两入口、同段多人重复/长短前缀/特殊与HTML字面/无preset及迟到/同名主题歧义/原文一致；Web相关tests/types/build89、实际1280/391排版无横溢与回退由原owner整项完成。5507仅其稳定单服务回合，启动前核监听/登记source/PID/PTY/consumer/stop，demo transport9、不gateway/mic/provider，保护draft/他人tab/全局viewport/8787/88/5355/5544；完成原PTY停/核端口/清tab/fixture。完整clean batch交root实际review后串行集成，不main/push/部署/PR。
+
+## 最新首渲染要求与用户执行模式重申
+
+用户再次明确：大部分实施/调研/配置/验收交其他chat/agent，root只分配和检查合入，只有很确定很简单的小事可亲自处理。此为既有AGENTS协调模式强化，根不保留执行尾巴。新截图要求调查已知有动画的角色不先静态再动画，直接动画加载；srcnull才始终静态。已整项交character_preset_migration，从reviewed9316701新codex/animation-first-render隔离WT，独占AnimatedPortrait.vue及UI/独立Web动画首帧tests/docs，背景App/style归视觉owner、性能loader/parser/build归性能owner、不抢写。pending不mount/static img请求、舞台稳定、就绪canvas；failure/reduce/能力不足仍旧static/首字fallback，切src迟到/取消/单RAF/卸载/hidden保持，shared Editor大舞台一致、结果A不动。不加固定delay/spinner或全人预加载。完整tests/types/build89、真实有界慢请求/首帧/切人/失败/391验证与服务清理由该owner整项执行，root实际review/串行集成，不main/push/deploy/PR。
+
+性能回合5544 Miniflare PID43122/原53366已exit130、核无监听/PID，IAB3/tab1已关且cacheoverride恢复；现在5544稳定回合明确给首帧owner，需启动前复核并登记真实WT/SHA/PID/PTY/consumer/stop，保护draft/其他服务/mic。性能代码d6700a7 clean，证据最后commit待完整handoff；同版warm13immutable请求0传输、仅HTML208bytes已owner实测，跨deploy旧hash留存未完成不称发布ready。root另派architecture_code_review只读核窄Worker-first计费/纯asset规则限制与最小既有CI artifact留存建议，不改性能source/发布链。
+
+动画独立审查AR01已证实crop证据缺口，原owner追加d1063a9只改3checker/证据，灰/紫正确检查PASS，银发phase20/28三独点（重复采样6次）FAIL；不改视觉稿/阈值、用户旧视觉批准保留，PRturn未给。已整项交动画owner真实Canvas精确t2.5/3.5s归因/正常及放大原生证据，必要最小修正提议先root review，不为追PASS偷改批准包。完整source refs/report/失败证据保留，不启动新端口，5355旧owner需有界核空闲再用/用完停。
