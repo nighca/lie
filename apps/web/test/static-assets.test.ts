@@ -71,7 +71,7 @@ it('fingerprints result terminal portraits independently and all animation attac
     const animation = '/appearances/guide/animation/package.json', part = '/appearances/guide/animation/parts/result-face.png'
     await put(right.slice(1), 'right-terminal')
     await put(wrong.slice(1), 'wrong-terminal')
-    await put(animation.slice(1), '{"schemaVersion":2}')
+    await put(animation.slice(1), JSON.stringify({ schemaVersion: 2, assets: { face: { src: 'parts/result-face.png', width: 1, height: 1 } } }))
     await put(part.slice(1), 'shared-result-face')
     await put('appearances/manifest.json', JSON.stringify([{ id: 'guide', portraits: { accusedCorrectly: right, accusedWrongly: wrong }, animation }]))
     const first = await fingerprintAssets(root, { optimizeImage: async bytes => ({ bytes, extension: '.png' }) })
