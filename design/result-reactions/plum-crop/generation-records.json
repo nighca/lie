@@ -1,0 +1,136 @@
+{
+  "owner": "result_lane_two",
+  "base": "365269b6185be586b69c0fac2b7ba15defeb7a6f",
+  "approval": "User approved strengthened Coral sample and authorized remaining-character self acceptance on 2026-10-25",
+  "prompts": {
+    "correct": "Edit target purple short curls woman head sprite. Keep EXACT original 1254x1254 transparent canvas, head position, scale, curl silhouette, face outline, neck, freckles, gold earrings, palette and line work. Change ONLY facial expression to an unmistakable rueful caught-out embarrassed reaction: eyelids lowered, brows inner corners lifted, one mouth corner tightened in a sheepish reluctant half-smile, complete dark-edged warm coral closed lips centered naturally below nose in blank mouth area. Expression lively and readable, mild resignation not cheerful victory, not crying, no villainy. No text or symbols. Do not rotate, resize, shift head; transparent background.",
+    "wrong": "Edit target original purple short curls woman head sprite. Keep EXACT 1254x1254 transparent canvas, head registration, scale, curl silhouette, face outline, neck, freckles, gold earrings and illustration style. Change ONLY expression: lively surprised questioning 'Me?!', one eyebrow high and other slightly bent, eyes clearly wider, complete small rounded parted mouth with dark outline and coral lips naturally centered below nose in the blank area. Friendly incredulous curiosity, no accusation, no anger, no fear. Readable at small size. No body or text or punctuation. No head movement, resize or reframe; real transparent background."
+  },
+  "generatedInputs": {
+    "correct": "exec-be75f4ad-b636-452f-9bef-3c6c68da66e0.png",
+    "wrong": "exec-7fec70ae-bcb2-4283-9af2-97905a841153.png"
+  },
+  "files": {
+    "accused-wrongly.png": {
+      "sha256": "ee43ed473f1fe8c46f78eecf77b2ee77a8d87a161ea54c6dd5e5d6e66c6e8f2d",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "accused-correctly.png": {
+      "sha256": "e2cd98ae59b427c28d30b769d0a3998c1904d22946e987a9fde48b46ea873722",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/result-wrong-head.png": {
+      "sha256": "27b03042166b9fcf746001b76579ad449cf44e55398dd82cae5065a67156117a",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/speaking-source.png": {
+      "sha256": "81452f2169679498f98a33d652a16483081c5f348a6f111770d6983241d629f8",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/waiting-source.png": {
+      "sha256": "76e1541dea7d48a6877f8519cec76768cc6e5031dd74cc25179ae1036578a121",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/default-source.png": {
+      "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/listening-source.png": {
+      "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/head.png": {
+      "sha256": "2d08b2b17687fad6f9fb54bb2a76be78f86ede46bd6a189362e8806ee1df98e0",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "parts/result-correct-head.png": {
+      "sha256": "f0718e7eb0868a7305310a5503d19cc91b6028808ae35b23a68df6ce62e1a564",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    "endpoint-review.jpg": {
+      "sha256": "38086565ca371a83ab9ea6f39f7bad7f3012a78d4cee39eb2191b9b4cad67de5",
+      "width": 1280,
+      "height": 781,
+      "format": "JPEG",
+      "mode": "RGB",
+      "alphaExtrema": null
+    }
+  },
+  "terminalExport": "Formal createCanvasRenderer(sampleClip(duration)), native canvas.toDataURL PNG; no pixel editing",
+  "selfReview": {
+    "endpoints": "Clear rueful/questioning, head identity and neck/sleeve/palm joints checked",
+    "motion": "Native browser t=.35, t=.75 and endpoint inspected; rigid nod/tilt and independent arms. No scale tracks",
+    "oldStates": "Original four clips, nodes, parts unchanged"
+  },
+  "service": {
+    "owner": "result_lane_two",
+    "port": 5357,
+    "pid": 53348,
+    "pty": 99017,
+    "tab": "1",
+    "stopCondition": "End of lane QA"
+  }
+}
