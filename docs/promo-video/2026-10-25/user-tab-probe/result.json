@@ -1,0 +1,18 @@
+{
+  "handshakeStatus": 101,
+  "observedConversationConnected": true,
+  "questionSent": false,
+  "dialogueValidated": false,
+  "finalUi": "开启对话",
+  "remaining": "07:34",
+  "cleanup": {
+    "inputContext": "closed",
+    "inputTracks": [
+      "ended",
+      "ended"
+    ],
+    "getUserMediaRestored": true
+  },
+  "wrapperError": "cleanup cancel locator matched two buttons; original error masked",
+  "userTabRetained": true
+}

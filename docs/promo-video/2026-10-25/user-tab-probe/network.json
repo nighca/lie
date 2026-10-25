@@ -1,0 +1,12 @@
+[
+  {
+    "method": "Network.webSocketCreated",
+    "requestId": "83831.823",
+    "url": "wss://lie.agency/api/voice"
+  },
+  {
+    "method": "Network.webSocketHandshakeResponseReceived",
+    "requestId": "83831.823",
+    "status": 101
+  }
+]
