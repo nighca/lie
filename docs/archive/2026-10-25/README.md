@@ -83,3 +83,7 @@
 | `design/coral-layered-animation/sources.json` | `85b8f44` | [历史来源JSON](snapshots/coral-research/design/coral-layered-animation/sources.json) |
 | `design/coral-layered-animation-v2/sources.json` | `85b8f44` | [历史来源JSON](snapshots/coral-research/design/coral-layered-animation-v2/sources.json) |
 | `design/coral-layered-animation-v2/reused-sources.json` | `85b8f44` | [历史来源JSON](snapshots/coral-research/design/coral-layered-animation-v2/reused-sources.json) |
+
+## 邀请码设计修订归档
+
+[旧完整方案、来源、状态与最新替代关系](invite-access/README.md)：保留原提交46ae7cb的原字节；原7天与暂停续局方案被替代。当前共享码/14天/公开浏览边界已获用户确认，完整状态见现行文档。

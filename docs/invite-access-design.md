@@ -1,114 +1,117 @@
-# 有效期邀请码访问设计（待用户确认）
+# 有效期邀请码访问设计
 
-2026-10-25；设计基线 `73ba1387c24762e48e78c003eef2421e53746a71`。**仅设计，未获实施批准；没有新增资源、secret、部署或付费实验。**
+2026-10-25修订；源码基线 `76cc04c43c63c4189f88b914a0ffd12cdc6c4322`。**用户已确认核心范围，并授权按实现简单度选择到期行为；root审查后可排期实现。本轮仅修订设计，未改应用、secret、资源、服务或部署。**
 
-推荐：离线签发可重复使用、具有固定截止时间的邀请码；同域 Worker 兑换为 HttpOnly 授权 Cookie，正常游戏入口与真实语音连接都检查资格。保留浏览器游戏架构，不新增账号、数据库、DO 或频率限制。
+采用最小方案：离线签发共享邀请码，默认签发后14天统一到期；Worker兑换同源HttpOnly Cookie。新开局和每次新WS检查有效期，已建立WS沿用既有180秒上限，不按邀请码到期强断。不做当前局续码恢复、账号、数据库、DO或频率控制。
 
-## 先确认这三点
+## 已确认与本轮选择
 
-1. **邀请码可转发、可多人重复使用，到统一截止时间失效。** 推荐默认签发后7天到期，发码时可指定其他明确截止时间；不是每个人首次使用后再计7天。没有一次性、绑定个人或逐码撤销。
-2. **到期暂停游戏并停止语音。** 不等整局结束；保留本页内存进度与只读转写，重新输入有效码后可继续，刷新仍按现有规则丢失进度。不清空已读内容、不自动判输赢。
-3. **浏览与创作公开，实际试玩要码。** 首页、案件介绍、编辑器、保存草稿、生成/打开分享链接可匿名；官方案件、分享案件、编辑器“试玩”的“接案，开始调查”均要求邀请码。生产不提供绕过门槛的模拟试玩。
+- **用户批准**：邀请码可共享、可多人重复使用；默认14天，可签发指定截止时间的码。首页、案件介绍、编辑器、草稿保存、生成/打开分享链接公开；官方案件、分享案件、编辑器实际试玩都需邀请码。不限制频率、局数、并发或日额度。
+- **用户明确删除**：续码恢复当前局，以及为此保留/持久化局进度的功能。刷新仍丢局，无云存档。
+- **用户授权按简单度决定**：到期是否立即停。本设计选择“到期拒绝新开局/新WS，已建WS自然结束”，比较见下表；不用再次请求整案批准。具体实现仍须root审查，供应商资源/生产启用仍有独立门禁。
+- 不增加一次性消耗、绑定个人或精准逐码撤销；无服务端使用记录，不能声称支持这些能力。
 
-这些是推荐选项，不是已批准行为。用户已确认的只有：用有有效期的邀请码限制玩游戏访问、不限制频率；本轮先出设计供确认。若用户要不可转发短码、每人单独计期、一次性消耗或精准撤码，需要另行设计，不在此默认增加状态服务。
-
-## 当前事实与设计边界
-
-已读真实代码，而非沿用旧提案的配置描述：
-
-- [Worker](../apps/gateway/src/index.ts) 当前暂时停用应用鉴权，`/api/voice/status` 只按三项供应商配置返回 ready/unavailable；WS 强制同源 Origin、禁止 query 覆盖，并使用固定 `LINX_DEVICE_ID`/agent/token。未授权请求目前也能在配置齐全时进入上游。
-- [CF 配置](../apps/gateway/cloudflare.config.ts) 当前生产声明这三项 secret，`/api/*`、`/games/*` 先经过 Worker，其余资产/SPA 按静态路由处理。[开发配置](../apps/gateway/vite.config.ts) 没有旧提案所述的安装测试 Cookie 接口。旧[上线提案](public-voice-launch-proposal.md)是归档，不是本次批准范围。
-- [Application](../apps/web/src/Application.vue) 在浏览器加载官方/分享/编辑器预览内容；[App](../apps/web/src/App.vue) 的接案按钮直接调用 controller.start；[liveVoice](../apps/web/src/application/liveVoice.ts) 先查状态，之后并行准备麦克风与 WS。[main](../apps/web/src/main.ts) 只在 DEV 且 `?demo=1` 时启用 fake 语音。
-- 保留现有上游握手10秒、每连接180秒、每帧64KiB。它们是已有传输安全边界；内容中的每局询问时长是玩法规则。**本设计不新增兑换/连接频率、局数、并发数或日额度限制。**
-
-游戏包、规则、答案仍可被浏览器检查；不锁静态 JSON/素材，也不承诺阻止下载后的离线运行或手改 JS。正常 UI 限制“玩游戏”，Worker 强制限制真实供应商访问；客户端门槛不能替代 Worker 校验。若要求故事数据保密或服务端强制执行指认规则，就超出现有架构，须另讨论。
-
-## 用户路径与到期体验
-
-1. 访客照常看首页/介绍或创作。点击“接案，开始调查”时检查访问状态；有有效 Cookie 直接开始，没有则在当前页面出现“输入邀请码”对话框。编辑器预览仍先进入介绍，再在接案处统一检查。
-2. 输入框接受完整粘贴的长码，只去除首尾空白，不接受 URL。提交到同源 POST；成功后清除输入值，展示完整到期时间，再继续原动作。全程不换路由，原 query、`#game=…`、编辑器内存预览和本地草稿保留；取消返回介绍。
-3. 格式/签名错误显示“邀请码无效，请检查后重试”；只有签名正确且已过期才显示“邀请码已过期，请获取新码”。网络错误显示“暂时无法验证，请重试”，不放行、不回退假语音。Cookie 被禁用时，提交后复查状态发现未保留资格，给出启用 Cookie 提示。
-4. 已授权期间不重复输入。客户端用 Worker 的 serverNow/exp 算剩余时间，以单调时钟安排 UI，重新聚焦/从后台恢复及准备开始语音时复查；本机改时钟不能延长服务端资格。截止时提示“邀请码已到期，输入新码后可继续”，停止麦克风、播放及连接；游戏动作（切人、指认、重开、开语音）暂停，转写/当前页仍可阅读，也可返回首页/编辑器。
-5. 新码验证后恢复当前内存局，沿用原剩余审问时长，不补时、不重置人物历史。前端暂停与异步事件隔离须复用现有 controller/voice 生命周期；禁止迟到音频在解锁后继续播放。到期本身不调用 end/accuse。已结束局仍可阅读结果；重新开始须有效资格。刷新仍丢局，不为邀请码添加存档。
-
-客户端暂停是产品体验；篡改浏览器代码可以绕过本地玩法锁，不能绕过到期后的 Worker 语音检查。多 tab 共享本 host Cookie；一个 tab 换码后，其他 tab 在聚焦/下次动作复查获知，不新增跨 tab 身份或锁。
-
-## 令牌、时间与秘密
-
-邀请码建议格式为 `base64url(payload).base64url(mac)`，payload 仅含 `v:1`、`purpose:"invite"`、`aud`（准确 HTTPS origin）、`iat`、`exp`（UTC Unix 秒安全整数）、128位安全随机 nonce；MAC 为 HMAC-SHA-256。签名覆盖带固定域前缀的原始 payload 编码字节，固定算法，不信任输入指定算法。校验限制长度/字段/版本/目的/audience、确认 `iat <= now < exp` 且 `exp > iat`，不加过期宽限。
-
-Worker 用原生 `crypto.subtle.importKey/sign/verify`，不手写 MAC 字符串比较；256位根密钥来自安全随机数。邀请码是持有者凭证，不是弱数字短码；签名载荷可读，不含个人资料、故事或供应商凭证。随机 nonce 不代表服务端记录使用次数。[Workers Web Crypto 的 HMAC 支持](https://developers.cloudflare.com/workers/runtime-apis/web-crypto/)
-
-兑换后签发 `purpose:"session"` 的独立签名令牌，使用不同的签名域前缀；保留原邀请码 exp/aud，签发新的 iat/nonce。邀请码不能直接充当 session Cookie，session 也不能作为新邀请码兑换；重复兑换不延长有效期，无滑动续期。
-
-Cookie：`__Host-lie_access=<session>; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=<exp-now>; Expires=<exp GMT>`，不设置 Domain。每次响应按签发时的 Worker now 计算剩余寿命；到期资格最终由 Worker 校验，不依赖浏览器何时删除 Cookie。生产全程同源 HTTPS；开发用独立测试密钥和明确的 loopback Cookie 策略，不把生产码放进本地明文调试。[Cookie 的寿命与 HttpOnly 语义](https://httpwg.org/specs/rfc6265.html#section-4.1.2)、[浏览器文档中的 Secure/host 前缀/SameSite 属性](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie)
-
-时钟权威为 Worker 接受请求时的服务器时间，不接受浏览器发送 now。运营者发码时必须提供带时区截止时间，工具输出 UTC 和北京时间（Asia/Shanghai，精确到秒），并标明不含截止秒；示例格式“有效至 2026-11-01 12:00:00 北京时间”。默认7天是运营便利的提案，不是新增局数限制。发码电脑应校时；未来 iat 被 Worker 拒绝，不用浏览器时间补偿。
-
-### 发码与撤回
-
-拟增加离线 Node 24 CLI，只负责 keygen/mint/inspect；不建网页管理后台、不建在线发码 API。它读取受限私密文件或 stdin 中的根密钥，签发指定 origin/截止时间的邀请码；密钥不放命令行参数、shell history、仓库或聊天。mint 将邀请码及截止时间明确输出到操作者指定的0600私密文件，keygen同样写受限文件；inspect只显示非秘密字段/验证结果，不把码当诊断日志打印。临时产物放版本控制之外。CLI 依赖 Node 原生 Web Crypto，Worker 不增加 Node 兼容依赖。
-
-根密钥以 Worker secret `INVITE_SIGNING_KEY` 保存，只有维护者及 Worker 有；浏览器只短暂持有输入的邀请码，长期授权留在 HttpOnly Cookie，禁止 localStorage/sessionStorage 保存码。不记录请求正文、Cookie、完整 token 或签名；现有 query 脱敏不等于这些字段自动安全，实施时要检查应用日志/诊断输出。[Worker secrets 官方说明](https://developers.cloudflare.com/workers/configuration/secrets/)
-
-维护者线下把码和到期时间交给受邀者；设计不自动发消息。码不混入游戏分享 fragment、query、Referer 或分享预览。分享链接仍只承载案件内容，不附带作者授权。
-
-无服务端使用记录，因此可复制、可重复使用，无法识别具体是谁或精准撤销单个码/已签发 Cookie。首版不加黑名单；丢码可等到期，紧急时轮换根密钥使旧码和旧 Cookie 全部在新请求校验失效，再重发新码。轮换影响全部访客，且不立即终止已建立 WS，不承诺即时全网撤销。若将来需要单码撤销，再单独讨论状态存储/运营代价。
-
-## 接口与真正的网关门槛
-
-以下均为拟新增/修改，不是现有端点行为。所有访问响应 `Cache-Control: no-store`，不启用 CORS；拒绝 query（包括邀请码参数）和 cross-site 请求。POST 要求准确同源 Origin、JSON Content-Type，流式读取时最多4KiB请求体、码最多1KiB，超限413；这些是解析安全边界，不是频率配额。GET 状态允许正常同源无 Origin 请求，但拒绝不匹配 Origin/`Sec-Fetch-Site: cross-site`。
-
-| 端点 | 拟议行为 |
-| --- | --- |
-| `GET /api/access/status` | 200 `{state:"granted", expiresAt, serverNow}` 或 `{state:"required", serverNow}`；访问配置错误/暂停则503和固定错误码。缺失/损坏/过期 Cookie 均不授权，不返回 token；无上游请求。 |
-| `POST /api/access/redeem` | body `{invite:string}`。有效则200，设置 session Cookie，返回 expiresAt/serverNow；无效401 `invite_invalid`，签名有效但过期401 `invite_expired`；同源错误403，解析错误400，配置缺失/暂停503。不因失败清掉仍有效的旧 Cookie。 |
-| `GET /api/voice/status` | 先校验资格；无资格401 `access_required`；有资格继续现有 ready/unavailable（不打开上游）。前端需保留这类错误，不能一律折成 check-failed。 |
-| `GET /api/voice`（WS） | 先检查 Upgrade/准确同源 Origin/无 query，再检查有效 session，未授权401且上游调用数为0；然后检查语音配置。上游固定目标、三项私密 headers 保留，不接受浏览器传 provider token/device。 |
-| 其他静态/health | 沿用现有内容与缓存/404行为；`/api/*`未知路由仍404，不把SPA HTML当认证成功。 |
-
-`/api/*` 已在 runWorkerFirst 中，拟新增接口也必须走 Worker，不能被 SPA fallback 绕开。由于不保护静态内容，不需要把整个站改为 Worker-first，也无需把 Cookie 转交 ASSETS 上游业务。[Cloudflare Worker-first 路由说明](https://developers.cloudflare.com/workers/static-assets/routing/worker-script/)
-
-浏览器原生 WS 握手会按 Cookie 规则附带凭证，不在 URL 塞 token。[WHATWG 握手的 credentials include 定义](https://websockets.spec.whatwg.org/#opening-handshake)；Origin 只是跨站保护，不是身份凭据，非浏览器客户端也必须提供有效 session。
-
-### 到期与握手竞态
-
-1. 接案资格检查用于 UI；每次真实 WS 仍重新验 Cookie，不能相信先前的 status。浏览器在开始采音前检查 access/voice status；401重新输入，503显示服务不可用，不调用麦克风或供应商。
-2. Worker 在启动上游前验证并捕获本连接的 exp；`now >= exp` 不可开始。绝对时间比较统一为毫秒（`exp * 1000`）；上游握手 Abort 截止取 `min(现有10秒, exp * 1000-nowMs)`。等待期间达到 exp 应取消握手。
-3. 上游返回后、发101前再次读取 now；`now >= exp` 则关闭已得到的上游 socket、返回401。Abort 与返回竞态都清理上游，不建立浏览器 relay。极短有效窗口仍可能发出了上游请求，不能承诺零计费；没有额外设置“剩余至少N秒”限制。
-4. 成功后连接截止取 `min(连接建立时间+180秒, exp对应的绝对时间)`。relay 同时设置关闭 timer，并在**双向每次转发**前检查 deadline；到期不再转发，关闭浏览器与上游，应用约定 close code 4001 `Access expired`。timer 可能延迟调度，不能宣称毫秒级硬止付；既有在途帧和供应商已启动的处理不可能撤销。close/error 清理复用现有幂等 finish。
-5. 客户端收到4001停止采音/播放并转 access-required；WS 非101在浏览器可能只呈通用失败，因此失败后查 access/status 区分“需重新输入”与普通网络故障，不能依赖读取WS HTTP响应体。status显示有效也不自动无限重连。客户端暂停后保留本地局，不把到期误报为角色回答。
-6. 换新码只影响后续请求。旧 WS 捕获原 exp，不因为 Cookie 更新自动延期；旧连接到期后可在新资格下按既有动作重新连接。未到原 exp 的已建连接也不会因另一个 tab 清 Cookie、密钥轮换或新部署立即全部断开。
-
-WebSocket close 与运行时生命周期依官方接口处理，部署/运行时更新可能另外断线；本方案没有跨连接注册表，不增加全网 socket 控制服务。[Cloudflare WebSocket close 与连接生命周期](https://developers.cloudflare.com/workers/runtime-apis/websockets/)
-
-## 最小模块与实现拆分（批准后才执行）
-
-| 所有权/拟议文件 | 职责、接口与依赖 | 独立检查 |
+| 到期路线 | 改动与体验 | 选择 |
 | --- | --- | --- |
-| 共享纯 TS `packages/access/src/token.ts`（新目录，非强制新 npm 包） | `verifyInvite/verifySession(token,key,audience,now)`、`signInvite/signSession`；无 Vue、CF、供应商引用。输出 typed claims 或固定错误。用标准 Web Crypto 接口给 CLI/Worker 复用，不复制两套编码器。 | 固定密钥/时间向量、CLI签发→Worker验证；篡改/错误目的/origin/版本/非整数/未来iat/刚好exp/随机坏输入。 |
-| 网关 owner：`apps/gateway/src/access.ts`、`src/index.ts`、`cloudflare.config.ts`、`test/*` | 访问端点、Cookie解析/发放、同源/输入边界；`requireAccess(request,env,now)`向relay传授权 exp；无游戏规则。配置类型继续从 cf config 推导。 | 真实本地 Worker runtime+假上游，验证无权零上游、exp跨握手、双向到期、关闭幂等、原安全边界/静态缓存回归。 |
-| Web owner：`apps/web/src/application/access.ts`、`Application.vue`、`App.vue`、`application/controller.ts`、`application/liveVoice.ts`、`application/voice.ts`、相关样式/测试 | access port 管理状态/提交/时间；接案与有效局动作门槛；暂停释放音频且保留局；错误提示与 dialog；现有voice channel已上报close code，liveVoice须把4001转为typed access事件，不能丢成普通closed。授权逻辑不塞入game-core，controller只接收访问状态/暂停动作。 | fake access/clock/voice覆盖官方、分享、编辑器预览；取消/网络失败/过期/续码、后台恢复、并发动作和迟到音频。 |
-| 运营工具 owner：`scripts/invites.mjs`、文档、必要package命令 | Node24读取私密材料、签发/检查和格式化截止时间；无远程API、无网页账号。需由共享模块构建入口复用编解码，不手写第二份协议。 | 原生crypto跨运行时向量、CLI参数时区/缺失/无效时间、无敏感日志；不把真实secret作为fixture。 |
+| 仅新开局/新WS验exp，已建WS沿既有180秒 | 新增请求边界校验；不改relay计时或逐帧处理，不加页面到期计时器、暂停/恢复状态。到期后下一条WS不可建立。 | **采用，最简单。** |
+| 到期立即停止正在进行的语音/游戏 | 额外exp关闭timer、双向逐帧截止检查、握手到期Abort、UI到期同步/后台恢复及资源释放竞态；即使不做恢复仍需额外关闭状态。 | 保留为未采用备选，不实施。 |
 
-共享令牌接口先冻结；并行时文件归属不重叠，Web/网关依赖共享向量。暂不选新 npm 依赖；签名、base64url、请求/Cookie解析采用有限固定协议，不能由此扩成通用 auth 框架。Worker 只需已支持的 Web API，不因 CLI 用 Node 而要求 `nodejs_compat`。最小前端样式沿用已批准视觉，不涉及新的视觉方向。
+**180秒是每条已建立WS的原有上限，不是整局保证。** 同一局切人、手动停止后重开、断网重连都会建立新WS，均重新检查；到期后不能因为“已经开局”继续无限建立新连接。没有新增连接频率或次数限制。
 
-## 迁移、验收与发布门槛
+## 当前代码事实与保护边界
 
-- 本次不触碰固定8787/8788、现有资源、生产配置或 `?demo=1` 行为。实施后的生产入口用 `ACCESS_MODE=invite|closed`：缺失/非法配置、缺根密钥均失败关闭游戏/语音，不沿用当前“应用鉴权关闭”作为生产fallback。`closed` 保留浏览和编辑、禁止兑换与新游戏/WS；它是维护暂停，不是限频。
-- 本机开发可在显式 development + loopback 的启动配置用 bypass/mock access，生产不能接受 query/header 绕过；生产构建仍不启用demo。测试密钥和本机 Cookie 与生产分开。固定开发服务切换须另安排 owner/受控重启，不在本轮自行重启。最后的本机 Cookie 行为需在实际浏览器验收，不假定HTTP `__Host-`可用。
-- 保留现有传输安全限制、秘密扫描与无供应商密钥下发；新日志只记固定事件/结果码，不能记录 token/Cookie/兑换body。无必要不增加用户跟踪。
-- 独立自动化按上表；总体验收用真实 IAB、假供应商先覆盖无Cookie直开/过期重输、刷新记住资格、Cookie禁用、地址栏分享fragment不变、编辑器草稿/预览返回、桌面窄屏键盘、后台恢复、到期麦克风/播放释放、两tab更新边界。worker测试覆盖 forged Cookie/伪Origin/直接WS、握手中到期、过期帧不转发、timer清理及配置失败关闭。
-- 最后才在已获授权的隔离资源上做有界真实语音验收；假上游通过不代表真实多人供应商隔离通过。本轮没有执行这些实现或浏览器/真实provider测试。
+已读[Worker](../apps/gateway/src/index.ts)、[CF配置](../apps/gateway/cloudflare.config.ts)、[开发网关](../apps/gateway/vite.config.ts)、[Application](../apps/web/src/Application.vue)、[App](../apps/web/src/App.vue)、[main](../apps/web/src/main.ts)、[liveVoice](../apps/web/src/application/liveVoice.ts)及controller/voice错误处理。
 
-### 独立的多人隔离阻塞
+当前应用鉴权暂关；voice/status只按三项供应商配置返回ready/unavailable，WS要求准确同源Origin、无query，使用固定provider device/agent/token。现有上游握手10秒、每连接180秒、每帧64KiB保留。每局审问时长属于玩法，不是供应商消费预算。
 
-当前每次WS仍发送同一个固定 device。`Client-Id`随机、关闭长期记忆、浏览器context隔离，都不能证明不同访客/多tab在供应商端互不串话。[既有预览资源记录](online-voice-preview.md)只确认1agent/1device受控试玩；[归档资源分配提案](public-voice-launch-proposal.md)中的动态独立device/回收仍未因邀请码设计获批。
+游戏和答案仍在浏览器，静态JSON/素材可公开读取，正常UI限制实际试玩，Worker强制保护真实供应商通道。不能防手改JS、离线运行或inspect故事；不把游戏规则迁入服务端，也不把provider管理材料交给前端。[旧公开上线提案](public-voice-launch-proposal.md)的动态设备、预算/限流等未因此获批。
 
-**邀请码可独立实现和验证，但不能作为多人上线验收许可。** 多人开放前须另有被批准并真实验证的设备/上下文隔离方案；不能因“不限频”而复用共享device作多人方案，也不把管理key交给浏览器。若该方案需要新provider、DB/DO、托管回收或scope变化，仍需用户确认；本设计不选择这些方案，不重新付费probe。
+## 用户路径与到期的完整边界
 
-不限频不等于费用封顶：有效期内可多次/多tab建立连接并消费。已有每连接180秒及到期关闭不是全局预算。`closed`或密钥轮换能在配置实际生效后拒绝新请求；旧连接仍沿原deadline，供应商在途消费和部署传播不保证即时停止。访问费用策略继续单独暂缓，不加入预算、限流、供应商额度或资源回收承诺；已有[额度调查](linx-quota-investigation.md)仅作边界证据。
+1. 访客浏览/创作/打开分享介绍照常。点击“接案，开始调查”或结果页“重新开始一局”时查access/status；无资格则当前页弹出“输入邀请码”，有资格开始新局。官方、分享、编辑器预览共用门槛。开发fake试玩可显式mock，生产无demo绕过。
+2. 粘贴完整邀请码，只去首尾空白，不接受URL；POST兑换成功后复查Cookie资格，清空输入并继续**新开局**。不改变路由，保留原query、分享`#game=…`、编辑器预览内容和草稿。无效/签名错提示“邀请码无效”；签名有效但过期提示“邀请码已过期”；网络错误可重试，不放行、不回退fake。Cookie不被保存时提示启用Cookie。
+3. 在有效期内，原有游戏动作、切人/重连/重开继续；每次新WS仍服务端验码。浏览器不能用本机时间、已查过的status或“已有一局”延长服务端资格。
+4. **到期瞬间不主动操作已开始的局或WS。** 已接通的语音可继续到该连接原本的180秒上限（也可能被用户结束、切人、网络/供应商提前关闭）；本地转写、指认、结案和返回仍按原玩法执行。页面不加exp timer，不承诺到期瞬间停音或整个局都能问完。
+5. 到期后第一次尝试新开局/新WS被拒绝时，正常UI停止相关采音/播放、dispose旧controller并回到该案件介绍，提示“邀请码已到期，请输入有效码重新开局”。旧局进度不保留、不自动判胜负；新码成功后新开一局，不提供暂停、续局或补时。若之前已结案，重新开局同样检查资格。取消输入留在介绍；尚未尝试新连接的旧局可直接本地指认结束。
+6. 不提供局内“换码后继续旧局”的操作。不同tab的Cookie会共享；若其他tab换成新码，旧tab**也不能借新Cookie续旧局的新WS**：接案时在浏览器捕获该局的授权exp，在后续开WS的前置状态检查中，只要旧局exp已被Worker返回的serverNow跨过，就丢弃旧局再要求新开局，即使当前Cookie已有效。此为无timer、仅动作边界的本地标记，不创建服务端局/存档；不用于Worker鉴权。篡改JS能绕过本地规则，仍须有效Cookie才能调用供应商。
 
-## 本轮设计核验记录
+到期后仍保留页面原有内存直到按上述边界丢弃，并非新增“保留待续局”能力。现有导航/刷新照常清理；迟到回包用既有epoch/dispose隔离，不带入新局。
 
-核对上述源码路径、CF配置及旧提案差异；查询官方 Web Crypto、Worker-first、WebSocket、secrets 与 Cookie/WS 标准资料（2026-10-25）。仅文档变更，不声称已实现/测通邀请码，也不改变已批准主架构。后续顺序：root实际review本设计 → 用户确认核心选项/范围 → 才分派实现与独立验收；生产启用另经验证与发布流程。
+## 令牌格式：两段不是JWT
+
+原提案的 `base64url(payload).base64url(mac)` **不是标准JWT/JWS compact**。常见签名JWT使用三段`header.payload.signature`，JWS规定签名输入为编码后的header与payload。[RFC7515 §3.1](https://www.rfc-editor.org/rfc/rfc7515.html#section-3.1)、[JWT定义](https://www.rfc-editor.org/rfc/rfc7519.html#section-3)
+
+本设计保留自用有限的两段HMAC协议：只有本项目CLI签发和Worker校验，无外部JWT互操作需求；固定版本/算法/字段，无JOSE算法协商、证书或远程key发现，也不加auth SDK。密码算法仍用标准Web Crypto，不自造加密算法。代价是编码/输入校验/协议维护由本项目负责，不能交给JWT库或通用JWT工具验证；若以后需要第三方验证或现有JWT基础设施，再改标准JWT并评估库，而不是把两段码叫JWT。
+
+固定payload：`v:1`、`purpose:"invite"`或`"session"`、`aud`准确公开origin、`iat`/`exp` UTC Unix秒安全整数、128位安全随机nonce。HMAC-SHA-256使用256位安全随机根密钥，签名覆盖固定目的域前缀及原始payload编码字节；算法不由输入选择。严格校验分段、base64url、字段类型/版本/目的/audience和 `iat <= now < exp`、`exp > iat`，不加过期宽限；nonce不代表使用记录。
+
+Worker原生`crypto.subtle.importKey/sign/verify`，不手写MAC字符串比较；CLI与Worker复用同一实现和固定向量。[Cloudflare Web Crypto](https://developers.cloudflare.com/workers/runtime-apis/web-crypto/)
+
+兑换invite后签发独立purpose=session令牌，换iat/nonce但保持原exp/aud，分别使用不同签名域。不能用invite直接充当session，也不能session再兑新码；重复兑换不延期，无滑动续期。密钥/供应商token不进入载荷，载荷可读不是加密。
+
+默认 `exp = 签发iat + 14×24小时`，不是首次使用起14天。发码可用显式带时区截止时间覆盖，CLI同时输出UTC和北京时间（Asia/Shanghai，精确到秒，截止秒不含）。最终判断由Worker服务器时间，忽略客户端传now；发码机需校时。
+
+## 同源、Cookie与本地路径
+
+### 生产
+
+CF配置将Web构建资产和Worker一起部署；浏览器页面、`/api/access/*`、`/api/voice/status`都在同一HTTPS origin，WS用同host的WSS `/api/voice`。Worker保留准确Origin检查；不开放CORS或任意上游。`/api/*`已Worker-first，新增access端点无需全站改Worker-first；其他静态资产仍公开，不能依赖SPA fallback鉴权。[Worker-first路由](https://developers.cloudflare.com/workers/static-assets/routing/worker-script/)
+
+生产Cookie：`__Host-lie_access=<session>; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=<剩余整数秒>; Expires=<exp GMT>`，不设Domain。寿命以签发时Worker时间计算，Worker仍每次验exp，不信任浏览器删Cookie时机。浏览器原生WS按Cookie规则附带凭证，不在query、fragment、subprotocol或JS存储传token。[Cookie语义](https://httpwg.org/specs/rfc6265.html#section-4.1.2)、[Cookie属性/前缀](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie)、[WS凭证握手](https://websockets.spec.whatwg.org/#opening-handshake)
+
+### 固定开发环境：源码核实，不冒称已运行验证
+
+[main-preview脚本](../scripts/main-preview.mjs)设置`LIE_GATEWAY_PORT=8788`、`LIE_VOICE_GATEWAY_URL=http://127.0.0.1:8788`并启动Vite Web在8787。浏览器访问`http://127.0.0.1:8787`；现有[Web Vite配置](../apps/web/vite.config.ts)仅将`/api/voice`前缀HTTP/WS代理到8788（包括`/api/voice/status`）。**`/api/access`当前没有反代，实施必须补这一前缀**，否则会命中Web开发服务而非认证Worker。
+
+代理需保留浏览器的原始Host/Origin/Cookie，HTTP响应Set-Cookie回到8787；不得把浏览器改为直连8788后开放CORS。现有配置未启用changeOrigin；实施需用本地Worker测试+IAB证明穿过cf/Vite后request.url与Origin实际一致。若宿主重写URL，只允许显式development/loopback配置的预期Web origin并用该origin验aud，不能无条件信任Forwarded/X-Forwarded-Host或放宽生产Origin。
+
+Cookie **不按端口隔离**，HttpOnly和`__Host-`也不提供端口隔离。`127.0.0.1:8787`与`:8788`/同host其他port可能收到同一Cookie。aud含origin能阻止正常验证器在错误端口接受它，不能阻止那个服务收到并窃取后拿去原origin重放。[RFC6265 §8.5](https://httpwg.org/specs/rfc6265.html#section-8.5)
+
+开发建议：显式development、仅绑定loopback时，使用独立 `lie_access_dev` 名、开发密钥、开发aud和host-only/HttpOnly/SameSite=Strict/Path=/ Cookie；纯HTTP调试不依赖Secure/`__Host-`在loopback的浏览器例外。这些区分避免误用生产资格，**不能隔离同host恶意端口**。不在共享不可信host调试，不使用生产码/密钥；需要强隔离时另用独立host+HTTPS测试，不偷改现有服务。开发bypass/mock只能显式启动配置，不接受URL/header绕过，生产构建禁止。Cookie与代理真实行为留实现验收。
+
+## 端点、WS与错误
+
+所有认证响应no-store，不启CORS，禁止query，GET拒绝不匹配Origin或cross-site（允许正常同源无Origin）；POST要求准确同源Origin和JSON。请求体流式上限4KiB、码上限1KiB，超限413；这是输入安全边界，不是频率控制。
+
+| 端点 | 行为 |
+| --- | --- |
+| `GET /api/access/status` | 200 `granted + expiresAt + serverNow`或`required + serverNow`；缺失/过期/损坏Cookie不授权。访问配置错误/closed为503；无上游。 |
+| `POST /api/access/redeem` | `{invite}`有效：200+Set-Cookie+expiresAt/serverNow；无效401 `invite_invalid`，签名有效但过期401 `invite_expired`；解析400、同源403、配置/closed503。失败不清掉仍有效旧Cookie。 |
+| `GET /api/voice/status` | 先验访问资格，无资格401 `access_required`；有资格保留ready/unavailable，无上游。返回serverNow供旧局exp动作边界判断；前端不得把401一律压成check-failed。 |
+| `GET /api/voice` WS | Upgrade/准确Origin/无query→验session→语音配置→固定上游。未授权401，且上游调用为0；不接受客户端device/token。 |
+| 静态/health/未知API | 保留现有公开内容、缓存、health及404，不误回SPA HTML认证成功。 |
+
+**握手边界**：每次启动上游前验`now < exp`，保留现10秒Abort。上游返回后、发101前再验一次；若此时已过期，关闭已取得的上游socket并返回401，不建立浏览器relay。握手跨exp可能已发供应商请求，不保证零费用；不新增剩余至少N秒门槛。成功101后只保留原180秒计时、64KiB和现有错误/关闭清理，不加exp计时、逐帧校验或4001协议。
+
+浏览器非101可能只得到通用WS失败；失败后查access/status判别到期/普通故障，不依赖WS HTTP body。到期则丢局回介绍重新开局；网络/503保留现有普通错误体验，不自动无限重连。准备新WS前status已拒绝时不启麦克风；请求与握手之间的竞态失败沿现有close清理收音/播放，不能保证每次竞态都从未短暂请求麦克风。
+
+新Cookie、密钥轮换、closed或新部署不保证立即杀掉旧WS；不建跨连接注册表。普通网络/运行时也可能提前断线。[Cloudflare WS生命周期](https://developers.cloudflare.com/workers/runtime-apis/websockets/)
+
+## 发码运营与最小实现范围
+
+拟离线Node CLI `keygen/mint/inspect`，不建在线发码接口/管理账号。密钥从0600私密文件或stdin读取，不放命令行值、仓库或聊天；mint将码和期限写操作者指定的0600文件，inspect只显示非秘密字段/验证结果。维护者自行分发，不自动发消息。
+
+本机已只读核实可用Node：常规PATH为24.17.0，**低于项目要求**；`/usr/local/bin/node`是16.14.0。已有持久运行时 `/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node` 实际`--version`为24.22.1，并验证subtle.importKey/getRandomValues/base64url入口存在，可用于CLI；未生成真实key/token，未安装/修改环境。实施使用该兼容运行时，不把所有“Node 24”当符合项目engine。
+
+根密钥Worker secret `INVITE_SIGNING_KEY`，访问模式`ACCESS_MODE=invite|closed`；缺失/非法配置失败关闭新游戏/WS，不沿用当前noauth默认。closed保留浏览创作、拒绝兑换和新连接，非频率限制。生产切换和固定本机服务变更须协调owner，不能本次自行重启。[Worker secrets](https://developers.cloudflare.com/workers/configuration/secrets/)
+
+不记录token/Cookie/兑换body；不放localStorage/sessionStorage、游戏分享fragment/query或Referer。query脱敏不等于其他字段安全，必须检查诊断输出。无DB不能精准撤单码；紧急换根密钥使旧码/旧Cookie在新请求失效，影响全部访客，不承诺旧WS即时停止。
+
+| 批准范围内的拟议模块/owner | 责任与独立验收 |
+| --- | --- |
+| 共享纯TS token模块 | 固定有限HMAC编解码、签发/验证invite与session；标准WebCrypto，不依赖Vue/CF。CLI与Worker复用向量，覆盖篡改/错purpose/aud/未来iat/恰好exp/坏长度/坏类型，不写两份协议。 |
+| Gateway：`src/access.ts`、`src/index.ts`、cf config、tests | 端点、Cookie、Origin、请求上限、握手双次有效期检查；原relay计时不变。workerd+假上游测无权零调用、握手跨exp、已建WS跨exp保持原关闭规则、原安全/缓存回归。 |
+| Web：Application/App、access port、liveVoice/voice错误映射、controller必要接线、Vite config/tests | 接案/重开门槛、旧局exp动作边界标记和拒绝后dispose→介绍、新码新局、补access代理。不加pause/resume状态或到期timer、不改game-core。fake覆盖三类play入口、多tab换码不续旧局、网络/401清理与迟到事件。 |
+| CLI：scripts/invites与文档/必要package命令 | Node24兼容运行时离线签发、默认14天、指定时区日期、受限文件输出及跨运行时验证；无远程API。 |
+
+暂不新增npm依赖或Node兼容flag；共享模块位置/构建入口由实现owner在原生WebAPI边界内确定，锁文件若确需调整由集成者串行管理。模块接口先对齐，具体文件归属不重叠。
+
+独立IAB验收覆盖生产等价HTTPS Cookie、固定loopback反代、无Cookie直接WS、Cookie禁用、invalid/expired、分享fragment/编辑器草稿不变、所有play门槛、已建WS跨exp但新WS拒绝、换码后全新局/多tab不续旧局、麦克风/播放清理与窄屏键盘。真实provider仅在另外获授权的隔离资源上有界验收；本轮未运行应用或这些测试，文档检查不冒充其通过。
+
+## 独立门禁与历史
+
+当前provider固定device仍未证明多人/多tab上下文隔离；随机Client-Id和关闭长期记忆不能替代真实验证。[既有预览](online-voice-preview.md)仅1agent/1device受控试玩。邀请码能独立实现，但**不是多人正式开放许可**。动态设备/新provider/DB/DO/资源回收仍另案确认，不因共享多人码获批而默授。[费用调查](linx-quota-investigation.md)的未知不改写为已解决。
+
+不限频不是费用封顶；有效期内可反复建立连接，临近到期已接通的WS可继续最多原180秒。closed/换密钥只在实际配置生效后的新请求阻断，不保证在途消费立即停止。费用/预算/供应商额度策略仍单独暂缓；本设计不添加软限流或硬消费承诺。
+
+[旧完整设计、来源和未采用备选索引](archive/2026-10-25/invite-access/README.md)保留默认7天、立即停与续码恢复的原文，明确已被本版替代。最新用户决定记录在本文开头，root维护中央计划/决定证据；本轮不修改中央文档。原提交ref `46ae7cb11902977470d121843b3e45ecd1da9241` 保留。
