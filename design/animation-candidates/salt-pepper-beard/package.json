@@ -1012,12 +1012,32 @@
             560
           ],
           [
-            429,
-            624
+            427,
+            620
           ],
           [
-            535,
-            624
+            437,
+            641
+          ],
+          [
+            452,
+            655
+          ],
+          [
+            475,
+            666
+          ],
+          [
+            500,
+            670
+          ],
+          [
+            523,
+            668
+          ],
+          [
+            531,
+            648
           ],
           [
             538,
@@ -1116,12 +1136,20 @@
             560
           ],
           [
-            546,
-            636
+            538,
+            600
           ],
           [
-            424,
-            636
+            535,
+            645
+          ],
+          [
+            530,
+            690
+          ],
+          [
+            410,
+            690
           ],
           [
             420,
@@ -1477,6 +1505,78 @@
           ]
         ]
       }
+    },
+    {
+      "id": "waiting-cuff-front",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 10,
+        "mask": [
+          [
+            410,
+            608
+          ],
+          [
+            420,
+            610
+          ],
+          [
+            430,
+            630
+          ],
+          [
+            445,
+            646
+          ],
+          [
+            465,
+            658
+          ],
+          [
+            490,
+            664
+          ],
+          [
+            510,
+            663
+          ],
+          [
+            525,
+            659
+          ],
+          [
+            531,
+            642
+          ],
+          [
+            550,
+            685
+          ],
+          [
+            550,
+            740
+          ],
+          [
+            390,
+            740
+          ],
+          [
+            390,
+            608
+          ]
+        ]
+      }
     }
   ],
   "clips": {
@@ -1501,7 +1601,8 @@
         "neck-waiting": false,
         "sleeve-speaking": false,
         "hem-speaking": false,
-        "arm-speaking": false
+        "arm-speaking": false,
+        "waiting-cuff-front": false
       },
       "tracks": [
         {
@@ -1689,7 +1790,8 @@
         "neck-waiting": false,
         "sleeve-speaking": false,
         "hem-speaking": false,
-        "arm-speaking": false
+        "arm-speaking": false,
+        "waiting-cuff-front": false
       },
       "tracks": [
         {
@@ -1877,7 +1979,8 @@
         "neck-waiting": true,
         "sleeve-speaking": false,
         "hem-speaking": false,
-        "arm-speaking": false
+        "arm-speaking": false,
+        "waiting-cuff-front": true
       },
       "tracks": [
         {
@@ -1999,7 +2102,8 @@
         "neck-waiting": false,
         "sleeve-speaking": true,
         "hem-speaking": true,
-        "arm-speaking": true
+        "arm-speaking": true,
+        "waiting-cuff-front": false
       },
       "tracks": [
         {
