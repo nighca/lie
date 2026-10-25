@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 本轮main包含已验生产候选746718abb0742ecc7ac40aa23b4228df2c8e73db及文档报告fc35fbf；操作前读取实际HEAD，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，本轮归档基线为已审main `f622ed5e1451257ec56234abc3cd9957ed033d3a`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 本轮main包含已验生产候选746718abb0742ecc7ac40aa23b4228df2c8e73db及文档报告fc35fbf；操作前读取实际HEAD，已含改编quiet入口、正式动画及PNG研究归档；线上最新已核发布a64bf6c（CI40165378030/CD40165634861成功）；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**最新远端main、CI/CD及线上静态指纹已核为a64bf6c1674b9755dbacc4d7519e92675ee5f4bf**（[最新证据](releases/2026-10-25-q90-ci-cd/success.md)）；原48316544为历史，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：root已正常push测试路径修复a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，远端main同SHA；CI40165378030/CD40165634861 attempt1均success，精确产物12588780677恢复195文件、latest-main及实际deploy成功，Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e。lie.agency home/editor/官方案query及JS/CSS/currentmanifest/WebP共8响应SHA全部同已验候选，缓存/MIME正常。[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)。旧297 failure/CDskip与修复历史保留，不再当当前线上状态。发布后本地报告不自动二次push；root独占集成/发布。首3design/统一页已归档，其余4设计候选73e55f5已交待root审查、正式激活/UI仍动画parent在制，5355用户页保留；5356/误占5357停止沿owner回执，本轮无服务动作，单JSON内置案仍仅讨论。
+下一步：root已正常push测试路径修复a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，远端main同SHA；CI40165378030/CD40165634861 attempt1均success，精确产物12588780677恢复195文件、latest-main及实际deploy成功，Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e。lie.agency home/editor/官方案query及JS/CSS/currentmanifest/WebP共8响应SHA全部同已验候选，缓存/MIME正常。[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)。旧297 failure/CDskip与修复历史保留，不再当当前线上状态。发布后本地报告不自动二次push；root独占集成/发布。首3design已归档，后4来源c18/fac/4b/2d＋73e已root完整审查；候选fb6086e全design同73e、当前parser8人1936采样同历史审计，待root读[归档报告](result-outcome-design/final-four-audit.md)后ff。本批无生产改动、不再push，正式激活/UI仍动画parent执行；5355已有同端口切源协调turn，owner自担App桌面/391/reduce/builtWebP，新PID等batch、不推断旧1851状态；5356/误占5357停止沿owner回执，本轮无服务动作，单JSON内置案仍仅讨论。
 
 ## 当前owner与恢复入口
 
@@ -48,6 +48,8 @@
 2026-10-25纯文档验收：从main `b59a6f53a75a4ccb95adc5b730cd03934368c815`，root已全文review的source40260dc四文件＋Hackathon67c3da2全文按序cherry为 `b4aec645a6b3cf663c734d4f9f7a0db4b9818d56` → `0c6286b9940478185ca4195966093374f24ef641`（WT integrate-character-preset-dawn/lie，branch codex/integrate-review-documents）。独立Node24.22.1重放review的1套3探针通过（870ms），结果JSON与原记录逐字节相同；本候选相对main只有5个docs路径、新文档49个本地链接目标存在。与冻结299相比，相关Editor/draft/share/controller不变，Application仅改编弹窗标题变化，故本次复现仍成立。此后仅更新中央状态，本提交经root审查、本地ff后交付，实际HEAD读Git，不提前声称ff已执行；Hackathon仍Draft非用户批准。未重跑应用套件/build、网络/服务/browser/mic/provider，未main/push；probe使用fetch抛错替身并断言零调用。
 
 ## 本轮单次发布准备
+
+当前最新发布为a64（CI40165378030/CD40165634861成功），[success.md](releases/2026-10-25-q90-ci-cd/success.md)为现行证据；本批设计/文档归档不再push。下述483准备记录仅历史。
 
 2026-10-25用户本轮单次普通main push授权由root执行完成：发布SHA48316544ea9fd22afbf1eee8db6f81e326026821，run40159380539 completed/success，latest=true条件下实际deploy成功，Worker版本2279b179-314f-4264-9ae9-6c67d0ef7c69。03:49:38Z线上GET入口/JS/CSS/logo/hashmanifest与最终候选dist字节一致，见[详细核验](releases/2026-10-25-main-refresh.md)。历史准备清单如下保留；本地发布后文档不自动再push，无手工部署/账号或费用授权扩大。
 

@@ -1,0 +1,286 @@
+{
+  "parent": "73e55f527729417ae5296526cc602aed2ca926ef",
+  "base": "365269b6185be586b69c0fac2b7ba15defeb7a6f",
+  "runtimeMain": "297666a69286e067d4a28135f9331ef4bd5f7726",
+  "snapshot": "/private/tmp/lie-final-four-audit-lddpjgq8",
+  "characters": [
+    {
+      "id": "mint-puffs",
+      "source": "c18cbdab71fd1107436aff2d7efdaaaeb29100b6",
+      "assets": 6,
+      "oldPartsUnchanged": 4,
+      "newAssets": 2,
+      "newNodes": 6,
+      "pixelsIncludingCanvas": 11007612,
+      "sourceToParentTextAdditions": [
+        "HANDOFF.md",
+        "generation-records.json"
+      ],
+      "resultClips": {
+        "accusedCorrectly": {
+          "duration": 1.2,
+          "loop": false
+        },
+        "accusedWrongly": {
+          "duration": 1.2,
+          "loop": false
+        }
+      },
+      "check": {
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidResultSamples": 242,
+        "terminalHold": true,
+        "assets": 6,
+        "sha256": {
+          "default-source": "f861c9b09dd26da407fcadff349e5fbb3d8a9708bae3bc298b940f2576bfd31f",
+          "listening-source": "2b44df563b93a9527da623a5dbfd91676ceab03183f1da5109aeb7dce854b2c4",
+          "speaking-source": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9",
+          "waiting-source": "85393b0a3bf216fd9ff5bdfb3e1df6f42fb742eda5f9fe64b626f7a375c817c0",
+          "result-correct-head": "ae8eab25a6d14efd12a78b3b38b52a745db19571bff179b88550ce3fa2476f75",
+          "result-wrong-head": "d3fc78520512e69e8d07098d5244dcd79e2ad7e748f6dea2ad6219da3e69980e",
+          "accused-correctly-terminal": "8b72540ee5304da9d004f7abc572795ad3645c62524b9babfe78df1026061516",
+          "accused-wrongly-terminal": "67e3d234c9c3c8d9754839fcfa3afa6380682579f142983ef1aa6c5926d76293"
+        }
+      }
+    },
+    {
+      "id": "blue-glasses",
+      "source": "fac2d8274c1d2f28b5aa73fc5c45d38706611298",
+      "assets": 8,
+      "oldPartsUnchanged": 6,
+      "newAssets": 2,
+      "newNodes": 2,
+      "pixelsIncludingCanvas": 14152644,
+      "sourceToParentTextAdditions": [
+        "README.md",
+        "generation-records.json"
+      ],
+      "resultClips": {
+        "accusedCorrectly": {
+          "duration": 1.2,
+          "loop": false
+        },
+        "accusedWrongly": {
+          "duration": 1.1,
+          "loop": false
+        }
+      },
+      "check": {
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidResultSamples": 242,
+        "terminalHold": true,
+        "assets": 8,
+        "sha256": {
+          "waiting-source": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+          "waiting-torso": "3527476e1c65d0463fd991d7fe5f2b69313ac534a45bd9ed5be7742439bd6ac0",
+          "shared-torso": "2a4ad43d7ecd09f47a790757941d8dd77d803bdd8460d13d5ffc32f4cf8d6226",
+          "default-source": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+          "listening-source": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+          "speaking-source": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+          "accused-correctly-source": "92335e7905e75f16673c8342f24a15499c63af8863926fd80ffb93f097b08d07",
+          "accused-wrongly-source": "665ec6c1b3c31d3e5be878ebf06cb87de0ec42f6593bf37544a8b640591b805b",
+          "accused-correctly-terminal": "a6d343d709ea7ddbe660c803e6ce2a33e76448cfee681e408e935f96d3e8d997",
+          "accused-wrongly-terminal": "93cd3a84803e6c847c1a93ba28852a5aea3c061101aeea466ce58789a71128e3"
+        }
+      }
+    },
+    {
+      "id": "salt-pepper-beard",
+      "source": "4b2b45b3dc288387f06a557b21f470ddf436efb9",
+      "assets": 7,
+      "oldPartsUnchanged": 5,
+      "newAssets": 2,
+      "newNodes": 2,
+      "pixelsIncludingCanvas": 12580128,
+      "sourceToParentTextAdditions": [
+        "README.md",
+        "generation-records.json"
+      ],
+      "resultClips": {
+        "accusedCorrectly": {
+          "duration": 1.25,
+          "loop": false
+        },
+        "accusedWrongly": {
+          "duration": 1.15,
+          "loop": false
+        }
+      },
+      "check": {
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidResultSamples": 242,
+        "terminalHold": true,
+        "assets": 7,
+        "sha256": {
+          "default-source": "11df64ffede48a020a638a471dab4034de9dbfc3275b9b9675c7d27cd9bc5087",
+          "listening-source": "b8e733673ccd4b202e7845a2ac4ca9d373c8117b2b21c8575590ba8e76c16640",
+          "waiting-source": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf",
+          "speaking-source": "c95bd5d34442a558f8487d923cf74b4cc09ef0df4223e916a00fd5468c4ff51f",
+          "lower-fill": "5c345cf374a9cd43fdb440879cc0b5fb63cca4b639079814015b660eec34e4a7",
+          "accused-correctly-source": "7185af30d4825167ac83f6265912ac200dcf242452e112702438c07b5088ff06",
+          "accused-wrongly-source": "b34f845453b977c2cc6344233c6839d932b7dd0c4d83a9439aba25e0eaa419f3",
+          "accused-correctly-terminal": "81e399391d4034ee294f69129633192dc785bb017beb3b8e34a4941734092720",
+          "accused-wrongly-terminal": "3540982067063ffd217bd48c81be30e3199987e76414258eda4f1ac56ddb9442"
+        }
+      }
+    },
+    {
+      "id": "ochre-freckles",
+      "source": "2d5976380af1366e350b8ee907cbd9765d46dcfb",
+      "assets": 6,
+      "oldPartsUnchanged": 4,
+      "newAssets": 2,
+      "newNodes": 2,
+      "pixelsIncludingCanvas": 11007612,
+      "sourceToParentTextAdditions": [
+        "README.md",
+        "generation-records.json"
+      ],
+      "resultClips": {
+        "accusedCorrectly": {
+          "duration": 1.15,
+          "loop": false
+        },
+        "accusedWrongly": {
+          "duration": 1.05,
+          "loop": false
+        }
+      },
+      "check": {
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidResultSamples": 242,
+        "terminalHold": true,
+        "assets": 6,
+        "sha256": {
+          "default-source": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d",
+          "listening-source": "18fc795432e49c980393e7dc787a015b8d0c486cf1c46d2c9d411407a40a00af",
+          "speaking-source": "d681a2d49ffa41e36f6e2e999add6c0b823bdafd92f0d71c6c8064d1dcf2863a",
+          "waiting-source": "725ecb0f77871e39f6ceb1a0fad850f1bd0392c94baa66cef68dcb546a7f80c7",
+          "accused-correctly-source": "e799f1c0c94a02bbe5ace3401c2757ad3175472f4295fabc07b3a377126a7924",
+          "accused-wrongly-source": "af4958a44c1b1e959f8b2925554bbf368b19b422d19f9204951fac3b81e88b81",
+          "accused-correctly-terminal": "1b0b2d40cb15c44e88caf68c5bb06d50558f6f2d13d024f406fc345d0845d112",
+          "accused-wrongly-terminal": "ccfa00d59c99d28a8c493473afee0325eae6d5b40d26ec40af5e476f9052c356"
+        }
+      }
+    }
+  ],
+  "unified": {
+    "status": "passed",
+    "characters": 8,
+    "results": [
+      {
+        "id": "coral-bob",
+        "name": "\u73ca\u745a\u77ed\u53d1",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 13,
+        "packageSha256": "2a9dd8ab80b63bcd04b1983cb29e1a789ff42ce81ec581c3e37b1ca73f4d4d73",
+        "terminalSha256": {
+          "accusedCorrectly": "a0eb5e5078a73f9f264cd0af8ea3927e5fe574d08443437be04d085db1546647",
+          "accusedWrongly": "ff0020fbfe45a86fb1e9b442d42604b9ca4eca01bd257036676729bcf6abc567"
+        }
+      },
+      {
+        "id": "sunny-moustache",
+        "name": "\u9633\u5149\u5c0f\u80e1\u5b50",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 7,
+        "packageSha256": "b41854000a35dd22fb2ce7ca4645b0273da3b5d31e4c9895a264128665b161d3",
+        "terminalSha256": {
+          "accusedCorrectly": "0a6d9eec45c21f0a9b75c79ebeb5dabd8052d743d32f7e1b805f276036fbe88e",
+          "accusedWrongly": "2fcc13885cca3f00988cff1e37f515b6d65a9fbcb564d1c79e969048ae7facb9"
+        }
+      },
+      {
+        "id": "blue-glasses",
+        "name": "\u84dd\u8863\u773c\u955c",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 8,
+        "packageSha256": "0982454a5c4a0c55e52dc4c830c5de5b789acfa470973d2274747eae45739a2c",
+        "terminalSha256": {
+          "accusedCorrectly": "a6d343d709ea7ddbe660c803e6ce2a33e76448cfee681e408e935f96d3e8d997",
+          "accusedWrongly": "93cd3a84803e6c847c1a93ba28852a5aea3c061101aeea466ce58789a71128e3"
+        }
+      },
+      {
+        "id": "silver-bun",
+        "name": "\u94f6\u53d1\u76d8\u53d1",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 8,
+        "packageSha256": "b0e246adb7722a1f9b079e015579dffff7a5fec55b329639dc359a1b6a0e68bd",
+        "terminalSha256": {
+          "accusedCorrectly": "3784dcd30dc7d3dabd717f5d6cadfb546c61cd9b3ce277f99aaa9f1914396ae9",
+          "accusedWrongly": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2"
+        }
+      },
+      {
+        "id": "salt-pepper-beard",
+        "name": "\u7070\u767d\u80e1\u987b",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 7,
+        "packageSha256": "7efcd0fac2067d5fed1de4822fabb38fec7e47e29eb66dcef2231e4b702bbe63",
+        "terminalSha256": {
+          "accusedCorrectly": "81e399391d4034ee294f69129633192dc785bb017beb3b8e34a4941734092720",
+          "accusedWrongly": "3540982067063ffd217bd48c81be30e3199987e76414258eda4f1ac56ddb9442"
+        }
+      },
+      {
+        "id": "plum-crop",
+        "name": "\u7d2b\u8863\u77ed\u5377\u53d1",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 7,
+        "packageSha256": "ac4513455a6e2e40138eaf720a47ce030c57f674f5f4cfcd5c3817749cff892e",
+        "terminalSha256": {
+          "accusedCorrectly": "e2cd98ae59b427c28d30b769d0a3998c1904d22946e987a9fde48b46ea873722",
+          "accusedWrongly": "ee43ed473f1fe8c46f78eecf77b2ee77a8d87a161ea54c6dd5e5d6e66c6e8f2d"
+        }
+      },
+      {
+        "id": "mint-puffs",
+        "name": "\u8584\u8377\u53cc\u4e38\u5b50",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 6,
+        "packageSha256": "6ea79c2f4ada90424247497392b02e98acbef264e6d62bbab525fb42fc8f63a6",
+        "terminalSha256": {
+          "accusedCorrectly": "8b72540ee5304da9d004f7abc572795ad3645c62524b9babfe78df1026061516",
+          "accusedWrongly": "67e3d234c9c3c8d9754839fcfa3afa6380682579f142983ef1aa6c5926d76293"
+        }
+      },
+      {
+        "id": "ochre-freckles",
+        "name": "\u8d6d\u9ec4\u96c0\u6591",
+        "status": "passed",
+        "originalClipsAndParts": "unchanged",
+        "rigidSamples": 242,
+        "assets": 6,
+        "packageSha256": "3f02b70a576d24d82d14e1cbd72c798205092706ff983f35c6f288f1cce7ac3c",
+        "terminalSha256": {
+          "accusedCorrectly": "1b0b2d40cb15c44e88caf68c5bb06d50558f6f2d13d024f406fc345d0845d112",
+          "accusedWrongly": "ccfa00d59c99d28a8c493473afee0325eae6d5b40d26ec40af5e476f9052c356"
+        }
+      }
+    ]
+  },
+  "limits": [
+    "No browser/Canvas raster re-render: terminal PNG identity/dimensions and sampler end hold checked; actual terminal raster equality is parent source evidence",
+    "Prior first three source data not independently re-audited; all-eight sampler includes their unchanged candidates for catalog composition only",
+    "Parent adds acceptance/export hashes/JPEGs and supersedes original source-only pending text; no activation/services/encoding/Git mutation"
+  ]
+}

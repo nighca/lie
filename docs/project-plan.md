@@ -1,8 +1,8 @@
 # LIE — 当前项目计划
 
-2026-10-25，基线已审本地main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
+2026-10-25，本轮已审main `f622ed5e1451257ec56234abc3cd9957ed033d3a`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
-已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。当前已证远端/CI/CD/线上静态部署a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，见[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)；旧483见[历史发布核验](releases/2026-10-25-main-refresh.md)；静态指纹同本地已验产物，不等真人功能验证。后续36a已含龙三叔配置，本轮归档基线main 870cbd524ab21e243e072866ce70288932192834已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
+已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。当前已证远端/CI/CD/线上静态部署a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，见[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)；旧483见[历史发布核验](releases/2026-10-25-main-refresh.md)；静态指纹同本地已验产物，不等真人功能验证。后续36a已含龙三叔配置，本轮归档基线main f622ed5e1451257ec56234abc3cd9957ed033d3a已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
 
 ## 已批准的产品与架构
 
@@ -16,7 +16,7 @@
 
 用户本轮授权的普通push修复后已完成：远端main a64bf6c，CI40165378030/CD40165634861均success，真实Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e；lie.agency有限静态核验8响应SHA均同已验候选。[实际发布证据](releases/2026-10-25-q90-ci-cd/success.md)。旧297 coverage失败/CDskip与修复完整保留；本报告归档不自动二次push。正式结果UI/激活仍独立在制，不混成本轮已发布成果。
 
-当前发布批次：两owner修复/小UI已root审查、组合288/types/build89通过并发布48316544，CI实际部署及线上入口静态指纹已核；[发布preflight与验证复用](coordinator-handoff.md#本轮单次发布准备)明确检查范围。后续连接loading及R结果视觉分阶段生产独立推进，不混入此次已发布SHA。
+当前发布状态：a64bf6c已通过CI40165378030/CD40165634861及线上有限静态身份核验，[最新证据](releases/2026-10-25-q90-ci-cd/success.md)。后四位设计归档候选尚待本批报告review/ff，正式结果功能仍在制；本批不再push。旧483为历史发布，不覆盖当前事实。
 
 完整owner/base/ordered SHAs/实际WT和检查边界见[handoff](coordinator-handoff.md)及[恢复清单](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)。新意图先与已分派文件协调，不重叠抢写。
 
@@ -30,7 +30,7 @@
 | 已main 年长男声 / older_male_voice＋root | 用户认为两候选仍年轻，**若无更合适先龙三叔并接受sunny同声，按现有支持候选实施已获授权**。voiceId2e7965636b0d4472ae51e75f419dff41；source7058f31368629d850ae8270a4339539eee8542f6已完整root review/独立单字段哈希核验，**main36a06de已实现**，其余7预设相等、不改sunny；source36tests/Webtypes/build89通过，候选应用资源依赖同源复用。已随48316544发布，未真人耳验扩展，不扩provider/克隆或付费样本。旧[候选](older-male-voice/available-candidates.md)仍待选择措辞已被此次决定覆盖。 |
 | 已main，待真实模型回归 / case_content_revision | sourcea549bbe，root完整12files/三案11profiles/ending/context/docs review、候选411f8d8与source应用/tests/依赖同源；Core51/Web17/types/build89复用，root独立三对byte/其他字段原样通过，main7249。背景154→112/189→132/161→111；贺宁普通施压不自曝口径已调，**未真实模型回归，不能称实测修好**。原文/备选/矩阵已[入库](case-content-revision-2026-10-25/README.md)，无服务/provider。 |
 | 已main / 性能、首帧、视觉 | mainc334e67；最终Web245/UI43/Gateway16/types/build89及40Miniflare，实际builtWorker有界开局/切人无staticfirst；[组合](performance/2026-10-25/combined-visual-verification.md)与[浏览器边界](performance/2026-10-25/combined-first-render-verification.md)保留。92hash输出/46parts、原89资源字节保留；源warm13资源零transfer不是线上新部署，PNG全81实测5.28%/66.73s，root已读完整报告并独立8项/源SHA汇总核验，同意暂不接构建；sourcea46的研究文档经fe32d46归档，已main299，不改生产。[PNG证据](performance/2026-10-25/png-lossless/README.md)。背景字面最长匹配/歧义中性、标题“{姓名}的询问记录”，不重派。 |
-| 首批三位design已main归档 / 动画parent＋root | 用户批准珊瑚374及后7自行验收。sunny e362、silver174→6f、plum4fa、父补证458已root逐文件review，候选da68bfd的57design路径同父来源；当前870 reader实际4人968采样通过，生产/canonical零变化，[审计与归档报告](result-outcome-design/first-batch-audit.md)。root已实际读报告并本地归档，正式manifest激活/结果App＋CSS仍由动画parent实施；另4位候选73e55f5已专项交付、待root审查，不称正式激活完成，5355用户消费者保留。本轮已随a64正常push/CI-CD发布。 |
+| 八人design已root审，后四位归档待本批ff / 动画parent＋root | 珊瑚374及后7自行验收获批；首3随a64归档发布，后4来源c18/fac/4b/2d＋parent73e已root全文review。候选fb6086e全design逐blob同73e、生产/canonical零变，当前parser8人1936采样同源与历史审计。[后四位审计/归档报告](result-outcome-design/final-four-audit.md)。正式激活/结果UI仍由parent执行，5355已协调同端口切源、真实App桌面/391/reduce/builtWebP由owner承担；新PID待其batch，不推断旧1851停或新服务状态。不是正式功能已完成，本批不push。 |
 | 已随a64发布 / 调查页高度＋character_preset_migration | source7c5ab232→候选1dc7e996，相main9a6635ce仅12行高度CSS；原测量/fixture身份与JSON断言复核、Webbuild99modules/strict89通过。[短报告](investigation-viewport-height-combined.md)。原IAB45–47按身份范围复用，本轮无browser/service；5507 PID29602/PTY38417 exit1、无监听、tabs/temp清。 |
 | 部分已确认，排序讨论，未授实施 / 单JSON增加内置案 | 用户确认删case-catalog派生目录、手写summary入正文、测试读content/games并删public/games、Editor输入及草稿/导出/分享/改编保留summary。无order、数字文件前缀与投稿count+1仍提议；root建议显式数值排序/prefix不改id旧URL/max+1/合入前冲突核查、旧summary兼容及必填分层，尚未确认。[当前讨论与旧方案](builtin-case-json-proposal.md)，本轮仅文档不迁移代码。 |
 | 已发布a64 q90 / 图片专项＋architecture_code_review＋root | q90/m6/alpha_q100、不缩放/原PNG保留已root审查并发布a64；Linux真实50编码成功，currentmanifest及WebP线上MIME/cache/hash与本地已验资源相等，[发布证据](releases/2026-10-25-q90-ci-cd/success.md)。81图9,746,332B，8包46parts；[组合报告/审计](performance/image-build-optimization/combined-main-verification.md)保留。源IAB4图仅按相同静态资源范围复用。 |
@@ -64,7 +64,7 @@
 
 ## 当前门禁与资源
 
-- **2026-10-25本轮单次main发布授权已执行完成**：root普通push48316544，CI run40159380539全部success且deploy实际成功，线上首页/JS/CSS/logo/hashmanifest同已验产物；[完整发布核验](releases/2026-10-25-main-refresh.md)。此次不是持续自动push授权，发布后报告/新任务不自动二次push；没有额外手工Cloudflare部署许可。原PR #1 CLOSED/mergedAt null，不恢复PR路线；真人验证另记。
+- **最新本轮发布已完成a64bf6c**：CI40165378030/CD40165634861均success，线上有限静态身份核验同已验产物，[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)。旧[483发布](releases/2026-10-25-main-refresh.md)保留历史；报告/设计归档不自动二次push，本批不再发布，无额外手工Cloudflare部署许可。原PR #1 CLOSED/mergedAt null，不恢复PR路线；真人验证另记。
 - 用户已明确不采用旧版本资源保留，相关14天/256MiB策略门禁取消；允许旧产品资源删除不授权广泛账号工件/Git历史/WT清理，此批无实际删除。没有新账号、secret、资源、付费测试或生产维护许可。
 - 宣传仅[方法/依赖研究](promo-video-production-research.md)完成；实际脚本/分镜/录屏/配音音乐/生成媒体/制作须用户成熟判断后明确授权。投稿PRIVATE及[代理投稿方案](editor-official-submission-proposal.md)门禁保留。用户已启用正式域名[lie.agency](https://lie.agency/)并指向现有正式Worker，编辑器为[/editor](https://lie.agency/editor)；早先lie.nighca.me仅指导属于历史，本批未操作DNS/账号，原workers.dev保留为平台原生/历史观测地址。
 - [端口台账](development.md#服务登记与生命周期)保留用户8787/8788及内部子监听。本批不扫描/启停服务，5544/5355/旧5507仅沿原owner退出证据；5507居中验收85753/PTY22271已exit1且tab40清；桌面立绘PID8323/PTY85340已exit1/无监听、tab41清，当前动画组合无新服务；其他人dirty/WT/refs不清理。前代分享tab未知不盲关。
