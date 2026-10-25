@@ -138,3 +138,5 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 2026-10-25 09:17服务回合更新：稳定探索QA的5544（WT stable-exploratory-qa/lie@abb12db，PID14248、原PTY26270、消费者自建tabs1/2）已Ctrl-C退出130并核无监听/PID消失，draft原样恢复；报告已交。5544下一回合明确分配 character_preset_migration 的 preset-loading-recovery（base03fcb06），只用于清单加载失败/重试的有界IAB验收，启动前须核监听，新PID/PTY等由该owner完整handoff补齐，验收后即停；不能据分配推断已启动。调查结果原型5507两回合PID95633/PTY12356及PID66158/PTY2561均已原PTY退出0、tabs33/34关闭、核无监听；无新常驻服务，8787/8788/5355保持原owner。
 
 5544加载修复本回合实际登记：owner character_preset_migration，WT character-preset-migration-dawn/lie，base03fcb06＋未交付修复，PID89520/原PTY3817，消费者独立Chrome tab1910329540（IAB unavailable），transport9、无gateway。停止条件为清单恢复有界验收结束；当前在用，结束停止/存储恢复/关闭tab证据待owner，不依旧“无监听”记录操作本PID。结果UI批准后5507分配原调查专项，启动实际PID/PTY待该owner交付，不预记监听。
+
+5544加载恢复回合已结束：PID89520不存在、原PTY3817退出130/无监听、独立tab1910329540关闭且draft/网络覆盖恢复。下一回合正式给stable_exploratory_qa的bundled-case-catalog（base1f168e3），仅验证打包后无/games/*请求的三案/编辑器分享兼容；启动需重核监听、实际WT/PID/PTY/消费者由其batch回执，完成即停，不能用旧PID/session发信号。
