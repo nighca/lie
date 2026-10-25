@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "types": ["vite/client"] },
+  "include": ["main.ts", "ReactionPreview.vue", "vite.config.ts"]
+}

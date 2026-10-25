@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "originalClipsAndParts": "unchanged",
+  "rigidResultSamples": 242,
+  "terminalHold": true,
+  "assets": 13,
+  "sha256": {
+    "body": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27",
+    "upper-left": "9efca1877d071c44702416992f91dc0df39bf28aaac92aa7126e878acb516c85",
+    "fore-left": "c48cc45a0bd343c753fd1328a6a1182640f79423f7fcc13cdc7e1df206c7112c",
+    "upper-right": "b2f3eba89e09dff9f8c5cf4fcd2256482b962a2fd67ade413b4be6e6147ceede",
+    "fore-right": "be316b025b810d7e10494a905182930f1eefc9743139f8578bc063c226f7c812",
+    "head": "fb92081b74134fd8397e0239f2a9603bb8b99f06ee82efc6ed1ce129e3ca925e",
+    "closed": "a8b4f55e14fe4e4397bb530869d4843db49ea8356378070af76a52c4028dc3c9",
+    "open": "05304f3ab8527b1a64a6c781b1271f10feebea07118cfd0659bff67744a4cc26",
+    "speak-fore": "5441a0ab98ef5ac282b6ce3e080632399128a94abda3d34100843f5dcb152ed4",
+    "listening-arm": "93602222407a2f4c3db2e73e2e445abc819e2e2da7b6c1260e57d41e11d00e20",
+    "waiting-arms": "2c8de0fc32d63d4c1ad8cf912119629ee6e62c15eb8e1adf90e922e7545246cc",
+    "accused-correctly-head": "4a40512e55d0761aaa3a8d5e40a7982bfcd937bdc09424ccd2c2f23d2a5d6852",
+    "accused-wrongly-head": "4871e31051e43bb7b2ec2be2b46a7240665a07d505dd401f1353326163428d2c",
+    "accused-correctly-terminal": "68d24be0316098897cb6bacced76d787976b9c143670c6ed4f33d88a605da5f6",
+    "accused-wrongly-terminal": "433ff3f9b870a6cc0668e7f0a5c0d6fdc2ad21164c96df2c49b603ebd71eceb9"
+  }
+}

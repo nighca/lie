@@ -1,0 +1,72 @@
+{
+  "status": "self-reviewed first pair; awaiting user sample approval; not activated in manifest",
+  "sources": [
+    {
+      "id": "accused-correctly-head",
+      "file": "design/result-reactions/coral-bob/parts/accused-correctly-head.png",
+      "source": "/Users/nighca/.codex/generated_images/01a16d44-aeea-7552-b184-5118072e75f3/exec-d3972e37-33ac-4183-b40c-ac5a3103113a.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "bounds": [
+        0,
+        27,
+        1239,
+        1211
+      ],
+      "sha256": "4a40512e55d0761aaa3a8d5e40a7982bfcd937bdc09424ccd2c2f23d2a5d6852"
+    },
+    {
+      "id": "accused-wrongly-head",
+      "file": "design/result-reactions/coral-bob/parts/accused-wrongly-head.png",
+      "source": "/Users/nighca/.codex/generated_images/01a16d44-aeea-7552-b184-5118072e75f3/exec-cfafb2cc-fdac-4978-8314-27ad283d69c7.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "bounds": [
+        57,
+        36,
+        1188,
+        1211
+      ],
+      "sha256": "4871e31051e43bb7b2ec2be2b46a7240665a07d505dd401f1353326163428d2c"
+    }
+  ],
+  "originalPackageSha256": "f3f2321b98fbced68c606b3513e93c27756a3e3aa7380ed2067dcf49b41fb818",
+  "rendering": {
+    "originalParts": "11 byte-identical files reused",
+    "newHeadRegistration": {
+      "sourceCanvas": [
+        1254,
+        1254
+      ],
+      "crop": [
+        60,
+        35,
+        1150,
+        790
+      ],
+      "x": 291.8,
+      "y": 28.55,
+      "scaleX": 0.53,
+      "scaleY": 0.53
+    },
+    "terminalImages": "native Canvas renderer exports of clip end poses; no raster editing",
+    "sourcePromptIntent": {
+      "accused-correctly-head": "Preserve exact original identity/hair/head canvas; subtle rueful embarrassed resignation, closed coral mouth; no tears, villain expression, body or neck; transparent.",
+      "accused-wrongly-head": "Preserve exact original identity/hair/head canvas; restrained questioning eyebrow asymmetry, small parted coral mouth, me?; no rage, exaggerated shock, body or neck; transparent."
+    }
+  }
+}
