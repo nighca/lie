@@ -1,0 +1,1 @@
+2026-10-25 parent cuff second review: restored sleeve cloth and curved cuffs fixed prior triangles/square skin steps, but silver moving forearm mask included the adjacent cardigan button, yielding a doubled circle at25%. Native screenshot/package preserved. Current fix follows the actual skin edge and leaves the entire button exclusively in the body group. Not user-approved.

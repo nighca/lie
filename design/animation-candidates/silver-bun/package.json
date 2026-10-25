@@ -925,8 +925,16 @@
         "order": 40,
         "mask": [
           [
-            366.65765765765764,
-            620
+            411,
+            444
+          ],
+          [
+            375,
+            491
+          ],
+          [
+            365,
+            574
           ],
           [
             369,
@@ -969,12 +977,28 @@
             713
           ],
           [
-            952.9428571428572,
-            620
+            951,
+            608
           ],
           [
-            827.2967032967033,
-            620
+            924,
+            530
+          ],
+          [
+            866,
+            476
+          ],
+          [
+            820,
+            446
+          ],
+          [
+            796,
+            491
+          ],
+          [
+            824,
+            600
           ],
           [
             839,
@@ -993,24 +1017,48 @@
             718
           ],
           [
-            605,
-            654
+            586,
+            664
           ],
           [
-            607.6356589147287,
-            620
+            577,
+            675
           ],
           [
-            498.0615384615385,
-            620
+            560,
+            676
           ],
           [
-            486,
-            648
+            540,
+            671
           ],
           [
-            474.3333333333333,
-            620
+            520,
+            660
+          ],
+          [
+            505,
+            647
+          ],
+          [
+            495,
+            634
+          ],
+          [
+            488,
+            618
+          ],
+          [
+            466,
+            600
+          ],
+          [
+            485,
+            501
+          ],
+          [
+            480,
+            449
           ]
         ]
       }
@@ -1053,12 +1101,32 @@
             525
           ],
           [
-            606.7054263565891,
-            632
+            611,
+            626
           ],
           [
-            492.89230769230767,
-            632
+            592,
+            626
+          ],
+          [
+            592,
+            668
+          ],
+          [
+            608,
+            672
+          ],
+          [
+            605,
+            704
+          ],
+          [
+            480,
+            704
+          ],
+          [
+            486,
+            648
           ],
           [
             514,
@@ -1075,6 +1143,126 @@
           [
             563,
             392
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-wrist-cloth-backing",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 586,
+        "y": 626,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 38,
+        "crop": [
+          613,
+          626,
+          6,
+          42
+        ]
+      }
+    },
+    {
+      "id": "waiting-button",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 592,
+        "y": 626,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 39,
+        "crop": [
+          592,
+          626,
+          25,
+          42
+        ]
+      }
+    },
+    {
+      "id": "waiting-cuff-front",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": false,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 50,
+        "mask": [
+          [
+            480,
+            610
+          ],
+          [
+            488,
+            613
+          ],
+          [
+            495,
+            629
+          ],
+          [
+            505,
+            642
+          ],
+          [
+            520,
+            655
+          ],
+          [
+            540,
+            666
+          ],
+          [
+            560,
+            671
+          ],
+          [
+            577,
+            670
+          ],
+          [
+            586,
+            659
+          ],
+          [
+            620,
+            690
+          ],
+          [
+            620,
+            745
+          ],
+          [
+            450,
+            745
+          ],
+          [
+            450,
+            610
           ]
         ]
       }
@@ -1197,6 +1385,9 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
         "waiting-hand": false,
         "torso": true,
         "waiting-torso": false,
@@ -1351,6 +1542,9 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
         "waiting-hand": false,
         "torso": false,
         "waiting-torso": false,
@@ -1478,6 +1672,9 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": true,
+        "waiting-button": true,
+        "waiting-cuff-front": true,
         "waiting-hand": true,
         "torso": false,
         "waiting-torso": true,
@@ -1639,6 +1836,9 @@
       "duration": 4,
       "loop": true,
       "visibility": {
+        "waiting-wrist-cloth-backing": false,
+        "waiting-button": false,
+        "waiting-cuff-front": false,
         "waiting-hand": false,
         "torso": true,
         "waiting-torso": false,
