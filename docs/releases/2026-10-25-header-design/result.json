@@ -1,0 +1,31 @@
+{
+  "publishedSha": "0abc82d1acdfbaedab19888cd94ac5eaad166ab1",
+  "ci": {
+    "id": 40177361453,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40177361453"
+  },
+  "cd": {
+    "id": 40177506678,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40177506678",
+    "deployJob": 121121289792,
+    "allSteps": "completed/success"
+  },
+  "artifact": {
+    "id": 12592222833,
+    "sourceRun": 40177361453,
+    "sourceAttempt": 1,
+    "sourceSha": "0abc82d1acdfbaedab19888cd94ac5eaad166ab1",
+    "digest": "sha256:3106d614aa1269ae6a5398903e9a982d088fb2f02aaec8dfe692320ddc570e71",
+    "verifiedRestoredFiles": 256
+  },
+  "workerVersion": "01ee0776-6218-45d8-84c3-28a226f0ec87",
+  "sourceIdentity": "No changes from5a9 in apps/packages/content/scripts/workflows/package/lock/design-character-presets",
+  "online": "Exactly home and referenced JS GET; SHA641ceb42be4cc78f0330ae4ba269c435608162c2e003d9b0766ec6e0e0fa054f unchanged, normal MIME/cache",
+  "limits": "No local build/browser/gameplay/voice/provider, retries/manual deploy, tracked changes or Git mutations. Design proposal archive does not implement or approve production header."
+}
