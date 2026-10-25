@@ -1,3 +1,5 @@
+> Current waiting visibility revision: [pending-user candidate](waiting-visibility-revision.md). Original accepted package is preserved in its linked archive; historical acceptance below does not approve this revision.
+
 # Silver-bun animation candidate
 
 当前接入候选按2026-10-25夜间小修自主授权准备正式资源，尚待总协调review/集成；不声称用户已亲自批准最终waiting。接入、验证及IAB边界见[正式接入记录](../../../docs/animation/silver-bun-game-integration.md)。以下保留制作修订历史，旧截图/旧待验状态以各段所述版本为准。

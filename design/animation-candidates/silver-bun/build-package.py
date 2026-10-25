@@ -59,7 +59,7 @@ for state in ['idle','listening','waiting','speaking']:
  if state not in ['waiting','speaking']:tracks += [track('right-neutral','rotation',[0,-1.2,0,1.2,0])]
  if state=='waiting':
   vis['waiting-lower-body']=True
-  tracks=[track('body-root','y',[800,800]),track('head-root','rotation',[0,0]),track('head-root','pivotY',[850,850]),track('head-root','y',[850,850]),track('head-root','scaleY',[round(1+.006*math.sin(i*math.pi/8),6) for i in range(17)])]
+  tracks=[track('body-root','y',[800,800]),track('head-root','rotation',[0,0]),track('head-root','pivotY',[850,850]),track('head-root','y',[850,850]),track('head-root','scaleY',[round(1+.015*math.sin(i*math.pi/8),6) for i in range(17)])]
  if state=='speaking':
   tracks += [track('speak-arm','rotation',[0,1.9,0,-1.9,0])]
   for n,invert in [('mouth-open',False),('mouth-closed',True)]:tracks.append(dict(node=n,property='visible',interpolation='step',keys=[dict(time=i*.25,value=(i%3!=0)^invert) for i in range(17)]))
