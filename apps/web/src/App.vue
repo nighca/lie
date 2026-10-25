@@ -95,6 +95,11 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>
     </ProductHeader>
 
+    <section v-if="view.phase === 'interrogating' && view.conversationActive && view.busy" class="voice-connection-notice" role="status" aria-label="语音连接提示">
+      <div><strong>正在连接语音</strong><p>{{ current?.name }} · 连接成功后再说话</p></div>
+      <UiButton variant="secondary" @click="controller.endConversation()">取消连接</UiButton>
+    </section>
+
     <main v-if="view.phase === 'loading' || view.phase === 'failed'" class="intro-card surface">
       <h1>{{ view.phase === 'loading' ? '正在准备案件…' : '案件暂时无法加载' }}</h1>
       <p role="status">{{ view.notice }}</p>

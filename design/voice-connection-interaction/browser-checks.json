@@ -1,0 +1,152 @@
+[
+  {
+    "label": "both-pending",
+    "frames": [
+      {
+        "id": "desktop",
+        "title": "沈禾的询问记录",
+        "notice": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "conversation": "inactive",
+        "action": "取消连接",
+        "budget": "08:00",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      },
+      {
+        "id": "mobile",
+        "title": "沈禾的询问记录",
+        "notice": "正在连接语音沈禾 · 连接成功后再说话取消连接",
+        "conversation": "inactive",
+        "action": "取消连接",
+        "budget": "08:00",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      }
+    ]
+  },
+  {
+    "label": "desktop-ready-mobile-cancelled-late-ready",
+    "frames": [
+      {
+        "id": "desktop",
+        "title": "沈禾的询问记录",
+        "notice": null,
+        "conversation": "active",
+        "action": "结束对话",
+        "budget": "08:00",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      },
+      {
+        "id": "mobile",
+        "title": "沈禾的询问记录",
+        "notice": null,
+        "conversation": "inactive",
+        "action": "开启对话",
+        "budget": "08:00",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      }
+    ]
+  },
+  {
+    "label": "rapid-A-B-C-old-events-rejected",
+    "frames": [
+      {
+        "id": "desktop",
+        "title": "陈拓的询问记录",
+        "notice": "正在连接语音陈拓 · 连接成功后再说话取消连接",
+        "conversation": "inactive",
+        "action": "取消连接",
+        "budget": "08:00",
+        "transcript": "陈拓的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      },
+      {
+        "id": "mobile",
+        "title": "沈禾的询问记录",
+        "notice": null,
+        "conversation": "inactive",
+        "action": "开启对话",
+        "budget": "08:00",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      }
+    ]
+  },
+  {
+    "label": "last-character-ready",
+    "frames": [
+      {
+        "id": "desktop",
+        "title": "陈拓的询问记录",
+        "notice": null,
+        "conversation": "active",
+        "action": "结束对话",
+        "budget": "08:00",
+        "transcript": "陈拓的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      },
+      {
+        "id": "mobile",
+        "title": "沈禾的询问记录",
+        "notice": null,
+        "conversation": "inactive",
+        "action": "开启对话",
+        "budget": "08:00",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      }
+    ]
+  },
+  {
+    "label": "inactive-switch-and-mobile-failure-no-retry",
+    "frames": [
+      {
+        "id": "desktop",
+        "title": "沈禾的询问记录",
+        "notice": null,
+        "conversation": "inactive",
+        "action": "开启对话",
+        "budget": "07:37",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      },
+      {
+        "id": "mobile",
+        "title": "顾遥的询问记录",
+        "notice": null,
+        "conversation": "inactive",
+        "action": "开启对话",
+        "budget": "08:00",
+        "transcript": "顾遥的询问记录还没有对话，开口打个招呼吧。提示语音暂时中断。已显示转写保留，你可以重新开始对话。",
+        "overflow": false
+      }
+    ]
+  },
+  {
+    "label": "background-revokes-pending-late-ready-after-close",
+    "frames": [
+      {
+        "id": "desktop",
+        "title": "沈禾的询问记录",
+        "notice": null,
+        "conversation": "inactive",
+        "action": "开启对话",
+        "budget": "07:37",
+        "transcript": "沈禾的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      },
+      {
+        "id": "mobile",
+        "title": "顾遥的询问记录",
+        "notice": null,
+        "conversation": "inactive",
+        "action": "开启对话",
+        "budget": "08:00",
+        "transcript": "顾遥的询问记录还没有对话，开口打个招呼吧。",
+        "overflow": false
+      }
+    ]
+  }
+]

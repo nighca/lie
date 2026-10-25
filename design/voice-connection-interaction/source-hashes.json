@@ -1,0 +1,13 @@
+{
+  "base": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+  "reviewedControllerCommit": "fc635b5",
+  "sha256": {
+    "apps/web/src/App.vue": "585a260f8be9928bd4bd998cc378b11bb7c9716a0bf6f0504a11ca80a916667e",
+    "apps/web/src/style.css": "84fa3eade6be3b072604ff49dfd9fbebbe84e7637e59620ee684b87a8bb4ce1d",
+    "apps/web/src/application/controller.ts": "883eaa66d91b9545b716d958d337b6c80f1de72902acc705a3bc53793dd7f2dc",
+    "apps/web/src/application/voice.ts": "3f6b30a99abf898e044ce9b96bfb4150bb1d2df2eeaec02f3ab5a6c4f437abef",
+    "apps/web/test/voice-capture-readiness.test.ts": "73ecc329a06c5c3dd1d234bf389b6dfaf9d84efeb927bfa7beda8b6e05f4d363",
+    "apps/web/test/voice-connection-notice.test.ts": "13351fac04e5986a3bab1c16010c4e5a9a1554ab3a0f6d716a2a508abe58d477",
+    "apps/web/test/voice-switch-controller.test.ts": "a86cbcfa3710dcd148d814b59a1e3853a677f65b1e668d42136b525cb0d95ebc"
+  }
+}
