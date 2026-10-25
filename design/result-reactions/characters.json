@@ -1,3 +1,18 @@
 [
-  { "id": "coral-bob", "name": "珊瑚短发" }
+  {
+    "id": "coral-bob",
+    "name": "珊瑚短发"
+  },
+  {
+    "id": "sunny-moustache",
+    "name": "阳光小胡子"
+  },
+  {
+    "id": "silver-bun",
+    "name": "银发盘发"
+  },
+  {
+    "id": "plum-crop",
+    "name": "紫衣短卷发"
+  }
 ]

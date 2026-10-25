@@ -1,0 +1,11 @@
+# 首批其余角色的发起者审查
+
+2026-10-25。用户已批准珊瑚加强版，并授权其他角色自行验收后本地合入，见current-authorization.md。
+
+阳光小胡子、银发盘发、紫衣短卷发：发起者已读取各自完整新节点/轨道/visibility、检查脚本、preview与来源/提示词/服务记录；新包的旧clips/nodes/transitions及所有旧PNG通过实际结构/字节比对；两种原生终态均看过，且在父5355统一页逐个选择，实际AnimatedPortrait的两结果末帧与静态导出像素一致。三位新脸能辨别无奈与疑问，胡须/头颈/袖手未发现新穿帮。各自parent-review.jpg为此轮实际组件画面证据，不只是子任务报告。此结论为候选/播放器验收，不将其说成尚未发生的正式游戏页面集成。
+
+当前统一catalog含珊瑚及本批3人；validate.mjs对4人通过（968个刚性结果采样、四态旧素材保留、终态保持/画布/PNG文件头）。另4个角色的候选仍在父QA/末帧导出中，不据此声称八人已做完。
+
+候选独立原始source（base365269b）：sunny e362243bc600c1443451503ec79d422b4285c149；silver174d98c43c83e5f0dcb0660edc42d22b68e7d5f3→6f83ce9cf661c13610d052c919a783eab4e724d4；plum4fa81cacf2a78bf3dc7f77087ffee4b9d3f4f14f；服务停止记录cf93dae724351f62c5258338981fdbc8d7129735。均已cherry至父专项分支，不是main集成；root保有唯一main集成权。
+
+5356与5357两个临时素材lane服务已由原PTY停止（各exit130），own tabs关闭，listener由owner及父复核为空。此后离线制作，只有父5355/PID1851/PTY55257统一QA，无新增listener/fs.allow扩展。5356已释放给图片owner，不认为现在仍应为空。
