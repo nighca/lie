@@ -1,0 +1,49 @@
+{
+  "base": "2f5496d61fca524dca04cf23da4ade8778513924",
+  "head": "1232ef884a6841065a73db5a1080d81eeb2fe03e",
+  "allChangedPathsOnlyDocsMedia": true,
+  "changedFileCount": 73,
+  "objects": [
+    {
+      "path": "apps",
+      "gitObject": "f847346961dc2e33e1fc00c7e13c189f5cf2a518",
+      "equal": true
+    },
+    {
+      "path": "packages",
+      "gitObject": "bda644dc3c6704ed7fe237ca899ebbe367e8390e",
+      "equal": true
+    },
+    {
+      "path": "scripts",
+      "gitObject": "611f0fbc27cb81b25926212f0fe9106fc898ba57",
+      "equal": true
+    },
+    {
+      "path": ".github",
+      "gitObject": "976b1fd7684cfc5999bee3494befc8250ce5aed9",
+      "equal": true
+    },
+    {
+      "path": "content",
+      "gitObject": "497040db26918dc47db7f808bf1eaad781742427",
+      "equal": true
+    },
+    {
+      "path": "design",
+      "gitObject": "e89f54848dcc7f6a65e9202a012a96dd849794bc",
+      "equal": true
+    },
+    {
+      "path": "package.json",
+      "gitObject": "04d77f7a86ddb335232ed2b96448cfe79f3ac8a1",
+      "equal": true
+    },
+    {
+      "path": "package-lock.json",
+      "gitObject": "ace0d60809d80f6240e71ebda6c5bc1851338732",
+      "equal": true
+    }
+  ],
+  "reuse": "2f5496d exact artifact/normal-TLS homepage-JS-CSS proof, no new GET/build"
+}

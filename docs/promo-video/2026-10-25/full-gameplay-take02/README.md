@@ -12,7 +12,7 @@
 
 ## 实际结果
 
-首页→背景→接案→开启沈禾，在ready前失败。无question/STT/TTS，未进入切人/指认/结局/最终首页；完整视频仍未完成。记录：[outcome](outcome.json)、[阶段和资源终态](session.json)、[白名单Network snapshot](network.json)、[失败页](failure.jpg)。
+首页→背景→接案→开启沈禾，在ready前失败。问题未发、未观察到STT/TTS结果（不代表供应商未建资源或零计费），未进入切人/指认/结局/最终首页；完整视频仍未完成。记录：[outcome](outcome.json)、[阶段和资源终态](session.json)、[白名单Network snapshot](network.json)、[失败页](failure.jpg)。
 
 Network snapshot关联1条连接：created（该事件无timestamp）→frame-error类别empty→4ms后closed。没有观察到willSendHandshake、response或loadingFailed；缺事件不证明请求没到Worker，不据此归因浏览器、上游或手动激活。Browser warn/error接口仍空数组。此次没有HTTP状态或新细分根因证据。
 
@@ -27,3 +27,5 @@ Network snapshot关联1条连接：created（该事件无timestamp）→frame-er
 root收到失败后已释放窗口。其建议下一步与用户协商“同页/同装置，由用户亲手点开启，我仅被动观察”的有界对照，此步尚未准备/实施，未获新的provider窗口，不自动做下一次agent点击。所有原始帧/WAV及模块在持久目录：
 
 `/Users/nighca/.codex/visualizations/2026/10/25/01a17226-5e5a-7193-b5b7-e522519a3e0c/promo-video/full-gameplay-take02`
+
+归档审查限制：实际probe-entry catch仍打印String(error)，本轮固定Voice failed before ready错误未见敏感内容；这不继承bb纯模块的JSON安全保证。export/截图后的disable/reset不在分项finally中，未来失败可能跳过收尾。保留此实际记录，不改写为已具备更强保护；后续对照前应离线修验逐项finally与有限错误分类，不能藉此重连。

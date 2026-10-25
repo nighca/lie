@@ -1,0 +1,68 @@
+{
+  "source": "736fae1ac67b7a27f2fc64dbbb2400734e53b293",
+  "parent": "bb1834f8cd9e1a7ce7828cb119df0763b34ee79d",
+  "scope": [
+    "docs/promo-video/2026-10-25/full-gameplay-take02/README.md",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/api-check.json",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/browser-errors.json",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/capture-flow.mjs",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/failure-verification.json",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/failure.jpg",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/network.json",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/outcome.json",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/probe-entry.js",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/recorder.mjs",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/session.json"
+  ],
+  "sourceSha256": {
+    "docs/promo-video/2026-10-25/full-gameplay-take02/README.md": "9ebadefd79a6d51d0f3633ae2fa2261fee40e75759d9d6213ac170a3d0f68e77",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/api-check.json": "197e4ded2eb87d18a9aa963eca88216452920b9f67e0c720730cfe5c4f463cf2",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/browser-errors.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/capture-flow.mjs": "72268d2c6093b923a4bbf448823901b3a9008eaef1c0db3b354ab74048148a21",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/failure-verification.json": "4a1b684e73330826270069a943abce77e4841642c284486b71b52d333c62e96e",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/failure.jpg": "502f6a00ff7b1e1c116753fa29c8460bb751cd18a91b4e2a124088defb7921bf",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/network.json": "14a76574b0360501dc1346f509e31c0ad433ec35f3d06e4a28da46161ed6a142",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/outcome.json": "b01e95fa606f336f9ad5c9dc0fb73bfa9ede158c5d0819ec6db48d8e27a574f6",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/probe-entry.js": "84feba6dec7372703421fbc985fe5ecc21d6f6164e5499aabcbad9b474a7e564",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/recorder.mjs": "af339d2aee2f3d50b7124cf014d04ae3a04ad9b0710beb19d19943e84245d30d",
+    "docs/promo-video/2026-10-25/full-gameplay-take02/session.json": "91ddc22052b1d3b9e595699e450c29960520d7dd094b815b04d785ffe19c30e3"
+  },
+  "jsSyntaxAndJsonLinks": "PASS",
+  "flowBodyIdentityWithPriorFactory": true,
+  "whitelistSnapshot": "1created(no timestamp),emptyframe-error0ms,closed4ms; no status/private data",
+  "rawFrames": 520,
+  "metadataAndActualJpegSize": [
+    1280,
+    800
+  ],
+  "wavTracks": {
+    "input": {
+      "samples": 402944,
+      "sampleRate": 48000,
+      "seconds": 8.394666666666666,
+      "peak": 0
+    },
+    "output": {
+      "samples": 402944,
+      "sampleRate": 48000,
+      "seconds": 8.394666666666666,
+      "peak": 0
+    },
+    "mix": {
+      "samples": 402944,
+      "sampleRate": 48000,
+      "seconds": 8.394666666666666,
+      "peak": 0
+    }
+  },
+  "questionSent": false,
+  "cleanup": "3contextsclosed3tracksended; api native/name checks not reference equality",
+  "persistentSourceIdentity": "matched session/outcome/network/recorder/flow",
+  "oldVideosIdentical": true,
+  "limitations": [
+    "No provider/browser/CF/service or recording script execution",
+    "No observed handshakeHTTP status or root cause",
+    "Cleanup API/native-string observation cannot prove prior reference equality",
+    "Outer post-failure export/Network-disable sequence lacks comprehensive finally; current evidence complete, future fault-path concern only"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "source": "bb1834f8cd9e1a7ce7828cb119df0763b34ee79d",
+  "parent": "721baec5f54402c794a40e6cfd117e91eb4f4304",
+  "producerHead": "bb1834f8cd9e1a7ce7828cb119df0763b34ee79d",
+  "producerClean": true,
+  "scope": [
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/README.md",
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/diagnostics.mjs",
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/diagnostics.test.mjs",
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/test-results.tap"
+  ],
+  "sourceSha256": {
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/README.md": "7dada8bdd139dfa325a1a7082386cb3b3ae3f869901d59801d7ace15eb91ae4d",
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/diagnostics.mjs": "67f3dce19d84316fb5a1ce3121682eadafdeca0b9f20f89ebf6771f12120d611",
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/diagnostics.test.mjs": "c3cde45eefaf3702c3c39ef73a235f3149653f7f0548e57709e32ac3bb8f8da8",
+    "docs/promo-video/2026-10-25/passive-voice-diagnostics/test-results.tap": "7d26c9f7060da024e561401b06c649730a0e9932aaa5c00f9facb6b7c3f4ee62"
+  },
+  "runtime": "Node24.22.1",
+  "originalSyntheticTests": {
+    "pass": 7,
+    "fail": 0
+  },
+  "extraAttackTests": {
+    "pass": 4,
+    "fail": 0
+  },
+  "blockingFindings": [],
+  "checks": [
+    "getter traps actual invocation across handshake/error/closed/ignored-frame branches",
+    "URL query and original IDs absent from output",
+    "scheme/host/port/credentials/path boundaries",
+    "invalid status and arbitrary error text finite mapping",
+    "concurrent reuse rejected without second start/cleanup",
+    "not-ready no question and first cause retained per existing tests"
+  ],
+  "limits": [
+    "Pure module/synthetic tests only; not integrated into browser recorder and no new live turn authorized",
+    "Optional callback waits remain caller-bounded; runner adds no hard deadline",
+    "Non-enumerable cause is JSON-safe but can still be exposed by a caller explicitly logging/serializing it",
+    "Original request IDs remain in ephemeral Map until diagnostics instance discarded"
+  ]
+}

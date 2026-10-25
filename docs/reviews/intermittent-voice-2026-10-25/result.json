@@ -1,0 +1,52 @@
+{
+  "reviewedPublishedSha": "2f5496d61fca524dca04cf23da4ade8778513924",
+  "comparisonSha": "8aa7ec967dfad45bf1646cdd27c6d909bebec437",
+  "sourceGitBlobs": {
+    "apps/web/src/application/liveVoice.ts": "03b3eb3b4c99c24f6d6e9493b69b1d1e17d751c6",
+    "packages/voice/src/channel.ts": "7aba9f94d8fefdddb9c7972cec041b823afa688b",
+    "packages/voice/src/player.ts": "34c6256c3558bc8403ddbcdd9932fab3077e0042",
+    "packages/voice/src/microphone.ts": "393f9909da09394a7d9a0f63d2c551d5184aaa33",
+    "apps/gateway/src/index.ts": "b5073c03af607eeccf7c5ad52677abe8173592e8",
+    "apps/gateway/cloudflare.config.ts": "960eb10dca5c3780d2019c4964f0078fddfb9fb5"
+  },
+  "voiceInputsUnchanged": true,
+  "newFailureSource": "721baec5f54402c794a40e6cfd117e91eb4f4304",
+  "failedWindowEpochMs": [
+    1792923530000,
+    1792923555000
+  ],
+  "failedWindowUtc": [
+    "2026-10-25T10:18:50Z",
+    "2026-10-25T10:19:15Z"
+  ],
+  "historicalQueries": "cf o11y telemetry query, dry:true, calculations only, no raw events/headers/frames",
+  "findings": {
+    "voiceStatusEndpoint": {
+      "path": "/api/voice/status",
+      "status": 200,
+      "outcome": "ok",
+      "count": 1
+    },
+    "exactVoicePath": "No matching completed aggregate row in failed window; absence is not proof request never reached Worker",
+    "upstreamSanitizedErrorEvents": "No matches in10:18:45..10:19:30Z for code-defined voice_upstream_ message filter",
+    "knownSuccessfulControl": {
+      "windowEpochMs": [
+        1792922758000,
+        1792922800000
+      ],
+      "count": 1,
+      "reportedResponseStatusField": 0,
+      "outcome": "ok",
+      "caution": "0 is telemetry representation, not an observed HTTP101 handshake code"
+    }
+  },
+  "rootCause": "UNKNOWN; no evidence warrants production/provider config repair or generalized outage claim",
+  "nextStep": "Prioritize passive CDP pre-open/loading failure classifications and compare controlled user-owned session only in a new explicit single-attempt turn; offline-validate diagnostic filtering and every gateway failure branch first.",
+  "limits": [
+    "No new WS/provider call, retry, live tail, config/resource changes, browser/service, secret/header/private-frame reads",
+    "CLI read existing historical aggregates only; no raw logs archived",
+    "No application build/test rerun; offline test plan is proposal",
+    "Producer full source not modified; inspected only frozen metadata for newest failure, no dirty worktree reads",
+    "No Git/main/push changes"
+  ]
+}

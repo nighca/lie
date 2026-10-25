@@ -1,0 +1,19 @@
+# 被动语音诊断离线模块独立审验
+
+冻结source bb1834f8cd9e1a7ce7828cb119df0763b34ee79d，父721baec5f54402c794a40e6cfd117e91eb4f4304；producer审前/审后clean且HEAD同源。完整读4文件286行：module122行、tests89行、README及原TAP，核实际diff/本地引用与身份。无阻塞发现。
+
+使用Node24.22.1，从Git对象复制module/tests到自有临时目录运行，原7项通过；新增4项小型攻击输入通过。actual.tap/attack.tap为本次真实TAP，不拿作者旧输出替代。所有输入为人工seed，不含真实用户数据。
+
+Getter trap有效：handshake request/response经过Proxy，headers/request/body/payloadData/cookies等属性一旦读取即抛错；本次完整6事件路径未读取。未支持的FrameReceived事件在取params前就丢弃。snapshot/accept返回的记录只有局部编号、相对时长、固定kind、bounded status与finite分类，不带URL/query/rawID/header/正文；seed未出现在序列化输出。未知net::/blockedReason映射OTHER/other，非法status包括0/NaN/Infinity/string均null，不把0或字符串101当握手成功。
+
+URL解析后要求ws/wss、无凭据、scheme映射后的origin精确等于配置origin，pathname=/api/voice。额外验证HTTP/HTTPS降级、端口变化、host后缀欺骗、userinfo、尾斜杠均不能关联。带query的合法路径可被观察，但query不输出——这是诊断关联工具，不代替gateway拒绝query的访问规则。raw requestId只在Map内关联，snapshot仅connection编号；调用者完成授权窗口后应丢弃该instance。
+
+runner在任何await之前同步置used，原测试及新增并发复用探针均证明第二次调用不会再次start；waitReady必须严格true才question，start/ready/question/answer异常被捕获，cleanup只调用一次，首失败不被cleanup异常覆盖，complete/incomplete/cleanup-only failure区分。callback负责真实等待上限与具体资源释放，模块没有自己的超时/abort，不能拿它替代5分钟watchdog或会话终态证据。
+
+非枚举cause正确保留首异常且不会进入JSON.stringify；但这不是对所有日志方式的隐私保证。调用方不得console.log原异常/result或主动展开cause、toJSON、自定义serializer。调用集成时仅保存snapshot和规范JSON结果，继续禁止打印原readEvents batch，Network启停和音频清理分项处理。
+
+局限：只审纯模块和合成事件，未验证CDP实际交付这些字段、旧窗口事件cursor/instance生命周期、浏览器录制接线、实际超时/cleanup与线上握手；也未声称修复现有间歇问题。elapsed来自原timestamp，不为不可信时间戳提供通用数值范围/单调性保证；在标准CDP秒级事件下用途明确，不构成此次数据泄露阻断。额外attack.test.mjs需与冻结diagnostics.mjs置于同目录后node --test重放，不执行任何真实连接。
+
+未访问browser/provider/Cloudflare/服务、未改source/Git/main或push。证据只在owned ignored目录，待root下一正常批归档，不新建发布循环。原TAP测试数量/名称与实际7项一致，耗时不要求字节相同。
+
+归档适配：attack.test.mjs仅import路径调整为本仓库canonical模块，其他断言与独立审验源相同；root重新执行归档路径的4项验证通过。source模块未改变，旧TAP是独立审验当时结果，不宣称耗时字节一致。

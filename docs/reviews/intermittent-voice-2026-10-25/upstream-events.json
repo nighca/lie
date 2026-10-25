@@ -1,0 +1,43 @@
+{
+  "timeframe": {
+    "from": 1792923525000,
+    "to": 1792923570000
+  },
+  "parameters": {
+    "filters": [
+      {
+        "key": "$metadata.service",
+        "operation": "eq",
+        "value": "lie-game",
+        "type": "string"
+      },
+      {
+        "key": "$metadata.message",
+        "operation": "includes",
+        "value": "voice_upstream_",
+        "type": "string"
+      }
+    ],
+    "filterCombination": "and",
+    "calculations": [
+      {
+        "alias": "events",
+        "operator": "count"
+      }
+    ],
+    "groupBys": [
+      {
+        "type": "string",
+        "value": "$metadata.message"
+      }
+    ],
+    "limit": 10
+  },
+  "aggregates": [
+    {
+      "alias": "events",
+      "aggregates": []
+    }
+  ],
+  "status": "COMPLETED"
+}

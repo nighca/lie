@@ -1,0 +1,47 @@
+{
+  "timeframe": {
+    "from": 1792923530000,
+    "to": 1792923555000
+  },
+  "parameters": {
+    "filters": [
+      {
+        "key": "$metadata.service",
+        "operation": "eq",
+        "value": "lie-game",
+        "type": "string"
+      },
+      {
+        "key": "$workers.event.request.url",
+        "operation": "ends_with",
+        "value": "/api/voice",
+        "type": "string"
+      }
+    ],
+    "filterCombination": "and",
+    "calculations": [
+      {
+        "alias": "requests",
+        "operator": "count"
+      }
+    ],
+    "groupBys": [
+      {
+        "type": "number",
+        "value": "$workers.event.response.status"
+      },
+      {
+        "type": "string",
+        "value": "$workers.outcome"
+      }
+    ],
+    "limit": 10
+  },
+  "aggregates": [
+    {
+      "alias": "requests",
+      "aggregates": []
+    }
+  ],
+  "status": "COMPLETED"
+}

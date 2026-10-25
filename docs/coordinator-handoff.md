@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `2f5496d61fca524dca04cf23da4ade8778513924`。CI40183820150/attempt1与CD40183972202均success，Worker `c45edc68-cace-4425-bda6-374a857389cf`；[发布及旧CI纠正证据](releases/2026-10-25-header-spacing/README.md)。正式TLS首页/JS/CSS逐字节匹配精确产物；头部与移动间距已上线。后续归档会继续推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `1232ef884a6841065a73db5a1080d81eeb2fe03e`。CI40184964392/attempt1与CD40185106004均success，Worker `11b07cad-85eb-44d4-a255-291cf8c73599`；[发布证据](releases/2026-10-25-native-video-archive/README.md)。运行输入与2f完全相同，复用其正式TLS身份。后续正常归档会推进HEAD，操作前读实际Git。
 
 ## 协调权、自动化与发布
 
@@ -27,7 +27,7 @@
 | character_preset_migration | 调查立绘加载占位source8b98887已clean交付、root完整审查并候选fe56783；36项目标测试root复验通过，沿用source UI/Web类型检查；仅调查页启用slot，无服务启动，IAB不可用，原生视觉未测。[证据](investigation-portrait-loading.md)。 |
 | hackathon_case | 新增第四案source b7b20e3→2cbae8f，root完整内容/八文件diff审查、候选c1da7a9→5c87845；仅新增04 JSON为运行变更，root2项专项复验通过。源Web357/脚本33/types/build身份可复用；真实模型/盲测未验。[交付](hackathon-case/README.md)。 |
 | 头部UI专项01a16d5c | 原头部9431922仍未批准；用户在专项要求下划线位于Logo右下方、带完整页面对比，新proposal0c4a268已完整审查归档；用户随后明确批准并要求左移接触，专项4567e2f→28b77d1已完成ProductHeader局部及再左移20px，已完整审查并随2f发布；UI59/types/build/IAB桌面手机和root5项测试通过。语音A用户已批准，e214c0e三稿归档并由character owner完成实现；两项门禁独立。 |
-| 宣传视频01a17226 | 73.4秒创作分享片已归档；dcc→3ee→904→434→f623整批36路径root实际审查及[独立完整审验](reviews/video-f623-batch-2026-10-25/README.md)通过。[37.53秒有声试片](promo-video/2026-10-25/user-tab-recording-take01/README.md)含本次新STT/TTS/非零双轨，但30秒上限仍speaking主动结束，非完整回答。用户直接验收效果并批准完整流程；等2f发布结束后唯一≤5分钟正式窗口又在连接阶段失败，未发问题且未观察到STT/TTS，已停止清理并释放，用户tab保留，整片未完成，source721baec已root及独立只读审查并归档，客户端未观察到结果不代表供应商未建资源或零计费。architecture整项只读查连接链路/既存日志，不猜普遍生产故障/不重连/不改provider配置；后续新真实尝试须另明确窗口。无公开上传许可。 |
+| 宣传视频01a17226 | 73.4秒创作分享片已归档；dcc→3ee→904→434→f623整批36路径root实际审查及[独立完整审验](reviews/video-f623-batch-2026-10-25/README.md)通过。[37.53秒有声试片](promo-video/2026-10-25/user-tab-recording-take01/README.md)含本次新STT/TTS/非零双轨，但30秒上限仍speaking主动结束，非完整回答。用户直接验收效果并批准完整流程；等2f发布结束后唯一≤5分钟正式窗口又在连接阶段失败，未发问题且未观察到STT/TTS，已停止清理并释放，用户tab保留，整片未完成，source721baec已root及独立只读审查并归档，客户端未观察到结果不代表供应商未建资源或零计费。[只读历史日志诊断](reviews/intermittent-voice-2026-10-25/README.md)完成，根因未知；失败窗仅/status200，精确voice/上游错误聚合缺项不证明未到Worker。[离线被动分类器](promo-video/2026-10-25/passive-voice-diagnostics/README.md)sourcebb1834f已全文审查，原7项+独立4项通过；尚未证明真实故障原因。用户随后明确再试一次，第二轮仍连接失败并已释放；source736fae1已完整审查并归档[实际失败证据](promo-video/2026-10-25/full-gameplay-take02/README.md)和[独立审验](reviews/full-gameplay-take02-2026-10-25/README.md)。用户先同意亲手点击对照，首次等待未点击到期、0provider，不当语音失败；随后明确取消该对照，改为协作完整录制。root已读直接用户指令01a172b0-3cca-7ce2-aafd-9bf2c3265304，批准≤8分钟窗口：专项从首页操作至调查，之后用户亲手开启/真实mic说话/切人/指认/回首页，专项持续录音录像；不自动重试/reload，逐项清理，窗口结束前冻结push。后续入口须有限错误分类及分项finally，不改生产/provider配置。无公开上传许可。 |
 | home_scroll / character_preset_migration | 首页source b9ef3cb→cf5c0fc、语音A777c392均已审查并随8aa发布；前者真实IAB验收，后者357测试/types/build及root4项通过。组合QA追加48b4b22已在独立Chrome补验并完整审查：三尺寸/reduce/取消迟到完成/首页四案滚动通过；使用真实App/controller＋fake transport，非真实语音。5544 PID10172/PTy45505原session停止exit130并核空监听，tab/临时入口/viewport清理完成。 |
 | native QA | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
 | 真人/内容QA | 贺宁真实模型、三案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |
