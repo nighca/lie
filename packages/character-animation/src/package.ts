@@ -1,6 +1,7 @@
-import type { AnimationPackage, AnimationProperty, AnimationState } from './types'
+import type { AnimationPackage, AnimationProperty, BaseAnimationState } from './types'
 
-export const animationStates: readonly AnimationState[] = ['default', 'listening', 'waiting', 'speaking']
+export const animationStates: readonly BaseAnimationState[] = ['default', 'listening', 'waiting', 'speaking']
+export const resultAnimationStates = ['accusedCorrectly', 'accusedWrongly'] as const
 const maxAssets = 32
 const maxPixels = 32 * 1024 * 1024
 const properties = ['x', 'y', 'pivotX', 'pivotY', 'rotation', 'scaleX', 'scaleY'] as const
@@ -22,7 +23,7 @@ function size(value: unknown, label: string): number { const result = positive(v
 export function readAnimationPackage(value: unknown): AnimationPackage {
   const root = object(value, 'Animation')
   fields(root, ['schemaVersion', 'canvas', 'assets', 'nodes', 'clips', 'states', 'transitions'], 'Animation')
-  if (root.schemaVersion !== 1) throw Error('Unsupported animation schemaVersion')
+  if (root.schemaVersion !== 1 && root.schemaVersion !== 2) throw Error('Unsupported animation schemaVersion')
   const canvas = object(root.canvas, 'canvas'); fields(canvas, ['width', 'height'], 'canvas')
   const canvasSize = { width: size(canvas.width, 'canvas.width'), height: size(canvas.height, 'canvas.height') }
   let pixels = canvasSize.width * canvasSize.height
@@ -92,16 +93,22 @@ export function readAnimationPackage(value: unknown): AnimationPackage {
     })
     clips[id] = { duration, loop: boolean(clip.loop, id), visibility, tracks }
   }
-  const rawStates = object(root.states, 'states'); fields(rawStates, animationStates, 'states')
+  const rawStates = object(root.states, 'states'); fields(rawStates, root.schemaVersion === 1 ? animationStates : [...animationStates, ...resultAnimationStates], 'states')
   const states = Object.fromEntries(animationStates.map(state => { const clip = text(rawStates[state], state); if (!Object.hasOwn(clips, clip)) throw Error(`${state}: unknown clip`); return [state, clip] })) as AnimationPackage['states']
+  for (const state of resultAnimationStates) {
+    if (!Object.hasOwn(rawStates, state)) continue
+    const clip = text(rawStates[state], state)
+    if (!Object.hasOwn(clips, clip) || clips[clip].loop) throw Error(`${state}: result clip must exist and not loop`)
+    states[state] = clip
+  }
   const pairs = new Set<string>()
   const transitions: AnimationPackage['transitions'] = array(root.transitions, 'transitions').map(raw => {
     const transition = object(raw, 'transition'); fields(transition, ['from', 'to', 'clip'], 'transition')
-    if (!animationStates.includes(transition.from as AnimationState) || !animationStates.includes(transition.to as AnimationState)) throw Error('Unknown transition state')
+    if (!animationStates.includes(transition.from as BaseAnimationState) || !animationStates.includes(transition.to as BaseAnimationState)) throw Error('Unknown transition state')
     const clip = text(transition.clip, 'transition clip'); if (!Object.hasOwn(clips, clip) || clips[clip].loop) throw Error('Transition clip must exist and not loop')
-    const from = transition.from as AnimationState, to = transition.to as AnimationState, pair = `${from}:${to}`
+    const from = transition.from as BaseAnimationState, to = transition.to as BaseAnimationState, pair = `${from}:${to}`
     if (from === to || pairs.has(pair)) throw Error('Duplicate or self transition'); pairs.add(pair)
     return { from, to, clip }
   })
-  return { schemaVersion: 1, canvas: canvasSize, assets, nodes, clips, states, transitions }
+  return { schemaVersion: root.schemaVersion, canvas: canvasSize, assets, nodes, clips, states, transitions }
 }

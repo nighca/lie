@@ -61,3 +61,34 @@ it('keeps unchanged URLs stable and changes the complete entry chain for changed
     expect(brand.plan.urls.get('/brand/logo.svg')).not.toBe(part.plan.urls.get('/brand/logo.svg'))
   } finally { await rm(root, { recursive: true, force: true }) }
 })
+
+it('fingerprints result terminal portraits independently and all animation attachments together', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'lie-result-fingerprint-'))
+  const put = async (path: string, bytes: string) => { await mkdir(dirname(join(root, path)), { recursive: true }); await writeFile(join(root, path), bytes) }
+  try {
+    await mkdir(join(root, 'brand'))
+    const right = '/appearances/guide/accused-correctly.png', wrong = '/appearances/guide/accused-wrongly.png'
+    const animation = '/appearances/guide/animation/package.json', part = '/appearances/guide/animation/parts/result-face.png'
+    await put(right.slice(1), 'right-terminal')
+    await put(wrong.slice(1), 'wrong-terminal')
+    await put(animation.slice(1), '{"schemaVersion":2}')
+    await put(part.slice(1), 'shared-result-face')
+    await put('appearances/manifest.json', JSON.stringify([{ id: 'guide', portraits: { accusedCorrectly: right, accusedWrongly: wrong }, animation }]))
+    const first = await fingerprintAssets(root)
+    const [preset] = JSON.parse(first.outputs.get(first.manifestUrl.slice(1))!.toString())
+    expect(preset.portraits.accusedCorrectly).toBe(first.urls.get(right))
+    expect(preset.portraits.accusedWrongly).toBe(first.urls.get(wrong))
+    await put(right.slice(1), 'updated-right-terminal')
+    const changed = await fingerprintAssets(root)
+    expect(changed.manifestUrl).not.toBe(first.manifestUrl)
+    expect(changed.urls.get(right)).not.toBe(first.urls.get(right))
+    expect(changed.urls.get(wrong)).toBe(first.urls.get(wrong))
+    expect(changed.urls.get(animation)).toBe(first.urls.get(animation))
+    await put(part.slice(1), 'updated-result-face')
+    const attachments = await fingerprintAssets(root)
+    expect(attachments.manifestUrl).not.toBe(changed.manifestUrl)
+    expect(attachments.urls.get(animation)).not.toBe(changed.urls.get(animation))
+    expect(attachments.urls.get(part)!.split('/')[2]).toBe(attachments.urls.get(animation)!.split('/')[2])
+    expect(attachments.urls.get(right)).toBe(changed.urls.get(right))
+  } finally { await rm(root, { recursive: true, force: true }) }
+})

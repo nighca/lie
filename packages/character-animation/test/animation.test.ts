@@ -30,7 +30,7 @@ describe('versioned animation contract', () => {
     expect(() => readAnimationPackage(hugeCanvas)).toThrow('pixel budget')
   })
   it.each([
-    ['version', (d: any) => { d.schemaVersion = 2 }],
+    ['version', (d: any) => { d.schemaVersion = 3 }],
     ['script', (d: any) => { d.evaluate = '() => alert(1)' }],
     ['path', (d: any) => { d.assets.head.src = '../other.png' }],
     ['cycle', (d: any) => { d.nodes[0].parent = d.nodes[1].id }],
@@ -102,5 +102,54 @@ describe('Canvas rig rendering', () => {
   it('fails cleanly when Canvas is unavailable', () => {
     const data = readAnimationPackage(fixture())
     expect(() => createCanvasRenderer({ getContext: () => null } as unknown as HTMLCanvasElement, data, new Map())).toThrow('Canvas 2D')
+  })
+})
+
+function reactionFixture() {
+  const raw = fixture()
+  raw.schemaVersion = 2
+  raw.clips['accused-correctly'] = { duration: 1, loop: false, visibility: {}, tracks: [{ node: 'head-root', property: 'rotation', interpolation: 'linear', keys: [{ time: 0, value: 0 }, { time: 1, value: 3 }] }] }
+  raw.states.accusedCorrectly = 'accused-correctly'
+  return raw
+}
+
+describe('optional version 2 result states', () => {
+  it('accepts zero, one and two result mappings without changing base clips', () => {
+    const raw = reactionFixture()
+    expect(readAnimationPackage(raw).states.accusedCorrectly).toBe('accused-correctly')
+    raw.states.accusedWrongly = 'accused-correctly'
+    expect(readAnimationPackage(raw).states.accusedWrongly).toBe('accused-correctly')
+    delete raw.states.accusedCorrectly; delete raw.states.accusedWrongly
+    expect(readAnimationPackage(raw).schemaVersion).toBe(2)
+  })
+  it.each([
+    ['v1 result key', (raw: any) => { raw.schemaVersion = 1 }],
+    ['unknown result', (raw: any) => { raw.states.won = 'idle' }],
+    ['missing base state', (raw: any) => { delete raw.states.default }],
+    ['null mapping', (raw: any) => { raw.states.accusedCorrectly = null }],
+    ['unknown clip', (raw: any) => { raw.states.accusedCorrectly = 'absent' }],
+    ['looping result', (raw: any) => { raw.clips['accused-correctly'].loop = true }],
+    ['result transition', (raw: any) => { raw.transitions = [{ from: 'default', to: 'accusedCorrectly', clip: 'accused-correctly' }] }],
+  ])('rejects %s', (_, mutate) => {
+    const raw = reactionFixture(); mutate(raw)
+    expect(() => readAnimationPackage(raw)).toThrow()
+  })
+  it('holds the exact last pose, reports completion and does not restart the same state', () => {
+    const data = readAnimationPackage(reactionFixture())
+    const clock = new AnimationTimeline(data, 'accusedCorrectly')
+    expect(clock.finished).toBe(false)
+    expect(clock.advance(.5)['head-root'].transform.rotation).toBe(1.5)
+    const last = clock.advance(.5)
+    expect(clock.finished).toBe(true)
+    expect(last['head-root'].transform.rotation).toBe(3)
+    clock.setState('accusedCorrectly')
+    expect(clock.advance(100)).toEqual(last)
+    expect(sampleClip(data, data.clips['accused-correctly'], 100)).toEqual(last)
+  })
+  it('rejects unavailable states before sampling without changing the current timeline', () => {
+    const data = readAnimationPackage(fixture()), clock = new AnimationTimeline(data)
+    expect(() => new AnimationTimeline(data, 'accusedCorrectly')).toThrow('state unavailable')
+    expect(() => clock.setState('accusedWrongly')).toThrow('state unavailable')
+    expect(clock.advance(0)).toEqual(sampleClip(data, data.clips.idle, 0))
   })
 })

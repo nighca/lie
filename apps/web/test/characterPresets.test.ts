@@ -70,9 +70,9 @@ describe('characterPreset state portraits', () => {
       { ...preset('partial'), portraits: { listening: '/listen.png', speaking: null } },
     ])
     expect(characterPresets.map(({ portraits }) => portraits)).toEqual([
-      { listening: null, waiting: null, speaking: null },
-      { listening: null, waiting: null, speaking: null },
-      { listening: '/listen.png', waiting: null, speaking: null },
+      { listening: null, waiting: null, speaking: null, accusedCorrectly: null, accusedWrongly: null },
+      { listening: null, waiting: null, speaking: null, accusedCorrectly: null, accusedWrongly: null },
+      { listening: '/listen.png', waiting: null, speaking: null, accusedCorrectly: null, accusedWrongly: null },
     ])
     expect(characterPresets[2].portrait).toBe('/portrait.png')
   })
@@ -81,7 +81,7 @@ describe('characterPreset state portraits', () => {
     expect(() => readCharacterPresets([{ ...preset('invalid'), portraits }])).toThrow('Invalid characterPreset portraits')
   })
 
-  it.each(['listening', 'waiting', 'speaking'])('rejects invalid %s URLs', (state) => {
+  it.each(['listening', 'waiting', 'speaking', 'accusedCorrectly', 'accusedWrongly'])('rejects invalid %s URLs', (state) => {
     for (const value of ['', '  ', 1, false, {}, []]) {
       expect(() => readCharacterPresets([{ ...preset('invalid'), portraits: { [state]: value } }])).toThrow('Invalid characterPreset portrait')
     }
@@ -130,4 +130,11 @@ describe('immutable preset animation URLs', () => {
   ])('rejects an out-of-scope immutable URL %s', animation => {
     expect(() => readCharacterPresets([{ ...preset('moving'), animation }])).toThrow('Invalid characterPreset animation')
   })
+})
+
+it('reads optional result portraits without requiring an animation package', () => {
+  const [item] = readCharacterPresets([{ ...preset('static'), portraits: { accusedCorrectly: '/right.png', accusedWrongly: '/wrong.png' } }])
+  expect(item.portraits.accusedCorrectly).toBe('/right.png')
+  expect(item.portraits.accusedWrongly).toBe('/wrong.png')
+  expect(item.animation).toBe(null)
 })

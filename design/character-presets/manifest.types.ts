@@ -26,6 +26,9 @@ export interface CharacterPresetManifestEntry {
     waiting: string
     /** 人物说话时的立绘：assets/<id>/speaking.png。 */
     speaking: string
+    /** 可选结果静态终态；对应非循环结果动作的回退。 */
+    accusedCorrectly?: string
+    accusedWrongly?: string
   }
 }
 

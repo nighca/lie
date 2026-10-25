@@ -31,8 +31,16 @@ export class AnimationTimeline {
   private elapsed = 0
   private transitionClip: string | null = null
   private blendFrom: AnimationPose | null = null
-  constructor(private readonly data: AnimationPackage, state: AnimationState = 'default') { this.state = state }
+  constructor(private readonly data: AnimationPackage, state: AnimationState = 'default') { this.requireState(state); this.state = state }
+  get finished(): boolean {
+    const clip = this.data.clips[this.data.states[this.state]!]
+    return this.transitionClip == null && !clip.loop && this.elapsed >= clip.duration
+  }
+  private requireState(state: AnimationState) {
+    if (!Object.hasOwn(this.data.states, state)) throw Error(`Animation state unavailable: ${state}`)
+  }
   setState(state: AnimationState) {
+    this.requireState(state)
     if (state === this.state) return
     const previous = this.pose()
     this.transitionClip = this.data.transitions.find(item => item.from === this.state && item.to === state)?.clip ?? null
@@ -51,7 +59,7 @@ export class AnimationTimeline {
     return this.pose()
   }
   private pose(): AnimationPose {
-    const clip = this.data.clips[this.transitionClip ?? this.data.states[this.state]]
+    const clip = this.data.clips[this.transitionClip ?? this.data.states[this.state]!]
     const target = sampleClip(this.data, clip, this.elapsed)
     if (this.blendFrom == null || this.elapsed >= .24) return target
     return blendPoses(this.blendFrom, target, this.elapsed / .24)

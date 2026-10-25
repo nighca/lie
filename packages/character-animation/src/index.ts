@@ -1,4 +1,4 @@
-export { readAnimationPackage, animationStates } from './package'
+export { readAnimationPackage, animationStates, resultAnimationStates } from './package'
 export { AnimationTimeline, sampleClip, blendPoses } from './playback'
 export { createCanvasRenderer } from './canvas'
 export { loadAnimationPackage } from './load'

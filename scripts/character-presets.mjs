@@ -5,6 +5,7 @@ import { readAnimationPackage } from '../packages/character-animation/src/packag
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url))
 const states = ['listening', 'waiting', 'speaking']
+const resultPortraits = { accusedCorrectly: 'accused-correctly', accusedWrongly: 'accused-wrongly' }
 const sourceFields = new Set(['id', 'name', 'avatar', 'portrait', 'accent', 'voiceId', 'portraits', 'animation'])
 const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])
 
@@ -89,6 +90,13 @@ export async function syncCharacterPresets({ sourceDirectory = join(projectRoot,
       if (!bytes.subarray(16, 24).equals(defaultBytes.subarray(16, 24))) throw new Error(`${path}: state canvas must match default`)
       generated.portraits[state] = add(`${id}/${state}.png`, bytes)
     }
+    for (const [state, filename] of Object.entries(resultPortraits)) {
+      if (!Object.hasOwn(portraits, state)) continue
+      const path = assetPath(portraits[state], id, filename, `${id}.portraits.${state}`)
+      const bytes = await load(path)
+      if (!bytes.subarray(16, 24).equals(defaultBytes.subarray(16, 24))) throw new Error(`${path}: state canvas must match default`)
+      generated.portraits[state] = add(`${id}/${filename}.png`, bytes)
+    }
     if (item.animation != null) {
       const expected = `assets/${id}/animation/package.json`
       if (item.animation !== expected) throw new Error(`${id}.animation: expected ${expected}`)
@@ -96,6 +104,9 @@ export async function syncCharacterPresets({ sourceDirectory = join(projectRoot,
       if (!(await lstat(input)).isFile() || !((await realpath(input)).startsWith(`${realSource}${sep}`))) throw new Error(`${expected}: expected regular animation package`)
       const bytes = await readFile(input)
       const animation = readAnimationPackage(JSON.parse(bytes.toString('utf8')))
+      for (const state of Object.keys(resultPortraits)) {
+        if (animation.states[state] != null && generated.portraits[state] == null) throw new Error(`${id}: ${state} animation requires matching static portrait`)
+      }
       generated.animation = add(`${id}/animation/package.json`, bytes)
       for (const asset of Object.values(animation.assets)) {
         const path = `assets/${id}/animation/${asset.src}`

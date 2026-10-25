@@ -2,15 +2,17 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import AnimatedPortrait from '../src/components/AnimatedPortrait.vue'
 
-const mock = vi.hoisted(() => ({ load: vi.fn(), render: vi.fn(), dispose: vi.fn(), setState: vi.fn(), advance: vi.fn() }))
+const mock = vi.hoisted(() => ({ load: vi.fn(), render: vi.fn(), dispose: vi.fn(), setState: vi.fn(), advance: vi.fn(), finished: false }))
 vi.mock('@lie/character-animation', () => ({
   loadAnimationPackage: mock.load,
   createCanvasRenderer: () => ({ render: mock.render, dispose: mock.dispose }),
-  AnimationTimeline: class { setState = mock.setState; advance = mock.advance },
+  AnimationTimeline: class { setState = mock.setState; advance = mock.advance; get finished() { return mock.finished } },
+  resultAnimationStates: ['accusedCorrectly', 'accusedWrongly'],
 }))
 let media: { matches: boolean; addEventListener: ReturnType<typeof vi.fn>; removeEventListener: ReturnType<typeof vi.fn> }
 beforeEach(() => {
   vi.clearAllMocks()
+  mock.finished = false
   media = { matches: false, addEventListener: vi.fn(), removeEventListener: vi.fn() }
   vi.stubGlobal('matchMedia', vi.fn(() => media))
   vi.stubGlobal('requestAnimationFrame', vi.fn(() => 42))
@@ -137,4 +139,122 @@ describe('optional animated portrait', () => {
     finish({ data: {}, images: new Map() }); await flushPromises()
     expect(mock.render).not.toHaveBeenCalled()
   })
+})
+
+function resultPortrait() {
+  return mount(AnimatedPortrait, { props: { src: '/appearances/example/animation/package.json', state: 'accusedCorrectly', fit: 'contain' }, slots: { default: '<img src="/result.png" alt="结果终态">' } })
+}
+function resultPackage() { mock.load.mockResolvedValue({ data: { states: { accusedCorrectly: 'reaction' } }, images: new Map() }) }
+function changeMotion(matches: boolean) {
+  media.matches = matches
+  media.addEventListener.mock.calls.at(-1)![1]()
+}
+describe('one-play result portrait', () => {
+  it('shows the result terminal image while loading, and for an old package with no reaction', async () => {
+    mock.load.mockResolvedValue({ data: { states: { default: 'idle' } }, images: new Map() })
+    const wrapper = resultPortrait()
+    expect(wrapper.get('img').attributes('src')).toBe('/result.png')
+    await flushPromises()
+    expect(wrapper.find('img').exists()).toBe(true)
+    expect(mock.render).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
+  it('holds the last canvas and stops scheduling frames when its nonloop clip ends', async () => {
+    resultPackage()
+    const wrapper = resultPortrait(); await flushPromises()
+    expect(wrapper.classes()).toContain('animated-portrait--contain')
+    const count = vi.mocked(requestAnimationFrame).mock.calls.length
+    mock.finished = true
+    vi.mocked(requestAnimationFrame).mock.calls.at(-1)![0](100)
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(count)
+    expect(wrapper.find('img').exists()).toBe(false)
+    expect(wrapper.get('canvas').element.style.display).toBe('')
+    document.dispatchEvent(new Event('visibilitychange'))
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(count)
+    wrapper.unmount()
+  })
+  it.each([true, false])('does not replay after reduced motion, initially reduced=%s', async initial => {
+    resultPackage(); media.matches = initial
+    const wrapper = resultPortrait(); await flushPromises()
+    if (!initial) { changeMotion(true); await flushPromises() }
+    const calls = mock.load.mock.calls.length
+    expect(wrapper.find('img').exists()).toBe(true)
+    changeMotion(false); await flushPromises()
+    expect(mock.load).toHaveBeenCalledTimes(calls)
+    expect(wrapper.find('img').exists()).toBe(true)
+    wrapper.unmount()
+    const fresh = resultPortrait(); await flushPromises()
+    expect(mock.load).toHaveBeenCalledTimes(calls + 1)
+    expect(fresh.find('img').exists()).toBe(false)
+    fresh.unmount()
+  })
+  it('does not replay on label/state updates or source changes after playback starts', async () => {
+    resultPackage(); const wrapper = resultPortrait(); await flushPromises()
+    await wrapper.setProps({ label: '新姓名', state: 'accusedCorrectly' })
+    expect(mock.load).toHaveBeenCalledOnce()
+    await wrapper.setProps({ src: '/appearances/other/animation/package.json' }); await flushPromises()
+    expect(mock.load).toHaveBeenCalledOnce()
+    expect(wrapper.find('img').exists()).toBe(true)
+    wrapper.unmount()
+  })
+  it('cancels a pending result load when reduced motion is enabled and ignores its late success', async () => {
+    let finish!: (value: unknown) => void
+    mock.load.mockReturnValue(new Promise(resolve => { finish = resolve }))
+    const wrapper = resultPortrait(); await flushPromises()
+    const signal = mock.load.mock.calls[0][1]
+    changeMotion(true); await flushPromises()
+    expect(signal.aborted).toBe(true)
+    finish({ data: { states: { accusedCorrectly: 'reaction' } }, images: new Map() }); await flushPromises()
+    expect(mock.render).not.toHaveBeenCalled()
+    changeMotion(false); await flushPromises()
+    expect(mock.load).toHaveBeenCalledOnce()
+    expect(wrapper.find('img').exists()).toBe(true)
+    wrapper.unmount()
+  })
+  it('pauses while hidden and resumes without advancing by time spent in the background', async () => {
+    resultPackage(); const wrapper = resultPortrait(); await flushPromises()
+    let hidden = false
+    vi.spyOn(document, 'hidden', 'get').mockImplementation(() => hidden)
+    const frame = () => vi.mocked(requestAnimationFrame).mock.calls.at(-1)![0]
+    frame()(1000); frame()(1050)
+    expect(mock.advance.mock.calls.at(-1)![0]).toBe(.05)
+    hidden = true; document.dispatchEvent(new Event('visibilitychange'))
+    const count = vi.mocked(requestAnimationFrame).mock.calls.length
+    document.dispatchEvent(new Event('visibilitychange'))
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(count)
+    hidden = false; document.dispatchEvent(new Event('visibilitychange'))
+    frame()(50000)
+    expect(mock.advance.mock.calls.at(-1)![0]).toBe(0)
+    expect(mock.load).toHaveBeenCalledOnce()
+    wrapper.unmount(); vi.restoreAllMocks()
+  })
+})
+
+it('keeps a failed result on its terminal fallback and aborts an unmounted pending result', async () => {
+  mock.load.mockRejectedValueOnce(Error('missing result asset'))
+  const failed = resultPortrait(); await flushPromises()
+  expect(failed.get('img').attributes('src')).toBe('/result.png')
+  failed.unmount()
+  mock.render.mockClear()
+  let finish!: (value: unknown) => void
+  mock.load.mockReturnValueOnce(new Promise(resolve => { finish = resolve }))
+  const pending = resultPortrait(); await flushPromises()
+  const signal = mock.load.mock.calls.at(-1)![1]
+  pending.unmount()
+  expect(signal.aborted).toBe(true)
+  finish({ data: { states: { accusedCorrectly: 'reaction' } }, images: new Map() }); await flushPromises()
+  expect(mock.render).not.toHaveBeenCalled()
+})
+
+it('resumes frames when switching an ordinary completed nonloop clip to another base state', async () => {
+  const wrapper = show(); await flushPromises()
+  mock.finished = true
+  vi.mocked(requestAnimationFrame).mock.calls.at(-1)![0](100)
+  const count = vi.mocked(requestAnimationFrame).mock.calls.length
+  mock.setState.mockImplementationOnce(() => { mock.finished = false })
+  await wrapper.setProps({ state: 'listening' })
+  expect(mock.setState).toHaveBeenCalledWith('listening')
+  expect(requestAnimationFrame).toHaveBeenCalledTimes(count + 1)
+  expect(mock.load).toHaveBeenCalledOnce()
+  wrapper.unmount()
 })

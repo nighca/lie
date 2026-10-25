@@ -148,7 +148,7 @@ test('animated and static characterPresets coexist; shared parts are copied once
 })
 
 for (const [label, mutate] of [
-  ['unsupported version', data => { data.schemaVersion = 2 }],
+  ['unsupported version', data => { data.schemaVersion = 3 }],
   ['outside asset', data => { data.assets.body.src = '../outside.png' }],
   ['missing node', data => { data.nodes[0].parent = 'missing' }],
   ['wrong dimensions', data => { data.assets.body.width = 2 }],
@@ -163,3 +163,48 @@ for (const [label, mutate] of [
     assert.deepEqual(await readFile(join(f.outputDirectory, 'manifest.json')), before)
   })
 }
+
+const resultStates = { accusedCorrectly: 'accused-correctly', accusedWrongly: 'accused-wrongly' }
+async function resultImages(f) {
+  const item = entry()
+  for (const [state, filename] of Object.entries(resultStates)) {
+    item.portraits[state] = `assets/fixture-guide/${filename}.png`
+    await writeFile(join(f.sourceDirectory, item.portraits[state]), png)
+  }
+  return item
+}
+test('static and animated result portraits share canonical generation and check paths', async t => {
+  const f = await fixture(t), item = await resultImages(f)
+  await f.manifest([item]); await syncCharacterPresets(f)
+  const animation = await animationFixture(f)
+  animation.data.schemaVersion = 2
+  animation.data.clips.reaction = { duration: 1, loop: false, visibility: {}, tracks: [] }
+  for (const state of Object.keys(resultStates)) animation.data.states[state] = 'reaction'
+  await writeFile(animation.path, JSON.stringify(animation.data))
+  await f.manifest([{ ...item, animation: 'assets/fixture-guide/animation/package.json' }])
+  await syncCharacterPresets(f)
+  assert.deepEqual((await syncCharacterPresets({ ...f, check: true })).differences, [])
+  const [runtime] = JSON.parse(await readFile(join(f.outputDirectory, 'manifest.json'), 'utf8'))
+  for (const [state, filename] of Object.entries(resultStates)) {
+    assert.equal(runtime.portraits[state], `/appearances/fixture-guide/${filename}.png`)
+    assert.deepEqual(await readFile(join(f.outputDirectory, `fixture-guide/${filename}.png`)), png)
+  }
+  delete item.portraits.accusedWrongly
+  await f.manifest([{ ...item, animation: 'assets/fixture-guide/animation/package.json' }])
+  await assert.rejects(syncCharacterPresets(f), /accusedWrongly animation requires matching static portrait/)
+})
+test('result portraits reject missing bytes, null, wrong paths and mismatched canvas before writing', async t => {
+  const f = await fixture(t), item = entry()
+  item.portraits.accusedCorrectly = 'assets/fixture-guide/accused-correctly.png'
+  await f.manifest([item])
+  await assert.rejects(syncCharacterPresets(f), { code: 'ENOENT' })
+  for (const value of [null, 'assets/fixture-guide/default.png', '../other.png']) {
+    item.portraits.accusedCorrectly = value; await f.manifest([item])
+    await assert.rejects(syncCharacterPresets(f), /portraits.accusedCorrectly/)
+  }
+  const valid = await resultImages(f)
+  const different = Buffer.from(png); different.writeUInt32BE(2, 16)
+  await writeFile(join(f.sourceDirectory, valid.portraits.accusedWrongly), different)
+  await f.manifest([valid])
+  await assert.rejects(syncCharacterPresets(f), /state canvas must match default/)
+})

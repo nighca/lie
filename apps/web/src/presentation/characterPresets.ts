@@ -6,7 +6,7 @@ export interface CharacterPreset {
   accent: string
   animation: string | null
   voiceId: string | null
-  portraits: { listening: string | null; waiting: string | null; speaking: string | null }
+  portraits: { listening: string | null; waiting: string | null; speaking: string | null; accusedCorrectly?: string | null; accusedWrongly?: string | null }
 }
 
 export function readCharacterPresets(data: unknown): readonly CharacterPreset[] {
@@ -22,11 +22,11 @@ export function readCharacterPresets(data: unknown): readonly CharacterPreset[] 
       const immutable = typeof item.animation === 'string' ? /^\/static\/[a-f0-9]{64}(\/appearances\/[a-z0-9]+(?:-[a-z0-9]+)*\/animation\/package\.json)$/.exec(item.animation) : null
       if (item.animation !== local && immutable?.[1] !== local) throw new Error('Invalid characterPreset animation')
     }
-    const portraits: CharacterPreset['portraits'] = { listening: null, waiting: null, speaking: null }
+    const portraits: CharacterPreset['portraits'] = { listening: null, waiting: null, speaking: null, accusedCorrectly: null, accusedWrongly: null }
     if (item.portraits != null) {
       if (typeof item.portraits !== 'object' || Array.isArray(item.portraits)) throw new Error('Invalid characterPreset portraits')
       const values = item.portraits as Record<string, unknown>
-      for (const state of ['listening', 'waiting', 'speaking'] as const) {
+      for (const state of ['listening', 'waiting', 'speaking', 'accusedCorrectly', 'accusedWrongly'] as const) {
         const url = values[state]
         if (url != null && (typeof url !== 'string' || url.trim().length === 0)) throw new Error('Invalid characterPreset portrait')
         portraits[state] = typeof url === 'string' ? url.trim() : null
