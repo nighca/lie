@@ -1,0 +1,33 @@
+{
+  "base": "3aaa329540dc53bfbc3a95adf66191e9c1576904",
+  "cases": [
+    {
+      "id": "empty-medal-box",
+      "beforeCharacters": 154,
+      "afterCharacters": 112,
+      "changedProfiles": [],
+      "compatibilityCopyByteEqual": true,
+      "allOtherFieldsUnchanged": true
+    },
+    {
+      "id": "duck-finale",
+      "beforeCharacters": 189,
+      "afterCharacters": 132,
+      "changedProfiles": [
+        "he"
+      ],
+      "compatibilityCopyByteEqual": true,
+      "allOtherFieldsUnchanged": true
+    },
+    {
+      "id": "salt-sugar-mixup",
+      "beforeCharacters": 161,
+      "afterCharacters": 111,
+      "changedProfiles": [
+        "tao"
+      ],
+      "compatibilityCopyByteEqual": true,
+      "allOtherFieldsUnchanged": true
+    }
+  ]
+}
