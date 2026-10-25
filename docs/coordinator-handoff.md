@@ -77,6 +77,12 @@
 
 覆盖率与双语README badge已本地main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`，root完整13files与计数/原始报告/SFC上下文实际review，候选与source47deba1覆盖源码/collector/依赖完全相同，复用clean4f5ba19真实388测试采样及两轮独立review；独立3脚本语法/45文件分母/SVG及快照逐字/链接通过。应用lines92.08%（1501/1630）、Node脚本91.32%（263/288）另报；[范围/命令与Vue映射限制](coverage/README.md)公开。CI上传14天artifact，不自动改trackedbadge，远程CI未运行，未push/部署；不重做已完成调查/采样。
 
+## 专职稳定版本探索测试
+
+用户最新明确要求启动专职subagent在稳定环境发现功能/设计/视觉问题；root核全backlog后实际spawn `/root/stable_exploratory_qa`。固定已发布abb12db，独立managed WT/unique branch，根侧不新增server；5544明确转交该QA owner按需启动，保护用户8787/8788、动画5355、设计5507、Editor5402及现有draft/浏览器会话。先隔离或可原样恢复测试draft再写入，做不到则报未测，不删除旧数据。
+
+allowed仅docs/qa/stable-exploration-2026-10-25/**报告/原生截图/必要fixture；系统走三案demo/两种终局、Editor/分享、状态边界、桌面/391与回退/键盘，不调用真实mic/provider，不把fake当真人或新动画验收。报告复现步骤/实际与预期/影响/版本/视口/证据及已知重复，P1立即报，常规完整batch；整项含环境和用后tab/fixture/服务清理。root负责实际review与排修，不准测试者自行改生产/main/push。当前只已启动，在测结果以完整交付为准；app子agent句柄不随四小时换代自动继承，届时取可恢复handoff，保持所有权。
+
 ## 最新发布与结果页设计授权
 
 用户授权的普通push已成功：远端32d89bf快进到 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，ls-remote实返该SHA，本地同SHA且clean。发布完整预检在独立publication-readiness WT通过388项测试、全types、Web/gateway build、8/8动画89assets+manifest90文件；fresh coverage发现生成清单晚于discovery的入口缺陷，唯一fix源fad5d862已实际review后cherry为abb12db。root比对应用/collector/依赖/CI/正式资源身份相同，后续暂停/归档docs不影响验证。CI40147932644与既有自动部署已实际success，root另核headSha/所有步骤；附件summary由独立owner读ZIP确认388/92.08%，远端README/SVG正确。部署版本24e508bf，已确认发布/部署SHA均abb12db，未做真人语音验收；publication turn已释放，后续文档仅本地未再push。[发布记录](history/2026-10-25/coverage-publication.md)说明边界。
