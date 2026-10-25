@@ -1,0 +1,23 @@
+[
+  {
+    "original": "docs/project-plan.md",
+    "snapshot": "project-plan.md",
+    "sourceCommit": "30822d3779102de249c3daca0800cb4316bff53f",
+    "sha256": "9bbab5802f0816892e4494ebfa78835eddd7addd9b09cfe30f1a510662d2f952",
+    "bytes": 25342
+  },
+  {
+    "original": "docs/coordinator-handoff.md",
+    "snapshot": "coordinator-handoff.md",
+    "sourceCommit": "30822d3779102de249c3daca0800cb4316bff53f",
+    "sha256": "88df07387b17465c793f28ddd6a926ec32bbe76eb3192569827a0925d3b2020a",
+    "bytes": 49460
+  },
+  {
+    "original": "docs/development.md",
+    "snapshot": "development.md",
+    "sourceCommit": "30822d3779102de249c3daca0800cb4316bff53f",
+    "sha256": "8730a577e6b51a54ae493f32fa457d636786aba761fdb23cba99649647ed675b",
+    "bytes": 18611
+  }
+]

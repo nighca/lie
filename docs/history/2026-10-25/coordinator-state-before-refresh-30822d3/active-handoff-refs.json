@@ -1,0 +1,79 @@
+{
+  "baseMain": "30822d3779102de249c3daca0800cb4316bff53f",
+  "coordinator": "01a17012-fa00-7170-ac0a-21c1900d71cd",
+  "animation": {
+    "worktree": "/Users/nighca/.codex/worktrees/approved-animation-rigid-batch/lie",
+    "branch": "codex/approved-animation-rigid-batch",
+    "base": "8be6d0315a393281484d65fa903353d4ea666739",
+    "orderedOriginal20": [
+      "48ce8704c5d9317eeb2bbe55d59c8cfc934f52c1",
+      "a67e7dc4aed1a865baa130064a0d911064511c27",
+      "30367b90efa5c1faaa2227a9a435e94ef64bab60",
+      "40477c6bcb4f319cf18fe60ffc8306cdc60c8475",
+      "954db6638361298cf49b33cc8db38d7dea67e180",
+      "3bfbb42797ad538af255db0daf57eb513e30c7de",
+      "0e4e3415d224709631aeb87adaddf84f54ef4322",
+      "a6c1f7346b0b3398f2a1426c9a8fc240e40270de",
+      "24bab7d32bba278b56be1f5eb5e02165b07cd657",
+      "97146796b87b74e4efa25abd7a4083912a4af616",
+      "e296cf24fbd6860ba878cd3844cc0eafc90200fc",
+      "38311f6d96c899ed6c393c57820a959aa60dc7dd",
+      "e9399a89538937972206b992cc589130356da012",
+      "5c39e8e7b0fdb78055a0acb184ec86a40e81bfa0",
+      "248bd9f7e823d629ec36740819a181fe0c1ee39c",
+      "902ce4a2bca7a6d28a2076daf0685ef945217fcc",
+      "57fc63369d5166a8bcf8b983fb4f7527f79fec0d",
+      "3169eee0bb8bd2818f70a50934aa0a7312562f15",
+      "fc20c363e45fe4800a2d55db7237b3c9867602bf",
+      "22b2ee8b635b2e6944d3801721673bc5122dfa3b"
+    ],
+    "auditCorrection": "d1063a97cf8a185cb067a293fba1add003b27bb1",
+    "packageHead": "22b2ee8b635b2e6944d3801721673bc5122dfa3b",
+    "gate": "AR01真实Canvas归因在制；未给mask/package写turn或PRturn"
+  },
+  "performance": {
+    "worktree": "/Users/nighca/.codex/worktrees/production-performance/lie",
+    "branch": "codex/production-performance-build",
+    "base": "e6cc3aa9b0f69a7c92ea422dde8085a1329e46fd",
+    "ordered": [
+      "cba8cf073f2b088bc52d47d2211346983fcc8085",
+      "d6700a757111f1eb57c6037211925ca1ad276ac6",
+      "bd724954e4ff8e518730fe8e0a0f15c712286424"
+    ],
+    "status": "clean handoff待root实际review"
+  },
+  "pendingReviewReports": [
+    {
+      "branch": "codex/cache-delivery-review",
+      "ordered": [
+        "06026043ffc548b61efd7220ee622ace1d68b4d5"
+      ]
+    },
+    {
+      "branch": "codex/animation-rigid-code-review",
+      "ordered": [
+        "5db35590e159fd55061cfdf686d29ff6b050cc5e",
+        "10039f40f4b63e535665020e04da5c924dea9cc9"
+      ]
+    }
+  ],
+  "backgroundNames": {
+    "worktree": "/Users/nighca/.codex/worktrees/background-character-names/lie",
+    "branch": "codex/background-character-names",
+    "base": "e22250347ae737437b930934512295316bfe93fc",
+    "firstHelperCommit": "d21f5ea8c0207f0c550b97486e89718f539cb61f",
+    "status": "App/style/test dirty归原owner，未cleanhandoff"
+  },
+  "firstRender": {
+    "branch": "codex/animation-first-render",
+    "base": "9316701433ba21017286c7023af5470275c23a28",
+    "owner": "/root/character_preset_migration",
+    "status": "整项在制，未handoff"
+  },
+  "olderVoice": {
+    "branch": "codex/older-male-voice",
+    "base": "30822d3779102de249c3daca0800cb4316bff53f",
+    "owner": "/root/older_male_voice",
+    "status": "只读筛选1–2候选，未给manifest写turn"
+  }
+}

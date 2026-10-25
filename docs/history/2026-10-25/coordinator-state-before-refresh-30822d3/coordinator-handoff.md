@@ -1,0 +1,205 @@
+# 当前主协调交接状态
+
+2026-10-25，09:17 Asia/Shanghai审查候选基线 main `03fcb06b40ad9dc85ce92af5c1dd6723afc10d4a`。本页登记协调权、未完成交付和保留资源；[项目计划](project-plan.md)列授权/队列，[历史索引](history/2026-10-25/README.md)只供追溯。文档提交会推进main，后续操作须重读实际HEAD。
+
+## 协调权登记（2026-10-25 06:43 Asia/Shanghai接任）
+
+前代已在main `9400686`释放集成权，不再写main。本代经真实chat ID、phase/predecessor及clean main核实后认领唯一协调/集成权；本登记经独立文档review、候选cherry-pick及main快进落地。[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)记录自动化ID分配差异；[前代快照](history/2026-10-25/coordinator-handoff-01a16f33-082b-78b2-bb32-b6f49fb4850a.md)保留原历史。
+
+| 字段 | 值 |
+| --- | --- |
+| phase | active |
+| coordinator | `01a17012-fa00-7170-ac0a-21c1900d71cd`，LIE 主协调 · 10月25日清晨接任 |
+| integrator | `01a17012-fa00-7170-ac0a-21c1900d71cd`，唯一；子agent不得自行集成 |
+| predecessor | `01a16f33-082b-78b2-bb32-b6f49fb4850a`，LIE 主协调 · 10月25日夜间接任；已released，不再写main |
+| successor | 尚未创建，留待本代四小时轮换，仅创建一次全新chat |
+| 本代30分钟heartbeat | `lie`，ACTIVE，target本代chat；本次mode=create，created_at `1792881692759`，每30分钟 |
+| 本代4小时heartbeat | `lie-2`，ACTIVE，target本代chat；本次mode=create，created_at `1792881694334`，每4小时 |
+| 前代heartbeat | `lie-3` / `lie-4`实际仍PAUSED，保持；旧历史lie/lie-2不能与本次新建同名任务混为一谈 |
+| 项目 | `ec01ea33-d2f9-4986-98e0-ed1644ba1772`，本机`/Users/nighca/code/nighca/lie`，root已核 |
+
+本次恰好两次mode=create，工具自动分配历史用过的`lie`/`lie-2` ID；创建前本机对应文件不存在，不能称为mode=update复用或仍PAUSED。当前本代两任务实际ACTIVE/target为本chat；按target＋created_at识别，旧协调不得暂停本代新任务。view仅返回卡片，不构成对历史同名任务状态的重新核验。两任务无实质变化时安静，仅重要进展、完成、失败或所需用户行动通知。
+
+按[轮换流程](coordinator-rotation.md)持续每30分钟推进、每4小时交接；接任成功后旧协调可归档。状态不明先查既有接任者，不重复创建、不双integrator，轮换不等于push/部署授权。
+
+**持续工作模式**：有一定工作量的执行、配置、运维、排障、浏览器和长检查须整项委派；root做调度/接口/决策/review/串行集成/报告且负责结果。隔离worktree、有序cherry-pick、clean main快进、内部无PR，详[AGENTS](../AGENTS.md)。此前一条环境通知因用户停止要求被自动审批拒绝，未重试，不绕道补发；固定环境任务已完成，不由root继续扩展配置。
+
+**已同意的协调优化**：一次完整批量handoff；同一已验代码/资源的差异＋哈希及依赖/组合/相关环境不变可复用验证，变更/冲突只复验受影响项，文档批只核文档。候选仍从最新main构造，实质base变化影响验证才重建；隔离WT/真实review/唯一integrator不变。先用现有执行者，独立任务持续排队再评估专职测试验收，当前不新建chat。
+
+**用户已回来（2026-10-25澄清）**：临时夜间无法回应模式结束，此前有效已授权工作继续；原约00:20至08:30的小修授权作为历史保留，不能再假设用户睡眠或无法审批。重大产品/玩法/架构/供应商/范围决定及宣传后置门禁仍在，不把沉默当通过。
+
+## 仓库与接任第一步
+
+- 06:43接任核验main clean为`940068638b9b8a49f9f1db11451783dd935dcddb`，此基线新增成果均未push；本地origin/main跟踪及最后实际部署证据为`32d89bf91f441168148884593a0f49b816ad7162`。本轮未fetch，不能冒称当前远程/线上最新版本。
+- owning main在`/Users/nighca/code/nighca/lie`；前代两个文档工作树`/Users/nighca/.codex/worktrees/coordinator-successor-registration/lie`及`/Users/nighca/.codex/worktrees/integrate-successor-registration/lie`制作前均clean，保留供接任复用或managed归档；重读实际HEAD/status。旧`investigation-review-takeover/lie`已不在worktree清单，不作为现存工作树操作。
+- 先核用户最新消息、协调phase、两任务及实际仓库；紧凑wait三专项，取最新clean完整handoff，避免读全历史/重派。三角色正式QA已main，本轮历史归档已完成入库，入口见[归档](archive/README.md)；当前命名迁移完整交付、已review并本地集成main c0ddd791，邀请码核心设计现获用户逐项确认，默认14天、删除续局；到期处理按用户授权选择最简策略，修订review后排期实施、分享软折行已root review/独立验证并本地集成163bd0d；所有待办见[队列](project-plan.md#仍需执行的队列)。
+- 旧命名候选`/private/tmp/lie-integrate-text-architecture` / `codex/integrate-preset-voices`保留refs；其中调查/预览改动已有main成果，禁止整批重放。原命名源`cb86dd6e25e22444dc93b892c2d609c0a0d6ac08`已由最新79b5503→354f58b按新main重做，旧ref仅追溯，不再排重审或重放。
+
+本代`share_boundary_audit`已完成代码级只读审计，root已实际review源码/完整探针并以绝对路径Node24.22.1独立执行探针（0.104s、exit0、全部PASS）：sharing＋navigation现有19/19通过，生产codec探针16000 URL与131072 UTF8字节边界、Unicode往返及无效/截断输入拒绝符合契约，未见需修复源码缺陷。19/19现有测试由执行者Node24.17.0运行，低于项目24.22.1，不称要求版本19项测试复验；root的24.22.1复核仅为探针。证据`/private/tmp/lie-share-boundary-audit.mjs`；无代码/服务/浏览器变动。仅Node/jsdom＋源码证据，未验真实reload、地址栏粘贴、network fragment、宿主/play回退或跨浏览器16k；16000仍暂定，且仍加载manifest/catalog，不称完全离线。
+
+## 专项、在制与共享所有权
+
+| Owner / chat | 当前交付与边界 |
+| --- | --- |
+| 调查共享视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 已本地集成main `3a677358cc5fc69f215f13c44d51c5a9643eab2c`，source `7dfbba62697320ca9db97450bc7d973d3a5d5823`（base31db7c9，无额外依赖，五文件clean）。root全diff/context/七图review无blocker，candidate以f433834独立Node24.22.1验证Web186/186（17files，base新增7项，区别source179）、类型/构建8形象60资源通过，source patch完全一致，clean main快进。最终单人180/176及四人148.5窄回归通过；临时JSON删除，tab30/31/32关闭且viewport reset。5507/session81667原owner已仅对自有session Ctrl-C，exit130，lsof5507无输出确认停止；source7dfbba6 clean，fixture/tab/viewport已清，无其他进程动作。 |
+| 编辑器 `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 已本地集成main `f4338346e3ec20fd742f6a75ea4362f428c18b5b`（base3f52ee5，source60e0ed7/base4fde8d4）。root实际review全diff/context/五图，独立Node24.22.1下28测试/Web类型/构建及8形象60资源通过，候选source两文件树相等，clean main快进；未push/部署。[实施证据](game-editor-implementation.md)。final iframe1004/391冷/ready及反复切人通过，非顶层mobile；MutationObserver非Node来源未证实、console非全清。已清tab17/18、临时壳、停5402/5403，取消topslot并通知fan。 |
+| 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | silver/gray/plum完整QA已main a4e9f7d。mint/ochre已source clean交付，同base73ba138，仅各design候选目录；mint ordered `4c213f83`→`b5c08960`→`dbecc26c`，ochre `0e4558ee`→`17fefd8a`。父实视/独立checks已交，命名接口已释放，verify_editor_candidate在final-two-character-game/lie从main c0ddd791整项准备正式候选和5544 demo，后交动画专项实际game QA；root最后审查/集成，当前未正式激活；不重做制作/不改色。 |
+| 接入执行 `main_acceptance_environment` / root review | gray/plum正式source HEAD `822e9b5bb8064f10c00178f9c5643dff6f3418dd`，base5968661，12有序提交clean；root已review builder/verify/manifest/docs/图，无源码blocker，sourceowner372测试/类型/构建72资源/strict/hash通过。与18个silver提交合成的角色接入已随最终35链纳入main a4e9f7d，未push。 |
+| 开发WS调查 / review_blue_animation | source `929acef88f7f6b09221fa3993f986d2ffb85f54c`完整无凭据network矩阵已过，4自有端口关闭；诊断和[根因记录](dev-websocket-rejection.md)已纳入本地main `0a67498`。开发宿主丢非101仍是未修复限制，无生产/依赖补丁，不重做调查或冒称已修。 |
+| 结果投影 / root候选独立验证 | source `6ca375176fa922f9d5bef566277257c810598460`→候选`17fb2ee2f269c7c4d2de03cae2415f5af84a5542`，base345a313，原候选分支`codex/integrate-result-projection`。生产仅controller2行，7项专属测试纳入Web183测试、类型/构建/60资源检查全过，已纳入本地main `0a67498`。仅复制既有被指认者/正误，不改UI/玩法/动画契约；详[实施记录](result-projection-implementation.md)。 |
+| 命名迁移 / character_preset_migration＋root review | source `79b55031ec44b0d845330cdf91e81ce033f9e6f3`→`354f58b638f81d3856c38e86ca3dad0fad220e77`，base2982e6a，174文件＋test fixture修复，clean交付。source388全检/79资源字节/真实IAB通过；独立review发现含空格Node shebang问题已修且目标测试通过。root候选 `integrate-character-preset-dawn/lie`从666e9c9有序cherry至 `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`，独立1目标test/79原字节/93链接/生产身份最终核验通过，388/type/build/IAB复用；已本地main c0ddd791，保持appearanceId、/appearances/；用户已明确“允许现在受控切换”，实施owner已完成一次受控切换，服务SHA实返3c54a9e6、8787/8788仅回环、79资源+manifest字节一致、实际私密路径403；记录见[实施验收](character-preset-migration-implementation.md)，其他agent不得停止或重复启动8787/8788。[计划](character-preset-migration-plan.md)。 |
+
+约06:52三专项waiting flags均恢复为空，当时工具侧原因不可见；用户现明确此前数小时浏览器等待是权限申请待其审批，不是已证实工具故障，亦不能推断今后全部工具必然正常。fan已review/独立验证并本地集成，动画三角色已完成QA/本地集成，下一批mint/ochre已clean交付待review及正式game QA；Editor已root review/独立验证并本地集成至f433834。保持未测项目，不重发/绕过权限动作。
+
+08:00 main c0ddd791已含三角色正式QA、邀请码设计、历史归档及命名迁移；邀请码随后已获用户逐项确认（默认14天、删除续局，到期处理授权按简单度选），修订review后排期实施；旧a440/bfb/051c及重建候选仅历史refs，不重放、不再当当前阻塞。完整最终35链、source/candidate review与通过/未测范围见[历史](history/2026-10-25/three-character-dawn-candidate.md#最终正式qa与本地集成)。三角色正式接入记录已在main。
+
+专项接入记录位于main的`docs/animation/silver-bun-game-integration.md`与`gray-plum-game-integration.md`，详细来源按source HEAD取log，不重复长链。
+
+共享窗口：当前无global viewport owner；fan已关tab30/31/32并reset，Editor slot已取消。动画继续独立tab/iframe，不获全局viewport授权。5504已无监听（原因未知），旧5505不恢复，5507/session81667已由原owner停止并核无监听；5402/5403也已清，其他保留preview不变，不新增或停止其他服务。
+
+[结果页提案](result-character-states-proposal.md)已review，最小既有结果投影已完成本轮验证并随main快进纳入；正式结果UI、新素材和动画契约仍待方案，设计/素材授权不扩大。
+
+06:43本代已实际成功向三个专项通知新协调ID，工具返回对应threadId；后续向本代完整批量handoff，保持原所有权、dirty工作、服务和viewport，不重启在制任务、不重发或绕过权限动作。约06:52三专项waiting flags已为空，当时原因不可见；用户现澄清长等待为待其审批；最新实际交付见上表，不推断审批结论。前代root子agent全部completed，其句柄不随chat继承；本代只读审计交付与复核边界如上；保留refs/dirty工作与证据，不清目录。
+
+蓝衣/sunny/Logo/README/observer/投稿/home/CJK均已本地main，已完成链与检查见[当前成果](project-plan.md#已集成本地main的成果)和[归档快照](history/2026-10-25/README.md)，不要沿旧记录再次激活或宣称仍待合入。17条原“只记录”已经解除且完成本地集成，不是后续禁令。
+
+## 必须保留的服务与环境
+
+**当前服务规则与盘点以[development登记](development.md#服务登记与生命周期)为准**：稳定端口优先复用，用完停服；历史端口不再默认永久保留。根侧未新启服务、未发停止信号；18个历史服务＋5358/5359制作入口＋5544正式QA共21个已关闭。保留用户8787/8788进程树；5355仍由动画专项独占，用于用户查看角色，来源切换由该owner登记。5544原owner已在session19829 Ctrl-C退出130并核无监听，不重复操作。证据及未知源码/PTY字段见[清理记录](history/2026-10-25/development-service-cleanup.md)，不交叉操作。以下旧记录只供归属追溯，不覆盖本轮登记。
+
+- 前代约03:37分享边界只读QA自建IAB browser `3` / tab `1`清理未确认：仅打开`http://localhost:8787/play`见缺内容提示，后续CDP调用约272秒未返回被中断；close返回`Browser is not available: 3`，IAB inventory也不可用；04:07一次inventory仍返回`Browser is not available: iab`，之后未重试/reset。浏览器恢复后仅核查/关闭此自建tab，禁止触碰他人tab或reset。无源码、草稿、viewport、mic/provider或服务改动，不推断产品bug/服务离线或其他专项等待原因，无审批/拒绝证据；未得边界/Unicode/refresh/网络结果。临时证据`/private/tmp/lie-share-boundary-qa-20261025/handoff.md`。
+
+- 用户launchd `dev.nighca.lie.main-preview`独立于chat：Vite8787、同源薄Worker8788，owning main每1.5s检查，lock变动先npm ci，失败30s退避；换代/归档不得停止或重复启动。实际SHA查`http://127.0.0.1:8787/__lie/main-status`；ready只证明配置可用，不是真人收音。
+- plist：`~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist`；Node24.22.1：`~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64`；日志：`~/Library/Logs/LIE/main-preview.log`。凭据只在忽略目录，勿输出，维护另派owner。[运行说明](development.md)
+- 当前动画历史入口仅5355因用户现有tab18保留；5351/5352/5357及其他旧动画入口本轮已核销，5356/Logo5497未见监听，不按旧“保留”文字继续闲置运行。用户8787测试tab保留；全局viewport按短窗口协调，不动用户会话/mic。
+- Editor5402/5403与调查5507当前无监听；旧5398已由调查owner本轮停止。CJK5501/README5499/Logo5503/投稿5401/root5486/5488/5489等历史停止记录只供追溯，不套用到新进程；当前用途/监听以development登记为准，不擅停未知服务。
+- 前代sunny只读QA：8787真实游戏单canvas/单RAF与切人正常；3次合成iframe暂停恢复无重复RAF，真实visibility因IAB子agent能力限制仍未验，不当PASS。未用mic/provider，自有tab已清理；临时证据`/private/tmp/lie-sunny-visibility-qa-20261025/handoff.md`及同目录`observations.json`。
+
+覆盖率与双语README badge已本地main `e40a54f777dd7aacc7e9c361f327653b1cc5557f`，root完整13files与计数/原始报告/SFC上下文实际review，候选与source47deba1覆盖源码/collector/依赖完全相同，复用clean4f5ba19真实388测试采样及两轮独立review；独立3脚本语法/45文件分母/SVG及快照逐字/链接通过。应用lines92.08%（1501/1630）、Node脚本91.32%（263/288）另报；[范围/命令与Vue映射限制](coverage/README.md)公开。CI上传14天artifact，不自动改trackedbadge，远程CI未运行，未push/部署；不重做已完成调查/采样。
+
+## 09:17质量、设计与研究批次（当前状态覆盖下文旧交付采样）
+
+本轮候选从clean main03fcb06构造，root唯一integrator，有序cherry审查报告216c035→323b5e3→93760fc、QA0a25d05、预算调查384a10c、结果设计0c65ea1→e743283、宣传研究b8912bb。46文件仅docs/design，无生产修改；root实际完整文本/源码、代表截图及上下文review，候选与各source全部交付目录字节一致，六共享资源/旧归档原文hash、JSON和新增文档链接通过；独立Node24.22.1预算探针实返65536转发/65537断1009，三人长设定72905、40条历史76208。原首轮探针也已独立跑过，不把fake当provider成功。全应用测试不为此文档批重跑。
+
+- 审查现行入口：[首轮代码审查](reviews/architecture-code-review-2026-10-25/README.md)、[预算调查](reviews/context-budget-2026-10-25/README.md)、[探索QA](qa/stable-exploration-2026-10-25/README.md)。无P1；CR02/QA001启动等待与预设失败不恢复合并修复；CR01超限context先防御明确失败，内容/历史政策仍用户门禁。QA002用户本chat明确选编辑器姓名唯一；QA003试玩返回步骤为待评估P3建议。
+- `/root/character_preset_migration`：WT character-preset-migration-dawn/lie，branch codex/preset-loading-recovery，base03fcb06；只Web清单加载/helper、main/Application/Editor必要接线与tests/docs。立即mount、有界fetch＋body、真实retry、resolver读最新表，保持draft。整项含5544单服务/IAB/清理，当前实际进程信息等完整handoff，不预写成功。该owner独占Editor.vue及加载相关测试。
+- `/root/stable_exploratory_qa`：新codex/editor-unique-names，base03fcb06；draft.ts＋editor-draft tests＋独立editor-unique-names.test.ts＋实施记录，trim后重名拒绝试玩/分享但可保存临时草稿；不改core或旧分享decode，不动Editor.vue、不另开服务。旧QA0a25d05冻结，源QA5544 PID14248/PTY26270已结束并恢复存储、关闭tabs1/2。
+- `/root/architecture_code_review`：新codex/context-frame-guard，base03fcb06；voice协议/channel与tests、liveVoice/voice.ts/controller最小typed reason/特定notice及tests，必要gateway合同测试，docs。保持64KiB/全故事历史/不自动retry；没有新增gate、截断、去重或provider调用。gateway现无voice包依赖，允许各自持有安全边界常量＋跨层边界测试，禁止不正确相对跨包import或为统一扩改package/lock。旧审查分支三SHA及预算分支384a10c冻结。
+- 结果设计用户原话已root read_thread核：整体无大问题，错误页短文案布局不协调。专项已完成760居中单列v2，root看过desktop/mobile/fallback原图，正确页不变，旧图/测量保留；仍无应用实现、新两态资产或契约授权。两回合5507均结束、tabs33/34关闭。后续用户在原专项确认，避免重复问原稿。
+- 宣传研究[现行简报](promo-video-production-research.md)完成：真实录制＋本地剪辑为优先建议，独立Remotion为多版备选；旧原文hash不变。仅方法/依赖/许可研究，不安装、脚本分镜、录屏、生成/渲染或制作。实际制作门禁保留。
+
+三执行agent句柄换代不自动继承；届时须取可恢复完整handoff，保护dirty/refs及服务，不重复派同一任务。当前运行时代码仍与已发布abb12db一致；本轮文档本地集成不新增push/部署授权。
+
+## 结果页最新实施批准与并行所有权
+
+root已实际read_thread核专项用户随后原话“没问题，按现在的版本实现吧”，明确批准当前correct左右＋wrong v2居中方案A的实施；不扩大到B/C新表情/动画资源或契约。已向原调查专项chat01a16d5c-de69-7452-8d6a-280d15a87e9e正式分派：从reviewed main30385c296eafe68b0403706f6ac63a37ce96487b新独立codex/result-scene-implementation WT，独占App.vue/style.css/新增独立result-scene tests/docs实施证据，整项含5507 demo/IAB与用后清理。结果只取actual result.characterId，wrong不揭真相，保留restart/returnLabel、长文、391/缺图/键盘。具体新WT与SHAs待clean完整handoff；root不代做其配置验收尾巴，无main/push/PR权限。
+
+清单修复owner已明确不改App.vue/style.css/原结果导航测试，App现数组prop自然响应，无需依赖commit；Application/main/Editor/loader及新增preset-loading-navigation.test.ts仍归其独占。其当前5544已实际启动：WT character-preset-migration-dawn/lie@03fcb06＋在制修复，PID89520、原PTY3817、消费者独立Chrome tab1910329540（IAB明确Browser unavailable后有界fallback）、transport9/no gateway；结束必须原PTY停并核无监听/关tab/恢复draft。root仅记录当前在用，未称已验收通过。其他QA002独立draft/tests与CR01voice/controller边界保持。
+
+## 最新发布与结果页设计授权
+
+用户授权的普通push已成功：远端32d89bf快进到 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，ls-remote实返该SHA，本地同SHA且clean。发布完整预检在独立publication-readiness WT通过388项测试、全types、Web/gateway build、8/8动画89assets+manifest90文件；fresh coverage发现生成清单晚于discovery的入口缺陷，唯一fix源fad5d862已实际review后cherry为abb12db。root比对应用/collector/依赖/CI/正式资源身份相同，后续暂停/归档docs不影响验证。CI40147932644与既有自动部署已实际success，root另核headSha/所有步骤；附件summary由独立owner读ZIP确认388/92.08%，远端README/SVG正确。部署版本24e508bf，已确认发布/部署SHA均abb12db，未做真人语音验收；publication turn已释放，后续文档仅本地未再push。[发布记录](history/2026-10-25/coverage-publication.md)说明边界。
+
+结果页设计此前send_message自动审批拒绝（认为缺少明确用户授权），未绕过。用户随后明确选中该拒绝说明并回复“重试一下，我来了”，据此重试向调查视觉专项01a16d5c-de69-7452-8d6a-280d15a87e9e分派成功，紧凑状态实际已开始。仅设计文档/现有素材HTML原型，新paths design/result-scene-proposal/**、docs/result-scene-visual-proposal.md，基abb12db；桌面/391及必要5507 QA/用后停由专项整项承担。root做实际review，应用实现/新素材/契约仍待用户确认，不能据本设计任务开工；auth暂停、新动画修订门禁不变。
+
+## 最新用户决定：暂停鉴权、授权推送
+
+2026-10-25用户明确邀请码/鉴权额外复杂度高，先暂缓实现；chat留待以后讨论，root先推进其他工作。已interrupt原实施agent并只授权其自有5544/tab安全收尾与完整暂停handoff，不继续开发/修复/测试/配置；全部WT/commits/dirty与已有必要证据保存，所有auth实现未main。新chat已通知暂停、不归档，以下早先“继续原整项/待接线”记录被本决定覆盖，不能凭其恢复。需用户明确重启才再实施，费用/provider/secret门禁不变。 原owner完整暂停回执已审查并保存至[暂停归档](archive/2026-10-25/invite-access-paused/README.md)：父3ed266a、Gatewayb16dc18、Web00bf976，源码无dirty、源收件箱4文件untracked保留；最后5544原PTY52545已退出130且lsof无监听，自建tab已关，未触其他服务。auth源码不合，最后proxy未父review、最终全组合未测，保留三WT/refs及ignored材料，不能按已有测试自动恢复。
+
+用户另明确“推送吧，我看看效果”，root持唯一publication turn按AGENTS发布流程推送已main成果（含badge），现有CI包含自动部署步骤；不纳入auth或待验动画修订，不改远程历史、不强推。fetch/普通push真实结果另记，不能把本授权当已发布。
+
+## 邀请码独立专项chat
+
+用户明确要求独立chat跟进，已实际创建 `01a17076-a9f2-7f11-aaf3-7f7c801fee37`，标题“LIE 邀请码与访问鉴权”，local lie项目；不是主协调换代。两问题（8788作用、密钥是否属于gateway环境）与已批14天/公开浏览/play要码/简化到期规则均已交新chat先回答。可恢复执行进度、所有权、Node测试主链、failclosed影响与服务边界已完整转交，见[专项交接](history/2026-10-25/invite-specialist-chat-handoff.md)。
+
+原root/invite_access_design及Gateway/Web子agent继续当前整项至review/组合QA/cleanup/clean批交root；新chat在root明确释放前只读和用户讨论，不改原在制WT或重派。root仍负责实际完整review/串行集成，后续实施/返修/验收协调由新chat承接。主协调两heartbeat/其他专项所有权不变。实际实现在制HEAD会前进，不能把交接采样当冻结最终交付。
+
+## 最新批次交付（8人基线与独立修订）
+
+8/8角色基线已实际main `dd1663853f7e153efb2c977dd74b89b415f0e20c`，clean未push/部署；8787的main-status实际同SHA（默认curl受本机代理影响，no-proxy＋获准本机网络只读查询成功；不据沙箱连接失败猜服务故障）。root候选从772dfa5依序接8个source提交，源72c4a93全部应用/依赖/正式资源身份相同，复用388/type/build/IAB；实际review完整构建器/验证器/来源/正式QA和6图，独立mint1280/ochre960采样、每人100中断、10新正式文件原字节及40链接通过。Ochre验证器首次仅受沙箱写ignored poses.json拒绝，获准同一隔离输出后exit0，不当应用失败；未增新服务。详细有序源链按[接入记录](animation/mint-ochre-game-integration.md)及source72c4a93 log追溯。
+
+已实际读取动画chat用户本轮原文：原8人继续集成；新问题另批处理，silver/salt/plum/mint/ochre waiting、mint default/listening幅度、ochre speaking头大小。动画专项最多2lane、只改各candidate，自验后5355供用户验收。**该新批必须用户确认后才单独PR**，是用户明确的局部例外；不现在开PR，不提前合main/游戏。已通知专项实际基线dd16638，保留在用final-two-character-game WT/5355，不把新问题当原8人阻塞。旧表中“尚未正式激活”已被本节取代。
+
+动画新批现明确**待用户验收**：A WT `animation-breathing-revision/lie`，branch `codex/animation-breathing-revision`，base772dfa5，有序5381633→85329b1→HEAD `c4881b3e21cb7967295545b259329c594bb9f85c`；B WT `animation-mint-ochre-revision/lie`，branch同WT名，basedd16638，有序6a5cf31→73a8420→bb5779e→HEAD `78031e87340fdc0a6d2ada6c8330c8fb17ddc038`。父证据WT `two-character-formal-qa/lie` branch `codex/animation-revision-parent-qa`，basedd16638→HEAD `1bf177ff2f1733fd240bc569fc3d8a785ffe4c1c`，包含14原生图/报告/preview-url.txt。root已实际核三WT/HEAD均clean，仅记录owner交付，不当root视觉通过；**这7个源提交及父证据提交都不得自动集成**，待用户确认后单独PR。保留三WT及source final-two72c4a93和5355：当前原PTY8486，默认页仍旧8人，tab47 query覆盖5修订，48/49由owner关闭。该回执取代旧5355 session82389采样，不按旧session发信号，不动预览或任意资源。
+
+**动画后续反馈覆盖旧“待验”状态**：用户否定增强候选强scaleY导致头部拉伸、与各角色其他动作风格不协调，要求按具体角色设计waiting；专项已撤回A c4881b3/B78031e8作为可验收候选，父证据1bf177f亦仅历史。仍2lane在各自candidate重做，原8人main不受影响；root已通知当前真实协调ID未换，旧7source/父证据不自动集成，新完成仍须用户确认后单独PR。
+
+邀请码核心修订已main772dfa5，实施owner invite_access_design含共享token/离线CLI、隔离Gateway/Web及5544本地QA/服务收尾。root保留package/lock所有权，coverage源47deba1已两轮独立review及root实际全diff审查并本地main e40a54f；邀请码新增Node测试test:access由root在鉴权最终候选集成时串行接npm test和CI，CI已用coverage不能仅改test主链而漏测。源码变动以各owner最终clean handoff为准，不重复派工或擅写其WT。
+
+## 不可丢失的质量与批准边界
+
+真人mic/外放/长会话/三案盲测、新增五声音色耳验、分享长URL跨浏览器、GitHub外部投稿端到端及费用硬限额未闭环；sunny真实隐藏恢复未验/1280×720舞台裁切保留。fake、文本detect、短WAV、ready或专项QA不等于用户/真人验收。
+
+仓仍PRIVATE，未授权改可见性/代建投稿fork或PR；带有效期邀请码访问设计已由用户放行，仅限制玩游戏访问、不限频率，核心设计已获用户本轮逐项确认，默认14天、删除续局，到期处理可按简单度选，修订review后排期实施；费用预算/回收策略仍暂缓，不新增频率/并发限制或授权secret/资源/DB/DO/账号/部署，供应商断连不等硬限额；宣传仅方法研究，实际脚本/分镜/录屏/生成媒体/制作须用户明确放行。重大门禁详[计划](project-plan.md#保留的门禁与外部依赖)，夜间小修权限不覆盖它们。
+
+Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416eafbfda102a90ed72aa4292，Node24.22.1生产encode）：normal539真实UI Unicode/换行/保留字符逐字相等及actual reload通过；恰16000 ASCII完整URL新blank tab fresh goto/reload intro通过、href16000；16001特定长度错误、损坏gzip错误及reload通过。root已实际review完整报告/四图，无codec blocker，局限保留。network初始fragment捕获因PerformanceAPI missing TypeError一次停止，未重试CDP；跨浏览器/地址栏粘贴/外部传输/离线未验，16k仍暂定、128KiB仍仅Node。证据/private/tmp/lie-share-browser-results.md及同名前缀fixtures/四张jpg；自建tab19/20/21已关，无viewport/draft/voice/mic/provider/服务动作，旧browser3/tab1未动。三角色完整QA已main，详细通过范围/未测边界见最终历史。新组合完整有序链见[历史](history/2026-10-25/three-character-dawn-candidate.md)。
+
+邀请码[设计](invite-access-design.md)已root完整114行及实际契约/官方文档review，本地集成3a1fa417，原版仅文档，用户现已确认核心范围并授权简化到期处理：默认14天、公开浏览创作/所有play需码、删除续局；开局及新WS校验exp，既有WS沿180秒，不新增到期强断计时。invite_access_design修订现行文档并归档旧版，root审查后排期实施；不是生产secret配置/部署授权，固定device多人隔离风险不由邀请码自动解决。分享长正文软折行已本地集成163bd0d，原横溢是独立排版问题，不混codec失败。
+
+历史三角色集成main为a4e9f7d（当前核验main c0ddd791），候选refs仅追溯，不重放。QA源bfb临时壳已由owner删除且status clean、tabs28—33关闭/overrides清；环境回证：PTY77092已失效，Ctrl-C返回Unknown process id；PID24833不存在且5504无监听，原因未知，未发生本次成功Ctrl-C停服。8787 main-status实返a4e9f7d＝当时main，三包HTTP200且同generated、79资源＋manifest共80文件，其他服务未触。分享软折行source c13e6194751334085094a10b773018a998341b01/base73 clean已交，仅.background/.public-background overflow-wrap:anywhere＋history；owner Node24.22.1 Web186/类型/构建60及1280/391 iframe两类文本通过，root已实际full两文件diff/context＋两截图review无blocker，独立候选163bd0deee6899df4a3d77cda562e511edb1a9cf已Node24.22.1 Web186/类型/构建79资源通过并本地main快进，未push/部署；iframe/触屏/跨浏览器及单独长reveal未验边界见专项记录。
+
+## 姓名唯一修复review完成
+
+source dfd89c424c6a48ef57a31c0f7584a335c244c113，WT editor-unique-names/lie，base03fcb06，clean四文件，生产仅draft.ts六行。root实际全diff/context/测试review，从main b065af0新候选有序cherry为10c57c2；apps/packages/scripts/package/lock/CI与source身份全同，仅已审设计/报告文档多出，复用源Node24.22.1六文件59测试/Web types/build89资源，无重复安装/全套测试。trim后同名的每个人物各有错误定位，临时草稿可保存，试玩/分享阻止，改名恢复；旧同名分享可读。独立浏览器组合未验、不冒称PASS，加载恢复未完成，后续组合需复核。未push/部署，source WT/refs暂保留。
+
+## 最新用户优化：首页静态案件目录
+
+用户明确希望静态案件列表构建期打包、首页无异步列表请求。root检查现main：main.ts loadCatalog fetch /games/index.json、Application加载状态/重试；三案摘要仅小型静态JSON，适合同步打包。已将整项准备/实施/tests/build/browser/cleanup委派stable_exploratory_qa，但先只读，等待character_preset_migration清单恢复完整clean交付＋root review集成后再给正式dependencySHA/main.ts＋Application.vue写turn；loading owner已冻结生产不扩展，最终handoff将到。用户随后明确完整官方案也可打包以省去案件开始页异步等待；范围现含目录与三份canonical content/games完整JSON（约32KB原始大小），不打包图片/语音，不复制两份手工目录，不改core/voice/provider/结果App/style。5544必须等loading原PTY3817停止及监听核销后再用，不能开新端口。保留controller现异步reader契约，不为await微任务重构core；重点验没有官方案JSON网络等待。新任务预定branch codex/bundled-case-catalog，实际WT/base/SHAs待分配；当前并未实现或验收。
+
+CR01防御源bb947d0已root实际12文件全diff/周边channel关闭、liveVoice/controller调用链与全部新增tests审查，无blocker；候选从e5c59e0有序cherry。voice/gateway生产与tests及相关Web/controller/liveVoice/依赖同source，额外draft唯一校验与报告不参与这些路径，复用源Voice40＋Web43＋Gateway12/三workspace types/Web+gateway build89资源验证，非真人provider认证。未提高64KiB、不删上下文历史/新增作者限制；该修复仅明确原本必断失败，内容继续游玩政策仍待决定。完整记录docs/context-frame-guard.md。
+
+## 清单恢复已集成，完整官方案打包正式开工
+
+source860ead838d00082bee3349b445676a5c6bb92f2e（base03fcb06、clean12files）已root全diff/loader/三新增tests/周边生命周期/三原生截图与完整证据review，无blocker；从main d26cc4a有序cherry为候选1f168e3486591b8c64f971dc6a3da87bdb41d2a3。执行者在该真实候选离线安装217锁依赖（不链接source workspace），Node24.22.1独立组合12suite151测试/Web类型/构建8预设89资源通过，tracked clean；root再次核main d26cc4a clean且未移动后已ff到1f168e3，未push/部署。5544上一回合PID89520消失、原3817exit130/无监听、自建tab/网络/draft已恢复，服务回合结束。
+
+已给stable_exploratory_qa正式base1f168e3、新codex/bundled-case-catalog隔离WT及main.ts/Application.vue/目录测试独占turn，允许新preset-loading-main/navigation测试仅按catalog同步接口适配，保留恢复断言。范围为单一目录源content/case-catalog.json＋三份canonical content/games完整数据静态import，未知ID失败、不改变controller异步reader契约/corevalidate；Editor/分享snapshot优先，图片/voice保持。完整tests/type/build/bundle及屏蔽/games/*后三案intro/start的有界浏览器验收/cleanup由其整项负责，5544仅其单服务；明确IAB unavailable一次才允许独立Chrome fallback，不占他人tab/全局viewport/mic。App/style结果专项独占，原editor-navigation错指标签1行变更合成时保留。当前未交付实现/验收，不把正式开工当完成。
+
+## 静态目录与完整官方案完成review（当前批次）
+
+source d494e433031a3632d7510cfb50a2abc0c92390e5，WT bundled-case-catalog/lie，base1f168e3，clean21文件。root实际完整diff/周边代码/新增与适配tests/完整证据和直接刷新、自编分享、存储恢复三原图review，从clean main8be6d03有序cherry为792e182。候选生产/测试/依赖/内容/CI全部与source身份相同，仅状态docs多出，复用最终eager代码46 tests/Web types/build89、实际Chrome阻断/games/*三案intro/start及direct/reload、unknown、同ID自编/分享验证；root独立目录原字节/5截图hash/文档链接/真实JS两个artifact的hash/raw/同Node24 gzip验证通过。JS gzip66049→78873（+12824）；公开图片/manifest/voice仍运行时加载，不称整站离线。完整证据docs/bundled-case-catalog.md及同名-evidence目录。5544 PID49549/PTY73441已exit130且无监听/PID，原draft逐字恢复/备份删除/tab1910329544关闭/网络覆盖清零；无保留服务。代码结果UI尚独立在制，editor-navigation旧标签1行将与结果源合成后精准复验。该批local main快进不授予push/部署。
+
+## 动画专项最新用户验收通过（覆盖旧待验门禁）
+
+用户在01a16d44-aeea-7552-b184-5118072e75f3明确“我验收过了，没问题了”，root已读最新userMessage核实。新刚性修订A final76dfc7a15df1350b6778d336049c8a28427302c8、B final26bed1b30b495d9cbf23f6b2e412fc819bfbfb8c、父证据b2abf6f08e1bb1b4d693ec48e405bdb964763983 clean交待验现已通过视觉；旧stretch稿仍是被否定历史，不复活。已向原专项明确整项负责最终批准delta聚合、正式资源生成、checks/game QA/cleanup与完整handoff；不写App/style（结果owner）、Application/main/catalog（静态案owner）、voice/controller（已main防御），不动8787/8788。root仍唯一协调/最终integrator。
+
+用户原先单独PR例外有效，但remote已知abb12db、local多未发布修复与docs，不能直接把localmain后全部提交推成所谓单独动画PR。已要求专项先完成clean候选交root实际review，未给当前push/createPR turn；之后root按remote真实fetch状态指定只含动画任务的PR基线/分支，必要impact复验，专项才负责普通branchpush/建PR及attach_artifact。不自动推main/部署，不再问已通过的视觉门禁。当前5355 PID70007/原8486仍用户tab50消费，默认旧8、query新刚性5，51/52已关，保留source/QA/服务WT及refs；完整链/36原生图/head采样在父证据目录待后续正式handoff入库，不能清理。
+
+## 最新用户P1：专职线上性能/内容hash缓存
+
+用户明确很重要：优化https://lie-game.nighca.workers.dev/，静态数据构建hash固定URL后正式长期缓存、图片无损压缩，要求专人。已实际spawn `/root/production_performance`（独立任务，不新sidebar chat），从reviewed d2a4eff新managed WT/branch codex/production-performance；整项职责含实际线上冷/暖请求/headers/可用trace、源/产物、最小实施/测试/build/browser/cleanup，但第一阶段独占仅docs/performance/2026-10-25/**审计证据，先交root简要基线/优先问题/生产文件接口申请，再root给实施turn，不是只交研究就结束。已读/告用户使用web-perf；工具实际存在trace/analyze/network能力，不编CWV、无trace就准确限制。Cloudflare无wrangler文件，cf CLI＋cloudflare.config.ts，文档核官方static-assets/cache语义。
+
+必须区分线上已发布abb12db与本地已main的非阻塞预设/目录三案eager打包；不把local成果充线上指标。当前Vite JS/CSS hash已有与否实测，重点public品牌/PNG/animation package相对parts/manifest缓存链；只内容寻址URL immutable，HTML/可变清单需更新/重验证，API/WS不得长缓存，实际内容变更必须换URL且验证跨部署一致性。无serviceworker/新CDN存储/provider架构，无secret/控制台配置/部署/付费请求。图片仅生成产物可评估无损，不改canonical，核RGBA/alpha/ICC/gAMA/sRGB解释与渲染，原bytes严格校验语义若需变先root协调，不冒用旧89字节PASS。
+
+当前所有权：App/style/结果tests仍原视觉专项；新批准动画在approved-animation-rigid-batch整项formalQA，design/candidate/正式animation资源及该批docs由它持有；perf第一阶段不改generator/scripts/manifest/这些文件，需按报告协调依赖正式动画SHA再动hash输出。5355由原动画owner受控从已验作者稿转formal game候选（旧70007/8486将停，新PID/PTY待真实handoff，不预写已切换），5507结果回合已结束待回执，5544无监听但未授perf自行起服务；线上审计本身无需server。独立IAB优先，明确unavailable一次才允许独立Chrome自建tab有界fallback，禁止动用户tab/globalviewport/mic及8787/8788。完整报告/设计/必要证据repo入库，不存secret/cookie或私数据。root仍唯一integrator，未授权此agent main/push/PR/deploy。
+
+## 结果页A实施组合审查完成
+
+source d97a13b11ed5e38f9bdc3acfe39c9c83aa91d43a（WT result-scene-implementation/lie，base30385c2，clean18files）已root实际完整diff/周边源码/所有新增tests/完整证据和wrong桌面、长文到底、真实图失败3图审查，无blocker。从main c540b70有序cherry为7b4d96a759fb61455c8a9fa03897155e0f59b621，editor-navigation同文件不同hunk自动合并，root核同步catalog prop与wrong『本局结束』同时保留。独立architecture_code_review在固定候选Node24.22.1验证完整Web220 tests/24files、Web types/build8presets89assets strict，前后HEAD固定/tracked clean，不起服务；root独立核App/style/lock/两形象hash同源QA，原IAB视觉/键盘/回退可复用，不把它说成重做真实组合IAB/真人语音。数据只actual result.characterId，wrong仍终局无真相，A静态default无动画契约新状态；B/C素材未授权。完整记录docs/result-scene-implementation.md与design/result-scene-implementation/**七原生图及测量，设计旧0c65/e743不重放。
+
+5507 Vite PID44546/原PTY30600消费者tab35/36均关闭，网络/媒体override清空，原PTY退出1且lsof无监听（不记退出0）；临时shell已删除，无草稿改动或保留服务，不重复停止旧PID。当前下一可执行优先为production_performance真实基线报告及最小scope确认、已验收动画正式QA完整handoff；鉴权仍暂停，视频只研究，所有push/部署门禁保留。
+
+## 性能专项首轮结果与正式实施turn
+
+production_performance已IAB自建tab1实测线上：冷禁cache首页15请求、8 PNG合计7468258字节、最大990099；JS index-B01MnLa4.js/CSS index-r2kXdcrw.css已hash，但响应仍public,max-age=0,must-revalidate。暖reload JS/CSS/3avatar明确304约205–234ms；其他图有效200但实际仅277–407bytes，不能误报全图重下。线上manifest→games/index链本地已eager修复，不重做。rawtrace尚待正式报告，不编CWV。根已核官方Cloudflare_headers默认/覆盖与Worker-first差别，未把官方默认当实测替代。
+
+已批准其修正最小方案整项实施，从reviewed main e6cc3aa新实施branch或clean自有WT切branch（原d2审计commit先冻结）：独占Web vite.config、新build/static-assets.mjs/独立tests、characterPresets/characterPresetLoader及必要URL/virtual module类型/vitest接线、public/_headers或生成等效、gateway缓存合同test/fixture、docs/performance。旧fixed manifest/原89资源必须原bytes保留且原strict仍通过；新内容寻址manifest/PNG/整包animation（package+parts全digest、内部原bytes/相对src不变）放独立/static namespace，不能宽松接收任意外部URL。Vite transform替换在正常JS/CSS hash计算前完成，禁止事后patch旧hashchunk；资源变更URL与消费链hash都变，稳定bytes则稳定URL。DEV仍旧路径；不改App/style/Application/main/catalog/动画素材/manifest/generator/rootpackage/lock。
+
+验收必须实际构建改1PNG/part验证整个引用链换hash、oldJS+fixedmanifest兼容、所有引用存在、相对parts正确、缺失hash不能HTML200+immutable、HTML/fixedmanifest/API/WS/404不长缓存；cf实际产物/本地响应合同，不只_headers文本。若实际证明纯资产规则不满足404/SPA，额外预授gateway cloudflare.config.ts/src/index.ts及tests最小新静态namespace guard/404/cache策略，不能全站Worker-first/新增缓存框架/存储或动API/WS/secret。图片无损另量实际收益/可用工具，保留RGBA/alpha/ICC/gAMA/sRGB；不得为压缩偷偷加重依赖/降低89字节源校验。
+
+动画正式冻结源22b2ee8b635b2e6944d3801721673bc5122dfa3b仅5正式packageJSON变化、PNG/generator不变；先不阻塞独立hash管线实现，后root实际review动画并与perf按最终输入摘要组合复验。性能5544稳定回合已给但启动前需核监听/真实登记，不按授予推断在监听。线上只读/no语音，不main/push/deploy/PR；完整报告/clean handoff交root。
+
+## 最新用户小需求：背景人物姓名高亮
+
+用户截图指开场故事背景，希望人物姓名渲染自动识别高亮，主题色可结合人物。root已回应开场介绍＋调查中背景统一，官方/分享/Editor试玩同引擎覆盖，无作者标记。已向原调查专项01a16d5c-de69-7452-8d6a-280d15a87e9e整项分派：reviewed main e22250347ae737437b930934512295316bfe93fc起新codex/background-character-names独立WT，旧结果d97a冻结已main不重放。独占App.vue/style.css仅背景、新presentation分段helper或局部Vue组件、独立tests、docs/background-character-names.md与精简原生证据；不动Application/main/loader/preset parser/Vite/gateway/动画等性能或动画owner文件。
+
+以view.characters真实姓名字面匹配、重叠最长优先、正则特殊字符字面处理；不用模型/NLP/别名推断，不加行为。浅主题底/下划线＋字重、深蓝前景保持可读，无preset或异步主题未到中性回退、恢复后响应；旧同名不同主题歧义也中性。仅两处public background，不扩询问转写/结果真相/Editor textarea。Vue安全文本节点，禁止v-html，拼回文本/空白/换行/复制完全一致。已有开背景停语音/暂停计时规则不变。
+
+测试实际App两入口、同段多人重复/长短前缀/特殊与HTML字面/无preset及迟到/同名主题歧义/原文一致；Web相关tests/types/build89、实际1280/391排版无横溢与回退由原owner整项完成。5507仅其稳定单服务回合，启动前核监听/登记source/PID/PTY/consumer/stop，demo transport9、不gateway/mic/provider，保护draft/他人tab/全局viewport/8787/88/5355/5544；完成原PTY停/核端口/清tab/fixture。完整clean batch交root实际review后串行集成，不main/push/部署/PR。
+
+## 最新首渲染要求与用户执行模式重申
+
+用户再次明确：大部分实施/调研/配置/验收交其他chat/agent，root只分配和检查合入，只有很确定很简单的小事可亲自处理。此为既有AGENTS协调模式强化，根不保留执行尾巴。新截图要求调查已知有动画的角色不先静态再动画，直接动画加载；srcnull才始终静态。已整项交character_preset_migration，从reviewed9316701新codex/animation-first-render隔离WT，独占AnimatedPortrait.vue及UI/独立Web动画首帧tests/docs，背景App/style归视觉owner、性能loader/parser/build归性能owner、不抢写。pending不mount/static img请求、舞台稳定、就绪canvas；failure/reduce/能力不足仍旧static/首字fallback，切src迟到/取消/单RAF/卸载/hidden保持，shared Editor大舞台一致、结果A不动。不加固定delay/spinner或全人预加载。完整tests/types/build89、真实有界慢请求/首帧/切人/失败/391验证与服务清理由该owner整项执行，root实际review/串行集成，不main/push/deploy/PR。
+
+性能回合5544 Miniflare PID43122/原53366已exit130、核无监听/PID，IAB3/tab1已关且cacheoverride恢复；现在5544稳定回合明确给首帧owner，需启动前复核并登记真实WT/SHA/PID/PTY/consumer/stop，保护draft/其他服务/mic。性能代码d6700a7 clean，证据最后commit待完整handoff；同版warm13immutable请求0传输、仅HTML208bytes已owner实测，跨deploy旧hash留存未完成不称发布ready。root另派architecture_code_review只读核窄Worker-first计费/纯asset规则限制与最小既有CI artifact留存建议，不改性能source/发布链。
+
+动画独立审查AR01已证实crop证据缺口，原owner追加d1063a9只改3checker/证据，灰/紫正确检查PASS，银发phase20/28三独点（重复采样6次）FAIL；不改视觉稿/阈值、用户旧视觉批准保留，PRturn未给。已整项交动画owner真实Canvas精确t2.5/3.5s归因/正常及放大原生证据，必要最小修正提议先root review，不为追PASS偷改批准包。完整source refs/report/失败证据保留，不启动新端口，5355旧owner需有界核空闲再用/用完停。

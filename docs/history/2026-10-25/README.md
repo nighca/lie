@@ -54,3 +54,7 @@
 同一[三角色候选记录](three-character-dawn-candidate.md#新main组合候选待正式qa交付)另存最新051c组合31链及382测试/Web186证据，旧bfb QA链保留；正式QA未完整交付。
 
 [三角色最终正式QA及本地集成35链](three-character-dawn-candidate.md#最终正式qa与本地集成)：main a4e9f7d，382测试/Web186及79资源验证；真实隐藏等未测边界保留，未push/部署。
+
+## 当前协调文档收拢（基线30822d3）
+
+[整理前逐字快照及来源](coordinator-state-before-refresh-30822d3/README.md)保存project-plan、handoff、development原文和SHA256；[在制refs](coordinator-state-before-refresh-30822d3/active-handoff-refs.json)保存20链动画、checker修正、性能三链及未审报告。现行文档原位维护最新状态；快照中的旧未完成/权限/端口文字不覆盖新决定。本批只整理文档，不改变active coordinator、定时任务、main功能或服务。

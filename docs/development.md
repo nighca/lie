@@ -35,7 +35,7 @@ npm run preview --workspace @lie/web
 
 根 `npm run build` 显式先构建 `apps/web`，再把网页和 Worker 打包到 `apps/gateway/.cloudflare/output`，避免工作区目录排序影响干净构建。`npm run dev --workspace @lie/gateway` 在 8787 提供同源网页与 API；普通 Web 开发在 5176，`?demo=1` 仅在开发模式启用明确标注的假语音。网关凭据未配置时会显示真实错误，不会切换到假模型。
 
-GitHub Actions 的 CI 在 main push 或手动触发时执行干净安装、类型检查、离线/替身自动化和完整构建。它不读取灵矽管理 key、不运行 `test:linx`、不自动部署。真实供应商验收必须另外执行并记录，不能由绿色 CI 推导。
+GitHub Actions 的 CI 在 main push 或手动触发时执行干净安装、类型检查、离线/替身自动化和完整构建。它不读取灵矽管理 key、不运行 `test:linx`。现有CI在验证成功、确认commit仍是main且既有部署secret可用时会自动部署；普通push可能触发部署，因此仅按明确发布turn执行。真实供应商验收必须另外执行并记录，不能由绿色 CI 推导。
 
 正式部署采用项目本地 cf CLI。首次准备好发布时，在仓库根目录执行 `npm ci`，再由账号持有者运行 `npm exec --workspace @lie/gateway -- cf auth login` 完成登录；使用 `npm exec --workspace @lie/gateway -- cf auth whoami` 检查结果。凭据不应发送到聊天或提交到仓库。供应商预付费与 Cloudflare 登录是不同前提。
 
@@ -63,7 +63,7 @@ npm run dev --workspace @lie/gateway
 npm run dev:main
 ```
 
-固定入口是 <http://127.0.0.1:8787/>，直接提供当前 main 的 Vite 源码。独立薄 Worker 使用 `127.0.0.1:8788`；前端同源代理 `/api/voice`，包括 WebSocket。凭据继续由网关读取本地忽略的 `.dev.vars`，脚本不复制凭据、不创建供应商资源，也不自动发起语音。两个服务仅绑定本机回环地址。运行前须释放这两个端口；启动冲突会报错并停止本脚本的子进程，不终止其他服务。
+固定入口是 <http://127.0.0.1:8787/>，直接提供当前 main 的 Vite 源码。独立薄 Worker 使用 `127.0.0.1:8788`；前端同源代理 `/api/voice`，包括 WebSocket。凭据继续由网关读取本地忽略的 `.dev.vars`，脚本不复制凭据、不创建供应商资源，也不自动发起语音。两个服务仅绑定本机回环地址。当前主机由下述launchd持有这两个端口，不得为手动启动而释放/停止它们；新的受控环境启动冲突会报错并仅停止该脚本自己的子进程。
 
 脚本每 1.5 秒读取 Git：main SHA 改变时停止自身服务，重新生成形象资源并重启；每次启动和锁文件改变时先运行 `npm ci`。安装或生成失败时停止并报告；手工运行可修复后重启，常驻进程管理器须退避重试。切换分支或修改已跟踪文件会暂停服务，恢复干净 main 后自动启动；忽略的凭据和生成文件不影响运行。不要在此 checkout 中实施未合入的功能。
 
@@ -90,12 +90,9 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 
 不要在常驻服务已运行时另开 `npm run dev:main` 或占8787/8788；单实例检查会拒绝重复运行。main更新会重启开发服务，Vite通常重连后刷新，必要时手动刷新；游戏局内状态不跨刷新保留，本地编辑草稿仍按原浏览器存储规则恢复。
 
-### 人物预设命名迁移的 runner 切换
+### 已完成的命名迁移维护
 
-正式源为 `design/character-presets/`，生成命令为 `npm run character-presets:generate`，生成入口为 `scripts/character-presets.mjs`；公开 URL 仍是 `/appearances/`。`main-preview.mjs` 启动时固定生成命令，运行中的旧 runner 不会随 Git 轮询重载自身代码。因此本次迁移合入干净 main 后，由环境执行 owner 在协调者给出的服务窗口执行一次现有 launchd 的 `kickstart -k`，使原 runner 加载新命令；不要新增 daemon、旧命令 shim 或并行实例。
-
-切换前核对 main SHA、干净状态和现有 launchd owner，保留原 plist、日志、端口与私密配置；切换后等待原服务完成锁文件安装和资源生成，核 `/__lie/main-status` 与集成 SHA 一致、8787/8788 均只监听回环，逐项核源/public/dist 的清单投影和资源字节，且前端访问网关私密路径仍返回403。只核状态/拒绝结果，不打印私密文件内容；不调用语音或新建供应商资源。若启动失败，依据原日志排查，不启动第二套服务或删除尚存活的锁。本次实施候选验证与集成后的真实常驻服务验收分别记录，不以候选测试代替已重启证明。
-
+人物预设迁移所需的一次受控runner切换已由用户明确批准并完成，[实施验收](character-preset-migration-implementation.md)保存真实服务版本/资源/私密路径拒绝证据。它不是每次换代或接新任务都要重启的操作。当前继续用character-presets命令和公开/appearances路径；没有新服务turn不得重复kickstart、复制daemon或清锁。上方管理命令仅作为明确维护窗口下的操作参考。
 
 ## 服务登记与生命周期
 
@@ -113,36 +110,21 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 | Editor验收 | Editor `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 5402，只有必要的受控代理才用5403；同源fixture复用，当前验收结束即停。 |
 | 调查UI验收 | 调查 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 5507；同源路径复用，当前验收结束即停。 |
 | 动画制作预览 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 5358 ochre、5359 mint；owner可在不影响当前制作的前提下合用一套多root服务，不强停在制消费者。制作/本批验收结束即停。 |
-| 稳定版本探索QA | root下 `stable_exploratory_qa` | 5544，固定已发布abb12db的独立QA WT；用户明确授权系统功能/设计/视觉探索。先核监听/owner，单服务同源fixture，测试完成即原PTY停并核无监听；不得恢复暂停鉴权、改用户环境或另开附加端口。此前正式游戏/鉴权QA停止回执保留历史。 |
+| 协调分配的有界验收 | root当轮明确的owner；当前下一turn `character_preset_migration` 首帧任务 | 5544；不同任务串行借用，不永久属于旧探索QA。先核监听/owner，登记实际WT/SHA/PID/PTY/消费者，结束原PTY停止并核销；不得另开端口或恢复暂停鉴权。 |
 
 PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已控制该进程。端口分配也不证明当前已有服务在跑；每轮实际状态看下表。CF开发服务器附带的workerd/内部RPC端口属于8788同一受保护进程树，不作为闲置独立预览批杀。
 
-### 当前登记（2026-10-25，08:10:18采样及后续owner最终回执）
+### 当前登记（本次协调整理，基线main30822d3）
 
-本轮由`root/character_preset_migration`（root chat同上）基于reviewed main `6e52462f8d9902bbf265fbf30f9ad030c855644e`完成只读盘点与台账汇总。启动/停止动作分别由原专项owner执行，根侧本owner未启动server/browser、未发任何停止/重启信号。原始回执出处、PID和18个已释放端口见[本轮清理记录](history/2026-10-25/development-service-cleanup.md)。表中PID/SHA仅为该时刻快照，未来操作前必须重新核对；checkout HEAD不等于未提交运行内容的字节证明。
+这是root完整交付事实的更新，不是本次新做端口扫描。PID/PTY仅属于原启动会话，操作前仍须owner实际核对；源码HEAD不证明dirty运行字节。历史21服务清理及所有原始回执已在[清理记录](history/2026-10-25/development-service-cleanup.md)和[整理前原文](history/2026-10-25/coordinator-state-before-refresh-30822d3/development.md)保留，不按历史PID重复停止。
 
-| 状态／端口 | owner与消费者 | WT／源码HEAD；PID／原PTY；停止条件 |
+| 端口 / 状态 | owner / 消费者 | 来源 / PID / PTY / 停止条件 |
 | --- | --- | --- |
-| 保留8787 / 8788及内部子监听 | root／用户固定main | owning main及apps/gateway；HEAD `6e52462f…`；PID54878／54957，workerd54990；launchd，PTY不适用。内部50360/50366/50367均为同网关回环子监听。只有明确服务turn可维护。 |
-| 保留5355（用户8角色检查） | 动画 `01a16d44…`／用户检查，deliverable tab45；原用户tab18未改 | final-two-character-game/lie，HEAD `72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`；当前PTY8486，PID未交不猜测（后续owner受控复用同端口，取代先前PTY82389采样）。默认页保持旧8人，tab47 query覆盖5修订供用户验收，修订WT通过显式fs allow接入同server，不另开端口。用户结束或迁至稳定入口后由该owner停止；此前保留source及两lane/父证据WT，不按旧PID/session操作。 |
-| 已关闭5359 | 动画 `01a16d44…`／mint本批制作与QA已完成 | mint-puffs-animation/lie；采样HEAD `dbecc26cfdf347d3e7bca8a35f76a38392ddf99f`；原PID54935、旧PTY失效后由owner精确TERM，最终无LISTEN。不重复停止。 |
-| 已关闭5544 | root下verify_editor_candidate／正式QA已完成 | final-two-character-game/lie；最终HEAD `72c4a93a7a5bd2c1ed4baa78e261d516139a64e9`；原PID35694、原session19829。owner已删除临时壳、原会话Ctrl-C退出130，lsof核无监听，WT clean。不重复停止。 |
-| 已关闭5358 | 动画／ochre本批制作与QA已完成 | 原PID48081，ochre-freckles-animation；动画owner通过原PTY Ctrl-C停止并最终核无LISTEN，本owner未发信号，不自行重启。 |
-| 未监听5402 / 5403 / 5507 | Editor／调查首选分配 | 只分配，不空闲常驻；Editor本轮保留0、调查保留0，无未知归属。 |
-| 已释放18旧端口 | 调查6＋Editor5＋动画7 | 调查5368/5369/5370/5392/5398/5394与Editor5371–5375有owner最终退出回执；动画5346/5347/5348/5350/5351/5352/5357经owner精确TERM、根侧获准最后一次只读扫描确认无监听。详清理记录，不按旧PID再停。 |
+| 8787/8788，用户常驻受保护 | root协调、用户；既有launchd及网关内部子监听 | owning main动态跟随，真实版本查/__lie/main-status。旧盘点PID不沿用为当前PID；没有新明确服务turn不得停止、重启或复制实例。 |
+| 5355，精确归因QA在用 | 动画01a16d44…；自建tabs56/57 | approved-animation-rigid-batch/lie，d106＋inspect；PID52630/原PTY23642。t2.5/3.5真实Canvas归因/本批验收结束后owner原PTY停、关自建tab/清fixture并核监听；cleanup待完整handoff。不得按旧5355 PID/session操作。 |
+| 5544，上回合已停；下一turn首帧 | 上回合production_performance；下一character_preset_migration | perf source d6700a7、Miniflare PID43122/PTY53366已exit130、无监听/PID，IAB3/tab1已关/cacheoverride已恢复。新首帧base9316701、codex/animation-first-render仅分配，实际新PID/PTY未知，启动前核监听，测试完立即cleanup。 |
+| 5507，姓名高亮按需QA | 调查01a16d5c… | background-character-names/lie，basee222＋helperd21f5ea及owner dirty。当前监听/PID/PTY待handoff，不猜未运行或已停。旧结果回合PID44546/30600退出1且核无监听，只是历史。 |
+| 5402/5403，Editor固定分配 | Editor01a16d90… | 没有新增常驻要求；本次未做监听扫描，不把历史空闲当当前精确进程状态。仅owner按需启用并用后停。 |
+| 5358/5359及18旧服务，历史清理完结 | 原调查/Editor/动画owner | 既有21服务清理回执存档，不为复用固定端口自动常驻或重复关闭历史进程。 |
 
-后续鉴权QA曾另用5544原PTY59002、52545；用户明确暂缓后，原owner已通过原PTY停止最后52545（exit130）并核无LISTEN，自建Chrome tab已关，保留暂停资料，未触8787/8788/5355；当前5544再次空闲，未经新授权不恢复鉴权QA。此前18个旧服务加本轮5358/5359及5544共21个已关闭，5544最终退出回执已通过原owner完整handoff闭环。未发现其他未知归属LIE监听；部分历史PTY及5355新PID尚未交已如实列出，保留服务均有明确owner/消费者。前代root5486/5488/5489、旧5356等本次未见监听，只记录观察，不认领历史停止。固定main SHA随正常集成更新，需用`/__lie/main-status`和实际main对照。5355已按随后owner完整回执更新为8角色检查入口，其他PID仍为08:10快照。旧5355受控切换至同端口新服务，不计作额外消除的闲置服务；不新增端口。
-
-2026-10-25用户另授权专职稳定版本探索QA，5544现分配给root/stable_exploratory_qa，旧“再次空闲”仅表示上轮鉴权收尾采样，不覆盖新owner。实际新WT/PID/PTY与启动/停止结果由该owner最终批量交付，不预写正在监听或已停止。
-
-2026-10-25 09:17服务回合更新：稳定探索QA的5544（WT stable-exploratory-qa/lie@abb12db，PID14248、原PTY26270、消费者自建tabs1/2）已Ctrl-C退出130并核无监听/PID消失，draft原样恢复；报告已交。5544下一回合明确分配 character_preset_migration 的 preset-loading-recovery（base03fcb06），只用于清单加载失败/重试的有界IAB验收，启动前须核监听，新PID/PTY等由该owner完整handoff补齐，验收后即停；不能据分配推断已启动。调查结果原型5507两回合PID95633/PTY12356及PID66158/PTY2561均已原PTY退出0、tabs33/34关闭、核无监听；无新常驻服务，8787/8788/5355保持原owner。
-
-5544加载修复本回合实际登记：owner character_preset_migration，WT character-preset-migration-dawn/lie，base03fcb06＋未交付修复，PID89520/原PTY3817，消费者独立Chrome tab1910329540（IAB unavailable），transport9、无gateway。停止条件为清单恢复有界验收结束；当前在用，结束停止/存储恢复/关闭tab证据待owner，不依旧“无监听”记录操作本PID。结果UI批准后5507分配原调查专项，启动实际PID/PTY待该owner交付，不预记监听。
-
-5544加载恢复回合已结束：PID89520不存在、原PTY3817退出130/无监听、独立tab1910329540关闭且draft/网络覆盖恢复。下一回合正式给stable_exploratory_qa的bundled-case-catalog（base1f168e3），仅验证打包后无/games/*请求的三案/编辑器分享兼容；启动需重核监听、实际WT/PID/PTY/消费者由其batch回执，完成即停，不能用旧PID/session发信号。
-
-5544静态目录/案件打包回合完成：WT bundled-case-catalog/lie@d494e43，PID49549/原73441已Ctrl-C exit130、核无监听/PID消失；消费者独立Chrome1910329544已关，原draft逐字恢复/备份删除、网络覆盖清除、临时helper删除。当前该回合无保留服务，不重复停旧PID；后续仅分配不能自动常驻。5355用户新动画视觉已验收，原owner仍保留至正式QA/交付协调，不由root停止。
-
-结果页A实施5507回合关闭：WT result-scene-implementation/lie@d97a13b，Vite PID44546/原30600由owner Ctrl-C退出1，lsof无监听；消费者自建tabs35/36已关，网络/媒体覆盖清除、临时shell删除，无draft改动，无保留server，不把非0退出写成正常0。性能任务只读线上起步，5507未自动再分配，不得用旧PTY/PID继续停止。
-
-5544性能cf产物回合已关闭：production-performance/lie@d6700a7，Miniflare PID43122/原53366，owner Ctrl-C exit130且lsof空/PID消失，IAB3/tab1已关、cacheDisabled恢复false，无draft/mic/provider。下一回合root明确给character_preset_migration的animation-first-render（base9316701），仅首帧/切人/失败验证；启动先核监听并实际登记，不按分配推断在监听，完成原PTY停与全cleanup。
+保留所有在制/依赖WT、refs及ignored必要材料：特别是动画聚合/两lane/父QA/旧formal来源、性能完整handoff、姓名dirty、首帧和年长声调查。服务退出不授权清理它们。前代分享自建tab清理unknown不能按复用的browser/tab号码盲关，须先核实际归属。所有生产维护、真人mic/provider及用户draft另守授权边界。
