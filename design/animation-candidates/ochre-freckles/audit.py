@@ -112,4 +112,25 @@ hair=[(x,y) for y in range(450) for x in range(im.width) if im.getpixel((x,y))[3
 assert len(hair)>1000
 minimum=min(min(mappt(phase['world']['head-waiting'],x,y)[1] for x,y in hair) for phase in phases['waiting'])
 assert minimum>=3,('waiting hair crop risk',minimum)
-print(f'33 waiting phases, every alpha>0 head pixel: minY={minimum:.3f}; lower body identity; only upper contact group translated15px without lateral motion')
+print(f'33 waiting phases, every alpha>0 head pixel: minY={minimum:.3f}; lower body identity; only rigid upper contact nod/vertical motion')
+
+# Separate rigid contact/forearm from unrotated local chest movement, with fixed trousers.
+rigid_count=0
+for phase in phases['waiting']:
+ for id in ['head-waiting','waiting-arm-contact']:
+  a,b,c,d,_,_=phase['world'][id]
+  assert abs(math.hypot(a,b)-1)<1e-12 and abs(math.hypot(c,d)-1)<1e-12
+  assert abs(a*c+b*d)<1e-12
+  rigid_count+=1
+ chest=phase['world']['waiting-contact'];head=phase['world']['head-waiting']
+ assert abs(chest[1])<1e-12 and abs(chest[2])<1e-12
+ assert chest!=head
+points=[];im=images['waiting-source']
+for y in range(730,850,2):
+ for x in range(390,650,2):
+  if all(im.getpixel((x+dx,y+dy))[3]>=240 for dx in range(-8,9,2) for dy in range(-8,9,2)):points.append((x,y))
+assert len(points)>300
+for phase in phases['waiting']:
+ draws=[n for n in data['nodes'] if 'sprite' in n and visible(n,phase['pose'])]
+ for x,y in points:assert max(alpha(n,x,y,phase) for n in draws)>=128,(phase['seconds'],x,y,'new elbow/support cut lost original opaque interior')
+print(f'{rigid_count} constant-unit orthogonal head/contact world matrices; {len(points)*len(phases["waiting"])} dense elbow/support interior probes; independent unrotated chest and fixed lower PASS')

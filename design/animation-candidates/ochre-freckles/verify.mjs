@@ -14,11 +14,11 @@ for(const [id,asset] of Object.entries(data.assets)) {
  assert.equal(hash(bytes),hash(canonical));assert.equal(hash(canonical),provenance.sources[state])
 }
 const heads=['head-default','head-listening','head-waiting']
-const expected={default:['body','left-arm','right-arm'],listening:['listening-body','listening-arm','listening-right'],waiting:['waiting-lower','waiting-contact'],speaking:['body','left-arm','speaking-fill','speaking-arm','speaking-cap']}
+const expected={default:['body','left-arm','right-arm'],listening:['listening-body','listening-arm','listening-right'],waiting:['waiting-lower','waiting-contact','waiting-arm-contact','waiting-support'],speaking:['body','left-arm','speaking-fill','speaking-arm','speaking-cap']}
 function check(pose,state) {
  assert.equal(heads.filter(id=>pose[id].visible).length,1)
  for(const node of data.nodes) {
-  for(const v of Object.values(pose[node.id].transform))assert(Number.isFinite(v))
+  for(const [key,v] of Object.entries(pose[node.id].transform)){assert(Number.isFinite(v));if(key.startsWith('scale'))assert.equal(v,1)}
   if(node.id==='mouth-open'){if(state!=='speaking')assert.equal(pose[node.id].visible,false);continue}
   if(node.sprite && !heads.includes(node.id))assert.equal(pose[node.id].visible,expected[state].includes(node.id),state+'/'+node.id)
  }
@@ -37,13 +37,14 @@ for(const state of Object.keys(data.states)) {
 for(const phase of evidence.waiting) {
  const m=phase.world
  assert(m['waiting-lower'].every((v,i)=>Math.abs(v-[1,0,0,1,0,0][i])<1e-12))
- assert.equal(m['waiting-contact'][0],1);assert.equal(m['waiting-contact'][1],0);assert(Math.abs(m['waiting-contact'][2])<1e-12)
- assert(Math.abs(m['waiting-contact'][3]*950+m['waiting-contact'][5]-965)<1e-9)
- assert.deepEqual(m['head-waiting'],m['waiting-contact'])
+ assert(Math.abs(Math.hypot(m['waiting-arm-contact'][0],m['waiting-arm-contact'][1])-1)<1e-12)
+ assert(Math.abs(Math.hypot(m['waiting-arm-contact'][2],m['waiting-arm-contact'][3])-1)<1e-12)
+ assert(Math.abs(m['waiting-arm-contact'][0]*m['waiting-arm-contact'][2]+m['waiting-arm-contact'][1]*m['waiting-arm-contact'][3])<1e-12)
+ assert.deepEqual(m['head-waiting'],m['waiting-arm-contact'])
 }
 assert.equal(data.nodes.find(n=>n.id==='listening-arm').parent,'contact-root')
 assert.equal(data.nodes.find(n=>n.id==='head-root').parent,'contact-root')
-assert.equal(data.nodes.find(n=>n.id==='waiting-contact').sprite.mask[6][1],958)
+assert.equal(data.nodes.find(n=>n.id==='waiting-contact').sprite.mask[3][1],958)
 assert.equal(data.nodes.find(n=>n.id==='waiting-lower').sprite.mask[0][1],942)
 const speech=data.clips.speaking
 for(let i=0;i<240;i++){const p=sampleClip(data,speech,i/60);assert.equal(p['head-default'].visible,true);assert.equal(p['head-default'].transform.scaleX,1);assert.equal(p['head-default'].transform.scaleY,1)}

@@ -56,6 +56,20 @@
       "visible": true
     },
     {
+      "id": "chest-root",
+      "parent": "body-root",
+      "transform": {
+        "x": 640,
+        "y": 700,
+        "pivotX": 640,
+        "pivotY": 700,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true
+    },
+    {
       "id": "head-root",
       "parent": "contact-root",
       "transform": {
@@ -1153,7 +1167,7 @@
     },
     {
       "id": "waiting-contact",
-      "parent": "contact-root",
+      "parent": "chest-root",
       "transform": {
         "x": 0,
         "y": 0,
@@ -1169,22 +1183,6 @@
         "order": 20,
         "mask": [
           [
-            200,
-            380
-          ],
-          [
-            555,
-            380
-          ],
-          [
-            555,
-            335
-          ],
-          [
-            700,
-            335
-          ],
-          [
             700,
             375
           ],
@@ -1199,6 +1197,146 @@
           [
             200,
             958
+          ],
+          [
+            200,
+            825
+          ],
+          [
+            510,
+            825
+          ],
+          [
+            578,
+            760
+          ],
+          [
+            593,
+            660
+          ],
+          [
+            635,
+            540
+          ],
+          [
+            675,
+            490
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-arm-contact",
+      "parent": "contact-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 32,
+        "mask": [
+          [
+            555,
+            335
+          ],
+          [
+            700,
+            335
+          ],
+          [
+            700,
+            490
+          ],
+          [
+            650,
+            525
+          ],
+          [
+            620,
+            650
+          ],
+          [
+            610,
+            720
+          ],
+          [
+            570,
+            790
+          ],
+          [
+            510,
+            825
+          ],
+          [
+            415,
+            825
+          ],
+          [
+            365,
+            745
+          ],
+          [
+            365,
+            650
+          ],
+          [
+            380,
+            500
+          ],
+          [
+            460,
+            425
+          ],
+          [
+            555,
+            380
+          ]
+        ]
+      }
+    },
+    {
+      "id": "waiting-support",
+      "parent": "chest-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 40,
+        "mask": [
+          [
+            425,
+            790
+          ],
+          [
+            710,
+            765
+          ],
+          [
+            800,
+            790
+          ],
+          [
+            800,
+            885
+          ],
+          [
+            420,
+            855
           ]
         ]
       }
@@ -1526,6 +1664,8 @@
         "speaking-cap": false,
         "waiting-lower": false,
         "waiting-contact": false,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
         "head-default": true,
         "head-listening": false,
         "head-waiting": false,
@@ -1684,6 +1824,8 @@
         "speaking-cap": false,
         "waiting-lower": false,
         "waiting-contact": false,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
         "head-default": false,
         "head-listening": true,
         "head-waiting": false,
@@ -1815,6 +1957,8 @@
         "speaking-cap": false,
         "waiting-lower": true,
         "waiting-contact": true,
+        "waiting-arm-contact": true,
+        "waiting-support": true,
         "head-default": false,
         "head-listening": false,
         "head-waiting": true,
@@ -1823,130 +1967,130 @@
       "tracks": [
         {
           "node": "contact-root",
+          "property": "rotation",
+          "interpolation": "linear",
+          "keys": [
+            {
+              "time": 0.0,
+              "value": 0
+            },
+            {
+              "time": 1.0,
+              "value": 0.95
+            },
+            {
+              "time": 2.0,
+              "value": 0
+            },
+            {
+              "time": 3.0,
+              "value": -0.95
+            },
+            {
+              "time": 4.0,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "node": "contact-root",
           "property": "y",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 965
+              "value": 432
             },
             {
               "time": 1.0,
-              "value": 965
+              "value": 433.6
             },
             {
               "time": 2.0,
-              "value": 965
+              "value": 432
             },
             {
               "time": 3.0,
-              "value": 965
+              "value": 430.4
             },
             {
               "time": 4.0,
-              "value": 965
+              "value": 432
             }
           ]
         },
         {
-          "node": "contact-root",
-          "property": "pivotY",
+          "node": "chest-root",
+          "property": "y",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 950
-            },
-            {
-              "time": 1.0,
-              "value": 950
-            },
-            {
-              "time": 2.0,
-              "value": 950
-            },
-            {
-              "time": 3.0,
-              "value": 950
-            },
-            {
-              "time": 4.0,
-              "value": 950
-            }
-          ]
-        },
-        {
-          "node": "contact-root",
-          "property": "scaleY",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 1.0
+              "value": 701.25
             },
             {
               "time": 0.25,
-              "value": 1.0068883
+              "value": 701.15484942
             },
             {
               "time": 0.5,
-              "value": 1.01272792
+              "value": 700.88388348
             },
             {
               "time": 0.75,
-              "value": 1.01662983
+              "value": 700.47835429
             },
             {
               "time": 1.0,
-              "value": 1.018
+              "value": 700.0
             },
             {
               "time": 1.25,
-              "value": 1.01662983
+              "value": 699.52164571
             },
             {
               "time": 1.5,
-              "value": 1.01272792
+              "value": 699.11611652
             },
             {
               "time": 1.75,
-              "value": 1.0068883
+              "value": 698.84515058
             },
             {
               "time": 2.0,
-              "value": 1.0
+              "value": 698.75
             },
             {
               "time": 2.25,
-              "value": 0.9931117
+              "value": 698.84515058
             },
             {
               "time": 2.5,
-              "value": 0.98727208
+              "value": 699.11611652
             },
             {
               "time": 2.75,
-              "value": 0.98337017
+              "value": 699.52164571
             },
             {
               "time": 3.0,
-              "value": 0.982
+              "value": 700.0
             },
             {
               "time": 3.25,
-              "value": 0.98337017
+              "value": 700.47835429
             },
             {
               "time": 3.5,
-              "value": 0.98727208
+              "value": 700.88388348
             },
             {
               "time": 3.75,
-              "value": 0.9931117
+              "value": 701.15484942
             },
             {
               "time": 4.0,
-              "value": 1.0
+              "value": 701.25
             }
           ]
         }
@@ -1967,6 +2111,8 @@
         "speaking-cap": true,
         "waiting-lower": false,
         "waiting-contact": false,
+        "waiting-arm-contact": false,
+        "waiting-support": false,
         "head-default": true,
         "head-listening": false,
         "head-waiting": false,

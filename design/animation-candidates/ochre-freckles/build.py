@@ -13,6 +13,7 @@ def sprite(id,asset,order,mask,parent='body-root',transform=None,crop=None):
  nodes.append(dict(id=id,parent=parent,transform=transform or identity.copy(),visible=True,sprite=s))
 group('body-root',None,640,960)
 group('contact-root','body-root',630,430)
+group('chest-root','body-root',640,700)
 group('head-root','contact-root',630,430)
 group('left-root','body-root',420,520)
 group('right-root','body-root',870,520)
@@ -40,9 +41,11 @@ def lower_mask(poly,boundary):
 sprite('speaking-arm','speaking-source',32,lower_mask(speak,650),'speaking-root')
 sprite('speaking-fill','speaking-source',31,[[825,650],[1040,650],[1040,925],[890,925],[865,875],[815,815],[810,775],[825,745]],'speaking-root')
 sprite('speaking-cap','speaking-source',33,[[825,420],[980,420],[1030,670],[825,670]])
-# Waiting is one original upper contact group plus a fixed lower body; 16px overlap.
+# Waiting separates rigid head/arm contact, a translating chest and fixed lower body.
 sprite('waiting-lower','waiting-source',9,[[200,942],[1100,942],[1100,1254],[200,1254]])
-sprite('waiting-contact','waiting-source',20,[[200,380],[555,380],[555,335],[700,335],[700,375],[1100,375],[1100,958],[200,958]],'contact-root')
+sprite('waiting-contact','waiting-source',20,[[700,375],[1100,375],[1100,958],[200,958],[200,825],[510,825],[578,760],[593,660],[635,540],[675,490]],'chest-root')
+sprite('waiting-arm-contact','waiting-source',32,[[555,335],[700,335],[700,490],[650,525],[620,650],[610,720],[570,790],[510,825],[415,825],[365,745],[365,650],[380,500],[460,425],[555,380]],'contact-root')
+sprite('waiting-support','waiting-source',40,[[425,790],[710,765],[800,790],[800,885],[420,855]],'chest-root')
 # Original heads preserve gaze, identity and exact waiting chin contact.
 headmask=[[380,0],[800,0],[800,340],[695,350],[690,360],[694,375],[693,390],[700,402],[715,415],[720,420],[710,425],[660,440],[590,445],[575,410],[550,400],[380,400]]
 for state in ['default','listening','waiting']:
@@ -57,10 +60,10 @@ for state in ['default','listening','waiting','speaking']:
  if state=='default':visible+=['body','left-arm','right-arm']
  elif state=='listening':visible+=['listening-body','listening-arm','listening-right']
  elif state=='speaking':visible=['head-default'];visible+=['body','left-arm','speaking-fill','speaking-arm','speaking-cap']
- else:visible=['head-waiting','waiting-contact','waiting-lower']
+ else:visible=['head-waiting','waiting-contact','waiting-lower','waiting-arm-contact','waiting-support']
  tracks=[wave('body-root','y',960,3.5),wave('head-root','rotation',0,1.05),wave('head-root','y',430,1.2),wave('left-root','rotation',0,1),wave('right-root','rotation',0,-1)]
  if state=='listening':tracks=[wave('body-root','y',960,3.5),wave('contact-root','rotation',0,.8),wave('contact-root','y',430,1.2),wave('right-root','rotation',0,-1)]
- if state=='waiting':tracks=[wave('contact-root','y',965,0),wave('contact-root','pivotY',950,0),dict(node='contact-root',property='scaleY',interpolation='linear',keys=[dict(time=i/4,value=round(1+.018*math.sin(i*math.pi/8),8)) for i in range(17)])]
+ if state=='waiting':tracks=[wave('contact-root','rotation',0,.95),wave('contact-root','y',432,1.6),dict(node='chest-root',property='y',interpolation='linear',keys=[dict(time=i/4,value=round(700+1.25*math.cos(i*math.pi/8),8)) for i in range(17)])]
  if state=='speaking':
   tracks.append(wave('speaking-root','rotation',0,-1.6))
   times=[0,.15,.33,.52,.71,.9,1.1,1.3,1.51,1.72,1.94,2.14,2.36,2.57,2.77,2.98,3.2,3.4,3.61,3.81,4]
