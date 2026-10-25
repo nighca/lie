@@ -9,11 +9,11 @@ import { readCharacterPresets } from '../src/presentation/characterPresets'
 import { setup } from './helpers'
 
 describe('shipped preset voices', () => {
-  it('voices every catalog preset while retaining the first case choices', () => {
+  it('voices every catalog preset with the approved shared mature voice', () => {
     const characterPresets = readCharacterPresets(manifest)
     expect(characterPresets.every(({ voiceId }) => voiceId != null)).toBe(true)
-    expect(['coral-bob', 'sunny-moustache', 'blue-glasses'].map((id) => characterPresets.find((characterPreset) => characterPreset.id === id)?.voiceId)).toEqual([
-      '535b81a1db504baa99fd726e01afee15', '2e7965636b0d4472ae51e75f419dff41', '29ddb9582ae8481ebf11562f99aeaf95',
+    expect(['coral-bob', 'sunny-moustache', 'blue-glasses', 'salt-pepper-beard'].map((id) => characterPresets.find((characterPreset) => characterPreset.id === id)?.voiceId)).toEqual([
+      '535b81a1db504baa99fd726e01afee15', '2e7965636b0d4472ae51e75f419dff41', '29ddb9582ae8481ebf11562f99aeaf95', '2e7965636b0d4472ae51e75f419dff41',
     ])
   })
 

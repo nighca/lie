@@ -1,0 +1,20 @@
+{
+  "base": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+  "canonicalChange": "salt-pepper-beard.voiceId only",
+  "previousVoiceId": "a42e04fcefac4e9492581fbc95f3fce3",
+  "voiceId": "2e7965636b0d4472ae51e75f419dff41",
+  "otherSevenEntriesUnchanged": true,
+  "presetCount": 8,
+  "generatedPublicEqualsFixedBuildManifest": true,
+  "hashedProductionManifest": "/static/4c0b4d28c65deab8a4ca7225a4cb1a1d1d88696c79b74ee20625d36afbd5781d/appearances/manifest.json",
+  "hashedManifestContentDigestMatchesURL": true,
+  "productionVoiceMappingEqualsCanonical": true,
+  "allProductionPresetResourcePathsExist": true,
+  "targetedTests": {
+    "files": 4,
+    "passed": 36
+  },
+  "webTypecheck": "passed",
+  "webBuildAnd89AssetCheck": "passed",
+  "liveProviderOrHumanVoiceTest": false
+}
