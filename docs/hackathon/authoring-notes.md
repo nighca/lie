@@ -34,7 +34,7 @@
 
 待补充正式赛制、权重、篇幅和演示限制后，可将本稿压缩成正式提交稿。商业目标和未来付费路径仍待用户讨论；长会话稳定性、多用户隔离、三案盲测、最新内容回归和分享跨浏览器验收仍需继续积累效果证据。移动端浏览器已获用户实测确认可用。
 
-本专题维护对外正文 `docs/hackathon/项目亮点.md` 及内部依据 `docs/hackathon/编写说明.md`，不修改中央计划或生产文件，不制作视频、脚本、分镜或媒体，不进行供应商、服务启停、push 或部署。研究和成稿在独立 `codex/hackathon-highlights` 工作树进行；交付后由现任主协调审查、决定合入，本稿状态不会自动变为用户批准。
+本专题维护对外正文 `docs/hackathon/project-highlights.md` 及内部依据 `docs/hackathon/authoring-notes.md`，不修改中央计划或生产文件，不制作视频、脚本、分镜或媒体，不进行供应商、服务启停、push 或部署。研究和成稿在独立 `codex/hackathon-highlights` 工作树进行；交付后由现任主协调审查、决定合入，本稿状态不会自动变为用户批准。
 
 ## 移动端确认来源
 
@@ -121,3 +121,9 @@ root在main2e24d32上的隔离候选按序重放初稿后14项source提交（84c
 ## 平台定位增量的主线审查
 
 root已读取本专题用户原话及source25e447d完整两文件diff，独立候选6844bae保留“主协调本轮集成核验”与“追加定位反馈”两段（仅末尾追加冲突），以及主线已更新的案件内容链接。与发布证据归档sourcecc59498同批合入；仅文档和链接检查，无生产变动或应用测试。a0e的最终CI/CD和必要脱敏证据见[本次归档](../releases/2026-10-25-single-json/README.md)。本批推送后CI/CD另核，不以旧成功回执代替新提交结果。
+
+## 英文文件名调整
+
+2026-10-25，用户要求本目录两份文档使用英文文件名。对外正文更名为 `project-highlights.md`，内部说明更名为 `authoring-notes.md`，正文内容不变。此增量基于 main `6fc17ae7bdc536580edb75a557728350da457476`，保留主线的发布核验与平台定位记录。
+
+中央文档归主协调维护：集成时请同步将 `docs/project-plan.md` 中两个 `hackathon/项目亮点.md`、`hackathon/编写说明.md` 目标分别更新为 `hackathon/project-highlights.md`、`hackathon/authoring-notes.md`，并将 `docs/coordinator-handoff.md` 中 `hackathon/编写说明.md` 目标更新为 `hackathon/authoring-notes.md`。历史快照保留当时文件名，不追改历史记录。
