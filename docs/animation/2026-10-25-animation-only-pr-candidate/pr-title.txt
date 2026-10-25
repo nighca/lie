@@ -1,0 +1,1 @@
+fix(animation): use character-specific rigid waiting motions
