@@ -1,0 +1,39 @@
+{
+  "source": "f62309c89ca32a7417a2f32eb0658eee8d7546d4",
+  "base": "3c8103693ebc7343131da643883c44fb27aff75f",
+  "newScopeFiles": 36,
+  "newTextFilesChecked": 30,
+  "videoSha256": "e5c546fd8cf6693e43cb69354577d0d7fca562d3fe7eb1b01dd0b878c9438064",
+  "videoBytes": 4181726,
+  "durationSeconds": "37.533333",
+  "rawFrames": 3030,
+  "rawJpegDimensions": [
+    1280,
+    800
+  ],
+  "frameReferences": 3031,
+  "audioTrimSeconds": 0.06009793281555176,
+  "wavSamplesEach": 1805056,
+  "wavPeaks": {
+    "input": 17339,
+    "output": 27104,
+    "mix": 27104
+  },
+  "allRmsPerSecondRecomputed": true,
+  "mixMaxDifferencePcm16": 0,
+  "encodedAudioRmsAtSeconds": {
+    "0": 0.0,
+    "6": 0.1092271108415129,
+    "18": 0.11848421127406047,
+    "30": 0.08317810503299786
+  },
+  "old73SecondVideoIdentical": true,
+  "outcome": "new question and real answer present, answerComplete false; stopped while speaking after30s",
+  "cleanup": "3contextsclosed4tracksended; socketCount0 means not instrumented",
+  "sourceFilesMatchPersistentLibrary": true,
+  "limits": [
+    "Previous dcc/3ee checks reused by Git identity, not provider rerun",
+    "Numeric alignment and sampled frames, no subjective listening or precise mouth-sync proof",
+    "No browser/network/provider/service/reencoding/Git or raw writes"
+  ]
+}

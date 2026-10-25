@@ -1,0 +1,7 @@
+verify	Test with application and separate script coverage	2026-10-25T10:04:58.7771611Z  [31m❯[39m [30m[46m web [49m[39m test/editor-page.test.ts [2m([22m[2m26 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1021[2mms[22m[39m
+verify	Test with application and separate script coverage	2026-10-25T10:05:34.9389258Z [31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+verify	Test with application and separate script coverage	2026-10-25T10:05:34.9395094Z [31m[1mError[22m[39m: Unable to get .lie-product-header__brand span within: <div data-v-08f39564="" class="editor-shell">
+verify	Test with application and separate script coverage	2026-10-25T10:05:34.9488905Z [36m [2m❯[22m test/editor-page.test.ts:[2m92:20[22m[39m
+verify	Test with application and separate script coverage	2026-10-25T10:05:34.9600192Z     [90m 92|[39m     expect(wrapper.get('.lie-product-header__brand span').text()).toBe…
+verify	Test with application and separate script coverage	2026-10-25T10:05:34.9601684Z [2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m57 passed[39m[22m[90m (58)[39m
+verify	Test with application and separate script coverage	2026-10-25T10:05:34.9628878Z [2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m603 passed[39m[22m[90m (604)[39m

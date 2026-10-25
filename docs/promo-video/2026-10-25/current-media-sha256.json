@@ -10,5 +10,12 @@
   "media/promo-video/home-create-blank-editor.jpg": "7990aeb1732eea373ee85744434a2d9e61cd6db78f562f45deae1031100c1da0",
   "media/promo-video/home-create-contact-sheet.jpg": "b0c14d9383b71715f967ca9b1a556bfd0d0e9bd902a5d6e9ae05ba40c6af577c",
   "media/promo-video/home-create-final-screen.jpg": "8e41a7a326b7167dc7ea31421fca4a40fe9a5e2f0363e88b8dca8b795a70d712",
-  "media/promo-video/lie-create-preview-share.mp4": "d61398d0140d7027d53ac83d81cf4bc8dde4b64c65724c3be30bb0dff6e1345c"
+  "media/promo-video/lie-create-preview-share.mp4": "d61398d0140d7027d53ac83d81cf4bc8dde4b64c65724c3be30bb0dff6e1345c",
+  "media/promo-video/lie-gameplay-audio-test.mp4": "e5c546fd8cf6693e43cb69354577d0d7fca562d3fe7eb1b01dd0b878c9438064",
+  "media/promo-video/offline-audio-check/input.wav": "7225a96a8548b37e7c1ec0f72ae40d641cfeabb1058dd155a91ae04da4b45bbd",
+  "media/promo-video/offline-audio-check/mix.wav": "932b2ff789791b61008d77c9dc6f14be8569d4d14cfb62c2678dc8e2da19c4ef",
+  "media/promo-video/offline-audio-check/output.wav": "3799f993dab6d276abab1c4cb40f00ab151d2d6ba7820832b55be1ba5452c926",
+  "media/promo-video/offline-audio-check/pcm-browser-proof.jpg": "ad19710d283cd0574ce3bbf0d48a74c8f0cce2f78ee9fac2c48b35b4f34c8f8d",
+  "media/promo-video/offline-audio-check/pcm-dual-audio-demo.mp3": "175752b01efb61767ea5f98cd30883a1a7a22b007907ae69357402ee82fbda15",
+  "media/promo-video/player-question-voice-sample.mp3": "cce05006e6ca474e7b634d888a32c7064079350325a058eaf3d82ec52d577df1"
 }

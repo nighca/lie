@@ -1,0 +1,8 @@
+deploy	Download only that CI attempt's build	2026-10-25T10:15:13.1056994Z   artifact-ids: 12594734312
+deploy	Download only that CI attempt's build	2026-10-25T10:15:13.1057291Z   run-id: 40183820150
+deploy	Download only that CI attempt's build	2026-10-25T10:15:13.4373187Z - production-build-2f5496d61fca524dca04cf23da4ade8778513924-40183820150-1 (ID: 12594734312, Size: 113336368, Expected Digest: sha256:2beb7ff5feefb1c492fb8aa8d107bed3245ad28cfab36dabe2641a751dc4947d)
+deploy	Download only that CI attempt's build	2026-10-25T10:15:16.3572052Z SHA256 digest of downloaded artifact is 2beb7ff5feefb1c492fb8aa8d107bed3245ad28cfab36dabe2641a751dc4947d
+deploy	Restore and check every build byte	2026-10-25T10:15:16.3829721Z   CI_HEAD_SHA: 2f5496d61fca524dca04cf23da4ade8778513924
+deploy	Restore and check every build byte	2026-10-25T10:15:17.7634552Z Restored 256 verified build files
+deploy	Deploy the verified CI build	2026-10-25T10:15:21.7242578Z   CI_HEAD_SHA: 2f5496d61fca524dca04cf23da4ade8778513924
+deploy	Deploy the verified CI build	2026-10-25T10:15:38.4362817Z │  Current Version ID: c45edc68-cace-4425-bda6-374a857389cf

@@ -17,7 +17,7 @@
 
 root要求等待纠正发布后再录，并暂停下一次push保留窗口。收到其报告2f5496d61fca524dca04cf23da4ade8778513924的CI40183820150/CD40183972202成功后，刷新用户tab1910329655回首页；实际读到script /assets/index-DLYlxLKt.js。版本发布/hash核验来自协调者，本专项只直接核页面script路径。
 
-首页→案件背景→接案→沈禾开启对话；连接未ready即UI语音暂时中断。没有发送提问、STT或TTS，没有切角色/指认/结局/最终首页，因此**本轮完整视频未完成**，也没有把37秒旧试片或静音失败段当成新成片。
+首页→案件背景→接案→沈禾开启对话；连接未ready即UI语音暂时中断。没有发送提问，未观察到STT/TTS结果；供应商侧是否创建资源及计费仍待独立诊断。没有切角色/指认/结局/最终首页，因此**本轮完整视频未完成**，也没有把37秒旧试片或静音失败段当成新成片。
 
 [Network](network.json)只有一条wss://lie.agency/api/voice创建→FrameError（空错误文本）→closed，没有握手response101；[outcome](outcome.json)首错Voice failed before ready，questionAt=null；[session](session.json)记录虚拟mic及采集侧零增益GainNode，不将此当作角色输出；[独立校验](failure-verification.json)3轨各888064样本/48k/18.501333秒，峰0、FFmpeg -xerror解码通过；1530帧metadata全1280×800scale1。capture失败仍留原始帧，但outcome.segments不加入失败段，这是预期非接受结果，不是没有捕获画面。
 

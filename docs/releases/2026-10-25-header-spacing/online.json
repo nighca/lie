@@ -1,0 +1,36 @@
+{
+  "sha": "2f5496d61fca524dca04cf23da4ade8778513924",
+  "ciRun": 40183820150,
+  "artifactId": 12594734312,
+  "artifactDigest": "sha256:2beb7ff5feefb1c492fb8aa8d107bed3245ad28cfab36dabe2641a751dc4947d",
+  "independentZipDigest": "2beb7ff5feefb1c492fb8aa8d107bed3245ad28cfab36dabe2641a751dc4947d",
+  "receiptFilesChecked": 256,
+  "lockMatch": true,
+  "rows": [
+    {
+      "path": "/",
+      "bytes": 546,
+      "sha256": "91d0923c5925d5a651cdc9b056f3476229993cb948564f348eecd7c51621b8e0",
+      "status": 200,
+      "matchesExactCIArtifact": true
+    },
+    {
+      "path": "/assets/index-DLYlxLKt.js",
+      "bytes": 237611,
+      "sha256": "f88131f74e822ba28e8265591752a215b3881fc41c4ec23322e71aec916b0df6",
+      "status": 200,
+      "matchesExactCIArtifact": true
+    },
+    {
+      "path": "/assets/index-BC_Jj60u.css",
+      "bytes": 57163,
+      "sha256": "d37f8761653b6e552e493607703c24a33d6fe54a1feb939b81e622e9a7b6adb9",
+      "status": 200,
+      "matchesExactCIArtifact": true
+    }
+  ],
+  "mobile620CaseSectionMargin32": true,
+  "headerUnderlineLeft30_9": true,
+  "accessibleHomeBrandInJS": true,
+  "scope": "Read-only normal TLS GET homepage/JS/CSS, no browser, voice/API/WS or provider"
+}

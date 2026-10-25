@@ -1,0 +1,33 @@
+{
+  "publishedSha": "d4c189b22dbf09ae7b2ec0ec998b3a678f1d2823",
+  "ci": {
+    "id": 40183215334,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "failure",
+    "url": "https://github.com/nighca/lie/actions/runs/40183215334",
+    "failedStep": "Test with application and separate script coverage",
+    "applicationPassed": 603,
+    "applicationFailed": 1,
+    "filesPassed": 57,
+    "filesFailed": 1
+  },
+  "cd": {
+    "id": 40183344564,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "skipped",
+    "url": "https://github.com/nighca/lie/actions/runs/40183344564"
+  },
+  "cause": {
+    "file": "apps/web/test/editor-page.test.ts",
+    "line": 92,
+    "assertion": "wrapper.get(.lie-product-header__brand span) expects removed old tagline",
+    "classification": "Stale test expectation after approved ProductHeader tagline removal; not evidence of runtime spacing failure"
+  },
+  "suggestion": "Update only old brand assertion to current accessible home link/svg and absent old span; preserve draft/leave assertions. Root coordinates fix and publication.",
+  "artifact": "No verified production build artifact or actual deploy for failed run",
+  "workerVersion": "NOT DEPLOYED by this run",
+  "onlineStaticQA": "NOT RUN since CD skipped",
+  "actions": "No source/Git/main/push changes, rerun/manual deploy, local build/browser/provider/service"
+}

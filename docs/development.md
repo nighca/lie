@@ -139,3 +139,5 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 组合语音提示补验追加：owner home_scroll，自有Chrome tab1910329686，source1973ee5/runtime2188f59，Vite5544 PID10172/PTY45505。root另给Chrome回合后执行，结束原PTY Ctrl-C exit130、lsof无监听，临时入口与符号链接已移除，tab关闭/viewport及reduce复原；无真实语音。视频专项获用户新授权一次≤60秒真实线上短测窗口，其他agents不得占用同一provider，专项完成后负责停止并交还；不变更现有agent/device或常驻服务。
 
 本批5544串行回执：UI头部own IAB48，PTY78961 Ctrl-C exit130、lsof无监听/tab关与viewport reset后释放；spacing owner character_preset_migration，原矩阵source397b032 PID50243/PTY61290、组合7c62ed3 PID69163/PTY46596，两次均原session Ctrl-C exit130/精确PID退出/监听无，Chrome1910329694及1910329701关闭，临时夹具入口删除，无viewport覆盖/storage动作。服务资源已交还，仍保护8787/8788/5355。
+
+Editor/share七项验收：home_scroll在127.0.0.1:5544读到旧draft后写入前停测，PTY49417退出130/无监听，旧draft未改；root明确改用同端口localhost独立origin。正式测试Vite PID96944/PTY64495，source d4c189b，Chrome own1910329710；合成草稿起末均null，Ctrl-C exit130/lsof5544空、tab关闭/viewportreset/本任务依赖链接移除。没有其他storage/provider/用户服务动作。视频完整录制新连接失败已释放窗口，未创建服务；架构排障只读，不准自动重试。
