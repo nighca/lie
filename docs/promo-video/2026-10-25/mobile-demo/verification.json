@@ -1,0 +1,209 @@
+{
+  "source": {
+    "filename": "mobile-lie.mov",
+    "sha256": "d9b836740e4920a0f8042e9b82979e15b1f2768ae68e6c58378425cd3b680682",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 2376,
+          "pix_fmt": "yuv420p",
+          "time_base": "1/90000",
+          "duration": "128.721500"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 1,
+          "time_base": "1/48000",
+          "duration": "128.537854"
+        }
+      ],
+      "format": {
+        "duration": "128.721500",
+        "size": "35928545"
+      }
+    }
+  },
+  "output": {
+    "path": "media/promo-video/lie-mobile-demo.mp4",
+    "sha256": "7b2904d821aaef72a68465472b183448cdda0935a176ed427ade95109d72d1e2",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 2376,
+          "pix_fmt": "yuv420p",
+          "time_base": "1/90000",
+          "duration": "128.721500"
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "sample_rate": "48000",
+          "channels": 1,
+          "time_base": "1/48000",
+          "duration": "128.539625"
+        }
+      ],
+      "format": {
+        "duration": "128.721500",
+        "size": "35998408"
+      }
+    }
+  },
+  "tools": {
+    "ffmpeg": "ffmpeg version 8.0 Copyright (c) 2000-2025 the FFmpeg developers",
+    "ffprobe": "ffprobe version 8.0 Copyright (c) 2007-2025 the FFmpeg developers"
+  },
+  "remux": {
+    "stream_copy": true,
+    "metadata_mapping": "global and stream metadata disabled; chapters removed; source descriptive/private tags not read or retained",
+    "streamhash_sha256": [
+      "0,v,SHA256=10f0838caacc671f05dc7d153fab172bc836a8fbca18cf0a2172cbf027751d3b",
+      "1,a,SHA256=e2c0c0827029b76d2cee91ef335700fbcd65df9264e20692c02998d38ee9387e"
+    ],
+    "streamhash_matches": true,
+    "packets": [
+      {
+        "stream_index": 0,
+        "packets": 7838,
+        "payload_hashes_and_sizes_identical": true,
+        "maximum_timestamp_difference_seconds": {
+          "pts_time": 0,
+          "dts_time": 0,
+          "duration_time": 0
+        }
+      },
+      {
+        "stream_index": 1,
+        "packets": 6015,
+        "payload_hashes_and_sizes_identical": true,
+        "maximum_timestamp_difference_seconds": {
+          "pts_time": 0,
+          "dts_time": 0,
+          "duration_time": 0
+        }
+      }
+    ],
+    "orientation": "Source and output have identical dimensions and rotation side data (none).",
+    "stream_duration_differences_seconds": [
+      0.0,
+      0.0017709999999908632
+    ],
+    "container_duration_difference_seconds": 0.0,
+    "command": [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-nostdin",
+      "-i",
+      "<user-provided mobile-lie.mov>",
+      "-map",
+      "0:v:0",
+      "-map",
+      "0:a:0",
+      "-c",
+      "copy",
+      "-map_metadata",
+      "-1",
+      "-map_metadata:s",
+      "-1",
+      "-map_chapters",
+      "-1",
+      "-movflags",
+      "+faststart",
+      "media/promo-video/lie-mobile-demo.mp4"
+    ],
+    "audio_header_duration_note": "Audio stream header duration changed by +0.001771 seconds during remux; every compressed packet payload, size, PTS, DTS and packet duration matches the source. Overall and video durations are unchanged."
+  },
+  "output_tag_keys": {
+    "format": [
+      "compatible_brands",
+      "encoder",
+      "major_brand",
+      "minor_version"
+    ],
+    "streams": [
+      [
+        "handler_name",
+        "language",
+        "vendor_id"
+      ],
+      [
+        "handler_name",
+        "language",
+        "vendor_id"
+      ]
+    ]
+  },
+  "top_level_boxes": [
+    {
+      "type": "ftyp",
+      "offset": 0,
+      "size": 32
+    },
+    {
+      "type": "moov",
+      "offset": 32,
+      "size": 188641
+    },
+    {
+      "type": "free",
+      "offset": 188673,
+      "size": 8
+    },
+    {
+      "type": "mdat",
+      "offset": 188681,
+      "size": 35809727
+    }
+  ],
+  "faststart_moov_before_mdat": true,
+  "limits": "One user recording, not a mobile-browser compatibility matrix or all-case/live-model acceptance. No pixel editing, screenshots, re-recording or re-encoding.",
+  "full_decode": {
+    "command": [
+      "ffmpeg",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-xerror",
+      "-nostdin",
+      "-i",
+      "media/promo-video/lie-mobile-demo.mp4",
+      "-map",
+      "0:v:0",
+      "-map",
+      "0:a:0",
+      "-fps_mode:v",
+      "passthrough",
+      "-enc_time_base:v",
+      "demux",
+      "-f",
+      "null",
+      "-"
+    ],
+    "exit_code": 0,
+    "stderr_bytes": 0,
+    "note": "Preserve demux time base and VFR timing when decoding to null; default null output time base caused duplicate-DTS muxer warnings in the initial check."
+  },
+  "authorization": {
+    "date": "2026-10-25",
+    "request": "用户明确要求将其本地 mobile-lie.mov 移动端演示加入项目，并在中英文 README 添加链接。",
+    "scope": "Repository media inclusion, stream-copy MP4 remux and metadata stripping; no public upload or account operation performed."
+  }
+}

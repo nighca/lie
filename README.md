@@ -14,7 +14,7 @@ English · [简体中文](README.zh-CN.md)
 
 LIE is an AI voice detective game and a platform for creating your own mysteries. Talk freely with AI characters, compare their accounts, and identify who is responsible. The artwork is playful; the characters may leave things unsaid. What to ask, whom to question first, and which story to trust are up to you. Play and create in desktop or mobile browsers, with no app to install. The game interface is in Chinese.
 
-[Play LIE](https://lie.agency/) · [Create a case](https://lie.agency/editor) · [Watch the demo (3:07, with audio)](media/promo-video/lie-demo.mp4)
+[Play LIE](https://lie.agency/) · [Create a case](https://lie.agency/editor) · [Watch the demo (3:07, with audio)](media/promo-video/lie-demo.mp4) · [Mobile demo (2:09)](media/promo-video/lie-mobile-demo.mp4)
 
 ## Play a case
 
