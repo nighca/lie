@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**最新远端main、CI/CD及线上静态指纹已核为a64bf6c1674b9755dbacc4d7519e92675ee5f4bf**（[最新证据](releases/2026-10-25-q90-ci-cd/success.md)）；原48316544为历史，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：root已正常push测试路径修复a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，远端main同SHA；CI40165378030/CD40165634861 attempt1均success，精确产物12588780677恢复195文件、latest-main及实际deploy成功，Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e。lie.agency home/editor/官方案query及JS/CSS/currentmanifest/WebP共8响应SHA全部同已验候选，缓存/MIME正常。[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)。旧297 failure/CDskip与修复历史保留，不再当当前线上状态。发布后本地报告不自动二次push；root独占集成/发布。首3design/统一页已归档，其余4及结果正式激活/UI仍动画parent在制，5355用户页保留；5356/误占5357停止沿owner回执，本轮无服务动作，单JSON内置案仍仅讨论。
+下一步：root已正常push测试路径修复a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，远端main同SHA；CI40165378030/CD40165634861 attempt1均success，精确产物12588780677恢复195文件、latest-main及实际deploy成功，Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e。lie.agency home/editor/官方案query及JS/CSS/currentmanifest/WebP共8响应SHA全部同已验候选，缓存/MIME正常。[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)。旧297 failure/CDskip与修复历史保留，不再当当前线上状态。发布后本地报告不自动二次push；root独占集成/发布。首3design/统一页已归档，其余4设计候选73e55f5已交待root审查、正式激活/UI仍动画parent在制，5355用户页保留；5356/误占5357停止沿owner回执，本轮无服务动作，单JSON内置案仍仅讨论。
 
 ## 当前owner与恢复入口
 
