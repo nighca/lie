@@ -32,7 +32,7 @@
 | P1 真人/盲测/多用户 / root协调用户＋QA | mic/外放/长会话、三案盲测、固定device多人隔离、正式费用硬限额未闭环。fake/短WAV/ready不替代，新增声仍按用户真实耳验范围，不后台保活mic。 |
 | P2 分享/投稿 / Editor＋root | 有界IAB539/16000 URL往返/reload/损坏输入已测；跨浏览器/地址栏粘贴/外部传输/离线/旧fragment网络补测未验，16k暂定、128KiB仅Node。投稿PRIVATE/用户GitHub门禁，不新增OAuth/PAT/代理投稿。 |
 | P2 出戏、启动延迟、开发WS / 工程/内容owner待排 | [出戏调查](role-immersion-investigation.md)尚未解决，不无限付费叠prompt/换provider。observer已main但非真人加速证据；[宿主WS非101](dev-websocket-rejection.md)仅诊断，未修vendor。 |
-| 交付组合通过 两项小优化 / Editor＋调查视觉 | 预设卡仅图像，aria-label/选中态/人物自己姓名保留；姓名高亮仅padding-inline少量间距，主题色/原文/匹配不变。root已读原图与完整diff；source0f12453及97a1803→8e09327在aa6fc190组合Web288/types/build89及字节/QA隔离核验通过。[报告](editor-state-recovery/combined-verification.md)；source IAB按相同字节复用，未重做浏览器；随本轮发布，不重复派。 |
+| 交付组合通过 两项小优化 / Editor＋调查视觉 | 预设卡仅图像，aria-label/选中态/人物自己姓名保留；姓名高亮仅margin-inline少量间距，主题色/原文/匹配不变。root已读原图与完整diff；source0f12453及97a1803→8e09327在aa6fc190组合Web288/types/build89及字节/QA隔离核验通过。[报告](editor-state-recovery/combined-verification.md)；source IAB按相同字节复用，未重做浏览器；随本轮发布，不重复派。 |
 | P3 Editor/视觉边界 / owner待排 | QA003随RSM-01完成、最终候选回归通过；silver/mint同accent区分待定，不全面重画。真实visibility/广泛race/硬件touch未验；1280×720既有舞台裁切，合成hidden不算真隐藏PASS。 |
 | 暂缓 鉴权 / 独立chat01a17076 | 用户明确暂停；[归档](archive/2026-10-25/invite-access-paused/README.md)及三候选/ignored材料保留，不恢复实现/QA/CI/部署，旧设计批准不替代重新启动许可。 |
 
