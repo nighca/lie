@@ -33,7 +33,7 @@ export function readAnimationPackage(value: unknown): AnimationPackage {
   const assets: AnimationPackage['assets'] = {}
   for (const [id, raw] of entries) {
     text(id, 'asset ID'); const asset = object(raw, id); fields(asset, ['src', 'width', 'height'], id)
-    if (typeof asset.src !== 'string' || !/^parts\/[a-z0-9]+(?:-[a-z0-9]+)*\.png$/.test(asset.src)) throw Error(`${id}: asset must be a local parts/*.png`)
+    if (typeof asset.src !== 'string' || !/^parts\/[a-z0-9]+(?:-[a-z0-9]+)*\.(?:png|webp)$/.test(asset.src)) throw Error(`${id}: asset must be a local parts/*.(png|webp)`)
     const width = size(asset.width, id), height = size(asset.height, id)
     pixels += width * height
     if (pixels > maxPixels) throw Error('Animation exceeds total pixel budget')

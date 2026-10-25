@@ -147,6 +147,18 @@ test('animated and static characterPresets coexist; shared parts are copied once
   await assert.rejects(readFile(join(f.outputDirectory, 'fixture-guide/animation/package.json')), { code: 'ENOENT' })
 })
 
+test('canonical animation rejects PNG bytes disguised under a WebP filename before changing outputs', async t => {
+  const f = await fixture(t); await syncCharacterPresets(f)
+  const before = await readFile(join(f.outputDirectory, 'manifest.json'))
+  const animation = await animationFixture(f)
+  animation.data.assets.body.src = 'parts/body.webp'
+  await writeFile(join(animation.base, 'parts/body.webp'), png)
+  await writeFile(animation.path, JSON.stringify(animation.data))
+  await f.manifest([{ ...entry(), animation: 'assets/fixture-guide/animation/package.json' }])
+  await assert.rejects(syncCharacterPresets(f), /canonical animation parts must use parts\/\*\.png/)
+  assert.deepEqual(await readFile(join(f.outputDirectory, 'manifest.json')), before)
+})
+
 for (const [label, mutate] of [
   ['unsupported version', data => { data.schemaVersion = 3 }],
   ['outside asset', data => { data.assets.body.src = '../outside.png' }],

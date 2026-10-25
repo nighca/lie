@@ -12,6 +12,18 @@ describe('versioned animation contract', () => {
     expect(Object.keys(data.states)).toEqual(['default', 'listening', 'waiting', 'speaking'])
     expect(data.nodes.filter(node => node.sprite?.asset === 'listening-arm')).toHaveLength(2)
   })
+  it('accepts package-local WebP parts in v1 and v2 while retaining result mappings', () => {
+    for (const raw of [fixture(), reactionFixture()]) {
+      raw.assets.head.src = 'parts/head.webp'
+      const parsed = readAnimationPackage(raw)
+      expect(parsed.assets.head.src).toBe('parts/head.webp')
+      if (raw.schemaVersion === 2) expect(parsed.states.accusedCorrectly).toBe('accused-correctly')
+    }
+  })
+  it.each(['../head.webp', 'parts/../head.webp', '/parts/head.webp', 'https://other.test/head.webp', 'parts/head.webp?x=1', 'parts/head.webp#x', 'parts/%68ead.webp', 'parts/head.WEBP', 'parts/head.png.webp', 'parts/sub/head.webp', 'parts/head.svg', 'parts/head_webp.webp'])('rejects unsafe or unsupported part path %s', src => {
+    const raw = fixture(); raw.assets.head.src = src
+    expect(() => readAnimationPackage(raw)).toThrow('local parts')
+  })
   it('caps resource count even when each image is tiny', () => {
     const raw = fixture()
     raw.assets = Object.fromEntries(Array.from({ length: 33 }, (_, i) => [`part-${i}`, { src: `parts/part-${i}.png`, width: 1, height: 1 }]))

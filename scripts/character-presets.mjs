@@ -109,6 +109,7 @@ export async function syncCharacterPresets({ sourceDirectory = join(projectRoot,
       }
       generated.animation = add(`${id}/animation/package.json`, bytes)
       for (const asset of Object.values(animation.assets)) {
+        if (!/^parts\/[a-z0-9]+(?:-[a-z0-9]+)*\.png$/.test(asset.src)) throw new Error(`${id}: canonical animation parts must use parts/*.png`)
         const path = `assets/${id}/animation/${asset.src}`
         const image = await load(path)
         if (image.readUInt32BE(16) !== asset.width || image.readUInt32BE(20) !== asset.height) throw new Error(`${path}: dimensions differ from animation contract`)

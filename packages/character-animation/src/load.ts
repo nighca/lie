@@ -1,4 +1,5 @@
 import { readAnimationPackage } from './package'
+import { readImageDimensions } from './image-header'
 
 function decodeImage(image: HTMLImageElement, src: string, signal: AbortSignal) {
   return new Promise<void>((resolve, reject) => {
@@ -20,7 +21,7 @@ function decodeImage(image: HTMLImageElement, src: string, signal: AbortSignal) 
   })
 }
 
-/** Loads at most three package-local PNG parts at a time; cancellation releases in-flight decode URLs immediately. */
+/** Loads at most three package-local PNG/WebP parts at a time; cancellation releases in-flight decode URLs immediately. */
 export async function loadAnimationPackage(url: URL, signal: AbortSignal) {
   signal.throwIfAborted()
   const loading = new AbortController()
@@ -41,9 +42,8 @@ export async function loadAnimationPackage(url: URL, signal: AbortSignal) {
         if (!response.ok) throw Error('Animation part load failed')
         const blob = await response.blob()
         loading.signal.throwIfAborted()
-        const header = new DataView(await blob.slice(0, 24).arrayBuffer())
-        if (header.byteLength < 24 || header.getUint32(0) !== 0x89504e47 || header.getUint32(4) !== 0x0d0a1a0a || header.getUint32(8) !== 13 || header.getUint32(12) !== 0x49484452) throw Error('Animation part must be PNG')
-        if (header.getUint32(16) !== asset.width || header.getUint32(20) !== asset.height) throw Error('Animation part dimensions differ from contract')
+        const dimensions = readImageDimensions(new DataView(await blob.arrayBuffer()))
+        if (dimensions.width !== asset.width || dimensions.height !== asset.height) throw Error('Animation part dimensions differ from contract')
         loading.signal.throwIfAborted()
         const image = new Image(), objectUrl = URL.createObjectURL(blob)
         try {
