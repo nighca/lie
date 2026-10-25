@@ -14,7 +14,7 @@ const phases = { intro: '案件介绍', interrogating: '正在调查', solved: '
 export function getPageTitle({ path, hasGame, game, shareFailed }: PageTitleContext): string {
   if (path === '/editor') return `创作案件 · ${BRAND_TITLE}`
   const mode = path === '/editor/preview' ? '试玩' : path === '/play' ? '分享案件' : null
-  if (mode == null && !hasGame) return `首页 · ${BRAND_TITLE}`
+  if (mode == null && !hasGame) return BRAND_TITLE
   if (path === '/play' && shareFailed) return `分享案件无法打开 · ${BRAND_TITLE}`
   if (game?.phase === 'failed') return `${mode ?? '案件'}无法打开 · ${BRAND_TITLE}`
   if (game == null || game.phase === 'loading') return `${mode === '试玩' ? '正在准备试玩' : mode === '分享案件' ? '正在打开分享案件' : '正在加载案件'} · ${BRAND_TITLE}`

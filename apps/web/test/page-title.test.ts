@@ -29,7 +29,7 @@ describe('page titles', () => {
     expect(readFileSync(new NodeURL('../index.html', import.meta.url), 'utf8')).toContain(`<title>${BRAND_TITLE}</title>`)
   })
   it.each(['/', '/unknown-route'])('names the rendered home at %s without using query text', (path) => {
-    expect(title(path, null, false)).toBe(`首页 · ${BRAND_TITLE}`)
+    expect(title(path, null, false)).toBe(BRAND_TITLE)
     expect(title(path, 'failed')).toBe(`案件无法打开 · ${BRAND_TITLE}`)
   })
   it('gives the editor a stable title regardless of cached game or untrusted query', () => {
