@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onDeactivated, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onActivated, onDeactivated, onUnmounted, ref, watch } from 'vue'
 import type { GameDefinition } from '@lie/game-core'
 import { AnimatedPortrait, CharacterChoice, ProductHeader, UiButton, UiNotice } from '@lie/ui'
 
@@ -19,6 +19,7 @@ const selectedId = ref<string | null>(null)
 const notice = ref<string | null>(null)
 const saveStatus = ref<string | null>(null)
 const busy = ref(false)
+const portraitActive = ref(true)
 const showIssues = ref(false)
 const overlay = ref<'example' | 'preset' | 'share' | 'submission' | 'delete' | 'clear' | null>(null)
 const shareUrl = ref<string | null>(null)
@@ -50,7 +51,8 @@ watch(draft, () => {
 }, { deep: true, flush: 'sync' })
 function invalidateCopy() { copyRevision++; copied.value = false }
 watch([overlay, shareUrl, submission], invalidateCopy, { flush: 'sync' })
-onDeactivated(invalidateCopy)
+onActivated(() => { portraitActive.value = true })
+onDeactivated(() => { portraitActive.value = false; invalidateCopy() })
 onUnmounted(() => { mounted = false })
 async function focus(field: string) {
   await nextTick()
@@ -160,7 +162,7 @@ async function copy(text: string) {
         <div v-else-if="step === 1" class="character-layout">
           <nav class="character-rail" aria-label="编辑人物"><CharacterChoice v-for="person in draft.characters" :key="person.id" class="character-card" :name="name(person)" :selected="selectedId === person.id" :aria-label="`编辑${name(person)}`" :style="{ '--character-accent': characterPreset(person)?.accent }" @click="selectedId = person.id"><template v-if="characterPreset(person)" #avatar><img :src="characterPreset(person)!.avatar" alt=""></template></CharacterChoice><button type="button" class="add-character" data-field="add-character" @click="addCharacter"><span>＋</span>添加人物</button></nav>
           <section v-if="character != null" class="panel character-editor" aria-label="人物编辑">
-            <div class="editor-character-stage"><button type="button" class="delete-button" :aria-label="`删除${name(character)}`" @click="overlay = 'delete'">删除人物</button><div class="editor-character-identity"><div class="portrait-halo"><AnimatedPortrait :src="characterPreset(character)?.animation ?? null" state="default" :label="name(character)"><img v-if="characterPreset(character)" :src="characterPreset(character)!.portrait" alt=""><span v-else class="portrait-initial">?</span></AnimatedPortrait></div><button type="button" class="preset-choice" data-field="preset" :aria-invalid="invalid('preset')" @click="overlay = 'preset'"><span class="preset-action">{{ characterPreset(character) == null ? '选择预设' : '更换预设' }}</span></button><h2>{{ name(character) }}</h2></div></div>
+            <div class="editor-character-stage"><button type="button" class="delete-button" :aria-label="`删除${name(character)}`" @click="overlay = 'delete'">删除人物</button><div class="editor-character-identity"><div class="portrait-halo"><AnimatedPortrait v-if="portraitActive" :src="characterPreset(character)?.animation ?? null" state="default" :label="name(character)"><img v-if="characterPreset(character)" :src="characterPreset(character)!.portrait" alt=""><span v-else class="portrait-initial">?</span></AnimatedPortrait></div><button type="button" class="preset-choice" data-field="preset" :aria-invalid="invalid('preset')" @click="overlay = 'preset'"><span class="preset-action">{{ characterPreset(character) == null ? '选择预设' : '更换预设' }}</span></button><h2>{{ name(character) }}</h2></div></div>
             <div class="character-fields">
               <label class="field">姓名<input v-model="character.name" :name="`name-${character.id}`" data-field="name" :aria-invalid="invalid('name')" placeholder="这个人物叫什么？"></label>
               <label class="answer-toggle"><input type="checkbox" data-field="answer" :aria-invalid="invalid('answer')" :checked="draft.ending.culpritId === character.id" @change="draft.ending.culpritId = ($event.target as HTMLInputElement).checked ? character.id : ''"><span><strong>将此人物设为案件答案</strong><small>玩家最终指认此人物，即挑战成功</small></span></label>

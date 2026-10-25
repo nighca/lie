@@ -30,3 +30,9 @@
 4. 捕获一条 `Uncaught TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.`，时间2026-10-25 11:37:43.985+08；无来源URL/堆栈，未定位归因，不将此轮描述为console clean，未扩大生产修复范围。此前任务也曾捕获同类记录，本轮不以此证明其来源。
 
 清理：自建tab26关闭，临时public/editor-state-qa.html删除；服务由原exec89431 Ctrl-C退出，最终lsof5402无listener。测试用原型shim随独立iframe销毁，不触碰产品文件。5402只留专项测试稿。工作树保留给主协调review；未 main/push/PR/deploy。
+
+## 主协调审查后生命周期补正
+
+冻结97a1803，追加Editor局部portraitActive激活状态：KeepAlive失活时卸载AnimatedPortrait，走其既有onUnmounted/watch cleanup停止requestAnimationFrame、abort加载与释放renderer；激活返回时重建立绘。只缓存编辑草稿/步骤/所选人物，不使隐藏编辑器动画和试玩动画并行。不改共享AnimatedPortrait接口/全局动画行为或视觉。
+
+新增一项真实KeepAlive生命周期回归，以带mounted/unmounted观测的立绘stub，验证失活释放一次、返回重新挂载、人物步骤与编辑姓名仍保留。该测试验证组件释放路径，不冒称真实GPU或帧率测量。追加后相邻editor-page/navigation共47项通过，Web typecheck通过；未重开服务/浏览器，复用上一版实际UI证据。原全量287/构建结果属于97a1803，root将对追加组合重跑。

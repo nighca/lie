@@ -1,4 +1,5 @@
 import { mount, flushPromises } from '@vue/test-utils'
+import { KeepAlive, defineComponent, h, onMounted, onUnmounted, ref } from 'vue'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { AnimatedPortrait, CharacterChoice } from '@lie/ui'
@@ -30,6 +31,27 @@ function page(stored: unknown = null) {
 }
 
 describe('three-step editor', () => {
+  it('releases the portrait while cached and remounts it on return without losing editing state', async () => {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(game))
+    const visible = ref(true)
+    const mounted = vi.fn()
+    const released = vi.fn()
+    const portrait = defineComponent({ setup() { onMounted(mounted); onUnmounted(released); return () => h('div', 'portrait') } })
+    const wrapper = mount(defineComponent({ setup: () => () => h(KeepAlive, null, { default: () => visible.value ? h(Editor, { characterPresets: [characterPreset] }) : null }) }), { global: { stubs: { AnimatedPortrait: portrait } } })
+    cleanup.push(() => wrapper.unmount())
+    await wrapper.findAll('.editor-steps button')[1].trigger('click')
+    await wrapper.get('[data-field=name]').setValue('保留的姓名')
+    expect(mounted).toHaveBeenCalledTimes(1)
+    visible.value = false
+    await flushPromises()
+    expect(released).toHaveBeenCalledTimes(1)
+    visible.value = true
+    await flushPromises()
+    expect(mounted).toHaveBeenCalledTimes(2)
+    expect(wrapper.get('h1').text()).toBe('故事人物')
+    expect((wrapper.get('[data-field=name]').element as HTMLInputElement).value).toBe('保留的姓名')
+  })
+
   it('uses the shared product brand, draft notice and existing leave event', async () => {
     const { wrapper, click } = page(game)
     expect(wrapper.get('.lie-product-header__brand span').text()).toBe('语音推理')
