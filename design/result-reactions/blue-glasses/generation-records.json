@@ -1,0 +1,37 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "source": "design/character-presets/assets/blue-glasses/animation/parts/default-source.png",
+  "states": [
+    {
+      "state": "accusedCorrectly",
+      "prompt": "Use case: identity-preserve. Edit target: supplied transparent 1254x1254 blue-overalls round-glasses game sprite. Change ONLY eyes, eyebrows and mouth to a clearly lively embarrassed 'you caught me' face: inner brows raised in resigned admission, eyes half-lidded looking slightly down, small wry asymmetric mouth with corners a little down (not the original happy smile). Moderate comic sheepishness, not crying or sorrow. Preserve EXACT entire 1254 canvas and registration, hair/head silhouette, glasses frame circles and their exact position, nose, ears, neck and whole blue-overall body and hands identically. The eye changes must remain correctly contained inside original glasses lenses. Same navy ink cartoon style/skin colors. Real transparent background, no text, symbols, props, tears/sweat.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-4fc9e68f-e45a-4f00-b8ea-5aabe73866dd.png",
+      "savedPath": "parts/accused-correctly-source.png",
+      "sha256": "92335e7905e75f16673c8342f24a15499c63af8863926fd80ffb93f097b08d07",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "state": "accusedWrongly",
+      "prompt": "Use case: identity-preserve. Edit supplied transparent 1254x1254 round-glasses blue-overalls game sprite. Change ONLY face eyes, eyebrows and mouth into clearly visible 'Me?!' questioning surprise. One eyebrow much higher than the other, both eyes widened but eye pupils contained correctly inside glasses, small open O mouth with visible pink tongue. Playful surprised innocence, not angry/frightened. Keep EXACT canvas, registration, hair and head/neck silhouettes, glasses frame lens circles in exactly same place, nose/ears/skin shading, shirt/overalls/full body/arms and hands unchanged. Same crisp navy cartoon ink/style. Preserve true transparent background. No symbols/text/tears/sweat/props.",
+      "file": "/Users/nighca/.codex/generated_images/01a17157-03fe-7633-aee0-4630c4c6840a/exec-8d09bbf8-58f4-4c09-9b8f-53f9d2190caf.png",
+      "savedPath": "parts/accused-wrongly-source.png",
+      "sha256": "665ec6c1b3c31d3e5be878ebf06cb87de0ec42f6593bf37544a8b640591b805b",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ]
+}

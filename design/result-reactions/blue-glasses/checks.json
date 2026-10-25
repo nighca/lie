@@ -1,0 +1,17 @@
+{
+  "status": "source-data-passed-terminal-and-browser-pending",
+  "originalClipsAndParts": "unchanged",
+  "rigidResultSamples": 242,
+  "terminalHold": true,
+  "assets": 8,
+  "sha256": {
+    "waiting-source": "ac827cb8a85dac69bd19b1a09b455c751bd1dd65f18833ca91d1b275164907db",
+    "waiting-torso": "3527476e1c65d0463fd991d7fe5f2b69313ac534a45bd9ed5be7742439bd6ac0",
+    "shared-torso": "2a4ad43d7ecd09f47a790757941d8dd77d803bdd8460d13d5ffc32f4cf8d6226",
+    "default-source": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "listening-source": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46",
+    "speaking-source": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c",
+    "accused-correctly-source": "92335e7905e75f16673c8342f24a15499c63af8863926fd80ffb93f097b08d07",
+    "accused-wrongly-source": "665ec6c1b3c31d3e5be878ebf06cb87de0ec42f6593bf37544a8b640591b805b"
+  }
+}
