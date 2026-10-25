@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { URL as NodeURL } from 'node:url'
 import { effectScope, nextTick, reactive, ref, shallowRef } from 'vue'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -25,7 +26,7 @@ function binding(path = '/', query: RouteLocationNormalizedLoaded['query'] = {})
 
 describe('page titles', () => {
   it('uses the formal brand before JavaScript is loaded', () => {
-    expect(readFileSync('index.html', 'utf8')).toContain(`<title>${BRAND_TITLE}</title>`)
+    expect(readFileSync(new NodeURL('../index.html', import.meta.url), 'utf8')).toContain(`<title>${BRAND_TITLE}</title>`)
   })
   it.each(['/', '/unknown-route'])('names the rendered home at %s without using query text', (path) => {
     expect(title(path, null, false)).toBe(`首页 · ${BRAND_TITLE}`)

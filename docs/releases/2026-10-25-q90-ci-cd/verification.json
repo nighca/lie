@@ -1,0 +1,69 @@
+{
+  "publishedSha": "297666a69286e067d4a28135f9331ef4bd5f7726",
+  "remoteMainConfirmed": true,
+  "ci": {
+    "id": 40164981567,
+    "attempt": 1,
+    "url": "https://github.com/nighca/lie/actions/runs/40164981567",
+    "conclusion": "failure",
+    "jobId": 121084079808,
+    "failedStep": {
+      "number": 8,
+      "name": "Test with application and separate script coverage"
+    },
+    "applicationFiles": {
+      "passed": 56,
+      "failed": 1,
+      "total": 57
+    },
+    "applicationTests": {
+      "passed": 572,
+      "failed": 1,
+      "total": 573
+    },
+    "failure": {
+      "file": "apps/web/test/page-title.test.ts",
+      "line": 28,
+      "case": "uses the formal brand before JavaScript is loaded",
+      "message": "ENOENT: no such file or directory, open 'index.html'"
+    }
+  },
+  "cd": {
+    "id": 40165091706,
+    "attempt": 1,
+    "url": "https://github.com/nighca/lie/actions/runs/40165091706",
+    "conclusion": "skipped",
+    "jobId": 121084402804,
+    "jobSteps": []
+  },
+  "actualDeployment": false,
+  "onlineStaticProbe": "not executed because CI failed and CD skipped",
+  "lastConfirmedDeploymentSha": "48316544ea9fd22afbf1eee8db6f81e326026821",
+  "mutations": "No dispatch, rerun, push, manual deploy, Cloudflare account change, browser, service or provider action",
+  "localFix": {
+    "file": "apps/web/test/page-title.test.ts",
+    "scope": "node:url NodeURL import plus module-relative HTML read only",
+    "testFileSha256": "18bb672a935e918b634b8b021791705a8a001570029c74a201eacb66f04dc841",
+    "node": "v24.22.1",
+    "npm": "11.13.0",
+    "rootCoverage": {
+      "exit": 0,
+      "applicationTestFiles": 57,
+      "applicationTests": 573,
+      "scriptTests": 33,
+      "applicationLines": "1743/1817 (95.92%)",
+      "nativeScriptLines": "275/300 (91.67%)",
+      "sourceFilesCovered": 52
+    },
+    "webWorkspaceTitleTests": 20,
+    "webTypecheck": "PASS",
+    "coverageSample": {
+      "sourceSha": "297666a69286e067d4a28135f9331ef4bd5f7726",
+      "dirty": true,
+      "collectedAt": "2026-10-25T05:22:05.037Z",
+      "node": "v24.22.1"
+    },
+    "firstDraft": "Global new URL failed with URL must be scheme file under browser/Vite asset transform; NodeURL alias follows existing filesystem tests and passed both entry points",
+    "remoteFixValidation": "Not yet published or remotely tested"
+  }
+}

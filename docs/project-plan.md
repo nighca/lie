@@ -14,7 +14,7 @@
 
 ## 当前队列与下一步
 
-用户最新授权：本次合完、review后由唯一root执行普通push并发布线上；三位design已完成[本批审计](result-outcome-design/first-batch-audit.md)实际review并本地归档，不提前声称发布成功。
+用户本轮授权的普通push已由root完成：远端main297666a；CI40164981567因标题测试cwd路径失败，CD40165091706按门禁skipped，未更新线上。测试module-relative NodeURL修复已本地root coverage573+脚本33/Webtypes及workspace标题20项通过，待root审查后正常新提交发布；[实际证据与建议](releases/2026-10-25-q90-ci-cd/README.md)。三位design已review入库，正式结果UI/激活仍独立在制。
 
 当前发布批次：两owner修复/小UI已root审查、组合288/types/build89通过并发布48316544，CI实际部署及线上入口静态指纹已核；[发布preflight与验证复用](coordinator-handoff.md#本轮单次发布准备)明确检查范围。后续连接loading及R结果视觉分阶段生产独立推进，不混入此次已发布SHA。
 
@@ -22,7 +22,7 @@
 
 | 优先 / owner | 当前状态与下一步 |
 | --- | --- |
-| 已main未推 CI/CD拆分 / architecture_code_review＋root | CI仅checks/coverage/build/dryrun与产物，CD限同仓main成功CI精确run/SHA、latest-main/最小权限/生产串行；候选746718a与q90组合实际Web334/runtime80/generator24/CI17、types/build89、195文件pack→restore及隔离cf dry-run通过。[组合报告](performance/image-build-optimization/combined-main-verification.md)。root已实际审查报告并本地集成；未push，远端Actions/Linux部署未验。 |
+| 已推297，未部署 CI/CD拆分 / architecture_code_review＋root | CI仅checks/coverage/build/dryrun与产物，CD限同仓main成功CI精确run/SHA、latest-main/最小权限/生产串行；候选746718a与q90组合实际Web334/runtime80/generator24/CI17、types/build89、195文件pack→restore及隔离cf dry-run通过。[组合报告](performance/image-build-optimization/combined-main-verification.md)。root已实际审查报告并本地集成；未push，远端Actions/Linux部署未验。 |
 | 不采用 旧版本保留 / production_release_compatibility＋root | 用户2026-10-25明确“不需要考虑旧版本兼容，老版本资源可以删除”。取消61a4f4d→cad7fd7→14a32fb实施/14天保留/累计256MiB预算选择门禁，不接CLI/CI、不再等待确认；现有hash构建仅current资源即可，无新增代码。候选README、修正、完整三SHA与代码引用[归档](archive/2026-10-25/release-retention-not-adopted/README.md)，[审查](reviews/release-compatibility-2026-10-25/README.md)保留。此批无实际线上删除；不授权清理Git历史/WT/凭据或广泛账号工件。 |
 | 已main 动画 / 动画专项＋root | 用户视觉已验，root完整技术/范围review；用户取消PR路线，原owner已确认PR #1 CLOSED/mergedAt null，无merge。常规本地候选df8d26d（main14ca＋23链＋9aa报告）Web281/UI43/runtime33、三包types/build89、hash/8包/46parts/龙三叔及QA隔离均通过，[完整报告](animation/combined-final-animation-verification-2026-10-25.md)，已root review并本地main299，已随48316544发布/CI实际部署。不重复视觉，不夹整个远程分支。 |
 | 已main 连接提醒＋active切人续接 / 调查视觉＋root | source fc635b56→dba2d641已root完整review，两提交纳入main **9b17538ba93fb9c388851a6882f1deb9954a304e**；全局醒目连接提示/取消，以实际收音ready退出，准备不计时；仅active（含准备中）切人断A接B，原已结束不开，历史/额度保留，迟到事件隔离、失败无循环。最终组合**31套266tests/types/build89通过**，7hash/完整20路径同源，龙三叔manifest/hash及QA不进生产包已核；[验收与复用边界](performance/2026-10-25/combined-voice-verification.md)。源IAB桌面/391为离线替身，无真人mic/provider；5507 PID50346/PTY39627 exit1无监听、tab39清。已随48316544发布/CI实际部署；App/controller所有权已释放给改编。提示居中微调7424已完整review并纳入main b3f9bf69029cb04aa0c21c58080192ee53f71b2a；5507本轮PID85753/PTY22271 exit1、无监听/tab40清。用户追加PC去姓名后立绘底部空，原owner仅获桌面portrait-backdrop CSS有界下移验收turn，窄屏/资源/组件不动，source ffa0b7534ccec65c34be81a1ae78aeb6a96ce6bc（baseb3，desktop top32px/mobile0）已root review并main14ca，当前组合保留，5507 PID8323/PTY85340 exit1、无监听/tab41清；不抢改编文件。 |
@@ -33,7 +33,7 @@
 | 首批三位design已main归档 / 动画parent＋root | 用户批准珊瑚374及后7自行验收。sunny e362、silver174→6f、plum4fa、父补证458已root逐文件review，候选da68bfd的57design路径同父来源；当前870 reader实际4人968采样通过，生产/canonical零变化，[审计与归档报告](result-outcome-design/first-batch-audit.md)。root已实际读报告并本地归档，正式manifest激活/结果App＋CSS仍由动画parent实施；另4位不冒称完成，5355用户消费者保留。用户已新增授权本次合完review后root普通push并发布线上，尚未执行。 |
 | 已main462d8a4未推 / 调查页高度＋character_preset_migration | source7c5ab232→候选1dc7e996，相main9a6635ce仅12行高度CSS；原测量/fixture身份与JSON断言复核、Webbuild99modules/strict89通过。[短报告](investigation-viewport-height-combined.md)。原IAB45–47按身份范围复用，本轮无browser/service；5507 PID29602/PTY38417 exit1、无监听、tabs/temp清。 |
 | 讨论，不可实施 / 单JSON增加内置案 | 用户提出简化新增案；root建议summary回正文、可选order缺省末尾按ID、derive catalog/去副本/去三案测试硬编码，字段和排序尚未用户确认。[短提案](builtin-case-json-proposal.md)，不改schema/内容。 |
-| 已main未推 q90 / 图片专项＋architecture_code_review＋root | 用户已批准q90/m6/alpha_q100、不缩放/原PNG保留。图片六源提交及CI拆分组成746718a，实际Web334/types/build89及81图/92hash/8包46parts闭包通过，9,746,332B、50cache hits；[组合报告与独立审计](performance/image-build-optimization/combined-main-verification.md)。root已实际审查报告并本地集成，未push/deploy；源IAB4图仅同hash静态资源范围复用。 |
+| 已推297，未部署 q90 / 图片专项＋architecture_code_review＋root | 用户已批准q90/m6/alpha_q100、不缩放/原PNG保留。图片六源提交及CI拆分组成746718a，实际Web334/types/build89及81图/92hash/8包46parts闭包通过，9,746,332B、50cache hits；[组合报告与独立审计](performance/image-build-optimization/combined-main-verification.md)。root已实际审查报告并本地集成，未push/deploy；源IAB4图仅同hash静态资源范围复用。 |
 | 已main未推 全站page title / Editor＋root | d325→4cd已root全文review，当前候选e818440→ba68f00接HTML正式品牌/title helper/真实Application两行；组合Web319/UI52/runtime43/generator23/types/build89（96modules）通过。[组合报告](page-titles/result-contract-combined-verification.md)。保留preview gate/loading；原IAB19矩阵与final28两页复核按原范围复用，未新browser。已root读报告并main365，未push/deploy。 |
 | 已main未推 编辑器草稿提示位置 / Editor＋root | 已在main6b126c9整体移到步骤条下方居中，出现条件/清除/缓存语义不改、窄屏可换行；与姓名高亮组合329/types/build通过。 |
 | 组合通过 公共角色名高亮＋草稿提示 / Editor＋root | source277→1a→db2→8b→335已root完整review；公共纯文本组件/统一样式覆盖调查标题、指认、成功经过和Editor预览，草稿状态/清除入口移三步下居中，wrong不泄真相、输入/复制/按键不改。已删唯一未引用global旧规则，不动height布局。最终候选fd4b257 Web35files329/types/build89（99modules）及资源/QA隔离通过，[报告](character-name-highlights/combined-verification.md)；已root审报告并main6b126c9，未push/发布。源IAB按记录范围复用，5402exec57157/tab29/storage已清理，未归因MutationObserver限制保留。 |
