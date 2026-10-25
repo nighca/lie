@@ -134,3 +134,16 @@ for phase in phases['waiting']:
  draws=[n for n in data['nodes'] if 'sprite' in n and visible(n,phase['pose'])]
  for x,y in points:assert max(alpha(n,x,y,phase) for n in draws)>=128,(phase['seconds'],x,y,'new elbow/support cut lost original opaque interior')
 print(f'{rigid_count} constant-unit orthogonal head/contact world matrices; {len(points)*len(phases["waiting"])} dense elbow/support interior probes; independent unrotated chest and fixed lower PASS')
+
+head_mask=next(n['sprite']['mask'] for n in data['nodes'] if n['id']=='head-waiting')
+arm_mask=next(n['sprite']['mask'] for n in data['nodes'] if n['id']=='waiting-arm-contact')
+chest_mask=next(n['sprite']['mask'] for n in data['nodes'] if n['id']=='waiting-contact')
+neck_ink=0
+for y in range(370,411):
+ for x in range(685,716):
+  r,g,b,a=images['waiting-source'].getpixel((x,y))
+  if a>=240 and max(r,g,b)<100:
+   neck_ink+=1
+   assert inside(x,y,chest_mask) and not inside(x,y,head_mask) and not inside(x,y,arm_mask),(x,y,'lower neck contour has multiple owners')
+assert neck_ink>100
+print(f'{neck_ink} source-classified lower-neck ink probes belong only to the chest, excluded from moving head and hand')
