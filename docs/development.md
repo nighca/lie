@@ -110,21 +110,21 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 | Editor验收 | Editor `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 5402，只有必要的受控代理才用5403；同源fixture复用，当前验收结束即停。 |
 | 调查UI验收 | 调查 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 5507；同源路径复用，当前验收结束即停。 |
 | 动画制作预览 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 5358 ochre、5359 mint；owner可在不影响当前制作的前提下合用一套多root服务，不强停在制消费者。制作/本批验收结束即停。 |
-| 协调分配的有界验收 | root当轮明确的owner；当前下一turn `character_preset_migration` 首帧任务 | 5544；不同任务串行借用，不永久属于旧探索QA。先核监听/owner，登记实际WT/SHA/PID/PTY/消费者，结束原PTY停止并核销；不得另开端口或恢复暂停鉴权。 |
+| 协调分配的有界验收 | root当轮明确的owner；当前无新turn，上一组合任务已结束 | 5544；不同任务串行借用，不永久属于旧探索QA。先核监听/owner，登记实际WT/SHA/PID/PTY/消费者，结束原PTY停止并核销；不得另开端口或恢复暂停鉴权。 |
 
 PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已控制该进程。端口分配也不证明当前已有服务在跑；每轮实际状态看下表。CF开发服务器附带的workerd/内部RPC端口属于8788同一受保护进程树，不作为闲置独立预览批杀。
 
-### 当前登记（本次协调整理，原基线main30822d3，追加同步至22b0b93）
+### 当前登记（2026-10-25，基线main7249a6f；轮换已暂停）
 
-这是root完整交付事实的更新，不是本次新做端口扫描。PID/PTY仅属于原启动会话，操作前仍须owner实际核对；源码HEAD不证明dirty运行字节。历史21服务清理及所有原始回执已在[清理记录](history/2026-10-25/development-service-cleanup.md)和[整理前原文](history/2026-10-25/coordinator-state-before-refresh-30822d3/development.md)保留，不按历史PID重复停止。
+用户约10:44暂停四小时换chat，root01a17012继续active/唯一integrator；准备文档不授权停止用户常驻环境或其他owner服务。这是root完整交付事实的更新，不是本次新做端口扫描。PID/PTY仅属于原启动会话，操作前仍须owner实际核对；源码HEAD不证明dirty运行字节。历史21服务清理及所有原始回执已在[清理记录](history/2026-10-25/development-service-cleanup.md)和[整理前原文](history/2026-10-25/coordinator-state-before-refresh-30822d3/development.md)保留，不按历史PID重复停止。
 
 | 端口 / 状态 | owner / 消费者 | 来源 / PID / PTY / 停止条件 |
 | --- | --- | --- |
 | 8787/8788，用户常驻受保护 | root协调、用户；既有launchd及网关内部子监听 | owning main动态跟随，真实版本查/__lie/main-status。旧盘点PID不沿用为当前PID；没有新明确服务turn不得停止、重启或复制实例。 |
-| 5355，最新修复回合已结束 | 动画01a16d44… | approved-animation-rigid-batch/lie@a432b72；PID99890/原PTY38260 exit130、无监听，tab58关闭，无保留服务。旧d106精确归因PID52630/23642是历史，不重停。源23链未root fullreview，不因服务结束清WT/refs。 |
+| 5355，最新修复回合已结束 | 动画01a16d44… | approved-animation-rigid-batch/lie@a432b72；PID99890/原PTY38260 exit130、无监听，tab58关闭，无保留服务。旧d106精确归因PID52630/23642是历史，不重停。用户已验视觉，现仅代码/资源/范围技术review；约10:46原sourceWT不再登记且目录空，Git23链对象仍保留，旧clean只属原交付，不因服务结束清refs。 |
 | 5544，最终组合验收回合已结束 | character_preset_migration | root候选be83810实际built Worker；Node35404/workerd35876，原PTY13186退出130，PID/监听消失；Chrome1910329555关、Fetch/cache/Network清理。后续视觉组合无新服务；首帧69515/74321及性能43122/53366是历史，不重复操作。 |
-| 5507，背景与标题两回合均已结束 | 调查01a16d5c… | background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听；tabs37/38/临时入口均已清理，无覆盖/草稿改动。 |
+| 5507，旧两回合结束；新语音turn已发 | 调查01a16d5c… | 旧background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听，tabs37/38已清。新语音连接/切人交互已给调查owner实施turn，5507按需使用，实际新WT/SHA/PID/PTY/消费者尚待回执；不能用旧关闭证据推定新进程状态。 |
 | 5402/5403，Editor固定分配 | Editor01a16d90… | 没有新增常驻要求；本次未做监听扫描，不把历史空闲当当前精确进程状态。仅owner按需启用并用后停。 |
 | 5358/5359及18旧服务，历史清理完结 | 原调查/Editor/动画owner | 既有21服务清理回执存档，不为复用固定端口自动常驻或重复关闭历史进程。 |
 
-保留所有在制/依赖WT、refs及ignored必要材料：特别是动画聚合/两lane/父QA/旧formal来源、性能完整handoff、姓名dirty、首帧和年长声调查。服务退出不授权清理它们。前代分享自建tab清理unknown不能按复用的browser/tab号码盲关，须先核实际归属。所有生产维护、真人mic/provider及用户draft另守授权边界。
+保留所有在制/依赖WT、refs及ignored必要材料：特别是动画23链可恢复Git对象及两lane/父QA/旧formal来源、发布兼容61→cad→14a、语音新任务、改编方案、首帧和年长声调查。最新[只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/worktree-status.json)有时间边界：原browser-architecture dirty及invite-access-design未跟踪归档材料不清；动画sourceWT其后缺失更新见[handoff](coordinator-handoff.md)。服务退出不授权清理它们。前代分享自建tab清理unknown不能按复用的browser/tab号码盲关，须先核实际归属。所有生产维护、真人mic/provider及用户draft另守授权边界。

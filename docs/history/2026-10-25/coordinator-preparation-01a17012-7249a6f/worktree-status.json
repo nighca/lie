@@ -1,0 +1,684 @@
+{
+  "capturedAt": "2026-10-25T02:37:57.006769+00:00",
+  "main": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+  "worktrees": [
+    {
+      "worktree": "/Users/nighca/code/nighca/lie",
+      "HEAD": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+      "branch": "refs/heads/main",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-appearance-assets",
+      "HEAD": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "branch": "refs/heads/codex/player-detective-avatar-options",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-approved-visual-design",
+      "HEAD": "ecd0445a0e3bca933b8c109b18b11f677aa7a0c1",
+      "branch": "refs/heads/codex/approved-visual-design",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-browser-architecture",
+      "HEAD": "13aabaf46d9f8ec041e1ee431d5215daf652aee3",
+      "branch": "refs/heads/codex/browser-architecture",
+      "exists": true,
+      "statusExit": 0,
+      "status": [
+        " M AGENTS.md",
+        " M README.md",
+        " M docs/deployment-options.md",
+        "?? docs/validation.md"
+      ],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-browser-game",
+      "HEAD": "d2729bb4a2a32e9ed0ef13f2605655be00464a66",
+      "branch": "refs/heads/codex/intermittent-game-load",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-case-content",
+      "HEAD": "6479ef29ac9c9f2db54878df04e97a7b781677d5",
+      "branch": "refs/heads/codex/expanded-appearance-runtime",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-cf-spike",
+      "HEAD": "a8c3be073c60e8441ed21df19f7600403bbe06a5",
+      "branch": "refs/heads/codex/cf-spike",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-chinese-style-variants",
+      "HEAD": "71009f02e804b6a602f22b29c7ed08badd206ec8",
+      "branch": "refs/heads/codex/chinese-style-variants",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-game-core",
+      "HEAD": "2ee94a84f1ff98624d581881671e8917048fa397",
+      "branch": "refs/heads/codex/game-core",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-gateway-integration",
+      "HEAD": "32d89bf91f441168148884593a0f49b816ad7162",
+      "branch": "refs/heads/codex/local-preview-cache-fix",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-integrate-text-architecture",
+      "HEAD": "21eadee61b9928182898a225bf356a9c9a39e71b",
+      "branch": "refs/heads/codex/integrate-preset-voices",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-interaction-prototype",
+      "HEAD": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "branch": "refs/heads/codex/interaction-prototype",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-intro-card-width",
+      "HEAD": "c4c1b4957ef34099f54379d1537ccea5d015fc3e",
+      "branch": "refs/heads/codex/intro-card-width",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-linx-probe",
+      "HEAD": "2c3c217c86bb852e60b209004f55841a2c3185c5",
+      "branch": "refs/heads/codex/linx-probe",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-playful-visual-direction",
+      "HEAD": "8ee0719351b23ef513d12394dbf16b9b5198fc37",
+      "branch": "refs/heads/codex/playful-visual-direction",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-project-scaffold",
+      "HEAD": "9ae09c47bae9c4aec3503a92e1765b1876d9304f",
+      "branch": "refs/heads/codex/project-scaffold",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-shared-ui-kit",
+      "HEAD": "3470fb321eaa8587124a9c58dd567cba79f7dedd",
+      "branch": "refs/heads/codex/variable-character-counts",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-validation-records",
+      "HEAD": "26e0b86e028eb57269e4b58b9eb4405e9025b6b5",
+      "branch": "refs/heads/codex/validation-records",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-visual-styleboards",
+      "HEAD": "d3e0296ce6f7d5dfcf585515aec63f8bbc2673ea",
+      "branch": "refs/heads/codex/visual-styleboards",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/private/tmp/lie-voice-adapter",
+      "HEAD": "0d0fe614dcf7f8bd011b6521ce8b5f472b75c1cc",
+      "branch": "refs/heads/codex/public-voice-launch-proposal",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/animation-breathing-revision/lie",
+      "HEAD": "76dfc7a15df1350b6778d336049c8a28427302c8",
+      "branch": "refs/heads/codex/animation-breathing-revision",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/animation-first-render/lie",
+      "HEAD": "574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a",
+      "branch": "refs/heads/codex/animation-first-render",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/animation-mint-ochre-revision/lie",
+      "HEAD": "26bed1b30b495d9cbf23f6b2e412fc819bfbfb8c",
+      "branch": "refs/heads/codex/animation-mint-ochre-revision",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/animation-rigid-code-review/lie",
+      "HEAD": "06026043ffc548b61efd7220ee622ace1d68b4d5",
+      "branch": "refs/heads/codex/cache-delivery-review",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/architecture-code-review/lie",
+      "HEAD": "bb947d0ab1a5ad2374e2f0ebe91686afbdb84ad6",
+      "branch": "refs/heads/codex/context-frame-guard",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/background-character-names/lie",
+      "HEAD": "09b10a4973d76da325f0cbb1a3204f11a11f68ba",
+      "branch": "refs/heads/codex/background-character-names",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/blue-glasses-animation/lie",
+      "HEAD": "8a4f7f988b640e7b7619aa9a9edcf2d8968dde21",
+      "branch": "refs/heads/codex/blue-glasses-animation",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/bundled-case-catalog/lie",
+      "HEAD": "d494e433031a3632d7510cfb50a2abc0c92390e5",
+      "branch": "refs/heads/codex/bundled-case-catalog",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/character-preset-migration-dawn/lie",
+      "HEAD": "860ead838d00082bee3349b445676a5c6bb92f2e",
+      "branch": "refs/heads/codex/preset-loading-recovery",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coordinator-current-state-refresh/lie",
+      "HEAD": "f30dc0ff128a60982c2925843ba74df5ebb297d4",
+      "branch": "refs/heads/codex/coordinator-current-state-refresh",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coordinator-dawn-registration/lie",
+      "HEAD": "e5d0b05d5b0afab1f685af4562c57f13319cd227",
+      "branch": "refs/heads/codex/coordinator-dawn-registration",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coordinator-rotation-preparation/lie",
+      "HEAD": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+      "branch": "refs/heads/codex/coordinator-rotation-preparation",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coral-animation-next/lie",
+      "HEAD": "85b8f44ae8c8ba6f74b6840b4735ff90351d674d",
+      "branch": "refs/heads/codex/coral-animation-next",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coral-game-animation/lie",
+      "HEAD": "f60ff43ff766ce8baf56da1791c6d3e2e1a9937c",
+      "branch": "refs/heads/codex/coral-game-animation",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coral-game-bridge/lie",
+      "HEAD": "323bd0a1c5b18e904f8f69542834e5f3093ec31b",
+      "branch": "refs/heads/codex/coral-game-bridge",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coral-runtime-evaluation/lie",
+      "HEAD": "0faa4dff3196594cfe789d5ed59d43eb88848139",
+      "branch": "refs/heads/codex/coral-runtime-evaluation",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/coverage-reporting/lie",
+      "HEAD": "47deba171ae4cb83ed137da7b4d6cb64323d8a02",
+      "branch": "refs/heads/codex/coverage-reporting",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/dawn-acceptance-status/lie",
+      "HEAD": "c7cd03cbab39391aaa728ab505932652693df9a4",
+      "branch": "refs/heads/codex/three-character-completion-status",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/design-document-archive/lie",
+      "HEAD": "13830beaecb706089a4918c5be9927b5b41442cb",
+      "branch": "refs/heads/codex/design-document-archive",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/editor-unique-names/lie",
+      "HEAD": "dfd89c424c6a48ef57a31c0f7584a335c244c113",
+      "branch": "refs/heads/codex/editor-unique-names",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/final-two-character-game/lie",
+      "HEAD": "72c4a93a7a5bd2c1ed4baa78e261d516139a64e9",
+      "branch": "refs/heads/codex/final-two-character-game",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/integrate-character-preset-dawn/lie",
+      "HEAD": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+      "branch": "refs/heads/codex/integrate-case-content-refinement",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/integrate-dawn-acceptance-status/lie",
+      "HEAD": "fb6ae85baacf9a15d430b6f07437bf459497d86e",
+      "branch": "refs/heads/codex/integrate-access-design-intake",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/integrate-dawn-registration/lie",
+      "HEAD": "3f52ee599c321e76528cc7c73d52777ca9f6c34d",
+      "branch": "refs/heads/codex/integrate-dawn-registration",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/integrate-design-document-archive/lie",
+      "HEAD": "666e9c9269218ceabcc4c3eba452633ffec77538",
+      "branch": "refs/heads/codex/integrate-design-document-archive",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/integrate-invite-access-design/lie",
+      "HEAD": "2982e6a77046d9f3c3744e529c08166149e3eddc",
+      "branch": "refs/heads/codex/integrate-three-character-completion-status",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/integrate-three-character-reviewed/lie",
+      "HEAD": "a4e9f7d1e04a8c0d58f0f7cbec335e686913d36c",
+      "branch": "refs/heads/codex/integrate-three-character-reviewed",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/investigation-approved-ui/lie",
+      "HEAD": "f283d16f209c3940f50cf8fb30112fb507d9f506",
+      "branch": "refs/heads/codex/investigation-approved-ui",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/investigation-controls-v3/lie",
+      "HEAD": "c7f12842beac0554e0574de6b91000b99d7defb9",
+      "branch": "refs/heads/codex/investigation-controls-v3",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/investigation-production-v3/lie",
+      "HEAD": "39dd344f9b7abcb9f651d344c541c5ff813a2221",
+      "branch": "refs/heads/codex/investigation-production-v3",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/investigation-ui-polish/lie",
+      "HEAD": "0807f50d6125c14790a20879998d6974dc746168",
+      "branch": "refs/heads/codex/investigation-ui-polish",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/invite-access-design/lie",
+      "HEAD": "3ed266a62124a988a097dfb09406dd4d20c64a3f",
+      "branch": "refs/heads/codex/invite-access-implementation",
+      "exists": true,
+      "statusExit": 0,
+      "status": [
+        "?? docs/archive-inbox/invite-access-paused-2026-10-25/"
+      ],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/invite-access-gateway/lie",
+      "HEAD": "b16dc185c56f0cbba0e203466188d12a935de140",
+      "branch": "refs/heads/codex/invite-access-gateway",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/invite-access-web/lie",
+      "HEAD": "00bf9769c4ddc8f68809782c37dd9c46569dea90",
+      "branch": "refs/heads/codex/invite-access-web",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/older-male-voice/lie",
+      "HEAD": "63d5b76aee56fa1d42036c7a4be345b486c210d7",
+      "branch": "refs/heads/codex/older-male-voice",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/production-performance/lie",
+      "HEAD": "bd724954e4ff8e518730fe8e0a0f15c712286424",
+      "branch": "refs/heads/codex/production-performance-build",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/production-release-compatibility/lie",
+      "HEAD": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "branch": "refs/heads/codex/production-release-compatibility",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/promo-production-research-update/lie",
+      "HEAD": "b8912bb58c08981726dd8cd1a11ddceaea26ddf8",
+      "branch": "refs/heads/codex/promo-production-research-update",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/publication-readiness/lie",
+      "HEAD": "fad5d862f239dd5f85cc00bbb1c712a9119d3cd0",
+      "branch": "refs/heads/codex/publication-readiness",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/release-compatibility-review/lie",
+      "HEAD": "154d583081fa72fefd0c4404baa9db43f4f136ac",
+      "branch": "refs/heads/codex/release-compatibility-review",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/result-scene-implementation/lie",
+      "HEAD": "d97a13b11ed5e38f9bdc3acfe39c9c83aa91d43a",
+      "branch": "refs/heads/codex/result-scene-implementation",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/result-scene-proposal/lie",
+      "HEAD": "e743283fa0a63e6c39fc49b0e231fc26b43e5129",
+      "branch": "refs/heads/codex/result-scene-proposal",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/review-accusation-fan-dawn/lie",
+      "HEAD": "3a677358cc5fc69f215f13c44d51c5a9643eab2c",
+      "branch": "refs/heads/codex/review-accusation-fan-dawn",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/review-editor-portrait-dawn/lie",
+      "HEAD": "f4338346e3ec20fd742f6a75ea4362f428c18b5b",
+      "branch": "refs/heads/codex/review-editor-portrait-dawn",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/review-share-wrap-dawn/lie",
+      "HEAD": "163bd0deee6899df4a3d77cda562e511edb1a9cf",
+      "branch": "refs/heads/codex/review-share-wrap-dawn",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/share-intro-wrap/lie",
+      "HEAD": "c13e6194751334085094a10b773018a998341b01",
+      "branch": "refs/heads/codex/share-intro-wrap",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/silver-bun-animation/lie",
+      "HEAD": "97548eaa3f324ffb46e8e5fec21185c06b4a3956",
+      "branch": "refs/heads/codex/silver-bun-animation",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/stable-exploratory-qa/lie",
+      "HEAD": "0a25d05c0aee251f8fa19ece73b40328155dd68e",
+      "branch": "refs/heads/codex/stable-exploratory-qa",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/three-character-final-dawn/lie",
+      "HEAD": "3cbe10323280cffa7106f0e5539c9caf75646852",
+      "branch": "refs/heads/codex/three-character-final-dawn",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/three-character-integrate-dawn/lie",
+      "HEAD": "051c441027030b8795cc14d7d998d85f14f55dd9",
+      "branch": "refs/heads/codex/three-character-integrate-dawn",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/three-character-qa-dawn/lie",
+      "HEAD": "bfb2a33954cf78ea9b92e2f1acd7ef66e2faef1c",
+      "branch": "refs/heads/codex/three-character-qa-dawn",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    },
+    {
+      "worktree": "/Users/nighca/.codex/worktrees/two-character-formal-qa/lie",
+      "HEAD": "b2abf6f08e1bb1b4d693ec48e405bdb964763983",
+      "branch": "refs/heads/codex/animation-revision-parent-qa",
+      "exists": true,
+      "statusExit": 0,
+      "status": [],
+      "statusError": null
+    }
+  ],
+  "automationsReadOnly": [
+    {
+      "version": 1,
+      "id": "lie",
+      "kind": "heartbeat",
+      "name": "LIE 清晨接任协调推进",
+      "status": "ACTIVE",
+      "target_thread_id": "01a17012-fa00-7170-ac0a-21c1900d71cd",
+      "created_at": 1792881692759,
+      "updated_at": 1792881692759
+    },
+    {
+      "version": 1,
+      "id": "lie-2",
+      "kind": "heartbeat",
+      "name": "LIE 清晨接任四小时轮换",
+      "status": "PAUSED",
+      "target_thread_id": "01a17012-fa00-7170-ac0a-21c1900d71cd",
+      "created_at": 1792881694334,
+      "updated_at": 1792893842022
+    }
+  ],
+  "scope": "read-only status/ref/config metadata only; no listener scan, no secret/ignored content, no signals, no cleanup"
+}

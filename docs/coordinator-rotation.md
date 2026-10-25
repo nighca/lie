@@ -1,6 +1,10 @@
-# 主协调定时轮换
+# 主协调轮换（当前暂停）
 
-## 用户授权与工作模式
+**最新决定：2026-10-25约10:44，用户明确暂停每四小时换chat，由root `01a17012-fa00-7170-ac0a-21c1900d71cd` 继续做完项目。** root仍active/唯一integrator，不release、不创建接任chat、不归档自己。约10:46只读确认推进`lie` ACTIVE、换chat`lie-2` PAUSED，target/created_at不变；本批未修改自动化。30分钟推进继续，不能据旧四小时deadline或下文旧持续授权恢复换chat。
+
+下文保留原流程与失败恢复作历史参考；**只有用户以后重新明确授权恢复轮换，才可按届时实际状态执行**。原文逐字保存在[本次快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/coordinator-rotation.md)，现行owner/排期读[handoff](coordinator-handoff.md)与[plan](project-plan.md)。
+
+## 原用户授权与工作模式（历史流程）
 
 2026-10-24，用户明确要求在自动compact之外，每4小时将当前工作、后续任务等写入合适文档，启动一个新的chat接替主协调，然后停止旧协调及其定时任务。接任者持续按同样模式运行：每30分钟推进、每4小时交接。这是持续授权，覆盖创建接任chat、向既有专项chat通知接手、创建接任者两项定时任务、暂停旧任务及成功后归档旧chat；不扩大产品、供应商、发布或付费测试权限。
 

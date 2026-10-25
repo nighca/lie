@@ -1,0 +1,236 @@
+{
+  "baseMain": "30822d3779102de249c3daca0800cb4316bff53f",
+  "coordinator": "01a17012-fa00-7170-ac0a-21c1900d71cd",
+  "animation": {
+    "worktree": "/Users/nighca/.codex/worktrees/approved-animation-rigid-batch/lie",
+    "branch": "codex/approved-animation-rigid-batch",
+    "base": "8be6d0315a393281484d65fa903353d4ea666739",
+    "orderedOriginal20": [
+      "48ce8704c5d9317eeb2bbe55d59c8cfc934f52c1",
+      "a67e7dc4aed1a865baa130064a0d911064511c27",
+      "30367b90efa5c1faaa2227a9a435e94ef64bab60",
+      "40477c6bcb4f319cf18fe60ffc8306cdc60c8475",
+      "954db6638361298cf49b33cc8db38d7dea67e180",
+      "3bfbb42797ad538af255db0daf57eb513e30c7de",
+      "0e4e3415d224709631aeb87adaddf84f54ef4322",
+      "a6c1f7346b0b3398f2a1426c9a8fc240e40270de",
+      "24bab7d32bba278b56be1f5eb5e02165b07cd657",
+      "97146796b87b74e4efa25abd7a4083912a4af616",
+      "e296cf24fbd6860ba878cd3844cc0eafc90200fc",
+      "38311f6d96c899ed6c393c57820a959aa60dc7dd",
+      "e9399a89538937972206b992cc589130356da012",
+      "5c39e8e7b0fdb78055a0acb184ec86a40e81bfa0",
+      "248bd9f7e823d629ec36740819a181fe0c1ee39c",
+      "902ce4a2bca7a6d28a2076daf0685ef945217fcc",
+      "57fc63369d5166a8bcf8b983fb4f7527f79fec0d",
+      "3169eee0bb8bd2818f70a50934aa0a7312562f15",
+      "fc20c363e45fe4800a2d55db7237b3c9867602bf",
+      "22b2ee8b635b2e6944d3801721673bc5122dfa3b"
+    ],
+    "auditCorrection": "d1063a97cf8a185cb067a293fba1add003b27bb1",
+    "packageHead": "a432b72bd9d7742c5b2d49306725be0fcd74e0d5",
+    "gate": "最小silverbutton crop/y修复已root授权并clean交；尚未root fullreview/PRturn",
+    "orderedFull23": [
+      "48ce8704c5d9317eeb2bbe55d59c8cfc934f52c1",
+      "a67e7dc4aed1a865baa130064a0d911064511c27",
+      "30367b90efa5c1faaa2227a9a435e94ef64bab60",
+      "40477c6bcb4f319cf18fe60ffc8306cdc60c8475",
+      "954db6638361298cf49b33cc8db38d7dea67e180",
+      "3bfbb42797ad538af255db0daf57eb513e30c7de",
+      "0e4e3415d224709631aeb87adaddf84f54ef4322",
+      "a6c1f7346b0b3398f2a1426c9a8fc240e40270de",
+      "24bab7d32bba278b56be1f5eb5e02165b07cd657",
+      "97146796b87b74e4efa25abd7a4083912a4af616",
+      "e296cf24fbd6860ba878cd3844cc0eafc90200fc",
+      "38311f6d96c899ed6c393c57820a959aa60dc7dd",
+      "e9399a89538937972206b992cc589130356da012",
+      "5c39e8e7b0fdb78055a0acb184ec86a40e81bfa0",
+      "248bd9f7e823d629ec36740819a181fe0c1ee39c",
+      "902ce4a2bca7a6d28a2076daf0685ef945217fcc",
+      "57fc63369d5166a8bcf8b983fb4f7527f79fec0d",
+      "3169eee0bb8bd2818f70a50934aa0a7312562f15",
+      "fc20c363e45fe4800a2d55db7237b3c9867602bf",
+      "22b2ee8b635b2e6944d3801721673bc5122dfa3b",
+      "d1063a97cf8a185cb067a293fba1add003b27bb1",
+      "6ed94a059d4539add866b0f2dcd28f83c0b9b15d",
+      "a432b72bd9d7742c5b2d49306725be0fcd74e0d5"
+    ],
+    "head": "a432b72bd9d7742c5b2d49306725be0fcd74e0d5",
+    "userAcceptedRigidBaseline": "22b2ee8b635b2e6944d3801721673bc5122dfa3b",
+    "rootReviewState": "用户视觉已验，不再重复视觉；root已读5generator delta/silver原生两图及两field修复；architecture reviewer独立managedWT从a432做代码/资源/范围技术完整性review中；完整finalreview未结束、未main、未PRturn",
+    "worktreeCurrent": "root~10:46 worktree list no longer lists sourceWT and architecture reviewer found directory empty; no root deletion; a432/all23 Git objects verified recoverable; old clean only original handoff fact",
+    "technicalReview": {
+      "base": "a432b72bd9d7742c5b2d49306725be0fcd74e0d5",
+      "ordered": [
+        "9aa665a8538fe6f05b33f3f970da7114460534af"
+      ],
+      "status": "5file clean independent report;root complete read report/check.py/results; numeric/package/resource integrity no new blocker; root full archive/diff review pending; no main/PR turn; no repeated visual acceptance"
+    }
+  },
+  "performance": {
+    "worktree": "/Users/nighca/.codex/worktrees/production-performance/lie",
+    "branch": "codex/production-performance-build",
+    "base": "e6cc3aa9b0f69a7c92ea422dde8085a1329e46fd",
+    "ordered": [
+      "cba8cf073f2b088bc52d47d2211346983fcc8085",
+      "d6700a757111f1eb57c6037211925ca1ad276ac6",
+      "bd724954e4ff8e518730fe8e0a0f15c712286424"
+    ],
+    "status": "已main c334e67组成；源三链冻结，不重做"
+  },
+  "pendingReviewReports": [
+    {
+      "branch": "codex/cache-delivery-review",
+      "ordered": [
+        "06026043ffc548b61efd7220ee622ace1d68b4d5"
+      ]
+    },
+    {
+      "branch": "codex/animation-rigid-code-review",
+      "ordered": [
+        "5db35590e159fd55061cfdf686d29ff6b050cc5e",
+        "10039f40f4b63e535665020e04da5c924dea9cc9"
+      ]
+    }
+  ],
+  "backgroundNames": {
+    "worktree": "/Users/nighca/.codex/worktrees/background-character-names/lie",
+    "branch": "codex/background-character-names",
+    "base": "e22250347ae737437b930934512295316bfe93fc",
+    "firstHelperCommit": "d21f5ea8c0207f0c550b97486e89718f539cb61f",
+    "status": "已root完整review/main c334e67组成，不重做",
+    "orderedFrozen": [
+      "d21f5ea8c0207f0c550b97486e89718f539cb61f",
+      "19fed70566951ad66fda49d7b61bf6f0923534b6"
+    ],
+    "orderedFull3": [
+      "d21f5ea8c0207f0c550b97486e89718f539cb61f",
+      "19fed70566951ad66fda49d7b61bf6f0923534b6",
+      "09b10a4973d76da325f0cbb1a3204f11a11f68ba"
+    ]
+  },
+  "firstRender": {
+    "branch": "codex/animation-first-render",
+    "base": "9316701433ba21017286c7023af5470275c23a28",
+    "owner": "/root/character_preset_migration",
+    "status": "已root完整review/main c334e67组成，不重做",
+    "head": "574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a"
+  },
+  "olderVoice": {
+    "branch": "codex/older-male-voice",
+    "base": "30822d3779102de249c3daca0800cb4316bff53f",
+    "owner": "/root/older_male_voice",
+    "status": "调查已rootreview/main；等用户选声，无配置改动",
+    "integratedMain": "8ac8a7eb64a257d3aca320762bf1872fe401c1c5"
+  },
+  "updatedThroughMain": "22b0b9391215210d1fb4f160a70a4f859b0a2631",
+  "source": "root完整新事实委派，未修改旧快照/旧refs",
+  "newIntake": {
+    "namePlacementMain": "dea290480b4ae8cab9d675cb95d1af4daad79c20",
+    "remixMain": "22b0b9391215210d1fb4f160a70a4f859b0a2631",
+    "remixStatus": "backlog未实施，保护已有草稿，不占App/style",
+    "domain": "lie.nighca.me仅给Custom Domain指导，未账号/DNS操作"
+  },
+  "historicalPriorRegisterNote": "原baseMain/updatedThroughMain及旧status字段为前次登记历史；本文件currentRecovery为本次当前状态。ordered历史链完整保留，不重写旧快照。",
+  "preparedFromMain": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+  "coordinatorPhase": "active; user paused four-hour chat rotation around2026-10-25 10:44; no release/successor",
+  "currentRecovery": {
+    "reviewedMain": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+    "activeCoordinator": "01a17012-fa00-7170-ac0a-21c1900d71cd",
+    "integrator": "01a17012-fa00-7170-ac0a-21c1900d71cd",
+    "successor": null,
+    "performanceVisual": {
+      "integratedMain": "c334e677c0436d0316df121c08b895a101b8e0be",
+      "codeCandidate": "d9d3e9354833f8585c7126bf8ed6e3e00e8d7314",
+      "firstCombinedCandidate": "be83810d1dafcf1cc1270520e669885661b24088",
+      "checks": "Web245/UI43/Gateway16/types/build89; 40 Miniflare; actual builtWorker firstRender; retain individual evidence boundaries"
+    },
+    "caseContent": {
+      "owner": "/root/case_content_revision",
+      "worktree": "/Users/nighca/.codex/worktrees/case-content-revision/lie",
+      "branch": "codex/case-content-revision",
+      "base": "3aaa329540dc53bfbc3a95adf66191e9c1576904",
+      "ordered": [
+        "a549bbe2147b355a53474ba592affbb271f71e2e"
+      ],
+      "head": "a549bbe2147b355a53474ba592affbb271f71e2e",
+      "candidate": "411f8d8ad91c0decb227f5beb1367f081b0b3f78",
+      "integratedMain": "7249a6f94106ce9fa7aaefdf640222f77ff70188",
+      "status": "root full12files/3cases/11profiles/ending/context review, source identity Core51/Web17/types/build89 reused plus root static byte/field verification; no real-model regression"
+    },
+    "releaseCompatibility": {
+      "owner": "/root/production_release_compatibility",
+      "worktree": "/Users/nighca/.codex/worktrees/production-release-compatibility/lie",
+      "branch": "codex/production-release-compatibility",
+      "base": "be83810d1dafcf1cc1270520e669885661b24088",
+      "frozenInitial": "61a4f4d9975cb7aaf259ebdb6f136c9ad8c03bb0",
+      "observedHead": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "observedOrdered": [
+        "61a4f4d9975cb7aaf259ebdb6f136c9ad8c03bb0",
+        "cad7fd7e387f3797a941785b51545bce2c87778a",
+        "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c"
+      ],
+      "status": "clean three-commit handoff; root complete corrected script/tests/CI/corrections/README/verifier diff review and independent21/21 Node24 PASS; no new fix blocker, not main/push/deployed; policy gates pending",
+      "reviewSource": "154d583081fa72fefd0c4404baa9db43f4f136ac",
+      "reviewCandidate": "72b3cbd73af82dfabf3d2840d848d9615f2e95bd",
+      "reviewArchiveIntegrated": true,
+      "policy": "trusted deploy+upload complete and CI source hash exact v1/14d; missing after TTL can omit, in-window/unknown missing fails; bounded pagination1000runs/1000jobs, overflow stops; final14d/storage user choice pending;256MiB cumulative budget unwired proposal auto-review rejected gate",
+      "historicalFailure": "cad新增回归fixture括号遗漏曾造成测试失败/误commit；14a独立修复，不改写或省略历史；必须完整包含61→cad→14a",
+      "sourceValidation": "owner21tests/build/Miniflare17 PASS; root21tests independent PASS; do not attribute root build/runtime rerun"
+    },
+    "olderVoice": {
+      "worktree": "/Users/nighca/.codex/worktrees/older-male-voice/lie",
+      "branch": "codex/older-male-voice",
+      "base": "30822d3779102de249c3daca0800cb4316bff53f",
+      "ordered": [
+        "e8cfad0e467283447c51e75107958a3df3abadc0",
+        "b211b7b4274752b9a3296cb2631917cdd8c6f891",
+        "63d5b76aee56fa1d42036c7a4be345b486c210d7"
+      ],
+      "head": "63d5b76aee56fa1d42036c7a4be345b486c210d7",
+      "status": "configuration source reviewed and main36a06de, not push/deploy/live voice",
+      "approvedVoiceId": "2e7965636b0d4472ae51e75f419dff41",
+      "configurationSource": "7058f31368629d850ae8270a4339539eee8542f6",
+      "configurationIntegratedMain": "36a06de86fed5dba6a1d4f14a1abcfc5c5c2a29f",
+      "configurationChecks": "root full review/independent onefield+hash;7otherpresets equal;source36tests/Webtypes/build89 and candidate code/resource/dependency identity reused"
+    },
+    "reports": {
+      "rigidOrdered": [
+        "5db35590e159fd55061cfdf686d29ff6b050cc5e",
+        "10039f40f4b63e535665020e04da5c924dea9cc9"
+      ],
+      "cacheOrdered": [
+        "06026043ffc548b61efd7220ee622ace1d68b4d5"
+      ],
+      "releaseOrdered": [
+        "154d583081fa72fefd0c4404baa9db43f4f136ac"
+      ],
+      "status": "review documents integrated; not animation final-review approval"
+    },
+    "backlogIntake": {
+      "voiceMain": "3aaa329540dc53bfbc3a95adf66191e9c1576904",
+      "voiceConnectionAndSwitch": "implementation turn actually sent to investigation chat01a16d5c-de69-7452-8d6a-280d15a87e9e from7249; requestedcodex/voice-connection-interaction; actualWT/HEAD pending receipt; ownsApp/style/controller/VoiceControl/tests/docs; fakeonly/5507 on demand/cleanup",
+      "remixMain": "22b0b9391215210d1fb4f160a70a4f859b0a2631",
+      "remix": "source0cd8702 base7249 docs109line root full proposal/context review accepted single-draft explicit replace+newcaseID; main d20812d; implementation waits voice App/controller release, no extra user gate for routine accepted implementation",
+      "domain": "guidance only, no DNS/account actions",
+      "remixSource": "0cd8702239e19b73029a7d15c2c0023704675f01",
+      "remixIntegratedMain": "d20812d2016aebaa8d2539e929eca73f111c60af"
+    },
+    "remoteEvidence": {
+      "lastConfirmed": "abb12dbf7a40689be593c2a1e580f23cfcc5611e",
+      "freshFetch": false,
+      "deploymentClaim": "new local features unpublished; do not assume live remote unchanged without fetch"
+    },
+    "controlRecovery": "successor does not inherit root subagent handles; preserve WT/refs/dirty, receive recoverable handoff or coordinate explicit follow-up ownership",
+    "rotation": {
+      "status": "paused by user",
+      "decidedAt": "2026-10-25 approximately10:44 Asia/Shanghai",
+      "coordinatorContinues": "01a17012-fa00-7170-ac0a-21c1900d71cd",
+      "automationRootReadAt": "approximately10:46",
+      "lie": "ACTIVE",
+      "lie-2": "PAUSED",
+      "noSuccessorCreated": true
+    },
+    "latestReviewedMain": "d20812d2016aebaa8d2539e929eca73f111c60af"
+  }
+}
