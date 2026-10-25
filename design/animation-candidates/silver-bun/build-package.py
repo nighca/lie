@@ -54,7 +54,7 @@ waiting_arms=next(n for n in nodes if n['id']=='waiting-arms')
 waiting_arms['sprite']['mask']=waiting_arms['sprite']['mask'][:23]+[[586,664],[577,675],[560,676],[540,671],[520,660],[505,647],[495,634],[488,618]]+waiting_arms['sprite']['mask'][34:]
 node('waiting-hand','head-root',asset='waiting-source',order=41,mask=[[594,363],[642,382],[653,418],[642,466],[615,525],[611,626],[592,626],[592,668],[608,672],[605,704],[480,704],[486,648],[514,583],[552,502],[549,441],[563,392]],visible=False)
 node('waiting-wrist-cloth-backing','waiting-breath-root',t(586,626),asset='waiting-source',order=38,crop=[613,626,6,42],visible=False)
-node('waiting-button','waiting-breath-root',t(592,626),asset='waiting-source',order=39,crop=[592,626,25,42],visible=False)
+node('waiting-button','waiting-breath-root',t(592,624),asset='waiting-source',order=39,crop=[592,624,25,44],visible=False)
 node('waiting-cuff-front','waiting-breath-root',asset='waiting-source',order=50,mask=[[480,610],[488,613],[495,629],[505,642],[520,655],[540,666],[560,671],[577,670],[586,659],[620,690],[620,745],[450,745],[450,610]],visible=False)
 node('speak-arm','body-root',t(880,530,880,530),asset='speaking-source',order=40,mask=[[820,450],[947,500],[974,600],[1030,610],[1060,680],[1040,770],[1000,870],[924,900],[900,870],[886,842],[864,810],[864,780],[860,752],[852,740],[842,728],[832,716],[831,714],[829.75,713],[832,704],[850,698],[854,690],[858,680],[864,650]],visible=False)
 def track(n,p,vals,d=4):return dict(node=n,property=p,interpolation='linear',keys=[dict(time=d*i/(len(vals)-1),value=v) for i,v in enumerate(vals)])

@@ -1,5 +1,7 @@
 # Silver exact-phase native Canvas attribution
 
+Current follow-up: [approved two-row seam fix](../2026-10-25-silver-seam-fix/README.md) resolves the silver crop-edge failure with unchanged checker predicates and native Canvas validation. Prior failures and proposal/pending checkpoints below remain historical evidence.
+
 ## Conclusion
 
 The corrected checker exposes a real but very small internal cloth seam, not merely movement of the external silhouette. At t2.5s and3.5s, actual renderer native pixels x594/596/598,y626 have alpha127 versus approved pre-revision baseline255. The adjacent native rows625 and627 are253. At CSS4× native detail there is a short pale horizontal line above the cardigan button, inside the green cloth. At the measured normal game scale it is not obvious; that does not make the seam proof pass. The overall user visual approval remains recorded, but a minimal overlap correction is proposed before PR publication.

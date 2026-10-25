@@ -1176,7 +1176,7 @@
       "parent": "waiting-breath-root",
       "transform": {
         "x": 592,
-        "y": 626,
+        "y": 624,
         "pivotX": 0,
         "pivotY": 0,
         "rotation": 0,
@@ -1189,9 +1189,9 @@
         "order": 39,
         "crop": [
           592,
-          626,
+          624,
           25,
-          42
+          44
         ]
       }
     },
