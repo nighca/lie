@@ -1,0 +1,337 @@
+{
+  "node": "v24.22.1",
+  "buildConfig": {
+    "notFoundHandling": "single-page-application",
+    "runWorkerFirst": [
+      "/api/*",
+      "/games/*",
+      "/static/*",
+      "/assets/*"
+    ]
+  },
+  "outputs": 92,
+  "presets": 8,
+  "parts": 46,
+  "results": [
+    {
+      "path": "/assets/index-EkbRGxr3.js",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/javascript; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/assets/index-EkbRGxr3.js",
+      "method": "GET",
+      "status": 304,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/javascript; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/assets/index-EkbRGxr3.js",
+      "method": "HEAD",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/javascript; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/assets/index-EkbRGxr3.js",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/javascript; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/assets/index-BcQJfu9i.css",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/css; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/assets/index-BcQJfu9i.css",
+      "method": "GET",
+      "status": 304,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/css; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/assets/index-BcQJfu9i.css",
+      "method": "HEAD",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/css; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/assets/index-BcQJfu9i.css",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "text/css; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/static/3972faf2da4160bb93d0a6b0735c907a590deb673787ff2be599f27fe659fbf7/appearances/manifest.json",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/static/3972faf2da4160bb93d0a6b0735c907a590deb673787ff2be599f27fe659fbf7/appearances/manifest.json",
+      "method": "GET",
+      "status": 304,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/static/3972faf2da4160bb93d0a6b0735c907a590deb673787ff2be599f27fe659fbf7/appearances/manifest.json",
+      "method": "HEAD",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/static/3972faf2da4160bb93d0a6b0735c907a590deb673787ff2be599f27fe659fbf7/appearances/manifest.json",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/static/0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe/appearances/coral-bob/avatar.png",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "image/png",
+      "range": null
+    },
+    {
+      "path": "/static/0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe/appearances/coral-bob/avatar.png",
+      "method": "GET",
+      "status": 304,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "image/png",
+      "range": null
+    },
+    {
+      "path": "/static/0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe/appearances/coral-bob/avatar.png",
+      "method": "HEAD",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "image/png",
+      "range": null
+    },
+    {
+      "path": "/static/0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe/appearances/coral-bob/avatar.png",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "image/png",
+      "range": null
+    },
+    {
+      "path": "/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/package.json",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/package.json",
+      "method": "GET",
+      "status": 304,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/package.json",
+      "method": "HEAD",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/static/bab6ff79d57294e9be8e798bbf8f809990eb3faac229618c7964be5947b7fe98/appearances/coral-bob/animation/package.json",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/play",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/editor",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "type": "text/html; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "/appearances/manifest.json",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/brand/logo.svg",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "type": "image/svg+xml",
+      "range": null
+    },
+    {
+      "path": "/games/empty-medal-box.json",
+      "method": "GET",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "status": 200,
+      "cache": "no-store",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/api/voice/status",
+      "method": "GET",
+      "status": 200,
+      "cache": "no-store",
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/api/missing",
+      "method": "GET",
+      "status": 404,
+      "cache": null,
+      "type": "application/json",
+      "range": null
+    },
+    {
+      "path": "/api/voice",
+      "method": "GET",
+      "status": 426,
+      "cache": null,
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/static/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/missing.png",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/static/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/missing.png",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/static/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/missing.png",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/assets/missing-AbCd1234.js",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/assets/missing-AbCd1234.js",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/assets/missing-AbCd1234.js",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/static/invalid/missing.png",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/static/invalid/missing.png",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    },
+    {
+      "path": "/static/invalid/missing.png",
+      "method": "GET",
+      "status": 404,
+      "cache": "no-store",
+      "type": "text/plain;charset=UTF-8",
+      "range": null
+    }
+  ]
+}

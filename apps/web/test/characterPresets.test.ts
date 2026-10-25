@@ -112,3 +112,22 @@ describe('optional characterPreset animation', () => {
     expect(() => readCharacterPresets([{ ...preset('moving'), animation }])).toThrow('Invalid characterPreset animation')
   })
 })
+
+
+describe('immutable preset animation URLs', () => {
+  const hash = 'a'.repeat(64)
+  it('accepts the exact local preset package under a content digest', () => {
+    const animation = `/static/${hash}/appearances/moving/animation/package.json`
+    expect(readCharacterPresets([{ ...preset('moving'), animation }])[0].animation).toBe(animation)
+  })
+  it.each([
+    `/static/${hash}/appearances/other/animation/package.json`,
+    `/static/${hash}/appearances/moving/animation/package.json?x`,
+    `/static/${hash}/appearances/moving/animation/parts/a.png`,
+    `/static/${'A'.repeat(64)}/appearances/moving/animation/package.json`,
+    `/static/${'a'.repeat(63)}/appearances/moving/animation/package.json`,
+    `https://example.com/static/${hash}/appearances/moving/animation/package.json`,
+  ])('rejects an out-of-scope immutable URL %s', animation => {
+    expect(() => readCharacterPresets([{ ...preset('moving'), animation }])).toThrow('Invalid characterPreset animation')
+  })
+})

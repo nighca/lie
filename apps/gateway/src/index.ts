@@ -20,6 +20,17 @@ export default {
     if (url.pathname === '/api/voice' && request.method === 'GET') return relayVoice(request, env)
     if (url.pathname.startsWith('/api/')) return Response.json({ error: 'Not found' }, { status: 404 })
     const response = await env.ASSETS.fetch(request)
+    if (url.pathname.startsWith('/static/') || url.pathname.startsWith('/assets/')) {
+      const contentAddressed = /^\/static\/[a-f0-9]{64}\//.test(url.pathname) || /^\/assets\/[^/]+-[A-Za-z0-9_-]+\.(?:js|css)$/.test(url.pathname)
+      const metadata = response.status === 304 && !response.headers.has('Content-Type')
+        ? await env.ASSETS.fetch(new Request(request.url, { method: 'HEAD' })) : response
+      if (!contentAddressed || ![200, 206, 304].includes(response.status) || metadata.headers.get('Content-Type')?.includes('text/html') || metadata.status >= 400) {
+        return new Response('Asset not found', { status: 404, headers: { 'Cache-Control': 'no-store' } })
+      }
+      const headers = new Headers(response.headers)
+      headers.set('Cache-Control', 'public, max-age=31536000, immutable')
+      return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+    }
     if (url.pathname.startsWith('/games/') && response.status !== 304 && !response.headers.get('Content-Type')?.includes('application/json')) {
       return Response.json({ error: 'Game not found' }, { status: 404 })
     }

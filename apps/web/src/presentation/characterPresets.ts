@@ -17,7 +17,11 @@ export function readCharacterPresets(data: unknown): readonly CharacterPreset[] 
     if (typeof item.id !== 'string' || typeof item.avatar !== 'string' || typeof item.portrait !== 'string' || typeof item.accent !== 'string') throw new Error('Invalid characterPreset fields')
     if (typeof item.name !== 'string' || item.name.trim().length === 0) throw new Error('Invalid characterPreset name')
     if (item.voiceId != null && (typeof item.voiceId !== 'string' || item.voiceId.trim().length === 0)) throw new Error('Invalid characterPreset voiceId')
-    if (item.animation != null && (typeof item.animation !== 'string' || item.animation !== `/appearances/${item.id}/animation/package.json`)) throw new Error('Invalid characterPreset animation')
+    if (item.animation != null) {
+      const local = `/appearances/${item.id}/animation/package.json`
+      const immutable = typeof item.animation === 'string' ? /^\/static\/[a-f0-9]{64}(\/appearances\/[a-z0-9]+(?:-[a-z0-9]+)*\/animation\/package\.json)$/.exec(item.animation) : null
+      if (item.animation !== local && immutable?.[1] !== local) throw new Error('Invalid characterPreset animation')
+    }
     const portraits: CharacterPreset['portraits'] = { listening: null, waiting: null, speaking: null }
     if (item.portraits != null) {
       if (typeof item.portraits !== 'object' || Array.isArray(item.portraits)) throw new Error('Invalid characterPreset portraits')

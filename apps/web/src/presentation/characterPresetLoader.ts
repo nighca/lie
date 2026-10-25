@@ -1,5 +1,7 @@
 import { shallowReactive } from 'vue'
 
+import manifestUrl from 'virtual:lie-preset-manifest'
+
 import { readCharacterPresets, type CharacterPreset } from './characterPresets'
 
 export type PresetLoadStatus = 'idle' | 'loading' | 'ready' | 'failed'
@@ -23,7 +25,7 @@ export function createCharacterPresetLoader(fetcher: typeof fetch = fetch, timeo
       const timer = setTimeout(() => controller.abort(), timeoutMs)
       try {
         const request = (async () => {
-          const response = await fetcher('/appearances/manifest.json', { signal: controller.signal })
+          const response = await fetcher(manifestUrl, { signal: controller.signal })
           if (!response.ok) throw new Error('Preset request failed')
           return readCharacterPresets(await response.json())
         })()

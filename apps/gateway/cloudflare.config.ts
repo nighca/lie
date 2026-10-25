@@ -5,7 +5,7 @@ export default defineConfig({
     name: 'lie-game',
     entrypoint: './src/index.ts',
     compatibilityDate: '2026-10-23',
-    assets: { notFoundHandling: 'single-page-application', runWorkerFirst: ['/api/*', '/games/*'] },
+    assets: { notFoundHandling: 'single-page-application', runWorkerFirst: ['/api/*', '/games/*', '/static/*', '/assets/*'] },
     env: {
       ASSETS: bindings.assets(),
       LINX_WS_TOKEN: bindings.secret(),
