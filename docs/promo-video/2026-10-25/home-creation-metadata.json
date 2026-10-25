@@ -1,0 +1,129 @@
+{
+  "identity": {
+    "entry": "https://lie.agency/",
+    "loadedScript": "https://lie.agency/assets/index-CRRGYc8t.js",
+    "associatedPublishedSha": "5a9a31c26b1e8f7be57b4147c2886b785b052111",
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "dpr": 1
+    },
+    "chromeTab": "1910329662",
+    "noVoiceStarted": true
+  },
+  "segments": [
+    {
+      "name": "01-home-story",
+      "frames": 455,
+      "endTimestamp": 1792918837.782,
+      "firstTimestamp": 1792918820.287696
+    },
+    {
+      "name": "02-first-character",
+      "frames": 622,
+      "endTimestamp": 1792918858.545,
+      "firstTimestamp": 1792918847.231732
+    },
+    {
+      "name": "03-second-character",
+      "frames": 706,
+      "endTimestamp": 1792918878.345,
+      "firstTimestamp": 1792918865.830254
+    },
+    {
+      "name": "04-ending-preview",
+      "frames": 431,
+      "endTimestamp": 1792918900.911,
+      "firstTimestamp": 1792918885.915645
+    }
+  ],
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 800,
+        "coded_width": 1280,
+        "coded_height": 800,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "8:5",
+        "pix_fmt": "yuv420p",
+        "level": 32,
+        "color_range": "tv",
+        "color_space": "bt470bg",
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 865280,
+        "duration": "56.333333",
+        "bit_rate": "376017",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "1690",
+        "extradata_size": 49,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc62.11.100 libx264"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/Users/nighca/.codex/worktrees/promo-video-production/lie/media/promo-video/lie-home-create-game.mp4",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "56.333333",
+      "size": "2668777",
+      "bit_rate": "378997",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf62.3.100"
+      }
+    }
+  },
+  "sha256": "cf9fc8b751aa3348c13e6f4f6a8d7f8e3bb1e5760991bd92e7861a7813ecab01",
+  "rawLibrary": "/Users/nighca/.codex/visualizations/2026/10/25/01a17226-5e5a-7193-b5b7-e522519a3e0c/promo-video/home-create-game-take01"
+}
