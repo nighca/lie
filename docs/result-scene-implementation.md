@@ -18,3 +18,7 @@ App复用已有GameView.result.characterId查实际被指认者，查预置defau
 生产只改App.vue/style.css；测试仅新增结果UI文件及两处获批旧文案断言。额外证据路径design/result-scene-implementation/**已获主协调批准。Application.vue/main.ts/Editor.vue/现有加载与动画测试未动；并行catalog任务会改Application props和导航测试挂载，组合时需保留双方的接口变更和新wrong标签，不回滚另一方。
 
 临时同源fixture已删除，原PTY30600停止PID44546并核5507释放，两自建tab与网络/媒体覆盖均已释放，无保留服务。所有源/必要图/限制在本批提交中留存；原设计源0c65ea1→e743283保持冻结且已在base，不重放。结果新情绪素材仍另行确认后才可生产。
+
+## 主协调组合审查
+
+root已实际核source d97a13b11ed5e38f9bdc3acfe39c9c83aa91d43a clean、完整18文件diff/周边生命周期/新增5tests与原生错误页、长文到底、图失败3图，无blocker。从最新main c540b70有序cherry为候选7b4d96a759fb61455c8a9fa03897155e0f59b621；editor-navigation自动合并后同时保留同步catalog挂载与“本局结束”断言，root逐hunk核实。独立执行者在固定真实候选Node24.22.1复验完整Web24文件220测试、Web类型/生产构建8预设89资源strict全通过，前后HEAD未变/tracked clean。root另核App/style/lock/形象source hash与原QA身份一致，复用原IAB画面/键盘/回退证据；未另外声称真实组合IAB或真人语音通过。main快进前重核SHA/clean，未push/部署。

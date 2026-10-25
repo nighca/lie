@@ -171,3 +171,9 @@ source d494e433031a3632d7510cfb50a2abc0c92390e5，WT bundled-case-catalog/lie，
 必须区分线上已发布abb12db与本地已main的非阻塞预设/目录三案eager打包；不把local成果充线上指标。当前Vite JS/CSS hash已有与否实测，重点public品牌/PNG/animation package相对parts/manifest缓存链；只内容寻址URL immutable，HTML/可变清单需更新/重验证，API/WS不得长缓存，实际内容变更必须换URL且验证跨部署一致性。无serviceworker/新CDN存储/provider架构，无secret/控制台配置/部署/付费请求。图片仅生成产物可评估无损，不改canonical，核RGBA/alpha/ICC/gAMA/sRGB解释与渲染，原bytes严格校验语义若需变先root协调，不冒用旧89字节PASS。
 
 当前所有权：App/style/结果tests仍原视觉专项；新批准动画在approved-animation-rigid-batch整项formalQA，design/candidate/正式animation资源及该批docs由它持有；perf第一阶段不改generator/scripts/manifest/这些文件，需按报告协调依赖正式动画SHA再动hash输出。5355由原动画owner受控从已验作者稿转formal game候选（旧70007/8486将停，新PID/PTY待真实handoff，不预写已切换），5507结果回合已结束待回执，5544无监听但未授perf自行起服务；线上审计本身无需server。独立IAB优先，明确unavailable一次才允许独立Chrome自建tab有界fallback，禁止动用户tab/globalviewport/mic及8787/8788。完整报告/设计/必要证据repo入库，不存secret/cookie或私数据。root仍唯一integrator，未授权此agent main/push/PR/deploy。
+
+## 结果页A实施组合审查完成
+
+source d97a13b11ed5e38f9bdc3acfe39c9c83aa91d43a（WT result-scene-implementation/lie，base30385c2，clean18files）已root实际完整diff/周边源码/所有新增tests/完整证据和wrong桌面、长文到底、真实图失败3图审查，无blocker。从main c540b70有序cherry为7b4d96a759fb61455c8a9fa03897155e0f59b621，editor-navigation同文件不同hunk自动合并，root核同步catalog prop与wrong『本局结束』同时保留。独立architecture_code_review在固定候选Node24.22.1验证完整Web220 tests/24files、Web types/build8presets89assets strict，前后HEAD固定/tracked clean，不起服务；root独立核App/style/lock/两形象hash同源QA，原IAB视觉/键盘/回退可复用，不把它说成重做真实组合IAB/真人语音。数据只actual result.characterId，wrong仍终局无真相，A静态default无动画契约新状态；B/C素材未授权。完整记录docs/result-scene-implementation.md与design/result-scene-implementation/**七原生图及测量，设计旧0c65/e743不重放。
+
+5507 Vite PID44546/原PTY30600消费者tab35/36均关闭，网络/媒体override清空，原PTY退出1且lsof无监听（不记退出0）；临时shell已删除，无草稿改动或保留服务，不重复停止旧PID。当前下一可执行优先为production_performance真实基线报告及最小scope确认、已验收动画正式QA完整handoff；鉴权仍暂停，视频只研究，所有push/部署门禁保留。
