@@ -8,7 +8,7 @@ Locations (repository-relative paths resolve from `/Users/nighca/code/nighca/lie
 
 - `apps/gateway/src/index.ts:87`: every relay frame above 65,536 UTF-8 bytes closes both peers with 1009.
 - `packages/game-core/src/context.ts:25`: profile is returned directly, and repeated in systemPrompt at line 36; background is repeated similarly.
-- `apps/web/src/application/liveVoice.ts:105`: the context tool serializes the complete context.
+- `apps/web/src/application/liveVoice.ts:101`: the context tool serializes the complete context.
 - `packages/voice/src/channel.ts:162`: the tool string is embedded into a JSON-RPC reply.
 - `apps/web/src/editor/share.ts:41`: author/share content accepts up to 128 KiB decompressed JSON, with no context wire-size check.
 
@@ -22,7 +22,7 @@ Minimal direction: establish a shared context wire-size budget across author val
 
 ## CR-02 — P2: optional presentation fetch blocks application mounting
 
-Location: `apps/web/src/main.ts:19` (await optional manifest before router/app creation, mount at line 41).
+Location: `apps/web/src/main.ts:19` (await optional manifest before router/app creation, mount at line 45).
 
 Trigger: the manifest request or response body remains pending, e.g. a slow/hung asset request on first load. Expected: the approved names/static fallback can produce a usable application, or a bounded preparation/error screen. Actual: no Vue UI mounts while this supposedly optional asset is pending; even home navigation is unavailable. There is no application timeout or AbortSignal on this request. This is a presentation-to-application-startup dependency inconsistent with the intended optional resource fallback, rather than a pure-core import violation.
 
@@ -50,4 +50,4 @@ Documentation discrepancy (not counted as a production defect): `packages/game-c
 
 Run Node 24.22.1: `node docs/reviews/architecture-code-review-2026-10-25/probes.cjs [repository-root]`. Probe transpiles read-only source with the repository's installed TypeScript, then runs inert fake sockets/bootstrap. No new package dependency or persisted app state. Final results in [probe-results.jsonl](probe-results.jsonl). Initial probe ran on host Node24.17; final strengthened run and recorded results use bundled Node24.22.1. No npm test suite claimed.
 
-Only this report, probe and small result file are intended for integration. Local ignored node_modules symlink reuses main's installed dependencies; no server was started, so stopped/retained/unknown services from this task are all zero. Temporary worktree must remain until root reviews this handoff; no other worktree or branch changed.
+Only this report, probe and small result file are intended for integration. The task-only node_modules symlink reused main's installed dependencies and was removed after the probes; no server was started, so stopped/retained/unknown services from this task are all zero. Temporary worktree must remain until root reviews this handoff; no other worktree or branch changed.
