@@ -1,0 +1,93 @@
+{
+  "source": "72c5b49a2a3f913bbb725abbaaa655d14bd84b59",
+  "videoSha256": "d61398d0140d7027d53ac83d81cf4bc8dde4b64c65724c3be30bb0dff6e1345c",
+  "videoBytes": 3751699,
+  "duration": "73.400000",
+  "acceptedFrames": 3070,
+  "actualJpegDimensions": [
+    [
+      1280,
+      800
+    ]
+  ],
+  "concatDurationSum": 73.41292283821106,
+  "clampedIntervals": 3,
+  "nonpositiveIntervals": 2,
+  "clampExamples": [
+    {
+      "segment": "02-first-character",
+      "frame": 0,
+      "delta": -0.004213094711303711
+    },
+    {
+      "segment": "06-generate-share",
+      "frame": 118,
+      "delta": -0.002897024154663086
+    },
+    {
+      "segment": "08-receiver-play",
+      "frame": 435,
+      "delta": 0.0005261898040771484
+    }
+  ],
+  "segments": [
+    {
+      "name": "01-home-story",
+      "frames": 454,
+      "endTimestamp": 1792919421.188,
+      "firstTimestamp": 1792919407.471995
+    },
+    {
+      "name": "02-first-character",
+      "frames": 644,
+      "endTimestamp": 1792919441.419,
+      "firstTimestamp": 1792919430.107975
+    },
+    {
+      "name": "03-second-character",
+      "frames": 682,
+      "endTimestamp": 1792919453.928,
+      "firstTimestamp": 1792919441.462525
+    },
+    {
+      "name": "04-ending-preview",
+      "frames": 405,
+      "endTimestamp": 1792919474.738,
+      "firstTimestamp": 1792919463.770452
+    },
+    {
+      "name": "05-exit-preview",
+      "frames": 227,
+      "endTimestamp": 1792919495.834,
+      "firstTimestamp": 1792919490.138569
+    },
+    {
+      "name": "06-generate-share",
+      "frames": 132,
+      "endTimestamp": 1792919508.457,
+      "firstTimestamp": 1792919501.870775
+    },
+    {
+      "name": "07-copy-share",
+      "frames": 90,
+      "endTimestamp": 1792919643.28,
+      "firstTimestamp": 1792919638.877285
+    },
+    {
+      "name": "08-receiver-play",
+      "frames": 436,
+      "endTimestamp": 1792919682.673,
+      "firstTimestamp": 1792919674.414085
+    }
+  ],
+  "concatRelocation": "exact after replacing original temporary root with persistent rawLibrary; no original files written",
+  "shareCharacters": 1349,
+  "decodedShareMatchesDemo": true,
+  "mediaMetadataMatches": true,
+  "rawLibraryVideoMatches": true,
+  "limitations": [
+    "No encoding/re-recording or overwrite of source library",
+    "No independent proof of OS clipboard/new-tab URL runtime; scope verified from user record, media, metadata and saved link",
+    "Contact sheet/endpoints inspected; not all video frames manually viewed"
+  ]
+}
