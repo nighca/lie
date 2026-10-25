@@ -33,7 +33,7 @@
 3. 在有效期内，原有游戏动作、切人/重连/重开继续；每次新WS仍服务端验码。浏览器不能用本机时间、已查过的status或“已有一局”延长服务端资格。
 4. **到期瞬间不主动操作已开始的局或WS。** 已接通的语音可继续到该连接原本的180秒上限（也可能被用户结束、切人、网络/供应商提前关闭）；本地转写、指认、结案和返回仍按原玩法执行。页面不加exp timer，不承诺到期瞬间停音或整个局都能问完。
 5. 到期后第一次尝试新开局/新WS被拒绝时，正常UI停止相关采音/播放、dispose旧controller并回到该案件介绍，提示“邀请码已到期，请输入有效码重新开局”。旧局进度不保留、不自动判胜负；新码成功后新开一局，不提供暂停、续局或补时。若之前已结案，重新开局同样检查资格。取消输入留在介绍；尚未尝试新连接的旧局可直接本地指认结束。
-6. 不提供局内“换码后继续旧局”的操作。不同tab的Cookie会共享；若其他tab换成新码，旧tab**也不能借新Cookie续旧局的新WS**：接案时在浏览器捕获该局的授权exp，在后续开WS的前置状态检查中，只要旧局exp已被Worker返回的serverNow跨过，就丢弃旧局再要求新开局，即使当前Cookie已有效。此为无timer、仅动作边界的本地标记，不创建服务端局/存档；不用于Worker鉴权。篡改JS能绕过本地规则，仍须有效Cookie才能调用供应商。
+6. 不增加局内换码/恢复入口，也不为禁止其他tab正常共享Cookie而新增每局授权标记或跨tab状态。每次新WS只验证请求当时的有效Cookie；若另一个tab已兑换有效码，按正常Cookie行为生效，不额外强制丢弃该tab尚未结束的局。这是原页面仍在运行，不提供保存、恢复或补时功能。
 
 到期后仍保留页面原有内存直到按上述边界丢弃，并非新增“保留待续局”能力。现有导航/刷新照常清理；迟到回包用既有epoch/dispose隔离，不带入新局。
 
@@ -77,7 +77,7 @@ Cookie **不按端口隔离**，HttpOnly和`__Host-`也不提供端口隔离。`
 | --- | --- |
 | `GET /api/access/status` | 200 `granted + expiresAt + serverNow`或`required + serverNow`；缺失/过期/损坏Cookie不授权。访问配置错误/closed为503；无上游。 |
 | `POST /api/access/redeem` | `{invite}`有效：200+Set-Cookie+expiresAt/serverNow；无效401 `invite_invalid`，签名有效但过期401 `invite_expired`；解析400、同源403、配置/closed503。失败不清掉仍有效旧Cookie。 |
-| `GET /api/voice/status` | 先验访问资格，无资格401 `access_required`；有资格保留ready/unavailable，无上游。返回serverNow供旧局exp动作边界判断；前端不得把401一律压成check-failed。 |
+| `GET /api/voice/status` | 先验访问资格，无资格401 `access_required`；有资格保留ready/unavailable，无上游。前端不得把401一律压成check-failed。 |
 | `GET /api/voice` WS | Upgrade/准确Origin/无query→验session→语音配置→固定上游。未授权401，且上游调用为0；不接受客户端device/token。 |
 | 静态/health/未知API | 保留现有公开内容、缓存、health及404，不误回SPA HTML认证成功。 |
 
@@ -101,12 +101,12 @@ Cookie **不按端口隔离**，HttpOnly和`__Host-`也不提供端口隔离。`
 | --- | --- |
 | 共享纯TS token模块 | 固定有限HMAC编解码、签发/验证invite与session；标准WebCrypto，不依赖Vue/CF。CLI与Worker复用向量，覆盖篡改/错purpose/aud/未来iat/恰好exp/坏长度/坏类型，不写两份协议。 |
 | Gateway：`src/access.ts`、`src/index.ts`、cf config、tests | 端点、Cookie、Origin、请求上限、握手双次有效期检查；原relay计时不变。workerd+假上游测无权零调用、握手跨exp、已建WS跨exp保持原关闭规则、原安全/缓存回归。 |
-| Web：Application/App、access port、liveVoice/voice错误映射、controller必要接线、Vite config/tests | 接案/重开门槛、旧局exp动作边界标记和拒绝后dispose→介绍、新码新局、补access代理。不加pause/resume状态或到期timer、不改game-core。fake覆盖三类play入口、多tab换码不续旧局、网络/401清理与迟到事件。 |
+| Web：Application/App、access port、liveVoice/voice错误映射、controller必要接线、Vite config/tests | 接案/重开门槛、拒绝后dispose→介绍、新码新局、补access代理。不加pause/resume状态或到期timer、不改game-core。fake覆盖三类play入口、正常多tab Cookie共享、网络/401清理与迟到事件。 |
 | CLI：scripts/invites与文档/必要package命令 | Node24兼容运行时离线签发、默认14天、指定时区日期、受限文件输出及跨运行时验证；无远程API。 |
 
 暂不新增npm依赖或Node兼容flag；共享模块位置/构建入口由实现owner在原生WebAPI边界内确定，锁文件若确需调整由集成者串行管理。模块接口先对齐，具体文件归属不重叠。
 
-独立IAB验收覆盖生产等价HTTPS Cookie、固定loopback反代、无Cookie直接WS、Cookie禁用、invalid/expired、分享fragment/编辑器草稿不变、所有play门槛、已建WS跨exp但新WS拒绝、换码后全新局/多tab不续旧局、麦克风/播放清理与窄屏键盘。真实provider仅在另外获授权的隔离资源上有界验收；本轮未运行应用或这些测试，文档检查不冒充其通过。
+独立IAB验收覆盖生产等价HTTPS Cookie、固定loopback反代、无Cookie直接WS、Cookie禁用、invalid/expired、分享fragment/编辑器草稿不变、所有play门槛、已建WS跨exp但新WS拒绝、拒绝后换码全新局/正常多tab Cookie共享、麦克风/播放清理与窄屏键盘。真实provider仅在另外获授权的隔离资源上有界验收；本轮未运行应用或这些测试，文档检查不冒充其通过。
 
 ## 独立门禁与历史
 
