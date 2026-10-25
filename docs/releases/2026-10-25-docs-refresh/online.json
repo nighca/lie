@@ -1,0 +1,26 @@
+{
+  "origin": "https://lie.agency",
+  "rows": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalUrl": "https://lie.agency/",
+      "sha256": "058cb0d694ea25502c435863cc8d34de0b115c62713728607a32b43e44418914",
+      "bytes": 546,
+      "mime": "text/html",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "localCandidateEqual": true
+    },
+    {
+      "path": "/assets/index-DolkqYbF.js",
+      "status": 200,
+      "finalUrl": "https://lie.agency/assets/index-DolkqYbF.js",
+      "sha256": "b43e1ec691545aa278e71995ad3f541b3d1476f0044073586ece310c96e3d369",
+      "bytes": 227906,
+      "mime": "text/javascript",
+      "cacheControl": "public, max-age=31536000, immutable",
+      "localCandidateEqual": true
+    }
+  ],
+  "scope": "Exactly homepage and its JS; no browser/voice/API/provider. Other static identity reused from a0e."
+}

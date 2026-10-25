@@ -1,0 +1,31 @@
+{
+  "publishedSha": "9e1c998ae4f44a32f0dc72e3f6fdd496ddec69f3",
+  "ci": {
+    "id": 40174362619,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40174362619"
+  },
+  "cd": {
+    "id": 40174509906,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40174509906",
+    "deployJob": 121112187640,
+    "actualDeployCompletedAt": "2026-10-25T07:54:25Z"
+  },
+  "artifact": {
+    "id": 12591562243,
+    "sourceRun": 40174362619,
+    "sourceAttempt": 1,
+    "sourceSha": "9e1c998ae4f44a32f0dc72e3f6fdd496ddec69f3",
+    "digest": "sha256:5960fe4d00873f726f93e3f1af5a3ab53215c81401d517aee7e11d36993425e9",
+    "verifiedRestoredFiles": 256
+  },
+  "workerVersion": "b6cf1433-58cd-4190-8676-0b8477d14385",
+  "sourceIdentity": "No differences from a0e in apps/packages/content/scripts/design/workflows/package.json/package-lock.json",
+  "online": "Exactly 2 HTTPS responses, home and referenced JS, unchanged verified candidate bytes; other static evidence reused from a0e",
+  "limits": "No gameplay/browser/voice/API/provider, workflow trigger/rerun/manual deploy, or tracked changes. Necessary sanitized evidence reserved for next normal archival batch."
+}
