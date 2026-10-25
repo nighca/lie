@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `a0e1a326a08df47c44d28a6cd42c100996a6b599`。CI40171557739/attempt1与CD40171731533最终success，deploy job121103798852全步success，Worker `a1e6ed12-5aeb-4f97-a94c-5caa2f52c7c6`；[必要发布证据](releases/2026-10-25-single-json/README.md)。早期聚合in_progress原因未知，保留原返回，不改写为当时已success。当前页不再沿用b387或a64作最新发布。
+2026-10-25，最近完成CI/CD核验的发布为 `9e1c998ae4f44a32f0dc72e3f6fdd496ddec69f3`。CI40174362619/attempt1与CD40174509906均success，Worker `b6cf1433-58cd-4190-8676-0b8477d14385`；[发布证据](releases/2026-10-25-docs-refresh/README.md)。本次加载占位功能批将继续推进HEAD，操作前读实际Git。
 
 ## 协调权、自动化与发布
 
@@ -20,10 +20,11 @@
 
 | owner / 队列 | 下一步或保留职责 |
 | --- | --- |
-| root | 唯一integrator/发布turn，已实际review平台定位25e447d及发布归档cc59498，候选6844bae→d24da4b；串行合入后普通push并检查本批CI/CD；保持响应，不把长验收尾巴留自己 |
-| Hackathon专项 | 新定位25e447d由root实际review并候选6844bae，保留用户决定和既有主线补记；与归档文档同批推送，未纳入旧a0e发布 |
+| root | 唯一integrator/发布turn，平台定位/归档已随9e1发布验证；本批调度调查立绘加载占位，实际审查后串行合入、普通push并检查CI/CD；保持响应，不把长验收尾巴留自己 |
+| Hackathon专项 | 新定位25e447d已review并随9e1发布，保留用户决定和既有主线补记 |
 | animation parent01a16d44 | 5355真实App＋统一八人页用户消费者仍保留，按owner生命周期清理；正式激活/UI已发布，不再排重复制作 |
 | architecture_code_review | 单JSON/CI-CD已验发布；本批原始发布材料来自该owner，CI artifact/restored256与Web251为不同集合。后续审查按新source身份，不重复已验全suite |
+| character_preset_migration | 调查立绘加载占位source8b98887已clean交付、root完整审查并候选fe56783；36项目标测试root复验通过，沿用source UI/Web类型检查；仅调查页启用slot，无服务启动，IAB不可用，原生视觉未测。[证据](investigation-portrait-loading.md)。 |
 | native QA | 最近600端点SHA匹配，无ready字段；本会话IAB不可用/设备锁定返回，native7未测，无草稿/tab/service动作。[范围](qa/native-share-editor-600-2026-10-25/README.md)，等原生窗口，不回退Chrome或重跑旧jsdom冒充进展 |
 | 真人/内容QA | 贺宁真实模型、三案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |
 

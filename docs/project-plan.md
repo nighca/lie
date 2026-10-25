@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-2026-10-25，最近完成CI/CD核验的发布为`a0e1a326a08df47c44d28a6cd42c100996a6b599`。CI40171557739/attempt1与CD40171731533最终success，Worker `a1e6ed12-5aeb-4f97-a94c-5caa2f52c7c6`；[发布证据](releases/2026-10-25-single-json/README.md)含精确artifact和8响应静态身份边界。文档集成会推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `9e1c998ae4f44a32f0dc72e3f6fdd496ddec69f3`。CI40174362619/attempt1与CD40174509906均success，Worker `b6cf1433-58cd-4190-8676-0b8477d14385`；[发布证据](releases/2026-10-25-docs-refresh/README.md)。本次加载占位功能批将继续推进HEAD，操作前读实际Git。
 
 用户暂停四小时换chat，root `01a17012-fa00-7170-ac0a-21c1900d71cd`继续active/唯一integrator；lie ACTIVE、lie-2 PAUSED，实际toml更新时间见[handoff](coordinator-handoff.md)。每次实际review/验证合main后由root按fetch/分歧审验/普通push流程默认推送并监测既有CI/CD；报告并入下一正常批次，避免报告循环。此授权不扩成手工部署、账号资源或真实provider操作。
 
@@ -22,9 +22,10 @@
 
 | 优先 / owner | 当前状态及下一步 |
 | --- | --- |
+| 调查立绘加载占位 / root已审待本批发布 | [实现与验证](investigation-portrait-loading.md)：动画未就绪显示居中“人物加载中…”，无动画/失败/reduce沿用静态回退，舞台尺寸不变；仅调查页启用。source8b98887完整审查，候选fe56783的36目标测试root复验通过；原生视觉未测，合入后默认push并检查CI/CD。 |
 | P1 真人/真实模型 / root协调用户与QA | 贺宁口径改动已入库，真实模型回归未闭环；三案盲测、mic/外放/长会话、固定device多人隔离、费用硬限额仍缺证据。先确定实际矩阵/费用上限/停止清理边界，再执行；fake/短WAV/ready不替代。 |
 | 原生分享/Editor生命周期 / QA | 最近600常驻状态SHA吻合但无ready字段，工具无IAB且设备锁定返回；7个native case未测、无草稿/tab/service动作。[实际前置](qa/native-share-editor-600-2026-10-25/README.md)。等可用窗口再排，旧8jsdom不重跑当进展。16k URL预算仍暂定；跨浏览器/外部传输/旧fragment网络边界未全验。 |
-| Hackathon新平台定位 / root已审 | source25e447d已实际review并隔离cherry为6844bae，保留main已有案件内容链接和内部集成证据；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。随本批文档推送并检查CI/CD，保持讨论稿，不衍生视频制作许可。 |
+| Hackathon新平台定位 / 已发布 | source25e447d已审查集成并随9e1发布；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。保持讨论稿，不衍生视频制作许可。 |
 | 出戏/启动/宿主WS / 工程与内容待排 | [出戏调查](role-immersion-investigation.md)未闭环，[WS非101诊断](dev-websocket-rejection.md)未修vendor；不默认付费叠prompt/换provider。真实visibility/广泛race/硬件touch、silver/mint同accent区分等旧边界保留，不按合成事件声称通过。 |
 | 投稿 / Editor＋root | GitHub网页辅助、作者确认；用户计划公开源码不等实际visibility已操作，本批不查/改可见性。无OAuth/PAT/token输入或自动PR；[投稿范围](editor-official-submission-proposal.md)。 |
 | 暂停鉴权 | 用户明确暂停，[设计与候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。 |

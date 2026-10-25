@@ -25,3 +25,7 @@ Node24.22.1，复用现有依赖，无安装/lock变化。
 本轮CUA只核inventory一次，仅有Chrome `type=extension`，没有IAB；本次没有设备锁定错误，不能沿用旧轮次错误。未选择其他chat的browser id、未回退Chrome、未操作用户标签。原生慢网/失败时真实舞台视觉、屏幕阅读器播报及桌面/391px尺寸未测；上述DOM测试不是浏览器视觉证明。未执行生产build或全仓测试，此小范围以两目标suite、UI/Web类型及CSS/121资源检查验证，不声称新产物验收。
 
 没有启动服务或申请额外端口，PID/PTY/consumer均无；8787/8788/5355与其WT、用户tab/草稿、viewport、mic/provider完全未触，无清理长尾。检查生成物仅既有ignored public；canonical/artwork/包锁及中央plan/handoff未改。root后续仅docs归档不改变本批base运行身份；交付后源提交冻结，root实际review/隔离集成，不在此main/push/PR。
+
+## root集成审查
+
+源提交 `8b98887365bd6b305ffb4c68e3e574b8a89d535d` 的clean状态、六文件完整diff及周围生命周期/调用者代码已实际检查；在base9e1上先cherry上一发布文档归档a4c9845，再cherry实现为fe56783，运行输入无其他变化。源五个代码/测试文件与候选逐字节相同，类型检查据此复用。root在候选各包目录独立复验UI28、Web8目标测试共36项通过；首次从仓库根调用UI配置因测试include相对cwd而未找到测试，已更正包cwd，不把该次当PASS。未重复全仓构建/真实provider；既有CI/CD在普通push后验证正式产物。
