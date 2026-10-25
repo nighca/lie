@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为af14e69370b38bdbd4c356b8cb002245b4dc3907，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为3fdec3de47d9e27e0ecd3f91be7e1e248158fd02，已含改编quiet入口、正式动画及PNG研究归档；线上已发布48316544；其后本地文档不自动二次push。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：48316544发布/CI/线上静态交付已核完成，本报告经root审查本地归档，不自动二次push。调查连接提示loading持有App.vue/style turn，并新增试玩结果隐藏改编（仅preview，official/shared保留），同时授Application及相邻路由测试；Editor旧turn已释放，避免并发写App；用户已在动画专项批准R方向，契约/珊瑚样片在制，设计source1c354425d3c90a198318194aa173423933867466已root全文review并候选归档、[批准来源/状态](result-outcome-design/approval.md)保留，具体样片验收另记，App/style释放后再授结果接入。两任务不混入本次线上核验。Hackathon仍Draft，鉴权/视频/付费等其他边界保留。
+下一步：root已完整review loading＋preview三链，候选b42e55b全部生产/依赖同source5afa，复用源288/types/IAB43/44，本轮build89/QA隔离通过，root审[身份报告](voice-connection-loading-combined.md)后本地ff，未称已main/发布。title最小Application import/调用两行已授Editor、未交；height从062在制且仅style调查布局，原sourceWT两未跟踪QA保护。公共角色名高亮已派Editor在title后做统一纯文本组件/helper/样式及App/Editor消费者，旧global样式等height释放另授清理；动画结果契约/珊瑚样片在制，图片chat01a1713b用户已批准q90/m6/alpha_q100且保留原图/构建自动处理，研究56b2adad clean待root全文review；构建转换turn已授，Linux编码器锁定/最终bytes hash须实测，动画package.ts/load.ts暂归结果契约，释放审/main后另授图片兼容接入，不自动push。入口lie.agency，最后已核线上48316544；其他门禁保留。
 
 ## 当前owner与恢复入口
 
