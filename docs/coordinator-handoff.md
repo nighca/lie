@@ -137,3 +137,7 @@ Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416
 邀请码[设计](invite-access-design.md)已root完整114行及实际契约/官方文档review，本地集成3a1fa417，原版仅文档，用户现已确认核心范围并授权简化到期处理：默认14天、公开浏览创作/所有play需码、删除续局；开局及新WS校验exp，既有WS沿180秒，不新增到期强断计时。invite_access_design修订现行文档并归档旧版，root审查后排期实施；不是生产secret配置/部署授权，固定device多人隔离风险不由邀请码自动解决。分享长正文软折行已本地集成163bd0d，原横溢是独立排版问题，不混codec失败。
 
 历史三角色集成main为a4e9f7d（当前核验main c0ddd791），候选refs仅追溯，不重放。QA源bfb临时壳已由owner删除且status clean、tabs28—33关闭/overrides清；环境回证：PTY77092已失效，Ctrl-C返回Unknown process id；PID24833不存在且5504无监听，原因未知，未发生本次成功Ctrl-C停服。8787 main-status实返a4e9f7d＝当时main，三包HTTP200且同generated、79资源＋manifest共80文件，其他服务未触。分享软折行source c13e6194751334085094a10b773018a998341b01/base73 clean已交，仅.background/.public-background overflow-wrap:anywhere＋history；owner Node24.22.1 Web186/类型/构建60及1280/391 iframe两类文本通过，root已实际full两文件diff/context＋两截图review无blocker，独立候选163bd0deee6899df4a3d77cda562e511edb1a9cf已Node24.22.1 Web186/类型/构建79资源通过并本地main快进，未push/部署；iframe/触屏/跨浏览器及单独长reveal未验边界见专项记录。
+
+## 姓名唯一修复review完成
+
+source dfd89c424c6a48ef57a31c0f7584a335c244c113，WT editor-unique-names/lie，base03fcb06，clean四文件，生产仅draft.ts六行。root实际全diff/context/测试review，从main b065af0新候选有序cherry为10c57c2；apps/packages/scripts/package/lock/CI与source身份全同，仅已审设计/报告文档多出，复用源Node24.22.1六文件59测试/Web types/build89资源，无重复安装/全套测试。trim后同名的每个人物各有错误定位，临时草稿可保存，试玩/分享阻止，改名恢复；旧同名分享可读。独立浏览器组合未验、不冒称PASS，加载恢复未完成，后续组合需复核。未push/部署，source WT/refs暂保留。

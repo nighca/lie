@@ -39,3 +39,7 @@ npm run build --workspace @lie/web
 - 文档相对链接、diff whitespace及最终文件范围检查通过。
 
 本轮没有开任何dev server或浏览器tab；5544由清单恢复专项持有，未争用。以上UI证据为真实Vue组件＋jsdom事件/焦点测试，不冒充浏览器像素或真人语音验收。root可在两个修复组合后安排同源浏览器复验。本轮无设备/供应商/凭据动作，未修改8787/8788或其他专项服务，无需服务清理。
+
+## 主协调审查与组合验证
+
+root逐项检查源WT clean、完整四文件diff及draft/Editor现有校验调用上下文，未发现阻塞项。候选从最新main b065af0有序cherry源dfd89c4；全部apps/packages/scripts/根package与lock/CI对源提交的git diff为空，应用、测试、依赖、组合身份一致，仅额外已审docs/design，因此复用源Node24.22.1的59测试/Web类型/构建89资源验证，不声称root另跑了这59项。候选diff --check通过。独立浏览器组合验收未执行，不冒充已通过；清单恢复另在制，后续仍需实际组合影响审查。候选修复提交10c57c2；本地main集成后不自动push/部署。
