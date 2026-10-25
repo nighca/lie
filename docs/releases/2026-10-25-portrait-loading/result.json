@@ -1,0 +1,30 @@
+{
+  "publishedSha": "2268f84f02576d4384f0d30f9f117a70164f135a",
+  "ci": {
+    "id": 40175520817,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40175520817"
+  },
+  "cd": {
+    "id": 40175677095,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nighca/lie/actions/runs/40175677095",
+    "deployJob": 121115703645,
+    "allSteps": "completed/success"
+  },
+  "artifact": {
+    "id": 12591569308,
+    "sourceRun": 40175520817,
+    "sourceAttempt": 1,
+    "sourceSha": "2268f84f02576d4384f0d30f9f117a70164f135a",
+    "digest": "sha256:e653654827373600a362d6c048ea6ca8c7322fc3d321672ebec47d5b9d28a063",
+    "verifiedRestoredFiles": 256
+  },
+  "workerVersion": "45919e35-3bf2-4a33-a550-199c0d18ceaf",
+  "scope": "Successful exact CI artifact download/digest/restore/latest/deploy; exactly home and new JS HTTPS requests confirm loading text/class, new asset hash, MIME/cache",
+  "limits": "No local rebuild or old dist comparison; no browser/gameplay/voice/provider. No actions triggered/retried, manual deploy, tracked changes or Git mutations. Necessary sanitized evidence reserved for next normal archival batch."
+}
