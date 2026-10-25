@@ -40,7 +40,7 @@ for state in ['default','listening','waiting','speaking']:
  vis.update({'speaking-shoulder-cap':state=='speaking','waiting-lower-body':state=='waiting','listening-torso':state=='listening','mouth-closed':True,'torso':state not in ['waiting','listening'],'left-neutral':state in ['default','speaking'],'right-neutral':state in ['default','listening'],'listen-arm':state=='listening','waiting-torso':state=='waiting','waiting-arms':state=='waiting','speak-arm':state=='speaking'})
  tracks=[wave('body-root','y',800,4),wave('head-root','rotation',0,.85 if state in ['listening','waiting'] else 1.2),wave('head-root','y',440,1.5),wave('left-neutral','rotation',0,1.2),wave('right-neutral','rotation',0,-1.2),wave('speak-arm','rotation',0,-1.9)]
  if state=='waiting':
-  tracks=[wave('body-root','y',800,0),wave('head-root','rotation',0,0),wave('head-root','pivotY',850,0),wave('head-root','y',850,0),dict(node='head-root',property='scaleY',interpolation='linear',keys=[dict(time=i/4,value=round(1+.006*math.sin(i*math.pi/8),6)) for i in range(17)])]
+  tracks=[wave('body-root','y',800,0),wave('head-root','rotation',0,0),wave('head-root','pivotY',850,0),wave('head-root','y',859,0),dict(node='head-root',property='scaleY',interpolation='linear',keys=[dict(time=i/4,value=round(1+.015*math.sin(i*math.pi/8),6)) for i in range(17)])]
  if state=='speaking':
   times=[0,.18,.36,.56,.72,.95,1.15,1.36,1.58,1.8,2.05,2.28,2.48,2.72,2.95,3.18,3.42,3.65,3.82,4]
   for id,invert in [('mouth-open',False),('mouth-closed',True)]:
