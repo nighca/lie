@@ -5,6 +5,7 @@
 [English](README.md) · 简体中文
 
 [![CI](https://github.com/nighca/lie/actions/workflows/ci.yml/badge.svg)](https://github.com/nighca/lie/actions/workflows/ci.yml)
+[![Application lines snapshot](docs/coverage/application-lines.svg)](docs/coverage/README.md)
 ![Node.js 24](https://img.shields.io/badge/Node.js-24-075BFA?style=flat-square&logo=nodedotjs&logoColor=white)
 ![Vue 3](https://img.shields.io/badge/Vue-3-075BFA?style=flat-square&logo=vuedotjs&logoColor=white)
 ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-075BFA?style=flat-square&logo=typescript&logoColor=white)
@@ -40,6 +41,8 @@
 未完成的草稿也会自动保存在当前浏览器。试玩使用同一个游戏引擎；分享把完整案件压缩到 URL fragment，朋友打开链接即可玩，不需要故事数据库或账号。当前完整链接预算为16,000字符，跨浏览器边界验收仍待完成。修改草稿不会改变已经发出的链接。
 
 官方投稿准备支持复制或下载 JSON，再由作者在 GitHub 继续操作；不会自动创建 PR 或发布案件，当前私有仓库尚未开放外部投稿。详见[编辑器实施说明](docs/game-editor-implementation.md)与[案件作者规格](content/games/README.md)。
+
+覆盖率徽章是**application lines 的采样快照**，Node脚本另行统计。见[采样SHA、时间、范围与更新命令](docs/coverage/README.md)和[真实计数](docs/coverage/summary.json)。CI上传当次报告artifact，不会自动改写仓库内徽章。
 
 ## 本地体验
 

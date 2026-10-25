@@ -20,10 +20,13 @@
     "test": "npm run test:main-preview && npm run test:character-presets && npm run test --workspaces --if-present",
     "character-presets:generate": "node scripts/character-presets.mjs",
     "character-presets:check": "node scripts/character-presets.mjs --check",
-    "test:character-presets": "node --test scripts/character-presets.test.mjs"
+    "test:character-presets": "node --test scripts/character-presets.test.mjs",
+    "coverage": "node scripts/coverage.mjs",
+    "coverage:snapshot": "node scripts/coverage-report.mjs --snapshot"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "6.0.10",
+    "@vitest/coverage-v8": "5.0.5",
     "@vue/test-utils": "2.5.1",
     "jsdom": "30.1.3",
     "typescript": "5.9.3",

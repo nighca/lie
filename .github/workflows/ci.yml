@@ -29,7 +29,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: npm test
+      - name: Test with application and separate script coverage
+        run: npm run coverage
+      - name: Upload coverage reports and generated snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ github.sha }}
+          path: coverage/
+          if-no-files-found: warn
+          retention-days: 14
       - run: npm run build
       - name: Validate production build without uploading
         run: npm exec --workspace @lie/gateway -- cf deploy --prebuilt --mode production --worker lie-game --provision=false --dry-run

@@ -5,6 +5,7 @@
 English · [简体中文](README.zh-CN.md)
 
 [![CI](https://github.com/nighca/lie/actions/workflows/ci.yml/badge.svg)](https://github.com/nighca/lie/actions/workflows/ci.yml)
+[![Application lines snapshot](docs/coverage/application-lines.svg)](docs/coverage/README.md)
 ![Node.js 24](https://img.shields.io/badge/Node.js-24-075BFA?style=flat-square&logo=nodedotjs&logoColor=white)
 ![Vue 3](https://img.shields.io/badge/Vue-3-075BFA?style=flat-square&logo=vuedotjs&logoColor=white)
 ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-075BFA?style=flat-square&logo=typescript&logoColor=white)
@@ -40,6 +41,8 @@ The editor has three freely navigable steps: story setup, characters, and the en
 Incomplete drafts autosave in the current browser. Trial play uses the same game engine. Sharing compresses the complete case into the URL fragment, so a friend can open it without a story database or an account. The current full-link budget is 16,000 characters; cross-browser boundary acceptance is still pending. Editing a draft does not change links already sent.
 
 Official contribution preparation lets an author copy or download JSON and continue on GitHub. It does not automatically create a PR or publish a case; the current private repository is not open to external submissions. See the [editor implementation](docs/game-editor-implementation.md) and [case authoring guide](content/games/README.md).
+
+Coverage is a **snapshot of application lines**, with native scripts reported separately. See the [sample SHA, timestamp, scope and update command](docs/coverage/README.md) and [measured counts](docs/coverage/summary.json). CI uploads fresh reports as artifacts; it does not rewrite the tracked badge.
 
 ## Run locally
 
