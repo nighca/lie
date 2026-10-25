@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，已审本地及已推main `a0e1a326a08df47c44d28a6cd42c100996a6b599`。CI40171557739/attempt1与CD40171731533最终success，deploy job121103798852全步success，Worker `a1e6ed12-5aeb-4f97-a94c-5caa2f52c7c6`；[必要发布证据](releases/2026-10-25-single-json/README.md)。早期聚合in_progress原因未知，保留原返回，不改写为当时已success。当前页不再沿用b387/870或a64作最新发布。
+2026-10-25，最近完成CI/CD核验的发布为 `a0e1a326a08df47c44d28a6cd42c100996a6b599`。CI40171557739/attempt1与CD40171731533最终success，deploy job121103798852全步success，Worker `a1e6ed12-5aeb-4f97-a94c-5caa2f52c7c6`；[必要发布证据](releases/2026-10-25-single-json/README.md)。早期聚合in_progress原因未知，保留原返回，不改写为当时已success。当前页不再沿用b387或a64作最新发布。
 
 ## 协调权、自动化与发布
 
@@ -20,8 +20,8 @@
 
 | owner / 队列 | 下一步或保留职责 |
 | --- | --- |
-| root | 唯一integrator/发布turn，审查当前文档批及Hackathon平台定位source25e447d后串行合入；保持响应，不把长验收尾巴留自己 |
-| Hackathon专项 | 新定位25e447d由root另批审查，本文档owner不写docs/hackathon，不预称新稿已发布 |
+| root | 唯一integrator/发布turn，已实际review平台定位25e447d及发布归档cc59498，候选6844bae→d24da4b；串行合入后普通push并检查本批CI/CD；保持响应，不把长验收尾巴留自己 |
+| Hackathon专项 | 新定位25e447d由root实际review并候选6844bae，保留用户决定和既有主线补记；与归档文档同批推送，未纳入旧a0e发布 |
 | animation parent01a16d44 | 5355真实App＋统一八人页用户消费者仍保留，按owner生命周期清理；正式激活/UI已发布，不再排重复制作 |
 | architecture_code_review | 单JSON/CI-CD已验发布；本批原始发布材料来自该owner，CI artifact/restored256与Web251为不同集合。后续审查按新source身份，不重复已验全suite |
 | native QA | 最近600端点SHA匹配，无ready字段；本会话IAB不可用/设备锁定返回，native7未测，无草稿/tab/service动作。[范围](qa/native-share-editor-600-2026-10-25/README.md)，等原生窗口，不回退Chrome或重跑旧jsdom冒充进展 |
