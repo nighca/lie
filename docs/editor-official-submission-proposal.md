@@ -4,6 +4,12 @@
 
 ## 最新确认与实测前提
 
+2026-10-25当前范围补记：用户已确认案件正文携带手写summary，Editor输入及草稿/导出/分享/改编均保留；删case-catalog派生目录、测试直接读content/games并删public/games。当前尚未实施；下文旧三处配合与旧JSON字段是调研时结构，不覆盖新确认。[单JSON当前讨论与历史](builtin-case-json-proposal.md)。
+
+文件`01-<id>.json`前缀排序、投稿按数量+1是用户讨论提议；root建议显式按数值解析、prefix不改JSON id/旧URL，按最大序号+1避免删案留空碰撞，并在合入前核查/调整并发投稿序号，不建分配服务。root另建议兼容旧稿缺summary、内置/投稿必填而试玩分享可选，尚未获该分层确认。以上不是已实现的新投稿规则。
+
+外部投稿仍GitHub网页辅助、由作者最终确认；不新增OAuth/token输入、自动PR或账号写授权。本文后续自动化路线仅历史备选，新增讨论不启用它们。
+
 用户已选择跳GitHub页面、由本人确认提交，不让LIE取得GitHub OAuth/token授权。只调查能预填多少，自动PR/OAuth/App/PAT路线不作为当前实施方向。
 
 root于2026-10-24只读运行`gh repo view nighca/lie --json nameWithOwner,isPrivate,visibility,defaultBranchRef`，确认目标仓为PRIVATE、main分支。当前外部玩家并无默认访问权。用户随后已明确决定：晚些时候公开当前nighca/lie源码仓，不另设投稿仓。投稿以此仓为目标；现在不自动改可见性或加协作者，外部投稿实测与开放等待实际公开。
