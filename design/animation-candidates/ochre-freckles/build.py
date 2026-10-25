@@ -60,7 +60,7 @@ for state in ['default','listening','waiting','speaking']:
  else:visible=['head-waiting','waiting-contact','waiting-lower']
  tracks=[wave('body-root','y',960,3.5),wave('head-root','rotation',0,1.05),wave('head-root','y',430,1.2),wave('left-root','rotation',0,1),wave('right-root','rotation',0,-1)]
  if state=='listening':tracks=[wave('body-root','y',960,3.5),wave('contact-root','rotation',0,.8),wave('contact-root','y',430,1.2),wave('right-root','rotation',0,-1)]
- if state=='waiting':tracks=[wave('body-root','y',972,0),wave('contact-root','y',950,0),wave('contact-root','pivotY',950,0),dict(node='contact-root',property='scaleY',interpolation='linear',keys=[dict(time=i/4,value=round(1+.018*math.sin(i*math.pi/8),8)) for i in range(17)])]
+ if state=='waiting':tracks=[wave('contact-root','y',962,0),wave('contact-root','pivotY',950,0),dict(node='contact-root',property='scaleY',interpolation='linear',keys=[dict(time=i/4,value=round(1+.018*math.sin(i*math.pi/8),8)) for i in range(17)])]
  if state=='speaking':
   tracks.append(wave('speaking-root','rotation',0,-1.6))
   times=[0,.15,.33,.52,.71,.9,1.1,1.3,1.51,1.72,1.94,2.14,2.36,2.57,2.77,2.98,3.2,3.4,3.61,3.81,4]

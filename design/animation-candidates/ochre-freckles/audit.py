@@ -33,7 +33,8 @@ for state in ['default','listening','waiting']:
   for x in range(2,1252,3):
    if im.getpixel((x,y))[3]<245:continue
    probes+=1
-   wx,wy=mappt(phase['world']['body-root'],x,y)
+   parent='contact-root' if state=='waiting' and y<958 else 'body-root'
+   wx,wy=mappt(phase['world'][parent],x,y)
    if max(alpha(n,wx,wy,phase) for n in draws)<200:missing.append((x,y))
  assert not missing,(state,missing)
  report.append(f'{state}: {probes} baseline opaque probes; missing={len(missing)}; regions={collections.Counter((x//50*50,y//50*50) for x,y in missing).most_common(12)}')
@@ -111,4 +112,4 @@ hair=[(x,y) for y in range(450) for x in range(im.width) if im.getpixel((x,y))[3
 assert len(hair)>1000
 minimum=min(min(mappt(phase['world']['head-waiting'],x,y)[1] for x,y in hair) for phase in phases['waiting'])
 assert minimum>=3,('waiting hair crop risk',minimum)
-print(f'33 waiting phases, every alpha>=200 head pixel: minY={minimum:.3f}; fixed lower body translated12px without loop motion')
+print(f'33 waiting phases, every alpha>=200 head pixel: minY={minimum:.3f}; lower body identity; only upper contact group translated12px without lateral motion')
