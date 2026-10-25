@@ -1,0 +1,40 @@
+{
+  "source": "600fb4dd5d60e7370cb1f6315c9c8628b7df0c99",
+  "node": "24.22.1",
+  "vitest": "5.0.5",
+  "tests": [
+    {
+      "name": "actual controller + live bridge + channel composition, no devices/network switches a ready A to pending B, suppresses retained A callbacks and charges only ready intervals",
+      "status": "passed"
+    },
+    {
+      "name": "actual controller + live bridge + channel composition, no devices/network keeps partial transcript and spent quota after disconnect, and exposes only that character history to the next tool call",
+      "status": "passed"
+    },
+    {
+      "name": "actual controller + live bridge + channel composition, no devices/network disposes after transport readiness but before microphone permission resolves and stops the late device exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "actual controller + live bridge + channel composition, no devices/network fails an uncompleted handshake without charging quota or leaking capture resources",
+      "status": "passed"
+    }
+  ],
+  "total": 4,
+  "passed": 4,
+  "productionChanges": false,
+  "fakes": [
+    "WebSocket-compatible in-memory transport",
+    "status Response",
+    "AudioContext/player/microphone permission",
+    "clock/timers"
+  ],
+  "realModules": [
+    "controller.ts",
+    "liveVoice.ts",
+    "channel.ts",
+    "game-core session/context"
+  ],
+  "externalOperations": "none: no network/provider/microphone/listener/browser",
+  "limit": "Finite composition probes are not exhaustive scheduler exploration or real device/provider verification"
+}
