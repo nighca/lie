@@ -25,9 +25,9 @@ const fingerprint = value => hash(JSON.stringify(value))
 assert.equal(fingerprint(raw.assets), baseline.assets)
 assert.equal(fingerprint(raw.nodes.filter(n=>['mouth-closed','mouth-open'].includes(n.id))), baseline.mouthNodes)
 const originalPackage = JSON.parse(fs.readFileSync(new URL('archive/pre-2026-10-25-amplitude-package.json', dir)))
-assert.deepEqual(raw.nodes.filter(n=>n.id!=='body-root'),originalPackage.nodes.filter(n=>n.id!=='body-root'))
 const oldSpeaking=structuredClone(originalPackage.clips.speaking)
-for(const track of oldSpeaking.tracks)if(track.node==='body-root' && track.property==='y')for(const key of track.keys)key.value+=6
+for(const track of oldSpeaking.tracks)if(track.node==='body-root' && track.property==='y')for(const key of track.keys)key.value+=2
+oldSpeaking.visibility['waiting-arm-contact']=false;oldSpeaking.visibility['waiting-support']=false
 assert.deepEqual(raw.clips.speaking,oldSpeaking)
 const contact = data.nodes.find(n=>n.id==='chin-contact')
 assert.equal(contact.sprite.asset, 'waiting-source')
@@ -41,13 +41,14 @@ assert.deepEqual(contact.sprite.mask, data.nodes.find(n=>n.id==='head').sprite.m
 const waitingVisibility = { ...raw.clips.waiting.visibility }
 assert.equal(waitingVisibility.head, false)
 delete waitingVisibility.head
+delete waitingVisibility['waiting-arm-contact'];delete waitingVisibility['waiting-support']
 assert.equal(fingerprint(waitingVisibility), baseline.waitingVisibility)
 assert.equal(raw.clips.waiting.visibility['mouth-closed'], true)
 assert.equal(raw.clips.waiting.visibility['mouth-open'], false)
 const states = Object.keys(data.states)
 function valid(pose, state) {
   for (const n of Object.values(pose)) for (const [key,value] of Object.entries(n.transform)) {
-    assert(Number.isFinite(value)); if (key.startsWith('scale')) assert(value > 0)
+    assert(Number.isFinite(value)); if (key.startsWith('scale')) assert.equal(value,1)
   }
   assert.notEqual(pose['mouth-open'].visible, pose['mouth-closed'].visible)
   for (const other of states) assert.equal(pose[other+'-body'].visible, other === state)
@@ -61,19 +62,19 @@ for (const state of states) {
   assert.deepEqual(sampleClip(data,clip,0),sampleClip(data,clip,4))
   const a=sampleClip(data,clip,1), b=sampleClip(data,clip,3)
   if (state==='waiting' || state==='listening') {
-    assert(Math.abs(a['head-root'].transform.scaleY-b['head-root'].transform.scaleY-.036)<1e-9)
+    assert.notEqual(a['head-root'].transform.rotation,b['head-root'].transform.rotation)
     for (const pose of [a,b]) {
       assert.deepEqual(pose['body-root'].transform,data.nodes[0].transform)
-      assert.equal(pose['head-root'].transform.rotation,0)
-      assert.equal(pose['head-root'].transform.y,858)
-      assert.equal(pose['head-root'].transform.pivotY,858)
+      assert.equal(pose['head-root'].transform.scaleX,1)
+      assert.equal(pose['head-root'].transform.scaleY,1)
+      assert.equal(pose['head-root'].transform.pivotY,445)
     }
   } else {
     assert.notEqual(a['head-root'].transform.rotation,b['head-root'].transform.rotation)
     assert.notEqual(a['body-root'].transform.y,b['body-root'].transform.y)
   }
 }
-for (const id of ['head','mouth-open','mouth-closed','listen-contact','chin-contact','waiting-body','listening-body']) assert.equal(data.nodes.find(n=>n.id===id).parent,'head-root')
+for (const id of ['head','mouth-open','mouth-closed','listen-contact','chin-contact','waiting-arm-contact']) assert.equal(data.nodes.find(n=>n.id===id).parent,'head-root')
 const timeline=new AnimationTimeline(data)
 let previous=timeline.advance(.37)
 for(let i=0;i<100;i++) {

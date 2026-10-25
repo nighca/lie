@@ -7,3 +7,9 @@ The built-in image generation output is copied byte-for-byte from `/Users/nighca
 ## Pre-amplitude revision baseline, 2026-10-25
 
 `pre-2026-10-25-amplitude-package.json` is the exact candidate JSON from reviewed local main `dd1663853f7e153efb2c977dd74b89b415f0e20c`, before the new user feedback. Its original PNGs are unchanged in `../parts`. It remains an accepted integrated baseline; the separate amplitude/mouth revision is not yet user-approved. Historical source generator and verification remain available through that immutable main commit.
+
+## Rejected uniform upper scale breath, 2026-10-25
+
+`rejected-scaled-upper-2026-10-25.json` preserves the exact candidate package at source commit78031e87340fdc0a6d2ada6c8330c8fb17ddc038. The user rejected its visibly stretching head and common breathing treatment. The next rigid contact/chest design supersedes it; this archive is not a runtime reference or approval.
+
+`rejected-first-rigid-mask-trial.json` preserves the meaningful original mask choices for the parent-observed white elbow notch/shoulder cut and listening old-outline tail. It is a rejected parameter record, not a playable approved package. Parent native screenshots are retained in its separate review handoff.
