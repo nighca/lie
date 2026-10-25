@@ -1,0 +1,163 @@
+{
+  "identity": {
+    "entry": "https://lie.agency/",
+    "loadedScript": "https://lie.agency/assets/index-CRRGYc8t.js",
+    "associatedPublishedSha": "5a9a31c26b1e8f7be57b4147c2886b785b052111",
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "dpr": 1
+    },
+    "authorTab": "1910329666",
+    "receiverTab": "1910329669",
+    "receiverIsSameBrowserNewTab": true,
+    "shareUrlLength": 1349,
+    "noVoiceStarted": true
+  },
+  "segments": [
+    {
+      "name": "01-home-story",
+      "frames": 454,
+      "endTimestamp": 1792919421.188,
+      "firstTimestamp": 1792919407.471995
+    },
+    {
+      "name": "02-first-character",
+      "frames": 644,
+      "endTimestamp": 1792919441.419,
+      "firstTimestamp": 1792919430.107975
+    },
+    {
+      "name": "03-second-character",
+      "frames": 682,
+      "endTimestamp": 1792919453.928,
+      "firstTimestamp": 1792919441.462525
+    },
+    {
+      "name": "04-ending-preview",
+      "frames": 405,
+      "endTimestamp": 1792919474.738,
+      "firstTimestamp": 1792919463.770452
+    },
+    {
+      "name": "05-exit-preview",
+      "frames": 227,
+      "endTimestamp": 1792919495.834,
+      "firstTimestamp": 1792919490.138569
+    },
+    {
+      "name": "06-generate-share",
+      "frames": 132,
+      "endTimestamp": 1792919508.457,
+      "firstTimestamp": 1792919501.870775
+    },
+    {
+      "name": "07-copy-share",
+      "frames": 90,
+      "endTimestamp": 1792919643.28,
+      "firstTimestamp": 1792919638.877285
+    },
+    {
+      "name": "08-receiver-play",
+      "frames": 436,
+      "endTimestamp": 1792919682.673,
+      "firstTimestamp": 1792919674.414085
+    }
+  ],
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1280,
+        "height": 800,
+        "coded_width": 1280,
+        "coded_height": 800,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "8:5",
+        "pix_fmt": "yuv420p",
+        "level": 32,
+        "color_range": "tv",
+        "color_space": "bt470bg",
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1127424,
+        "duration": "73.400000",
+        "bit_rate": "405970",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "2202",
+        "extradata_size": 49,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc62.11.100 libx264"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/Users/nighca/.codex/worktrees/promo-video-production/lie/media/promo-video/lie-create-preview-share.mp4",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "73.400000",
+      "size": "3751699",
+      "bit_rate": "408904",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf62.3.100"
+      }
+    }
+  },
+  "sha256": "d61398d0140d7027d53ac83d81cf4bc8dde4b64c65724c3be30bb0dff6e1345c",
+  "rawLibrary": "/Users/nighca/.codex/visualizations/2026/10/25/01a17226-5e5a-7193-b5b7-e522519a3e0c/promo-video/complete-create-preview-share-take01",
+  "frames": 3070,
+  "receiverUrlMatchedGeneratedLink": true,
+  "allAcceptedFrameMetadata": {
+    "width": 1280,
+    "height": 800,
+    "pageScaleFactor": 1
+  }
+}

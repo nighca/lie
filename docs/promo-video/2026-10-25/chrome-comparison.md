@@ -1,5 +1,7 @@
 # Chrome 指针与画面边界对比
 
+> 历史预览：用户于2026-10-25要求重录完整流程并允许删除旧视频；本稿对应MP4已从当前交付目录移除，制作记录与Git历史保留。现行成片见[完整创作、试玩与分享](complete-create-preview-share.md)。
+
 2026-10-25；待用户审看，不替代首段完整案件创作。
 
 用户反馈首版画面可能偏移，要求尝试本机 Chrome，同时解决看不出鼠标操作的问题。实际使用用户 Chrome 的独立 tab 1910329658，线上 lie.agency/editor。设置 1280×800 并读取实际 innerWidth/innerHeight、DPR=1、visualViewport.scale=1；采集首帧 metadata 的 deviceWidth/Height=1280/800、offsetTop=0、pageScaleFactor=1、scrollOffsetX/Y=0。不能据此断定上一版问题一定来自内置浏览器。
