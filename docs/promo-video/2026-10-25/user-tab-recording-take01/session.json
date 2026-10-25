@@ -1,0 +1,135 @@
+{
+  "events": [
+    {
+      "at": 1792922734052,
+      "duration": 4.613,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792922758977,
+      "contextTime": 24.88533333333333,
+      "type": "record-start"
+    },
+    {
+      "at": 1792922759646,
+      "type": "virtual-mic-request"
+    },
+    {
+      "at": 1792922759667,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922764945,
+      "contextTime": 30.85333333333333,
+      "duration": 4.613,
+      "type": "question"
+    },
+    {
+      "at": 1792922774383,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922774929,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922781133,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922781302,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922782746,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922783156,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922783304,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922783920,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922784495,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922787318,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922788472,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922791800,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922795164,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792922796581,
+      "contextTime": 62.49066666666667,
+      "type": "record-stop"
+    },
+    {
+      "at": 1792922796582,
+      "contexts": [
+        "closed",
+        "closed",
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "recording-complete",
+      "sockets": [],
+      "tracks": [
+        "ended",
+        "ended",
+        "ended",
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed",
+      "closed",
+      "closed"
+    ],
+    "socketCount": 0,
+    "sockets": [],
+    "stopped": true,
+    "tracks": [
+      "ended",
+      "ended",
+      "ended",
+      "ended"
+    ]
+  }
+}

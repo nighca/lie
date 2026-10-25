@@ -1,0 +1,20 @@
+{
+  "questionSent": true,
+  "answerComplete": false,
+  "errors": [
+    "回答未在30秒内完成"
+  ],
+  "initial": {
+    "active": false,
+    "articles": 2,
+    "error": false,
+    "status": "idle"
+  },
+  "ready": true,
+  "finalState": {
+    "active": true,
+    "articles": 4,
+    "error": false,
+    "status": "speaking"
+  }
+}
