@@ -1,0 +1,8 @@
+{
+  "AudioContextName": "AudioContext",
+  "WebSocketName": "WebSocket",
+  "captureApiRemoved": true,
+  "connectNative": true,
+  "getUserMediaNative": true,
+  "pointerRemoved": true
+}

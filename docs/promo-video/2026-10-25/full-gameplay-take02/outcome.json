@@ -1,0 +1,18 @@
+{
+  "phase": "failed",
+  "dialogs": [
+    {
+      "name": "shen",
+      "initialArticles": 0,
+      "questionAt": null,
+      "speakingAt": null,
+      "quietAt": null,
+      "complete": false
+    }
+  ],
+  "errors": [
+    "Error: Voice failed before ready: shen"
+  ],
+  "segments": [],
+  "completed": false
+}
