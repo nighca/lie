@@ -50,6 +50,8 @@ ready仍需PCM hello与工具列表回复、采集及播放就绪；准备期间
 
 2026-10-25只读核对官方[WebSocket协议](https://linx.qiniu.com/docs/xrobot/platform/websocket)与[端侧MCP流程](https://linx.qiniu.com/docs/xrobot/mcp/hardware-mcp)：连接后再发hello，端侧工具按initialize/list/call发现与调用。未见当前所读页面承诺跨角色上下文清空或跳过发现的快速重连能力。仅是所读资料范围，不能据此断言供应商没有其他能力。
 
+用户随后要求结合官方产品文档；[专项文档调查](official-docs.md)补齐换音色保留上下文/无记忆仍有本次上下文的明确约束，以及OTA动态路由与单备用连接候选。它是后续研究，不改变本节候选为未批准的状态。
+
 ## 候选、收益与决定门槛
 
 | 候选（均未实施） | 本组能支持的收益判断 | 复杂度与风险 / 建议 |
