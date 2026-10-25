@@ -1,0 +1,68 @@
+{
+  "publishedSha": "a64bf6c1674b9755dbacc4d7519e92675ee5f4bf",
+  "remoteMainRechecked": true,
+  "ci": {
+    "id": 40165378030,
+    "attempt": 1,
+    "url": "https://github.com/nighca/lie/actions/runs/40165378030",
+    "conclusion": "success",
+    "jobId": 121085233774,
+    "headSha": "a64bf6c1674b9755dbacc4d7519e92675ee5f4bf",
+    "applicationTestFiles": 57,
+    "applicationTests": 573,
+    "scriptTests": 33,
+    "imageBuild": {
+      "encoded": 50,
+      "cached": 0,
+      "preserved": 0,
+      "platform": "Linux-X64",
+      "cacheSaved": true
+    }
+  },
+  "productionArtifact": {
+    "id": 12588780677,
+    "name": "production-build-a64bf6c1674b9755dbacc4d7519e92675ee5f4bf-40165378030-1",
+    "sizeInBytes": 77403693,
+    "digest": "sha256:4197a4617daed1d7bfe4514aec36c8cfaf51982d8c3dc9a6471aef17e78f10e2",
+    "expired": false,
+    "runId": 40165378030,
+    "headSha": "a64bf6c1674b9755dbacc4d7519e92675ee5f4bf",
+    "branch": "main",
+    "repositoryId": 1430668532,
+    "headRepositoryId": 1430668532
+  },
+  "cd": {
+    "id": 40165634861,
+    "attempt": 1,
+    "url": "https://github.com/nighca/lie/actions/runs/40165634861",
+    "event": "workflow_run",
+    "conclusion": "success",
+    "jobId": 121085989436,
+    "runApiHeadSha": "a64bf6c1674b9755dbacc4d7519e92675ee5f4bf",
+    "checkedOutHeadSha": "a64bf6c1674b9755dbacc4d7519e92675ee5f4bf",
+    "downloadedArtifactId": 12588780677,
+    "downloadedRunId": 40165378030,
+    "restoredVerifiedFiles": 195,
+    "latestMainStep": "success",
+    "deployStep": {
+      "number": 9,
+      "name": "Deploy the verified CI build",
+      "conclusion": "success"
+    },
+    "workerVersion": "dabb77da-39b5-4b69-bf90-bddbced1628e"
+  },
+  "online": {
+    "requests": 8,
+    "normalTls": true,
+    "all200": true,
+    "allBodyShaEqualTestedCandidate": true,
+    "candidateIdentitySource": "746718abb0742ecc7ac40aa23b4228df2c8e73db actual build tmp/q90-built-identity.json",
+    "manifestSha": "30a60c44617ba8916468ba2d580434752c46415338ef9ca6a14a4441cf7a30b4"
+  },
+  "limitations": [
+    "CD github.sha is default-branch context by GitHub semantics; no explicit job print of that environment variable, API CD head_sha recorded instead. This run default branch and upstream SHA equal; mismatch behavior has local guard test evidence only.",
+    "HTTP verifies static bodies/routes, not browser game interaction, provider or voice behavior.",
+    "Python urllib first failed local issuer CA resolution; system curl succeeded with normal TLS validation, without insecure options.",
+    "No workflow dispatch/rerun, manual deployment, service/browser/provider action or secret read."
+  ]
+}

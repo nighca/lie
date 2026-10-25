@@ -16,9 +16,9 @@
 
 ## 版本与下一步
 
-已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**远端main、同SHA CI/deploy与线上入口静态指纹已核为48316544ea9fd22afbf1eee8db6f81e326026821**，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
+已main成果包含正式动画、缓存、内容、改编及Editor错误恢复/小UI，不重做。**最新远端main、CI/CD及线上静态指纹已核为a64bf6c1674b9755dbacc4d7519e92675ee5f4bf**（[最新证据](releases/2026-10-25-q90-ci-cd/success.md)）；原48316544为历史，见[发布核验](releases/2026-10-25-main-refresh.md)；本轮单次普通push授权已执行，不把HTTP200等同真人验收。runner版本仍看8787的/__lie/main-status，不以Git HEAD推定本地常驻字节。
 
-下一步：root已普通push远端main `297666a69286e067d4a28135f9331ef4bd5f7726`；生产/CI与已验746完全相同。CI40164981567 coverage标题测试 `readFileSync('index.html')` root cwd下ENOENT，572/573tests通过；CD40165091706 workflow_run首次触发成立但按success门禁skipped，未部署。module-relative NodeURL测试修复已本地root coverage573+脚本33、Webtypes及workspace标题20项通过，待root审查正常新提交发布，不rerun不变SHA或手工兜底。[实际核验](releases/2026-10-25-q90-ci-cd/README.md)。最后已证线上仍483，本轮未执行部署后HTTP探针；root独占发布turn。已审首3design/统一页归档、其余4与结果正式激活/UI仍动画parent在制，5355用户页保留；图片5356/误占5357已清沿owner回执，本轮无服务动作。单JSON内置案仍仅讨论。
+下一步：root已正常push测试路径修复a64bf6c1674b9755dbacc4d7519e92675ee5f4bf，远端main同SHA；CI40165378030/CD40165634861 attempt1均success，精确产物12588780677恢复195文件、latest-main及实际deploy成功，Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e。lie.agency home/editor/官方案query及JS/CSS/currentmanifest/WebP共8响应SHA全部同已验候选，缓存/MIME正常。[最新发布核验](releases/2026-10-25-q90-ci-cd/success.md)。旧297 failure/CDskip与修复历史保留，不再当当前线上状态。发布后本地报告不自动二次push；root独占集成/发布。首3design/统一页已归档，其余4及结果正式激活/UI仍动画parent在制，5355用户页保留；5356/误占5357停止沿owner回执，本轮无服务动作，单JSON内置案仍仅讨论。
 
 ## 当前owner与恢复入口
 
