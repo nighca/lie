@@ -30,6 +30,11 @@ export interface DraftIssue {
 /** Authoring requirements locate incomplete fields without blocking step navigation. */
 export function draftIssues(draft: EditorDraft, characterPresets: readonly CharacterPreset[]): DraftIssue[] {
   const issues: DraftIssue[] = []
+  const nameCounts = new Map<string, number>()
+  for (const character of draft.characters) {
+    const name = character.name.trim()
+    nameCounts.set(name, (nameCounts.get(name) ?? 0) + 1)
+  }
   const add = (step: DraftIssue['step'], field: string, message: string, characterId: string | null = null) => issues.push({ step, field, message, characterId })
   if (!draft.title.trim()) add(0, 'title', '请填写案件标题')
   if (!draft.background.trim()) add(0, 'background', '请填写公共背景')
@@ -38,6 +43,7 @@ export function draftIssues(draft: EditorDraft, characterPresets: readonly Chara
   for (const [index, character] of draft.characters.entries()) {
     const name = character.name.trim() || `人物 ${index + 1}`
     if (!character.name.trim()) add(1, 'name', `请填写人物 ${index + 1} 的姓名`, character.id)
+    else if ((nameCounts.get(name) ?? 0) > 1) add(1, 'name', `人物姓名“${name}”重复，请使用不同姓名`, character.id)
     if (!character.profile.trim()) add(1, 'profile', `请填写${name}的人物设定`, character.id)
     if (!characterPresets.some((characterPreset) => characterPreset.id === character.appearanceId)) add(1, 'preset', `请为${name}选择有效的人物预设`, character.id)
   }
