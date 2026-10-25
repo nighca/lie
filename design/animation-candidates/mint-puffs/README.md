@@ -1,5 +1,7 @@
 # Mint-puffs animation candidate
 
+Current 2026-10-25 user-requested revision: see [revision-2026-10-25.md](revision-2026-10-25.md). The earlier assembly/validation below records the integrated baseline and is superseded only where that revision explicitly says so. This revision requires user visual approval before separate integration.
+
 Candidate only. Owner `/root/mint_animation`, base `73ba1387c24762e48e78c003eef2421e53746a71`, no additional dependencies. Only this directory changes. Canonical manifest/images, engine, UI, providers and other characters remain untouched.
 
 1254² canvas, four shared PNGs, four 4-second looping clips, 7,862,580 declared canvas+asset pixels. A canonical default head-through-neck runtime mask in default/listening/speaking combines with native canonical torso/arms, canonical closed/open mouth crops and stable data-only parents. The original four pose meanings remain arms down, ear listening, chin thinking with supporting forearm, palm-up speech. Preserves mint clothing, dark curls and brown skin; no theme redesign.

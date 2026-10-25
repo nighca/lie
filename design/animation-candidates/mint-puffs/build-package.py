@@ -21,7 +21,7 @@ body=rect(0,415,1254,1254)
 # The listening hand/forearm starts above the body cut and remains a single contact group.
 listen=[[390,240],[530,240],[545,435],[580,435],[580,540],[330,650],[270,630],[340,475],[390,415]]
 # Waiting keeps its original head/chin/hand as one same-source contact assembly.
-nodes=[node('body-root',None,transform(650,860,650,850)),node('head-root','body-root',transform(650,445,650,445)),node('head','head-root',transform(),sprite('default-source',30,[[0,0],[1254,0],[1254,431],[747,431],[750,493],[575,493],[580,431],[0,431]])),node('mouth-closed','head-root',transform(603,320),sprite('default-source',35,[[0,21],[85,0],[94,5],[85,31],[50,44],[10,38]],[603,320,96,48])),node('mouth-open','head-root',transform(603,320),sprite('speaking-source',36,[[0,25],[88,0],[95,4],[89,44],[63,69],[30,66],[10,45]],[603,320,98,72]))]
+nodes=[node('body-root',None,transform(650,866,650,850)),node('head-root','body-root',transform(650,445,650,445)),node('head','head-root',transform(),sprite('default-source',30,[[0,0],[1254,0],[1254,431],[747,431],[750,493],[575,493],[580,431],[0,431]])),node('mouth-closed','head-root',transform(603,320),sprite('default-source',35,[[0,21],[85,0],[94,5],[85,31],[50,44],[10,38]],[603,320,96,48])),node('mouth-open','head-root',transform(603,320),sprite('speaking-source',36,[[0,25],[88,0],[95,4],[89,44],[63,69],[30,66],[10,45]],[603,320,98,72]))]
 for state in ['default','listening','waiting','speaking']:
  parent='head-root' if state in ['listening','waiting'] else 'body-root'
  nodes.append(node(state+'-body',parent,transform(),sprite(state+'-source',10,body)))
@@ -41,9 +41,9 @@ for state in ['default','listening','waiting','speaking']:
  visibility['listen-contact']=state=='listening';visibility['chin-contact']=state=='waiting'
  visibility.update({'mouth-closed':True,'mouth-open':False})
  if state=='waiting':visibility['head']=False
- tracks=[wave('body-root','y',860,3),wave('head-root','rotation',0,.9),wave('head-root','y',445,1.2)]
+ tracks=[wave('body-root','y',866,5 if state=='default' else 3),wave('head-root','rotation',0,1.4 if state=='default' else .9),wave('head-root','y',445,1.8 if state=='default' else 1.2)]
  if state in ['listening','waiting']:
-  tracks=[wave('body-root','y',860,0),wave('head-root','y',858,0),wave('head-root','pivotY',858,0),wave('head-root','scaleY',1,.006)]
+  tracks=[wave('body-root','y',866,0),wave('head-root','y',858,0),wave('head-root','pivotY',858,0),wave('head-root','scaleY',1,.018)]
  if state=='speaking':
   times=[0,.18,.36,.56,.72,.95,1.15,1.36,1.58,1.8,2.05,2.28,2.48,2.72,2.95,3.18,3.42,3.65,3.82,4]
   for id,invert in [('mouth-open',False),('mouth-closed',True)]:tracks.append(dict(node=id,property='visible',interpolation='step',keys=[dict(time=time,value=(bool(i%2)^invert)) for i,time in enumerate(times)]))
