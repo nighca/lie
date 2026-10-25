@@ -131,6 +131,8 @@
     "pid": 53348,
     "pty": 99017,
     "tab": "1",
-    "stopCondition": "End of lane QA"
+    "stopCondition": "End of lane QA",
+    "status": "stopped",
+    "stopEvidence": "Original PTY99017 Ctrl-C exit130; lsof5357 no listener; own IAB tab1 closed before mint QA coordination"
   }
 }

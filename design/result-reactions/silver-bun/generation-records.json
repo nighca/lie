@@ -134,6 +134,8 @@
     "pty": 99017,
     "tab": "1",
     "source": "this worktree at base plus candidate",
-    "stopCondition": "lane QA complete"
+    "stopCondition": "lane QA complete",
+    "status": "stopped",
+    "stopEvidence": "Original PTY99017 Ctrl-C exit130; lsof5357 no listener; own IAB tab1 closed before mint QA coordination"
   }
 }
