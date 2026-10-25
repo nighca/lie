@@ -1,7 +1,7 @@
 {
-  "sourceSha": "fa27dc4f18f5b971da42ce8497eeba64c94ee9da",
+  "sourceSha": "4f5ba19be935dee2c891a7e9c6584f58acf45e69",
   "dirty": false,
-  "collectedAt": "2026-10-25T00:07:22.998Z",
+  "collectedAt": "2026-10-25T00:13:01.452Z",
   "node": "v24.22.1",
   "application": {
     "scope": "Six workspaces, production src .ts/.vue; excludes declarations and UI demo",
@@ -58,7 +58,7 @@
         "covered": 263,
         "pct": 91.32
       },
-      "branchs": {
+      "branches": {
         "total": 163,
         "covered": 138,
         "pct": 84.66
