@@ -1,0 +1,34 @@
+{
+  "source": "Root IAB browser3 actual network observation; relayed by parent /root in same task team",
+  "observedAt": "2026-10-25 ~12:06 Asia/Shanghai",
+  "origin": "https://lie-game.nighca.workers.dev",
+  "version": "48316544ea9fd22afbf1eee8db6f81e326026821",
+  "method": "Own tab1; CDP Network.enable/cacheDisabled true; reload, latest-navigation requests only >=64230.46; intro, first investigation and wrong accusation; exclude blob Image decode responses",
+  "stages": {
+    "home8": [
+      "sunny-moustache/avatar.png",
+      "coral-bob/avatar.png",
+      "blue-glasses/avatar.png",
+      "salt-pepper-beard/default.png",
+      "silver-bun/default.png",
+      "plum-crop/default.png",
+      "mint-puffs/default.png",
+      "ochre-freckles/default.png"
+    ],
+    "first-investigation-extra5": [
+      "sunny-moustache/animation/parts/shared-torso.png",
+      "sunny-moustache/animation/parts/listening-source.png",
+      "sunny-moustache/animation/parts/default-source.png",
+      "sunny-moustache/animation/parts/waiting-source.png",
+      "sunny-moustache/animation/parts/speaking-source.png"
+    ],
+    "wrong-result-extra": [
+      "sunny-moustache/default.png"
+    ]
+  },
+  "responses": "All bitmap HTTPS responses 200/fromDiskCache=false, content-type image/png, year immutable; bytes confirmed in summary by local source mapping",
+  "animationDigest": "96859df31e4b9bb8652145329a1de3d396930e678b93b81ab22ffba9c3160fe6",
+  "providerActions": false,
+  "cleanup": "cacheDisabled restored false; Network.disable; own tab1 closed; no local service",
+  "limitations": "No raw HAR, credentials, headers containing personal data or page content copied. Stage-set evidence only; no LCP trace or proposed WebP production timing; new lie.agency identity separately verified by HTTP."
+}

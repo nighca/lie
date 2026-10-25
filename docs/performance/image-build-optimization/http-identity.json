@@ -1,0 +1,31 @@
+{
+  "observedAtUTC": "2026-10-25T04:11:27.687299+00:00",
+  "method": "system curl --fail, normal TLS verification; two public GETs; Python local CA failed, no bypass",
+  "canonicalAvatarMatch": true,
+  "records": [
+    {
+      "kind": "manifest",
+      "url": "https://lie.agency/static/a569fd2622d84c9b584c1b7fbc3aa2182a07e7a3b438033f2780c77bb3f58a29/appearances/manifest.json",
+      "bytes": 7657,
+      "sha256": "a569fd2622d84c9b584c1b7fbc3aa2182a07e7a3b438033f2780c77bb3f58a29",
+      "headers": {
+        "content-type": "application/json",
+        "content-length": "7657",
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "\"58cc2b45fbf05c64d65677d18e57e2dc\""
+      }
+    },
+    {
+      "kind": "avatar",
+      "url": "https://lie.agency/static/61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218/appearances/sunny-moustache/avatar.png",
+      "bytes": 963360,
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+      "headers": {
+        "content-type": "image/png",
+        "content-length": "963360",
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "\"af3dcb0711ecb9cd888e6541eda11a50\""
+      }
+    }
+  ]
+}
