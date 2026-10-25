@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `b1f4af888d32508d6dd1a2a7a7304d2646552b67`。CI40188556882与CD40188686645均attempt1/success，Worker `e223b3f0-7611-4aca-bd12-5c4c05dfd2a2`；[发布证据](releases/2026-10-25-first-case-rename/README.md)。新正式TLS首页/JS已确认《消失的纪念章》与原ID。后续归档会推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `e130912a86fa7431886cba03dc15cea510f4282a`。CI40190425237与CD40190596028均attempt1/success，Worker `938c40ed-a35c-47e4-9306-d14fcad0d501`；[发布证据](releases/2026-10-25-combined-demo/README.md)。有声演示片和中英文README链接已入库；运行输入与b1相同，复用正式TLS新标题验证。后续正常批次会推进HEAD，操作前读实际Git。
 
 ## 协调权、自动化与发布
 
@@ -27,10 +27,10 @@
 | character_preset_migration | 调查立绘加载占位source8b98887已clean交付、root完整审查并候选fe56783；36项目标测试root复验通过，沿用source UI/Web类型检查；仅调查页启用slot，无服务启动，IAB不可用，原生视觉未测。[证据](investigation-portrait-loading.md)。 |
 | hackathon_case | 新增第四案source b7b20e3→2cbae8f，root完整内容/八文件diff审查、候选c1da7a9→5c87845；仅新增04 JSON为运行变更，root2项专项复验通过。源Web357/脚本33/types/build身份可复用；真实模型/盲测未验。[交付](hackathon-case/README.md)。 |
 | 头部UI专项01a16d5c | 原头部9431922仍未批准；用户在专项要求下划线位于Logo右下方、带完整页面对比，新proposal0c4a268已完整审查归档；用户随后明确批准并要求左移接触，专项4567e2f→28b77d1已完成ProductHeader局部及再左移20px，已完整审查并随2f发布；UI59/types/build/IAB桌面手机和root5项测试通过。语音A用户已批准，e214c0e三稿归档并由character owner完成实现；两项门禁独立。 |
-| 宣传视频01a17226 | 73.4秒创作分享片及37.53秒合成双向试片已归档。用户主导的take03完成三角色真实问答→正确指认→首页，source1545c1f已root全文审查及[独立复核](reviews/joint-gameplay-1545-2026-10-25/README.md)：PCM/编码/哈希/7881帧索引通过，7ctxclosed/9tracksended、四API引用恢复；[完整记录与失败备选](promo-video/2026-10-25/joint-gameplay-recording/README.md)保留。录屏存在段间hold，具体指认点击瞬间未完整动态捕获，不能声称连续或精确口型；外围finally/observer源码未全保存，仅核终态回执。用户在专项新明确要求试玩前＋创作后、有声合成成片入库并README链接，source1ae1fa3已root全文审查、接缝/末帧实际看图及[独立身份审验](reviews/combined-demo-1ae-2026-10-25/README.md)通过；[成片与复现](promo-video/2026-10-25/combined-demo/README.md)187.433秒、1280×800/30fps/H264/AAC，试玩双方声音保留、创作段原无声。两README已加链接，特定成片入库许可覆盖其中实际人声，原WAV/失败素材仍仅本地；本批候选准备合main/push，不能先当新CI/CD成功。发布窗口已释放，无新provider操作或公开平台上传许可。 |
+| 宣传视频01a17226 | 73.4秒创作分享片及37.53秒合成双向试片已归档。用户主导的take03完成三角色真实问答→正确指认→首页，source1545c1f已root全文审查及[独立复核](reviews/joint-gameplay-1545-2026-10-25/README.md)：PCM/编码/哈希/7881帧索引通过，7ctxclosed/9tracksended、四API引用恢复；[完整记录与失败备选](promo-video/2026-10-25/joint-gameplay-recording/README.md)保留。录屏存在段间hold，具体指认点击瞬间未完整动态捕获，不能声称连续或精确口型；外围finally/observer源码未全保存，仅核终态回执。用户在专项新明确要求试玩前＋创作后、有声合成成片入库并README链接，source1ae1fa3已root全文审查、接缝/末帧实际看图及[独立身份审验](reviews/combined-demo-1ae-2026-10-25/README.md)通过；[成片与复现](promo-video/2026-10-25/combined-demo/README.md)187.433秒、1280×800/30fps/H264/AAC，试玩双方声音保留、创作段原无声。两README已加链接，特定成片入库许可覆盖其中实际人声，原WAV/失败素材仍仅本地；已随e130912合main并普通push，精确CI/CD均success；成片保留原录制名称与已知hold，不再重录打磨。发布窗口已释放，无新provider操作或公开平台上传许可。 |
 | home_scroll / character_preset_migration | 首页source b9ef3cb→cf5c0fc、语音A777c392均已审查并随8aa发布；前者真实IAB验收，后者357测试/types/build及root4项通过。组合QA追加48b4b22已在独立Chrome补验并完整审查：三尺寸/reduce/取消迟到完成/首页四案滚动通过；使用真实App/controller＋fake transport，非真实语音。5544 PID10172/PTy45505原session停止exit130并核空监听，tab/临时入口/viewport清理完成。 |
 | native QA | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
-| 真人/内容QA | 贺宁真实模型、三案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |
+| 真人/内容QA | 贺宁真实模型、四案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |
 
 旧完整owner/base/有序SHA/失败和WT恢复入口保存在[整理前两页原文及来源SHA](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)，更早[只读WT/ref清单](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)有原时间边界，不当当前WT clean/存在证明。不得因刷新文档清理他人dirty/refs/ignored材料。
 

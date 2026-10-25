@@ -1,0 +1,15 @@
+{
+  "sha": "e130912a86fa7431886cba03dc15cea510f4282a",
+  "ciRun": 40190425237,
+  "cdRun": 40190596028,
+  "attempt": 1,
+  "ci": "completed/success",
+  "cd": "completed/success",
+  "artifactId": 12597731416,
+  "artifactDigest": "sha256:379d9776e59a4bb7355bb2892d65262b8ab89c1d09f4ac16513f92ba917305f1",
+  "digestEvidence": "API expected equals actual CD downloaded digest; no independent ZIP download this round",
+  "cdRestoredFiles": 256,
+  "workerVersion": "938c40ed-a35c-47e4-9306-d14fcad0d501",
+  "tlsReuse": "b1f4af8 new-title/homepage-JS proof; runtime objects equal per runtime-identity.json",
+  "newGetBuildBrowserProviderServiceGitWriteManualDeployRerun": false
+}
