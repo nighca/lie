@@ -1,0 +1,72 @@
+{
+  "events": [
+    {
+      "at": 1792923523702,
+      "duration": 5.5391875,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792923530630,
+      "contextTime": 6.938666666666666,
+      "type": "record-start"
+    },
+    {
+      "at": 1792923530720,
+      "name": "home-start",
+      "type": "phase"
+    },
+    {
+      "at": 1792923537567,
+      "name": "open-shen",
+      "type": "phase"
+    },
+    {
+      "at": 1792923541111,
+      "type": "virtual-mic-request"
+    },
+    {
+      "at": 1792923541124,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792923549132,
+      "contextTime": 25.44,
+      "type": "record-stop"
+    },
+    {
+      "at": 1792923549132,
+      "contexts": [
+        "closed",
+        "closed",
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "capture-step-failed",
+      "sockets": [],
+      "tracks": [
+        "ended",
+        "ended",
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed",
+      "closed",
+      "closed"
+    ],
+    "socketCount": 0,
+    "sockets": [],
+    "stopped": true,
+    "tracks": [
+      "ended",
+      "ended",
+      "ended"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "audio": {
+    "input": {
+      "samples": 888064,
+      "sampleRate": 48000,
+      "seconds": 18.501333333333335,
+      "peak": 0
+    },
+    "output": {
+      "samples": 888064,
+      "sampleRate": 48000,
+      "seconds": 18.501333333333335,
+      "peak": 0
+    },
+    "mix": {
+      "samples": 888064,
+      "sampleRate": 48000,
+      "seconds": 18.501333333333335,
+      "peak": 0
+    }
+  },
+  "video": {
+    "frames": 1530,
+    "sizes": [
+      [
+        [
+          1280,
+          800,
+          1
+        ],
+        1530
+      ]
+    ]
+  },
+  "audioDecode": "ffmpeg -xerror passed"
+}

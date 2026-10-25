@@ -1,0 +1,16 @@
+[
+  {
+    "method": "Network.webSocketCreated",
+    "requestId": "83831.955",
+    "url": "wss://lie.agency/api/voice"
+  },
+  {
+    "method": "Network.webSocketFrameError",
+    "requestId": "83831.955",
+    "error": ""
+  },
+  {
+    "method": "Network.webSocketClosed",
+    "requestId": "83831.955"
+  }
+]
