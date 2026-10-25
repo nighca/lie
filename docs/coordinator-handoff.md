@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `5a9a31c26b1e8f7be57b4147c2886b785b052111`。CI40176764338/attempt1与CD40176928339均success，Worker `b1866411-b431-4f59-80f1-a6bd0f9e6eed`；[发布证据](releases/2026-10-25-hackathon-case/README.md)。新设计归档会继续推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `0abc82d1acdfbaedab19888cd94ac5eaad166ab1`。CI40177361453/attempt1与CD40177506678均success，Worker `01ee0776-6218-45d8-84c3-28a226f0ec87`；[发布证据](releases/2026-10-25-header-design/README.md)。本批候选含首页滚动修复、语音提示A及设计/视频归档；最终发布状态操作后以实际Git及CI/CD为准。
 
 ## 协调权、自动化与发布
 
@@ -22,13 +22,14 @@
 | --- | --- |
 | root | 唯一integrator/发布turn，平台定位/归档已随9e1发布验证；调查立绘加载占位已随2268发布；本批调度第四案、头部效果图与视频新授权同步，实际审查后串行合入、普通push并检查CI/CD；保持响应，不把长验收尾巴留自己 |
 | Hackathon专项 | 新定位25e447d已review并随9e1发布，保留用户决定和既有主线补记 |
-| animation parent01a16d44 | 5355真实App＋统一八人页用户消费者仍保留，按owner生命周期清理；正式激活/UI已发布，不再排重复制作 |
+| animation parent01a16d44 | 2026-10-25用户在专项明确验收8角色两种新状态无问题，root已读取直接用户原话；5355统一页按要求继续保留。正式激活/UI已发布，不重复制作/合入 |
 | architecture_code_review | 单JSON/CI-CD已验发布；本批原始发布材料来自该owner，CI artifact/restored256与Web251为不同集合。后续审查按新source身份，不重复已验全suite |
 | character_preset_migration | 调查立绘加载占位source8b98887已clean交付、root完整审查并候选fe56783；36项目标测试root复验通过，沿用source UI/Web类型检查；仅调查页启用slot，无服务启动，IAB不可用，原生视觉未测。[证据](investigation-portrait-loading.md)。 |
 | hackathon_case | 新增第四案source b7b20e3→2cbae8f，root完整内容/八文件diff审查、候选c1da7a9→5c87845；仅新增04 JSON为运行变更，root2项专项复验通过。源Web357/脚本33/types/build身份可复用；真实模型/盲测未验。[交付](hackathon-case/README.md)。 |
-| 头部UI专项01a16d5c | Logo效果图source9431922已交、root实际review与查看PNG、候选a6ea1bc归档，待用户确认；语音连接提示三版浅色紧凑设计继续制作，两项均不直接改正式组件。 |
-| 宣传视频01a17226 | 已创建专chat并承接研究，用户直接沟通创意；旧仅研究门禁已被用户新授权取代。 |
-| native QA | 最近600端点SHA匹配，无ready字段；本会话IAB不可用/设备锁定返回，native7未测，无草稿/tab/service动作。[范围](qa/native-share-editor-600-2026-10-25/README.md)，等原生窗口，不回退Chrome或重跑旧jsdom冒充进展 |
+| 头部UI专项01a16d5c | 原头部9431922仍未批准；用户在专项要求下划线位于Logo右下方、带完整页面对比，专项独立做新proposal。语音A用户已批准，e214c0e三稿归档并由character owner完成实现；两项门禁独立。 |
+| 宣传视频01a17226 | 用户已授权实际制作并直接沟通；72c5b49完整创作→试玩→退出→分享→接收方73.4秒无音轨录像已审，独立审验3ea6ee→3cb876归档。用户明确允许删除前三段旧MP4，历史/截图/原帧保留。[当前素材](promo-video/2026-10-25/complete-create-preview-share.md)。后续真实语音双轨仍需明确共享设备窗口/owner和费用边界，当前仅离线验证，不启动provider；无公开上传许可。 |
+| home_scroll / character_preset_migration | 首页source b9ef3cb→cf5c0fc、语音A777c392均已完整审查入候选；前者真实IAB验收，后者357测试/types/build及root4项通过。组合QA1973ee5仅NOT RUN记录/DEV夹具：本轮无IAB，没有启动5544或任何新PID/PTY；不把历史首页图当语音验收。 |
+| native QA | 最新QA child仅一次合法inventory，只有Chrome extension无IAB，原因未知且本次无锁定错误；native7全部未测，无草稿/tab/service动作，不借用视频chat的browser id。[范围](qa/native-share-editor-600-2026-10-25/README.md)，等原生窗口，不回退Chrome或重跑旧jsdom冒充进展 |
 | 真人/内容QA | 贺宁真实模型、三案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |
 
 旧完整owner/base/有序SHA/失败和WT恢复入口保存在[整理前两页原文及来源SHA](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)，更早[只读WT/ref清单](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)有原时间边界，不当当前WT clean/存在证明。不得因刷新文档清理他人dirty/refs/ignored材料。

@@ -23,3 +23,7 @@ CI17 guards、全workspace types、真实Web/Gateway build通过；Web100modules
 ## 服务与交还
 
 本轮无listener/browser/端口动作，source WT/dist/deps未改。owner回执旧5355 PID1851在PTY55257 exit130后无listener；现同5355 `/Users/nighca/.codex/worktrees/result-reactions-combined-qa/lie` PID37202/PTY40865保留用户统一页tab60，启动f294＋built QA修订、最终source d7；仅127.0.0.1，LIE_RESULT_QA_BUILT_ASSETS=1。tabs61/62关，block/media/vision/viewport覆盖复原；试玩留下空盒案草稿，未删用户数据。保留消费者结束后由owner原PTY停止并核listener。本轮不据历史退出记录关服务，不archive源WT，不动8787/8788。文档追加后clean交回root，root仍唯一integrator；无服务/长检查尾项。
+
+## 用户统一验收补记（2026-10-25）
+
+用户在动画专项chat `01a16d44-aeea-7552-b184-5118072e75f3`、turn `01a17245-f3cd-7660-a896-bdb53e8677f5` 明确确认已在统一检查页看过8个角色的两种新状态，没有问题。root已独立读取直接用户消息；据此将本批 accusedCorrectly / accusedWrongly 图片与动画记为用户视觉验收通过。它们已随既有成果集成发布，不重复制作/合入或扩大为真人语音/全设备验收。5355统一检查页继续保留，不因已通过而擅自停服务。
