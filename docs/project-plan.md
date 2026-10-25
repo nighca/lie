@@ -28,6 +28,7 @@
 | 第四案Hackathon作弊 / 已发布5a9a31c | 《这真是今天做的吗》3人/480秒，source b7b20e3→2cbae8f、候选c1da7a9→5c87845。仅新增04 JSON运行变更，原有1216产品文件未变；[内容与验证](hackathon-case/README.md)另附。Web357/脚本33/全types/正式build通过，root候选2项真glob/首页开局指认改编分享复验通过；真实AI/盲测未做。CI/CD与线上新JS身份均确认。 |
 | PC首页双滚动 / 已发布8aa7ec9 | source b9ef3cb→cf5c0fc完整审查；PC视口约束，仅案件列表内滚；移动端维持自然页面滚动。真实IAB尺寸/第四案可达见[验收](home-scroll/README.md)。两轮5544验收均已原PTY停止并核空监听，组合Chrome亦验证第四案可达。 |
 | 移动首页分区间距 / 已发布2f5496d | source397b032→19fba4c、显式Header依赖4567后58dedce已完整审查；≤620px案件区上边距32px，标题与列表关系保持；真实Chrome iframe320/391/620移动和621/1280桌面对照/滚动通过，391/1280与新Header组合几何相同。[证据](home-mobile-section-spacing/README.md)。两轮5544均停止核空、临时入口/tab清理。 |
+| 首案改名 / 已审待发布 | 用户明确改为《消失的纪念章》。source b246c902→候选1c3875c，canonical仅title改变，ID/URL/文件名保持；同步当前中英文README，历史取证与兼容输入保留。37项相关测试通过，root全diff及JSON单字段身份复核通过；候选clean，待协作录制窗口释放后随本批串行合main/push。[记录](case-title-rename/README.md)。 |
 | P1 真人/真实模型 / root协调用户与QA | 贺宁口径改动已入库，真实模型回归未闭环；三案盲测、mic/外放/长会话、固定device多人隔离、费用硬限额仍缺证据。先确定实际矩阵/费用上限/停止清理边界，再执行；fake/短WAV/ready不替代。 |
 | 原生分享/Editor生命周期 / 已完成有限验收 | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
 | Hackathon新平台定位 / 已发布 | source25e447d已审查集成并随9e1发布；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。保持讨论稿，不衍生视频制作许可。 |
