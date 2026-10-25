@@ -1,0 +1,201 @@
+{
+  "base": "8be6d0315a393281484d65fa903353d4ea666739",
+  "head": "22b2ee8b635b2e6944d3801721673bc5122dfa3b",
+  "perCommit": [
+    {
+      "sha": "48ce8704c5d9317eeb2bbe55d59c8cfc934f52c1",
+      "subject": "fix(animation): increase silver waiting breath visibility for review",
+      "files": 9,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "a67e7dc4aed1a865baa130064a0d911064511c27",
+      "subject": "fix(animation): increase gray beard waiting breath visibility for review",
+      "files": 9,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "30367b90efa5c1faaa2227a9a435e94ef64bab60",
+      "subject": "fix(animation): enlarge plum waiting breath and preserve hair margin for review",
+      "files": 10,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "40477c6bcb4f319cf18fe60ffc8306cdc60c8475",
+      "subject": "fix(animation): separate rigid silver chin-hand turn from breathing clothes",
+      "files": 18,
+      "jsonParsed": 3,
+      "animationPackagesParsed": 3
+    },
+    {
+      "sha": "954db6638361298cf49b33cc8db38d7dea67e180",
+      "subject": "fix(animation): give gray beard a rigid thoughtful turn and separate sweater rise",
+      "files": 23,
+      "jsonParsed": 5,
+      "animationPackagesParsed": 5
+    },
+    {
+      "sha": "3bfbb42797ad538af255db0daf57eb513e30c7de",
+      "subject": "fix(animation): rig rigid plum waiting gesture with independent collar and cuffs",
+      "files": 23,
+      "jsonParsed": 5,
+      "animationPackagesParsed": 5
+    },
+    {
+      "sha": "0e4e3415d224709631aeb87adaddf84f54ef4322",
+      "subject": "fix(animation): preserve silver upper sleeves and place wrist behind native cuff",
+      "files": 13,
+      "jsonParsed": 3,
+      "animationPackagesParsed": 3
+    },
+    {
+      "sha": "a6c1f7346b0b3398f2a1426c9a8fc240e40270de",
+      "subject": "fix(animation): hide gray forearm join behind curved sweater cuff",
+      "files": 10,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "24bab7d32bba278b56be1f5eb5e02165b07cd657",
+      "subject": "fix(animation): preserve plum wrist arc beneath fixed white cuff",
+      "files": 10,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "97146796b87b74e4efa25abd7a4083912a4af616",
+      "subject": "fix(animation): make mint idle listening and waiting motion visible",
+      "files": 10,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "e296cf24fbd6860ba878cd3844cc0eafc90200fc",
+      "subject": "fix(animation): strengthen ochre breath and keep speech head stable",
+      "files": 10,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "38311f6d96c899ed6c393c57820a959aa60dc7dd",
+      "subject": "fix(animation): retain ochre lower body while clearing waiting hair",
+      "files": 5,
+      "jsonParsed": 1,
+      "animationPackagesParsed": 1
+    },
+    {
+      "sha": "e9399a89538937972206b992cc589130356da012",
+      "subject": "fix(animation): preserve full ochre waiting hair fringe clearance",
+      "files": 5,
+      "jsonParsed": 1,
+      "animationPackagesParsed": 1
+    },
+    {
+      "sha": "5c39e8e7b0fdb78055a0acb184ec86a40e81bfa0",
+      "subject": "fix(animation): separate mint rigid head contact from local chest motion",
+      "files": 8,
+      "jsonParsed": 3,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "248bd9f7e823d629ec36740819a181fe0c1ee39c",
+      "subject": "fix(animation): separate ochre rigid chin contact from chest breath",
+      "files": 7,
+      "jsonParsed": 2,
+      "animationPackagesParsed": 2
+    },
+    {
+      "sha": "902ce4a2bca7a6d28a2076daf0685ef945217fcc",
+      "subject": "fix(animation): assign ochre lower neck contour to one layer",
+      "files": 4,
+      "jsonParsed": 1,
+      "animationPackagesParsed": 1
+    },
+    {
+      "sha": "57fc63369d5166a8bcf8b983fb4f7527f79fec0d",
+      "subject": "docs: review isolated animation motion revisions pending user acceptance",
+      "files": 16,
+      "jsonParsed": 0,
+      "animationPackagesParsed": 0
+    },
+    {
+      "sha": "3169eee0bb8bd2818f70a50934aa0a7312562f15",
+      "subject": "docs: withdraw stretched-motion candidate after user review",
+      "files": 1,
+      "jsonParsed": 0,
+      "animationPackagesParsed": 0
+    },
+    {
+      "sha": "fc20c363e45fe4800a2d55db7237b3c9867602bf",
+      "subject": "docs: review character-specific rigid waiting motions for user acceptance",
+      "files": 40,
+      "jsonParsed": 0,
+      "animationPackagesParsed": 0
+    },
+    {
+      "sha": "22b2ee8b635b2e6944d3801721673bc5122dfa3b",
+      "subject": "fix(animation): activate accepted rigid motions in formal game assets",
+      "files": 17,
+      "jsonParsed": 6,
+      "animationPackagesParsed": 5
+    }
+  ],
+  "finalFiles": 183,
+  "formalFiles": [
+    "design/character-presets/assets/mint-puffs/animation/package.json",
+    "design/character-presets/assets/ochre-freckles/animation/package.json",
+    "design/character-presets/assets/plum-crop/animation/package.json",
+    "design/character-presets/assets/salt-pepper-beard/animation/package.json",
+    "design/character-presets/assets/silver-bun/animation/package.json"
+  ],
+  "results": [
+    {
+      "id": "silver-bun",
+      "sha256": "52ac940f1a01b36909757897281e4c6cd997cbb4e61e25dee172d518ac8efd17",
+      "candidateFormalGeneratedIdentical": true,
+      "nativePartsUnchanged": true,
+      "sampledPoses": 964,
+      "unchangedNonwaitingPoses": 723,
+      "interruptionSequences": 100
+    },
+    {
+      "id": "salt-pepper-beard",
+      "sha256": "92693d4321f48d6a9af578cb4e56d0d028396da5f8bc47b9fa7ff7098d97bde8",
+      "candidateFormalGeneratedIdentical": true,
+      "nativePartsUnchanged": true,
+      "sampledPoses": 964,
+      "unchangedNonwaitingPoses": 723,
+      "interruptionSequences": 100
+    },
+    {
+      "id": "plum-crop",
+      "sha256": "bcf6fe83894384997b45f53e8f13abdfd131c2bb666a5bbdfe5720d935624bfc",
+      "candidateFormalGeneratedIdentical": true,
+      "nativePartsUnchanged": true,
+      "sampledPoses": 964,
+      "unchangedNonwaitingPoses": 723,
+      "interruptionSequences": 100
+    },
+    {
+      "id": "mint-puffs",
+      "sha256": "bb4c9fad042cc871c6fed77e46237bf72bc413f7ef05d50e801b0488e2543adc",
+      "candidateFormalGeneratedIdentical": true,
+      "nativePartsUnchanged": true,
+      "sampledPoses": 964,
+      "unchangedNonwaitingPoses": 0,
+      "interruptionSequences": 100
+    },
+    {
+      "id": "ochre-freckles",
+      "sha256": "b5dce30a0aac378a5ba3a660b8c730c4dfc82afe5ea799bf29a4b272bce499c7",
+      "candidateFormalGeneratedIdentical": true,
+      "nativePartsUnchanged": true,
+      "sampledPoses": 964,
+      "unchangedNonwaitingPoses": 0,
+      "interruptionSequences": 100
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+CORRECTED CROP EXTENT AUDIT silver-bun
+(node:29570) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions; 33 real full-parent rigid head/contact matrices: column lengths invariant/orthogonal, head-to-hand relation constant, fixed lower body and torso has no head rotation
+{
+  "role": "silver-bun",
+  "period": 4,
+  "nonzeroAlphaPixels": 1242921,
+  "waitingBounds": [
+    320.7186214609117,
+    14.66682876231101,
+    965.5,
+    1253.5
+  ]
+}
+Native alpha >0 at pixel centers; not antialiased color/duplicate-contour judgement. Parent browser artistic review and user confirmation remain required.
+Traceback (most recent call last):
+  File "/Users/nighca/.codex/worktrees/animation-rigid-code-review/lie/docs/reviews/animation-rigid-batch-2026-10-25/crop-audit-probe.py", line 17, in <module>
+    exec(compile(text,str(p),'exec'),{'__file__':str(p),'__name__':'__main__'})
+  File "/Users/nighca/.codex/worktrees/approved-animation-rigid-batch/lie/design/animation-candidates/silver-bun/check-waiting-revision.py", line 122, in <module>
+    print(f'PASS {probes} native-alpha waist/contact interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.')
+            ^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('waist/contact seam', 20, 6, [(np.float64(594.5), np.float64(626.5)), (np.float64(596.5), np.float64(626.5)), (np.float64(598.5), np.float64(626.5)), (np.float64(594.5), np.float64(626.5)), (np.float64(596.5), np.float64(626.5)), (np.float64(598.5), np.float64(626.5))])
