@@ -123,7 +123,7 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 | 8787/8788，用户常驻受保护 | root协调、用户；既有launchd及网关内部子监听 | owning main动态跟随，真实版本查/__lie/main-status。旧盘点PID不沿用为当前PID；没有新明确服务turn不得停止、重启或复制实例。 |
 | 5355，最新修复回合已结束 | 动画01a16d44… | approved-animation-rigid-batch/lie@a432b72；PID99890/原PTY38260 exit130、无监听，tab58关闭，无保留服务。旧d106精确归因PID52630/23642是历史，不重停。用户已验视觉，现仅代码/资源/范围技术review；约10:46原sourceWT不再登记且目录空，Git23链对象仍保留，旧clean只属原交付，不因服务结束清refs。 |
 | 5544，最终组合验收回合已结束 | character_preset_migration | root候选be83810实际built Worker；Node35404/workerd35876，原PTY13186退出130，PID/监听消失；Chrome1910329555关、Fetch/cache/Network清理。后续视觉组合无新服务；首帧69515/74321及性能43122/53366是历史，不重复操作。 |
-| 5507，旧两回合结束；新语音turn已发 | 调查01a16d5c… | 旧background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听，tabs37/38已清。新语音连接/切人交互已给调查owner实施turn，5507按需使用，实际新WT/SHA/PID/PTY/消费者尚待回执；不能用旧关闭证据推定新进程状态。 |
+| 5507，旧两回合结束；新语音turn已发 | 调查01a16d5c… | 旧background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听，tabs37/38已清。新语音回合source fc635b5＋dba2d641，PID50346/PTY39627，消费者IAB39；原PTY Ctrl-C exit1、lsof核无监听、tab39/临时入口清理，无override；已main9b17538，无保留服务。 |
 | 5402/5403，Editor固定分配 | Editor01a16d90… | 没有新增常驻要求；本次未做监听扫描，不把历史空闲当当前精确进程状态。仅owner按需启用并用后停。 |
 | 5358/5359及18旧服务，历史清理完结 | 原调查/Editor/动画owner | 既有21服务清理回执存档，不为复用固定端口自动常驻或重复关闭历史进程。 |
 

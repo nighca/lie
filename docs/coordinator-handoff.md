@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已审main为d20812d2016aebaa8d2539e929eca73f111c60af（含36a声配置及改编方案文档）；本工作树仍从7249隔离。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已审main为9b17538ba93fb9c388851a6882f1deb9954a304e（含36a声配置、语音连接交互及改编方案文档）；本工作树仍从7249隔离。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 main7249已含原结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫，以及性能hash/cache、动画首帧、背景姓名高亮/询问记录标题（mainc334e67）和三案背景/贺宁口径内容修订。**已main不重做；本地新成果未push/部署。** 最后已证远程/CI/部署 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，本批未fetch，不声称远端实时未变。runner真实版本看8787的/__lie/main-status，不以Git HEAD推定运行字节。
 
-下一步：root依据已读修复与21项独立PASS整理发布兼容政策供用户确认；动画技术报告已交/root读完且无新阻塞，仍完成全档案/完整diff范围review，不重复用户已验视觉；推进已分派语音交互，待其释放App/controller后安排已技术接受的改编方案实施。龙三叔配置已main不重做。发布/预算、鉴权和视频门禁继续保留。
+下一步：root依据已读修复与21项独立PASS整理发布兼容政策供用户确认；动画技术报告已交/root读完且无新阻塞，仍完成全档案/完整diff范围review，不重复用户已验视觉；语音连接交互已完成review/组合验证并main9b17538；已将App/controller/Application/draft释放并整项交Editor从9b实施改编。龙三叔配置已main不重做。发布/预算、鉴权和视频门禁继续保留。
 
 ## 当前owner与恢复入口
 
@@ -28,8 +28,8 @@ main7249已含原结果页A、官方三案同步打包、清单恢复、姓名�
 | --- | --- |
 | production_release_compatibility | WT/branch production-release-compatibility，basebe83810；**clean有序61a4f4d9975cb7aaf259ebdb6f136c9ad8c03bb0 → cad7fd7e387f3797a941785b51545bce2c87778a → 14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c**。root完整读修正脚本/tests/CI/corrections/README/verifier差异并独立Node24 21/21 PASS，未见新fix blocker；source另报build/Miniflare17 PASS，不当root重跑。cad新增fixture括号遗漏曾失败/误commit，14a独立修复，不改写历史、不能只取最后一条。三链未main/push/deploy。[RC01/02审查](reviews/release-compatibility-2026-10-25/README.md)已main归档。 |
 | 动画01a16d44-aeea-7552-b184-5118072e75f3＋architecture reviewer | approved-animation-rigid-batch原base8be6d03，完整23链到a432b72bd9d7742c5b2d49306725be0fcd74e0d5。root约10:46发现原WT不在登记，reviewer核目录空；不能写当前WT clean存在，无root删除，a432及23链Git对象仍可恢复，旧clean仅交付时事实。独立技术review source9aa665a8538fe6f05b33f3f970da7114460534af（basea432，5报告文件clean）已交，root读完整报告/check.py/结果，数值/包/资源完整性无新增阻塞。用户已验视觉，不重复视觉；root此前已读5generator delta/silver精确修复，但全档案/完整diff审查尚未结束，不能称最终集成通过，23链未main、未PRturn。 |
-| 调查视觉01a16d5c-de69-7452-8d6a-280d15a87e9e | **已实际收到整项语音实施turn**，从7249新codex/voice-connection-interaction，实际WT/HEAD待回执。独占App/style/controller/VoiceControl及相关tests/docs；全局连接提醒＋仅active切人自动续接，fake only，5507按需并完整cleanup。不要另派同文件。 |
-| Editor01a16d90-27cc-77c2-9e0a-4b28b1135371 | 最小方案source0cd8702239e19b73029a7d15c2c0023704675f01（base7249，docs/remix-game-proposal/README.md109行）已交，root完整读方案及Application/controller/session/draft上下文，已main d20812d2016aebaa8d2539e929eca73f111c60af。接受single-draft明确确认替换＋新caseID的最小技术方案，不需再问用户常规实现确认；仍待voice释放App/controller后实施turn，不抢写、不称已实施。 |
+| 调查视觉01a16d5c-de69-7452-8d6a-280d15a87e9e | WT background-character-names/lie、branch codex/voice-connection-interaction，base7249；clean有序source fc635b56e5b2780e8bc629427866cee3fa051f20→dba2d641ff9ac9020185eb18413b6718ee1c34d9，root完整生产/周边/tests/docs/fixture/原生图审查，候选b0025ee→fa4f02c→9b17538完整31套266tests/types/build89及产物身份通过，已main9b17538。7hash/完整20交付路径同源，源IAB1280/391不重做；无真人mic/provider。5507 PID50346/PTY39627 exit1无监听/tab39清。原source冻结，App/controller文件权已交Editor，未push部署。用户在调查专项追加提示垂直居中偏下的位置微调，原owner仅持voice-notice位置CSS/专属证据和5507有界验收turn，追加独立提交，尚未交回；Editor样式只result-actions。[组合报告](performance/2026-10-25/combined-voice-verification.md)。 |
+| Editor01a16d90-27cc-77c2-9e0a-4b28b1135371 | source方案0cd8702239e19b73029a7d15c2c0023704675f01已root完整审查并main d20812d；single-draft明确替换＋新caseID最小方案技术接受。**已给整项实施turn，从reviewed main9b17538ba93fb9c388851a6882f1deb9954a304e开始**，独占App/controller/Application/draft及相关tests/专属docs，style只必要result-actions小规则；保护新语音，5402按需用后完整cleanup。官方/分享/试玩实际静态快照、成功/失败入口、存储失败/取消保留，未交实现，不称已完工。 |
 | older_male_voice | 三提交调查已main8ac8a7e，WT older-male-voice/branch同名base30822，原source63d5b76。用户认为两候选仍年轻，**若无更合适可先龙三叔，接受sunny同声，已授权按现有支持候选实施**；voiceId `2e7965636b0d4472ae51e75f419dff41`，不改sunny。source7058f31368629d850ae8270a4339539eee8542f6已root完整review/独立单字段及哈希核验，main36a06de86fed5dba6a1d4f14a1abcfc5c5c2a29f已实现灰白胡须映射龙三叔，其余7预设相等；source36tests/Webtypes/build89通过、候选代码资源依赖同源复用，未push/deploy/真人。旧[候选文档](older-male-voice/available-candidates.md)等选声措辞已被新决定及配置覆盖；不扩付费/provider/克隆。 |
 | case_content_revision | case-content-revision/branch同名，base3aaa329；source a549bbe2147b355a53474ba592affbb271f71e2e clean已完整root review12files/三案11profiles/ending/context/docs，候选411f8d8全部应用/tests/依赖身份同源；Core51/Web17/types/build89复用，root独立三对byte/allotherfields核验，已main7249。贺宁口径已修，**真实模型未回归**；三背景154→112/189→132/161→111，原文/备选/矩阵入库，无服务/provider。 |
 | production_performance / character_preset_migration / 调查视觉旧批 | 性能三链cba8cf0→d6700a7→bd72495，首帧574cf3a，背景d21f5ea→19fed705→09b10a4均已mainc334e67；代码候选d9d3e93、首轮be83810。Web245/UI43/Gateway16/types/build89、40Miniflare、built Worker开局/切人无staticfirst，[组合证据](performance/2026-10-25/combined-visual-verification.md)及[真实浏览器边界](performance/2026-10-25/combined-first-render-verification.md)已main。暖缓存/391px等源验收按各原范围，不重复实施或泛化PASS。 |
