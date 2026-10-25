@@ -2,7 +2,7 @@
 
 2026-10-25，基线已审本地main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
-已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已审main9b17538ba93fb9c388851a6882f1deb9954a304e已含语音连接交互及改编方案文档；本批仍基于7249隔离。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
+已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已审main b3f9bf69029cb04aa0c21c58080192ee53f71b2a已含语音连接交互、改编方案文档及连接提示居中微调；本批从已审d47ae217隔离。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
 
 ## 已批准的产品与架构
 
@@ -18,9 +18,9 @@
 
 | 优先 / owner | 当前状态与下一步 |
 | --- | --- |
-| P1 发布兼容 / production_release_compatibility＋root | clean完整61a4f4d→cad7fd7→14a32fb（basebe83810）已交，root完整读修正并独立Node24 **21/21 PASS**，RC01过期元数据消失/RC02分页修复未见新blocker；cad fixture括号失败/误commit由14a独立修正，保留历史及全三链。source build/Miniflare17为owner证据，未main/push/deploy。[RC报告](reviews/release-compatibility-2026-10-25/README.md)已main。current＋最多2旧代、v1/14d/每次约67MB及存储费用仍等用户最终策略；累计256MiB硬发布门槛自动审批明确拒绝，保持未接线，不绕过。cf未登录/套餐共享额度未知。 |
-| P1 动画 / 动画专项＋architecture reviewer＋root | 用户已验刚性五角色视觉，不重复视觉验收。source a432b72共23链Git对象可恢复，原WT约10:46已不登记/目录空，不能声称当前clean存在；独立技术报告9aa665a（basea432，5文件clean）已交，root读完整报告/check.py/结果，数值/包/资源完整性无新增阻塞；全档案/完整diff仍未审完，不能称最终集成通过，未main/PRturn；仅最小button crop/y修复授权，旧FAIL/伪PASS历史保留。 |
-| 已main 连接提醒＋active切人续接 / 调查视觉＋root | source fc635b56→dba2d641已root完整review，两提交纳入main **9b17538ba93fb9c388851a6882f1deb9954a304e**；全局醒目连接提示/取消，以实际收音ready退出，准备不计时；仅active（含准备中）切人断A接B，原已结束不开，历史/额度保留，迟到事件隔离、失败无循环。最终组合**31套266tests/types/build89通过**，7hash/完整20路径同源，龙三叔manifest/hash及QA不进生产包已核；[验收与复用边界](performance/2026-10-25/combined-voice-verification.md)。源IAB桌面/391为离线替身，无真人mic/provider；5507 PID50346/PTY39627 exit1无监听、tab39清。未push/部署；App/controller所有权已释放给改编。用户在调查专项追加要求提示垂直居中偏下更醒目，原owner仅持voice-notice位置CSS＋有界5507验收追加修正turn，尚未交回；不改行为或抢改编文件。 |
+| 不采用 旧版本保留 / production_release_compatibility＋root | 用户2026-10-25明确“不需要考虑旧版本兼容，老版本资源可以删除”。取消61a4f4d→cad7fd7→14a32fb实施/14天保留/累计256MiB预算选择门禁，不接CLI/CI、不再等待确认；现有hash构建仅current资源即可，无新增代码。候选README、修正、完整三SHA与代码引用[归档](archive/2026-10-25/release-retention-not-adopted/README.md)，[审查](reviews/release-compatibility-2026-10-25/README.md)保留。此批无实际线上删除；不授权清理Git历史/WT/凭据或广泛账号工件。 |
+| P1 动画 / 动画专项＋architecture reviewer＋root | 用户已验刚性五角色视觉。source a432b72完整23链及技术报告9aa665a保留；隔离PR候选a9e5811604a5413c4431707d5584bc816abb655e基于fresh remote abb12db，root已读完整README/PR正文，独立228＋5路径身份/无其他代码delta核验，结合此前正式5包/代码/tests/技术报告完整审查及owner61/types/build89，已发普通branch push＋创建PR＋attach turn。现发布中，待URL回执；未称已创建/merge/main/deploy，不重复视觉验收。 |
+| 已main 连接提醒＋active切人续接 / 调查视觉＋root | source fc635b56→dba2d641已root完整review，两提交纳入main **9b17538ba93fb9c388851a6882f1deb9954a304e**；全局醒目连接提示/取消，以实际收音ready退出，准备不计时；仅active（含准备中）切人断A接B，原已结束不开，历史/额度保留，迟到事件隔离、失败无循环。最终组合**31套266tests/types/build89通过**，7hash/完整20路径同源，龙三叔manifest/hash及QA不进生产包已核；[验收与复用边界](performance/2026-10-25/combined-voice-verification.md)。源IAB桌面/391为离线替身，无真人mic/provider；5507 PID50346/PTY39627 exit1无监听、tab39清。未push/部署；App/controller所有权已释放给改编。提示居中微调7424已完整review并纳入main b3f9bf69029cb04aa0c21c58080192ee53f71b2a；5507本轮PID85753/PTY22271 exit1、无监听/tab40清。用户追加PC去姓名后立绘底部空，原owner仅获桌面portrait-backdrop CSS有界下移验收turn，窄屏/资源/组件不动，未交新提交；不抢改编文件。 |
 | P2 改编游戏 / Editor01a16d90 | 方案已main d20812d并技术接受；**整项实施turn已发，从reviewed main9b17538开始**，App/controller/Application/draft本轮独占。成功/失败结果把实际官方/分享/试玩完整静态快照填入现编辑器，新caseID、不携运行状态、不改原案；已有raw草稿先明确替换确认，取消/读写失败不覆盖或导航。失败页不揭真相，主动作者内容含答案；复用既有编辑/试玩/分享，不新增账号或多槽备份。实施、相关检查及desktop/391验收由该owner完整交付，5402按需用后停；尚未实现交回，不抢写。 |
 | 已main 年长男声 / older_male_voice＋root | 用户认为两候选仍年轻，**若无更合适先龙三叔并接受sunny同声，按现有支持候选实施已获授权**。voiceId2e7965636b0d4472ae51e75f419dff41；source7058f31368629d850ae8270a4339539eee8542f6已完整root review/独立单字段哈希核验，**main36a06de已实现**，其余7预设相等、不改sunny；source36tests/Webtypes/build89通过，候选应用资源依赖同源复用。未push/deploy/真人，不扩provider/克隆或付费样本。旧[候选](older-male-voice/available-candidates.md)仍待选择措辞已被此次决定覆盖。 |
 | 已main，待真实模型回归 / case_content_revision | sourcea549bbe，root完整12files/三案11profiles/ending/context/docs review、候选411f8d8与source应用/tests/依赖同源；Core51/Web17/types/build89复用，root独立三对byte/其他字段原样通过，main7249。背景154→112/189→132/161→111；贺宁普通施压不自曝口径已调，**未真实模型回归，不能称实测修好**。原文/备选/矩阵已[入库](case-content-revision-2026-10-25/README.md)，无服务/provider。 |
@@ -46,8 +46,8 @@
 
 ## 当前门禁与资源
 
-- 无自动push/部署；一次既有发布授权已完成。动画单独PR仅本批例外，仍须技术/范围完整review及明确remote base/隔离turn，只带动画delta，不夹未发布功能。记录、main、push、CI、部署和真人验收分开报告。
-- 累计兼容artifact256MiB硬门槛影响发布可用性，自动审批要求用户确认，保持未启用；14d存储策略仍等决定。没有新账号、secret、资源、付费测试或生产维护许可。
+- 无自动push/部署；一次既有发布授权已完成。动画单独PR仅本批例外：a9e5811技术/范围完整review及remote base已核，隔离branch push＋创建PR＋attach turn已发、待URL，只带动画delta，不夹未发布功能；无main/merge/deploy turn。记录、main、push、CI、部署和真人验收分开报告。
+- 用户已明确不采用旧版本资源保留，相关14天/256MiB策略门禁取消；允许旧产品资源删除不授权广泛账号工件/Git历史/WT清理，此批无实际删除。没有新账号、secret、资源、付费测试或生产维护许可。
 - 宣传仅[方法/依赖研究](promo-video-production-research.md)完成；实际脚本/分镜/录屏/配音音乐/生成媒体/制作须用户成熟判断后明确授权。投稿PRIVATE及[代理投稿方案](editor-official-submission-proposal.md)门禁保留。域名lie.nighca.me仅给Custom Domain指导，未DNS/账号操作。
-- [端口台账](development.md#服务登记与生命周期)保留用户8787/8788及内部子监听。本批不扫描/启停服务，5544/5355/旧5507仅沿原owner退出证据；新语音5507按实际turn登记，未知PID不猜，其他人dirty/WT/refs不清理。前代分享tab未知不盲关。
+- [端口台账](development.md#服务登记与生命周期)保留用户8787/8788及内部子监听。本批不扫描/启停服务，5544/5355/旧5507仅沿原owner退出证据；5507居中验收85753/PTY22271已exit1且tab40清；桌面立绘新turn实际PID仍待owner交，不猜，其他人dirty/WT/refs不清理。前代分享tab未知不盲关。
 - 真实mic/provider试验仍须明确矩阵、时长/费用上限、首FAIL/UNCERTAIN停止和自建资源清理；优先IAB，具体授权fallback才使用独立Chrome。原子agent句柄不会自动交给新chat；用户已暂停轮换，本root继续推进。

@@ -1,0 +1,46 @@
+# RC01 / RC02 corrective review record
+
+Owner `root/production_release_compatibility`; initial commit `61a4f4d9975cb7aaf259ebdb6f136c9ad8c03bb0` frozen, corrections appended independently. Local candidate only: no main mutation, push, remote workflow, artifact API call/upload/deletion or deployment. Root's original dependency base remains `be83810d1dafcf1cc1270520e669885661b24088`.
+
+## RC01 — disappearance of expired artifact metadata
+
+Review found a real P2 in the original implementation: missing artifacts failed before checking expiration. GitHub changed its API on2026-09-24 so expired artifacts disappear instead of staying listed with expired metadata. After a quiet period longer than retention, the original candidate could keep failing future restores. Prior17tests did not model that behavior. [Official change](https://github.blog/changelog/2026-09-24-expired-github-actions-artifacts-no-longer-shown-in-ui-and-api/).
+
+The corrected code does **not** equate missing with expired. For a selected run with no matching archive, it requires:
+
+- this same verified repository/main/workflow/source SHA, successful deploy, successful artifact upload, and a valid upload completion time no earlier than deploy completion;
+- the exact `.github/workflows/ci.yml` file at that fixed40hex source SHA, fetched only through the existing api.github.com client; returned type/path/base64 encoding, canonical decoded bytes and64KiB size bound are checked;
+- its entire source byte SHA256 matching an explicitly reviewed version1 policy allowlist. Current hash is `9caa7a0b7d50a3814c9346e8e6ed2906c23737ce70e37ecdcb1372b199d46dc6`, corresponding to this candidate's explicit14day upload retention;
+- current time at or after successful upload completion plus those14days. Upload completion is conservatively later than archive creation, so this cannot discard an unexpired archive based on an earlier upload-start timestamp.
+
+Only then does absence produce `expired-api-metadata-absent`, recording policy hash, upload completion, retention days and expiry upper bound. Unknown workflow bytes/policy, missing successful-upload evidence, malformed source, and an unexpired missing artifact fail. API failures do not become expiration. Present archives continue to use verified run provenance, archive SHA256, per-file inventory and explicit expiration metadata. Upload failure is rejected even before considering absent/expired metadata.
+
+**Maintenance cost is explicit:** any future CI byte change needs review and an appropriate policy-hash allowlist entry or new versioned namespace, even if it changes an unrelated CI step. Preserve reviewed older hashes while their generations can still need expiry classification. The code cannot infer arbitrary old/future retention settings. This source allowlist establishes what the trusted workflow requested; it does not claim an account retention setting or available storage allowance. Shortened actual retention/manual deletion before that conservative bound remains an unexpected missing archive and fails.
+
+## RC02 — creation pages are not deployment order
+
+The original first100runs plus two candidates was insufficient. A run outside that page can have a newer successful rerun. The GitHub workflow-runs endpoint supports pagination and total_count; a filtered query can expose at most1000results. It does not offer the actual successful deploy-step completion timestamp as a list-sort selector. This implementation makes **no assumption** that API run order is deployment order. [Official API](https://docs.github.com/en/rest/actions/workflow-runs?apiVersion=2022-11-28#list-workflow-runs-for-a-workflow).
+
+The correction completely enumerates the same workflow's main run list before selecting candidates:100/page, up to1000 total, total_count stable across pages, unique safe numeric IDs, exact accumulated count. Holes, duplicated IDs, changing counts, excessive totals or incomplete pages fail closed **even if page1 already contains two candidates**. It then inspects the actual attempts (up to10/run, maximum1000 job queries) and sorts successful deployment timestamps across the complete bounded result. Equal timestamps use descending run ID/attempt only as a deterministic tie break. The latest two eligible deployed generations, including successful earlier attempts of a failed rerun, determine retained/expired sets. Unknown or excessive history is an explicit limitation rather than silently reverting to page1.
+
+The larger bound is finite, not a claim to query unlimited history. A repository beyond that complete-query bound needs a separately reviewed history policy before proceeding. GitHub's actual API rate allowance was not queried; request/rate errors remain failures, not proof of empty history. No permission expansion beyond the original contents:read/actions:read is introduced.
+
+## Executed correction validation
+
+Node24.22.1, same locked dependencies. Focused suite now **21/21**:
+
+- missing expired metadata with successful upload and exact policy => explicit omission;
+- missing unexpired archive => failure; unknown30day workflow bytes => failure; missing upload timestamp and malformed source => failure;
+-101-run fixture: page1 contains two eligible deployments, page2 contains a much older run's newer second attempt; the page2 run is selected first by actual deploy completion;
+- total_count over1000, changed count, duplicate IDs and incomplete pagination fail before partial selection; an independent101runs×10attempts fixture stops after exactly1000job queries;
+- original path/ZIP/digest/collision/current-only/rerun tests and the **unwired**256MiB proposal remain covered.
+
+An intermediate fixture run failed2/20 because its generic `/workflows/` fixture matcher accidentally intercepted `/contents/.github/workflows/ci.yml`; corrected fixture dispatch to check the contents endpoint first. The actual production client always uses complete fixed API URLs. A later added query-budget fixture initially had one missing closing brace, causing a syntax failure; the shell sequence still created the corrective commit. It is preserved and fixed in an additional commit without amending history. Final21tests pass; no failed run is called PASS.
+
+The minimal actual build replay uses unchanged Web/hash/gateway source, the corrected release selector and its real ZIP fixtures: Web build/strict89original resources, current-only snapshot, two prior-generation fixtures, merge before actual cf build, then actual packaged Worker/static binding checks. Updated [build evidence](build-evidence.json) and [replay script](verify-build.mjs) record108unique immutable files/75,896,107bytes and17actual requests. This is local API-shaped fixture acceptance, **not** remote CI or production traffic. No unrelated application suite rerun is claimed.
+
+## Still gated and cleanup
+
+Storage policy/user approval remains pending exactly as in the original proposal. The256MiB cumulative budget function remains exported but **uncalled by CLI/CI**.14day automatic archive retention is still a reviewable candidate rather than an authorized published policy. Nothing buys capacity, deletes artifacts, adds actions:write or silently changes retention.
+
+No development service/port/browser/provider/microphone session was started; Miniflare disposed. Isolated temporary acceptance fixtures are removed after the final replay, retaining only tracked sanitized evidence/script. Original native image/assets and old commits remain unchanged. This task does not supersede root's independent review report; it supplies the corrected implementation for actual re-review.

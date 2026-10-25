@@ -1,0 +1,61 @@
+{
+  "status": "not-adopted",
+  "date": "2026-10-25",
+  "decision": "不需要考虑旧版本兼容，老版本资源可以删除。",
+  "documentation_base": "d47ae21767038176da71bf6dd03478b3806bcee5",
+  "source_base": "be83810d1dafcf1cc1270520e669885661b24088",
+  "source_branch": "codex/production-release-compatibility",
+  "ordered_commits": [
+    "61a4f4d9975cb7aaf259ebdb6f136c9ad8c03bb0",
+    "cad7fd7e387f3797a941785b51545bce2c87778a",
+    "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c"
+  ],
+  "snapshots": [
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": "docs/performance-release-compatibility/2026-10-25/README.md",
+      "archive_path": "README.md.txt",
+      "sha256": "186344c0559e69513076258c32c5e7dbac8066b3cc1c3968b9598d2afadfc38e",
+      "git_blob": "eec10f38bf3c1948ab38f214b8bd08289dcd5687"
+    },
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": "docs/performance-release-compatibility/2026-10-25/corrections.md",
+      "archive_path": "corrections.md.txt",
+      "sha256": "8c694824551f1bc1788c0b0a4013ac41fd0785061a3c4ac2e055b4fefef289e2",
+      "git_blob": "b3c7a25f89efd0682aaad27d267bfbb86df327b0"
+    }
+  ],
+  "code_and_evidence_references": [
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": "scripts/release-assets.mjs",
+      "git_blob": "1a8db3d0c701dcce07b36b4f5b3668b02e82d902"
+    },
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": "scripts/release-assets.test.mjs",
+      "git_blob": "78ace0e85eae273b14f57c28824deed2adca1a70"
+    },
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": ".github/workflows/ci.yml",
+      "git_blob": "ca2fa4d674af2bf8c2feb2c33d4ad64d7b328dc3"
+    },
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": ".gitignore",
+      "git_blob": "4e7e78b531b157c200ba6b1898eda03a53a0c325"
+    },
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": "docs/performance-release-compatibility/2026-10-25/verify-build.mjs",
+      "git_blob": "695fab9250144fd853344ed4cfd4b2b0bfe90454"
+    },
+    {
+      "source_commit": "14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c",
+      "source_path": "docs/performance-release-compatibility/2026-10-25/build-evidence.json",
+      "git_blob": "898ebc60fe81e562356073b6280041f9c5b1c15b"
+    }
+  ]
+}

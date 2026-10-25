@@ -14,6 +14,7 @@
 | 决策与完成证据 | [历史索引](../history/README.md)、[当前计划与门禁](../project-plan.md) |
 | 归档补存 | [2026-10-25盘点、原文与待交付范围](2026-10-25/README.md) |
 | 历史提交与chat补查 | [第二轮31份中间版本、chat范围及旧dirty映射](2026-10-25/history-followup/README.md) |
+| 未采用 发布兼容 | [旧版本资源保留方案、修正原文与完整代码来源](2026-10-25/release-retention-not-adopted/README.md)：用户明确不需要旧版本兼容，取消14天/256MiB政策确认与实施，不接CI；未实际线上删除。 |
 | 暂停实现保存 | [邀请码完整暂停handoff、来源与三张必要截图](2026-10-25/invite-access-paused/README.md)，代码未合入，恢复须用户明确重启。 |
 | 专项历史补交 | [动画研究README、来源与失败证据](2026-10-25/animation-history-followup/README.md)；[编辑器原型与聊天设计回收](../archive-inbox/editor-history-2026-10-25/README.md)；[调查页、品牌与移动端历史设计](../archive-inbox/investigation-visual-history/README.md) |
 
