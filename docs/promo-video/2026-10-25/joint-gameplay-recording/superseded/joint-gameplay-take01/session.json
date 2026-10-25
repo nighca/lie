@@ -1,0 +1,143 @@
+{
+  "events": [
+    {
+      "at": 1792925840138,
+      "duration": 0,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792925840393,
+      "contextTime": 0.19733333333333333,
+      "type": "record-start"
+    },
+    {
+      "at": 1792925852812,
+      "type": "microphone-attached"
+    },
+    {
+      "at": 1792925852929,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925867110,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925883654,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925890649,
+      "type": "microphone-attached"
+    },
+    {
+      "at": 1792925890744,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925902857,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925904379,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925911390,
+      "role": "陈拓",
+      "type": "human-role"
+    },
+    {
+      "at": 1792925914684,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925917509,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925917698,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925922400,
+      "role": "顾遥",
+      "type": "human-role"
+    },
+    {
+      "at": 1792925924859,
+      "type": "microphone-attached"
+    },
+    {
+      "at": 1792925924951,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792925934853,
+      "contextTime": 94.592,
+      "type": "record-stop"
+    },
+    {
+      "at": 1792925934853,
+      "contexts": [
+        "closed",
+        "closed",
+        "closed",
+        "closed",
+        "closed",
+        "closed",
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "joint-capture-failed",
+      "sockets": [],
+      "tracks": [
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed",
+      "closed",
+      "closed",
+      "closed",
+      "closed",
+      "closed",
+      "closed"
+    ],
+    "socketCount": 0,
+    "sockets": [],
+    "stopped": true,
+    "tracks": [
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended"
+    ]
+  }
+}

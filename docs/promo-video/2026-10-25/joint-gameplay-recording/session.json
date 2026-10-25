@@ -1,0 +1,150 @@
+{
+  "events": [
+    {
+      "at": 1792927023941,
+      "duration": 0,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792927024188,
+      "contextTime": 0.19733333333333333,
+      "type": "record-start"
+    },
+    {
+      "at": 1792927034939,
+      "type": "microphone-attached"
+    },
+    {
+      "at": 1792927035036,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927038778,
+      "role": "沈禾",
+      "type": "human-role"
+    },
+    {
+      "at": 1792927049975,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927069714,
+      "role": "陈拓",
+      "type": "human-role"
+    },
+    {
+      "at": 1792927069957,
+      "type": "microphone-attached"
+    },
+    {
+      "at": 1792927070048,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927081970,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927082013,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927095942,
+      "role": "顾遥",
+      "type": "human-role"
+    },
+    {
+      "at": 1792927096257,
+      "type": "microphone-attached"
+    },
+    {
+      "at": 1792927096351,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927112689,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927118525,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927118729,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927120439,
+      "node": "AnalyserNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792927149167,
+      "contextTime": 124.77866666666668,
+      "type": "record-stop"
+    },
+    {
+      "at": 1792927149168,
+      "contexts": [
+        "closed",
+        "closed",
+        "closed",
+        "closed",
+        "closed",
+        "closed",
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "joint-capture-ended",
+      "sockets": [],
+      "tracks": [
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended",
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed",
+      "closed",
+      "closed",
+      "closed",
+      "closed",
+      "closed",
+      "closed"
+    ],
+    "socketCount": 0,
+    "sockets": [],
+    "stopped": true,
+    "tracks": [
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended",
+      "ended"
+    ]
+  }
+}

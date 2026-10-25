@@ -1,0 +1,26 @@
+[
+  {
+    "stage": "stop",
+    "ok": true
+  },
+  {
+    "stage": "export",
+    "ok": true
+  },
+  {
+    "stage": "network-disable",
+    "ok": true
+  },
+  {
+    "stage": "remove",
+    "ok": true
+  },
+  {
+    "stage": "metrics",
+    "ok": true
+  },
+  {
+    "stage": "viewport",
+    "ok": true
+  }
+]

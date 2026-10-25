@@ -1,0 +1,53 @@
+{
+  "events": [
+    {
+      "at": 1792926806952,
+      "duration": 0,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792926807221,
+      "contextTime": 0.224,
+      "type": "record-start"
+    },
+    {
+      "at": 1792926822084,
+      "type": "microphone-attached"
+    },
+    {
+      "at": 1792926823203,
+      "contextTime": 16.149333333333335,
+      "type": "record-stop"
+    },
+    {
+      "at": 1792926823203,
+      "contexts": [
+        "closed",
+        "closed",
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "joint-capture-failed",
+      "sockets": [],
+      "tracks": [
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed",
+      "closed",
+      "closed"
+    ],
+    "socketCount": 0,
+    "sockets": [],
+    "stopped": true,
+    "tracks": [
+      "ended"
+    ]
+  }
+}

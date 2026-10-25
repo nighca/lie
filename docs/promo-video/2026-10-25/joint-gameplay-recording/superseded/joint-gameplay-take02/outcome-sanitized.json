@@ -1,0 +1,15 @@
+{
+  "phase": "failed",
+  "complete": false,
+  "segments": [
+    "01-home-entry"
+  ],
+  "roles": [],
+  "transcripts": {},
+  "errors": [
+    {
+      "stage": "capture",
+      "category": "voice-error"
+    }
+  ]
+}

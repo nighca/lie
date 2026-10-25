@@ -1,0 +1,27 @@
+{
+  "phase": "failed",
+  "complete": false,
+  "segments": [
+    "01-home-entry"
+  ],
+  "roles": [
+    "陈拓",
+    "顾遥"
+  ],
+  "transcripts": {
+    "陈拓": {
+      "humanMessages": 1,
+      "characterMessages": 1
+    },
+    "顾遥": {
+      "humanMessages": 0,
+      "characterMessages": 0
+    }
+  },
+  "errors": [
+    {
+      "stage": "capture",
+      "category": "voice-error"
+    }
+  ]
+}

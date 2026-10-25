@@ -1,0 +1,34 @@
+{
+  "phase": "completed",
+  "complete": true,
+  "segments": [
+    "01-home-entry",
+    "02-human-play",
+    "03-human-play",
+    "04-result-home"
+  ],
+  "roles": [
+    "沈禾",
+    "陈拓",
+    "顾遥"
+  ],
+  "transcripts": {
+    "沈禾": {
+      "humanMessages": 1,
+      "characterMessages": 1,
+      "interruptedMessages": 0
+    },
+    "陈拓": {
+      "humanMessages": 1,
+      "characterMessages": 1,
+      "interruptedMessages": 0
+    },
+    "顾遥": {
+      "humanMessages": 3,
+      "characterMessages": 1,
+      "interruptedMessages": 0
+    }
+  },
+  "errors": [],
+  "result": "solved"
+}

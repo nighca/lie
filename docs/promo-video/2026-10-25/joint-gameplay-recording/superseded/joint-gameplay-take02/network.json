@@ -1,0 +1,38 @@
+{
+  "connections": 2,
+  "events": [
+    {
+      "connection": 1,
+      "elapsedMs": null,
+      "kind": "created"
+    },
+    {
+      "connection": 1,
+      "elapsedMs": 0,
+      "kind": "frame-error",
+      "category": "empty"
+    },
+    {
+      "connection": 1,
+      "elapsedMs": 6,
+      "kind": "closed"
+    },
+    {
+      "connection": 2,
+      "elapsedMs": null,
+      "kind": "created"
+    },
+    {
+      "connection": 2,
+      "elapsedMs": 65914,
+      "kind": "handshake-sent",
+      "sent": true
+    },
+    {
+      "connection": 2,
+      "elapsedMs": 67286,
+      "kind": "handshake-response",
+      "status": 101
+    }
+  ]
+}

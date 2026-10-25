@@ -1,0 +1,21 @@
+{
+  "connections": 1,
+  "events": [
+    {
+      "connection": 1,
+      "elapsedMs": null,
+      "kind": "created"
+    },
+    {
+      "connection": 1,
+      "elapsedMs": 0,
+      "kind": "frame-error",
+      "category": "closed-before-open"
+    },
+    {
+      "connection": 1,
+      "elapsedMs": 17,
+      "kind": "closed"
+    }
+  ]
+}

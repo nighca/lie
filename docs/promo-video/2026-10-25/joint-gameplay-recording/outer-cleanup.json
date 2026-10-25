@@ -1,0 +1,42 @@
+[
+  {
+    "stage": "stop",
+    "ok": true
+  },
+  {
+    "stage": "export",
+    "ok": true
+  },
+  {
+    "stage": "screenshot",
+    "ok": true
+  },
+  {
+    "stage": "stop-export-screenshot",
+    "ok": true
+  },
+  {
+    "stage": "network-save",
+    "ok": true
+  },
+  {
+    "stage": "network-disable",
+    "ok": true
+  },
+  {
+    "stage": "api-check",
+    "ok": true
+  },
+  {
+    "stage": "remove",
+    "ok": true
+  },
+  {
+    "stage": "metrics",
+    "ok": true
+  },
+  {
+    "stage": "viewport",
+    "ok": true
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "removedSilentIntervalSeconds": [
+    108.50586204528808,
+    119.0198618888855
+  ],
+  "rawPcmPeakInsideGap": 0,
+  "sourcePreserved": true,
+  "sha256": "4e9d9badf30c66bfe89e199d9cacfdcdb67bcf4d404b4c88f12137601cb29afc",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 800,
+        "r_frame_rate": "30/1"
+      },
+      {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 1,
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "114.015000",
+      "size": "9763645"
+    }
+  },
+  "decode": "ffmpeg -xerror passed"
+}

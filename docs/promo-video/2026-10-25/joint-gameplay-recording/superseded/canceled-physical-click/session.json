@@ -1,0 +1,35 @@
+{
+  "events": [
+    {
+      "at": 1792925241116,
+      "duration": 5.5391875,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792925301178,
+      "contexts": [
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "no-physical-click",
+      "sockets": [],
+      "tracks": [
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed"
+    ],
+    "socketCount": 0,
+    "sockets": [],
+    "stopped": true,
+    "tracks": [
+      "ended"
+    ]
+  }
+}
