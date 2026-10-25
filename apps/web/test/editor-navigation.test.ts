@@ -6,6 +6,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 import type { GameDefinition } from '@lie/game-core'
 
 import Application from '../src/Application.vue'
+import App from '../src/App.vue'
 import { DRAFT_KEY } from '../src/editor/draft'
 import { encodeGameLink, SHARE_URL_LIMIT } from '../src/editor/share'
 import * as sharing from '../src/editor/share'
@@ -201,26 +202,43 @@ describe('remixing a completed case', () => {
     await screen.click(correct ? '指认 甲' : '指认 乙')
   }
   const screenFactory = screen
-  it.each([['official', true], ['official', false], ['shared', true], ['shared', false], ['preview', true], ['preview', false]] as const)('opens an independent editor draft from actual %s snapshot (correct=%s)', async (kind, correct) => {
+  it.each([['official', true], ['official', false], ['shared', true], ['shared', false]] as const)('opens an independent editor draft from actual %s snapshot (correct=%s)', async (kind, correct) => {
     const original = { ...customGame, id: officialGame.id }
-    if (kind === 'preview') localStorage.setItem(DRAFT_KEY, JSON.stringify(original))
-    const result = await screen(kind === 'official' ? '/?game=test' : kind === 'shared' ? await sharedPath(original) : '/editor')
-    if (kind === 'preview') await result.click('试玩')
+    const result = await screen(kind === 'official' ? '/?game=test' : await sharedPath(original))
     const source = kind === 'official' ? officialGame : original
     await finish(result, correct)
-    if (kind === 'preview') localStorage.setItem(DRAFT_KEY, JSON.stringify({ ...original, title: '试玩后另改的草稿' }))
     await result.click('我要改编')
-    if (kind === 'preview') await result.click('替换草稿并改编')
     expect(result.router.currentRoute.value.path).toBe('/editor')
     const draft = JSON.parse(localStorage.getItem(DRAFT_KEY)!)
     expect(draft.id).not.toBe(source.id)
     expect({ ...draft, id: source.id }).toEqual(source)
     expect((result.wrapper.get('input[name="title"]').element as HTMLInputElement).value).toBe(source.title)
     expect(result.sessions).toHaveLength(1)
-    if (kind === 'preview') {
-      await result.wrapper.get('input[name="title"]').setValue('继续编辑新改编稿')
-      expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).id).toBe(draft.id)
-    }
+  })
+  it.each([true, false])('returns to the original editor after preview without remixing (correct=%s)', async (correct) => {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(customGame))
+    const result = await screen('/editor')
+    await result.wrapper.get('input[name="title"]').setValue('继续编辑的原稿')
+    await result.wrapper.findAll('.editor-steps button')[1].trigger('click')
+    await result.click('编辑乙')
+    await result.wrapper.get('[data-field="profile"]').setValue('乙在试玩前的设定')
+    await result.click('试玩')
+    const savedDraft = localStorage.getItem(DRAFT_KEY)
+    await finish(result, correct)
+    expect(result.wrapper.findAll('.result-actions button').map((button) => button.text())).toEqual(['重新开始一局', '返回编辑器'])
+    result.wrapper.getComponent(App).vm.$emit('remix')
+    await settle()
+    expect(result.router.currentRoute.value.path).toBe('/editor/preview')
+    expect(localStorage.getItem(DRAFT_KEY)).toBe(savedDraft)
+    expect(result.wrapper.findAll('dialog').some((dialog) => dialog.element.open)).toBe(false)
+    await result.click('返回编辑器')
+    expect(result.wrapper.get('main h1').text()).toBe('故事人物')
+    expect((result.wrapper.get('[data-field="name"]').element as HTMLInputElement).value).toBe('乙')
+    expect((result.wrapper.get('[data-field="profile"]').element as HTMLTextAreaElement).value).toBe('乙在试玩前的设定')
+    await result.wrapper.findAll('.editor-steps button')[0].trigger('click')
+    expect((result.wrapper.get('input[name="title"]').element as HTMLInputElement).value).toBe('继续编辑的原稿')
+    expect(localStorage.getItem(DRAFT_KEY)).toBe(savedDraft)
+    expect(result.sessions).toHaveLength(1)
   })
   it.each(['{broken', '', JSON.stringify({ title: '未完成' })])('preserves exact existing bytes on cancellation: %s', async (raw) => {
     const result = await screen('/?game=test')

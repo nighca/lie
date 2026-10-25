@@ -119,6 +119,7 @@ function cancelRemix() {
   draftRead = false
 }
 function remix() {
+  if (route.path === '/editor/preview') return
   const source = controller.value?.getRemixSource()
   if (source == null) return
   pendingRemix = createRemixDraft(source)
@@ -163,7 +164,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
   <KeepAlive v-if="route.path === '/editor' || route.path === '/editor/preview'" :max="1">
     <Editor v-if="route.path === '/editor'" :key="editorRevision" :character-presets="characterPresets" :preset-status="presetStatus" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
   </KeepAlive>
-  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
+  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :allow-remix="route.path !== '/editor/preview'" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
   </div>
