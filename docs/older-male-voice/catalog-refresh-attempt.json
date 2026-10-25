@@ -1,0 +1,7 @@
+{
+  "capturedAt": "2026-10-25T02:01:56.900Z",
+  "method": "GET",
+  "endpoint": "https://xrobo.qiniu.com/v1/voices",
+  "maximumRequests": 1,
+  "retries": 0
+}

@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "id": "2e7965636b0d4472ae51e75f419dff41",
+      "method": "HEAD",
+      "httpStatus": "200",
+      "exitCode": 0,
+      "downloadedAudio": false
+    },
+    {
+      "id": "2090374269950234626",
+      "method": "HEAD",
+      "httpStatus": "200",
+      "exitCode": 0,
+      "downloadedAudio": false
+    }
+  ],
+  "existingChineseSample": {
+    "path": "/private/tmp/lie-voice-adapter/spikes/voice-audition/tmp/sunny-moustache.wav",
+    "bytes": 150444,
+    "sha256": "59bf51382e29d1be619d2fcf11d0e2d61557409ccf89f4203441f59fc841efb0",
+    "channels": 1,
+    "sampleRate": 16000,
+    "bitsPerSample": 16,
+    "audioSeconds": 4.7,
+    "newGeneration": false
+  }
+}

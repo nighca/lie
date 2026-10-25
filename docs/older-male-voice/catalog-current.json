@@ -1,0 +1,796 @@
+{
+  "capturedAt": "2026-10-25T02:01:56.900Z",
+  "endpoint": "https://xrobo.qiniu.com/v1/voices",
+  "httpStatus": 200,
+  "code": 0,
+  "totalVoiceCount": 226,
+  "selectedScope": "public male voices with zh language",
+  "selectedVoiceCount": 37,
+  "voices": [
+    {
+      "id": "03f5f7eb7ed344d69af8a1c6ede55f4a",
+      "name": "智慧青年男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/yxlcev/%E9%BE%99%E6%A9%99.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "zhixing"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "1aca2272002c4f6282e2e9c1ac3418c8",
+      "name": "实力歌手男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250624/uqtctc/%E9%BE%99%E6%B7%B1.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "huopo"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "1c0da95dd2914bf882fb6d5048ea5138",
+      "name": "温暖元气男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/mdolqm/%E9%BE%99%E6%B3%BD.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "wenrou"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "2087828880417325057",
+      "name": "猴哥",
+      "demo": "https://xrobot-storage.qnaigc.com/demo/tts_voices/2026-0813/sunwukong_voice.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "",
+        "gender": "male",
+        "styles": [],
+        "scenes": [],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "2087829522122092545",
+      "name": "熊二",
+      "demo": "https://xrobot-storage.qnaigc.com/demo/tts_voices/2026-0813/xionger_vioice.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "",
+        "gender": "male",
+        "styles": [],
+        "scenes": [],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "2090374269950234626",
+      "name": "磁性理智男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/vkbkhz/%E9%BE%99%E5%A4%A9.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "29ddb9582ae8481ebf11562f99aeaf95",
+      "name": "温暖阿虎/Alvin",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Alvin.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "wenrou"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "2e7965636b0d4472ae51e75f419dff41",
+      "name": "沉稳质感男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/otqtwd/%E9%BE%99%E4%B8%89%E5%8F%94.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "audiobook"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "30b517c1409d4e4493319fbbd1f8126b",
+      "name": "热血磁性男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/liqtfn/%E9%BE%99%E9%A3%9E.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "rexue"
+        ],
+        "scenes": [
+          "recitation"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "3682d12777014db0ae2cbb14cc5c2d70",
+      "name": "傲娇霸总",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E5%82%B2%E5%A8%87%E9%9C%B8%E6%80%BB.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "qiangshi"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "4c89ea979ba44dafb14aeddf8d994956",
+      "name": "古代诗仙男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/jkrnti/%E6%9D%8E%E7%99%BD.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "gufeng"
+        ],
+        "scenes": [
+          "recitation"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "56277dc0c13d4462a210b1d1af2433fc",
+      "name": "呆板大暖男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/wogvqz/%E9%BE%99%E5%93%B2.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "daiban"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "6c020a40601843bea600492c09f762ad",
+      "name": "渊博小叔",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E6%B8%8A%E5%8D%9A%E5%B0%8F%E5%8F%94.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "zhixing"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "7e74beb93aaf4b9a866b554068adad0d",
+      "name": "阳光青年",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E9%98%B3%E5%85%89%E9%9D%92%E5%B9%B4.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "kailang"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "9141f26b175e4f8fa8cb433e10301d16",
+      "name": "阳光顽皮男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/xqrzon/%E9%BE%99%E6%9D%B0%E5%8A%9B%E8%B1%86.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "child",
+        "gender": "male",
+        "styles": [
+          "huopo"
+        ],
+        "scenes": [
+          "toddler"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "9d91653b2adf4aa9ad97e1c8f63fbda3",
+      "name": "磁性低音男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/sjhntj/%E9%BE%99%E5%B0%8F%E8%AF%9A.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "9fe804bde57f44a2a4150b793939eb29",
+      "name": "博才干练男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/mhfnjs/%E9%BE%99%E7%A1%95.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "zhixing"
+        ],
+        "scenes": [
+          "news"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "a42e04fcefac4e9492581fbc95f3fce3",
+      "name": "睿智青年男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/tojjob/%E9%BE%99%E6%A5%A0.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "audiobook"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "b38d4a6eb8f64c209fa6febfd7f91663",
+      "name": "深夜播客",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E6%B7%B1%E5%A4%9C%E6%92%AD%E5%AE%A2.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "audiobook"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "b6a1aa749bd94c9c811444443ae1fa5c",
+      "name": "博才说书男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/isfcla/%E9%BE%99%E4%BF%AE.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "zhixing"
+        ],
+        "scenes": [
+          "audiobook"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "cc73f0728da44e7b934ac48a0a644e28",
+      "name": "积极向上男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/krbwty/%E9%BE%99%E9%82%B5.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "huopo"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "d0a37106e7f945b0aa85f3d233ffc36e",
+      "name": "少年梓辛/Brayan",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Brayan.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "youhao"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "e48c9e09b655493ea012dd47e3e9c8ee",
+      "name": "优雅温润男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/yfsrer/%E9%BE%99%E6%B4%A5.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "gufeng"
+        ],
+        "scenes": [
+          "recitation"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "ea04a167b8aa4d8c95be84e811eace7b",
+      "name": "多情忧郁男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250618/lbljnc/%E9%BE%99%E6%B5%A9.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "middle",
+        "gender": "male",
+        "styles": [
+          "youyu"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "f566cb22237b46e7bc90924fa285bcb8",
+      "name": "沉稳青年男",
+      "demo": "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250617/zihuud/%E9%BE%99%E4%B9%A6.mp3",
+      "tags": {
+        "languages": [
+          "zh",
+          "en"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "news"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "d5838aff825444d0a818c4c969e64db0",
+      "name": "京腔侃爷/Harmony",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/Harmony.mp3",
+      "tags": {
+        "languages": [
+          "en",
+          "zh"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "kailang"
+        ],
+        "scenes": [
+          "dialect"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "2031648472324964354",
+      "name": "新闻直播男声",
+      "demo": "",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [],
+        "scenes": [
+          "default"
+        ],
+        "profile": "public"
+      },
+      "tier": "pro",
+      "expired_time": ""
+    },
+    {
+      "id": "2031648356109996033",
+      "name": "温柔男声",
+      "demo": "",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [],
+        "scenes": [
+          "default"
+        ],
+        "profile": "public"
+      },
+      "tier": "pro",
+      "expired_time": ""
+    },
+    {
+      "id": "2029739560654675970",
+      "name": "温润青年",
+      "demo": "",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [],
+        "scenes": [
+          "default"
+        ],
+        "profile": "public"
+      },
+      "tier": "pro",
+      "expired_time": ""
+    },
+    {
+      "id": "2029740102628675585",
+      "name": "沉稳高管",
+      "demo": "",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [],
+        "scenes": [
+          "default"
+        ],
+        "profile": "public"
+      },
+      "tier": "pro",
+      "expired_time": ""
+    },
+    {
+      "id": "2029740684041216001",
+      "name": "电台男主播",
+      "demo": "",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [],
+        "scenes": [
+          "default"
+        ],
+        "profile": "public"
+      },
+      "tier": "pro",
+      "expired_time": ""
+    },
+    {
+      "id": "38cde7d2091d427c8ddc52a1eb4adf5b",
+      "name": "湾区大叔",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E6%B9%BE%E5%8C%BA%E5%A4%A7%E5%8F%94.mp3",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "dialect"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "560d4a785a8f4b86b1cdfc63cdd64e51",
+      "name": "豫州子轩",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E8%B1%AB%E5%B7%9E%E5%AD%90%E8%BD%A9.mp3",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "youhao"
+        ],
+        "scenes": [
+          "companion"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "30ee6078a37a4507a94073d8064055bb",
+      "name": "广西远舟",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E5%B9%BF%E8%A5%BF%E8%BF%9C%E8%88%9F.mp3",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "youhao"
+        ],
+        "scenes": [
+          "dialect"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "ad69866eedeb419d88e058d613cf1989",
+      "name": "北京小爷",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E5%8C%97%E4%BA%AC%E5%B0%8F%E7%88%B7.mp3",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "zhishuai"
+        ],
+        "scenes": [
+          "dialect"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "93cc0b8a4e454810b645fb35e5fe16f4",
+      "name": "浩宇小哥",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E6%B5%A9%E5%AE%87%E5%B0%8F%E5%93%A5.mp3",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "young",
+        "gender": "male",
+        "styles": [
+          "zhishuai"
+        ],
+        "scenes": [
+          "dialect"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    },
+    {
+      "id": "14daf72a319c4a319f0b61e675ba0efc",
+      "name": "广州德哥",
+      "demo": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lm_hz_ihsph/ljhwZthlaukjlkulzlp/portal/bigtts/%E5%B9%BF%E5%B7%9E%E5%BE%B7%E5%93%A5.mp3",
+      "tags": {
+        "languages": [
+          "zh"
+        ],
+        "age": "adult",
+        "gender": "male",
+        "styles": [
+          "chenwen"
+        ],
+        "scenes": [
+          "dialect"
+        ],
+        "profile": "public"
+      },
+      "tier": "free",
+      "expired_time": ""
+    }
+  ]
+}
