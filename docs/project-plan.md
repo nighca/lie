@@ -74,7 +74,7 @@
 | P2 | 启动延迟与剩余回归 / 语音/工程owner待排 | observer已集成但无真人阶段采样/加速结论；先有界实测，再优化，不跨轮保活mic/连接。开发代理WS问题已独立派下行owner，不混作延迟结论。 |
 | P2 | 开发代理完整WS拒绝 / review_blue_animation | [无凭据网络对照](dev-websocket-rejection.md)已定位Cloudflare Vite开发宿主丢弃非101响应；Web代理/Worker HTTP控制保留503/403。诊断脚本与记录已纳入本地main `0a67498`，未修补vendor/生产配置；宿主限制仍未修复，上游或开发适配后置评估。 |
 | P3 | 银发/双丸子主题区分 / 视觉owner待排 | 两者accent同`#78DDD7`；先定accent/卡底/服装层级方案，不混waiting返修。若改服装须静态/动画一致，未授权全面重画。 |
-| P2 | 结果页视觉方案 / 已交付，用户反馈细化 | [现行提案](result-scene-visual-proposal.md)、[原型与两版原生图](../design/result-scene-proposal/README.md) source0c65ea1→e743283，root已完整源码/测量/代表图review。用户专项chat表示两稿整体无大问题，要求错误页短文案更协调；现错误页760px居中单列，正确页保留左右长文，391上下排，v2另测/旧图保留。只设计入库，应用实施/两态新素材未批准；继续在专项确认，不重复问已看原稿。5507两回合原PTY12356/2561均退出0、tabs33/34已关、无监听。 |
+| P2 | 结果页视觉方案 / 已交付，用户反馈细化 | [现行提案](result-scene-visual-proposal.md)、[原型与两版原生图](../design/result-scene-proposal/README.md) source0c65ea1→e743283，root已完整源码/测量/代表图review。用户专项chat表示两稿整体无大问题，要求错误页短文案更协调；现错误页760px居中单列，正确页保留左右长文，391上下排，v2另测/旧图保留。用户随后在专项明确“没问题，按现在的版本实现吧”，root已核原话并分派该owner从已审main30385c2独立实施A：App.vue/style.css/独立结果tests/实施记录独占，完整5507 IAB验收与清理；不改Application/main/Editor，不做B/C新表情或契约。5507两回合原PTY12356/2561均退出0、tabs33/34已关、无监听。 |
 | P2/P3 | 动画剩余质量 / 动画＋UI owner | sunny前代只读QA：8787真实游戏正常单canvas/单RAF及切人；3次合成iframe暂停/恢复未见重复RAF，仅为合成事件证据。IAB明确子agent不支持真实visibility，真实隐藏恢复仍未验，不能视为PASS；未用mic/provider，自建tab已清理、服务保留。临时证据`/private/tmp/lie-sunny-visibility-qa-20261025/handoff.md`及同目录`observations.json`。1280×720既有舞台裁切保留；按真实问题排期，静态回退及资源取消不退化。 |
 
 ## 保留的门禁与外部依赖

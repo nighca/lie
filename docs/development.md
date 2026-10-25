@@ -136,3 +136,5 @@ PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已
 2026-10-25用户另授权专职稳定版本探索QA，5544现分配给root/stable_exploratory_qa，旧“再次空闲”仅表示上轮鉴权收尾采样，不覆盖新owner。实际新WT/PID/PTY与启动/停止结果由该owner最终批量交付，不预写正在监听或已停止。
 
 2026-10-25 09:17服务回合更新：稳定探索QA的5544（WT stable-exploratory-qa/lie@abb12db，PID14248、原PTY26270、消费者自建tabs1/2）已Ctrl-C退出130并核无监听/PID消失，draft原样恢复；报告已交。5544下一回合明确分配 character_preset_migration 的 preset-loading-recovery（base03fcb06），只用于清单加载失败/重试的有界IAB验收，启动前须核监听，新PID/PTY等由该owner完整handoff补齐，验收后即停；不能据分配推断已启动。调查结果原型5507两回合PID95633/PTY12356及PID66158/PTY2561均已原PTY退出0、tabs33/34关闭、核无监听；无新常驻服务，8787/8788/5355保持原owner。
+
+5544加载修复本回合实际登记：owner character_preset_migration，WT character-preset-migration-dawn/lie，base03fcb06＋未交付修复，PID89520/原PTY3817，消费者独立Chrome tab1910329540（IAB unavailable），transport9、无gateway。停止条件为清单恢复有界验收结束；当前在用，结束停止/存储恢复/关闭tab证据待owner，不依旧“无监听”记录操作本PID。结果UI批准后5507分配原调查专项，启动实际PID/PTY待该owner交付，不预记监听。

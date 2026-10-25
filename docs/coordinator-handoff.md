@@ -90,6 +90,12 @@
 
 三执行agent句柄换代不自动继承；届时须取可恢复完整handoff，保护dirty/refs及服务，不重复派同一任务。当前运行时代码仍与已发布abb12db一致；本轮文档本地集成不新增push/部署授权。
 
+## 结果页最新实施批准与并行所有权
+
+root已实际read_thread核专项用户随后原话“没问题，按现在的版本实现吧”，明确批准当前correct左右＋wrong v2居中方案A的实施；不扩大到B/C新表情/动画资源或契约。已向原调查专项chat01a16d5c-de69-7452-8d6a-280d15a87e9e正式分派：从reviewed main30385c296eafe68b0403706f6ac63a37ce96487b新独立codex/result-scene-implementation WT，独占App.vue/style.css/新增独立result-scene tests/docs实施证据，整项含5507 demo/IAB与用后清理。结果只取actual result.characterId，wrong不揭真相，保留restart/returnLabel、长文、391/缺图/键盘。具体新WT与SHAs待clean完整handoff；root不代做其配置验收尾巴，无main/push/PR权限。
+
+清单修复owner已明确不改App.vue/style.css/原结果导航测试，App现数组prop自然响应，无需依赖commit；Application/main/Editor/loader及新增preset-loading-navigation.test.ts仍归其独占。其当前5544已实际启动：WT character-preset-migration-dawn/lie@03fcb06＋在制修复，PID89520、原PTY3817、消费者独立Chrome tab1910329540（IAB明确Browser unavailable后有界fallback）、transport9/no gateway；结束必须原PTY停并核无监听/关tab/恢复draft。root仅记录当前在用，未称已验收通过。其他QA002独立draft/tests与CR01voice/controller边界保持。
+
 ## 最新发布与结果页设计授权
 
 用户授权的普通push已成功：远端32d89bf快进到 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，ls-remote实返该SHA，本地同SHA且clean。发布完整预检在独立publication-readiness WT通过388项测试、全types、Web/gateway build、8/8动画89assets+manifest90文件；fresh coverage发现生成清单晚于discovery的入口缺陷，唯一fix源fad5d862已实际review后cherry为abb12db。root比对应用/collector/依赖/CI/正式资源身份相同，后续暂停/归档docs不影响验证。CI40147932644与既有自动部署已实际success，root另核headSha/所有步骤；附件summary由独立owner读ZIP确认388/92.08%，远端README/SVG正确。部署版本24e508bf，已确认发布/部署SHA均abb12db，未做真人语音验收；publication turn已释放，后续文档仅本地未再push。[发布记录](history/2026-10-25/coverage-publication.md)说明边界。
