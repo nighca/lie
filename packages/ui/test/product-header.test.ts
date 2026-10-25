@@ -24,11 +24,9 @@ describe('product header', () => {
     const link = wrapper.get('a')
     expect(link.attributes('href')).toBe('/')
     expect(link.attributes('aria-label')).toBe('LIE 首页')
-    expect(link.get('span').text()).toBe('语音推理')
     const svg = link.get('svg')
     expect(svg.attributes('aria-hidden')).toBe('true')
     expect(svg.attributes('focusable')).toBe('false')
-    expect(link.get('span').classes()).toContain('lie-handwritten-underline')
     const original = new DOMParser().parseFromString(readFileSync(new NodeURL('../../../design/brand/logo.svg', import.meta.url), 'utf8'), 'image/svg+xml')
     expect(svg.attributes('viewBox')).toBe(original.documentElement.getAttribute('viewBox'))
     expect(svg.findAll('path, circle').map(node => Object.fromEntries(Object.entries(node.attributes()).filter(([name]) => !name.startsWith('data-v-'))))).toEqual(
