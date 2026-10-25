@@ -9,8 +9,8 @@ import authoredCase from '../../../content/games/empty-medal-box.json'
 import authoredDuckCase from '../../../content/games/duck-finale.json'
 import caseData from '../public/games/empty-medal-box.json'
 import duckCaseData from '../public/games/duck-finale.json'
-import catalogData from '../public/games/index.json'
-import { readCatalog } from '../src/application/catalog'
+import catalogData from '../../../content/case-catalog.json'
+import { caseCatalog } from '../src/application/catalog'
 import gameConfig from '../src/game-config.json'
 import characterPresetData from '../public/appearances/manifest.json'
 import { readCharacterPresets } from '../src/presentation/characterPresets'
@@ -52,7 +52,10 @@ describe('bundled game content', () => {
   })
 
   it('keeps public catalog cards in sync with their actual content packages', async () => {
-    for (const entry of readCatalog(catalogData)) {
+    expect(caseCatalog).toEqual(catalogData)
+    expect(new Set(caseCatalog.map(({ id }) => id)).size).toBe(caseCatalog.length)
+    for (const entry of caseCatalog) {
+      expect(entry.summary.trim()).not.toBe('')
       const source = await readFile(fileURLToPath(new NodeURL(`../public/games/${encodeURIComponent(entry.id)}.json`, import.meta.url)), 'utf8')
       const content = validateGame(JSON.parse(source))
       expect({ id: content.id, title: content.title, interrogationLimitSeconds: content.interrogationLimitSeconds }).toEqual({ id: entry.id, title: entry.title, interrogationLimitSeconds: entry.interrogationLimitSeconds })

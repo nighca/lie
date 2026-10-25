@@ -1,0 +1,42 @@
+[
+  {
+    "file": "direct-reload.jpg",
+    "format": "JPEG",
+    "width": 1470,
+    "height": 980,
+    "sha256": "b146da0df20f2fcd02db1bcff09120b23b487bf72434ead4bb5dcaa5527e33a7",
+    "edited": false
+  },
+  {
+    "file": "home-blocked.jpg",
+    "format": "JPEG",
+    "width": 1470,
+    "height": 971,
+    "sha256": "4218d7fbef166252e3b92960f18da3feedffd9d8093eb251534d8f4be11ac4ed",
+    "edited": false
+  },
+  {
+    "file": "shared-intro.jpg",
+    "format": "JPEG",
+    "width": 1470,
+    "height": 951,
+    "sha256": "d98ee29673c7080fadefb4ae721ee82c3cd71b255525bea5e1ac5b3cbe9de5c6",
+    "edited": false
+  },
+  {
+    "file": "storage-restored.jpg",
+    "format": "JPEG",
+    "width": 1470,
+    "height": 835,
+    "sha256": "37322bbdd5e3e48d3a68dc7a699fa668b87cb503281b0c05c5162d93dd232383",
+    "edited": false
+  },
+  {
+    "file": "unknown.jpg",
+    "format": "JPEG",
+    "width": 1470,
+    "height": 835,
+    "sha256": "335af49a028de0cf9ca5a0250e0056fde4ea50328de82da25bcc9f4db94fd2d8",
+    "edited": false
+  }
+]

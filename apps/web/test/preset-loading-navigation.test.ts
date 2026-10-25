@@ -28,7 +28,7 @@ async function page(fetcher: typeof fetch, path = '/') {
       sessions.push(session)
       return session.controller
     },
-    loadCatalog: async () => [], characterPresets: loader.state.presets, presetStatus: loader.state.status, loadCharacterPresets: loader.load, demo: true,
+    catalog: [], characterPresets: loader.state.presets, presetStatus: loader.state.status, loadCharacterPresets: loader.load, demo: true,
   }))
   const wrapper = mount(root, { global: { plugins: [router] }, attachTo: document.body })
   cleanup.push(() => { wrapper.unmount(); loader.cancel() })

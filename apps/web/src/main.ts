@@ -4,7 +4,8 @@ import type { GameDefinition } from '@lie/game-core'
 
 import '@lie/ui/style.css'
 import Application from './Application.vue'
-import { readCatalog } from './application/catalog'
+import { readBundledCase } from './application/bundledCases'
+import { caseCatalog } from './application/catalog'
 import { createGameController } from './application/controller'
 import { createDemoVoicePort } from './application/demoVoice'
 import { createLiveVoicePort } from './application/liveVoice'
@@ -18,9 +19,7 @@ async function main() {
   const createController = (game: GameDefinition | null = null) => createGameController({
     async readGame(gameId) {
       if (game != null) return game
-      const response = await fetch(`/games/${encodeURIComponent(gameId)}.json`)
-      if (!response.ok) throw new Error('Game load failed')
-      return response.json()
+      return readBundledCase(gameId)
     },
     voice: demo ? createDemoVoicePort() : createLiveVoicePort(),
     resolveVoiceId: (appearanceId) => presets.state.presets.find((characterPreset) => characterPreset.id === appearanceId)?.voiceId ?? null,
@@ -28,16 +27,11 @@ async function main() {
     newSessionId: () => crypto.randomUUID(),
   })
   const router = createRouter({ history: createWebHistory(), routes: [{ path: '/:pathMatch(.*)*', component: Application }] })
-  const loadCatalog = async () => {
-    const response = await fetch('/games/index.json')
-    if (!response.ok) throw new Error('Catalog load failed')
-    return readCatalog(await response.json())
-  }
   const app = createApp({
     setup() {
       onUnmounted(presets.cancel)
       return () => h(Application, {
-        createController, loadCatalog, demo,
+        createController, catalog: caseCatalog, demo,
         characterPresets: presets.state.presets,
         presetStatus: presets.state.status,
         loadCharacterPresets: presets.load,

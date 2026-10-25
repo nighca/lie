@@ -1,0 +1,26 @@
+{
+  "runtime": "v24.22.1",
+  "compression": "node:zlib gzipSync defaults applied equally to existing files",
+  "base": "1f168e3486591b8c64f971dc6a3da87bdb41d2a3",
+  "baselineSource": "existing root integration checkout 8be6d03 (docs only beyond base), runtime tree unchanged",
+  "baseline": {
+    "file": "/Users/nighca/.codex/worktrees/integrate-character-preset-dawn/lie/apps/web/dist/assets/index-BMZLwpli.js",
+    "raw": 181978,
+    "gzip": 66049,
+    "sha256": "addbe7ad5990207045478efdcc8c63405a7f15ceb79e9f7a60322fd3fe82feb7"
+  },
+  "candidate": {
+    "file": "apps/web/dist/assets/index-DOo7nbIc.js",
+    "raw": 213067,
+    "gzip": 78873,
+    "sha256": "84030283d5e9deaaefb751c3c51f69b90be2e6405b67a2d19c27337ec57b7c12"
+  },
+  "delta": {
+    "raw": 31089,
+    "gzip": 12824
+  },
+  "entryJsFiles": [
+    "index-DOo7nbIc.js"
+  ],
+  "canonicalBodyExcerptsFound": 3
+}

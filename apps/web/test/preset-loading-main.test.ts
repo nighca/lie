@@ -26,5 +26,7 @@ it('the production entry mounts a usable homepage before the optional manifest s
   await flushPromises()
   expect(document.body.textContent).toContain('有人在说谎')
   expect(document.body.textContent).toContain('创作案件')
+  expect(document.querySelectorAll('.case-card')).toHaveLength(3)
+  expect(fetcher.mock.calls.every(([url]) => String(url) === '/appearances/manifest.json')).toBe(true)
   expect(fetcher.mock.calls.filter(([url]) => url === '/appearances/manifest.json')).toHaveLength(1)
 })

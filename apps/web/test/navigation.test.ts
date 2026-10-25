@@ -3,7 +3,6 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 import Application from '../src/Application.vue'
-import { readCatalog } from '../src/application/catalog'
 import { observeNavigationLifecycle } from '../src/application/navigationLifecycle'
 import { game, setup } from './helpers'
 
@@ -16,12 +15,12 @@ beforeEach(() => {
 })
 afterEach(() => cleanup.splice(0).forEach((action) => action()))
 const catalog = [{ id: game.id, title: game.title, summary: '公开简介', interrogationLimitSeconds: 480, characters: game.characters.map(({ name, appearanceId }) => ({ name, appearanceId: appearanceId ?? null })) }]
-async function screen(path = '/', loadCatalog = async () => catalog) {
+async function screen(path = '/', entries = catalog) {
   const sessions: ReturnType<typeof setup>[] = []
   const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/', component: Application }] })
   await router.push(path)
   const wrapper = mount(Application, { props: {
-    characterPresets: [], demo: true, loadCatalog,
+    characterPresets: [], demo: true, catalog: entries,
     createController: () => { const next = setup(); sessions.push(next); return next.controller },
   }, global: { plugins: [router] } })
   cleanup.push(() => wrapper.unmount())
@@ -33,18 +32,6 @@ async function screen(path = '/', loadCatalog = async () => catalog) {
   }
   return { wrapper, router, sessions, click }
 }
-
-describe('case catalog', () => {
-  it('projects public metadata and rejects duplicate IDs and invalid durations', () => {
-    expect(readCatalog([{ ...catalog[0], profile: 'private', ending: 'private' }])).toEqual(catalog)
-    expect(() => readCatalog([catalog[0], catalog[0]])).toThrow()
-    expect(() => readCatalog([{ ...catalog[0], interrogationLimitSeconds: 0 }])).toThrow()
-    expect(() => readCatalog([{ ...catalog[0], title: ' ' }])).toThrow()
-    expect(() => readCatalog([{ ...catalog[0], characters: [] }])).toThrow()
-    expect(() => readCatalog([{ ...catalog[0], characters: [{ name: ' ', appearanceId: null }] }])).toThrow()
-    expect(readCatalog([{ ...catalog[0], characters: [{ name: '甲', appearanceId: null, profile: 'private' }] }])[0].characters).toEqual([{ name: '甲', appearanceId: null }])
-  })
-})
 
 describe('home and case navigation', () => {
   it('loads public cards without constructing a game or starting voice, and opens an intro by selection', async () => {
@@ -75,22 +62,6 @@ describe('home and case navigation', () => {
     expect(router.currentRoute.value.path).toBe('/')
     expect(router.currentRoute.value.query).toEqual({ demo: '1' })
     expect(wrapper.get('.home-intro h1').text()).toBe('有人在说谎')
-  })
-
-  it('retries a failed catalog independently of direct case loading', async () => {
-    let fail = true
-    const { wrapper, router, click } = await screen('/', async () => {
-      if (fail) throw new Error('offline')
-      return [...catalog, { ...catalog[0], id: 'another-case', title: '另一桩案件' }]
-    })
-    expect(wrapper.text()).toContain('案件列表暂时无法加载')
-    await router.push('/?game=test'); await flushPromises()
-    expect(wrapper.text()).toContain('接案，开始调查')
-    await click('返回案件列表')
-    fail = false
-    await click('重试')
-    expect(wrapper.findAll('article')).toHaveLength(2)
-    expect(wrapper.text()).toContain('另一桩案件')
   })
 
   it('cancels leaving with URL, session, history and voice intact, then discards on confirmation', async () => {

@@ -13,13 +13,11 @@ import { observeNavigationLifecycle } from './application/navigationLifecycle'
 import type { CharacterPreset } from './presentation/characterPresets'
 import type { PresetLoadStatus } from './presentation/characterPresetLoader'
 
-const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; loadCatalog: () => Promise<CaseSummary[]>; characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus; loadCharacterPresets?: () => Promise<readonly CharacterPreset[] | null>; demo: boolean }>()
+const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; catalog: readonly CaseSummary[]; characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus; loadCharacterPresets?: () => Promise<readonly CharacterPreset[] | null>; demo: boolean }>()
 const route = useRoute()
 const router = useRouter()
 const controller = shallowRef<GameController | null>(null)
 const instance = ref(0)
-const cases = ref<CaseSummary[]>([])
-const catalogStatus = ref<'loading' | 'ready' | 'failed'>('loading')
 const confirmation = ref(false)
 const shareLoading = ref(false)
 const shareError = ref<string | null>(null)
@@ -108,13 +106,7 @@ async function end() { if (await confirmLeave()) controller.value?.end() }
 function avatar(id: string | null) { return props.characterPresets.find((item) => item.id === id)?.avatar ?? null }
 const brokenAvatars = ref(new Set<string>())
 
-async function loadCatalog() {
-  catalogStatus.value = 'loading'
-  try { cases.value = await props.loadCatalog(); catalogStatus.value = 'ready' }
-  catch { catalogStatus.value = 'failed' }
-}
 watch(() => route.fullPath, loadCurrent, { immediate: true })
-void loadCatalog()
 onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard() })
 </script>
 
@@ -143,11 +135,9 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
         <ol class="flow-hint home-flow" aria-label="调查流程"><li>开口问话</li><li>对照说法</li><li>最终指认</li></ol>
       </section>
       <section class="home-cases" aria-labelledby="cases-title"><h2 id="cases-title">选择案件</h2>
-        <p v-if="catalogStatus === 'loading'" role="status">正在准备案件…</p>
-        <div v-else-if="catalogStatus === 'failed'" class="surface catalog-error"><p role="status">案件列表暂时无法加载</p><UiButton @click="loadCatalog">重试</UiButton></div>
-        <p v-else-if="cases.length === 0">新案件正在准备中。</p>
+        <p v-if="catalog.length === 0">新案件正在准备中。</p>
         <div v-else class="case-grid">
-          <article v-for="(item, index) in cases" :key="item.id" class="surface case-card">
+          <article v-for="(item, index) in catalog" :key="item.id" class="surface case-card">
             <div class="case-top"><span class="case-number" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><div class="case-cast" role="img" :aria-label="`${item.characters.length}位角色：${item.characters.map((person) => person.name).join('、')}`">
               <span class="case-cast__avatars" aria-hidden="true"><span v-for="(person, personIndex) in item.characters" :key="personIndex" class="case-cast__avatar"><img v-if="avatar(person.appearanceId) != null && !brokenAvatars.has(avatar(person.appearanceId)!)" :src="avatar(person.appearanceId)!" alt="" @error="brokenAvatars.add(avatar(person.appearanceId)!)"><span v-else>{{ person.name.slice(0, 1) }}</span></span></span>
               <span aria-hidden="true">{{ item.characters.length }}位角色</span>

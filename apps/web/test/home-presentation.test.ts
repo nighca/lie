@@ -17,12 +17,13 @@ async function home(catalog: CaseSummary[]) {
   await router.push('/?demo=1')
   const createController = vi.fn(() => setup().controller)
   const wrapper = mount(Application, {
-    props: { characterPresets: [], demo: true, loadCatalog: async () => catalog, createController },
+    props: { characterPresets: [], demo: true, catalog, createController },
     global: { plugins: [router] },
   })
   cleanup.push(() => wrapper.unmount())
+  const initialCards = wrapper.findAll('.case-card').length
   await flushPromises()
-  return { wrapper, router, createController }
+  return { wrapper, router, createController, initialCards }
 }
 
 const catalog = Array.from({ length: 5 }, (_, index) => ({
@@ -33,7 +34,8 @@ const catalog = Array.from({ length: 5 }, (_, index) => ({
 
 describe('homepage presentation', () => {
   it.each([1, 5])('presents %i catalog entries with their public metadata and individual entry buttons', async (count) => {
-    const { wrapper, createController } = await home(catalog.slice(0, count))
+    const { wrapper, createController, initialCards } = await home(catalog.slice(0, count))
+    expect(initialCards).toBe(count)
     const cards = wrapper.findAll('.case-card')
     expect(cards).toHaveLength(count)
     cards.forEach((card, index) => {

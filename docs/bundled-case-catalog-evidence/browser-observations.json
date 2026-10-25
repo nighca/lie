@@ -1,0 +1,56 @@
+{
+  "blockedPattern": "http://127.0.0.1:5544/games/*",
+  "cases": [
+    {
+      "case": 1,
+      "title": "空盒里的纪念章",
+      "people": [
+        "沈禾",
+        "顾遥",
+        "陈拓"
+      ],
+      "requests": 14,
+      "truncated": false,
+      "hasMore": false,
+      "gamesRequests": []
+    },
+    {
+      "case": 2,
+      "title": "压轴怎么是鸭叫",
+      "people": [
+        "任爷爷",
+        "乔姨",
+        "贺宁",
+        "周乐"
+      ],
+      "requests": 13,
+      "truncated": false,
+      "hasMore": false,
+      "gamesRequests": []
+    },
+    {
+      "case": 3,
+      "title": "盐和糖的小乌龙",
+      "people": [
+        "陶老师",
+        "小岚",
+        "阿湛",
+        "余安"
+      ],
+      "requests": 15,
+      "truncated": false,
+      "hasMore": false,
+      "gamesRequests": []
+    }
+  ],
+  "directNavigationReload": "duck-finale intro visible after fresh navigation and actual reload with cache disabled",
+  "editorPreview": "custom title displayed even with original official ID",
+  "share": {
+    "title": "打包兼容测试：专属分享案",
+    "length": 6004
+  },
+  "initialBroadCapture": {
+    "truncated": true,
+    "claim": "not used as complete request trace"
+  }
+}
