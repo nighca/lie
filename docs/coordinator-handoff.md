@@ -77,6 +77,12 @@
 
 覆盖率[准备方案](archive/2026-10-25/coverage-design-preparation.md)已完整归档；managed WT coverage-reporting/lie从现main c0ddd791开始，已整项委派design_document_archive实施本地快照badge/真实scope报告且无外部权限；迁移package/lock及目录依赖已释放，保留无实测百分比/SFC remap待验/脚本另报边界，不重做已完成调查。
 
+## 邀请码独立专项chat
+
+用户明确要求独立chat跟进，已实际创建 `01a17076-a9f2-7f11-aaf3-7f7c801fee37`，标题“LIE 邀请码与访问鉴权”，local lie项目；不是主协调换代。两问题（8788作用、密钥是否属于gateway环境）与已批14天/公开浏览/play要码/简化到期规则均已交新chat先回答。可恢复执行进度、所有权、Node测试主链、failclosed影响与服务边界已完整转交，见[专项交接](history/2026-10-25/invite-specialist-chat-handoff.md)。
+
+原root/invite_access_design及Gateway/Web子agent继续当前整项至review/组合QA/cleanup/clean批交root；新chat在root明确释放前只读和用户讨论，不改原在制WT或重派。root仍负责实际完整review/串行集成，后续实施/返修/验收协调由新chat承接。主协调两heartbeat/其他专项所有权不变。实际实现在制HEAD会前进，不能把交接采样当冻结最终交付。
+
 ## 最新批次交付（8人基线与独立修订）
 
 8/8角色基线已实际main `dd1663853f7e153efb2c977dd74b89b415f0e20c`，clean未push/部署；8787的main-status实际同SHA（默认curl受本机代理影响，no-proxy＋获准本机网络只读查询成功；不据沙箱连接失败猜服务故障）。root候选从772dfa5依序接8个source提交，源72c4a93全部应用/依赖/正式资源身份相同，复用388/type/build/IAB；实际review完整构建器/验证器/来源/正式QA和6图，独立mint1280/ochre960采样、每人100中断、10新正式文件原字节及40链接通过。Ochre验证器首次仅受沙箱写ignored poses.json拒绝，获准同一隔离输出后exit0，不当应用失败；未增新服务。详细有序源链按[接入记录](animation/mint-ochre-game-integration.md)及source72c4a93 log追溯。
