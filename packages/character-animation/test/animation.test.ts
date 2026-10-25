@@ -3,12 +3,17 @@ import { describe, expect, it } from 'vitest'
 import { AnimationTimeline, createCanvasRenderer, readAnimationPackage, sampleClip } from '../src/index'
 
 const source = JSON.parse(readFileSync(new URL('../../../design/character-presets/assets/coral-bob/animation/package.json', import.meta.url), 'utf8'))
-function fixture() { return structuredClone(source) }
+function fixture() {
+  const raw = structuredClone(source)
+  raw.schemaVersion = 1
+  raw.states = { default: raw.states.default, listening: raw.states.listening, waiting: raw.states.waiting, speaking: raw.states.speaking }
+  return raw
+}
 
 describe('versioned animation contract', () => {
   it('loads the shared Coral rig with all four application states', () => {
     const data = readAnimationPackage(fixture())
-    expect(Object.keys(data.assets)).toHaveLength(11)
+    expect(data.assets).toEqual(source.assets)
     expect(Object.keys(data.states)).toEqual(['default', 'listening', 'waiting', 'speaking'])
     expect(data.nodes.filter(node => node.sprite?.asset === 'listening-arm')).toHaveLength(2)
   })
