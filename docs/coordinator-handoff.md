@@ -163,3 +163,11 @@ source d494e433031a3632d7510cfb50a2abc0c92390e5，WT bundled-case-catalog/lie，
 用户在01a16d44-aeea-7552-b184-5118072e75f3明确“我验收过了，没问题了”，root已读最新userMessage核实。新刚性修订A final76dfc7a15df1350b6778d336049c8a28427302c8、B final26bed1b30b495d9cbf23f6b2e412fc819bfbfb8c、父证据b2abf6f08e1bb1b4d693ec48e405bdb964763983 clean交待验现已通过视觉；旧stretch稿仍是被否定历史，不复活。已向原专项明确整项负责最终批准delta聚合、正式资源生成、checks/game QA/cleanup与完整handoff；不写App/style（结果owner）、Application/main/catalog（静态案owner）、voice/controller（已main防御），不动8787/8788。root仍唯一协调/最终integrator。
 
 用户原先单独PR例外有效，但remote已知abb12db、local多未发布修复与docs，不能直接把localmain后全部提交推成所谓单独动画PR。已要求专项先完成clean候选交root实际review，未给当前push/createPR turn；之后root按remote真实fetch状态指定只含动画任务的PR基线/分支，必要impact复验，专项才负责普通branchpush/建PR及attach_artifact。不自动推main/部署，不再问已通过的视觉门禁。当前5355 PID70007/原8486仍用户tab50消费，默认旧8、query新刚性5，51/52已关，保留source/QA/服务WT及refs；完整链/36原生图/head采样在父证据目录待后续正式handoff入库，不能清理。
+
+## 最新用户P1：专职线上性能/内容hash缓存
+
+用户明确很重要：优化https://lie-game.nighca.workers.dev/，静态数据构建hash固定URL后正式长期缓存、图片无损压缩，要求专人。已实际spawn `/root/production_performance`（独立任务，不新sidebar chat），从reviewed d2a4eff新managed WT/branch codex/production-performance；整项职责含实际线上冷/暖请求/headers/可用trace、源/产物、最小实施/测试/build/browser/cleanup，但第一阶段独占仅docs/performance/2026-10-25/**审计证据，先交root简要基线/优先问题/生产文件接口申请，再root给实施turn，不是只交研究就结束。已读/告用户使用web-perf；工具实际存在trace/analyze/network能力，不编CWV、无trace就准确限制。Cloudflare无wrangler文件，cf CLI＋cloudflare.config.ts，文档核官方static-assets/cache语义。
+
+必须区分线上已发布abb12db与本地已main的非阻塞预设/目录三案eager打包；不把local成果充线上指标。当前Vite JS/CSS hash已有与否实测，重点public品牌/PNG/animation package相对parts/manifest缓存链；只内容寻址URL immutable，HTML/可变清单需更新/重验证，API/WS不得长缓存，实际内容变更必须换URL且验证跨部署一致性。无serviceworker/新CDN存储/provider架构，无secret/控制台配置/部署/付费请求。图片仅生成产物可评估无损，不改canonical，核RGBA/alpha/ICC/gAMA/sRGB解释与渲染，原bytes严格校验语义若需变先root协调，不冒用旧89字节PASS。
+
+当前所有权：App/style/结果tests仍原视觉专项；新批准动画在approved-animation-rigid-batch整项formalQA，design/candidate/正式animation资源及该批docs由它持有；perf第一阶段不改generator/scripts/manifest/这些文件，需按报告协调依赖正式动画SHA再动hash输出。5355由原动画owner受控从已验作者稿转formal game候选（旧70007/8486将停，新PID/PTY待真实handoff，不预写已切换），5507结果回合已结束待回执，5544无监听但未授perf自行起服务；线上审计本身无需server。独立IAB优先，明确unavailable一次才允许独立Chrome自建tab有界fallback，禁止动用户tab/globalviewport/mic及8787/8788。完整报告/设计/必要证据repo入库，不存secret/cookie或私数据。root仍唯一integrator，未授权此agent main/push/PR/deploy。
