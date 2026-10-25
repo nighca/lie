@@ -1,0 +1,8 @@
+{
+  "base": "133cff050e0d4127901d9d3c0d5b3d750a9fa1b5",
+  "references": {
+    "design/character-presets/assets/coral-bob/default.png": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "design/character-presets/assets/sunny-moustache/default.png": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "apps/web/public/games/empty-medal-box.json": "cdff68337cd685802f725627202766a1941f27396a6578687081d3271a8e86ae"
+  }
+}

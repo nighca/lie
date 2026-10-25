@@ -1,0 +1,57 @@
+{
+  "browser": "Codex in-app browser 3, own tab59 only",
+  "desktopFrameWidths": [
+    1280,
+    1280
+  ],
+  "narrowFrames": {
+    "correct": {
+      "clientWidth": 391,
+      "scrollWidth": 391
+    },
+    "wrong": {
+      "clientWidth": 391,
+      "scrollWidth": 391
+    }
+  },
+  "longNarrow": {
+    "clientWidth": 391,
+    "scrollWidth": 391,
+    "scrollHeight": 1993,
+    "name": "来自社区摄影社的特别来宾顾遥",
+    "lastActionFrameLocalTop": 1420.0625,
+    "lastActionFrameLocalBottom": 1441.0625,
+    "parentIframeTop": -310.375,
+    "keyboardVisibility": "NOT PASS: nested board parent did not scroll last control into viewport; later click returned No node found at given location. No production keyboard inference."
+  },
+  "staticFallback": {
+    "correct": {
+      "initialVisible": true,
+      "imageVisible": false,
+      "markVisible": true
+    },
+    "wrong": {
+      "initialVisible": true,
+      "imageVisible": false,
+      "markVisible": true
+    }
+  },
+  "reducedMotion": {
+    "scope": "tab59 Emulation.setEmulatedMedia prefers-reduced-motion=reduce, then reset features[]",
+    "tickAnimation": "none",
+    "tickDashOffset": "0px"
+  },
+  "console": [
+    {
+      "level": "error",
+      "message": "Uncaught TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.",
+      "source": "not provided",
+      "attribution": "Unresolved; fixture contains no MutationObserver use. Not counted as clean console."
+    }
+  ],
+  "limits": [
+    "Prototype controls are inert layout examples, not application commands.",
+    "No new character expression or animation, no production UI/runtime/contract change.",
+    "No app route/focus/live voice/device or user recognition study performed."
+  ]
+}

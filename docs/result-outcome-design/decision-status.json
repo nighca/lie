@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-25",
+  "current": "proposed-awaiting-user",
+  "approvedExisting": [
+    "Chinese B overall direction",
+    "Result page A implementation with default portraits",
+    "Original eight-character four-state motions",
+    "Quiet remix action in result controls"
+  ],
+  "proposedNew": [
+    "Outcome glyph/pattern/composition system",
+    "Two static reaction end poses per character",
+    "One nonloop reaction per outcome per character",
+    "Optional result resource and state compatibility extension"
+  ],
+  "recommended": "R: glyph/pattern system plus 16 end poses and 16 one-shot clips",
+  "alternative": "S: same result system plus 16 static end poses, clips later",
+  "productionAuthorizedByThisDesign": false,
+  "historicalSources": [
+    "../result-character-states-proposal.md",
+    "../result-scene-visual-proposal.md",
+    "../result-scene-implementation.md"
+  ]
+}
