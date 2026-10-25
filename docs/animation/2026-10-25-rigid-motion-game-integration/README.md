@@ -1,5 +1,7 @@
 # Accepted rigid-motion batch: formal game integration
 
+Subsequent verifier correction: [crop audit](../2026-10-25-crop-audit-correction/README.md). Prior crop-sensitive alpha/ordered proofs are withdrawn; corrected gray/plum checks pass, silver seam predicate fails at two phases and is pending coordinator disposition. This does not revoke the user’s visual approval.
+
 ## User approval and scope
 
 On 2026-10-25 the user explicitly confirmed “我验收过了，没问题了” for the character-specific rigid-motion preview recorded in ../2026-10-25-rigid-motion-parent-review/. This supersedes that review’s pending visual gate. The separate PR exception requested by the user remains the delivery path. Historical stretching drafts stay archived and are not the active packages.
