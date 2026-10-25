@@ -1,10 +1,10 @@
 # LIE — 当前项目计划
 
-更新：2026-10-25，依据07:55 Asia/Shanghai核验本地 main `666e9c9269218ceabcc4c3eba452633ffec77538`；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
+更新：2026-10-25，依据08:00 Asia/Shanghai核验本地 main `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`；文档提交会推进HEAD，接任时重读实际状态。[交接登记](coordinator-handoff.md)管协调权/服务，[历史索引](history/README.md)管完成证据；旧快照不覆盖最新授权。
 
 ## 当前轮换交接
 
-当前仍由`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）担任active协调/唯一integrator，本代`lie`/`lie-2`为ACTIVE且target本chat，前代`lie-3`/`lie-4`保持PAUSED；[登记](coordinator-handoff.md)及[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)保留创建/通知事实。用户已回来，临时无法回应模式结束；此前数小时浏览器等待经用户澄清为待其审批，不推断后续工具必然正常。Editor定位、fan及银发/灰白/紫发正式QA均已main；历史设计归档已完成本轮收集并入库，入口见[归档](archive/README.md)。当前命名迁移已完整交付，root候选已最终核验、待main集成，尚未main或切换runner；mint/ochre已交clean候选待root review/正式游戏QA。重大门禁与既有有效授权保留，未push/部署。
+当前仍由`01a17012-fa00-7170-ac0a-21c1900d71cd`（LIE 主协调 · 10月25日清晨接任）担任active协调/唯一integrator，本代`lie`/`lie-2`为ACTIVE且target本chat，前代`lie-3`/`lie-4`保持PAUSED；[登记](coordinator-handoff.md)及[接任证据](history/2026-10-25/coordinator-arrival-01a17012-fa00-7170-ac0a-21c1900d71cd.md)保留创建/通知事实。用户已回来，临时无法回应模式结束；此前数小时浏览器等待经用户澄清为待其审批，不推断后续工具必然正常。Editor定位、fan及银发/灰白/紫发正式QA均已main；历史设计归档已完成本轮收集并入库，入口见[归档](archive/README.md)。当前命名迁移已完整交付，已review并本地集成main c0ddd791，实施owner获用户批准的一次受控runner切换进行中，恢复尚待交付；mint/ochre已交clean候选待root review/正式游戏QA。重大门禁与既有有效授权保留，未push/部署。
 
 ## 授权与执行方式
 
@@ -19,7 +19,7 @@
 
 | 入口 | 当前事实 |
 | --- | --- |
-| 本地main | 07:55核验main `666e9c9269218ceabcc4c3eba452633ffec77538`干净，已含下表成果及历史归档；命名迁移候选尚未main；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
+| 本地main | 08:00核验main `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`干净，已含下表成果、历史归档及命名迁移；本轮文档提交推进HEAD，后续候选另列；这些新增改动均未push。 |
 | 本地试玩 | 用户launchd独立维持[8787](http://127.0.0.1:8787/)，薄Worker8788；自动跟随干净owning main，实际版本看[SHA接口](http://127.0.0.1:8787/__lie/main-status)。轮换不得停止或重复启动。 |
 | 远程/线上 | 本地origin/main跟踪及最后实际部署证据均为`32d89bf91f441168148884593a0f49b816ad7162`；本轮未fetch/重验远端，不能冒称最新remote。见[部署证据](deployments/2026-10-24-animation-milestone.md)。 |
 | 质量边界 | fake、文本detect、短WAV、配置ready均不替代整合版真人麦克风/外放/长会话/盲测；多用户隔离与正式费用硬限额未闭环。 |
@@ -59,11 +59,11 @@
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
 | P1 | 带有效期邀请码访问设计 / 待用户确认 | [方案](invite-access-design.md)已root完整review并本地集成3a1fa417，仅文档：推荐可复用/多人转发、统一绝对exp默认7天可指定；到期停voice暂停actions保留页内局，新码continue；home/intro/editor/share公开、所有play入口需码。均为建议待用户确认，未授权实现/secret/资源/DB/DO/账号/部署，预算/回收及多人隔离风险仍独立保留。 |
-| P2 | mint/ochre动画候选 / 动画专项→root review | 两人已source clean交付，同base73ba138，仅各候选目录；mint ordered `4c213f83`→`b5c08960`→`dbecc26c`，ochre `0e4558ee`→`17fefd8a`。父实视及独立checks已交；root review、正式game QA及激活尚未做，等命名接口释放后组合验证，不重派制作/不改色。 |
-| P2 | CharacterPreset内部命名迁移 / character_preset_migration＋root review | owner已交 `79b5503`→`354f58b`，base2982e6a，174文件迁移＋runner test fixture修复；source388全检、79资源原字节及真实IAB通过。独立review发现含空格Node路径的shebang问题，已修且目标测试通过；root `integrate-character-preset-dawn/lie`从666e9c9有序cherry至候选 `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`，最终独立1目标test/79原字节/93链接/生产身份核验通过，388/type/build/IAB复用；尚未main。保持appearanceId与/appearances/；用户已明确允许现在受控切换；root准备集成并给实施owner一次服务turn，尚未实际重启/恢复，不得重复启动8787/8788。[计划](character-preset-migration-plan.md)。 |
+| P2 | mint/ochre动画候选 / 动画专项→root review | 两人已source clean交付，同base73ba138，仅各候选目录；mint ordered `4c213f83`→`b5c08960`→`dbecc26c`，ochre `0e4558ee`→`17fefd8a`。父实视及独立checks已交；正式候选整项owner verify_editor_candidate，WT final-two-character-game/lie 从已main c0ddd791开始source review、五提交集成、正式资源激活候选及自动检查；准备独立5544 demo后交动画专项实际game QA，root最后审查/集成；尚未正式激活，不重派制作/不改色。 |
+| P2 | CharacterPreset内部命名迁移 / character_preset_migration＋root review | owner已交 `79b5503`→`354f58b`，base2982e6a，174文件迁移＋runner test fixture修复；source388全检、79资源原字节及真实IAB通过。独立review发现含空格Node路径的shebang问题，已修且目标测试通过；root `integrate-character-preset-dawn/lie`从666e9c9有序cherry至候选 `c0ddd791fd98182b5888e986a9aa2b31b7680dc5`，最终独立1目标test/79原字节/93链接/生产身份核验通过，388/type/build/IAB复用；已本地main c0ddd791。保持appearanceId与/appearances/；用户已明确允许现在受控切换，实施owner已获一次服务turn，恢复核验尚待交付，不得重复启动8787/8788。[计划](character-preset-migration-plan.md)。 |
 | P1 | 真人与盲测质量 / root协调用户＋独立QA | 整合版mic/外放/长会话、三案盲测、多用户隔离未闭环；新增五声待耳验，不能用fake代替。保护用户设备。 |
 | P2 | 编辑器分享/投稿端到端 / 编辑器＋root review | Editor已交有界IAB分享QA（source main0f73006、share blob7539ab638591ef416eafbfda102a90ed72aa4292，Node24.22.1生产encode）：normal539真实UI Unicode/换行/保留字符逐字相等及actual reload通过；恰16000 ASCII完整URL新blank tab fresh goto/reload intro通过、href16000；16001特定长度错误、损坏gzip错误及reload通过。root已实际review完整报告/四图，无codec blocker，局限保留。network初始fragment捕获因PerformanceAPI missing TypeError一次停止，未重试CDP；跨浏览器/地址栏粘贴/外部传输/离线未验，16k仍暂定、128KiB仍仅Node。证据/private/tmp/lie-share-browser-results.md及同名前缀fixtures/四张jpg；自建tab19/20/21已关，无viewport/draft/voice/mic/provider/服务动作，旧browser3/tab1未动。 GitHub投稿仍受PRIVATE及用户权限门禁。 |
-| P2 | 测试覆盖率统计与README badge / 实施owner待排 | [完整准备方案](archive/2026-10-25/coverage-design-preparation.md)已归档；managed WT正从reviewed候选c0ddd791准备（显式依赖，待main迁移集成），独立实施owner待root登记，拟做本地快照badge与真实scope报告，无外部权限。迁移目录/package/lock稳定后eligible。六workspace一次Vitest采样、Node脚本独立报告、SFC remap与PRIVATE badge路径是已调查的推荐，尚无真实百分比或已实现badge。不重复研究，不伪造数字/擅设门槛，不授权push/部署或外部服务权限。 |
+| P2 | 测试覆盖率统计与README badge / design_document_archive实施owner | [完整准备方案](archive/2026-10-25/coverage-design-preparation.md)已归档；managed WT coverage-reporting/lie已从现main c0ddd791准备，已整项委派design_document_archive实施，交付本地快照badge与真实scope报告，无外部权限。迁移依赖已main释放。六workspace一次Vitest采样、Node脚本独立报告、SFC remap与PRIVATE badge路径是已调查的推荐，尚无真实百分比或已实现badge。不重复研究，不伪造数字/擅设门槛，不授权push/部署或外部服务权限。 |
 | P2 | 角色出戏边界 / 语音内容owner | 攻击问仍有幕后元话语，候选未解决且未生产；停止无限付费叠提示，不擅换模型/供应商/剧情。[调查](role-immersion-investigation.md) |
 | P2 | 启动延迟与剩余回归 / 语音/工程owner待排 | observer已集成但无真人阶段采样/加速结论；先有界实测，再优化，不跨轮保活mic/连接。开发代理WS问题已独立派下行owner，不混作延迟结论。 |
 | P2 | 开发代理完整WS拒绝 / review_blue_animation | [无凭据网络对照](dev-websocket-rejection.md)已定位Cloudflare Vite开发宿主丢弃非101响应；Web代理/Worker HTTP控制保留503/403。诊断脚本与记录已纳入本地main `0a67498`，未修补vendor/生产配置；宿主限制仍未修复，上游或开发适配后置评估。 |
