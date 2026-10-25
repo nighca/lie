@@ -1,19 +1,19 @@
-PASS generator rebuilt byte-identical package; all native PNG bytes unchanged; original provenance retained.
+PASS generator package bytes and all native PNG hashes unchanged; original provenance retained.
 $ node --experimental-transform-types design/animation-candidates/plum-crop/check.mjs
-(node:36327) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:98499) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 PASS strict contract; 5 PNG dimensions/native hashes; canonical hashes; 960 finite samples; loop boundaries; mouth/limb exclusivity; contact parents; anchored waiting breath; 100 interrupted switches with every numeric channel continuous
 
 $ python3 design/animation-candidates/plum-crop/check-waiting-revision.py
-(node:36375) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:98501) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:36760) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(node:98530) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions; 33 real full-parent rigid head/contact matrices: column lengths invariant/orthogonal, head-to-hand relation constant, fixed lower body and torso has no head rotation
 {
   "role": "plum-crop",
   "period": 4,
-  "nonzeroAlphaPixels": 915013,
+  "nonzeroAlphaPixels": 936713,
   "waitingBounds": [
     351.5,
     9.312081653368612,
@@ -24,4 +24,7 @@ PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions
 Native alpha >0 at pixel centers; not antialiased color/duplicate-contour judgement. Parent browser artistic review and user confirmation remain required.
 PASS 454938 native-alpha waist/contact interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.
 PASS 40062 neck skin interior probes with4px skin margin, following contact world matrices over33 phases; alpha only, collar/outline color requires native Canvas review.
+PASS 47058 dense original upper-sleeve cloth probes at33 full-parent phases, including the formerly missing silver triangles.
+PASS 165 original wrist-arc dark-ink probes through33 sampled ordered RGBA layer stacks; nearest-native pixel probes, not antialiased Canvas acceptance.
+PASS bounded cuff-ink ROI: 185 native ink pixels, 0 excluded from moving hand, 136 retained deep-interior pixels have4488 opaque higher-z checks. 49 near-joint ink pixels lack6px mask margin and are outside this strict containment claim; native Canvas cuff review covers their artistic appearance.
 PASS exact visible native sprite and full-parent world matrix identity for720 nonwaiting real sampled poses; 3840 rendered-node comparisons

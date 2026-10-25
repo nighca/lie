@@ -652,8 +652,8 @@
         "order": 41,
         "mask": [
           [
-            591.4,
-            644
+            586,
+            662
           ],
           [
             625,
@@ -704,8 +704,40 @@
             735
           ],
           [
-            353.0,
-            644
+            355,
+            630
+          ],
+          [
+            440,
+            600
+          ],
+          [
+            490,
+            620
+          ],
+          [
+            492,
+            628
+          ],
+          [
+            500,
+            647
+          ],
+          [
+            515,
+            658
+          ],
+          [
+            535,
+            668
+          ],
+          [
+            555,
+            673
+          ],
+          [
+            575,
+            674
           ]
         ]
       }
@@ -1091,6 +1123,74 @@
       }
     },
     {
+      "id": "waiting-cuff-front",
+      "parent": "waiting-breath-root",
+      "transform": {
+        "x": 0,
+        "y": 0,
+        "pivotX": 0,
+        "pivotY": 0,
+        "rotation": 0,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "visible": true,
+      "sprite": {
+        "asset": "waiting-source",
+        "order": 50,
+        "mask": [
+          [
+            480,
+            620
+          ],
+          [
+            492,
+            623
+          ],
+          [
+            500,
+            642
+          ],
+          [
+            515,
+            653
+          ],
+          [
+            535,
+            663
+          ],
+          [
+            555,
+            668
+          ],
+          [
+            575,
+            669
+          ],
+          [
+            586,
+            657
+          ],
+          [
+            620,
+            695
+          ],
+          [
+            620,
+            750
+          ],
+          [
+            460,
+            750
+          ],
+          [
+            460,
+            620
+          ]
+        ]
+      }
+    },
+    {
       "id": "waiting-hand",
       "parent": "head-root",
       "transform": {
@@ -1184,16 +1284,16 @@
             600
           ],
           [
-            592,
-            640
+            600,
+            700
           ],
           [
-            588.5714285714286,
-            660
+            480,
+            700
           ],
           [
-            488.61538461538464,
-            660
+            488,
+            664
           ],
           [
             494,
@@ -1532,6 +1632,7 @@
         "waiting-arms": false,
         "speak-arm": false,
         "mouth-open": false,
+        "waiting-cuff-front": false,
         "head": true,
         "waiting-head": false,
         "waiting-neck-backing": false,
@@ -1718,6 +1819,7 @@
         "waiting-arms": false,
         "speak-arm": false,
         "mouth-open": false,
+        "waiting-cuff-front": false,
         "head": true,
         "waiting-head": false,
         "waiting-neck-backing": false,
@@ -1904,6 +2006,7 @@
         "waiting-arms": true,
         "speak-arm": false,
         "mouth-open": false,
+        "waiting-cuff-front": true,
         "head": false,
         "waiting-head": true,
         "waiting-neck-backing": true,
@@ -2036,6 +2139,7 @@
         "waiting-arms": false,
         "speak-arm": true,
         "mouth-open": false,
+        "waiting-cuff-front": false,
         "head": true,
         "waiting-head": false,
         "waiting-neck-backing": false,

@@ -139,6 +139,68 @@ for pose in poses:
  neck_probes+=len(nx)
 print(f'PASS {neck_probes} neck skin interior probes with4px skin margin, following contact world matrices over33 phases; alpha only, collar/outline color requires native Canvas review.')
 
+# Former horizontal-cut cloth holes: dense native sleeve interiors, moving with the body group.
+rects={'silver-bun':[(375,440,520,660),(905,940,550,660)],'salt-pepper-beard':[(350,400,530,630)],'plum-crop':[(365,425,550,650)]}[root.name]
+cloth_probes=0
+for x0,x1,y0,y1 in rects:
+ yy,xx=np.mgrid[y0:y1:2,x0:x1:2];keep=reference[yy,xx,3]>=240
+ for dx,dy in [(3,0),(-3,0),(0,3),(0,-3)]:keep &= reference[yy+dy,xx+dx,3]>=240
+ cx=xx[keep]+.5;cy=yy[keep]+.5;assert len(cx)>0
+ for pose in poses:
+  w=worlds(pose);m=w['waiting-breath-root'];wx=m[0,0]*cx+m[0,1]*cy+m[0,2];wy=m[1,0]*cx+m[1,1]*cy+m[1,2]
+  assert np.all(draw_alpha(w,wx,wy)>=128),'upper sleeve cloth hole'
+  cloth_probes+=len(cx)
+print(f'PASS {cloth_probes} dense original upper-sleeve cloth probes at33 full-parent phases, including the formerly missing silver triangles.')
+# Pick the original wrist-arc ink from a narrow canonical band, independently of runtime masks.
+anchors={'silver-bun':[(495,633),(505,646),(520,659),(540,669),(560,674),(575,673)],'salt-pepper-beard':[(430,634),(445,649),(465,660),(490,667),(510,666),(523,664)],'plum-crop':[(500,646),(515,658),(535,667),(555,671),(575,671)]}[root.name]
+ink=[]
+for x,y in anchors:
+ candidates=[(int(max(reference[yy,x,:3])),yy) for yy in range(y-2,y+4) if reference[yy,x,3]>=220]
+ value,yy=min(candidates);assert value<110,('native wrist-arc ink',x,y,value);ink.append((x+.5,yy+.5))
+ink=np.array(ink);ink_probes=0
+for pose in poses:
+ w=worlds(pose);m=w['waiting-breath-root'];wx=m[0,0]*ink[:,0]+m[0,1]*ink[:,1]+m[0,2];wy=m[1,0]*ink[:,0]+m[1,1]*ink[:,1]+m[1,2]
+ color=np.tile(np.array([255.,254.,247.]),(len(ink),1))
+ for n in sorted([n for n in p['nodes'] if n['id'] in points],key=lambda n:n['sprite']['order']):
+  sp=n['sprite'];inv=np.linalg.inv(w[n['id']]);u=inv[0,0]*wx+inv[0,1]*wy+inv[0,2];v=inv[1,0]*wx+inv[1,1]*wy+inv[1,2]
+  included=in_mask(u,v,sp['mask']) if 'mask' in sp else np.ones(wx.shape,dtype=bool)
+  if 'crop' in sp:u=u+sp['crop'][0];v=v+sp['crop'][1]
+  im=images[sp['asset']];ix=np.floor(u).astype(int);iy=np.floor(v).astype(int);included &= (ix>=0)&(ix<im.shape[1])&(iy>=0)&(iy<im.shape[0])
+  rgba=im[iy[included],ix[included]].astype(float);a=rgba[:,3:4]/255;color[included]=rgba[:,:3]*a+color[included]*(1-a)
+ assert np.max(color)<110,('cuff arc ink lost in actual ordered layer stack',color)
+ ink_probes+=len(ink)
+print(f'PASS {ink_probes} original wrist-arc dark-ink probes through33 sampled ordered RGBA layer stacks; nearest-native pixel probes, not antialiased Canvas acceptance.')
+
+hand=next(n for n in p['nodes'] if n['id']=='waiting-hand')
+if root.name=='silver-bun':
+ yy,xx=np.mgrid[636:658,594:613]
+ assert not np.any(in_mask(xx.flatten()+.5,yy.flatten()+.5,hand['sprite']['mask'])),'moving hand retains cardigan button'
+ button=next(n for n in p['nodes'] if n['id']=='waiting-button')
+ assert button['parent']=='waiting-breath-root'
+ for pose in poses:assert np.array_equal(worlds(pose)['waiting-button'][:2,:2],np.eye(2))
+ print('PASS entire original cardigan-button ROI excluded from moving hand; native button belongs exclusively to stable body parent.')
+else:
+ x0,x1,y0,y1=(532,546,658,690) if root.name=='salt-pepper-beard' else (588,606,666,690)
+ yy,xx=np.mgrid[y0:y1,x0:x1]
+ colors=reference[yy,xx];keep=(colors[:,:,3]>=220)&(np.max(colors[:,:,:3],axis=2)<110)
+ sx=xx[keep]+.5;sy=yy[keep]+.5
+ native_ink_count=len(sx)
+ included=in_mask(sx,sy,hand['sprite']['mask']);sx=sx[included];sy=sy[included]
+ cuff=next(n for n in p['nodes'] if n['id']=='waiting-cuff-front');assert cuff['sprite']['order']>hand['sprite']['order']
+ retained_count=len(sx)
+ deep=in_mask(sx,sy,cuff['sprite']['mask'])
+ for dx,dy in [(6,0),(-6,0),(0,6),(0,-6)]:deep &= in_mask(sx+dx,sy+dy,cuff['sprite']['mask'])
+ boundary_count=int(np.sum(~deep));sx=sx[deep];sy=sy[deep]
+ occluded=0
+ for pose in poses:
+  w=worlds(pose);m=w['waiting-hand'];wx=m[0,0]*sx+m[0,1]*sy+m[0,2];wy=m[1,0]*sx+m[1,1]*sy+m[1,2]
+  inv=np.linalg.inv(w['waiting-cuff-front']);cx=inv[0,0]*wx+inv[0,1]*wy+inv[0,2];cy=inv[1,0]*wx+inv[1,1]*wy+inv[1,2]
+  assert np.all(in_mask(cx,cy,cuff['sprite']['mask'])),'old cuff ink escapes foreground mask'
+  ix=np.floor(cx).astype(int);iy=np.floor(cy).astype(int)
+  assert np.all(reference[iy,ix,3]>=240),'old cuff ink escapes opaque cuff foreground'
+  occluded+=len(cx)
+ print(f'PASS bounded cuff-ink ROI: {native_ink_count} native ink pixels, {native_ink_count-retained_count} excluded from moving hand, {len(sx)} retained deep-interior pixels have{occluded} opaque higher-z checks. {boundary_count} near-joint ink pixels lack6px mask margin and are outside this strict containment claim; native Canvas cuff review covers their artistic appearance.')
+
 other_code="""
 import fs from 'node:fs';import assert from 'node:assert/strict';
 import {readAnimationPackage} from './packages/character-animation/src/package.ts';
