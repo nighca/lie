@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "question": "我想问一下，你最后一次看到纪念章是什么时候？",
+  "case": "空盒里的纪念章",
+  "character": "沈禾",
+  "retry": 0,
+  "error": "Error: 连接未在15秒内准备好",
+  "failureSnapshot": "- banner:\n  - link \"LIE 首页\":\n    - /url: /\n    - generic: 语音推理\n  - heading \"空盒里的纪念章\" [level=1]:\n    - button \"查看案件背景\":\n      - generic: 空盒里的纪念章\n      - generic: 案件背景 ↗\n  - button \"结束本局\"\n- main:\n  - navigation \"选择询问人物\":\n    - button \"沈禾\" [pressed]:\n      - strong: 沈禾\n    - button \"顾遥\":\n      - strong: 顾遥\n    - button \"陈拓\":\n      - strong: 陈拓\n  - region \"沈禾的人物形象\":\n    - img \"沈禾\"\n  - heading \"沈禾的询问记录\" [level=2]:\n    - mark: 沈禾\n    - text: 的询问记录\n  - region \"对话转写\":\n    - log \"语音转写\":\n      - paragraph: 还没有对话，开口打个招呼吧。\n  - status:\n    - strong: 提示\n    - generic: 语音暂时中断。已显示转写保留，你可以重新开始对话。\n  - region \"语音对话控制\":\n    - generic \"剩余询问时间\":\n      - generic: 剩余询问\n      - strong: 08:00\n    - button \"开启对话\" [active]:\n      - text: 开启对话\n    - status: 语音暂时中断\n    - button \"我有答案了\": 我有答案了 →"
+}

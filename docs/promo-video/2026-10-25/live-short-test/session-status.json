@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "at": 1792921374881,
+      "duration": 4.613,
+      "sampleRate": 48000,
+      "type": "prepared"
+    },
+    {
+      "at": 1792921412845,
+      "contextTime": 38.026666666666664,
+      "type": "record-start"
+    },
+    {
+      "at": 1792921417166,
+      "type": "voice-socket-created"
+    },
+    {
+      "at": 1792921417166,
+      "type": "virtual-mic-request"
+    },
+    {
+      "at": 1792921417169,
+      "node": "GainNode",
+      "type": "output-tap"
+    },
+    {
+      "at": 1792921431276,
+      "contextTime": 56.458666666666666,
+      "type": "record-stop"
+    },
+    {
+      "at": 1792921431277,
+      "contexts": [
+        "closed",
+        "closed",
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "short-test-finished",
+      "sockets": [
+        3
+      ],
+      "tracks": [
+        "ended",
+        "ended",
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "restored": {
+    "connect": true,
+    "context": true,
+    "gum": true,
+    "socket": true
+  },
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed",
+      "closed",
+      "closed"
+    ],
+    "socketCount": 1,
+    "sockets": [
+      3
+    ],
+    "stopped": true,
+    "tracks": [
+      "ended",
+      "ended",
+      "ended"
+    ]
+  }
+}

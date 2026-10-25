@@ -1,3 +1,4 @@
+// Historical offline calibration prototype. For managed live sessions use browser-audio-capture-session.js.
 (() => {
   const NativeContext = window.AudioContext;
   const control = new NativeContext();

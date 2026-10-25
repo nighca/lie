@@ -32,5 +32,29 @@
   "maxMixDifferencePcm16": 0,
   "waveformChecksPassed": true,
   "sampleAlignmentPassed": true,
-  "strictDecodePassed": true
+  "strictDecodePassed": true,
+  "method": {
+    "pcm": "mono signed16 little-endian WAV, normalization sample/32768",
+    "questionWindowSeconds": [
+      0.501,
+      3.501
+    ],
+    "questionWindowSamplesHalfOpen": [
+      24048,
+      168048
+    ],
+    "outputWindowSeconds": [
+      5.219,
+      5.819
+    ],
+    "outputWindowSamplesHalfOpen": [
+      250512,
+      279312
+    ],
+    "rms": "sqrt(sum(normalizedSample**2)/N)",
+    "presenceThreshold": 0.01,
+    "absenceThreshold": 0.005,
+    "alignment": "max(abs(mix[i]-input[i]-output[i])) across all 307968 samples; expected 0",
+    "decode": "ffmpeg -hide_banner -loglevel error -xerror -i TRACK.wav -f null -"
+  }
 }

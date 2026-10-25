@@ -1,0 +1,34 @@
+{
+  "error": "intentional-partial-worklet-failure",
+  "events": [
+    {
+      "at": 1792921259477,
+      "contexts": [
+        "closed"
+      ],
+      "errors": 0,
+      "reason": "prepare-failed",
+      "tracks": [
+        "ended"
+      ],
+      "type": "cleanup"
+    }
+  ],
+  "restored": {
+    "connect": true,
+    "context": true,
+    "gum": true,
+    "socket": true
+  },
+  "status": {
+    "closed": true,
+    "contexts": [
+      "closed"
+    ],
+    "socketCount": 0,
+    "stopped": true,
+    "tracks": [
+      "ended"
+    ]
+  }
+}

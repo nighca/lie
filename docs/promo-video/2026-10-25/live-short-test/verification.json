@@ -1,0 +1,24 @@
+{
+  "input": {
+    "samples": 884736,
+    "sampleRate": 48000,
+    "duration": 18.432,
+    "peakPcm16": 0
+  },
+  "output": {
+    "samples": 884736,
+    "sampleRate": 48000,
+    "duration": 18.432,
+    "peakPcm16": 0
+  },
+  "mix": {
+    "samples": 884736,
+    "sampleRate": 48000,
+    "duration": 18.432,
+    "peakPcm16": 0
+  },
+  "frames": 1042,
+  "questionSent": false,
+  "realRoleOutput": false,
+  "cleanupPassed": true
+}
