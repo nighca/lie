@@ -10,6 +10,7 @@ def group(id,parent,p):
 def sprite(id,asset,order,mask,parent,visible=False):
  nodes.append(dict(id=id,parent=parent,transform=identity.copy(),visible=visible,sprite=dict(asset=asset,order=order,mask=mask)))
 group('body-root',None,(630,930))
+group('waiting-breath-root','body-root',(0,0))
 group('contact-root','body-root',(620,395))
 group('head-root','contact-root',(620,395))
 group('left-root','body-root',(410,870))
@@ -27,8 +28,9 @@ sprite('arm-right','default-source',1,[[700,310],[1100,360],[1150,650],[1150,125
 sprite('arm-listening','listening-source',1,[[280,180],[530,180],[550,365],[590,370],[570,460],[520,600],[470,650],[425,700],[340,725],[220,725],[160,650],[150,500],[280,400]],'contact-root')
 sprite('arm-right-listening','listening-source',1,[[700,310],[1100,360],[1150,650],[1150,1254],[850,1254],[900,1030],[900,950],[890,900],[880,860],[865,820],[860,780],[850,740],[760,550]],'right-root')
 sprite('body-waiting-lower','waiting-source',3,[[200,895],[1100,895],[1100,1254],[200,1254]],'body-root')
-sprite('contact-waiting','waiting-source',4,[[250,420],[500,380],[550,420],[650,430],[700,380],[735,330],[1030,370],[1050,925],[250,925]],'contact-root')
-sprite('neck-waiting','waiting-source',4,[[450,320],[760,320],[780,500],[500,520]],'contact-root')
+sprite('contact-waiting','waiting-source',4,[[250,420],[500,380],[497,400],[482,450],[472,500],[447,560],[429,624],[535,624],[538,560],[558,520],[583,490],[598,450],[613,400],[608,380],[650,430],[700,380],[735,330],[1030,370],[1050,925],[250,925]],'waiting-breath-root')
+sprite('waiting-hand','waiting-source',9,[[500,350],[600,345],[630,385],[625,430],[606,470],[580,510],[558,560],[546,636],[424,636],[420,620],[443,560],[468,500],[478,450],[493,400]],'contact-root')
+sprite('neck-waiting','waiting-source',4,[[450,310],[724,310],[726,330],[731,350],[737,355],[735,365],[739,370],[745,380],[737,390],[728,400],[716,410],[702,420],[686,430],[666,440],[638,450],[611,460],[604,470],[500,500]],'contact-root')
 sprite('sleeve-speaking','speaking-source',1,[[700,310],[1100,360],[1150,650],[1100,880],[1030,900],[900,890],[850,845],[850,815],[840,780],[820,740],[810,700],[790,620],[780,500]],'speaking-root')
 sprite('hem-speaking','speaking-source',3,[[780,860],[862,860],[862,980],[780,980]],'body-root')
 sprite('arm-speaking','speaking-source',4,[[870,720],[920,750],[930,810],[900,850],[870,845],[835,820],[800,790],[770,765],[735,770],[695,765],[660,750],[640,730],[620,700],[615,675],[625,660],[645,655],[665,660],[680,650],[715,670],[745,680],[760,670],[760,635],[770,605],[788,600],[800,615],[805,645],[820,665],[820,700]],'speaking-root')
@@ -36,13 +38,13 @@ attachments=[n['id'] for n in nodes if 'sprite' in n]
 def wave(node,prop,values,d):return dict(node=node,property=prop,interpolation='linear',keys=[dict(time=d*i/(len(values)-1),value=v) for i,v in enumerate(values)])
 def clip(s,d):
  visible=['head-'+s]
- if s=='waiting':visible+=['body-waiting-lower','contact-waiting','neck-waiting']
+ if s=='waiting':visible+=['body-waiting-lower','contact-waiting','neck-waiting','waiting-hand']
  elif s=='listening':visible+=['lower-fill','body-listening','arm-listening','arm-right-listening']
  elif s=='speaking':visible+=['lower-fill','body-default','arm-left','hem-speaking','sleeve-speaking','arm-speaking']
  else:visible+=['lower-fill','body-default','arm-left','arm-right']
  tracks=[] if s=='waiting' else [wave('body-root','y',[930,926,930,934,930],d),wave('body-root','rotation',[0,.4,.08,-.4,0],d)]
  if s=='waiting':
-  tracks += [wave('contact-root','y',[915,915],d),wave('contact-root','pivotY',[915,915],d),wave('contact-root','scaleY',[round(1+.015*math.sin(2*math.pi*i/16),8) for i in range(17)],d)]
+  tracks += [wave('contact-root','pivotY',[420,420],d),wave('contact-root','y',[420,419.4,420,420.8,420],d),wave('contact-root','rotation',[0,.8,.15,-1,0],d),wave('waiting-breath-root','y',[0,-1.8,-.2,1.5,0],d)]
  elif s=='listening':tracks += [wave('contact-root','rotation',[0,.95,.15,-.85,0],d),wave('contact-root','y',[395,393.8,395,396.2,395],d)]
  else:tracks += [wave('head-root','rotation',[0,1.6,.25,-1.3,0],d),wave('head-root','y',[395,393.5,395,396.5,395],d)]
  if s!='waiting':tracks += [wave('left-root','rotation',[0,.9,-.2,-1.4,0],d),wave('right-root','rotation',[0,-1.3,.25,1.1,0],d)]
