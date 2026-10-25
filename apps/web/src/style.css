@@ -307,3 +307,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .voice-connection-notice p { font-size: 14px; }
   .voice-connection-notice .lie-button { padding: 8px 10px; font-size: 13px; }
 }
+
+@media (min-width: 1151px) {
+  .game-shell--investigating .portrait-backdrop :is(img, canvas) { top: 32px; }
+}
