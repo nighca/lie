@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-2026-10-25，本次整理基线为已审本地main `30822d3779102de249c3daca0800cb4316bff53f`；文档集成会推进HEAD，操作前重读实际仓库。[协调登记](coordinator-handoff.md)管所有权/可恢复交付，[服务台账](development.md#服务登记与生命周期)管端口，[整理前逐字快照](history/2026-10-25/coordinator-state-before-refresh-30822d3/README.md)保留旧状态和审批证据，不能用旧快照覆盖新决定。
+2026-10-25，本次整理原始基线为已审本地main `30822d3779102de249c3daca0800cb4316bff53f`；本次追加同步截至main `22b0b9391215210d1fb4f160a70a4f859b0a2631`的年长声文档与两项intake；文档集成会推进HEAD，操作前重读实际仓库。[协调登记](coordinator-handoff.md)管所有权/可恢复交付，[服务台账](development.md#服务登记与生命周期)管端口，[整理前逐字快照](history/2026-10-25/coordinator-state-before-refresh-30822d3/README.md)保留旧状态和审批证据，不能用旧快照覆盖新决定。
 
 ## 协调与当前版本
 
@@ -20,15 +20,15 @@
 
 ## 当前可执行队列
 
-各在制交付的完整base/ordered SHAs/WT见[交接](coordinator-handoff.md)及[恢复清单](history/2026-10-25/coordinator-state-before-refresh-30822d3/active-handoff-refs.json)。下表状态来自root本次完整委派；未root审查、未测、未集成分别保留。
+各在制交付的完整base/ordered SHAs/WT见[交接](coordinator-handoff.md)及[最新恢复清单](history/2026-10-25/coordinator-state-before-refresh-30822d3/active-handoff-update-22b0b93.json)。下表状态来自root本次完整委派；未root审查、未测、未集成分别保留。
 
 | 优先 | 工作 / owner | 当前状态与下一步 |
 | --- | --- | --- |
 | P1 | 线上性能/cache / production_performance | clean三提交handoff已交，待root实际review。保留旧fixed89资源原字节，新增92hash输出/46parts，源码hash在Vite前替换、独立hashed manifest；source Web228/Gateway13＋transport3/types/build/cf dry-run通过，IAB同版warm13immutable请求0传输/仅HTML208B属执行者证据。冷首页8PNG7.47MB；PNG压缩仅调查约3.92%，未生成。**跨部署旧hash留存未实现，窄Worker-first冷请求计Worker费用/额度**，不是发布ready保证。5544/自建tab已清。root审查cache报告后决定有限旧hash兼容方案/发布限制，不能擅加新存储或部署。 |
-| P1 | 刚性5角色动画 / 动画专项 | 用户已明确验收通过，不重问旧视觉批准；原stretch历史仍拒绝。20链22b正式包不变，d106只修checker/失败证据。AR01 crop审计旧PASS错误已核；gray/plum正确检查PASS，silver phase20/28三unique点FAIL。owner在做t2.5/3.5真实Canvas归因；已见t2.5 alpha127对base255、4×短浅横线，正常约2.48×0.413 CSS px，非P1但不能称无问题。尚未授权改mask/package或给PR turn；先完整新证据/必要修正提议review。5355暂归owner精确QA，不擅停。 |
-| P2 | 动画首帧 / character_preset_migration | 从reviewed9316701独立codex/animation-first-render在制，无source handoff。nonnull animation pending直接走动画、不先mount/request静态；srcnull、reduce、能力不足、失败保留回退。独占AnimatedPortrait及独立tests/docs，保留取消/迟到隔离/单RAF/卸载/hidden；不改App/style。5544下一回合归此owner，启动前核监听和真实登记，完整验收/cleanup后交。 |
-| P2 | 背景姓名高亮 / 原调查视觉专项 | background-character-names，basee222，首helper d21f5ea；App/style/test仍dirty归owner，未clean交付，不能记PASS/main。仅开场/调查背景，真实姓名字面/最长优先、主题浅底＋字重深蓝字，无preset/同名歧义中性；保留纯文本/换行/复制，禁v-html/NLP，官方/分享/Editor试玩一致。5507按需有界QA，PID待handoff不猜。 |
-| P2 | 灰白胡须声音偏年轻 / older_male_voice | 用户否定当前龙楠听感，目标更成熟年长自然；专人已一次只读刷新灵矽目录并核两项可用中文试听：[候选与证据](older-male-voice/available-candidates.md)。龙三叔已有项目样本但与sunny同声；龙天当前未占用、尚未经项目实时/人耳验收。等待用户试听选声，再协调canonical单字段修改；当前映射未改，无新增付费合成/供应商切换。完整初轮及替代方案已归档，root已实际review三提交/公开字段/脚本与样本哈希，文档批无应用改动。 |
+| P1 | 刚性5角色动画 / 动画专项 | 原5人刚性视觉已用户通过，旧stretch仍拒绝。原20链22b后追加d106审计修正、6ed精确Canvas归因，再由root授权最小silver button crop `[592,624,25,44]` /transform.y624；clean source a432b72共23链已交，root尚未完成fullreview，未PR turn。灰/紫correctedPASS；银发旧phase20/28三unique点FAIL及t2.5 alpha127vsbase255/4×浅线证据保留，不能以旧伪PASS抹历史。无其他mask/包扩改许可；5355新修复回合PID99890/PTY38260退出130、无监听、tab58已关，无服务保留。 |
+| P2 | 动画首帧 / character_preset_migration | animation-first-render clean source `574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a`已交，root正在review未集成。nonnull pending不先static，srcnull/reduce/能力不足/失败仍回退；单watch/迟到取消/单RAF保持。source UI43＋Web35/types/build89，最终单watch另Web2；不当root复测。5544 PID69515/PTY74321最终shell退出1、端口/PID消失，独立Chrome1910329550已关/覆盖清理，不能沿旧摘要写exit130。 |
+| P2 | 背景人物姓名自动高亮 / 原调查视觉专项 | 背景批冻结 d21f5ea→`19fed70566951ad66fda49d7b61bf6f0923534b6`，source Web236/types/build89及IAB1280/391已交，未rootreview/main。仅两处背景安全字面/最长匹配、主题中性回退/原文一致。5507 PID95357/PTY32844退出1、无监听、tab37已关。原owner正独立追加下述姓名位置需求，保留冻结背景源；不要用新在制dirty覆盖已交批。 |
+| P2 | 灰白胡子年长男声 / 等待用户试听选声 | 三提交调查已root实际review并main `8ac8a7eb64a257d3aca320762bf1872fe401c1c5`；[候选与公开试听](older-male-voice/available-candidates.md)已给用户。龙天当前未占用、龙三叔与sunny同声，真实年龄/自然度等用户耳验。原龙楠映射未改，无manifest写turn/付费生成/管理agentdevice或secret操作；不动首案声。若需进一步中文样本，仍先固定≤2候选/同短句/时长费用上限/首FAIL停及自建资源cleanup方案。 |
 | P2 | 专职代码review / architecture_code_review | 两项初始发现及CR01预算调查已审；CR01防御已main，CR02/QA001已main。刚性审查5db3559→10039f4与cache审查0602604新clean报告**待root实际review/入库**，不在本批提前集成或称已审。AR01已即时协调owner。后续按具体缺陷排修，不泛化重构。 |
 | P1 | 真人/盲测/多用户质量 / root协调用户＋QA | 整合mic/外放/长会话、三案盲测、固定device多用户隔离、正式费用硬限额未闭环；新增声需耳验，fake/短WAV/配置ready不可替代。保护用户设备，不后台保活mic。 |
 | P2 | 分享/投稿后续 / Editor＋root | Node边界及有界IAB539/16000 URL往返、reload/损坏输入已测；跨浏览器、地址栏粘贴、外部传输、离线未验，16k暂定，128KiB仅Node。旧fragment网络捕获失败未补测；投稿受PRIVATE/用户GitHub权限门禁，不新增OAuth/PAT/代理投稿。证据出处保留在整理前快照。 |
@@ -54,6 +54,7 @@
 
 ## 保留门禁与可验证边界
 
+- 用户询问`lie.nighca.me`配置，已提供Workers Custom Domain步骤；仅指导，未操作账号/DNS或声明域名配置成功。
 - 默认无内部PR/自动push/deploy；动画单独PR仅此批例外，须先完整rootreview、明确turn及仅动画远程基线，不能夹带local未发布功能。记录、本地集成、push、CI、部署、真人验收分别报告。
 - 投稿仓仍PRIVATE，未授权改可见性/代理fork提交；[投稿方案](editor-official-submission-proposal.md)。无应用鉴权语音的既有特定线上授权不扩展到新secret/资源/DB/账号或新的付费试验，[公开方案](public-voice-launch-proposal.md)。
 - 宣传脚本/分镜/录屏/旁白音乐/生成媒体/实际制作须用户判断成熟并明确放行；只完成研究不跨门禁。

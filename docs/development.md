@@ -114,16 +114,16 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 
 PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已控制该进程。端口分配也不证明当前已有服务在跑；每轮实际状态看下表。CF开发服务器附带的workerd/内部RPC端口属于8788同一受保护进程树，不作为闲置独立预览批杀。
 
-### 当前登记（本次协调整理，基线main30822d3）
+### 当前登记（本次协调整理，原基线main30822d3，追加同步至22b0b93）
 
 这是root完整交付事实的更新，不是本次新做端口扫描。PID/PTY仅属于原启动会话，操作前仍须owner实际核对；源码HEAD不证明dirty运行字节。历史21服务清理及所有原始回执已在[清理记录](history/2026-10-25/development-service-cleanup.md)和[整理前原文](history/2026-10-25/coordinator-state-before-refresh-30822d3/development.md)保留，不按历史PID重复停止。
 
 | 端口 / 状态 | owner / 消费者 | 来源 / PID / PTY / 停止条件 |
 | --- | --- | --- |
 | 8787/8788，用户常驻受保护 | root协调、用户；既有launchd及网关内部子监听 | owning main动态跟随，真实版本查/__lie/main-status。旧盘点PID不沿用为当前PID；没有新明确服务turn不得停止、重启或复制实例。 |
-| 5355，精确归因QA在用 | 动画01a16d44…；自建tabs56/57 | approved-animation-rigid-batch/lie，d106＋inspect；PID52630/原PTY23642。t2.5/3.5真实Canvas归因/本批验收结束后owner原PTY停、关自建tab/清fixture并核监听；cleanup待完整handoff。不得按旧5355 PID/session操作。 |
-| 5544，上回合已停；下一turn首帧 | 上回合production_performance；下一character_preset_migration | perf source d6700a7、Miniflare PID43122/PTY53366已exit130、无监听/PID，IAB3/tab1已关/cacheoverride已恢复。新首帧base9316701、codex/animation-first-render仅分配，实际新PID/PTY未知，启动前核监听，测试完立即cleanup。 |
-| 5507，姓名高亮按需QA | 调查01a16d5c… | background-character-names/lie，basee222＋helperd21f5ea及owner dirty。当前监听/PID/PTY待handoff，不猜未运行或已停。旧结果回合PID44546/30600退出1且核无监听，只是历史。 |
+| 5355，最新修复回合已结束 | 动画01a16d44… | approved-animation-rigid-batch/lie@a432b72；PID99890/原PTY38260 exit130、无监听，tab58关闭，无保留服务。旧d106精确归因PID52630/23642是历史，不重停。源23链未root fullreview，不因服务结束清WT/refs。 |
+| 5544，首帧回合已结束 | character_preset_migration | animation-first-render/lie@574cf3a；PID69515/原PTY74321最终shell退出1，端口/PID消失，Chrome1910329550关闭/覆盖清理。不能沿原摘要记130；perf43122/53366退出130属更早回合。未来重新分配/启动须重新核监听和登记。 |
+| 5507，冻结背景批回合已结束；新姓名位置在制 | 调查01a16d5c… | background-character-names/lie@19fed705；PID95357/原PTY32844退出1、无监听、tab37关闭。owner正独立追加大图姓名移除/询问标题，不据此猜测是否已再启服务；新PID/PTY/cleanup待新批handoff。 |
 | 5402/5403，Editor固定分配 | Editor01a16d90… | 没有新增常驻要求；本次未做监听扫描，不把历史空闲当当前精确进程状态。仅owner按需启用并用后停。 |
 | 5358/5359及18旧服务，历史清理完结 | 原调查/Editor/动画owner | 既有21服务清理回执存档，不为复用固定端口自动常驻或重复关闭历史进程。 |
 
