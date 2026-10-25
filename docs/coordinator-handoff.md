@@ -23,7 +23,7 @@ Root仅调度、接口/决策、实际完整review、隔离候选有序cherry-pi
 
 本地基线30822已含结果页A（7b4d96a）、完整三案/目录打包（792e182）、清单恢复（1f168e3）、帧守卫（531c721）、姓名唯一（10c57c2）。最后已证origin/部署是`abb12dbf7a40689be593c2a1e580f23cfcc5611e`，[CI/部署证据](history/2026-10-25/coverage-publication.md)；此次未fetch，不声称远端仍未变化或本地新代码已部署。runner真实版本读8787的`/__lie/main-status`，不根据owning main SHA猜服务已跟上。
 
-下一可执行：性能/首帧/背景高亮/调查标题及两份review报告已完成root实际review与本批组合验证，见[最终组合](performance/2026-10-25/combined-visual-verification.md)。root待完成干净main快进，不自动push；后续生产发布兼容由production_release_compatibility在独立WT执行。动画23链仍待完整final review/PRturn。改编仅backlog，年长声等用户选声。
+下一可执行：性能/首帧/背景高亮/调查标题及两份review报告已完成root实际review与本批组合验证，见[最终组合](performance/2026-10-25/combined-visual-verification.md)。本批经干净main快进后仍不自动push；后续生产发布兼容由production_release_compatibility在独立WT执行。动画23链仍待完整final review/PRturn。改编仅backlog，年长声等用户选声。
 
 ## 活跃所有权与可恢复交付
 
@@ -34,7 +34,7 @@ Root仅调度、接口/决策、实际完整review、隔离候选有序cherry-pi
 | `/root/production_performance` | production-performance；codex/production-performance-build；basee6cc3aa | ordered `cba8cf073f2b088bc52d47d2211346983fcc8085`→`d6700a757111f1eb57c6037211925ca1ad276ac6`→`bd724954e4ff8e518730fe8e0a0f15c712286424`，已root完整review，纳入代码候选d9d3e93并组合验证。原fixed89字节、92hash输出/46parts；source Web228/Gateway13＋transport3、types/build/cf dryrun通过，IABwarm13immutable0transfer/HTML208B；不是root独立复测。PNG只调查约3.92%未生成；跨deploy旧hash保留未实现，Worker-first冷计费/额度风险保留。5544/PID43122/PTY53366退出130、无监听/tab1已关。 |
 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | approved-animation-rigid-batch；codex/approved-animation-rigid-batch；base8be6d03 | 原20链22b→d106审计→`6ed94a059d4539add866b0f2dcd28f83c0b9b15d`精确Canvas→`a432b72bd9d7742c5b2d49306725be0fcd74e0d5`最小修复，共23链clean交。root已明确授权silver button crop[592,624,25,44]/transform.y624，未授其他mask/包扩改。旧crop伪PASS/grayplum correctedPASS/silver旧phase20/28失败保留；新完整source未root fullreview、无PR turn。5355 PID99890/PTY38260退出130、无监听、tab58关。 |
 | 调查视觉 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | background-character-names；codex/background-character-names；basee222503 | 背景批冻结`d21f5ea8c0207f0c550b97486e89718f539cb61f`→`19fed70566951ad66fda49d7b61bf6f0923534b6`，source Web236/types/build89、IAB1280/391；root已完整review并纳入代码候选；09b10a4973d76da325f0cbb1a3204f11a11f68ba追加标题同批交付，最终Web245。5507 PID95357/32844退出1、无监听/tab37关。标题已clean完成；5507第二回合PTY97605退出1/无监听、tab38关，PID未记录。 |
-| `/root/character_preset_migration` | animation-first-render；codex/animation-first-render；base9316701433ba21017286c7023af5470275c23a28 | clean`574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a`已交，root已完整review并纳入代码候选d9d3e93。最终组合Web245/types/build89，UI43＋Web35/types/build89，最终单watch另Web2均source结果。5544 PID69515/PTY74321最终shell退出1（不是130）、端口/PID消失，Chrome1910329550关/覆盖清理；无保留服务。 |
+| `/root/character_preset_migration` | animation-first-render；codex/animation-first-render；base9316701433ba21017286c7023af5470275c23a28 | clean`574cf3ac38b8fd40a0fdec2f1efa8d0a203ab54a`已交，root已完整review并纳入代码候选d9d3e93。最终组合Web245/types/build89；源阶段UI43＋Web35/types/build89及最终单watch另Web2范围另存。5544 PID69515/PTY74321最终shell退出1（不是130）、端口/PID消失，Chrome1910329550关/覆盖清理；无保留服务。 |
 | `/root/older_male_voice` | older-male-voice；codex/older-male-voice；base30822 | 三提交调查已root实际review并main`8ac8a7eb64a257d3aca320762bf1872fe401c1c5`；[候选入口](older-male-voice/available-candidates.md)。龙天未占用/龙三叔与sunny同声公开试听已交用户，等待选声；当前龙楠voiceId a42e04fcefac4e9492581fbc95f3fce3未改。无manifest写turn或新增付费/管理资源许可；先真人耳验再配置。 |
 | `/root/architecture_code_review` | animation-rigid-code-review；报告分支分别codex/animation-rigid-code-review、codex/cache-delivery-review | 刚性report ordered`5db35590e159fd55061cfdf686d29ff6b050cc5e`→`10039f40f4b63e535665020e04da5c924dea9cc9`；cache report`06026043ffc548b61efd7220ee622ace1d68b4d5`，均已root实际review并纳入本批候选；原报告冻结历史结论保留，不能代替23链动画final review。refs保留。初始code review/帧守卫已main不重做。 |
 | `/root/production_release_compatibility` | production-release-compatibility；codex/production-release-compatibility；明确依赖be83810 | 实施CI有限旧hash保留及安全清单验证，current＋最多2旧代、每代80MiB/512files/合并240MiB上限、artifact TTL14天，不承诺14天在线页寿命；source dirty/候选未交，保护WT。不启服务/远程workflow/上传/部署。cf auth只读未登录，套餐预算未知。 |
@@ -51,7 +51,7 @@ Root仅调度、接口/决策、实际完整review、隔离候选有序cherry-pi
 
 ## 新intake与配置指导
 
-main dea290480b4ae8cab9d675cb95d1af4daad79c20已登记姓名位置需求：调查大图下姓名移除，标题“{当前姓名}的询问记录”，侧卡不变，由当前App/style owner独立追加。main22b0b93新增改编游戏仅记录：成功/失败结算均可进入编辑器并预填当前完整案件（含官方/分享/试玩快照）；不携运行状态、不改原案、不静默覆盖已有草稿，失败结果仍不揭真相，主动改编会进入含答案作者内容。按全backlog排期，尚未实施、不抢App/style。用户问lie.nighca.me，已给Workers Custom Domain步骤，仅指导、未操作账号/DNS。
+main dea290480b4ae8cab9d675cb95d1af4daad79c20已登记姓名位置需求：调查大图下姓名移除，标题“{当前姓名}的询问记录”，侧卡不变，已由09b10a4独立完成并纳入本批review候选。main22b0b93新增改编游戏仅记录：成功/失败结算均可进入编辑器并预填当前完整案件（含官方/分享/试玩快照）；不携运行状态、不改原案、不静默覆盖已有草稿，失败结果仍不揭真相，主动改编会进入含答案作者内容。按全backlog排期，尚未实施、不抢App/style。用户问lie.nighca.me，已给Workers Custom Domain步骤，仅指导、未操作账号/DNS。
 
 ## 必须继承的门禁与证据限制
 
@@ -60,3 +60,5 @@ main dea290480b4ae8cab9d675cb95d1af4daad79c20已登记姓名位置需求：调�
 3. 视频研究已完成，实际脚本/分镜/录屏/配音音乐/生成媒体/制作仍后置用户成熟判断＋明确授权。投稿仓PRIVATE/代理fork提交/公开可见性未授权。
 4. fake/demo/文本detect/短WAV/ready不等真人mic/外放/长对话/三案盲测或固定device多人隔离；新增声需耳验。真实visibility、硬件mobile/touch、广泛race未测，16k分享仍暂定，128KiB边界仅Node。开发宿主非101未修，不冒称已解决。
 5. root审查完整diff/上下文/必要证据，不靠agent摘要PASS；真实相同代码/资源/依赖/组合/环境身份才复用验证。所有完成设计/提案/失败方案入库后才清理必要WT；保护别人的dirty、草稿、进程和权限动作，不重复或绕过审批。
+
+发布兼容待决策：累计兼容artifact 256MiB硬门槛只是提案。自动审批拒绝将其写为现行策略，理由会影响发布可用性、须用户确认；未启用该门槛，不重复或绕过审批。专人可完成未接线预算选项/安全资源校验与离线证据，root先完整review再交用户确认，不自动发布。
