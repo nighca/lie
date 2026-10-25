@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为843cd6ea9638195f1c81716c6a678747d78ee88e，已含改编quiet入口、正式动画及PNG研究归档；本轮纯文档候选从此main隔离。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
+2026-10-25，现状整理基线为已审main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44明确暂停四小时换chat，由本root继续做完项目；本批仅整理，不轮换、不释放集成权。** 最新已确认main为aca35311784cded8423c8958170bb9f30862b505，已含改编quiet入口、正式动画及PNG研究归档；本轮发布UI修复候选从此main隔离。文档集成会推进HEAD，操作前读实际Git。[原文/来源与只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)、[完整ordered refs/恢复状态](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)保留所有历史与候选，不用旧状态覆盖新决定。
 
 ## 唯一协调权与任务
 
@@ -18,7 +18,7 @@
 
 main7249已含原结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫，以及性能hash/cache、动画首帧、背景姓名高亮/询问记录标题（mainc334e67）和三案背景/贺宁口径内容修订。**已main不重做；本地新成果未push/部署。** 最后已证远程/CI/部署 `abb12dbf7a40689be593c2a1e580f23cfcc5611e`，本批未fetch，不声称远端实时未变。runner真实版本看8787的/__lie/main-status，不以Git HEAD推定运行字节。
 
-下一步：原Editor已获两项RSM修复＋预设卡隐藏可见名称整项实施，owns Editor/Application邻近helper/tests，可局部内存保留并顺带QA003返回step；原调查视觉已获姓名高亮间距实施，仅style.css背景姓名selector，不重叠。结果胜负辨识＋指认表情由动画owner出设计，新增视觉须用户确认后实施。已main成果不重做；Hackathon初稿仍Draft。原PR #1 CLOSED/mergedAt null，retention不采用、鉴权/视频/付费门禁不变；用户新增本轮单次main push授权，当前两owner修复/小UI合入后发布，不等结果设计审批。
+下一步：两专项最终交付已root全文review，冻结候选aa6fc190 Web31files288/types/build89与源字节/QA隔离通过；root审[组合报告](editor-state-recovery/combined-verification.md)、Git最终recheck后本地ff并执行用户本轮单次普通main push，触发现有CI。此记录不提前声称已ff/push/deploy；CI/线上成功按发布SHA另验。新结果胜负/指认表情设计仍等用户确认、不阻塞此批；Hackathon仍Draft，鉴权/视频/付费边界不变。
 
 ## 当前owner与恢复入口
 
@@ -29,9 +29,9 @@ main7249已含原结果页A、官方三案同步打包、清单恢复、姓名�
 | production_release_compatibility | WT/branch production-release-compatibility，basebe83810；冻结有序61a4f4d9975cb7aaf259ebdb6f136c9ad8c03bb0 → cad7fd7e387f3797a941785b51545bce2c87778a → 14a32fb39a95caa33bcce6bdbe1c3cd5cb3e283c。root完整review/独立Node24 21/21 PASS属于历史候选技术证据，未main/push/deploy。**用户明确不采用旧版本兼容，实施/14d/256MiB确认门禁取消，不接CI。** [README/修正/来源与代码引用](archive/2026-10-25/release-retention-not-adopted/README.md)永久归档，不删除历史refs/WT；[RC01/02审查](reviews/release-compatibility-2026-10-25/README.md)保留。 |
 | 动画01a16d44-aeea-7552-b184-5118072e75f3＋root | 原23链a432及9aa技术报告已root完整技术/范围review；用户视觉已验不重复。用户取消PR路线，原owner已确认PR #1 CLOSED、mergedAt null，历史head a9e5811保留，未merge/deploy。当前从main14ca有序重放23＋1得到df8d26d，当前main组合Web281/UI43/runtime33、三包types/build89与hash资源检查通过，已root审报告并本地main299，未push/deploy；没有整个远程分支merge。[报告及有序链](animation/combined-final-animation-verification-2026-10-25.md)。 |
 | 调查视觉01a16d5c-de69-7452-8d6a-280d15a87e9e | WT background-character-names/lie、branch codex/voice-connection-interaction，base7249；clean有序source fc635b56e5b2780e8bc629427866cee3fa051f20→dba2d641ff9ac9020185eb18413b6718ee1c34d9，root完整生产/周边/tests/docs/fixture/原生图审查，候选b0025ee→fa4f02c→9b17538完整31套266tests/types/build89及产物身份通过，已main9b17538。7hash/完整20交付路径同源，源IAB1280/391不重做；无真人mic/provider。5507 PID50346/PTY39627 exit1无监听/tab39清。原source冻结，App/controller文件权已交Editor，未push部署。提示居中微调7424已完整review并main b3f9bf69029cb04aa0c21c58080192ee53f71b2a；5507本轮85753/PTY22271 exit1、无监听/tab40清。用户新反馈PC去姓名后立绘底部空，原owner仅桌面portrait-backdrop CSS小范围下移有界验收turn，窄屏/资源/组件不动；source ffa0b7534ccec65c34be81a1ae78aeb6a96ce6bc（baseb3，desktop top32px/mobile0）已root review并main14ca，纳入本轮动画组合。Editor样式仍只result-actions。[组合报告](performance/2026-10-25/combined-voice-verification.md)。 |
-| 调查视觉当前turn | 介绍背景高亮姓名增加少量两侧视觉间距，保留主题色/原文字/匹配规则、换行及标点；只owns style.css背景姓名selector，不改Editor/Application，整项已派、尚未交实现。 |
+| 调查视觉本轮交付 | source0f12453a1d9fcc6d9b1e8dca4900675df225d7cf，只有style.css背景姓名padding-inline及证据；root完整审原图/JSON/fixture，候选4b6624d纳入最终aa6fc190，CSS source字节相等、全Web288/types/build89通过。5507 PID97700/PTY27003停止/无listener、tab42/临时入口清（owner回执），无保留服务。 |
 | Editor01a16d90-27cc-77c2-9e0a-4b28b1135371 | source d3bd29c6基于9b17538；root完整源码/5测试/docs及desktop/391原图review，组合Web281/types/build89通过，已main eafee8599210bd382b2738d85d52a08281d43b7e，不重做。[原组合报告](remix-game-proposal/combined-verification.md)。用户新要求“我要改编”文字链接最右＋弹窗标题“改编案件”，候选4769b5a→5d24f004402961221905c9131ca471aa0fbed8cb已root完整diff/两图review，独立3files47tests/Webtypes/build89通过，六路径同source b84f1c7a、其他生产字节同main299，[报告](remix-game-proposal/quiet-combined-verification.md)已root审并本地main a128320，未push/deploy。5402旧session23758为历史；quiet最终验收session54417已Ctrl-C/无listener、自建tab/fixture清（owner回执），本轮离线无新服务。 |
-| Editor当前turn | 已派RSM-01 P2保存失败试玩返回保留编辑、RSM-02 P3旧copy完成不得污染新链接，以及人物预设卡隐藏可见预设名（可访问名称/选中态保留）；owns Editor/Application邻近helper/tests，可局部内存保留并顺带QA003step，不扩云同步/多槽，尚未交实现。 |
+| Editor本轮交付 | source97a18031666a0e60cca7a7ada920ad6ce51951cd→8e09327e9ff2b504b8e62ce72f59825b7e7dae0a已root完整review，修RSM-01/QA003、RSM-02、预设可见去名及KeepAlive失活立绘释放；最终candidate61c0c41→aa6fc190对应3生产/2测试逐字节相等，组合288/types/build89通过，[报告](editor-state-recovery/combined-verification.md)。5402原exec89431停止/无listener、tab26/temp清；source未归因MutationObserver异常保留，不冒称console clean/GPU验收。 |
 | older_male_voice | 三提交调查已main8ac8a7e，WT older-male-voice/branch同名base30822，原source63d5b76。用户认为两候选仍年轻，**若无更合适可先龙三叔，接受sunny同声，已授权按现有支持候选实施**；voiceId `2e7965636b0d4472ae51e75f419dff41`，不改sunny。source7058f31368629d850ae8270a4339539eee8542f6已root完整review/独立单字段及哈希核验，main36a06de86fed5dba6a1d4f14a1abcfc5c5c2a29f已实现灰白胡须映射龙三叔，其余7预设相等；source36tests/Webtypes/build89通过、候选代码资源依赖同源复用，未push/deploy/真人。旧[候选文档](older-male-voice/available-candidates.md)等选声措辞已被新决定及配置覆盖；不扩付费/provider/克隆。 |
 | case_content_revision | case-content-revision/branch同名，base3aaa329；source a549bbe2147b355a53474ba592affbb271f71e2e clean已完整root review12files/三案11profiles/ending/context/docs，候选411f8d8全部应用/tests/依赖身份同源；Core51/Web17/types/build89复用，root独立三对byte/allotherfields核验，已main7249。贺宁口径已修，**真实模型未回归**；三背景154→112/189→132/161→111，原文/备选/矩阵入库，无服务/provider。 |
 | production_performance / character_preset_migration / 调查视觉旧批 | 性能三链cba8cf0→d6700a7→bd72495，首帧574cf3a，背景d21f5ea→19fed705→09b10a4均已mainc334e67；代码候选d9d3e93、首轮be83810。Web245/UI43/Gateway16/types/build89、40Miniflare、built Worker开局/切人无staticfirst，[组合证据](performance/2026-10-25/combined-visual-verification.md)及[真实浏览器边界](performance/2026-10-25/combined-first-render-verification.md)已main。暖缓存/391px等源验收按各原范围，不重复实施或泛化PASS。 |
@@ -49,7 +49,7 @@ main7249已含原结果页A、官方三案同步打包、清单恢复、姓名�
 
 ## 本轮单次发布准备
 
-2026-10-25用户明确“空了之后把当前main推到远端，这样正式环境验证”。唯一integrator/publisher仍root。当前已确认main `843cd6ea9638195f1c81716c6a678747d78ee88e`；先收Editor三项（隐藏预设可见名、RSM-01保留失败保存编辑并含QA003step、RSM-02复制意图隔离）及调查姓名间距，root实际review并合入，完成组合检查后执行本轮一次普通main push。不等结果胜负/指认表情新设计批准；该设计仍须用户确认再实施。此批文档准备不执行fetch/push/部署，root已有fetch在处理，远端abb12db仍仅最后确认记录，不是实时断言。鉴权、视频、付费、账号/凭据与其他服务边界不扩大。
+2026-10-25用户明确“空了之后把当前main推到远端，这样正式环境验证”。唯一integrator/publisher仍root。当前已确认main `aca35311784cded8423c8958170bb9f30862b505`；Editor三项（隐藏预设可见名、RSM-01保留失败保存编辑并含QA003step、RSM-02复制意图隔离）及调查姓名间距已完整root review，冻结组合aa6fc190 Web288/types/build89通过；root审报告并完成Git复核/本地ff后执行本轮一次普通main push。不等结果胜负/指认表情新设计批准；该设计仍须用户确认再实施。此批文档准备不执行fetch/push/部署，root已有fetch在处理，远端abb12db仍仅最后确认记录，不是实时断言。鉴权、视频、付费、账号/凭据与其他服务边界不扩大。
 
 | 发布前检查 | 可复用与仍须完成 |
 | --- | --- |

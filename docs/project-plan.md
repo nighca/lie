@@ -2,7 +2,7 @@
 
 2026-10-25，基线已审本地main `7249a6f94106ce9fa7aaefdf640222f77ff70188`。**用户约10:44暂停四小时换chat，本root继续做完项目**；唯一active coordinator/integrator仍01a17012-fa00-7170-ac0a-21c1900d71cd，不释放、不新建chat。本代推进lie ACTIVE、轮换lie-2 PAUSED，root约10:46只读确认，target/created_at不变。[handoff](coordinator-handoff.md)管所有权与门禁，[服务台账](development.md#服务登记与生命周期)管端口，[原文/refs快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/README.md)保留历史；不把旧10:41deadline当现行许可。
 
-已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已确认main 843cd6ea9638195f1c81716c6a678747d78ee88e已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
+已main：结果页A、官方三案同步打包、清单恢复、姓名唯一、帧守卫、性能hash/cache/动画首帧/背景姓名高亮与标题（c334e67）、三案背景和贺宁口径（7249）。不重做。最后已证remote/CI/部署abb12db，本批未fetch，本地新成果**未push/部署**。后续36a已含龙三叔配置，最新已确认main aca35311784cded8423c8958170bb9f30862b505已含改编quiet入口、桌面立绘top32 CSS、正式动画与PNG研究归档。root保持响应，整项委派实施/环境/排障/浏览器/长检查，自己负责实际完整review、决策及串行隔离集成；文档批只查文档，按实际身份复用验证。用户已回来，旧夜间临时授权结束，所有设计/替代/失败方案须入库，归档不等于批准。
 
 ## 已批准的产品与架构
 
@@ -14,7 +14,7 @@
 
 ## 当前队列与下一步
 
-当前发布批次：上述两owner在制小UI/Editor修复完成后由root审查合入并执行此次授权；[发布preflight与验证复用](coordinator-handoff.md#本轮单次发布准备)明确检查范围。结果表情设计仍独立等用户确认，不阻塞这一批。
+当前发布批次：两owner已交修复/小UI并root完整review，冻结组合aa6fc190 Web288/types/build89通过，root审组合报告后本地ff并执行此次授权；[发布preflight与验证复用](coordinator-handoff.md#本轮单次发布准备)明确检查范围。结果表情设计仍独立等用户确认，不阻塞这一批。
 
 完整owner/base/ordered SHAs/实际WT和检查边界见[handoff](coordinator-handoff.md)及[恢复清单](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)。新意图先与已分派文件协调，不重叠抢写。
 
@@ -28,12 +28,12 @@
 | 已main，待真实模型回归 / case_content_revision | sourcea549bbe，root完整12files/三案11profiles/ending/context/docs review、候选411f8d8与source应用/tests/依赖同源；Core51/Web17/types/build89复用，root独立三对byte/其他字段原样通过，main7249。背景154→112/189→132/161→111；贺宁普通施压不自曝口径已调，**未真实模型回归，不能称实测修好**。原文/备选/矩阵已[入库](case-content-revision-2026-10-25/README.md)，无服务/provider。 |
 | 已main / 性能、首帧、视觉 | mainc334e67；最终Web245/UI43/Gateway16/types/build89及40Miniflare，实际builtWorker有界开局/切人无staticfirst；[组合](performance/2026-10-25/combined-visual-verification.md)与[浏览器边界](performance/2026-10-25/combined-first-render-verification.md)保留。92hash输出/46parts、原89资源字节保留；源warm13资源零transfer不是线上新部署，PNG全81实测5.28%/66.73s，root已读完整报告并独立8项/源SHA汇总核验，同意暂不接构建；sourcea46的研究文档经fe32d46归档，已main299，不改生产。[PNG证据](performance/2026-10-25/png-lossless/README.md)。背景字面最长匹配/歧义中性、标题“{姓名}的询问记录”，不重派。 |
 | 设计中 结果辨识＋指认表情 / 动画视觉01a16d44 | 用户新增：结合“被正确/错误指认”的人物动画/表情，用颜色、图案等让成功/失败一眼可辨，不依赖先读标题；已交视觉专项统一设计，先核其既有方案/批准范围，提供两态并排推荐及窄屏/静态/减弱动效回退，方案入库后交用户确认新增视觉再实施。不靠单一颜色，不泄错误指认的真正答案，不改玩法。 |
-| 已审报告，修复已派 Editor / 改编状态隔离 | [review](reviews/remix-state-review-2026-10-25/README.md) source40260dc已root全文及真实Editor/Application周边review；2026-10-25文档候选0c6286b独立重放3探针通过，结果JSON与原记录逐字节一致。RSM-01 P2保存失败试玩返回丢编辑、RSM-02 P3旧copy完成污染新链接已交原Editor整项修复，可用局部内存保留并顺带QA003返回step；owns Editor/Application邻近helper/tests，不扩云同步/多槽。probe确认错误存在，不称已修复。 |
+| 修复组合通过 / Editor＋root | RSM-01保存失败试玩返回保留编辑/步骤/人物（含QA003）、RSM-02复制意图隔离已实现；97a1803→8e09327补失活立绘卸载、激活重建，最多缓存一份Editor、离开范围清理，改编替换key失效。root完整review；最终候选aa6fc190 **Web288/types/build89通过**，待root审[组合报告](editor-state-recovery/combined-verification.md)、本地ff并按本轮授权发布；未提前称已main/push/deploy。旧[review](reviews/remix-state-review-2026-10-25/README.md)错误探针归档，不当修复后验收。 |
 | P1 真人/盲测/多用户 / root协调用户＋QA | mic/外放/长会话、三案盲测、固定device多人隔离、正式费用硬限额未闭环。fake/短WAV/ready不替代，新增声仍按用户真实耳验范围，不后台保活mic。 |
 | P2 分享/投稿 / Editor＋root | 有界IAB539/16000 URL往返/reload/损坏输入已测；跨浏览器/地址栏粘贴/外部传输/离线/旧fragment网络补测未验，16k暂定、128KiB仅Node。投稿PRIVATE/用户GitHub门禁，不新增OAuth/PAT/代理投稿。 |
 | P2 出戏、启动延迟、开发WS / 工程/内容owner待排 | [出戏调查](role-immersion-investigation.md)尚未解决，不无限付费叠prompt/换provider。observer已main但非真人加速证据；[宿主WS非101](dev-websocket-rejection.md)仅诊断，未修vendor。 |
-| 实施已派 两项阅读/选择小优化 / 原Editor＋调查视觉 | 用户2026-10-25要求：①Editor人物预设卡隐藏可见预设名，只看形象，保留按钮可访问名称/选中态与人物自己的姓名；已派原Editor，随RSM修复交付。②介绍背景高亮姓名两侧少量视觉间距，保留主题色/原文/匹配与换行标点；已派原调查视觉，仅style.css背景姓名selector。文件权不重叠，尚无实现交付，不提前记PASS。 |
-| P3 Editor/视觉边界 / owner待排 | QA003试玩返回step由Editor随RSM-01处理，未交付；silver/mint同accent区分待定，不全面重画。真实visibility/广泛race/硬件touch未验；1280×720既有舞台裁切，合成hidden不算真隐藏PASS。 |
+| 交付组合通过 两项小优化 / Editor＋调查视觉 | 预设卡仅图像，aria-label/选中态/人物自己姓名保留；姓名高亮仅padding-inline少量间距，主题色/原文/匹配不变。root已读原图与完整diff；source0f12453及97a1803→8e09327在aa6fc190组合Web288/types/build89及字节/QA隔离核验通过。[报告](editor-state-recovery/combined-verification.md)；source IAB按相同字节复用，未重做浏览器；随本轮发布，不重复派。 |
+| P3 Editor/视觉边界 / owner待排 | QA003随RSM-01完成、最终候选回归通过；silver/mint同accent区分待定，不全面重画。真实visibility/广泛race/硬件touch未验；1280×720既有舞台裁切，合成hidden不算真隐藏PASS。 |
 | 暂缓 鉴权 / 独立chat01a17076 | 用户明确暂停；[归档](archive/2026-10-25/invite-access-paused/README.md)及三候选/ignored材料保留，不恢复实现/QA/CI/部署，旧设计批准不替代重新启动许可。 |
 
 ## 已集成与已完成研究
