@@ -43,13 +43,13 @@ sprite('speaking-fill','speaking-source',31,[[825,650],[1040,650],[1040,925],[89
 sprite('speaking-cap','speaking-source',33,[[825,420],[980,420],[1030,670],[825,670]])
 # Waiting separates rigid head/arm contact, a translating chest and fixed lower body.
 sprite('waiting-lower','waiting-source',9,[[200,942],[1100,942],[1100,1254],[200,1254]])
-sprite('waiting-contact','waiting-source',20,[[700,375],[1100,375],[1100,958],[200,958],[200,825],[510,825],[578,760],[593,660],[635,540],[675,490]],'chest-root')
-sprite('waiting-arm-contact','waiting-source',32,[[555,335],[700,335],[700,490],[650,525],[620,650],[610,720],[570,790],[510,825],[415,825],[365,745],[365,650],[380,500],[460,425],[555,380]],'contact-root')
+sprite('waiting-contact','waiting-source',20,[[675,350],[740,365],[1100,375],[1100,958],[200,958],[200,825],[510,825],[578,760],[593,660],[630,540],[645,530],[665,490],[680,450],[680,400]],'chest-root')
+sprite('waiting-arm-contact','waiting-source',32,[[555,335],[700,335],[680,365],[680,390],[682,410],[680,470],[650,525],[620,650],[610,720],[570,790],[510,825],[415,825],[365,745],[365,650],[380,500],[460,425],[555,380]],'contact-root')
 sprite('waiting-support','waiting-source',40,[[425,790],[710,765],[800,790],[800,885],[420,855]],'chest-root')
 # Original heads preserve gaze, identity and exact waiting chin contact.
 headmask=[[380,0],[800,0],[800,340],[695,350],[690,360],[694,375],[693,390],[700,402],[715,415],[720,420],[710,425],[660,440],[590,445],[575,410],[550,400],[380,400]]
 for state in ['default','listening','waiting']:
- mask=[[x+10 if state=='listening' and 340<=y<=375 and x>650 else x,y] for x,y in headmask]
+ mask=([[380,0],[800,0],[800,340],[695,350],[679,355],[677,360],[679,370],[681,380],[684,390],[688,400],[695,410],[705,420],[706,430],[690,440],[660,440],[590,445],[575,410],[550,400],[380,400]] if state=='waiting' else [[x+10 if state=='listening' and 340<=y<=375 and x>650 else x,y] for x,y in headmask])
  sprite('head-'+state,state+'-source',30,mask,'head-root')
 sprite('mouth-open','speaking-source',35,[[0,15],[86,0],[98,5],[94,46],[76,64],[30,64],[0,45]],'head-root',{**identity,'x':590,'y':291},[590,291,100,66])
 attachments=[n['id'] for n in nodes if 'sprite'in n]
