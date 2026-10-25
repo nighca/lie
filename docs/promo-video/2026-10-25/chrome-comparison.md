@@ -14,10 +14,12 @@ CDP 页面采集不包含 OS 系统指针。本次在专用页面注入临时、
 
 ## 采集结果与限制
 
-最终视频 ../../../media/promo-video/chrome-pointer-preview.mp4，H.264/yuv420p，1280×800，30fps，15.833333秒，1131122 bytes，无音轨。取每2秒接触表核对画面边界和指针，FFmpeg 全文件解码无报错，ffprobe 参数通过；点击圆环为短暂录制辅助，不将它宣传为产品功能。正式重录仍待用户对比反馈。
+最终视频 ../../../media/promo-video/chrome-pointer-preview.mp4，H.264 4:2:0 full-range/yuvj420p，1280×800，30fps，15.833333秒，1131122 bytes，无音轨。取每2秒接触表核对画面边界和指针，FFmpeg 全文件解码无报错，ffprobe 参数通过；点击圆环为短暂录制辅助，不将它宣传为产品功能。正式重录仍待用户对比反馈。
 
 第一轮过多 CDP 指针分步导致执行超过50秒，采集中断，无完整时间戳工程，不作为可用样片；随后缩短移动实现并完成短片。中间 take02 测试目录被最终同名采集覆盖，最终666帧时间戳有效；最终帧/frames.json/FFconcat 位于下方素材库 take02，输出、截图位于 take03。未把缺少工程的尝试称为完成。
 
 原始素材保存于本机持久目录 `/Users/nighca/.codex/visualizations/2026/10/25/01a17226-5e5a-7193-b5b7-e522519a3e0c/promo-video/chrome-pointer-comparison`。重建 FFconcat 时将 `/private/tmp/lie-promo-chrome-20261025` 替换为此根目录；编码命令同 README。大量原始 JPEG 不进入 Git，预览/验看图与必要元数据入库。
 
 本批基于制作分支0e0461667ad5c74464d9599883e8d1bf3f8b8352追加；main、服务、端口、他人标签页、账号/权限均未修改，没有push/部署。线上页面现显示第四案，说明较首版已有更新；此次仅画面与指针链验证，没有确定后续整片稳定发布SHA，正式完整录制前重新锁定。
+
+归档格式修正：`chrome-pointer-screen.jpg` 实际为 JPEG、1280×800（原 `.png` 扩展名错误，现仅改名，字节不变）；两部已有 MP4 实际 `color_range=pc`、`pix_fmt=yuvj420p`，与命令请求 `-pix_fmt yuv420p` 分别记录，不声称 limited-range。
