@@ -89,7 +89,10 @@ describe('three-step editor', () => {
 
   it('uses the shared product brand, draft notice and existing leave event', async () => {
     const { wrapper, click } = page(game)
-    expect(wrapper.get('.lie-product-header__brand span').text()).toBe('语音推理')
+    const brand = wrapper.get('a[aria-label="LIE 首页"]')
+    expect(brand.attributes('href')).toBe('/')
+    expect(brand.get('svg title').text()).toBe('LIE')
+    expect(brand.get('svg').attributes('aria-hidden')).toBe('true')
     expect(wrapper.get('.editor-draft-status [role=status]').text()).toContain('草稿已保存至此设备')
     expect(wrapper.get('.editor-draft-status').element.previousElementSibling?.getAttribute('aria-label')).toBe('创作步骤')
     await wrapper.get('.lie-product-header__brand').trigger('click')
