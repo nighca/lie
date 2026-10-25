@@ -41,3 +41,7 @@ npm run typecheck --workspace @lie/web
 ## root审查后的notice范围收敛
 
 root指出5ceb成功保存时无条件notice=null超出保存修复范围；原提交冻结保留。追加仅记录saveNotice文本归属，成功保存时只清仍匹配该错误的notice。新增回归证实原有草稿读取失败提示在成功编辑保存后按旧语义保留，overflow修复后保存错误仍能消失。最终局部editor-page **25/25**、原边界三probe **3/3**、Web types通过；未扩探针/构建/全套。78项通过属于5ceb初版，最终仅此notice范围差异按上述受影响检查复验，证据口径分开。
+
+## root最终组合核验
+
+实际干净main0d8bf05上有序cherry source3c44→5ceb→5af→8f1193为候选ebc067c→1c205ac→91f5f6e→84f7b44。root实际检查完整diff与Editor/draft/share/core周边，确认最终仅两个生产文件；2e24至0d8四路径全部文档，生产、依赖及组合未变。四个生产/回归文件与source最终SHA逐字节一致，after.json哈希均相同；故按原范围复用source25page/types（及初版78历史检查），不冒称最终重新全套通过。候选独立重放原3项正向探针3/3通过（930ms），无网络/服务/浏览器/用户草稿访问；不重复build/编码或无关测试。文件名核对首次受Git引号转义影响断言失败，改用NUL分隔重查4条实际docs路径通过；不是应用或测试失败。root最终本地快进后以实际main为准，未push。

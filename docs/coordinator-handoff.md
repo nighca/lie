@@ -67,4 +67,4 @@ CI使用现有GitHub secrets及固定Worker lie-game，`--provision=false`；本
 
 ## 本轮后续排期
 
-从实际main2e24d32巡检：正式结果600已完成，纠正计划顶部仍在制旧措辞；favicon已用Logo且正式hash SVG身份核对相同，无需改代码。Hackathon专项初稿后用户直接修订14链已实际全文review并在隔离候选有序cherry（779824f至9615f29），两文件source身份及49本地链接通过；移动端可用是用户已确认事实，不能继续标成整体未验。当前architecture_code_review负责自编内容输入边界有界离线审查，原voice审查不重做；待完整handoff后root继续review。唯一integrator仍本root，不启动新服务、不push，实际main更新后读Git。
+从实际main2e24d32巡检：正式结果600已完成，纠正计划顶部仍在制旧措辞；favicon已用Logo且正式hash SVG身份核对相同，无需改代码。Hackathon专项初稿后用户直接修订14链已实际全文review并在隔离候选有序cherry（779824f至9615f29），两文件source身份及49本地链接通过；移动端可用是用户已确认事实，不能继续标成整体未验。输入边界审查已发现并修复CB01异常时长草稿无法恢复：source四链至8f1193已root实际全文review，候选84f7b44上独立三probe通过、4源码/回归SHA一致、最终25page/types按相同环境范围复用；报告见reviews/content-boundary-2026-10-25，原voice审查不重做。唯一integrator仍本root，不启动新服务、不push，实际main更新后读Git。
