@@ -36,7 +36,7 @@ for(const state of Object.keys(data.states)) {
 }
 for(const phase of evidence.waiting) {
  const m=phase.world
- assert(m['waiting-lower'].every((v,i)=>Math.abs(v-[1,0,0,1,0,12][i])<1e-12))
+ assert(m['waiting-lower'].every((v,i)=>Math.abs(v-[1,0,0,1,0,0][i])<1e-12))
  assert.equal(m['waiting-contact'][0],1);assert.equal(m['waiting-contact'][1],0);assert(Math.abs(m['waiting-contact'][2])<1e-12)
  assert(Math.abs(m['waiting-contact'][3]*950+m['waiting-contact'][5]-962)<1e-9)
  assert.deepEqual(m['head-waiting'],m['waiting-contact'])

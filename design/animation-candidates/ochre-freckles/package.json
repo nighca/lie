@@ -1822,56 +1822,29 @@
       },
       "tracks": [
         {
-          "node": "body-root",
-          "property": "y",
-          "interpolation": "linear",
-          "keys": [
-            {
-              "time": 0.0,
-              "value": 972
-            },
-            {
-              "time": 1.0,
-              "value": 972
-            },
-            {
-              "time": 2.0,
-              "value": 972
-            },
-            {
-              "time": 3.0,
-              "value": 972
-            },
-            {
-              "time": 4.0,
-              "value": 972
-            }
-          ]
-        },
-        {
           "node": "contact-root",
           "property": "y",
           "interpolation": "linear",
           "keys": [
             {
               "time": 0.0,
-              "value": 950
+              "value": 962
             },
             {
               "time": 1.0,
-              "value": 950
+              "value": 962
             },
             {
               "time": 2.0,
-              "value": 950
+              "value": 962
             },
             {
               "time": 3.0,
-              "value": 950
+              "value": 962
             },
             {
               "time": 4.0,
-              "value": 950
+              "value": 962
             }
           ]
         },
