@@ -1,0 +1,246 @@
+[
+  [
+    {
+      "name": "candidate",
+      "viewport": [
+        320,
+        844
+      ],
+      "scrollY": 836,
+      "listScrollTop": 0,
+      "flow": {
+        "x": 16,
+        "y": -401.53125,
+        "width": 288,
+        "height": 22.3984375,
+        "top": -401.53125,
+        "right": 304,
+        "bottom": -379.1328125,
+        "left": 16
+      },
+      "cases": {
+        "x": 16,
+        "y": -347.1328125,
+        "width": 288,
+        "height": 1174.953125,
+        "top": -347.1328125,
+        "right": 304,
+        "bottom": 827.8203125,
+        "left": 16
+      },
+      "heading": {
+        "x": 16,
+        "y": -347.1328125,
+        "width": 288,
+        "height": 40,
+        "top": -347.1328125,
+        "right": 304,
+        "bottom": -307.1328125,
+        "left": 16
+      },
+      "list": {
+        "x": 16,
+        "y": -307.1328125,
+        "width": 288,
+        "height": 1134.953125,
+        "top": -307.1328125,
+        "right": 304,
+        "bottom": 827.8203125,
+        "left": 16
+      },
+      "sectionGap": 32,
+      "titleListGap": 0,
+      "casesMarginTop": "32px",
+      "document": {
+        "client": 844,
+        "scroll": 1680,
+        "width": 320
+      },
+      "listOverflow": "visible",
+      "listScroll": 1135,
+      "listClient": 1135
+    },
+    {
+      "name": "baseline",
+      "viewport": [
+        320,
+        844
+      ],
+      "scrollY": 0,
+      "listScrollTop": 0,
+      "flow": {
+        "x": 16,
+        "y": 434.46875,
+        "width": 288,
+        "height": 22.3984375,
+        "top": 434.46875,
+        "right": 304,
+        "bottom": 456.8671875,
+        "left": 16
+      },
+      "cases": {
+        "x": 16,
+        "y": 456.8671875,
+        "width": 288,
+        "height": 1174.953125,
+        "top": 456.8671875,
+        "right": 304,
+        "bottom": 1631.8203125,
+        "left": 16
+      },
+      "heading": {
+        "x": 16,
+        "y": 456.8671875,
+        "width": 288,
+        "height": 40,
+        "top": 456.8671875,
+        "right": 304,
+        "bottom": 496.8671875,
+        "left": 16
+      },
+      "list": {
+        "x": 16,
+        "y": 496.8671875,
+        "width": 288,
+        "height": 1134.953125,
+        "top": 496.8671875,
+        "right": 304,
+        "bottom": 1631.8203125,
+        "left": 16
+      },
+      "sectionGap": 0,
+      "titleListGap": 0,
+      "casesMarginTop": "0px",
+      "document": {
+        "client": 844,
+        "scroll": 1648,
+        "width": 320
+      },
+      "listOverflow": "visible",
+      "listScroll": 1135,
+      "listClient": 1135
+    }
+  ],
+  [
+    {
+      "name": "candidate",
+      "viewport": [
+        1280,
+        844
+      ],
+      "scrollY": 0,
+      "listScrollTop": 457.5,
+      "flow": {
+        "x": 24,
+        "y": 657.0703125,
+        "width": 588,
+        "height": 22.3984375,
+        "top": 657.0703125,
+        "right": 612,
+        "bottom": 679.46875,
+        "left": 24
+      },
+      "cases": {
+        "x": 668,
+        "y": 122,
+        "width": 588,
+        "height": 698,
+        "top": 122,
+        "right": 1256,
+        "bottom": 820,
+        "left": 668
+      },
+      "heading": {
+        "x": 668,
+        "y": 122,
+        "width": 588,
+        "height": 50,
+        "top": 122,
+        "right": 1256,
+        "bottom": 172,
+        "left": 668
+      },
+      "list": {
+        "x": 668,
+        "y": 172,
+        "width": 588,
+        "height": 648,
+        "top": 172,
+        "right": 1256,
+        "bottom": 820,
+        "left": 668
+      },
+      "sectionGap": -557.46875,
+      "titleListGap": 0,
+      "casesMarginTop": "0px",
+      "document": {
+        "client": 844,
+        "scroll": 844,
+        "width": 1280
+      },
+      "listOverflow": "auto",
+      "listScroll": 1105,
+      "listClient": 648
+    },
+    {
+      "name": "baseline",
+      "viewport": [
+        1280,
+        844
+      ],
+      "scrollY": 0,
+      "listScrollTop": 0,
+      "flow": {
+        "x": 24,
+        "y": 657.0703125,
+        "width": 588,
+        "height": 22.3984375,
+        "top": 657.0703125,
+        "right": 612,
+        "bottom": 679.46875,
+        "left": 24
+      },
+      "cases": {
+        "x": 668,
+        "y": 122,
+        "width": 588,
+        "height": 698,
+        "top": 122,
+        "right": 1256,
+        "bottom": 820,
+        "left": 668
+      },
+      "heading": {
+        "x": 668,
+        "y": 122,
+        "width": 588,
+        "height": 50,
+        "top": 122,
+        "right": 1256,
+        "bottom": 172,
+        "left": 668
+      },
+      "list": {
+        "x": 668,
+        "y": 172,
+        "width": 588,
+        "height": 648,
+        "top": 172,
+        "right": 1256,
+        "bottom": 820,
+        "left": 668
+      },
+      "sectionGap": -557.46875,
+      "titleListGap": 0,
+      "casesMarginTop": "0px",
+      "document": {
+        "client": 844,
+        "scroll": 844,
+        "width": 1280
+      },
+      "listOverflow": "auto",
+      "listScroll": 1105,
+      "listClient": 648
+    }
+  ]
+]
