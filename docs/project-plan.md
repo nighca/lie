@@ -30,6 +30,7 @@
 | P1 真人/盲测/多用户 / root协调用户＋QA | mic/外放/长会话、三案盲测、固定device多人隔离、正式费用硬限额未闭环。fake/短WAV/ready不替代，新增声仍按用户真实耳验范围，不后台保活mic。 |
 | P2 分享/投稿 / Editor＋root | 有界IAB539/16000 URL往返/reload/损坏输入已测；跨浏览器/地址栏粘贴/外部传输/离线/旧fragment网络补测未验，16k暂定、128KiB仅Node。投稿PRIVATE/用户GitHub门禁，不新增OAuth/PAT/代理投稿。 |
 | P2 出戏、启动延迟、开发WS / 工程/内容owner待排 | [出戏调查](role-immersion-investigation.md)尚未解决，不无限付费叠prompt/换provider。observer已main但非真人加速证据；[宿主WS非101](dev-websocket-rejection.md)仅诊断，未修vendor。 |
+| P3 已记录 两项阅读/选择小优化 / Editor＋调查视觉，待排 | 用户2026-10-25浏览器评论：①/editor人物预设选择卡片隐藏可见预设名（如“珊瑚短发”），只看形象选择；保留按钮可访问名称/选中态，人物自己的姓名不受影响。②案件介绍背景的高亮姓名两侧增加少量视觉间距，保留人物主题色、原文字/匹配规则，注意换行和标点。当前只记录，未实施；分别随对应owner下一批小改处理，不抢在制文件。 |
 | P3 Editor/视觉边界 / owner待排 | QA003试玩返回步骤丢失仅建议；silver/mint同accent区分待定，不全面重画。真实visibility/广泛race/硬件touch未验；1280×720既有舞台裁切，合成hidden不算真隐藏PASS。 |
 | 暂缓 鉴权 / 独立chat01a17076 | 用户明确暂停；[归档](archive/2026-10-25/invite-access-paused/README.md)及三候选/ignored材料保留，不恢复实现/QA/CI/部署，旧设计批准不替代重新启动许可。 |
 
