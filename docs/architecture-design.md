@@ -30,7 +30,7 @@ flowchart LR
 | `@lie/game-core` | 内容校验、确定性状态转换、角色上下文；不依赖 Vue、网络或文件系统 | 包根导出 content/session/context；另有 `@lie/game-core/content` 子路径 |
 | `@lie/ui` | 无案件规则的展示组件；依赖 Vue、character-animation | 组件与展示类型从包根导出，样式通过 `@lie/ui/style.css` 引入 |
 | `@lie/voice` | Linx WebSocket/MCP、PCM 编解码、麦克风与播放 | 包根导出 channel、PCM、player、microphone 与观测类型 |
-| `@lie/character-animation` | 非可执行动画包校验、确定性采样、浏览器加载与 Canvas 渲染 | 包根导出解析器、时间线、渲染器、加载器和类型 |
+| `@lie/character-animation` | 非可执行动画包校验、确定性采样、浏览器加载与 Canvas 渲染 | 包根导出解析器、时间线、渲染器、加载器和类型；另有 `@lie/character-animation/contract` 子路径 |
 | `apps/gateway` | Worker 静态服务、供应商凭据与双向中继 | HTTP/WS 路由；源码另导出 `relaySockets` 供测试 |
 
 包的准确导出以各自入口为准：[core](../packages/game-core/src/index.ts)、[ui](../packages/ui/src/index.ts)、[voice](../packages/voice/src/index.ts)、[animation](../packages/character-animation/src/index.ts)。
@@ -62,7 +62,7 @@ buildCharacterContext(game: GameDefinition, characterId: string,
 
 ### 状态接口
 
-状态转换通过返回的 `GameSession` 交付结果，不原地修改输入；幂等忽略可返回原对象。会话 ID、墙钟时间与耗时由调用者提供，core 不持有定时器。
+不原地修改输入，会话更新由返回值交付；幂等忽略可返回原对象。会话 ID、墙钟时间与耗时由调用者提供，core 不持有定时器。
 
 | 公开函数 | 输入 → 输出与约束 |
 | --- | --- |
@@ -224,11 +224,11 @@ Worker 的实际接口为 `fetch(request, env): Promise<Response>`，依赖 ASSE
 
 `design/character-presets/manifest.json` 与相对 PNG/animation 包是人物制作源。生成器 `syncCharacterPresets({ sourceDirectory?, outputDirectory?, check? })` 校验 ID、固定路径、普通文件/目录隔离、PNG 画布、声音配置、动画引用与预算，输出 `apps/web/public/appearances` 的运行时清单和资源。--check 比较已有输出，不作为来源反写。生产 URL 由构建另派生。[生成器](../scripts/character-presets.mjs)。
 
-`readCharacterPresets(data)` 输出 `CharacterPreset[]`：id/name/avatar/portrait/accent、voiceId/animation 可 null，portraits 含基础状态与可选结果图；故事以 appearanceId 引用，不复制美术或声音。它校验 animation 为当前形象的本地或 immutable package 路径。应用的 [createCharacterPresetLoader](../apps/web/src/presentation/characterPresetLoader.ts)负责懒加载清单、状态和过期取消，失败可重试；[运行时类型](../apps/web/src/presentation/characterPresets.ts)与制作源字段含义不同，接入者勿直接把源相对路径当运行 URL。
+`readCharacterPresets(data)` 输出 `CharacterPreset[]`：id/name/avatar/portrait/accent、voiceId/animation 可 null，portraits 含基础状态与可选结果图；故事以 appearanceId 引用，不复制美术或声音。它校验 animation 为当前形象的本地或 immutable package 路径。应用的 [createCharacterPresetLoader](../apps/web/src/presentation/characterPresetLoader.ts)返回 `{ state, load, cancel }`，state 含 presets/status；`load(): Promise<readonly CharacterPreset[] | null>` 共享在途请求，默认 8 秒超时覆盖响应体解析，失败置 failed 并返回 null，可重试；cancel 中止在途请求。[运行时类型](../apps/web/src/presentation/characterPresets.ts)与制作源字段含义不同，接入者勿直接把源相对路径当运行 URL。
 
 ### 生产派生与检查
 
-1. Web prebuild 生成固定 PNG/清单，保留原始制作源。Vite 插件 `fingerprintAssets(publicDirectory, { optimizeImage? })` 收集人物与品牌资源，图片按源 bytes 去重、最多两个编码 worker。
+1. Web prebuild 生成固定 PNG/清单，保留原始制作源。Vite 资源插件调用 `fingerprintAssets(publicDirectory, { optimizeImage? })` 收集人物与品牌资源，图片按源 bytes 去重、最多两个编码 worker，返回 `{ urls, outputs, manifestUrl, imageStats }`，分别提供源 URL 映射、输出字节映射、派生清单地址与图片处理统计。
 2. 固定工具的 WebP q90 编码采用 `-q 90 -m 6 -alpha_q 100 -metadata icc`；检查尺寸与完整 alpha，缓存键绑定源/工具/策略身份。超预算、不支持元数据或无体积收益等场景保留 PNG 并报告；损坏源不伪装成功。
 3. 根据实际输出扩展名改写动画包相对 parts；以最终路径/长度/bytes 对完整包目录取 hash，其余静态资源按最终 bytes 取 hash；清单引用最终 URL 后再 hash。虚拟模块 `virtual:lie-preset-manifest` 输出运行时清单 URL，开发指向固定清单。Vite 随后生成带 hash 的 JS/CSS。
 4. Web postbuild 检查固定输出与制作源一致；构建过程/测试守卫验证官方 JSON、资源引用和派生契约。CI 运行类型、覆盖率、真实 Web/Gateway 构建、部署 dry-run 与发布产物打包。CD 校验上游 SHA/产物/最新 main 后部署同一已验证产物，不重新构建。
@@ -239,4 +239,4 @@ Worker 的实际接口为 `fetch(request, env): Promise<Response>`，依赖 ASSE
 
 修改包接口时同时检查其直接消费者：core → controller/editor/official reader，voice → liveVoice，animation → generator/AnimatedPortrait/build，ui → App/Editor。接口规格可由 [core tests](../packages/game-core/test)、[voice tests](../packages/voice/test)、[动画 tests](../packages/character-animation/test)及 [Web tests](../apps/web/test)核对；测试替身证明协议和状态处理，不证明真实模型推理、听感或多用户容量。
 
-本次文档只核读实现和既存契约，检查链接与接口名，没有执行应用测试、真实服务、浏览器或构建。分享跨浏览器极限、四案完整真实模型/盲测、多用户隔离与账户费用控制仍须独立验证，不因接口完备而视为完成。
+分享跨浏览器极限、四案完整真实模型/盲测、多用户隔离与账户费用控制仍须独立验证，不因接口完备而视为完成。
