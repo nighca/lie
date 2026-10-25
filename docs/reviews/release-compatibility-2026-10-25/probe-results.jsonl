@@ -1,0 +1,2 @@
+{"id":"RC-01","expiredArchiveOmittedByApi":true,"result":"Deployed release artifact missing or ambiguous","expectedPolicy":"explicit expiration omission or documented recovery, not mandatory download of a deleted object"}
+{"id":"RC-02","apiTotalCount":101,"enumerated":100,"hiddenOlderRunLatestDeployment":1,"selected":[200,199],"requestedPage2":false,"refusedIncompleteSearch":false}
