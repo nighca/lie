@@ -1,6 +1,6 @@
 # 当前主协调交接状态
 
-2026-10-25，最近完成CI/CD核验的发布为 `9e1c998ae4f44a32f0dc72e3f6fdd496ddec69f3`。CI40174362619/attempt1与CD40174509906均success，Worker `b6cf1433-58cd-4190-8676-0b8477d14385`；[发布证据](releases/2026-10-25-docs-refresh/README.md)。本次加载占位功能批将继续推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `2268f84f02576d4384f0d30f9f117a70164f135a`。CI40175520817/attempt1与CD40175677095均success，Worker `45919e35-3bf2-4a33-a550-199c0d18ceaf`；[发布证据](releases/2026-10-25-portrait-loading/README.md)。新案件与设计交付会继续推进HEAD，操作前读实际Git。
 
 ## 协调权、自动化与发布
 
@@ -20,11 +20,14 @@
 
 | owner / 队列 | 下一步或保留职责 |
 | --- | --- |
-| root | 唯一integrator/发布turn，平台定位/归档已随9e1发布验证；本批调度调查立绘加载占位，实际审查后串行合入、普通push并检查CI/CD；保持响应，不把长验收尾巴留自己 |
+| root | 唯一integrator/发布turn，平台定位/归档已随9e1发布验证；调查立绘加载占位已随2268发布；本批调度第四案、头部效果图与视频新授权同步，实际审查后串行合入、普通push并检查CI/CD；保持响应，不把长验收尾巴留自己 |
 | Hackathon专项 | 新定位25e447d已review并随9e1发布，保留用户决定和既有主线补记 |
 | animation parent01a16d44 | 5355真实App＋统一八人页用户消费者仍保留，按owner生命周期清理；正式激活/UI已发布，不再排重复制作 |
 | architecture_code_review | 单JSON/CI-CD已验发布；本批原始发布材料来自该owner，CI artifact/restored256与Web251为不同集合。后续审查按新source身份，不重复已验全suite |
 | character_preset_migration | 调查立绘加载占位source8b98887已clean交付、root完整审查并候选fe56783；36项目标测试root复验通过，沿用source UI/Web类型检查；仅调查页启用slot，无服务启动，IAB不可用，原生视觉未测。[证据](investigation-portrait-loading.md)。 |
+| hackathon_case | 新增第四案source b7b20e3→2cbae8f，root完整内容/八文件diff审查、候选c1da7a9→5c87845；仅新增04 JSON为运行变更，root2项专项复验通过。源Web357/脚本33/types/build身份可复用；真实模型/盲测未验。[交付](hackathon-case/README.md)。 |
+| 头部UI专项01a16d5c | Logo下划线效果图制作中，用户要求先看图确认；不得直接改正式ProductHeader。 |
+| 宣传视频01a17226 | 已创建专chat并承接研究，用户直接沟通创意；旧仅研究门禁已被用户新授权取代。 |
 | native QA | 最近600端点SHA匹配，无ready字段；本会话IAB不可用/设备锁定返回，native7未测，无草稿/tab/service动作。[范围](qa/native-share-editor-600-2026-10-25/README.md)，等原生窗口，不回退Chrome或重跑旧jsdom冒充进展 |
 | 真人/内容QA | 贺宁真实模型、三案盲测、长会话/mic/外放、多用户隔离和费用硬限额未闭环；fake/短WAV和静态HTTP身份不是证明 |
 
@@ -34,6 +37,6 @@
 
 [服务台账](development.md#服务登记与生命周期)是端口恢复入口。8787/8788及内部子监听受保护，真实版本看main-status，不从Git推断运行ready。5355/PID37202/PTY40865、WT result-reactions-combined-qa/lie、用户tab60仍有消费者；不停止/切源/清用户草稿或归档其WT。其他旧端口沿owner退出回执，本批无扫描/启停/浏览器。
 
-鉴权明确暂停；视频仅方法研究，实际制作须用户后续授权；投稿为GitHub网页辅助、作者确认，用户计划公开仓不等本批已改visibility，无OAuth/token/自动PR。旧版本retention未采用；不扩为账号工件、历史、WT或凭据清理。[当前待办](project-plan.md#当前待办与门禁)包含出戏/宿主WS/真实visibility等未验边界。用户确认移动可用不等全设备长会话/盲测通过。
+鉴权明确暂停；视频现已获用户明确制作授权，专chat01a17226-5e5a-7193-b5b7-e522519a3e0c与用户直接确认创意细节，旧仅研究门禁不再适用；投稿为GitHub网页辅助、作者确认，用户计划公开仓不等本批已改visibility，无OAuth/token/自动PR。旧版本retention未采用；不扩为账号工件、历史、WT或凭据清理。[当前待办](project-plan.md#当前待办与门禁)包含出戏/宿主WS/真实visibility等未验边界。用户确认移动可用不等全设备长会话/盲测通过。
 
 本归档批不重跑构建、测试、线上八响应或真实provider。root已独立核线上八SHA同源产物并正常TLS GET首页/JS；本归档者仅复核CD最终状态及必要证据关联、脚本/JSON/文档，不新增部署结论。

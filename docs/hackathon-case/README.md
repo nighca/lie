@@ -46,3 +46,7 @@ python3 docs/hackathon-case/verify.py
 专题 DOM 测试补齐 jsdom 缺少的 dialog showModal/close；初次未生成预设与未补 dialog 导致的测试环境错误已修复，未改生产组件。构建仍提示既有 Vite native loader 扩展名预警与 underline.svg 运行期解析提示，没有导致失败。首次离线安装使用系统 Node 24.17.0 出现 engines 警告；全部最终检查使用指定 Node 24.22.1。
 
 不声称这些自动检查证明真实 AI 会稳定按知识边界扮演、不会提前认罪或具有合适难度；未调用付费 provider，未做真人语音/盲测或原生浏览器视觉验收。未手工启动 dev server、未触碰 8787/8788/5355、用户页面或草稿。测试只使用自身隔离的内存 DOM、localStorage 与现有测试夹具，无保留服务。未推送、部署或自行合 main。
+
+## root候选审查
+
+source `b7b20e3eebc8014237c4a5b4891f4106ef6ed92f` → `2cbae8fa5387976fbc38e5f030704ef69750877f` 已确认clean并冻结；root实际阅读完整JSON、角色亲历/知识边界、八文件全diff及相关发现/调用契约，隔离cherry为c1da7a9→5c87845。候选产品范围对2268仅新增该JSON，八个来源文件逐字节一致；其它变更为发布证据/协调文档，没有新运行输入。root在候选独立复验两项专题测试通过，另核源251 Web/Worker产物字节及JS SHA，已有Web357/脚本33/types/build结果按相同输入复用；不是声称候选重建或真人验收。后续普通push检查现有CI/CD，报告并入下一正常批。
