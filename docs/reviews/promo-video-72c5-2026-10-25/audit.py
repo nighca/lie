@@ -1,4 +1,4 @@
-import pathlib,json,hashlib,subprocess,re,struct,base64,gzip,urllib.parse
+import pathlib,json,hashlib,subprocess,re,struct,base64,gzip,urllib.parse,tempfile
 wt=pathlib.Path('/Users/nighca/.codex/worktrees/promo-video-production/lie');sha='72c5b49a2a3f913bbb725abbaaa655d14bd84b59'
 def obj(p):return subprocess.check_output(['git','show',f'{sha}:{p}'],cwd=wt)
 meta=json.loads(obj('docs/promo-video/2026-10-25/complete-metadata.json'));root=pathlib.Path(meta['rawLibrary']);expected=[];segments=[];dimensions=set();count=0;clamps=[];nonpositive=[];duration=0
@@ -32,7 +32,10 @@ lines.extend([lines[-3],'option framerate 1000']);assert count==3070;assert segm
 original=(root/'recording.ffconcat').read_text();relocated=original.replace('/private/tmp/lie-promo-complete-20261025',str(root));assert relocated=='\n'.join(lines)+'\n'
 assert all(pathlib.Path(x[6:-1]).is_file() for x in lines if x.startswith("file '"))
 video=obj('media/promo-video/lie-create-preview-share.mp4');assert len(video)==3751699;assert hashlib.sha256(video).hexdigest()==meta['sha256'];assert (root/'lie-create-preview-share.mp4').read_bytes()==video
-probe=json.loads(pathlib.Path('/private/tmp/lie-video72-probe.json').read_text());assert probe['streams']==meta['probe']['streams'];assert {k:v for k,v in probe['format'].items() if k!='filename'}=={k:v for k,v in meta['probe']['format'].items() if k!='filename'}
+with tempfile.TemporaryDirectory(prefix='lie-video72-probe-') as directory:
+ frozen=pathlib.Path(directory)/'frozen.mp4';frozen.write_bytes(video)
+ probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(frozen)]))
+assert probe['streams']==meta['probe']['streams'];assert {k:v for k,v in probe['format'].items() if k!='filename'}=={k:v for k,v in meta['probe']['format'].items() if k!='filename'}
 url=obj('docs/promo-video/2026-10-25/complete-share-link.txt').decode().strip();assert len(url)==1349;assert url==(root/'share-link.txt').read_text().strip();payload=urllib.parse.urlsplit(url).fragment.removeprefix('game=');game=json.loads(gzip.decompress(base64.urlsafe_b64decode(payload+'='*(-len(payload)%4))));assert game==json.loads(obj('docs/promo-video/2026-10-25/complete-demo-case.json'));assert meta['identity']==json.loads((root/'recording-identity.json').read_text())
 for p in ['docs/promo-video/2026-10-25/complete-metadata.json','docs/promo-video/2026-10-25/complete-demo-case.json']:json.loads(obj(p))
 compile(obj('docs/promo-video/2026-10-25/rebuild-complete.py'),'rebuild-complete.py','exec')
