@@ -1,0 +1,21 @@
+{
+  "base": "2268f84f02576d4384f0d30f9f117a70164f135a",
+  "caseFile": "content/games/04-hackathon-old-project.json",
+  "caseSha256": "538e75a73e03f159ee84dcfa8d18ba016afd268ba515d06be47d592b9ae6e790",
+  "officialCases": [
+    "content/games/01-empty-medal-box.json",
+    "content/games/02-duck-finale.json",
+    "content/games/03-salt-sugar-mixup.json",
+    "content/games/04-hackathon-old-project.json"
+  ],
+  "unchangedExistingProductFiles": 1216,
+  "productChange": "one added canonical JSON only",
+  "newCaseIdTitleSummaryInProductionJavaScript": true,
+  "webFilesEqualWorkerAssets": 251,
+  "productionJavaScript": [
+    {
+      "path": "assets/index-CRRGYc8t.js",
+      "sha256": "641ceb42be4cc78f0330ae4ba269c435608162c2e003d9b0766ec6e0e0fa054f"
+    }
+  ]
+}

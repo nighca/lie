@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-25",
+  "node": "24.22.1",
+  "npm": "11.13.0",
+  "base": "2268f84f02576d4384f0d30f9f117a70164f135a",
+  "productCommit": "b7b20e3eebc8014237c4a5b4891f4106ef6ed92f",
+  "checks": [
+    {
+      "command": "node node_modules/vitest/vitest.mjs run --config docs/hackathon-case/vitest.config.mts",
+      "result": "PASS",
+      "files": 2,
+      "tests": 2,
+      "scope": "real eager glob, home/card/summary, normal and direct route, 3 character switches and accusation outcomes, hidden wrong reveal, real remix route and editor inputs; gzip share/remix/draft/preview contracts"
+    },
+    {
+      "command": "node --test scripts/main-preview.test.mjs scripts/character-presets.test.mjs",
+      "result": "PASS",
+      "tests": 33
+    },
+    {
+      "command": "../../node_modules/.bin/vitest run (cwd apps/web)",
+      "result": "PASS",
+      "files": 37,
+      "tests": 357
+    },
+    {
+      "command": "npm run build",
+      "result": "PASS",
+      "webModules": 101,
+      "gatewayModules": 4,
+      "fallbackModules": 2,
+      "presets": 8,
+      "presetAssets": 121,
+      "imagesEncoded": 82,
+      "imageCacheHits": 0
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "PASS",
+      "scope": "all workspaces with typecheck scripts"
+    },
+    {
+      "command": "python3 docs/hackathon-case/verify.py",
+      "result": "PASS",
+      "unchangedExistingProductFiles": 1216,
+      "webFilesEqualWorkerAssets": 251
+    }
+  ],
+  "notVerified": [
+    "real-provider character portrayal and confession resistance",
+    "voice/microphone/speaker behavior",
+    "human blind solve and difficulty",
+    "native browser visual behavior"
+  ],
+  "services": "No manually started dev server, no retained service, no protected service or user browser touched.",
+  "publication": "Not merged, pushed or deployed by this owner."
+}
