@@ -16,7 +16,7 @@
 
 ## 已完成与当前所有权
 
-正式八人结果激活/UI、CB01保存保护、单JSON官方案、截至f753890的Hackathon14链均已随a0e发布。结果[最终验收](result-game-ui/final-main-verification.md)、[CB01](reviews/content-boundary-2026-10-25/README.md)、[单JSON](builtin-case-json-implementation/README.md)、[Hackathon依据](hackathon/编写说明.md)保留真实来源和边界；不把旧“在制/仅讨论/未推”当当前状态。
+正式八人结果激活/UI、CB01保存保护、单JSON官方案、截至f753890的Hackathon14链均已随a0e发布。结果[最终验收](result-game-ui/final-main-verification.md)、[CB01](reviews/content-boundary-2026-10-25/README.md)、[单JSON](builtin-case-json-implementation/README.md)、[Hackathon依据](hackathon/authoring-notes.md)保留真实来源和边界；不把旧“在制/仅讨论/未推”当当前状态。
 
 | owner / 队列 | 下一步或保留职责 |
 | --- | --- |

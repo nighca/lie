@@ -31,6 +31,7 @@ The questioning budget is shared across all characters. It counts time while voi
 | **消失的纪念章** — a medal disappears before a photography club group photo | 3 | 8 minutes |
 | **压轴怎么是鸭叫** — a puppet show's piano finale unexpectedly becomes duck quacks | 4 | 10 minutes |
 | **盐和糖的小乌龙** — a community baking session produces unexpectedly salty cookies | 4 | 9 minutes |
+| **这真是今天做的吗** — compare Hackathon accounts to find who passed off old work as new | 3 | 8 minutes |
 
 Case sizes vary; the engine does not hardcode three suspects.
 
@@ -74,7 +75,7 @@ npm run build
 
 Automated checks cover content validation, accusation rules, character context, asynchronous ownership, voice transport, UI flows and Worker boundaries. Fake-provider success does not certify real microphone capture, recognition, playback or model behavior. Real-service evidence is recorded separately in the [validation log](docs/validation.md) and [case follow-up](docs/case-live-followup.md).
 
-[CI](https://github.com/nighca/lie/actions/workflows/ci.yml) performs checks, coverage, build and a deployment dry run. A separate [CD workflow](https://github.com/nighca/lie/actions/workflows/cd.yml) receives only a successful same-repository main CI run, verifies its exact SHA and artifact, then deploys that prebuilt output if the SHA is still main. CD does not rebuild or rerun tests. Manual runs start from CI; [handoff and permissions](docs/ci-cd.md) describe the boundary. The [latest verified release](docs/releases/2026-10-25-main-refresh.md) is historical deployment evidence, not proof these new workflows have run remotely.
+[CI](https://github.com/nighca/lie/actions/workflows/ci.yml) performs checks, coverage, build and a deployment dry run. A separate [CD workflow](https://github.com/nighca/lie/actions/workflows/cd.yml) receives only a successful same-repository main CI run, verifies its exact SHA and artifact, then deploys that prebuilt output if the SHA is still main. CD does not rebuild or rerun tests. Manual runs start from CI; [handoff and permissions](docs/ci-cd.md) describe the boundary. The [release verification record](docs/releases/2026-10-25-combined-demo/README.md) documents actual runs of the existing CI/CD workflows.
 
 Local and online development previews support real voice. Application authentication is temporarily disabled by the project owner's decision; provider credentials remain on the Worker. Production access, concurrency allocation and account-wide spending controls are still deferred. A browser's questioning timer is not a hard provider spending cap. Continuous-voice user testing and bounded real-model checks do not establish unrestricted multi-user readiness; see the [online voice preview boundaries](docs/online-voice-preview.md).
 

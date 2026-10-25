@@ -1,0 +1,22 @@
+{
+  "base": "e130912a86fa7431886cba03dc15cea510f4282a",
+  "files": [
+    "README.md",
+    "README.zh-CN.md",
+    "docs/hackathon/project-highlights.md",
+    "docs/hackathon/authoring-notes.md",
+    "docs/project-plan.md",
+    "docs/coordinator-handoff.md"
+  ],
+  "validLocalLinks": 185,
+  "fourCanonicalTitlesInBothReadmesAndHighlights": true,
+  "bilingualMermaidTopology": "identical after label normalization",
+  "modules": 6,
+  "currentFactsSurviveRename": true,
+  "runtimeInputs": "unchanged",
+  "notRun": [
+    "Mermaid native render",
+    "app suite/build",
+    "browser/provider/network/services"
+  ]
+}

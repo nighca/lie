@@ -127,3 +127,7 @@ root已读取本专题用户原话及source25e447d完整两文件diff，独立�
 2026-10-25，用户要求本目录两份文档使用英文文件名。对外正文更名为 `project-highlights.md`，内部说明更名为 `authoring-notes.md`，正文内容不变。此增量基于 main `6fc17ae7bdc536580edb75a557728350da457476`，保留主线的发布核验与平台定位记录。
 
 中央文档归主协调维护：集成时请同步将 `docs/project-plan.md` 中两个 `hackathon/项目亮点.md`、`hackathon/编写说明.md` 目标分别更新为 `hackathon/project-highlights.md`、`hackathon/authoring-notes.md`，并将 `docs/coordinator-handoff.md` 中 `hackathon/编写说明.md` 目标更新为 `hackathon/authoring-notes.md`。历史快照保留当时文件名，不追改历史记录。
+
+## 当前主协调组合核对
+
+最新事实source d01613c与英文更名source4bc5081已按此顺序进入当前候选，保留新事实区与全部历史记录；中央计划/交接已更新当前英文目标。用户明确催合入的README有序source28b0625→7daa237→9f207e4已纳入同批，保留e130新增视频入口和首案新名称，并据四份canonical JSON补齐两版README第四案。root实际全文审查及组合链接/语义核对；无应用或真实provider变更，正式推送和新CI/CD由root另核，不以旧成功替代。

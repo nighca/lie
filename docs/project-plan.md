@@ -15,7 +15,7 @@
 | 正式八人结果 | 8个v2包、16对结果动画/静态资源按真实被指认者投影，旧四态/81PNG/声音保留；2026-10-25用户在动画专项明确确认统一页8个角色新的两种状态均无问题；不重复合入制作，实际App/窄屏/reduce/fallback边界及strict121见[最终组合](result-game-ui/final-main-verification.md)。不是仅设计在制。 |
 | CB01草稿保存保护 | 非finite时长拒绝序列化、原raw保留、修正后保存，notice只清自身保存错误；[审查与修复](reviews/content-boundary-2026-10-25/README.md)。 |
 | 单JSON官方案 | 编号JSON派生目录/开局，summary贯通Editor/draft/share/remix/投稿；数值排序/max+1、旧id/URL和缺summary兼容，官方/投稿必填；移除catalog/public副本。[实施与验证](builtin-case-json-implementation/README.md)。不再是未决讨论。 |
-| Hackathon14链 | 截至f753890的14项修订已审、随a0e发布；[讨论稿](hackathon/项目亮点.md)及[内部编写依据](hackathon/编写说明.md)保留。移动可用由用户确认，不扩大为盲测/长会话全通过。新平台定位source25e447d已审并随9e1发布，不计入旧a0e发布。 |
+| Hackathon14链 | 截至f753890的14项修订已审、随a0e发布；[讨论稿](hackathon/project-highlights.md)及[内部编写依据](hackathon/authoring-notes.md)保留。移动可用由用户确认，不扩大为盲测/长会话全通过。新平台定位source25e447d已审并随9e1发布，不计入旧a0e发布。 |
 | 既有主线 | q90派生/CI-CD拆分、动画首帧/hash/cache、姓名高亮/标题、龙三叔配置、连接提醒/active切人续接、改编quiet入口、KeepAlive/草稿与复制隔离、调查高度等均已发布，不重派。详细原提交/验收见[整理前快照](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)。 |
 
 ## 当前待办与门禁
@@ -29,7 +29,7 @@
 | PC首页双滚动 / 已发布8aa7ec9 | source b9ef3cb→cf5c0fc完整审查；PC视口约束，仅案件列表内滚；移动端维持自然页面滚动。真实IAB尺寸/第四案可达见[验收](home-scroll/README.md)。两轮5544验收均已原PTY停止并核空监听，组合Chrome亦验证第四案可达。 |
 | 移动首页分区间距 / 已发布2f5496d | source397b032→19fba4c、显式Header依赖4567后58dedce已完整审查；≤620px案件区上边距32px，标题与列表关系保持；真实Chrome iframe320/391/620移动和621/1280桌面对照/滚动通过，391/1280与新Header组合几何相同。[证据](home-mobile-section-spacing/README.md)。两轮5544均停止核空、临时入口/tab清理。 |
 | 首案改名 / 已发布b1f4af8 | 用户明确改为《消失的纪念章》，仅canonical title及当前README改变；ID/URL保持。37项相关测试与root单字段身份检查通过，CI/CD及新TLS JS已核验。[记录](case-title-rename/README.md)。 |
-| 评审亮点文档事实同步 / 专项01a17114 | 用户时间紧，root已核旧稿仍三案/首案旧名/旧状态描述；已委派原owner从e130912同步四案、新名称、结果动画、单JSON、WebP构建缓存和成片入口，保留未测边界。仅文档，不扩产品/模型/资源；完成后root实际审查并随正常批push。 |
+| 评审亮点文档事实同步 / 专项01a17114 | 用户时间紧，root已核旧稿仍三案/首案旧名/旧状态描述；source d01613c已审查，同批纳入英文更名4bc5081及用户在专项明确催合入的README三提交28b0625→7daa237→9f207e4；root保留新案名/视频，补齐两版README第四案、同步中央英文链接。只做文档，待组合审查完成后普通push及新CI/CD。 |
 | P1 真人/真实模型 / root协调用户与QA | 贺宁口径改动已入库，真实模型回归未闭环；四案盲测、mic/外放/长会话、固定device多人隔离、费用硬限额仍缺证据。先确定实际矩阵/费用上限/停止清理边界，再执行；fake/短WAV/ready不替代。 |
 | 原生分享/Editor生命周期 / 已完成有限验收 | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
 | Hackathon新平台定位 / 已发布 | source25e447d已审查集成并随9e1发布；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。保持讨论稿，不衍生视频制作许可。 |

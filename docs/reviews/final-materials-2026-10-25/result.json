@@ -1,0 +1,89 @@
+{
+  "A": {
+    "head": "9f207e4fc004ad94783772d3c148eef1d5f127e7",
+    "status": "",
+    "scope": [
+      "README.md",
+      "README.zh-CN.md"
+    ],
+    "missingLocalLinks": [],
+    "mermaidTopologyBilingual": "identical"
+  },
+  "B": {
+    "head": "d01613c9568f5c45768a4ec69cdba3e93e227385",
+    "status": "",
+    "scope": [
+      "docs/hackathon/编写说明.md",
+      "docs/hackathon/项目亮点.md"
+    ],
+    "missingLocalLinks": [],
+    "cases": [
+      {
+        "file": "content/games/01-empty-medal-box.json",
+        "title": "消失的纪念章",
+        "characters": 3,
+        "fields": [
+          "id",
+          "title",
+          "summary",
+          "interrogationLimitSeconds",
+          "background",
+          "characters",
+          "ending"
+        ]
+      },
+      {
+        "file": "content/games/02-duck-finale.json",
+        "title": "压轴怎么是鸭叫",
+        "characters": 4,
+        "fields": [
+          "id",
+          "title",
+          "summary",
+          "interrogationLimitSeconds",
+          "background",
+          "characters",
+          "ending"
+        ]
+      },
+      {
+        "file": "content/games/03-salt-sugar-mixup.json",
+        "title": "盐和糖的小乌龙",
+        "characters": 4,
+        "fields": [
+          "id",
+          "title",
+          "summary",
+          "interrogationLimitSeconds",
+          "background",
+          "characters",
+          "ending"
+        ]
+      },
+      {
+        "file": "content/games/04-hackathon-old-project.json",
+        "title": "这真是今天做的吗",
+        "characters": 3,
+        "fields": [
+          "id",
+          "title",
+          "summary",
+          "interrogationLimitSeconds",
+          "background",
+          "characters",
+          "ending"
+        ]
+      }
+    ]
+  },
+  "C": {
+    "head": "4bc5081a356a284370e9826621737c8200c3021e",
+    "status": "",
+    "scope": [
+      "docs/hackathon/authoring-notes.md",
+      "docs/hackathon/project-highlights.md"
+    ],
+    "missingLocalLinks": [],
+    "highlightsRenameIdentity": "exact"
+  }
+}
