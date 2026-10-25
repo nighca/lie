@@ -1,0 +1,310 @@
+(node:39047) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS exact nonwaiting tracks/visibility and original nonwaiting node definitions; 33 real full-parent rigid head/contact matrices: column lengths invariant/orthogonal, head-to-hand relation constant, fixed lower body and torso has no head rotation
+{
+  "role": "silver-bun",
+  "period": 4,
+  "nonzeroAlphaPixels": 1242921,
+  "waitingBounds": [
+    320.7186214609117,
+    14.66682876231101,
+    965.5,
+    1253.5
+  ]
+}
+Native alpha >0 at pixel centers; not antialiased color/duplicate-contour judgement. Parent browser artistic review and user confirmation remain required.
+PASS local crop counterexample: opaque atlas outside left/right/top/bottom excluded from alpha and ordered-color sampling; crop origin, mask and uncropped bounds checked.
+{
+  "correctCropSilverSeamFailures": [
+    {
+      "phase": 20,
+      "seconds": 2.5,
+      "badProbeCount": 6,
+      "uniquePoints": [
+        {
+          "world": [
+            594.5,
+            626.5
+          ],
+          "contributorsUnderOldWholeImageBounds": [
+            {
+              "node": "waiting-wrist-cloth-backing",
+              "crop": [
+                613,
+                626,
+                6,
+                42
+              ],
+              "local": [
+                8.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                621,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            },
+            {
+              "node": "waiting-button",
+              "crop": [
+                592,
+                626,
+                25,
+                42
+              ],
+              "local": [
+                2.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                594,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            }
+          ]
+        },
+        {
+          "world": [
+            596.5,
+            626.5
+          ],
+          "contributorsUnderOldWholeImageBounds": [
+            {
+              "node": "waiting-wrist-cloth-backing",
+              "crop": [
+                613,
+                626,
+                6,
+                42
+              ],
+              "local": [
+                10.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                623,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            },
+            {
+              "node": "waiting-button",
+              "crop": [
+                592,
+                626,
+                25,
+                42
+              ],
+              "local": [
+                4.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                596,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            }
+          ]
+        },
+        {
+          "world": [
+            598.5,
+            626.5
+          ],
+          "contributorsUnderOldWholeImageBounds": [
+            {
+              "node": "waiting-wrist-cloth-backing",
+              "crop": [
+                613,
+                626,
+                6,
+                42
+              ],
+              "local": [
+                12.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                625,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            },
+            {
+              "node": "waiting-button",
+              "crop": [
+                592,
+                626,
+                25,
+                42
+              ],
+              "local": [
+                6.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                598,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 28,
+      "seconds": 3.5,
+      "badProbeCount": 6,
+      "uniquePoints": [
+        {
+          "world": [
+            594.5,
+            626.5
+          ],
+          "contributorsUnderOldWholeImageBounds": [
+            {
+              "node": "waiting-wrist-cloth-backing",
+              "crop": [
+                613,
+                626,
+                6,
+                42
+              ],
+              "local": [
+                8.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                621,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            },
+            {
+              "node": "waiting-button",
+              "crop": [
+                592,
+                626,
+                25,
+                42
+              ],
+              "local": [
+                2.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                594,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            }
+          ]
+        },
+        {
+          "world": [
+            596.5,
+            626.5
+          ],
+          "contributorsUnderOldWholeImageBounds": [
+            {
+              "node": "waiting-wrist-cloth-backing",
+              "crop": [
+                613,
+                626,
+                6,
+                42
+              ],
+              "local": [
+                10.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                623,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            },
+            {
+              "node": "waiting-button",
+              "crop": [
+                592,
+                626,
+                25,
+                42
+              ],
+              "local": [
+                4.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                596,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            }
+          ]
+        },
+        {
+          "world": [
+            598.5,
+            626.5
+          ],
+          "contributorsUnderOldWholeImageBounds": [
+            {
+              "node": "waiting-wrist-cloth-backing",
+              "crop": [
+                613,
+                626,
+                6,
+                42
+              ],
+              "local": [
+                12.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                625,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            },
+            {
+              "node": "waiting-button",
+              "crop": [
+                592,
+                626,
+                25,
+                42
+              ],
+              "local": [
+                6.5,
+                -0.10000000000002274
+              ],
+              "source": [
+                598,
+                625
+              ],
+              "sourceAlpha": 253,
+              "insideLocalDraw": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

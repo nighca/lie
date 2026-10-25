@@ -1,5 +1,7 @@
 # Character-specific rigid motion: accepted parent review
 
+Subsequent verifier correction: [crop audit](../2026-10-25-crop-audit-correction/README.md). Prior crop-sensitive alpha/ordered proofs are withdrawn; corrected gray/plum checks pass, silver seam predicate fails at two phases and is pending coordinator disposition. This does not revoke the user’s visual approval.
+
 User accepted this final revision on 2026-10-25: “我验收过了，没问题了”. The former pending gate below describes the pre-acceptance checkpoint; current formal integration evidence is in [game integration](../2026-10-25-rigid-motion-game-integration/README.md).
 
 Current replacement for the withdrawn stretching revision. User rejected strong vertical stretching and asked that waiting match each character's other states. Original eight-character main/game baseline remains unaffected. This candidate requires the user's personal visual confirmation before a separate PR, merge or game activation. No PR, main change, push or deployment of this batch has occurred.

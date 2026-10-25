@@ -94,6 +94,32 @@ def in_mask(x,y,poly):
   if yi!=yj:inside^=((yi>y)!=(yj>y)) & (x<(xj-xi)*(y-yi)/(yj-yi)+xi)
  return inside
 images={id:np.asarray(Image.open(root/a['src'])) for id,a in p['assets'].items()}
+def sprite_samples(sp,im,u,v):
+ included=in_mask(u,v,sp['mask']) if 'mask' in sp else np.ones(u.shape,dtype=bool)
+ x0,y0,width,height=sp.get('crop',[0,0,im.shape[1],im.shape[0]])
+ included &= (u>=0)&(u<width)&(v>=0)&(v<height)
+ ix=np.floor(u+x0).astype(int);iy=np.floor(v+y0).astype(int)
+ included &= (ix>=0)&(ix<im.shape[1])&(iy>=0)&(iy<im.shape[0])
+ return included,ix,iy
+
+# An opaque atlas must not cover points outside its local drawImage crop.
+probe_image=np.full((8,8,4),255,dtype=np.uint8)
+probe_sprite={'crop':[2,3,2,2]}
+probe_u=np.array([-.5,.5,1.5,2.,.5,.5]);probe_v=np.array([.5,.5,1.5,.5,-.5,2.])
+probe_included,probe_ix,probe_iy=sprite_samples(probe_sprite,probe_image,probe_u,probe_v)
+assert np.array_equal(probe_included,[False,True,True,False,False,False])
+assert np.array_equal(probe_ix[probe_included],[2,3]) and np.array_equal(probe_iy[probe_included],[3,4])
+legacy_included=(probe_ix>=0)&(probe_ix<8)&(probe_iy>=0)&(probe_iy<8)
+assert np.all(legacy_included),'counterexample must expose the former whole-atlas false coverage'
+probe_alpha=np.zeros(6,dtype=np.uint8);probe_alpha[probe_included]=probe_image[probe_iy[probe_included],probe_ix[probe_included],3]
+assert np.array_equal(probe_alpha,[0,255,255,0,0,0])
+probe_color=np.full((6,3),255.);probe_color[probe_included]=0
+assert np.array_equal(probe_color[:,0],[255,0,0,255,255,255])
+probe_mask={'crop':[2,3,2,2],'mask':[[0,0],[1,0],[1,2],[0,2]]}
+assert np.array_equal(sprite_samples(probe_mask,probe_image,probe_u,probe_v)[0],[False,True,False,False,False,False])
+assert np.array_equal(sprite_samples({},probe_image,np.array([-.1,0.,7.9,8.]),np.ones(4))[0],[False,True,True,False])
+print('PASS local crop counterexample: opaque atlas outside left/right/top/bottom excluded from alpha and ordered-color sampling; crop origin, mask and uncropped bounds checked.')
+
 reference=images['waiting-source']
 yy1,xx1=np.mgrid[waist-8:waist+9:2,420:900:2]
 yy2,xx2=np.mgrid[450:620:2,460:620:2]
@@ -108,16 +134,13 @@ def draw_alpha(w,x,y):
  for n in p['nodes']:
   if n['id'] not in points:continue
   sp=n['sprite'];inv=np.linalg.inv(w[n['id']]);u=inv[0,0]*x+inv[0,1]*y+inv[0,2];v=inv[1,0]*x+inv[1,1]*y+inv[1,2]
-  included=in_mask(u,v,sp['mask']) if 'mask' in sp else np.ones(x.shape,dtype=bool)
-  if 'crop' in sp:u=u+sp['crop'][0];v=v+sp['crop'][1]
-  im=images[sp['asset']];ix=np.floor(u).astype(int);iy=np.floor(v).astype(int)
-  included&=(ix>=0)&(ix<im.shape[1])&(iy>=0)&(iy<im.shape[0])
+  im=images[sp['asset']];included,ix,iy=sprite_samples(sp,im,u,v)
   opacity[included]=np.maximum(opacity[included],im[iy[included],ix[included],3])
  return opacity
 probes=0
-for pose in poses:
+for phase,pose in enumerate(poses):
  w=worlds(pose);opacity=draw_alpha(w,x,y)
- assert np.all(opacity>=128),('waist/contact seam',int(np.sum(opacity<128)),list(zip(x[opacity<128][:12],y[opacity<128][:12])))
+ assert np.all(opacity>=128),('waist/contact seam',root.name,phase,int(np.sum(opacity<128)),list(zip(x[opacity<128][:12],y[opacity<128][:12])))
  probes+=len(x)
 print(f'PASS {probes} native-alpha waist/contact interior probes over 33 real sampled full-parent phases; nearest source alpha, not Canvas color judgement.')
 
@@ -131,11 +154,11 @@ keep=skin_at(nx,ny)
 for dx,dy in [(4,0),(-4,0),(0,4),(0,-4)]:keep &= skin_at(nx+dx,ny+dy)
 nx=nx[keep]+.5;ny=ny[keep]+.5;assert len(nx)>0
 neck_probes=0
-for pose in poses:
+for phase,pose in enumerate(poses):
  w=worlds(pose);m=w['contact-root' if root.name=='salt-pepper-beard' else 'head-root']
  xw=m[0,0]*nx+m[0,1]*ny+m[0,2];yw=m[1,0]*nx+m[1,1]*ny+m[1,2]
  opacity=draw_alpha(w,xw,yw)
- assert np.all(opacity>=128),('neck interior',int(np.sum(opacity<128)),list(zip(nx[opacity<128][:8],ny[opacity<128][:8])))
+ assert np.all(opacity>=128),('neck interior',root.name,phase,int(np.sum(opacity<128)),list(zip(nx[opacity<128][:8],ny[opacity<128][:8])))
  neck_probes+=len(nx)
 print(f'PASS {neck_probes} neck skin interior probes with4px skin margin, following contact world matrices over33 phases; alpha only, collar/outline color requires native Canvas review.')
 
@@ -146,9 +169,10 @@ for x0,x1,y0,y1 in rects:
  yy,xx=np.mgrid[y0:y1:2,x0:x1:2];keep=reference[yy,xx,3]>=240
  for dx,dy in [(3,0),(-3,0),(0,3),(0,-3)]:keep &= reference[yy+dy,xx+dx,3]>=240
  cx=xx[keep]+.5;cy=yy[keep]+.5;assert len(cx)>0
- for pose in poses:
+ for phase,pose in enumerate(poses):
   w=worlds(pose);m=w['waiting-breath-root'];wx=m[0,0]*cx+m[0,1]*cy+m[0,2];wy=m[1,0]*cx+m[1,1]*cy+m[1,2]
-  assert np.all(draw_alpha(w,wx,wy)>=128),'upper sleeve cloth hole'
+  opacity=draw_alpha(w,wx,wy)
+  assert np.all(opacity>=128),('upper sleeve cloth hole',root.name,phase,list(zip(wx[opacity<128][:12],wy[opacity<128][:12])))
   cloth_probes+=len(cx)
 print(f'PASS {cloth_probes} dense original upper-sleeve cloth probes at33 full-parent phases, including the formerly missing silver triangles.')
 # Pick the original wrist-arc ink from a narrow canonical band, independently of runtime masks.
@@ -158,16 +182,14 @@ for x,y in anchors:
  candidates=[(int(max(reference[yy,x,:3])),yy) for yy in range(y-2,y+4) if reference[yy,x,3]>=220]
  value,yy=min(candidates);assert value<110,('native wrist-arc ink',x,y,value);ink.append((x+.5,yy+.5))
 ink=np.array(ink);ink_probes=0
-for pose in poses:
+for phase,pose in enumerate(poses):
  w=worlds(pose);m=w['waiting-breath-root'];wx=m[0,0]*ink[:,0]+m[0,1]*ink[:,1]+m[0,2];wy=m[1,0]*ink[:,0]+m[1,1]*ink[:,1]+m[1,2]
  color=np.tile(np.array([255.,254.,247.]),(len(ink),1))
  for n in sorted([n for n in p['nodes'] if n['id'] in points],key=lambda n:n['sprite']['order']):
   sp=n['sprite'];inv=np.linalg.inv(w[n['id']]);u=inv[0,0]*wx+inv[0,1]*wy+inv[0,2];v=inv[1,0]*wx+inv[1,1]*wy+inv[1,2]
-  included=in_mask(u,v,sp['mask']) if 'mask' in sp else np.ones(wx.shape,dtype=bool)
-  if 'crop' in sp:u=u+sp['crop'][0];v=v+sp['crop'][1]
-  im=images[sp['asset']];ix=np.floor(u).astype(int);iy=np.floor(v).astype(int);included &= (ix>=0)&(ix<im.shape[1])&(iy>=0)&(iy<im.shape[0])
+  im=images[sp['asset']];included,ix,iy=sprite_samples(sp,im,u,v)
   rgba=im[iy[included],ix[included]].astype(float);a=rgba[:,3:4]/255;color[included]=rgba[:,:3]*a+color[included]*(1-a)
- assert np.max(color)<110,('cuff arc ink lost in actual ordered layer stack',color)
+ assert np.max(color)<110,('cuff arc ink lost in actual ordered layer stack',root.name,phase,color)
  ink_probes+=len(ink)
 print(f'PASS {ink_probes} original wrist-arc dark-ink probes through33 sampled ordered RGBA layer stacks; nearest-native pixel probes, not antialiased Canvas acceptance.')
 
@@ -195,9 +217,9 @@ else:
  for pose in poses:
   w=worlds(pose);m=w['waiting-hand'];wx=m[0,0]*sx+m[0,1]*sy+m[0,2];wy=m[1,0]*sx+m[1,1]*sy+m[1,2]
   inv=np.linalg.inv(w['waiting-cuff-front']);cx=inv[0,0]*wx+inv[0,1]*wy+inv[0,2];cy=inv[1,0]*wx+inv[1,1]*wy+inv[1,2]
-  assert np.all(in_mask(cx,cy,cuff['sprite']['mask'])),'old cuff ink escapes foreground mask'
-  ix=np.floor(cx).astype(int);iy=np.floor(cy).astype(int)
-  assert np.all(reference[iy,ix,3]>=240),'old cuff ink escapes opaque cuff foreground'
+  sp=cuff['sprite'];im=images[sp['asset']];included,ix,iy=sprite_samples(sp,im,cx,cy)
+  assert np.all(included),'old cuff ink escapes foreground local bounds/mask'
+  assert np.all(im[iy,ix,3]>=240),'old cuff ink escapes opaque cuff foreground'
   occluded+=len(cx)
  print(f'PASS bounded cuff-ink ROI: {native_ink_count} native ink pixels, {native_ink_count-retained_count} excluded from moving hand, {len(sx)} retained deep-interior pixels have{occluded} opaque higher-z checks. {boundary_count} near-joint ink pixels lack6px mask margin and are outside this strict containment claim; native Canvas cuff review covers their artistic appearance.')
 
