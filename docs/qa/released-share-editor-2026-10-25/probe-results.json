@@ -1,0 +1,39 @@
+{
+  "source": "48316544ea9fd22afbf1eee8db6f81e326026821",
+  "node": "v24.22.1",
+  "environment": "jsdom + memory history; not a native browser",
+  "observations": [
+    {
+      "scenario": "S1",
+      "result": "fresh independent mount preserves text and exact draft bytes; no native reload tested"
+    },
+    {
+      "scenario": "S2",
+      "result": "bad checksum rejected, replacement valid hash opens exactly one session"
+    },
+    {
+      "scenario": "S3",
+      "result": "unsupported ID fails closed then valid same-page replacement succeeds"
+    },
+    {
+      "scenario": "S4",
+      "result": "injected missing capability recovers through actual retry button"
+    },
+    {
+      "scenario": "S5",
+      "result": "memory history valid→bad→back→forward selects correct screen; not native popstate/BFCache"
+    },
+    {
+      "scenario": "S6",
+      "result": "DRAFT_KEY-only quota fixture removed; next edit saves and generated link decodes latest content"
+    },
+    {
+      "scenario": "S7",
+      "result": "injected compression failure releases busy state and subsequent share succeeds"
+    },
+    {
+      "scenario": "S8",
+      "result": "expired ephemeral snapshot redirects editor; subsequent preview uses fresh content"
+    }
+  ]
+}
