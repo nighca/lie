@@ -1,0 +1,28 @@
+{
+  "sha": "b1f4af888d32508d6dd1a2a7a7304d2646552b67",
+  "rows": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalURL": "https://lie.agency/",
+      "bytes": 546,
+      "sha256": "b0f782cffcf2d42dd2e12de638f2a1118fe4a457bf6f9819a5db17cad76ea872",
+      "normalTLS": true,
+      "immutable": false
+    },
+    {
+      "path": "/assets/index-B52hJVOl.js",
+      "status": 200,
+      "finalURL": "https://lie.agency/assets/index-B52hJVOl.js",
+      "bytes": 237608,
+      "sha256": "e52a0ebd1eae7f54ccd3f78fa7cf078fb0dd20e3ac00cb282bb84486b1d98a6a",
+      "normalTLS": true,
+      "immutable": true
+    }
+  ],
+  "canonicalTitle": "消失的纪念章",
+  "canonicalId": "empty-medal-box",
+  "runtimeCanonicalPairPresent": true,
+  "oldCanonicalTitleAbsent": true,
+  "scope": "Static normal-TLS homepage and JS GET only; no browser/game/provider/API/WS"
+}

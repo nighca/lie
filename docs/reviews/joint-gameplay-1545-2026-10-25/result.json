@@ -1,0 +1,950 @@
+{
+  "sha": "1545c1f0aeabe7e3e2af310eb53b4e1a674af790",
+  "base": "736fae1ac67b7a27f2fc64dbbb2400734e53b293",
+  "files": {
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/README.md": {
+      "sha256": "35cb9039ff5b587a6105987d4bd75887731eba8617424162de1c6c9bd7ec9c2e"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/api-check.json": {
+      "sha256": "037235cc4c5783ef19f42392317b2ffbb7dbee422a2172e37a4c9048318691ba",
+      "json": "pass"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/audio-harness.js": {
+      "sha256": "24ece0f80e29c8e626f448811c102d97c5f64582c35bf0fa0a64719c792fe206",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/joint-capture.mjs": {
+      "sha256": "74c114e21ad9a7acbac10a897adbecf784fe7664c20e0bfe74a1356c2fb95605",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/network.json": {
+      "sha256": "5f3d952543e87122db53e6d03956daeabaafab19429520e429bc21974f267dc1",
+      "json": "pass",
+      "summary": {
+        "connections": 0,
+        "events": []
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/outcome-sanitized.json": {
+      "sha256": "0a2ef57b0482484e9b2063142463de2159a58be170944ee799776c74d294a0cd",
+      "json": "pass",
+      "summary": {
+        "phase": "completed",
+        "complete": true,
+        "segments": [
+          "01-home-entry",
+          "02-human-play",
+          "03-human-play",
+          "04-result-home"
+        ],
+        "roles": [
+          "沈禾",
+          "陈拓",
+          "顾遥"
+        ],
+        "transcripts": {
+          "沈禾": {
+            "humanMessages": 1,
+            "characterMessages": 1,
+            "interruptedMessages": 0
+          },
+          "陈拓": {
+            "humanMessages": 1,
+            "characterMessages": 1,
+            "interruptedMessages": 0
+          },
+          "顾遥": {
+            "humanMessages": 3,
+            "characterMessages": 1,
+            "interruptedMessages": 0
+          }
+        },
+        "errors": [],
+        "result": "solved"
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/outer-cleanup.json": {
+      "sha256": "d22fb642098546da81626c29e4e326e7251d04d9ca8f424650f3b028fa5bae90",
+      "json": "pass",
+      "summary": [
+        {
+          "stage": "stop",
+          "ok": true
+        },
+        {
+          "stage": "export",
+          "ok": true
+        },
+        {
+          "stage": "screenshot",
+          "ok": true
+        },
+        {
+          "stage": "stop-export-screenshot",
+          "ok": true
+        },
+        {
+          "stage": "network-save",
+          "ok": true
+        },
+        {
+          "stage": "network-disable",
+          "ok": true
+        },
+        {
+          "stage": "api-check",
+          "ok": true
+        },
+        {
+          "stage": "remove",
+          "ok": true
+        },
+        {
+          "stage": "metrics",
+          "ok": true
+        },
+        {
+          "stage": "viewport",
+          "ok": true
+        }
+      ]
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/preview-render-command.json": {
+      "sha256": "60957055c9c678d1ba40ec31ae78d92033bcc49748905f5d11f8d3345aef8c49",
+      "json": "pass"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/preview-verification.json": {
+      "sha256": "788d6dcc892a436046c2ff620cae39b308a8408b7e637b17ba635be820462909",
+      "json": "pass"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/rebuild.py": {
+      "sha256": "3b794bd7651d3b58e1031acd71f6ced2d9de8e1cf15d71a27b5e308335bfbb55",
+      "syntax": "pass"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/session.json": {
+      "sha256": "8223e19d25caa559c94e81762303e42a27d358275c5d826d80d6d6e0b195fbac",
+      "json": "pass",
+      "summary": {
+        "events": [
+          {
+            "at": 1792927023941,
+            "duration": 0,
+            "sampleRate": 48000,
+            "type": "prepared"
+          },
+          {
+            "at": 1792927024188,
+            "contextTime": 0.19733333333333333,
+            "type": "record-start"
+          },
+          {
+            "at": 1792927034939,
+            "type": "microphone-attached"
+          },
+          {
+            "at": 1792927035036,
+            "node": "GainNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927038778,
+            "role": "沈禾",
+            "type": "human-role"
+          },
+          {
+            "at": 1792927049975,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927069714,
+            "role": "陈拓",
+            "type": "human-role"
+          },
+          {
+            "at": 1792927069957,
+            "type": "microphone-attached"
+          },
+          {
+            "at": 1792927070048,
+            "node": "GainNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927081970,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927082013,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927095942,
+            "role": "顾遥",
+            "type": "human-role"
+          },
+          {
+            "at": 1792927096257,
+            "type": "microphone-attached"
+          },
+          {
+            "at": 1792927096351,
+            "node": "GainNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927112689,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927118525,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927118729,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927120439,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792927149167,
+            "contextTime": 124.77866666666668,
+            "type": "record-stop"
+          },
+          {
+            "at": 1792927149168,
+            "contexts": [
+              "closed",
+              "closed",
+              "closed",
+              "closed",
+              "closed",
+              "closed",
+              "closed"
+            ],
+            "errors": 0,
+            "reason": "joint-capture-ended",
+            "sockets": [],
+            "tracks": [
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended"
+            ],
+            "type": "cleanup"
+          }
+        ],
+        "status": {
+          "closed": true,
+          "contexts": [
+            "closed",
+            "closed",
+            "closed",
+            "closed",
+            "closed",
+            "closed",
+            "closed"
+          ],
+          "socketCount": 0,
+          "sockets": [],
+          "stopped": true,
+          "tracks": [
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended"
+          ]
+        }
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/canceled-physical-click/audio-harness.js": {
+      "sha256": "42a9154fa09e17b11fb9aabed254b9e7022e6503ce36b2ab464598110e177649",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/canceled-physical-click/network.json": {
+      "sha256": "5f3d952543e87122db53e6d03956daeabaafab19429520e429bc21974f267dc1",
+      "json": "pass",
+      "summary": {
+        "connections": 0,
+        "events": []
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/canceled-physical-click/outcome.json": {
+      "sha256": "6de51a6393ebed419bc6e1193203a2f7730c036ad00a0bcd8ece3dea4f3bf66b",
+      "json": "pass",
+      "summary": {
+        "phase": "canceled-by-user",
+        "questionSent": false,
+        "complete": false,
+        "initialArticles": 2,
+        "errors": []
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/canceled-physical-click/outer-cleanup.json": {
+      "sha256": "c874c73f031a5478a94332088e79216e8a843b63a6e3c78cc8e2720b3843dfe1",
+      "json": "pass",
+      "summary": [
+        {
+          "stage": "stop",
+          "ok": true
+        },
+        {
+          "stage": "export",
+          "ok": true
+        },
+        {
+          "stage": "network-disable",
+          "ok": true
+        },
+        {
+          "stage": "remove",
+          "ok": true
+        },
+        {
+          "stage": "metrics",
+          "ok": true
+        },
+        {
+          "stage": "viewport",
+          "ok": true
+        }
+      ]
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/canceled-physical-click/physical-click.mjs": {
+      "sha256": "eeab48a2f097b7835d568056eb36c2f580e56dd94f0324294918d5ac721cc77d",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/canceled-physical-click/session.json": {
+      "sha256": "6b78545acbc9eca4b8af7f8bdc325d10440a05144508dcbed8d3c909327af361",
+      "json": "pass",
+      "summary": {
+        "events": [
+          {
+            "at": 1792925241116,
+            "duration": 5.5391875,
+            "sampleRate": 48000,
+            "type": "prepared"
+          },
+          {
+            "at": 1792925301178,
+            "contexts": [
+              "closed"
+            ],
+            "errors": 0,
+            "reason": "no-physical-click",
+            "sockets": [],
+            "tracks": [
+              "ended"
+            ],
+            "type": "cleanup"
+          }
+        ],
+        "status": {
+          "closed": true,
+          "contexts": [
+            "closed"
+          ],
+          "socketCount": 0,
+          "sockets": [],
+          "stopped": true,
+          "tracks": [
+            "ended"
+          ]
+        }
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take01/api-check.json": {
+      "sha256": "037235cc4c5783ef19f42392317b2ffbb7dbee422a2172e37a4c9048318691ba",
+      "json": "pass"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take01/audio-harness.js": {
+      "sha256": "24ece0f80e29c8e626f448811c102d97c5f64582c35bf0fa0a64719c792fe206",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take01/joint-capture.mjs": {
+      "sha256": "0244a3b503882edb3d90e2a38da2b3077246480f95debc1122d09537fe991676",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take01/network.json": {
+      "sha256": "81d75c906004948e145f2883156b6fc1ae672dd37bf9eb4fbfb07ac72a5985b0",
+      "json": "pass",
+      "summary": {
+        "connections": 1,
+        "events": [
+          {
+            "connection": 1,
+            "elapsedMs": null,
+            "kind": "created"
+          },
+          {
+            "connection": 1,
+            "elapsedMs": 0,
+            "kind": "frame-error",
+            "category": "closed-before-open"
+          },
+          {
+            "connection": 1,
+            "elapsedMs": 17,
+            "kind": "closed"
+          }
+        ]
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take01/outcome-sanitized.json": {
+      "sha256": "503d9ac16f23d95bf792dae09317c8c3d49a5bd04da1af39164937faa5dda533",
+      "json": "pass",
+      "summary": {
+        "phase": "failed",
+        "complete": false,
+        "segments": [
+          "01-home-entry"
+        ],
+        "roles": [
+          "陈拓",
+          "顾遥"
+        ],
+        "transcripts": {
+          "陈拓": {
+            "humanMessages": 1,
+            "characterMessages": 1
+          },
+          "顾遥": {
+            "humanMessages": 0,
+            "characterMessages": 0
+          }
+        },
+        "errors": [
+          {
+            "stage": "capture",
+            "category": "voice-error"
+          }
+        ]
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take01/outer-cleanup.json": {
+      "sha256": "d22fb642098546da81626c29e4e326e7251d04d9ca8f424650f3b028fa5bae90",
+      "json": "pass",
+      "summary": [
+        {
+          "stage": "stop",
+          "ok": true
+        },
+        {
+          "stage": "export",
+          "ok": true
+        },
+        {
+          "stage": "screenshot",
+          "ok": true
+        },
+        {
+          "stage": "stop-export-screenshot",
+          "ok": true
+        },
+        {
+          "stage": "network-save",
+          "ok": true
+        },
+        {
+          "stage": "network-disable",
+          "ok": true
+        },
+        {
+          "stage": "api-check",
+          "ok": true
+        },
+        {
+          "stage": "remove",
+          "ok": true
+        },
+        {
+          "stage": "metrics",
+          "ok": true
+        },
+        {
+          "stage": "viewport",
+          "ok": true
+        }
+      ]
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take01/session.json": {
+      "sha256": "96ddb4fba07d5aa44e5b3e0feb6bbbb413ce2bf607f1ef54497b506dd54ef17a",
+      "json": "pass",
+      "summary": {
+        "events": [
+          {
+            "at": 1792925840138,
+            "duration": 0,
+            "sampleRate": 48000,
+            "type": "prepared"
+          },
+          {
+            "at": 1792925840393,
+            "contextTime": 0.19733333333333333,
+            "type": "record-start"
+          },
+          {
+            "at": 1792925852812,
+            "type": "microphone-attached"
+          },
+          {
+            "at": 1792925852929,
+            "node": "GainNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925867110,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925883654,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925890649,
+            "type": "microphone-attached"
+          },
+          {
+            "at": 1792925890744,
+            "node": "GainNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925902857,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925904379,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925911390,
+            "role": "陈拓",
+            "type": "human-role"
+          },
+          {
+            "at": 1792925914684,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925917509,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925917698,
+            "node": "AnalyserNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925922400,
+            "role": "顾遥",
+            "type": "human-role"
+          },
+          {
+            "at": 1792925924859,
+            "type": "microphone-attached"
+          },
+          {
+            "at": 1792925924951,
+            "node": "GainNode",
+            "type": "output-tap"
+          },
+          {
+            "at": 1792925934853,
+            "contextTime": 94.592,
+            "type": "record-stop"
+          },
+          {
+            "at": 1792925934853,
+            "contexts": [
+              "closed",
+              "closed",
+              "closed",
+              "closed",
+              "closed",
+              "closed",
+              "closed"
+            ],
+            "errors": 0,
+            "reason": "joint-capture-failed",
+            "sockets": [],
+            "tracks": [
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended",
+              "ended"
+            ],
+            "type": "cleanup"
+          }
+        ],
+        "status": {
+          "closed": true,
+          "contexts": [
+            "closed",
+            "closed",
+            "closed",
+            "closed",
+            "closed",
+            "closed",
+            "closed"
+          ],
+          "socketCount": 0,
+          "sockets": [],
+          "stopped": true,
+          "tracks": [
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended",
+            "ended"
+          ]
+        }
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take02/api-check.json": {
+      "sha256": "037235cc4c5783ef19f42392317b2ffbb7dbee422a2172e37a4c9048318691ba",
+      "json": "pass"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take02/audio-harness.js": {
+      "sha256": "24ece0f80e29c8e626f448811c102d97c5f64582c35bf0fa0a64719c792fe206",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take02/joint-capture.mjs": {
+      "sha256": "0244a3b503882edb3d90e2a38da2b3077246480f95debc1122d09537fe991676",
+      "syntax": 0
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take02/network.json": {
+      "sha256": "475065ad5288d65fdfa8ce0be7de7f177a969210edf44d0ad187788302088b86",
+      "json": "pass",
+      "summary": {
+        "connections": 2,
+        "events": [
+          {
+            "connection": 1,
+            "elapsedMs": null,
+            "kind": "created"
+          },
+          {
+            "connection": 1,
+            "elapsedMs": 0,
+            "kind": "frame-error",
+            "category": "empty"
+          },
+          {
+            "connection": 1,
+            "elapsedMs": 6,
+            "kind": "closed"
+          },
+          {
+            "connection": 2,
+            "elapsedMs": null,
+            "kind": "created"
+          },
+          {
+            "connection": 2,
+            "elapsedMs": 65914,
+            "kind": "handshake-sent",
+            "sent": true
+          },
+          {
+            "connection": 2,
+            "elapsedMs": 67286,
+            "kind": "handshake-response",
+            "status": 101
+          }
+        ]
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take02/outcome-sanitized.json": {
+      "sha256": "63259cf42521676c7d4f124265e9f68817743db7fb0532e135097b2a033220b1",
+      "json": "pass",
+      "summary": {
+        "phase": "failed",
+        "complete": false,
+        "segments": [
+          "01-home-entry"
+        ],
+        "roles": [],
+        "transcripts": {},
+        "errors": [
+          {
+            "stage": "capture",
+            "category": "voice-error"
+          }
+        ]
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take02/outer-cleanup.json": {
+      "sha256": "d22fb642098546da81626c29e4e326e7251d04d9ca8f424650f3b028fa5bae90",
+      "json": "pass",
+      "summary": [
+        {
+          "stage": "stop",
+          "ok": true
+        },
+        {
+          "stage": "export",
+          "ok": true
+        },
+        {
+          "stage": "screenshot",
+          "ok": true
+        },
+        {
+          "stage": "stop-export-screenshot",
+          "ok": true
+        },
+        {
+          "stage": "network-save",
+          "ok": true
+        },
+        {
+          "stage": "network-disable",
+          "ok": true
+        },
+        {
+          "stage": "api-check",
+          "ok": true
+        },
+        {
+          "stage": "remove",
+          "ok": true
+        },
+        {
+          "stage": "metrics",
+          "ok": true
+        },
+        {
+          "stage": "viewport",
+          "ok": true
+        }
+      ]
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/superseded/joint-gameplay-take02/session.json": {
+      "sha256": "8fbcac59ac72d6f5f98dcb233b190b1e514858d0a99082b6a9e890248ca770b8",
+      "json": "pass",
+      "summary": {
+        "events": [
+          {
+            "at": 1792926806952,
+            "duration": 0,
+            "sampleRate": 48000,
+            "type": "prepared"
+          },
+          {
+            "at": 1792926807221,
+            "contextTime": 0.224,
+            "type": "record-start"
+          },
+          {
+            "at": 1792926822084,
+            "type": "microphone-attached"
+          },
+          {
+            "at": 1792926823203,
+            "contextTime": 16.149333333333335,
+            "type": "record-stop"
+          },
+          {
+            "at": 1792926823203,
+            "contexts": [
+              "closed",
+              "closed",
+              "closed"
+            ],
+            "errors": 0,
+            "reason": "joint-capture-failed",
+            "sockets": [],
+            "tracks": [
+              "ended"
+            ],
+            "type": "cleanup"
+          }
+        ],
+        "status": {
+          "closed": true,
+          "contexts": [
+            "closed",
+            "closed",
+            "closed"
+          ],
+          "socketCount": 0,
+          "sockets": [],
+          "stopped": true,
+          "tracks": [
+            "ended"
+          ]
+        }
+      }
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/verification.json": {
+      "sha256": "d9f7c738c6437d8ef7987fad9d2c0c5b1ec25bce3b7b2fc3fac35b4df2601393",
+      "json": "pass"
+    },
+    "docs/promo-video/2026-10-25/joint-gameplay-recording/录制台词清单.txt": {
+      "sha256": "13488c9db70aafb9abf00446c9a955923782f9947bb5d5adeac83bd42ef18887"
+    }
+  },
+  "media": {
+    "lie-play-game-complete.mp4": {
+      "sha256": "7177f004da5c5a0e8f26f78df6c21e37a225b1b4efac005e028a96bd88f84688",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 800,
+            "pix_fmt": "yuv420p",
+            "color_range": "tv",
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "124.488000",
+          "size": "10726870"
+        }
+      },
+      "fullDecode": "pass"
+    },
+    "lie-gameplay-complete-preview.mp4": {
+      "sha256": "4e9d9badf30c66bfe89e199d9cacfdcdb67bcf4d404b4c88f12137601cb29afc",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 800,
+            "pix_fmt": "yuv420p",
+            "color_range": "tv",
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "114.015000",
+          "size": "9763645"
+        }
+      },
+      "fullDecode": "pass"
+    },
+    "input.wav": {
+      "samples": 5979904,
+      "sampleRate": 48000,
+      "seconds": 124.58133333333333,
+      "peak": 26214
+    },
+    "output.wav": {
+      "samples": 5979904,
+      "sampleRate": 48000,
+      "seconds": 124.58133333333333,
+      "peak": 21348
+    },
+    "mix.wav": {
+      "samples": 5979904,
+      "sampleRate": 48000,
+      "seconds": 124.58133333333333,
+      "peak": 26214
+    }
+  },
+  "verificationKeys": [
+    "audioTrimSeconds",
+    "video",
+    "audio",
+    "mixMaxDifferencePcm16",
+    "mp4",
+    "sha256",
+    "decode"
+  ],
+  "mixMaxDifferencePcm16": 1,
+  "removedGapPcmPeak": 0,
+  "frames": {
+    "count": 7881,
+    "sizes": "1280x800 scale1",
+    "offsetSeconds": 0.09360003471374512,
+    "gaps": [
+      {
+        "at": 1792927027.818812,
+        "seconds": 1.66605806350708
+      },
+      {
+        "at": 1792927033.006137,
+        "seconds": 5.730329990386963
+      },
+      {
+        "at": 1792927061.0887,
+        "seconds": 5.188416957855225
+      },
+      {
+        "at": 1792927081.46154,
+        "seconds": 7.768240928649902
+      },
+      {
+        "at": 1792927131.987462,
+        "seconds": 11.613999843597412
+      },
+      {
+        "at": 1792927145.757578,
+        "seconds": 0.5829041004180908
+      },
+      {
+        "at": 1792927147.442006,
+        "seconds": 1.6059939861297607
+      }
+    ]
+  },
+  "status": "",
+  "markdownLocalLinks": 10,
+  "whitespace": "pass",
+  "concatRefs": 7882,
+  "concatRelocatable": "regenerate by rebuild.py with explicit root; existing concat uses absolute paths",
+  "rawSensitivePayloadKeys": [],
+  "trackedBinaryFiles": 0,
+  "finalProducerHead": "1545c1f0aeabe7e3e2af310eb53b4e1a674af790",
+  "finalProducerStatus": ""
+}

@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-2026-10-25，最近完成CI/CD核验的发布为 `1232ef884a6841065a73db5a1080d81eeb2fe03e`。CI40184964392/attempt1与CD40185106004均success，Worker `11b07cad-85eb-44d4-a255-291cf8c73599`；[发布证据](releases/2026-10-25-native-video-archive/README.md)。运行输入与2f完全相同，复用其正式TLS身份。后续正常归档会推进HEAD，操作前读实际Git。
+2026-10-25，最近完成CI/CD核验的发布为 `b1f4af888d32508d6dd1a2a7a7304d2646552b67`。CI40188556882与CD40188686645均attempt1/success，Worker `e223b3f0-7611-4aca-bd12-5c4c05dfd2a2`；[发布证据](releases/2026-10-25-first-case-rename/README.md)。新正式TLS首页/JS已确认《消失的纪念章》与原ID。后续归档会推进HEAD，操作前读实际Git。
 
 用户暂停四小时换chat，root `01a17012-fa00-7170-ac0a-21c1900d71cd`继续active/唯一integrator；lie ACTIVE、lie-2 PAUSED，实际toml更新时间见[handoff](coordinator-handoff.md)。每次实际review/验证合main后由root按fetch/分歧审验/普通push流程默认推送并监测既有CI/CD；报告并入下一正常批次，避免报告循环。此授权不扩成手工部署、账号资源或真实provider操作。
 
@@ -28,14 +28,14 @@
 | 第四案Hackathon作弊 / 已发布5a9a31c | 《这真是今天做的吗》3人/480秒，source b7b20e3→2cbae8f、候选c1da7a9→5c87845。仅新增04 JSON运行变更，原有1216产品文件未变；[内容与验证](hackathon-case/README.md)另附。Web357/脚本33/全types/正式build通过，root候选2项真glob/首页开局指认改编分享复验通过；真实AI/盲测未做。CI/CD与线上新JS身份均确认。 |
 | PC首页双滚动 / 已发布8aa7ec9 | source b9ef3cb→cf5c0fc完整审查；PC视口约束，仅案件列表内滚；移动端维持自然页面滚动。真实IAB尺寸/第四案可达见[验收](home-scroll/README.md)。两轮5544验收均已原PTY停止并核空监听，组合Chrome亦验证第四案可达。 |
 | 移动首页分区间距 / 已发布2f5496d | source397b032→19fba4c、显式Header依赖4567后58dedce已完整审查；≤620px案件区上边距32px，标题与列表关系保持；真实Chrome iframe320/391/620移动和621/1280桌面对照/滚动通过，391/1280与新Header组合几何相同。[证据](home-mobile-section-spacing/README.md)。两轮5544均停止核空、临时入口/tab清理。 |
-| 首案改名 / 已审待发布 | 用户明确改为《消失的纪念章》。source b246c902→候选1c3875c，canonical仅title改变，ID/URL/文件名保持；同步当前中英文README，历史取证与兼容输入保留。37项相关测试通过，root全diff及JSON单字段身份复核通过；root已收到窗口释放；随本批串行合main/push，CI/CD另行核验。[记录](case-title-rename/README.md)。 |
+| 首案改名 / 已发布b1f4af8 | 用户明确改为《消失的纪念章》，仅canonical title及当前README改变；ID/URL保持。37项相关测试与root单字段身份检查通过，CI/CD及新TLS JS已核验。[记录](case-title-rename/README.md)。 |
 | P1 真人/真实模型 / root协调用户与QA | 贺宁口径改动已入库，真实模型回归未闭环；三案盲测、mic/外放/长会话、固定device多人隔离、费用硬限额仍缺证据。先确定实际矩阵/费用上限/停止清理边界，再执行；fake/短WAV/ready不替代。 |
 | 原生分享/Editor生命周期 / 已完成有限验收 | source79d1798七项独立Chrome已完成，root全文/JSON/三图审查通过：[验收](qa/native-share-editor-d4c-2026-10-25/README.md)。中文emoji/换行分享、reload、valid/damaged历史、试玩Back缓存/无快照Forward回Editor、原生清除确认与焦点、窄屏长内容可达；仅localhost:5544自建合成草稿，末尾恢复null，127旧草稿未碰，5544已停核空。不是Safari/真机/跨设备/剪贴板授权/真实语音通过；16k预算仍暂定。 |
 | Hackathon新平台定位 / 已发布 | source25e447d已审查集成并随9e1发布；“游戏＋游戏平台”统领既有UGC/资源/引擎能力，未增加玩法范围。保持讨论稿，不衍生视频制作许可。 |
 | 出戏/启动/宿主WS / 工程与内容待排 | [出戏调查](role-immersion-investigation.md)未闭环，[WS非101诊断](dev-websocket-rejection.md)未修vendor；不默认付费叠prompt/换provider。真实visibility/广泛race/硬件touch、silver/mint同accent区分等旧边界保留，不按合成事件声称通过。 |
 | 投稿 / Editor＋root | GitHub网页辅助、作者确认；用户计划公开源码不等实际visibility已操作，本批不查/改可见性。无OAuth/PAT/token输入或自动PR；[投稿范围](editor-official-submission-proposal.md)。 |
 | 暂停鉴权 | 用户明确暂停，[设计与候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。 |
-| 宣传视频制作 / 专项01a17226-5e5a-7193-b5b7-e522519a3e0c | 73.4秒创作分享片已归档；dcc→3ee→904→434→f623整批36路径root实际审查及[独立完整审验](reviews/video-f623-batch-2026-10-25/README.md)通过。[37.53秒有声试片](promo-video/2026-10-25/user-tab-recording-take01/README.md)含本次新STT/TTS/非零双轨，但30秒上限仍speaking主动结束，非完整回答。用户直接验收效果并批准完整流程；等2f发布结束后唯一≤5分钟正式窗口又在连接阶段失败，未发问题且未观察到STT/TTS，已停止清理并释放，用户tab保留，整片未完成，source721baec已root及独立只读审查并归档，客户端未观察到结果不代表供应商未建资源或零计费。[只读历史日志诊断](reviews/intermittent-voice-2026-10-25/README.md)完成，根因未知；失败窗仅/status200，精确voice/上游错误聚合缺项不证明未到Worker。[离线被动分类器](promo-video/2026-10-25/passive-voice-diagnostics/README.md)sourcebb1834f已全文审查，原7项+独立4项通过；尚未证明真实故障原因。用户随后明确再试一次，第二轮仍连接失败并已释放；source736fae1已完整审查并归档[实际失败证据](promo-video/2026-10-25/full-gameplay-take02/README.md)和[独立审验](reviews/full-gameplay-take02-2026-10-25/README.md)。用户先同意亲手点击对照，首次等待未点击到期、0provider，不当语音失败；随后明确取消该对照，改为协作完整录制。root已读直接用户指令01a172b0-3cca-7ce2-aafd-9bf2c3265304，批准≤8分钟窗口：专项从首页操作至调查，之后用户亲手开启/真实mic说话/切人/指认/回首页，专项持续录音录像；不自动重试/reload，逐项清理，随后用户明确网络恢复并要求从头再录；take03已由专项回执完整三人问答→正确指认→首页，complete=true/errors=[]，清理完成并明确释放push窗口。该回执尚待root审查脱敏交付，不先宣称媒体/全量真人QA验收；真实人声及MP4仅本地保管，无公开上传。后续入口须有限错误分类及分项finally，不改生产/provider配置。无公开上传许可。 |
+| 宣传视频制作 / 专项01a17226-5e5a-7193-b5b7-e522519a3e0c | 73.4秒创作分享片及37.53秒合成双向试片已归档。用户主导的take03完成三角色真实问答→正确指认→首页，source1545c1f已root全文审查及[独立复核](reviews/joint-gameplay-1545-2026-10-25/README.md)：PCM/编码/哈希/7881帧索引通过，7ctxclosed/9tracksended、四API引用恢复；[完整记录与失败备选](promo-video/2026-10-25/joint-gameplay-recording/README.md)保留。录屏存在段间hold，具体指认点击瞬间未完整动态捕获，不能声称连续或精确口型；外围finally/observer源码未全保存，仅核终态回执。用户在专项新明确要求试玩前＋创作后、有声合成成片入库并README链接，owner独立b1基线制作中；该特定成片许可覆盖其中实际人声，原WAV/失败素材仍仅本地。发布窗口已释放，无新provider操作或公开平台上传许可。 |
 | 不采用旧资源保留 | 用户不需要旧版本兼容，14d/256MiB提案不接CI；[历史方案](archive/2026-10-25/release-retention-not-adopted/README.md)保留。允许旧产品资源删除不等广泛账号工件/Git历史/WT清理。 |
 
 8787/8788及内部监听受保护；5355/PID37202/PTY40865/tab60仍有动画用户消费者，沿owner回执保留，未扫描/启停。其他端口及历史退出看[服务台账](development.md#服务登记与生命周期)。保护所有在制/dirty/refs；完成设计和失败方案均入库后才讨论清理，归档不等批准。当前状态替代[原文快照](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)，旧发布/失败历史不被覆盖。

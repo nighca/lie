@@ -1,0 +1,17 @@
+{
+  "sha": "b1f4af888d32508d6dd1a2a7a7304d2646552b67",
+  "ciRun": 40188556882,
+  "cdRun": 40188686645,
+  "attempt": 1,
+  "ci": "completed/success",
+  "cd": "completed/success",
+  "artifactId": 12597142769,
+  "artifactDigest": "sha256:79e307297e6365c298de501f783c3fd7507cf463b66431c1d08ac8e281539115",
+  "digestEvidence": "API expected equals actual CD downloaded digest; no independent ZIP download this round",
+  "cdRestoredFiles": 256,
+  "workerVersion": "e223b3f0-7611-4aca-bd12-5c4c05dfd2a2",
+  "onlineProof": "online.json, fresh normal-TLS home and new JS GET",
+  "title": "消失的纪念章",
+  "unchangedId": "empty-medal-box",
+  "gitWriteManualDeployRerunBrowserProviderService": false
+}

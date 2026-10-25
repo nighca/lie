@@ -1,0 +1,76 @@
+{
+  "reviewedMain": "1232ef884a6841065a73db5a1080d81eeb2fe03e",
+  "previousReview": "600fb4dd5d60e7370cb1f6315c9c8628b7df0c99",
+  "worktreeHead": "3cb8766d3c184d4dc0210f0788661166352b9e8b",
+  "usedProductionFilesMatchMain": [
+    "apps/web/src/application/controller.ts",
+    "apps/web/src/application/liveVoice.ts",
+    "apps/web/src/application/navigationLifecycle.ts",
+    "apps/web/src/application/pageLifecycle.ts",
+    "apps/web/src/application/voice.ts",
+    "apps/web/src/Application.vue",
+    "packages/voice/src/channel.ts",
+    "packages/voice/src/microphone.ts",
+    "packages/voice/src/player.ts",
+    "packages/voice/src/pcm.ts",
+    "packages/voice/src/protocol.ts",
+    "packages/game-core/src/session.ts",
+    "packages/game-core/src/context.ts"
+  ],
+  "unchangedFromPreviousReview": [
+    "apps/web/src/application/controller.ts",
+    "apps/web/src/application/liveVoice.ts",
+    "apps/web/src/application/navigationLifecycle.ts",
+    "apps/web/src/application/pageLifecycle.ts",
+    "apps/web/src/application/voice.ts",
+    "apps/web/src/Application.vue",
+    "packages/voice/src/channel.ts",
+    "packages/voice/src/microphone.ts",
+    "packages/voice/src/player.ts",
+    "packages/voice/src/pcm.ts",
+    "packages/voice/src/protocol.ts",
+    "packages/game-core/src/session.ts",
+    "packages/game-core/src/context.ts"
+  ],
+  "sourceSha256": {
+    "apps/web/src/application/controller.ts": "30acda32893a2ba05bf05a88059f9176a0f7dd3c3cfcf3dac03d92680bfd8a5e",
+    "apps/web/src/application/liveVoice.ts": "5ab99f725187b27a0acdc6cc554156ab82ee7c3298534377cb52a04dd907f833",
+    "apps/web/src/application/navigationLifecycle.ts": "a4eb7964c75b4697152cae3e3f36081220362007e12fe8ac72bdffd772463016",
+    "apps/web/src/application/pageLifecycle.ts": "238433e53609a579d546b657c52d5929b41e629f7a9757dc4325f2ae5c88527a",
+    "apps/web/src/application/voice.ts": "3f6b30a99abf898e044ce9b96bfb4150bb1d2df2eeaec02f3ab5a6c4f437abef",
+    "apps/web/src/Application.vue": "5df40f1ff852cf9ef6f04e08d15384a8c50a750a74370c8fe26ddb9818cfb3cb",
+    "packages/voice/src/channel.ts": "b46d1a78c1a7d56a0f2858c74a611059557b4aa6b29e7faed48b224fc3ddb6e2",
+    "packages/voice/src/microphone.ts": "a21f27d92ef9e4cd3e62276cc41f3fb5e19c66c2ab5db660250e3a25166038b9",
+    "packages/voice/src/player.ts": "2d771427afa3e7ab148c70fe66a805d7cf3cae68ad5c34fcbfabdb432d0a0c7d",
+    "packages/voice/src/pcm.ts": "f0d75bcd2d4a3e096aff705b58abea5526c3cc97d62d2f2ea99647f190bfb07f",
+    "packages/voice/src/protocol.ts": "af703b82d5b6fa2d83745cc939d3a697ec71382e68fde1d1bdeb46c1840c06bf",
+    "packages/game-core/src/session.ts": "71bf50bf7d1a277233c1fb3700ebac31d99641be17fc7ea775993a81fa589070",
+    "packages/game-core/src/context.ts": "fc787dc3768c2f407190147d18016f75c2cfa5e1facb58d567db90c3064a27ca"
+  },
+  "newConfirmedFindings": [],
+  "additionalFiniteCompositionProbe": {
+    "pass": 1,
+    "fail": 0,
+    "actualModules": [
+      "controller",
+      "liveVoice",
+      "channel",
+      "navigationLifecycle",
+      "game-core session/context"
+    ],
+    "fakes": [
+      "status Response deferred and ignores abort deliberately",
+      "socket",
+      "mic/player/context",
+      "EventTarget visibility/page transitions",
+      "clock"
+    ],
+    "sequence": "pending status A -> hidden cancel -> visible no restart -> explicit B ready -> A status late -> B remains -> 50ms hide -> quota950/1000 and history preserved -> pagehide dispose/pageshow restore callback; timer0"
+  },
+  "notRun": [
+    "Browser/native audio/mic/user tab/real provider/network/services",
+    "application whole-suite/build",
+    "previous4 probe rerun (historical identity reviewed, not newly reported PASS)"
+  ],
+  "productionGitChanges": false
+}
