@@ -14,9 +14,9 @@
 
 ## 当前队列与下一步
 
-用户本轮授权的普通push修复后已完成：远端main a64bf6c，CI40165378030/CD40165634861均success，真实Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e；lie.agency有限静态核验8响应SHA均同已验候选。[实际发布证据](releases/2026-10-25-q90-ci-cd/success.md)。旧297 coverage失败/CDskip与修复完整保留；本报告归档不自动二次push。正式结果UI/激活仍独立在制，不混成本轮已发布成果。
+用户本轮授权的普通push修复后已完成：远端main a64bf6c，CI40165378030/CD40165634861均success，真实Worker版本dabb77da-39b5-4b69-bf90-bddbced1628e；lie.agency有限静态核验8响应SHA均同已验候选。[实际发布证据](releases/2026-10-25-q90-ci-cd/success.md)。旧297 coverage失败/CDskip与修复完整保留；本报告归档不自动二次push。正式结果UI/激活已在本地main600完成，尚未发布，不混成本轮已发布成果。
 
-当前发布状态：a64bf6c已通过CI40165378030/CD40165634861及线上有限静态身份核验，[最新证据](releases/2026-10-25-q90-ci-cd/success.md)。后四位设计归档已由root实际review并本地集成，正式结果功能仍在制；本批不再push。旧483为历史发布，不覆盖当前事实。
+当前发布状态：a64bf6c已通过CI40165378030/CD40165634861及线上有限静态身份核验，[最新证据](releases/2026-10-25-q90-ci-cd/success.md)。八人设计及正式结果功能已由root完整review并本地集成600；本批不再push。旧483为历史发布，不覆盖当前事实。
 
 完整owner/base/ordered SHAs/实际WT和检查边界见[handoff](coordinator-handoff.md)及[恢复清单](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/active-handoff-refs.json)。新意图先与已分派文件协调，不重叠抢写。
 
@@ -41,6 +41,9 @@
 | 已随a64发布 连接提示loading / 调查视觉＋root | 青绿色20px环/1.1s纯CSS、reduce静态、取消保留；source5afa与候选b42e55b生产/依赖完全相同，root已审完整图/运行时证据，复用源IAB43/44及288/types，本轮build89通过。[身份/复用边界](voice-connection-loading-combined.md)。旧5507 30999/27840已exit1/tab43/44清，height新服务不外推。已main911、现随a64发布，不重占已释放App/Application。 |
 | 修复组合通过 / Editor＋root | RSM-01保存失败试玩返回保留编辑/步骤/人物（含QA003）、RSM-02复制意图隔离已实现；97a1803→8e09327补失活立绘卸载、激活重建，最多缓存一份Editor、离开范围清理，改编替换key失效。root完整review；最终候选aa6fc190 **Web288/types/build89通过**，已root审[组合报告](editor-state-recovery/combined-verification.md)、本地ff并发布48316544，CI/deploy成功及线上产物身份已核；[发布记录](releases/2026-10-25-main-refresh.md)。旧[review](reviews/remix-state-review-2026-10-25/README.md)错误探针归档，不当修复后验收。 |
 | 后续审查已归档，原生QA待工具 / character_preset_migration＋architecture_code_review | 稳定8787状态实际SHA600、无ready字段；工具本轮无IAB，7个native case未执行，无草稿/tab/service动作，[前置事实](qa/native-share-editor-600-2026-10-25/README.md)。voice生命周期源码review及实际controller/bridge/channel组合4项有限fake探针通过，未证实新bug，[完整范围/结果](reviews/voice-lifecycle-2026-10-25/README.md)；不替代原生设备/真实provider，不重复已修项或全suite/build。生产代码未改，未push；等IAB可用窗口再排原生矩阵。 |
+| 进行中 输入边界审查 / architecture_code_review＋root | 从main2e24d32审查自编案件导入/分享解码、core校验与Editor恢复，先对照既有review避免重复，最多3个有源码依据的离线探针；确定的小缺陷可修并相关验证，契约/玩法重大选择仍讨论。不启动服务或真实provider，不push；待完整批量handoff。 |
+| 待新批交付 Hackathon修订 / 专项chat＋root | 巡检发现用户在专项chat继续修订初稿后的13项提交，已请owner核对完整有序SHA/clean与文档链接后批量交付；root正在实际全文审查，尚未集成这批。移动端可用已由用户在专项明确确认，应与尚未验的长会话/盲测边界区分。 |
+| 已核 favicon / root | HTML已使用正式brand/logo.svg，正式站对应hash SVG返回200/image/svg+xml，响应体SHA与URL及源Logo一致，immutable一年缓存；无需新增图标或改代码。 |
 | 已审候选归档 离线分享/Editor QA / character_preset_migration | source877ac94889b2ea140263997575751d1d32861e10四文件已root全文review并候选fd4b257归档；[8离线场景/边界](qa/released-share-editor-2026-10-25/README.md)，无新confirmed缺陷。固定483探针本轮不重跑；真实reload/popstate/BFCache/dialog未验，CUA未暴露IAB、不回退Chrome/启5544，不冒称原生QA。 |
 | P1 真人/盲测/多用户 / root协调用户＋QA | mic/外放/长会话、三案盲测、固定device多人隔离、正式费用硬限额未闭环。fake/短WAV/ready不替代，新增声仍按用户真实耳验范围，不后台保活mic。 |
 | P2 分享/投稿 / Editor＋root | 有界IAB539/16000 URL往返/reload/损坏输入已测；跨浏览器/地址栏粘贴/外部传输/离线/旧fragment网络补测未验，16k暂定、128KiB仅Node。投稿PRIVATE/用户GitHub门禁，不新增OAuth/PAT/代理投稿。 |
