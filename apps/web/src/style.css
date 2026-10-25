@@ -221,6 +221,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .home-cast .home-cast-blue { left: 159px; }
   .home-spark.first { font-size: 28px; top: 2px; }
   .home-spark.second { font-size: 22px; right: 4px; top: 24px; }
+  .home-cases { margin-top: 32px; }
   .home-cases h2 { min-height: 40px; font-size: 18px; }
   .case-grid { gap: 20px; }
   .case-card { padding: 20px 21px 22px; border-radius: 23px; }
