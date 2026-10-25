@@ -1,0 +1,25 @@
+{
+  "base": "30385c296eafe68b0403706f6ac63a37ce96487b",
+  "checked_files": [
+    {
+      "path": "apps/web/src/App.vue",
+      "sha256": "3a6047a0aa76ea0b0ea24b228ebca13ab76caf59266c8b9970ddee70f4578e0a"
+    },
+    {
+      "path": "apps/web/src/style.css",
+      "sha256": "0f60d711e7286ecb565988703392ac1b1b5fd774657a8407f905c2e409f08409"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "2efd70fe940997ce63746a05a6d5574974560a67d6a737f4801e9f9e254e82e0"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/default.png",
+      "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe"
+    },
+    {
+      "path": "design/character-presets/assets/sunny-moustache/default.png",
+      "sha256": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218"
+    }
+  ]
+}

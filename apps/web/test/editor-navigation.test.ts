@@ -90,7 +90,7 @@ describe('editor and shared case application routes', () => {
     expect(sessions).toHaveLength(1)
     expect(sessions[0].source).toEqual(customGame)
     await click('接案，开始调查'); await click('我有答案了 →'); await click('指认 乙')
-    expect(wrapper.text()).toContain('本局失败')
+    expect(wrapper.text()).toContain('本局结束')
     await click('重新开始一局')
     expect(sessions[0].setup.controller.getView().phase).toBe('intro')
     await click('接案，开始调查'); await click('我有答案了 →'); await click('指认 甲')

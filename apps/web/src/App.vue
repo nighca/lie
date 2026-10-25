@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
 
 import type { GameController } from './application/controller'
@@ -20,6 +20,15 @@ onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
 const current = computed(() => view.value.characters.find((character) => character.id === view.value.currentCharacterId) ?? null)
 const currentCharacterPreset = computed(() => characterPreset(current.value?.appearanceId ?? null))
+const resultCharacter = computed(() => view.value.characters.find((character) => character.id === view.value.result?.characterId) ?? null)
+const resultCharacterPreset = computed(() => characterPreset(resultCharacter.value?.appearanceId ?? null))
+const resultPortrait = computed(() => {
+  const url = resultCharacterPreset.value?.portrait ?? null
+  return usableImage(url) ? url : null
+})
+const resultParagraphs = computed(() => view.value.reveal?.split('\n\n') ?? [])
+const resultHeading = ref<HTMLElement | null>(null)
+watch(resultHeading, (heading) => { heading?.focus() }, { flush: 'post' })
 const portraitState = computed(() => {
   if (!view.value.conversationActive || view.value.busy) return 'default'
   const status = view.value.voiceStatus
@@ -137,20 +146,30 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       </VoiceControl>
     </main>
 
-    <main v-else-if="view.phase === 'solved'" class="intro-card result-card surface">
-      <p class="eyebrow">指认正确</p>
-      <h1 class="case-title lie-handwritten-underline">谜题解开了！</h1>
-      <div class="result-divider" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="result-story"><h2>完整经过</h2><p class="background">{{ view.reveal }}</p></div>
-      <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
-      <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
-    </main>
-    <main v-else-if="view.phase === 'lost'" class="intro-card result-card surface">
-      <p class="eyebrow">本局失败</p>
-      <h1 class="case-title lie-handwritten-underline">指认不正确</h1>
-      <p class="background">这次调查已结束。想再试一次，请重新开始一局。</p>
-      <UiButton class="intro-start" @click="controller.restart()">重新开始一局</UiButton>
-      <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
+    <main v-else-if="view.phase === 'solved' || view.phase === 'lost'" class="result-card surface" :class="{ 'result-card--wrong': view.phase === 'lost' }">
+      <header class="result-heading">
+        <p class="eyebrow">{{ view.phase === 'solved' ? '指认正确' : '本局结束' }}</p>
+        <h1 ref="resultHeading" class="case-title lie-handwritten-underline" tabindex="-1">{{ view.phase === 'solved' ? '谜题解开了！' : '指认不正确' }}</h1>
+      </header>
+      <div class="result-content">
+        <figure v-if="resultCharacter != null" class="result-character" :style="{ '--character-accent': resultCharacterPreset?.accent ?? 'var(--lie-aqua)' }">
+          <div class="result-portrait">
+            <img v-if="resultPortrait != null" :key="resultPortrait" :src="resultPortrait" alt="" @error="portraitFailed">
+            <span v-else class="result-initial" aria-hidden="true">{{ resultCharacter.name.slice(0, 1) }}</span>
+          </div>
+          <figcaption><span>你指认了</span><strong>{{ resultCharacter.name }}</strong></figcaption>
+        </figure>
+        <section v-if="view.phase === 'solved'" class="result-story" aria-label="完整经过">
+          <h2>完整经过</h2><p v-for="(paragraph, index) in resultParagraphs" :key="index">{{ paragraph }}</p>
+        </section>
+        <section v-else class="result-story" aria-label="调查结果">
+          <h2>这次调查已结束</h2><p>想再试一次，请重新开始一局。</p>
+        </section>
+      </div>
+      <footer class="result-actions">
+        <UiButton @click="controller.restart()">重新开始一局</UiButton>
+        <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
+      </footer>
     </main>
     <main v-else class="intro-card surface">
       <h1>本局已结束</h1><p>这次的对话已经停止。准备好后，可以重新接案。</p>

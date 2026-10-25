@@ -1,0 +1,230 @@
+[
+  {
+    "buttons": [
+      {
+        "bottom": 773.2890625,
+        "text": "重新开始一局"
+      },
+      {
+        "bottom": 773.2890625,
+        "text": "返回案件列表"
+      }
+    ],
+    "card": {
+      "bottom": 808.2890625,
+      "left": 120,
+      "right": 120,
+      "width": 1040
+    },
+    "clip": {
+      "height": 878,
+      "scale": 1,
+      "width": 1280,
+      "x": 24,
+      "y": 138.3515625
+    },
+    "focus": "BODY",
+    "headingFocused": false,
+    "height": 878,
+    "id": "desktop-correct",
+    "initial": null,
+    "name": "顾遥",
+    "paragraphs": 4,
+    "portrait": "/appearances/coral-bob/default.png",
+    "scrollHeight": 878,
+    "scrollWidth": 1280,
+    "scrollY": 0,
+    "width": 1280,
+    "wrongLeaksTruth": null
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 751.0859375,
+        "text": "重新开始一局"
+      },
+      {
+        "bottom": 751.0859375,
+        "text": "返回案件列表"
+      }
+    ],
+    "card": {
+      "bottom": 786.0859375,
+      "left": 260,
+      "right": 260,
+      "width": 760
+    },
+    "clip": {
+      "height": 878,
+      "scale": 1,
+      "width": 1280,
+      "x": 24,
+      "y": 1088.265625
+    },
+    "focus": "BODY",
+    "headingFocused": false,
+    "height": 878,
+    "id": "desktop-wrong",
+    "initial": null,
+    "name": "沈禾",
+    "paragraphs": 1,
+    "portrait": "/appearances/sunny-moustache/default.png",
+    "scrollHeight": 878,
+    "scrollWidth": 1280,
+    "scrollY": 0,
+    "width": 1280,
+    "wrongLeaksTruth": false
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 1096.1484375,
+        "text": "重新开始一局"
+      },
+      {
+        "bottom": 1160.546875,
+        "text": "返回案件列表"
+      }
+    ],
+    "card": {
+      "bottom": 1186.546875,
+      "left": 16,
+      "right": 16,
+      "width": 359
+    },
+    "clip": {
+      "height": 844,
+      "scale": 1,
+      "width": 391,
+      "x": 24,
+      "y": 2038.1796875
+    },
+    "focus": "BODY",
+    "headingFocused": false,
+    "height": 844,
+    "id": "mobile-correct",
+    "initial": null,
+    "name": "顾遥",
+    "paragraphs": 4,
+    "portrait": "/appearances/coral-bob/default.png",
+    "scrollHeight": 1230,
+    "scrollWidth": 391,
+    "scrollY": 0,
+    "width": 391,
+    "wrongLeaksTruth": null
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 647.4296875,
+        "text": "重新开始一局"
+      },
+      {
+        "bottom": 711.828125,
+        "text": "返回案件列表"
+      }
+    ],
+    "card": {
+      "bottom": 737.828125,
+      "left": 16,
+      "right": 16,
+      "width": 359
+    },
+    "clip": {
+      "height": 844,
+      "scale": 1,
+      "width": 391,
+      "x": 24,
+      "y": 2954.09375
+    },
+    "focus": "BODY",
+    "headingFocused": false,
+    "height": 844,
+    "id": "mobile-wrong",
+    "initial": null,
+    "name": "沈禾",
+    "paragraphs": 1,
+    "portrait": "/appearances/sunny-moustache/default.png",
+    "scrollHeight": 844,
+    "scrollWidth": 391,
+    "scrollY": 0,
+    "width": 391,
+    "wrongLeaksTruth": false
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 3083.640625,
+        "text": "重新开始一局"
+      },
+      {
+        "bottom": 3148.0390625,
+        "text": "返回案件列表"
+      }
+    ],
+    "card": {
+      "bottom": 3174.0390625,
+      "left": 16,
+      "right": 16,
+      "width": 359
+    },
+    "clip": {
+      "height": 844,
+      "scale": 1,
+      "width": 391,
+      "x": 24,
+      "y": 3870.0078125
+    },
+    "focus": "BODY",
+    "headingFocused": false,
+    "height": 844,
+    "id": "mobile-long",
+    "initial": null,
+    "name": "摄影社特别来宾顾遥的长姓名测试",
+    "paragraphs": 6,
+    "portrait": "/appearances/coral-bob/default.png",
+    "scrollHeight": 3218,
+    "scrollWidth": 391,
+    "scrollY": 0,
+    "width": 391,
+    "wrongLeaksTruth": null
+  },
+  {
+    "buttons": [
+      {
+        "bottom": 3083.640625,
+        "text": "重新开始一局"
+      },
+      {
+        "bottom": 3148.0390625,
+        "text": "返回案件列表"
+      }
+    ],
+    "card": {
+      "bottom": 3174.0390625,
+      "left": 16,
+      "right": 16,
+      "width": 359
+    },
+    "clip": {
+      "height": 844,
+      "scale": 1,
+      "width": 391,
+      "x": 24,
+      "y": 4785.921875
+    },
+    "focus": "H1",
+    "headingFocused": true,
+    "height": 844,
+    "id": "mobile-fallback",
+    "initial": "摄",
+    "name": "摄影社特别来宾顾遥的长姓名测试",
+    "paragraphs": 6,
+    "portrait": null,
+    "scrollHeight": 3218,
+    "scrollWidth": 391,
+    "scrollY": 0,
+    "width": 391,
+    "wrongLeaksTruth": null
+  }
+]
