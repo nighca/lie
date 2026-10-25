@@ -1,0 +1,26 @@
+{
+  "base": "0abc82d1acdfbaedab19888cd94ac5eaad166ab1",
+  "status": "proposal-awaiting-user-approval",
+  "mark": {
+    "logo": [
+      105,
+      56
+    ],
+    "underline": [
+      70,
+      49,
+      68,
+      9
+    ],
+    "rotationDegrees": -8,
+    "frame": [
+      142,
+      64
+    ]
+  },
+  "sources": {
+    "apps/web/public/brand/logo.svg": "162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb",
+    "apps/web/public/brand/underline.svg": "faa327c12fb23c77018ffa9b4226efe689e1f6014c66747b8c0801f5369718b9"
+  },
+  "context": "Static reconstruction from current homepage layout/content; existing avatar PNGs resized via sips. Not a live application screenshot."
+}
