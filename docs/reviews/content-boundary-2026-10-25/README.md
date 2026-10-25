@@ -11,7 +11,7 @@
 root明确授权的修复 **`5ceb7d5de718d8c0a7aeab4a4159562f3e5526a6`**：
 
 - `saveDraft`在任何setItem前以Number.isFinite拒绝NaN/±Infinity（JSON不能保真表示），throw带修正询问时长提示的RangeError；原raw逐字节不动。
-- Editor保留未保存警告；仅RangeError使用具体时长提示，普通存储错误原“浏览器不允许保存草稿或存储空间不足”文案保留。下一次真正保存成功时清除过期notice。
+- Editor保留未保存警告；仅RangeError使用具体时长提示，普通存储错误原“浏览器不允许保存草稿或存储空间不足”文案保留。跟踪本次保存错误文本；下一次真正保存成功，仅在notice仍匹配该保存错误时清除，不清除草稿读取/分享等其他功能提示。
 - 修正时长后保存全部最新内存编辑；重新挂载仍能读取原先可恢复故事。未增加任何任意时长上限、core规则/兼容协议、云同步或多槽草稿。已有有限但暂不可玩的编辑值仍可按原编辑草稿语义保存；core正安全整数规则不变。
 
 ## 实际范围与另两项探针
@@ -37,3 +37,7 @@ npm run typecheck --workspace @lie/web
 ```
 
 复现前态可在独立checkout取原证据提交3c44及其源码再跑同配置，不在共享WT回退。探针只用隔离jsdom localStorage，所有fetch设为抛错且逐项核零调用；未读写用户草稿。无native browser、监听器服务、provider/mic、付费、账号、build/编码或全工程测试，不代表浏览器原生数值控件或未执行native矩阵验收。普通浏览器溢出机制由JS Number/JSON确定，UI触发由真实Vue组件/jsdom实测，边界如实区分。refs/其他owner文件/5355与8787/8788均未动，无清理尾项。
+
+## root审查后的notice范围收敛
+
+root指出5ceb成功保存时无条件notice=null超出保存修复范围；原提交冻结保留。追加仅记录saveNotice文本归属，成功保存时只清仍匹配该错误的notice。新增回归证实原有草稿读取失败提示在成功编辑保存后按旧语义保留，overflow修复后保存错误仍能消失。最终局部editor-page **25/25**、原边界三probe **3/3**、Web types通过；未扩探针/构建/全套。78项通过属于5ceb初版，最终仅此notice范围差异按上述受影响检查复验，证据口径分开。

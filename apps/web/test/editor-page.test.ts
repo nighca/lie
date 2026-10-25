@@ -66,6 +66,16 @@ describe('three-step editor', () => {
     expect(wrapper.find('[role=alert]').exists()).toBe(false)
   })
 
+  it('retains a draft-read notice when autosave succeeds without a preceding save error', async () => {
+    localStorage.setItem(DRAFT_KEY, '{')
+    const { wrapper } = page()
+    const message = '本地草稿无法读取。你仍可创作新案件；开始编辑后会保存新的草稿。'
+    expect(wrapper.text()).toContain(message)
+    await wrapper.get('input[name=title]').setValue('新的可保存草稿')
+    expect(wrapper.text()).toContain(message)
+    expect(wrapper.get('.editor-draft-status').text()).toContain('草稿已保存至此设备')
+  })
+
   it('uses the shared product brand, draft notice and existing leave event', async () => {
     const { wrapper, click } = page(game)
     expect(wrapper.get('.lie-product-header__brand span').text()).toBe('语音推理')

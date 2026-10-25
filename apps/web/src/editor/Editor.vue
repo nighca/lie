@@ -30,6 +30,7 @@ const form = ref<HTMLElement | null>(null)
 let mounted = true
 let copyRevision = 0
 let clearingDraft = false
+let saveNotice: string | null = null
 try {
   const stored = loadDraft(localStorage)
   if (stored != null) { draft.value = stored; saveStatus.value = '草稿已保存至此设备' }
@@ -48,8 +49,16 @@ watch(draft, () => {
   if (clearingDraft) return
   shareUrl.value = null
   invalidateCopy()
-  try { saveDraft(localStorage, draft.value); saveStatus.value = '草稿已保存至此设备'; notice.value = null }
-  catch (error) { saveStatus.value = '草稿未能保存，请勿关闭页面'; notice.value = error instanceof RangeError ? error.message : '浏览器不允许保存草稿或存储空间不足。' }
+  try {
+    saveDraft(localStorage, draft.value)
+    saveStatus.value = '草稿已保存至此设备'
+    if (notice.value === saveNotice) notice.value = null
+    saveNotice = null
+  } catch (error) {
+    saveStatus.value = '草稿未能保存，请勿关闭页面'
+    saveNotice = error instanceof RangeError ? error.message : '浏览器不允许保存草稿或存储空间不足。'
+    notice.value = saveNotice
+  }
 }, { deep: true, flush: 'sync' })
 function invalidateCopy() { copyRevision++; copied.value = false }
 watch([overlay, shareUrl, submission], invalidateCopy, { flush: 'sync' })

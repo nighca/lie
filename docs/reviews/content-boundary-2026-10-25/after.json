@@ -1,7 +1,6 @@
 {
   "base": "2e24d32c098773728ae18c636c0492d622ce859d",
   "beforeEvidenceCommit": "3c44d530e4776b28cd842a53e5d0d1b4215d64e7",
-  "implementationCommit": "5ceb7d5de718d8c0a7aeab4a4159562f3e5526a6",
   "node": "24.22.1",
   "tests": [
     {
@@ -19,9 +18,9 @@
   ],
   "sourceAndRegressionSha256": {
     "apps/web/src/editor/draft.ts": "db411345a6f30b2c280a46edc8b35da07b53db48f6276427e75198777751e2df",
-    "apps/web/src/editor/Editor.vue": "c37adb279be8068fff7f41adca04ee83bb7fc48246181e50aaaff1936b9c204f",
+    "apps/web/src/editor/Editor.vue": "87e9366bce2653c7344578b4b6dfcb7ee76571b8d48e800ae74a8b3889a97b90",
     "apps/web/test/editor-draft.test.ts": "2c012732fef8b97d0575d636216fe17cef630ccaea126f344f975bc1170d70fa",
-    "apps/web/test/editor-page.test.ts": "b29194791bc9d83196ee6df4a3142c5415f953b1fd06b623e8badd9fa20867b3"
+    "apps/web/test/editor-page.test.ts": "5f302bb4f7fe624f7a0fe99c650c98c189fe56209f18ea30470e4722d9e9b1a4"
   },
   "affectedChecks": {
     "webFiles": [
@@ -45,5 +44,15 @@
     "No new duration upper bound/core contract change",
     "No production data/user storage access",
     "No full suite/build/encoding/network/listener/browser/provider/push"
-  ]
+  ],
+  "initialImplementationCommit": "5ceb7d5de718d8c0a7aeab4a4159562f3e5526a6",
+  "noticeScopeFollowup": {
+    "reason": "Root review rejected clearing unrelated notice on successful autosave",
+    "implementation": "Track latest save-error text and clear only while current notice still matches it",
+    "editorPageTests": 25,
+    "boundaryProbes": 3,
+    "webTypecheck": "PASS",
+    "retainsDraftReadNotice": true,
+    "historical78Tests": "Passed initial implementation5ceb; final notice-only correction received bounded affected checks above"
+  }
 }
