@@ -18,7 +18,7 @@ export function createLiveVoicePort(dependencies: {
   createChannel: createVoiceChannel,
   createPlayer: createPcmPlayer,
   openMic: openMicrophone,
-  createContext: () => new AudioContext(),
+  createContext: () => new AudioContext({ sampleRate: 16000 }),
   ...(import.meta.env.DEV ? { onPlayback: observeVoicePlayback } : {}),
   fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]) }),
 }): VoicePort {
