@@ -22,7 +22,7 @@
 | 首页右下版本footer0d753 / 旧红点实现门禁 | fd049红点已正式发布，旧footer被替代。用户又批准“页面口供”弹窗；clipboard迟到race已修并复验，随bda合批main/push，精确CI/CD/serving/local已完整回执，发布证据da3d2ef待独立归档。 |
 | 等待提示 dirty demo、插画/步骤点/副句与700ms参考 | 用户最终批准纯文字版本，f75发布；0/700/1400/2100仅为旧已发节奏。用户直接要求每步1秒，source746→bda已main/push及最终发布验收通过。旧demo单样本连接时间不当当前性能分布，fake不当真人语音。 |
 | 布丁案 / 原三官方案 | 布丁因答案明显被否决；2026-10-25用户批准第四Hackathon案。礼物案获双人180秒/首页第一实施许可，仍先试玩和最终用户确认，不硬编码引擎/UI，不当已发布第五案。 |
-| 视频旧不提交 / SFX许可及嵌套symlink blocker | 最新横v3/竖v5指定清单获用户明确入库许可，旧v1/v2仍排除。rawSFX排除、Apache许可补齐，嵌套symlink写前preflight已补，b4c清单360/350 payload候选准备。旧356/346与180MB/250MB描述仅历史，不再当当前清单；不授权社交发布、购买或账号改动。 |
+| 视频旧不提交 / SFX许可及嵌套symlink blocker | 当时横v3/竖v5指定清单曾获用户明确入库许可，旧v1/v2仍排除。rawSFX排除、Apache许可补齐，嵌套symlink写前preflight已补，b4c清单360/350 payload曾准备入库；随后用户撤销Git入库，见下方撤销记录。旧356/346与180MB/250MB描述仅历史，不再当当前清单；不授权社交发布、购买或账号改动。 |
 | 邀请码、投稿、CI预览、旧版本保留等 | 邀请码暂停需用户重启；投稿仅研究/手动确认，不授权OAuth/PAT/自动PR；CI隔离预览待用户；14天/256MiB兼容被否决，不自动实施。已批架构/交互/B视觉不重新当待批准。 |
 
 当前状态与下一步只读[计划](../../../project-plan.md)，具体服务只读[登记](../../../development.md)。其他既有完整决策、动画/编辑器/视觉历史仍由原文入口及[设计档案](../../../archive/README.md)追溯，本任务不重新生产或改变批准范围。
@@ -33,4 +33,14 @@
 
 5198来源为`/Users/nighca/.codex/worktrees/lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`；原launcher session95944已退出，PID13491是源owner最近lsof回执，用户IAB编辑保留。未来停止需精确重核command/cwd/`.dev.pid`，不据旧launcher批停。
 
-6dd/d242/事实六链、546（19文件/72case/source/checker/图）、0e163/da3及cce均已review，尚待默认分支归档；原voice chat已archived、多个旧WT已不在list，但精确对象/refs仍可用，不恢复服务以完成归档。视频最新仅本地main ff至843985前缀、远端push传输中，不称已published。以上为root追加回执；两份原文快照与来源哈希保持不变。
+6dd/d242/事实六链、546（19文件/72case/source/checker/图）、0e163/da3及cce均已review，尚待默认分支归档；原voice chat已archived、多个旧WT已不在list，但精确对象/refs仍可用，不恢复服务以完成归档。当时视频仅本地main ff至843985、push传输中，未确认published；后续取消与恢复见下节，旧进度不再现行。以上为root追加回执；两份原文快照与来源哈希保持不变。
+
+## 视频入库许可撤销与未推 main 恢复
+
+最新用户决定为“视频不提交进git，太大不合适”，继而明确“本地含视频commit撤掉，不能追加删除commit，需要从history干掉”。它明确覆盖此前横v3/竖v5指定清单入库批准，旧许可、制作/许可边界修补及review证据仍保历史；今后成片与大型制作包只本地交付，不另托管、上传或删除，也不新增ignore范围。
+
+root先核视频push进程已不存在、独立gh远端main仍为`bda3ddbf7b69f7f28ee2f112183477e617a2bbd0`。原15分钟维护窗已结束，用户重新直接确认“可以，现在没有语音对话”，仅授权这次恢复。root在clean owning main执行`reset --keep`，由未推成功的`843985977659ce2c78e746436b80b1b544119fe3`恢复bda；核843不再是main祖先、mainclean，没有追加revert/删除commit、force或远端写。这是针对未发布本地main的明确用户授权恢复，不扩大为通常改写共享历史许可。
+
+恢复后root核本地main-status为bda、health正常、voiceStatus ready；四source电影在原WT逐个SHA全匹配保留。Git对象与任务分支保留，不执行GC/清refs/删除作品。本段仅记录root实际回执，本文档任务没有操作main、远端或服务。
+
+旧`lie-evidence-archive-integration` detached843从未push、禁止publication；下次归档从bda重建，只cherry已review纯docs精确对象，不含视频祖先、不恢复archived chat。首页/高视窗人物对齐归UI Chat `01a18d48-6d1a-7273-914e-3c2aef2fa27e`，WT `lie-character-layout/lie`、branch `codex/character-layout`，原base843仅本地；后续只cherry实际layout代码到bda系候选。5177给该新预览turn，本次无新PID/PTY回执，不冒称已启动。root已接回唯一集成turn；恢复许可不含后续docs/result main更新，等待新窗口。

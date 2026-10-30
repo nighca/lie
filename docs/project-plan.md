@@ -1,6 +1,6 @@
 # LIE — 当前项目计划
 
-2026-10-30 状态截点：本文档整理基线为 `fd0493773e3b47ee934b2a391e8f69b49f632c58`。总协调最新完整回执：UI 合批 `bda3ddbf7b69f7f28ee2f112183477e617a2bbd0` 已 main/push、精确 CI/CD success、实际 serving 与本地恢复验收通过（见下表）。视频由 `page_version` 持唯一 turn 独立执行；最新协调回执为本地 main 已 ff 至 `843985` 前缀，远端 push 仍在传输，尚无确认 published 或最终 serving 回执。用户另批准北京时间 **23:17:16–23:32:16** 视频素材及随后纯文档维护窗口，**不含结果 UI**；过窗须重新协调，不延续为常设权限。
+2026-10-30 状态截点：本文档整理基线为 `fd0493773e3b47ee934b2a391e8f69b49f632c58`。已发布并完整验收的 UI 为 `bda3ddbf7b69f7f28ee2f112183477e617a2bbd0`（见下表）。用户最新明确撤销视频 Git 入库许可，并要求移除本地含视频提交；root 在用户重新确认无语音的单次恢复窗口内，将未推成功的本地 main 从 `843985977659ce2c78e746436b80b1b544119fe3` 恢复 bda，main clean、远端仍 bda、本地 main-status/health/voiceStatus 已恢复。原 23:17:16–23:32:16 窗口已结束，后一次恢复许可仅该动作，**当前没有后续文档或结果页 main 更新许可**。总协调已接回唯一 integration/publication turn。
 
 总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 负责需求、调度、实际 review、串行集成与发布；具体实施和耗时验证由专项完整执行。每个专项使用独立 managed worktree / `codex/` 分支，草稿、产物、依赖与临时文件不落主工作区。只有获唯一 integration/publication turn 的 owner 可更新 main/push；review 后默认普通 push，不开 PR，不恢复旧轮换或定时任务。服务窗口与源码发布授权分别确认。
 
@@ -8,12 +8,13 @@
 
 | 优先 / owner | 已确认状态、依赖与下一步 |
 | --- | --- |
-| P2 宣传视频入库 / `coordinator_dashboard`＋视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15` | 用户明确批准最新横 v3/竖 v5 入库，取代这些交付物的旧“不提交”门禁。独立 clean 候选 `b4c26c8ca2abb6444cfcc254409ae5aadde644fb`，base fd049，WT `lie-promo-package-v3-review`；360 named / 350 payload / 131416998 bytes，26 CLI、真实嵌套 symlink 写前拒绝、15 SHA 与四成片身份通过。原 SFX 不再分发、Apache LICENSE 已补；root 已读 HANDOFF/runtime helper/prepare/notices/overrides，无新增 blocker。root 已交 `page_version` 在上述窗口独立建候选、review/checks 与发布；本地 main 已 ff 至 `843985` 前缀，远端 push 仍在传输；不写已 published，最终结果待 owner 回执，不混结果 UI 或其他产品变更。仅入库指定清单，不授权社交上传、账号改动或购买；旧 v1/v2 不入库。 |
-| P2 礼物入门案 / Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e` | 布丁案因答案明显被否决；用户批准礼物案实施：双人、180 秒、首页第一、旧案后移。允许内容 JSON、排序及必要 tests/docs，通用引擎/UI 不因加案改变。5544 保留用户试玩、proxy 8788；具体最终设计仍在与用户讨论，**先本地试玩、用户确认，再交总协调 review/合入**，不能把初始实施许可当最终设计通过。当前 UI 批次用户明确无对话、可短暂更新 8788；这不授权停止 5544 或后续任意维护。 |
-| P2 成功/失败结果页 / Chat `01a18d4c-72b2-7d93-8df3-2aa9cb7a5fe4` | 用户要求独立 Chat 共同优化，WT `4ea5/lie`；先前 Transcript 预览和本轮结果页预览均已停止交回。范围 App solved/lost 与专属呈现/样式/tests/设计文档，保错误指认不揭晓、成功完整经过、可变角色及 UGC。实现有序 `2a677d847ab76531a8eda6a5e6a14805daf54c07`→`23abd80ebfb7f8fa29d4aaa5b545ee08a4563f68` 已交，独立/root review 通过；5176 已停止释放。用户已明确批准具体设计并要求“可以，这样就合理了，整理提交后交总协调review和合入吧”，设计批准已满足。当前视频＋纯文档窗口不含此产品变更，仅发布/服务窗口需 root 另协调，不重复要求设计确认；不碰 Transcript/PageVersion ownership。 |
+| 宣传视频：取消 Git 入库、仅本地交付 / 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`＋总协调 | 用户最新明确“视频不提交进git，太大不合适”，继而要求本地含视频提交从历史撤掉，覆盖此前横v3/竖v5入库批准。b4c26c8/843985不再排入任何cherry/push清单；未成功published，远端main仍bda。四成片原WT逐个SHA匹配保留；成片/大型制作包只本地交付，不另托管、上传或删除。原许可、许可修补与取消/恢复过程见[日期档案](history/2026-10-30/coordinator-refresh-fd049/README.md#视频入库许可撤销与未推-main-恢复)。 |
+| P2 礼物入门案 / Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e` | 布丁案因答案明显被否决；用户批准礼物案实施：双人、180 秒、首页第一、旧案后移。允许内容 JSON、排序及必要 tests/docs，通用引擎/UI 不因加案改变。5544 保留用户试玩、proxy 8788；具体最终设计仍在与用户讨论，**先本地试玩、用户确认，再交总协调 review/合入**，不能把初始实施许可当最终设计通过。此前UI批次的无对话维护许可及后来的单次main恢复许可均已结束；这不授权停止5544或后续任意维护。 |
+| 首页/高视窗人物对齐 / UI Chat `01a18d48-6d1a-7273-914e-3c2aef2fa27e`＋总协调 | 新ownership为人物布局专项，WT `/Users/nighca/.codex/worktrees/lie-character-layout/lie`、branch `codex/character-layout`；原base843仅本地、含已撤销视频祖先。后续只将实际layout代码提交cherry到最新reviewed bda系main候选，禁止合入该分支完整祖先或带回视频。5177分配新预览turn，本任务未获启动PID/PTY回执，不编造或代启服务；交付后root实际review/安排新窗口。 |
+| P2 成功/失败结果页 / Chat `01a18d4c-72b2-7d93-8df3-2aa9cb7a5fe4` | 用户要求独立 Chat 共同优化，WT `4ea5/lie`；先前 Transcript 预览和本轮结果页预览均已停止交回。范围 App solved/lost 与专属呈现/样式/tests/设计文档，保错误指认不揭晓、成功完整经过、可变角色及 UGC。实现有序 `2a677d847ab76531a8eda6a5e6a14805daf54c07`→`23abd80ebfb7f8fa29d4aaa5b545ee08a4563f68` 已交，独立/root review 通过；5176 已停止释放。用户已明确批准具体设计并要求“可以，这样就合理了，整理提交后交总协调review和合入吧”，设计批准已满足。原视频＋纯文档窗口已结束且未含此产品变更，仅发布/服务窗口需 root 另协调，不重复要求设计确认；不碰 Transcript/PageVersion ownership。 |
 | P1 语音体验观察 / 总协调（原语音 Chat `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9` 已 archived） | CPU 配置发布后用户亲测线上 f862 连续近 4 分钟无意外断开；16k 候选 5545 用户明确“没有电流声了，效果很好”，已随 f75 部署。原 chat 现由 App 返回 archived，root 未擅自 unarchive；多个旧 voice WT 已不在 worktree list，不能当活跃服务，精确 Git 对象/refs（含1ee049e）仍完整可归档。保留为同设备人工观察，继续收具体页面 hash、触发场景和时间；不声称所有设备音爆已消除、完整 600 秒或 provider 已验证。无授权不自动推理、录音、WS/profile、付费测试或改 provider 配置。 |
 | P1 本地 main 对比环境 / `session_limit_acceptance`＋总协调 | 用户已重新授权并恢复持久 launchd 8787/8788，跟 owning clean main；仅用户要求停用或明确维护窗口才操作。实际当前服务身份、消费者和下轮待更新 PID 见[服务登记](development.md#当前服务登记)。DEV＋本地 workerd 只能绕过生产 CF 网络/平台 CPU 配额，本地 workerd/provider/设备限制仍有；provider 资源同一性未核。 |
-| 文档与调查归档 / 本任务＋总协调 | 中央草稿完整快照、决定演进和未集成依赖见[当日索引](history/2026-10-30/README.md)。CPU 发布、红点发布、本地恢复、断连与离线接缝证据按下方精确链保存；6dd/d242/事实六链、546离线档案、0e163/da3发布和cce恢复均已review通过，待集成默认分支归档，本文不代为 cherry-pick。 |
+| 文档与调查归档 / 本任务＋总协调 | 中央草稿完整快照、决定演进和未集成依赖见[当日索引](history/2026-10-30/README.md)。CPU 发布、红点发布、本地恢复、断连与离线接缝证据按下方精确链保存；6dd/d242/事实六链、546离线档案、0e163/da3发布和cce恢复均已review通过，待集成默认分支归档，视频排除。旧 `lie-evidence-archive-integration` 候选detached843从未push，root已禁止其publication；下一批从bda重建、直接cherry已review纯docs精确对象，不恢复已archived chat，不带843依赖。本批文档提交保留待新窗口，本文不代为cherry-pick。 |
 
 ## 已确认的产品边界
 
@@ -40,4 +41,4 @@
 - 角色沉浸、启动时序与 vendor WS 方向继续按具体证据排查；不擅改 prompt/provider/预算。贺宁与 Hackathon 的真实模型短测由用户本人执行，不自动造推理流量。
 - GitHub 投稿仍为独立研究/用户手动确认路线，不授权 OAuth/PAT、自动 PR、提交或假定仓库可公开；开发工作仍采用无 PR 的 worktree 集成流程。
 - PR CI 隔离预览提案 `60d1d8` 待用户确认，不实施新 workflow/资源/权限；邀请码明确暂停，须用户重启；旧版本兼容 14 天/256MiB 方案被用户否决，不接 CI、不自动保留或删除线上资源。
-- 视频生产已获独立专项授权，最新 v3/v5 指定清单又获入库授权；不扩展到旧 v1/v2、社交发布、购买或账号变更。历史研究、被否决方案及旧媒体许可边界保留在[完整日期归档](history/2026-10-30/README.md)与[既有档案](archive/README.md)。
+- 视频制作曾获专项授权、横v3/竖v5曾获指定清单入库授权；用户最新已撤销Git入库，仅本地交付，禁止再将成片/大型制作包排入Git发布，也未授权另托管、上传、购买、账号改动或删除。历史研究、被否决方案及旧媒体许可边界保留在[完整日期归档](history/2026-10-30/README.md)与[既有档案](archive/README.md)。

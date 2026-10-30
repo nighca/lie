@@ -2,7 +2,7 @@
   "date": "2026-10-30",
   "base": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
   "sourceWorktreeBase": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
-  "latestCoordinatorReceipt": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0 UI main/push, exact CI/CD, actual serving and local restoration passed; video independent publication still in progress at cutoff; 2026-10-30 23:17:16–23:32:16 Asia/Shanghai approved for video then documentation only, excluding outcome UI",
+  "latestCoordinatorReceipt": "Video Git intake authorization revoked by user; no successful publication. Root verified remote main still bda and used separately user-authorized reset --keep to restore unpublished local main 843985977659ce2c78e746436b80b1b544119fe3 to bda3ddbf7b69f7f28ee2f112183477e617a2bbd0; clean, local status/health/voice ready restored; four source movies retained with matching hashes. Prior maintenance window ended; no subsequent docs/result main update permission. Prior receipt fields below are historical and superseded by this latest receipt.",
   "files": [
     {
       "source": "/Users/nighca/.codex/worktrees/lie-disconnect-evidence-integration/lie/docs/project-plan.md",
@@ -34,5 +34,6 @@
     "reasonForDurableCopy": "Exact blob exists in Codex turn-diff capture/checkpoint refs only; no reviewed branch-tip archive found. Save one dated evidence attachment, reusing the same Git blob.",
     "privacyReview": "Viewed: game interruption message, remaining 05:25 and action buttons; no personal, authentication or transcript content. Does not prove exact elapsed duration or request identity."
   },
-  "correctionReceipt": "Outcome design explicitly approved by user; only separate publication/service window remains. Exact stopped 5176 PID/PTY and retained 5198 cwd/launcher receipts added. Voice chat archived; old WT paths are historical; Git objects/refs remain. All named documentation archives reviewed, awaiting main integration. Video local main ff to 843985 prefix; ordinary remote push in progress, publication not confirmed at cutoff."
+  "correctionReceipt": "Outcome design explicitly approved by user; only separate publication/service window remains. Exact stopped 5176 PID/PTY and retained 5198 cwd/launcher receipts added. Voice chat archived; old WT paths are historical; Git objects/refs remain. All named documentation archives reviewed, awaiting main integration. Video local main ff to 843985 prefix; ordinary remote push in progress, publication not confirmed at cutoff.",
+  "videoIntakeCancelled": true
 }
