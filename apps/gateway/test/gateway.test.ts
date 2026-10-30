@@ -30,7 +30,7 @@ export default { fetch(request) {
   return new Response(null, {status: 101, webSocket: client});
 } }`
 
-async function runtime(bindings = credentials, upstreamScript = fakeUpstream) {
+async function runtime(bindings: Record<string, string> = credentials, upstreamScript = fakeUpstream) {
   const manifest = (contents: string) => ({ mainModule: 'index.js', modulesRoot: process.cwd(), modules: { 'index.js': { type: 'esm' as const, contents } } })
   const instance = new Miniflare({
     workers: [{
@@ -170,3 +170,24 @@ describe('gateway in workerd', () => {
     expect(await response.text()).toBe('Voice upstream unavailable')
   }, 20000)
 })
+
+
+it('propagates a configured one-second cap through the real workerd route', async () => {
+  const instance = await runtime({ ...credentials, VOICE_MAX_SESSION_SECONDS: '1' })
+  const response = await instance.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders({ 'X-Voice-Max-Session-Seconds': '600' }) })
+  expect(response.status).toBe(101)
+  const socket = response.webSocket!
+  socket.accept()
+  expect(await closed(socket)).toEqual({ code: 1000, reason: 'Conversation time limit' })
+}, 20000)
+
+it('does not open the upstream in workerd when the deployment cap is invalid', async () => {
+  const instance = await runtime({ ...credentials, VOICE_MAX_SESSION_SECONDS: '0' }, `let calls = 0; export default { fetch(request) {
+    if (new URL(request.url).pathname === '/count') return Response.json({ calls });
+    calls++; return new Response('unexpected call', { status: 500 });
+  } }`)
+  const response = await instance.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders() })
+  expect(response.status).toBe(500)
+  const upstream = await instance.getWorker('upstream')
+  expect(await (await upstream.fetch('https://upstream.test/count')).json()).toEqual({ calls: 0 })
+}, 20000)

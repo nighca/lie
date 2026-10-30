@@ -50,6 +50,8 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
   }
   const status = voiceStatus(env)
   if (status === 'unavailable') return new Response('Voice unavailable', { status: 503 })
+  const sessionLimitSeconds = voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS)
+  if (sessionLimitSeconds == null) return new Response('Invalid voice session limit configuration', { status: 500 })
   let response: Response
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
@@ -74,14 +76,20 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
     return new Response('Voice upstream unavailable', { status: 502 })
   }
   const [client, server] = Object.values(new WebSocketPair())
-  relaySockets(server, upstream)
+  relaySockets(server, upstream, sessionLimitSeconds)
   return new Response(null, { status: 101, webSocket: client })
 }
 
+function voiceSessionLimitSeconds(value = '600'): number | null {
+  if (!/^[1-9][0-9]*$/.test(value)) return null
+  const seconds = Number(value)
+  return Number.isSafeInteger(seconds) && seconds <= Math.floor(0x7fffffff / 1000) ? seconds : null
+}
+
 /** Owns both accepted sockets for one bounded conversation; no shared connection state. */
-export function relaySockets(browser: WebSocket, upstream: WebSocket) {
+export function relaySockets(browser: WebSocket, upstream: WebSocket, sessionLimitSeconds = 600) {
   let closed = false
-  const timer = setTimeout(() => finish(1000, 'Conversation time limit'), 180000)
+  const timer = setTimeout(() => finish(1000, 'Conversation time limit'), sessionLimitSeconds * 1000)
   function finish(code: number, reason: string) {
     if (closed) return
     closed = true

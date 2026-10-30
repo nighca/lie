@@ -31,7 +31,24 @@ The user completed cf login and root verified valid authentication on 2026-10-23
 
 The upstream is fixed to `https://xrobo-io.qiniuapi.com/v1/ws/`. The Worker constructs `Authorization`, `Device-Id`, random per-connection `Client-Id`, `Protocol-Version: 1`, and `X-Agent-ID` headers from server bindings. It never accepts an upstream URL, management key, device ID or agent ID from a browser parameter. Upstream rejection/error is sanitized to 502; private response bodies are not returned.
 
-Once upgraded, the Worker forwards text and ArrayBuffer frames both ways, explicitly sets `binaryType = 'arraybuffer'`, and propagates closure/error to both peers. It does not interpret game MCP payloads. The upstream handshake has a 10-second timeout which is cleared after the upgrade; each relay has a 3-minute deadline and a 64KiB per-frame limit. Oversized frames close with 1009; transport failures close with 1011; abnormal close 1006 is normalized before sending. There is no shared mutable connection state, reconnect, claim of global rate limiting or browser resource lease.
+Once upgraded, the Worker forwards text and ArrayBuffer frames both ways, explicitly sets `binaryType = 'arraybuffer'`, and propagates closure/error to both peers. It does not interpret game MCP payloads. The upstream handshake has a 10-second timeout which is cleared after the upgrade; each relay has a configurable deadline (10 minutes by default) and a 64KiB per-frame limit. Oversized frames close with 1009; transport failures close with 1011; abnormal close 1006 is normalized before sending. There is no shared mutable connection state, reconnect, claim of global rate limiting or browser resource lease.
+
+### Voice connection deadline
+
+`VOICE_MAX_SESSION_SECONDS` is a non-secret, server-owned text binding. Its default is `600` seconds (10 minutes). Each connection starts this clock when the gateway creates the relay after the upstream upgrade, including subsequent browser audio/permission/hello preparation. It does not start at gameplay readiness, pause for silence, or reset on traffic. Expiry closes both peers with code `1000` and reason `Conversation time limit`.
+
+Set a configuration-process environment variable before running the gateway or building the deployment:
+
+```sh
+VOICE_MAX_SESSION_SECONDS=900 npm run dev --workspace @lie/gateway
+VOICE_MAX_SESSION_SECONDS=900 npm run build
+```
+
+These commands are configuration examples, not a request to start or deploy services. `cloudflare.config.ts` maps that process value to `bindings.text(...)`, so the production Build Output carries the chosen text binding. With no override it carries `600`. Rebuild and publish normally for a production change; changing a shell variable alone does not update deployed or established connections. This value is not a `VITE_*` variable, provider credential or browser parameter. The supported override above is the configuration process environment; do not rely on putting this setting in `.dev.vars` (its precedence against a declared text binding has not been verified here). The existing `.env.example` continues to cover the separate credential setup.
+
+Accepted configuration is a decimal string integer from `1` through `2147483` seconds, ensuring the millisecond timer does not exceed `2147483647`. Zero, negative, fractional, whitespace-padded, exponential, non-finite and larger values are rejected; there is no unlimited sentinel. Invalid configuration returns `500 Invalid voice session limit configuration` on the WebSocket upgrade route before opening the provider. Health/static delivery remains available; `/api/voice/status` still reports credential availability only. Runtime callers with the binding absent also fall back to `600`.
+
+This is independent of the browser's cumulative game budget and provider idle timeout. A 600-second game does not get a guaranteed full 600 seconds in one connection because preparation consumes part of the same connection deadline. Editor/shared content remains author-configured without a new business duration maximum. Reconnecting creates another bounded connection; this is not a per-visitor, per-game or account spending cap. See [implementation and validation](../../docs/voice-session-limit/implementation.md).
 
 ### Restricted test access, not a public allocation policy
 

@@ -1,6 +1,6 @@
 # 单次语音180秒限制：现状与选择
 
-2026-10-30（Asia/Shanghai）读取；**仅调查与设计，未授权或实施限制/配置变更**。源码基线 `60c11f72b71ead4b8e744f2281d5dbecb796d11a`，专用分支 `codex/lie-voice-session-limit`，worktree `/Users/nighca/.codex/worktrees/lie-voice-session-limit/lie`。本任务与播放器流畅性修复分离，不依赖、改写或提交其工作树/commits。中央project-plan/development由总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 统一维护。
+2026-10-30（Asia/Shanghai）实施前调查快照。用户随后明确选择方案B并批准默认10分钟（600秒），计时仍包含准备阶段；见[实施与验证](implementation.md)。本文保留原始比较和未选择方案，不代表仍待选择或其他方案已获实施授权。源码基线 `60c11f72b71ead4b8e744f2281d5dbecb796d11a`，专用分支 `codex/lie-voice-session-limit`，worktree `/Users/nighca/.codex/worktrees/lie-voice-session-limit/lie`。本任务与播放器流畅性修复分离，不依赖、改写或提交其工作树/commits。中央project-plan/development由总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 统一维护。
 
 ## 结论
 

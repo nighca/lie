@@ -1,0 +1,47 @@
+{
+  "implementationBase": "2886bd90fc299a7627b9abbef6cf4c1bd8a79efb",
+  "sourceBase": "60c11f72b71ead4b8e744f2281d5dbecb796d11a",
+  "runtime": "Node.js v24.22.1; npm 11.19.1; cf 1.0.0-beta.18",
+  "productionTextBinding": {
+    "default": {
+      "type": "text",
+      "value": "600"
+    },
+    "override": {
+      "type": "text",
+      "value": "17"
+    },
+    "restored": {
+      "type": "text",
+      "value": "600"
+    }
+  },
+  "checks": {
+    "rootTypecheck": "passed",
+    "rootTest": "passed",
+    "rootBuild": "passed",
+    "gatewayTests": 34,
+    "webTests": 357,
+    "scriptTests": 33,
+    "characterAnimationTests": 80,
+    "coreTests": 52,
+    "uiTests": 59,
+    "voiceTests": 40,
+    "gatewayOverrideBuild": "passed",
+    "gatewayDefaultRestoredBuild": "passed"
+  },
+  "sourceSha256": {
+    "apps/gateway/src/index.ts": "3db329f3d715c3bf2db0773fb3776a24b39dca3927d9c16d15be070c5e51863d",
+    "apps/gateway/cloudflare.config.ts": "4e022d04b32b97224a93a4def861c6d867ebcc8ae145a2a537cce2f98bfde558",
+    "apps/gateway/test/gateway.test.ts": "fef28e84b7c37202a446d10385dcb26b29f2b85761ca086ddc6b7e5eb64594fe",
+    "apps/gateway/test/session-limit.test.ts": "bae05f0d886d5f9ce12f5576a23e9e5e47d2481be46dd3e3cc7102301eea55d4",
+    "apps/gateway/test/session-limit-config.test.ts": "6819c2ec03f7cba95df24b23cec72a48dc844c5d85a39399d4cfa5b2d16ab5f6"
+  },
+  "limits": [
+    "No production deployment or account/resource operations",
+    "No real provider, microphone or 600-second live voice acceptance",
+    "workerd route uses isolated fake upstream",
+    "Default remains relay-created time including browser preparation",
+    "No UGC/game-budget/cumulative-spending changes"
+  ]
+}
