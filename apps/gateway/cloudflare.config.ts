@@ -5,6 +5,7 @@ export default defineConfig({
     name: 'lie-game',
     entrypoint: './src/index.ts',
     compatibilityDate: '2026-10-23',
+    limits: { cpuMs: 30000 },
     assets: { notFoundHandling: 'single-page-application', runWorkerFirst: ['/api/*', '/games/*', '/static/*', '/assets/*'] },
     env: {
       ASSETS: bindings.assets(),
