@@ -5,6 +5,7 @@ import { ProductHeader, UiButton, UiDialog } from '@lie/ui'
 import type { GameDefinition } from '@lie/game-core'
 
 import App from './App.vue'
+import PageVersion from './PageVersion.vue'
 import Editor from './editor/Editor.vue'
 import { createRemixDraft, DRAFT_KEY, saveDraft, type EditorDraft } from './editor/draft'
 import { decodeSharedGame, SHARE_URL_LIMIT } from './editor/share'
@@ -16,6 +17,7 @@ import type { CharacterPreset } from './presentation/characterPresets'
 import type { PresetLoadStatus } from './presentation/characterPresetLoader'
 
 const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; catalog: readonly CaseSummary[]; characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus; loadCharacterPresets?: () => Promise<readonly CharacterPreset[] | null>; demo: boolean }>()
+const pageBuild = import.meta.env.DEV ? null : import.meta.env.LIE_PAGE_BUILD
 const route = useRoute()
 const router = useRouter()
 const controller = shallowRef<GameController | null>(null)
@@ -202,6 +204,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
         </div>
       </section>
     </main>
+    <footer class="home-version"><PageVersion :build="pageBuild" /></footer>
   </div>
   <UiDialog :open="remixOpen" title="改编案件" @close="cancelRemix">
     <p>改编会打开完整案件，包括答案、结局和人物设定。</p>

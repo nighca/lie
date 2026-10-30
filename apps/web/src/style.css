@@ -148,6 +148,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .home-shell > .lie-product-header { margin-bottom: 0; }
+.home-version { flex-shrink: 0; margin-top: 12px; }
 .home-content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; margin: 34px 0 0; align-items: start; }
 .home-intro { position: sticky; top: 30px; padding: 12px 0 0; min-width: 0; }
 .home-intro h1 { font-size: 52px; line-height: 1.24; letter-spacing: -1.8px; margin: 0 0 18px; font-weight: 850; }

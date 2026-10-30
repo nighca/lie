@@ -1,12 +1,16 @@
+import { fileURLToPath } from 'node:url'
+
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 import { staticAssets } from './build/static-assets.mjs'
 import { officialCases } from './build/official-cases'
+import { readPageBuild } from './build/page-version'
 
 const gatewayUrl = process.env.LIE_VOICE_GATEWAY_URL ?? 'http://127.0.0.1:8787'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  define: { 'import.meta.env.LIE_PAGE_BUILD': JSON.stringify(command === 'build' ? readPageBuild(fileURLToPath(new URL('../..', import.meta.url))) : null) },
   plugins: [officialCases(), staticAssets(), vue(), {
     name: 'lie-main-preview-status',
     apply: 'serve',
@@ -31,4 +35,4 @@ export default defineConfig({
       '/api/voice': { target: gatewayUrl, ws: true },
     },
   },
-})
+}))
