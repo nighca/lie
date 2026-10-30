@@ -1,0 +1,75 @@
+{
+  "sourceCommit": "087d72a2e6e1395231ad52ee15b1bfe8011fee69",
+  "userReport": {
+    "workersPaidUpgrade": "reported completed by user via coordinator",
+    "reportDate": "2026-10-30",
+    "notAnApiClassification": true
+  },
+  "authentication": {
+    "adapter": "Existing official connector internal OAuth for settings/entitlements; existing pinned cf CLI for deployment/Worker identity",
+    "sameAccountSelectionAsPrevious": true,
+    "credentialFileReadOrTokenExported": false,
+    "newLoginOrPermissions": false
+  },
+  "settings": {
+    "schemaSource": "Cloudflare official OpenAPI GET /accounts/{account_id}/workers/scripts/{script_name}/settings",
+    "cpuSchema": "limits.cpu_ms integer, milliseconds",
+    "readAtUTC": "2026-10-30T12:39:00.993Z",
+    "worker": "lie-game",
+    "requestSucceeded": true,
+    "limitsPresent": false,
+    "cpuMsPresent": false,
+    "cpuMs": null,
+    "effectiveNumericCpuStatus": "unknown",
+    "defaultInserted": false
+  },
+  "entitlements": {
+    "schemaSource": "Cloudflare official OpenAPI GET /accounts/{account_id}/entitlements; feature.key and allocation",
+    "readAtUTC": "2026-10-30T12:39:04.659Z",
+    "requestSucceeded": true,
+    "runtimeWorkersPlanAndCpuMatches": [],
+    "excludedBuildOnlyKeys": [
+      "workers_builds.cpu"
+    ],
+    "buildAllocationNotTreatedAsRuntimeCpu": true,
+    "independentApiPlanClassification": "unknown"
+  },
+  "currentWorkerContext": {
+    "readAtUTC": "2026-10-30T12:39:50.018Z",
+    "worker": "lie-game",
+    "workerIdentityMatchesPrevious": true,
+    "lieAgencyDomainMatched": true,
+    "deployment": {
+      "created_on": "2026-10-30T12:09:28.789204Z",
+      "versions": [
+        {
+          "version_id": "380959e2-51b8-489f-b76b-1db289f30cba",
+          "percentage": 100
+        }
+      ],
+      "gitMessage": "Verified CI build 12c4e4d29135c7e30083c8ecf08c2fc95bcaf150"
+    },
+    "atomicSettingsVersionSnapshot": false
+  },
+  "conclusions": {
+    "paidCompletionSource": "user report",
+    "effectiveCpuMs": null,
+    "real180SecondAcceptance": "not run",
+    "real600SecondAcceptance": "not run",
+    "historical597EvidenceChanged": false
+  },
+  "operations": {
+    "subscriptions403Repeated": false,
+    "accountOrConfigOrDeploymentChanges": false,
+    "voiceOrSyntheticSocketOrProfileTraffic": false,
+    "servicesOrBrowserOpened": false,
+    "cfGeneratedAccountSelectionCache": "Owned .cloudflare/cache/cloudflare-account.json appeared during 12:39 metadata queries after clean status; moved without opening contents into this worktree ignored tmp/voice-cpu-options/post-upgrade-owned-cf-cache."
+  },
+  "manualPlayStatus": {
+    "userAgreedToSelfTest": true,
+    "target": "One new connection, same character, approximately 210 seconds, then manually stop",
+    "actualStartOrEndProvided": false,
+    "notificationUsedAsConnectionStart": false,
+    "agentInitiatedTrafficOrNewLogQuery": false
+  }
+}

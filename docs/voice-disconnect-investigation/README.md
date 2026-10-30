@@ -1,6 +1,6 @@
 # 线上约3分钟语音中断：运行证据与下一步
 
-最新用户事实与决定（2026-10-30）：用户已亲自确认Workers为Free，CPU time limit未显示，有效数值仍未知；随后明确选择Paid，并表示会在控制台手动开通，尚未报告完成或核实生效。见[两路线比较、费用与后续验证](cpu-options.md)。未修改套餐/配置或创建真实语音流量；此前[API结果](settings-evidence.json)保留历史状态，不从缺字段/2019ms推定限额。
+最新状态（2026-10-30）：用户已报告Workers Paid升级完成；升级后只读settings仍未返回CPU限额，相关entitlements未提供运行档位/CPU证据，因此有效数值仍未知，不能默认30000ms。当前部署与域名已核，见[升级后证据](post-upgrade-evidence.json)和[后续手动试玩步骤](cpu-options.md#用户报告完成升级后的只读核查与手动试玩)。本专项未改套餐/配置或代理执行真实语音验证；用户已确认本人试玩并在结束后反馈，实际窗口尚待提供。旧Free/597/API证据保留历史身份。
 
 2026-10-30只读调查；专用WT `/Users/nighca/.codex/worktrees/lie-voice-disconnect-investigation/lie`，branch `codex/lie-voice-disconnect-investigation`，调查起点与执行者冻结交付时HEAD为 `95cb5cf02277a5c3f380d0a18158d3672a9bfcdd`，初始clean。此交付只新增本目录，未修改应用、CPU/会话配置、账号、provider或中央计划；专项root审查后保存任务分支文档提交，不操作main/push。
 
