@@ -1,0 +1,12 @@
+{
+  "base": "60c11f72b71ead4b8e744f2281d5dbecb796d11a",
+  "sourceSha256": "5c87eb2ec1e59a0e1c86c364eeb50dd0db2ceb683ea632538498fa9c9025a716",
+  "runtime": "v24.17.0",
+  "mode": "actual base relay function with synthetic peers and fake clock; no workerd/network",
+  "outcomes": [
+    "180000ms timer; traffic does not refresh; paired/idempotent timeout close; late messages dropped",
+    "early browser close clears timer and closes upstream once",
+    "independent relay lifetimes; upstream error closes one pair; remaining pair still expires"
+  ],
+  "passed": true
+}
