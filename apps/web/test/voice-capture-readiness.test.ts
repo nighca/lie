@@ -12,7 +12,7 @@ it('keeps the controller connecting after the transport opens until microphone c
   const stopMic = vi.fn(async () => {})
   const voice = createLiveVoicePort({
     createChannel: () => channel,
-    createPlayer: () => ({ enqueue() {}, stop() {} }),
+    createPlayer: () => ({ enqueue() {}, flush() {}, stop() {} }),
     createContext: () => ({ state: 'running', resume: async () => {}, close: async () => {} }) as unknown as AudioContext,
     openMic: () => new Promise(resolve => { grant = resolve }),
     fetchStatus: async () => new Response('{"status":"ready"}'),

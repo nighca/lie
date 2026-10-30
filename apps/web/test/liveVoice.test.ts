@@ -11,9 +11,10 @@ function setupBridge(voiceId: string | null = null, diagnostics: { onPlayback?: 
   let drained = () => {}
   let inputMeter = (_level: number) => {}
   let outputMeter = (_level: number) => {}
+  let playbackFailure = () => {}
   const stopMic = vi.fn(async () => {})
   const context = { currentTime: 0, state: 'running', resume: vi.fn(async () => {}), close: vi.fn(async () => {}) }
-  const player = { enqueue: vi.fn(), stop: vi.fn((_reason?: import('@lie/voice').PlaybackStopReason) => drained()) }
+  const player = { enqueue: vi.fn(), flush: vi.fn(), stop: vi.fn((_reason?: import('@lie/voice').PlaybackStopReason) => drained()) }
   const channel = { open: vi.fn(async () => {}), startInput: vi.fn(), input: vi.fn(), stopInput: vi.fn(), interrupt: vi.fn(), close: vi.fn() }
   const onEvent = vi.fn()
   const readContext = vi.fn(() => ({ background: '公共', characterId: 'one', characterName: '甲', profile: '甲自己的设定', history: [], systemPrompt: '角色提示' }))
@@ -24,12 +25,12 @@ function setupBridge(voiceId: string | null = null, diagnostics: { onPlayback?: 
     ...diagnostics,
     fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready' }))),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
-    createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void, onPlayback?: import('@lie/voice').PlaybackObserver) { expect(onPlayback).toBe(diagnostics.onPlayback); drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
+    createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void, onPlayback?: import('@lie/voice').PlaybackObserver, onError: () => void = () => {}) { playbackFailure = onError; expect(onPlayback).toBe(diagnostics.onPlayback); drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
     openMic: vi.fn(async (value: { onFrame(data: Uint8Array): void; onLevel?: (level: number) => void }): Promise<{ stop(): Promise<void> }> => { onFrame = value.onFrame; inputMeter = value.onLevel ?? (() => {}); return { stop: stopMic } }),
     createContext: () => context as unknown as AudioContext,
   }
   const connection = createLiveVoicePort(dependencies).create(scope)
-  return { connection, dependencies, channel, player, context, onEvent, readContext, stopMic, expire() { current = false; abort.abort() }, options: () => options!, inputMeter: (level: number) => inputMeter(level), outputMeter: (level: number) => outputMeter(level), drain: () => drained(), frame: (data: Uint8Array) => onFrame(data) }
+  return { connection, dependencies, channel, player, context, onEvent, readContext, stopMic, expire() { current = false; abort.abort() }, options: () => options!, inputMeter: (level: number) => inputMeter(level), outputMeter: (level: number) => outputMeter(level), drain: () => drained(), playbackFailure: () => playbackFailure(), frame: (data: Uint8Array) => onFrame(data) }
 }
 
 const format = { format: 'pcm' as const, sampleRate: 16000, channels: 1 as const, bitsPerSample: 16 as const, frameDuration: 20 }
@@ -354,5 +355,28 @@ it('isolates failing answer diagnostics and records normal TTS boundaries withou
     { type: 'answer', state: 'start', audioTime: 0, contextState: 'running' },
     { type: 'answer', state: 'stop', audioTime: 0, contextState: 'running' },
   ])
+  bridge.connection.close()
+})
+
+
+it('reports a normal-stop flush failure instead of leaving the short tail silently pending', async () => {
+  const bridge = setupBridge()
+  await bridge.connection.open()
+  bridge.player.flush.mockImplementation(() => { throw new Error('Playback unavailable') })
+  bridge.options().onEvent({ type: 'tts', state: 'stop', text: null, aborted: false })
+  expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'error' })
+  bridge.connection.close()
+})
+
+
+it('drops a late asynchronous playback failure from an expired conversation', async () => {
+  const bridge = setupBridge()
+  await bridge.connection.open()
+  bridge.playbackFailure()
+  expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'error' })
+  bridge.onEvent.mockClear()
+  bridge.expire()
+  bridge.playbackFailure()
+  expect(bridge.onEvent).not.toHaveBeenCalled()
   bridge.connection.close()
 })

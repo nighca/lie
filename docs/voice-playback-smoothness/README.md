@@ -1,5 +1,7 @@
 # 语音播放流畅性：当前审计与待确认方案
 
+当前追加工作：用户已批准100ms起播缓冲，见[独立实现与验证](prebuffer-implementation.md)。当前复验使用[prebuffer fixture](prebuffer-browser-qa.html)；旧browser-qa/JSON/source-hashes保留为5e97源码环境的历史证据，不能直接套到当前播放器。
+
 2026-10-30实施前审计快照。用户随后已批准并完成第一步“连续调度修复＋可关闭本地诊断”，见[实施与验证](implementation.md)；本文的预缓冲、淡出与架构候选仍未实施。用户报告：MacBook、手机，通常Chrome外放，AI语音偶尔卡顿或“爆”一下。
 
 ## 当前身份与结论

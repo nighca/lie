@@ -1,0 +1,903 @@
+{
+  "schedulingPassed": true,
+  "cases": [
+    {
+      "rate": 16000,
+      "mode": "threshold-continuous",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.016,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.036000000000000004,
+          "startTime": 0.096,
+          "endTime": 0.116,
+          "renderLead": 0.016,
+          "gap": null,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0.19999992847442627,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.036000000000000004,
+          "queueAheadAfter": 0.05600000000000001,
+          "startTime": 0.116,
+          "endTime": 0.136,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.05600000000000001,
+          "queueAheadAfter": 0.076,
+          "startTime": 0.136,
+          "endTime": 0.156,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0.10000002384185791,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.076,
+          "queueAheadAfter": 0.09599999999999999,
+          "startTime": 0.156,
+          "endTime": 0.176,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0.10000002384185791,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.09599999999999999,
+          "queueAheadAfter": 0.11599999999999998,
+          "startTime": 0.176,
+          "endTime": 0.19599999999999998,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.17,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 2.100000023841858,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.025999999999999968,
+          "queueAheadAfter": 0.04599999999999996,
+          "startTime": 0.19599999999999998,
+          "endTime": 0.21599999999999997,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 640,
+          "queueAhead": 0,
+          "audioTime": 0.02,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 960,
+          "queueAhead": 0,
+          "audioTime": 0.04,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 1280,
+          "queueAhead": 0,
+          "audioTime": 0.06,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0.08,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "threshold",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0.08,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 16000,
+      "mode": "short-flush",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.016,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.03,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.036000000000000004,
+          "startTime": 0.046,
+          "endTime": 0.066,
+          "renderLead": 0.016,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "flush",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.03,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 16000,
+      "mode": "timeout",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.016,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.1,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.036000000000000004,
+          "startTime": 0.116,
+          "endTime": 0.136,
+          "renderLead": 0.016,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "timeout",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.1,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 16000,
+      "mode": "recovery",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.016,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 1600,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.116,
+          "startTime": 0.016,
+          "endTime": 0.116,
+          "renderLead": 0.016,
+          "gap": null,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.22,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0.19999992847442627,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.036000000000000004,
+          "startTime": 0.236,
+          "endTime": 0.256,
+          "renderLead": 0.016,
+          "gap": 0.11999999999999998,
+          "queueExhausted": true
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.23,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 111.40000009536743,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.025999999999999995,
+          "queueAheadAfter": 0.04600000000000001,
+          "startTime": 0.256,
+          "endTime": 0.276,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "threshold",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.12,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "timeout",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.22,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 16000,
+      "mode": "stop-old-timer",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 2,
+      "expectedIdle": 2,
+      "renderLead": 0.016,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.01,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.036,
+          "startTime": 0.026000000000000002,
+          "endTime": 0.046,
+          "renderLead": 0.016,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.01,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "flush",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.01,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 16000,
+      "mode": "normal-TTS-stop-drain",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "noEarlyListening": true,
+      "events": [
+        "speaking",
+        "listening"
+      ],
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.036000000000000004,
+          "startTime": 0.016,
+          "endTime": 0.036000000000000004,
+          "renderLead": 0.016,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "flush",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 48000,
+      "mode": "threshold-continuous",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.005333333333333333,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.025333333333333333,
+          "startTime": 0.08533333333333333,
+          "endTime": 0.10533333333333333,
+          "renderLead": 0.005333333333333333,
+          "gap": null,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.025333333333333333,
+          "queueAheadAfter": 0.04533333333333332,
+          "startTime": 0.10533333333333333,
+          "endTime": 0.12533333333333332,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0.10000002384185791,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.04533333333333332,
+          "queueAheadAfter": 0.06533333333333331,
+          "startTime": 0.12533333333333332,
+          "endTime": 0.14533333333333331,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.06533333333333331,
+          "queueAheadAfter": 0.0853333333333333,
+          "startTime": 0.14533333333333331,
+          "endTime": 0.1653333333333333,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.08,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.0853333333333333,
+          "queueAheadAfter": 0.10533333333333329,
+          "startTime": 0.1653333333333333,
+          "endTime": 0.1853333333333333,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.17,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0.10000002384185791,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.015333333333333282,
+          "queueAheadAfter": 0.03533333333333327,
+          "startTime": 0.1853333333333333,
+          "endTime": 0.20533333333333328,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 640,
+          "queueAhead": 0,
+          "audioTime": 0.02,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 960,
+          "queueAhead": 0,
+          "audioTime": 0.04,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 1280,
+          "queueAhead": 0,
+          "audioTime": 0.06,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "pending",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0.08,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "threshold",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0.08,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0.25,
+      "differentSamples": 5,
+      "seamMatchesSingleSource": false,
+      "contextState": "closed"
+    },
+    {
+      "rate": 48000,
+      "mode": "short-flush",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.005333333333333333,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.03,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.025333333333333333,
+          "startTime": 0.035333333333333335,
+          "endTime": 0.05533333333333333,
+          "renderLead": 0.005333333333333333,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "flush",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.03,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 48000,
+      "mode": "timeout",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.005333333333333333,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.1,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.02533333333333332,
+          "startTime": 0.10533333333333333,
+          "endTime": 0.12533333333333332,
+          "renderLead": 0.005333333333333333,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "timeout",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.1,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 48000,
+      "mode": "recovery",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 1,
+      "expectedIdle": 1,
+      "renderLead": 0.005333333333333333,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 1600,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.10533333333333333,
+          "startTime": 0.005333333333333333,
+          "endTime": 0.10533333333333333,
+          "renderLead": 0.005333333333333333,
+          "gap": null,
+          "queueExhausted": false
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.22,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 0.10000002384185791,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.02533333333333332,
+          "startTime": 0.22533333333333333,
+          "endTime": 0.24533333333333332,
+          "renderLead": 0.005333333333333333,
+          "gap": 0.12,
+          "queueExhausted": true
+        },
+        {
+          "type": "schedule",
+          "audioTime": 0.23,
+          "contextState": "suspended",
+          "arrivalIntervalMs": 111.69999992847443,
+          "sampleCount": 320,
+          "queueAheadBefore": 0.01533333333333331,
+          "queueAheadAfter": 0.0353333333333333,
+          "startTime": 0.24533333333333332,
+          "endTime": 0.2653333333333333,
+          "renderLead": 0,
+          "gap": 0,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "threshold",
+          "pendingSamples": 1600,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.12,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "timeout",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.22,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0.25,
+      "differentSamples": 2,
+      "seamMatchesSingleSource": false,
+      "contextState": "closed"
+    },
+    {
+      "rate": 48000,
+      "mode": "stop-old-timer",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "timerDidNotRestart": true,
+      "idle": 2,
+      "expectedIdle": 2,
+      "renderLead": 0.005333333333333333,
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0.01,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.025333333333333333,
+          "startTime": 0.015333333333333334,
+          "endTime": 0.035333333333333335,
+          "renderLead": 0.005333333333333333,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.01,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "flush",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0.01,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    },
+    {
+      "rate": 48000,
+      "mode": "normal-TTS-stop-drain",
+      "schedulingPassed": true,
+      "pendingHeld": true,
+      "noEarlyListening": true,
+      "events": [
+        "speaking",
+        "listening"
+      ],
+      "scheduled": [
+        {
+          "type": "schedule",
+          "audioTime": 0,
+          "contextState": "suspended",
+          "arrivalIntervalMs": null,
+          "sampleCount": 320,
+          "queueAheadBefore": 0,
+          "queueAheadAfter": 0.025333333333333333,
+          "startTime": 0.005333333333333333,
+          "endTime": 0.025333333333333333,
+          "renderLead": 0.005333333333333333,
+          "gap": null,
+          "queueExhausted": false
+        }
+      ],
+      "bufferEvents": [
+        {
+          "type": "buffer",
+          "state": "waiting",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        },
+        {
+          "type": "buffer",
+          "state": "flush",
+          "pendingSamples": 320,
+          "queueAhead": 0,
+          "audioTime": 0,
+          "contextState": "suspended"
+        }
+      ],
+      "silentInterior": 0,
+      "maxDifference": 0,
+      "differentSamples": 0,
+      "seamMatchesSingleSource": true,
+      "contextState": "closed"
+    }
+  ]
+}

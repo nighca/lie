@@ -1,0 +1,107 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LIE 100ms prebuffer native acceptance</title>
+<h1>LIE 100ms prebuffer native acceptance</h1>
+<p>Synthetic PCM and OfflineAudioContext only. No microphone, provider or speaker output. Scheduling checks do not certify real-time hardware or seam equivalence.</p>
+<button id="run">Run prebuffer checks</button>
+<pre id="result">Ready</pre>
+<script type="module">
+import { createPcmPlayer } from '../../packages/voice/src/player.ts'
+import { createLiveVoicePort } from '../../apps/web/src/application/liveVoice.ts'
+const format = { format:'pcm', sampleRate:16000, channels:1, bitsPerSample:16, frameDuration:20 }
+const wait = milliseconds => new Promise(resolve => setTimeout(resolve,milliseconds))
+function pcm(samples=320) { const data=new Uint8Array(samples*2),view=new DataView(data.buffer); for(let i=0;i<samples;i++)view.setInt16(i*2,8192,true); return data }
+function setup(rate) {
+  const native=new OfflineAudioContext(1,rate/2,rate)
+  let time=0
+  const context={
+    sampleRate:rate, get currentTime(){return time},get state(){return native.state},destination:native.destination,
+    createBuffer:native.createBuffer.bind(native),createBufferSource:native.createBufferSource.bind(native),createAnalyser:native.createAnalyser.bind(native),
+    addEventListener:native.addEventListener.bind(native),removeEventListener:native.removeEventListener.bind(native),
+    resume:async()=>{},close:async()=>{},
+  }
+  return {native,context,time(value){time=value}}
+}
+async function renderEvidence(f,events,windows) {
+  const rendered=await f.native.startRendering(),signal=rendered.getChannelData(0)
+  const reference=new OfflineAudioContext(1,signal.length,f.context.sampleRate)
+  for(const {start,samples}of windows) {
+    const buffer=reference.createBuffer(1,samples,16000);buffer.getChannelData(0).fill(.25)
+    const node=reference.createBufferSource();node.buffer=buffer;node.connect(reference.destination);node.start(start)
+  }
+  const baseline=(await reference.startRendering()).getChannelData(0)
+  let maxDifference=0,differentSamples=0,silentInterior=0
+  for(let i=0;i<signal.length;i++) {
+    const delta=Math.abs(signal[i]-baseline[i]);maxDifference=Math.max(maxDifference,delta)
+    if(delta>1e-6)differentSamples++
+    if(baseline[i]>.2&&Math.abs(signal[i])<1e-6)silentInterior++
+  }
+  const scheduled=events.filter(event=>event.type==='schedule')
+  return {scheduled,bufferEvents:events.filter(event=>event.type==='buffer'),silentInterior,maxDifference,differentSamples,seamMatchesSingleSource:maxDifference<1e-6,contextState:f.native.state}
+}
+async function runPlayer(rate,mode) {
+  const f=setup(rate),events=[];let idle=0;const player=createPcmPlayer(f.context,()=>idle++,undefined,event=>events.push(event))
+  const lead=256/rate,windows=[];let pendingHeld=true,timerDidNotRestart=true
+  try {
+    if(mode==='threshold-continuous') {
+      for(let packet=0;packet<4;packet++){f.time(packet*.02);player.enqueue(pcm(),format)}
+      pendingHeld=!events.some(event=>event.type==='schedule')&&idle===0
+      f.time(.08);player.enqueue(pcm(),format)
+      f.time(.17);player.enqueue(pcm(),format)
+      windows.push({start:.08+lead,samples:1920})
+    } else if(mode==='short-flush') {
+      player.enqueue(pcm(),format);pendingHeld=idle===0&&!events.some(event=>event.type==='schedule')
+      f.time(.03);player.flush();player.flush();windows.push({start:.03+lead,samples:320})
+    } else if(mode==='timeout') {
+      player.enqueue(pcm(),format);pendingHeld=idle===0&&!events.some(event=>event.type==='schedule')
+      f.time(.1);await wait(110);windows.push({start:.1+lead,samples:320})
+    } else if(mode==='recovery') {
+      player.enqueue(pcm(1600),format);f.time(.12);player.enqueue(pcm(),format)
+      f.time(.22);await wait(110)
+      f.time(.23);player.enqueue(pcm(),format)
+      windows.push({start:lead,samples:1600},{start:.22+lead,samples:640})
+    } else if(mode==='stop-old-timer') {
+      player.enqueue(pcm(),format);player.stop('stt')
+      f.time(.01);player.enqueue(pcm(),format);player.flush()
+      await wait(110)
+      timerDidNotRestart=events.filter(event=>event.type==='schedule').length===1
+      windows.push({start:.01+lead,samples:320})
+    }
+    const evidence=await renderEvidence(f,events,windows)
+    const expectedIdle=mode==='stop-old-timer'?2:1
+    const gaps=evidence.scheduled.slice(1).filter(event=>!event.queueExhausted&&event.gap>1e-8)
+    const schedulingPassed=pendingHeld&&timerDidNotRestart&&idle===expectedIdle&&evidence.silentInterior===0&&gaps.length===0&&evidence.contextState==='closed'
+    return {rate,mode,schedulingPassed,pendingHeld,timerDidNotRestart,idle,expectedIdle,renderLead:lead,...evidence}
+  } finally {player.stop()}
+}
+async function runBridge(rate) {
+  const f=setup(rate),events=[],audio=[];let receive=()=>{}
+  const connection=createLiveVoicePort({
+    createPlayer:createPcmPlayer,createContext:()=>f.context,onPlayback:event=>audio.push(event),
+    createChannel(options){receive=options.onEvent;return{open:async()=>{},close(){},startInput(){},input(){},stopInput(){},interrupt(){}}},
+    openMic:async()=>({stop:async()=>{}}),fetchStatus:async()=>new Response('{"status":"ready"}'),
+  }).create({sessionId:'synthetic',characterId:'one',epoch:1,voiceId:null,signal:new AbortController().signal,isCurrent:()=>true,
+    readContext:()=>({background:'synthetic',characterId:'one',characterName:'A',profile:'synthetic',history:[],systemPrompt:'synthetic'}),
+    onEvent:event=>{if(event.type!=='audioLevel')events.push(event.type)},
+  })
+  try {
+    await connection.open();receive({type:'ready',format});receive({type:'tts',state:'start',text:null});receive({type:'audio',data:pcm()})
+    const pendingHeld=!audio.some(event=>event.type==='schedule')&&!events.includes('listening')
+    receive({type:'tts',state:'stop',text:null,aborted:false})
+    const noEarlyListening=!events.includes('listening')
+    const evidence=await renderEvidence(f,audio,[{start:256/rate,samples:320}])
+    return {rate,mode:'normal-TTS-stop-drain',schedulingPassed:pendingHeld&&noEarlyListening&&events.at(-1)==='listening'&&evidence.silentInterior===0,pendingHeld,noEarlyListening,events,...evidence}
+  } finally{connection.close()}
+}
+document.querySelector('#run').onclick=async()=>{
+  const result=document.querySelector('#result');result.textContent='Running native offline rendering…'
+  try {
+    const cases=[]
+    for(const rate of[16000,48000]){
+      for(const mode of['threshold-continuous','short-flush','timeout','recovery','stop-old-timer'])cases.push(await runPlayer(rate,mode))
+      cases.push(await runBridge(rate))
+    }
+    result.textContent=JSON.stringify({schedulingPassed:cases.every(item=>item.schedulingPassed),cases},null,2)
+  }catch(error){result.textContent=JSON.stringify({schedulingPassed:false,error:String(error)})}
+}
+</script>

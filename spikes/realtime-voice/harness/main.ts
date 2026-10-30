@@ -28,7 +28,7 @@ async function start() {
   let uploading = false
   let playing = false
   let mic: Awaited<ReturnType<typeof openMicrophone>> | null = null
-  const player = createPcmPlayer(context, () => { playing = false; if (!answering && !abort.signal.aborted) status.textContent = '正在聆听（麦克风开启）' })
+  const player = createPcmPlayer(context, () => { playing = false; if (!answering && !abort.signal.aborted) status.textContent = '正在聆听（麦克风开启）' }, undefined, undefined, () => stop('播放失败，麦克风已关闭'))
   const socket = new WebSocket(`ws://${location.host}/voice`)
   socket.binaryType = 'arraybuffer'
   const display = () => { counts.textContent = JSON.stringify(stats, null, 2) }
@@ -70,6 +70,7 @@ async function start() {
         if (event.state === 'sentence_start' && typeof event.text === 'string') append('assistant', event.text)
         if (event.state === 'stop') {
           stats.stops++; answering = false
+          if (event.is_aborted !== true) player.flush()
           if (event.is_aborted !== true && !playing) status.textContent = '正在聆听（麦克风开启）'
           if (event.is_aborted === true) { stats.aborted++; const stoppedAt = performance.now(); player.stop(); stats.abortToPlayerStopMs = Math.round((performance.now() - stoppedAt) * 100) / 100; status.textContent = '已打断，正在聆听（麦克风仍开）' }
         }

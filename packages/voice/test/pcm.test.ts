@@ -34,7 +34,7 @@ describe('PCM audio', () => {
   it('schedules consecutive buffers and stops all pending playback on interrupt', () => {
     const sources: { onended: (() => void) | null; start: ReturnType<typeof vi.fn>; stop: ReturnType<typeof vi.fn>; disconnect: ReturnType<typeof vi.fn> }[] = []
     const context = {
-      currentTime: 1,
+      currentTime: 1, sampleRate: 48000,
       destination: {},
       createBuffer: (_: number, size: number, rate: number) => ({ duration: size / rate, copyToChannel: vi.fn() }),
       createBufferSource: () => {
@@ -48,8 +48,9 @@ describe('PCM audio', () => {
     const format = { format: 'pcm', channels: 1, bitsPerSample: 16, sampleRate: 16000, frameDuration: 20 } as const
     player.enqueue(new Uint8Array(640), format)
     player.enqueue(new Uint8Array(640), format)
-    expect(sources[0]!.start).toHaveBeenCalledWith(1.02)
-    expect(sources[1]!.start).toHaveBeenCalledWith(1.04)
+    player.flush()
+    expect(sources[0]!.start).toHaveBeenCalledWith(1 + 256 / 48000)
+    expect(sources[1]!.start).toHaveBeenCalledWith(1.02 + 256 / 48000)
     sources[0]!.onended?.()
     expect(onIdle).not.toHaveBeenCalled()
     player.stop()
@@ -59,7 +60,8 @@ describe('PCM audio', () => {
     player.stop()
     expect(sources[1]!.stop).toHaveBeenCalledOnce()
     player.enqueue(new Uint8Array(640), format)
-    expect(sources[2]!.start).toHaveBeenCalledWith(1.02)
+    player.flush()
+    expect(sources[2]!.start).toHaveBeenCalledWith(1 + 256 / 48000)
     sources[2]!.onended?.()
     expect(onIdle).toHaveBeenCalledTimes(3)
   })

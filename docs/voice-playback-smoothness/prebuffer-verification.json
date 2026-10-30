@@ -1,0 +1,142 @@
+{
+  "dependency": "5e97cda1bfe4e5621467bb4560cdfea2848b4591",
+  "originalSourceBase": "60c11f72b71ead4b8e744f2281d5dbecb796d11a",
+  "toolchain": "Node24.22.1/npm11.19.1",
+  "checks": {
+    "rootTypes": "passed",
+    "rootTest": "passed",
+    "rootBuild": "passed",
+    "rootWebTests": 367,
+    "voiceTests": 54,
+    "finalWebTargetTests": 32,
+    "finalWebTypes": "passed",
+    "harnessStrictTypes": "passed",
+    "nativeOfflineCases": 12
+  },
+  "sourceSha256": {
+    "packages/voice/src/player.ts": "4b1bdfa0b506a02c4aa2066a43438d8a7ea6afaae03a8e7927538a243ef30ab7",
+    "apps/web/src/application/liveVoice.ts": "a375635e33e482fbfc84e0121256f5bfa3a5c0e24abb3af630629635708efdad",
+    "packages/voice/test/player.test.ts": "18ec436235c66cb67936499a3900d84b06b60cb1a40e3a4e7cb5b31f469c0ea3",
+    "packages/voice/test/pcm.test.ts": "9ad084ac7d23c44c73c8dff38895981efd14496dc255082399b42c0da26e941e",
+    "apps/web/test/liveVoice.test.ts": "f781ebc98a64d9052eb598b9ef6feccfc338fffc8b1fc74183589b6703a318b9",
+    "apps/web/test/liveVoice-prebuffer.test.ts": "8f05190d1207ab2c3f2f6c2add93398cabe055b10bbe57d268e388eb98e811e1",
+    "apps/web/test/voice-capture-readiness.test.ts": "7d01ff2783bb63c76dd7c533584f10ed73c4062a70b93dd3203167ccf7c1b1f1",
+    "spikes/realtime-voice/harness/main.ts": "f174389d85564ad1c4ebfe5ca4f8fcde7d9a21916aa0048b7a73d9899e900f1b",
+    "packages/voice/README.md": "51a828ddf0f98a45417a249c5684b41835edd20ed48ff733a1150fc86c90d2e4",
+    "docs/voice-playback-smoothness/prebuffer-browser-qa.html": "16ce10f442fc4c7b3e86cb6edc596d0b4985a6bce91ab6ec13d918f098f2bdad",
+    "docs/voice-playback-smoothness/prebuffer-browser-results.json": "c7bf9d40ae2460026cbd38ca2a38fed7c8a605a58bdb762f37ae05b071328f1e"
+  },
+  "lockSha256": "2efd70fe940997ce63746a05a6d5574974560a67d6a737f4801e9f9e254e82e0",
+  "productionBundle": {
+    "path": "apps/web/dist/assets/index-JyPHfPjh.js",
+    "sha256": "9b3feb93e4fa4256be304f6dd3bd57cefe26c1c3566f8f9a9dac36414b0497b7",
+    "fixtureMarkersAbsent": true
+  },
+  "nativeSummary": [
+    {
+      "rate": 16000,
+      "mode": "threshold-continuous",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 16000,
+      "mode": "short-flush",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 16000,
+      "mode": "timeout",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 16000,
+      "mode": "recovery",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 16000,
+      "mode": "stop-old-timer",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 16000,
+      "mode": "normal-TTS-stop-drain",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 48000,
+      "mode": "threshold-continuous",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": false,
+      "differentSamples": 5,
+      "maxDifference": 0.25
+    },
+    {
+      "rate": 48000,
+      "mode": "short-flush",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 48000,
+      "mode": "timeout",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 48000,
+      "mode": "recovery",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": false,
+      "differentSamples": 2,
+      "maxDifference": 0.25
+    },
+    {
+      "rate": 48000,
+      "mode": "stop-old-timer",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    },
+    {
+      "rate": 48000,
+      "mode": "normal-TTS-stop-drain",
+      "schedulingPassed": true,
+      "seamMatchesSingleSource": true,
+      "differentSamples": 0,
+      "maxDifference": 0
+    }
+  ],
+  "service": {
+    "port": 5544,
+    "pid": 41535,
+    "session": 75464,
+    "tab": "1910332008",
+    "stopped": true,
+    "exitCode": 1,
+    "retained": false
+  }
+}

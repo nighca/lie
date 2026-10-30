@@ -127,6 +127,7 @@ export function createLiveVoicePort(dependencies: {
                 interruptAnswer('tts-aborted')
               } else {
                 answerEnded = true
+                try { player?.flush() } catch { scope.onEvent({ type: 'error' }); return }
                 if (!playing) answerDrained()
               }
             }
@@ -187,7 +188,7 @@ export function createLiveVoicePort(dependencies: {
               const ended = outputLevel !== 0 && level === 0
               outputLevel = level
               feedback(ended)
-            }, dependencies.onPlayback)
+            }, dependencies.onPlayback, () => { if (current()) scope.onEvent({ type: 'error' }) })
             micReady = dependencies.openMic({
               ...(observe == null ? {} : { onStartup: observe }),
               signal: scope.signal,
