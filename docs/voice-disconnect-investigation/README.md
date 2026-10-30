@@ -1,6 +1,6 @@
 # 线上约3分钟语音中断：运行证据与下一步
 
-最新状态：获准的官方只读API核查已完成，仍未取得有效CPU限额或明确Workers订阅分类；见[API结果](settings-evidence.json)。下一步需账号Dashboard确认，尚未调整资源或创建真实语音流量。
+最新用户事实与决定（2026-10-30）：用户已亲自确认Workers为Free，CPU time limit未显示，有效数值仍未知；随后明确选择Paid，并表示会在控制台手动开通，尚未报告完成或核实生效。见[两路线比较、费用与后续验证](cpu-options.md)。未修改套餐/配置或创建真实语音流量；此前[API结果](settings-evidence.json)保留历史状态，不从缺字段/2019ms推定限额。
 
 2026-10-30只读调查；专用WT `/Users/nighca/.codex/worktrees/lie-voice-disconnect-investigation/lie`，branch `codex/lie-voice-disconnect-investigation`，调查起点与执行者冻结交付时HEAD为 `95cb5cf02277a5c3f380d0a18158d3672a9bfcdd`，初始clean。此交付只新增本目录，未修改应用、CPU/会话配置、账号、provider或中央计划；专项root审查后保存任务分支文档提交，不操作main/push。
 

@@ -1,0 +1,13 @@
+{
+  "sourceSha256": "3db329f3d715c3bf2db0773fb3776a24b39dca3927d9c16d15be070c5e51863d",
+  "equivalentCases": 4042,
+  "syntheticMix": {
+    "binary640ByteFrames": 30000,
+    "shortTextFrames": 600,
+    "originalTextEncodes": 600,
+    "candidateTextEncodes": 0,
+    "frameGuardDispatchesBoth": 30600
+  },
+  "implemented": false,
+  "limitation": "Predicate feasibility and encode-call counts only; not Cloudflare CPU profiling, a native-proxy test, or evidence Free can sustain 180/600 seconds."
+}
