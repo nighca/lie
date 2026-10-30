@@ -7,7 +7,7 @@ import CharacterNameText from './CharacterNameText.vue'
 const props = withDefaults(defineProps<{ name: string; accent?: string | null }>(), { accent: null })
 const emit = defineEmits<{ cancel: [] }>()
 const step = ref(0)
-const timers = [700, 1400, 2100].map((delay, index) => setTimeout(() => { step.value = index + 1 }, delay))
+const timers = [1000, 2000, 3000].map((delay, index) => setTimeout(() => { step.value = index + 1 }, delay))
 onUnmounted(() => timers.forEach(clearTimeout))
 const headline = computed(() => [
   `正在请${props.name}过来…`,
