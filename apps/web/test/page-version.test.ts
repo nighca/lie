@@ -16,7 +16,7 @@ beforeEach(() => {
   })
 })
 const directories: string[] = []
-afterEach(() => { vi.unstubAllEnvs(); directories.splice(0).forEach(directory => rmSync(directory, { recursive: true, force: true })) })
+afterEach(() => { vi.unstubAllEnvs(); vi.unstubAllGlobals(); directories.splice(0).forEach(directory => rmSync(directory, { recursive: true, force: true })) })
 function directory() { const value = mkdtempSync(join(tmpdir(), 'lie-page-version-')); directories.push(value); return value }
 function git(directory: string, args: string[]) { return execFileSync('git', args, { cwd: directory, encoding: 'utf8' }).trim() }
 
@@ -66,5 +66,32 @@ it('distinguishes development, unknown and modified local builds', async () => {
     expect(wrapper.get('strong').text()).toBe('abcdef1')
     expect(wrapper.text()).toContain('本地改动')
     expect(wrapper.text()).toContain('构建包含未提交的本地改动')
+  } finally { wrapper.unmount() }
+})
+
+it('copies the full real SHA and resets feedback when reopened', async () => {
+  const commit = '1234567abcdef1234567abcdef1234567abcdef123'
+  const writeText = vi.fn().mockResolvedValue(null)
+  vi.stubGlobal('navigator', { clipboard: { writeText } })
+  const wrapper = mount(PageVersion, { props: { build: { commit, dirty: true }, open: true } })
+  try {
+    await wrapper.get('.version-copy button').trigger('click')
+    expect(writeText).toHaveBeenCalledWith(commit)
+    expect(wrapper.get('[role="status"]').text()).toBe('已复制，口供带走。')
+    await wrapper.setProps({ open: false })
+    await wrapper.setProps({ open: true })
+    expect(wrapper.get('[role="status"]').text()).toBe('')
+  } finally { wrapper.unmount() }
+})
+
+it('offers manual selection if clipboard access fails', async () => {
+  vi.stubGlobal('navigator', { clipboard: { writeText: vi.fn().mockRejectedValue(new Error('denied')) } })
+  const wrapper = mount(PageVersion, { props: { build: { commit: 'abcdef1234567890', dirty: false }, open: true } })
+  try {
+    await wrapper.get('.version-copy button').trigger('click')
+    expect(wrapper.get('[role="status"]').text()).toContain('选中上方编号手动复制')
+    expect(wrapper.get('code').attributes('tabindex')).toBe('0')
+    await wrapper.get('dialog').trigger('cancel')
+    expect(wrapper.emitted('close')).toHaveLength(1)
   } finally { wrapper.unmount() }
 })
