@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>转写姓名高亮 · 独立 QA</title>
+<style>body{margin:0;padding:12px;background:#ddd;font:14px system-ui}header{display:flex;align-items:center;gap:8px;height:37px;overflow:auto;white-space:nowrap;margin-bottom:12px}button{padding:7px 10px;flex-shrink:0}iframe{display:block;border:0;background:#fff;width:1280px;height:900px}</style>
+<header><strong>QA · 正式 App + fake voice</strong><button data-size="1280,900">桌面 1280</button><button data-size="391,844">手机 391</button><output id="size">1280 × 900</output><button data-action="sample">完整样例</button><button data-action="partial">半个名字</button><button data-action="middle">继续到第二个半名</button><button data-action="finish">补完整句</button><button data-action="reconnect">同人重连</button></header>
+<iframe title="真实调查页" src="./frame.html"></iframe>
+<script>
+const frame=document.querySelector('iframe');
+for(const button of document.querySelectorAll('button'))button.addEventListener('click',()=>{
+  if(button.dataset.size){const [width,height]=button.dataset.size.split(',');frame.style.width=width+'px';frame.style.height=height+'px';document.querySelector('#size').textContent=width+' × '+height;}
+  else frame.contentWindow.postMessage({action:button.dataset.action},location.origin);
+});
+</script></html>

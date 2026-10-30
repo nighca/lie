@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>姓名高亮验收 iframe</title>
+<script>
+for(const key of ['localStorage','sessionStorage']){
+  const values=new Map();
+  Object.defineProperty(window,key,{configurable:true,value:{getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(String(key),String(value)),removeItem:key=>values.delete(key),clear:()=>values.clear(),key:index=>[...values.keys()][index]??null,get length(){return values.size;}}});
+}
+</script><div id="app"></div><script type="module" src="./fixture.ts"></script></html>

@@ -1,0 +1,33 @@
+{
+  "base": "f75b5db858e20b596c0d6851fa13a602f87bc975",
+  "codeCommit": "d76e780ba1804902d94575350682b4a5513616bf",
+  "buildGitHead": "f75b5db858e20b596c0d6851fa13a602f87bc975",
+  "trackedSourceDirtyAtBuild": true,
+  "node": "24.22.1",
+  "npm": "11.19.1",
+  "sourceSha256": {
+    "apps/web/src/App.vue": "b8392408588e66450347fdb5e85725be21f7ddb769c670a281f8f6e844fdf65b",
+    "packages/ui/src/components/Transcript.vue": "c26feb35cc13e1797a9fc18f1eb93e30d2f29d0a3ec11e4559ee6b523e8b2aca",
+    "apps/web/test/transcript-character-names.test.ts": "b362981adce4d31a957726ad28ee75f269177aaf18ac8eb8b7dcd24a4d0fd537",
+    "packages/ui/test/transcript-text-slot.test.ts": "cf0c27d0aff664841c452af9fbc56851fed2bb1194c917ca227ec9787cba0f67",
+    "apps/web/src/presentation/CharacterNameText.vue": "39993b54753a6619fca1f90aa255dd1f32f97ad633a71506ee9faf96c2e8c620",
+    "apps/web/src/presentation/characterNames.ts": "df31b83e3ab38934cf41ba7fa718b2982d5d61e135c058009ff309248e416cfc",
+    "packages/ui/src/presentation/transcriptReveal.ts": "fed45a1bbdb478e3c05276bf5818e150e9c070063835426e0252d848e1b2f5fc",
+    "package-lock.json": "2efd70fe940997ce63746a05a6d5574974560a67d6a737f4801e9f9e254e82e0"
+  },
+  "bundleSha256": {
+    "apps/web/dist/assets/index-7EAXjzOY.js": "c43fc2a5007d94f44659c9b54361039b5c8626d37e1768cf507bee06be26954e",
+    "apps/web/dist/assets/index-Cfq3thWt.css": "26f2040d17a5cb51cd18959d8c31d360140afad702b7f5313aed8163428b31e8"
+  },
+  "distFileCount": 251,
+  "distTreeSha256": "a61f01bb9627b8226f935353ce0dfcb31f1aa69167dbd6bc4a0008c42ad89564",
+  "distTreeHashFormat": "UTF-8 lines sorted by relative path; each line is sha256 + two spaces + POSIX relative path + LF",
+  "qaSha256": {
+    "desktop.jpg": "ca630b72205073f0b5c4506b0eec8ae0c3f472d80fa6e8f04d366579d3a66628",
+    "fixture.ts": "05ebaea2b33cc3515e9413d76230507ab1cde6b0e3e64cfc28a8652e18396089",
+    "frame.html": "07f9777d359db1b50fa3738e076a081323f35e51e1408007a0d3c056a46c78aa",
+    "index.html": "9f9bc4d675250c1c4aa3baf47200514f365c26985d3fd6d84631728b141d40c7",
+    "mobile.jpg": "05fecc654e7df5394947f036ba0ee8bdb0ed19272ce1f1c922be4bbfc66e65ab",
+    "partial.jpg": "47f5276faccb00b269402aa4a9913b05c9e5b359705ef8249154bbf22c108ae9"
+  }
+}
