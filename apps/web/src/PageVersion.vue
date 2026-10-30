@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { UiButton, UiDialog } from '@lie/ui'
 
 import type { PageBuild } from '../build/page-version'
@@ -7,17 +7,22 @@ import type { PageBuild } from '../build/page-version'
 const props = defineProps<{ build: PageBuild | null; open: boolean }>()
 const emit = defineEmits<{ close: [] }>()
 const copyMessage = ref('')
+let copyRequest = 0
 
-watch(() => props.open, () => { copyMessage.value = '' })
+watch(() => props.open, () => { copyRequest++; copyMessage.value = '' }, { flush: 'sync' })
+onBeforeUnmount(() => { copyRequest++ })
 
 async function copyVersion() {
   if (props.build?.commit == null) return
+  const request = ++copyRequest
+  let message: string
   try {
     await navigator.clipboard.writeText(props.build.commit)
-    copyMessage.value = '已复制，口供带走。'
+    message = '已复制，口供带走。'
   } catch {
-    copyMessage.value = '复制未成功，可以选中上方编号手动复制。'
+    message = '复制未成功，可以选中上方编号手动复制。'
   }
+  if (props.open && request === copyRequest) copyMessage.value = message
 }
 </script>
 

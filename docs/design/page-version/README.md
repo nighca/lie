@@ -34,3 +34,7 @@
 服务严格127.0.0.1:5177，起前lsof无监听；Node PID77249，原exec/session5085。启动身份为上述base加本任务未提交组件/tests/设计资料（Vite热更新），不是clean build。消费者为本Chat IAB tab1及用户审看。用户确认本版并要求推进合入后，owner已在原session5085发送Ctrl-C，进程退出130；随后lsof确认5177无监听，临时预览消费结束、端口交还。未触碰其他端口。初次sandbox listen EPERM未启动监听，获准同端口重试后启动。
 
 实际产品修改仅PageVersion.vue和其专属test。Application.vue、ProductHeader、共享UI、runtime/provider均未改。总协调持唯一main集成/push turn，实际审查后处理；不创建PR。
+
+## 合入审查补修
+
+2026-10-30总协调的独立review用deferred mock复现：复制pending后关闭重开，旧成功反馈污染新弹窗；连续复制时旧失败覆盖新成功。新增一个请求序号，每次开关/新请求/卸载使旧请求失效，只有当前打开轮次的最新请求可写反馈；复制内容与视觉不变。两项deferred回归已补，版本专项现8项通过，Web源码/tests类型检查通过、diff空白检查通过。未重启预览或重复原生视觉验收；原用户设计批准继续有效。

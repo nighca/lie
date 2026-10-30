@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 
 import { readPageBuild } from '../build/page-version'
@@ -93,5 +93,36 @@ it('offers manual selection if clipboard access fails', async () => {
     expect(wrapper.get('code').attributes('tabindex')).toBe('0')
     await wrapper.get('dialog').trigger('cancel')
     expect(wrapper.emitted('close')).toHaveLength(1)
+  } finally { wrapper.unmount() }
+})
+
+it('ignores a pending copy result from a previous opening', async () => {
+  let finishCopy!: () => void
+  const pending = new Promise<void>(resolve => { finishCopy = resolve })
+  vi.stubGlobal('navigator', { clipboard: { writeText: vi.fn().mockReturnValue(pending) } })
+  const wrapper = mount(PageVersion, { props: { build: { commit: 'abcdef1234567890', dirty: false }, open: true } })
+  try {
+    await wrapper.get('.version-copy button').trigger('click')
+    await wrapper.setProps({ open: false })
+    await wrapper.setProps({ open: true })
+    finishCopy()
+    await flushPromises()
+    expect(wrapper.get('[role="status"]').text()).toBe('')
+  } finally { wrapper.unmount() }
+})
+
+it('keeps the latest copy result when an earlier request fails late', async () => {
+  let failFirstCopy!: (error: Error) => void
+  const pending = new Promise<void>((_resolve, reject) => { failFirstCopy = reject })
+  const writeText = vi.fn().mockReturnValueOnce(pending).mockResolvedValueOnce(null)
+  vi.stubGlobal('navigator', { clipboard: { writeText } })
+  const wrapper = mount(PageVersion, { props: { build: { commit: 'abcdef1234567890', dirty: false }, open: true } })
+  try {
+    await wrapper.get('.version-copy button').trigger('click')
+    await wrapper.get('.version-copy button').trigger('click')
+    expect(wrapper.get('[role="status"]').text()).toBe('已复制，口供带走。')
+    failFirstCopy(new Error('late denial'))
+    await flushPromises()
+    expect(wrapper.get('[role="status"]').text()).toBe('已复制，口供带走。')
   } finally { wrapper.unmount() }
 })
