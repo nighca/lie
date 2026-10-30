@@ -1,0 +1,67 @@
+# 在线部署与免运维服务端可行性
+
+状态：用户已选择 Cloudflare 静态网站 + 薄 serverless 网关，游戏逻辑尽量在浏览器，内容用静态 JSON。2026-10-23 已完成本地 workerd 和公网基础链路验证；正式模块架构仍待确认。
+
+技术基线已确定为 Vue + TypeScript 前端；如需服务端或 Worker，采用 TypeScript 并优先 Node.js 技术生态。选托管平台时还需检查实际运行时：Workers 官方提供部分 Node.js API 实现与兼容垫片，部分可导入模块没有可用实现，不能默认任意 Node.js 依赖都能执行。若关键依赖需要完整 Node.js，应在架构评审中选择相应的托管运行方式。[Workers Node.js 兼容性](https://developers.cloudflare.com/workers/runtime-apis/nodejs/)
+
+## 结论
+
+**已用真实部署验证：无需传统常驻服务端，也无需游戏数据库。** Cloudflare Static Assets 提供 Vue 产物和 JSON，Worker 同域代理灵矽 WebSocket；本局进度留在浏览器。公网探针已完成 hello、端侧 MCP 工具发现与调用、文本输入、TTS 和二进制音频返回。语音采集/实际播放、多角色与跨用户隔离另行验证，不能把基础链路当作完整游戏验收。详见 [验证记录](validation.md)。
+
+目前明确的协议障碍是：灵矽公开 WSS 协议要求 Authorization、Device-Id、Client-Id、Protocol-Version 等握手头，而浏览器标准 WebSocket 构造器只接收 URL 和子协议，不能设置任意鉴权头。因此现有设备接入方式不能直接照搬到浏览器。官方确有网页体验，但第三方可复用的 SDK、临时凭证和替代语音握手尚未查明，不能断言产品没有其他浏览器方案。平台管理 API key 不能公开；受限设备语音 token 是否适合交付浏览器则需核实其作用域、期限和撤销方式，不能任意改用 URL 参数。[灵矽连接协议](https://linx.qiniu.com/docs/xrobot/platform/websocket)、[WHATWG WebSocket 标准](https://websockets.spec.whatwg.org/#the-websocket-interface)
+
+游戏规则本身可以在浏览器运行。是否对玩家隐藏完整剧情与答案、是否要求服务端维护不可篡改的成绩，是产品与架构取舍，不是已确认的防作弊要求。角色知识过滤仍需要正确实现，但不因其存在就必然需要独立服务端。
+
+## 最小候选路径
+
+当前选择 **一个托管应用：Web 静态资源与 JSON + 浏览器游戏状态/端侧 MCP + 薄 Worker 网关**。不增加游戏 HTTP 状态 API、云端 MCP、数据库、KV 或 Durable Objects。下表保留选型时的能力比较；Vercel 和纯静态是备选背景，不是当前实施路径。
+
+| 方案 | 官方能力依据 | 项目判断与限制 |
+| --- | --- | --- |
+| Cloudflare Workers + Static Assets | 同项目托管静态资源和 Worker；入站 WebSocketPair、出站 fetch Upgrade、自定义 headers 和二进制消息 | 已选择并验证公网静态/WS/Linx 基础中继；真实浏览器音频与完整游戏仍待实现和验证 |
+| Vercel 静态资源 + Functions | 最新官方 WebSockets 主文档明确支持入站 WS；2026-10-20 已 GA，不能再沿用“不支持 WS server”的旧说法 | 也是可行候选；连接达到 Function 最大执行时长会关闭，重连不保证同实例，需恢复机制与共享状态。不能只因支持 WS 就视为与 Workers 的生命周期等价 |
+| 纯静态托管 | 能托管浏览器资源；游戏引擎可在本地运行 | 灵矽第三方浏览器直连方式尚未证实；若采用浏览器内容包，熟悉开发者工具的玩家可查看答案。端侧 MCP 可望免除外部 MCP 服务，但不解决语音握手问题 |
+
+来源：[Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/)、[Workers WebSockets](https://developers.cloudflare.com/workers/runtime-apis/websockets/)、[Workers Request headers](https://developers.cloudflare.com/workers/runtime-apis/request/)、[Vercel WebSockets](https://vercel.com/docs/functions/websockets)、[Vercel GA 公告](https://vercel.com/changelog/websocket-support-is-now-generally-available)。
+
+## Workers 具体适配边界
+
+- **WSS 网关：** 用 fetch Upgrade 向上游发起握手并设置必需头；接收入站 WS，双向保留 JSON 文本和音频 binary 消息。显式设置 `binaryType = "arraybuffer"`，避免默认 Blob 导致错误处理；联动关闭上下游，限制消息和缓冲，处理旧连接事件。以上 API 有文档依据，灵矽兼容性尚未实测。
+- **端侧 MCP：** 工具请求和响应通过同一语音 WebSocket 转发，由客户端处理，不需要额外公网 MCP endpoint。Node 协议探针已实际完成发现与调用；浏览器游戏模块还需接入这套处理。[灵矽端侧 MCP](https://linx.qiniu.com/docs/xrobot/mcp/hardware-mcp)
+- **凭证与内容：** 管理 key 只放 Worker secrets；游戏 JSON 是公开静态资源。临时线上探针只配置专用设备 token 和私密测试访问码，没有上传管理 API key，也没有将测试访问码写入静态产物。[Workers Secrets](https://developers.cloudflare.com/workers/configuration/secrets/)
+- **本地测试：** Wrangler/Miniflare 在真实本地 workerd 测试 HTTP、WS 和 Assets；纯规则模块用独立自动化测试。端侧 MCP 不需要反向调用本地公网 HTTP 服务，但语音链路仍需真实灵矽连接。[Workers 本地开发](https://developers.cloudflare.com/workers/local-development/)
+
+## 两种运行取舍
+
+| 模式 | 引擎与角色工具位置 | 托管端需要做什么 | 代价与待验证项 |
+| --- | --- | --- | --- |
+| 浏览器运行游戏 + 薄 serverless 网关（已选） | 浏览器保存本局，按角色过滤知识，经语音连接中的端侧 MCP 响应工具 | 保管管理凭据、补上游握手头、转发文本与音频，按实际接入方式管理设备 | 不依赖自有游戏 DB；玩家可查看 JSON。基础链路已验证，设备/角色/跨局隔离、浏览器实际音频仍待测 |
+| 托管端维护游戏状态 | Worker/function 中运行引擎并提供云端 MCP，浏览器只拿公开视图 | 除网关外提供会话一致性和内容投影 | 可将答案与平台配置留在托管端，但增加会话状态设施和本地集成工作 |
+
+端侧 MCP 使用既有 WebSocket 的 JSON-RPC 工具请求与响应，已由真实 Node 客户端通过公网 Worker 中继验证。其浏览器实现仍须实际测试；不能把 Node 客户端的成功等同于浏览器模块已经实现。[端侧 MCP](https://linx.qiniu.com/docs/xrobot/mcp/hardware-mcp)
+
+## 后置备选：托管权威状态
+
+以下仅说明未来改变边界时的代价，不是当前依赖。只有遇到明确问题并与用户讨论后才考虑。
+
+浏览器动作、灵矽云端 MCP 和重连属于不同请求，不能假设都落到同一个 Worker 实例，也不能依赖全局 Map 维护一致状态。会话至少需支持版本检查、动作去重、逐角色隔离，以及平台会话到游戏局的可靠映射。
+
+此模式中架构先保留 `SessionRepository` 一类接口，以内存 fake 做独立测试；上线实现须保证并发一致性。若采用 Workers 且需要 MCP/WS/API 共同操作单局，**每局一个 Durable Object** 是可评估的实现：协调同局请求并使用其内置存储，可能无需再加 D1 或 KV。是否采用、存活与清理策略待架构确认。只做 WS 透明中继本身不必引入 DO；理由应是共享权威会话，而不是“用 WS 就必须 DO”。[Durable Objects 能力](https://developers.cloudflare.com/durable-objects/concepts/what-are-durable-objects/)
+
+## 音频对部署方案的影响
+
+透明转发可减少网关计算和依赖。此次真实连接成功协商 PCM 输出：16 kHz、单声道、16-bit、20 ms；直接连接和公网 Worker 中继均收到二进制音频。优先验证浏览器 PCM 收音和播放；尚未解码聆听，仍需确认字节布局和实际声音质量。不能据此假设所有模型、配置和后续协商都相同。
+
+原始 Opus packet 不能直接当作 MediaRecorder 的 WebM/Ogg 文件或可播放 URL。若由前端解码，需要确认原始包与 WebCodecs `EncodedAudioChunk` 的匹配、时间戳、解码配置及目标浏览器的 `AudioDecoder.isConfigSupported`，并处理 AudioWorklet 播放队列和打断清空；不支持时评估 WASM decoder。W3C 注册定义了 Opus 的 WebCodecs 数据契约，但未要求每个浏览器实现该 codec。[Opus WebCodecs 注册](https://www.w3.org/TR/webcodecs-opus-codec-registration/)
+
+若最终选择服务端 Opus 转 PCM，必须另验 Workers 可用的 WASM 解码器、CPU/内存与部署体积；不能假定 Node 原生音频库能直接运行。音频实现路径仍待技术试验与架构确认。
+
+## 已完成与仍待完成的验证
+
+1. 已完成：公网静态站点、JSON、health、WS echo 文本/二进制/关闭，受保护 Worker → 灵矽握手、端侧工具调用、文本触发 TTS/PCM 返回。浏览器页面收集和重置内存进度也已操作验证。
+2. 待完成：目标浏览器真实收音、播放与打断；优先 PCM，不默认引入 Opus 或服务端转码。
+3. 待完成：端侧 MCP 由浏览器实际承接游戏状态；出示证据后当轮读取正确 revision，多人物回应不串线。
+4. 多外部试玩用户同时开局：设备分配和角色历史不串局；刷新、超时、服务重启/发布后恢复或明确重新开局，不能悄悄丢状态。
+5. 测量用户所在地到托管地区、再到灵矽的延迟与稳定性；核验当时计划的执行时限、CPU/流量费用、公开访问保护与额度。没有实测前不承诺免费额度足够或具体延迟。
+
+现有 Cloudflare 登录和用户授权的灵矽 API key 已足够完成本轮验证，无需用户新建账号。线上页面为技术探针而非正式游戏，不包含首案或已批准视觉；正式公开试玩还需完成上列剩余验收及平台资源/额度策略。

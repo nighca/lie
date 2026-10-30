@@ -1,6 +1,10 @@
-# 主协调轮换（当前暂停）
+# 主协调轮换（已收尾，不自动恢复）
 
-**最新决定：2026-10-25约10:44，用户明确暂停每四小时换chat，由root `01a17012-fa00-7170-ac0a-21c1900d71cd` 继续做完项目。** root仍active/唯一integrator，不release、不创建接任chat、不归档自己。约10:46只读确认推进`lie` ACTIVE、换chat`lie-2` PAUSED，target/created_at不变；本批未修改自动化。30分钟推进继续，不能据旧四小时deadline或下文旧持续授权恢复换chat。
+**2026-10-27用户决定archive当前chat，后续新增工作另开chat；本代coordinator/integrator已收尾，无接任chat。`lie`与`lie-2`实读均PAUSED。本次交接仅提交本地main、不push。** [当前交接](coordinator-handoff.md)及[收尾记录](history/2026-10-27/project-closeout/README.md)为最新入口；下文旧轮换流程仅作历史，不执行。
+
+## 2026-10-25暂停轮换决定（历史）
+
+**历史决定：2026-10-25约10:44，用户明确暂停每四小时换chat，由root `01a17012-fa00-7170-ac0a-21c1900d71cd` 继续做完项目。** root仍active/唯一integrator，不release、不创建接任chat、不归档自己。约10:46只读确认推进`lie` ACTIVE、换chat`lie-2` PAUSED，target/created_at不变；本批未修改自动化。30分钟推进继续，不能据旧四小时deadline或下文旧持续授权恢复换chat。
 
 下文保留原流程与失败恢复作历史参考；**只有用户以后重新明确授权恢复轮换，才可按届时实际状态执行**。原文逐字保存在[本次快照](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/coordinator-rotation.md)，现行owner/排期读[handoff](coordinator-handoff.md)与[plan](project-plan.md)。
 

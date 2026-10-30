@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-27",
+  "beforeWorktrees": 59,
+  "removed": 58,
+  "remainingWorktree": "/Users/nighca/code/nighca/lie",
+  "all58OldPathsAbsent": true,
+  "allOriginalHeadCommitsStillExist": true,
+  "necessarySourceIdentities": 50,
+  "privatePreservedFiles": 155,
+  "privatePreservedBytes": 7629898,
+  "candidateDiskAllocatedKiBBefore": 27638280,
+  "diskMeasurementNote": "26.36GiB of per-checkout du removed; APFS shared blocks mean actual physical free-space gain may differ. Small archive/snapshot objects remain.",
+  "mainSHA": "ca7f37f9c04530e124ade2e38c4f3f8d9bcab7df",
+  "mainClean": true,
+  "managedMethod": "39 official archive_worktree calls, queued then verified absent",
+  "unmanagedMethod": "19 ordinary git worktree remove; four dirty documents preserved in main plus named stash; no force/remove refs/GC"
+}

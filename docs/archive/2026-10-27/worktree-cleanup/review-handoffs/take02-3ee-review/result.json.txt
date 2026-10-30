@@ -1,0 +1,40 @@
+{
+  "source": "3ee9b07be142414da59e99d25f031d68daaf22ee",
+  "parent": "dcc52a14d6569d124708f4db096221d21d195c96",
+  "observedProducerHead": "904fd863bbb3cf6d547711fe1c340f8c9d4448a8",
+  "frozenScope": [
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/README.md",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/browser-audio-capture-diagnostic.js",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/failure-page.jpg",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/outcome.json",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/run-live-diagnostic.js",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/session.json",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/verification.json"
+  ],
+  "sourceSha256": {
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/README.md": "a59ba46fffd0c27e2996d4a4a589b08b8b50b5cd94dd159b2caf94f4578e66a7",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/browser-audio-capture-diagnostic.js": "b14dde68afe9a686f74e728ef4003d0fcfc704319cfc8df7766d8fe528f562e4",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/failure-page.jpg": "22d26a21383502be2c524f87750d800114145d0ed5c234e44c4f8e6eea9fb578",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/outcome.json": "19c0b630289a9bd38106be7d857b0a9a93addd6765212ece83bbea758c5d5916",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/run-live-diagnostic.js": "f83a4353f6b70b74779ca08348f371a73a0c3279deac48bfacb84bd8e33911ce",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/session.json": "7e90d7dc0701c5b07943a4f302f91daf3b20f5e82bde436ac80ad1c536223738",
+    "docs/promo-video/2026-10-25/live-diagnostic-take02/verification.json": "b6e5f6e5ccd606b3aab68ad74d1be8ef7cb68902346d7202a1113e9c0b4683bf"
+  },
+  "socketCreatedUtc": "2026-10-25T09:55:06.097000+00:00",
+  "socketErrorUtc": "2026-10-25T09:55:08.532000+00:00",
+  "errorAfterMs": 2435,
+  "noOpenOrProtocolMessages": true,
+  "browserClose": {
+    "code": 1006,
+    "clean": false
+  },
+  "localCloseOrder": "voice-error then1ms later app Aborted, then native close1006",
+  "contextsCreatedRunning": 3,
+  "cleanupTerminal": "3contextsclosed/3tracksended/1socketclosed; no reference equality assertion this take",
+  "wavZeroSamplesEach": 217728,
+  "frameMetadata": "268 frames1470x779, not approved1280x800",
+  "sourceWrapperMatchesLibrary": true,
+  "userCounterEvidence": "Root supplied direct-user evidence: same computer Chrome same case ordinary real conversation succeeds; not an independently re-executed test by reviewer",
+  "cause": "UNKNOWN; temporary tab/harness/session differences take precedence over generalized production outage claim",
+  "actions": "No WS/provider/network inference/browser/Worker config/credentials/service/application build/test; local source+WAV metadata inspection only"
+}

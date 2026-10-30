@@ -1,0 +1,10 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import Transcript from '../../src/components/Transcript.vue'
+const messages = ref(Array.from({ length: 30 }, (_, i) => ({ id: `initial-${i}`, speaker: '人物甲', text: `第${i + 1}条长历史。这段中文用于实际浏览器滚动验证。请继续往下看。` })))
+function add() { messages.value.push({ id: `new-${messages.value.length}`, speaker: '你', text: `最新加入第${messages.value.length + 1}条。` }) }
+function stream() { messages.value[messages.value.length - 1].text += '这段流式新增的文本会持续增长，直到最后一条消息本身跨越多个可视区域。'.repeat(50) }
+function switchHistory() { messages.value = Array.from({ length: 20 }, (_, i) => ({ id: `other-${i}`, speaker: '人物乙', text: `乙的第${i + 1}条历史。另一份长历史也应该显示尾部。` })) }
+</script>
+<template><main><h1>转写跟随验证 · 独立假数据</h1><div class="actions"><button @click="add">新增一条</button><button @click="stream">同一条持续增长</button><button @click="switchHistory">换成另一段历史</button></div><Transcript :messages="messages" /><div class="footer">页面底部留白，用于检查是否意外滚动了整个页面。</div></main></template>
+<style>body { margin: 0; background: #fff18a; color: #111b45; font: 16px/1.65 system-ui; } main { max-width: 800px; margin: auto; padding: 32px; } .actions { display: flex; gap: 12px; margin: 24px 0; } button { padding: 12px; } .footer { height: 900px; padding-top: 60px; }</style>

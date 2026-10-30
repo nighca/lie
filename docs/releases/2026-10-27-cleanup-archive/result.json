@@ -1,0 +1,45 @@
+{
+  "publishedSHA": "ca7f37f9c04530e124ade2e38c4f3f8d9bcab7df",
+  "ci": {
+    "databaseId": 40444791243,
+    "url": "https://github.com/nighca/lie/actions/runs/40444791243",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "headSha": "ca7f37f9c04530e124ade2e38c4f3f8d9bcab7df"
+  },
+  "cd": {
+    "databaseId": 40444941027,
+    "url": "https://github.com/nighca/lie/actions/runs/40444941027",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "headSha": "ca7f37f9c04530e124ade2e38c4f3f8d9bcab7df"
+  },
+  "artifact": {
+    "id": 12707564882,
+    "name": "production-build-ca7f37f9c04530e124ade2e38c4f3f8d9bcab7df-40444791243-1",
+    "digest": "sha256:3f7103f861229e36069b68756cd9e936ba8d0ad7c63964ead50a7e6af5c53530",
+    "expired": false,
+    "size_in_bytes": 113336350
+  },
+  "restoredVerifiedFiles": 256,
+  "latestMainAndAttemptStep": "completed/success; deploy not skipped",
+  "deployStep": "completed/success",
+  "workerVersion": "43f0991b-333a-4feb-b09b-3bb99a0f4e3d",
+  "runtimeInputDiffVsF8": [],
+  "httpChecks": "NOT RUN per assigned scope; unchanged runtime inputs reuse existing evidence",
+  "providerBrowserService": "NOT RUN",
+  "documentChecks": {
+    "docsOnlyFiles": 62,
+    "sourceIdentities": 50,
+    "json": 6,
+    "currentLinks": 92,
+    "whitespace": "pass"
+  },
+  "gitMutations": false,
+  "limitations": [
+    "No new application/native/hardware or runtime HTTP acceptance",
+    "CI/CD success establishes this exact release, not model/capacity proof"
+  ]
+}

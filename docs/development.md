@@ -1,6 +1,8 @@
 # 本地开发
 
-> 当前状态（2026-10-25）：用户已明确停用本地8787及配套8788。launchd已disable＋bootout，Web/Worker与自有内部监听全部释放，配置和凭据保留。下文原常驻运行说明仅供恢复参考，不代表服务仍运行；未经用户重新要求不得自动启动。[停用证据](history/2026-10-25/main-preview-stopped/README.md)。
+> 当前状态（2026-10-27收尾）：58个旧工作树已清理，只保留main；5355旧PID37202/监听亦已不存在，无在用动画预览消费者。旧台账仅为历史，勿按旧路径恢复。用户后续另开chat；定时推进/轮换均PAUSED。[收尾与恢复入口](history/2026-10-27/project-closeout/README.md)。
+
+> 已停用环境（2026-10-25）：用户已明确停用本地8787及配套8788。launchd已disable＋bootout，Web/Worker与自有内部监听全部释放，配置和凭据保留。下文原常驻运行说明仅供恢复参考，不代表服务仍运行；未经用户重新要求不得自动启动。[停用证据](history/2026-10-25/main-preview-stopped/README.md)。
 
 正式生产入口：[LIE](https://lie.agency/) · [编辑器](https://lie.agency/editor)。2026-10-25用户已启用该域名，指向现有Cloudflare正式Worker；本批仅文档修订，未改DNS/账号/Worker配置。平台原生地址`lie-game.nighca.workers.dev`继续作为原生入口与历史测量origin，不要求删除/重定向；[已核发布](releases/2026-10-25-main-refresh.md)的原始观测保留。
 

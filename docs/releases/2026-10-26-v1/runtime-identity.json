@@ -1,0 +1,47 @@
+{
+  "base": "713bbe7427320bcda33d26594c78ac25336e3457",
+  "sha": "f8c4e2b5d908538e76e60d4d9ddba39da2c30d13",
+  "objects": [
+    {
+      "path": "apps",
+      "object": "cdc963464ed216a3aad87601130ebf2a416ac8a7",
+      "equal": true
+    },
+    {
+      "path": "packages",
+      "object": "bda644dc3c6704ed7fe237ca899ebbe367e8390e",
+      "equal": true
+    },
+    {
+      "path": "scripts",
+      "object": "611f0fbc27cb81b25926212f0fe9106fc898ba57",
+      "equal": true
+    },
+    {
+      "path": "content",
+      "object": "5934c831b75f8447bdb423e773836b62753ceb5a",
+      "equal": true
+    },
+    {
+      "path": "design",
+      "object": "e89f54848dcc7f6a65e9202a012a96dd849794bc",
+      "equal": true
+    },
+    {
+      "path": ".github",
+      "object": "976b1fd7684cfc5999bee3494befc8250ce5aed9",
+      "equal": true
+    },
+    {
+      "path": "package.json",
+      "object": "04d77f7a86ddb335232ed2b96448cfe79f3ac8a1",
+      "equal": true
+    },
+    {
+      "path": "package-lock.json",
+      "object": "ace0d60809d80f6240e71ebda6c5bc1851338732",
+      "equal": true
+    }
+  ],
+  "reuse": "713 normal TLS homepage/newJS +27 title tests; no new GET/browser/provider/service"
+}

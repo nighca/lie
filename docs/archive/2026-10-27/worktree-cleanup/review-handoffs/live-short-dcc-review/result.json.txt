@@ -1,0 +1,41 @@
+{
+  "source": "dcc52a14d6569d124708f4db096221d21d195c96",
+  "parent": "3c8103693ebc7343131da643883c44fb27aff75f",
+  "reviewedMain": "6fc17ae7bdc536580edb75a557728350da457476",
+  "sourceSha256": {
+    "apps/web/src/application/liveVoice.ts": "5ab99f725187b27a0acdc6cc554156ab82ee7c3298534377cb52a04dd907f833",
+    "apps/web/src/application/controller.ts": "30acda32893a2ba05bf05a88059f9176a0f7dd3c3cfcf3dac03d92680bfd8a5e",
+    "packages/voice/src/channel.ts": "b46d1a78c1a7d56a0f2858c74a611059557b4aa6b29e7faed48b224fc3ddb6e2",
+    "packages/voice/src/microphone.ts": "a21f27d92ef9e4cd3e62276cc41f3fb5e19c66c2ab5db660250e3a25166038b9",
+    "packages/voice/src/player.ts": "2d771427afa3e7ab148c70fe66a805d7cf3cae68ad5c34fcbfabdb432d0a0c7d",
+    "packages/voice/src/startup.ts": "286614713cde31d7d700acf5d16aea64abf4739b2f9fd0e1f2cd98b3d8efb76c",
+    "docs/promo-video/2026-10-25/browser-audio-capture-session.js": "6534f4068341c19205f54c07827b8341a21c2de1aab84fe16f79208d4fe77c33"
+  },
+  "liveSilentTracks": {
+    "input": {
+      "samples": 884736,
+      "sampleRate": 48000,
+      "duration": 18.432,
+      "peakPcm16": 0
+    },
+    "output": {
+      "samples": 884736,
+      "sampleRate": 48000,
+      "duration": 18.432,
+      "peakPcm16": 0
+    },
+    "mix": {
+      "samples": 884736,
+      "sampleRate": 48000,
+      "duration": 18.432,
+      "peakPcm16": 0
+    }
+  },
+  "acceptedFramesMetadata": 1042,
+  "failureCleanupStateAndTwoOfflineFaultInjections": "matched persisted JSON",
+  "offlineRmsWindowsRecomputed": true,
+  "offlineMixMaxDifferencePcm16": 0,
+  "currentVoiceInputsUnchangedSince5a9": true,
+  "liveCause": "UNKNOWN: no WS open/close/protocol stages retained",
+  "scope": "Read-only local source/WAV/frame metadata audit; no network/provider/browser/audio execution or encoding"
+}

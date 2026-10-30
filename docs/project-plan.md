@@ -1,8 +1,8 @@
 # LIE — 当前项目计划
 
-2026-10-25，最近完成CI/CD核验的发布为 `713bbe7427320bcda33d26594c78ac25336e3457`。CI40195071294与CD40195181405均attempt1/success，Worker `74794fdb-bc16-42ab-9ff0-875a782c3707`；[发布证据](releases/2026-10-25-title-and-architecture/README.md)。首页标题与当前架构规格/双语入口已发布；本批移动演示、两项研究归档及停服记录正在review后的正常发布队列，不能当其CI/CD已通过。后续提交会推进HEAD，操作前读实际Git。
+2026-10-27：项目本阶段完成，用户将archive主协调chat，后续另开新chat。**无active coordinator、无自动在制队列。** 本次收尾只提交本地main，不push；[交接入口](coordinator-handoff.md)与[收尾记录](history/2026-10-27/project-closeout/README.md)为最新状态，覆盖旧active/待审/常驻表述。
 
-用户暂停四小时换chat，root `01a17012-fa00-7170-ac0a-21c1900d71cd`继续active/唯一integrator；lie ACTIVE、lie-2 PAUSED，实际toml更新时间见[handoff](coordinator-handoff.md)。每次实际review/验证合main后由root按fetch/分歧审验/普通push流程默认推送并监测既有CI/CD；报告并入下一正常批次，避免报告循环。此授权不扩成手工部署、账号资源或真实provider操作。
+最近已推送且CI/CD通过的main为ca7f37f；v1.0.0标签指向f8c4e2b，运行输入相同。[最后发布证据](releases/2026-10-27-cleanup-archive/README.md)。58旧工作树已清理，必要设计/私密恢复材料保留。`lie`和`lie-2`实读均PAUSED；8787/8788停用，5355旧监听亦不存在。用户尚未重新授权的方案不因收尾而启动。
 
 ## 已批准范围与已发布成果
 
@@ -40,9 +40,9 @@
 | 首页浏览器标题 / character_preset_migration | 已随713bbe7发布并CI/CD通过，首页精确“LIE · 语音推理”；其余路由不变，root27项复验与正常TLS新JS核验通过。 |
 | 角色语音连接耗时 / 专项01a17319-1ea3-7be0-9c3c-04c999169591 | [首轮报告](voice-connection-latency/README.md)与[官方资料](voice-connection-latency/official-docs.md)已完整审查，ecd555c→008fb42归档。用户明确释放的有界窗口内3次本地实测2536.2/1799.6/1687.5ms，主要为连接握手包络；单样本非生产p95，未实施优化。8模块身份/4项fake时钟/旧生命周期证据保留。窗口已释放；后续测量/预热策略需明确方案，不重启已停8787/8788。 |
 | PR合入前CI与预览 / 专项01a1730f-9304-7d51-bf5b-8c20c3d37920 | [方案60d1d8](pr-ci-preview-proposal.md)已root全文及独立审查归档，待用户在专项确认。建议全PR无secretCI、同仓自动/fork逐head批准的独立公开UI预览，无真实voice；审批/清理/token范围与成本边界保留。未改workflow、建Worker/token/environment或部署；归档不等实施批准。 |
-| 移动端演示入库 / 专项01a17114＋root | 用户明确授权其mobile-lie.mov录制入库；source736e459已全文审查及独立媒体身份核验，128.7215秒1080×2376 H264/AAC，无重编码MP4及双语README链接进入本批。包/时间轴保持，AAC header＋1.771ms如实记载；非全设备验收。[记录](promo-video/2026-10-25/mobile-demo/README.md)。 |
+| 移动端演示入库 / 专项01a17114＋root | 用户明确授权其mobile-lie.mov录制入库；source736e459已全文审查及独立媒体身份核验，128.7215秒1080×2376 H264/AAC，无重编码MP4及双语README链接已随f8c4e2b发布。包/时间轴保持，AAC header＋1.771ms如实记载；非全设备验收。[记录](promo-video/2026-10-25/mobile-demo/README.md)。 |
 | 暂停鉴权 | 用户明确暂停，[设计与候选归档](archive/2026-10-25/invite-access-paused/README.md)保留，不恢复实现/QA/CI/部署。 |
 | 宣传视频制作 / 专项01a17226-5e5a-7193-b5b7-e522519a3e0c | 73.4秒创作分享片及37.53秒合成双向试片已归档。用户主导的take03完成三角色真实问答→正确指认→首页，source1545c1f已root全文审查及[独立复核](reviews/joint-gameplay-1545-2026-10-25/README.md)：PCM/编码/哈希/7881帧索引通过，7ctxclosed/9tracksended、四API引用恢复；[完整记录与失败备选](promo-video/2026-10-25/joint-gameplay-recording/README.md)保留。录屏存在段间hold，具体指认点击瞬间未完整动态捕获，不能声称连续或精确口型；外围finally/observer源码未全保存，仅核终态回执。用户在专项新明确要求试玩前＋创作后、有声合成成片入库并README链接，source1ae1fa3已root全文审查、接缝/末帧实际看图及[独立身份审验](reviews/combined-demo-1ae-2026-10-25/README.md)通过；[成片与复现](promo-video/2026-10-25/combined-demo/README.md)187.433秒、1280×800/30fps/H264/AAC，试玩双方声音保留、创作段原无声。两README已加链接，特定成片入库许可覆盖其中实际人声，原WAV/失败素材仍仅本地；已随e130912合main并普通push，精确CI/CD均success；成片保留原录制名称与已知hold，不再重录打磨。发布窗口已释放，无新provider操作或公开平台上传许可。 |
 | 不采用旧资源保留 | 用户不需要旧版本兼容，14d/256MiB提案不接CI；[历史方案](archive/2026-10-25/release-retention-not-adopted/README.md)保留。允许旧产品资源删除不等广泛账号工件/Git历史/WT清理。 |
 
-用户明确停用本地8787/8788，launchd已disable/bootout、自有内部监听和PID均退出；配置保留，恢复须用户重新要求；5355/PID37202/PTY40865/tab60仍有动画用户消费者，沿owner回执保留，未扫描/启停。其他端口及历史退出看[服务台账](development.md#服务登记与生命周期)。保护所有在制/dirty/refs；完成设计和失败方案均入库后才讨论清理，归档不等批准。当前状态替代[原文快照](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)，旧发布/失败历史不被覆盖。
+当前服务与工作树状态以[收尾交接](coordinator-handoff.md)为准：没有保留5355消费者，所有旧工作树已清理；旧表中的owner/PID/PTY/tab只作历史证据。各专项chat已archive，表中待讨论事项等待用户后续新任务，不构成自动续跑授权。

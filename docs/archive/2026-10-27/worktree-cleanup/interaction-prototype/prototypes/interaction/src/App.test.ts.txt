@@ -1,0 +1,84 @@
+import { mount } from '@vue/test-utils'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import App from './App.vue'
+
+function button(wrapper: ReturnType<typeof mount>, text: string) {
+  const found = wrapper.findAll('button').find((item) => item.text().includes(text))
+  if (found == null) throw new Error(`Missing button: ${text}`)
+  return found
+}
+
+async function begin() {
+  const wrapper = mount(App)
+  await button(wrapper, '接案').trigger('click')
+  return wrapper
+}
+
+afterEach(() => { vi.useRealTimers() })
+
+describe('voice-only mock investigation', () => {
+  it('retains each person’s transcript and cancels pending replies when switching', async () => {
+    vi.useFakeTimers()
+    const wrapper = await begin()
+    await button(wrapper, '模拟发言').trigger('click')
+    expect(wrapper.text()).toContain('模拟收音中')
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(wrapper.text()).toContain('模拟等待')
+    await button(wrapper, '陈默').trigger('click')
+    expect(wrapper.get('[role="log"]').text()).toContain('19:50 我去东侧巡查')
+    await button(wrapper, '林岚').trigger('click')
+    expect(wrapper.get('[role="log"]').text()).toContain('闭馆之后，你在哪里？')
+    expect(wrapper.get('[role="log"]').text()).toContain('取消了本次模拟回应')
+    await vi.advanceTimersByTimeAsync(4000)
+    expect(wrapper.get('[role="log"]').text()).not.toContain('19:50 之后我一直在前台')
+    wrapper.unmount()
+  })
+
+  it('simulates recording, waiting, speaking and interruption for distinct questions', async () => {
+    vi.useFakeTimers()
+    const wrapper = await begin()
+    await wrapper.get('select').setValue('key')
+    await button(wrapper, '模拟发言').trigger('click')
+    await vi.advanceTimersByTimeAsync(1900)
+    expect(wrapper.text()).toContain('模拟说话中')
+    expect(wrapper.get('[role="log"]').text()).toContain('展柜工作卡一直在我身上')
+    await button(wrapper, '打断说话').trigger('click')
+    expect(wrapper.text()).toContain('你打断了模拟说话')
+    await wrapper.get('select').setValue('contradiction')
+    await button(wrapper, '模拟发言').trigger('click')
+    await vi.advanceTimersByTimeAsync(4100)
+    expect(wrapper.text()).toContain('等待你开口')
+    expect(wrapper.get('[role="log"]').text()).toContain('我确实回过展厅')
+    wrapper.unmount()
+  })
+
+  it('gives each of three people distinct mock replies', async () => {
+    vi.useFakeTimers()
+    const wrapper = await begin()
+    for (const [name, line] of [['陈默', '看见林岚抱着扁盒'], ['周启', '陈默巡查时来过门口'], ['林岚', '19:50 之后我一直在前台']]) {
+      await button(wrapper, name).trigger('click')
+      await button(wrapper, '模拟发言').trigger('click')
+      await vi.advanceTimersByTimeAsync(4100)
+      expect(wrapper.get('[role="log"]').text()).toContain(line)
+    }
+    wrapper.unmount()
+  })
+
+  it('supports wrong accusation, return, correct accusation, reveal and full restart', async () => {
+    const wrapper = await begin()
+    await button(wrapper, '最终指认').trigger('click')
+    await button(wrapper, '指认 陈默').trigger('click')
+    expect(wrapper.text()).toContain('指认错误')
+    await button(wrapper, '返回调查').trigger('click')
+    expect(wrapper.find('[role="dialog"]').exists()).toBe(false)
+    await button(wrapper, '最终指认').trigger('click')
+    await button(wrapper, '指认 林岚').trigger('click')
+    expect(wrapper.text()).toContain('纪念章找到了')
+    expect(wrapper.text()).toContain('完整经过')
+    await button(wrapper, '重新开始').trigger('click')
+    await button(wrapper, '接案').trigger('click')
+    expect(wrapper.get('[role="log"]').text()).toBe('林岚闭馆后我就去前台了，没有再回展厅。纪念章失踪的事，我也是后来才知道。')
+    expect(wrapper.get('select').element.value).toBe('where')
+    wrapper.unmount()
+  })
+})

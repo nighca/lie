@@ -1,0 +1,4 @@
+deploy	Download only that CI attempt's build	2026-10-27T03:35:07.5013486Z - production-build-ca7f37f9c04530e124ade2e38c4f3f8d9bcab7df-40444791243-1 (ID: 12707564882, Size: 113336350, Expected Digest: sha256:3f7103f861229e36069b68756cd9e936ba8d0ad7c63964ead50a7e6af5c53530)
+deploy	Deploy the verified CI build	2026-10-27T03:35:23.4734736Z │  Uploaded lie-game (4.64 sec)
+deploy	Deploy the verified CI build	2026-10-27T03:35:23.9281224Z │  Deployed lie-game triggers (0.45 sec)
+deploy	Deploy the verified CI build	2026-10-27T03:35:23.9288320Z │  Current Version ID: 43f0991b-333a-4feb-b09b-3bb99a0f4e3d

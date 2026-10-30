@@ -1,0 +1,27 @@
+import pathlib,json,subprocess,wave,array,hashlib,math
+wt=pathlib.Path('/Users/nighca/.codex/worktrees/promo-video-production/lie');sha='dcc52a14d6569d124708f4db096221d21d195c96';doc='docs/promo-video/2026-10-25/'
+def raw(p):return subprocess.check_output(['git','show',f'{sha}:{p}'],cwd=wt)
+def j(p):return json.loads(raw(doc+p))
+root=pathlib.Path('/Users/nighca/.codex/visualizations/2026/10/25/01a17226-5e5a-7193-b5b7-e522519a3e0c/promo-video');live=root/'live-short-test-20261025';tracks={}
+for name in ['input','output','mix']:
+ with wave.open(str(live/(name+'.wav')),'rb') as f:
+  assert (f.getnchannels(),f.getsampwidth(),f.getframerate(),f.getnframes())==(1,2,48000,884736);samples=array.array('h',f.readframes(f.getnframes()));assert max(map(abs,samples))==0
+ tracks[name]={'samples':len(samples),'sampleRate':48000,'duration':len(samples)/48000,'peakPcm16':0}
+assert tracks=={k:v for k,v in j('live-short-test/verification.json').items() if k in tracks}
+session=j('live-short-test/session-status.json');assert session['status']['socketCount']==1 and session['status']['sockets']==[3];assert session['status']['contexts']==['closed']*3 and session['status']['tracks']==['ended']*3;assert all(session['restored'].values());assert not any(e['type']=='question' for e in session['events'])
+for filename in ['invalid-prepare-cleanup.json','partial-worklet-cleanup.json']:
+ x=j('live-short-test/'+filename);assert x['status']['socketCount']==0 and all(x['restored'].values());assert x['status']['contexts']==['closed'] and x['status']['tracks']==['ended'];assert (live/filename).read_bytes()==raw(doc+'live-short-test/'+filename)
+frames=json.loads((live/'live-short-take/frames.json').read_text());assert len(frames)==1042;assert all((f['metadata']['deviceWidth'],f['metadata']['deviceHeight'])==(1280,800) for f in frames)
+offline=j('offline-audio-verification.json');method=offline['method'];assert method['questionWindowSamplesHalfOpen']==[24048,168048] and method['outputWindowSamplesHalfOpen']==[250512,279312];samples={}
+for name in ['input','output','mix']:
+ p=wt/'media/promo-video/offline-audio-check'/(name+'.wav')
+ with wave.open(str(p),'rb') as f:samples[name]=array.array('h',f.readframes(f.getnframes()))
+ a=samples[name];assert len(a)==307968
+ for window,metric in [('questionWindowSamplesHalfOpen','questionRms'),('outputWindowSamplesHalfOpen','outputToneRms')]:
+  start,end=method[window];rms=math.sqrt(sum((s/32768)**2 for s in a[start:end])/(end-start));assert abs(rms-offline['tracks'][name][metric])<1e-12
+assert max(abs(m-i-o) for m,i,o in zip(samples['mix'],samples['input'],samples['output']))==0
+for name in subprocess.check_output(['git','diff','--name-only','3c81036',sha],cwd=wt,text=True).splitlines():
+ if name.endswith('.json'):json.loads(raw(name))
+assert subprocess.check_output(['git','diff','--name-only','5a9a31c26b1e8f7be57b4147c2886b785b052111','main','--','apps/web/src/application/liveVoice.ts','apps/web/src/application/controller.ts','packages/voice/src'],cwd=wt,text=True)==''
+paths=['apps/web/src/application/liveVoice.ts','apps/web/src/application/controller.ts','packages/voice/src/channel.ts','packages/voice/src/microphone.ts','packages/voice/src/player.ts','packages/voice/src/startup.ts','docs/promo-video/2026-10-25/browser-audio-capture-session.js']
+print(json.dumps({'source':sha,'parent':subprocess.check_output(['git','rev-parse',sha+'^'],cwd=wt,text=True).strip(),'reviewedMain':subprocess.check_output(['git','rev-parse','main'],cwd=wt,text=True).strip(),'sourceSha256':{p:hashlib.sha256(raw(p)).hexdigest() for p in paths},'liveSilentTracks':tracks,'acceptedFramesMetadata':len(frames),'failureCleanupStateAndTwoOfflineFaultInjections':'matched persisted JSON','offlineRmsWindowsRecomputed':True,'offlineMixMaxDifferencePcm16':0,'currentVoiceInputsUnchangedSince5a9':True,'liveCause':'UNKNOWN: no WS open/close/protocol stages retained','scope':'Read-only local source/WAV/frame metadata audit; no network/provider/browser/audio execution or encoding'},indent=2))

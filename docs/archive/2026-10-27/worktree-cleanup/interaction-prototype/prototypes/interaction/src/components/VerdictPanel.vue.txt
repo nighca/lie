@@ -1,0 +1,23 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { suspects } from '../data'
+
+const emit = defineEmits<{ close: []; success: [] }>()
+const result = ref<string | null>(null)
+
+function accuse(id: string) {
+  if (id === 'lin') emit('success')
+  else result.value = '指认错误。此人没有取走纪念章。你可以返回调查，重新听取三人的说法。'
+}
+</script>
+
+<template>
+  <div class="overlay">
+    <section role="dialog" aria-modal="true" aria-labelledby="verdict-title" class="dialog">
+      <div class="section-heading"><h2 id="verdict-title">最终指认</h2><button @click="$emit('close')">返回调查</button></div>
+      <p>谁取走了纪念章？选择一名嫌疑人完成指认。</p>
+      <div class="accusations"><button v-for="suspect in suspects" :key="suspect.id" @click="accuse(suspect.id)">指认 {{ suspect.name }}<small>{{ suspect.role }}</small></button></div>
+      <p v-if="result != null" role="status" class="notice">{{ result }}</p>
+    </section>
+  </div>
+</template>

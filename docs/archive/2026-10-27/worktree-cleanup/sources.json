@@ -1,0 +1,457 @@
+{
+  "date": "2026-10-27",
+  "mainBaseline": "f8c4e2b5d908538e76e60d4d9ddba39da2c30d13",
+  "readOnlySources": true,
+  "entries": [
+    {
+      "archive": "interaction-prototype/prototypes/interaction/README.md.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/README.md",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 1431,
+      "sha256": "4826d3b94329a1bb1701036ca2877fb545d304889d1d12e0ee58c96bd97f0358",
+      "gitBlob": "0296fa71c006847a1011be4b4f3da54fc37eab6e"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/index.html.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/index.html",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 268,
+      "sha256": "33c22b68aa3ada83b505e7a0a56391c25d348d92c4ff9fb0d4de1d1a556ead2d",
+      "gitBlob": "360ee321b645124c65a34ceb4aea1685bb006c8a"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/package-lock.json.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/package-lock.json",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 88105,
+      "sha256": "fba1830014496a1359f214bcce634ee1f4a7890fa98628383094d26f1e0be1d7",
+      "gitBlob": "090d14778c8c96969d098d0b39fbecf1bcfa83ad"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/package.json.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/package.json",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 497,
+      "sha256": "4dff38d795e09240e8178b790bf3f36edcc594e6e42dd9d9c3886a6539274be7",
+      "gitBlob": "d357bf8cfd1e478ed9007a78b102075a16b89503"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/src/App.test.ts.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/src/App.test.ts",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 3975,
+      "sha256": "8008d6713e8119e258453236f28e16b54fe9dea75f34aad008a24c42d43dac20",
+      "gitBlob": "858c9f7bf912bd559f39bb40f9ce2f41653b421f"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/src/App.vue.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/src/App.vue",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 7803,
+      "sha256": "559a2a6778cdc83b0a5ac0104e089533fd8afee65f4a1880b391246c2ed9ad54",
+      "gitBlob": "0c6855f109f174d4ef8c2bbfdbb5815b5ad50378"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/src/components/VerdictPanel.vue.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/src/components/VerdictPanel.vue",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 1023,
+      "sha256": "f188359b4f67bfddcba0544e541743a823966507301f5e478fa720fec5cd8e79",
+      "gitBlob": "462fe6426e183a2bf4905ed3a61f8609b15fd969"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/src/data.ts.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/src/data.ts",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 2174,
+      "sha256": "8fc4ff2d8da38e35e392584826e9ab558b0f0b2812663ae424dcdd779d71e93b",
+      "gitBlob": "c0e5642b6a1deb15ff19f31b9a62eac742aa75bf"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/src/main.ts.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/src/main.ts",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 111,
+      "sha256": "0d42fb6bb74a51d647f20a0cd2bcdcc7b89b146f4cdfbf6f1f7b640e7e036119",
+      "gitBlob": "fe5bae398bf7147490e7f9c3b7802f05a12938db"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/src/style.css.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/src/style.css",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 4953,
+      "sha256": "f8e661a5c3ebfecb0e01df3cdc61e79081fe7fa16b1055209de5ab7c6e28343a",
+      "gitBlob": "19a80800f04ac2882fc280a209560a1ed02cd5fd"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/tsconfig.json.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/tsconfig.json",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 301,
+      "sha256": "a3c8a8c2162e5863df15eefaf8eae1faafae8e4d30088e7cc4634f3ef1e7a4a3",
+      "gitBlob": "252fa5d035ebbaab02aafd0c5b87fc2265e22a40"
+    },
+    {
+      "archive": "interaction-prototype/prototypes/interaction/vite.config.ts.txt",
+      "source": "/private/tmp/lie-interaction-prototype/prototypes/interaction/vite.config.ts",
+      "sourceRef": "d494d34b9b3b994f11a452d548fdfc1d42e6fa75",
+      "status": "historical superseded low-fidelity design; non-current non-executable text snapshot",
+      "bytes": 169,
+      "sha256": "7f9e383e4a6a821467b9ea1c2cb9f9f928c79e4b2b4d66e7f06d32358b1a463f",
+      "gitBlob": "d7ff436d8f150acce9126c2cb3ca15b4c9ae2315"
+    },
+    {
+      "archive": "browser-architecture/AGENTS.md.txt",
+      "source": "/private/tmp/lie-browser-architecture/AGENTS.md",
+      "sourceRef": "13aabaf46d9f8ec041e1ee431d5215daf652aee3 + working tree",
+      "status": "historical dirty draft; preserved verbatim, not current instructions or validation",
+      "bytes": 13563,
+      "sha256": "622fcd0d9e5b6fbbec94502dd6bca33794be9b21569aef55b3856d6cb83a584b",
+      "gitBlob": "c75ab48e88d09b42f28c120e4772377828847785"
+    },
+    {
+      "archive": "browser-architecture/README.md.txt",
+      "source": "/private/tmp/lie-browser-architecture/README.md",
+      "sourceRef": "13aabaf46d9f8ec041e1ee431d5215daf652aee3 + working tree",
+      "status": "historical dirty draft; preserved verbatim, not current instructions or validation",
+      "bytes": 2473,
+      "sha256": "63569758b0ecd7d599df5caf3a485e1b00790a517e5658306a9d715e1fefbb1a",
+      "gitBlob": "4e2a8b1ce12e77985a45f9d889173df88c662b1c"
+    },
+    {
+      "archive": "browser-architecture/docs/deployment-options.md.txt",
+      "source": "/private/tmp/lie-browser-architecture/docs/deployment-options.md",
+      "sourceRef": "13aabaf46d9f8ec041e1ee431d5215daf652aee3 + working tree",
+      "status": "historical dirty draft; preserved verbatim, not current instructions or validation",
+      "bytes": 10037,
+      "sha256": "7480a791ce654f558225e21c47251d874600c32b5fe511ab49d369ca01f1b519",
+      "gitBlob": "4e36c78be8a04877632b2266d99046a8d5d1b0e1"
+    },
+    {
+      "archive": "browser-architecture/docs/validation.md.txt",
+      "source": "/private/tmp/lie-browser-architecture/docs/validation.md",
+      "sourceRef": "13aabaf46d9f8ec041e1ee431d5215daf652aee3 + working tree",
+      "status": "historical dirty draft; preserved verbatim, not current instructions or validation",
+      "bytes": 4048,
+      "sha256": "ce287556f52a4c7d2b5ff2529c97003df120dde0ecb7b9bb93b02ed3fc31a652",
+      "gitBlob": "7dfb27b0780baeaa3326a74da99d4aadf096710a"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/diversity-batch-two/mint-puffs-initial.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/diversity-batch-two/mint-puffs-initial.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 945180,
+      "sha256": "f8d2ab8ef803c86ef73c4837379d697add087e232113680a6881dc7ec8dcab03",
+      "gitBlob": "a0438ba2f228b9b90e20a0db6e22c50155536eb2"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/player-avatar/desktop.jpg",
+      "source": "/private/tmp/lie-appearance-assets/tmp/player-avatar/desktop.jpg",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 103536,
+      "sha256": "78e765ca0ec94f95a463008176d49fbd115ec6488835a691940a9431b3879a2f",
+      "gitBlob": "4b37d712d4ecb3ebcf619479e48a38f4d85d95fb"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/player-avatar/narrow.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/player-avatar/narrow.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 237844,
+      "sha256": "2f71a73e5bf2886d840092ba43704e1d92a35978b93501dcb2852cd24dd14335",
+      "gitBlob": "cc62c9e60be55211b9cee989ace2f58a521d9ee2"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-solved-1280.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-solved-1280.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 102957,
+      "sha256": "b91dc56b337e85c7a60d867da544d7e9735cfff9ca543738371439d6022a878f",
+      "gitBlob": "212efbe779a7755849769b5d0935b50336d95ddb"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/before-interrogation-1440.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/before-interrogation-1440.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 204907,
+      "sha256": "64dd902bc973ba452822bba183a38444926cb1dfd0ef2a19e399dff0a7d95b01",
+      "gitBlob": "1dbfd3861e1d090f63acb4708d34e12717db8a68"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-wrong-1280.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-wrong-1280.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 279487,
+      "sha256": "847916ded394cf33f3c8a3666dca6d863c6c632afe182a911083e167747c4ef1",
+      "gitBlob": "7c26da8279ab2afa914da595d2108e8e0bffe1a9"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/before-interrogation-1280.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/before-interrogation-1280.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 16403,
+      "sha256": "912925965cc4d2d3dc67fc04e98c494423f2f744aa2a424b940f9e960992a3c7",
+      "gitBlob": "9935903324405e5fbd0031e6a069f420ccfbab90"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-interrogation-1280.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-interrogation-1280.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 283556,
+      "sha256": "28c89cef124a42375506e7b3a3418eff19c1053239ec43bd91211aed0fa093fd",
+      "gitBlob": "b5405146801ee4e52e4357a39d2ef5ccfe898fe7"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-intro-1440.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-intro-1440.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 187540,
+      "sha256": "93a29e3ef669f37ed91d3d257c4df7f7d76a8b42d183b949cb15797862e9f298",
+      "gitBlob": "a0a485b8eb9422596dcfde995dd07b6f08f50c1a"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/before-intro-1280.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/before-intro-1280.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 116933,
+      "sha256": "d64a2e028651a8eb5859a2a9a599fdbfa25e5bd5c04dd8c1d64db8529cc8addb",
+      "gitBlob": "3bf0cc1c6bd512542e0cc4d8e049dc6e7f3f12bd"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-intro-1280.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-intro-1280.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 184819,
+      "sha256": "70c99129557192cd72e92c5bd3f9f90449ed2126951c36b6439ab3146139b284",
+      "gitBlob": "f2a23cba26b47c6ab70bdb6e5590dc14a732c6a2"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-interrogation-1440.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-interrogation-1440.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 349699,
+      "sha256": "23a4c68713331ca0430beef5304669d5f41de237385b166ca00427ed346cc988",
+      "gitBlob": "f3e614f2e50fd6c8a2cc00ea5569db1cec111efc"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-accusation-1440.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-accusation-1440.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 288439,
+      "sha256": "f47c84b94588f749de3afa30af4f825cf0e3c1ec8bf009cb6148c599bac6a717",
+      "gitBlob": "b4587854e619fce0cf576035f413cb1615123aa8"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-recording-1280.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-recording-1280.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 264913,
+      "sha256": "cfae17ef4b1f509ec268211fc6f028053360437dbac4d5396f734b6c5aff92d4",
+      "gitBlob": "b10fa453fea935b5f30318a9292679db32de667a"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/ui-alignment/after-narrow-640.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/ui-alignment/after-narrow-640.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 224123,
+      "sha256": "0f61fb6ba7c83d2893f0bcdc4e1b19319144dd890b9e35496e5d9af6ee1cea6c",
+      "gitBlob": "5076539b82167aa067eb46e32d6cf0620bf12fd6"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/accusation-spacing/desktop.jpg",
+      "source": "/private/tmp/lie-appearance-assets/tmp/accusation-spacing/desktop.jpg",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 102092,
+      "sha256": "b7fbaac163e2fdd6bcd2cccc5ef65a076ed0a1c85c388a8bde7956dd9b5bf621",
+      "gitBlob": "edd9e02ef3945d1af115ded94dfa2043fb903a6c"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/accusation-spacing/narrow.png",
+      "source": "/private/tmp/lie-appearance-assets/tmp/accusation-spacing/narrow.png",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 154068,
+      "sha256": "9e1e86ba299e8ecb01583a42b4626efeab10ee89abf97791e4ef25a16200c90d",
+      "gitBlob": "3b8eea71193bb8383398511162693b5749fa2af9"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-appearance-assets/tmp/avatar-stability/after.jpg",
+      "source": "/private/tmp/lie-appearance-assets/tmp/avatar-stability/after.jpg",
+      "sourceRef": "cc560033c2443c137e1a7ed658ab35362ede96fd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 87706,
+      "sha256": "6451787d7c50a4db3c0c728c625e267fb0ce30043b60b3a1b59e6a22b2970080",
+      "gitBlob": "b30dab0f3a6a5f068cf9ccd5b4f2a38d02c95969"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-shared-ui-kit/packages/ui/tmp/transcript-follow.jpg",
+      "source": "/private/tmp/lie-shared-ui-kit/packages/ui/tmp/transcript-follow.jpg",
+      "sourceRef": "3470fb321eaa8587124a9c58dd567cba79f7dedd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 46262,
+      "sha256": "d7eb1ba1b3e8b14d7a15ee5909cc01b45e511b319b2481a02f4b6563f1bb8df3",
+      "gitBlob": "b89dd68b5fbb9a948aebfc6c4f8421fd7f0a2d94"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-shared-ui-kit/packages/ui/tmp/transcript-harness/App.vue.txt",
+      "source": "/private/tmp/lie-shared-ui-kit/packages/ui/tmp/transcript-harness/App.vue",
+      "sourceRef": "3470fb321eaa8587124a9c58dd567cba79f7dedd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 1563,
+      "sha256": "5369cb92f17ca0830acc6f1fc80e658b65d778d65e128832da098daadc803899",
+      "gitBlob": "ff05df95acc8d146021fa62dbedd92487b0fefc5"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-shared-ui-kit/packages/ui/tmp/transcript-harness/index.html.txt",
+      "source": "/private/tmp/lie-shared-ui-kit/packages/ui/tmp/transcript-harness/index.html",
+      "sourceRef": "3470fb321eaa8587124a9c58dd567cba79f7dedd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 256,
+      "sha256": "66e83557a7a5fe2f6cd7ddca352d83862ef12bf133c6dcb62dd4cc7373419eb2",
+      "gitBlob": "bfe506155da21941bba287ec9679eab08ff469d9"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-shared-ui-kit/packages/ui/tmp/transcript-harness/main.ts.txt",
+      "source": "/private/tmp/lie-shared-ui-kit/packages/ui/tmp/transcript-harness/main.ts",
+      "sourceRef": "3470fb321eaa8587124a9c58dd567cba79f7dedd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 114,
+      "sha256": "780d8b82baa628b9c75f6120f4a409786711d2e421ecba62c394557de3977d44",
+      "gitBlob": "4993e1513e46ebe0ada4a6011a467e6f2d127f8b"
+    },
+    {
+      "archive": "ignored-design-evidence/lie-shared-ui-kit/tmp/ui-preview.jpg",
+      "source": "/private/tmp/lie-shared-ui-kit/tmp/ui-preview.jpg",
+      "sourceRef": "3470fb321eaa8587124a9c58dd567cba79f7dedd",
+      "status": "historical design/sample evidence; superseded, no new acceptance claim",
+      "bytes": 140174,
+      "sha256": "0f0b851af99fa331565f9e0eb44a619444894be264641885db9db3b58053aa43",
+      "gitBlob": "6e1b3c3a699d1e4a68af3aada728f3851afdf432"
+    },
+    {
+      "archive": "review-handoffs/passive-diagnostics-bb1834-review/README.md.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/passive-diagnostics-bb1834-review/README.md",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 3178,
+      "sha256": "c1a133e61911d76c9afbe8aed90b507937a349ca341048f88cd8d8c724eae2e2",
+      "gitBlob": "8ca2c279c3b901f8ed7648273d8487c00a40f177"
+    },
+    {
+      "archive": "review-handoffs/passive-diagnostics-bb1834-review/attack.test.mjs.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/passive-diagnostics-bb1834-review/attack.test.mjs",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 2974,
+      "sha256": "1ea97ecee5b63cd17fa7965b5860fa0fbff5ae2d1f210fa590d3f3484742d9e1",
+      "gitBlob": "3c26d9d57a06b08d7dbf66fcc199f71d72bbcad8"
+    },
+    {
+      "archive": "review-handoffs/live-short-dcc-review/audit.py.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/live-short-dcc-review/audit.py",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 4026,
+      "sha256": "a1fb2949764cae02fefd965991b7fb2aebfd8b4c92927903831068744a5c14d3",
+      "gitBlob": "e80f939f6186bc893878e3bba48b817cebece24c"
+    },
+    {
+      "archive": "review-handoffs/live-short-dcc-review/result.json.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/live-short-dcc-review/result.json",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 1800,
+      "sha256": "c36cdd5109b7a4693954aeb88c9e32788f0ee840927259e3103e7eb0dff23147",
+      "gitBlob": "d7079b7ba68d7c071374e334a323cd60295af69f"
+    },
+    {
+      "archive": "review-handoffs/live-short-dcc-review/README.md.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/live-short-dcc-review/README.md",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 5682,
+      "sha256": "aeaf08b145abfd7348c9dee9dd5c95d5240139d32c57f35409826efc7d263641",
+      "gitBlob": "e0f1b7d34c2e7908506d0a825df4d9eb5fc20935"
+    },
+    {
+      "archive": "review-handoffs/d457-archive-candidate-check/result.json.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/d457-archive-candidate-check/result.json",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 9697,
+      "sha256": "47386ca3119bc61a147c451792bf80591087ac8778cafd2d3926356da45f55c1",
+      "gitBlob": "8dd77e10bb4d5ba478e2f2637e2566012deb83e5"
+    },
+    {
+      "archive": "review-handoffs/d457-archive-candidate-check/README.md.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/d457-archive-candidate-check/README.md",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 2234,
+      "sha256": "6b52e192e7f681a3bcfb3a05d903de8972c50fac5281635b390b9e04abc3dac2",
+      "gitBlob": "0b6285e704f62763f319b7754da6d9ee6461c6f1"
+    },
+    {
+      "archive": "review-handoffs/d457-archive-candidate-check/attack.tap.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/d457-archive-candidate-check/attack.tap",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 1022,
+      "sha256": "2a2cafbdcf02532ef7fac6f3b5fbd7745e34d406cc0631149f0985aefacbeec4",
+      "gitBlob": "43d48ad06adb4dbd56e21809400f970204edeff2"
+    },
+    {
+      "archive": "review-handoffs/take02-3ee-review/result.json.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/take02-3ee-review/result.json",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 2837,
+      "sha256": "a4b998b93b50057bb28b3f0dd063b59fb2761b217805223ef60333598ffe0939",
+      "gitBlob": "5f929b632a592010c2adc66435b3e7f48c5d9b79"
+    },
+    {
+      "archive": "review-handoffs/take02-3ee-review/README.md.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/take02-3ee-review/README.md",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 7107,
+      "sha256": "0050b35d8d07b7489e22b026cc8104b889edd15ecd1b7da85f338f319970a176",
+      "gitBlob": "792a4ef38bb62274a10ff4c88c16d869029f495d"
+    },
+    {
+      "archive": "review-handoffs/lifecycle-1232-review/README.md.txt",
+      "source": "/Users/nighca/.codex/worktrees/split-ci-cd-workflows/lie/tmp/lifecycle-1232-review/README.md",
+      "sourceRef": null,
+      "status": "historical sanitized review/evidence; supplements already archived reviews",
+      "bytes": 4098,
+      "sha256": "62ca3330dfd728662210cde45e9ca39c0492cd19b8b84134915cbafc0eb4fa54",
+      "gitBlob": "f19874a08edb5a0bf8e85a503e20a563170cbae2"
+    }
+  ]
+}

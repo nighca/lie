@@ -1,0 +1,48 @@
+export interface Suspect {
+  id: string
+  name: string
+  role: string
+  opening: string
+  replies: Record<string, string>
+}
+
+export interface Message {
+  speaker: string
+  text: string
+}
+
+export const questions = [
+  { id: 'where', text: '闭馆之后，你在哪里？' },
+  { id: 'key', text: '谁能打开纪念章的展柜？' },
+  { id: 'contradiction', text: '其他人的说法和你不一致，你能解释吗？' }
+]
+
+export const suspects: Suspect[] = [
+  {
+    id: 'lin', name: '林岚', role: '展览策划',
+    opening: '闭馆后我就去前台了，没有再回展厅。纪念章失踪的事，我也是后来才知道。',
+    replies: {
+      where: '19:50 之后我一直在前台整理材料，没有去过别的地方。',
+      key: '展柜工作卡一直在我身上。我没有借给别人，但这不代表是我拿的。',
+      contradiction: '陈默说看见我抱着盒子？……好吧，我确实回过展厅。可盒子里装的是展览材料，纪念章的事我不清楚。'
+    }
+  },
+  {
+    id: 'chen', name: '陈默', role: '值班保安',
+    opening: '19:50 我去东侧巡查，20:05 才回来。回来时，展柜已经空了。',
+    replies: {
+      where: '我在东侧巡查。19:55 经过走廊时，看见林岚抱着扁盒走向暂存柜。我当时没多想。',
+      key: '展柜只有林岚的工作卡能开，闭馆前她还用过。我自己没有这张卡。',
+      contradiction: '她说一直在前台？不对，我还跟她打了招呼。她说要先把外借的东西收好。'
+    }
+  },
+  {
+    id: 'zhou', name: '周启', role: '修复助理',
+    opening: '我一直在修复室整理工具。林岚下午问过我，暂存柜是不是还能用。',
+    replies: {
+      where: '我在修复室，19:55 前后陈默巡查时来过门口。后来林岚来问我明天能不能做外借检查。',
+      key: '工作卡由林岚保管。下午她想提前取出纪念章准备外借，我告诉她，申请没批准之前不能搬走。',
+      contradiction: '她说盒子里是材料？那她为什么来问我，纪念章放在暂存柜一晚会不会有事？我让她马上放回展柜。'
+    }
+  }
+]

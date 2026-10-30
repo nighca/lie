@@ -1,0 +1,127 @@
+<script setup lang="ts">
+import { computed, nextTick, onUnmounted, ref } from 'vue'
+import VerdictPanel from './components/VerdictPanel.vue'
+import { questions, suspects } from './data'
+import type { Message } from './data'
+
+const stage = ref<'briefing' | 'investigation' | 'solved'>('briefing')
+const activeId = ref('lin')
+const histories = ref<Record<string, Message[]>>(createHistories())
+const questionId = ref('where')
+const speechState = ref<'idle' | 'recording' | 'waiting' | 'speaking'>('idle')
+const showVerdict = ref(false)
+const feedback = ref('选择一名人物，用下方模拟语音按钮开始交流。')
+const chatLog = ref<HTMLElement | null>(null)
+let timer: ReturnType<typeof setTimeout> | null = null
+
+const current = computed(() => suspects.find((item) => item.id === activeId.value)!)
+const stateText = computed(() => ({ idle: '等待你开口', recording: '模拟收音中…', waiting: '模拟等待 · 正在组织回应…', speaking: '模拟说话中 · 可打断' })[speechState.value])
+
+function createHistories(): Record<string, Message[]> {
+  return Object.fromEntries(suspects.map((item) => [item.id, [{ speaker: item.name, text: item.opening }]]))
+}
+
+function stop(markInterruption = true) {
+  if (timer != null) clearTimeout(timer)
+  timer = null
+  if (speechState.value !== 'idle' && markInterruption) {
+    const text = { recording: '你取消了本次模拟发言。', waiting: '你取消了本次模拟回应。', speaking: '你打断了模拟说话；已显示的转写保留。', idle: '' }[speechState.value]
+    histories.value[activeId.value].push({ speaker: '记录', text })
+  }
+  speechState.value = 'idle'
+}
+
+async function scrollChat() {
+  await nextTick()
+  chatLog.value?.scrollTo?.({ top: chatLog.value.scrollHeight, behavior: 'smooth' })
+}
+
+function speak() {
+  stop()
+  const id = activeId.value
+  const chosen = questions.find((item) => item.id === questionId.value)!
+  speechState.value = 'recording'
+  timer = setTimeout(() => {
+    histories.value[id].push({ speaker: '你', text: chosen.text })
+    speechState.value = 'waiting'
+    scrollChat()
+    timer = setTimeout(() => {
+      histories.value[id].push({ speaker: current.value.name, text: current.value.replies[chosen.id] })
+      speechState.value = 'speaking'
+      scrollChat()
+      timer = setTimeout(() => { speechState.value = 'idle'; timer = null }, 2200)
+    }, 900)
+  }, 1000)
+}
+
+function switchPerson(id: string) {
+  if (id === activeId.value) return
+  stop()
+  activeId.value = id
+  feedback.value = `已切换至${current.value.name}，此人的语音转写已保留。`
+  scrollChat()
+}
+
+function openVerdict() {
+  stop()
+  showVerdict.value = true
+}
+
+function restart() {
+  stop(false)
+  activeId.value = 'lin'
+  histories.value = createHistories()
+  questionId.value = 'where'
+  showVerdict.value = false
+  feedback.value = '选择一名人物，用下方模拟语音按钮开始交流。'
+  stage.value = 'briefing'
+}
+
+onUnmounted(() => stop(false))
+</script>
+
+<template>
+  <header class="topbar"><strong>LIE / 审讯室</strong><span>交互原型 · 演示数据</span><small>无真实 AI、麦克风或声音播放</small></header>
+  <main v-if="stage === 'briefing'" class="briefing panel">
+    <small>占位案件 001 · 非最终剧本</small>
+    <h1>消失的纪念章</h1>
+    <p class="lead">闭馆后二十分钟，展柜中的纪念章不见了。三名工作人员仍留在馆内，各自的说法能拼出真相吗？</p>
+    <div class="briefing-facts"><p><strong>你的任务</strong><br>通过语音询问三人，发现说法间的矛盾，指认取走纪念章的人。</p><p><strong>正式交互方向</strong><br>与嫌疑人自由语音交流，最终点击按钮选择责任人。</p><p><strong>如何体验原型</strong><br>选择一条测试句，点击模拟发言，观察收音、等待、说话和打断。</p></div>
+    <p class="muted">测试句只用于假数据演示，不代表正式游戏的预设选项。转写为只读，没有文字聊天。</p>
+    <button class="primary" @click="stage = 'investigation'">接案，开始调查 →</button>
+  </main>
+
+  <main v-else-if="stage === 'investigation'" class="workspace">
+    <div class="case-heading"><div><small>调查进行中 / 占位案件</small><h1>消失的纪念章</h1></div><button class="primary" @click="openVerdict">最终指认</button></div>
+    <nav class="suspect-tabs" aria-label="选择询问人物">
+      <button v-for="person in suspects" :key="person.id" :aria-pressed="activeId === person.id" @click="switchPerson(person.id)"><strong>{{ person.name }}</strong><span>{{ person.role }}</span></button>
+    </nav>
+    <p role="status" class="feedback">{{ feedback }}</p>
+    <section class="panel conversation">
+      <div class="section-heading"><div><h2>{{ current.name }}</h2><small>{{ current.role }} · 语音对话</small></div><span class="status-dot">{{ stateText }}</span></div>
+      <div class="voice-stage" :data-state="speechState"><span class="voice-avatar">{{ current.name.slice(0, 1) }}</span><div><strong>{{ stateText }}</strong><p>模拟语音链路，仅展示状态变化，不采集麦克风，也不播放声音。</p></div></div>
+      <details open><summary>查看对话转写 · 只读</summary>
+        <div ref="chatLog" class="chat-log" role="log" aria-label="语音转写" aria-live="polite">
+          <article v-for="(message, index) in histories[activeId]" :key="index" :class="{ mine: message.speaker === '你', system: message.speaker === '记录' }"><small>{{ message.speaker }}</small><p>{{ message.text }}</p></article>
+        </div>
+      </details>
+      <div class="simulator">
+        <div><strong>原型演示控制</strong><small>以下测试句仅替代真实开口，正式游戏支持自由语音。</small></div>
+        <label for="sample">模拟发言内容</label><select id="sample" v-model="questionId"><option v-for="question in questions" :key="question.id" :value="question.id">{{ question.text }}</option></select>
+        <div class="composer-actions"><small>模拟：收音 1 秒 → 等待 → 人物说话<br>说话开始时显示完整转写。</small><button v-if="speechState !== 'idle'" @click="stop()">{{ speechState === 'speaking' ? '打断说话' : '取消本轮' }}</button><button class="primary" @click="speak">{{ speechState === 'idle' ? '模拟发言' : '打断并模拟发言' }}</button></div>
+      </div>
+    </section>
+  </main>
+
+  <main v-else class="panel briefing reveal">
+    <small>指认正确 · 演示结果</small><h1>纪念章找到了</h1>
+    <p class="lead">林岚取走了纪念章，放入暂存柜准备一次尚未获批的外借。她隐瞒了返回展厅的行为。</p>
+    <h2>完整经过</h2>
+    <ol><li>19:50，陈默离开展厅巡查，周启在修复室整理工具。</li><li>林岚使用自己保管的工作卡取出纪念章，装盒后放进暂存柜。</li><li>19:55，陈默看见她抱着盒子；她告诉陈默是在收拾外借的东西。</li><li>林岚随后询问周启，纪念章能否在暂存柜过夜。周启要求她放回。</li><li>20:05，陈默发现展柜空了。林岚却声称自己一直在前台。</li></ol>
+    <p class="notice">三人的说法串起了关键矛盾：林岚否认离开前台，却被另外两人的亲历叙述揭穿；只有她持有工作卡，她也向周启谈及暂存的纪念章。</p>
+    <p class="muted">以上为验证交互而写的简化占位案件，不代表正式剧情。</p>
+    <button class="primary" @click="restart">重新开始一局</button>
+  </main>
+  <VerdictPanel v-if="showVerdict" @close="showVerdict = false" @success="showVerdict = false; stage = 'solved'" />
+  <footer>低保真交互提案 · 刷新页面清除进度 · 仅用于确认操作流程</footer>
+</template>

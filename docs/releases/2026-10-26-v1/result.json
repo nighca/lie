@@ -1,0 +1,23 @@
+{
+  "sha": "f8c4e2b5d908538e76e60d4d9ddba39da2c30d13",
+  "ciRun": 40197058052,
+  "cdRun": 40197191660,
+  "attempt": 1,
+  "ci": "completed/success",
+  "cd": "completed/success",
+  "ciJobIDs": [
+    121180074936
+  ],
+  "cdJobIDs": [
+    121180471775
+  ],
+  "artifactId": 12600168036,
+  "artifactDigest": "sha256:c2a1732f8fa275c710eb035a2b4cc516b198a0dd5c567ac24f8342bb5dff604d",
+  "digestEvidence": "API expected equals CD actual downloaded digest; no independent ZIP download this round",
+  "cdRestoredFiles": 256,
+  "workerVersion": "9acfdca6-45f1-4e15-ac5e-10d48e90f266",
+  "reusedEvidence": "713bbe7 normal-TLS homepage/newJS and27 route-title tests, actual runtime eight Git objects identical",
+  "newStaticTLS": false,
+  "browserProviderServiceGitWritesManualDeployRerun": false,
+  "localServiceBoundary": "8787/8788 remain disabled; no service operations;5355 not touched"
+}
