@@ -1,0 +1,187 @@
+{
+  "checkedAtUTC": "2026-10-30T16:09:36.727157+00:00",
+  "authorization": "Root relayed fresh direct user confirmation: 可以，现在没有语音对话，直接发布; one-time automatic local restart for this batch only",
+  "orderedReviewedSourceCommits": [
+    "2a677d847ab76531a8eda6a5e6a14805daf54c07",
+    "23abd80ebfb7f8fa29d4aaa5b545ee08a4563f68",
+    "09a766d8280d778b836b7b104efff5395ee0a4ed",
+    "003f8a95526af872850526fac5dd0e39348931ee",
+    "6ddbe141b597b2c60d4fc32d052f8fdaf91b3726",
+    "0e1634a4853a4cce85867cdd6a26f0c27b1e23f8",
+    "cce53e8da69e8b3490f15095fae1924c2709a816",
+    "087d72a2e6e1395231ad52ee15b1bfe8011fee69",
+    "8d6c4b8f38e6358da35d9b21e8dc2f5a25466757",
+    "c8dbd3e610bea04d1938f5db6f680ba28c98847b",
+    "3b745182633266a0cd22d8cfada0ebffa86f37ad",
+    "29a97d52337aebe2cba7cadbd0b693b280c1af2f",
+    "1ee049e5036b515880bc38daf8230fd700a66771",
+    "d242bfedae92854b60b1f13cb933d2be9fe7d407",
+    "546f61fe52d02db01e5b7a6736570e76219f7604",
+    "da3d2ef56e35776fc9d245e599d3176df00ea446",
+    "ed0d69b889d16edf97ae86293d04e74b4315567b",
+    "5aae4bbe442c57d8131db6526fe6dfa49ee2c3e0",
+    "40ef04ebc2fb4c5323edb0a11cb1695fdc870799"
+  ],
+  "candidateBuild": {
+    "sha": "a8be75823ceb67966390b5534d725a3a8bf1505b",
+    "base": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+    "dirty": false,
+    "asset": "/assets/index-COwzblXy.js",
+    "bytes": 244428,
+    "sha256": "d1d4ed2145e73d5ab938fb0d43e500a10c1dbacc4cc363eb55c2b0f8ab844b61",
+    "cpuMs": 30000,
+    "voiceMaxSessionSeconds": "600",
+    "orderedCandidateCommits": [
+      "b44a969d1f927eeb433d50cb26640dd7404f97dc",
+      "009358a3255b0d2f7b4e4df8195dc4afa64a653b",
+      "c0a9632e263e78f819f71e1514fea40f13ec82a8",
+      "ef960fa29112d53c67e3d07b52699836509a2bdf",
+      "7a640d07c2e1688c4280f51b86b2e8512fdc996f",
+      "26a71006505a5ca841103e26ebf2763cee53312b",
+      "acb6f2a836efdabe29c27d13bd6a3aa8cc5af480",
+      "e65a8a6297694d40937404b4342b3f56968acac8",
+      "e4491d17081cf77db4ae60fdbaa3a81f4ea19ba7",
+      "9ccfdc389c09b4dd5006825be924e51bed26ea60",
+      "3d8112a73ac56edd7841c1392fe6df6f694fb9f3",
+      "bb0be27dcf532dfb3e49461c0c631754d8701be2",
+      "05563cad91ec85ba3ee4b7e40e49e3527c9c55e6",
+      "65aceb61f2241cbe13e0a93c95554e60a139387a",
+      "e20d935ad1a758cc98a075b06920df57dad0a81c",
+      "5f0364e951e2e46e07543dc18cfab86d404366dd",
+      "f6f6964164181d62203d20f13e315982061be86e",
+      "614a5d9f93643e3fbbffdd4472b0e0c42614c865",
+      "c6fb376bec00fb626f0349e12ab64a1e6c177905",
+      "a8be75823ceb67966390b5534d725a3a8bf1505b"
+    ],
+    "changedFiles": 84,
+    "totalChangedFileBytes": 5574255,
+    "maximumChangedFileBytes": 777163,
+    "patchStats": "84 files changed, 4522 insertions(+), 230 deletions(-)",
+    "videoAncestor": false,
+    "mediaDiff": false
+  },
+  "publishedSha": "a8be75823ceb67966390b5534d725a3a8bf1505b",
+  "checks": {
+    "workspaceTypes": "passed",
+    "webTargets": {
+      "files": 10,
+      "tests": 88,
+      "result": "passed"
+    },
+    "cleanFullWebGatewayBuild": "passed",
+    "productionDryRun": "passed",
+    "jsonParsed": 16,
+    "localLinksChecked": 91,
+    "localLinksMissing": 0,
+    "originalThreeSnapshotHashes": "matched",
+    "videoCommitAncestors": false,
+    "newMedia": false
+  },
+  "ci": {
+    "id": 41085985860,
+    "url": "https://github.com/nighca/lie/actions/runs/41085985860",
+    "headSha": "a8be75823ceb67966390b5534d725a3a8bf1505b",
+    "conclusion": "success"
+  },
+  "cd": {
+    "id": 41086191125,
+    "url": "https://github.com/nighca/lie/actions/runs/41086191125",
+    "headSha": "a8be75823ceb67966390b5534d725a3a8bf1505b",
+    "conclusion": "success",
+    "downloadRestoreLatestDeployAllActuallySuccess": true
+  },
+  "artifact": {
+    "id": 12992205912,
+    "name": "production-build-a8be75823ceb67966390b5534d725a3a8bf1505b-41085985860-1",
+    "digest": "sha256:34a6b7ad6d692b602421c6b24abd8bd21d3951adf5bc0eb224d018d21be0b778",
+    "size_in_bytes": 113350683
+  },
+  "artifactVerification": {
+    "artifactId": 12992205912,
+    "archiveDigestMatched": true,
+    "verifiedFiles": 256,
+    "sha": "a8be75823ceb67966390b5534d725a3a8bf1505b",
+    "asset": "/assets/index-COwzblXy.js",
+    "bytes": 244428,
+    "sha256": "d1d4ed2145e73d5ab938fb0d43e500a10c1dbacc4cc363eb55c2b0f8ab844b61",
+    "matchesLocalCandidate": true
+  },
+  "servingDeployment": {
+    "id": "45af4a17-7713-48ae-a069-4cc96b191e0b",
+    "created_on": "2026-10-30T16:02:49.842255Z",
+    "annotations": {
+      "workers/message": "Verified CI build a8be75823ceb67966390b5534d725a3a8bf1505b",
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "1820dfac-c92e-4082-91af-0cf46de7aff5",
+        "percentage": 100
+      }
+    ]
+  },
+  "servingVersion": {
+    "id": "1820dfac-c92e-4082-91af-0cf46de7aff5",
+    "number": 39,
+    "annotations": {
+      "workers/message": "Verified CI build a8be75823ceb67966390b5534d725a3a8bf1505b",
+      "workers/tag": "git-a8be75823ceb67966390b5534d725a3a8bf1505b",
+      "workers/triggered_by": "version_upload"
+    },
+    "limits": {
+      "cpu_ms": 30000
+    },
+    "usage_model": "standard",
+    "voiceSession": {
+      "text": "600",
+      "type": "plain_text"
+    }
+  },
+  "onlineAsset": {
+    "asset": "/assets/index-COwzblXy.js",
+    "bytes": 244428,
+    "sha256": "d1d4ed2145e73d5ab938fb0d43e500a10c1dbacc4cc363eb55c2b0f8ab844b61",
+    "matchesFinalCandidate": true,
+    "normalTlsVerification": true,
+    "redirects": 0
+  },
+  "onlineUi": {
+    "ownedChromeTab": "1910332177; closed after acceptance",
+    "homeCastArtExists": true,
+    "centerDifferencePx": 0,
+    "artworkRatio": 1.6499930942405967,
+    "horizontalOverflow": false,
+    "versionInitiallyClosed": true,
+    "oldFooterCount": 0,
+    "openedFullHash": "a8be75823ceb67966390b5534d725a3a8bf1505b",
+    "dirty": false,
+    "copyButtonPresent": true,
+    "clipboardInvoked": false,
+    "routeUnchanged": true,
+    "closeReturnedFocusToDot": true,
+    "globalViewportOrUserStorageManipulated": false
+  },
+  "localPreview": {
+    "source": "Single post-update status/health/listener observation; no repeated probe",
+    "mainStatusSha": "a8be75823ceb67966390b5534d725a3a8bf1505b",
+    "health": {
+      "status": "ok",
+      "storage": "none"
+    },
+    "voiceStatus": "ready",
+    "webPid": 64161,
+    "webParentRunnerPid": 66435,
+    "gatewayListenerPid": 64257,
+    "gatewayParentPid": 64212,
+    "automaticallyFollowedMain": true,
+    "manualServiceOperations": false,
+    "retainedForUser": true
+  },
+  "boundaries": [
+    "Video b4/843 are not ancestors; main media bytes unchanged from bda; cancelled video publication never resumed",
+    "No preview service, provider/mic/voice WebSocket/profile or real clipboard operations",
+    "Original reviewed native results/layout matrices reused by relevant source identity and combined CSS review; no new true-device/Safari/600s acceptance claimed",
+    "Prior video/recovery maintenance permissions were not reused; this fresh one-time window is consumed",
+    "Release evidence remains only on task branch for the next normal archive batch, without report-only main update/push"
+  ]
+}
