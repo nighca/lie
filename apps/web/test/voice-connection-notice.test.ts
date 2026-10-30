@@ -1,10 +1,13 @@
 import { mount, flushPromises } from '@vue/test-utils'
-import { expect, it } from 'vitest'
+import { afterEach, expect, it, vi } from 'vitest'
 
 import App from '../src/App.vue'
 import { createGameController } from '../src/application/controller'
 import type { ConversationScope } from '../src/application/voice'
+import VoiceConnectionNotice from '../src/presentation/VoiceConnectionNotice.vue'
 import { game } from './helpers'
+
+afterEach(() => { vi.clearAllTimers(); vi.useRealTimers() })
 
 function scene() {
   const attempts: { scope: ConversationScope; ready(): void; fail(): void; closed: boolean }[] = []
@@ -28,14 +31,13 @@ it('keeps the global wait-to-speak notice until capture preparation actually res
     await controller.load('test'); controller.start(); await flushPromises()
     await wrapper.get('.lie-voice__actions button').trigger('click')
     expect(wrapper.get('[aria-label="语音连接提示"]').attributes('role')).toBe('status')
-    expect(wrapper.get('.voice-connection-notice strong').text()).toBe('正在连接…')
-    expect(wrapper.get('.voice-connection-notice p').text()).toBe('连好后再说话')
-    expect(wrapper.get('.voice-connection-notice__spinner').attributes('aria-hidden')).toBe('true')
+    expect(wrapper.get('.voice-connection-notice strong').text()).toBe('正在请甲过来…')
+    expect(wrapper.get('.voice-connection-notice footer span').text()).toBe('等 TA 坐定，再开口哦')
     expect(wrapper.get('.voice-connection-notice button').text()).toBe('取消')
     expect(wrapper.get('.voice-connection-notice button').attributes('aria-label')).toBe('取消连接')
     expect(wrapper.get('.lie-voice').attributes('data-conversation')).toBe('inactive')
     attempts[0].scope.onEvent({ type: 'listening' }); await flushPromises()
-    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('正在连接…')
+    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('正在请甲过来…')
     attempts[0].ready(); await flushPromises()
     expect(wrapper.find('[aria-label="语音连接提示"]').exists()).toBe(false)
     expect(wrapper.get('.lie-voice').attributes('data-conversation')).toBe('active')
@@ -77,7 +79,7 @@ it('keeps the connection card while switching and stops it when background opens
     await controller.load('test'); controller.start(); await flushPromises()
     await wrapper.get('.lie-voice__actions button').trigger('click')
     await wrapper.findAll('.character-list button')[1].trigger('click')
-    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('连好后再说话')
+    expect(wrapper.get('[aria-label="语音连接提示"]').text()).toContain('正在请乙过来…')
     expect(controller.getView().currentCharacterId).toBe('two')
     expect(attempts).toHaveLength(2)
     expect(attempts[0].closed).toBe(true)
@@ -85,5 +87,50 @@ it('keeps the connection card while switching and stops it when background opens
     expect(wrapper.find('[aria-label="语音连接提示"]').exists()).toBe(false)
     attempts.forEach(attempt => attempt.ready()); await flushPromises()
     expect(controller.getView().conversationActive).toBe(false)
+  } finally { cleanup() }
+})
+
+it('advances the approved lines and holds the last until unmounted', async () => {
+  vi.useFakeTimers()
+  const wrapper = mount(VoiceConnectionNotice, { props: { name: '顾遥', accent: '#ff665b' } })
+  try {
+    expect(wrapper.get('strong').text()).toBe('正在请顾遥过来…')
+    expect(wrapper.get('mark').text()).toBe('顾遥')
+    expect(wrapper.get('mark').attributes('style')).toContain('--character-name-accent: #ff665b')
+    await vi.advanceTimersByTimeAsync(699)
+    expect(wrapper.attributes('data-step')).toBe('0')
+    await vi.advanceTimersByTimeAsync(1)
+    expect(wrapper.get('strong').text()).toBe('搬个椅子…')
+    await vi.advanceTimersByTimeAsync(700)
+    expect(wrapper.get('strong').text()).toBe('TA 正在入座…')
+    await vi.advanceTimersByTimeAsync(700)
+    expect(wrapper.get('strong').text()).toBe('等 TA 坐稳…')
+    await vi.advanceTimersByTimeAsync(20000)
+    expect(wrapper.get('strong').text()).toBe('等 TA 坐稳…')
+  } finally { wrapper.unmount() }
+})
+
+it('restarts the same character on a new attempt even within one render batch', async () => {
+  vi.useFakeTimers()
+  const { controller, wrapper, cleanup } = scene()
+  try {
+    await controller.load('test'); controller.start(); void controller.startConversation(); await flushPromises()
+    await vi.advanceTimersByTimeAsync(1500)
+    expect(wrapper.get('.voice-connection-notice strong').text()).toBe('TA 正在入座…')
+    controller.endConversation(); void controller.startConversation(); await flushPromises()
+    expect(wrapper.get('.voice-connection-notice strong').text()).toBe('正在请甲过来…')
+    await vi.advanceTimersByTimeAsync(699)
+    expect(wrapper.get('.voice-connection-notice').attributes('data-step')).toBe('0')
+  } finally { cleanup() }
+})
+
+it('uses the selected preset accent for the current target name', async () => {
+  const { controller, wrapper, cleanup } = scene()
+  try {
+    await wrapper.setProps({ characterPresets: [{ id: 'blue', name: '蓝衣眼镜', avatar: '/blue.png', portrait: '/blue.png', accent: '#075bfa', animation: null, voiceId: null, portraits: { listening: null, waiting: null, speaking: null } }] })
+    await controller.load('test'); controller.start(); void controller.startConversation()
+    controller.selectCharacter('two'); await flushPromises()
+    expect(wrapper.get('.voice-connection-notice mark').text()).toBe('乙')
+    expect(wrapper.get('.voice-connection-notice mark').attributes('style')).toContain('--character-name-accent: #075bfa')
   } finally { cleanup() }
 })

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIE · 候场 Demo 尺寸验收</title>
+<style>
+  body { margin: 0; padding: 18px; background: #eaf2ff; color: #111b45; font: 14px/1.6 system-ui, sans-serif; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+  select { padding: 8px; font: inherit; }
+  iframe { display: block; width: 391px; height: 844px; border: 0; box-shadow: 0 0 0 2px #111b45; }
+</style>
+<header><strong>离线设计 Demo · 独立 iframe 尺寸</strong><label>尺寸 <select id="size"><option value="391,844">手机 391 × 844</option><option value="320,700">窄屏 320 × 700</option><option value="1280,878">桌面 1280 × 878</option></select></label><a href="/connection-demo.html">直接打开 Demo</a></header>
+<iframe src="/connection-demo.html" title="候场设计 Demo"></iframe>
+<script>
+  document.getElementById('size').addEventListener('change', event => {
+    const [width, height] = event.target.value.split(',')
+    const frame = document.querySelector('iframe')
+    frame.style.width = `${width}px`
+    frame.style.height = `${height}px`
+  })
+</script>
+</html>

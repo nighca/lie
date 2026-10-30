@@ -323,21 +323,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .intro-character { transition: none; }
 }
 
-.voice-connection-notice { position: fixed; z-index: 6; top: 55dvh; left: 50%; transform: translate(-50%, -50%); width: min(360px, calc(100% - 32px)); min-height: 72px; display: flex; align-items: center; gap: 10px; padding: 12px; border: 2px solid var(--lie-ink); border-radius: 16px; background: #fffef7; color: var(--lie-ink); box-shadow: 0 3px 0 #111b451c; }
-.voice-connection-notice > div { min-width: 0; flex: 1; }
-.voice-connection-notice strong { display: block; font-size: 18px; font-weight: 800; line-height: 25px; }
-.voice-connection-notice p { margin: 0; color: #52607a; font-size: 13px; line-height: 18px; overflow-wrap: anywhere; }
-.voice-connection-notice .lie-button { flex-shrink: 0; width: 56px; min-height: 44px; padding: 8px; border: 1.5px solid #9ba6bb; border-radius: 12px; background: transparent; color: var(--lie-ink); font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: none; }
-.voice-connection-notice .lie-button:hover { background: #111b4508; }
-.voice-connection-notice__spinner { flex: 0 0 18px; width: 18px; height: 18px; border: 2px solid #075bfa2e; border-top-color: var(--lie-primary); border-right-color: var(--lie-primary); border-radius: 50%; animation: voice-connection-spin 1.1s linear infinite; }
-@keyframes voice-connection-spin { to { transform: rotate(1turn); } }
-@media (prefers-reduced-motion: reduce) {
-  .voice-connection-notice__spinner { animation: none; }
-}
-@media (max-width: 700px) {
-  .voice-connection-notice { width: min(312px, calc(100% - 32px)); min-height: 68px; padding: 10px 12px; }
-}
-
 @media (min-width: 1151px) {
   .game-shell--investigating .portrait-backdrop :is(img, canvas) { top: 32px; }
 }

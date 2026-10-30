@@ -4,16 +4,19 @@ import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton,
 
 import type { GameController } from './application/controller'
 import CharacterNameText from './presentation/CharacterNameText.vue'
+import VoiceConnectionNotice from './presentation/VoiceConnectionNotice.vue'
 import type { CharacterPreset } from './presentation/characterPresets'
 
 const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; allowRemix?: boolean; returnLabel?: string }>(), { allowRemix: true, returnLabel: '返回案件列表' })
 const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: []; remix: [] }>()
 const view = ref(props.controller.getView())
+const connectionAttempt = ref(0)
 const voiceFeedback = ref(props.controller.getVoiceFeedback())
 const unsubscribeFeedback = props.controller.subscribeVoiceFeedback((value) => { voiceFeedback.value = value })
 onUnmounted(unsubscribeFeedback)
 const backgroundOpen = ref(false)
 const unsubscribe = props.controller.subscribe((value) => {
+  if (value.busy && (!view.value.busy || value.currentCharacterId !== view.value.currentCharacterId)) connectionAttempt.value++
   view.value = value
   if (value.phase !== 'interrogating') backgroundOpen.value = false
 })
@@ -99,11 +102,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>
     </ProductHeader>
 
-    <section v-if="view.phase === 'interrogating' && view.conversationActive && view.busy" class="voice-connection-notice" role="status" aria-label="语音连接提示">
-      <span class="voice-connection-notice__spinner" aria-hidden="true"></span>
-      <div><strong>正在连接…</strong><p>连好后再说话</p></div>
-      <UiButton variant="secondary" aria-label="取消连接" @click="controller.endConversation()">取消</UiButton>
-    </section>
+    <VoiceConnectionNotice v-if="view.phase === 'interrogating' && view.conversationActive && view.busy && current != null" :key="connectionAttempt" :name="current.name" :accent="currentCharacterPreset?.accent ?? null" @cancel="controller.endConversation()" />
 
     <main v-if="view.phase === 'loading' || view.phase === 'failed'" class="intro-card surface">
       <h1>{{ view.phase === 'loading' ? '正在准备案件…' : '案件暂时无法加载' }}</h1>

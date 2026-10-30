@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-30",
+  "base": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+  "archiveCommit": "40cc97421a6c322137869ddfe6d62b2821bbc652",
+  "status": "production-source-reviewed-locally-awaiting-initiator-review",
+  "sourceSha256": {
+    "apps/web/src/App.vue": "31ab62844bf286e369d4b317ff9ca2b66178f1c93d86a9b3b97f2f74c2f4960b",
+    "apps/web/src/style.css": "8b4665a2cfab409b918649c6985f836e7b86c369cf1a11d007b60a98fd40991f",
+    "apps/web/src/presentation/VoiceConnectionNotice.vue": "12098306f96aefbaf2c17680dc6ff1f5994ca699158635a25eb8266d1fb39dd9",
+    "apps/web/src/connection-demo/ConnectionDemo.vue": "f3a6564db4a2a5d3ff31caa7d017e62c1cc6a72b3e78ff0b906800ba996d731c",
+    "apps/web/src/connection-demo/voice.ts": "785422dae7a4741500cdae97029a323a968527e618c4aee670c561230fed836e",
+    "apps/web/src/connection-demo/main.ts": "a188b476dc4aad10a6971b4bc39672f635962561a8741d39f39ead1d3111fe5f",
+    "apps/web/connection-demo.vite.config.ts": "d0afe64a7ee5da7d51b73007654b57393ec2519c714dcd7e8d338b913b358a4f",
+    "apps/web/test/voice-connection-notice.test.ts": "0e7a5728ef8907d04b43cadc182b3b688eb19b999139868a87188e5b375f6dc3",
+    "package-lock.json": "2efd70fe940997ce63746a05a6d5574974560a67d6a737f4801e9f9e254e82e0"
+  },
+  "workspaceLinks": {
+    "character-animation": "/Users/nighca/.codex/worktrees/connection-waiting-product/lie/packages/character-animation",
+    "game-core": "/Users/nighca/.codex/worktrees/connection-waiting-product/lie/packages/game-core",
+    "gateway": "/Users/nighca/.codex/worktrees/connection-waiting-product/lie/apps/gateway",
+    "ui": "/Users/nighca/.codex/worktrees/connection-waiting-product/lie/packages/ui",
+    "voice": "/Users/nighca/.codex/worktrees/connection-waiting-product/lie/packages/voice",
+    "web": "/Users/nighca/.codex/worktrees/connection-waiting-product/lie/apps/web"
+  },
+  "node": "v24.22.1",
+  "npm": "11.19.1",
+  "checks": {
+    "webTypecheck": "pass",
+    "uiTypecheck": "pass",
+    "tests": "5 files / 47 passed",
+    "webBuild": "pass; 8 presets / 121 assets; 82 unique images encoded",
+    "browser": "391x844 and 1280x878 independent iframes; offline fake voice"
+  },
+  "services": {
+    "old": {
+      "pid": 13931,
+      "session": 83334,
+      "stop": "Ctrl-C exit130; 5176 listener absent"
+    },
+    "new": {
+      "pid": 54852,
+      "session": 7499,
+      "stop": "Ctrl-C exit130; 5176 listener absent"
+    }
+  },
+  "limits": [
+    "No real microphone/provider/voice WS",
+    "No global viewport or storage changes",
+    "No 320px/200-percent zoom/reduced-motion/screen-reader native acceptance"
+  ]
+}

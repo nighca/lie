@@ -1,0 +1,69 @@
+[
+  {
+    "accent": "--character-name-accent: #FFCF43;",
+    "bottom": "正在连接",
+    "budget": "剩余询问07:30",
+    "check": "mobile-first",
+    "name": "沈禾",
+    "notice": "正在请沈禾过来…等 TA 坐定，再开口哦取消",
+    "noticeRect": {
+      "bottom": 532.6953125,
+      "height": 137,
+      "left": 16,
+      "right": 375,
+      "top": 395.6953125,
+      "width": 359,
+      "x": 16,
+      "y": 395.6953125
+    },
+    "scrollWidth": 391,
+    "width": 391
+  },
+  {
+    "accent": "--character-name-accent: #075BFA;",
+    "check": "rapid-switch-final",
+    "name": "陈拓",
+    "step": "0",
+    "text": "正在请陈拓过来…等 TA 坐定，再开口哦取消"
+  },
+  {
+    "check": "early-ready",
+    "notices": 0
+  },
+  {
+    "check": "same-person-restart",
+    "step": "0"
+  },
+  {
+    "check": "cancel",
+    "notices": 0
+  },
+  {
+    "check": "wait-budget",
+    "before": "剩余询问\n07:30",
+    "after": "剩余询问\n07:30",
+    "step": "3"
+  },
+  {
+    "check": "failure",
+    "notices": 0,
+    "text": "陈拓的询问记录\n\n还没有对话，开口打个招呼吧。\n\n提示\n语音暂时中断。已显示转写保留，你可以重新开始对话。"
+  },
+  {
+    "bottom": "正在连接",
+    "check": "desktop-first",
+    "notice": "正在请陈拓过来…等 TA 坐定，再开口哦取消",
+    "noticeRect": {
+      "bottom": 554.3984375,
+      "height": 143,
+      "left": 450,
+      "right": 830,
+      "top": 411.3984375,
+      "width": 380,
+      "x": 450,
+      "y": 411.3984375
+    },
+    "scrollWidth": 1280,
+    "width": 1280
+  }
+]
