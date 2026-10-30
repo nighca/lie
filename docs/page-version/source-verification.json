@@ -1,0 +1,28 @@
+{
+  "buildCommit": "efdc96f102346e750f41965a21ede4c0435f9c0e",
+  "clean": true,
+  "script": "/assets/index-DhUnAzna.js",
+  "sha256": "8cbc29ce9df07af695bbafa29f8a5fd74c25ca83bb007f90074ae97646ea282a",
+  "checks": {
+    "webTypes": "passed",
+    "targetTests": 14,
+    "browserWidths": [
+      391,
+      1280
+    ],
+    "nativeDisclosure": "Enter open and Space close",
+    "fullCommitUserSelect": "all"
+  },
+  "service": {
+    "port": 5544,
+    "pid": 6016,
+    "session": 78829,
+    "tab": "1910332022",
+    "sourceCommit": "efdc96f102346e750f41965a21ede4c0435f9c0e",
+    "dirty": false,
+    "stopped": true,
+    "exitCode": 130,
+    "tabClosed": true,
+    "listenerReleased": true
+  }
+}
