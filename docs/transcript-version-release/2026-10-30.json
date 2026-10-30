@@ -1,0 +1,139 @@
+{
+  "checkedAtUTC": "2026-10-30T15:13:50.704675+00:00",
+  "candidateBase": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
+  "orderedSourceCommits": [
+    "d76e780ba1804902d94575350682b4a5513616bf",
+    "83125e01c7ea74a29633ff7fa263e1e2dc050b1c",
+    "af960130e977b2a159ac6ca02873d1d28d76a5e0",
+    "9549278f32b82cfa69b540492774bae0966b8fe7",
+    "a6bf8624379435e3b01a2e4f0337cfeba629be40",
+    "74687a7b45b75f84ce68eb1f231a7ec85f17558d"
+  ],
+  "publishedSha": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+  "candidateBuild": {
+    "sha": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+    "dirty": false,
+    "asset": "/assets/index-BnWfxI2C.js",
+    "bytes": 243642,
+    "sha256": "875fb60831d1de2f2fa4c68cbe114a847a90aef8d1f4d990e7b7cf1dd05a3bab",
+    "cpuMs": 30000,
+    "voiceMaxSessionSeconds": "600",
+    "orderedCandidateCommits": [
+      "7f88064b6c6559855fc07e21340040d68eff3b54",
+      "275d5309fa66e9109ba0adc2d8d53e58e8e73783",
+      "ecc085edc60285b033f4fde6c90737e572505b08",
+      "e014c07211669b6224415bbadb4b79c17a9474f6",
+      "5507cf26b03a100bd2dfddc753776d850c07818f",
+      "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0"
+    ],
+    "sourceSha256": {
+      "apps/web/src/App.vue": "0d2ae70dd563779070950d704367a96df4576ea4e6ec0a2adc030f423e2e28c8",
+      "apps/web/src/PageVersion.vue": "0a6ba5575192d1e462246c961570826cc52330c85a555f440133a9cf33fdcb6e",
+      "packages/ui/src/components/Transcript.vue": "c26feb35cc13e1797a9fc18f1eb93e30d2f29d0a3ec11e4559ee6b523e8b2aca",
+      "apps/web/src/presentation/VoiceConnectionNotice.vue": "cb26fbf28e2cfa163b62b63df7c3f6259a02dae47c9051bf8e7d22026e9ebbae",
+      "packages/ui/src/components/ProductHeader.vue": "07d438a4e3afceec300a3d94d6db9d8d2e1d2d80ab7725c190e4f243f807e894",
+      "apps/web/src/Application.vue": "92dcef7bed271cea6a6f3fa44246df6b7d7474012956202716e532470806ac66"
+    }
+  },
+  "checks": {
+    "allWorkspaceTypesBeforeNumericOnlyAppend": "passed at 5507cf26b03a100bd2dfddc753776d850c07818f",
+    "finalWebTypes": "passed",
+    "finalWebTargets": 40,
+    "unchangedUiTargets": 25,
+    "fullFinalBuild": "passed",
+    "productionDryRun": "passed",
+    "candidateClean": true,
+    "clipboardRaceIndependentReview": "Root forwarded independent delta review passed before main update"
+  },
+  "ci": {
+    "id": 41077748266,
+    "url": "https://github.com/nighca/lie/actions/runs/41077748266",
+    "headSha": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+    "conclusion": "success"
+  },
+  "cd": {
+    "id": 41078006001,
+    "url": "https://github.com/nighca/lie/actions/runs/41078006001",
+    "headSha": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+    "conclusion": "success",
+    "downloadRestoreLatestDeployAllActuallySuccess": true
+  },
+  "servingDeployment": {
+    "id": "7f3d8035-f323-4ee4-8027-c42b1315938e",
+    "created_on": "2026-10-30T15:09:37.382458Z",
+    "annotations": {
+      "workers/message": "Verified CI build bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "2d6b7a2f-5261-4ccd-bade-41298c7d856c",
+        "percentage": 100
+      }
+    ]
+  },
+  "servingVersion": {
+    "id": "2d6b7a2f-5261-4ccd-bade-41298c7d856c",
+    "number": 38,
+    "annotations": {
+      "workers/message": "Verified CI build bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+      "workers/tag": "git-bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+      "workers/triggered_by": "version_upload"
+    },
+    "limits": {
+      "cpu_ms": 30000
+    },
+    "usage_model": "standard",
+    "voiceSession": {
+      "text": "600",
+      "type": "plain_text"
+    }
+  },
+  "onlineAsset": {
+    "asset": "/assets/index-BnWfxI2C.js",
+    "bytes": 243642,
+    "sha256": "875fb60831d1de2f2fa4c68cbe114a847a90aef8d1f4d990e7b7cf1dd05a3bab",
+    "matchesFinalCandidate": true,
+    "normalTlsVerification": true,
+    "redirects": 0
+  },
+  "onlineUi": {
+    "source": "One owned Chrome tab 1910332142 on https://lie.agency/; closed after acceptance",
+    "initiallyClosed": true,
+    "oldFooterCount": 0,
+    "title": "报上版本。",
+    "fullHash": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+    "dirty": false,
+    "copyButtonPresent": true,
+    "clipboardInvoked": false,
+    "decorationAriaHidden": true,
+    "routeUnchanged": true,
+    "closeReturnedFocusToDot": true,
+    "sourceEntry": "/assets/index-BnWfxI2C.js",
+    "globalViewportOrUserStorageManipulated": false
+  },
+  "localPreview": {
+    "source": "One post-update status/health/listener check; no repeated probe",
+    "mainStatusSha": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0",
+    "health": {
+      "status": "ok",
+      "storage": "none"
+    },
+    "voiceStatus": "ready",
+    "webPid": 33625,
+    "webParentRunnerPid": 66435,
+    "gatewayListenerPid": 33704,
+    "gatewayParentPid": 33649,
+    "automaticallyFollowedMain": true,
+    "manualServiceOperations": false,
+    "retainedForUser": true
+  },
+  "boundaries": [
+    "No provider/mic/voice WebSocket/profile/real clipboard operations",
+    "No new service or port/viewport override; 5544 and other owners remain protected",
+    "Source native fixture QA reused only for unchanged relevant code, not claimed as final-SHA artifacts",
+    "Transcript source QA recorded two unattributed MutationObserver errors; no console-clean or cause claim",
+    "No new real-device/Safari/600-second/universal audio-quality acceptance"
+  ],
+  "archive": "Evidence follow-up commit remains only on owned task branch for next normal batch; never report-only main update/push."
+}
