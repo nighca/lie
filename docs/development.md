@@ -17,7 +17,7 @@ npm run character-presets:check
 
 按实际改动运行必要检查；纯文档只做文档/链接/敏感材料检查。character presets 的生成/校验入口是根 scripts；素材或生成契约变化再运行生成，不手工改生成物。构建应从预期 clean HEAD 重做，页面版本注入精确 git SHA/dirty，build 后再改 tracked 文档会改变下一次身份。Mock 测试不能证明真实 provider。
 
-启动 Web/gateway 预览前先获得对应端口窗口并核 owner、consumer、cwd/SHA/listener，按应用 README 的 dev 命令配置已分配端口与同源 proxy。根 `npm run dev` 的默认开发端口不构成占用许可；当前 5176/5544/5198 与 8787/8788 均有明确归属，不自行换端口起重复服务。无 consumer 的临时服务应关闭，稳定端口也不授权闲置常驻。
+启动 Web/gateway 预览前先获得对应端口窗口并核 owner、consumer、cwd/SHA/listener，按应用 README 的 dev 命令配置已分配端口与同源 proxy。根 `npm run dev` 的默认开发端口不构成占用许可；5544/5198 与 8787/8788 有保留消费者，5176已停止释放但需重新协调归属，不自行换端口起重复服务。无 consumer 的临时服务应关闭，稳定端口也不授权闲置常驻。
 
 私密配置只在各自获准的 ignored `.dev.vars` 等服务端位置，由应用内部读取；不查看/打印/复制凭据、不导出 token、不放 VITE/client/assets/提交。持久 main 环境使用 owning main 现有 ignored `.dev.vars`，不为“恢复环境”创建 provider 资源、修改套餐或扩大权限。需要真实 Linx/provider 验证时另外取得具体用户窗口，默认离线 fake，不自动执行付费测试命令。
 
@@ -30,10 +30,10 @@ npm run character-presets:check
 | --- | --- | --- |
 | 8787 Web / 8788 Worker，持久保留，仅 loopback | `session_limit_acceptance`＋总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8`；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。UI发布后快照：runner66435，Web33625 parent66435，gateway33704 parent33649；source/status bda，healthready。上批fd049 Web48655/Worker48747已是历史；视频/文档后新PID待owner下一批回执。 | 用户本地与 lie.agency 对比；5544 用户试玩 proxy 复用8788。用户已明确本批无对话、允许 main 更新短暂重启，非长期开放维护，也未授权停止5544。保留服务；停止须用户明确要求或新的协调窗口。 |
 | 5544，保留用户试玩 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`，原 base f862＋专项 dirty；已登记 PID10258 / PTY8214，Vite proxy8788。 | 用户仍审看礼物案，未释放 consumer；不要停、刷新用户 tab 或自行操作 mic。内容迭代后实际 SHA/dirty 由该 owner 下一批登记，不把旧 base 当当前 main。 |
-| 5176，已停止释放 | 结果页 Chat `01a18d4c-72b2-7d93-8df3-2aa9cb7a5fe4`，WT `4ea5/lie`。前一 Transcript PID39747 / PTY79421 exit1已交回；本轮结果UI root回执也已停止释放，source2a677→23abd。该轮精确PID/PTY不在本次摘要，留原owner正式handoff，不与旧Transcript快照混用。 | 当前无保留consumer回执；结果UI代码已review，发布窗口另协调。若再启须重新核归属和窗口，不据历史端口擅起服务。 |
-| 5198，保留用户编辑 | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；最后登记 PID13491，workbench 用户编辑环境。原 PTY/精确 cwd 未在本次回执提供，待原 owner 补登记，不编造或通过无关探测补齐。 | 用户编辑 consumer 未释放；不重启/停止、不清工程。成品入库许可不等于关闭 workbench。 |
+| 5176，已停止释放 | 结果页 Chat `01a18d4c-72b2-7d93-8df3-2aa9cb7a5fe4`，WT `4ea5/lie`。前一 Transcript PID39747 / PTY79421 exit1已交回；本轮结果UI root回执也已停止释放，source2a677→23abd。该轮初PID89418/PTY92966及后PID27393/PTY12370均原PTY Ctrl-C exit130；最终ps27393及lsof核空。不与旧Transcript快照混用。 | 当前无保留consumer回执；结果UI具体设计已获用户明确批准、代码已review，仅发布窗口另协调。若再启须重新核归属和窗口，不据历史端口擅起服务。 |
+| 5198，保留用户编辑 | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；来源 cwd `/Users/nighca/.codex/worktrees/lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`，原 launcher session95944已退出；PID13491为源owner最近lsof回执，用户IAB编辑保留。 | 用户编辑 consumer 未释放；不重启/停止、不清工程。成品入库许可不等于关闭workbench；未来停止须精确重核command/cwd/`.dev.pid`，不将已退出launcher当存活服务PTY。 |
 | 5177，已停止交回 | 趣味 PageVersion Chat `01a18d48-6d1a-7273-914e-3c2aef2fa27e`；WT `85bb/lie`，source af960→9549278→a6bf862；原 PID77249 / PTY5085 Ctrl-C exit130，owner 核无 listener。 | 用户批准页面口供版本后结束审看；无运行服务。不得将旧 QA tab/端口自动用于新任务。 |
-| 5545 / 5546，已停止交回 | 16k 音频专项；WT `lie-playback-16k-candidate/lie`；原 PTY8226 / 17929 及内部监听已由 owner 停止核清，own Chrome 已关。 | 用户明确试听“没有电流声了，效果很好”并释放环境；不再启动或造语音流量。完整 PID 历史保留专项交付，不拼凑为当前运行值。 |
+| 5545 / 5546，已停止交回 | 16k 音频专项；历史来源WT `lie-playback-16k-candidate/lie`（不能据旧路径认定仍在worktree list或有活跃服务）；原 PTY8226 / 17929 及内部监听已由 owner 停止核清，own Chrome 已关。 | 用户明确试听“没有电流声了，效果很好”并释放环境；不再启动或造语音流量。完整 PID 历史保留专项交付，不拼凑为当前运行值。 |
 
 这张表没有登记为活动的旧 5402/5403、5507、5358/5359 等只是[历史快照](history/2026-10-30/coordinator-refresh-fd049/development.root-draft.md.txt)中的旧窗口，不能自动恢复。未知进程、消费者或归属先协调，不能杀未知 PID、按端口杀进程、`pkill` 或换口绕占用。
 
@@ -60,3 +60,5 @@ npm run character-presets:check
 main 跟随重启会影响5544共享8788，发布 owner 必须持唯一 integration/publication turn，先确认实际语音消费者安全维护窗口，保用户 tab/其他端口不动。不要在非窗口自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
 
 当前文档任务无服务操作、远端 API、浏览器、provider/WS/mic/profile 或应用测试。旧完整登记、来源/批准门禁和未合入的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
+
+原语音Chat `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9` 现已archived，root未自行unarchive；若干旧voice WT已不在worktree list。精确提交（如1ee049e）及refs仍可归档，目录/旧PID只是历史证据；不为归档恢复chat、服务或旧WT。以上均为协调回执，本任务未额外探测。

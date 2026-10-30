@@ -26,3 +26,11 @@
 | 邀请码、投稿、CI预览、旧版本保留等 | 邀请码暂停需用户重启；投稿仅研究/手动确认，不授权OAuth/PAT/自动PR；CI隔离预览待用户；14天/256MiB兼容被否决，不自动实施。已批架构/交互/B视觉不重新当待批准。 |
 
 当前状态与下一步只读[计划](../../../project-plan.md)，具体服务只读[登记](../../../development.md)。其他既有完整决策、动画/编辑器/视觉历史仍由原文入口及[设计档案](../../../archive/README.md)追溯，本任务不重新生产或改变批准范围。
+
+## 校正回执与当前边界
+
+用户已明确批准结果页具体设计并要求“可以，这样就合理了，整理提交后交总协调review和合入吧”；2a677→23abd已独立/root review。设计批准不重复索取，仅当前视频＋纯文档维护窗口不含它，另排发布窗口。5176结果预览初PID89418/PTY92966、后PID27393/PTY12370均Ctrl-C exit130，最终ps27393/lsof空。
+
+5198来源为`/Users/nighca/.codex/worktrees/lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`；原launcher session95944已退出，PID13491是源owner最近lsof回执，用户IAB编辑保留。未来停止需精确重核command/cwd/`.dev.pid`，不据旧launcher批停。
+
+6dd/d242/事实六链、546（19文件/72case/source/checker/图）、0e163/da3及cce均已review，尚待默认分支归档；原voice chat已archived、多个旧WT已不在list，但精确对象/refs仍可用，不恢复服务以完成归档。视频最新仅本地main ff至843985前缀、远端push传输中，不称已published。以上为root追加回执；两份原文快照与来源哈希保持不变。
