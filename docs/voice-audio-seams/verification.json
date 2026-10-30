@@ -1,0 +1,34 @@
+{
+  "runs": 2,
+  "byteIdentical": true,
+  "resultSha256": "ebb95c5d2152c52ac973810f96022b1d33012f204f15bf17a7b8bb11f6309951",
+  "allContextsClosed": true,
+  "allSchedulesConsistent": true,
+  "matchedOnsetThreeVersionsEqual": true,
+  "base": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+  "node": "24.22.1",
+  "plot": "matplotlib 3.11.2 in ignored local venv",
+  "matrixSha256": "4e8751ab0526e0c19f8e13cd4a0edfd9101625bc6c18f0fe8444801a9b5aecbb",
+  "fixtureSha256": "bb43ad6552c040a00ed45051f499b3e5b7481f795677ffe7b9dfa425b64a8965",
+  "generatorSnapshotMode": "passed with archived source/module hashes unchanged",
+  "evidenceProbe": "verify-evidence.py passed",
+  "service": {
+    "port": 5544,
+    "pid": 25110,
+    "session": 19864,
+    "tab": "1910332068",
+    "stopped": true,
+    "exitCode": 130,
+    "listenerReleased": true,
+    "tabClosed": true
+  },
+  "productionChanges": false,
+  "nativeServedModuleSha256": {
+    "baseline": "5c6969161f58cdf7829210dc476dca5d1a4ec4b135ba940cd1a86a3161a78894",
+    "gap": "082f1e08d8504f005367d1ee9eeb852752484ee1addba2370926cc53865efb12",
+    "current": "dd441772b49e68b3fd22f3f1159d5da7f48e1676149775c28e801cae9a91d2e7"
+  },
+  "archivedModuleNormalization": "Trailing whitespace only, produced by Node type erasure; actual TS snapshots unchanged",
+  "nativePrettyCaptureSha256": "f0443ff6c4ceda92b73404ff1f9bfb61e27e41fd75a4c28c8610603d97fc34db",
+  "archiveFormat": "Lossless compact JSON; Node JSON.stringify(parsed, null, 2) plus newline reconstructs the original repeated capture bytes"
+}

@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LIE native PCM seam comparison</title>
+<h1>Native PCM seam comparison</h1>
+<p>Only synthetic PCM and OfflineAudioContext. No microphone, provider, WebSocket or speaker output.</p>
+<button id="run">Run native comparison</button>
+<pre id="status">Ready</pre>
+<script type="module">
+import { runMatrix } from './matrix.mjs'
+document.querySelector('#run').onclick = async () => {
+  const status = document.querySelector('#status')
+  try {
+    const result = await runMatrix(message => { status.textContent = message })
+    const response = await fetch('/__results', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(result) })
+    if (!response.ok) throw new Error('Could not save synthetic results')
+    status.textContent = JSON.stringify({ completed: true, caseCount: result.cases.length, browser: result.browser, summary: result.summary }, null, 2)
+  } catch (error) { status.textContent = JSON.stringify({ completed: false, error: String(error) }) }
+}
+</script>

@@ -1,0 +1,27 @@
+{
+  "toolchain": "v24.22.1",
+  "transform": "Node stripTypeScriptTypes; PCM import redirected; trailing whitespace trimmed",
+  "versions": {
+    "baseline": {
+      "commit": "60c11f72b71ead4b8e744f2281d5dbecb796d11a",
+      "playerSha256": "2d771427afa3e7ab148c70fe66a805d7cf3cae68ad5c34fcbfabdb432d0a0c7d",
+      "pcmSha256": "f0d75bcd2d4a3e096aff705b58abea5526c3cc97d62d2f2ea99647f190bfb07f",
+      "moduleSha256": "a1af7a5ac5e78d3f009804bfef6e0c37dbc63a482f6f9c0be7d402b34fb83f59",
+      "rawModuleSha256": "5c6969161f58cdf7829210dc476dca5d1a4ec4b135ba940cd1a86a3161a78894"
+    },
+    "gap": {
+      "commit": "5e97cda1bfe4e5621467bb4560cdfea2848b4591",
+      "playerSha256": "b3bb00011d6de900a678d6197f3e972424a9c2c51495a986c0bdc390f84faf8e",
+      "pcmSha256": "f0d75bcd2d4a3e096aff705b58abea5526c3cc97d62d2f2ea99647f190bfb07f",
+      "moduleSha256": "705435dc13142dfb82588da6e62c0eaf46a846aba52c68843073c8969d52b312",
+      "rawModuleSha256": "082f1e08d8504f005367d1ee9eeb852752484ee1addba2370926cc53865efb12"
+    },
+    "current": {
+      "commit": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+      "playerSha256": "4b1bdfa0b506a02c4aa2066a43438d8a7ea6afaae03a8e7927538a243ef30ab7",
+      "pcmSha256": "f0d75bcd2d4a3e096aff705b58abea5526c3cc97d62d2f2ea99647f190bfb07f",
+      "moduleSha256": "475e74b55ffada82b55e2ab830dda2404c66c725c3f21d9dbe828c9cba77ff04",
+      "rawModuleSha256": "dd441772b49e68b3fd22f3f1159d5da7f48e1676149775c28e801cae9a91d2e7"
+    }
+  }
+}
