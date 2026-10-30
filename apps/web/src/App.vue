@@ -8,7 +8,7 @@ import VoiceConnectionNotice from './presentation/VoiceConnectionNotice.vue'
 import type { CharacterPreset } from './presentation/characterPresets'
 
 const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; allowRemix?: boolean; returnLabel?: string }>(), { allowRemix: true, returnLabel: '返回案件列表' })
-const emit = defineEmits<{ navigateHome: []; requestEnd: []; retry: []; remix: [] }>()
+const emit = defineEmits<{ navigateHome: []; showVersion: [trigger: HTMLButtonElement]; requestEnd: []; retry: []; remix: [] }>()
 const view = ref(props.controller.getView())
 const connectionAttempt = ref(0)
 const voiceFeedback = ref(props.controller.getVoiceFeedback())
@@ -94,7 +94,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 
 <template>
   <div class="game-shell" :class="{ 'game-shell--investigating': view.phase === 'interrogating' }">
-    <ProductHeader @navigate-home="emit('navigateHome')">
+    <ProductHeader @navigate-home="emit('navigateHome')" @show-version="emit('showVersion', $event)">
       <template v-if="view.phase === 'interrogating'" #title><h1 class="investigation-heading" :aria-label="view.title"><button class="investigation-title" aria-label="查看案件背景" @click="openBackground"><span>{{ view.title }}</span><small>案件背景 ↗</small></button></h1></template>
       <template v-if="view.phase === 'interrogating'" #actions>
         <UiButton variant="quiet" @click="emit('requestEnd')">结束本局</UiButton>

@@ -13,7 +13,7 @@ import { encodeGameLink, SHARE_URL_LIMIT } from './share'
 import { prepareSubmission } from './submission'
 
 const props = withDefaults(defineProps<{ characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus }>(), { presetStatus: 'ready' })
-const emit = defineEmits<{ preview: [game: GameDefinition]; leave: []; 'retry-presets': [] }>()
+const emit = defineEmits<{ preview: [game: GameDefinition]; leave: []; showVersion: [trigger: HTMLButtonElement]; 'retry-presets': [] }>()
 const draft = ref(createDraft(props.characterPresets[0]?.id ?? null))
 const step = ref(0)
 const selectedId = ref<string | null>(null)
@@ -147,7 +147,7 @@ async function copy(text: string) {
 
 <template>
   <div class="editor-shell">
-    <ProductHeader class="editor-header" @navigate-home="!busy && emit('leave')">
+    <ProductHeader class="editor-header" @navigate-home="!busy && emit('leave')" @show-version="emit('showVersion', $event)">
       <template #actions><UiButton variant="quiet" :disabled="busy" @click="emit('leave')">返回首页</UiButton></template>
     </ProductHeader>
     <nav class="editor-steps" aria-label="创作步骤">

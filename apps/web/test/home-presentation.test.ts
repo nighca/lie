@@ -48,7 +48,7 @@ describe('homepage presentation', () => {
     expect(wrapper.get('.home-intro h1').text()).toBe('有人在说谎')
     expect(wrapper.get('.home-intro').text()).toContain('和角色语音对话')
     expect(wrapper.get('.home-flow').text()).toBe('开口问话对照说法最终指认')
-    expect(wrapper.get('.home-header button').text()).toBe('创作案件')
+    expect(wrapper.get('.home-header .lie-product-header__actions button').text()).toBe('创作案件')
     expect(createController).toHaveBeenCalledTimes(0)
   })
 

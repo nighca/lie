@@ -4,11 +4,17 @@ import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 
 import { mount } from '@vue/test-utils'
-import { afterEach, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 
 import { readPageBuild } from '../build/page-version'
 import PageVersion from '../src/PageVersion.vue'
 
+beforeEach(() => {
+  Object.defineProperties(HTMLDialogElement.prototype, {
+    showModal: { configurable: true, value(this: HTMLDialogElement) { this.open = true } },
+    close: { configurable: true, value(this: HTMLDialogElement) { this.open = false } },
+  })
+})
 const directories: string[] = []
 afterEach(() => { vi.unstubAllEnvs(); directories.splice(0).forEach(directory => rmSync(directory, { recursive: true, force: true })) })
 function directory() { const value = mkdtempSync(join(tmpdir(), 'lie-page-version-')); directories.push(value); return value }
@@ -32,20 +38,33 @@ it('honestly labels a package outside Git without inventing a commit', () => {
   expect(readPageBuild(cwd)).toEqual({ commit: null, dirty: false })
 })
 
-it('keeps the full page commit selectable behind a native disclosure', () => {
+it('keeps version information in a closed dialog until requested and exposes selectable full identity', async () => {
   const commit = '1234567abcdef1234567abcdef1234567abcdef123'
-  const wrapper = mount(PageVersion, { props: { build: { commit, dirty: false } } })
-  expect(wrapper.get('summary').text()).toBe('页面版本 1234567')
-  expect(wrapper.get('details').attributes('open')).toBeUndefined()
-  expect(wrapper.get('code').text()).toBe(commit)
-  expect(wrapper.text()).toContain('仅表示当前页面的构建版本')
+  const wrapper = mount(PageVersion, { props: { build: { commit, dirty: false }, open: false } })
+  try {
+    const dialog = wrapper.get('dialog').element
+    expect(dialog.open).toBe(false)
+    await wrapper.setProps({ open: true })
+    expect(dialog.open).toBe(true)
+    expect(wrapper.get('strong').text()).toBe('1234567')
+    expect(wrapper.get('code').text()).toBe(commit)
+    expect(wrapper.text()).toContain('仅表示当前页面的构建版本')
+    await wrapper.get('[aria-label="关闭弹窗"]').trigger('click')
+    expect(wrapper.emitted('close')).toHaveLength(1)
+    await wrapper.setProps({ open: false })
+    expect(dialog.open).toBe(false)
+  } finally { wrapper.unmount() }
 })
 
 it('distinguishes development, unknown and modified local builds', async () => {
-  const wrapper = mount(PageVersion, { props: { build: null } })
-  expect(wrapper.get('summary').text()).toBe('页面版本 开发版')
-  await wrapper.setProps({ build: { commit: null, dirty: false } })
-  expect(wrapper.get('summary').text()).toBe('页面版本 未知')
-  await wrapper.setProps({ build: { commit: 'abcdef1234567890', dirty: true } })
-  expect(wrapper.get('summary').text()).toBe('页面版本 abcdef1 · 本地改动')
+  const wrapper = mount(PageVersion, { props: { build: null, open: false } })
+  try {
+    expect(wrapper.get('strong').text()).toBe('开发版')
+    await wrapper.setProps({ build: { commit: null, dirty: false } })
+    expect(wrapper.get('strong').text()).toBe('未知')
+    await wrapper.setProps({ build: { commit: 'abcdef1234567890', dirty: true } })
+    expect(wrapper.get('strong').text()).toBe('abcdef1')
+    expect(wrapper.text()).toContain('本地改动')
+    expect(wrapper.text()).toContain('构建包含未提交的本地改动')
+  } finally { wrapper.unmount() }
 })

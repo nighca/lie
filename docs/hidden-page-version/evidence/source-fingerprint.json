@@ -1,0 +1,15 @@
+{
+  "testedBase": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+  "testedTree": "base plus candidate source edits; build dirty=true",
+  "sha256": {
+    "packages/ui/src/components/ProductHeader.vue": "07d438a4e3afceec300a3d94d6db9d8d2e1d2d80ab7725c190e4f243f807e894",
+    "apps/web/src/Application.vue": "92dcef7bed271cea6a6f3fa44246df6b7d7474012956202716e532470806ac66",
+    "apps/web/src/PageVersion.vue": "b948b460ef6af3a3986c6e2ad2331f33aac34e2063c060282c8ac496a1164132",
+    "apps/web/src/App.vue": "6609589b4429504191d9962094ad65db0acc2e69ddb51e2afd1d63fa9add8cf5",
+    "apps/web/src/editor/Editor.vue": "ebf2aca9bb19757b436093f7813044382afbfb05d6c7f225d4dab71466cb189b",
+    "apps/web/src/style.css": "af3068d20f72e9737064c28786941a7e17b84adbc4b6455db187f85ac45a0609",
+    "apps/web/build/page-version.ts": "f6b4a560f8e8ea82def5c8f48d063284f920fb768b9c6ddba4f92c9ec625dbd8",
+    "apps/web/vite.config.ts": "6a8648ec16f21f5d0455c0dd4955b0323fdf180982f78844685c4ac47d64788a",
+    "package-lock.json": "2efd70fe940997ce63746a05a6d5574974560a67d6a737f4801e9f9e254e82e0"
+  }
+}

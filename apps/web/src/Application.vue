@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KeepAlive, onUnmounted, ref, shallowRef, watch } from 'vue'
+import { KeepAlive, nextTick, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ProductHeader, UiButton, UiDialog } from '@lie/ui'
 import type { GameDefinition } from '@lie/game-core'
@@ -18,6 +18,15 @@ import type { PresetLoadStatus } from './presentation/characterPresetLoader'
 
 const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; catalog: readonly CaseSummary[]; characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus; loadCharacterPresets?: () => Promise<readonly CharacterPreset[] | null>; demo: boolean }>()
 const pageBuild = import.meta.env.DEV ? null : import.meta.env.LIE_PAGE_BUILD
+const versionOpen = ref(false)
+let versionTrigger: HTMLElement | null = null
+function showVersion(trigger: HTMLElement) { versionTrigger = trigger; versionOpen.value = true }
+async function closeVersion() {
+  versionOpen.value = false
+  await nextTick()
+  versionTrigger?.focus()
+  versionTrigger = null
+}
 const route = useRoute()
 const router = useRouter()
 const controller = shallowRef<GameController | null>(null)
@@ -166,14 +175,14 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
 
 <template>
   <KeepAlive v-if="route.path === '/editor' || route.path === '/editor/preview'" :max="1">
-    <Editor v-if="route.path === '/editor'" :key="editorRevision" :character-presets="characterPresets" :preset-status="presetStatus" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
+    <Editor v-if="route.path === '/editor'" :key="editorRevision" :character-presets="characterPresets" :preset-status="presetStatus" @show-version="showVersion" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
   </KeepAlive>
-  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :allow-remix="route.path !== '/editor/preview'" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
+  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :allow-remix="route.path !== '/editor/preview'" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @show-version="showVersion" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
     <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
   </div>
   <div v-else-if="route.path !== '/editor' && route.path !== '/editor/preview'" class="game-shell home-shell">
-    <ProductHeader class="home-header" @navigate-home="home">
+    <ProductHeader class="home-header" @navigate-home="home" @show-version="showVersion">
       <template #actions><UiButton variant="quiet" @click="editor">创作案件</UiButton></template>
       <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>
     </ProductHeader>
@@ -204,8 +213,8 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
         </div>
       </section>
     </main>
-    <footer class="home-version"><PageVersion :build="pageBuild" /></footer>
   </div>
+  <PageVersion :open="versionOpen" :build="pageBuild" @close="closeVersion" />
   <UiDialog :open="remixOpen" title="改编案件" @close="cancelRemix">
     <p>改编会打开完整案件，包括答案、结局和人物设定。</p>
     <p>此浏览器如有草稿，继续将替换它，无法撤销。选择“保留草稿”可取消改编。</p>

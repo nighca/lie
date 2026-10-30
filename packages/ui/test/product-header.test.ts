@@ -47,7 +47,7 @@ describe('product header', () => {
     })
     expect(wrapper.get('h1').text()).toBe('测试案件')
     expect(wrapper.text()).toContain('演示模式')
-    await wrapper.get('button').trigger('click')
+    await wrapper.get('.lie-product-header__actions button').trigger('click')
     expect(accuse).toHaveBeenCalledOnce()
     wrapper.unmount()
   })
@@ -110,4 +110,23 @@ it('resets when motion preference changes and releases its listener on unmount',
   await wrapper.get('a').trigger('mouseenter')
   wrapper.unmount()
   expect(motionChanges.size).toBe(0)
+})
+
+
+it('opens caller-owned version details from a separate native button without navigating', async () => {
+  const wrapper = mount(ProductHeader)
+  try {
+    const dot = wrapper.get('button[aria-label="查看页面版本"]')
+    const link = wrapper.get('a[aria-label="LIE 首页"]')
+    expect(dot.attributes('type')).toBe('button')
+    expect(dot.attributes('aria-haspopup')).toBe('dialog')
+    expect(dot.element.parentElement).toBe(link.element.parentElement)
+    await dot.trigger('pointerdown', { pointerType: 'touch' })
+    expect(wrapper.get('svg').classes()).toContain('lie-product-header__logo--playing')
+    await dot.trigger('click')
+    expect(wrapper.emitted('showVersion')).toEqual([[dot.element]])
+    expect(wrapper.emitted('navigateHome')).toBeUndefined()
+    await link.trigger('click')
+    expect(wrapper.emitted('navigateHome')).toHaveLength(1)
+  } finally { wrapper.unmount() }
 })

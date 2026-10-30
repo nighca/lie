@@ -1,0 +1,127 @@
+[
+  {
+    "check": "desktop-initial-hit",
+    "dot": {
+      "home": false,
+      "tag": "BUTTON",
+      "version": true
+    },
+    "initiallyClosed": true,
+    "letterE": {
+      "home": true,
+      "tag": "path",
+      "version": false
+    },
+    "letterI": {
+      "home": true,
+      "tag": "path",
+      "version": false
+    },
+    "letterL": {
+      "home": true,
+      "tag": "path",
+      "version": false
+    },
+    "noFooter": true,
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "check": "desktop-close-focus",
+    "closed": true,
+    "focus": "查看页面版本"
+  },
+  {
+    "check": "native-keyboard",
+    "enterOpened": true,
+    "escapeState": {
+      "closed": true,
+      "focus": "查看页面版本"
+    },
+    "spaceState": {
+      "open": true
+    },
+    "focusState": {
+      "focused": true,
+      "outline": "3px",
+      "visibleFocus": true
+    }
+  },
+  {
+    "check": "game-route-and-home-guard",
+    "before": {
+      "budget": "剩余询问08:00",
+      "investigating": true,
+      "url": "http://127.0.0.1:5176/?game=empty-medal-box"
+    },
+    "open": {
+      "budget": "剩余询问08:00",
+      "investigating": true,
+      "open": true,
+      "url": "http://127.0.0.1:5176/?game=empty-medal-box"
+    }
+  },
+  {
+    "check": "isolated-storage-and-no-voice",
+    "apiRequests": 0,
+    "memoryStorage": true,
+    "storedCount": 0,
+    "url": "http://127.0.0.1:5176/"
+  },
+  {
+    "check": "editor-preserved",
+    "before": {
+      "title": "版本弹窗验收草稿",
+      "url": "http://127.0.0.1:5176/editor"
+    },
+    "after": {
+      "closed": true,
+      "focus": "查看页面版本",
+      "title": "版本弹窗验收草稿",
+      "url": "http://127.0.0.1:5176/editor"
+    }
+  },
+  {
+    "check": "mobile-hit",
+    "dot": {
+      "home": false,
+      "version": true
+    },
+    "letterE": {
+      "home": true,
+      "version": false
+    },
+    "letterI": {
+      "home": true,
+      "version": false
+    },
+    "letterL": {
+      "home": true,
+      "version": false
+    },
+    "scrollWidth": 391,
+    "targetHeight": 24,
+    "targetWidth": 28,
+    "width": 391
+  },
+  {
+    "check": "mobile-popup-editor-home",
+    "popup": {
+      "hash": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+      "select": "all",
+      "width": 351
+    },
+    "editorAfter": {
+      "focus": "查看页面版本",
+      "title": "版本弹窗验收草稿",
+      "url": "http://127.0.0.1:5176/editor"
+    },
+    "home": {
+      "initiallyClosed": true,
+      "noFooter": true,
+      "scrollWidth": 391,
+      "url": "http://127.0.0.1:5176/",
+      "width": 391
+    }
+  }
+]
