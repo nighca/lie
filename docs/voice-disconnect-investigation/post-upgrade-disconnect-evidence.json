@@ -1,0 +1,142 @@
+{
+  "readAtUTC": "2026-10-30T12:53:14.673Z",
+  "windowUTC": {
+    "from": "2026-10-30T12:44:00Z",
+    "to": "2026-10-30T12:53:00Z"
+  },
+  "schema": {
+    "operationId": "o11y.telemetry.query",
+    "httpMethod": "POST",
+    "path": "/accounts/{account_id}/workers/observability/telemetry/query"
+  },
+  "filters": [
+    {
+      "key": "$workers.scriptName",
+      "operation": "eq",
+      "type": "string",
+      "value": "lie-game"
+    },
+    {
+      "key": "$workers.event.request.path",
+      "operation": "eq",
+      "type": "string",
+      "value": "/api/voice"
+    }
+  ],
+  "limit": 100,
+  "deployment": {
+    "createdAtUTC": "2026-10-30T12:09:28.789204Z",
+    "versions": [
+      {
+        "version_id": "380959e2-51b8-489f-b76b-1db289f30cba",
+        "percentage": 100
+      }
+    ],
+    "gitMessage": "Verified CI build 12c4e4d29135c7e30083c8ecf08c2fc95bcaf150"
+  },
+  "requestGroupCount": 1,
+  "groups": [
+    {
+      "group": "group-1",
+      "recordCount": 5,
+      "exceptionEventCount": 4,
+      "messageCategories": {
+        "cpu-limit": 4,
+        "other-record": 1
+      },
+      "routeMatches": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "versions": [
+        "380959e2-51b8-489f-b76b-1db289f30cba"
+      ],
+      "terminalRecords": [
+        {
+          "timestampMs": 1793364547065,
+          "timestampUTC": "2026-10-30T12:49:07.065Z",
+          "outcome": "exceededCpu",
+          "cpuTimeMs": 2050,
+          "wallTimeMs": 157316,
+          "eventType": "fetch",
+          "truncated": false,
+          "version": "380959e2-51b8-489f-b76b-1db289f30cba",
+          "responseStatus": null
+        }
+      ]
+    }
+  ],
+  "sourceCommit": "8d6c4b8f38e6358da35d9b21e8dc2f5a25466757",
+  "userReport": {
+    "paidUpgrade": "Previously reported completed by user",
+    "pageGit": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+    "approximateConversationSeconds": 150,
+    "relativeFailureTime": "About 1–2 minutes before user feedback, approximate",
+    "remainingBudgetDisplay": "05:25",
+    "totalBudgetReconfirmed": false,
+    "precise155SecondsInferred": false,
+    "connectionEndedAfterFailure": true
+  },
+  "querySemantics": {
+    "view": "invocations",
+    "outcomeOrErrorFilterApplied": false,
+    "coverage": "All returned records matching script/path and fixed window; not a CPU-only exception query",
+    "exhaustiveTrafficClaim": false,
+    "paginationMetadata": {
+      "metadataCheckedAtUTC": "2026-10-30T12:56:17.341Z",
+      "sameWindowAndFilters": true,
+      "runStatus": "COMPLETED",
+      "returnedGroupCount": 1,
+      "returnedRecordCount": 5,
+      "hasMore": null,
+      "cursorFieldPresent": false,
+      "resultInfoPresent": false,
+      "abr_level": 1,
+      "interpretation": "Run COMPLETED; CLI response exposes no next-cursor/result_info/hasMore value. abr_level retained without inferring no sampling; do not claim exhaustive traffic."
+    },
+    "samplingAndIngestionLimit": "Persisted observation only; in-flight, sampling, retention or delayed ingestion may affect coverage",
+    "repeatTerminalIdentityMatched": true
+  },
+  "associationLimit": "Near-time matching group, not proven to be this precise user; no raw request/session IDs persisted. Record timestamp is not asserted to be click/start/end.",
+  "interpretation": {
+    "actualObservedOutcome": "exceededCpu",
+    "effectiveCpuLimitMs": null,
+    "inferredConfigured2000Ms": false,
+    "paidIneffectiveInferred": false,
+    "rootCauseBeyondCpuTermination": "unknown",
+    "browserCloseCodeOrActiveCloser": "not established by these projected platform records"
+  },
+  "actions": {
+    "changesMade": false,
+    "newSettingsOrSubscriptionsQueries": false,
+    "voiceOrProfileTraffic": false,
+    "servicesOpened": false
+  },
+  "resourceEvidenceBoundary": "Only CPU-limit exception classification and platform terminal metrics established; browser close code/reason/active closer or provider/protocol resource reason not established.",
+  "proposedNextStep": {
+    "candidateWorkerLimit": "limits.cpuMs: 30000",
+    "support": "Pinned cf beta18 WorkerConfig and official cf programmatic config support per-invocation limits for standard usage model. Ordinary Worker fetch/WS support does not independently explain which effective limit ended this invocation.",
+    "requires": "User authorization, reviewed configuration/build/deployment and post-change quota evidence; if unexplained, effective-quota evidence or Cloudflare support. No guarantee of 180/600s.",
+    "runtimeActivationAuthorized": false,
+    "offlineCandidatePreparationRequestedByCoordinator": true
+  },
+  "localComparison": {
+    "source": "User self-test reported via coordinator",
+    "entry": "http://127.0.0.1:8787/",
+    "reportedApproximateSeconds": "More than about 220 seconds",
+    "singleCharacter": true,
+    "originalProblemReport": "然后都没有问题",
+    "noInterruptionReported": true,
+    "allPopsObjectivelyExcluded": false,
+    "exactTimesOrConnectionIdProvided": false,
+    "gitVerifiedByCoordinatorHttp": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+    "runtime": "Vite DEV and local workerd",
+    "providerAgentOrDeviceIdentityCompared": false,
+    "sameGitNotEquivalentEnvironment": true,
+    "sixHundredSecondsPassed": false,
+    "agentInitiatedTest": false
+  }
+}

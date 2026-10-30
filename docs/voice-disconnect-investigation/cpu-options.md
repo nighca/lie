@@ -2,7 +2,7 @@
 
 2026-10-30调查/提案，公开资料当日重新读取。专用WT `/Users/nighca/.codex/worktrees/lie-voice-cpu-options/lie`，branch `codex/lie-voice-cpu-options`，base与调查起点HEAD为 `12c4e4d29135c7e30083c8ecf08c2fc95bcaf150`，初始clean。本轮仅文档与离线可行性探针，不改应用、套餐、CPU/config、provider、部署或中央计划，不创建WS/真实语音/profile/browser/服务，不重复403或扫描账户。
 
-**最新用户报告：已在控制台完成Paid升级；本专项随后仅做只读核查，API仍未明确返回有效CPU限额，也未执行真实语音验收。** 用户此前亲自确认升级前Workers订阅为Free，CPU time limit未显示；有效数值仍未知。这是用户事实，不是从API缺字段推断。历史[运行证据](runtime-evidence.json)/[API结果](settings-evidence.json)保持原样，不能把两次CPU2019ms称为Free固定硬上限。
+**最新用户报告：已完成Paid升级；随后本人线上再次约2.5分钟中断。窄窗口返回组仍有exceededCpu终态（CPU2050ms、wall157316ms），见[新增调查](post-upgrade-disconnect.md)。有效数值/精确用户归属仍未证实，本专项只读调查、不改设置或代理发起流量。** 用户此前亲自确认升级前Workers订阅为Free，CPU time limit未显示；有效数值仍未知。这是用户事实，不是从API缺字段推断。历史[运行证据](runtime-evidence.json)/[API结果](settings-evidence.json)保持原样，不能把两次CPU2019ms称为Free固定硬上限。
 
 ## 推荐与理由
 
@@ -82,3 +82,5 @@ included额度按账号同类用量共享，账号内其他Workers也会消耗�
 代理自动发起真实推理或210秒窗口、600秒验收、profile或任何配置调整仍未授权。用户本人手动窗口的确认状态见下段。纯文档增量只做JSON/链接/身份/范围/隐私检查，无需重跑应用套件。cf此次自动生成的账号选择缓存（本轮初始clean、时间与12:39查询吻合）已不读内容地移到本WT ignored tmp；没有遗留未解决的.cloudflare/，也不提交缓存。
 
 用户随后已向总协调确认由本人进行上述单条新连接、同角色约210秒试玩，结束后反馈；实际开始/结束时间尚未提供，不能把确认通知时点当连接起点。本专项代理仍无发起WS/推理/profile/录音授权，不查询新日志，等待总协调传来具体窗口后再另作只读对照。总协调在该用户consumer期间暂停push/deploy，保持main12c/Worker380上下文；本交付不改变它。
+
+后续反馈更新：用户已因中断结束本人连接；[新窄窗口调查](post-upgrade-disconnect.md)记录12c/380匹配组的CPU终态。旧“等待实际窗口”的描述是此前阶段，不能覆盖新报告；本调查WT没有执行额外210/600测试或实现配置变更；显式30000ms配置候选按总协调要求在另一独立WT离线准备，启用/发布仍待用户确认。
