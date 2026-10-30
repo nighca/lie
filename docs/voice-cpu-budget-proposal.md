@@ -1,6 +1,6 @@
 # Voice gateway CPU budget proposal
 
-Date: 2026-10-30. Status: **user approved enabling the explicit 30000ms CPU budget and normal reviewed publication**. This source document is a pre-publication snapshot; build/commit alone is not proof of the serving deployment.
+Date: 2026-10-30. Status: **enabled by the approved normal CI/CD release and verified on the 100%-serving Worker version**. Published main is `f86206611dbc0a10260fb1605d9a616b22493dc3`; the platform read back `limits.cpu_ms: 30000` and `usage_model: standard`. See [actual release verification](voice-cpu-budget-release/2026-10-30.md). The original candidate and pre-publication evidence below are retained as dated history, not a pending approval gate.
 Owner: CPU configuration specialist, reviewed by the voice-session-limit initiator and main coordinator. The user explicitly approved this change on 2026-10-30 and confirmed there is no active local conversation, authorizing the normal main integration/publication and its automatic local-preview restart. The coordinator delegated this release's unique integration/publication turn to `session_limit_acceptance`. No further enablement approval is pending; only a successful serving deployment applies the setting.
 
 ## Proposed change

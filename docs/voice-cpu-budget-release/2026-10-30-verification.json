@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-30 Asia/Shanghai",
+  "base": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+  "approvedSource": "7c786ab3a97b34cdb5e401377d3c04175d13fccb",
+  "orderedIntegrationCommits": [
+    "98fdb1bad147267ac4d5be62ad4590d40cb67dbe",
+    "f86206611dbc0a10260fb1605d9a616b22493dc3"
+  ],
+  "localIntegratedSha": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+  "confirmedPublishedSha": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+  "checks": {
+    "candidate": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+    "clean": true,
+    "cpuMs": 30000,
+    "voiceMaxSessionSeconds": {
+      "type": "text",
+      "value": "600"
+    },
+    "productionEntry": "apps/web/dist/assets/index-LTO_byd5.js",
+    "productionSha256": "683f640930975e42584c07091061a91d39116fc4b5ad64a334f2b9079a3d48fe",
+    "pageBuild": {
+      "commit": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+      "dirty": false
+    },
+    "rootTypes": "passed",
+    "gatewayTests": 35,
+    "rootBuild": "passed",
+    "productionDryRun": "passed"
+  },
+  "ci": {
+    "id": 41063632168,
+    "url": "https://github.com/nighca/lie/actions/runs/41063632168",
+    "headSha": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+    "attempt": 1,
+    "conclusion": "success"
+  },
+  "cd": {
+    "id": 41063875763,
+    "url": "https://github.com/nighca/lie/actions/runs/41063875763",
+    "headSha": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+    "conclusion": "success",
+    "deployJob": 124090080655,
+    "verifiedDownloadRestoreLatestGuardAndDeployAllSucceeded": true
+  },
+  "artifact": {
+    "id": 12981187201,
+    "name": "production-build-f86206611dbc0a10260fb1605d9a616b22493dc3-41063632168-1",
+    "digest": "sha256:ae36319e51c84a5af634e337ff90473c382afb68d4843ff33c53885ad2b313b8"
+  },
+  "servingDeployment": {
+    "id": "a7b53ed8-45a5-4f81-9d75-64ec66649d6c",
+    "created_on": "2026-10-30T13:31:25.769838Z",
+    "annotations": {
+      "workers/message": "Verified CI build f86206611dbc0a10260fb1605d9a616b22493dc3",
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "bf101da5-a7ad-4a46-8fe4-995a9103cd23",
+        "percentage": 100
+      }
+    ]
+  },
+  "servingVersion": {
+    "id": "bf101da5-a7ad-4a46-8fe4-995a9103cd23",
+    "number": 35,
+    "annotations": {
+      "workers/message": "Verified CI build f86206611dbc0a10260fb1605d9a616b22493dc3",
+      "workers/tag": "git-f86206611dbc0a10260fb1605d9a616b22493dc3",
+      "workers/triggered_by": "version_upload"
+    },
+    "limits": {
+      "cpu_ms": 30000
+    },
+    "usage_model": "standard",
+    "voiceSessionBinding": {
+      "text": "600",
+      "type": "plain_text"
+    },
+    "readMethod": "cf workers versions get on exact version ID; modules not requested"
+  },
+  "online": {
+    "pageBuild": {
+      "commit": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+      "dirty": false
+    },
+    "homeStatus": 200,
+    "productionEntry": "/assets/index-LTO_byd5.js",
+    "productionBytes": 240736,
+    "productionSha256": "683f640930975e42584c07091061a91d39116fc4b5ad64a334f2b9079a3d48fe",
+    "matchesLocalFinalBuild": true,
+    "normalTlsVerification": true,
+    "redirects": 0,
+    "health": {
+      "status": "ok",
+      "storage": "none"
+    },
+    "servingVersion": "bf101da5-a7ad-4a46-8fe4-995a9103cd23",
+    "servingLimits": {
+      "cpu_ms": 30000
+    },
+    "usageModel": "standard",
+    "voiceSessionBinding": {
+      "text": "600",
+      "type": "plain_text"
+    }
+  },
+  "localService": {
+    "checks": {
+      "mainStatus": {
+        "status": 200,
+        "body": {
+          "branch": "main",
+          "sha": "f86206611dbc0a10260fb1605d9a616b22493dc3"
+        }
+      },
+      "health": {
+        "status": 200,
+        "body": {
+          "status": "ok",
+          "storage": "none"
+        }
+      },
+      "voiceStatus": {
+        "status": 200,
+        "body": {
+          "status": "ready"
+        }
+      },
+      "owningMain": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+      "owningMainClean": true
+    },
+    "launchdLabel": "dev.nighca.lie.main-preview",
+    "launchdRunnerPid": 66435,
+    "state": "running",
+    "runCount": 1,
+    "webPid": 98476,
+    "gatewayEntryPid": 98547,
+    "listeners": [
+      "127.0.0.1:8787",
+      "127.0.0.1:8788"
+    ],
+    "mainUpdateTriggeredAutomaticChildRestart": true,
+    "manualServiceOperations": false,
+    "retained": true,
+    "newConsumer": "gift-case preview uses shared 8788; do not update main/restart for report-only work"
+  },
+  "boundaries": {
+    "realVoiceOrWebSocketOrMicrophoneOrProfile": false,
+    "providerConfigurationChanged": false,
+    "accountPlanOrPermissionsChanged": false,
+    "billing403Retried": false,
+    "manualDeployment": false,
+    "productionEnforcementOr600SecondVoiceAcceptancePerformed": false,
+    "rawLogsOrCredentialsIncluded": false
+  },
+  "toolNotes": [
+    "Cloudflare MCP classic settings read failed once at transport; not retried. Supported cf CLI serving-version read returned cpu_ms=30000 and usage_model=standard.",
+    "Python TLS CA validation failed locally; system curl subsequently verified TLS normally with zero redirects. No insecure flag or certificate bypass."
+  ],
+  "archiveStatus": "Evidence-only follow-up task commit, not main/pushed; next normal review batch. Existing runtime stays at the verified published SHA."
+}
