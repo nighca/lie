@@ -1,0 +1,63 @@
+{
+  "recordedAtUTC": "2026-10-30T12:02:16Z",
+  "sourceCommit": "6ac389a6392df9045ff646f6b23e70d246c13e3c",
+  "authorization": "User explicitly allowed official read-only Cloudflare API for Workers Free/Paid classification and lie-game effective CPU limit only; no setting, subscription, permission or traffic changes.",
+  "authentication": {
+    "adapter": "Cloudflare official connector, internally authenticated OAuth",
+    "accountMatchedExistingCfSelection": true,
+    "credentialFileReadOrTokenExported": false,
+    "newLoginOrPermissionChange": false
+  },
+  "workerContext": {
+    "worker": "lie-game",
+    "currentGit": "0d753ec74c03b9d35ae8505942ab56a5f02fa651",
+    "currentVersion": "61a449e7-7997-4b33-8e34-295a02bd138a",
+    "deploymentCreatedAtUTC": "2026-10-30T11:50:55.080093Z",
+    "deploymentPercentage": 100,
+    "confirmation": "Existing cf CLI deployments list and workers get, same account/worker selection; settings response does not itself identify a version, so this context is not an atomic settings/version snapshot."
+  },
+  "settings": {
+    "schemaSource": "Cloudflare official OpenAPI via connector search: GET /accounts/{account_id}/workers/scripts/{script_name}/settings",
+    "schemaCpuField": "limits.cpu_ms: integer, CPU time in milliseconds",
+    "readAtUTC": "2026-10-30T11:59:59.791Z",
+    "method": "GET",
+    "pathTemplate": "/accounts/{account_id}/workers/scripts/lie-game/settings",
+    "requestSucceeded": true,
+    "limitsPresent": false,
+    "cpuMsPresent": false,
+    "cpuMs": null,
+    "effectiveCpuLimitStatus": "unknown",
+    "defaultInserted": false
+  },
+  "entitlements": {
+    "schemaSource": "Cloudflare official OpenAPI: GET /accounts/{account_id}/entitlements; feature.key and allocation.type/value",
+    "readAtUTC": "2026-10-30T12:00:19.641Z",
+    "method": "GET",
+    "pathTemplate": "/accounts/{account_id}/entitlements",
+    "projection": "Only Workers CPU/plan/Free/Paid/standard/unbound/execution entitlement keys and allocations",
+    "matchingEntitlements": [],
+    "classification": "unknown",
+    "absenceInterpretedAsFree": false
+  },
+  "subscription": {
+    "schemaSource": "Cloudflare official OpenAPI: GET /accounts/{account_id}/subscriptions; plan identity and state only, no bill/payment endpoints",
+    "attemptRecordedByUTC": "2026-10-30T12:02:16Z",
+    "method": "GET",
+    "pathTemplate": "/accounts/{account_id}/subscriptions",
+    "projection": "Workers Free/Paid classification only; monetary, billing, payment and other-product values excluded inside connector",
+    "httpStatus": 403,
+    "errorCode": 10000,
+    "fixedErrorCategory": "OAuth connection cannot use endpoint; API token with Billing Read or Billing Write required",
+    "classification": "unknown",
+    "additionalCredentialRequested": false,
+    "absenceInterpretedAsFree": false
+  },
+  "conclusion": {
+    "workersPlan": "unknown",
+    "effectiveCpuLimitMs": null,
+    "cpuFieldAbsenceDoesNotExcludeCustomOrDashboardLimit": true,
+    "nextFactSource": "Workers & Pages Dashboard: Workers subscription Free/Paid and lie-game CPU time limit; do not confuse with domain Free/Pro plan",
+    "changesMade": false,
+    "voiceOrProfileTrafficCreated": false
+  }
+}

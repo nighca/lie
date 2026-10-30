@@ -1,5 +1,7 @@
 # 线上约3分钟语音中断：运行证据与下一步
 
+最新状态：获准的官方只读API核查已完成，仍未取得有效CPU限额或明确Workers订阅分类；见[API结果](settings-evidence.json)。下一步需账号Dashboard确认，尚未调整资源或创建真实语音流量。
+
 2026-10-30只读调查；专用WT `/Users/nighca/.codex/worktrees/lie-voice-disconnect-investigation/lie`，branch `codex/lie-voice-disconnect-investigation`，调查起点与执行者冻结交付时HEAD为 `95cb5cf02277a5c3f380d0a18158d3672a9bfcdd`，初始clean。此交付只新增本目录，未修改应用、CPU/会话配置、账号、provider或中央计划；专项root审查后保存任务分支文档提交，不操作main/push。
 
 **已确认所查反馈窗口中正确Worker版本的两次语音请求因CPU超限结束。** 其实际部署模块与绑定均为600秒，不是仅凭CI/CD成功推断。尚未把请求组归属到该用户，也未验证真实连接持续600秒；有效Workers订阅档位/CPU配额仍缺明确证据，不能由2019ms观测反推“配置就是2000ms”。
@@ -71,3 +73,23 @@
 后续总协调通知：纯前端页面版本标识已随main `0d753ec74c03b9d35ae8505942ab56a5f02fa651` 发布，新Worker版本`61a449e7-7997-4b33-8e34-295a02bd138a`，北京时间2026-10-30 19:50:56；gateway、voice、lock/workflow相对95cb无差异，未改CPU/套餐/limits/provider。本报告的597部署快照与11:20–11:35UTC日志仍是固定历史证据，不代表后续latest版本，也不因新前端发布失效。首页hash不能当网关连接关联ID或CPU问题已修证明；此版本更新来自总协调回执，本专项未重复部署验证。
 
 本轮只归档调查，不修应用或调整资源。总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 独占后续用户决定、审查、集成与push。
+
+## 2026-10-30补充：获准官方只读API后的结果
+
+用户随后明确允许cf缺入口的两项使用Cloudflare官方只读API：只查Workers订阅Free/Paid及lie-game有效CPU limit。基于已归档commit `6ac389a6392df9045ff646f6b23e70d246c13e3c`追加本节，不改历史597模块/日志/探针证据；这次例外不授权更改CPU、套餐、权限、provider或创建真实连接/profile。
+
+官方Cloudflare connector已内部认证成功，明确选择与既有cf一致的账号，无凭据文件读取、token导出、手动HTTP认证header或新登录。先用官方OpenAPI确认必要GET的schema再执行，在工具内部只投影允许字段。完整最小结果见[settings-evidence.json](settings-evidence.json)：
+
+| 读取 | 时间UTC与结果 | 能确认/不能确认 |
+| --- | --- | --- |
+| GET /accounts/{account_id}/workers/scripts/lie-game/settings | 11:59:59.791Z成功；limits不存在，limits.cpu_ms不存在 | schema明确cpu_ms可为毫秒整数；实际响应未提供，不能补默认或据此排除dashboard/旧配置的低限额。有效CPU limit仍未知。 |
+| GET /accounts/{account_id}/entitlements | 12:00:19.641Z成功；仅Workers CPU/plan相关键的投影为空 | 没有得到明确档位/CPU配额；空结果不是Free证明。 |
+| GET /accounts/{account_id}/subscriptions | 至12:02:16Z前完成；HTTP403，10000 Authentication error | connector明确当前OAuth不能使用此接口，需带Billing Read/Write的API token。本任务不索要secret、不扩大权限，不再扫描其他账户产品或账单。Workers Free/Paid仍未知。 |
+
+这次通过现有cf CLI另核当前部署：lie-game的100%流量版本为`61a449e7-7997-4b33-8e34-295a02bd138a`，11:50:55.080093Z创建，标记git `0d753ec74c03b9d35ae8505942ab56a5f02fa651`，同一账号/Worker及lie.agency映射。settings响应自身没有version字段，因此上述版本为cf随后核实的上下文，不伪称原子一致快照；此前597/11:20–11:35UTC exceededCpu证据仍保持原历史身份。
+
+**两项仍准确未知，而非已确认Free或CPU=2000/默认值。** 目前最小剩余事实仍是用户在Workers & Pages看Workers订阅Free/Paid，以及lie-game实际CPU time limit；它们与域名Free/Pro不同。已Paid但dashboard/旧配置设低CPU仍可能，不直接推荐升级套餐。确认事实后才决定是否需要配置修复及额外预算授权；不继续增加600秒墙钟、不以缺字段或2019ms观测猜配额。
+
+本增量只有本节及settings-evidence.json。JSON/链接/隐私字段/范围和git diff --check通过；无应用改动，无需重跑应用套件或历史探针。没有账号/配置/部署/权限变更、服务、浏览器、语音推理或profile流量。认证被拒绝只限制订阅读取，不曾尝试绕过；历史已通过的应用与运行探针结果没有改写。
+
+专项 root 已审查本增量的API范围、读取结果与版本上下文，校验JSON和文档链接；固定597模块/历史运行证据/探针与6ac389a逐项无差异。本增量只保存只读结果，不重复运行已通过的应用检查或被拒绝的订阅请求。
