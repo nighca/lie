@@ -2,7 +2,7 @@
 
 2026-10-30；owner：本专项 Chat（85bb worktree）；来源：总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 的用户授权任务。
 
-状态：第一版实现与原生浏览器检查完成，供用户审看；尚未获得用户对具体文案/造型的反馈，未合 main、未 push、未部署。既定俏皮中文 B 方向已批准，本页不重开整体视觉审批。
+状态：第一版实现与原生浏览器检查完成。用户于2026-10-30在本Chat明确确认“这个版本可以的，推进合入吧”，批准本版并要求推进合入；交总协调审查、串行合入与push。此记录时尚未合 main、未 push、未部署。既定俏皮中文 B 方向已批准，本页不重开整体视觉审批。
 
 ## 设计
 
@@ -31,6 +31,6 @@
 
 总协调正式分配5177并行预览turn。owner：版本弹窗专项；WT `/Users/nighca/.codex/worktrees/85bb/lie`；分支 `codex/playful-page-version`；原base `fd0493773e3b47ee934b2a391e8f69b49f632c58`；无依赖提交。
 
-服务严格127.0.0.1:5177，起前lsof无监听；Node PID77249，原exec/session5085。启动身份为上述base加本任务未提交组件/tests/设计资料（Vite热更新），不是clean build。消费者为本Chat IAB tab1及用户审看，保留服务供用户反馈；用户审看结束/明确交还后owner原session Ctrl-C并核PID/监听退出。当前无停止回执，保护其他端口不操作。初次sandbox listen EPERM未启动监听，获准同端口重试后启动。
+服务严格127.0.0.1:5177，起前lsof无监听；Node PID77249，原exec/session5085。启动身份为上述base加本任务未提交组件/tests/设计资料（Vite热更新），不是clean build。消费者为本Chat IAB tab1及用户审看。用户确认本版并要求推进合入后，owner已在原session5085发送Ctrl-C，进程退出130；随后lsof确认5177无监听，临时预览消费结束、端口交还。未触碰其他端口。初次sandbox listen EPERM未启动监听，获准同端口重试后启动。
 
 实际产品修改仅PageVersion.vue和其专属test。Application.vue、ProductHeader、共享UI、runtime/provider均未改。总协调持唯一main集成/push turn，实际审查后处理；不创建PR。
