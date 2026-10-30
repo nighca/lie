@@ -225,7 +225,7 @@ describe('remixing a completed case', () => {
     await result.click('试玩')
     const savedDraft = localStorage.getItem(DRAFT_KEY)
     await finish(result, correct)
-    expect(result.wrapper.findAll('.result-actions button').map((button) => button.text())).toEqual(['重新开始一局', '返回编辑器'])
+    expect(result.wrapper.findAll('.result-actions button').map((button) => button.text())).toEqual(correct ? ['返回编辑器', '重新开始一局'] : ['重新开始一局', '返回编辑器'])
     result.wrapper.getComponent(App).vm.$emit('remix')
     await settle()
     expect(result.router.currentRoute.value.path).toBe('/editor/preview')

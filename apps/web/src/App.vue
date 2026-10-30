@@ -165,6 +165,9 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     <main v-else-if="view.phase === 'solved' || view.phase === 'lost'" class="result-card surface" :class="{ 'result-card--wrong': !view.result?.correct }">
       <div class="result-pattern" aria-hidden="true"></div>
       <header class="result-heading">
+        <div v-if="view.phase === 'solved'" class="result-confetti" aria-hidden="true">
+          <i v-for="index in 18" :key="index" :style="{ '--x': `${(index * 37) % 100}%`, '--drift': `${((index * 23) % 100) - 50}px`, '--turn': `${index % 2 === 0 ? 240 : -200}deg`, '--delay': `${(index % 5) * 55}ms` }"></i>
+        </div>
         <svg class="result-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
           <template v-if="view.result?.correct">
             <path class="result-mark__seal" d="M50 2 60 12 75 8 79 23 94 28 89 43 98 55 85 65 85 81 69 83 60 97 47 89 33 96 25 82 9 78 13 62 2 50 14 39 12 23 28 20 38 6Z" />
@@ -177,7 +180,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </svg>
         <div class="result-heading-copy">
           <p class="eyebrow">{{ view.phase === 'solved' ? '指认正确' : '本局结束' }}</p>
-          <h1 ref="resultHeading" class="case-title lie-handwritten-underline" tabindex="-1">{{ view.phase === 'solved' ? '谜题解开了！' : '指认不正确' }}</h1>
+          <h1 ref="resultHeading" class="case-title" tabindex="-1">{{ view.phase === 'solved' ? '谜题解开了！' : '指认不正确' }}</h1>
+          <p v-if="view.phase === 'solved'" class="result-celebration">漂亮！藏在对话里的真相，被你找到了。</p>
         </div>
       </header>
       <div class="result-content">
@@ -188,7 +192,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
               <span v-else class="result-initial" aria-hidden="true">{{ resultCharacter.name.slice(0, 1) }}</span>
             </AnimatedPortrait>
           </div>
-          <figcaption><span>你指认了</span><strong>{{ resultCharacter.name }}</strong></figcaption>
+          <figcaption><span>你指认了</span><strong><CharacterNameText :text="resultCharacter.name" :characters="characterNames" /></strong></figcaption>
         </figure>
         <section v-if="view.phase === 'solved'" class="result-story" aria-label="完整经过">
           <h2>完整经过</h2><p v-for="(paragraph, index) in resultParagraphs" :key="index"><CharacterNameText :text="paragraph" :characters="characterNames" /></p>
@@ -198,8 +202,14 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </section>
       </div>
       <footer class="result-actions">
-        <UiButton @click="controller.restart()">重新开始一局</UiButton>
-        <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
+        <template v-if="view.phase === 'solved'">
+          <UiButton @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
+          <UiButton variant="secondary" @click="controller.restart()">重新开始一局</UiButton>
+        </template>
+        <template v-else>
+          <UiButton @click="controller.restart()">重新开始一局</UiButton>
+          <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
+        </template>
         <UiButton v-if="allowRemix" variant="quiet" class="remix-link" @click="emit('remix')">我要改编</UiButton>
       </footer>
     </main>
@@ -230,4 +240,54 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 
 <style scoped>
 .intro-duration { text-autospace: normal; }
+.result-character figcaption strong :deep(.character-name-text) { display: inline; font: inherit; color: inherit; }
+.result-celebration { margin: 12px 0 0; font-size: 16px; font-weight: 600; line-height: 1.6; text-wrap: pretty; }
+.result-card:not(.result-card--wrong) .result-heading { position: relative; isolation: isolate; padding-block: 36px; background: #daf5ef; }
+.result-card:not(.result-card--wrong) .result-heading::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .75; background: radial-gradient(circle at 7% 30%, #ff9486 0 4px, transparent 5px), radial-gradient(circle at 92% 70%, #ff9486 0 5px, transparent 6px), radial-gradient(circle at 87% 20%, #e7b827 0 5px, transparent 6px), radial-gradient(circle at 14% 80%, #e7b827 0 3px, transparent 4px); }
+.result-card:not(.result-card--wrong) .result-mark { width: 116px; height: 116px; transform: rotate(-10deg); filter: drop-shadow(4px 5px 0 #111b451a); }
+.result-card:not(.result-card--wrong) .result-mark__seal { fill: #ffe47b; }
+.result-card:not(.result-card--wrong) .result-portrait::before { background: #fff0a8; box-shadow: 6px 6px 0 #111b4514; }
+.result-card:not(.result-card--wrong) .result-portrait::after { color: var(--lie-ink); transform: rotate(12deg); }
+.result-confetti { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .result-card:not(.result-card--wrong) .result-mark { animation: result-stamp 650ms cubic-bezier(.2, .8, .25, 1) both; }
+  .result-card:not(.result-card--wrong) .result-heading-copy { animation: result-arrive 450ms 120ms ease-out both; }
+  .result-card:not(.result-card--wrong) .result-character { animation: result-arrive 550ms 220ms ease-out both; }
+  .result-card:not(.result-card--wrong) .result-story { animation: result-arrive 500ms 320ms ease-out both; }
+  .result-card--wrong .result-mark { animation: result-wobble 550ms ease-out both; }
+  .result-card--wrong .result-character { animation: result-arrive 450ms 100ms ease-out both; }
+  .result-card--wrong .result-story { animation: result-arrive 400ms 180ms ease-out both; }
+  .result-confetti { display: block; position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+  .result-confetti i { position: absolute; left: var(--x); top: -12px; width: 8px; height: 14px; border-radius: 2px; background: #e9b92f; animation: result-confetti 1250ms var(--delay) ease-out both; }
+  .result-confetti i:nth-child(3n) { background: #ee867b; }
+  .result-confetti i:nth-child(3n + 1) { background: #3cab9b; width: 7px; height: 7px; border-radius: 50%; }
+}
+@keyframes result-stamp {
+  0% { opacity: 0; transform: scale(.35) rotate(-30deg); }
+  55% { opacity: 1; transform: scale(1.16) rotate(-4deg); }
+  78% { transform: scale(.96) rotate(-13deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-10deg); }
+}
+@keyframes result-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  50% { transform: rotate(6deg); }
+  75% { transform: rotate(-3deg); }
+}
+@keyframes result-arrive {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes result-confetti {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  12% { opacity: .9; }
+  75% { opacity: .75; }
+  100% { opacity: 0; transform: translate(var(--drift), 230px) rotate(var(--turn)); }
+}
+@media (max-width: 620px) {
+  .result-card:not(.result-card--wrong) .result-heading { flex-direction: column; gap: 12px; padding: 24px 20px; text-align: center; }
+  .result-card:not(.result-card--wrong) .result-mark { width: 88px; height: 88px; }
+  .result-card:not(.result-card--wrong) .case-title { margin-inline: auto; }
+  .result-celebration { font-size: 14px; margin-top: 10px; }
+}
 </style>
