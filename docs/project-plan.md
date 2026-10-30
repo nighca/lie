@@ -1,8 +1,20 @@
 # LIE — 当前项目计划
 
-2026-10-27：项目本阶段完成，用户将archive主协调chat，后续另开新chat。**无active coordinator、无自动在制队列。** 本次收尾只提交本地main，不push；[交接入口](coordinator-handoff.md)与[收尾记录](history/2026-10-27/project-closeout/README.md)为最新状态，覆盖旧active/待审/常驻表述。
+2026-10-30：用户指定总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 接任，负责需求沟通、优先级、专项协调、实际交付审查、串行合入和 push；具体实施与耗时验证交专项执行。**总协调持有唯一 integration turn，所有专项改动须经其审查合入。** 每次 reviewed integration 按既定流程普通 push；专项另有“不提交、不推送”要求时继续遵守。
 
-最近已推送且CI/CD通过的main为ca7f37f；v1.0.0标签指向f8c4e2b，运行输入相同。[最后发布证据](releases/2026-10-27-cleanup-archive/README.md)。58旧工作树已清理，必要设计/私密恢复材料保留。`lie`和`lie-2`实读均PAUSED；8787/8788停用，5355旧监听亦不存在。用户尚未重新授权的方案不因收尾而启动。
+所有专项在各自独立 worktree 工作，代码、草稿、临时文件、生成产物及验证环境均不得落在主工作区。主工作区仅用于审查后的 main 集成。主目录原有两个视频目录已由视频 owner 核对13个文件归属、完整副本和逐文件哈希后迁入专项 worktree；总协调独立确认主工作区干净，视频仍不入库。
+
+## 当前执行队列与门禁
+
+| 优先 / owner | 当前状态及下一步 |
+| --- | --- |
+| P1 语音连接上限 / 语音专项 `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9`＋总协调 | 用户已在专项批准方案 B：保留服务端上限、可配置、默认600秒。source `2886bd90`→`597d7635` 已交付；候选 `dc6a6ad` 已通过总协调实际审查和独立组合复验，随本批集成；普通 push 及 CI/CD 结果由总协调另核。网关34项、类型检查和离线构建通过，实际生产 text binding 为字符串600；[集成复验](voice-session-limit/integration-verification.md)。[实施与验证](voice-session-limit/implementation.md)。计时仍从 relay 创建开始，包含准备阶段；不改变游戏共享询问额度、UGC时长、provider idle 或累计费用体系。专项测试不代表真实10分钟语音已验收。 |
+| P1 语音播放流畅性 / 同上语音专项＋总协调 | source `5e97cda`、原候选 `b1844db` 待总协调实际审查和独立集成。连续分片调度修复与默认关闭诊断已交付；48kHz接缝异常仍是独立未闭环线索，不宣称爆音已解决。与上限任务分开交付，不重复播放修复提交。 |
+| 连接等待提示 / `01a18adf-d929-7060-969c-8c2d40415d04` | 有序步骤文案与播放节奏方案讨论；实际 ready 立即结束过场。文案、时间和视觉细节尚待用户确认，未授权实施。 |
+| 简单入门案件 / `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e` | 布丁案因答案过于显然被否决；礼物案仍为讨论提案。待用户确认内容，不实施或增加正式案件。 |
+| 宣传视频 / `01a17dee-6a37-73f3-bf53-853df51f6b15` | 26.1秒竖屏 v5 已交付，继续遵守用户“不提交、不推送”。产物及必要工程保留专项 worktree；owner 已核对并迁出主目录两个未跟踪目录，13文件内容保留在专项 worktree，主工作区已干净；不因接任授权入库或公开上传。 |
+
+8787/8788继续停用，无新启动授权；不恢复旧定时任务或四小时轮换。2026-10-27收尾时的清理、暂停及历史发布证据见[交接入口](coordinator-handoff.md)与[收尾记录](history/2026-10-27/project-closeout/README.md)。最近已核历史发布main为ca7f37f，v1.0.0标签指向f8c4e2b；本轮集成/推送结果另核，不能沿用旧CI/CD结论。未重新授权的旧方案继续守原门禁。
 
 ## 已批准范围与已发布成果
 
@@ -18,9 +30,11 @@
 | Hackathon14链 | 截至f753890的14项修订已审、随a0e发布；[讨论稿](hackathon/project-highlights.md)及[内部编写依据](hackathon/authoring-notes.md)保留。移动可用由用户确认，不扩大为盲测/长会话全通过。新平台定位source25e447d已审并随9e1发布，不计入旧a0e发布。 |
 | 既有主线 | q90派生/CI-CD拆分、动画首帧/hash/cache、姓名高亮/标题、龙三叔配置、连接提醒/active切人续接、改编quiet入口、KeepAlive/草稿与复制隔离、调查高度等均已发布，不重派。详细原提交/验收见[整理前快照](history/2026-10-25/dashboard-before-a0e-release-archive/README.md)。 |
 
-## 当前待办与门禁
+## 2026-10-27收尾保留事项与历史成果
 
-| 优先 / owner | 当前状态及下一步 |
+以下为收尾时的成果、未决边界和批准证据，不是自动续跑队列；当前工作以文首表为准。
+
+| 历史事项 / owner | 收尾状态与证据 |
 | --- | --- |
 | 调查立绘加载占位 / 已发布2268 | [实现与验证](investigation-portrait-loading.md)：动画未就绪显示居中“人物加载中…”，无动画/失败/reduce沿用静态回退，舞台尺寸不变；仅调查页启用。source8b98887完整审查，候选fe56783的36目标测试root复验通过；原生视觉未测，CI/CD及线上新JS身份已确认，未冒充真人验收。 |
 | 头部Logo下划线 / 已发布2f5496d | 用户在专项要求移至Logo右下方并看完整页面；source0c4a268已完整审查、桌面/手机实际看图、独立格式/品牌身份审验通过；[当前方案](header-logo-lower-right-design.md)替代[上版位置](header-logo-underline-design.md)。静态重绘非App截图；用户随后在专项明确同意并要求笔画左移接触Logo、直接实现，UI专项4567e2f→28b77d1完整审查并集成发布：移除文字，笔画接触Logo且按后续要求再左移约20px；UI59/types/Webbuild与真实IAB桌面/手机通过，root组合5项Header测试通过。[实现](header-logo-implementation.md)。 |
@@ -45,4 +59,4 @@
 | 宣传视频制作 / 专项01a17226-5e5a-7193-b5b7-e522519a3e0c | 73.4秒创作分享片及37.53秒合成双向试片已归档。用户主导的take03完成三角色真实问答→正确指认→首页，source1545c1f已root全文审查及[独立复核](reviews/joint-gameplay-1545-2026-10-25/README.md)：PCM/编码/哈希/7881帧索引通过，7ctxclosed/9tracksended、四API引用恢复；[完整记录与失败备选](promo-video/2026-10-25/joint-gameplay-recording/README.md)保留。录屏存在段间hold，具体指认点击瞬间未完整动态捕获，不能声称连续或精确口型；外围finally/observer源码未全保存，仅核终态回执。用户在专项新明确要求试玩前＋创作后、有声合成成片入库并README链接，source1ae1fa3已root全文审查、接缝/末帧实际看图及[独立身份审验](reviews/combined-demo-1ae-2026-10-25/README.md)通过；[成片与复现](promo-video/2026-10-25/combined-demo/README.md)187.433秒、1280×800/30fps/H264/AAC，试玩双方声音保留、创作段原无声。两README已加链接，特定成片入库许可覆盖其中实际人声，原WAV/失败素材仍仅本地；已随e130912合main并普通push，精确CI/CD均success；成片保留原录制名称与已知hold，不再重录打磨。发布窗口已释放，无新provider操作或公开平台上传许可。 |
 | 不采用旧资源保留 | 用户不需要旧版本兼容，14d/256MiB提案不接CI；[历史方案](archive/2026-10-25/release-retention-not-adopted/README.md)保留。允许旧产品资源删除不等广泛账号工件/Git历史/WT清理。 |
 
-当前服务与工作树状态以[收尾交接](coordinator-handoff.md)为准：没有保留5355消费者，所有旧工作树已清理；旧表中的owner/PID/PTY/tab只作历史证据。各专项chat已archive，表中待讨论事项等待用户后续新任务，不构成自动续跑授权。
+2026-10-27收尾时没有保留5355消费者，58个旧工作树已清理，旧专项已archive；这些是历史事实，不覆盖本轮新建专项 worktree 与总协调身份。旧表中的owner/PID/PTY/tab只作历史证据，不按旧记录启停服务。当前协调入口见[交接说明](coordinator-handoff.md)，未列入文首队列的旧事项不自动续跑。
