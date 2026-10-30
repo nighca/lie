@@ -1,12 +1,8 @@
 # 本地开发
 
-> 当前状态（2026-10-27收尾）：58个旧工作树已清理，只保留main；5355旧PID37202/监听亦已不存在，无在用动画预览消费者。旧台账仅为历史，勿按旧路径恢复。用户后续另开chat；定时推进/轮换均PAUSED。[收尾与恢复入口](history/2026-10-27/project-closeout/README.md)。
+> 当前协调（2026-10-30）：总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 接任；专项在独立 worktree 执行，当前服务以[本轮登记](#2026-10-30-当前专项分配)为准。2026-10-27收尾时58个旧工作树清理、5355旧监听消失的事实仅为历史，不覆盖本轮新专项。定时推进/轮换仍PAUSED。[收尾与恢复入口](history/2026-10-27/project-closeout/README.md)。
 
 > 已停用环境（2026-10-25）：用户已明确停用本地8787及配套8788。launchd已disable＋bootout，Web/Worker与自有内部监听全部释放，配置和凭据保留。下文原常驻运行说明仅供恢复参考，不代表服务仍运行；未经用户重新要求不得自动启动。[停用证据](history/2026-10-25/main-preview-stopped/README.md)。
-
-## 2026-10-30 语音流畅性专项服务回执
-
-本轮仅离线合成音频验收，owner `/root/voice_audit`，worktree `lie-voice-smoothness/lie`、基线 `60c11f7` 加本轮修复，唯一端口 `127.0.0.1:5176`。两轮临时 Vite（PID6899/session15286、PID13131/session56862）对应自有 Chrome tabs1910331727/1910331732，均已在原 PTY Ctrl-C 退出130、核无listener、关闭自有tab；没有保留消费者或服务。IAB不可用后才使用Chrome；未调用真实mic/provider，未触碰8787/8788。完整结果与已知48k接缝边界见[实施记录](voice-playback-smoothness/implementation.md)。
 
 正式生产入口：[LIE](https://lie.agency/) · [编辑器](https://lie.agency/editor)。2026-10-25用户已启用该域名，指向现有Cloudflare正式Worker；本批仅文档修订，未改DNS/账号/Worker配置。平台原生地址`lie-game.nighca.workers.dev`继续作为原生入口与历史测量origin，不要求删除/重定向；[已核发布](releases/2026-10-25-main-refresh.md)的原始观测保留。
 
@@ -114,6 +110,16 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 
 验收结束或消费者释放后立即停临时服务，优先原PTY Ctrl-C，并复核PID/监听已退出。原PTY失效时，只有已经确认owner及无消费者的精确进程，才在操作前再次核PID、cwd和命令后对该PID发送SIGTERM；退出失败/归属不明先协调，不使用pkill、按node或端口批杀。handoff分别列已停（实际退出证据）、保留理由、未知项，不能把“当前未见监听”写成“本次成功停止”。不同时清理WT、refs、文件或凭据。
 
+### 2026-10-30 当前专项分配
+
+语音等待提示 demo 的 `5176` 已分配给专项 Chat `01a18adf-d929-7060-969c-8c2d40415d04`，来源 `/Users/nighca/.codex/worktrees/lie-connection-design/lie`、分支 `codex/lie-connection-design`。owner 批量回执：base/HEAD `60c11f72b71ead4b8e744f2281d5dbecb796d11a` 加未提交的 demo 改动，PID `13931`，原 PTY/session `83334`；旧 session `2450`、`27009` 均由原 PTY Ctrl-C 退出130。以上是 owner 回执，不是总协调新扫描。总协调分配前核无监听；服务严格绑定 `127.0.0.1:5176`，不自动换端口。消费者为用户审看与专项 Chrome 验收；用户 review 结束或明确交还后由 owner 原 PTY 停止并核监听释放，不因总协调接管而停掉仍被用户使用的服务。
+
+入口为 `http://127.0.0.1:5176/connection-demo.html`，独立尺寸入口为 `/connection-demo-viewports.html`。IAB 工具明确不可用，专项 Chrome tab `1910332005` 使用 iframe 验收391/320/1280尺寸；tab 随用户审看保留，不修改全局视口或现有用户 tab/storage，不是 IAB/真机验收通过。离线 fake VoicePort，无真实 provider/mic；未含后续 main 的600秒网关改动。
+
+仅授权当前 UI 的有序候场旁白可运行 demo，尚非正式产品落地批准；无真实 provider/mic，不启动 Worker。`5198` 归属未在本轮核定，不触碰。`8787/8788` 继续停用，本分配不授权恢复。下方2026-10-25表为历史记录，不覆盖本次分配。
+
+播放器100ms缓冲组合的短暂离线原生PCM QA已结束，`5544` 已释放：owner `/root/voice_audit`，语音专项 Chat `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9`，来源 `/Users/nighca/.codex/worktrees/lie-voice-prebuffer/lie`，运行身份 `5e97cda` 加当轮未提交缓冲改动。PID `41535` / 原 PTY/session `75464`，自有 Chrome tab `1910332008`；owner 回执已在原 PTY Ctrl-C exit1，随后 `ps` 核41535无进程、`lsof` 核5544无监听，自有tab已关，无保留消费者。仅合成PCM，未操作全局视口、storage、Worker或provider；不是总协调重新扫描/停止的证据。5176因用户审看不能切源，当时使用既有5544有界端口隔离；本回执不触碰或释放5176/5198/8787/8788。
+
 ### 稳定端口分配
 
 | 用途 | owner/chat | 首选端口与停止条件 |
@@ -126,7 +132,7 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 
 PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已控制该进程。端口分配也不证明当前已有服务在跑；每轮实际状态看下表。CF开发服务器附带的workerd/内部RPC端口属于8788同一受保护进程树，不作为闲置独立预览批杀。
 
-### 当前登记（2026-10-25，本次文档基线a0e1a326；轮换已暂停）
+### 历史登记（2026-10-25，本次文档基线a0e1a326；轮换已暂停）
 
 用户约10:44暂停四小时换chat，root01a17012继续active/唯一integrator；准备文档不授权停止用户常驻环境或其他owner服务。这是root完整交付事实的更新，不是本次新做端口扫描。PID/PTY仅属于原启动会话，操作前仍须owner实际核对；源码HEAD不证明dirty运行字节。历史21服务清理及所有原始回执已在[清理记录](history/2026-10-25/development-service-cleanup.md)和[整理前原文](history/2026-10-25/coordinator-state-before-refresh-30822d3/development.md)保留，不按历史PID重复停止。
 

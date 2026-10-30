@@ -4,7 +4,11 @@
 
 用户要求全部专项在独立 worktree 工作，临时文件、设计草稿和生成产物均留在专项 worktree，主工作区仅作审查后的集成。视频 owner 已核对13个文件归属、完整副本和逐文件哈希，将主目录两个未跟踪视频目录迁入专项 worktree；总协调独立确认主工作区干净，文件内容保留。视频“不提交、不推送”的专项约束继续有效。
 
-语音上限已获用户批准采用可配置600秒默认值，source `2886bd90`→`597d7635` 已交付；候选 `dc6a6ad` 已完成实际审查与独立组合复验，随本批集成；网关34项、类型检查和离线构建通过，生产 text binding 核为字符串600，见[复验记录](voice-session-limit/integration-verification.md)。普通 push/CI/CD 结果另核，不把替身测试视为真实10分钟语音验证。语音播放修复另有 source `5e97cda` 待审；等待提示和新入门案仍处讨论阶段。8787/8788继续停用，没有新服务启动授权。当前集成完成后按既定 reviewed integration 普通 push 流程发布，区别于下述2026-10-27仅本地收尾的特例。
+语音上限已随 main `a742b1ecbe2a6227d53958ed3275a9f4089c5b96` 完成普通 push，精确 CI `41031475179` / CD `41031654559` 均 success，实际部署日志核 text binding `VOICE_MAX_SESSION_SECONDS` 为字符串600，Worker版本 `082b7ad7-16dd-4c43-bec5-bd35d2f1f2c2`。[发布证据](history/2026-10-30/voice-session-limit-release.md)与[集成复验](voice-session-limit/integration-verification.md)保留；尚未真实provider/mic/600秒长会话验收。
+
+用户已批准100ms起播缓冲与消除分片人为gap组合，source `5e97cda1bfe4e5621467bb4560cdfea2848b4591`→`decf1f17724250754db4041724a96f55fd12b57c`，候选 `8829f2c`→`e027701` 已通过总协调实际审查和独立组合复验，随本批集成；普通push/CI/CD结果另核。[组合验收](voice-playback-smoothness/integration-verification.md)确认全部types、voice54/Web目标34/gateway34和完整build通过，生产JS哈希与源一致、网关仍为600秒。首播/真实耗尽恢复100ms PCM储备与单一有界timer、短尾flush、连续排队无逐片gap、打断/close立即清理；不加淡出或Worklet，48k接缝及真实爆音仍未闭环。旧20ms方案与旧视频dirty门禁仅为源提交历史，不覆盖本轮决定和已完成迁移。
+
+等待提示仍为用户审看的dirty demo，文案、节奏及最终视觉待确认，不能正式合入；`5176`（PID13931/session83334）与自有Chrome tab1910332005保留。播放器QA `5544` 已由owner原PTY停止，PID41535退出、无监听、自有tab1910332008关闭；详见[服务登记](development.md#2026-10-30-当前专项分配)。新入门案仍处讨论阶段。8787/8788继续停用，本批没有新服务启动/停止授权。每批审查后的main集成继续普通 push，不能沿用下述2026-10-27仅本地收尾的特例。
 
 ## 2026-10-27收尾快照
 

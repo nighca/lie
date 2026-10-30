@@ -8,23 +8,13 @@
 
 | 优先 / owner | 当前状态及下一步 |
 | --- | --- |
-| P1 语音连接上限 / 语音专项 `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9`＋总协调 | 用户已在专项批准方案 B：保留服务端上限、可配置、默认600秒。source `2886bd90`→`597d7635` 已交付；候选 `dc6a6ad` 已通过总协调实际审查和独立组合复验，随本批集成；普通 push 及 CI/CD 结果由总协调另核。网关34项、类型检查和离线构建通过，实际生产 text binding 为字符串600；[集成复验](voice-session-limit/integration-verification.md)。[实施与验证](voice-session-limit/implementation.md)。计时仍从 relay 创建开始，包含准备阶段；不改变游戏共享询问额度、UGC时长、provider idle 或累计费用体系。专项测试不代表真实10分钟语音已验收。 |
-| P1 语音播放流畅性 / 同上语音专项＋总协调 | source `5e97cda`、原候选 `b1844db` 待总协调实际审查和独立集成。连续分片调度修复与默认关闭诊断已交付；48kHz接缝异常仍是独立未闭环线索，不宣称爆音已解决。与上限任务分开交付，不重复播放修复提交。 |
-| 连接等待提示 / `01a18adf-d929-7060-969c-8c2d40415d04` | 有序步骤文案与播放节奏方案讨论；实际 ready 立即结束过场。文案、时间和视觉细节尚待用户确认，未授权实施。 |
+| P1 语音连接上限 / 语音专项 `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9`＋总协调 | 用户已批准方案 B：保留服务端上限、可配置、默认600秒。source `2886bd90`→`597d7635` 已随 `a742b1ecbe2a6227d53958ed3275a9f4089c5b96` 合入 main 并普通 push，精确 CI `41031475179` / CD `41031654559` 均 success；实际部署日志确认 text binding 字符串600，[发布证据](history/2026-10-30/voice-session-limit-release.md)。网关34项、类型检查和离线构建通过，[集成复验](voice-session-limit/integration-verification.md)及[实施与验证](voice-session-limit/implementation.md)保留。计时仍从 relay 创建开始、包含准备阶段；不改变游戏共享询问额度、UGC时长、provider idle 或累计费用体系。未进行真实10分钟语音验收。 |
+| P1 语音播放流畅性 / 同上语音专项＋总协调 | 用户已批准100ms起播缓冲与消除分片人为gap组合。干净源分支 `codex/lie-voice-prebuffer` 按顺序交付 `5e97cda1bfe4e5621467bb4560cdfea2848b4591`→`decf1f17724250754db4041724a96f55fd12b57c`；总协调从 main `a742b1e` 构造候选 `8829f2c`→`e027701`，已通过总协调实际审查与独立组合复验，随本批集成；普通push及CI/CD结果另核。[组合验收](voice-playback-smoothness/integration-verification.md)：全部types、voice54/Web目标34/gateway34及完整build通过，生产JS哈希与源相同，网关仍为600秒。首播/真实耗尽恢复采用100ms PCM储备和单一100ms有界timer，短尾flush，连续排队不逐片插gap，打断/close立即清理；不加淡出或Worklet。DEV数值诊断默认关闭。源全检查及原生offline12场景调度通过，16k波形一致，48k两个场景有差异；真实爆音及48k接缝仍未闭环。原候选 `b1844db` 不单独集成；已发布600秒上限不改。[首轮审计与复现](voice-playback-smoothness/README.md)、[调度实施](voice-playback-smoothness/implementation.md)及[100ms组合实施](voice-playback-smoothness/prebuffer-implementation.md)保留。 |
+| 连接等待提示 / `01a18adf-d929-7060-969c-8c2d40415d04` | 已获准的当前UI有序候场旁白demo完成专项交付，仍为用户审看中的dirty demo，无新commit，不可直接cherry-pick；正式产品落地尚未批准。文案、1.8/3.6/6秒节奏与最终视觉待用户确认，实际 ready 立即结束过场。owner报告8目标测试、Web vue-tsc与Chrome iframe391/320/1280验收通过；IAB不可用，无真实provider/mic，不代表全应用build或真机通过。独立WT `lie-connection-design/lie` 基线60c11f7，5176服务及专项Chrome tab保留供用户审看，[服务登记](development.md#2026-10-30-当前专项分配)。必要方案、替代稿、生成源和截图在专项docs/design目录保留；后续整理clean有序提交，再交总协调实际review与归档/合入，不清理当前WT。 |
 | 简单入门案件 / `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e` | 布丁案因答案过于显然被否决；礼物案仍为讨论提案。待用户确认内容，不实施或增加正式案件。 |
 | 宣传视频 / `01a17dee-6a37-73f3-bf53-853df51f6b15` | 26.1秒竖屏 v5 已交付，继续遵守用户“不提交、不推送”。产物及必要工程保留专项 worktree；owner 已核对并迁出主目录两个未跟踪目录，13文件内容保留在专项 worktree，主工作区已干净；不因接任授权入库或公开上传。 |
 
-8787/8788继续停用，无新启动授权；不恢复旧定时任务或四小时轮换。2026-10-27收尾时的清理、暂停及历史发布证据见[交接入口](coordinator-handoff.md)与[收尾记录](history/2026-10-27/project-closeout/README.md)。最近已核历史发布main为ca7f37f，v1.0.0标签指向f8c4e2b；本轮集成/推送结果另核，不能沿用旧CI/CD结论。未重新授权的旧方案继续守原门禁。
-
-## 当前专项：语音播放流畅性（2026-10-30）
-
-用户重新开启语音卡顿/偶发爆音排查，范围为 MacBook 与手机 Chrome 外放。owner 为本专项 root，语音审计由 `voice_audit` 执行；唯一集成人为 root。使用独立 worktree `lie-voice-smoothness/lie`、分支 `codex/lie-voice-smoothness`，起点 `60c11f72b71ead4b8e744f2281d5dbecb796d11a`。其余旧队列与暂停事项不自动恢复。
-
-- 已核：当前 `packages/voice` 与 `apps/web/src/application/liveVoice.ts` 相对历史 `f8c4e2b` 无差异；逐片最少 20ms 前置调度、立即 stop、无自适应 jitter buffer 仍存在。具体设备症状的根因尚未证实。
-- 第一阶段已实现并经 root 审查，待集成：[审计与历史复现](voice-playback-smoothness/README.md)、[实现与验证](voice-playback-smoothness/implementation.md)。连续分片直接衔接，首次/耗尽后仍等待 20ms；DEV 数值诊断默认关闭。合规 Node24.22.1 下全根 types/tests/build 通过，root 独立复验 voice46 与 Web 目标26项通过。真实设备爆音根因尚未证实。
-- 用户已于 2026-10-30 明确批准第一步：修复连续调度，增加默认关闭的本地诊断（到包间隔、队列余量、耗尽与停止原因）。由 voice_audit 实施及验证，root 审查；保留现有 20ms 首音起播及立即中断行为。约 100ms 预缓冲、短淡出和 AudioWorklet/环形缓冲均未批准，不纳入本轮。
-- 已知边界：Chrome 合成离线 16k 输出连续/重锚逐样本验证通过；48k 输出的分片接缝相对单 source 出现单样本增幅，证据已保留，不按无调度静默推断爆音已解决。未调用真实 provider 或麦克风；专项 5176 临时服务与自有 tabs 均已关闭，旧 8787/8788 环境未动。
-- 集成门禁：主工作区有既存未跟踪视频目录，保持原样；按干净 main 工作区要求，当前未更新或发布 main。
+8787/8788继续停用，无新启动授权；不恢复旧定时任务或四小时轮换。2026-10-27收尾时的清理、暂停及历史发布证据见[交接入口](coordinator-handoff.md)与[收尾记录](history/2026-10-27/project-closeout/README.md)。最近已核发布 main 为 `a742b1ecbe2a6227d53958ed3275a9f4089c5b96`，CI/CD及生产600秒绑定已确认；v1.0.0标签仍指向f8c4e2b。播放器组合的合入/发布结果另核，不能沿用上批CI/CD结论。未重新授权的旧方案继续守原门禁。
 
 ## 已批准范围与已发布成果
 
