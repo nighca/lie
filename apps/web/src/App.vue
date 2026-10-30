@@ -150,7 +150,9 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </section>
         <section class="conversation-copy">
           <h2><template v-if="current != null"><CharacterNameText :text="current.name" :characters="characterNames" />的询问记录</template><template v-else>询问记录</template></h2>
-          <Transcript :key="view.currentCharacterId ?? ''" :messages="transcript" :animate="view.conversationActive && !view.busy" />
+          <Transcript :key="view.currentCharacterId ?? ''" :messages="transcript" :animate="view.conversationActive && !view.busy">
+            <template #text="{ text }"><CharacterNameText :text="text" :characters="characterNames" /></template>
+          </Transcript>
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>
