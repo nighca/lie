@@ -191,11 +191,13 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
         <h1>有人在说谎</h1>
         <p>和角色语音对话，<br>找出藏起真相的人。</p>
         <div class="home-cast" aria-hidden="true">
-          <div class="home-cast-backdrop"></div>
-          <img class="home-cast-sunny" src="/appearances/sunny-moustache/avatar.png" alt="">
-          <img class="home-cast-coral" src="/appearances/coral-bob/avatar.png" alt="">
-          <img class="home-cast-blue" src="/appearances/blue-glasses/avatar.png" alt="">
-          <span class="home-spark first">✦</span><span class="home-spark second">✦</span>
+          <div class="home-cast-art">
+            <div class="home-cast-backdrop"></div>
+            <img class="home-cast-sunny" src="/appearances/sunny-moustache/avatar.png" alt="">
+            <img class="home-cast-coral" src="/appearances/coral-bob/avatar.png" alt="">
+            <img class="home-cast-blue" src="/appearances/blue-glasses/avatar.png" alt="">
+            <span class="home-spark first">✦</span><span class="home-spark second">✦</span>
+          </div>
         </div>
         <ol class="flow-hint home-flow" aria-label="调查流程"><li>开口问话</li><li>对照说法</li><li>最终指认</li></ol>
       </section>

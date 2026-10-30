@@ -1,0 +1,138 @@
+[
+  {
+    "id": "blue-glasses",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      81,
+      15,
+      1208,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  {
+    "id": "coral-bob",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      0,
+      4,
+      1240,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  {
+    "id": "mint-puffs",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      33,
+      0,
+      1202,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  {
+    "id": "ochre-freckles",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      71,
+      9,
+      1174,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  {
+    "id": "plum-crop",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      0,
+      5,
+      1234,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  {
+    "id": "salt-pepper-beard",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      0,
+      19,
+      1236,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  {
+    "id": "silver-bun",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      0,
+      18,
+      1202,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  {
+    "id": "sunny-moustache",
+    "defaultSize": [
+      1254,
+      1254
+    ],
+    "alphaBounds": [
+      0,
+      21,
+      1202,
+      1254
+    ],
+    "canvas": {
+      "width": 1254,
+      "height": 1254
+    }
+  }
+]
