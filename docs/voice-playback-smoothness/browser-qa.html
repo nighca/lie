@@ -1,0 +1,65 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LIE offline PCM acceptance</title>
+<h1>LIE offline PCM acceptance</h1>
+<p>Native OfflineAudioContext, synthetic PCM only. No microphone, network voice or speaker output.</p>
+<button id="run">Run offline audio checks</button>
+<pre id="result">Ready</pre>
+<script type="module">
+import { createPcmPlayer } from '../../packages/voice/src/player.ts'
+import { enableVoicePlaybackDiagnostics, disableVoicePlaybackDiagnostics, observeVoicePlayback, readVoicePlaybackDiagnostics } from '../../apps/web/src/application/voicePlaybackDiagnostics.ts'
+const format = { format: 'pcm', sampleRate: 16000, channels: 1, bitsPerSample: 16, frameDuration: 20 }
+function pcm() {
+  const data = new Uint8Array(640)
+  const view = new DataView(data.buffer)
+  for (let i=0;i<320;i++) view.setInt16(i*2,8192,true)
+  return data
+}
+document.querySelector('#run').onclick = async () => {
+  const report = {}
+  try {
+    for (const mode of ['continuous','late','resampled-48k']) {
+      const rate = mode === 'resampled-48k' ? 48000 : 16000
+      const native = new OfflineAudioContext(1,rate / 5,rate)
+      let time = 0
+      let idle = 0
+      const context = {
+        get currentTime() { return time }, get state() { return native.state }, destination:native.destination,
+        createBuffer: native.createBuffer.bind(native), createBufferSource:native.createBufferSource.bind(native),
+        addEventListener:native.addEventListener.bind(native), removeEventListener:native.removeEventListener.bind(native),
+      }
+      enableVoicePlaybackDiagnostics()
+      const player = createPcmPlayer(context, () => idle++, undefined, observeVoicePlayback)
+      player.enqueue(pcm(),format)
+      time = mode === 'late' ? .1 : .03
+      player.enqueue(pcm(),format)
+      if (mode === 'late') { time=.11; player.enqueue(pcm(),format) }
+      const events = readVoicePlaybackDiagnostics()
+      const rendered = await native.startRendering()
+      const signal = rendered.getChannelData(0)
+      const expected = mode === 'late' ? [[320,640],[1920,2560]] : [[320,960]]
+      let mismatches=0
+      for(let i=0;i<signal.length;i++) {
+        const value=expected.some(([start,end])=>i>=start&&i<end) ? .25 : 0
+        if(Math.abs(signal[i]-value)>.000001) mismatches++
+      }
+      if (rate === 48000) {
+        const reference = new OfflineAudioContext(1,rate / 5,rate)
+        const single = reference.createBuffer(1,640,16000)
+        single.getChannelData(0).fill(.25)
+        const node = reference.createBufferSource()
+        node.buffer=single; node.connect(reference.destination); node.start(.02)
+        const baseline=(await reference.startRendering()).getChannelData(0)
+        const seam=signal.slice(1920-32,1920+32)
+        const maxSeamDifference=Math.max(...seam.map((value,i)=>Math.abs(value-baseline[1920-32+i])))
+        const silentSeamSamples=[...seam].filter(value=>Math.abs(value)<1e-6).length
+        report[mode]={passed:idle===1&&silentSeamSamples===0&&events[1].startTime===.04,outputRate:rate,idle,silentSeamSamples,maxSeamDifference,seamMatchesSingleSource:maxSeamDifference<1e-6,differencesAtSeam:[...seam].map((value,i)=>({offset:i-32,delta:value-baseline[1920-32+i]})).filter(item=>Math.abs(item.delta)>1e-6),minimumAtSeam:Math.min(...seam),maximumAtSeam:Math.max(...seam),events,contextState:native.state}
+      } else report[mode]={passed:mismatches===0&&idle===1,mismatches,idle,events,contextState:native.state}
+      player.stop()
+      disableVoicePlaybackDiagnostics()
+    }
+    report.passed=Object.values(report).every(value=>value.passed)
+    document.querySelector('#result').textContent=JSON.stringify(report,null,2)
+  } catch(error) { document.querySelector('#result').textContent=JSON.stringify({passed:false,error:String(error)}) }
+}
+</script>

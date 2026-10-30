@@ -1,6 +1,7 @@
 import { createPcmPlayer, createVoiceChannel, openMicrophone } from '@lie/voice'
-import type { PcmFormat, VoiceStartupObservation } from '@lie/voice'
+import type { PcmFormat, PlaybackObserver, PlaybackStopReason, VoiceStartupObservation } from '@lie/voice'
 
+import { observeVoicePlayback } from './voicePlaybackDiagnostics'
 import { VoiceAvailabilityError } from './voice'
 import type { VoicePort } from './voice'
 
@@ -10,6 +11,7 @@ export function createLiveVoicePort(dependencies: {
   openMic: typeof openMicrophone
   createContext: () => AudioContext
   fetchStatus: (signal: AbortSignal) => Promise<Response>
+  onPlayback?: PlaybackObserver
   onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void
   now?: () => number
 } = {
@@ -17,6 +19,7 @@ export function createLiveVoicePort(dependencies: {
   createPlayer: createPcmPlayer,
   openMic: openMicrophone,
   createContext: () => new AudioContext(),
+  ...(import.meta.env.DEV ? { onPlayback: observeVoicePlayback } : {}),
   fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]) }),
 }): VoicePort {
   return {
@@ -80,11 +83,15 @@ export function createLiveVoicePort(dependencies: {
           scope.onEvent({ type: 'listening' })
         }
       }
-      function interruptAnswer() {
+      function observeAnswer(state: 'start' | 'stop' | 'aborted') {
+        if (context == null || dependencies.onPlayback == null) return
+        try { dependencies.onPlayback({ type: 'answer', state, audioTime: context.currentTime, contextState: context.state }) } catch { /* Diagnostics cannot affect conversations. */ }
+      }
+      function interruptAnswer(reason: PlaybackStopReason) {
         if (!answerInProgress && !playing) return
         answerEnded = false
         answerInProgress = false
-        player?.stop()
+        player?.stop(reason)
         playing = false
         scope.onEvent({ type: 'interrupted' })
       }
@@ -104,18 +111,20 @@ export function createLiveVoicePort(dependencies: {
         onEvent(event) {
           if (!current()) return
           if (event.type === 'ready') format = event.format
-          if (event.type === 'stt') { interruptAnswer(); scope.onEvent({ type: 'userText', text: event.text }) }
+          if (event.type === 'stt') { interruptAnswer('stt'); scope.onEvent({ type: 'userText', text: event.text }) }
           if (event.type === 'tts') {
             if (event.state === 'start') {
-              if (answerEnded) interruptAnswer()
+              observeAnswer('start')
+              if (answerEnded) interruptAnswer('new-answer')
               answerEnded = false
               answerInProgress = true
               scope.onEvent({ type: 'speaking' })
             }
             if (event.state === 'sentence' && answerInProgress && event.text != null) { scope.onEvent({ type: 'assistantText', text: event.text }) }
             if (event.state === 'stop') {
+              observeAnswer(event.aborted ? 'aborted' : 'stop')
               if (event.aborted) {
-                interruptAnswer()
+                interruptAnswer('tts-aborted')
               } else {
                 answerEnded = true
                 if (!playing) answerDrained()
@@ -143,7 +152,7 @@ export function createLiveVoicePort(dependencies: {
         microphone = null
         answerEnded = false
         answerInProgress = false
-        player?.stop()
+        player?.stop('close')
         const contextStop = context != null && context.state !== 'closed' ? context.close() : null
         if (observe != null) void Promise.allSettled([micReady, micStop, contextStop]).then(results => {
           report('cleanup', results.some(result => result.status === 'rejected') ? 'failed' : 'completed')
@@ -178,7 +187,7 @@ export function createLiveVoicePort(dependencies: {
               const ended = outputLevel !== 0 && level === 0
               outputLevel = level
               feedback(ended)
-            })
+            }, dependencies.onPlayback)
             micReady = dependencies.openMic({
               ...(observe == null ? {} : { onStartup: observe }),
               signal: scope.signal,

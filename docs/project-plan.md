@@ -16,6 +16,16 @@
 
 8787/8788继续停用，无新启动授权；不恢复旧定时任务或四小时轮换。2026-10-27收尾时的清理、暂停及历史发布证据见[交接入口](coordinator-handoff.md)与[收尾记录](history/2026-10-27/project-closeout/README.md)。最近已核历史发布main为ca7f37f，v1.0.0标签指向f8c4e2b；本轮集成/推送结果另核，不能沿用旧CI/CD结论。未重新授权的旧方案继续守原门禁。
 
+## 当前专项：语音播放流畅性（2026-10-30）
+
+用户重新开启语音卡顿/偶发爆音排查，范围为 MacBook 与手机 Chrome 外放。owner 为本专项 root，语音审计由 `voice_audit` 执行；唯一集成人为 root。使用独立 worktree `lie-voice-smoothness/lie`、分支 `codex/lie-voice-smoothness`，起点 `60c11f72b71ead4b8e744f2281d5dbecb796d11a`。其余旧队列与暂停事项不自动恢复。
+
+- 已核：当前 `packages/voice` 与 `apps/web/src/application/liveVoice.ts` 相对历史 `f8c4e2b` 无差异；逐片最少 20ms 前置调度、立即 stop、无自适应 jitter buffer 仍存在。具体设备症状的根因尚未证实。
+- 第一阶段已实现并经 root 审查，待集成：[审计与历史复现](voice-playback-smoothness/README.md)、[实现与验证](voice-playback-smoothness/implementation.md)。连续分片直接衔接，首次/耗尽后仍等待 20ms；DEV 数值诊断默认关闭。合规 Node24.22.1 下全根 types/tests/build 通过，root 独立复验 voice46 与 Web 目标26项通过。真实设备爆音根因尚未证实。
+- 用户已于 2026-10-30 明确批准第一步：修复连续调度，增加默认关闭的本地诊断（到包间隔、队列余量、耗尽与停止原因）。由 voice_audit 实施及验证，root 审查；保留现有 20ms 首音起播及立即中断行为。约 100ms 预缓冲、短淡出和 AudioWorklet/环形缓冲均未批准，不纳入本轮。
+- 已知边界：Chrome 合成离线 16k 输出连续/重锚逐样本验证通过；48k 输出的分片接缝相对单 source 出现单样本增幅，证据已保留，不按无调度静默推断爆音已解决。未调用真实 provider 或麦克风；专项 5176 临时服务与自有 tabs 均已关闭，旧 8787/8788 环境未动。
+- 集成门禁：主工作区有既存未跟踪视频目录，保持原样；按干净 main 工作区要求，当前未更新或发布 main。
+
 ## 已批准范围与已发布成果
 
 四官方案3/4/4/3人、共享询问480/600/540/480秒（第四案为用户本次明确新增）；引擎支持可变人数，新同玩法案件仅内容与必要呈现配置。浏览器运行故事/会话/指认，薄Worker仅provider传输；纯TS core独立Vue/宿主，凭据不得入客户端。中文B、调查/首页A及既有美术方向已批准，详见[架构](architecture.md)。

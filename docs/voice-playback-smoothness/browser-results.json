@@ -1,0 +1,129 @@
+{
+  "continuous": {
+    "passed": true,
+    "mismatches": 0,
+    "idle": 1,
+    "events": [
+      {
+        "type": "schedule",
+        "audioTime": 0,
+        "contextState": "suspended",
+        "arrivalIntervalMs": null,
+        "sampleCount": 320,
+        "queueAheadBefore": 0,
+        "queueAheadAfter": 0.04,
+        "startTime": 0.02,
+        "endTime": 0.04,
+        "gap": null,
+        "queueExhausted": false
+      },
+      {
+        "type": "schedule",
+        "audioTime": 0.03,
+        "contextState": "suspended",
+        "arrivalIntervalMs": 0.5999999046325684,
+        "sampleCount": 320,
+        "queueAheadBefore": 0.010000000000000002,
+        "queueAheadAfter": 0.03,
+        "startTime": 0.04,
+        "endTime": 0.06,
+        "gap": 0,
+        "queueExhausted": false
+      }
+    ],
+    "contextState": "closed"
+  },
+  "late": {
+    "passed": true,
+    "mismatches": 0,
+    "idle": 1,
+    "events": [
+      {
+        "type": "schedule",
+        "audioTime": 0,
+        "contextState": "suspended",
+        "arrivalIntervalMs": null,
+        "sampleCount": 320,
+        "queueAheadBefore": 0,
+        "queueAheadAfter": 0.04,
+        "startTime": 0.02,
+        "endTime": 0.04,
+        "gap": null,
+        "queueExhausted": false
+      },
+      {
+        "type": "schedule",
+        "audioTime": 0.1,
+        "contextState": "suspended",
+        "arrivalIntervalMs": 0.09999990463256836,
+        "sampleCount": 320,
+        "queueAheadBefore": 0,
+        "queueAheadAfter": 0.04000000000000001,
+        "startTime": 0.12000000000000001,
+        "endTime": 0.14,
+        "gap": 0.08000000000000002,
+        "queueExhausted": true
+      },
+      {
+        "type": "schedule",
+        "audioTime": 0.11,
+        "contextState": "suspended",
+        "arrivalIntervalMs": 0,
+        "sampleCount": 320,
+        "queueAheadBefore": 0.030000000000000013,
+        "queueAheadAfter": 0.05,
+        "startTime": 0.14,
+        "endTime": 0.16,
+        "gap": 0,
+        "queueExhausted": false
+      }
+    ],
+    "contextState": "closed"
+  },
+  "resampled-48k": {
+    "passed": true,
+    "outputRate": 48000,
+    "idle": 1,
+    "silentSeamSamples": 0,
+    "maxSeamDifference": 0.25,
+    "seamMatchesSingleSource": false,
+    "differencesAtSeam": [
+      {
+        "offset": 0,
+        "delta": 0.25
+      }
+    ],
+    "minimumAtSeam": 0.25,
+    "maximumAtSeam": 0.5,
+    "events": [
+      {
+        "type": "schedule",
+        "audioTime": 0,
+        "contextState": "suspended",
+        "arrivalIntervalMs": null,
+        "sampleCount": 320,
+        "queueAheadBefore": 0,
+        "queueAheadAfter": 0.04,
+        "startTime": 0.02,
+        "endTime": 0.04,
+        "gap": null,
+        "queueExhausted": false
+      },
+      {
+        "type": "schedule",
+        "audioTime": 0.03,
+        "contextState": "suspended",
+        "arrivalIntervalMs": 0.10000002384185791,
+        "sampleCount": 320,
+        "queueAheadBefore": 0.010000000000000002,
+        "queueAheadAfter": 0.03,
+        "startTime": 0.04,
+        "endTime": 0.06,
+        "gap": 0,
+        "queueExhausted": false
+      }
+    ],
+    "contextState": "closed"
+  },
+  "passed": true
+}

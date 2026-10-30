@@ -1,0 +1,45 @@
+{
+  "head": "60c11f72b71ead4b8e744f2281d5dbecb796d11a",
+  "sourceSha256": {
+    "player": "2d771427afa3e7ab148c70fe66a805d7cf3cae68ad5c34fcbfabdb432d0a0c7d",
+    "pcm": "f0d75bcd2d4a3e096aff705b58abea5526c3cc97d62d2f2ea99647f190bfb07f"
+  },
+  "source": "actual player.ts/pcm.ts transpiled with installed TypeScript; fake AudioContext",
+  "results": [
+    {
+      "secondArrivalMs": 10,
+      "firstStartMs": 20,
+      "firstEndMs": 40,
+      "secondStartMs": 40,
+      "gapMs": 0
+    },
+    {
+      "secondArrivalMs": 20,
+      "firstStartMs": 20,
+      "firstEndMs": 40,
+      "secondStartMs": 40,
+      "gapMs": 0
+    },
+    {
+      "secondArrivalMs": 30,
+      "firstStartMs": 20,
+      "firstEndMs": 40,
+      "secondStartMs": 50,
+      "gapMs": 10
+    },
+    {
+      "secondArrivalMs": 40,
+      "firstStartMs": 20,
+      "firstEndMs": 40,
+      "secondStartMs": 60,
+      "gapMs": 20
+    },
+    {
+      "secondArrivalMs": 50,
+      "firstStartMs": 20,
+      "firstEndMs": 40,
+      "secondStartMs": 70,
+      "gapMs": 30
+    }
+  ]
+}

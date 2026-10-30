@@ -1,0 +1,10 @@
+{
+  "packages/voice/src/player.ts": "b3bb00011d6de900a678d6197f3e972424a9c2c51495a986c0bdc390f84faf8e",
+  "packages/voice/src/index.ts": "51772875b001e7b649ec7c91ca01ab671f7c761d0a90e58cfdc430aa9668e39c",
+  "apps/web/src/application/liveVoice.ts": "046fc729a9ceecb5fe516edc8171829c6f32d7c9a0b5e234d57f39cbda9a5dd8",
+  "apps/web/src/application/voicePlaybackDiagnostics.ts": "bb662e1136a0294ccb8889572bd3b3bb2d31c11373f44afddaf82be325a6d2a4",
+  "packages/voice/test/player.test.ts": "21ee5358c195206c4e0c716230fd3ccacb31dff3dc7d6aef125697516837f38a",
+  "apps/web/test/liveVoice.test.ts": "7d43d7436737371bfa9784af35f69fe1020d990ccc1a57d94f60d233802aff28",
+  "apps/web/test/voicePlaybackDiagnostics.test.ts": "5314af58146a383b98dc267b2cecc432dd0e6a25ba286b16c2382a13ffc8f6f7",
+  "docs/voice-playback-smoothness/browser-qa.html": "c445129fb9dae08cc6b84b8d659c03dfa9afe00921c9c3fd422a5815b21b3fc7"
+}

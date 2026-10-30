@@ -4,6 +4,10 @@
 
 > 已停用环境（2026-10-25）：用户已明确停用本地8787及配套8788。launchd已disable＋bootout，Web/Worker与自有内部监听全部释放，配置和凭据保留。下文原常驻运行说明仅供恢复参考，不代表服务仍运行；未经用户重新要求不得自动启动。[停用证据](history/2026-10-25/main-preview-stopped/README.md)。
 
+## 2026-10-30 语音流畅性专项服务回执
+
+本轮仅离线合成音频验收，owner `/root/voice_audit`，worktree `lie-voice-smoothness/lie`、基线 `60c11f7` 加本轮修复，唯一端口 `127.0.0.1:5176`。两轮临时 Vite（PID6899/session15286、PID13131/session56862）对应自有 Chrome tabs1910331727/1910331732，均已在原 PTY Ctrl-C 退出130、核无listener、关闭自有tab；没有保留消费者或服务。IAB不可用后才使用Chrome；未调用真实mic/provider，未触碰8787/8788。完整结果与已知48k接缝边界见[实施记录](voice-playback-smoothness/implementation.md)。
+
 正式生产入口：[LIE](https://lie.agency/) · [编辑器](https://lie.agency/editor)。2026-10-25用户已启用该域名，指向现有Cloudflare正式Worker；本批仅文档修订，未改DNS/账号/Worker配置。平台原生地址`lie-game.nighca.workers.dev`继续作为原生入口与历史测量origin，不要求删除/重定向；[已核发布](releases/2026-10-25-main-refresh.md)的原始观测保留。
 
 域名文档检查（2026-10-25）：正常TLS普通GET `/`、`/editor`、`/play`均200，最终URL保持lie.agency、0重定向；三者返回同一SPA入口（546 bytes，SHA256 `d9841a11c0cf254cba0b3dc2843f48a249e46ebea9e22986eb4786766bea08cb`），仅证明路由回退交付，不代表已生成可玩分享或执行编辑/语音。只读源码核：分享以`location.origin`生成`/play#game=…`；voice/status用同源相对路径、WS由当前location派生；gateway严格比较请求Origin与请求URL origin，没有写死旧生产hostname，未放宽Origin/CORS。无应用测试/build、浏览器/草稿、API/WS/provider或服务操作。

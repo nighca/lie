@@ -5,15 +5,15 @@ import { createLiveVoicePort } from '../src/application/liveVoice'
 import { VoiceAvailabilityError } from '../src/application/voice'
 import type { ConversationScope } from '../src/application/voice'
 
-function setupBridge(voiceId: string | null = null, diagnostics: { onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void; now?: () => number } = {}) {
+function setupBridge(voiceId: string | null = null, diagnostics: { onPlayback?: import('@lie/voice').PlaybackObserver; onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void; now?: () => number } = {}) {
   let current = true
   let options: VoiceChannelOptions | null = null
   let drained = () => {}
   let inputMeter = (_level: number) => {}
   let outputMeter = (_level: number) => {}
   const stopMic = vi.fn(async () => {})
-  const context = { state: 'running', resume: vi.fn(async () => {}), close: vi.fn(async () => {}) }
-  const player = { enqueue: vi.fn(), stop: vi.fn(() => drained()) }
+  const context = { currentTime: 0, state: 'running', resume: vi.fn(async () => {}), close: vi.fn(async () => {}) }
+  const player = { enqueue: vi.fn(), stop: vi.fn((_reason?: import('@lie/voice').PlaybackStopReason) => drained()) }
   const channel = { open: vi.fn(async () => {}), startInput: vi.fn(), input: vi.fn(), stopInput: vi.fn(), interrupt: vi.fn(), close: vi.fn() }
   const onEvent = vi.fn()
   const readContext = vi.fn(() => ({ background: '公共', characterId: 'one', characterName: '甲', profile: '甲自己的设定', history: [], systemPrompt: '角色提示' }))
@@ -24,7 +24,7 @@ function setupBridge(voiceId: string | null = null, diagnostics: { onStartup?: (
     ...diagnostics,
     fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready' }))),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
-    createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void) { drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
+    createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void, onPlayback?: import('@lie/voice').PlaybackObserver) { expect(onPlayback).toBe(diagnostics.onPlayback); drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
     openMic: vi.fn(async (value: { onFrame(data: Uint8Array): void; onLevel?: (level: number) => void }): Promise<{ stop(): Promise<void> }> => { onFrame = value.onFrame; inputMeter = value.onLevel ?? (() => {}); return { stop: stopMic } }),
     createContext: () => context as unknown as AudioContext,
   }
@@ -118,6 +118,7 @@ describe('continuous browser voice and device bridge', () => {
     bridge.onEvent.mockClear()
     bridge.options().onEvent({ type: 'tts', state: 'stop', text: null, aborted: true })
     expect(bridge.onEvent.mock.calls).toEqual([[{ type: 'interrupted' }]])
+    expect(bridge.player.stop).toHaveBeenCalledWith('tts-aborted')
     bridge.options().onEvent({ type: 'tts', state: 'start', text: null })
     bridge.options().onEvent({ type: 'audio', data: new Uint8Array([0, 0]) })
     bridge.options().onEvent({ type: 'tts', state: 'stop', text: null, aborted: false })
@@ -199,7 +200,7 @@ describe('continuous browser voice and device bridge', () => {
     bridge.onEvent.mockClear()
     if (boundary === 'stt') bridge.options().onEvent({ type: 'stt', text: '新问题。' })
     else bridge.options().onEvent({ type: 'tts', state: 'start', text: null })
-    expect(bridge.player.stop).toHaveBeenCalledOnce()
+    expect(bridge.player.stop).toHaveBeenCalledExactlyOnceWith(boundary === 'stt' ? 'stt' : 'new-answer')
     expect(bridge.onEvent.mock.calls).toEqual([
       [{ type: 'interrupted' }],
       [boundary === 'stt' ? { type: 'userText', text: '新问题。' } : { type: 'speaking' }],
@@ -323,4 +324,35 @@ it('propagates the specific frame limit cause and closes devices once through th
   expect(bridge.stopMic).toHaveBeenCalledTimes(1)
   expect(bridge.channel.close).toHaveBeenCalledTimes(1)
   expect(bridge.context.close).toHaveBeenCalledTimes(1)
+})
+
+
+it('passes the opt-in playback observer and labels closure without changing normal answer drain', async () => {
+  const observer = vi.fn()
+  const bridge = setupBridge(null, { onPlayback: observer })
+  await bridge.connection.open()
+  bridge.options().onEvent({ type: 'ready', format })
+  bridge.options().onEvent({ type: 'tts', state: 'start', text: null })
+  bridge.options().onEvent({ type: 'audio', data: new Uint8Array([0, 0]) })
+  bridge.options().onEvent({ type: 'tts', state: 'stop', text: null, aborted: false })
+  bridge.drain()
+  expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'listening' })
+  bridge.connection.close()
+  expect(bridge.player.stop).toHaveBeenCalledExactlyOnceWith('close')
+})
+
+
+it('isolates failing answer diagnostics and records normal TTS boundaries without text', async () => {
+  const observer = vi.fn((_event: import('@lie/voice').PlaybackObservation) => { throw new Error('Diagnostic consumer failed') })
+  const bridge = setupBridge(null, { onPlayback: observer })
+  await bridge.connection.open()
+  bridge.options().onEvent({ type: 'tts', state: 'start', text: null })
+  expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'speaking' })
+  bridge.options().onEvent({ type: 'tts', state: 'stop', text: null, aborted: false })
+  expect(bridge.onEvent).toHaveBeenLastCalledWith({ type: 'listening' })
+  expect(observer.mock.calls.map(([event]) => event)).toEqual([
+    { type: 'answer', state: 'start', audioTime: 0, contextState: 'running' },
+    { type: 'answer', state: 'stop', audioTime: 0, contextState: 'running' },
+  ])
+  bridge.connection.close()
 })
