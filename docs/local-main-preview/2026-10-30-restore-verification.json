@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-30 Asia/Shanghai",
+  "ownerTask": "/root/session_limit_acceptance",
+  "coordinatorChat": "01a18baa-4fac-71f2-a81f-c39be0640fe8",
+  "initial": {
+    "owningMainClean": true,
+    "mainSha": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+    "ports8787And8788Listening": false,
+    "launchdDisabled": true,
+    "launchdLoaded": false,
+    "previewLockExists": false,
+    "existingCredentialFileExists": true,
+    "credentialContentsRead": false
+  },
+  "operations": [
+    "launchctl enable gui/501/dev.nighca.lie.main-preview",
+    "launchctl bootstrap gui/501 /Users/nighca/Library/LaunchAgents/dev.nighca.lie.main-preview.plist"
+  ],
+  "launchd": {
+    "label": "dev.nighca.lie.main-preview",
+    "enabled": true,
+    "state": "running",
+    "pid": 66435,
+    "parentPid": 1,
+    "runCount": 1,
+    "lastExit": "never exited",
+    "runAtLoad": true,
+    "keepAlive": {
+      "SuccessfulExit": false
+    },
+    "throttleSeconds": 30,
+    "cwd": "/Users/nighca/code/nighca/lie",
+    "program": "/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node",
+    "script": "/Users/nighca/code/nighca/lie/scripts/main-preview.mjs",
+    "logs": "/Users/nighca/Library/Logs/LIE/main-preview.log",
+    "pty": null
+  },
+  "runtime": {
+    "node": "v24.22.1",
+    "npm": "11.19.1",
+    "persistentExistingRuntime": true,
+    "plistModified": false,
+    "runtimeModified": false,
+    "globalNodeModified": false
+  },
+  "processes": [
+    {
+      "pid": 66435,
+      "role": "main-preview runner",
+      "cwd": "/Users/nighca/code/nighca/lie"
+    },
+    {
+      "pid": 67468,
+      "role": "gateway npm parent",
+      "cwd": "/Users/nighca/code/nighca/lie"
+    },
+    {
+      "pid": 67469,
+      "role": "web Vite",
+      "cwd": "/Users/nighca/code/nighca/lie",
+      "listeners": [
+        "127.0.0.1:8787"
+      ]
+    },
+    {
+      "pid": 67483,
+      "role": "cf dev",
+      "cwd": "/Users/nighca/code/nighca/lie/apps/gateway"
+    },
+    {
+      "pid": 67522,
+      "role": "gateway npm exec vite",
+      "cwd": "/Users/nighca/code/nighca/lie/apps/gateway"
+    },
+    {
+      "pid": 67554,
+      "role": "gateway Vite",
+      "cwd": "/Users/nighca/code/nighca/lie/apps/gateway",
+      "listeners": [
+        "127.0.0.1:8788",
+        "127.0.0.1:57317"
+      ]
+    },
+    {
+      "pid": 67716,
+      "role": "workerd",
+      "cwd": "/Users/nighca/code/nighca/lie/apps/gateway",
+      "listeners": [
+        "127.0.0.1:57323",
+        "127.0.0.1:57324"
+      ]
+    }
+  ],
+  "http": {
+    "homepage": {
+      "url": "http://127.0.0.1:8787/",
+      "status": 200,
+      "viteEntry": "/src/main.ts"
+    },
+    "mainStatus": {
+      "url": "http://127.0.0.1:8787/__lie/main-status",
+      "status": 200,
+      "branch": "main",
+      "sha": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+      "matchesActualMain": true
+    },
+    "workerHealth": {
+      "url": "http://127.0.0.1:8788/api/health",
+      "status": 200,
+      "result": {
+        "status": "ok",
+        "storage": "none"
+      }
+    },
+    "voiceStatus": {
+      "url": "http://127.0.0.1:8787/api/voice/status",
+      "status": 200,
+      "result": {
+        "status": "ready"
+      },
+      "providerInference": false
+    }
+  },
+  "servedSourceMaps": [
+    {
+      "file": "apps/web/src/application/liveVoice.ts",
+      "httpStatus": 200,
+      "sha256": "a375635e33e482fbfc84e0121256f5bfa3a5c0e24abb3af630629635708efdad",
+      "matchesOwningMain": true
+    },
+    {
+      "file": "packages/voice/src/player.ts",
+      "httpStatus": 200,
+      "sha256": "4b1bdfa0b506a02c4aa2066a43438d8a7ea6afaae03a8e7927538a243ef30ab7",
+      "matchesOwningMain": true
+    }
+  ],
+  "voiceLimit": {
+    "declaredTextDefaultSeconds": 600,
+    "launchdNonSecretOverridePresent": false,
+    "providerConfigurationChanged": false,
+    "localAndProductionProviderResourceIdentityCompared": false
+  },
+  "browser": {
+    "preferredIab": "unavailable",
+    "fallback": "independent Chrome tab",
+    "tab": "1910332055",
+    "homepageAxAndScreenshotChecked": true,
+    "fourCasesAndArtworkRendered": true,
+    "versionLabel": "页面版本 开发版",
+    "consoleWarningsOrErrors": [],
+    "ownQaTabClosed": true,
+    "globalViewportChanged": false,
+    "storageWritten": false,
+    "microphoneRequested": false
+  },
+  "current": {
+    "mainStillClean": true,
+    "mainSha": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+    "retainedForUser": true,
+    "stopCondition": "user explicitly asks to stop or coordinated maintenance turn"
+  },
+  "notPerformed": [
+    "real voice or WebSocket inference",
+    "provider credentials inspection or comparison",
+    "provider/account/resource changes",
+    "production deployment",
+    "main SHA mutation to simulate follow behavior",
+    "other preview service/dependency operations by this task"
+  ],
+  "limits": [
+    "Vite DEV frontend differs from production build",
+    "local workerd remains in the transport path",
+    "bypasses production Cloudflare network path and platform CPU quota, not all runtime/provider/browser limits",
+    "voice ready checks local credential availability only; does not establish upstream resources usable or identical to production"
+  ]
+}
