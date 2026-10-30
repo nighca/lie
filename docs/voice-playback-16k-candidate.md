@@ -1,6 +1,6 @@
 # 16kHz playback-context candidate
 
-2026-10-30. Status: isolated local candidate, native/browser checks passed; awaiting the user's listening confirmation. No main integration, push or deployment is authorized by this preparation.
+2026-10-30. Status: native/browser checks and the reported local user listening acceptance passed; ready for coordinator review. This specialist has not integrated, pushed or deployed the candidate.
 
 ## Scope and rationale
 
@@ -78,6 +78,10 @@ node ../../node_modules/vite/bin/vite.js --config ../../tmp/playback-16k/web.con
 
 Consumer transitions from agent no-provider acceptance to initiator review/user listening. The owned Chrome tab1910332085 is left at the introduction, with no mic/provider connection; the initiator gives the user the entry only after handoff review. Entry: `http://127.0.0.1:5545/?game=empty-medal-box`. **The user alone starts live voice.** Retain services only while this approved review/listening consumer exists; when the user finishes or the initiator rejects/cancels the candidate, owner sends Ctrl-C in frontend PTY8226 and gateway PTY17929, then verifies all five listed listeners and both process roots/child are gone. Do not use kill-by-port/pkill or touch another owner. Protected 8787/8788/5176/5198 and 5544 remain untouched.
 
-## Remaining acceptance gate
+## User listening acceptance and integration handoff
 
-The user has not yet confirmed audible quality. No claim of repaired electrical noise, 600-second acceptance, production behavior, or latency improvement is made. Initial actual-diff review of ac1d200 passed before service startup; this completed handoff goes back to the initiator for review, then to the user. Do not send this implementation to the main coordinator for integration review before the user confirms the listening result. No main/push/deploy or unrelated account/credential change was performed.
+On 2026-10-30 the user explicitly reported in the initiating chat: “我现在测试的本地版本（http://127.0.0.1:5545）没有电流声了，效果很好”. This is the user's positive listening result for the local candidate whose application code remains ac1d200; the intervening commit 6052919 only records verification. The previously agreed user-listening gate is now satisfied, so the initiator can hand the frozen candidate to the main coordinator for review and integration.
+
+The report does not individually establish browser/device/output configuration, test duration, a complete 600-second session, production behavior, or all-device sound quality. It supports this local improvement without proving that every audible artifact has the same cause. No audio or transcript was collected. Initial full-diff review, the independent HTTP checks and native/fake checks above remain applicable: application source and dependencies have not changed.
+
+The user's message confirms the effect but does not explicitly release the ongoing listening consumer. Keep 5545/5546 under their recorded owner until that consumer is released; coordinate any maintenance separately and do not interrupt an active connection. The coordinator alone owns integration/publication, and this specialist has not changed main, pushed, deployed or modified account/provider settings.
