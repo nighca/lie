@@ -1,0 +1,13 @@
+[
+  {
+    "preset": "first-reference-2500",
+    "observedRoundMs": 2631,
+    "lastStepObserved": true
+  },
+  {
+    "preset": "switch-reference-1700",
+    "observedRoundMs": 1783,
+    "thirdStepObserved": true,
+    "remainingCards": 0
+  }
+]

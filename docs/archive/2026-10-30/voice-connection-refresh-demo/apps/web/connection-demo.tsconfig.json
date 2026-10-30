@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@lie/game-core": ["../../packages/game-core/src/index.ts"],
+      "@lie/game-core/content": ["../../packages/game-core/src/content.ts"],
+      "@lie/ui": ["../../packages/ui/src/index.ts"],
+      "@lie/voice": ["../../packages/voice/src/index.ts"],
+      "@lie/character-animation": ["../../packages/character-animation/src/index.ts"]
+    }
+  }
+}

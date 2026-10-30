@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-30",
+  "status": "approved-demo-before-production-promotion",
+  "sourceWorktree": "/Users/nighca/.codex/worktrees/lie-connection-design/lie",
+  "sourceBranch": "codex/lie-connection-design",
+  "sourceBase": "60c11f72b71ead4b8e744f2281d5dbecb796d11a",
+  "productionBase": "f86206611dbc0a10260fb1605d9a616b22493dc3",
+  "snapshots": [
+    "apps/web/src/App.vue",
+    "apps/web/src/connection-demo",
+    "apps/web/connection-demo.html",
+    "apps/web/connection-demo-viewports.html",
+    "apps/web/connection-demo.vite.config.ts",
+    "apps/web/connection-demo.vitest.config.ts",
+    "apps/web/connection-demo.tsconfig.json",
+    "apps/web/test/connection-design-demo.test.ts",
+    "docs/voice-connection-refresh.md"
+  ],
+  "sharedDesignAssets": "../../../../design/voice-connection-refresh",
+  "omitted": [
+    "central project-plan edits",
+    "node_modules symlink",
+    "generated appearances",
+    "npm cache/dependencies/logs",
+    "credentials"
+  ],
+  "approval": "用户确认最终纯文字候场版本，并明确要求提交 review & 合入吧。"
+}

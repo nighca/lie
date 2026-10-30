@@ -1,0 +1,28 @@
+{
+  "status": "proposal-awaiting-user-selection",
+  "date": "2026-10-30",
+  "base": "60c11f72b71ead4b8e744f2281d5dbecb796d11a",
+  "sources": {
+    "design/ui/tokens.json": "bc9193a270fd881431d1774a0c71ebcf048fa503cecc0deb55731a662ed99031",
+    "design/ui/spec.md": "6377afa5fbe2d22c8b10efaf6ad01bca518c5feaec6ad96274a0ed111f222221",
+    "apps/web/src/App.vue": "2e371ad440eecc58af891b89f6abb4511cdef56c0d0db24968c6f93956824fa3",
+    "apps/web/src/style.css": "af3068d20f72e9737064c28786941a7e17b84adbc4b6455db187f85ac45a0609",
+    "design/investigation-portrait-position/mobile-unchanged.png": "e4f78ba90120dc17bb547006833728d84c1998215c53daaf32aff298f2e4ac85",
+    "design/character-presets/assets/coral-bob/default.png": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "design/character-presets/assets/coral-bob/avatar.png": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe",
+    "design/character-presets/assets/sunny-moustache/default.png": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "design/character-presets/assets/sunny-moustache/avatar.png": "61e062cbfb52ff47dc9cbd9c84424fda287b09e3dd7a75ff39031e71b366a218",
+    "design/character-presets/assets/blue-glasses/default.png": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17",
+    "design/character-presets/assets/blue-glasses/avatar.png": "af2b936dcc9d09ec46519b74a01be8f823ae976f6fdfa68e1a624fec0b2a4c17"
+  },
+  "font": {
+    "file": "/System/Library/Fonts/Hiragino Sans GB.ttc",
+    "regularIndex": 0,
+    "boldIndex": 2
+  },
+  "limitations": [
+    "Static Pillow compositions; no production edits or browser validation.",
+    "Animation descriptions are proposals, not animated output.",
+    "C uses a generic greeting cue that also works without previous transcripts."
+  ]
+}
