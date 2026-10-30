@@ -1,0 +1,134 @@
+{
+  "checkedAtUTC": "2026-10-30T13:17:02.523Z",
+  "windowUTC": {
+    "from": "2026-10-30T13:04:00Z",
+    "to": "2026-10-30T13:13:00Z"
+  },
+  "timeframeMs": {
+    "from": 1793365440000,
+    "to": 1793365980000
+  },
+  "schema": {
+    "operationId": "o11y.telemetry.query",
+    "httpMethod": "POST",
+    "path": "/accounts/{account_id}/workers/observability/telemetry/query"
+  },
+  "queryDryRunEndpointVerified": true,
+  "metadataDryRunGetVerified": true,
+  "query": {
+    "view": "invocations",
+    "limit": 100,
+    "filters": [
+      {
+        "key": "$workers.scriptName",
+        "operation": "eq",
+        "type": "string",
+        "value": "lie-game"
+      },
+      {
+        "key": "$workers.event.request.path",
+        "operation": "eq",
+        "type": "string",
+        "value": "/api/voice"
+      }
+    ],
+    "filterCombination": "and",
+    "outcomeFilter": false
+  },
+  "deployment": {
+    "readAtUTC": "2026-10-30T13:17:00.641Z",
+    "workerNameMatches": true,
+    "workerIdentityMatchesPriorAudit": true,
+    "lieAgencyDomainMatches": true,
+    "createdAtUTC": "2026-10-30T12:09:28.789204Z",
+    "versions": [
+      {
+        "version_id": "380959e2-51b8-489f-b76b-1db289f30cba",
+        "percentage": 100
+      }
+    ],
+    "gitMessage": "Verified CI build 12c4e4d29135c7e30083c8ecf08c2fc95bcaf150"
+  },
+  "response": {
+    "topLevelKeys": [
+      "run",
+      "invocations",
+      "statistics"
+    ],
+    "runStatus": "COMPLETED",
+    "abrLevel": 1,
+    "hasMore": null,
+    "cursorFieldPresent": false,
+    "resultInfoPresent": false,
+    "invocationObjectGroupCount": 1,
+    "grouping": "In-memory invocation object keys; second fixed-window check verified all five keys equal each record $metadata.requestId; all identifier values discarded",
+    "fallbackRecordCount": 5,
+    "groupCount": 1,
+    "recordCount": 5
+  },
+  "groups": [
+    {
+      "group": "group-1",
+      "recordCount": 5,
+      "exceptionEventCount": 4,
+      "categories": {
+        "cpu-limit": 4,
+        "terminal": 1
+      },
+      "routeMatches": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "versions": [
+        "380959e2-51b8-489f-b76b-1db289f30cba"
+      ],
+      "terminalRecords": [
+        {
+          "timestampMs": 1793365713558,
+          "timestampUTC": "2026-10-30T13:08:33.558Z",
+          "outcome": "exceededCpu",
+          "cpuTimeMs": 2050,
+          "wallTimeMs": 99509,
+          "eventType": "fetch",
+          "truncated": false,
+          "version": "380959e2-51b8-489f-b76b-1db289f30cba",
+          "responseStatus": null
+        }
+      ]
+    }
+  ],
+  "groupingVerification": {
+    "checkedAtUTC": "2026-10-30T13:17:42.787Z",
+    "sameWindowAndFilters": true,
+    "runStatus": "COMPLETED",
+    "groupCount": 1,
+    "recordsWithMetadataRequestId": 5,
+    "allInvocationKeysMatchMetadataRequestId": true,
+    "terminalTupleUnchanged": true
+  },
+  "userReport": {
+    "approximateLocalTime": "2026-10-30 21:09 Asia/Shanghai",
+    "approximateDurationSeconds": 96,
+    "durationIsExact": false,
+    "visibleRemaining": "06:24",
+    "visibleNoticeCategory": "generic voice interrupted; existing transcripts retained; restart available",
+    "browserCommitReconfirmed": false,
+    "strictAttributionToReturnedGroup": false
+  },
+  "coverageLimits": [
+    "Returned groups only; no claim of complete traffic coverage",
+    "limit=100 does not guarantee completeness",
+    "abr_level=1 preserved without assuming unsampled coverage",
+    "No top-level cursor/result_info/hasMore value was returned",
+    "Active invocations, ingestion delay, sampling and retention may affect coverage",
+    "Record timestamp is not asserted to be request start, end, click or disconnect time"
+  ],
+  "screenshot": {
+    "file": "incident-1309-ui.png",
+    "sha256": "6167af9d046297091a0ecaf152e98417818c7bb8681c3ba93be8b7d1963497d6",
+    "reviewed": "Viewed before copying: bounded game interruption UI only; no visible transcript text, account details, browser chrome or personal identifiers; copied unchanged without external upload or image processing"
+  }
+}
