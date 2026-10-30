@@ -1,161 +1,62 @@
-# 本地开发
+# 开发与服务登记
 
-> 当前协调（2026-10-30）：总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 接任；专项在独立 worktree 执行，当前服务以[本轮登记](#2026-10-30-当前专项分配)为准。2026-10-27收尾时58个旧工作树清理、5355旧监听消失的事实仅为历史，不覆盖本轮新专项。定时推进/轮换仍PAUSED。[收尾与恢复入口](history/2026-10-27/project-closeout/README.md)。
+2026-10-30 文档整理基线 fd049；最新协调回执为 main 已普通 push `bda3ddbf7b69f7f28ee2f112183477e617a2bbd0`，UI精确CI/CD、serving与本地恢复已由发布owner完整回执，root独立核线上fullhash一致。视频另由 `page_version` 在北京时间23:17:16–23:32:16视频＋随后纯文档窗口执行，结果UI不在该窗口内；视频后续新main/children以其下一批回执为准。本表来自已交接的 owner 回执，**本次文档任务没有扫描端口、HTTP、进程或 launchd**。PID 是快照，不是永久停机授权；这里记录UI发布后bda快照，不能沿用为后续视频/文档发布的新PID。
 
-> 已停用环境（2026-10-25）：用户已明确停用本地8787及配套8788。launchd已disable＋bootout，Web/Worker与自有内部监听全部释放，配置和凭据保留。下文原常驻运行说明仅供恢复参考，不代表服务仍运行；未经用户重新要求不得自动启动。[停用证据](history/2026-10-25/main-preview-stopped/README.md)。
+## 本地开发
 
-正式生产入口：[LIE](https://lie.agency/) · [编辑器](https://lie.agency/editor)。2026-10-25用户已启用该域名，指向现有Cloudflare正式Worker；本批仅文档修订，未改DNS/账号/Worker配置。平台原生地址`lie-game.nighca.workers.dev`继续作为原生入口与历史测量origin，不要求删除/重定向；[已核发布](releases/2026-10-25-main-refresh.md)的原始观测保留。
+使用 Node.js `24.22.1` 或符合根 engines 的 24.x、npm 11；根目录 `npm ci` 安装 workspace 依赖。源码在 `apps/web`、`apps/gateway` 与 `packages/*`；应用边界见[架构](architecture.md)。实现、依赖、临时文件和产物放专项独立 worktree，不在主工作区落临时工作，不跨 checkout 软链共享 node_modules。
 
-域名文档检查（2026-10-25）：正常TLS普通GET `/`、`/editor`、`/play`均200，最终URL保持lie.agency、0重定向；三者返回同一SPA入口（546 bytes，SHA256 `d9841a11c0cf254cba0b3dc2843f48a249e46ebea9e22986eb4786766bea08cb`），仅证明路由回退交付，不代表已生成可玩分享或执行编辑/语音。只读源码核：分享以`location.origin`生成`/play#game=…`；voice/status用同源相对路径、WS由当前location派生；gateway严格比较请求Origin与请求URL origin，没有写死旧生产hostname，未放宽Origin/CORS。无应用测试/build、浏览器/草稿、API/WS/provider或服务操作。
-
-使用 Node.js 24.22.1 或更新的 24.x 版本，以及 npm 11。在仓库根目录运行：
-
-```sh
-npm ci
-npm run dev
-```
-
-正式 Web 工程的本地入口是 <http://127.0.0.1:5176/>，与独立交互原型的 5173 端口区分。优先在 Codex 内置浏览器调试。
-
-## 目录和命令
-
-- `apps/web`：Vue 3 + TypeScript + Vite，包含完整游戏页面、浏览器对话编排与开发演示。
-- `packages/*`：共享模块工作区；公共 UI 包使用 `@lie/ui` 名称，由组件任务提供。
-- 根 `tsconfig.base.json`：共享的严格 TypeScript 配置，各包独立检查源码和相关测试。
-- 历史原型与探针保存在独立工作分支；不要假设 main 上存在相应目录。
+常规离线检查：
 
 ```sh
 npm run typecheck
 npm test
 npm run build
-npm run preview --workspace @lie/web
+npm run character-presets:check
 ```
 
-类型检查和测试遍历各工作区；构建显式先 Web 后网关。测试使用 Vitest、Vue Test Utils、jsdom 和 workerd，覆盖游戏规则、对话编排、公共组件、语音协议和网关边界。新增业务应按实际行为补充自动化测试。
+按实际改动运行必要检查；纯文档只做文档/链接/敏感材料检查。character presets 的生成/校验入口是根 scripts；素材或生成契约变化再运行生成，不手工改生成物。构建应从预期 clean HEAD 重做，页面版本注入精确 git SHA/dirty，build 后再改 tracked 文档会改变下一次身份。Mock 测试不能证明真实 provider。
 
-`npm run build` 产出 `apps/web/dist` 静态文件；类型检查是独立命令，提交前应同时运行 `typecheck`、`test` 和 `build`。正式 Worker 配置位于 `apps/gateway/cloudflare.config.ts`，游戏状态保存在浏览器内存中。禁止将供应商凭证放入 `VITE_*` 变量或前端资源。
+启动 Web/gateway 预览前先获得对应端口窗口并核 owner、consumer、cwd/SHA/listener，按应用 README 的 dev 命令配置已分配端口与同源 proxy。根 `npm run dev` 的默认开发端口不构成占用许可；当前 5176/5544/5198 与 8787/8788 均有明确归属，不自行换端口起重复服务。无 consumer 的临时服务应关闭，稳定端口也不授权闲置常驻。
 
-## 工作区协作
+私密配置只在各自获准的 ignored `.dev.vars` 等服务端位置，由应用内部读取；不查看/打印/复制凭据、不导出 token、不放 VITE/client/assets/提交。持久 main 环境使用 owning main 现有 ignored `.dev.vars`，不为“恢复环境”创建 provider 资源、修改套餐或扩大权限。需要真实 Linx/provider 验证时另外取得具体用户窗口，默认离线 fake，不自动执行付费测试命令。
 
-新增包时在自己的目录定义 `package.json`，组件库可直接导出 TypeScript/Vue 源码供 Vite 编译，无需预先增加库打包层。消费方必须在自身的 `dependencies` 声明使用的工作区包。根锁文件由集成者串行更新：从根目录执行 `npm install` 并提交 `package-lock.json`，干净安装使用 `npm ci`。
+<a id="2026-10-30-当前专项分配"></a>
+<a id="服务登记与生命周期"></a>
 
-## 本地同源网关与自动化
+## 当前服务登记
 
-根 `npm run build` 显式先构建 `apps/web`，再把网页和 Worker 打包到 `apps/gateway/.cloudflare/output`，避免工作区目录排序影响干净构建。`npm run dev --workspace @lie/gateway` 在 8787 提供同源网页与 API；普通 Web 开发在 5176，`?demo=1` 仅在开发模式启用明确标注的假语音。网关凭据未配置时会显示真实错误，不会切换到假模型。
-
-GitHub Actions 的 CI 在 main push 或手动触发时执行干净安装、类型检查、离线/替身自动化和完整构建。它不读取灵矽管理 key、不运行 `test:linx`。现有CI在验证成功、确认commit仍是main且既有部署secret可用时会自动部署；普通push可能触发部署，因此仅按明确发布turn执行。真实供应商验收必须另外执行并记录，不能由绿色 CI 推导。
-
-正式部署采用项目本地 cf CLI。首次准备好发布时，在仓库根目录执行 `npm ci`，再由账号持有者运行 `npm exec --workspace @lie/gateway -- cf auth login` 完成登录；使用 `npm exec --workspace @lie/gateway -- cf auth whoami` 检查结果。凭据不应发送到聊天或提交到仓库。供应商预付费与 Cloudflare 登录是不同前提。
-
-## 本地真实语音试玩
-
-准备真实灵矽专用测试设备（不执行推理），在仓库根目录运行：
-
-```sh
-npm run test:linx --workspace @lie/gateway -- --key-file /absolute/path/to/.linx-api-key --setup-only --export-dev-vars
-npm run build
-npm run dev --workspace @lie/gateway
-```
-
-打开 <http://127.0.0.1:8787/>。接案、点击“开启对话”、允许麦克风后发问，结束时点“结束对话”。这个页面连接真实灵矽，不使用 `demo=1`。浏览器与系统都可能需要授予 Codex 麦克风权限；始终保留“取消本轮”入口。
-
-本地 Cloudflare Vite 插件读取忽略的 `.dev.vars` 中的语音凭据；production 构建仍无需供应商凭据。该环境只供单个受控浏览器会话使用，不证明公共多用户分配已经完成。
-
-测试设备和凭据保留期间可反复打开同一本地入口。结束试玩后，先停止本地 Worker，再按网关 README 的 `--cleanup` 清理这组专用资源；不要在用户试玩中途清理。不要将 `.dev.vars` 内容发到聊天或提交。
-
-## 固定 main 验收环境
-
-在持有 `main` 的仓库根目录，以 Node.js 24.22.1 / npm 11 执行：
-
-```sh
-npm run dev:main
-```
-
-固定入口是 <http://127.0.0.1:8787/>，直接提供当前 main 的 Vite 源码。独立薄 Worker 使用 `127.0.0.1:8788`；前端同源代理 `/api/voice`，包括 WebSocket。凭据继续由网关读取本地忽略的 `.dev.vars`，脚本不复制凭据、不创建供应商资源，也不自动发起语音。两个服务仅绑定本机回环地址。当前主机由下述launchd持有这两个端口，不得为手动启动而释放/停止它们；新的受控环境启动冲突会报错并仅停止该脚本自己的子进程。
-
-脚本每 1.5 秒读取 Git：main SHA 改变时停止自身服务，重新生成形象资源并重启；每次启动和锁文件改变时先运行 `npm ci`。安装或生成失败时停止并报告；手工运行可修复后重启，常驻进程管理器须退避重试。切换分支或修改已跟踪文件会暂停服务，恢复干净 main 后自动启动；忽略的凭据和生成文件不影响运行。不要在此 checkout 中实施未合入的功能。
-
-开发专用 <http://127.0.0.1:8787/__lie/main-status> 返回当前服务的 main SHA，可与 `git rev-parse main` 对照；该端点不进入生产构建。已打开的页面在 main 更新导致的重启后应刷新再验收。服务启动和 Git 更新之间有短暂不可用窗口。
-
-`SIGINT` / `SIGTERM` 会停止脚本自己创建的进程组并移除单实例锁。锁位于当前 checkout 的 Git 目录 `main-preview.lock`；锁记录 owner PID；启动时仅在系统明确报告该 PID 已不存在时回收死锁。存活或无法确认的 owner 均报告冲突，不能直接删除其他实例的锁。需要跨 chat 常驻时，由协调者配置本机进程管理器运行同一命令，并保存日志；进程管理器不得在安装失败后无限高速重启。
-
-### 当前主机常驻服务
-
-2026-10-24，当前用户已安装并启动launchd服务 `dev.nighca.lie.main-preview`，固定入口8787跟随owning main checkout；不依赖Codex chat/临时工作树，主协调归档/轮换时保留该服务。登录后自动运行；电脑睡眠/关机时本机服务不可访问。失败重启退避30秒。Node24.22.1完整运行时保留于用户Application Support/LIE/runtime，避免依赖临时目录或修改系统Node。
-
-配置为 `~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist`，日志为 `~/Library/Logs/LIE/main-preview.log`。凭据位于owning main的 `apps/gateway/.dev.vars`，沿用既有同项目测试资源，不是新建provider资源；不读取/输出/提交其内容。前端fs deny同时保护该文件、管理key及Cloudflare本地状态目录。
-
-检查或手工管理（会影响正在测试的页面，请先确认没有需要保留的对局）：
-
-```sh
-launchctl print gui/$(id -u)/dev.nighca.lie.main-preview
-launchctl kickstart -k gui/$(id -u)/dev.nighca.lie.main-preview
-# 停止且卸载当前登录会话中的服务（保留plist，未来登录仍按RunAtLoad启动）
-launchctl bootout gui/$(id -u)/dev.nighca.lie.main-preview
-# 重新装载
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist
-```
-
-不要在常驻服务已运行时另开 `npm run dev:main` 或占8787/8788；单实例检查会拒绝重复运行。main更新会重启开发服务，Vite通常重连后刷新，必要时手动刷新；游戏局内状态不跨刷新保留，本地编辑草稿仍按原浏览器存储规则恢复。
-
-### 已完成的命名迁移维护
-
-人物预设迁移所需的一次受控runner切换已由用户明确批准并完成，[实施验收](character-preset-migration-implementation.md)保存真实服务版本/资源/私密路径拒绝证据。它不是每次换代或接新任务都要重启的操作。当前继续用character-presets命令和公开/appearances路径；没有新服务turn不得重复kickstart、复制daemon或清锁。上方管理命令仅作为明确维护窗口下的操作参考。
-
-## 服务登记与生命周期
-
-固定端口用于复用来源与减少重复浏览器授权，不代表允许空闲常驻。启动前先查现有owner、消费者、cwd/SHA与监听；同一任务优先复用同一服务、同源测试路径或明确的多root预览。现有服务不能代表当前候选时，先与owner协调切换来源/配置；只有真实并发隔离或其他owner正在使用且无法共享时，才经协调登记例外，不自动换一个新端口，也不重复启动server绕过审批。
-
-每个owner启动服务时，在任务记录及完整handoff登记：**owner/chat、worktree、源码SHA、端口、PID、原PTY/session、消费者、停止条件**。PID/PTY未知明确写未知，不从旧端口或历史日志猜测新进程归属；根协调收到批量交付后维护下面的当前表。适用的浏览器tab/origin也尽量复用并批量完成检查；权限审批仍遵守原边界，不为减少等待重复请求或绕过审批。
-
-验收结束或消费者释放后立即停临时服务，优先原PTY Ctrl-C，并复核PID/监听已退出。原PTY失效时，只有已经确认owner及无消费者的精确进程，才在操作前再次核PID、cwd和命令后对该PID发送SIGTERM；退出失败/归属不明先协调，不使用pkill、按node或端口批杀。handoff分别列已停（实际退出证据）、保留理由、未知项，不能把“当前未见监听”写成“本次成功停止”。不同时清理WT、refs、文件或凭据。
-
-### 2026-10-30 当前专项分配
-
-页面版本标识built首页验收已结束，`5544` 已释放：owner `page_version`，来源 `/Users/nighca/.codex/worktrees/lie-page-version/lie`、分支 `codex/lie-page-version`，实际运行source `efdc96f102346e750f41965a21ede4c0435f9c0e` clean production dist。Node静态服务PID `6016` / 原PTY/session `78829`，严格绑定 `127.0.0.1:5544`；owner回执原PTY Ctrl-C exit130，精确ps及lsof均空，自有Chrome tab `1910332022` 已关，无保留消费者。IAB不可用后实测391/1280无横向overflow，mobile Enter展开、desktop click展开/Space收起、完整hash一致且可选择；未读写clipboard、未改全局视口或用户tab/storage，不调用provider/mic/Worker。这是owner回执，不是总协调本轮新扫描或启停；5176用户demo继续保留，不因5544释放而停止。
-
-语音等待提示 demo 的 `5176` 已分配给专项 Chat `01a18adf-d929-7060-969c-8c2d40415d04`，来源 `/Users/nighca/.codex/worktrees/lie-connection-design/lie`、分支 `codex/lie-connection-design`。owner 批量回执：base/HEAD `60c11f72b71ead4b8e744f2281d5dbecb796d11a` 加未提交的 demo 改动，PID `13931`，原 PTY/session `83334`；旧 session `2450`、`27009` 均由原 PTY Ctrl-C 退出130。以上是 owner 回执，不是总协调新扫描。总协调分配前核无监听；服务严格绑定 `127.0.0.1:5176`，不自动换端口。消费者为用户审看与专项 Chrome 验收；用户 review 结束或明确交还后由 owner 原 PTY 停止并核监听释放，不因总协调接管而停掉仍被用户使用的服务。
-
-入口为 `http://127.0.0.1:5176/connection-demo.html`，独立尺寸入口为 `/connection-demo-viewports.html`。IAB 工具明确不可用，专项 Chrome tab `1910332005` 使用 iframe 实测391/1280尺寸；owner增量澄清320仅验收页支持，尚未实测，覆盖先前391/320/1280表述。tab 随用户审看保留，不修改全局视口或现有用户 tab/storage，不是 IAB/真机验收通过。离线 fake VoicePort，无真实 provider/mic；未含后续 main 的600秒网关改动。节奏修改后5176仍为PID13931/session83334，owner报告未重启。
-
-仅授权当前 UI 的有序候场旁白可运行 demo，尚非正式产品落地批准；无真实 provider/mic，不启动 Worker。`5198` 归属未在本轮核定，不触碰。`8787/8788` 继续停用，本分配不授权恢复。下方2026-10-25表为历史记录，不覆盖本次分配。
-
-播放器100ms缓冲组合的短暂离线原生PCM QA已结束，`5544` 已释放：owner `/root/voice_audit`，语音专项 Chat `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9`，来源 `/Users/nighca/.codex/worktrees/lie-voice-prebuffer/lie`，运行身份 `5e97cda` 加当轮未提交缓冲改动。PID `41535` / 原 PTY/session `75464`，自有 Chrome tab `1910332008`；owner 回执已在原 PTY Ctrl-C exit1，随后 `ps` 核41535无进程、`lsof` 核5544无监听，自有tab已关，无保留消费者。仅合成PCM，未操作全局视口、storage、Worker或provider；不是总协调重新扫描/停止的证据。5176因用户审看不能切源，当时使用既有5544有界端口隔离；本回执不触碰或释放5176/5198/8787/8788。
-
-### 稳定端口分配
-
-| 用途 | owner/chat | 首选端口与停止条件 |
+| 端口 / 生命周期 | owner、来源与最后回执 | consumer 与下一步 |
 | --- | --- | --- |
-| 用户当前main（已停用） | root `01a17012-fa00-7170-ac0a-21c1900d71cd`／原launchd | 用户明确停用；8787 Web、8788 Worker及其自有内部监听已释放，launchd disabled/unloaded。配置保留，恢复须用户重新要求，不另起副本。 |
-| Editor验收 | Editor `01a16d90-27cc-77c2-9e0a-4b28b1135371` | 5402，只有必要的受控代理才用5403；同源fixture复用，当前验收结束即停。 |
-| 调查UI验收 | 调查 `01a16d5c-de69-7452-8d6a-280d15a87e9e` | 5507；同源路径复用，当前验收结束即停。 |
-| 动画制作预览 | 动画 `01a16d44-aeea-7552-b184-5118072e75f3` | 5358 ochre、5359 mint；owner可在不影响当前制作的前提下合用一套多root服务，不强停在制消费者。制作/本批验收结束即停。 |
-| 协调分配的有界验收 | root当轮明确的owner；当前动画组合仅离线验证，无服务turn | 5544；不同任务串行借用，不永久属于旧探索QA。先核监听/owner，登记实际WT/SHA/PID/PTY/消费者，结束原PTY停止并核销；不得另开端口或恢复暂停鉴权。 |
+| 8787 Web / 8788 Worker，持久保留，仅 loopback | `session_limit_acceptance`＋总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8`；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。UI发布后快照：runner66435，Web33625 parent66435，gateway33704 parent33649；source/status bda，healthready。上批fd049 Web48655/Worker48747已是历史；视频/文档后新PID待owner下一批回执。 | 用户本地与 lie.agency 对比；5544 用户试玩 proxy 复用8788。用户已明确本批无对话、允许 main 更新短暂重启，非长期开放维护，也未授权停止5544。保留服务；停止须用户明确要求或新的协调窗口。 |
+| 5544，保留用户试玩 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`，原 base f862＋专项 dirty；已登记 PID10258 / PTY8214，Vite proxy8788。 | 用户仍审看礼物案，未释放 consumer；不要停、刷新用户 tab 或自行操作 mic。内容迭代后实际 SHA/dirty 由该 owner 下一批登记，不把旧 base 当当前 main。 |
+| 5176，已停止释放 | 结果页 Chat `01a18d4c-72b2-7d93-8df3-2aa9cb7a5fe4`，WT `4ea5/lie`。前一 Transcript PID39747 / PTY79421 exit1已交回；本轮结果UI root回执也已停止释放，source2a677→23abd。该轮精确PID/PTY不在本次摘要，留原owner正式handoff，不与旧Transcript快照混用。 | 当前无保留consumer回执；结果UI代码已review，发布窗口另协调。若再启须重新核归属和窗口，不据历史端口擅起服务。 |
+| 5198，保留用户编辑 | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；最后登记 PID13491，workbench 用户编辑环境。原 PTY/精确 cwd 未在本次回执提供，待原 owner 补登记，不编造或通过无关探测补齐。 | 用户编辑 consumer 未释放；不重启/停止、不清工程。成品入库许可不等于关闭 workbench。 |
+| 5177，已停止交回 | 趣味 PageVersion Chat `01a18d48-6d1a-7273-914e-3c2aef2fa27e`；WT `85bb/lie`，source af960→9549278→a6bf862；原 PID77249 / PTY5085 Ctrl-C exit130，owner 核无 listener。 | 用户批准页面口供版本后结束审看；无运行服务。不得将旧 QA tab/端口自动用于新任务。 |
+| 5545 / 5546，已停止交回 | 16k 音频专项；WT `lie-playback-16k-candidate/lie`；原 PTY8226 / 17929 及内部监听已由 owner 停止核清，own Chrome 已关。 | 用户明确试听“没有电流声了，效果很好”并释放环境；不再启动或造语音流量。完整 PID 历史保留专项交付，不拼凑为当前运行值。 |
 
-PTY仅属于创建它的执行会话，其他chat不能据旧session号宣称已控制该进程。端口分配也不证明当前已有服务在跑；每轮实际状态看下表。CF开发服务器附带的workerd/内部RPC端口属于8788同一受保护进程树，不作为闲置独立预览批杀。
+这张表没有登记为活动的旧 5402/5403、5507、5358/5359 等只是[历史快照](history/2026-10-30/coordinator-refresh-fd049/development.root-draft.md.txt)中的旧窗口，不能自动恢复。未知进程、消费者或归属先协调，不能杀未知 PID、按端口杀进程、`pkill` 或换口绕占用。
 
-### 历史登记（2026-10-25，本次文档基线a0e1a326；轮换已暂停）
+<a id="固定-main-验收环境"></a>
+<a id="当前主机常驻服务"></a>
 
-用户约10:44暂停四小时换chat，root01a17012继续active/唯一integrator；准备文档不授权停止用户常驻环境或其他owner服务。这是root完整交付事实的更新，不是本次新做端口扫描。PID/PTY仅属于原启动会话，操作前仍须owner实际核对；源码HEAD不证明dirty运行字节。历史21服务清理及所有原始回执已在[清理记录](history/2026-10-25/development-service-cleanup.md)和[整理前原文](history/2026-10-25/coordinator-state-before-refresh-30822d3/development.md)保留，不按历史PID重复停止。
+## 常驻 main 对比环境
 
-| 端口 / 状态 | owner / 消费者 | 来源 / PID / PTY / 停止条件 |
-| --- | --- | --- |
-| 8787/8788，已停用 | root协调、用户；原launchd及网关内部子监听 | 用户明确允许停止后已disable/bootout；7原PID退出、5端口释放、runner正常清锁。恢复须用户明确要求，旧PID不沿用，不自动启动或复制。 |
-| 5355，正式结果统一八人页用户审看在用 | 动画01a16d44… / 用户tab60 | owner回执旧1851在PTY55257 Ctrl-C exit130、无listener后同端口切源。现PID37202/PTY40865，WT result-reactions-combined-qa/lie，启动f294＋built QA修订、最终source d7dd95a，LIE_RESULT_QA_BUILT_ASSETS=1、strict 127.0.0.1:5355。用户统一页/design/result-reactions/及tab60保留；制作61/实际App62已关，block/media/vision/viewport覆盖恢复；试玩空盒草稿保留未清。consumer结束后owner原PTY停并核listener。本轮主线组合仅离线，无扫描/启停/浏览器，不archive源WT。 |
-| 5356图片验收已结束；5357误占已停 | 图片owner；动画owner已释放误占 | 图片built轮PID92431/子92889/PTY39359 Ctrl-C exit130、listener/ps空、own tab2关、media/cache/Network override复原（owner回执）。5357曾误占已停，不是批准额外端口。5355动画用户消费者保留。本轮q90/CI候选746718a仅离线build/pack→restore/dry-run，无服务扫描/启停。 |
-| 5544，最终组合验收回合已结束 | character_preset_migration | root候选be83810实际built Worker；Node35404/workerd35876，原PTY13186退出130，PID/监听消失；Chrome1910329555关、Fetch/cache/Network清理。后续视觉/语音/当前最终动画组合均无新服务；首帧69515/74321及性能43122/53366是历史，不重复操作。 |
-| 5507，height验收已结束 | 调查01a16d5c… | 旧background-character-names/lie最终09b10a4；背景PID95357/PTY32844、标题PTY97605（PID未记录），各原PTY退出1且随后无监听，tabs37/38已清。新语音回合source fc635b5＋dba2d641，PID50346/PTY39627，消费者IAB39；原PTY Ctrl-C exit1、lsof核无监听、tab39/临时入口清理，无override；已main9b17538；居中PID85753/PTY22271 exit1、无监听/tab40清；PC位置PID8323/PTY85340 exit1、无监听/tab41/temp清，已main14ca。最新姓名间距source0f12453，PID97700/PTY27003停止/无listener、tab42及临时入口清。旧loading/preview回合source5afa：PID30999/PTY27840 Ctrl-C exit1、无listener、IAB43/44关/reduce恢复/4tmp清（owner回执）。height source7c5ab232回合PID29602/PTY38417 Ctrl-C exit1、无监听、IAB45/46/47关、两临时入口清（owner回执）；归档fixture保留design目录。本轮候选1dc7e996仅离线build/strict89，无扫描/启停，该高度修复已随a0e发布（历史退出回执不变）。 |
-| 5402/5403，Editor固定分配 | Editor01a16d90… | 改编验收原exec/session23758已退出、无listener，自建tab及临时public/remix-qa.html已清（owner交付/协调确认，本轮未扫描/停进程）。改编已main eafee859、动画已main299；quiet CTA最终验收原session54417已Ctrl-C/无listener，自建tab/fixture清（源quiet-refinement.md回执）；本轮47tests/types/build89组合仅离线，无新服务。最新状态恢复source97a1803→8e09327，原exec89431停止/无listener、tab26/temp清（owner回执）；最终组合Web288/types/build89仅离线，无新服务。最新姓名/草稿提示source335回合exec57157已Ctrl-C、tab29关闭、storage恢复原字节、lsof无listener（owner回执）；本轮329/types/build89仅离线，未启动/扫描服务。后续仅owner按需启用用后停。 |
-| 5358/5359及18旧服务，历史清理完结 | 原调查/Editor/动画owner | 既有21服务清理回执存档，不为复用固定端口自动常驻或重复关闭历史进程。 |
+用户 2026-10-30 明确重新授权恢复该服务，覆盖旧 2026-10-25 停用标记，**仅限这个服务**，不恢复旧 chat automation/四小时轮换。使用持久配置：
 
-保留所有在制/依赖WT、refs及ignored必要材料：特别是动画23链可恢复Git对象及两lane/父QA/旧formal来源、发布兼容61→cad→14a、语音新任务、改编方案、首帧和年长声调查。最新[只读WT盘点](history/2026-10-25/coordinator-preparation-01a17012-7249a6f/worktree-status.json)有时间边界：原browser-architecture dirty及invite-access-design未跟踪归档材料不清；动画sourceWT其后缺失更新见[handoff](coordinator-handoff.md)。服务退出不授权清理它们。前代分享自建tab清理unknown不能按复用的browser/tab号码盲关，须先核实际归属。所有生产维护、真人mic/provider及用户draft另守授权边界。
+- label：`dev.nighca.lie.main-preview`；plist：`~/Library/LaunchAgents/dev.nighca.lie.main-preview.plist`。
+- runtime：`~/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64`，完整 Node/npm，不依赖 chat/tmp 或全局 Node 修改。
+- 日志：`~/Library/Logs/LIE/main-preview.log`；owning clean main：`/Users/nighca/code/nighca/lie`。
+- 固定入口 `http://127.0.0.1:8787/`，Worker8788；`/__lie/main-status` 用于非敏感源码/服务 SHA 核对。首页、health、voiceStatus 的 ready/200 不代表已完成真实推理或 provider 资源同一性。
 
-2026-10-25 首页滚动验收5544：owner home_scroll，WT `/Users/nighca/.codex/worktrees/home-scroll/lie`，source b9ef3cb→cf5c0fc，PID42659 / PTY85261；真实IAB消费结束后Ctrl-C exit130、listener已核消失，自建tab关闭/viewport复原。后续2188f59语音组合QA起前5544无监听，本轮inventory无IAB，未启动服务/新PID/PTY；不占用该端口。8787/8788及5355保持保护。
+[`scripts/main-preview.mjs`](../scripts/main-preview.mjs) 约每 1.5 秒检查 owning main SHA；只有正确分支且 tracked clean 才随新 SHA 重启自有 children，lock 改变时正常 npm ci。保留单实例 PID lock、仅 ESRCH 可回收的陈旧锁、自有进程组和 launchd 30 秒失败退避；不要手工抢锁或另起 runner。应用本地状态/storage 不因维护清除。此次 UI 更新触发的是既有自动跟随，不再为报告文档制造额外 main 更新；这里children/PID仅为UI发布后bda回执；后续发布按下一批更新。未人为改main模拟重启测试。
 
-组合语音提示补验追加：owner home_scroll，自有Chrome tab1910329686，source1973ee5/runtime2188f59，Vite5544 PID10172/PTY45505。root另给Chrome回合后执行，结束原PTY Ctrl-C exit130、lsof无监听，临时入口与符号链接已移除，tab关闭/viewport及reduce复原；无真实语音。视频专项获用户新授权一次≤60秒真实线上短测窗口，其他agents不得占用同一provider，专项完成后负责停止并交还；不变更现有agent/device或常驻服务。
+本地为 Vite DEV＋本地 workerd，页面版本显示“开发版”，不是线上 production 的同一 bundle；精确本地 main SHA 用 main-status 核。它绕过生产 Cloudflare 网络/平台 CPU 配额，仍受本地 workerd、provider、网络与设备限制。未读取 secret 手比 provider 资源，不把本地 ready、无断连观察或 runtime 恢复当线上配额/音爆根因证明。线上入口为 `https://lie.agency/` 与 `/editor`；旧平台原生地址保持现状，未授权 DNS 改动。
 
-本批5544串行回执：UI头部own IAB48，PTY78961 Ctrl-C exit130、lsof无监听/tab关与viewport reset后释放；spacing owner character_preset_migration，原矩阵source397b032 PID50243/PTY61290、组合7c62ed3 PID69163/PTY46596，两次均原session Ctrl-C exit130/精确PID退出/监听无，Chrome1910329694及1910329701关闭，临时夹具入口删除，无viewport覆盖/storage动作。服务资源已交还，仍保护8787/8788/5355。
+## 服务操作与交付规则
 
-Editor/share七项验收：home_scroll在127.0.0.1:5544读到旧draft后写入前停测，PTY49417退出130/无监听，旧draft未改；root明确改用同端口localhost独立origin。正式测试Vite PID96944/PTY64495，source d4c189b，Chrome own1910329710；合成草稿起末均null，Ctrl-C exit130/lsof5544空、tab关闭/viewportreset/本任务依赖链接移除。没有其他storage/provider/用户服务动作。视频完整录制新连接失败已释放窗口，未创建服务；架构排障只读，不准自动重试。
+每次启动登记 owner/chat、worktree/SHA/dirty、端口、PID、原 PTY/session、consumer 和停止条件。临时 consumer/验收结束后优先在原 PTY Ctrl-C，再核进程/监听消失；原 PTY 不可用时仅在 owner 确认不再需要、重新核 exact PID/cwd/命令后精确停止。服务关闭不连带清理 worktree/refs/用户文件。
 
-七项原生验收第一轮127-origin停测服务补核：owner home_scroll只读原回执确认实际PID为unknown（当时未记录），不能套用后续96944；原session49417退出130及停后无监听已有证据。此处不为补PID重启或扫描服务。
+main 跟随重启会影响5544共享8788，发布 owner 必须持唯一 integration/publication turn，先确认实际语音消费者安全维护窗口，保用户 tab/其他端口不动。不要在非窗口自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
+
+当前文档任务无服务操作、远端 API、浏览器、provider/WS/mic/profile 或应用测试。旧完整登记、来源/批准门禁和未合入的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。

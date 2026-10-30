@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-30",
+  "base": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
+  "sourceWorktreeBase": "12c4e4d29135c7e30083c8ecf08c2fc95bcaf150",
+  "latestCoordinatorReceipt": "bda3ddbf7b69f7f28ee2f112183477e617a2bbd0 UI main/push, exact CI/CD, actual serving and local restoration passed; video independent publication still in progress at cutoff; 2026-10-30 23:17:16–23:32:16 Asia/Shanghai approved for video then documentation only, excluding outcome UI",
+  "files": [
+    {
+      "source": "/Users/nighca/.codex/worktrees/lie-disconnect-evidence-integration/lie/docs/project-plan.md",
+      "copy": "project-plan.root-draft.md.txt",
+      "bytes": 34327,
+      "sha256": "9feb8d4e4f2bc1c8f7a3ddb9f7fa0acc5b8dabb6ba119502d4be94a1d0017e46",
+      "preservedVerbatim": true
+    },
+    {
+      "source": "/Users/nighca/.codex/worktrees/lie-disconnect-evidence-integration/lie/docs/development.md",
+      "copy": "development.root-draft.md.txt",
+      "bytes": 26813,
+      "sha256": "9872319a749fcc0530be35520fd9e2cebf1a736e072996640d860f721540ea17",
+      "preservedVerbatim": true
+    },
+    {
+      "source": "/Users/nighca/.codex/worktrees/lie-disconnect-evidence-integration/lie/docs/voice-disconnect-investigation/post-paid-interruption-ui.png",
+      "copy": "post-paid-interruption-ui.png",
+      "bytes": 248970,
+      "sha256": "bd646847a0e0d91e9c49d7e0bfeadf53ed8259d7f91d497172638c123c977d72",
+      "preservedVerbatim": true
+    }
+  ],
+  "omissions": "No credentials, private configuration, authentication headers, ordinary logs or caches collected. No remote API or running-service checks in this documentation task.",
+  "screenshot": {
+    "gitBlob": "b9ac2279981299072c32288ec1f93e476823f9e7",
+    "existingCaptureCommit": "4895158b56b84a038edc625fa6f4ba23ee4fc4cd",
+    "existingCaptureOnly": true,
+    "reasonForDurableCopy": "Exact blob exists in Codex turn-diff capture/checkpoint refs only; no reviewed branch-tip archive found. Save one dated evidence attachment, reusing the same Git blob.",
+    "privacyReview": "Viewed: game interruption message, remaining 05:25 and action buttons; no personal, authentication or transcript content. Does not prove exact elapsed duration or request identity."
+  }
+}
