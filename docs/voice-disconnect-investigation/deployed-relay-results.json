@@ -1,0 +1,20 @@
+{
+  "version": "597aa83d-8b31-4564-a7f4-c16e2345d872",
+  "moduleSha256": "ddfc474059891e3d06da989dc500b56a1a23aa07aa54bfd98af2f26b4cbc85f1",
+  "configuredSeconds": 600,
+  "checkpointsMs": [
+    179999,
+    180000,
+    599999,
+    600000
+  ],
+  "passed": [
+    "no close at former 180s",
+    "600s wall-clock close",
+    "messages do not renew cap",
+    "late messages ignored",
+    "close idempotent",
+    "early close clears timer"
+  ],
+  "limitation": "Exact downloaded relay with fake clock/sockets only; no Workers CPU enforcement, network, provider, microphone or paid inference."
+}

@@ -1,0 +1,116 @@
+{
+  "sourceBase": "95cb5cf02277a5c3f380d0a18158d3672a9bfcdd",
+  "captureDateUTC": "2026-10-30",
+  "queryWindowUTC": {
+    "from": "2026-10-30T11:20:00Z",
+    "to": "2026-10-30T11:35:00Z"
+  },
+  "queryFilter": {
+    "scriptName": "lie-game",
+    "requestPath": "/api/voice"
+  },
+  "activeDeployment": {
+    "id": "61e0ff82-c75d-4b8b-b0ba-b7e2c862a67c",
+    "created_on": "2026-10-30T11:12:48.069595Z",
+    "version": "597aa83d-8b31-4564-a7f4-c16e2345d872",
+    "percentage": 100,
+    "git": "95cb5cf02277a5c3f380d0a18158d3672a9bfcdd"
+  },
+  "worker": {
+    "name": "lie-game",
+    "customDomainMatched": "lie.agency",
+    "observability": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "redact_query_string": true,
+      "logs": {
+        "enabled": true,
+        "head_sampling_rate": 1,
+        "invocation_logs": true,
+        "persist": true
+      },
+      "traces": {
+        "enabled": true,
+        "head_sampling_rate": 0.01,
+        "persist": true
+      }
+    }
+  },
+  "version": {
+    "id": "597aa83d-8b31-4564-a7f4-c16e2345d872",
+    "created_on": "2026-10-30T11:12:47.505916Z",
+    "usageModel": "standard",
+    "limitsFieldReturned": false,
+    "sessionCap": {
+      "text": "600",
+      "type": "plain_text"
+    },
+    "module": {
+      "shape": {
+        "name": "string",
+        "content_type": "string",
+        "content_base64": "string"
+      },
+      "name": "index.js",
+      "bytes": 5572,
+      "sha256": "ddfc474059891e3d06da989dc500b56a1a23aa07aa54bfd98af2f26b4cbc85f1",
+      "hasOld180": false,
+      "has600": true,
+      "capCode": [
+        "\tconst sessionLimitSeconds = voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS);",
+        "\tif (sessionLimitSeconds == null) return new Response(\"Invalid voice session limit configuration\", { status: 500 });",
+        "\trelaySockets(server, upstream, sessionLimitSeconds);",
+        "function voiceSessionLimitSeconds(value = \"600\") {",
+        "function relaySockets(browser, upstream, sessionLimitSeconds = 600) {",
+        "\tconst timer = setTimeout(() => finish(1e3, \"Conversation time limit\"), sessionLimitSeconds * 1e3);"
+      ]
+    }
+  },
+  "telemetry": {
+    "exceptionEventCount": 8,
+    "requestGroups": 2,
+    "groups": [
+      {
+        "group": "group-1",
+        "timestampMs": 1793359711884,
+        "timestampUTC": "2026-10-30T11:28:31.884000+00:00",
+        "exceptionEvents": 4,
+        "invocationTerminalEvents": 1,
+        "scriptName": "lie-game",
+        "version": "597aa83d-8b31-4564-a7f4-c16e2345d872",
+        "routeMatchesLieAgencyVoice": true,
+        "outcome": "exceededCpu",
+        "cpuTimeMs": 2019,
+        "wallTimeMs": 182022
+      },
+      {
+        "group": "group-2",
+        "timestampMs": 1793359441859,
+        "timestampUTC": "2026-10-30T11:24:01.859000+00:00",
+        "exceptionEvents": 4,
+        "invocationTerminalEvents": 1,
+        "scriptName": "lie-game",
+        "version": "597aa83d-8b31-4564-a7f4-c16e2345d872",
+        "routeMatchesLieAgencyVoice": true,
+        "outcome": "exceededCpu",
+        "cpuTimeMs": 2019,
+        "wallTimeMs": 204331
+      }
+    ],
+    "associationLimit": "No user/session ID attribution; time/workload match supports investigation, not proof that either group is this exact user."
+  },
+  "plan": {
+    "classification": "unverified",
+    "note": "Subscription query did not yield a recognized Workers plan; absence is not proof of Free. Standard usage model is not proof of Paid. No billing/payment data retained."
+  },
+  "notRun": [
+    "real provider connection",
+    "microphone",
+    "browser",
+    "service",
+    "production profile",
+    "account/config/permissions change",
+    "deployment"
+  ],
+  "snapshotScope": "Observed deployment before the later frontend-only release; fixed historical version and query window, not a claim about subsequent latest deployments."
+}
