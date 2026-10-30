@@ -32,7 +32,7 @@ npm run character-presets:check
 | 5544，保留用户试玩 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`，原 base f862＋专项 dirty；已登记 PID10258 / PTY8214，Vite proxy8788。 | 用户仍审看礼物案，未释放 consumer；不要停、刷新用户 tab 或自行操作 mic。内容迭代后实际 SHA/dirty 由该 owner 下一批登记，不把旧 base 当当前 main。 |
 | 5176，已停止释放 | 结果页 Chat `01a18d4c-72b2-7d93-8df3-2aa9cb7a5fe4`，WT `4ea5/lie`。前一 Transcript PID39747 / PTY79421 exit1已交回；本轮结果UI root回执也已停止释放，source2a677→23abd。该轮初PID89418/PTY92966及后PID27393/PTY12370均原PTY Ctrl-C exit130；最终ps27393及lsof核空。不与旧Transcript快照混用。 | 当前无保留consumer回执；结果UI具体设计已获用户明确批准、代码已review，仅发布窗口另协调。若再启须重新核归属和窗口，不据历史端口擅起服务。 |
 | 5198，保留用户编辑 | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；来源 cwd `/Users/nighca/.codex/worktrees/lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`，原 launcher session95944已退出；PID13491为源owner最近lsof回执，用户IAB编辑保留。 | 用户编辑 consumer 未释放；不重启/停止、不清工程。视频取消Git入库不等于关闭workbench或删除工程；未来停止须精确重核command/cwd/`.dev.pid`，不将已退出launcher当存活服务PTY。 |
-| 5177，新人物布局专项预览turn；未在本任务获启动回执 | UI Chat `01a18d48-6d1a-7273-914e-3c2aef2fa27e`；新WT `lie-character-layout/lie`、branch `codex/character-layout`、原base843仅本地。尚无本任务可登记的新PID/PTY，不沿用旧值。此前趣味弹窗WT85bb的PID77249/PTY5085已Ctrl-C exit130、无listener。 | 新turn归首页/高视窗人物对齐预览；owner启动前核归属并登记，不能据分配自动声称已启动。layout后续仅cherry实际代码到bda，不带视频祖先；本任务不操作服务。 |
+| 5177，人物布局预览已停止交回 | UI Chat `01a18d48-6d1a-7273-914e-3c2aef2fa27e`；WT `lie-character-layout/lie`、branch `codex/character-layout`，源09a766d→003f8a9，用户已批准、独立/root review通过。原PID93927 / PTY49034，原PTY Ctrl-C exit130；owner核5177无listener、精确PID93927退出，review tab亦已关闭。此前弹窗PID77249/PTY5085仅为另一轮历史。 | 无保留consumer，未授权再启动。layout只cherry实际两patch到bda系候选，不带843视频祖先；本批发布另等root新确认窗口。 |
 | 5545 / 5546，已停止交回 | 16k 音频专项；历史来源WT `lie-playback-16k-candidate/lie`（不能据旧路径认定仍在worktree list或有活跃服务）；原 PTY8226 / 17929 及内部监听已由 owner 停止核清，own Chrome 已关。 | 用户明确试听“没有电流声了，效果很好”并释放环境；不再启动或造语音流量。完整 PID 历史保留专项交付，不拼凑为当前运行值。 |
 
 这张表没有登记为活动的旧 5402/5403、5507、5358/5359 等只是[历史快照](history/2026-10-30/coordinator-refresh-fd049/development.root-draft.md.txt)中的旧窗口，不能自动恢复。未知进程、消费者或归属先协调，不能杀未知 PID、按端口杀进程、`pkill` 或换口绕占用。
@@ -59,6 +59,6 @@ npm run character-presets:check
 
 main 跟随重启会影响5544共享8788，发布 owner 必须持唯一 integration/publication turn，先确认实际语音消费者安全维护窗口，保用户 tab/其他端口不动。不要在非窗口自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
 
-当前文档任务无服务操作、远端 API、浏览器、provider/WS/mic/profile 或应用测试。旧完整登记、来源/批准门禁和未合入的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
+原文档整理任务无服务操作、远端API、浏览器或应用测试；本批集成只执行必要离线checks/构建，main更新及自动跟随须新确认窗口，不创建真人provider/WS/mic/profile流量。旧完整登记、来源/批准门禁和已纳本批候选的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
 
 原语音Chat `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9` 现已archived，root未自行unarchive；若干旧voice WT已不在worktree list。精确提交（如1ee049e）及refs仍可归档，目录/旧PID只是历史证据；不为归档恢复chat、服务或旧WT。以上均为协调回执，本任务未额外探测。

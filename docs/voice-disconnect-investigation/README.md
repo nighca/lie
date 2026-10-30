@@ -1,6 +1,8 @@
 # 线上约3分钟语音中断：运行证据与下一步
 
-最新状态（2026-10-30）：用户报告Paid升级完成后，本人再次线上约2.5分钟中断。12:44–12:53UTC的非error限定查询返回1个匹配请求组，终态exceededCpu、CPU2050ms、wall157316ms，版本仍12c/380；见[本次调查](post-upgrade-disconnect.md)及[证据](post-upgrade-disconnect-evidence.json)。用户随后确认同设备、同git本地连续约3分40多秒未意外断连，但仍有电流样音爆；不是等环境或600秒验收。不据此断言有效限额2000ms或Paid未生效，用户精确请求归属仍未建立；本专项未改配置或创建真实流量，旧历史证据保留。
+后续已确认：[f862 CPU预算实际发布](../voice-cpu-budget-release/2026-10-30.md)已读回30000ms；[用户近4分钟人工反馈](post-cpu-manual-acceptance.md)记录单次成功，不等于600秒保证；[16k播放候选与验收](../voice-playback-16k-candidate.md)经用户试听后已随f75正常发布。以下旧调查与当时未知项按原截点保留，不覆盖后续发布，也不把CPU计量反推为配置值。
+
+历史调查截点（2026-10-30，修改前快照）：用户报告Paid升级完成后，本人再次线上约2.5分钟中断。12:44–12:53UTC的非error限定查询返回1个匹配请求组，终态exceededCpu、CPU2050ms、wall157316ms，版本仍12c/380；见[本次调查](post-upgrade-disconnect.md)及[证据](post-upgrade-disconnect-evidence.json)。用户随后确认同设备、同git本地连续约3分40多秒未意外断连，但仍有电流样音爆；不是等环境或600秒验收。不据此断言有效限额2000ms或Paid未生效，用户精确请求归属仍未建立；本专项未改配置或创建真实流量，旧历史证据保留。
 
 2026-10-30只读调查；专用WT `/Users/nighca/.codex/worktrees/lie-voice-disconnect-investigation/lie`，branch `codex/lie-voice-disconnect-investigation`，调查起点与执行者冻结交付时HEAD为 `95cb5cf02277a5c3f380d0a18158d3672a9bfcdd`，初始clean。此交付只新增本目录，未修改应用、CPU/会话配置、账号、provider或中央计划；专项root审查后保存任务分支文档提交，不操作main/push。
 
