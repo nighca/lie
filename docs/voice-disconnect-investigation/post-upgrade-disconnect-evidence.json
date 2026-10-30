@@ -137,6 +137,12 @@
     "providerAgentOrDeviceIdentityCompared": false,
     "sameGitNotEquivalentEnvironment": true,
     "sixHundredSecondsPassed": false,
-    "agentInitiatedTest": false
+    "agentInitiatedTest": false,
+    "samePhysicalDeviceConfirmedByUser": true,
+    "browserAndOutputIndividuallyConfirmed": false,
+    "localPopsReported": true,
+    "popDescription": "就是那种吱吱的像电流声一样",
+    "priorGeneralNoProblemReportClarified": "Only no unexpected disconnection; audible noise also exists locally",
+    "cpuCandidateClaimsToFixAudioPops": false
   }
 }
