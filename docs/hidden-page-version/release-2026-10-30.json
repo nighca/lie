@@ -1,0 +1,115 @@
+{
+  "checkedAtUTC": "2026-10-30T14:47:46.493686+00:00",
+  "source": "455e43bb8a1e17a1c95c42f0853f98e4392afd1d",
+  "candidateBase": "f75b5db858e20b596c0d6851fa13a602f87bc975",
+  "publishedSha": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
+  "candidateBuild": {
+    "sha": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
+    "dirty": false,
+    "asset": "/assets/index-fBjRnqLQ.js",
+    "bytes": 242290,
+    "sha256": "a03c41b66b4da97eaafe8f89cf7148892c59a13ca412ffe3e7d20ed6ede7f638",
+    "cpuMs": 30000,
+    "voiceMaxSessionSeconds": "600"
+  },
+  "checks": {
+    "allWorkspaceTypes": "passed",
+    "webTargetTests": 71,
+    "uiTests": 60,
+    "connectionNoticeTests": 7,
+    "fullBuild": "passed",
+    "productionDryRun": "passed",
+    "candidateClean": true,
+    "sourceFingerprintCount": 9,
+    "originalInlineSvgByteIdentical": true
+  },
+  "ci": {
+    "id": 41073746177,
+    "url": "https://github.com/nighca/lie/actions/runs/41073746177",
+    "conclusion": "success",
+    "headSha": "fd0493773e3b47ee934b2a391e8f69b49f632c58"
+  },
+  "cd": {
+    "id": 41073977759,
+    "url": "https://github.com/nighca/lie/actions/runs/41073977759",
+    "conclusion": "success",
+    "headSha": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
+    "downloadRestoreLatestDeployAllSuccess": true
+  },
+  "servingDeployment": {
+    "id": "5c9c207e-9f4e-44b8-b06a-fd38657a98d2",
+    "created_on": "2026-10-30T14:42:54.869539Z",
+    "annotations": {
+      "workers/message": "Verified CI build fd0493773e3b47ee934b2a391e8f69b49f632c58",
+      "workers/triggered_by": "deployment"
+    },
+    "versions": [
+      {
+        "version_id": "971c6d3d-62e2-4585-80d8-59b8b01509f7",
+        "percentage": 100
+      }
+    ]
+  },
+  "servingVersion": {
+    "id": "971c6d3d-62e2-4585-80d8-59b8b01509f7",
+    "number": 37,
+    "annotations": {
+      "workers/message": "Verified CI build fd0493773e3b47ee934b2a391e8f69b49f632c58",
+      "workers/tag": "git-fd0493773e3b47ee934b2a391e8f69b49f632c58",
+      "workers/triggered_by": "version_upload"
+    },
+    "limits": {
+      "cpu_ms": 30000
+    },
+    "usage_model": "standard"
+  },
+  "servingVoiceSession": {
+    "text": "600",
+    "type": "plain_text"
+  },
+  "onlineAsset": {
+    "verifiedBy": "Coordinator independent normal-TLS curl; reported during this release",
+    "asset": "/assets/index-fBjRnqLQ.js",
+    "bytes": 242290,
+    "sha256": "a03c41b66b4da97eaafe8f89cf7148892c59a13ca412ffe3e7d20ed6ede7f638",
+    "matchesCandidate": true
+  },
+  "onlineUi": {
+    "source": "Owned Chrome 1910332126 DOM/AX observation, closed after acceptance; IAB absent from inventory",
+    "url": "https://lie.agency/",
+    "defaultVersionClosed": true,
+    "oldFooterCount": 0,
+    "nativeDotButton": true,
+    "openedFullHash": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
+    "dirty": false,
+    "sourceEntry": "/assets/index-fBjRnqLQ.js",
+    "routeUnchanged": true,
+    "closeReturnedFocusToDot": true,
+    "voiceStarted": false,
+    "userStorageReadOrWrittenByAutomation": false,
+    "globalViewportChanged": false
+  },
+  "localPreview": {
+    "source": "Single post-update health/status/listener observation; no repeated probe",
+    "mainStatusSha": "fd0493773e3b47ee934b2a391e8f69b49f632c58",
+    "health": {
+      "status": "ok",
+      "storage": "none"
+    },
+    "voiceStatus": "ready",
+    "webPid": 48655,
+    "webParentRunnerPid": 66435,
+    "gatewayListenerPid": 48747,
+    "gatewayParentPid": 48699,
+    "automaticRestart": true,
+    "manualServiceOperations": false,
+    "retainedForUser": true
+  },
+  "boundaries": [
+    "No real provider, microphone, voice WebSocket, profile, billing, permissions or manual deploy operations",
+    "Native desktop/mobile fixture QA reused by exact source identity; final online DOM independently checked",
+    "No new service; ports 5176 and 5544 consumers untouched",
+    "No broader Safari, touch-device, 200%-zoom, 600-second or universal audio-quality acceptance claimed"
+  ],
+  "archive": "Release evidence follow-up only; not main/pushed. Published product identity remains the exact SHA above."
+}
