@@ -112,9 +112,11 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/dev.nighca.lie.main-prev
 
 ### 2026-10-30 当前专项分配
 
+页面版本标识built首页验收已结束，`5544` 已释放：owner `page_version`，来源 `/Users/nighca/.codex/worktrees/lie-page-version/lie`、分支 `codex/lie-page-version`，实际运行source `efdc96f102346e750f41965a21ede4c0435f9c0e` clean production dist。Node静态服务PID `6016` / 原PTY/session `78829`，严格绑定 `127.0.0.1:5544`；owner回执原PTY Ctrl-C exit130，精确ps及lsof均空，自有Chrome tab `1910332022` 已关，无保留消费者。IAB不可用后实测391/1280无横向overflow，mobile Enter展开、desktop click展开/Space收起、完整hash一致且可选择；未读写clipboard、未改全局视口或用户tab/storage，不调用provider/mic/Worker。这是owner回执，不是总协调本轮新扫描或启停；5176用户demo继续保留，不因5544释放而停止。
+
 语音等待提示 demo 的 `5176` 已分配给专项 Chat `01a18adf-d929-7060-969c-8c2d40415d04`，来源 `/Users/nighca/.codex/worktrees/lie-connection-design/lie`、分支 `codex/lie-connection-design`。owner 批量回执：base/HEAD `60c11f72b71ead4b8e744f2281d5dbecb796d11a` 加未提交的 demo 改动，PID `13931`，原 PTY/session `83334`；旧 session `2450`、`27009` 均由原 PTY Ctrl-C 退出130。以上是 owner 回执，不是总协调新扫描。总协调分配前核无监听；服务严格绑定 `127.0.0.1:5176`，不自动换端口。消费者为用户审看与专项 Chrome 验收；用户 review 结束或明确交还后由 owner 原 PTY 停止并核监听释放，不因总协调接管而停掉仍被用户使用的服务。
 
-入口为 `http://127.0.0.1:5176/connection-demo.html`，独立尺寸入口为 `/connection-demo-viewports.html`。IAB 工具明确不可用，专项 Chrome tab `1910332005` 使用 iframe 验收391/320/1280尺寸；tab 随用户审看保留，不修改全局视口或现有用户 tab/storage，不是 IAB/真机验收通过。离线 fake VoicePort，无真实 provider/mic；未含后续 main 的600秒网关改动。
+入口为 `http://127.0.0.1:5176/connection-demo.html`，独立尺寸入口为 `/connection-demo-viewports.html`。IAB 工具明确不可用，专项 Chrome tab `1910332005` 使用 iframe 实测391/1280尺寸；owner增量澄清320仅验收页支持，尚未实测，覆盖先前391/320/1280表述。tab 随用户审看保留，不修改全局视口或现有用户 tab/storage，不是 IAB/真机验收通过。离线 fake VoicePort，无真实 provider/mic；未含后续 main 的600秒网关改动。节奏修改后5176仍为PID13931/session83334，owner报告未重启。
 
 仅授权当前 UI 的有序候场旁白可运行 demo，尚非正式产品落地批准；无真实 provider/mic，不启动 Worker。`5198` 归属未在本轮核定，不触碰。`8787/8788` 继续停用，本分配不授权恢复。下方2026-10-25表为历史记录，不覆盖本次分配。
 
