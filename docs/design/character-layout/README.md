@@ -1,6 +1,6 @@
 # 首页与调查页人物定位
 
-2026-10-30；owner：界面专项（`lie-character-layout`）。用户在版本弹窗Chat提供两张截图并要求修复首页人物组偏侧、高窗口调查人物偏上。本次是既定品牌内的响应式修正，不改变玩法、人物资产或其他页面方向。
+2026-10-30；owner：界面专项（`lie-character-layout`）。用户在版本弹窗Chat提供两张截图并要求修复首页人物组偏侧、高窗口调查人物偏上。本次是既定品牌内的响应式修正，不改变玩法、人物资产或其他页面方向。用户随后在本Chat明确确认“看着可以，推进合入吧”，本版效果已获确认，交总协调审查与串行合入发布；此记录不代表已经上线。
 
 ## 原因与修正
 
@@ -33,6 +33,6 @@
 
 工作树`/Users/nighca/.codex/worktrees/lie-character-layout/lie`；分支`codex/character-layout`；原base `843985977659ce2c78e746436b80b1b544119fe3`。该base只是历史任务起点，用户随后撤回video入Git许可，总协调负责从不含video的main仅cherry-pick本任务新commit；layout不依赖video文件/提交，不整体merge本分支。
 
-服务owner为本专项`/root/character_layout`（发起Chat的完整实施子任务），起前lsof5177空；严格127.0.0.1:5177，Node PID93927，原exec/session49034。启动source为base843加本任务dirty，后续Vite HMR加载最终任务修改，不是clean生产dist。消费者：用户审看与本任务IAB tab1；发起者自有tab2独立review。保留供用户审看，未停止；用户结束/明确交还后owner原session Ctrl-C并核PID/监听。未触碰5176/5198/5544/8787/8788或任何他人服务。保留WT、refs、ignored独立deps、生成资源、图片cache、dist及临时symlink，不因服务生命周期清理。
+服务owner为本专项`/root/character_layout`（发起Chat的完整实施子任务），起前lsof5177空；严格127.0.0.1:5177，Node PID93927，原exec/session49034。启动source为base843加本任务dirty，后续Vite HMR加载最终任务修改，不是clean生产dist。消费者：用户审看与本任务IAB tab1；发起者自有tab2独立review。用户确认效果并要求推进合入后，owner已在原session49034 Ctrl-C停止，exit130；随后实核5177无监听、精确PID93927无进程。发起者亦核对tab2仍为本任务预览后关闭，用户审看消费结束。未触碰5176/5198/5544/8787/8788或任何他人服务。保留WT、refs、ignored独立deps、生成资源、图片cache、dist及临时symlink，不因服务生命周期清理。
 
 总协调持唯一main/push turn；专项仅提交clean任务结果供review，无PR/main/push/deploy。中央project-plan/development由总协调批量维护。
