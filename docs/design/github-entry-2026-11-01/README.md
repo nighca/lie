@@ -10,17 +10,17 @@
 
 链接目标由 origin 核实为 `https://github.com/nighca/lie`。建议新标签打开，并带 `noopener noreferrer`；可访问名称为“在新标签页打开 LIE GitHub 仓库”。手机保留文字和外链箭头，44px 点击高度，键盘 focus 有蓝色描边。这里没有 Star 数字、登录或其他 GitHub 操作。
 
-![桌面实现验收](implemented-desktop.png)
+![桌面实现验收](implemented-desktop.jpg)
 
-![手机实现验收](implemented-mobile.png)
+![手机实现验收](implemented-mobile.jpg)
 
-原推荐（GitHub 在“创作案件”左侧）的静态截图仍保留为 [桌面](recommended-desktop.png) / [手机](recommended-mobile.png)，对应冻结设计提交 `125b4143ea15a92bffee94fb1605d6e87b3a9912`；`recommended.html` 已按用户要求改为最右顺序。下面备选仅保存探索历史，不是正式实现范围。
+原推荐（GitHub 在“创作案件”左侧）的静态截图仍保留为 [桌面](recommended-desktop.jpg) / [手机](recommended-mobile.jpg)，对应冻结设计提交 `125b4143ea15a92bffee94fb1605d6e87b3a9912`；`recommended.html` 已按用户要求改为最右顺序。下面备选仅保存探索历史，不是正式实现范围。
 
 ## 备选：介绍区下方
 
 可把同一文字链接放在首页左侧介绍区的流程说明下方。更安静，但更难发现；在当前固定高桌面首页中还会占用人物图空间，因此推荐顶部方案。
 
-![备选桌面](alternative-desktop.png)
+![备选桌面](alternative-desktop.jpg)
 
 ## 预览来源与边界
 
