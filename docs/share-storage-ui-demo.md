@@ -1,0 +1,43 @@
+# 持久化分享：交互原型
+
+2026-11-01。状态：整体存储方案已获用户批准，UI交互原型待用户评审；没有正式接线、创建存储桶或上线。基线为 `a8be75823ceb67966390b5534d725a3a8bf1505b`，方案来源为专项 `docs/share-storage-design.md`（设计依赖至 `ad7bfb32b37d076688cec8243266a84f5c6fcca6`）。
+
+## 范围与体验
+
+独立Vue/TypeScript原型在 `design/share-storage-demo/`，复用现有ProductHeader、UiButton、EditorDialog及编辑器/游戏样式，沿用已确认的中文B视觉。未改正式Editor/Application、UI公共组件或其他专项文件。
+
+作者从现有第三步结局页点击「分享案件」，按钮显示等待并禁用编辑；成功弹窗保留「把谜题交给朋友」标题、复制链接和快照说明，去掉旧URL字符计数。分享入口附一句存储说明，不增加确认弹窗或发布流程。失败就地提示并可手动重试，草稿保持；超限提示精简内容。弹窗不增加Demo导航，接收方体验从外部工具栏切换。
+
+玩家打开时展示加载，随后沿现有接案页展示案件与人物。网络错误可重新加载，不存在时提示向作者确认链接，支持返回首页。不会自动进入语音或申请麦克风。
+
+原型上方灰色工具栏仅用于切换作者/玩家和模拟成功、网络失败、服务不可用、超过1MiB、案件不存在等场景，**不是产品UI**。所有存储结果、已保存草稿提示和等待均为模拟；编辑仅在内存中，刷新重置示例。示例短链不能作为已上传或可公开打开的真实案件；「开始调查」、其他编辑步骤、投稿等不接真实流程。复制按钮使用浏览器真实clipboard API，失败时提示手动复制。
+
+## 运行与验证
+
+使用根锁定依赖，不新增依赖或package-lock修改：
+
+```sh
+npm ci
+node scripts/character-presets.mjs
+node node_modules/vue-tsc/bin/vue-tsc.js -p design/share-storage-demo/tsconfig.json --noEmit
+node node_modules/vite/bin/vite.js build --config design/share-storage-demo/vite.config.ts
+node node_modules/vite/bin/vite.js --config design/share-storage-demo/vite.config.ts --host 127.0.0.1 --port 5177 --strictPort
+```
+
+检查使用已有Node24.22.1运行时。初次npm ci使用shell默认Node24.17发出engine警告，安装成功，后续类型/构建/服务均用24.22.1；没有修改任何全局Node配置或执行audit fix。独立原型无需应用全套测试。
+
+- 类型检查通过；Vite生产构建通过。编辑器CSS按原组件同样使用scoped方式，构建无deep选择器警告。
+- IAB默认1280×720及390×844检查：分享等待、成功弹窗、真实复制成功、关闭弹窗、网络失败保留文本、手动重试成功、服务暂不可用、超限、玩家加载/接案/不存在/网络错误及重试。390px页宽无横向溢出。
+- 本次仅验证模拟UI，不证明R2读写/体积边界/真正超时或云端可用性。剪贴板失败分支有文案，未通过改权限人为触发。
+- 预设图片使用现有生成目录，无新增素材；构建产物与生成资源不入Git。必要截图见 [evidence](../design/share-storage-demo/evidence/)。
+
+## 服务登记（供总协调批量更新）
+
+- owner：`/root/share_ui_demo`，发起专项Chat `01a194d9-e260-7cd2-a8df-89b1478a1120`；端口5177由总协调分配，仅本原型使用。
+- worktree：`/Users/nighca/.codex/worktrees/lie-share-storage-ui-demo/lie`，branch `codex/lie-share-storage-ui-demo`。
+- 启动源码：基线a8be758＋本原型未提交文件；提交后服务沿同一原型源码HMR，最终SHA见交付回执，不把初始dirty冒称clean构建身份。
+- listener PID：29883；原始exec session/PTY：99739。命令为上述Vite命令，实际node为`/Users/nighca/Library/Application Support/LIE/runtime/node-v24.22.1-darwin-arm64/bin/node`。
+- consumer：用户交互设计评审；入口 `http://127.0.0.1:5177/`。子agent隐藏IAB负责验收，root另开可见tab供用户审看。
+- 停止条件：用户释放评审consumer后由本owner在原session Ctrl-C，随后核listener与精确PID退出；当前保留供用户审看，不停止未知进程。未操作8787/8788、5544、5198或真实gateway。
+
+正式接入须等本轮UI获得用户反馈后再实施；此原型代码不直接复制为完整游戏编辑器实现。
