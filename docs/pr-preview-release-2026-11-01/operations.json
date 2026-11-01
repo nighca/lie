@@ -1,0 +1,192 @@
+{
+  "date": "2026-11-01",
+  "publishedMain": "51264aebaf590badf0d0e3039ebbb6679994fe29",
+  "runtimeSecrets": {
+    "configured": 4,
+    "environmentNamesConfirmed": 6,
+    "unknownField": null
+  },
+  "initialization": {
+    "runId": "41292864690",
+    "jobId": "124807545803",
+    "headSha": "1c90aa26c5fbeada4c0088d0c7427a81d27882c5",
+    "conclusion": "success",
+    "completedAt": "2026-11-01T09:23:03Z",
+    "result": {
+      "initialized": true,
+      "existing": false,
+      "workerName": "lie-pr-preview"
+    }
+  },
+  "acceptancePR": {
+    "number": 2,
+    "url": "https://github.com/nighca/lie/pull/2",
+    "branch": "codex/pr-preview-acceptance-20261101-0923",
+    "baseSha": "1c90aa26c5fbeada4c0088d0c7427a81d27882c5",
+    "firstHeadSha": "96029a65901a115a004465fe956e4124f8527db1",
+    "revision": "preview-acceptance-v2",
+    "merged": false,
+    "firstCI": {
+      "runId": "41292994119",
+      "attempt": 1,
+      "conclusion": "success",
+      "mergeSha": "bf4d0c0902763ddade8556da8862a33219b4c61d",
+      "artifactId": "13077714499",
+      "artifactName": "pr-preview-2-bf4d0c0902763ddade8556da8862a33219b4c61d-41292994119-1",
+      "artifactBytes": 113424855,
+      "artifactDigest": "sha256:653588aeda24ce90b8ba4fc15c7ed1e716a4e53b02dd82d0cd793a0bce5185ed"
+    },
+    "firstAutomaticPublisher": {
+      "runId": "41293123810",
+      "trustedHeadSha": "1c90aa26c5fbeada4c0088d0c7427a81d27882c5",
+      "status": "failure",
+      "failedStep": "Upload the PR code with fixed nonproduction configuration",
+      "failedAt": "2026-11-01T09:27:18.263Z",
+      "safeError": "Preview deployment failed",
+      "preciseCloudPhaseKnown": false,
+      "cloudPreviewExistence": "confirmed-by-later-inspection",
+      "commitStatus": "failure",
+      "priorChecksPassed": [
+        "selection",
+        "exact-artifact-download",
+        "receipt-api-authorization",
+        "deployment-record",
+        "latest-identity-recheck"
+      ]
+    },
+    "v1": {
+      "headSha": "44fe5aa4cd23063c893a71d9a677af95ea468d9b",
+      "mergeSha": "361e2e8fe5f44dfa1f5241fe2bf15cdafabebaa1",
+      "ciRunId": "41295994810",
+      "publisherRunId": "41296127731",
+      "ciConclusion": "success",
+      "publisherConclusion": "success",
+      "artifactId": "13079172012",
+      "artifactDigest": "sha256:33c1548a56e359ce2864dc31e0935b9d7a215ad95cd72ea3b1da329348613668",
+      "artifactBytes": 113424855,
+      "stableURL": "https://pr-2-lie-pr-preview.nighca.workers.dev",
+      "immutableURL": "https://7b2a8acf-lie-pr-preview.nighca.workers.dev",
+      "browserText": "preview-acceptance-v1：前端和 Worker 一致",
+      "browser": "Chrome dedicated tab; IAB unavailable",
+      "passed": true
+    },
+    "v2": {
+      "headSha": "e262418bd7254af0085a5b9d91fd8c3b47e69067",
+      "ciRunId": "41296560774",
+      "status": "completed",
+      "mergeSha": "34e0813c50c19a0daf361516bb5cc33670c2b751",
+      "ciConclusion": "success",
+      "publisherRunId": "41296703371",
+      "publisherConclusion": "success",
+      "artifactId": "13079272765",
+      "artifactDigest": "sha256:2959eccf03fae0a3e68c46245a59060befcd0cd7648971826f4baa2a389ab7e9",
+      "artifactBytes": 113424855,
+      "stableURL": "https://pr-2-lie-pr-preview.nighca.workers.dev",
+      "immutableURL": "https://779b6509-lie-pr-preview.nighca.workers.dev",
+      "browserText": "preview-acceptance-v2：前端和 Worker 一致",
+      "passed": true
+    },
+    "state": "closed"
+  },
+  "readOnlyInspection": {
+    "runId": "41294606441",
+    "jobId": "124812704891",
+    "trustedHeadSha": "23684acd03abd9ae9cc4de3021033f2ae9f9646f",
+    "conclusion": "failure",
+    "failedAt": "2026-11-01T09:47:27.026Z",
+    "safeError": "Preview operation failed: stage=inspect-deployment",
+    "parentExists": true,
+    "previewExists": true,
+    "deploymentShapeKnown": false,
+    "inference": "inspect-deployment is reached only after parent and pr-2 identity checks passed; no full deployment summary was emitted"
+  },
+  "fork": {
+    "repository": "kingqn0321/lie",
+    "pushPermission": false,
+    "realForkPathVerified": false
+  },
+  "counts": {
+    "devices": 2,
+    "logicalWS": 3,
+    "upstreamHandshakes": 6,
+    "managementOtaHTTP": 19,
+    "socketMs": 16031,
+    "r2Requests": 6
+  },
+  "services": [],
+  "status": "complete-with-real-fork-path-unverified",
+  "readOnlyShapeInspection": {
+    "runId": "41295284533",
+    "jobId": "124814739288",
+    "trustedHeadSha": "37d7e4353da7a7217a59af9bc28f2838f114b521",
+    "conclusion": "success",
+    "completedAt": "2026-11-01T09:57:20.620Z",
+    "metadataHTTPcode": 200,
+    "parentExists": true,
+    "parentBaseEmpty": true,
+    "previewExists": true,
+    "deploymentID": "063049c3-82d7-4aed-a9b6-2d490a1d84b3",
+    "previewIDPresent": false,
+    "previewIDType": "undefined",
+    "envCount": 8,
+    "unknownEnvCount": 0,
+    "r2DevMatch": true,
+    "namespacePrMatch": true,
+    "voice600Match": true,
+    "secretTypeMatch": true,
+    "previewURLs": [
+      "https://pr-2-lie-pr-preview.nighca.workers.dev"
+    ],
+    "deploymentURLs": [
+      "https://063049c3-lie-pr-preview.nighca.workers.dev"
+    ]
+  },
+  "sharing": {
+    "passed": true,
+    "requests": 6,
+    "syntheticCaseCount": 2,
+    "duplicateStable": true,
+    "oldSnapshotPreserved": true,
+    "retainedNonproductionData": true
+  },
+  "voice": {
+    "passed": true,
+    "devices": 2,
+    "logicalWS": 3,
+    "upstreamHandshakes": 6,
+    "managementOtaHTTP": 19,
+    "socketMs": 16031,
+    "uncertainPreparations": 0,
+    "normalClose": true,
+    "allOwnedBindingsRemoved": true,
+    "listen": 0,
+    "textInference": 0,
+    "audio": 0,
+    "microphone": 0
+  },
+  "cleanup": {
+    "closedCIRunId": "41296845867",
+    "publisherRunId": "41296859092",
+    "publisherJobId": "124819485297",
+    "conclusion": "success",
+    "deletedAt": "2026-11-01T10:18:42.400Z",
+    "previewName": "pr-2",
+    "previewDeleted": true,
+    "cloudflareMetadataGET": 404,
+    "metadata404Evidence": "deletePreview returns deleted=true only after the exact Preview metadata GET returns 404",
+    "stableHealthGET": 404,
+    "ownedRemoteBranchDeleted": true,
+    "githubBranchGET": 404,
+    "mainUnchangedDuringBranchDeletion": true,
+    "privateUnknownOperation": null,
+    "allOwnedBindingsRemoved": true,
+    "ownedTabsClosed": 2,
+    "servicesStarted": 0,
+    "nonproductionDataRetained": true,
+    "parentWorkerRetained": true
+  },
+  "manualPreviewEntry": {
+    "realDispatchVerified": false,
+    "reason": "No writable fork; same-repository automatic lifecycle used without an unnecessary additional deployment"
+  }
+}
