@@ -1,6 +1,6 @@
 # 开发与服务登记
 
-2026-11-01 当前登记截点：已审main5552215已普通push，CI41318558408/CD41318694961均通过、正式线上完整5552215身份、六案顺序、徒步三人360秒及老赵姓名均已只读核验，prod/local health与voice ready正常；持久8787/8788随owning main保留，不将push或本地跟随称为生产已验。徒步专项无保留本地服务、PR4已关闭且云Preview清理确认404。5176为WebMCP迭代、5544为首次帮助用户体验，均未释放；5177/5198仍按最后回执保护。Safari诊断工具已审，本批集成/发布待CI/CD及线上只读核验，没有新应用服务或真实mic/provider验收。本轮仅按owner/root回执登记，不探测或启停服务。
+2026-11-01 当前登记截点：已审main5552215已普通push，CI41318558408/CD41318694961均通过、正式线上完整5552215身份、六案顺序、徒步三人360秒及老赵姓名均已只读核验，prod/local health与voice ready正常；持久8787/8788随owning main保留，不将push或本地跟随称为生产已验。徒步专项无保留本地服务、PR4已关闭且云Preview清理确认404。5176 WebMCP与5544首次帮助均获用户最终接受，owner已在原PTY停止并核PID/listener空，已释放；5177/5198仍按最后回执保护。Safari诊断工具已随730ba84发布，CI41319185403/CD41319332333通过，canonical入口/HTML hash已核；首次帮助和WebMCP本批组合待最终review、CI/CD与线上核验，没有新应用服务或真实mic/provider验收。本轮仅按owner/root回执登记，不探测或启停服务。
 
 ## 本地开发
 
@@ -17,7 +17,7 @@ npm run character-presets:check
 
 按实际改动运行必要检查；纯文档只做文档/链接/敏感材料检查。character presets 的生成/校验入口是根 scripts；素材或生成契约变化再运行生成，不手工改生成物。构建应从预期 clean HEAD 重做，页面版本注入精确 git SHA/dirty，build 后再改 tracked 文档会改变下一次身份。Mock 测试不能证明真实 provider。
 
-启动 Web/gateway 预览前先获得对应端口窗口并核 owner、consumer、cwd/SHA/listener，按应用 README 的 dev 命令配置已分配端口与同源 proxy。根 `npm run dev` 的默认开发端口不构成占用许可；5176/5544/5177/5198与8787/8788按最后owner回执均有保留消费者；5180/5182旧轮已释放，新任务仍需重新协调归属，不自行换端口起重复服务。无 consumer 的临时服务应关闭，稳定端口也不授权闲置常驻。
+启动 Web/gateway 预览前先获得对应端口窗口并核 owner、consumer、cwd/SHA/listener，按应用 README 的 dev 命令配置已分配端口与同源 proxy。根 `npm run dev` 的默认开发端口不构成占用许可；5177/5198与8787/8788按最后owner回执保护；5176/5544最新消费者已释放；5180/5182旧轮已释放，新任务仍需重新协调归属，不自行换端口起重复服务。无 consumer 的临时服务应关闭，稳定端口也不授权闲置常驻。
 
 私密配置只在各自获准的 ignored `.dev.vars` 等服务端位置，由应用内部读取；不查看/打印/复制凭据、不导出 token、不放 VITE/client/assets/提交。持久 main 环境使用 owning main 现有 ignored `.dev.vars`，不为“恢复环境”创建 provider 资源、修改套餐或扩大权限。需要真实 Linx/provider 验证时另外取得具体用户窗口，默认离线 fake，不自动执行付费测试命令。
 
@@ -28,9 +28,9 @@ npm run character-presets:check
 
 | 端口 / 生命周期 | owner、来源与最后回执 | consumer 与下一步 |
 | --- | --- | --- |
-| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；先前main-status读回51264a属历史；已审main现为5552215，持久服务随owning main推进，不将旧SHA/PID当本轮服务实测。 | 用户本地对比；5544当前首次帮助consumer复用8788，旧江苏消费者已释放不代表新consumer或持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
-| 5176，WebMCP本地迭代用户consumer保留 | Chat `01a19745`；WT `c4e9/lie`、branch `codex/webmcp-authoring-research`。最后登记Web PID48877/原PTY35629，入口 `/editor?demo=1&webmcp=1`；51830ee/3e68803仅旧Demo身份。 | 用户已改方向为表单partial直接写现有草稿＋能力提示，owner实施中，尚无新clean交付，不把旧检查覆盖新流程。consumer仍保留；owner释放后原PTY停并核PID/listener，不能用旧调查页5176退出记录停止本轮。不打印token。 |
-| 5544，首次帮助本地Vue体验保留 | Chat `01a19748`；WT `a92e/lie`、branch `codex/first-use-help-assessment`。最近至少f24d267已审，仍用户迭代；最后登记Web PID64673/原PTY63756、cwd `apps/web`、strict127.0.0.1/proxy8788，入口 `/` 或 `/?demo=1`。 | 用户consumer继续保留，尚未最终接受产品合入/发布；旧360ac91及startup1b028cf只作历史。用户释放后owner原PTY停核，不读editor store、不自动真实voice，不因旧江苏5544退出记录擅停。 |
+| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；先前main-status读回51264a属历史；本批集成基线main为730ba84，持久服务随owning main推进，不将旧SHA/PID当本轮服务实测。 | 用户本地对比；5544首次帮助consumer已释放，仍不代表持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 5176，WebMCP用户体验已停止交回 | Chat `01a19745`；WT `c4e9/lie`、branch `codex/webmcp-authoring-research`，最终clean3efe3c5。原PID48877/PTY35629，owner Ctrl-C exit130，精确ps及lsof LISTEN均空。 | 用户最终接受直接表单partial与新UI，consumer/turn已释放；未关闭用户tab或改store，不触其他服务。本批待CI/CD；不打印token，不据旧Demo检查冒称生产trial接受。 |
+| 5544，首次帮助用户体验已停止交回 | Chat `01a19748`；WT `a92e/lie`、branch `codex/first-use-help-assessment`，最终adfe295/clean20cb239。原PID64673/PTY63756，owner原PTY Ctrl-C，精确PID/cwd/child及双次lsof核空，root独立核无残留。 | 用户最终接受并要求提交合入，consumer已结束；本批待CI/CD。不读editor store、不自动真实voice、不操作持久8787/8788。 |
 | 5544，江苏案最终试玩已停止交回 | 江苏案Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `lie-jiangsu-starter/lie`、branch `codex/lie-jiangsu-starter`、base1e88180＋当轮专项变更，最终源d6d33a7。原Web PID29602/PTY34175，strict127.0.0.1、proxy既有8788。用户接受后owner原PTY Ctrl-C停止，PID与5544监听核空，root收到同项回执。 | 用户consumer/服务turn已释放；没有关闭或刷新用户tab，不触碰8787/8788。旧礼物案释放事实另列，不将其PID套用于本轮；不自动重启。 |
 | 5544，礼物案用户试玩已释放 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`、原base f862＋dirty，原PID10258/PTY8214。用户明确本轮试玩结束不保留环境；owner只读核无listener、原PTY Unknown process。 | 退出时间/原因未知，本次没有执行stop。保留dirty内容/附件，不重启、刷新用户tab或升级旧前端；正式案件确认门禁不变。 |
 | 5176，调查页UI试玩已停止交回 | UI Chat `01a1964e-eda0-78c2-b353-ffcecf1cfed0`；WT `6d4d/lie`、branch `codex/investigation-ui-followup`、clean43a08229。Node24 Web以proxy8788、strict127.0.0.1:5176运行；原PID19329/PTY80248，用户明确验收通过并允许撤环境。owner复核监听后原PTY Ctrl-C exit130，ps19329及lsof5176均空。 | consumer/turn已释放，未动用户tab/storage/8787/8788，不把原分享QA或结果页旧PID套成本轮。新任务起前另协调。 |
@@ -65,7 +65,7 @@ npm run character-presets:check
 
 每次启动登记 owner/chat、worktree/SHA/dirty、端口、PID、原 PTY/session、consumer 和停止条件。临时 consumer/验收结束后优先在原 PTY Ctrl-C，再核进程/监听消失；原 PTY 不可用时仅在 owner 确认不再需要、重新核 exact PID/cwd/命令后精确停止。服务关闭不连带清理 worktree/refs/用户文件。
 
-main 跟随重启会影响所有复用8788的consumer（当前5544用户体验仍保留），发布 owner 必须持唯一 integration/publication turn，按用户简化要求允许短时不可用，仅用户明确正在语音时简单协调，保用户tab/其他端口不动。不要自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
+main 跟随重启会影响所有复用8788的consumer（已释放的5544首用体验不代表持久服务可停），发布 owner 必须持唯一 integration/publication turn，按用户简化要求允许短时不可用，仅用户明确正在语音时简单协调，保用户tab/其他端口不动。不要自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
 
 本轮文档整理无服务操作、远端API、浏览器或应用测试；仅做必要文档检查，main更新及自动跟随按正常review发布流程，不追加复杂窗口审批，不创建真人provider/WS/mic/profile流量。旧完整登记、来源/批准门禁和已纳本批候选的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
 

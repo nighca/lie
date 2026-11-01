@@ -2,7 +2,7 @@
 
 2026-11-01，用户已确认内置浏览器测试通过，并明确调整交互：检测`document.modelContext`，支持时显示小提示，点击后弹窗介绍；不要独立Demo草稿、整案候选或采纳/放弃步骤；工具直接操作当前表单。本文替代[此前候选Demo](webmcp-authoring-demo-2026-11-01.md)的当前推荐与实现，旧文档/截图和提交保留历史，不改写旧审查事实。
 
-后续体验反馈：用户确认整体逻辑正确，但否决悬浮长蓝链入口和技术说明式弹窗，要求符合现有界面的入口与普通用户能实操的内容。本次据此调整视觉/文案；新样式尚待用户体验确认，不把“整体逻辑正确”当最终UI接受。
+后续体验反馈：用户确认整体逻辑正确，但否决悬浮长蓝链入口和技术说明式弹窗，要求符合现有界面的入口与普通用户能实操的内容。本次据此调整视觉/文案；最终clean3efe3c5获用户明确“这个版本可以，推进提交合入吧”接受；现组合于main730ba84基线交review，待CI/CD与线上核验。
 
 ## 当前行为
 
@@ -47,6 +47,6 @@ changes允许`title/summary/background/interrogationLimitSeconds/characters/endi
 
 ## 所有权与交接
 
-继续使用独立WT`/Users/nighca/.codex/worktrees/c4e9/lie`、branch`codex/webmcp-authoring-research`。原始base35e987a；本次相对已冻结旧头`3e68803a722492f3a09dfffa6dc8a8026770501a`追加提交，旧四笔不amend。当前local main8449b1a相对原base只有文档变更，无Editor源码交叉；不将其文档状态当本分支已合入证明。
+继续使用独立WT`/Users/nighca/.codex/worktrees/c4e9/lie`、branch`codex/webmcp-authoring-research`。原始base35e987a；本次相对已冻结旧头`3e68803a722492f3a09dfffa6dc8a8026770501a`追加提交，旧四笔不amend。当时实施基线local main8449b1a相对原base只有文档变更，无Editor源码交叉；当前组合基线为main730ba84，不将历史文档状态当已发布证明。
 
-原服务PID48877/exec session35629仍strict127.0.0.1:5176，来源随本WT本批HMR；consumer=用户5176体验，结束/明确释放后由owner原session Ctrl-C并核精确PID/listener。无新服务、无端口/代理/受保护资源修改。用户原127页/草稿未被验收工具修改；原独立Demo槽不作自动迁移。总协调负责全diff审查、中央计划/服务登记和后续集成发布判断。
+原服务PID48877/exec session35629曾strict127.0.0.1:5176供用户体验；最终接受后owner原session Ctrl-C exit130，精确ps48877与lsof5176 LISTEN均空，consumer已释放。无新服务、无端口/代理/受保护资源修改。用户原127页/草稿未被验收工具修改；原独立Demo槽不作自动迁移。总协调负责全diff审查、中央计划/服务登记和后续集成发布判断。
