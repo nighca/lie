@@ -1,6 +1,6 @@
 # 首次玩家帮助评估
 
-2026-11-01。状态：源码审计与待讨论建议；未批准正式实现、部署或真人测试。专项 Chat `01a19748-009d-7842-9c37-e8ab059d91f3`，WT `/Users/nighca/.codex/worktrees/a92e/lie`，分支 `codex/first-use-help-assessment`，基线 `35e987a7516493dcdccb8392cb8817f3b82744e4`，与当时本地 main 一致。初始 attached WT 为 clean detached HEAD，已在任何文档写入前建立专项分支；没有变更其他 WT、main 或远端。
+2026-11-01。状态：审计与独立设计历史已保全；用户已接受交互并授权基于真实代码实现、本地体验，真实实现与本地验收已完成，待用户体验，尚未合入或部署。专项 Chat `01a19748-009d-7842-9c37-e8ab059d91f3`，WT `/Users/nighca/.codex/worktrees/a92e/lie`，分支 `codex/first-use-help-assessment`，基线 `35e987a7516493dcdccb8392cb8817f3b82744e4`，与当时本地 main 一致。初始 attached WT 为 clean detached HEAD，已在任何文档写入前建立专项分支；没有变更其他 WT、main 或远端。
 
 ## 判断
 
@@ -72,4 +72,8 @@
 
 已完成 [Demo 片段](demo.html)、[设计说明与截图验收](demo-notes.md)、[验证脚本](verification.mjs)及[八组离线交互检查结果](verification.json)。片段在本 Chat 内交互体验；桌面/窄屏截图与模拟检查不等于用户接受，正式产品维持原状。
 
-下一步：用户体验 Demo 后讨论文案、展开方式与位置，明确接受后再决定是否进入产品实现。研究与设计文档可独立保全，文档保全不授予产品实施许可。
+## 真实代码实施授权（2026-11-01）
+
+用户体验设计后明确表示：“交互上没问题，不过我希望你在真实代码基础上真正实现完再给我体验下”。据此进入正式 Vue 代码的本地实现与体验阶段，范围仍仅计时就地说明和指认前后果提示，不变更实际玩法。专项先实现、核验并提供真实应用本地入口，由用户体验；本轮不自行合入 main、push 或部署。前文与 Demo 说明中的“未批准实现”保留为当时历史边界，由本条较新授权覆盖。执行与服务记录见后续 [实施记录](implementation.md)。
+
+真实代码已提交 `5d85b9e1e3e18de64e13c271e1ef338131a11475`，58 项目标测试、Web/UI types、Web build 与真实 IAB 桌面/窄屏检查通过；[实施记录](implementation.md)保留验证边界与 5544 用户体验服务信息。下一步：用户本地体验；按实际反馈调整后再交总协调 review，合入/发布仍依协调 turn 执行。
