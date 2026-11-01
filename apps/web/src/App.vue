@@ -161,7 +161,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </section>
       </div>
       <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" @start="speak">
-        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><button ref="timeHelpTrigger" type="button" class="interrogation-budget__help" aria-label="怎么算时间" aria-haspopup="dialog" @click="timeHelpOpen = true"><strong>{{ remainingTime }}</strong><span class="interrogation-budget__info" aria-hidden="true">i</span></button></div></template>
+        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><button ref="timeHelpTrigger" type="button" class="interrogation-budget__help" :aria-label="`剩余询问${remainingTime}，怎么算时间`" aria-haspopup="dialog" @click="timeHelpOpen = true"><strong>{{ remainingTime }}</strong><span class="interrogation-budget__info" aria-hidden="true">i</span></button></div></template>
         <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
       </VoiceControl>
     </main>
