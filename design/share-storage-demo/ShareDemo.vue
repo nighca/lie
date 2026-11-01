@@ -14,6 +14,7 @@ const dialog = ref(false)
 const copied = ref(false)
 const copyError = ref(false)
 const notice = ref<string | null>(null)
+const shareError = ref<string | null>(null)
 const playerState = ref<'loading' | 'ready' | 'missing' | 'network'>('loading')
 const title = ref('消失的小鸭木偶')
 const reveal = ref('小林为了给主创一个谢幕惊喜，提前把小鸭木偶收进舞台左侧的蓝色抽屉。阿禾看到他走出道具间，却没看见他手里的东西；小周一直在台口调试音箱。大家急着找木偶时，小林才意识到自己闹了个乌龙。')
@@ -51,24 +52,26 @@ function share() {
   copied.value = false
   copyError.value = false
   notice.value = null
+  shareError.value = null
+  dialog.value = true
   if (authorResult.value === 'large') {
-    notice.value = '案件内容过大，请精简后再分享。草稿仍保留在这里。'
+    shareError.value = '案件内容过大，请精简后再分享。'
     return
   }
   sharing.value = true
   timer = setTimeout(() => {
     sharing.value = false
-    if (authorResult.value === 'success') dialog.value = true
-    else notice.value = authorResult.value === 'network'
-      ? '网络连接失败，请检查网络后重试。草稿仍保留在这里。'
-      : '暂时无法生成分享链接，请稍后重试。草稿仍保留在这里。'
+    if (authorResult.value !== 'success') shareError.value = authorResult.value === 'network'
+      ? '网络连接失败，请检查网络后重试。'
+      : '暂时无法生成分享链接，请稍后重试。'
   }, 1300)
 }
 async function copy() {
   try { await navigator.clipboard.writeText(shareUrl); copied.value = true }
   catch { copyError.value = true }
 }
-function edit() { notice.value = null; dialog.value = false }
+function closeShare() { cancelPending(); dialog.value = false }
+function edit() { notice.value = null; closeShare() }
 onUnmounted(cancelPending)
 </script>
 
@@ -97,17 +100,25 @@ onUnmounted(cancelPending)
           </section>
           <aside class="panel player-preview"><span class="preview-badge">正确指认后的揭晓</span><h2>谜底在这里</h2><p class="reveal-text">{{ reveal }}</p></aside>
         </div>
-        <footer class="step-footer"><UiButton variant="quiet" @click="notice = '本原型聚焦分享体验，不切换完整编辑步骤。'">上一步</UiButton><div class="final-actions"><UiButton variant="quiet" @click="notice = '投稿给官方的既有流程保持原样。'">投稿给官方</UiButton><UiButton variant="secondary" @click="openPlayer">试玩</UiButton><UiButton :busy="sharing" @click="share">{{ sharing ? '正在生成链接…' : '分享案件' }}</UiButton></div></footer>
+        <footer class="step-footer"><UiButton variant="quiet" @click="notice = '本原型聚焦分享体验，不切换完整编辑步骤。'">上一步</UiButton><div class="final-actions"><UiButton variant="quiet" @click="notice = '投稿给官方的既有流程保持原样。'">投稿给官方</UiButton><UiButton variant="secondary" @click="openPlayer">试玩</UiButton><UiButton @click="share">分享案件</UiButton></div></footer>
       </fieldset>
       <p class="share-disclosure">生成链接会将案件保存到 LIE 服务端，持有链接的人可以查看完整内容。</p>
-      <div v-if="notice != null" class="share-error" role="status"><p>{{ notice }}</p><button v-if="authorResult !== 'large'" type="button" :disabled="sharing" @click="share">重新生成链接</button></div>
+      <p v-if="notice != null" class="demo-feedback" role="status">{{ notice }}</p>
     </main>
-    <EditorDialog v-if="dialog" title="把谜题交给朋友" @close="dialog = false">
-      <p class="share-lead">链接准备好了，朋友打开就能玩。</p>
-      <label class="field">分享链接<input :value="shareUrl" readonly @focus="($event.target as HTMLInputElement).select()"></label>
-      <p class="snapshot-note">修改案件后需要重新生成链接，旧链接保留当时的内容。</p>
-      <p v-if="copyError" class="copy-error" role="status">无法自动复制，请选中上方链接手动复制。</p>
-      <div class="share-actions"><UiButton @click="copy">{{ copied ? '已复制链接' : '复制分享链接' }}</UiButton></div>
+    <EditorDialog v-if="dialog" title="把谜题交给朋友" @close="closeShare">
+      <div v-if="sharing" class="share-pending" role="status"><span class="loading-ring" aria-hidden="true"></span><p>正在保存案件…</p><span class="muted">分享链接马上就好。</span></div>
+      <template v-else-if="shareError != null">
+        <p class="share-lead" role="status">{{ shareError }}</p>
+        <p class="snapshot-note">草稿仍保留在这里，可以继续编辑。</p>
+        <div class="share-actions"><UiButton v-if="authorResult !== 'large'" @click="share">重试</UiButton><UiButton variant="secondary" @click="closeShare">继续编辑</UiButton></div>
+      </template>
+      <template v-else>
+        <p class="share-lead">链接准备好了，朋友打开就能玩。</p>
+        <label class="field">分享链接<input :value="shareUrl" readonly @focus="($event.target as HTMLInputElement).select()"></label>
+        <p class="snapshot-note">修改案件后需要重新生成链接，旧链接保留当时的内容。</p>
+        <p v-if="copyError" class="copy-error" role="status">无法自动复制，请选中上方链接手动复制。</p>
+        <div class="share-actions"><UiButton @click="copy">{{ copied ? '已复制链接' : '复制分享链接' }}</UiButton></div>
+      </template>
     </EditorDialog>
   </div>
 
