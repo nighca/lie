@@ -28,7 +28,7 @@ npm run character-presets:check
 
 | 端口 / 生命周期 | owner、来源与最后回执 | consumer 与下一步 |
 | --- | --- | --- |
-| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；当前main源码为51264a，不把旧PID或源码SHA当本轮新探测。 | 用户本地对比；5544旧proxy消费者已释放，不代表持久main服务可停。后续集成/维护仍由root协调当前语音消费者及唯一turn，不复用旧窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；integrator已读回当前local main-status精确51264a，未将旧PID当本轮进程探测。 | 用户本地对比；5544旧proxy消费者已释放，不代表持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
 | 5544，礼物案用户试玩已释放 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`、原base f862＋dirty，原PID10258/PTY8214。用户明确本轮试玩结束不保留环境；owner只读核无listener、原PTY Unknown process。 | 退出时间/原因未知，本次没有执行stop。保留dirty内容/附件，不重启、刷新用户tab或升级旧前端；正式案件确认门禁不变。 |
 | 5176，调查页UI试玩已停止交回 | UI Chat `01a1964e-eda0-78c2-b353-ffcecf1cfed0`；WT `6d4d/lie`、branch `codex/investigation-ui-followup`、clean43a08229。Node24 Web以proxy8788、strict127.0.0.1:5176运行；原PID19329/PTY80248，用户明确验收通过并允许撤环境。owner复核监听后原PTY Ctrl-C exit130，ps19329及lsof5176均空。 | consumer/turn已释放，未动用户tab/storage/8787/8788，不把原分享QA或结果页旧PID套成本轮。新任务起前另协调。 |
 | 5182及内部63075，P0 fake验收已停止 | owner `/root/cookie_device_implementation`、P0 Chat `01a19557-145d-72f3-ace4-382ac03c22c9`；源cf375958（产品a178），Node41692/workerd41766、原PTY64276 Ctrl-C exit130，精确ps/listener均空。 | 自建pages2/3/4已关闭、native contexts closed/合成track停止；保留原page1。无真实provider/mic，本轮不重启；方法与身份见[本地验收](reviews/device-concurrency-2026-11-01/acceptance/README.md)。 |
@@ -52,7 +52,7 @@ npm run character-presets:check
 - 日志：`~/Library/Logs/LIE/main-preview.log`；owning clean main：`/Users/nighca/code/nighca/lie`。
 - 固定入口 `http://127.0.0.1:8787/`，Worker8788；`/__lie/main-status` 用于非敏感源码/服务 SHA 核对。首页、health、voiceStatus 的 ready/200 不代表已完成真实推理或 provider 资源同一性。
 
-[`scripts/main-preview.mjs`](../scripts/main-preview.mjs) 约每 1.5 秒检查 owning main SHA；只有正确分支且 tracked clean 才随新 SHA 重启自有 children，lock 改变时正常 npm ci。保留单实例 PID lock、仅 ESRCH 可回收的陈旧锁、自有进程组和 launchd 30 秒失败退避；不要手工抢锁或另起 runner。应用本地状态/storage 不因维护清除。main更新（包括文档）可能触发既有自动跟随，不为报告单独制造额外main更新；旧children/PID仅为当轮快照；a8历史身份见[发布回执](results-layout-release/2026-10-31.md)，P0配置与local-main恢复见[实际回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)，均不能替代下一维护turn实际复核。后续发布必须取得新窗口。未人为改main模拟重启测试。
+[`scripts/main-preview.mjs`](../scripts/main-preview.mjs) 约每 1.5 秒检查 owning main SHA；只有正确分支且 tracked clean 才随新 SHA 重启自有 children，lock 改变时正常 npm ci。保留单实例 PID lock、仅 ESRCH 可回收的陈旧锁、自有进程组和 launchd 30 秒失败退避；不要手工抢锁或另起 runner。应用本地状态/storage 不因维护清除。main更新（包括文档）可能触发既有自动跟随，不为报告单独制造额外main更新；旧children/PID仅为当轮快照；a8历史身份见[发布回执](results-layout-release/2026-10-31.md)，P0配置与local-main恢复见[实际回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)，均不能替代下一维护turn实际复核。正常review后main→CI/CD；用户已接受短时不可用，不再要求固定新窗口，明确正在语音时再简单协调。未人为改main模拟重启测试。
 
 本地为 Vite DEV＋本地 workerd，页面版本显示“开发版”，不是线上 production 的同一 bundle；精确本地 main SHA 用 main-status 核。它绕过生产 Cloudflare 网络/平台 CPU 配额，仍受本地 workerd、provider、网络与设备限制。未读取 secret 手比 provider 资源，不把本地 ready、无断连观察或 runtime 恢复当线上配额/音爆根因证明。线上入口为 `https://lie.agency/` 与 `/editor`；旧平台原生地址保持现状，未授权 DNS 改动。
 
@@ -60,9 +60,9 @@ npm run character-presets:check
 
 每次启动登记 owner/chat、worktree/SHA/dirty、端口、PID、原 PTY/session、consumer 和停止条件。临时 consumer/验收结束后优先在原 PTY Ctrl-C，再核进程/监听消失；原 PTY 不可用时仅在 owner 确认不再需要、重新核 exact PID/cwd/命令后精确停止。服务关闭不连带清理 worktree/refs/用户文件。
 
-main 跟随重启会影响所有复用8788的consumer（5544本轮已释放），发布 owner 必须持唯一 integration/publication turn，先确认实际语音消费者安全维护窗口，保用户 tab/其他端口不动。不要在非窗口自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
+main 跟随重启会影响所有复用8788的consumer（5544本轮已释放），发布 owner 必须持唯一 integration/publication turn，按用户简化要求允许短时不可用，仅用户明确正在语音时简单协调，保用户tab/其他端口不动。不要自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
 
-本轮文档整理无服务操作、远端API、浏览器或应用测试；仅做必要文档检查，main更新及自动跟随仍由root协调新窗口，不创建真人provider/WS/mic/profile流量。旧完整登记、来源/批准门禁和已纳本批候选的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
+本轮文档整理无服务操作、远端API、浏览器或应用测试；仅做必要文档检查，main更新及自动跟随按正常review发布流程，不追加复杂窗口审批，不创建真人provider/WS/mic/profile流量。旧完整登记、来源/批准门禁和已纳本批候选的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
 
 原语音Chat `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9` 现已archived，root未自行unarchive；若干旧voice WT已不在worktree list。精确提交（如1ee049e）及refs仍可归档，目录/旧PID只是历史证据；不为归档恢复chat、服务或旧WT。以上均为协调回执，本任务未额外探测。
 
