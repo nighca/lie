@@ -1,6 +1,6 @@
 # 开发与服务登记
 
-2026-11-01 当前登记截点：已审main5552215已普通push，CI41318558408/CD41318694961均通过、正式线上内容核验待回执；持久8787/8788随owning main保留，不将push或本地跟随称为生产已验。徒步专项无保留本地服务、PR4已关闭且云Preview清理确认404。5176为WebMCP迭代、5544为首次帮助用户体验，均未释放；5177/5198仍按最后回执保护。Safari诊断工具已审、待普通集成，没有新应用服务或真实mic/provider验收。本轮仅按owner/root回执登记，不探测或启停服务。
+2026-11-01 当前登记截点：已审main5552215已普通push，CI41318558408/CD41318694961均通过、正式线上完整5552215身份、六案顺序、徒步三人360秒及老赵姓名均已只读核验，prod/local health与voice ready正常；持久8787/8788随owning main保留，不将push或本地跟随称为生产已验。徒步专项无保留本地服务、PR4已关闭且云Preview清理确认404。5176为WebMCP迭代、5544为首次帮助用户体验，均未释放；5177/5198仍按最后回执保护。Safari诊断工具已审，本批集成/发布待CI/CD及线上只读核验，没有新应用服务或真实mic/provider验收。本轮仅按owner/root回执登记，不探测或启停服务。
 
 ## 本地开发
 
@@ -37,7 +37,7 @@ npm run character-presets:check
 | 5182及内部63075，P0 fake验收已停止 | owner `/root/cookie_device_implementation`、P0 Chat `01a19557-145d-72f3-ace4-382ac03c22c9`；源cf375958（产品a178），Node41692/workerd41766、原PTY64276 Ctrl-C exit130，精确ps/listener均空。 | 自建pages2/3/4已关闭、native contexts closed/合成track停止；保留原page1。无真实provider/mic，本轮不重启；方法与身份见[本地验收](reviews/device-concurrency-2026-11-01/acceptance/README.md)。 |
 | PR原生云Preview验收，已收尾；无本地服务 | owner PR Chat `01a19533-d60a-7980-91b8-9e7ec1dbbe6a`；真实PR2 v1/v2同地址前后端同版、R2六请求/两合成、voice两Device/三逻辑WS与owned清理通过。close CI41296845867/cleanup publisher41296859092 job124819485297 success，10:18:42Z deleted=true，精确GET404。 | PR2 closed/unmerged，owned远端分支已删除GET404，main不变；private unknown=null、两owned绑定已解绑、两自建tab已关闭、服务0。共享测试R2按批准保留，关PR不删共享数据或扩大清理；真实fork未验。 |
 | PR3自动云Preview，成功保留；无本地服务 | 总协调按用户授权rename＋普通merge同步原PR分支，head d67d69c；CI41302052728与publisher41302167123实际成功，receipt/上传/固定4GET/publish均通过。 | PR3 OPEN且DO NOT MERGE，未合main；无新增provider/voice测试，无服务启停。PR2关闭回收记录不适用于PR3，不删除其预览或共享R2数据。 |
-| PR4云Preview已按授权关闭回收；本专项无本地服务 | 徒步案已获用户最终接受并集成main5552215；PR4按授权close，自动cleanup成功，原Preview入口404已由owner/root确认。 | 不再提供PR4预览；共享R2按原批准保留，不扩大清理。正式main CI41318558408/CD41318694961均通过，正式线上内容核验待回执；EPIPE未定因，不称已修复。 |
+| PR4云Preview已按授权关闭回收；本专项无本地服务 | 徒步案已获用户最终接受并集成main5552215；PR4按授权close，自动cleanup成功，原Preview入口404已由owner/root确认。 | 不再提供PR4预览；共享R2按原批准保留，不扩大清理。正式main CI41318558408/CD41318694961均通过，正式线上完整5552215身份、六案顺序、徒步三人360秒及老赵姓名均已只读核验，prod/local health与voice ready正常；EPIPE未定因，不称已修复。 |
 | 5180，分享gateway验收已停止；原5176轮为历史 | owner `/root/share_frontend`；源27a＋dirty、最终34c5af8。原Web75839/PTY8893与gateway75292/PTY31258均Ctrl-C exit130，内部56985、workerd75705及56996/56997核空，自建IAB清理。 | 与新UI5176回执分开；不把本地R2/DEV身份当云验收。 |
 | 5198，最后登记为用户编辑consumer | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；cwd `lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`，原launcher95944已退出；PID13491只是源owner最后回执，不是本轮复核。 | 尚无consumer释放回执，不重启/停止、不清工程；未来须owner核当前command/cwd/精确PID，不能把launcher退出当服务已停。新视频Git入库撤销与专项上传授权均不改变该服务门禁。 |
 | 5177，最后登记为分享UI Demo用户审看 | owner `/root/share_ui_demo`、Chat `01a194d9-e260-7cd2-a8df-89b1478a1120`；WT `lie-share-storage-ui-demo/lie`，branch `codex/lie-share-storage-ui-demo`，c4ee640→eccf75f。原PID29883/PTY99739、a8＋dirty后HMR，仅历史来源。 | 没有新释放回执，仍保护用户consumer；不能因为正式分享已上线就擅停，用户释放后由owner原PTY停并核销。 |
