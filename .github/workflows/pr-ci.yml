@@ -3,7 +3,7 @@ name: PR CI
 on:
   pull_request:
     branches: [main]
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review, closed]
 
 permissions:
   contents: read
@@ -17,6 +17,7 @@ env:
 
 jobs:
   verify:
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -37,6 +38,8 @@ jobs:
             ${{ runner.os }}-${{ runner.arch }}-lie-images-v1-${{ hashFiles('apps/web/build/image-tools.mjs', 'apps/web/build/image-optimize.mjs', 'apps/web/build/image-codec.mjs') }}-
       - name: Check CI/CD handoff guards
         run: node --test scripts/ci-release.test.mjs
+      - name: Check preview artifact and publisher boundaries
+        run: node --test scripts/pr-preview*.test.mjs
       - run: npm run typecheck
       - name: Test with application and separate script coverage
         run: npm run coverage
@@ -51,9 +54,31 @@ jobs:
       - run: npm run build
       - name: Validate production build without uploading
         run: npm exec --workspace @lie/gateway -- cf deploy --prebuilt --mode production --worker lie-game --provision=false --dry-run
+      - name: Build the same PR Worker for Preview without credentials
+        env:
+          CLOUDFLARE_PREVIEW_BUILD: 'true'
+          LIE_SHARE_BUCKET_NAME: lie-shared-games-dev
+          LIE_VOICE_ENVIRONMENT: pr-${{ github.event.pull_request.number }}
+        run: npm exec --workspace @lie/gateway -- cf build --mode preview
+      - name: Package the full PR frontend and Worker
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_MERGE_SHA: ${{ github.sha }}
+        run: node scripts/pr-preview-artifact.mjs pack
+      - name: Upload the exact preview build
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-preview-${{ github.event.pull_request.number }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/pr-preview-build/
+          include-hidden-files: true
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
 
   gate:
-    if: always()
+    if: always() && github.event.action != 'closed'
     needs: [verify]
     runs-on: ubuntu-latest
     timeout-minutes: 1
@@ -62,3 +87,17 @@ jobs:
         env:
           VERIFY_RESULT: ${{ needs.verify.result }}
         run: test "$VERIFY_RESULT" = success
+
+  closed:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Emit a close signal without checking out PR code
+        run: printf 'closed\n' > closed.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr-preview-closed-${{ github.event.pull_request.number }}
+          path: closed.txt
+          if-no-files-found: error
+          retention-days: 1

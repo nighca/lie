@@ -1,0 +1,225 @@
+name: PR Preview
+
+on:
+  workflow_run:
+    workflows: [PR CI]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Preview a reviewed PR or initialize the dedicated preview parent
+        required: true
+        type: choice
+        default: preview
+        options: [preview, initialize]
+      pr_number:
+        description: PR number to preview
+        required: false
+        type: string
+      head_sha:
+        description: Full current PR head SHA reviewed for this deployment
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: read
+
+env:
+  CF_SEND_TELEMETRY: 'false'
+
+jobs:
+  initialize:
+    if: github.repository == 'nighca/lie' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.operation == 'initialize'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: pr-preview
+    concurrency:
+      group: lie-pr-preview-initialize
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Initialize only the dedicated parent without business bindings
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          export PR_PREVIEW_CF_CLI="$GITHUB_WORKSPACE/node_modules/cf/bin/cf"
+          node scripts/pr-preview-deploy.mjs init
+
+  select:
+    if: github.repository == 'nighca/lie' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.operation == 'preview')
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      action: ${{ steps.selection.outputs.action }}
+      status: ${{ steps.selection.outputs.status }}
+      pr_number: ${{ steps.selection.outputs.pr_number }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.22.1
+      - name: Select the current PR and exact CI attempt using read-only APIs
+        id: selection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs prepare
+
+  approval-notice:
+    needs: [select]
+    if: needs.select.outputs.status == 'awaiting-approval'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    concurrency:
+      group: lie-pr-preview-${{ needs.select.outputs.pr_number }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+      deployments: read
+      statuses: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.22.1
+      - name: Recheck and show the current head's approval requirement
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SELECTED_PR_NUMBER: ${{ needs.select.outputs.pr_number }}
+        run: |
+          node scripts/pr-preview.mjs prepare
+          node scripts/pr-preview.mjs notice
+
+  preview:
+    needs: [select]
+    if: needs.select.outputs.action == 'deploy' || needs.select.outputs.action == 'cleanup'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: pr-preview
+    concurrency:
+      group: lie-pr-preview-${{ needs.select.outputs.pr_number }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+      deployments: write
+      statuses: write
+    env:
+      SELECTED_PR_NUMBER: ${{ needs.select.outputs.pr_number }}
+      PR_PREVIEW_ARTIFACT_DIR: ${{ runner.temp }}/pr-preview-artifact
+      PR_PREVIEW_IDENTITY_FILE: ${{ runner.temp }}/pr-preview-identity.json
+      PR_PREVIEW_DEPLOYMENT_FILE: ${{ runner.temp }}/pr-preview-deployment.json
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - name: Recheck after acquiring this PR's deployment lock
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs prepare
+      - name: Install only the trusted publisher commit's locked CLI
+        if: steps.current.outputs.action == 'deploy' || steps.current.outputs.action == 'cleanup'
+        run: npm ci --ignore-scripts
+      - name: Download only the selected CI attempt's artifact
+        if: steps.current.outputs.action == 'deploy'
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: ${{ steps.current.outputs.artifact_id }}
+          digest-mismatch: error
+          run-id: ${{ steps.current.outputs.run_id }}
+          repository: nighca/lie
+          github-token: ${{ github.token }}
+          path: ${{ env.PR_PREVIEW_ARTIFACT_DIR }}
+      - name: Verify the receipt against current GitHub identities
+        if: steps.current.outputs.action == 'deploy'
+        id: authorized
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs authorize
+      - name: Record this deployment attempt
+        if: steps.authorized.outputs.current == 'true'
+        id: pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs pending
+      - name: Recheck immediately before uploading
+        if: steps.pending.outputs.current == 'true'
+        id: latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs recheck
+      - name: Upload the PR code with fixed nonproduction configuration
+        if: steps.latest.outputs.current == 'true'
+        id: deployed
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          LINX_API_KEY: ${{ secrets.PR_PREVIEW_LINX_API_KEY }}
+          LINX_AGENT_ID: ${{ secrets.PR_PREVIEW_LINX_AGENT_ID }}
+          LINX_WS_TOKEN: ${{ secrets.PR_PREVIEW_LINX_WS_TOKEN }}
+          VOICE_DEVICE_COOKIE_SECRET: ${{ secrets.PR_PREVIEW_VOICE_DEVICE_COOKIE_SECRET }}
+        run: |
+          export PR_PREVIEW_CF_CLI="$GITHUB_WORKSPACE/node_modules/cf/bin/cf"
+          node scripts/pr-preview-deploy.mjs > "$PR_PREVIEW_DEPLOYMENT_FILE"
+      - name: Verify HTTP entry points without preparing voice or sending audio
+        if: steps.deployed.outcome == 'success'
+        run: node scripts/pr-preview.mjs probe
+      - name: Recheck and publish the current preview link
+        if: steps.deployed.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs publish
+      - name: Report a failed update without claiming the old URL is current
+        if: failure() && steps.current.outputs.action == 'deploy'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs fail
+      - name: Confirm this PR is still closed before removal
+        if: steps.current.outputs.action == 'cleanup'
+        id: cleanup
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/pr-preview.mjs cleanup-authorize
+      - name: Remove only the closed PR's native Preview
+        if: steps.cleanup.outputs.current == 'true'
+        id: removed
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PR_NUMBER: ${{ needs.select.outputs.pr_number }}
+        run: |
+          export PR_PREVIEW_CF_CLI="$GITHUB_WORKSPACE/node_modules/cf/bin/cf"
+          node scripts/pr-preview-deploy.mjs delete
+      - name: Mark the removed preview inactive
+        if: steps.removed.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_PREVIEW_DELETE_CONFIRMED: 'true'
+        run: node scripts/pr-preview.mjs cleanup-report
