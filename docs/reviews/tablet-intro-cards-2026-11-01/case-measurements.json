@@ -1,0 +1,25 @@
+[
+  {
+    "cards": [
+      "180px",
+      "180px",
+      "180px"
+    ],
+    "case": "消失的纪念章",
+    "hoverNone": true,
+    "scrollWidth": 1024,
+    "width": 1024
+  },
+  {
+    "cards": [
+      "153px",
+      "153px",
+      "153px",
+      "153px"
+    ],
+    "case": "压轴怎么是鸭叫",
+    "hoverNone": true,
+    "scrollWidth": 1024,
+    "width": 1024
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "cards": [
+      "115px",
+      "115px"
+    ],
+    "hoverNone": true,
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "cards": [
+      "150.5px",
+      "150.5px"
+    ],
+    "hoverNone": true,
+    "scrollWidth": 391,
+    "width": 391
+  },
+  {
+    "cards": [
+      "180px",
+      "180px"
+    ],
+    "hoverNone": false,
+    "scrollWidth": 1440,
+    "width": 1440
+  },
+  {
+    "cards": [
+      "180px",
+      "180px"
+    ],
+    "hoverNone": true,
+    "screen": "accusation",
+    "scrollWidth": 1024,
+    "width": 1024
+  }
+]

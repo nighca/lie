@@ -16,6 +16,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .background { white-space: pre-wrap; text-align: left; max-width: 46em; margin: 24px auto; line-height: 1.8; }
 .intro-characters { display: flex; justify-content: center; align-items: center; max-width: 660px; margin: 24px auto 16px; padding: 24px 12px 32px; }
 .intro-character { position: relative; flex: 0 1 180px; margin-left: -28px; transform: translateY(var(--fan-drop)) rotate(var(--fan-angle)); transform-origin: 50% 100%; box-shadow: 0 5px 0 #111b4514; transition: transform 160ms ease; }
+.intro-card .intro-character { width: min(100%, 180px); justify-self: center; }
 .intro-character:first-child { margin-left: 0; }
 .intro-character:hover, .intro-character:focus-visible { z-index: 2; transform: translateY(-16px) rotate(0); }
 .intro-character:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 4px; }
