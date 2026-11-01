@@ -128,7 +128,6 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <strong>{{ character.name }}</strong>
         </div>
       </div>
-      <ol class="flow-hint" aria-label="调查流程"><li>开口问话</li><li>对照说法</li><li>最终指认</li></ol>
       <p class="muted intro-duration">本局可询问{{ durationLabel }}</p>
       <UiButton class="intro-start" @click="controller.start()">接案，开始调查</UiButton>
       <UiButton variant="quiet" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
