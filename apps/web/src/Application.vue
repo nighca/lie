@@ -192,7 +192,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
     <main class="home-content">
       <section class="home-intro" aria-label="产品介绍">
         <h1>有人在说谎</h1>
-        <p>和角色语音对话，<br>找出藏起真相的人。</p>
+        <p>和角色语音对话，<br>找出谜题的答案。</p>
         <div class="home-cast" aria-hidden="true">
           <div class="home-cast-art">
             <div class="home-cast-backdrop"></div>

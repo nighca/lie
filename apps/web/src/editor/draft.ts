@@ -60,7 +60,7 @@ export function draftIssues(draft: EditorDraft, characterPresets: readonly Chara
     if (!characterPresets.some((characterPreset) => characterPreset.id === character.appearanceId)) add(1, 'preset', `请为${name}选择有效的人物预设`, character.id)
   }
   if (!draft.characters.some((character) => character.id === draft.ending.culpritId)) add(1, 'answer', '请在人物编辑中选择一位案件答案')
-  if (!draft.ending.reveal.trim()) add(2, 'reveal', '请填写完整经过')
+  if (!draft.ending.reveal.trim()) add(2, 'reveal', '请填写揭晓内容')
   return issues
 }
 export function draftGame(draft: EditorDraft, characterPresets: readonly CharacterPreset[]): GameDefinition {

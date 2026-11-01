@@ -108,7 +108,7 @@ describe('three-step editor', () => {
     await click('清除草稿')
     await click('保留草稿')
     expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!)).toEqual(game)
-    expect(wrapper.get('h1').text()).toBe('真相结局')
+    expect(wrapper.get('h1').text()).toBe('答案揭晓')
     await click('清除草稿')
     await click('确认清除')
     expect(localStorage.getItem(DRAFT_KEY)).toBeNull()
