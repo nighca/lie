@@ -8,7 +8,7 @@
 <p>此测试页只调用本 PR 新增接口，不加载案件或语音。</p>
 <output id="result" aria-live="polite" data-result="pending">正在核验…</output>
 <script type="module">
-const expected = 'preview-acceptance-v1'
+const expected = 'preview-acceptance-v2'
 const output = document.querySelector('#result')
 try {
   const response = await fetch('/api/pr-preview-check', { cache: 'no-store' })
