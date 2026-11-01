@@ -31,11 +31,11 @@ afterEach(() => cleanup.splice(0).forEach((action) => action()))
 
 describe('public background character names', () => {
   it.each([
-    { background: '沈禾的第一段。\n顾遥的第二段。', paragraphs: ['沈禾的第一段。', '顾遥的第二段。'] },
-    { background: '沈禾的第一段。\n\n顾遥的第二段。', paragraphs: ['沈禾的第一段。', '', '顾遥的第二段。'] },
-    { background: '  沈禾的第一段。\r\n\r\n\t顾遥的第二段。  \r\n', paragraphs: ['  沈禾的第一段。', '', '\t顾遥的第二段。  ', ''] },
-    { background: '\n沈禾的第一段。\r顾遥的第二段。\n', paragraphs: ['', '沈禾的第一段。', '顾遥的第二段。', ''] },
-  ])('shows explicit paragraph breaks without losing author text: $background', async ({ background, paragraphs }) => {
+    { label: 'single LF', background: '沈禾的第一段。\n顾遥的第二段。', paragraphs: ['沈禾的第一段。', '顾遥的第二段。'] },
+    { label: 'blank paragraph', background: '沈禾的第一段。\n\n顾遥的第二段。', paragraphs: ['沈禾的第一段。', '', '顾遥的第二段。'] },
+    { label: 'CRLF and whitespace', background: '  沈禾的第一段。\r\n\r\n\t顾遥的第二段。  \r\n', paragraphs: ['  沈禾的第一段。', '', '\t顾遥的第二段。  ', ''] },
+    { label: 'mixed LF and CR', background: '\n沈禾的第一段。\r顾遥的第二段。\n', paragraphs: ['', '沈禾的第一段。', '顾遥的第二段。', ''] },
+  ])('shows explicit paragraph breaks without losing author text: $label', async ({ background, paragraphs }) => {
     const source = { ...content, background }
     const { controller, wrapper } = createScene(source)
     await controller.load('test'); await wrapper.vm.$nextTick()
