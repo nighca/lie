@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 import Application from '../src/Application.vue'
-import type { CaseSummary } from '../src/application/catalog'
+import { caseCatalog, type CaseSummary } from '../src/application/catalog'
 import { setup } from './helpers'
 
 const cleanup: (() => void)[] = []
@@ -33,6 +33,19 @@ const catalog = Array.from({ length: 5 }, (_, index) => ({
 }))
 
 describe('homepage presentation', () => {
+  it('puts the Jiangsu starter first while keeping the existing cases in order', async () => {
+    expect(caseCatalog.map(({ id }) => id)).toEqual([
+      'jiangsu-local', 'empty-medal-box', 'duck-finale', 'salt-sugar-mixup', 'hackathon-old-project',
+    ])
+    const { wrapper, router } = await home([...caseCatalog])
+    const first = wrapper.findAll('.case-card')[0]
+    expect(first.get('h3').text()).toBe('谁才是江苏人')
+    expect(first.get('.case-cast').attributes('aria-label')).toContain('2位角色')
+    await first.get('button').trigger('click')
+    await flushPromises()
+    expect(router.currentRoute.value.query).toEqual({ game: 'jiangsu-local', demo: '1' })
+  })
+
   it.each([1, 5])('presents %i catalog entries with their public metadata and individual entry buttons', async (count) => {
     const { wrapper, createController, initialCards } = await home(catalog.slice(0, count))
     expect(initialCards).toBe(count)

@@ -1,10 +1,12 @@
 # LIE 首案：《空盒里的纪念章》
 
+2026-11-01：入门案置首后，仅当前内容链接的文件编号顺移；原案设计与历史验收结论保留。
+
 状态：**用户已确认《空盒里的纪念章》为首案，题材与固定真相已选定。** 更新时间：2026-10-23。已确认中文桌面 Web、三名嫌疑人、自由语音问话、按钮切人和最终指认；案件内容仅为公共背景、每人完整设定文本、固定责任人和揭晓。本文含完整剧透。
 
 首案采用 **《空盒里的纪念章》**：以摄影社合影前的小乱子呈现“每个人都有不想说的事，但取走纪念章的只有一人”。不用职业知识、数字计算或界面上的额外收集操作；玩家需要分清交接发生的先后与人物隐瞒的性质。《最后一份布丁》保留为历史备选，不再等待选案。
 
-正式静态内容包为 [01-empty-medal-box.json](../content/games/01-empty-medal-box.json)，游戏 ID 为 `empty-medal-box`。初始 [纪念章提案](../content/proposals/empty-medal-box.proposal.json) 与 [布丁简案](../content/proposals/last-pudding.proposal.json) 保留历史，不作为正式入口。
+正式静态内容包为 [01-empty-medal-box.json](../content/games/02-empty-medal-box.json)，游戏 ID 为 `empty-medal-box`。初始 [纪念章提案](../content/proposals/empty-medal-box.proposal.json) 与 [布丁简案](../content/proposals/last-pudding.proposal.json) 保留历史，不作为正式入口。
 
 形象绑定：沈禾为成年男策划，使用 `sunny-moustache`；顾遥为成年女摄影师，使用 `coral-bob`；陈拓为成年男执行，使用 `blue-glasses`。三个 ID 均来自已 review 的预置形象库；故事不携带图片或动画，平台 agent/音色配置仍独立。
 
