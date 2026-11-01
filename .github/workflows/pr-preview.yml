@@ -7,11 +7,11 @@ on:
   workflow_dispatch:
     inputs:
       operation:
-        description: Preview a reviewed PR or initialize the dedicated preview parent
+        description: Preview a reviewed PR, initialize its parent, or inspect one Preview
         required: true
         type: choice
         default: preview
-        options: [preview, initialize]
+        options: [preview, initialize, inspect]
       pr_number:
         description: PR number to preview
         required: false
@@ -31,7 +31,7 @@ env:
 
 jobs:
   initialize:
-    if: github.repository == 'nighca/lie' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.operation == 'initialize'
+    if: github.repository == 'nighca/lie' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && (inputs.operation == 'initialize' || inputs.operation == 'inspect')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     environment: pr-preview
@@ -50,13 +50,19 @@ jobs:
           node-version: 24.22.1
           cache: npm
       - run: npm ci --ignore-scripts
-      - name: Initialize only the dedicated parent without business bindings
+      - name: Initialize the dedicated parent or inspect one Preview
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PR_PREVIEW_OPERATION: ${{ inputs.operation }}
+          PR_NUMBER: ${{ inputs.pr_number }}
         run: |
           export PR_PREVIEW_CF_CLI="$GITHUB_WORKSPACE/node_modules/cf/bin/cf"
-          node scripts/pr-preview-deploy.mjs init
+          if [[ "$PR_PREVIEW_OPERATION" == inspect ]]; then
+            node scripts/pr-preview-deploy.mjs inspect
+          else
+            node scripts/pr-preview-deploy.mjs init
+          fi
 
   select:
     if: github.repository == 'nighca/lie' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.operation == 'preview')

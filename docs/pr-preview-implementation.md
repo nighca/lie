@@ -73,4 +73,6 @@ Checks固定CI gate与预览status分开；预览使用commit status链接及Git
 
 当前原生手动权限依据：[GitHub手动运行工作流](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)、[Environment required reviewers](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments#required-reviewers)。不新增PAT或权限查询要求，未修改用户现有Environment设置。
 
+真实首个PR发布失败后，使用同一可信工作流的 `operation=inspect` 与 `pr_number` 精确只读核查固定父Worker/该Preview/latest deployment：只输出存在性、已知字段/绑定类型与数量、目标匹配布尔值及验证过的公开URL，不输出env文本或凭据，不部署/删除/修配置。部署错误保留静态阶段及安全HTTP/进程退出码，避免泛化错误掩盖上传前后边界。Deployment日志和失败status链接指向当前publisher，producer CI run仍单独用于产物身份；成功后的Step Summary仅列已验证URL及公开head/merge和两类run标识。父Worker及其Preview Base保持无业务绑定，实际R2/语音配置直配每个PR部署。
+
 用户要求移除admin限制的本轮delta：父owner实际审阅角色层移除、main/当前SHA及P2立即保存ID保留，独立Node24.22.1运行受影响GitHub授权/编排测试 **109/109通过**；两YAML与27段bash语法、diff check通过。未变产物/部署模块不重复扩测或重build；已有实际构建与字节/schema证据继续保留，远程启用仍未执行。
