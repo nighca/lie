@@ -419,3 +419,37 @@ test('diagnostic URL projection can use a missing preview_id only from the fixed
     assert.throws(() => verifyRuntimeDeployment(deployment, result))
   }
 })
+
+test('native deployment UUID short URLs and metadata without preview_id retain all identity and binding checks', () => {
+  const deploymentId = '063049c3-82d7-4aed-a9b6-2d490a1d84b3'
+  const actual = { ...result, deployment_id: deploymentId, deployment_urls: ['https://063049c3-lie-pr-preview.example.workers.dev'] }
+  assert.deepEqual(previewResult(actual, 12), actual)
+  assert.doesNotThrow(() => previewResult({ ...actual, deployment_urls: [`https://${deploymentId}-lie-pr-preview.example.workers.dev`] }, 12))
+  assert.throws(() => previewResult({ ...result, deployment_urls: ['https://deployme-lie-pr-preview.example.workers.dev'] }, 12))
+  for (const host of ['063049c4-lie-pr-preview.example.workers.dev', '063049c3-lie-game.example.workers.dev', '063049c3-lie-pr-preview.foreign.workers.dev']) assert.throws(() => previewResult({ ...actual, deployment_urls: [`https://${host}`] }, 12))
+  const value = metadata()
+  value.result.id = deploymentId
+  delete value.result.preview_id
+  assert.doesNotThrow(() => verifyRuntimeDeployment(value, actual))
+  for (const mutate of [v => { v.result.id = 'wrong-id' }, v => { v.result.preview_id = 'other-preview' }, v => { v.result.preview_id = null }, v => { v.result.preview_id = undefined }, v => { v.result.env.EXTRA = { type: 'secret_text' } }]) {
+    const bad = structuredClone(value)
+    mutate(bad)
+    assert.throws(() => verifyRuntimeDeployment(bad, actual))
+  }
+})
+
+test('both existing-latest preflight and exact-new postflight accept the observed native metadata shape', async () => {
+  const f = await fixture(), deploymentId = '063049c3-82d7-4aed-a9b6-2d490a1d84b3'
+  const uploaded = { ...result, deployment_id: deploymentId, deployment_urls: ['https://063049c3-lie-pr-preview.example.workers.dev'] }
+  const requests = []
+  assert.deepEqual(await deployPreview(f, async (_node, args) => ({ stdout: JSON.stringify(args[1] === 'workers' ? { name: 'lie-pr-preview' } : uploaded) }), async url => {
+    requests.push(url)
+    if (url.endsWith('/previews/pr-12')) return Response.json({ name: 'pr-12', id: 'preview-id' })
+    const value = metadata()
+    delete value.result.preview_id
+    if (!url.endsWith('/deployments/latest')) value.result.id = deploymentId
+    return Response.json(value)
+  }), uploaded)
+  assert.equal(requests[1].endsWith('/previews/preview-id/deployments/latest'), true)
+  assert.equal(requests[2].endsWith(`/previews/preview-id/deployments/${deploymentId}`), true)
+})

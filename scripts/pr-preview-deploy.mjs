@@ -85,13 +85,17 @@ export function previewResult(value, prNumber) {
   requireThat(previewUrls.every(url => new URL(url).hostname.startsWith(`${value.preview_slug}-lie-pr-preview.`)), 'Preview URL does not match deployment target')
   const accountDomain = new URL(previewUrls[0]).hostname.split('.').slice(1).join('.')
   requireThat([...previewUrls, ...deploymentUrls].every(url => new URL(url).hostname.endsWith(`.${accountDomain}`)), 'Inconsistent preview URL account')
-  requireThat(deploymentUrls.every(url => new URL(url).hostname === `${value.deployment_id.toLowerCase()}-lie-pr-preview.${accountDomain}`), 'Deployment URL does not match deployment identity')
+  const deploymentLabels = [value.deployment_id]
+  if (/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(value.deployment_id)) deploymentLabels.push(value.deployment_id.slice(0, 8))
+  requireThat(deploymentUrls.every(url => deploymentLabels.some(id => new URL(url).hostname === `${id.toLowerCase()}-lie-pr-preview.${accountDomain}`)), 'Deployment URL does not match deployment identity')
   return { type: 'preview', version: 1, preview_id: value.preview_id, preview_name: value.preview_name, preview_slug: value.preview_slug, preview_urls: previewUrls, deployment_id: value.deployment_id, deployment_urls: deploymentUrls }
 }
 
 export function verifyRuntimeDeployment(value, expected) {
   const deployment = value?.result ?? value
-  requireThat(value?.success !== false && deployment != null && deployment.id === expected.deployment_id && deployment.preview_id === expected.preview_id && deployment.env != null && typeof deployment.env === 'object' && !Array.isArray(deployment.env), 'Invalid preview deployment metadata')
+  // Callers read the fixed, verified Preview's latest or exact deployment endpoint.
+  // Cloudflare may omit preview_id; an explicitly returned foreign identity is rejected.
+  requireThat(value?.success !== false && deployment != null && deployment.id === expected.deployment_id && (!Object.hasOwn(deployment, 'preview_id') || deployment.preview_id === expected.preview_id) && deployment.env != null && typeof deployment.env === 'object' && !Array.isArray(deployment.env), 'Invalid preview deployment metadata')
   const names = ['ASSETS', 'SHARED_GAMES', 'VOICE_MAX_SESSION_SECONDS', 'VOICE_DEVICE_ENVIRONMENT', ...secretNames]
   requireThat(Object.keys(deployment.env).length === names.length && names.every(name => Object.hasOwn(deployment.env, name)), 'Unexpected preview runtime bindings')
   const env = deployment.env
