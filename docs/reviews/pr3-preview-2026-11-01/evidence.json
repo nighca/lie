@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-01",
+  "repository": "nighca/lie",
+  "pr": 3,
+  "status": "PR open, DO NOT MERGE retained; rename and ordinary main synchronization completed; not merged",
+  "mainUnchanged": "1e88180239684db1ef5d3bddde3375639ee4bec7",
+  "rename": {
+    "parent": "d078767d8355b187ada72bcbd8270b0148aee353",
+    "commit": "0aace235cb354f0b833c5369190582a1e1b6adf8",
+    "file": "content/games/05-1dee7d02-4c70-4563-a11e-dc5bcfad6b9f.json",
+    "gitBlob": "8157f8db62d1f1e111d62d975a4c5513ef0efe74",
+    "bytes": 3082,
+    "sha256": "f882ca07dcdf6d41f8776c1680e8b4424a8f546d31352c33b2060fa06294bf99",
+    "change": "100% rename; zero content edits"
+  },
+  "failedPreview": {
+    "head": "0aace235cb354f0b833c5369190582a1e1b6adf8",
+    "apiAndEventBase": "f504e1acc1044f58c5b455daeb62b96fa5b9047c",
+    "merge": "af4e4fe15758512c49343561a073f804bfc232c3",
+    "mergeParents": [
+      "1e88180239684db1ef5d3bddde3375639ee4bec7",
+      "0aace235cb354f0b833c5369190582a1e1b6adf8"
+    ],
+    "ciRun": 41301208031,
+    "ciConclusion": "success",
+    "publisherRun": 41301344598,
+    "publisherConclusion": "failure",
+    "failureStage": "select",
+    "error": "Preview is not the current PR test merge",
+    "uploadAttempted": false,
+    "lastRepeatedObservationUTC": "2026-11-01T11:24:47Z"
+  },
+  "synchronized": {
+    "head": "d67d69ccc916fe64ea9cf3bb4e8ce4f8a1b38ed8",
+    "parents": [
+      "0aace235cb354f0b833c5369190582a1e1b6adf8",
+      "1e88180239684db1ef5d3bddde3375639ee4bec7"
+    ],
+    "apiAndEventBase": "1e88180239684db1ef5d3bddde3375639ee4bec7",
+    "testedMerge": "c60da48cec7b8ebc07f0bf88e5a1452d86354cac",
+    "ciRun": 41302052728,
+    "ciConclusion": "success",
+    "publisherRun": 41302167123,
+    "publisherConclusion": "success",
+    "previewJob": 124835294235,
+    "artifactId": 13082041632,
+    "artifactDigest": "sha256:eb8358e26393e362c27e4ea986903f91fefb700b7f1e0971e0d8bf8486242154",
+    "deploymentId": 7472389265,
+    "successUTC": "2026-11-01T11:31:21Z",
+    "stableURL": "https://pr-3-lie-pr-preview.nighca.workers.dev",
+    "immutableURL": null,
+    "immutableBoundary": "Validated by successful publisher path; exact URL text not retrieved from job summary",
+    "httpSmoke": "Existing pipeline: four bounded GETs, /, /editor, /api/health, /api/voice/status; not live voice acceptance"
+  },
+  "omitted": "No story text, credentials, auth headers, runtime secret values, cookie values, provider identifiers or raw environment dumps. Public Git SHAs and GitHub run/artifact/deployment identifiers retained."
+}
