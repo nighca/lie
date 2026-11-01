@@ -8,8 +8,8 @@
 
 Chrome专属新tab `1910332592`，只访问 `http://127.0.0.1:5544/?demo=1&game=jiangsu-local`，接案后打开指认。实际检查并保存：
 
-- [1280×800桌面](accusation-title-screenshots/desktop-1280.png)：唯一问题标题、后果、两个人物及返回按钮完整可见；scrollWidth=1280，弹窗宽660px，左310/右970。
-- [320×844窄屏](accusation-title-screenshots/narrow-320.png)：问题标题自然换行，无裁切；后果、人物与返回均可见。scrollWidth=320，弹窗宽282px、左19/右301、顶193/底651，返回操作底627px，处于视口内。
+- [1280×800桌面](accusation-title-screenshots/desktop-1280.jpg)：唯一问题标题、后果、两个人物及返回按钮完整可见；scrollWidth=1280，弹窗宽660px，左310/右970。
+- [320×844窄屏](accusation-title-screenshots/narrow-320.jpg)：问题标题自然换行，无裁切；后果、人物与返回均可见。scrollWidth=320，弹窗宽282px、左19/右301、顶193/底651，返回操作底627px，处于视口内。
 
 两图均已实际打开查看。原生Escape成功关闭指认，焦点回到“我有答案了”入口；tab console warn/error为空。无真实语音、mic、provider或WS调用，不把模拟与桌面Chromium检查扩大为真人/Safari/移动真机验收。
 

@@ -45,9 +45,9 @@ git diff --check
 
 已保存并实际查看：
 
-- [桌面收起](implementation-screenshots/desktop-collapsed.png)、[桌面展开](implementation-screenshots/desktop-expanded.png)：实际默认 1280×720，展开时文案与对话/指认操作完整可见，scrollWidth=1280。
-- [391px 收起](implementation-screenshots/narrow-391-collapsed.png)、[391px 展开](implementation-screenshots/narrow-391-expanded.png)、[391px 指认](implementation-screenshots/narrow-391-accusation.png)：391×844，无横向溢出；展开控制区高333px、顶511px，记录区底499px，无重叠。
-- [320px 收起](implementation-screenshots/narrow-320-collapsed.png)、[320px 展开](implementation-screenshots/narrow-320-expanded.png)、[320px 指认](implementation-screenshots/narrow-320-accusation.png)：320×844，实际 scrollWidth=320；summary 左18/右302、说明与两操作可见，无横向溢出。
+- [桌面收起](implementation-screenshots/desktop-collapsed.jpg)、[桌面展开](implementation-screenshots/desktop-expanded.jpg)：实际默认 1280×720，展开时文案与对话/指认操作完整可见，scrollWidth=1280。
+- [391px 收起](implementation-screenshots/narrow-391-collapsed.jpg)、[391px 展开](implementation-screenshots/narrow-391-expanded.jpg)、[391px 指认](implementation-screenshots/narrow-391-accusation.jpg)：391×844，无横向溢出；展开控制区高333px、顶511px，记录区底499px，无重叠。
+- [320px 收起](implementation-screenshots/narrow-320-collapsed.jpg)、[320px 展开](implementation-screenshots/narrow-320-expanded.jpg)、[320px 指认](implementation-screenshots/narrow-320-accusation.jpg)：320×844，实际 scrollWidth=320；summary 左18/右302、说明与两操作可见，无横向溢出。
 
 在真实浏览器开启模拟对话、展开说明，保持连接且剩余从02:00持续减至01:47；结束后仍为01:47，随后切换视口/指认与返回不自动续聊。指认弹窗中后果文案在人物前可见，原生 Escape 关闭成功、焦点回到指认入口；返回调查按钮同样可用。未重新设计或替换现有 dialog 焦点策略。此轮未做原生 Tab 焦点圈定或屏幕阅读器验证。
 

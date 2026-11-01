@@ -38,9 +38,9 @@ git diff --check
 
 截图来自真实应用，并已逐图查看主要桌面/窄屏结果：
 
-- [桌面紧凑条](revision-screenshots/desktop-compact.png)、[桌面时间弹窗](revision-screenshots/desktop-time-dialog.png)：1280×800。
-- [391px 紧凑条](revision-screenshots/narrow-391-compact.png)、[391px 时间弹窗](revision-screenshots/narrow-391-time-dialog.png)：391×844，document.scrollWidth=391，弹窗左19/右372、宽353、高约432px。
-- [320px 紧凑条](revision-screenshots/narrow-320-compact.png)、[320px 时间弹窗](revision-screenshots/narrow-320-time-dialog.png)：320×844，document.scrollWidth=320，弹窗左19/右301、宽282、高约511px，标题/全部说明/操作均在视口内。
+- [桌面紧凑条](revision-screenshots/desktop-compact.jpg)、[桌面时间弹窗](revision-screenshots/desktop-time-dialog.jpg)：1280×800。
+- [391px 紧凑条](revision-screenshots/narrow-391-compact.jpg)、[391px 时间弹窗](revision-screenshots/narrow-391-time-dialog.jpg)：391×844，document.scrollWidth=391，弹窗左19/右372、宽353、高约432px。
+- [320px 紧凑条](revision-screenshots/narrow-320-compact.jpg)、[320px 时间弹窗](revision-screenshots/narrow-320-time-dialog.jpg)：320×844，document.scrollWidth=320，弹窗左19/右301、宽282、高约511px，标题/全部说明/操作均在视口内。
 
 控制条不再有整行规则，手机转写区域恢复空间；弹窗布局无横向溢出。原生 Escape 与回焦已实证，未做屏幕阅读器、Tab 圈定、移动真机或真人新手研究。tab console warn/error 为空。模拟对话已停止，临时 viewport 已 reset，自建 Chrome tab 已关闭，未保留额外浏览器消费者。仅使用既有 DEV demo port，无真实模型、mic、provider 或 WS 调用；不将 fake 当真实语音验收。
 

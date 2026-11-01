@@ -13,7 +13,7 @@
 
 本轮使用真实应用、既有5544 Web与新建专属Chrome tab `1910332581`。IAB不可用事实已在前一项[计时弹窗验收](../../design/first-use-help-2026-11-01/revision-time-dialog.md)核实，沿主代理允许的Chrome fallback，不重复探测。只访问带`demo=1`的DEV案件页，未读取用户正常模式tab、草稿、Cookie或storage，未自动开启真实语音。
 
-触控复现使用已读文档的 tab CDP capability：`Emulation.setTouchEmulationEnabled` 的 enabled=true、maxTouchPoints=1；鼠标对照为enabled=false。每轮以实际 `matchMedia('(hover:none)').matches` 核分支，**不是仅resize后假定已模拟触屏**。1024×768下，基线鼠标为false/flex/180px，触控为true/grid/322px；同触控条件下指认卡仍为180px。原始复现截图：[修前接案](screenshots/before-touch-1024-intro.png)、[修前指认](screenshots/before-touch-1024-accusation.png)。不把Chromium触控仿真等同于真实iPad或Safari实机。
+触控复现使用已读文档的 tab CDP capability：`Emulation.setTouchEmulationEnabled` 的 enabled=true、maxTouchPoints=1；鼠标对照为enabled=false。每轮以实际 `matchMedia('(hover:none)').matches` 核分支，**不是仅resize后假定已模拟触屏**。1024×768下，基线鼠标为false/flex/180px，触控为true/grid/322px；同触控条件下指认卡仍为180px。原始复现截图：[修前接案](screenshots/before-touch-1024-intro.jpg)、[修前指认](screenshots/before-touch-1024-accusation.jpg)。不把Chromium触控仿真等同于真实iPad或Safari实机。
 
 ## 根因与最小修复
 
@@ -29,10 +29,10 @@
 
 ## 实际浏览器验证
 
-- [修后1024×768双人接案](screenshots/after-touch-1024-intro.png)：两卡180px，完整脸部恢复；[同尺寸修后指认](screenshots/after-touch-1024-accusation.png)仍180px，与基线一致。
+- [修后1024×768双人接案](screenshots/after-touch-1024-intro.jpg)：两卡180px，完整脸部恢复；[同尺寸修后指认](screenshots/after-touch-1024-accusation.jpg)仍180px，与基线一致。
 - 1000/1001/1023/1024/1025/1100六个相邻宽度、高768，分别切实际mouse与touch媒体分支，12轮均为两卡180px且document.scrollWidth等于viewport。完整[量测结果](measurements.json)保留grid/flex和hoverNone实测值。
-- 1024×768触控，[三人案](screenshots/after-touch-1024-three-characters.png)各180px，[四人案](screenshots/after-touch-1024-four-characters.png)各153px，均无横向溢出，角色均显示且不被固定为双人；[人数量测](case-measurements.json)。当前官方人数2/3/4已覆盖，不伪称存在官方七人案。
-- 小屏触控320×844为115px、391×844为150.5px，仍自然填入原有两列；[391截图](screenshots/after-touch-391-intro.png)。桌面鼠标1440×900仍180px，[桌面截图](screenshots/after-mouse-desktop-intro.png)。[边界与指认量测](edge-measurements.json)同时记录无横向溢出。
+- 1024×768触控，[三人案](screenshots/after-touch-1024-three-characters.jpg)各180px，[四人案](screenshots/after-touch-1024-four-characters.jpg)各153px，均无横向溢出，角色均显示且不被固定为双人；[人数量测](case-measurements.json)。当前官方人数2/3/4已覆盖，不伪称存在官方七人案。
+- 小屏触控320×844为115px、391×844为150.5px，仍自然填入原有两列；[391截图](screenshots/after-touch-391-intro.jpg)。桌面鼠标1440×900仍180px，[桌面截图](screenshots/after-mouse-desktop-intro.jpg)。[边界与指认量测](edge-measurements.json)同时记录无横向溢出。
 
 主要修前/修后、三人/四人和手机截图均已实际打开检查。CSS经既有Vite正常HMR更新，未重启服务；没有刷新或操作用户正在玩的页面、触碰其mic/WS。tab console warn/error为空。自建tab完成后关闭，触控仿真设回false、viewport reset，无额外浏览器消费者保留。
 
