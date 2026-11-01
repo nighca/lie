@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
-import { readFile, writeFile } from 'node:fs/promises'
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { build } from 'vite'
 
 const output = new URL('../../tmp/safari-audio-probe/', import.meta.url)
@@ -24,3 +24,10 @@ const standalone = html.replace(scriptTag, () => `<script type="module">${script
   .replace("script-src 'self' blob:", `script-src 'sha256-${hash(script)}' blob:`)
   .replace("style-src 'self'", `style-src 'sha256-${hash(style)}'`)
 await writeFile(new URL('safari-audio.html', output), standalone)
+
+if (process.argv.includes('--publish')) {
+  const web = new URL('../../apps/web/dist/', import.meta.url)
+  await access(new URL('index.html', web))
+  await mkdir(new URL('_diagnostics/', web), { recursive: true })
+  await writeFile(new URL('_diagnostics/safari-audio.html', web), standalone)
+}

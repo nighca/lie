@@ -1,6 +1,6 @@
 # Safari 角色语音自打断调查
 
-2026-11-01，专项 Chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。状态：**首轮事件路径和后续 WebKit 输出路径调查完成，独立无provider诊断工具已实现并离线检查；线上入口待用户范围确认，真实 Safari 未复现、根因未定、无产品修复**。
+2026-11-01，专项 Chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。状态：**首轮事件路径和后续 WebKit 输出路径调查完成，独立无provider诊断工具已实现并离线检查；用户已明确批准线上独立诊断入口，并要求不影响其他线上功能。本批仅接入构建，待协调者review/发布；真实 Safari 未复现、根因未定、无产品修复**。
 
 ## 范围与来源
 
@@ -70,7 +70,7 @@
 
 针对补充条件查询了 WebKit 的 AEC/WebAudio/移动端相关报告，未找到足以确认本案根因的对应修复。[WebKit #218012](https://bugs.webkit.org/show_bug.cgi?id=218012) 讨论开启 mic 后音量/路由变化，只作为检查音频会话的背景，不是自打断的复现证据；不将音量/爆音 bug 与本案混为一个问题。
 
-后续继续调查已找到具体 upstream 输出路径差异：WebAudio 直接output使用RemoteIO，AEC capture使用VPIO；MediaStream renderer在特定默认输出/最近采集connection等条件下可经capture unit渲染。已据此实现[独立A/B/C工具与源码证据](../../../spikes/safari-audio/README.md)，比较16k直接播放、默认率直接播放、16k媒体流播放；不改变现有玩法，不使用Linx或录音。13项fake/types/独立构建及产物边界检查通过；新增隐藏HTTPS入口待用户明确范围确认，由协调者review后发布，当前未改产品路由。IAB file协议预览被策略拒绝且未绕过，实际CSP/浏览器音频效果未验。
+后续继续调查已找到具体 upstream 输出路径差异：WebAudio 直接output使用RemoteIO，AEC capture使用VPIO；MediaStream renderer在特定默认输出/最近采集connection等条件下可经capture unit渲染。已据此实现[独立A/B/C工具与源码证据](../../../spikes/safari-audio/README.md)，比较16k直接播放、默认率直接播放、16k媒体流播放；不改变现有玩法，不使用Linx或录音。13项fake/types/独立构建及产物边界检查通过；用户明确回复“同意上线独立诊断入口”，随后要求“需要确保不影响任何其他线上功能”。经协调者明确交回最小Web构建接入ownership，本专项只在原postbuild后追加独立HTML，测试/typecheck覆盖工具；不改App/路由/语音产品代码/Worker/API/全局CSP/工作流/锁文件。由协调者review后发布。IAB file协议预览被策略拒绝且未绕过，实际CSP/浏览器音频效果未验。
 
 ## 下一轮所需证据与判别
 

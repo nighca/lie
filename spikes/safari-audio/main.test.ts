@@ -1,14 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { readFileSync } from 'node:fs'
 
 import type { ProbeReport } from './probe'
+import template from './index.html?raw'
 
 const fake = vi.hoisted(() => ({ start: vi.fn(), stop: vi.fn(async () => {}), create: vi.fn(), update: (_report: ProbeReport) => {} }))
 vi.mock('./probe', () => ({ createAudioProbe: (...args: unknown[]) => { fake.create(...args); fake.update = args[1] as typeof fake.update; return { start: fake.start, stop: fake.stop } } }))
 
 beforeEach(() => {
   vi.resetModules(); vi.clearAllMocks()
-  document.documentElement.innerHTML = readFileSync('spikes/safari-audio/index.html', 'utf8')
+  document.documentElement.innerHTML = template
   vi.stubGlobal('isSecureContext', true)
   vi.stubGlobal('navigator', { mediaDevices: { getUserMedia: vi.fn() } })
 })
