@@ -2,7 +2,7 @@
 
 2026-10-30 状态截点：本文档整理基线为 `fd0493773e3b47ee934b2a391e8f69b49f632c58`。已发布并完整验收的 UI 为 `bda3ddbf7b69f7f28ee2f112183477e617a2bbd0`（见下表）。用户最新明确撤销视频 Git 入库许可，并要求移除本地含视频提交；root 在用户重新确认无语音的单次恢复窗口内，将未推成功的本地 main 从 `843985977659ce2c78e746436b80b1b544119fe3` 恢复 bda，main clean、远端仍 bda、本地 main-status/health/voiceStatus 已恢复。原 23:17:16–23:32:16 窗口已结束，后一次恢复许可仅该动作，**当前没有后续文档或结果页 main 更新许可**。本批结果页、人物布局与已审资料从bda另建隔离候选，由page_version持唯一integration/publication turn；新服务窗口须由root另行确认，不延用上述旧许可。
 
-总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 负责需求、调度、实际 review、串行集成与发布；具体实施和耗时验证由专项完整执行。每个专项使用独立 managed worktree / `codex/` 分支，草稿、产物、依赖与临时文件不落主工作区。只有获唯一 integration/publication turn 的 owner 可更新 main/push；review 后默认普通 push，不开 PR，不恢复旧轮换或定时任务。服务窗口与源码发布授权分别确认。 2026-11-01 协作约定：新 LIE chat 默认已附带 App 建立的独立 worktree，先核路径、HEAD、目标 base、分支及文件 ownership，合适则复用，不因新 chat 重复创建；仅在没有合适附带工作区时新建，独立 `codex/` 分支与唯一集成者规则继续有效。
+总协调 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8` 负责需求、调度、实际 review、串行集成与发布；具体实施和耗时验证由专项完整执行。每个专项使用独立 managed worktree / `codex/` 分支，草稿、产物、依赖与临时文件不落主工作区。只有获唯一 integration/publication turn 的 owner 可更新 main/push；review 后默认普通 push，不开 PR，不恢复旧轮换或定时任务。服务窗口与源码发布授权分别确认。 2026-11-01 协作约定（纠正此前“默认已附带”的措辞）：创建每个新 LIE chat 时主动选择独立 worktree 环境，核验实际绑定路径、HEAD、目标 base、分支及文件 ownership；创建时已正确配置则复用该工作区，不重复新建，未配置则先补配置并完成隔离，不假设默认已有。独立 `codex/` 分支、任务隔离与唯一集成者规则继续有效。
 
 ## 当前执行队列
 
