@@ -19,6 +19,7 @@
 ```sh
 npm ci
 node scripts/character-presets.mjs
+node node_modules/vitest/vitest.mjs run --config design/share-storage-demo/vitest.config.ts
 node node_modules/vue-tsc/bin/vue-tsc.js -p design/share-storage-demo/tsconfig.json --noEmit
 node node_modules/vite/bin/vite.js build --config design/share-storage-demo/vite.config.ts
 node node_modules/vite/bin/vite.js --config design/share-storage-demo/vite.config.ts --host 127.0.0.1 --port 5177 --strictPort
@@ -51,3 +52,5 @@ node node_modules/vite/bin/vite.js --config design/share-storage-demo/vite.confi
 用户再次明确将存储说明从编辑页移入分享弹窗：当时说明移至状态和操作区之后；本轮进一步移除分隔线并合并说明，所有分享状态仍共享一次，未增加任何确认步骤。此修订追加提交，不改已交历史。Chrome专属验收页已核桌面/390×844等待、失败、成功和超限状态，说明均在弹窗内仅出现一次，编辑页不显示；移动无横向溢出。截图已同步更新，验收tab关闭且viewport重置；类型/构建检查通过，原5177服务继续供用户审看。
 
 用户认为成功弹窗信息类别与样式过多，本轮合并为三组；等待去掉重复副句，失败去掉重复的草稿保留段落，保留原因与重试/继续编辑。说明为普通小字，不新增图标、确认步骤或组件。旧版设计仍保存在此前提交，用户对照图保存为evidence/review-before-simplification.png。专属Chrome页实测桌面链接/复制同行且保现有输入边框/内距、390px自然堆叠无横向溢出；复制成功、失败重试、等待关闭和超限继续编辑通过，已更新截图并关闭验收页。类型/构建和diff检查通过；原服务保留，正式UI仍待用户批准。
+
+Review补修：复制反馈使用一个轮次counter，新分享、关闭/导航和卸载使旧异步结果失效；每次复制重置错误。沿现有Vitest/Vue Test Utils做3项实际组件测试：正常复制、deferred旧复制在关闭重开后完成不标记新弹窗、失败后重试成功清错误，全部通过，无新增依赖。`evidence/player-network-mobile.jpg`已重拍并目视核见玩家网络失败卡片与重新加载按钮；专属Chrome验后关闭，viewport重置，原服务保持。

@@ -27,20 +27,19 @@ const people = [
 const avatar = (id: string) => `/appearances/${id}/avatar.png`
 const errorMessage = computed(() => playerState.value === 'missing' ? '案件不存在或已不可用' : '暂时无法打开案件')
 let timer: ReturnType<typeof setTimeout> | null = null
+let copyRevision = 0
 function cancelPending() {
   if (timer != null) clearTimeout(timer)
   timer = null
   sharing.value = false
 }
 function author() {
-  cancelPending()
+  closeShare()
   screen.value = 'author'
-  dialog.value = false
   notice.value = null
 }
 function openPlayer() {
-  cancelPending()
-  dialog.value = false
+  closeShare()
   screen.value = 'player'
   playerState.value = 'loading'
   timer = setTimeout(() => {
@@ -49,6 +48,7 @@ function openPlayer() {
 }
 function share() {
   cancelPending()
+  copyRevision++
   copied.value = false
   copyError.value = false
   notice.value = null
@@ -67,12 +67,17 @@ function share() {
   }, 1300)
 }
 async function copy() {
-  try { await navigator.clipboard.writeText(shareUrl); copied.value = true }
-  catch { copyError.value = true }
+  const revision = ++copyRevision
+  copied.value = false
+  copyError.value = false
+  try {
+    await navigator.clipboard.writeText(shareUrl)
+    if (revision === copyRevision) copied.value = true
+  } catch { if (revision === copyRevision) copyError.value = true }
 }
-function closeShare() { cancelPending(); dialog.value = false }
+function closeShare() { cancelPending(); copyRevision++; dialog.value = false }
 function edit() { notice.value = null; closeShare() }
-onUnmounted(cancelPending)
+onUnmounted(closeShare)
 </script>
 
 <template>
