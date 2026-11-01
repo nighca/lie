@@ -73,8 +73,7 @@ describe('server-owned voice session lifetime', () => {
 
 it.each(['1', '2147483'])('accepts the timer-safe configuration boundary %s', async value => {
   const upstream = vi.spyOn(globalThis, 'fetch')
-    .mockImplementationOnce(async () => Response.json({ websocket: { token: 'fake-token' } }))
-    .mockImplementationOnce(async () => new Response('fake upgrade rejection', { status: 401 }))
+    .mockImplementationOnce(async () => new Response('fake upgrade rejection', { status: 403 }))
   const env: GatewayEnv = {
     VOICE_MAX_SESSION_SECONDS: value,
     ...credentials,
@@ -84,5 +83,5 @@ it.each(['1', '2147483'])('accepts the timer-safe configuration boundary %s', as
   const cookie = (await browserDeviceCookie(request, env, newBrowserDevice(request, env))).split(';')[0]
   const response = await gateway.fetch(new Request(request.url, { headers: { Upgrade: 'websocket', Origin: 'https://game.example', Cookie: cookie } }), env)
   expect(response.status).toBe(502)
-  expect(upstream).toHaveBeenCalledTimes(2)
+  expect(upstream).toHaveBeenCalledOnce()
 })

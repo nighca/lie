@@ -6,7 +6,7 @@ import { browserDeviceCookie, deviceProvider, newBrowserDevice, readBrowserDevic
 
 type ConfiguredEnv = InferEnv<ReturnType<typeof config.worker>>
 export type GatewayEnv = Omit<ConfiguredEnv, 'SHARED_GAMES'> & Partial<Pick<ConfiguredEnv, 'SHARED_GAMES'>> & Partial<Record<
-  'LINX_API_KEY' | 'VOICE_DEVICE_COOKIE_SECRET' | 'LINX_AGENT_ID', string
+  'LINX_API_KEY' | 'LINX_WS_TOKEN' | 'VOICE_DEVICE_COOKIE_SECRET' | 'LINX_AGENT_ID', string
 >>
 const upstreamUrl = 'https://xrobo-io.qiniuapi.com/v1/ws/'
 
@@ -105,8 +105,7 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
   const timeout = setTimeout(() => controller.abort(), 9000)
   const signal = AbortSignal.any([controller.signal, request.signal])
   try {
-    const token = await deviceProvider(env, device, signal).token()
-    response = await fetch(upstreamUrl, {
+    const connect = (token: string) => fetch(upstreamUrl, {
       headers: {
         Upgrade: 'websocket', Authorization: `Bearer ${token}`,
         'Device-Id': device.deviceId, 'Client-Id': device.clientId,
@@ -114,6 +113,11 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
       },
       redirect: 'manual', signal
     })
+    response = await connect(env.LINX_WS_TOKEN!)
+    if (response.status === 401 && response.webSocket == null) {
+      void response.body?.cancel().catch(() => {})
+      if (!signal.aborted) response = await connect(await deviceProvider(env, device, signal).token())
+    }
   } catch (error) {
     console.error(JSON.stringify({ event: 'voice_upstream_unavailable' }))
     return new Response('Voice upstream unavailable', { status: signal.aborted ? 504 : error instanceof VoiceDeviceError ? error.status : 502 })

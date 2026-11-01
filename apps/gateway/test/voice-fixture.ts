@@ -5,7 +5,7 @@ import { Miniflare } from 'miniflare'
 import { workerScript } from './worker-script'
 
 export const testOrigin = 'https://game.example'
-export const credentials = { LINX_API_KEY: 'fake-management-key', LINX_AGENT_ID: 'test-agent', VOICE_DEVICE_COOKIE_SECRET: 'test-cookie-signing-key-at-least-32-bytes', VOICE_DEVICE_ENVIRONMENT: 'test' }
+export const credentials = { LINX_API_KEY: 'fake-management-key', LINX_WS_TOKEN: 'fake-shared-token', LINX_AGENT_ID: 'test-agent', VOICE_DEVICE_COOKIE_SECRET: 'test-cookie-signing-key-at-least-32-bytes', VOICE_DEVICE_ENVIRONMENT: 'test' }
 export const fakeLinx = `
 const devices = new Map();
 const sockets = new Map();
@@ -51,7 +51,9 @@ export default { async fetch(request) {
   if(url.origin === 'https://xrobo-io.qiniuapi.com' && url.pathname === '/v1/ws/') {
     calls.ws++;
     const mac=request.headers.get('Device-Id'); const d=devices.get(mac);
-    if(!d?.agent || request.headers.get('Authorization') !== 'Bearer device-token-'+mac || request.headers.get('X-Agent-ID') !== d.agent || request.headers.get('Client-Id') !== d.client || request.headers.get('Protocol-Version') !== '1') return new Response('private fake details',{status:401});
+    const authorization=request.headers.get('Authorization');
+    if(!d?.agent || !(authorization === 'Bearer device-token-'+mac || authorization === 'Bearer fake-shared-token') || request.headers.get('X-Agent-ID') !== d.agent || request.headers.get('Client-Id') !== d.client || request.headers.get('Protocol-Version') !== '1') return new Response('private fake details',{status:401});
+    if(options.rejectSharedToken && authorization === 'Bearer fake-shared-token') return new Response('expired shared token',{status:401});
     if(options.rejectWs) return new Response('private fake details',{status:401});
     const owner={};
     const [client,server]=Object.values(new WebSocketPair()); server.accept(); server.binaryType='arraybuffer'; sockets.set(mac,owner);

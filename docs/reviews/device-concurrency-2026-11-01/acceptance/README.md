@@ -23,7 +23,7 @@
 
 ## 服务和浏览器方法
 
-执行脚本的原始身份保存在本目录：`server.ts` SHA256 `cab18f49e495448370f8d61cbbbb02bce73487a589dae43445ec87a2dd69684b`；`media-injection.mjs` SHA256 `8aeb306cdb2733028b3b1b9c9203fb785bbe6cbc4346201e0115175a2730b005`。脚本保持实际执行版本；重放时从 repo root 复制回原位置，不能直接在归档目录执行相对 import：
+执行脚本的原始身份保存在本目录：`server.ts` SHA256 `cab18f49e495448370f8d61cbbbb02bce73487a589dae43445ec87a2dd69684b`；`media-injection.mjs` SHA256 `8aeb306cdb2733028b3b1b9c9203fb785bbe6cbc4346201e0115175a2730b005`。脚本保持实际执行版本；重放须使用本次 `cf375958` 对应的源码与 fixture，不能把后续共享 token 实现套入本次配置后声称重放相同实验。从该版本 repo root 复制回原位置，不能直接在归档目录执行相对 import：
 
 ```sh
 mkdir -p tmp/p0-cookie-browser

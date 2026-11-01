@@ -1,6 +1,6 @@
 # 同设备新连接顶替旧连接：P0证据审查
 
-2026-11-01；本页保存最初本地证据的独立审查，下文按调查当时的范围保留。当前进展：已[生产复现](production-2026-11-01.md)，Cookie Device 修复已在专项分支实现并完成[本地浏览器验收](acceptance/README.md)，尚未集成或上线；[真实共享 token 样本](token-study/run-02.md)通过，原固定 token 与期限仍待核对。[HTTP API 设计](browser-device-implementation.md)与[省 OTA 候选](token-study/shared-token-proposal.md)分别记录现有实现和后续 proposal。只保存脱敏事实和必要方法，不复制设备/会话标识、认证值、录音或真实用户转写。
+2026-11-01；本页保存最初本地证据的独立审查，下文按调查当时的范围保留。当前进展：已[生产复现](production-2026-11-01.md)，Cookie Device 修复已在专项分支实现并完成[本地浏览器验收](acceptance/README.md)，尚未集成或上线；[共享 token 并存](token-study/run-02.md)及[原固定本地 token 配新 Device](token-study/original-fixed-run-01.md)均通过。后续源码已采用共享首握、仅401一次刷新，生产同一性与期限仍未知。[HTTP API 设计](browser-device-implementation.md)、[省 OTA 设计](token-study/shared-token-proposal.md)与[发布就绪方案](release-readiness.md)记录当前契约和发布门槛。只保存脱敏事实和必要方法，不复制设备/会话标识、认证值、录音或真实用户转写。
 
 ## 来源与身份
 

@@ -27,7 +27,7 @@ function environment(request: Request, env: GatewayEnv) {
   return `${env.VOICE_DEVICE_ENVIRONMENT}:${loopback(request) ? 'development' : 'https'}`
 }
 export function voiceConfigured(env: GatewayEnv) {
-  return Boolean(env.LINX_API_KEY && env.LINX_AGENT_ID && env.VOICE_DEVICE_COOKIE_SECRET &&
+  return Boolean(env.LINX_API_KEY && env.LINX_WS_TOKEN && env.LINX_AGENT_ID && env.VOICE_DEVICE_COOKIE_SECRET &&
     encoder.encode(env.VOICE_DEVICE_COOKIE_SECRET).byteLength >= 32 && env.VOICE_DEVICE_ENVIRONMENT)
 }
 function encode(bytes: Uint8Array) { return btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '') }

@@ -106,7 +106,7 @@ describe('gateway in workerd', () => {
     }
   }, 20000)
 
-  it.each(['LINX_API_KEY', 'LINX_AGENT_ID', 'VOICE_DEVICE_COOKIE_SECRET'])('reports unavailable when %s is not configured', async (key) => {
+  it.each(['LINX_API_KEY', 'LINX_WS_TOKEN', 'LINX_AGENT_ID', 'VOICE_DEVICE_COOKIE_SECRET'])('reports unavailable when %s is not configured', async (key) => {
     const unconfigured = await runtime({ ...credentials, [key]: '' })
     const response = await unconfigured.dispatchFetch(`${testOrigin}/api/voice/status`)
     expect(await response.json()).toEqual({ status: 'unavailable' })
@@ -281,4 +281,25 @@ it('accepts a zero-byte stream while rejecting actual prepare body bytes', async
   const filled = await instance.dispatchFetch(`${testOrigin}/api/voice/prepare`, { method: 'POST', headers: { Origin: testOrigin, Cookie: cookie }, body: 'x' })
   expect(filled.status).toBe(400)
   expect((await snapshot(instance)).calls.bind).toBe(1)
+}, 20000)
+
+
+it.each([false, true])('uses shared token first and refreshes only one rejected handshake (401=%s)', async rejectedShared => {
+  const instance = await runtime()
+  const headers = await preparedHeaders(instance)
+  const before = (await snapshot(instance)).calls
+  if (rejectedShared) await control(instance, { rejectSharedToken: true })
+  const response = await instance.dispatchFetch(`${testOrigin}/api/voice`, { headers })
+  expect(response.status).toBe(101)
+  const socket = response.webSocket!
+  socket.accept()
+  const after = (await snapshot(instance)).calls
+  expect(after.ota - before.ota).toBe(rejectedShared ? 1 : 0)
+  expect(after.ws - before.ws).toBe(rejectedShared ? 2 : 1)
+  expect(after.bind).toBe(before.bind)
+  const closeEvent = closed(socket)
+  socket.send('server-close')
+  await closeEvent
+  expect((await snapshot(instance)).calls).toEqual(after)
+  socket.close()
 }, 20000)

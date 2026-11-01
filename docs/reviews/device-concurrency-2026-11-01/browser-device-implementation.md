@@ -2,7 +2,7 @@
 
 2026-11-01；设计基线 `916d77cdb4044069e53d7c9f61b2a2b68d5bdcbf`，已在专项提交 `a17870f80a8eb7922f33a1629886cf953bf5314b` 实现并完成[本地验收](acceptance/README.md)，尚未集成或上线。产品语义已确定：一个站点浏览器身份对应一个供应商 Device；同身份后连接自然顶旧，不加锁、不新增多标签页提示。案件有效加载成功、展示背景页时即后台准备Device；开始对话时准备已完成就连接，否则等待同一准备任务。Cookie 跨局保留，开始游戏不等于新建 Device。
 
-下述每 WS OTA 是当前实现的取值方式，不是供应商强制要求；后续[真实跨 Device 共用 token 样本](token-study/run-02.md)已通过，[免逐次 OTA 候选](token-study/shared-token-proposal.md)尚未写入产品代码。原固定 token、长期期限与刷新规则仍待核对。
+后续[真实跨 Device 共用 token 样本](token-study/run-02.md)与[原固定本地 token 配新 Device 样本](token-study/original-fixed-run-01.md)均已通过。按用户优先省去逐次 OTA 的要求，后续实现改为共享 token 直连，只有首次 HTTP401 才一次 OTA 刷新并重试；生产 token 同一性、长期期限与真实过期行为仍未知。
 
 ## 推荐：签名 Cookie＋供应商绑定状态，不新增 DB/DO
 
@@ -18,7 +18,7 @@
 | --- | --- |
 | `GET /api/voice/status` | 保留配置可用性检查；缺失/失效Cookie时签发新身份，需续期时保留原Device/Client。返回`{status:"ready"}`及必要`Set-Cookie`，`no-store`；不发OTA/管理请求。`ready`只表示配置可用。 |
 | 新增 `POST /api/voice/prepare` | 空body，只接受当前签名Cookie；校验同源Origin、无query，不接收客户端Device/token。按该身份OTA，未绑定才激活绑定固定Agent，再OTA确认token。成功204；无效/缺Cookie为409 `{error:"identity-required"}`且无provider副作用；非法输入400、跨源403、供应商失败502、准备超时504。 |
-| `GET /api/voice` WebSocket | 保留同源Origin/无query、不新增subprotocol。验证当前Cookie及配置环境后OTA取token，只有已绑定身份才连接固定官方WSS。不跟随OTA URL，不用明文WS；未绑定时503，下一次显式准备处理，不在WS窗口冷注册。 |
+| `GET /api/voice` WebSocket | 保留同源Origin/无query、不新增subprotocol。验证当前Cookie及配置环境后，用服务端共享token连接固定官方WSS；只有首次握手HTTP401且未升级才按同身份OTA一次并重试一次。整条路径共用9秒预算。不跟随OTA URL，不用明文WS，不在WS窗口冷注册/绑定，不缓存刷新token。签名Cookie不证明已完成绑定，合法绑定验证依赖供应商；前端正常路径先prepare。 |
 
 请求示例（浏览器自动处理Cookie，正文不含身份或凭据）：
 
@@ -42,11 +42,11 @@ Upgrade: websocket
 
 两个无Cookie标签页并发status可能签发A/B两个候选，后响应会覆盖Cookie；**不声称一次GET就锁定全浏览器身份**。当前有效签名Cookie是身份权威，页面的`prepared`仅是减少重复准备的优化hint。A的prepare若已开始才被B Cookie覆盖，A结果仍属于A，不移给B、不做回滚解绑；它可能成为孤立候选，进入人工资源核对。
 
-随后WS按其实际Cookie B重新OTA：B已绑定就连B，符合当前身份语义；B未绑定就失败，不临时创建，不借用A token或人物context。下次用户显式对话动作先重新status/prepare同一个B身份。HTTP准备缺Cookie/失效时，可在同一20秒总预算内最多重新bootstrap一次；再失败停止。WS失败不自动重拨，沿现有错误反馈。首次候选竞争期间不保证不同候选马上互顶；它们是不同身份，旧候选连接仍受原600秒/页面关闭生命周期约束，不为此加活跃voice锁或新UI。
+随后WS按其实际Cookie B传递Device/Client，用同一Agent的服务端共享token握手，不借用A身份或人物context。网关不冷注册；供应商拒绝未绑定B时明确失败，下次用户显式动作重新status/prepare同一个B身份。共享token已实证不必逐Device取得，不能再把共用token本身当身份串用。HTTP准备缺Cookie/失效时，可在同一20秒总预算内最多重新bootstrap一次；再失败停止。WS失败不自动重拨，沿现有错误反馈。首次候选竞争期间不保证不同候选马上互顶；它们是不同身份，旧候选连接仍受原600秒/页面关闭生命周期约束，不为此加活跃voice锁或新UI。
 
 未采纳“前端expected identity tag＋WS subprotocol”备选：它约束JS曾准备的候选，但这不是已定产品要求，也不消除孤立资源，反而扩大协议和voice包修改；本方案不新增tag字段或修改voice包。
 
-准备窗口建议客户端 ensurePrepared 全链20秒（包括身份GET和prepare POST）、服务端prepare供应商总计18秒（单次请求最多8秒且受剩余总预算约束）；失败立即停止，不循环重试。现有 channel 的10秒握手窗口保留，单独覆盖每次 WS 的 OTA、上游 upgrade、hello/MCP；网关该阶段总预算应小于客户端10秒，建议9秒。用户后续要求验证跨Device共用原固定token及有效期/刷新；这部分尚未实证，见[token研究](token-study/study.md)。正常prepare与WS各一次OTA是目前已实现的保守取舍，而非供应商已证实的必须要求：不为省这次请求引入跨实例 token 缓存或把 token 放浏览器。
+准备窗口为客户端 ensurePrepared 全链20秒（包括身份GET和prepare POST）、服务端prepare供应商总计18秒（单次请求最多8秒且受剩余总预算约束）；失败立即停止，不循环重试。现有 channel 的10秒握手窗口保留，覆盖上游upgrade、hello/MCP；网关9秒总预算包括首握、仅401触发的一次OTA与二握，不重置。日常成功首握没有OTA；403、网络错误、101后断开不触发刷新。刷新值不缓存、不写平台secret，静态token持续失效时可能每次连接重复401/OTA/重试，需授权运维轮换；完整限制见[token研究](token-study/study.md)。
 
 已测 D2 OTA＋bind＋OTA约4.034秒、WS到ready约2.102秒，整体6.139秒，仅单样本，不是超时可满足的 SLA。准备完成不意味着麦克风已准备或语音已ready。
 
@@ -68,7 +68,7 @@ Upgrade: websocket
 
 ## 需确认的运维边界
 
-建议保留固定通用 Agent，仅用在线管理 key 完成首次绑定；不在运行时创建 Agent。设计供用户审阅不阻塞已授权的接入推进；在线管理key作为Worker secret、新独立Cookie签名密钥及下述运维策略仍需进入具体配置/发布审查，不在本设计里执行。原固定 `LINX_DEVICE_ID/LINX_WS_TOKEN` 不再承担所有用户连接身份；迁移与环境隔离另由发布方案核定，不能默认两套 token 能隔离同 Device。
+保留固定通用 Agent，仅用在线管理 key 完成首次绑定；不在运行时创建 Agent。设计供用户审阅不阻塞已授权的接入推进；在线管理key作为Worker secret、新独立Cookie签名密钥及下述运维策略仍需进入具体配置/发布审查，不在本设计里执行。原固定 `LINX_DEVICE_ID` 不再承担所有用户连接身份；`LINX_WS_TOKEN` 保留为服务器共享握手凭据。迁移与环境隔离见[发布就绪方案](release-readiness.md)，不能默认两套token能隔离同Device。
 
 建议180天 Cookie、首版无自动解绑 TTL：cookie 过期不等于供应商通话结束，`lastConnectedAt` 的完整性/时效也未验证。由总协调指定资源管理 owner，发布前保存配置 Agent 的既有设备保护清单；发布后7天内完成首轮人工清点，此后每周复核。超过30天未连接只列为人工候选，必须确认归属、无当前消费者及终止状态后才清理；不能只按前缀或时间直接删除。若清单/归属无法可靠核定，暂停扩大新身份发放并补齐登记/查询能力，不能静默无限积累。以上周期、责任与暂人工回收方案待用户确认，不代表已有自动清理或硬容量上限。
 

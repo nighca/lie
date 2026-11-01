@@ -1,0 +1,81 @@
+{
+  "owner": "lie-p0-original-fixed-token-2026-11-01",
+  "startedAt": "2026-11-01T06:49:42.953Z",
+  "operations": [
+    {
+      "operation": "read-target-agent-greeting",
+      "startedAtMs": 3,
+      "durationMs": 2095,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D1-initial-ota",
+      "startedAtMs": 2100,
+      "durationMs": 5939,
+      "status": 200,
+      "code": null,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D1-bind",
+      "startedAtMs": 8041,
+      "durationMs": 1773,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D1-unbind",
+      "startedAtMs": 15639,
+      "durationMs": 1858,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    }
+  ],
+  "channel": {
+    "startedAtMs": 9815,
+    "openedAtMs": 11664,
+    "helloAtMs": 12114,
+    "callerClose": true,
+    "closeObserved": true,
+    "closeAtMs": 15639,
+    "closeCode": 1000,
+    "readyState": 3,
+    "terminated": false,
+    "unexpectedUpgradeStatus": null,
+    "receivedAudioBytes": 0,
+    "receivedTtsMessages": 0,
+    "errorCode": null
+  },
+  "completed": true,
+  "listenMessages": 0,
+  "inputAudioBytes": 0,
+  "cleanup": {
+    "startedAt": "2026-11-01T06:49:58.069Z",
+    "socketCreated": true,
+    "socketClosed": true,
+    "normalClose": true,
+    "ownedBindingCleared": true,
+    "scope": "Only the newly owned Device binding; no target Agent or original Device changes; provider registry/log erasure not claimed",
+    "finishedAt": "2026-11-01T06:50:00.452Z"
+  },
+  "config": {
+    "disable_greeting": true
+  },
+  "token": {
+    "format": "jwt-like",
+    "signatureVerified": false,
+    "iat": null,
+    "exp": null,
+    "declaredLifetimeSeconds": null
+  },
+  "finishedAt": "2026-11-01T06:50:00.452Z",
+  "elapsedMs": 17499
+}

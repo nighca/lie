@@ -72,7 +72,6 @@ it('closes only its owned upstream when an aborted upgrade resolves late', async
   try {
     vi.stubGlobal('WebSocketPair', browserRelay)
     globalThis.fetch = vi.fn()
-      .mockImplementationOnce(async () => Response.json({ websocket: { token: 'fake-token' } }))
       .mockImplementationOnce(() => new Promise(resolve => { finishUpgrade = resolve }))
     const response = gateway.fetch(new Request('https://game.example/api/voice', { headers: { Cookie: one.cookie, Origin: 'https://game.example', Upgrade: 'websocket' }, signal: abort.signal }), env)
     await vi.waitFor(() => expect(finishUpgrade).toBeTypeOf('function'))
@@ -82,7 +81,7 @@ it('closes only its owned upstream when an aborted upgrade resolves late', async
     expect(result.status).toBe(504)
     expect(result.webSocket).toBeUndefined()
     expect(browserRelay).not.toHaveBeenCalled()
-    expect(globalThis.fetch).toHaveBeenCalledTimes(2)
+    expect(globalThis.fetch).toHaveBeenCalledOnce()
     expect(upstream.accept).toHaveBeenCalledOnce()
     expect(upstream.close).toHaveBeenCalledExactlyOnceWith(1000, 'Connection cancelled')
   } finally { globalThis.fetch = previous; vi.unstubAllGlobals() }
