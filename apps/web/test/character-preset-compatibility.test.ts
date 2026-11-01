@@ -3,11 +3,12 @@ import { describe, expect, it } from 'vitest'
 
 import source from '../../../design/character-presets/manifest.json'
 import { draftGame, draftIssues, DRAFT_KEY, loadDraft, saveDraft } from '../src/editor/draft'
-import { decodeSharedGame, encodeGameLink } from '../src/editor/share'
+import { decodeSharedGame } from '../src/editor/share'
 import { readCharacterPresets } from '../src/presentation/characterPresets'
 import manifest from '../public/appearances/manifest.json'
 import legacyDrafts from './fixtures/legacy-preset-drafts.json'
 import legacyShare from './fixtures/legacy-preset-share.json'
+import { legacyGameLink as encodeGameLink } from './legacy-share'
 
 const presets = readCharacterPresets(manifest)
 

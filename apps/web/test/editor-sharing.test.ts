@@ -1,10 +1,12 @@
 // @vitest-environment node
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { decodeSharedGame, encodeGameLink, CONTENT_BYTES_LIMIT, SHARE_URL_LIMIT } from '../src/editor/share'
+import { decodeSharedGame, loadSharedGame, saveSharedGame, CONTENT_BYTES_LIMIT, SHARE_URL_LIMIT } from '../src/editor/share'
 import { game as sourceGame } from './helpers'
+import { legacyGameLink as encodeGameLink } from './legacy-share'
 
 const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: null })) }
+
 
 const base = 'https://lie.example'
 async function fragment(content: unknown) {
@@ -44,17 +46,53 @@ describe('editor story sharing', () => {
   })
   it('bounds decompressed size even for a highly compressible payload', async () => {
     const content = { ...game, background: '甲'.repeat(CONTENT_BYTES_LIMIT) }
-    await expect(encodeGameLink(content, base)).rejects.toThrow('内容过大')
     const hash = await fragment(content)
     expect(hash.length).toBeLessThan(SHARE_URL_LIMIT)
     await expect(decodeSharedGame(hash, [])).rejects.toThrow('内容过大')
   })
-  it('enforces the full URL budget including the origin, at the exact boundary', async () => {
-    const url = await encodeGameLink(game, base)
-    const remaining = SHARE_URL_LIMIT - url.length
-    const host = `https://${'x'.repeat(new URL(base).host.length + remaining)}`
-    expect((await encodeGameLink(game, host)).length).toBe(SHARE_URL_LIMIT)
-    await expect(encodeGameLink(game, `${host}x`)).rejects.toThrow('16,000')
+  it('rejects oversized legacy fragments', async () => {
     await expect(decodeSharedGame(`#game=${'a'.repeat(SHARE_URL_LIMIT)}`, [])).rejects.toThrow('过长')
+  })
+})
+
+afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers() })
+describe('persistent sharing', () => {
+  const id = 'gmlvKTOY_GNRWutf2yaZBw'
+  it('posts canonical JSON and reads a short link without compression support', async () => {
+    const request = vi.fn().mockResolvedValueOnce(Response.json({ id })).mockResolvedValueOnce(Response.json(game))
+    vi.stubGlobal('fetch', request)
+    vi.stubGlobal('CompressionStream', undefined)
+    const link = await saveSharedGame({ ...game, title: '中文🦆' }, base)
+    expect(link).toBe(`${base}/play?share=v1.${id}`)
+    expect(request.mock.calls[0][0]).toBe('/api/shared-games/v1')
+    expect(JSON.parse(request.mock.calls[0][1].body).title).toBe('中文🦆')
+    expect(await loadSharedGame(new URL(link), [])).toEqual(game)
+  })
+  it('limits UTF-8 writes to 1 MiB and still accepts larger-than-legacy stories', async () => {
+    const request = vi.fn().mockResolvedValue(Response.json({ id }))
+    vi.stubGlobal('fetch', request)
+    const small = JSON.stringify(game)
+    const budget = 1024 * 1024 - new TextEncoder().encode(small).byteLength
+    const exact = { ...game, background: game.background + 'a'.repeat(budget) }
+    await expect(saveSharedGame(exact, base)).resolves.toContain(id)
+    await expect(saveSharedGame({ ...exact, background: exact.background + '甲' }, base)).rejects.toMatchObject({ retryable: false })
+    expect(request).toHaveBeenCalledTimes(1)
+  })
+  it.each([['?share=v2.' + id, ''], ['?share=bad', ''], ['?share=v1.' + id, '#game=x'], ['?share=v1.' + id + '&share=v1.' + id, '']])('rejects malformed or ambiguous routes %s%s', async (query, hash) => {
+    const request = vi.fn(); vi.stubGlobal('fetch', request)
+    await expect(loadSharedGame(new URL(base + '/play' + query + hash), [])).rejects.toThrow('分享链接')
+    expect(request).not.toHaveBeenCalled()
+  })
+  it.each([404, 413, 503])('maps server status %s to safe messages', async (status) => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('private server details', { status })))
+    await expect(saveSharedGame(game, base)).rejects.toThrow(status === 404 ? '不存在' : status === 413 ? '内容过大' : '服务暂时不可用')
+  })
+  it('times out the request and does not fall back to a fragment link', async () => {
+    vi.useFakeTimers()
+    vi.stubGlobal('fetch', vi.fn((_path, init) => new Promise((_resolve, reject) => init.signal.addEventListener('abort', () => reject(new Error('aborted'))))))
+    const saving = saveSharedGame(game, base)
+    const failure = expect(saving).rejects.toThrow('超时')
+    await vi.advanceTimersByTimeAsync(15_000)
+    await failure
   })
 })

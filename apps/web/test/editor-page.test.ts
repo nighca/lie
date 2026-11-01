@@ -157,7 +157,7 @@ describe('three-step editor', () => {
 
   it('keeps header departure disabled while a share snapshot is being encoded', async () => {
     let finish: (url: string) => void = () => {}
-    vi.spyOn(sharing, 'encodeGameLink').mockImplementation(() => new Promise((resolve) => { finish = resolve }))
+    vi.spyOn(sharing, 'saveSharedGame').mockImplementation(() => new Promise((resolve) => { finish = resolve }))
     const { wrapper } = page(game)
     const share = wrapper.findAll('button').find((button) => button.text() === '分享案件')!
     await share.trigger('click')
@@ -293,9 +293,9 @@ describe('three-step editor', () => {
     expect(wrapper.get('dialog').text()).toContain('不会自动创建 PR')
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: vi.fn().mockResolvedValue(null) } })
     await click('复制 JSON')
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith((wrapper.get('dialog input, dialog textarea').element as HTMLTextAreaElement).value)
     expect(wrapper.get('dialog').text()).toContain('已复制')
-    const exported = JSON.parse((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
+    const exported = JSON.parse((wrapper.get('dialog input, dialog textarea').element as HTMLTextAreaElement).value)
     expect(exported).toEqual(game)
     const link = new URL(wrapper.get('.github-link').attributes('href')!)
     expect(link.searchParams.get('filename')).toBe(`content/games/${String(nextOfficialCaseSequence).padStart(2, '0')}-test.json`)
@@ -303,25 +303,25 @@ describe('three-step editor', () => {
   })
 
   it('opens share with the generated URL and clears it after further editing', async () => {
-    vi.spyOn(sharing, 'encodeGameLink').mockResolvedValue('https://lie.example/play#game=abc')
+    vi.spyOn(sharing, 'saveSharedGame').mockResolvedValue('https://lie.example/play#game=abc')
     const { wrapper, click } = page(game)
     await click('分享案件')
-    expect((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value).toBe('https://lie.example/play#game=abc')
+    expect((wrapper.get('dialog input, dialog textarea').element as HTMLTextAreaElement).value).toBe('https://lie.example/play#game=abc')
     await wrapper.get('[aria-label=关闭]').trigger('click')
     await wrapper.get('[name=title]').setValue('改了')
     await click('分享案件')
-    expect(sharing.encodeGameLink).toHaveBeenLastCalledWith(expect.objectContaining({ title: '改了' }), location.origin)
+    expect(sharing.saveSharedGame).toHaveBeenLastCalledWith(expect.objectContaining({ title: '改了' }), location.origin)
   })
 
   it.each([['share', false], ['share', true], ['same-share', false], ['submission', false]])('ignores an old copy completion in a reopened %s dialog (reject=%s)', async (next, reject) => {
-    vi.spyOn(sharing, 'encodeGameLink').mockImplementation(async (game) => `https://lie.example/play#${game.title}`)
+    vi.spyOn(sharing, 'saveSharedGame').mockImplementation(async (game) => `https://lie.example/play#${game.title}`)
     let complete!: () => void
     const writeText = vi.fn().mockResolvedValue(null).mockImplementationOnce(() => new Promise<void>((resolve, fail) => { complete = () => reject ? fail(new Error('old denied')) : resolve() }))
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
     const { wrapper, click, step } = page(game)
     await click('分享案件')
-    const original = (wrapper.get('dialog textarea').element as HTMLTextAreaElement).value
-    await click('复制分享链接')
+    const original = (wrapper.get('dialog input, dialog textarea').element as HTMLTextAreaElement).value
+    await click('复制链接')
     await wrapper.get('[aria-label=关闭]').trigger('click')
     if (next !== 'same-share') await wrapper.get('[name=title]').setValue('新内容')
     if (next === 'submission') { await step(2); await click('投稿给官方') }
@@ -331,8 +331,8 @@ describe('three-step editor', () => {
     expect(writeText).toHaveBeenCalledWith(original)
     expect(wrapper.get('dialog').text()).not.toContain('已复制')
     expect(wrapper.get('dialog').text()).not.toContain('无法自动复制')
-    await click(next === 'submission' ? '复制 JSON' : '复制分享链接')
-    expect(writeText).toHaveBeenLastCalledWith((wrapper.get('dialog textarea').element as HTMLTextAreaElement).value)
+    await click(next === 'submission' ? '复制 JSON' : '复制链接')
+    expect(writeText).toHaveBeenLastCalledWith((wrapper.get('dialog input, dialog textarea').element as HTMLTextAreaElement).value)
     expect(wrapper.get('dialog').text()).toContain('已复制')
   })
 
@@ -357,5 +357,48 @@ describe('three-step editor', () => {
     expect(wrapper.get('.editor-preset').attributes('aria-label')).toBe('来自清单的新名字')
     await wrapper.get('[aria-label=关闭]').trigger('click')
     expect(wrapper.get('[data-field=preset]').text()).toBe('更换预设')
+  })
+})
+
+describe('persistent share request isolation', () => {
+  it('keeps a closed request out of a newer sharing dialog', async () => {
+    let oldResult: (url: string) => void = () => {}
+    let newResult: (url: string) => void = () => {}
+    vi.spyOn(sharing, 'saveSharedGame').mockImplementationOnce(() => new Promise((resolve) => { oldResult = resolve })).mockImplementationOnce(() => new Promise((resolve) => { newResult = resolve }))
+    const { wrapper, click } = page(game)
+    await click('分享案件')
+    expect(wrapper.get('dialog').text()).toContain('正在保存案件')
+    await click('关闭')
+    await click('分享案件')
+    oldResult('https://lie.example/play?share=v1.old')
+    await flushPromises()
+    expect(wrapper.get('dialog').text()).toContain('正在保存案件')
+    newResult('https://lie.example/play?share=v1.new')
+    await flushPromises()
+    expect(wrapper.get<HTMLInputElement>('input[aria-label="分享链接"]').element.value).toContain('v1.new')
+  })
+
+  it('shows server failure and retries within the same dialog without losing the draft', async () => {
+    vi.spyOn(sharing, 'saveSharedGame').mockRejectedValueOnce(new sharing.ShareError('网络连接失败')).mockResolvedValueOnce('https://lie.example/play?share=v1.new')
+    const { wrapper, click } = page(game)
+    await click('分享案件')
+    expect(wrapper.get('dialog').text()).toContain('网络连接失败')
+    expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).title).toBe(game.title)
+    await click('重试')
+    expect(wrapper.get<HTMLInputElement>('input[aria-label="分享链接"]').element.value).toContain('v1.new')
+  })
+
+  it('invalidates sharing when a KeepAlive editor is deactivated', async () => {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(game))
+    const visible = ref(true)
+    let finish: (url: string) => void = () => {}
+    vi.spyOn(sharing, 'saveSharedGame').mockImplementation(() => new Promise((resolve) => { finish = resolve }))
+    const wrapper = mount(defineComponent({ setup: () => () => h(KeepAlive, null, { default: () => visible.value ? h(Editor, { characterPresets: [characterPreset] }) : null }) }))
+    cleanup.push(() => wrapper.unmount())
+    await wrapper.findAll('button').find((button) => button.text() === '分享案件')!.trigger('click')
+    visible.value = false; await flushPromises()
+    finish('https://lie.example/play?share=v1.old'); await flushPromises()
+    visible.value = true; await flushPromises()
+    expect(wrapper.find('dialog').exists()).toBe(false)
   })
 })

@@ -11,6 +11,7 @@ import { BRAND_TITLE } from '../src/application/pageTitle'
 import { DRAFT_KEY } from '../src/editor/draft'
 import * as sharing from '../src/editor/share'
 import { game as source } from './helpers'
+import { legacyGameLink as encodeGameLink } from './legacy-share'
 
 Object.assign(globalThis, { Blob, TextEncoder, TextDecoder })
 const game = { ...source, characters: source.characters.map((person) => ({ ...person, appearanceId: 'blue' })) }
@@ -79,8 +80,8 @@ describe('application page title wiring', () => {
   })
   it('uses the actual decoded shared public title and never decodes twice for title', async () => {
     const shared = { ...game, title: '分享的公开案件名 🌊' }
-    const link = new URL(await sharing.encodeGameLink(shared, window.location.origin))
-    const decode = vi.spyOn(sharing, 'decodeSharedGame')
+    const link = new URL(await encodeGameLink(shared, window.location.origin))
+    const decode = vi.spyOn(sharing, 'loadSharedGame')
     const { reads, voice, click } = await screen(`${link.pathname}${link.hash}`)
     expectTitle(`分享案件 · 案件介绍 · ${shared.title}`)
     await click('接案，开始调查'); expectTitle(`分享案件 · 正在调查 · ${shared.title}`)
@@ -91,7 +92,7 @@ describe('application page title wiring', () => {
   })
   it('keeps shared decoding pending/failure/route departure titles accurate without fragment contents', async () => {
     let finish!: (value: GameDefinition) => void
-    const decode = vi.spyOn(sharing, 'decodeSharedGame').mockImplementationOnce(() => new Promise((resolve) => { finish = resolve })).mockRejectedValue(new Error('private-fragment'))
+    const decode = vi.spyOn(sharing, 'loadSharedGame').mockImplementationOnce(() => new Promise((resolve) => { finish = resolve })).mockRejectedValue(new Error('private-fragment'))
     const { router, click } = await screen('/play#game=not-a-title')
     expectTitle('正在打开分享案件')
     await router.push('/editor'); await settle(); expectTitle('创作案件')

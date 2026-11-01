@@ -8,9 +8,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import Application from '../src/Application.vue'
 import Editor from '../src/editor/Editor.vue'
 import { DRAFT_KEY } from '../src/editor/draft'
-import { encodeGameLink } from '../src/editor/share'
+
 import { createCharacterPresetLoader } from '../src/presentation/characterPresetLoader'
 import { game as sourceGame, setup } from './helpers'
+import { legacyGameLink as encodeGameLink } from './legacy-share'
 
 const preset = { id: 'blue', name: '蓝衣眼镜', avatar: '/a.png', portrait: '/p.png', accent: '#123456', voiceId: 'same-voice' }
 const game = { ...sourceGame, characters: sourceGame.characters.map((person) => ({ ...person, appearanceId: 'blue' })) }

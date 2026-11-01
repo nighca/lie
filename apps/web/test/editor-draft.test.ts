@@ -2,8 +2,9 @@
 import { describe, expect, it } from 'vitest'
 
 import { createDraft, createRemixDraft, draftGame, draftIssues, DRAFT_KEY, loadDraft, removeCharacter, saveDraft } from '../src/editor/draft'
-import { decodeSharedGame, encodeGameLink } from '../src/editor/share'
+import { decodeSharedGame } from '../src/editor/share'
 import { game as sourceGame } from './helpers'
+import { legacyGameLink as encodeGameLink } from './legacy-share'
 
 const characterPresets = [{ id: 'blue', name: '蓝衣眼镜', avatar: '/a.png', portrait: '/p.png', accent: '#123456', voiceId: null, animation: null, portraits: { listening: null, waiting: null, speaking: null } }]
 const game = { ...sourceGame, characters: sourceGame.characters.map((character) => ({ ...character, appearanceId: 'blue' })) }

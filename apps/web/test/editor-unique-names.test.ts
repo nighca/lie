@@ -18,7 +18,7 @@ describe('unique editor character names', () => {
   it.each(['试玩', '分享案件'])('blocks %s on duplicate names, locates both fields and recovers after renaming', async (label) => {
     const stored = { ...game, characters: game.characters.map((person, index) => ({ ...person, appearanceId: characterPreset.id, name: index === 0 ? '小林' : ' 小林 ' })) }
     localStorage.setItem(DRAFT_KEY, JSON.stringify(stored))
-    const encode = vi.spyOn(sharing, 'encodeGameLink').mockResolvedValue('https://lie.example/play#game=encoded')
+    const encode = vi.spyOn(sharing, 'saveSharedGame').mockResolvedValue('https://lie.example/play#game=encoded')
     const wrapper = mount(Editor, { props: { characterPresets: [characterPreset] }, attachTo: document.body })
     cleanup.push(() => wrapper.unmount())
     async function act() {
@@ -46,7 +46,7 @@ describe('unique editor character names', () => {
       expect(wrapper.emitted('preview')?.[0]).toEqual([{ ...stored, characters: stored.characters.map((person, index) => ({ ...person, name: index === 0 ? '小林' : '小周' })) }])
     } else {
       expect(encode).toHaveBeenCalledOnce()
-      expect(wrapper.get('dialog textarea').element).toHaveProperty('value', 'https://lie.example/play#game=encoded')
+      expect(wrapper.get('dialog input, dialog textarea').element).toHaveProperty('value', 'https://lie.example/play#game=encoded')
     }
   })
 })

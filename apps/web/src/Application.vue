@@ -8,7 +8,7 @@ import App from './App.vue'
 import PageVersion from './PageVersion.vue'
 import Editor from './editor/Editor.vue'
 import { createRemixDraft, DRAFT_KEY, saveDraft, type EditorDraft } from './editor/draft'
-import { decodeSharedGame, SHARE_URL_LIMIT } from './editor/share'
+import { loadSharedGame, ShareError } from './editor/share'
 import type { CaseSummary } from './application/catalog'
 import type { GameController } from './application/controller'
 import { observeNavigationLifecycle } from './application/navigationLifecycle'
@@ -35,6 +35,7 @@ const editorRevision = ref(0)
 const confirmation = ref(false)
 const shareLoading = ref(false)
 const shareError = ref<string | null>(null)
+const shareRetryable = ref(true)
 const remixOpen = ref(false)
 const remixError = ref<string | null>(null)
 const remixChanged = ref(false)
@@ -52,6 +53,7 @@ function discard() {
   revision++
   shareLoading.value = false
   shareError.value = null
+  shareRetryable.value = true
   answer(false)
   cancelRemix()
   unsubscribe?.()
@@ -80,11 +82,10 @@ async function loadCurrent() {
     const currentRevision = revision
     shareLoading.value = true
     try {
-      if (new URL(route.fullPath, window.location.origin).href.length > SHARE_URL_LIMIT) throw new Error('分享链接过长，请向作者索取可用链接')
       const presets = props.loadCharacterPresets == null ? props.characterPresets : await props.loadCharacterPresets()
       if (revision !== currentRevision) return
       if (presets == null) throw new Error('人物预设加载失败，请重试')
-      const game = await decodeSharedGame(route.hash, presets)
+      const game = await loadSharedGame(new URL(route.fullPath, window.location.origin), presets)
       if (revision !== currentRevision) return
       shareLoading.value = false
       attach(game.id, game)
@@ -92,6 +93,7 @@ async function loadCurrent() {
       if (revision !== currentRevision) return
       shareLoading.value = false
       shareError.value = error instanceof Error ? error.message : '分享案件暂时无法打开'
+      shareRetryable.value = !(error instanceof ShareError) || error.retryable
     }
     return
   }
@@ -179,7 +181,8 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
   </KeepAlive>
   <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :allow-remix="route.path !== '/editor/preview'" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @show-version="showVersion" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
-    <main class="intro-card surface"><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p role="status">{{ shareError }}</p><UiButton v-if="shareError != null" @click="loadCurrent">重试</UiButton><UiButton variant="secondary" @click="home">返回首页</UiButton></main>
+    <ProductHeader @navigate-home="home" @show-version="showVersion"><template #actions><UiButton variant="quiet" @click="home">返回首页</UiButton></template></ProductHeader>
+    <main class="intro-card surface share-state-card"><span v-if="shareLoading" class="share-loading-ring" aria-hidden="true"></span><span v-else class="share-question" aria-hidden="true">?</span><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p v-if="shareError != null" role="status">{{ shareError }}</p><div v-if="shareError != null" class="share-state-actions"><UiButton v-if="shareRetryable" @click="loadCurrent">重试</UiButton><UiButton :variant="shareRetryable ? 'secondary' : 'primary'" @click="home">返回首页</UiButton></div></main>
   </div>
   <div v-else-if="route.path !== '/editor' && route.path !== '/editor/preview'" class="game-shell home-shell">
     <ProductHeader class="home-header" @navigate-home="home" @show-version="showVersion">
@@ -226,3 +229,15 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
   </UiDialog>
   <UiDialog class="leave-confirmation" :open="confirmation" title="结束这次调查？" @close="answer(false)"><p>离开会结束本局，调查进度不会保留。</p><template #actions><UiButton variant="secondary" @click="answer(false)">继续调查</UiButton><UiButton @click="answer(true)">确认结束</UiButton></template></UiDialog>
 </template>
+
+<style scoped>
+.share-state-card { min-height: 370px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.share-state-card h1 { font-size: 28px; margin: 22px 0 0; }
+.share-state-card p { color: var(--lie-muted); margin: 16px 0 24px; }
+.share-state-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.share-loading-ring { width: 42px; height: 42px; border: 4px solid #d7e4ff; border-top-color: var(--lie-primary); border-radius: 50%; animation: share-spin 1s linear infinite; }
+.share-question { width: 66px; height: 66px; border: 2px solid var(--lie-ink); border-radius: 23px; background: var(--lie-aqua); display: grid; place-items: center; font-size: 40px; font-weight: 800; transform: rotate(-7deg); box-shadow: 0 4px 0 #111b451a; }
+@keyframes share-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .share-loading-ring { animation: none; } }
+@media (max-width: 670px) { .share-state-card { padding: 28px 18px; }.share-state-card h1 { font-size: 24px; } }
+</style>

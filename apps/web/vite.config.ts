@@ -33,6 +33,7 @@ export default defineConfig(({ command }) => ({
     },
     proxy: {
       '/api/voice': { target: gatewayUrl, ws: true },
+      '/api/shared-games': { target: gatewayUrl },
     },
   },
 }))

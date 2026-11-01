@@ -9,7 +9,7 @@ import type { PresetLoadStatus } from '../presentation/characterPresetLoader'
 import EditorDialog from './EditorDialog.vue'
 import { createDraft, draftGame, draftIssues, DRAFT_KEY, loadDraft, removeCharacter, saveDraft, type DraftCharacter, type DraftIssue } from './draft'
 import { PROFILE_EXAMPLE } from './example'
-import { encodeGameLink, SHARE_URL_LIMIT } from './share'
+import { saveSharedGame, ShareError } from './share'
 import { prepareSubmission } from './submission'
 
 const props = withDefaults(defineProps<{ characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus }>(), { presetStatus: 'ready' })
@@ -24,11 +24,15 @@ const portraitActive = ref(true)
 const showIssues = ref(false)
 const overlay = ref<'example' | 'preset' | 'share' | 'submission' | 'delete' | 'clear' | null>(null)
 const shareUrl = ref<string | null>(null)
+const shareError = ref<string | null>(null)
+const shareRetryable = ref(true)
+const copyError = ref<string | null>(null)
 const submission = ref<ReturnType<typeof prepareSubmission> | null>(null)
 const copied = ref(false)
 const form = ref<HTMLElement | null>(null)
 let mounted = true
 let copyRevision = 0
+let shareRevision = 0
 let clearingDraft = false
 let saveNotice: string | null = null
 try {
@@ -47,8 +51,8 @@ function invalid(field: string) { return showIssues.value && issues.value.some((
 function name(person: DraftCharacter) { return person.name.trim() || `人物 ${draft.value.characters.indexOf(person) + 1}` }
 watch(draft, () => {
   if (clearingDraft) return
+  closeShare()
   shareUrl.value = null
-  invalidateCopy()
   try {
     saveDraft(localStorage, draft.value)
     saveStatus.value = '草稿已保存至此设备'
@@ -60,11 +64,13 @@ watch(draft, () => {
     notice.value = saveNotice
   }
 }, { deep: true, flush: 'sync' })
-function invalidateCopy() { copyRevision++; copied.value = false }
+function invalidateCopy() { copyRevision++; copied.value = false; copyError.value = null }
+function closeShare() { shareRevision++; busy.value = false; if (overlay.value === 'share') overlay.value = null; invalidateCopy() }
+function closeOverlay() { closeShare(); overlay.value = null }
 watch([overlay, shareUrl, submission], invalidateCopy, { flush: 'sync' })
 onActivated(() => { portraitActive.value = true })
-onDeactivated(() => { portraitActive.value = false; invalidateCopy() })
-onUnmounted(() => { mounted = false })
+onDeactivated(() => { portraitActive.value = false; closeShare() })
+onUnmounted(() => { mounted = false; closeShare() })
 async function focus(field: string) {
   await nextTick()
   const target = form.value?.querySelector<HTMLElement>(`[data-field="${field}"]`)
@@ -125,12 +131,22 @@ function preview() {
 async function share() {
   const game = validated()
   if (game == null) return
+  const revision = ++shareRevision
+  shareUrl.value = null
+  shareError.value = null
+  shareRetryable.value = true
+  invalidateCopy()
+  overlay.value = 'share'
   busy.value = true
   try {
-    const url = await encodeGameLink(game, location.origin)
-    if (mounted) { shareUrl.value = url; overlay.value = 'share' }
-  } catch (error) { if (mounted) notice.value = error instanceof Error ? error.message : '当前浏览器无法生成分享链接' }
-  finally { if (mounted) busy.value = false }
+    const url = await saveSharedGame(game, location.origin)
+    if (mounted && revision === shareRevision) shareUrl.value = url
+  } catch (error) {
+    if (mounted && revision === shareRevision) {
+      shareError.value = error instanceof Error ? error.message : '暂时无法生成分享链接，请稍后重试。'
+      shareRetryable.value = !(error instanceof ShareError) || error.retryable
+    }
+  } finally { if (mounted && revision === shareRevision) busy.value = false }
 }
 function contribute() {
   const game = validated()
@@ -139,9 +155,10 @@ function contribute() {
   catch (error) { notice.value = error instanceof Error ? error.message : '无法准备投稿文件' }
 }
 async function copy(text: string) {
-  const revision = ++copyRevision
+  invalidateCopy()
+  const revision = copyRevision
   try { await navigator.clipboard.writeText(text); if (mounted && revision === copyRevision) copied.value = true }
-  catch { if (mounted && revision === copyRevision) notice.value = '无法自动复制，请选中下方内容手动复制。' }
+  catch { if (mounted && revision === copyRevision) copyError.value = '无法自动复制，请选中内容手动复制。' }
 }
 </script>
 
@@ -191,12 +208,17 @@ async function copy(text: string) {
         <div v-if="step < 2" class="quick-actions"><button type="button" class="text-button" @click="preview">试玩</button><button type="button" class="text-button" @click="share">分享案件</button></div>
       </fieldset>
     </main>
-    <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', preset: '选择人物预设', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？', clear: '清除本地草稿？' }[overlay]" @close="overlay = null">
+    <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', preset: '选择人物预设', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？', clear: '清除本地草稿？' }[overlay]" @close="closeOverlay">
       <template v-if="overlay === 'example'"><p>这是写给角色的扮演资料，仍是一份纯文本。</p><p class="example-text">{{ PROFILE_EXAMPLE }}</p><p class="muted">示例不会替换你正在写的内容。</p></template>
       <div v-else-if="overlay === 'preset'" class="preset-grid"><button v-for="preset in characterPresets" :key="preset.id" type="button" class="editor-preset" :aria-label="preset.name" :aria-pressed="character?.appearanceId === preset.id" @click="chooseCharacterPreset(preset.id)"><img :src="preset.avatar" alt=""></button><div v-if="characterPresets.length === 0"><p role="status">{{ presetStatus === 'loading' ? '正在加载人物预设…' : '人物预设暂未加载，请重新加载。草稿仍保留在此浏览器。' }}</p><UiButton v-if="presetStatus !== 'loading'" @click="emit('retry-presets')">重新加载预设</UiButton></div></div>
       <template v-else-if="overlay === 'clear'"><p>将清除当前案件的全部编辑内容和此浏览器保存的草稿，重新开始创作。此操作无法撤销，已分享的链接不受影响。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留草稿</UiButton><UiButton @click="clearDraft">确认清除</UiButton></div></template>
       <template v-else-if="overlay === 'delete'"><p>将删除<CharacterNameText :text="character == null ? '' : name(character)" :characters="characterNames" />的设定。如果他是案件答案，需要重新选择；此操作无法撤销。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留人物</UiButton><UiButton @click="deleteCharacter">确认删除</UiButton></div></template>
-      <template v-else-if="overlay === 'share' && shareUrl != null"><p>朋友打开链接就能玩。修改草稿后需要重新生成链接，旧链接保留当时的内容。</p><label class="field">完整分享链接<textarea :value="shareUrl" readonly rows="4" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label><p class="muted">{{ shareUrl.length.toLocaleString('en-US') }} / {{ SHARE_URL_LIMIT.toLocaleString('en-US') }} 字符</p><UiButton @click="copy(shareUrl)">{{ copied ? '已复制' : '复制分享链接' }}</UiButton></template>
+      <template v-else-if="overlay === 'share'">
+        <div v-if="busy" class="share-pending" role="status"><span class="share-loading-ring" aria-hidden="true"></span><p>正在保存案件…</p></div>
+        <template v-else-if="shareError != null"><p role="status">{{ shareError }}</p><div class="dialog-actions"><UiButton v-if="shareRetryable" @click="share">重试</UiButton><UiButton variant="secondary" @click="closeShare">继续编辑</UiButton></div></template>
+        <template v-else-if="shareUrl != null"><div class="share-copy-group"><input :value="shareUrl" aria-label="分享链接" readonly @focus="($event.target as HTMLInputElement).select()"><UiButton @click="copy(shareUrl)">{{ copied ? '已复制' : '复制链接' }}</UiButton></div><p v-if="copyError != null" class="share-note" role="status">{{ copyError }}</p></template>
+        <p class="share-note">{{ shareUrl != null ? '案件已保存到 LIE，链接保留当前内容；修改后需重新分享。持有链接的人可查看完整内容。' : '案件会保存到 LIE，持有链接的人可查看完整内容。' }}</p>
+      </template>
       <div v-else-if="overlay === 'submission' && submission != null" class="submission-layout">
         <p class="submission-intro">案件包含完整真相和人物设定，投稿前请确认愿意公开。</p>
         <div class="submission-actions">
@@ -207,7 +229,7 @@ async function copy(text: string) {
         <label class="field submission-json">案件 JSON<textarea :value="submission.json" readonly rows="6" @focus="($event.target as HTMLTextAreaElement).select()"></textarea></label>
         <p class="submission-note">这里不会自动创建 PR。维护者审阅并收录后，案件才会上线。</p>
       </div>
-      <p v-if="notice != null" role="alert">{{ notice }}</p>
+      <p v-if="notice != null" role="alert">{{ notice }}</p><p v-if="copyError != null && overlay !== 'share'" role="status">{{ copyError }}</p>
     </EditorDialog>
   </div>
 </template>

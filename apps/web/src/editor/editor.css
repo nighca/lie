@@ -143,3 +143,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
   .final-actions .lie-button { padding: 8px 11px; font-size: 13px; }
   .final-actions .lie-button--quiet { flex-basis: 100%; order: 3; }
 }
+
+.share-note { color: var(--lie-muted); font-size: 13px; line-height: 1.7; margin: 18px 0 0; }
+.share-copy-group { display: flex; align-items: center; gap: 12px; }
+.share-copy-group input { flex: 1; min-width: 0; }
+.share-copy-group .lie-button { flex: none; padding-inline: 18px; }
+.share-pending { display: flex; align-items: center; gap: 16px; padding: 12px 0; }
+.share-pending p { margin: 0; }
+.share-loading-ring { width: 42px; height: 42px; flex-shrink: 0; border: 4px solid #d7e4ff; border-top-color: var(--lie-primary); border-radius: 50%; animation: share-spin 1s linear infinite; }
+@keyframes share-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .share-loading-ring { animation: none; } }
+@media (max-width: 670px) { .share-copy-group { align-items: stretch; flex-direction: column; } }

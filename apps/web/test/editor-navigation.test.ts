@@ -8,9 +8,10 @@ import type { GameDefinition } from '@lie/game-core'
 import Application from '../src/Application.vue'
 import App from '../src/App.vue'
 import { DRAFT_KEY } from '../src/editor/draft'
-import { encodeGameLink, SHARE_URL_LIMIT } from '../src/editor/share'
+import { SHARE_URL_LIMIT } from '../src/editor/share'
 import * as sharing from '../src/editor/share'
 import { game as officialGame, setup } from './helpers'
+import { legacyGameLink as encodeGameLink } from './legacy-share'
 
 const customGame = { ...officialGame, id: 'custom-private-id', title: '玩家创作的谜题', characters: officialGame.characters.map((character) => ({ ...character, appearanceId: 'blue' })) }
 const cleanup: (() => void)[] = []
@@ -151,7 +152,7 @@ describe('editor and shared case application routes', () => {
 
   it('discards an outstanding decode when the route changes before it finishes', async () => {
     let release = () => {}
-    vi.spyOn(sharing, 'decodeSharedGame').mockImplementation(async () => {
+    vi.spyOn(sharing, 'loadSharedGame').mockImplementation(async () => {
       await new Promise<void>((resolve) => { release = resolve })
       return customGame
     })
@@ -166,7 +167,7 @@ describe('editor and shared case application routes', () => {
 
   it('cannot construct a controller from a decoder that completes after unmount', async () => {
     let release = () => {}
-    vi.spyOn(sharing, 'decodeSharedGame').mockImplementation(async () => {
+    vi.spyOn(sharing, 'loadSharedGame').mockImplementation(async () => {
       await new Promise<void>((resolve) => { release = resolve })
       return customGame
     })
@@ -297,5 +298,31 @@ describe('remixing a completed case', () => {
     write.mockRestore()
     await result.click('重试')
     expect(result.router.currentRoute.value.path).toBe('/editor')
+  })
+})
+
+describe('stored share routes', () => {
+  const path = '/play?share=v1.gmlvKTOY_GNRWutf2yaZBw'
+  it('loads a stored snapshot and leaves official data untouched', async () => {
+    const request = vi.spyOn(globalThis, 'fetch').mockResolvedValue(Response.json(customGame))
+    const { sessions, wrapper } = await screen(path)
+    expect(request.mock.calls[0][0]).toBe('/api/shared-games/v1/gmlvKTOY_GNRWutf2yaZBw')
+    expect(sessions[0].source).toEqual(customGame)
+    expect(wrapper.text()).toContain(customGame.title)
+  })
+  it('ignores a stored snapshot that arrives after leaving the route', async () => {
+    let finish: (response: Response) => void = () => {}
+    vi.spyOn(globalThis, 'fetch').mockImplementation(() => new Promise((resolve) => { finish = resolve }))
+    const { sessions, router, wrapper } = await screen(path)
+    await router.push('/'); await settle()
+    finish(Response.json(customGame)); await settle()
+    expect(sessions).toHaveLength(0)
+    expect(wrapper.text()).toContain('有人在说谎')
+  })
+  it('shows missing stored content without creating a game session', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('', { status: 404 }))
+    const { sessions, wrapper } = await screen(path)
+    expect(sessions).toHaveLength(0)
+    expect(wrapper.text()).toContain('案件不存在或已不可用')
   })
 })
