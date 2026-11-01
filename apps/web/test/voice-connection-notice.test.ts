@@ -3,6 +3,7 @@ import { afterEach, expect, it, vi } from 'vitest'
 
 import App from '../src/App.vue'
 import { createGameController } from '../src/application/controller'
+import { createLiveVoicePort } from '../src/application/liveVoice'
 import type { ConversationScope } from '../src/application/voice'
 import VoiceConnectionNotice from '../src/presentation/VoiceConnectionNotice.vue'
 import { game } from './helpers'
@@ -133,4 +134,62 @@ it('uses the selected preset accent for the current target name', async () => {
     expect(wrapper.get('.voice-connection-notice mark').text()).toBe('乙')
     expect(wrapper.get('.voice-connection-notice mark').attributes('style')).toContain('--character-name-accent: #075bfa')
   } finally { cleanup() }
+})
+
+it.each([250, 1250, 2250, 5000])('ends the actual App/controller notice immediately when ready at %sms', async (elapsed) => {
+  vi.useFakeTimers()
+  const { controller, wrapper, attempts, cleanup } = scene()
+  try {
+    await controller.load('test'); controller.start(); void controller.startConversation(); await flushPromises()
+    await vi.advanceTimersByTimeAsync(elapsed)
+    expect(wrapper.get('.voice-connection-notice').attributes('data-step')).toBe(String(Math.min(3, Math.floor(elapsed / 1000))))
+    attempts[0].ready(); await flushPromises()
+    expect(wrapper.find('.voice-connection-notice').exists()).toBe(false)
+    expect(controller.getView().busy).toBe(false)
+    expect(wrapper.get('.lie-voice').attributes('data-conversation')).toBe('active')
+    await vi.advanceTimersByTimeAsync(4000)
+    expect(wrapper.find('.voice-connection-notice').exists()).toBe(false)
+  } finally { cleanup() }
+})
+
+it.each(['cancel', 'fail'] as const)('ends during an intermediate line on %s and ignores late events', async (end) => {
+  vi.useFakeTimers()
+  const { controller, wrapper, attempts, cleanup } = scene()
+  try {
+    await controller.load('test'); controller.start(); void controller.startConversation(); await flushPromises()
+    await vi.advanceTimersByTimeAsync(1500)
+    if (end === 'cancel') await wrapper.get('.voice-connection-notice button').trigger('click')
+    else { attempts[0].fail(); await flushPromises() }
+    expect(wrapper.find('.voice-connection-notice').exists()).toBe(false)
+    attempts[0].ready()
+    attempts[0].scope.onEvent({ type: 'listening' })
+    await flushPromises()
+    await vi.advanceTimersByTimeAsync(5000)
+    expect(wrapper.find('.voice-connection-notice').exists()).toBe(false)
+    expect(controller.getView().conversationActive).toBe(false)
+  } finally { cleanup() }
+})
+
+it.each(['microphone', 'playback', 'channel'] as const)('hides immediately when the last liveVoice prerequisite (%s) resolves before 3s', async (last) => {
+  vi.useFakeTimers()
+  let finish = () => {}
+  const gate = new Promise<void>(resolve => { finish = resolve })
+  const voice = createLiveVoicePort({
+    createChannel: () => ({ open: () => last === 'channel' ? gate : Promise.resolve(), startInput() {}, input() {}, stopInput() {}, interrupt() {}, close() {} }),
+    createPlayer: () => ({ enqueue() {}, flush() {}, stop() {} }),
+    createContext: () => ({ resume: () => last === 'playback' ? gate : Promise.resolve(), close: async () => {} }) as unknown as AudioContext,
+    openMic: async () => { if (last === 'microphone') await gate; return { async stop() {} } },
+    prepareDevice: async () => new Response(null, { status: 204 }),
+    fetchStatus: async () => new Response('{"status":"ready"}'),
+  })
+  const controller = createGameController({ readGame: async () => game, voice, now: () => 0, newSessionId: () => 'all-ready' })
+  const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })
+  try {
+    await controller.load('test'); controller.start(); void controller.startConversation(); await flushPromises()
+    await vi.advanceTimersByTimeAsync(2250)
+    expect(wrapper.get('.voice-connection-notice').attributes('data-step')).toBe('2')
+    finish(); await flushPromises()
+    expect(wrapper.find('.voice-connection-notice').exists()).toBe(false)
+    expect(controller.getView()).toMatchObject({ busy: false, voiceStatus: 'recording', interrogationRemainingMs: 480000 })
+  } finally { wrapper.unmount(); controller.dispose() }
 })

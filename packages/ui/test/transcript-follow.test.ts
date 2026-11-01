@@ -77,6 +77,81 @@ describe('transcript follows the latest visible content', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 
+  it('preserves an upward reading position across cloned messages, streaming and final text, then resumes at bottom', async () => {
+    let height = 900
+    vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => height)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(300)
+    const message = { id: 'stream', speaker: '甲', text: '初始文字' }
+    const wrapper = mount(Transcript, { props: { messages: [message] } })
+    wrappers.push(wrapper)
+    const log = wrapper.get('[role="log"]')
+    log.element.scrollTop = 200
+    await log.trigger('scroll')
+    height = 1100
+    await wrapper.setProps({ messages: [{ ...message, text: message.text + '增量' }] })
+    expect(log.element.scrollTop).toBe(200)
+    height = 1400
+    await wrapper.setProps({ messages: [{ ...message, text: message.text + '增量最终文本' }] })
+    expect(log.element.scrollTop).toBe(200)
+    log.element.scrollTop = 1098
+    await log.trigger('scroll')
+    height = 1600
+    await wrapper.setProps({ messages: [{ ...message, text: message.text + '增量最终文本继续' }] })
+    expect(log.element.scrollTop).toBe(1600)
+  })
+
+  it('keeps following from no overflow and preserves scroll intent through resize, then disconnects', async () => {
+    let resized = () => {}
+    const disconnect = vi.fn()
+    vi.stubGlobal('ResizeObserver', class {
+      constructor(callback: () => void) { resized = callback }
+      observe() {}
+      disconnect = disconnect
+    })
+    let height = 100
+    vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => height)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(300)
+    const wrapper = mount(Transcript, { props: { messages: [] } })
+    wrappers.push(wrapper)
+    const log = wrapper.get('[role="log"]')
+    log.element.scrollTop = 0
+    await log.trigger('scroll')
+    height = 700
+    await wrapper.setProps({ messages: [{ id: 'one', speaker: '甲', text: '第一条长回复' }] })
+    expect(log.element.scrollTop).toBe(700)
+    height = 1000
+    resized()
+    expect(log.element.scrollTop).toBe(1000)
+    log.element.scrollTop = 100
+    await log.trigger('scroll')
+    height = 1200
+    resized()
+    expect(log.element.scrollTop).toBe(100)
+    await wrapper.setProps({ messages: [] })
+    await wrapper.setProps({ messages: [{ id: 'new', speaker: '乙', text: '新局' }] })
+    expect(log.element.scrollTop).toBe(1200)
+    wrapper.unmount()
+    expect(disconnect).toHaveBeenCalledOnce()
+  })
+
+  it('does not pull an upward reader down on reveal frames or interruption', async () => {
+    vi.useFakeTimers()
+    vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockReturnValue(1000)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(300)
+    const wrapper = mount(Transcript, { props: { messages: [], animate: true } })
+    wrappers.push(wrapper)
+    await wrapper.setProps({ messages: [{ id: 'reply', speaker: '甲', text: '逐字展示内容。'.repeat(20), pending: true }] })
+    const log = wrapper.get('[role="log"]')
+    log.element.scrollTop = 120
+    await log.trigger('scroll')
+    await vi.advanceTimersByTimeAsync(500)
+    expect(log.element.scrollTop).toBe(120)
+    expect(wrapper.get('article p').text().length).toBeGreaterThan(0)
+    await wrapper.setProps({ messages: [{ id: 'final', speaker: '甲', text: '逐字展示内容。'.repeat(20), interrupted: true }] })
+    expect(log.element.scrollTop).toBe(120)
+    expect(wrapper.get('article p').text()).toBe('逐字展示内容。'.repeat(20))
+  })
+
   it.each([false, true])('skips animation when reduced motion is already preferred (player=%s)', async (mine) => {
     const media = Object.assign(new EventTarget(), { matches: true })
     vi.stubGlobal('matchMedia', () => media)
