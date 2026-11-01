@@ -1,6 +1,6 @@
 # 首次玩家帮助评估
 
-2026-11-01。状态：审计、设计与首版实现历史已保全；用户实际体验后要求将整行计时说明改为时间旁图标与弹窗，时间图标弹窗修订已完成，待用户继续体验，尚未合入或部署。专项 Chat `01a19748-009d-7842-9c37-e8ab059d91f3`，WT `/Users/nighca/.codex/worktrees/a92e/lie`，分支 `codex/first-use-help-assessment`，基线 `35e987a7516493dcdccb8392cb8817f3b82744e4`，与当时本地 main 一致。初始 attached WT 为 clean detached HEAD，已在任何文档写入前建立专项分支；没有变更其他 WT、main 或远端。
+2026-11-01。状态：用户已最终确认“可以了，提交推进合入吧”；全部本地界面修订获接受，完整批准、提交及服务收尾见[最终交接](acceptance-handoff.md)。本专项尚未修改main或发布。专项 Chat `01a19748-009d-7842-9c37-e8ab059d91f3`，WT `/Users/nighca/.codex/worktrees/a92e/lie`，分支 `codex/first-use-help-assessment`，基线 `35e987a7516493dcdccb8392cb8817f3b82744e4`，与当时本地 main 一致。初始 attached WT 为 clean detached HEAD，已在任何文档写入前建立专项分支；没有变更其他 WT、main 或远端。
 
 ## 判断
 
@@ -123,3 +123,7 @@
 ## 接案标题与下划线间距（2026-11-01）
 
 用户要求手绘下划线靠近标题底部、略有重叠，并将标题与正文距离稍微拉开（[原图](feedback-intro-heading-spacing.png)）。本轮只调接案标题相关CSS的下划线位置与正文间距，保留字体、下划线资源/颜色/角度、正文段距与其他页面标题；实际数值和视觉核对见[标题间距记录](intro-heading-spacing/note.md)。
+
+## 最终接受与交接（2026-11-01）
+
+用户已接受截至 `adfe2953426fc520133341e8629ed069b5a15ba9` 的真实本地版本并授权推进合入，覆盖本记录此前等待体验的阶段状态。原5544临时Web已由owner在原PTY Ctrl-C结束并复核无listener/PID；其他服务不动。由总协调完成独立审查、串行集成与正常发布，见[完整有序提交、验证边界和停止回执](acceptance-handoff.md)。旧方案、用户反馈与各阶段截图继续保留。
