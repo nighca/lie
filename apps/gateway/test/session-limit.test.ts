@@ -2,6 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import gateway, { relaySockets } from '../src/index'
 import type { GatewayEnv } from '../src/index'
+import { browserDeviceCookie, newBrowserDevice } from '../src/browser-device'
+import { credentials } from './voice-fixture'
 
 function peer() {
   const listeners = new Map<string, (event: { data?: string; code?: number; reason?: string }) => void>()
@@ -58,7 +60,7 @@ describe('server-owned voice session lifetime', () => {
     const upstream = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('Unexpected upstream call'))
     const env: GatewayEnv = {
       VOICE_MAX_SESSION_SECONDS: value,
-      LINX_WS_TOKEN: 'fake-token', LINX_DEVICE_ID: 'fake-device', LINX_AGENT_ID: 'fake-agent',
+      ...credentials,
       ASSETS: { fetch: vi.fn() } as unknown as Fetcher,
     }
     const response = await gateway.fetch(new Request('https://game.example/api/voice', { headers: { Upgrade: 'websocket', Origin: 'https://game.example' } }), env)
@@ -70,13 +72,17 @@ describe('server-owned voice session lifetime', () => {
 
 
 it.each(['1', '2147483'])('accepts the timer-safe configuration boundary %s', async value => {
-  const upstream = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('fake upgrade rejection', { status: 401 }))
+  const upstream = vi.spyOn(globalThis, 'fetch')
+    .mockImplementationOnce(async () => Response.json({ websocket: { token: 'fake-token' } }))
+    .mockImplementationOnce(async () => new Response('fake upgrade rejection', { status: 401 }))
   const env: GatewayEnv = {
     VOICE_MAX_SESSION_SECONDS: value,
-    LINX_WS_TOKEN: 'fake-token', LINX_DEVICE_ID: 'fake-device', LINX_AGENT_ID: 'fake-agent',
+    ...credentials,
     ASSETS: { fetch: vi.fn() } as unknown as Fetcher,
   }
-  const response = await gateway.fetch(new Request('https://game.example/api/voice', { headers: { Upgrade: 'websocket', Origin: 'https://game.example' } }), env)
+  const request = new Request('https://game.example/api/voice')
+  const cookie = (await browserDeviceCookie(request, env, newBrowserDevice(request, env))).split(';')[0]
+  const response = await gateway.fetch(new Request(request.url, { headers: { Upgrade: 'websocket', Origin: 'https://game.example', Cookie: cookie } }), env)
   expect(response.status).toBe(502)
-  expect(upstream).toHaveBeenCalledOnce()
+  expect(upstream).toHaveBeenCalledTimes(2)
 })

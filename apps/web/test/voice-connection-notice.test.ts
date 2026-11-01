@@ -13,7 +13,7 @@ function scene() {
   const attempts: { scope: ConversationScope; ready(): void; fail(): void; closed: boolean }[] = []
   const controller = createGameController({
     readGame: async () => game, now: () => 0, newSessionId: () => 'notice-test',
-    voice: { create(scope) {
+    voice: { async prepare() {}, create(scope) {
       let ready = () => {}; let fail = () => {}
       const prepared = new Promise<void>((resolve, reject) => { ready = resolve; fail = () => reject(new Error('Preparation failed')) })
       const attempt = { scope, ready: () => ready(), fail: () => fail(), closed: false }

@@ -16,12 +16,13 @@ const demo = import.meta.env.DEV && new URLSearchParams(location.search).get('de
 
 async function main() {
   const presets = createCharacterPresetLoader()
+  const voice = demo ? createDemoVoicePort() : createLiveVoicePort()
   const createController = (game: GameDefinition | null = null) => createGameController({
     async readGame(gameId) {
       if (game != null) return game
       return readBundledCase(gameId)
     },
-    voice: demo ? createDemoVoicePort() : createLiveVoicePort(),
+    voice,
     resolveVoiceId: (appearanceId) => presets.state.presets.find((characterPreset) => characterPreset.id === appearanceId)?.voiceId ?? null,
     now: Date.now,
     newSessionId: () => crypto.randomUUID(),

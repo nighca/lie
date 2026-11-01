@@ -35,6 +35,7 @@ export interface Conversation {
 }
 
 export interface VoicePort {
+  prepare(): Promise<void>
   create(scope: ConversationScope): Conversation
 }
 

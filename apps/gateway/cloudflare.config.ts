@@ -5,14 +5,16 @@ export default defineConfig({
     name: 'lie-game',
     entrypoint: './src/index.ts',
     compatibilityDate: '2026-10-23',
+    compatibilityFlags: ['enable_request_signal'],
     limits: { cpuMs: 30000 },
     assets: { notFoundHandling: 'single-page-application', runWorkerFirst: ['/api/*', '/games/*', '/static/*', '/assets/*'] },
     env: {
       ASSETS: bindings.assets(),
       SHARED_GAMES: bindings.r2({ name: process.env.LIE_SHARE_BUCKET_NAME ?? 'lie-shared-games', dev: { remote: false } }),
       VOICE_MAX_SESSION_SECONDS: bindings.text(process.env.VOICE_MAX_SESSION_SECONDS ?? '600'),
-      LINX_WS_TOKEN: bindings.secret(),
-      LINX_DEVICE_ID: bindings.secret(),
+      LINX_API_KEY: bindings.secret(),
+      VOICE_DEVICE_COOKIE_SECRET: bindings.secret(),
+      VOICE_DEVICE_ENVIRONMENT: bindings.text(process.env.LIE_VOICE_ENVIRONMENT ?? 'production'),
       LINX_AGENT_ID: bindings.secret()
     },
     observability: {

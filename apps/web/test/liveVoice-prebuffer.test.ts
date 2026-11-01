@@ -34,6 +34,7 @@ function fixture() {
       return { open: async () => {}, close() {}, startInput() {}, input() {}, stopInput() {}, interrupt() {} }
     },
     openMic: async () => ({ stop: async () => {} }),
+    prepareDevice: async () => new Response(null, { status: 204 }),
     fetchStatus: async () => new Response('{"status":"ready"}'),
   }).create(scope)
   return { connection, sources, events, context, receive: (event: Parameters<VoiceChannelOptions['onEvent']>[0]) => receive(event) }

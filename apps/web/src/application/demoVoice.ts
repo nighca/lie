@@ -3,6 +3,7 @@ import type { VoicePort } from './voice'
 /** Explicit development demo only; neither captures nor synthesizes real voice. */
 export function createDemoVoicePort(): VoicePort {
   return {
+    async prepare() {},
     create(scope) {
       const timers = new Set<ReturnType<typeof setTimeout>>()
       function later(action: () => void, delay: number) {

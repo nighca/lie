@@ -23,6 +23,7 @@ function setupBridge(voiceId: string | null = null, diagnostics: { onPlayback?: 
   let onFrame: (data: Uint8Array) => void = () => {}
   const dependencies = {
     ...diagnostics,
+    prepareDevice: async () => new Response(null, { status: 204 }),
     fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready' }))),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
     createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void, onPlayback?: import('@lie/voice').PlaybackObserver, onError: () => void = () => {}) { playbackFailure = onError; expect(onPlayback).toBe(diagnostics.onPlayback); drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },

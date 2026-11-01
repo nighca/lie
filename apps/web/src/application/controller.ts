@@ -238,6 +238,7 @@ export function createGameController(options: ControllerOptions) {
         notice = '案件暂时无法加载，请稍后重试。'
       }
       publish()
+      if (request === loadEpoch && loadState == null && session != null) void options.voice.prepare().catch(() => {})
     },
     start() {
       session = startSession(requireSession(), options.now())
@@ -281,9 +282,11 @@ export function createGameController(options: ControllerOptions) {
     restart() {
       stopVoice()
       session = restartSession(requireSession(), { sessionId: options.newSessionId(), now: options.now() })
+      const request = loadEpoch
       accusationOpen = false
       notice = null
       publish()
+      if (request === loadEpoch && loadState == null) void options.voice.prepare().catch(() => {})
     },
     dispose() { ++loadEpoch; stopVoice(); listeners.clear(); feedbackListeners.clear() },
   }

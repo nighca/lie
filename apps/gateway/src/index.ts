@@ -2,10 +2,11 @@ import type { InferEnv } from 'cf/config'
 
 import type config from '../cloudflare.config'
 import { sharedGames } from './shared-games'
+import { browserDeviceCookie, deviceProvider, newBrowserDevice, readBrowserDevice, voiceConfigured, VoiceDeviceError } from './browser-device'
 
 type ConfiguredEnv = InferEnv<ReturnType<typeof config.worker>>
 export type GatewayEnv = Omit<ConfiguredEnv, 'SHARED_GAMES'> & Partial<Pick<ConfiguredEnv, 'SHARED_GAMES'>> & Partial<Record<
-  'LINX_WS_TOKEN' | 'LINX_DEVICE_ID' | 'LINX_AGENT_ID', string
+  'LINX_API_KEY' | 'VOICE_DEVICE_COOKIE_SECRET' | 'LINX_AGENT_ID', string
 >>
 const upstreamUrl = 'https://xrobo-io.qiniuapi.com/v1/ws/'
 
@@ -17,8 +18,14 @@ export default {
     }
     if (url.pathname === '/api/voice/status' && request.method === 'GET') {
       if ((request.headers.get('Origin') != null && request.headers.get('Origin') !== url.origin) || request.headers.get('Sec-Fetch-Site') === 'cross-site' || url.search !== '') return new Response('Forbidden', { status: 403 })
-      return Response.json({ status: voiceStatus(env) }, { headers: { 'Cache-Control': 'no-store' } })
+      const headers = new Headers({ 'Cache-Control': 'no-store' })
+      if (voiceConfigured(env)) {
+        const device = await readBrowserDevice(request, env) ?? newBrowserDevice(request, env)
+        headers.set('Set-Cookie', await browserDeviceCookie(request, env, device))
+      }
+      return Response.json({ status: voiceStatus(env) }, { headers })
     }
+    if (url.pathname === '/api/voice/prepare' && request.method === 'POST') return prepareVoice(request, env)
     if (url.pathname === '/api/voice' && request.method === 'GET') return relayVoice(request, env)
     if (url.pathname === '/api/shared-games/v1' || url.pathname.startsWith('/api/shared-games/v1/')) return sharedGames(request, env.SHARED_GAMES)
     if (url.pathname.startsWith('/api/')) return Response.json({ error: 'Not found' }, { status: 404 })
@@ -43,7 +50,43 @@ export default {
 
 // Application access checks are temporarily disabled by user decision; provider credentials remain required.
 function voiceStatus(env: GatewayEnv): 'unavailable' | 'ready' {
-  return env.LINX_WS_TOKEN && env.LINX_DEVICE_ID && env.LINX_AGENT_ID ? 'ready' : 'unavailable'
+  return voiceConfigured(env) ? 'ready' : 'unavailable'
+}
+
+async function emptyRequestBody(request: Request) {
+  if (request.body == null) return true
+  const reader = request.body.getReader()
+  const signal = AbortSignal.any([request.signal, AbortSignal.timeout(1000)])
+  const cancel = () => { void reader.cancel().catch(() => {}) }
+  signal.addEventListener('abort', cancel, { once: true })
+  try {
+    while (!signal.aborted) {
+      const next = await reader.read()
+      if (signal.aborted) return false
+      if (next.done) return true
+      if (next.value.byteLength > 0) { cancel(); return false }
+    }
+    return false
+  } catch { return false }
+  finally { signal.removeEventListener('abort', cancel); reader.releaseLock() }
+}
+
+async function prepareVoice(request: Request, env: GatewayEnv): Promise<Response> {
+  const url = new URL(request.url)
+  const headers = new Headers({ 'Cache-Control': 'no-store' })
+  if (request.headers.get('Origin') !== url.origin || url.search !== '' || request.headers.get('Sec-Fetch-Site') === 'cross-site') return Response.json({ error: 'forbidden' }, { status: 403, headers })
+  if (!await emptyRequestBody(request)) return Response.json({ error: 'invalid-request' }, { status: 400, headers })
+  if (!voiceConfigured(env)) return Response.json({ error: 'unavailable' }, { status: 503, headers })
+  const device = await readBrowserDevice(request, env)
+  if (device == null) return Response.json({ error: 'identity-required' }, { status: 409, headers })
+  const signal = AbortSignal.any([request.signal, AbortSignal.timeout(18000)])
+  try {
+    await deviceProvider(env, device, signal).prepare()
+    return new Response(null, { status: 204, headers })
+  } catch (error) {
+    const status = signal.aborted ? 504 : error instanceof VoiceDeviceError ? error.status === 409 ? 502 : error.status : 502
+    return Response.json({ error: status === 504 ? 'prepare-timeout' : 'provider-unavailable' }, { status, headers })
+  }
 }
 
 async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> {
@@ -55,25 +98,33 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
   if (status === 'unavailable') return new Response('Voice unavailable', { status: 503 })
   const sessionLimitSeconds = voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS)
   if (sessionLimitSeconds == null) return new Response('Invalid voice session limit configuration', { status: 500 })
+  const device = await readBrowserDevice(request, env)
+  if (device == null) return new Response('Voice identity required', { status: 409 })
   let response: Response
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 10000)
+  const timeout = setTimeout(() => controller.abort(), 9000)
+  const signal = AbortSignal.any([controller.signal, request.signal])
   try {
+    const token = await deviceProvider(env, device, signal).token()
     response = await fetch(upstreamUrl, {
       headers: {
-        Upgrade: 'websocket', Authorization: `Bearer ${env.LINX_WS_TOKEN}`,
-        'Device-Id': env.LINX_DEVICE_ID!, 'Client-Id': crypto.randomUUID(),
+        Upgrade: 'websocket', Authorization: `Bearer ${token}`,
+        'Device-Id': device.deviceId, 'Client-Id': device.clientId,
         'Protocol-Version': '1', 'X-Agent-ID': env.LINX_AGENT_ID!
       },
-      signal: controller.signal
+      redirect: 'manual', signal
     })
-  } catch {
+  } catch (error) {
     console.error(JSON.stringify({ event: 'voice_upstream_unavailable' }))
-    return new Response('Voice upstream unavailable', { status: 502 })
+    return new Response('Voice upstream unavailable', { status: signal.aborted ? 504 : error instanceof VoiceDeviceError ? error.status : 502 })
   } finally {
     clearTimeout(timeout)
   }
   const upstream = response.webSocket
+  if (signal.aborted) {
+    if (upstream != null) { try { upstream.accept(); upstream.close(1000, 'Connection cancelled') } catch { /* A peer may already be closed. */ } }
+    return new Response('Voice upstream unavailable', { status: 504 })
+  }
   if (upstream == null) {
     console.error(JSON.stringify({ event: 'voice_upstream_rejected', status: response.status }))
     return new Response('Voice upstream unavailable', { status: 502 })

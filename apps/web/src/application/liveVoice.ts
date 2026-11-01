@@ -11,6 +11,7 @@ export function createLiveVoicePort(dependencies: {
   openMic: typeof openMicrophone
   createContext: () => AudioContext
   fetchStatus: (signal: AbortSignal) => Promise<Response>
+  prepareDevice: (signal: AbortSignal) => Promise<Response>
   onPlayback?: PlaybackObserver
   onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void
   now?: () => number
@@ -20,13 +21,61 @@ export function createLiveVoicePort(dependencies: {
   openMic: openMicrophone,
   createContext: () => new AudioContext({ sampleRate: 16000 }),
   ...(import.meta.env.DEV ? { onPlayback: observeVoicePlayback } : {}),
-  fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]) }),
+  fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal }),
+  prepareDevice: (signal: AbortSignal) => fetch('/api/voice/prepare', { method: 'POST', credentials: 'same-origin', cache: 'no-store', signal }),
 }): VoicePort {
+  let generation = 0
+  let preparedGeneration: number | null = null
+  let pending: { generation: number; promise: Promise<number> } | null = null
+  async function prepareAttempt() {
+    const signal = AbortSignal.timeout(20000)
+    async function status() {
+      const response = await dependencies.fetchStatus(signal)
+      if (!response.ok) throw new VoiceAvailabilityError('check-failed')
+      const result = await response.json()
+      if (result?.status !== 'ready') throw new VoiceAvailabilityError(result?.status === 'unavailable' ? 'unavailable' : 'check-failed')
+    }
+    try {
+      await status()
+      let response = await dependencies.prepareDevice(signal)
+      if (response.status === 409) {
+        if ((await response.json())?.error !== 'identity-required') throw new VoiceAvailabilityError('check-failed')
+        await status()
+        response = await dependencies.prepareDevice(signal)
+      }
+      if (response.status !== 204) throw new VoiceAvailabilityError('check-failed')
+    } catch (error) {
+      throw error instanceof VoiceAvailabilityError ? error : new VoiceAvailabilityError('check-failed')
+    }
+  }
+  function ensurePrepared(): Promise<number> {
+    if (preparedGeneration === generation) return Promise.resolve(generation)
+    if (pending != null) return pending.promise
+    const attempt = ++generation
+    const promise = prepareAttempt().then(() => {
+      if (generation === attempt) preparedGeneration = attempt
+      if (pending?.generation === attempt) pending = null
+      return attempt
+    }, error => {
+      if (pending?.generation === attempt) pending = null
+      throw error
+    })
+    pending = { generation: attempt, promise }
+    return promise
+  }
+  function invalidatePrepared(attempt: number | null) {
+    if (attempt == null || generation !== attempt || preparedGeneration !== attempt) return
+    preparedGeneration = null
+    generation++
+  }
   return {
+    async prepare() { await ensurePrepared() },
     create(scope) {
       let startedAt: number | null = null
       let startupFinished = false
       let firstForwarded = false
+      let preparationGeneration: number | null = null
+      let channelReady = false
       let micReady: Promise<void> | null = null
       const observe = dependencies.onStartup == null ? null : (event: VoiceStartupObservation) => {
         try {
@@ -110,7 +159,7 @@ export function createLiveVoicePort(dependencies: {
         }],
         onEvent(event) {
           if (!current()) return
-          if (event.type === 'ready') format = event.format
+          if (event.type === 'ready') { format = event.format; channelReady = true }
           if (event.type === 'stt') { interruptAnswer('stt'); scope.onEvent({ type: 'userText', text: event.text }) }
           if (event.type === 'tts') {
             if (event.state === 'start') {
@@ -135,8 +184,12 @@ export function createLiveVoicePort(dependencies: {
           if (event.type === 'audio' && answerInProgress && event.data.byteLength > 0 && format != null) {
             try { playing = true; player!.enqueue(event.data, format) } catch { scope.onEvent({ type: 'error' }) }
           }
-          if (event.type === 'closed') { finishStartup('failed'); scope.onEvent({ type: 'closed' }) }
+          if (event.type === 'closed') {
+            if (!channelReady) invalidatePrepared(preparationGeneration)
+            finishStartup('failed'); scope.onEvent({ type: 'closed' })
+          }
           if (event.type === 'error') {
+            if (!channelReady) invalidatePrepared(preparationGeneration)
             finishStartup('failed')
             scope.onEvent(event.code === 'payload-too-large' ? { type: 'error', reason: 'context-too-large' } : { type: 'error' })
           }
@@ -166,22 +219,15 @@ export function createLiveVoicePort(dependencies: {
           }
           report('startup', 'started')
           try {
-            let availability: unknown
-            try {
-              report('status', 'started')
-              const response = await dependencies.fetchStatus(scope.signal)
-              report('statusHeaders', 'completed')
-              if (!response.ok) throw new Error('Voice status check failed')
-              availability = (await response.json())?.status
-            } catch {
-              report('status', scope.signal.aborted || closed ? 'cancelled' : 'failed')
-              throw new VoiceAvailabilityError('check-failed')
+            if (!current()) return
+            report('status', 'started')
+            try { preparationGeneration = await ensurePrepared() }
+            catch (error) {
+              if (!current()) { report('status', 'cancelled'); return }
+              report('status', 'failed')
+              throw error
             }
             if (!current()) { report('status', 'cancelled'); return }
-            if (availability !== 'ready') {
-              report('status', 'failed')
-              throw new VoiceAvailabilityError(availability === 'unavailable' ? 'unavailable' : 'check-failed')
-            }
             report('status', 'completed')
             context = dependencies.createContext()
             player = dependencies.createPlayer(context, answerDrained, (level) => {
@@ -207,7 +253,11 @@ export function createLiveVoicePort(dependencies: {
               report('playbackResume', scope.signal.aborted || closed ? 'cancelled' : 'failed')
               throw error
             })
-            await Promise.all([playbackReady, channel.open({ signal: scope.signal }), micReady])
+            const transportReady = channel.open({ signal: scope.signal }).then(() => { channelReady = true }, error => {
+              if (current()) invalidatePrepared(preparationGeneration)
+              throw error
+            })
+            await Promise.all([playbackReady, transportReady, micReady])
             if (!current()) return
             channel.startInput()
             report('listenStart', 'completed')

@@ -86,7 +86,7 @@ describe('page titles', () => {
   it('ignores old controller loads completing after route and controller replacement', async () => {
     const state = binding('/', { game: '<untrusted query>' })
     let release!: (game: unknown) => void
-    const old = createGameController({ readGame: () => new Promise((resolve) => { release = resolve }), voice: { create() { throw new Error('No voice') } }, now: () => 0, newSessionId: () => 'test' })
+    const old = createGameController({ readGame: () => new Promise((resolve) => { release = resolve }), voice: { async prepare() {}, create() { throw new Error('No voice') } }, now: () => 0, newSessionId: () => 'test' })
     cleanup.push(() => old.dispose())
     state.controller.value = old
     const loading = old.load('test')
