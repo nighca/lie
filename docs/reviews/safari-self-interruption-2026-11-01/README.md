@@ -97,7 +97,7 @@
 
 ## 交付与服务回执
 
-v2以`6bd6426f9fe9c5d76cc5e3b5c15334588de56d46`正式发布，CI41323231785/CD41323378232 success，canonical HTML12173B/SHA256 `f9a678de6fafb41364873d9fd5be41834772104474a15706a83dd9edb1fc1518`。随后自有IAB tab3不开mic验收：v2文案/formatVersion字段存在、start listener注册、JS/CSS自身hash精准允许、控件选择B正常；受控reload及选择后0AudioContext/WS/runtime exception，结果空、无audio元素/权限提示，未点击开始。边缘beacon被CSP阻、工具sidebar样式被阻与自有页面区分，不称console零告警。tab关闭后IAB list空，无服务/真实mic/provider。此次复制按钮正常批次补存[必要v2截图](production-v2-initial-page.png)，不为旧回执单开部署。
+v2以`6bd6426f9fe9c5d76cc5e3b5c15334588de56d46`正式发布，CI41323231785/CD41323378232 success，canonical HTML12173B/SHA256 `f9a678de6fafb41364873d9fd5be41834772104474a15706a83dd9edb1fc1518`。随后自有IAB tab3不开mic验收：v2文案/formatVersion字段存在、start listener注册、JS/CSS自身hash精准允许、控件选择B正常；受控reload及选择后0AudioContext/WS/runtime exception，结果空、无audio元素/权限提示，未点击开始。边缘beacon被CSP阻、工具sidebar样式被阻与自有页面区分，不称console零告警。tab关闭后IAB list空，无服务/真实mic/provider。此次复制按钮正常批次补存[必要v2截图](production-v2-initial-page.jpg)，按真实JPEG编码修正后缀，字节不变、不重编码，不为旧回执单开部署。
 
 首轮代码范围仅新增1个事件路径测试、本目录README与必要原图；后续独立诊断工具新增`spikes/safari-audio/`，批准后以`apps/web/package.json`接入独立HTML构建与工具tests/types。方法/边界/源码链接与fake检查见该目录，[同clean SHA产物隔离证据](isolation-results.json)确认旧251 Web文件和256 Cloudflare文件全部逐字一致，只多一个诊断HTML。432 Web+13 probe+19 gateway离线测试及Web/probe types通过。无产品修复或 UI/玩法/provider 合同修改。原始 base 如上，无额外依赖提交；有序完整 commit SHA 在最终交付消息列明，不把 commit 自己的 hash 写回制造文档提交循环。
 

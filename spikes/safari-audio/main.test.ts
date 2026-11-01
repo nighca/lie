@@ -102,4 +102,21 @@ describe('diagnostic page control boundary', () => {
     fake.update(stopped(true))
     expect(copy.disabled).toBe(false)
   })
+
+  it('labels late clipboard success as previous results while a new trial still awaits its first update', async () => {
+    let resolve!: () => void
+    vi.stubGlobal('navigator', { mediaDevices: { getUserMedia: vi.fn() }, clipboard: { writeText: () => new Promise<void>(done => { resolve = done }) } })
+    await import('./main')
+    const start = document.querySelector<HTMLButtonElement>('#start')!
+    const copy = document.querySelector<HTMLButtonElement>('#copy')!
+    start.click(); fake.update(stopped(true)); copy.click()
+    const previous = document.querySelector<HTMLTextAreaElement>('#report')!.value
+    start.click()
+    expect(document.querySelector<HTMLTextAreaElement>('#report')!.value).toBe(previous)
+    resolve()
+    await vi.waitFor(() => expect(document.querySelector('#copy-status')!.textContent).toContain('上一份结果'))
+    expect(copy.disabled).toBe(true)
+    fake.update(stopped(true))
+    expect(copy.disabled).toBe(false)
+  })
 })

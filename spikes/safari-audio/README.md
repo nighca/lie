@@ -43,6 +43,8 @@ node spikes/safari-audio/build.mjs
 
 一键复制追加3项检查（共18项fake）：只有点击才复制完整历史/current、拒绝不伪称成功且保留原文、迟到clipboard结果不重开采集中复制按钮。工具tsc/独立build通过；不动probe音频代码、v2数据格式或产品语音。
 
+review补修：每次真正开始测试递增本机轮次，复制记录点击时轮次；即使新测试还在等待首次update、textarea内容未变，迟到成功也明确为上一份。新增这一场景的fake，当前共19项；不持久化轮次、不触发新采集。
+
 Vite独立配置，不读取应用vite.config、不导入应用main/controller，不会调用prepare/status/voice。产物在ignored `tmp/safari-audio-probe/`：普通index/assets与单文件`safari-audio.html`；后者将脚本和CSS内联并精确写入SHA256 CSP，无外部资源/导入请求。构建产物扫描已核对CSP hash、无网络/存储API引用、无provider入口；不因扫描通过声称已验证浏览器CSP或真实设备音频。
 
 首轮IAB对file://预览的唯一尝试被浏览器URL协议策略拒绝，仅允许http/https。没有换浏览器、原始CDP、注入或服务器绕过。v1及v2正式HTTPS发布后，均已用正常IAB自有tab完成不开mic的初始控件/inlineJS/自有样式验收并关闭tab；边缘beacon和工具style被CSP拦截的告警与页面自身功能分开保留，详见[专项记录](../../docs/reviews/safari-self-interruption-2026-11-01/README.md)。一键复制当前仅fake验证，仍待发布后的明确合成文本clipboard验收，不调用真实mic。

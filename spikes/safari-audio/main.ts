@@ -11,6 +11,7 @@ const copyStatus = document.querySelector<HTMLParagraphElement>('#copy-status')!
 const completed: ProbeReport[] = []
 let trial: ReturnType<typeof createAudioProbe> | null = null
 let copying = false
+let trialGeneration = 0
 const labels = { preparing: '正在准备；如出现权限提示，请选择允许或取消。', 'quiet-before': '静默基线：请先保持安静。', playing: '正在播放测试音。', 'quiet-after': '播放后静默：请继续保持安静。', stopped: '测试结束。' }
 
 function update(report: ProbeReport) {
@@ -32,6 +33,7 @@ start.addEventListener('click', () => {
     return
   }
   start.disabled = true; mode.disabled = true; stop.disabled = false
+  trialGeneration++
   copy.disabled = true; copyStatus.textContent = ''
   trial = createAudioProbe(mode.value as ProbeMode, update)
   void trial.start()
@@ -40,10 +42,11 @@ stop.addEventListener('click', () => { stop.disabled = true; status.textContent 
 copy.addEventListener('click', async () => {
   if (copying || trial != null || output.value === '') return
   const text = output.value
+  const generation = trialGeneration
   copying = true; copy.disabled = true; copyStatus.textContent = '正在复制…'
   try {
     await navigator.clipboard.writeText(text)
-    copyStatus.textContent = output.value === text ? '已复制全部结果，可以直接粘贴发送。' : '已复制上一份结果；当前结果已更新，请测试结束后再复制。'
+    copyStatus.textContent = generation === trialGeneration && output.value === text ? '已复制全部结果，可以直接粘贴发送。' : '已复制上一份结果；请等当前测试结束后再复制。'
   } catch {
     copyStatus.textContent = '未能复制，请长按下方结果复制。'
   } finally {
