@@ -1,10 +1,10 @@
 # P0：供应商连接隔离调查与决策稿
 
-2026-11-01；owner：专项 Chat `01a19557-145d-72f3-ace4-382ac03c22c9`。基线 `98d71fb9ebc2f517010598c4796c8db3014a73c7`，分支 `codex/voice-device-isolation`。**只读调查与待确认方案，不是已批准实现或修复交付。** [本地实验证据](README.md)独立保存；本批没有新增供应商会话或账户API请求、资源、secret、服务或应用改动。
+2026-11-01；owner：专项 Chat `01a19557-145d-72f3-ace4-382ac03c22c9`。基线 `98d71fb9ebc2f517010598c4796c8db3014a73c7`，分支 `codex/voice-device-isolation`。**调查与待确认方案，不是已批准实现或修复交付。** [本地实验证据](README.md)独立保存；初始调查没有新增供应商会话或账户API请求、资源、secret、服务或应用改动，后续新增的获准生产连接测试另档。
 
 ## 已证实的问题与源码边界
 
-本地现配置下同 Device、不同随机 ClientId 的第二条连接使第一条收到 close1000；第二轮没有 listen 或音频输入，足以否定“随机 ClientId 已提供并发隔离”。尚未测生产并发，也未比较生产与本地设备身份，不归因为历史跨用户泄露或全部旧断连。
+本地现配置下同 Device、不同随机 ClientId 的第二条连接使第一条收到 close1000；第二轮没有 listen 或音频输入，足以否定“随机 ClientId 已提供并发隔离”。后续在用户明确接受顶掉其他用户的授权下，[生产双页面协议连接已一次复现顶替](production-2026-11-01.md)：A准备好后保持约3秒再建立B，A被非主动close1000，B正常准备好并保持。未比较生产与本地设备身份，不归因为历史跨用户泄露或全部旧断连；这也不是完整游戏UI真人并行问答验收。
 
 - `apps/gateway/src/index.ts:64–66` 固定 Device/token/Agent；`relaySockets` 仅隔离本地 socket 对。600秒上限和CPU30000不能改变设备互斥。
 - `apps/web/src/application/controller.ts:172–181` 的 session/character/epoch 与 `liveVoice.ts` 的 `isCurrent()` 保护当前页面状态和工具投影；未传成供应商独立身份，应保留这些保护。
