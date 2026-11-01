@@ -1,0 +1,161 @@
+{
+  "independentTrials": 6,
+  "historyCopiesAreNotReplicates": true,
+  "userConfirmed": {
+    "sameIPad": true,
+    "allSignalsAudible": true,
+    "noSpeaking": true,
+    "sameSystemVolumeAndPosition": true,
+    "noNoticeableOutputVolumeOrReceiverSwitch": true
+  },
+  "measurement": "captured PCM amplitude; descriptive dB ratios are not ERLE or a measure of isolated echo",
+  "rows": [
+    {
+      "file": "safari-a.json",
+      "bytes": 1654,
+      "sha256": "250ba60c75fdf14a138402cb6a848bd171374ef591317d9580149acfe7aacee0",
+      "browser": "safari",
+      "group": "A",
+      "mode": "direct-16k",
+      "quietBeforeRMS": 0.00018902662164371593,
+      "playingRMS": 0.0017429291400900763,
+      "quietAfterRMS": 0.0002199260851786423,
+      "playingPeak": 0.070892333984375,
+      "playingDbfs": -55.17440538107529,
+      "playingOverQuietBeforeDb": 19.295135168392836,
+      "playingOverQuietAfterDb": 17.980059747281597,
+      "frames": {
+        "quiet-before": 100,
+        "playing": 200,
+        "quiet-after": 101
+      }
+    },
+    {
+      "file": "safari-b.json",
+      "bytes": 3418,
+      "sha256": "ab59ae7640e90f2efce10ee3bf5be78a0c115051418513cc769862fcaa3485a0",
+      "browser": "safari",
+      "group": "B",
+      "mode": "direct-default",
+      "quietBeforeRMS": 0.000725675647132792,
+      "playingRMS": 0.0010306098352638646,
+      "quietAfterRMS": 0.0004752154735920673,
+      "playingPeak": 0.044586181640625,
+      "playingDbfs": -59.738114346358905,
+      "playingOverQuietBeforeDb": 3.047034675910205,
+      "playingOverQuietAfterDb": 6.724074186474582,
+      "frames": {
+        "quiet-before": 100,
+        "playing": 200,
+        "quiet-after": 100
+      }
+    },
+    {
+      "file": "safari-c.json",
+      "bytes": 5177,
+      "sha256": "efe75a4ac1ed66d72310602e2e83a97108e805b0c427b4ee46e43cf93767af57",
+      "browser": "safari",
+      "group": "C",
+      "mode": "media-16k",
+      "quietBeforeRMS": 0.0003296948636478979,
+      "playingRMS": 0.002872756219013838,
+      "quietAfterRMS": 0.0004429417814257187,
+      "playingPeak": 0.098480224609375,
+      "playingDbfs": -50.8340245301375,
+      "playingOverQuietBeforeDb": 18.80373184436378,
+      "playingOverQuietAfterDb": 16.239042510507137,
+      "frames": {
+        "quiet-before": 100,
+        "playing": 200,
+        "quiet-after": 101
+      }
+    },
+    {
+      "file": "chrome-a.json",
+      "bytes": 1647,
+      "sha256": "f885337bd917405952b4f99f671aa9647852e352d344c3c3c67e39ce16bdd853",
+      "browser": "chrome",
+      "group": "A",
+      "mode": "direct-16k",
+      "quietBeforeRMS": 0.00022210581402602595,
+      "playingRMS": 0.0025067887603860807,
+      "quietAfterRMS": 0.00020545705913419709,
+      "playingPeak": 0.09521484375,
+      "playingDbfs": -52.01764522401806,
+      "playingOverQuietBeforeDb": 21.05115623298435,
+      "playingOverQuietAfterDb": 21.72793342738637,
+      "frames": {
+        "quiet-before": 100,
+        "playing": 200,
+        "quiet-after": 100
+      }
+    },
+    {
+      "file": "chrome-b.json",
+      "bytes": 3410,
+      "sha256": "4745dd579ae31ba91f3fe8aa5626fbf7be6f447cc75469026eb9df8101e81241",
+      "browser": "chrome",
+      "group": "B",
+      "mode": "direct-default",
+      "quietBeforeRMS": 0.01321517295295036,
+      "playingRMS": 0.0008905714817865844,
+      "quietAfterRMS": 0.0007876268782305651,
+      "playingPeak": 0.031036376953125,
+      "playingDbfs": -61.006624322452566,
+      "playingOverQuietBeforeDb": -23.428081348720433,
+      "playingOverQuietAfterDb": 1.0669651120744699,
+      "frames": {
+        "quiet-before": 100,
+        "playing": 200,
+        "quiet-after": 101
+      }
+    },
+    {
+      "file": "chrome-c.json",
+      "bytes": 5169,
+      "sha256": "f3bb29cf1078d6c7b6ed218b3ad45fbbe541ef6ef5114e30126a1d1a200d8ef3",
+      "browser": "chrome",
+      "group": "C",
+      "mode": "media-16k",
+      "quietBeforeRMS": 0.0004169741915341714,
+      "playingRMS": 0.0005650727167649289,
+      "quietAfterRMS": 0.0001879264835244318,
+      "playingPeak": 0.021759033203125,
+      "playingDbfs": -64.95791322210026,
+      "playingOverQuietBeforeDb": 2.6399032717656383,
+      "playingOverQuietAfterDb": 9.562327031338985,
+      "frames": {
+        "quiet-before": 100,
+        "playing": 200,
+        "quiet-after": 100
+      }
+    }
+  ],
+  "contrasts": [
+    {
+      "browser": "safari",
+      "comparison": "B/A",
+      "rmsRatio": 0.5913090851247124,
+      "rmsDifferenceDb": -4.563708965283616
+    },
+    {
+      "browser": "safari",
+      "comparison": "C/A",
+      "rmsRatio": 1.6482346602256999,
+      "rmsDifferenceDb": 4.340380850937795
+    },
+    {
+      "browser": "chrome",
+      "comparison": "B/A",
+      "rmsRatio": 0.35526387219377187,
+      "rmsDifferenceDb": -8.988979098434504
+    },
+    {
+      "browser": "chrome",
+      "comparison": "C/A",
+      "rmsRatio": 0.2254169659983236,
+      "rmsDifferenceDb": -12.9402679980822
+    }
+  ],
+  "conclusion": "C is not supported as Safari fix. B merits repeated reversed-order A/B with temporal energy bins; root cause remains undetermined."
+}

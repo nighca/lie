@@ -1,6 +1,6 @@
 # Safari 角色语音自打断调查
 
-2026-11-01，专项 Chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。状态：**首轮事件路径和后续 WebKit 输出路径调查完成，独立无provider诊断工具已实现并离线检查；用户已明确批准线上独立诊断入口，并要求不影响其他线上功能。本批仅接入构建，待协调者review/发布；真实 Safari 未复现、根因未定、无产品修复**。
+2026-11-01，专项 Chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。状态：**诊断v1已随730ba84正式发布并收到用户iPad/iPhone数据；根因仍未定、无产品语音修复。v2仅补分时音量和帧到达时间，离线检查通过，待协调者review/发布。用户已批准独立入口并要求不影响其他线上功能。**
 
 ## 范围与来源
 
@@ -33,7 +33,7 @@
 
 | 环节 | 当前代码与证据 | 可推断的边界 |
 | --- | --- | --- |
-| 麦克风请求 | [`microphone.ts`](../../../packages/voice/src/microphone.ts) 请求 `audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true }`，`video: false`。不指定 `autoGainControl` 或输入设备。 | 已请求 AEC，不等于实际生效或能消除所有外放声。代码没有读取 `getSupportedConstraints()` / `track.getSettings()`；当前没有用户设备的实际设置。 |
+| 麦克风请求 | [`microphone.ts`](../../../packages/voice/src/microphone.ts) 请求 `audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true }`，`video: false`。不指定 `autoGainControl` 或输入设备。 | 游戏采集模块自身未读settings；后续独立诊断的用户样本已报告AEC=true/capture48k，NS/AGC未报告。报告启用不等于消除所有外放声。 |
 | 采集路径 | `getUserMedia → MediaStreamAudioSourceNode → AudioWorklet → PCM encoder → channel.input`；mic graph 的 gain 为 0。编码使用 capture AudioContext 的实际 sampleRate，重采样到 PCM16 mono 16k/20ms。 | 没有显式把角色播放节点接到采集 graph；没有本地 mic 监听外放。实际设备/OS 声学或虚拟路由仍未知。 |
 | 播放路径 | [`liveVoice.ts`](../../../apps/web/src/application/liveVoice.ts) 单独创建 `AudioContext({ sampleRate: 16000 })`；[`player.ts`](../../../packages/voice/src/player.ts) 使用 buffer source 接 playback destination。麦克风另开默认采样率 context。 | 两个 context 是当前事实；没有证据证明这就是 Safari 故障原因。未经对照不合并 context、不撤销已接受的 16k 播放。 |
 | 本地活动检测 | liveVoice 的输入 RMS / 0.012、0.008 阈值及 120/350ms 滞回仅发 `audioLevel`。 | 改这些阈值不会改变供应商 VAD 或阻止当前打断路径；未发现本地能量触发 abort。 |
@@ -70,9 +70,11 @@
 
 针对补充条件查询了 WebKit 的 AEC/WebAudio/移动端相关报告，未找到足以确认本案根因的对应修复。[WebKit #218012](https://bugs.webkit.org/show_bug.cgi?id=218012) 讨论开启 mic 后音量/路由变化，只作为检查音频会话的背景，不是自打断的复现证据；不将音量/爆音 bug 与本案混为一个问题。
 
-后续继续调查已找到具体 upstream 输出路径差异：WebAudio 直接output使用RemoteIO，AEC capture使用VPIO；MediaStream renderer在特定默认输出/最近采集connection等条件下可经capture unit渲染。已据此实现[独立A/B/C工具与源码证据](../../../spikes/safari-audio/README.md)，比较16k直接播放、默认率直接播放、16k媒体流播放；不改变现有玩法，不使用Linx或录音。13项fake/types/独立构建及产物边界检查通过；用户明确回复“同意上线独立诊断入口”，随后要求“需要确保不影响任何其他线上功能”。经协调者明确交回最小Web构建接入ownership，本专项只在原postbuild后追加独立HTML，测试/typecheck覆盖工具；不改App/路由/语音产品代码/Worker/API/全局CSP/工作流/锁文件。由协调者review后发布。IAB file协议预览被策略拒绝且未绕过，实际CSP/浏览器音频效果未验。
+后续继续调查已找到具体 upstream 输出路径差异：WebAudio 直接output使用RemoteIO，AEC capture使用VPIO；MediaStream renderer在特定默认输出/最近采集connection等条件下可经capture unit渲染。已据此实现[独立A/B/C工具与源码证据](../../../spikes/safari-audio/README.md)，比较16k直接播放、默认率直接播放、16k媒体流播放；不改变现有玩法，不使用Linx或录音。首版13项fake/types/独立构建及产物边界检查通过；用户明确批准独立入口并要求不影响其他功能。只在原postbuild后追加独立HTML，不改App/路由/语音产品代码/Worker/API/全局CSP/工作流/锁文件。协调者review后以730ba84发布。首轮file预览被策略拒绝且未绕过，后续正式HTTPS已完成不开mic原生验收；自有JS/CSS正常、边缘beacon/工具style被阻告警另记，必要截图随用户结果批次保全。
 
 ## 下一轮所需证据与判别
+
+用户现已提供[同iPad Safari/Chrome六组及条件确认](ipad-first-pass/README.md)和[iPhone Safari三组及C更响/出声不同](iphone-first-pass/README.md)，原JSON、哈希、计算和前次必要线上截图在这次正常调查批次保全。整体RMS不支持直接采用C；B在三个环境绝对值较低但基线不稳且每组一次，不能宣称修复。独立诊断格式v2只补每200ms窗口与主线程帧到达时间，保留8秒/显式点击/无录音上传/Linx/产品语音零改；待review/发布后仅做少量Safari A/B反序重复。不要再将实际settings或输出是否可听写成完全未知，也不要求用户重述已确认iPad条件。
 
 设备类别、iPadOS 版本和两台移动设备的外放已由用户补充，不重复请求。后续如取得手动窗口，优先在**同一 iPad 的 Safari 与 Chrome、相同 build hash 和输出/音量条件**比较实际设置与事件顺序，再按需要补齐机型、Safari/Chrome 完整版本、是否有其他正在采集的 tab/app；MacBook 作为附加对照。耳机是可选的第二维度，无需为调查购买设备。目前没有要求用户开始新付费会话。
 
@@ -97,6 +99,6 @@
 
 首轮代码范围仅新增1个事件路径测试、本目录README与必要原图；后续独立诊断工具新增`spikes/safari-audio/`，批准后以`apps/web/package.json`接入独立HTML构建与工具tests/types。方法/边界/源码链接与fake检查见该目录，[同clean SHA产物隔离证据](isolation-results.json)确认旧251 Web文件和256 Cloudflare文件全部逐字一致，只多一个诊断HTML。432 Web+13 probe+19 gateway离线测试及Web/probe types通过。无产品修复或 UI/玩法/provider 合同修改。原始 base 如上，无额外依赖提交；有序完整 commit SHA 在最终交付消息列明，不把 commit 自己的 hash 写回制造文档提交循环。
 
-启动服务 **0**，停止服务 **0**，真实 mic/录音/上传 **0**，Linx 请求 **0**。后续IAB本地file页的唯一尝试被协议策略拒绝、未创建tab或执行页面。未触碰 8787/8788、5176、5544 等其他 owner 服务，无新增端口/PID/PTY/保留 consumer。测试进程均退出，不需服务清理。Safari 真机/真实回声仍未验证；因此状态仍为“待复现/实际设置与事件证据”，不能标已修复。
+Agent新增应用服务/停止他人服务/真实mic/录音/音频上传/Linx请求均为 **0**；本地cf build内部临时监听单独按工具README登记并核退出，不计为应用dev服务。file尝试被拒未绕过；v1 HTTPS验收自建tab已关闭，未动用户tab/权限。用户后来手动提供真机合成信号结果，独立于Agent离线测试；真实玩法STT时序/根因仍待验证，不能标已修复。未触碰其他owner端口/launchd，无保留新consumer；v2同样未启动服务或真实音频。
 
 给中央计划的批量更新建议：P1 Safari 自打断首轮事件路径及WebKit输出差异调查完成；用户对照条件已记录。用户已批准同域隐藏独立诊断页并要求不影响其他线上功能，构建接入/离线检查和严格产物对比完成，仅新增一个HTML；等待协调者review/发布和用户同iPad Safari/Chrome手动对照。无玩法/产品语音修复，不将独立诊断页上线称为自打断已解决。

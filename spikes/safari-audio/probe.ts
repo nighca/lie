@@ -3,15 +3,20 @@ import { openMicrophone } from '../../packages/voice/src/microphone'
 export type ProbeMode = 'direct-16k' | 'direct-default' | 'media-16k'
 export type ProbePhase = 'preparing' | 'quiet-before' | 'playing' | 'quiet-after' | 'stopped'
 type Energy = { frames: number; samples: number; sumSquares: number; peak: number }
+type EnergyWindow = Energy & { firstFrameAtMs: number; lastFrameAtMs: number }
+type CapturePhase = 'quiet-before' | 'playing' | 'quiet-after'
 type AudioSettings = { echoCancellation: boolean | null; noiseSuppression: boolean | null; autoGainControl: boolean | null; sampleRate: number | null; channelCount: number | null; latency: number | null }
 type ContextInfo = { sampleRate: number; state: string }
 export type ProbeReport = {
+  formatVersion: 2
   mode: ProbeMode
   phase: ProbePhase
   settings: AudioSettings | null
   settingsByPhase: Partial<Record<'quiet-before' | 'playing' | 'quiet-after', AudioSettings>>
   contexts: { capture: ContextInfo | null; playback: ContextInfo | null }
   energy: Record<'quiet-before' | 'playing' | 'quiet-after', { frames: number; rms: number; peak: number }>
+  timeline: Record<CapturePhase, { fromFrame: number; frames: number; firstFrameAtMs: number; lastFrameAtMs: number; rms: number; peak: number }[]>
+  timelineTruncated: boolean
   cleanup: { tracksEnded: boolean; contextsClosed: boolean } | null
   error: string | null
 }
@@ -37,6 +42,8 @@ export function createAudioProbe(mode: ProbeMode, onUpdate: (report: ProbeReport
 }) {
   const abort = new AbortController()
   const stats = { 'quiet-before': energy(), playing: energy(), 'quiet-after': energy() }
+  const windows: Record<CapturePhase, EnergyWindow[]> = { 'quiet-before': [], playing: [], 'quiet-after': [] }
+  let phaseStartedAt = 0
   const contexts: AudioContext[] = []
   let stream: MediaStream | null = null
   let microphone: Awaited<ReturnType<typeof openMicrophone>> | null = null
@@ -49,12 +56,13 @@ export function createAudioProbe(mode: ProbeMode, onUpdate: (report: ProbeReport
   let timer: ReturnType<typeof setTimeout> | null = null
   let stopPromise: Promise<void> | null = null
   let started = false
-  const report: ProbeReport = { mode, phase: 'preparing', settings: null, settingsByPhase: {}, contexts: { capture: null, playback: null }, energy: { 'quiet-before': { frames: 0, rms: 0, peak: 0 }, playing: { frames: 0, rms: 0, peak: 0 }, 'quiet-after': { frames: 0, rms: 0, peak: 0 } }, cleanup: null, error: null }
+  const report: ProbeReport = { formatVersion: 2, mode, phase: 'preparing', settings: null, settingsByPhase: {}, contexts: { capture: null, playback: null }, energy: { 'quiet-before': { frames: 0, rms: 0, peak: 0 }, playing: { frames: 0, rms: 0, peak: 0 }, 'quiet-after': { frames: 0, rms: 0, peak: 0 } }, timeline: { 'quiet-before': [], playing: [], 'quiet-after': [] }, timelineTruncated: false, cleanup: null, error: null }
 
   function snapshot(): ProbeReport {
     for (const phase of ['quiet-before', 'playing', 'quiet-after'] as const) {
       const value = stats[phase]
       report.energy[phase] = { frames: value.frames, rms: Math.sqrt(value.sumSquares / Math.max(1, value.samples)), peak: value.peak }
+      report.timeline[phase] = windows[phase].map((window, index) => ({ fromFrame: index * 10, frames: window.frames, firstFrameAtMs: window.firstFrameAtMs, lastFrameAtMs: window.lastFrameAtMs, rms: Math.sqrt(window.sumSquares / Math.max(1, window.samples)), peak: window.peak }))
     }
     return structuredClone(report)
   }
@@ -65,7 +73,7 @@ export function createAudioProbe(mode: ProbeMode, onUpdate: (report: ProbeReport
     report.settings = { echoCancellation: settings.echoCancellation ?? null, noiseSuppression: settings.noiseSuppression ?? null, autoGainControl: settings.autoGainControl ?? null, sampleRate: settings.sampleRate ?? null, channelCount: settings.channelCount ?? null, latency: (settings as MediaTrackSettings & { latency?: number }).latency ?? null }
     report.settingsByPhase[report.phase] = report.settings
   }
-  function phase(next: ProbePhase) { report.phase = next; readSettings(); publish() }
+  function phase(next: ProbePhase) { report.phase = next; phaseStartedAt = performance.now(); readSettings(); publish() }
   function contextInfo(context: AudioContext): ContextInfo { return { sampleRate: context.sampleRate, state: context.state } }
   function rememberContext(context: AudioContext, role: 'capture' | 'playback') {
     contexts.push(context)
@@ -153,10 +161,21 @@ export function createAudioProbe(mode: ProbeMode, onUpdate: (report: ProbeReport
           if (abort.signal.aborted || report.phase === 'preparing' || report.phase === 'stopped') return
           const value = stats[report.phase]
           const view = new DataView(data.buffer, data.byteOffset, data.byteLength)
+          let sumSquares = 0
+          let peak = 0
           for (let i = 0; i < view.byteLength; i += 2) {
             const sample = view.getInt16(i, true) / 32768
-            value.sumSquares += sample * sample; value.samples++; value.peak = Math.max(value.peak, Math.abs(sample))
+            sumSquares += sample * sample; peak = Math.max(peak, Math.abs(sample))
           }
+          const samples = view.byteLength / 2
+          value.sumSquares += sumSquares; value.samples += samples; value.peak = Math.max(value.peak, peak)
+          const windowIndex = Math.floor(value.frames / 10)
+          if (windowIndex < 50) {
+            const phaseWindows = windows[report.phase]
+            const at = performance.now() - phaseStartedAt
+            const window = phaseWindows[windowIndex] ??= { ...energy(), firstFrameAtMs: at, lastFrameAtMs: at }
+            window.frames++; window.samples += samples; window.sumSquares += sumSquares; window.peak = Math.max(window.peak, peak); window.lastFrameAtMs = at
+          } else report.timelineTruncated = true
           value.frames++
           if (value.frames % 10 === 0) { readSettings(); publish() }
         },

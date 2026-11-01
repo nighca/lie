@@ -15,7 +15,7 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals())
 
 function stopped(cleaned: boolean): ProbeReport {
-  return { mode: 'direct-16k', phase: 'stopped', settings: null, settingsByPhase: {}, contexts: { capture: null, playback: null }, energy: { 'quiet-before': { frames: 0, rms: 0, peak: 0 }, playing: { frames: 0, rms: 0, peak: 0 }, 'quiet-after': { frames: 0, rms: 0, peak: 0 } }, cleanup: { tracksEnded: cleaned, contextsClosed: cleaned }, error: null }
+  return { formatVersion: 2, mode: 'direct-16k', phase: 'stopped', settings: null, settingsByPhase: {}, contexts: { capture: null, playback: null }, energy: { 'quiet-before': { frames: 0, rms: 0, peak: 0 }, playing: { frames: 0, rms: 0, peak: 0 }, 'quiet-after': { frames: 0, rms: 0, peak: 0 } }, timeline: { 'quiet-before': [], playing: [], 'quiet-after': [] }, timelineTruncated: false, cleanup: { tracksEnded: cleaned, contextsClosed: cleaned }, error: null }
 }
 
 describe('diagnostic page control boundary', () => {

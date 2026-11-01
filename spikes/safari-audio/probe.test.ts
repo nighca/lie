@@ -38,7 +38,7 @@ function fixture(mode: ProbeMode = 'direct-16k') {
     getUserMedia: vi.fn(async (_constraints: MediaStreamConstraints) => stream as unknown as MediaStream),
   }
   const probe = createAudioProbe(mode, row => rows.push(row), dependencies)
-  return { probe, dependencies, track, routeTrack, route, source, silence, contexts, audio, rows, sample: () => worklet.port.onmessage?.({ data: new Float32Array(960).fill(0.25) }) }
+  return { probe, dependencies, track, routeTrack, route, source, silence, contexts, audio, rows, sample: (value = 0.25) => worklet.port.onmessage?.({ data: new Float32Array(960).fill(value) }) }
 }
 
 afterEach(() => vi.useRealTimers())
@@ -141,6 +141,44 @@ describe('local-only Safari audio probe', () => {
     await f.probe.stop()
     expect(f.probe.snapshot().cleanup).toEqual({ tracksEnded: true, contextsClosed: false })
     expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('separates an onset spike from steady input and retains a partial final window', async () => {
+    vi.useFakeTimers()
+    const f = fixture()
+    await f.probe.start()
+    await vi.advanceTimersByTimeAsync(2000)
+    f.sample(0.5)
+    for (let index = 0; index < 9; index++) f.sample(0)
+    for (let index = 0; index < 11; index++) f.sample(0.125)
+    await f.probe.stop()
+    const report = f.probe.snapshot()
+    expect(report.formatVersion).toBe(2)
+    expect(report.timeline.playing.map(window => [window.fromFrame, window.frames])).toEqual([[0, 10], [10, 10], [20, 1]])
+    expect(report.timeline.playing[0].rms).toBeCloseTo(Math.sqrt(0.25 / 10), 12)
+    expect(report.timeline.playing[0].peak).toBe(0.5)
+    expect(report.timeline.playing[1].rms).toBe(0.125)
+    expect(report.timeline.playing[2].rms).toBe(0.125)
+    expect(report.energy.playing.rms).toBeCloseTo(Math.sqrt((0.25 + 11 * 0.125 ** 2) / 21), 12)
+    expect(report.timelineTruncated).toBe(false)
+  })
+
+  it('reports main-thread frame arrival delay and bounds retained window metadata', async () => {
+    vi.useFakeTimers()
+    const f = fixture()
+    const time = vi.spyOn(performance, 'now').mockReturnValue(0)
+    try {
+      await f.probe.start()
+      time.mockReturnValue(500); f.sample()
+      time.mockReturnValue(520); f.sample()
+      expect(f.probe.snapshot().timeline['quiet-before'][0]).toMatchObject({ firstFrameAtMs: 500, lastFrameAtMs: 520 })
+      for (let index = 0; index < 499; index++) f.sample()
+      const report = f.probe.snapshot()
+      expect(report.energy['quiet-before'].frames).toBe(501)
+      expect(report.timeline['quiet-before']).toHaveLength(50)
+      expect(report.timeline['quiet-before'].reduce((sum, window) => sum + window.frames, 0)).toBe(500)
+      expect(report.timelineTruncated).toBe(true)
+    } finally { await f.probe.stop(); time.mockRestore() }
   })
 
   it('uses a deterministic bounded synthetic signal with a silent onset', () => {

@@ -20,7 +20,7 @@
     </select></label>
     <div class="actions"><button id="start">开始本机测试</button><button id="stop" disabled>停止并释放麦克风</button></div>
     <p id="status" role="status">尚未开启麦克风。</p>
-    <p>刷新或关闭页面会丢弃结果。可在下方手动选择复制文字；结果只有设置、相对分组音量和清理状态，没有音频、设备标识或对话内容。</p>
+    <p>诊断格式 v2：保留整段音量，并增加每约 200 毫秒的音量统计及帧到达时间，用来区分启播瞬间与持续输入。刷新或关闭页面会丢弃结果。可在下方手动选择复制文字；没有音频、设备标识或对话内容。</p>
     <label>本机结果 <textarea id="report" readonly rows="22" spellcheck="false"></textarea></label>
   </main>
   <script type="module" src="./main.ts"></script>

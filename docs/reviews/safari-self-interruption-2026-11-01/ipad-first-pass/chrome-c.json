@@ -1,0 +1,214 @@
+{
+  "completed": [
+    {
+      "mode": "direct-16k",
+      "phase": "stopped",
+      "settings": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "settingsByPhase": {
+        "quiet-before": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "playing": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "quiet-after": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        }
+      },
+      "contexts": {
+        "capture": {
+          "sampleRate": 48000,
+          "state": "closed"
+        },
+        "playback": {
+          "sampleRate": 16000,
+          "state": "closed"
+        }
+      },
+      "energy": {
+        "quiet-before": {
+          "frames": 100,
+          "rms": 0.00022210581402602595,
+          "peak": 0.001220703125
+        },
+        "playing": {
+          "frames": 200,
+          "rms": 0.0025067887603860807,
+          "peak": 0.09521484375
+        },
+        "quiet-after": {
+          "frames": 100,
+          "rms": 0.00020545705913419709,
+          "peak": 0.00201416015625
+        }
+      },
+      "cleanup": {
+        "tracksEnded": true,
+        "contextsClosed": true
+      },
+      "error": null
+    },
+    {
+      "mode": "direct-default",
+      "phase": "stopped",
+      "settings": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "settingsByPhase": {
+        "quiet-before": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "playing": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "quiet-after": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        }
+      },
+      "contexts": {
+        "capture": {
+          "sampleRate": 48000,
+          "state": "closed"
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "state": "closed"
+        }
+      },
+      "energy": {
+        "quiet-before": {
+          "frames": 100,
+          "rms": 0.01321517295295036,
+          "peak": 0.153411865234375
+        },
+        "playing": {
+          "frames": 200,
+          "rms": 0.0008905714817865844,
+          "peak": 0.031036376953125
+        },
+        "quiet-after": {
+          "frames": 101,
+          "rms": 0.0007876268782305651,
+          "peak": 0.032958984375
+        }
+      },
+      "cleanup": {
+        "tracksEnded": true,
+        "contextsClosed": true
+      },
+      "error": null
+    }
+  ],
+  "current": {
+    "mode": "media-16k",
+    "phase": "stopped",
+    "settings": {
+      "echoCancellation": true,
+      "noiseSuppression": null,
+      "autoGainControl": null,
+      "sampleRate": 48000,
+      "channelCount": null,
+      "latency": null
+    },
+    "settingsByPhase": {
+      "quiet-before": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "playing": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "quiet-after": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      }
+    },
+    "contexts": {
+      "capture": {
+        "sampleRate": 48000,
+        "state": "closed"
+      },
+      "playback": {
+        "sampleRate": 16000,
+        "state": "closed"
+      }
+    },
+    "energy": {
+      "quiet-before": {
+        "frames": 100,
+        "rms": 0.0004169741915341714,
+        "peak": 0.005401611328125
+      },
+      "playing": {
+        "frames": 200,
+        "rms": 0.0005650727167649289,
+        "peak": 0.021759033203125
+      },
+      "quiet-after": {
+        "frames": 100,
+        "rms": 0.0001879264835244318,
+        "peak": 0.001312255859375
+      }
+    },
+    "cleanup": {
+      "tracksEnded": true,
+      "contextsClosed": true
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "declaredCurrentTrials": 3,
+  "browser": "Safari",
+  "device": "iPhone; model/OS version not provided",
+  "userConfirmed": {
+    "CNoticeablyLouder": true,
+    "COutputSoundsDifferent": true,
+    "noChromeComparison": true
+  },
+  "unknownConditions": [
+    "calibrated acoustic output",
+    "device model and OS version",
+    "conditions and attribution of extra completed history trials"
+  ],
+  "historyPolicy": "Only filename-designated current is used; completed includes repeated currents plus additional unlabelled rounds, preserved verbatim but excluded from comparisons.",
+  "rows": [
+    {
+      "file": "iphone-safari-a.json",
+      "bytes": 6934,
+      "sha256": "b6a833f12a28d1cd6386f0b034f573c38e59846c6f2561ba24642056a9d58b19",
+      "group": "A",
+      "mode": "direct-16k",
+      "historyEntries": 3,
+      "quietBeforeRMS": 0.00015051406000936136,
+      "playingRMS": 0.0020080831817275917,
+      "quietAfterRMS": 0.0008449237378373688,
+      "playingPeak": 0.035308837890625,
+      "playingDbfs": -53.944366023597546,
+      "frames": {
+        "quiet-before": 96,
+        "playing": 200,
+        "quiet-after": 100
+      }
+    },
+    {
+      "file": "iphone-safari-b.json",
+      "bytes": 8695,
+      "sha256": "d1903eab0d5c3537a9c1340b7378134391771e6833598a70f1cef4153880ccde",
+      "group": "B",
+      "mode": "direct-default",
+      "historyEntries": 4,
+      "quietBeforeRMS": 4.374777583871903e-05,
+      "playingRMS": 0.00085849129285263,
+      "quietAfterRMS": 1.774797895629891e-05,
+      "playingPeak": 0.025146484375,
+      "playingDbfs": -61.325282105232695,
+      "frames": {
+        "quiet-before": 100,
+        "playing": 200,
+        "quiet-after": 100
+      }
+    },
+    {
+      "file": "iphone-safari-c.json",
+      "bytes": 12209,
+      "sha256": "c068c511ab5da6d0fc8fec48b4928e64811b830754888a14c672b8c731af009d",
+      "group": "C",
+      "mode": "media-16k",
+      "historyEntries": 6,
+      "quietBeforeRMS": 2.516929431420165e-05,
+      "playingRMS": 0.00029583910663571084,
+      "quietAfterRMS": 2.8931105656912416e-05,
+      "playingPeak": 0.0087890625,
+      "playingDbfs": -70.57888835299542,
+      "frames": {
+        "quiet-before": 72,
+        "playing": 200,
+        "quiet-after": 101
+      }
+    }
+  ],
+  "descriptiveContrasts": [
+    {
+      "comparison": "B/A",
+      "rmsRatio": 0.42751779441430005,
+      "rmsDifferenceDb": -7.38091608163515,
+      "interpretation": "Not calibrated echo attenuation; C has confirmed output confound."
+    },
+    {
+      "comparison": "C/A",
+      "rmsRatio": 0.1473241294622043,
+      "rmsDifferenceDb": -16.634522329397885,
+      "interpretation": "Not calibrated echo attenuation; C has confirmed output confound."
+    }
+  ],
+  "conclusion": "Do not pool iPhone with iPad or infer Chrome behavior. C is audibly different and cannot be treated as a drop-in output fix; A/B onset-vs-steady temporal data is still missing."
+}

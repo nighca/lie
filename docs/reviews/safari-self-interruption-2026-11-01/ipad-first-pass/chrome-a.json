@@ -1,0 +1,73 @@
+{
+  "completed": [],
+  "current": {
+    "mode": "direct-16k",
+    "phase": "stopped",
+    "settings": {
+      "echoCancellation": true,
+      "noiseSuppression": null,
+      "autoGainControl": null,
+      "sampleRate": 48000,
+      "channelCount": null,
+      "latency": null
+    },
+    "settingsByPhase": {
+      "quiet-before": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "playing": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "quiet-after": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      }
+    },
+    "contexts": {
+      "capture": {
+        "sampleRate": 48000,
+        "state": "closed"
+      },
+      "playback": {
+        "sampleRate": 16000,
+        "state": "closed"
+      }
+    },
+    "energy": {
+      "quiet-before": {
+        "frames": 100,
+        "rms": 0.00022210581402602595,
+        "peak": 0.001220703125
+      },
+      "playing": {
+        "frames": 200,
+        "rms": 0.0025067887603860807,
+        "peak": 0.09521484375
+      },
+      "quiet-after": {
+        "frames": 100,
+        "rms": 0.00020545705913419709,
+        "peak": 0.00201416015625
+      }
+    },
+    "cleanup": {
+      "tracksEnded": true,
+      "contextsClosed": true
+    },
+    "error": null
+  }
+}
