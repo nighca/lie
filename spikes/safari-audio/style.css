@@ -1,0 +1,8 @@
+:root { font: 16px/1.65 system-ui, sans-serif; color: #17203b; background: #f5f6fa; }
+body { margin: 0; } main { max-width: 800px; margin: auto; padding: 24px 20px; }
+h1 { font-size: 26px; } label { display: block; font-weight: 600; }
+select, textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 8px; font: inherit; border: 1px solid #8992a6; border-radius: 8px; background: white; padding: 10px; color: inherit; }
+select { white-space: normal; } textarea { font: 12px/1.5 ui-monospace, monospace; }
+button { font: inherit; padding: 10px 14px; border-radius: 8px; border: 1px solid #59698f; background: #fff; color: inherit; cursor: pointer; }
+button:disabled { opacity: .5; cursor: default; } .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+#status { font-weight: 700; min-height: 2em; }

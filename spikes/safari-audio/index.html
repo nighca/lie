@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' blob:; style-src 'self'; media-src blob:; worker-src blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>LIE Safari 音频诊断</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main>
+    <h1>Safari 外放音频诊断</h1>
+    <p>这个独立页面不连接游戏或 Linx。点击开始后会请求麦克风，播放约 4 秒轻声测试音，总计约 8 秒。只在本机计算输入音量与音频设置，不保存、上传或回放麦克风音频。请先调低扬声器音量。</p>
+    <p>第一轮请保持安静，使用同一设备、音量与摆放位置依次测试 A、B、C。每组确认能听到测试音；听不到的组请注明，不用于比较回声。然后在另一浏览器重复。可另做一轮，在测试音期间正常说话，并在结果旁注明。输入能量变化不是识别结果，也不能单独证明回声消除是否正常。</p>
+    <p>若某组测试音明显变轻、变重或改从听筒播放，请一并注明：输入变小也可能只是输出音量或路由变化。</p>
+    <label>对照组 <select id="mode">
+      <option value="direct-16k">A：16k WebAudio 直接播放（现有链路的最小模型）</option>
+      <option value="direct-default">B：默认采样率 WebAudio 直接播放</option>
+      <option value="media-16k">C：16k WebAudio → 媒体流 → audio 播放</option>
+    </select></label>
+    <div class="actions"><button id="start">开始本机测试</button><button id="stop" disabled>停止并释放麦克风</button></div>
+    <p id="status" role="status">尚未开启麦克风。</p>
+    <p>刷新或关闭页面会丢弃结果。可在下方手动选择复制文字；结果只有设置、相对分组音量和清理状态，没有音频、设备标识或对话内容。</p>
+    <label>本机结果 <textarea id="report" readonly rows="22" spellcheck="false"></textarea></label>
+  </main>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
