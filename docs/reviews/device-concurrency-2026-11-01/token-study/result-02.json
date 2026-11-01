@@ -1,0 +1,181 @@
+{
+  "owner": "lie-p0-token-share-2026-11-01",
+  "startedAt": "2026-11-01T06:37:29.798Z",
+  "operations": [
+    {
+      "operation": "create-agent",
+      "startedAtMs": 2,
+      "durationMs": 1874,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "configure-agent",
+      "startedAtMs": 1878,
+      "durationMs": 453,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "read-agent",
+      "startedAtMs": 2331,
+      "durationMs": 1316,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D1-initial-ota",
+      "startedAtMs": 3649,
+      "durationMs": 2064,
+      "status": 200,
+      "code": null,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D1-bind",
+      "startedAtMs": 5714,
+      "durationMs": 470,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D1-token-ota",
+      "startedAtMs": 6186,
+      "durationMs": 436,
+      "status": 200,
+      "code": null,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D2-initial-ota",
+      "startedAtMs": 6626,
+      "durationMs": 508,
+      "status": 200,
+      "code": null,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D2-bind",
+      "startedAtMs": 7136,
+      "durationMs": 467,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D1-unbind",
+      "startedAtMs": 24565,
+      "durationMs": 1758,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "D2-unbind",
+      "startedAtMs": 26324,
+      "durationMs": 483,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    },
+    {
+      "operation": "delete-agent",
+      "startedAtMs": 26808,
+      "durationMs": 450,
+      "status": 200,
+      "code": 0,
+      "errorCode": null,
+      "success": true
+    }
+  ],
+  "channels": [
+    {
+      "label": "D1-T1",
+      "device": "D1",
+      "token": "T1",
+      "startedAtMs": 7606,
+      "openedAtMs": 9758,
+      "helloAtMs": 10189,
+      "callerClose": true,
+      "closeObserved": true,
+      "closeAtMs": 24565,
+      "closeCode": 1000,
+      "terminated": false,
+      "readyState": 3,
+      "receivedAudioBytes": 0,
+      "receivedTtsMessages": 0,
+      "unexpectedUpgradeStatus": null,
+      "errorCode": null
+    },
+    {
+      "label": "D2-T1",
+      "device": "D2",
+      "token": "T1",
+      "startedAtMs": 13192,
+      "openedAtMs": 18712,
+      "helloAtMs": 19125,
+      "callerClose": true,
+      "closeObserved": true,
+      "closeAtMs": 24548,
+      "closeCode": 1000,
+      "terminated": false,
+      "readyState": 3,
+      "receivedAudioBytes": 0,
+      "receivedTtsMessages": 0,
+      "unexpectedUpgradeStatus": null,
+      "errorCode": null
+    }
+  ],
+  "inputAudioBytes": 0,
+  "listenMessages": 0,
+  "crossDeviceAccepted": true,
+  "concurrentSameToken": true,
+  "distinctSessions": true,
+  "completed": true,
+  "cleanup": {
+    "startedAt": "2026-11-01T06:37:53.925Z",
+    "allSocketsClosed": true,
+    "allSocketClosesNormal": true,
+    "resourcesRemoved": true,
+    "scope": "Owned bindings removed and owned Agent deleted; not proof of all provider records/log/history erasure",
+    "finishedAt": "2026-11-01T06:37:57.059Z"
+  },
+  "config": {
+    "memModelId": "Memory_nomem",
+    "chatHistoryConf": 0,
+    "disable_greeting": true,
+    "max_tokens": 160,
+    "enable_search": false
+  },
+  "otaTarget": {
+    "scheme": "ws",
+    "officialHost": true,
+    "officialPath": true,
+    "hasQuery": false,
+    "hasUserInfo": false,
+    "hasNonDefaultPort": false
+  },
+  "token": {
+    "format": "jwt-like",
+    "signatureVerified": false,
+    "iat": null,
+    "exp": null,
+    "declaredLifetimeSeconds": null
+  },
+  "finishedAt": "2026-11-01T06:37:57.059Z",
+  "elapsedMs": 27261
+}

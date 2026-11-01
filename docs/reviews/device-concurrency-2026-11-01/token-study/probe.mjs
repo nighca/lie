@@ -6,6 +6,16 @@ class ProbeError extends Error {}
 const approvalPhrase = 'dedicated-token-share-turn-approved'
 const wsEndpoint = 'wss://xrobo-io.qiniuapi.com/v1/ws/'
 const owner = 'lie-p0-token-share-2026-11-01'
+const safeNetworkCodes = new Set(['ENOTFOUND', 'EAI_AGAIN', 'EPERM', 'EACCES', 'ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT',
+  'ENETUNREACH', 'EHOSTUNREACH', 'CERT_HAS_EXPIRED', 'UNABLE_TO_GET_ISSUER_CERT_LOCALLY', 'DEPTH_ZERO_SELF_SIGNED_CERT',
+  'SELF_SIGNED_CERT_IN_CHAIN', 'ERR_TLS_CERT_ALTNAME_INVALID', 'UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_BODY_TIMEOUT'])
+
+export function networkErrorProjection(error) {
+  for (const candidate of [error, error?.cause, error?.cause?.cause]) if (safeNetworkCodes.has(candidate?.code)) return candidate.code
+  if (error?.name === 'AbortError') return 'ABORTED'
+  if (error?.name === 'TimeoutError') return 'TIMEOUT'
+  return 'OTHER'
+}
 
 export function tokenProjection(token) {
   const result = { format: 'opaque', signatureVerified: false, iat: null, exp: null, declaredLifetimeSeconds: null }
@@ -62,7 +72,7 @@ export async function runApproved({ approval, keyPath, privateDir, resultPath, W
   }
   async function http(operation, url, options, requireCode = true) {
     if (!cleanupMode) check()
-    const row = { operation, startedAtMs: elapsed(), durationMs: null, status: null, code: null, success: false }
+    const row = { operation, startedAtMs: elapsed(), durationMs: null, status: null, code: null, errorCode: null, success: false }
     report.operations.push(row)
     try {
       const response = await request(url, { ...options, redirect: 'error', signal: AbortSignal.any([
@@ -72,11 +82,12 @@ export async function runApproved({ approval, keyPath, privateDir, resultPath, W
       const body = await response.json()
       row.code = typeof body?.code === 'number' ? body.code : null
       if (!response.ok || (requireCode && body?.code !== 0) || (!requireCode && (body?.error || (body?.code != null && body.code !== 0)))) {
+        row.errorCode = 'REJECTED_RESPONSE'
         throw new ProbeError('Rejected operation')
       }
       row.success = true
       return body
-    } catch { throw new ProbeError(`Operation failed: ${operation}`) }
+    } catch (error) { row.errorCode ??= networkErrorProjection(error); throw new ProbeError(`Operation failed: ${operation}`) }
     finally { row.durationMs = elapsed() - row.startedAtMs }
   }
   const api = (operation, path, method = 'GET', body = null) => http(operation, `https://xrobo.qiniu.com${path}`, {
@@ -112,7 +123,7 @@ export async function runApproved({ approval, keyPath, privateDir, resultPath, W
     check()
     const row = { label, device: device.label, token: 'T1', startedAtMs: elapsed(), openedAtMs: null, helloAtMs: null,
       callerClose: false, closeObserved: false, closeAtMs: null, closeCode: null, terminated: false, readyState: null,
-      receivedAudioBytes: 0, receivedTtsMessages: 0, unexpectedUpgradeStatus: null }
+      receivedAudioBytes: 0, receivedTtsMessages: 0, unexpectedUpgradeStatus: null, errorCode: null }
     report.channels.push(row)
     const ws = new WebSocket(wsEndpoint, { handshakeTimeout: 10000, headers: { Authorization: `Bearer ${token}`,
       'Device-Id': device.mac, 'Client-Id': device.client, 'Protocol-Version': '1', 'X-Agent-ID': state.agentId } })
@@ -123,7 +134,7 @@ export async function runApproved({ approval, keyPath, privateDir, resultPath, W
     const timer = setTimeout(() => { if (!readyDone) fail(`Hello timeout: ${label}`) }, 10000)
     const abort = () => resolveReady(false)
     experiment.signal.addEventListener('abort', abort, { once: true })
-    ws.on('error', () => fail(`WebSocket failed: ${label}`))
+    ws.on('error', error => { row.errorCode = networkErrorProjection(error); fail(`WebSocket failed: ${label}`) })
     ws.on('unexpected-response', (_req, response) => {
       row.unexpectedUpgradeStatus = response.statusCode ?? null
       response.resume()

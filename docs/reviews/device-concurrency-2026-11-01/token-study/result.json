@@ -1,0 +1,32 @@
+{
+  "owner": "lie-p0-token-share-2026-11-01",
+  "startedAt": "2026-11-01T06:27:34.149Z",
+  "operations": [
+    {
+      "operation": "create-agent",
+      "startedAtMs": 1,
+      "durationMs": 17,
+      "status": null,
+      "code": null,
+      "success": false
+    }
+  ],
+  "channels": [],
+  "inputAudioBytes": 0,
+  "listenMessages": 0,
+  "crossDeviceAccepted": false,
+  "concurrentSameToken": false,
+  "distinctSessions": false,
+  "completed": false,
+  "cleanup": {
+    "startedAt": "2026-11-01T06:27:34.167Z",
+    "allSocketsClosed": true,
+    "allSocketClosesNormal": false,
+    "resourcesRemoved": false,
+    "error": "Uncertain owned resources need reconciliation",
+    "finishedAt": "2026-11-01T06:27:34.167Z"
+  },
+  "error": "Operation failed: create-agent",
+  "finishedAt": "2026-11-01T06:27:34.167Z",
+  "elapsedMs": 18
+}

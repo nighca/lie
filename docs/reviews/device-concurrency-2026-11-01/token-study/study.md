@@ -1,6 +1,6 @@
 # WSS token作用域与复用研究
 
-2026-11-01；本轮只读官方公开资料与仓库源码，尚未取得真实token测试turn。**“不同Device必须不同token”和“每次WS必须OTA”均未证实。** 下文不把JWT格式、不同token字符串或历史每Device各取token的成功样本当作该结论。
+2026-11-01；官方只读研究之后，受权[第二轮](run-02.md)已实际验证同一专用Agent下D1取得的T1可用于不同D1/D2两WS并存，D2没有另取T2。**“不同Device必须不同token”不成立为普遍假设；固定原值、生产secret、长期期限与刷新仍未验证。** 下文保留官方公开契约与证据边界，不把JWT格式、不同token字符串或历史每Device各取token的成功样本当作必须分token的依据。
 
 ## 官方已说明与未说明
 
@@ -21,11 +21,13 @@
 
 ## 分开回答两类问题
 
-1. **是否可共用：** 用同一Agent下D1所得T1，连接D1与D2并存，能提供本次T1跨Device接受及不因共享T1顶线的直接样本。不能扩展成所有Agent、套餐、token来源或未来token永久可共用。
+1. **是否可共用：** [第二轮真实样本](run-02.md)已用同一Agent下D1所得T1连接D1/D2，并在D2 hello后并存5秒，未顶线。不能扩展成所有Agent、套餐、token来源或未来token永久可共用。
 2. **是否可长期省OTA：** 即便短测成功，仍需期限和失效恢复契约。获批后只投影JWT的`iat`/`exp`是否存在与数值，不输出token、claims、ID或hash；解码不验证签名，标量也只是当前样本，不等于供应商稳定承诺。opaque token或无exp应如实记未知。
 
 可评审候选为固定sharedToken＋明确轮换：只有实际共享验证通过且scope适合目标Agent后，再决定是否保留固定WSS secret；新Device仅首次绑定，日常WS直接用sharedToken。到期/认证失败时明确报不可用并由授权运维轮换，或另行批准服务端按需OTA刷新设计。不能无限缓存、Worker自动改平台secret、无限认证失败重试，亦不能把“正在用的WS短时间正常”写成长期刷新已完成。
 
 ## 当前状态
 
-[有界验证计划](plan.md)覆盖专用资源样本；原固定token另需owner明确来源和授权scope。当前未读任何secret、未做账户请求、未创建资源。source与配置修改由父owner负责，本子目录只保全研究、计划、探针及脱敏结果。
+[固定sharedToken直连候选](shared-token-proposal.md)将首次prepare与日常WS分开，并列出HTTP401时单次OTA刷新＋单次握手重试、缓存/运维取舍及原固定token最小追加验证。均为proposal，未改产品源码或配置，亦不授权追加实测。
+
+[有界验证计划](plan.md)及[第二轮差异](retry-plan.md)覆盖专用资源样本。[首轮](run-01.md)的创建状态随后按受权只读[核对回执](reconciliation-run.md)处理：完整响应快照无该名称，未DELETE或重跑该state。[第二轮](run-02.md)实际共享T1通过并已正常关闭/解绑/删专用Agent，私密state清理完成，执行turn释放。当前没有运行中的测试。原固定token仍需owner明确来源和授权scope，source与配置修改由父owner负责。

@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
 
-import { otaTargetProjection, runApproved, tokenProjection } from './probe.mjs'
+import { networkErrorProjection, otaTargetProjection, runApproved, tokenProjection } from './probe.mjs'
 
 test('safe token and OTA target projections never include opaque identities or full claims', () => {
   const payload = Buffer.from(JSON.stringify({ iat: 100, exp: 200, subject: 'PRIVATE-SUBJECT', device: 'PRIVATE-DEVICE' })).toString('base64url')
@@ -31,7 +31,7 @@ test('specific turn is required before any credential read or network call', asy
   assert.equal(touched, false)
 })
 
-async function fixture({ rejectD2 = false, loseD2Bind = false, failClose = false } = {}) {
+async function fixture({ rejectD2 = false, loseD2Bind = false, failClose = false, failCreate = false } = {}) {
   const directory = await mkdtemp(join(tmpdir(), 'lie-token-study-offline-'))
   try {
   const calls = [], bound = [], sockets = []
@@ -78,6 +78,7 @@ async function fixture({ rejectD2 = false, loseD2Bind = false, failClose = false
   async function request(url, options) {
     const body = options.body == null ? null : JSON.parse(options.body)
     calls.push({ url, options, body })
+    if (failCreate) throw Object.assign(new Error('PRIVATE-TRANSPORT-MESSAGE'), { cause: { code: 'ENOTFOUND', hostname: 'PRIVATE-HOST' } })
     let data
     if (url === 'https://xrobo.qiniu.com/xiaozhi/agent' && options.method === 'POST') data = { code: 0, data: 'PRIVATE-AGENT' }
     else if (url.endsWith('/xiaozhi/agent/PRIVATE-AGENT') && options.method === 'GET') data = { code: 0, data: {
@@ -162,4 +163,25 @@ test('local termination fallback is preserved and cannot yield successful normal
   assert.equal(result.cleanup.resourcesRemoved, true)
   assert.ok(result.channels.every(c => c.terminated && c.closeCode === 1006))
   assert.ok(sockets.every(s => s.readyState === 3))
+})
+
+test('network exception projection retains only fixed codes and never raw errors', () => {
+  assert.equal(networkErrorProjection({ code: 'ENOTFOUND', message: 'PRIVATE' }), 'ENOTFOUND')
+  assert.equal(networkErrorProjection({ cause: { cause: { code: 'ECONNRESET', hostname: 'PRIVATE' } } }), 'ECONNRESET')
+  assert.equal(networkErrorProjection({ code: 'PRIVATE-CODE', message: 'PRIVATE' }), 'OTHER')
+  assert.equal(networkErrorProjection({ name: 'AbortError', message: 'PRIVATE' }), 'ABORTED')
+  assert.equal(networkErrorProjection({ name: 'TimeoutError', message: 'PRIVATE' }), 'TIMEOUT')
+})
+
+test('failed creation keeps allowlisted transport category without retry or uncertain cleanup claims', async () => {
+  const { result, calls, sockets, state } = await fixture({ failCreate: true })
+  assert.equal(result.completed, false)
+  assert.equal(result.operations[0].errorCode, 'ENOTFOUND')
+  assert.equal(result.operations[0].status, null)
+  assert.equal(calls.length, 1)
+  assert.equal(sockets.length, 0)
+  assert.equal(state.createAttempted, true)
+  assert.equal(state.agentId, null)
+  assert.equal(state.cleanupComplete, false)
+  assert.equal(result.cleanup.resourcesRemoved, false)
 })

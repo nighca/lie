@@ -1,8 +1,8 @@
 # 同Agent跨Device共享token：最小有界实测计划
 
-2026-11-01；**待父owner给出具体资源/时间窗/执行turn，未执行。** 原两轮测试已结束，不能复用此前许可。
+2026-11-01；父owner后续已给出一次具体资源/时间窗/执行turn，[首轮](run-01.md)在create-agent无确认响应处停止，未进入WS，共享token仍未知。原turn已释放；不重跑，创建状态核对需另行授权。以下保留当时评审的有界计划。
 
-探针为`probe.mjs`，只有显式参数才能调用`runApproved`；`runner.mjs`只有直接执行且唯一参数为`--execute-dedicated-approved`时才加载本worktree的`ws`并读取已指定管理key。导入或无参数运行均不读key、不发请求。**flag本身不是授权，当前不能执行真实命令。** 获得turn后的确切命令（Node 24.22，系统CA）：`node --use-system-ca docs/reviews/device-concurrency-2026-11-01/token-study/runner.mjs --execute-dedicated-approved`。私密状态仅在ignored `tmp/p0-token-study-run01/state.json`，结果在本目录`result.json`；两者拒绝覆盖，不自动重跑。
+探针为`probe.mjs`，只有显式参数才能调用`runApproved`；`runner.mjs`只有直接执行且唯一参数为`--execute-dedicated-approved`时才加载本worktree的`ws`并读取已指定管理key。导入或无参数运行均不读key、不发请求。**flag本身不是授权，不能凭本计划重跑。** 当时获批确切命令（Node 24.22，系统CA）：`node --use-system-ca docs/reviews/device-concurrency-2026-11-01/token-study/runner.mjs --execute-dedicated-approved`。私密状态仅在ignored `tmp/p0-token-study-run01/state.json`，结果在本目录`result.json`；两者拒绝覆盖，不自动重跑。
 
 ## 一轮具体范围
 
