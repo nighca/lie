@@ -1,8 +1,10 @@
 import type { InferEnv } from 'cf/config'
 
 import type config from '../cloudflare.config'
+import { sharedGames } from './shared-games'
 
-export type GatewayEnv = InferEnv<ReturnType<typeof config.worker>> & Partial<Record<
+type ConfiguredEnv = InferEnv<ReturnType<typeof config.worker>>
+export type GatewayEnv = Omit<ConfiguredEnv, 'SHARED_GAMES'> & Partial<Pick<ConfiguredEnv, 'SHARED_GAMES'>> & Partial<Record<
   'LINX_WS_TOKEN' | 'LINX_DEVICE_ID' | 'LINX_AGENT_ID', string
 >>
 const upstreamUrl = 'https://xrobo-io.qiniuapi.com/v1/ws/'
@@ -11,13 +13,14 @@ export default {
   async fetch(request: Request, env: GatewayEnv): Promise<Response> {
     const url = new URL(request.url)
     if (url.pathname === '/api/health' && request.method === 'GET') {
-      return Response.json({ status: 'ok', storage: 'none' }, { headers: { 'Cache-Control': 'no-store' } })
+      return Response.json({ status: 'ok', storage: env.SHARED_GAMES == null ? 'none' : 'r2' }, { headers: { 'Cache-Control': 'no-store' } })
     }
     if (url.pathname === '/api/voice/status' && request.method === 'GET') {
       if ((request.headers.get('Origin') != null && request.headers.get('Origin') !== url.origin) || request.headers.get('Sec-Fetch-Site') === 'cross-site' || url.search !== '') return new Response('Forbidden', { status: 403 })
       return Response.json({ status: voiceStatus(env) }, { headers: { 'Cache-Control': 'no-store' } })
     }
     if (url.pathname === '/api/voice' && request.method === 'GET') return relayVoice(request, env)
+    if (url.pathname === '/api/shared-games/v1' || url.pathname.startsWith('/api/shared-games/v1/')) return sharedGames(request, env.SHARED_GAMES)
     if (url.pathname.startsWith('/api/')) return Response.json({ error: 'Not found' }, { status: 404 })
     const response = await env.ASSETS.fetch(request)
     if (url.pathname.startsWith('/static/') || url.pathname.startsWith('/assets/')) {

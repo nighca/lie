@@ -1,14 +1,13 @@
-import { readFile } from 'node:fs/promises'
 import { fileURLToPath, URL as NodeURL } from 'node:url'
 
 import { Miniflare } from 'miniflare'
 import type { WebSocket as TestSocket } from 'miniflare'
-import ts from 'typescript'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
+import { workerScript } from './worker-script'
+
 const testOrigin = 'https://game.example'
-const source = await readFile(fileURLToPath(new NodeURL('../src/index.ts', import.meta.url)), 'utf8')
-const script = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } }).outputText
+const script = await workerScript()
 const runtimes: Miniflare[] = []
 const credentials = { LINX_WS_TOKEN: 'upstream-test-token', LINX_DEVICE_ID: 'test-device', LINX_AGENT_ID: 'test-agent' }
 const fakeUpstream = `

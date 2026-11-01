@@ -9,6 +9,7 @@ export default defineConfig({
     assets: { notFoundHandling: 'single-page-application', runWorkerFirst: ['/api/*', '/games/*', '/static/*', '/assets/*'] },
     env: {
       ASSETS: bindings.assets(),
+      SHARED_GAMES: bindings.r2({ name: process.env.LIE_SHARE_BUCKET_NAME ?? 'lie-shared-games', dev: { remote: false } }),
       VOICE_MAX_SESSION_SECONDS: bindings.text(process.env.VOICE_MAX_SESSION_SECONDS ?? '600'),
       LINX_WS_TOKEN: bindings.secret(),
       LINX_DEVICE_ID: bindings.secret(),

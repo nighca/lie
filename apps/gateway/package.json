@@ -10,6 +10,9 @@
     "test": "vitest run",
     "test:linx": "node --use-system-ca scripts/linx-check.ts"
   },
+  "dependencies": {
+    "@lie/game-core": "0.0.0"
+  },
   "devDependencies": {
     "cf": "1.0.0-beta.18",
     "ws": "8.22.0",
