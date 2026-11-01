@@ -162,7 +162,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </section>
       </div>
       <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" @start="speak">
-        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><button ref="timeHelpTrigger" type="button" class="interrogation-budget__help" :aria-label="`剩余询问${remainingTime}，怎么算时间`" aria-haspopup="dialog" @click="timeHelpOpen = true"><strong>{{ remainingTime }}</strong><span class="interrogation-budget__info" aria-hidden="true">i</span></button></div></template>
+        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><button ref="timeHelpTrigger" type="button" class="interrogation-budget__help" :aria-label="`剩余询问${remainingTime}，怎么算时间`" aria-haspopup="dialog" @click="timeHelpOpen = true"><strong>{{ remainingTime }}</strong><svg class="interrogation-budget__info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" /></svg></button></div></template>
         <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
       </VoiceControl>
     </main>

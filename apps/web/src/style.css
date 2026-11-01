@@ -52,7 +52,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .interrogation-budget__help { display: inline-flex; align-items: center; gap: 5px; border: 0; border-radius: 8px; background: transparent; color: inherit; padding: 4px; margin: 4px -4px -4px; font: inherit; cursor: pointer; }
 .interrogation-budget__help:hover { background: var(--lie-soft-blue); }
 .interrogation-budget__help:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 3px; }
-.interrogation-budget__info { display: inline-grid; place-items: center; width: 15px; height: 15px; border: 1px solid currentColor; border-radius: 50%; color: var(--lie-muted); font: 650 11px/1 var(--lie-font); }
+.interrogation-budget__info { display: block; flex-shrink: 0; width: 16px; height: 16px; color: var(--lie-muted); }
 .time-help-dialog p { margin: 0 0 12px; }
 .time-help-notice { font-weight: 650; }
 .game-shell .time-help-dialog { width: min(540px, calc(100% - 32px)); padding: 26px 28px; }
