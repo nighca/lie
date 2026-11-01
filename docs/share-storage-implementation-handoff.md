@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | 设计与用户批准记录 | `f6dc/lie` / `codex/lie-share-storage-design` | 已交设计链 `1a35d8f035f0f954c93fa2c155c28e901e88abac` → `03bd0fbe407e14e3cb42f51e473bffeae3c423d6` → `c7511c6814902ea0845189c75378a9c5a3581646` → `ad7bfb32b37d076688cec8243266a84f5c6fcca6`；本批追加 `ae7ef8cebebfbb270ad5146619e76d52fd941d0c` 记录实施批准与UI Demo范围 |
 | 后台与协议 | `lie-share-storage-backend/lie` / `codex/lie-share-storage-backend` | `b9b403b083271fb526900bcb669483a54ab017d8` |
-| UI交互Demo | `lie-share-storage-ui-demo/lie` / `codex/lie-share-storage-ui-demo` | `c4ee640e0691b36d429051f8df5307e2f0669c3a` → `0e8baa77482e038bd3454fa747a7b0428d0e3f67` |
+| UI交互Demo | `lie-share-storage-ui-demo/lie` / `codex/lie-share-storage-ui-demo` | `c4ee640e0691b36d429051f8df5307e2f0669c3a` → `0e8baa77482e038bd3454fa747a7b0428d0e3f67` → `c98488d78995270c7c6d78795200dd6ada4803d1` |
 
 worktree根均为 `/Users/nighca/.codex/worktrees/`。后台与Demo没有彼此的代码依赖；两者以已确认的分享设计为合同。此文档的提交作为设计链后续补交。各owner source工作区交付时clean，无未跟踪文件；后台与Demo未被cherry-pick到本设计worktree。
 
@@ -20,7 +20,7 @@ worktree根均为 `/Users/nighca/.codex/worktrees/`。后台与Demo没有彼此�
 
 Demo只增加 `design/share-storage-demo/**` 和 `docs/share-storage-ui-demo.md`，复用现有Vue组件/中文B样式。作者等待、复制成功、上传失败重试、超限和玩家加载/接案/不存在/网络失败均可交互切换。顶部工具栏是原型控制，不进入正式产品；没有正式Editor/Application接线，没有写用户草稿或真实存储，没有语音。
 
-用户审看后提出等待与保存异常都放在分享弹窗，Demo追加提交已落实：点击立即打开弹窗，内部等待→成功或失败，失败可重试/继续编辑，超限仅继续编辑；关闭等待不会因迟到结果重开。专项owner实际审完整追加diff并在根chat IAB验证等待→失败，桌面/移动证据已查看，具体UI仍供用户评审，不把建议改动当用户最终批准。
+用户审看后提出等待与保存异常都放在分享弹窗，Demo追加提交已落实：点击立即打开弹窗，内部等待→成功或失败，失败可重试/继续编辑，超限仅继续编辑；关闭等待不会因迟到结果重开。专项owner实际审完整追加diff并在根chat IAB验证等待→失败，桌面/移动证据已查看，用户随后又明确存储说明也应放在分享弹窗，最新追加提交已删除编辑页说明、将其统一置于弹窗底部；桌面/移动等待、失败、成功和超限状态已核仅出现一次，类型/构建通过。专项owner已审该小diff及移动证据。具体UI仍供用户评审，不把建议改动当用户最终批准。
 
 专项owner已读所有源码、配置、tests、完整base diff和交付文档，检查实际status与提交；桌面及移动成功截图已实际查看，root可见IAB实际操作分享等待/成功。review发现的快照测试前置数据依赖已由后台owner修正，并独立执行该test验证；Demo成功弹窗内的额外原型导航已删除，统一用外部工具栏。
 
@@ -38,7 +38,7 @@ Demo只增加 `design/share-storage-demo/**` 和 `docs/share-storage-ui-demo.md`
 唯一临时服务为UI Demo：
 
 - owner `/root/share_ui_demo`；发起专项Chat `01a194d9-e260-7cd2-a8df-89b1478a1120`。
-- worktree `/Users/nighca/.codex/worktrees/lie-share-storage-ui-demo/lie`，当前源码 `0e8baa77482e038bd3454fa747a7b0428d0e3f67`，clean；DEV启动时为a8加原型dirty，随后同一服务HMR至当前提交，不冒称clean production bundle。
+- worktree `/Users/nighca/.codex/worktrees/lie-share-storage-ui-demo/lie`，当前源码 `c98488d78995270c7c6d78795200dd6ada4803d1`，clean；DEV启动时为a8加原型dirty，随后同一服务HMR至当前提交，不冒称clean production bundle。
 - loopback `127.0.0.1:5177`，PID `29883`，原exec session `99739`。专项owner已用lsof独立核listener匹配；ps受sandbox限制，未为此扩大权限。
 - 命令：Node24.22.1执行 `node_modules/vite/bin/vite.js --config design/share-storage-demo/vite.config.ts --host 127.0.0.1 --port 5177 --strictPort`。
 - consumer：用户UI评审；URL `http://127.0.0.1:5177/`，root可见IAB tab已markDeliverable；Demo owner隐藏验收tab已关闭，viewport已reset。
