@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "reviewedAtDate": "2026-11-01",
+  "sourceChat": "01a1954a-ebcd-7860-bdff-693447c817f0",
+  "rawEvidenceCopied": false,
+  "sourceIdentity": {
+    "probe.mjs": {
+      "bytes": 6126,
+      "sha256": "9bd3c9b90eeab419fe4420afd0e1f96bad6174f95f37a0a27bdeb5b5a597346b"
+    },
+    "results.json": {
+      "bytes": 676,
+      "sha256": "66007d2c43bdbd90353f3b8a673b834f8632d8d55e728f3dcb6738b9e9d2235f"
+    },
+    "connection-results.json": {
+      "bytes": 680,
+      "sha256": "655267b28bfa9797a33d61f8b0337f1f9e70b13c6ba466f71b2041f2936a2904"
+    },
+    "connection-probe.mjs": {
+      "bytes": 5757,
+      "sha256": "83b966db837fd77d38106de2987c9a886736fcf5c5247f0fa5b1174b6a17783c"
+    }
+  },
+  "firstRun": {
+    "startedAt": "2026-11-01T04:15:02.339Z",
+    "finishedAt": "2026-11-01T04:15:06.767Z",
+    "sameDevice": true,
+    "randomClientPerConnection": true,
+    "bothHello": true,
+    "distinctSessions": true,
+    "unexpectedCloseA": 1000,
+    "completed": false,
+    "error": "Connection not open",
+    "toolsCalls": 0,
+    "recordedAnswerTextBytes": 0,
+    "recordedAudioBytes": 0,
+    "caveat": "Promise.all evaluates B.ask even when A.ask returns a rejected promise; B listen.detect may have been sent. Not evidence of zero inference requests."
+  },
+  "connectionOnlyRun": {
+    "startedAt": "2026-11-01T04:15:32.823Z",
+    "finishedAt": "2026-11-01T04:15:43.302Z",
+    "sameDevice": true,
+    "randomClientPerConnection": true,
+    "bothHello": true,
+    "distinctSessions": true,
+    "aHelloMs": 2356,
+    "aStayedOpenBeforeB": true,
+    "bStartMs": 5359,
+    "aUnexpectedCloseMs": 7040,
+    "aCloseCode": 1000,
+    "bHelloMs": 7470,
+    "completed": true,
+    "askCalls": 0,
+    "toolsCalls": 0,
+    "recordedRounds": 0,
+    "holdAfterReadinessMs": 3000
+  },
+  "cleanup": {
+    "finallyCloseAndTerminateFallbackInBothScripts": true,
+    "finalClosedAcknowledgmentRecorded": false,
+    "ownerConfirmationPending": true
+  },
+  "boundaries": [
+    "Local-development credential configuration only; configuration values were not read by reviewer.",
+    "No local/production device identity comparison.",
+    "No production concurrent-user reproduction or historical cross-user leakage proven.",
+    "No account usage or bill read; zero rounds is not zero cost."
+  ]
+}
