@@ -95,8 +95,8 @@
 
 ## 交付与服务回执
 
-首轮代码范围仅新增1个事件路径测试、本目录README与必要原图；后续独立诊断工具新增`spikes/safari-audio/`，方法/边界/源码链接与fake检查见该目录。无产品修复或 UI/玩法/provider 合同修改。原始 base 如上，无额外依赖提交；有序完整 commit SHA 在最终交付消息列明，不把 commit 自己的 hash 写回制造文档提交循环。
+首轮代码范围仅新增1个事件路径测试、本目录README与必要原图；后续独立诊断工具新增`spikes/safari-audio/`，批准后以`apps/web/package.json`接入独立HTML构建与工具tests/types。方法/边界/源码链接与fake检查见该目录，[同clean SHA产物隔离证据](isolation-results.json)确认旧251 Web文件和256 Cloudflare文件全部逐字一致，只多一个诊断HTML。432 Web+13 probe+19 gateway离线测试及Web/probe types通过。无产品修复或 UI/玩法/provider 合同修改。原始 base 如上，无额外依赖提交；有序完整 commit SHA 在最终交付消息列明，不把 commit 自己的 hash 写回制造文档提交循环。
 
 启动服务 **0**，停止服务 **0**，真实 mic/录音/上传 **0**，Linx 请求 **0**。后续IAB本地file页的唯一尝试被协议策略拒绝、未创建tab或执行页面。未触碰 8787/8788、5176、5544 等其他 owner 服务，无新增端口/PID/PTY/保留 consumer。测试进程均退出，不需服务清理。Safari 真机/真实回声仍未验证；因此状态仍为“待复现/实际设置与事件证据”，不能标已修复。
 
-给中央计划的批量更新建议：P1 Safari 自打断专项已完成首轮代码及 fake 事件路径核查。用户补充 iPhone/iPad Safari 内置扬声器均出现、iPadOS26.7.1、同 iPad Chrome 和 MacBook Safari 没出现；优先调查移动 Safari 音频会话/AEC 实际状态，实际 settings/build/现场 STT 时序仍缺失，根因未定、产品无改动。待同 iPad 手动对照窗口，由协调者 review 后随正常批次归档本目录及测试，不为报告单独制造部署。
+给中央计划的批量更新建议：P1 Safari 自打断首轮事件路径及WebKit输出差异调查完成；用户对照条件已记录。用户已批准同域隐藏独立诊断页并要求不影响其他线上功能，构建接入/离线检查和严格产物对比完成，仅新增一个HTML；等待协调者review/发布和用户同iPad Safari/Chrome手动对照。无玩法/产品语音修复，不将独立诊断页上线称为自打断已解决。

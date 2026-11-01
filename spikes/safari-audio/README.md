@@ -53,3 +53,16 @@ IAB对file://预览的唯一尝试被浏览器URL协议策略拒绝，仅允许h
 ## 服务与交付
 
 本轮新增服务0、真实mic/录音/用户音频上传/Linx请求0；保留所有其他owner端口和launchd。范围仅本目录、专项调查文档和`apps/web/package.json`构建/检查接入，不改产品采集/播放器接口、UI、主工作区或main。构建输出可再生且不入Git，必要方法与权限/证据在本目录保留。用户批准独立入口不授权真实自动音频测试；发布仍由协调者实际review和串行集成负责。
+
+### 接入后的不影响其他功能检查
+
+同一clean SHA `34b0735ac4ce95e4b5259eef753c745df26dc350`、同WT/Node/工具/环境，对比“直接Vite构建普通Web、不运行新增postbuild”与“正常npm Web构建含新增postbuild”，然后分别用相同`cf build`生成Worker产物。[逐字哈希对比结果](../../docs/reviews/safari-self-interruption-2026-11-01/isolation-results.json)：
+
+- 原Web **251个文件**的路径和SHA256全相同；无删除/修改，仅多`_diagnostics/safari-audio.html`，总252个。
+- 原Cloudflare output **256个文件**全相同，包括Worker JS、sourcemap、Vite manifest、worker config及原Web assets；仅多`v0/workers/default/assets/_diagnostics/safari-audio.html`，总257个。
+- 新HTML 11437B、SHA256 `37d189b15dbf592b20d61775e56c8c9a660d171dd0b6a45a75d1c40dd78428ad`，Web与Worker assets逐字相同。所有旧首页/游戏/编辑器/素材保持原构建字节，未增加诊断导入或链接。对比基准是相同源码SHA的普通构建，不将不同提交的版本信息变化误算成业务变化。
+- 正常Web测试 **432**、诊断工具 **13**、Web+工具typecheck通过；gateway static-cache/frame-budget/session-limit纯离线 **19**通过，不启动Miniflare服务或provider。
+- Gateway源码/配置/锁文件/部署workflow零diff。现有`runWorkerFirst`仍仅`/api/*`、`/games/*`、`/static/*`、`/assets/*`；新增文件走既有精确静态匹配，不改SPA fallback、未知路径和已知资源的规则。原资产/普通index字节完全相同，原API及错误路径处理代码完全相同。此为构建/源码路由核查，线上GET及原生浏览器检查仍需发布后执行；不把fake Assets绑定当平台实际路由证明。
+- 独立HTML的脚本/样式CSP hash精确对应内容，无外部资源/导入、upload/storage API或provider入口；首次加载无音频初始化由source和UI fake验证。真实浏览器CSP仍未验。
+
+环境失败分开记录：首次Web build因sandbox DNS失败不能下载项目固定SHA256的官方libwebp；经正常工具审批下载至owned ignored缓存后成功。首次cf build因内部127.0.0.1 listener被sandbox EPERM拒绝；dry-run只证明参数，随后两次同一明确本地build经审批均exit0，original exec sessions `58520`/`83471`，非dev/deploy。插件的短时内部port/PID未抓取，不补造。构建后按cwd和启动时间核查：同WT剩余Node均为更早启动的MCP/CUA工具进程，精确PID listener检查无TCP监听，未发现本轮build运行时残留；未停止任何未知进程。没有新增应用服务或占用登记端口。

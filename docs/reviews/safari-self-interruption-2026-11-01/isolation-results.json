@@ -1,0 +1,50 @@
+{
+  "verifiedSourceSHA": "34b0735ac4ce95e4b5259eef753c745df26dc350",
+  "worktreeWasCleanDuringBothBuilds": true,
+  "web": {
+    "sha": "34b0735ac4ce95e4b5259eef753c745df26dc350",
+    "baselineFiles": 251,
+    "integratedFiles": 252,
+    "unchangedFiles": 251,
+    "added": [
+      "_diagnostics/safari-audio.html"
+    ],
+    "removed": [],
+    "changed": [],
+    "baselineManifestSHA256": "2a4c7e2d0ba56adc722f81dda8b8dc4e133ebe513b904456ada8b08081dae207",
+    "newHTMLSHA256": "37d189b15dbf592b20d61775e56c8c9a660d171dd0b6a45a75d1c40dd78428ad"
+  },
+  "gateway": {
+    "sha": "34b0735ac4ce95e4b5259eef753c745df26dc350",
+    "baselineFiles": 256,
+    "integratedFiles": 257,
+    "unchangedFiles": 256,
+    "added": [
+      "v0/workers/default/assets/_diagnostics/safari-audio.html"
+    ],
+    "removed": [],
+    "changed": [],
+    "baselineManifestSHA256": "cbd6095c2685d3569b94e8da5af8c42e4eb74b42dbde4fe1889a7b2896ef18fb",
+    "workerBundleSHA256": "a66d427a5f0cb3a06af250b68fa05aa2b6bed80181a7b7549cfa57e87db54024",
+    "workerConfigSHA256": "ec7b79444a257358fbe9b02936a0c99ee2f2b7dfb7d5a4456a9308bf57dc78fc"
+  },
+  "checks": {
+    "webTests": 432,
+    "probeTests": 13,
+    "gatewayOfflineTests": 19,
+    "webAndProbeTypes": "passed",
+    "artifactCspHashesAndNoUploadStorageApis": "passed"
+  },
+  "runtimeBoundary": {
+    "realMicrophone": false,
+    "providerRequests": 0,
+    "newApplicationServices": 0,
+    "browserNativeValidation": "not performed; file URL rejected by policy",
+    "buildOnlyLoopback": "two successful cf build invocations exited 0; no post-build listening Node/workerd in this worktree; existing tool processes preserved"
+  },
+  "limits": [
+    "No Safari hardware validation",
+    "No production deployment or on-production route checks yet",
+    "Energy on synthetic test signal does not establish ASR behavior or final root cause"
+  ]
+}
