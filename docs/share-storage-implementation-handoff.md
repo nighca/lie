@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | 设计与用户批准记录 | `f6dc/lie` / `codex/lie-share-storage-design` | 已交设计链 `1a35d8f035f0f954c93fa2c155c28e901e88abac` → `03bd0fbe407e14e3cb42f51e473bffeae3c423d6` → `c7511c6814902ea0845189c75378a9c5a3581646` → `ad7bfb32b37d076688cec8243266a84f5c6fcca6`；本批追加 `ae7ef8cebebfbb270ad5146619e76d52fd941d0c` 记录实施批准与UI Demo范围 |
 | 后台与协议 | `lie-share-storage-backend/lie` / `codex/lie-share-storage-backend` | `b9b403b083271fb526900bcb669483a54ab017d8` → `27a08aeceb81093b62cffde65124bf3f445df67e` |
-| UI交互Demo | `lie-share-storage-ui-demo/lie` / `codex/lie-share-storage-ui-demo` | `c4ee640e0691b36d429051f8df5307e2f0669c3a` → `0e8baa77482e038bd3454fa747a7b0428d0e3f67` → `c98488d78995270c7c6d78795200dd6ada4803d1` → `234d99af0a4fb00621f2dcb4aa74b92c6a77d9a6` |
+| UI交互Demo | `lie-share-storage-ui-demo/lie` / `codex/lie-share-storage-ui-demo` | `c4ee640e0691b36d429051f8df5307e2f0669c3a` → `0e8baa77482e038bd3454fa747a7b0428d0e3f67` → `c98488d78995270c7c6d78795200dd6ada4803d1` → `234d99af0a4fb00621f2dcb4aa74b92c6a77d9a6` → `eccf75f41febe58752afab08c12f1d11e0b1df00` |
 
 worktree根均为 `/Users/nighca/.codex/worktrees/`。后台与Demo没有彼此的代码依赖；两者以已确认的分享设计为合同。此文档的提交作为设计链后续补交。各owner source工作区交付时clean，无未跟踪文件；后台与Demo未被cherry-pick到本设计worktree。
 
@@ -32,6 +32,7 @@ Demo只增加 `design/share-storage-demo/**` 和 `docs/share-storage-ui-demo.md`
 - Demo owner：锁定Node24.22.1类型检查、Vite build及IAB 1280×720／390×844交互通过，真实复制成功，390px无横向溢出，无console warn/error；未人为触发clipboard拒绝分支。专项owner另独立typecheck通过。
 - 弹窗状态修订后类型/构建通过。子agent该轮IAB不可用，经协调用独立Chrome原型tab检查桌面与390×844状态、重试、继续编辑、超限、等待关闭后不重开；验后关闭并重置viewport。root可见IAB另独立验证，未操作用户其他tab。新增截图为 `share-loading-desktop.jpg`、`share-error-desktop.jpg` 与移动对照。
 - 总协调独立review指出配置test受外部LIE_SHARE_BUCKET_NAME影响，后台追加test-only提交隔离默认与override并正常恢复env；无产品代码变化。owner两种外部env运行各2 tests通过，gateway双types通过；专项owner读完整追加diff并用外部override独立复跑2 tests通过。
+- UI独立review后追加最小copy轮次失效修正，关闭/导航/新分享/卸载不再受旧clipboard结果影响，失败后成功清错误；沿现有Vitest/Vue工具3项实际组件测试通过，专项owner独立复跑亦通过。无新增依赖或布局改动。旧移动network图未包含错误卡片，已重拍并实际查看，当前图含玩家网络失败、重新加载与返回首页。
 - 各分支diff whitespace检查通过。局部模拟或本地R2不证明云端可用性、全球传播或实际账户费用；云端桶尚未创建，未部署。Demo的分享链接是示例，不是真实上传结果。
 
 ## 保留服务与浏览器
@@ -39,7 +40,7 @@ Demo只增加 `design/share-storage-demo/**` 和 `docs/share-storage-ui-demo.md`
 唯一临时服务为UI Demo：
 
 - owner `/root/share_ui_demo`；发起专项Chat `01a194d9-e260-7cd2-a8df-89b1478a1120`。
-- worktree `/Users/nighca/.codex/worktrees/lie-share-storage-ui-demo/lie`，当前源码 `234d99af0a4fb00621f2dcb4aa74b92c6a77d9a6`，clean；DEV启动时为a8加原型dirty，随后同一服务HMR至当前提交，不冒称clean production bundle。
+- worktree `/Users/nighca/.codex/worktrees/lie-share-storage-ui-demo/lie`，当前源码 `eccf75f41febe58752afab08c12f1d11e0b1df00`，clean；DEV启动时为a8加原型dirty，随后同一服务HMR至当前提交，不冒称clean production bundle。
 - loopback `127.0.0.1:5177`，PID `29883`，原exec session `99739`。专项owner已用lsof独立核listener匹配；ps受sandbox限制，未为此扩大权限。
 - 命令：Node24.22.1执行 `node_modules/vite/bin/vite.js --config design/share-storage-demo/vite.config.ts --host 127.0.0.1 --port 5177 --strictPort`。
 - consumer：用户UI评审；URL `http://127.0.0.1:5177/`，root可见IAB tab已markDeliverable；Demo owner隐藏验收tab已关闭，viewport已reset。
