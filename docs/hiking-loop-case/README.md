@@ -1,10 +1,10 @@
 # 《这条线你真走了吗》环线案
 
-2026-11-01。用户已批准本案实现并放首页第二，要求提PR取得自动preview后亲自验证；该明确PR授权覆盖AGENTS通常no-PR约定。不因此授权merge、更新main或发布。执行子代理只准备源码/测试/文档dirty交付，root实际review后才具名提交、推任务分支并创建PR。
+2026-11-01。用户已在PR preview验证后最终确认：“这局时间4分钟调整6分钟，其他没问题，可以推进合入（本地常规流程，PR可close）；本地测试环境干掉。”当前正式额度360秒，用户已授权按本地常规流程交总协调review/集成；root已按用户授权关闭PR4，不等待新preview，不为本轮6分钟变更推送到远端触发无用preview。执行子代理仅准备最终dirty变更与验证，不stage、commit、push或更新main。早先明确PR授权覆盖通常no-PR约定的历史仍保留在下文。
 
 ## 已批准内容与作者默认
 
-[唯一正式内容](../../content/games/02-hiking-loop.json)。三名朋友上午从村口沿溪穿林地，到半程休息点共同午餐后才分开，最后都回村领完成纪念章。小岳实际在半程原路折返，照旧攻略虚构后半段；阿宁和老赵确实走完。正确目标`yue`。三人复用ochre-freckles/coral-bob/salt-pepper-beard；共享240秒是作者设计默认，待PR preview真人验证，不是实测时长。
+[唯一正式内容](../../content/games/02-hiking-loop.json)。三名朋友上午从村口沿溪穿林地，到半程休息点共同午餐后才分开，最后都回村领完成纪念章。小岳实际在半程原路折返，照旧攻略虚构后半段；阿宁和老赵确实走完。正确目标`yue`。三人复用ochre-freckles/coral-bob/salt-pepper-beard；原共享240秒是最初作者默认；用户验收后明确最终改为360秒，剧情、角色、答案和顺序保持不变。
 
 先前“登顶”方向被用户纠正为本次环线；root另行保存[已被替代的登顶原稿](previous-summit-draft.md)，来源和替代状态见该附件。本执行子代理没有补写或伪造未收到的旧原稿。最终明确无登顶、地图/海拔计算、搜证或专业术语。
 
@@ -20,7 +20,7 @@
 
 用户PR3另有未合入05编号内容，DO NOT MERGE；本任务不修改该PR。旧四案顺移与该PR未来如何编号，由总协调集成队列另议，不默认合并或改写他人内容。
 
-## 环境、验证与当前状态
+## 早先4分钟版本的环境与验证（历史）
 
 独立npmci和本WT构建缓存，显式Node24.22.1运行时。仅从既有已验证缓存复制固定libwebp工具和衍生images，构建核编码器/输入/alpha/输出hash与策略，不链接旧node_modules、不复制secret。Web全测试46文件/437项、Web类型检查和生产构建通过；新内容3人/240秒/正确目标/上下文隔离/状态与真实首页第二位入口均被自动化覆盖。最终入口`dist/assets/index-CVW-BFbL.js`，postbuild8预设/121资源通过，82份图像缓存命中；diff-check通过。构建不代表真实语音/模型验收。
 
@@ -43,8 +43,17 @@
 
 修改范围：新案JSON和四旧案rename；新`hikingLoopContent.test.ts`、首页真实目录/第二入口测试、两旧内容测试import路径；中英README与Web README当前目录说明；两旧案设计文档仅当前链接与编号说明；本目录的当前案设计/验证及root保留的登顶稿。没有改江苏JSON、通用产品源码、workflows、依赖声明或锁文件。历史文档其他旧路径不全局重写。
 
-当前source执行交付仍dirty、无stage、无新增commit/有序SHA，root会实际完整review后具名stage、commit、push任务分支并创建用户明确要求的PR。未合main；后续preview URL/CI及用户验收由PR流程补充，本记录不声称preview已生成或真人表现已通过。
+上述交付状态对应早先4分钟版本：当时由root review提交并创建PR4，随后CI/preview成功，用户通过该preview验收；不把这个历史阶段的“待preview/无commit”表述当作当前状态。当前继续按本页首段最终6分钟授权，由总协调本地review/集成，root可关闭PR。
 
 最终JS SHA-256 `092af2163f4d5014219a769625cc53c28e9dc8cc853a837f1a038f0720d43c5d`。
 
 用户后续要求更换姓氏：当前案中“老许”统一改为“老赵”，人物ID保持`xu`；仅改姓名及其文本引用、已有测试预期和本说明。旧登顶提案保留原名，属于历史设计。本轮相关5项内容测试、JSON解析与纯更名差异检查、diff-check通过；原全套检查与构建为更名前记录，不冒称本轮重跑。
+
+
+## 最终6分钟版本与环境释放
+
+本轮起始源为`977911349177342da520f3cf5a68da52dc1e3c73`，初始clean；本轮产品JSON仅`interrogationLimitSeconds`从240改360，剧情、人物、正确答案和目录顺序逐字段相同。对应内容测试起始360000ms、三人各20秒后300000ms；双语及Web README只同步本案6分钟与已接受状态。新JSON SHA-256 `dbc58af023407ed106cf44a77f2ff83ff6c3c493b1e827b58c0634b857d4227b`。相关内容/首页测试3文件/16项、Web类型检查与最终build均通过（入口`dist/assets/index-CL5bFhFz.js`，postbuild8预设121资源、82图缓存命中）；diff-check和仅时长产品diff检查通过；不重复早先已过437项全Web检查，不把4分钟构建身份冒作本轮最终身份。
+
+本徒步专项从未启动本地服务。用户要求撤本地环境后，本轮只读发现5544的PID64673属于`/Users/nighca/.codex/worktrees/a92e/lie/apps/web`，登记owner为首次帮助Chat01a19748、分支`codex/first-use-help-assessment`、原PTY63756，仍有独立用户体验consumer；它不属于本徒步专项。总协调已明确确认该owner与consumer仍保留；本案没有自建local server可停，不停止/重启其他owner服务，也不再继续调查其用户状态。未触碰8787/8788或其他服务，不刷新/关闭用户tab，不调用provider。
+
+本轮最终JS SHA-256 `aaaa8349e5688d26ba045e44bf9fb9c2b37a1f032a17fdf29b0dafc50a3e8324`。执行子代理未stage/commit/push；当前6文件dirty交root实际review及本地提交，再由总协调按常规review/候选集成流程处理。
