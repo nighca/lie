@@ -1,6 +1,6 @@
 # 浏览器 Device 最小接入设计
 
-2026-11-01；基线 `916d77cdb4044069e53d7c9f61b2a2b68d5bdcbf`。**仅设计，未实现或新增真实测试。** 产品语义已确定：一个站点浏览器身份对应一个供应商 Device；同身份后连接自然顶旧，不加锁、不新增多标签页提示。开始游戏时后台准备 Device；开始对话时准备已完成就连接，否则等待同一准备任务。Cookie 跨局保留，开始游戏不等于新建 Device。
+2026-11-01；基线 `916d77cdb4044069e53d7c9f61b2a2b68d5bdcbf`。**仅设计，未实现或新增真实测试。** 产品语义已确定：一个站点浏览器身份对应一个供应商 Device；同身份后连接自然顶旧，不加锁、不新增多标签页提示。案件有效加载成功、展示背景页时即后台准备Device；开始对话时准备已完成就连接，否则等待同一准备任务。Cookie 跨局保留，开始游戏不等于新建 Device。
 
 ## 推荐：签名 Cookie＋供应商绑定状态，不新增 DB/DO
 
@@ -44,7 +44,7 @@ Upgrade: websocket
 
 未采纳“前端expected identity tag＋WS subprotocol”备选：它约束JS曾准备的候选，但这不是已定产品要求，也不消除孤立资源，反而扩大协议和voice包修改；本方案不新增tag字段或修改voice包。
 
-准备窗口建议客户端 ensurePrepared 全链20秒（包括身份GET和prepare POST）、服务端prepare供应商总计18秒（单次请求最多8秒且受剩余总预算约束）；失败立即停止，不循环重试。现有 channel 的10秒握手窗口保留，单独覆盖每次 WS 的 OTA、上游 upgrade、hello/MCP；网关该阶段总预算应小于客户端10秒，建议9秒。正常 prepare 与 WS 各一次 OTA 的重复开销是首版明确取舍：不为省这次请求引入跨实例 token 缓存或把 token 放浏览器。
+准备窗口建议客户端 ensurePrepared 全链20秒（包括身份GET和prepare POST）、服务端prepare供应商总计18秒（单次请求最多8秒且受剩余总预算约束）；失败立即停止，不循环重试。现有 channel 的10秒握手窗口保留，单独覆盖每次 WS 的 OTA、上游 upgrade、hello/MCP；网关该阶段总预算应小于客户端10秒，建议9秒。用户后续要求验证跨Device共用原固定token及有效期/刷新；这部分尚未实证，见[token研究](token-study/study.md)。正常prepare与WS各一次OTA是目前已实现的保守取舍，而非供应商已证实的必须要求：不为省这次请求引入跨实例 token 缓存或把 token 放浏览器。
 
 已测 D2 OTA＋bind＋OTA约4.034秒、WS到ready约2.102秒，整体6.139秒，仅单样本，不是超时可满足的 SLA。准备完成不意味着麦克风已准备或语音已ready。
 
@@ -58,7 +58,7 @@ Upgrade: websocket
 
 建议把 live VoicePort 在 `main.ts` 的应用作用域创建一次，注入各 controller；不能继续每次 `createController()` 都新建准备状态。每个 Conversation 的 scope、mic/player/channel 仍是独立局部对象。VoicePort 增加 `prepare(): Promise<void>`，demo 实现为空操作；live port内持有当前`generation`、`preparedGeneration`和`pending={generation,promise}`，只合并**本页面应用实例**的准备调用，跨标签页不声称共享Promise。每次发起新的准备attempt递增generation；仅当前attempt成功能写preparedGeneration，旧pending的finally只能清除自己代次的pending。generation只用于本页异步归属，不宣称能感知HttpOnly Cookie被其他页面更新。
 
-- `controller.start()` 后台触发 `voice.prepare()`，不阻塞开始游戏、不申请麦克风/AudioContext、不创建 WS、不发送 ASR，不启动审问计时；后台失败只记录为未准备，不新增提示流程。
+- 有效`controller.load()`成功发布背景页（intro）后即触发`voice.prepare()`；失效、失败或dispose的加载不触发；`restart()`展示新背景时复用准备，`start()`不再首触发。不阻塞背景展示或开始游戏、不申请麦克风/AudioContext、不创建 WS、不发送 ASR，不启动审问计时；后台失败只记录为未准备，不新增提示流程。
 - `Conversation.open()`先await同一prepare：pending就等、已prepared则跳过；未准备/上次失败时由这次显式对话动作触发一次新准备。live内部捕获本次attempt generation，完成后先检查scope仍current再建mic/player/WS。HTTP有界bootstrap之外不自动循环重试。
 - 取消当前 Conversation 只使该 awaiter 的 scope/epoch 失效，不 abort 共享 prepare。准备返回后先检查 `isCurrent()`，失效者不创建 mic/player/WS。换局可复用已准备状态与同一个 Cookie；准备请求取消/迟到只涉及本身份，不能清理其他浏览器资源。
 - 页面卸载可能中止fetch，但不依赖服务端必定观察到断连，也不新增公共取消整个VoicePort的接口。已经成功的绑定保留给同浏览器，不因为消费者离开而解绑；本地20秒、服务端18秒上限仍有效。
@@ -77,7 +77,7 @@ Upgrade: websocket
 | `apps/gateway/src/index.ts`＋新增 `browser-device.ts` | Cookie验证/签发、prepare、OTA与绑定核对；固定 WSS、同源限制、600秒及64KiB保持。 |
 | `apps/gateway/cloudflare.config.ts`、gateway tests | 私密管理/签名bindings及环境分离；Cookie与供应商 fake，不写真实secret。 |
 | `apps/web/src/main.ts`、`application/voice.ts`、`demoVoice.ts`、`liveVoice.ts`、`controller.ts` | app级VoicePort、后台prepare、共享pending/ready、scope取消与现有失败反馈。 |
-| Web对应测试 | 开始游戏触发但不阻塞/不计时，不申请mic或WS；同页重复调用/换局合并、旧finally/旧open失败不清新代次；取消旧scope后准备迟到不建通道；失败仅显式重试；顶旧沿原清理；准备延迟后再开语音的既有权限/播放路径不得假定已验。 |
+| Web对应测试 | 案件加载成功展示背景即触发、失效/失败/已dispose加载不触发，但不阻塞/不计时，不申请mic或WS；同页重复调用/换局合并、旧finally/旧open失败不清新代次；取消旧scope后准备迟到不建通道；失败仅显式重试；顶旧沿原清理；准备延迟后再开语音的既有权限/播放路径不得假定已验。 |
 
 关键 fake：无Cookie先只签发无provider副作用；两tab候选A/B覆盖后WS只用当前Cookie B：B已绑定可连接，B未绑定拒绝且不借A凭据/不误解绑；旧响应/旧finally/旧open失败不污染新generation；签名/过期/环境/Origin/query拒绝；跨身份Device不同、同身份始终稳定；两个gateway实例同身份首次并发；bind400/409/响应丢失经有界核对或明确失败，不换ID、不误解绑；OTA token不进入Cookie/body/log；同Device新WS踢旧、不同Device互不影响；准备18/20秒与WS9/10秒边界、取消/晚到、600秒与帧限制回归。Fake不替代真实供应商行为。
 
