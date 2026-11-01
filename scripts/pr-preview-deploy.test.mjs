@@ -335,7 +335,7 @@ test('inspect reports absent previews and denies invalid targets, forbidden meta
   assert.equal((await inspectPreview({ ...f, prNumber: 12 }, run, async () => new Response(null, { status: 404 }))).previewExists, false)
   await assert.rejects(() => inspectPreview({ ...f, prNumber: '../production' }, run), /stage=inspect-input/)
   await assert.rejects(() => inspectPreview({ ...f, prNumber: 12 }, run, async () => new Response(null, { status: 403 })), /stage=inspect-preview http=403/)
-  await assert.rejects(() => inspectPreview({ ...f, prNumber: 12 }, run, async () => Response.json({ name: 'pr-13', id: 'other' })), /stage=inspect-preview/)
+  assert.equal((await inspectPreview({ ...f, prNumber: 12 }, run, async () => Response.json({ name: 'pr-13', id: 'other' }))).previewNameMatch, false)
 })
 
 test('safe operation errors distinguish upload, result validation and metadata failures without raw diagnostics', async () => {
@@ -364,4 +364,58 @@ test('inspection projects only explicitly supplied public URLs matching the Prev
   assert.equal(summary.deploymentURLCandidateCount, 6)
   assert.equal(JSON.stringify(summary).includes('password'), false)
   assert.equal(JSON.stringify(summary).includes('secret.workers.dev'), false)
+})
+
+test('inspection reports missing or mismatched latest identity as safe shape diagnostics', async () => {
+  const f = await fixture()
+  for (const deployment of [
+    { env: {} },
+    { id: { secret: 'sensitive-value' }, preview_id: 123, env: [] },
+    { id: 'deployment-id', preview_id: 'another-preview', env: metadata().result.env }
+  ]) {
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id' } : deployment))
+    assert.equal(summary.metadataHTTPcode, 200)
+    assert.equal(summary.previewIDMatch, false)
+    assert.equal(summary.deploymentIDPresent, Object.hasOwn(deployment, 'id'))
+    assert.deepEqual(summary.deploymentURLs, [])
+    assert.equal(JSON.stringify(summary).includes('sensitive-value'), false)
+    assert.throws(() => verifyRuntimeDeployment(deployment, result))
+  }
+})
+
+test('inspect reports parent and Preview shape mismatches without following an invalid resource ID', async () => {
+  const f = await fixture()
+  for (const parent of [{ id: 'parent-id' }, { name: { secret: 'sensitive-value' } }, { name: 'wrong-parent' }]) {
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify(parent) }), async () => { throw Error('must not follow') })
+    assert.equal(summary.parentNameMatch, false)
+    assert.equal(JSON.stringify(summary).includes('sensitive-value'), false)
+  }
+  for (const preview of [{ name: 'pr-12' }, { name: 'pr-12', id: '../production' }, { id: 'preview-id' }]) {
+    let requests = 0
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => {
+      requests++
+      assert.equal(url.endsWith('/previews/pr-12'), true)
+      return Response.json(preview)
+    })
+    assert.equal(summary.previewExists, true)
+    assert.equal(requests, 1)
+    assert.deepEqual(summary.deploymentURLs, [])
+  }
+  await assert.rejects(() => inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: 'invalid JSON' })), /stage=inspect-parent/)
+})
+
+test('diagnostic URL projection can use a missing preview_id only from the fixed verified latest endpoint', async () => {
+  const f = await fixture()
+  for (const previewId of [undefined, 'wrong-preview']) {
+    const deployment = { id: '12345678-deployment', urls: ['https://12345678-lie-pr-preview.example.workers.dev', 'https://12345678-lie-game.example.workers.dev'] }
+    if (previewId != null) deployment.preview_id = previewId
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => {
+      if (url.endsWith('/previews/pr-12')) return Response.json({ name: 'pr-12', id: 'preview-id' })
+      assert.equal(url.endsWith('/previews/preview-id/deployments/latest'), true)
+      return Response.json(deployment)
+    })
+    assert.deepEqual(summary.deploymentURLs, previewId == null ? ['https://12345678-lie-pr-preview.example.workers.dev'] : [])
+    assert.equal(summary.deploymentURLCandidateCount, previewId == null ? 2 : 0)
+    assert.throws(() => verifyRuntimeDeployment(deployment, result))
+  }
 })

@@ -165,23 +165,41 @@ export async function inspectPreview(options, run = runFile, request = fetch) {
     directory = await mkdtemp(join(tmpdir(), 'lie-pr-preview-inspect-'))
     const env = await cliEnvironment(directory, options)
     stage = 'inspect-parent'
-    let parent
+    let parent, parentRead
     try {
-      const result = await run(process.execPath, [options.cliPath, 'workers', 'get', 'lie-pr-preview'], { cwd: directory, env, timeout: 30000, maxBuffer: 1024 * 1024 })
-      const value = JSON.parse(result.stdout)
-      parent = value?.result ?? value
-      requireThat(value?.success !== false && parent?.name === 'lie-pr-preview', 'Unexpected preview parent')
+      parentRead = await run(process.execPath, [options.cliPath, 'workers', 'get', 'lie-pr-preview'], { cwd: directory, env, timeout: 30000, maxBuffer: 1024 * 1024 })
     } catch { parent = await readMetadata(apiRoot(options), options, request) }
+    if (parentRead != null) {
+      const value = JSON.parse(parentRead.stdout)
+      parent = value?.result ?? value
+      requireThat(value?.success !== false && parent != null && typeof parent === 'object' && !Array.isArray(parent), 'Invalid parent metadata')
+    }
     const summary = { parentExists: parent != null, parentBaseEmpty: false, previewExists: false, metadataHTTPcode: parent == null ? 404 : 200, previewURLs: [], deploymentURLs: [], previewURLCandidateCount: 0, deploymentURLCandidateCount: 0 }
     if (parent == null) return summary
-    requireThat(parent.name === 'lie-pr-preview', 'Unexpected preview parent')
+    const publicId = value => typeof value === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value)
+    const valueType = value => value === null ? 'null' : Array.isArray(value) ? 'array' : typeof value
+    const fields = (value, known) => ({ known: Object.keys(value).filter(key => known.includes(key)).sort(), unknownCount: Object.keys(value).filter(key => !known.includes(key)).length })
+    const parentFields = fields(parent, ['id', 'name', 'previews_base_config', 'subdomain', 'created_on', 'modified_on'])
+    Object.assign(summary, {
+      parentNamePresent: Object.hasOwn(parent, 'name'), parentNameType: valueType(parent.name), parentNameMatch: parent.name === 'lie-pr-preview',
+      parentIDPresent: Object.hasOwn(parent, 'id'), parentIDType: valueType(parent.id), parentIDValid: publicId(parent.id),
+      parentKnownFields: parentFields.known, parentUnknownFieldCount: parentFields.unknownCount
+    })
+    if (!summary.parentNameMatch) return summary
     try { previewParent(parent); summary.parentBaseEmpty = true } catch { /* Report only the boolean. */ }
     stage = 'inspect-preview'
     const preview = await readMetadata(`${apiRoot(options)}/previews/pr-${prNumber}`, options, request)
     summary.metadataHTTPcode = preview == null ? 404 : 200
     if (preview == null) return summary
-    const publicId = value => typeof value === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value)
-    requireThat(preview.name === `pr-${prNumber}` && publicId(preview.id), 'Unexpected preview identity')
+    const previewFields = fields(preview, ['id', 'name', 'slug', 'urls', 'preview_urls', 'latest_deployment', 'created_on', 'modified_on'])
+    Object.assign(summary, {
+      previewExists: true,
+      previewNamePresent: Object.hasOwn(preview, 'name'), previewNameType: valueType(preview.name), previewNameMatch: preview.name === `pr-${prNumber}`,
+      previewObjectIDPresent: Object.hasOwn(preview, 'id'), previewObjectIDType: valueType(preview.id), previewObjectIDValid: publicId(preview.id),
+      previewSlugPresent: Object.hasOwn(preview, 'slug'), previewSlugType: valueType(preview.slug), previewSlugValid: publicId(preview.slug),
+      previewKnownFields: previewFields.known, previewUnknownFieldCount: previewFields.unknownCount
+    })
+    if (!summary.previewNameMatch || !summary.previewObjectIDValid) return summary
     Object.assign(summary, { previewExists: true, previewID: preview.id, previewName: preview.name })
     const previewLabels = [preview.name, ...(publicId(preview.slug) ? [preview.slug] : [])]
     const previewLinks = publicInspectionUrls(preview, ['urls', 'preview_urls'], previewLabels)
@@ -190,15 +208,20 @@ export async function inspectPreview(options, run = runFile, request = fetch) {
     const deployment = await readMetadata(`${apiRoot(options)}/previews/${encodeURIComponent(preview.id)}/deployments/latest`, options, request)
     summary.metadataHTTPcode = deployment == null ? 404 : 200
     if (deployment == null) return summary
-    requireThat(publicId(deployment.id) && deployment.preview_id === preview.id, 'Unexpected deployment identity')
-    const deploymentLinks = publicInspectionUrls(deployment, ['urls', 'deployment_urls'], [deployment.id, deployment.id.slice(0, 8)])
+    const deploymentIDValid = publicId(deployment.id), previewIDMatch = deployment.preview_id === preview.id
+    Object.assign(summary, {
+      deploymentIDPresent: Object.hasOwn(deployment, 'id'), deploymentIDType: valueType(deployment.id), deploymentIDValid,
+      previewIDPresent: Object.hasOwn(deployment, 'preview_id'), previewIDType: valueType(deployment.preview_id), previewIDMatch,
+      envPresent: Object.hasOwn(deployment, 'env'), envType: valueType(deployment.env)
+    })
+    const deploymentLinks = deploymentIDValid && (!Object.hasOwn(deployment, 'preview_id') || previewIDMatch) ? publicInspectionUrls(deployment, ['urls', 'deployment_urls'], [deployment.id, deployment.id.slice(0, 8)]) : { urls: [], candidateCount: 0 }
     Object.assign(summary, { deploymentURLs: deploymentLinks.urls, deploymentURLCandidateCount: deploymentLinks.candidateCount })
     const knownFields = ['id', 'preview_id', 'env', 'main_module', 'modules', 'assets', 'compatibility_date', 'compatibility_flags', 'limits', 'annotations', 'urls', 'created_on', 'modified_on']
     const names = ['ASSETS', 'SHARED_GAMES', 'VOICE_MAX_SESSION_SECONDS', 'VOICE_DEVICE_ENVIRONMENT', ...secretNames]
     const knownTypes = ['assets', 'r2_bucket', 'plain_text', 'secret_text', 'inherit']
     const bindings = deployment.env != null && typeof deployment.env === 'object' && !Array.isArray(deployment.env) ? deployment.env : {}
     Object.assign(summary, {
-      deploymentID: deployment.id,
+      ...(deploymentIDValid ? { deploymentID: deployment.id } : {}),
       topLevelFields: Object.keys(deployment).filter(key => knownFields.includes(key)).sort(),
       unknownTopLevelFieldCount: Object.keys(deployment).filter(key => !knownFields.includes(key)).length,
       envCount: Object.keys(bindings).length,
