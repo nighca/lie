@@ -9,7 +9,7 @@ import test from 'node:test'
 import { adaptVoiceRunner, prepareVoiceAdapter } from './prepare-voice-adapter.mjs'
 import { previewTarget } from './verify-voice-preview.mjs'
 
-const source = name => execFileSync('git', ['show', `cbc88f474db2a103af2c50a0c016571a9ae0c58e:docs/reviews/device-concurrency-2026-11-01/${name}`], { encoding: 'utf8' })
+const source = name => execFileSync('git', ['show', `51264aebaf590badf0d0e3039ebbb6679994fe29:docs/reviews/device-concurrency-2026-11-01/${name}`], { encoding: 'utf8' })
 
 test('thin adaptation retains reviewed logic while reducing budgets and replacing production identity', () => {
   const adapted = adaptVoiceRunner(source('release-api-v2.mjs'))
