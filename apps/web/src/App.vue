@@ -224,10 +224,10 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     </main>
 
     <UiDialog class="time-help-dialog" :open="timeHelpOpen" title="怎么算时间" @close="closeTimeHelp">
-      <p>所有人物共享本局的询问时间。</p>
-      <p>连接准备不计时；连接就绪后，说话、停顿、等待和回答都会计时。</p>
-      <p>结束对话后暂停。切换人物沿用剩余时间；用完后仍可回看对话、提交指认。</p>
-      <p class="time-help-notice">查看说明不会暂停计时。需要思考时，可先结束对话。</p>
+      <p>所有人物共用本局的询问时间，换人不会增加时间。</p>
+      <p>语音接通后开始计时。说话、停顿、等回答和听回答都会计时，连接准备时不计时。</p>
+      <p>时间用完后，还能回看对话记录，再做最终指认。</p>
+      <p class="time-help-notice">打开说明不会暂停计时。想暂停，请先点「结束对话」。</p>
       <template #actions><UiButton @click="closeTimeHelp">继续调查</UiButton></template>
     </UiDialog>
     <UiDialog class="background-dialog" :open="backgroundOpen && view.phase === 'interrogating'" :title="view.title" @close="backgroundOpen = false">
