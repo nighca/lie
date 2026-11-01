@@ -4,6 +4,7 @@ import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton,
 
 import type { GameController } from './application/controller'
 import CharacterNameText from './presentation/CharacterNameText.vue'
+import PublicBackground from './presentation/PublicBackground.vue'
 import VoiceConnectionNotice from './presentation/VoiceConnectionNotice.vue'
 import type { CharacterPreset } from './presentation/characterPresets'
 
@@ -117,7 +118,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     <main v-else-if="view.phase === 'intro'" class="intro-card surface">
       <p class="eyebrow">一桩小谜题，几位有话说的人</p>
       <h1 class="case-title lie-handwritten-underline">{{ view.title }}</h1>
-      <p class="background"><CharacterNameText :text="view.background" :characters="characterNames" /></p>
+      <PublicBackground class="background" :text="view.background" :characters="characterNames" />
       <div class="intro-characters" :class="{ 'intro-characters--many': view.characters.length > 5 }">
         <div v-for="(character, index) in view.characters" :key="character.id" class="intro-character" tabindex="0" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }">
           <span v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" class="avatar-frame">
@@ -231,7 +232,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <template #actions><UiButton @click="closeTimeHelp">继续调查</UiButton></template>
     </UiDialog>
     <UiDialog class="background-dialog" :open="backgroundOpen && view.phase === 'interrogating'" :title="view.title" @close="backgroundOpen = false">
-      <p class="public-background"><CharacterNameText :text="view.background" :characters="characterNames" /></p>
+      <PublicBackground class="public-background" :text="view.background" :characters="characterNames" />
       <template #actions><UiButton @click="backgroundOpen = false">继续调查</UiButton></template>
     </UiDialog>
     <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="你认为谁是我们要找的人？" @close="controller.closeAccusation()">

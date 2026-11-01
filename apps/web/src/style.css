@@ -13,7 +13,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .case-title { position: relative; width: fit-content; max-width: 100%; margin: 0 auto 24px; font-size: clamp(34px, 4vw, 48px); font-weight: 800; letter-spacing: -1px; }
 .case-title.lie-handwritten-underline::after { height: 12px; width: 52%; left: auto; bottom: -10px; right: 0; }
 .background, .public-background { overflow-wrap: anywhere; }
-.background { white-space: pre-wrap; text-align: left; max-width: 46em; margin: 24px auto; line-height: 1.8; }
+.background { text-align: left; max-width: 46em; margin: 24px auto; line-height: 1.8; }
 .intro-characters { display: flex; justify-content: center; align-items: center; max-width: 660px; margin: 24px auto 16px; padding: 24px 12px 32px; }
 .intro-character { position: relative; flex: 0 1 180px; margin-left: -28px; transform: translateY(var(--fan-drop)) rotate(var(--fan-angle)); transform-origin: 50% 100%; box-shadow: 0 5px 0 #111b4514; transition: transform 160ms ease; }
 .intro-card .intro-character { width: min(100%, 180px); justify-self: center; }
@@ -63,7 +63,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .investigation-title:hover { background: #fff9c080; }
 .investigation-title:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 4px; }
 .game-shell .background-dialog.lie-dialog { width: min(660px, calc(100% - 32px)); padding: 26px 28px; border-width: 2px; border-radius: 26px; }
-.public-background { white-space: pre-wrap; line-height: 1.85; font-size: 15px; margin: 0; }
+.public-background { line-height: 1.85; font-size: 15px; margin: 0; }
 .game-shell .background-dialog .lie-button { border-width: 2px; border-radius: 15px; min-height: 46px; font-size: 14px; }
 .accusation-hint { color: var(--lie-ink); background: color-mix(in srgb, var(--lie-canvas) 40%, var(--lie-surface)); text-align: center; margin: 12px 0 0; padding: 12px 16px; border-radius: 14px; font-weight: 650; }
 .accusation-choices { margin: 16px auto 8px; padding-block: 24px; }

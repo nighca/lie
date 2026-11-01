@@ -1,0 +1,122 @@
+[
+  {
+    "paragraphs": [
+      {
+        "bottom": 328.5859375,
+        "lineHeight": "28.8px",
+        "marginTop": "0px",
+        "top": 270.9921875
+      },
+      {
+        "bottom": 369.3828125,
+        "lineHeight": "28.8px",
+        "marginTop": "12px",
+        "top": 340.5859375
+      },
+      {
+        "bottom": 410.1796875,
+        "lineHeight": "28.8px",
+        "marginTop": "12px",
+        "top": 381.3828125
+      }
+    ],
+    "screen": "intro",
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "action": "开启模拟对话",
+    "paragraphs": [
+      {
+        "bottom": 368.828125,
+        "lineHeight": "27.75px",
+        "marginTop": "0px",
+        "top": 313.328125
+      },
+      {
+        "bottom": 435.578125,
+        "lineHeight": "27.75px",
+        "marginTop": "11.25px",
+        "top": 380.078125
+      },
+      {
+        "bottom": 474.578125,
+        "lineHeight": "27.75px",
+        "marginTop": "11.25px",
+        "top": 446.828125
+      }
+    ],
+    "screen": "dialog",
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  {
+    "dialog": {
+      "bottom": 624.421875,
+      "height": 404.84375,
+      "left": 19,
+      "right": 372,
+      "top": 219.578125,
+      "width": 353,
+      "x": 19,
+      "y": 219.578125
+    },
+    "paragraphs": [
+      {
+        "lineHeight": "27.75px",
+        "marginTop": "0px"
+      },
+      {
+        "lineHeight": "27.75px",
+        "marginTop": "11.25px"
+      },
+      {
+        "lineHeight": "27.75px",
+        "marginTop": "11.25px"
+      }
+    ],
+    "screen": "dialog",
+    "scrollWidth": 391,
+    "width": 391
+  },
+  {
+    "paragraphs": [
+      {
+        "lineHeight": "28.8px",
+        "marginTop": "0px"
+      },
+      {
+        "lineHeight": "28.8px",
+        "marginTop": "12px"
+      }
+    ],
+    "screen": "intro-two-paragraph",
+    "scrollWidth": 320,
+    "width": 320
+  },
+  {
+    "dialog": {
+      "bottom": 632.671875,
+      "height": 421.34375,
+      "left": 19,
+      "right": 301,
+      "top": 211.328125,
+      "width": 282,
+      "x": 19,
+      "y": 211.328125
+    },
+    "paragraphs": [
+      {
+        "lineHeight": "27.75px",
+        "marginTop": "0px"
+      },
+      {
+        "lineHeight": "27.75px",
+        "marginTop": "11.25px"
+      }
+    ],
+    "screen": "dialog-two-paragraph",
+    "scrollWidth": 320,
+    "width": 320
+  }
+]
