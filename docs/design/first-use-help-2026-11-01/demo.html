@@ -1,0 +1,176 @@
+<div id="lie-help-demo">
+  <header class="lh-header">
+    <div class="lh-brand" aria-label="LIE">LIE<span>有人在说谎</span></div>
+    <div class="lh-heading"><h1>失约的茶会</h1><span>模拟案件 · 不使用麦克风</span></div>
+  </header>
+  <div class="lh-demo-bar"><span>设计体验 · 仅模拟对话与结果</span><button type="button" class="lh-link cursor-interaction" data-reset>重置 Demo</button></div>
+  <main data-investigation>
+    <div class="lh-layout">
+      <nav class="lh-people" aria-label="选择询问人物">
+        <button type="button" class="lh-person cursor-interaction" data-person="0" aria-pressed="true"><span class="lh-avatar">林</span><strong>林夏</strong></button>
+        <button type="button" class="lh-person cursor-interaction" data-person="1" aria-pressed="false"><span class="lh-avatar lh-avatar-coral">许</span><strong>许澄</strong></button>
+      </nav>
+      <section class="lh-stage" aria-label="当前询问人物"><span class="lh-portrait" aria-hidden="true" data-initial>林</span><h2 data-person-name>林夏</h2><p>茶会邀请人</p></section>
+      <section class="lh-records" aria-label="询问记录"><h2 data-record-title>林夏的询问记录</h2><div data-records aria-live="polite"><p class="lh-empty">还没有对话，开口打个招呼吧。</p></div></section>
+    </div>
+    <section class="lh-controls" aria-label="语音对话控制">
+      <div class="lh-controls-row">
+        <div class="lh-budget"><span>剩余询问</span><strong data-time>02:00</strong></div>
+        <div class="lh-rule"><p>所有人物共享，结束对话后暂停</p><button type="button" class="lh-link cursor-interaction" data-explain aria-expanded="false" aria-controls="lh-time-rules">怎么算时间？</button></div>
+        <button type="button" class="lh-button lh-primary cursor-interaction" data-voice aria-pressed="false">开启模拟对话</button>
+        <button type="button" class="lh-button cursor-interaction" data-answer>我有答案了 →</button>
+      </div>
+      <p class="lh-connection" data-connection role="status" hidden></p>
+      <div id="lh-time-rules" class="lh-explanation" hidden>
+        <p>连接准备不计时；连接就绪后，说话、停顿、等待和回答都会计时。</p>
+        <p>切换人物沿用剩余时间；用完后仍可回看对话、提交指认。</p>
+        <p class="lh-pause-note">查看这段说明不会暂停。需要思考时，可先结束对话。</p>
+      </div>
+      <p class="lh-expiry" data-expiry role="status" hidden>询问时间已用完。你可以回看对话，并选择最终指认。</p>
+    </section>
+  </main>
+  <section class="lh-result" data-result hidden aria-label="模拟结果">
+    <span class="lh-result-label">模拟结果</span><h2>指认不正确</h2><p data-result-person></p><p>这次调查已结束，答案不会揭晓。</p><button type="button" class="lh-button lh-primary cursor-interaction" data-restart>重新开始一局</button>
+  </section>
+  <dialog class="lh-dialog" aria-labelledby="lh-dialog-title" aria-describedby="lh-accusation-consequence">
+    <h2 id="lh-dialog-title">我有答案了</h2><p class="lh-question">你认为谁是我们要找的人？</p>
+    <p id="lh-accusation-consequence" class="lh-consequence">点击人物会立即提交，结束本局；<br>选错不会揭晓答案。</p>
+    <div class="lh-choices"><button type="button" class="lh-choice cursor-interaction" data-accuse="0"><span class="lh-avatar">林</span><strong>指认 林夏</strong></button><button type="button" class="lh-choice cursor-interaction" data-accuse="1"><span class="lh-avatar lh-avatar-coral">许</span><strong>指认 许澄</strong></button></div>
+    <p class="lh-simulation-note">Demo 固定展示错指结果，不对应真实案件答案。</p><button type="button" class="lh-button cursor-interaction" data-return autofocus>返回调查</button>
+  </dialog>
+</div>
+<style>
+  #lie-help-demo{--lh-ink:#111b45;--lh-blue:#075bfa;--lh-canvas:#fff9e9;--lh-paper:#fffef7;--lh-muted:#52607a;--lh-yellow:#ffe47b;--lh-soft-blue:#eaf2ff;color-scheme:light;background:var(--lh-canvas);color:var(--lh-ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;padding:24px;border-radius:20px;position:relative;isolation:isolate}
+  #lie-help-demo *{box-sizing:border-box}#lie-help-demo [hidden]{display:none!important}#lie-help-demo h1,#lie-help-demo h2,#lie-help-demo p{margin:0}#lie-help-demo button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}#lie-help-demo button:disabled{opacity:.6;cursor:default}
+  #lie-help-demo .lh-header{display:grid;grid-template-columns:150px 1fr 110px;align-items:center;gap:16px;padding-bottom:18px;border-bottom:2px solid var(--lh-ink)}
+  #lie-help-demo .lh-brand{font-size:38px;line-height:1;font-weight:900;letter-spacing:-3px;transform:rotate(-4deg);width:fit-content;background:linear-gradient(transparent 55%,var(--lh-yellow) 55%);padding:0 8px 3px}#lie-help-demo .lh-brand span{display:block;font-size:11px;letter-spacing:1px;font-weight:700;margin-top:7px}
+  #lie-help-demo .lh-heading{text-align:center}#lie-help-demo h1{font-size:24px;font-weight:800;line-height:1.4}#lie-help-demo .lh-heading>span{font-size:12px;color:var(--lh-muted)}
+  #lie-help-demo .lh-demo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:12px 0 18px;color:var(--lh-muted);font-size:12px}
+  #lie-help-demo .lh-link{background:transparent;border:0;color:var(--lh-blue);text-decoration:underline;text-underline-offset:4px;padding:5px 0;min-height:32px;font-weight:650}
+  #lie-help-demo .lh-layout{display:grid;grid-template-columns:82px minmax(150px,.8fr) minmax(240px,1.25fr);gap:18px;align-items:stretch}
+  #lie-help-demo .lh-people{display:flex;flex-direction:column;gap:14px}#lie-help-demo .lh-person{display:flex;flex-direction:column;align-items:center;gap:7px;padding:10px 5px;background:var(--lh-paper);border:2px solid var(--lh-ink);border-radius:18px;box-shadow:0 3px 0 #111b4514}#lie-help-demo .lh-person[aria-pressed=true]{background:var(--lh-soft-blue);border-color:var(--lh-blue);color:var(--lh-blue)}
+  #lie-help-demo .lh-avatar{display:grid;place-items:center;width:50px;height:50px;background:#bfe9e2;border:2px solid var(--lh-ink);border-radius:18px;font-size:25px;font-weight:800;color:var(--lh-ink)}#lie-help-demo .lh-avatar-coral{background:#ffd5c9}#lie-help-demo .lh-person strong{font-size:14px}
+  #lie-help-demo .lh-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px 12px;min-height:280px}#lie-help-demo .lh-portrait{display:grid;place-items:center;width:150px;height:175px;border-radius:46% 52% 43% 55%;background:#cbece4;border:2px solid var(--lh-ink);font-size:76px;font-weight:800;transform:rotate(-5deg);box-shadow:5px 6px 0 #111b4514}#lie-help-demo .lh-stage h2{font-size:22px;margin-top:18px}#lie-help-demo .lh-stage p{color:var(--lh-muted);font-size:13px}
+  #lie-help-demo .lh-records{min-width:0;padding:20px;background:var(--lh-paper);border:2px solid var(--lh-ink);border-radius:24px;min-height:300px}#lie-help-demo .lh-records h2{font-size:18px;font-weight:800;border-bottom:1px solid #111b4529;padding-bottom:12px;margin-bottom:16px}#lie-help-demo .lh-empty{color:var(--lh-muted)}#lie-help-demo .lh-message{font-size:14px;border-radius:15px 15px 15px 4px;background:#fff0c9;padding:10px 13px;margin-bottom:12px;max-width:94%}#lie-help-demo .lh-message.mine{background:var(--lh-soft-blue);margin-left:auto;border-radius:15px 15px 4px 15px}#lie-help-demo .lh-message strong{display:block;font-size:12px;margin-bottom:3px}
+  #lie-help-demo .lh-controls{margin-top:20px;border:2px solid var(--lh-ink);border-radius:24px;background:var(--lh-paper);padding:18px 20px;box-shadow:0 4px 0 #111b451a}#lie-help-demo .lh-controls-row{display:grid;grid-template-columns:76px minmax(160px,1fr) auto auto;align-items:center;gap:16px}#lie-help-demo .lh-budget{line-height:1.3}#lie-help-demo .lh-budget>span{font-size:12px;color:var(--lh-muted)}#lie-help-demo .lh-budget strong{display:block;font-size:27px;font-weight:850;font-variant-numeric:tabular-nums;margin-top:4px}#lie-help-demo .lh-rule{font-size:13px}#lie-help-demo .lh-rule .lh-link{font-size:13px}
+  #lie-help-demo .lh-button{border:2px solid var(--lh-ink);border-radius:13px;background:var(--lh-paper);padding:10px 14px;min-height:46px;font-weight:750;box-shadow:0 3px 0 #111b4514;white-space:nowrap}#lie-help-demo .lh-primary{background:var(--lh-blue);color:#fff;box-shadow:0 3px 0 var(--lh-ink)}#lie-help-demo .lh-button:not(:disabled):hover,#lie-help-demo .lh-choice:hover{filter:brightness(.97)}
+  #lie-help-demo .lh-explanation{margin-top:15px;border-top:1px solid #111b4529;padding-top:14px;font-size:14px}#lie-help-demo .lh-explanation p+p{margin-top:5px}#lie-help-demo .lh-pause-note{font-weight:650}#lie-help-demo .lh-connection,#lie-help-demo .lh-expiry{margin-top:14px;padding-top:12px;border-top:1px solid #111b4529;font-size:14px}
+  #lie-help-demo .lh-dialog{position:absolute;inset:0;margin:auto;width:min(540px,calc(100% - 32px));height:fit-content;max-height:none;padding:28px;background:var(--lh-paper);color:var(--lh-ink);border:3px solid var(--lh-ink);border-radius:26px;box-shadow:0 8px 0 #111b4526;text-align:center;font:inherit}#lie-help-demo .lh-dialog::backdrop{background:#111b4560}#lie-help-demo .lh-dialog h2{font-size:25px;font-weight:800}#lie-help-demo .lh-question{margin-top:10px;font-weight:650}#lie-help-demo .lh-consequence{margin-top:14px;font-size:14px;padding:12px 14px;background:#fff0bd;border-radius:13px;font-weight:650}#lie-help-demo .lh-choices{display:flex;justify-content:center;gap:18px;margin:24px 0 18px}#lie-help-demo .lh-choice{min-width:0;flex:1;max-width:180px;padding:18px 10px 12px;border:2px solid var(--lh-ink);border-radius:19px;background:var(--lh-paper);display:flex;flex-direction:column;align-items:center;gap:14px}#lie-help-demo .lh-choice .lh-avatar{width:68px;height:68px;font-size:34px}#lie-help-demo .lh-simulation-note{font-size:12px;color:var(--lh-muted);margin-bottom:18px}
+  #lie-help-demo .lh-result{text-align:center;border:2px solid var(--lh-ink);border-radius:24px;background:var(--lh-paper);padding:45px 24px}#lie-help-demo .lh-result-label{display:inline-block;font-size:13px;background:var(--lh-yellow);padding:2px 12px;border-radius:20px}#lie-help-demo .lh-result h2{font-size:30px;margin:15px 0}#lie-help-demo .lh-result p+p{margin-top:5px}#lie-help-demo .lh-result .lh-button{margin-top:24px}
+  @media(max-width:850px){#lie-help-demo .lh-controls-row{grid-template-columns:76px 1fr auto}#lie-help-demo [data-answer]{grid-column:3;grid-row:2}#lie-help-demo [data-voice]{grid-column:2;grid-row:2;justify-self:start}#lie-help-demo .lh-rule{grid-column:2 / -1}}
+  @media(max-width:560px){#lie-help-demo{padding:16px 12px;border-radius:16px}#lie-help-demo .lh-header{grid-template-columns:80px 1fr;padding-top:34px;gap:10px}#lie-help-demo .lh-brand{font-size:30px}#lie-help-demo .lh-brand span{font-size:9px;letter-spacing:0}#lie-help-demo h1{font-size:21px}#lie-help-demo .lh-layout{grid-template-columns:1fr;gap:14px}#lie-help-demo .lh-people{flex-direction:row}#lie-help-demo .lh-person{flex:1;flex-direction:row;justify-content:center;padding:9px}#lie-help-demo .lh-avatar{width:38px;height:38px;font-size:21px;border-radius:13px}#lie-help-demo .lh-stage{display:none}#lie-help-demo .lh-records{min-height:180px;padding:16px}#lie-help-demo .lh-controls{padding:15px 13px;margin-top:16px}#lie-help-demo .lh-controls-row{grid-template-columns:1fr 1fr;gap:12px}#lie-help-demo .lh-budget{grid-column:1;grid-row:1}#lie-help-demo .lh-rule{grid-column:1 / -1;grid-row:2}#lie-help-demo [data-voice]{grid-column:1;grid-row:3;justify-self:stretch}#lie-help-demo [data-answer]{grid-column:2;grid-row:3}#lie-help-demo .lh-button{white-space:normal;padding:9px 10px;font-size:13px}#lie-help-demo .lh-dialog{padding:22px 16px}#lie-help-demo .lh-dialog h2{font-size:23px}#lie-help-demo .lh-choices{gap:12px}#lie-help-demo .lh-consequence{padding:12px 8px}#lie-help-demo .lh-link{min-height:40px}}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('lie-help-demo');
+  const q = selector => root.querySelector(selector);
+  const names = ['林夏', '许澄'];
+  const records = [[], []];
+  const voiceButton = q('[data-voice]');
+  const answerButton = q('[data-answer]');
+  const dialog = q('dialog');
+  const details = q('#lh-time-rules');
+  const explainButton = q('[data-explain]');
+  let person = 0;
+  let remainingMs = 120000;
+  let preparation = null;
+  let ticker = null;
+  let lastTick = null;
+  let ended = false;
+
+  function renderTime() {
+    const seconds = Math.ceil(remainingMs / 1000);
+    q('[data-time]').textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+  }
+  function render() {
+    const active = ticker != null;
+    root.querySelectorAll('[data-person]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.person) === person)));
+    q('[data-person-name]').textContent = names[person];
+    q('[data-initial]').textContent = names[person][0];
+    q('[data-initial]').style.background = person === 0 ? '#cbece4' : '#ffd5c9';
+    q('.lh-stage p').textContent = person === 0 ? '茶会邀请人' : '受邀的朋友';
+    q('[data-record-title]').textContent = `${names[person]}的询问记录`;
+    const log = q('[data-records]');
+    log.replaceChildren();
+    if (records[person].length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'lh-empty'; empty.textContent = '还没有对话，开口打个招呼吧。'; log.append(empty);
+    }
+    records[person].forEach((entry, index) => {
+      const message = document.createElement('div');
+      message.className = `lh-message${index === 0 ? ' mine' : ''}`;
+      const speaker = document.createElement('strong'); speaker.textContent = index === 0 ? '你' : names[person];
+      const text = document.createElement('p'); text.textContent = entry;
+      message.append(speaker, text); log.append(message);
+    });
+    voiceButton.textContent = preparation != null ? '取消连接' : active ? '结束对话' : remainingMs <= 0 ? '询问时间已用完' : '开启模拟对话';
+    voiceButton.setAttribute('aria-pressed', String(active));
+    voiceButton.disabled = remainingMs <= 0;
+    q('[data-connection]').hidden = preparation == null;
+    q('[data-connection]').textContent = preparation == null ? '' : `正在请${names[person]}过来… 等 TA 坐定，再开口哦`;
+    q('[data-expiry]').hidden = remainingMs > 0;
+    renderTime();
+  }
+  function settleTime() {
+    if (lastTick == null) return;
+    const now = performance.now();
+    remainingMs = Math.max(0, remainingMs - Math.max(0, now - lastTick));
+    lastTick = now;
+  }
+  function stop() {
+    settleTime();
+    clearTimeout(preparation); clearInterval(ticker);
+    preparation = null; ticker = null; lastTick = null;
+  }
+  function openAccusation() {
+    stop(); render();
+    if (!dialog.open) dialog.showModal();
+  }
+  function start() {
+    preparation = setTimeout(() => {
+      preparation = null;
+      lastTick = performance.now();
+      ticker = setInterval(() => {
+        settleTime(); renderTime();
+        if (remainingMs <= 0) openAccusation();
+      }, 100);
+      if (records[person].length === 0) records[person].push('先说说你和这次茶会的关系吧。', person === 0 ? '是我约大家来的。原本说好午后见面，一起喝杯茶。' : '我收到了邀请，出门前还特意确认了一遍时间。');
+      render();
+    }, 1000);
+    render();
+  }
+  function reset() {
+    stop(); if (dialog.open) dialog.close();
+    person = 0; remainingMs = 120000; ended = false;
+    records.forEach(history => history.splice(0));
+    details.hidden = true; explainButton.setAttribute('aria-expanded', 'false');
+    q('[data-investigation]').hidden = false; q('[data-result]').hidden = true;
+    render(); voiceButton.focus();
+  }
+  voiceButton.addEventListener('click', () => {
+    if (preparation != null || ticker != null) { stop(); render(); }
+    else if (!ended && remainingMs > 0) start();
+  });
+  root.querySelectorAll('[data-person]').forEach(button => button.addEventListener('click', () => {
+    const next = Number(button.dataset.person);
+    if (person === next) return;
+    const resume = preparation != null || ticker != null;
+    stop(); person = next; render();
+    if (resume && remainingMs > 0) start();
+  }));
+  explainButton.addEventListener('click', () => { details.hidden = !details.hidden; explainButton.setAttribute('aria-expanded', String(!details.hidden)); });
+  answerButton.addEventListener('click', openAccusation);
+  q('[data-return]').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => { if (!ended) answerButton.focus(); });
+  root.querySelectorAll('[data-accuse]').forEach(button => button.addEventListener('click', () => {
+    ended = true; stop(); dialog.close();
+    q('[data-investigation]').hidden = true; q('[data-result]').hidden = false;
+    q('[data-result-person]').textContent = `你指认了${names[Number(button.dataset.accuse)]}。`;
+    q('[data-restart]').focus();
+  }));
+  q('[data-reset]').addEventListener('click', reset);
+  q('[data-restart]').addEventListener('click', reset);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); render(); } });
+  render();
+})();
+</script>

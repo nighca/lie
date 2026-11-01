@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-01",
+  "node": "v24.17.0",
+  "jsdom": "30.1.3",
+  "checks": [
+    {
+      "name": "preparation is free, stop pauses, restart uses same budget",
+      "passed": true
+    },
+    {
+      "name": "expanding and collapsing timing help does not pause",
+      "passed": true
+    },
+    {
+      "name": "active character switch prepares again, shares time and keeps histories",
+      "passed": true
+    },
+    {
+      "name": "cancelled preparation cannot start late, same-person click is inert",
+      "passed": true
+    },
+    {
+      "name": "accusation pauses; returning restores focus without resuming",
+      "passed": true
+    },
+    {
+      "name": "clicking either person immediately ends the demo, reset starts fresh",
+      "passed": true
+    },
+    {
+      "name": "expiry stops conversation, allows review and does not repeatedly open on switch",
+      "passed": true
+    },
+    {
+      "name": "document hidden pauses current conversation",
+      "passed": true
+    }
+  ],
+  "networkAndStorageCalls": 0,
+  "limits": [
+    "jsdom dialog shim does not validate native focus trapping, Escape, layout, assistive technology or browser rendering",
+    "No product, real voice, microphone, provider, account, browser storage or service test"
+  ]
+}
