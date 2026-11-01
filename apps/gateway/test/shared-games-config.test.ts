@@ -1,11 +1,17 @@
 import { convertToWranglerConfig, resolveAndParseConfig } from '@cloudflare/config'
-import { expect, it } from 'vitest'
+import { afterEach, expect, it, vi } from 'vitest'
 
 import config from '../cloudflare.config'
 
-it('declares private R2 storage with remote development disabled', async () => {
+afterEach(() => { vi.unstubAllEnvs() })
+
+it.each([
+  { name: 'default', value: undefined, expected: 'lie-shared-games' },
+  { name: 'override', value: 'lie-shared-games-review-local', expected: 'lie-shared-games-review-local' }
+])('declares private R2 storage with the $name bucket and remote development disabled', async ({ value, expected }) => {
+  vi.stubEnv('LIE_SHARE_BUCKET_NAME', value)
   const parsed = await resolveAndParseConfig(config, { isPreview: false, mode: 'production' })
   if (!parsed.success) throw parsed.error
-  expect(parsed.data.worker?.env?.SHARED_GAMES).toEqual({ type: 'r2', name: 'lie-shared-games', dev: { remote: false } })
-  expect(convertToWranglerConfig(parsed.data).r2_buckets).toEqual([{ binding: 'SHARED_GAMES', bucket_name: 'lie-shared-games', remote: false }])
+  expect(parsed.data.worker?.env?.SHARED_GAMES).toEqual({ type: 'r2', name: expected, dev: { remote: false } })
+  expect(convertToWranglerConfig(parsed.data).r2_buckets).toEqual([{ binding: 'SHARED_GAMES', bucket_name: expected, remote: false }])
 })
