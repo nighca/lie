@@ -12,7 +12,7 @@ describe('hiking loop canonical content', () => {
   it('loads three existing appearances with a four-minute questioning allowance', () => {
     expect(readBundledCase(game.id)).toEqual(game)
     expect(game.characters.map(({ name, appearanceId }) => [name, appearanceId])).toEqual([
-      ['小岳', 'ochre-freckles'], ['阿宁', 'coral-bob'], ['老许', 'salt-pepper-beard'],
+      ['小岳', 'ochre-freckles'], ['阿宁', 'coral-bob'], ['老赵', 'salt-pepper-beard'],
     ])
     expect(game.interrogationLimitSeconds).toBe(240)
     for (const character of game.characters) {
