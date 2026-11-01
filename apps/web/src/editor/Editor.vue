@@ -6,14 +6,18 @@ import { AnimatedPortrait, CharacterChoice, ProductHeader, UiButton, UiNotice } 
 import CharacterNameText from '../presentation/CharacterNameText.vue'
 import type { CharacterPreset } from '../presentation/characterPresets'
 import type { PresetLoadStatus } from '../presentation/characterPresetLoader'
+import AuthoringDemo from './AuthoringDemo.vue'
 import EditorDialog from './EditorDialog.vue'
 import { createDraft, draftGame, draftIssues, DRAFT_KEY, loadDraft, removeCharacter, saveDraft, type DraftCharacter, type DraftIssue } from './draft'
 import { PROFILE_EXAMPLE } from './example'
 import { saveSharedGame, ShareError } from './share'
 import { prepareSubmission } from './submission'
+import { useAuthoringDemo } from './useAuthoringDemo'
 
 const props = withDefaults(defineProps<{ characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus }>(), { presetStatus: 'ready' })
 const emit = defineEmits<{ preview: [game: GameDefinition]; leave: []; showVersion: [trigger: HTMLButtonElement]; 'retry-presets': [] }>()
+const authoringDemo = import.meta.env.DEV && new URLSearchParams(location.search).get('webmcp') === '1'
+const draftKey = authoringDemo ? 'lie-webmcp-demo-draft' : DRAFT_KEY
 const draft = ref(createDraft(props.characterPresets[0]?.id ?? null))
 const step = ref(0)
 const selectedId = ref<string | null>(null)
@@ -36,7 +40,7 @@ let shareRevision = 0
 let clearingDraft = false
 let saveNotice: string | null = null
 try {
-  const stored = loadDraft(localStorage)
+  const stored = loadDraft(localStorage, draftKey)
   if (stored != null) { draft.value = stored; saveStatus.value = '草稿已保存至此设备' }
 } catch { saveStatus.value = '本地草稿无法读取'; notice.value = '本地草稿无法读取。你仍可创作新案件；开始编辑后会保存新的草稿。' }
 selectedId.value = draft.value.characters[0]?.id ?? null
@@ -54,7 +58,7 @@ watch(draft, () => {
   closeShare()
   shareUrl.value = null
   try {
-    saveDraft(localStorage, draft.value)
+    saveDraft(localStorage, draft.value, draftKey)
     saveStatus.value = '草稿已保存至此设备'
     if (notice.value === saveNotice) notice.value = null
     saveNotice = null
@@ -64,6 +68,10 @@ watch(draft, () => {
     notice.value = saveNotice
   }
 }, { deep: true, flush: 'sync' })
+const { candidate: aiCandidate, previous: aiPrevious, status: aiStatus, message: aiMessage, canAdopt, canUndo, adopt, undo } = useAuthoringDemo({
+  enabled: authoringDemo, storageKey: draftKey, draft, presets: () => props.characterPresets,
+  replaceDraft(next) { draft.value = next; selectedId.value = next.characters[0]?.id ?? null; step.value = 0; closeOverlay() },
+})
 function invalidateCopy() { copyRevision++; copied.value = false; copyError.value = null }
 function closeShare() { shareRevision++; busy.value = false; if (overlay.value === 'share') overlay.value = null; invalidateCopy() }
 function closeOverlay() { closeShare(); overlay.value = null }
@@ -105,7 +113,7 @@ function deleteCharacter() {
   void focus(character.value == null ? 'add-character' : 'name')
 }
 function clearDraft() {
-  try { localStorage.removeItem(DRAFT_KEY) }
+  try { localStorage.removeItem(draftKey) }
   catch { notice.value = '无法清除本地草稿，内容已保留，请重试。'; return }
   clearingDraft = true
   draft.value = createDraft(props.characterPresets[0]?.id ?? null)
@@ -175,6 +183,7 @@ async function copy(text: string) {
     </nav>
     <div v-if="saveStatus != null" class="editor-draft-status"><p role="status">{{ saveStatus }}</p><button type="button" :disabled="busy" @click="overlay = 'clear'">清除草稿</button></div>
     <main ref="form">
+      <AuthoringDemo v-if="authoringDemo" :status="aiStatus" :message="aiMessage" :candidate="aiCandidate?.draft ?? null" :can-adopt="canAdopt && !busy" :can-undo="canUndo && !busy" :has-previous="aiPrevious != null" @adopt="adopt" @undo="undo" @discard="aiCandidate = null" />
       <div v-if="notice != null" role="alert" class="editor-notice"><UiNotice tone="error">{{ notice }}</UiNotice></div>
       <section v-if="showIssues && issues.length" class="error-summary" role="alert" aria-label="待补充内容"><strong>再补充这些，就能试玩或分享了</strong><ul><li v-for="(issue, index) in issues" :key="index"><button type="button" @click="goToIssue(issue)">{{ issue.message }}</button></li></ul></section>
       <fieldset class="editor-fields" :disabled="busy">
