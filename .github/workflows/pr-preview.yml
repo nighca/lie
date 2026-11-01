@@ -127,9 +127,6 @@ jobs:
       statuses: write
     env:
       SELECTED_PR_NUMBER: ${{ needs.select.outputs.pr_number }}
-      PR_PREVIEW_ARTIFACT_DIR: ${{ runner.temp }}/pr-preview-artifact
-      PR_PREVIEW_IDENTITY_FILE: ${{ runner.temp }}/pr-preview-identity.json
-      PR_PREVIEW_DEPLOYMENT_FILE: ${{ runner.temp }}/pr-preview-deployment.json
     steps:
       - uses: actions/checkout@v6
         with:
@@ -139,6 +136,12 @@ jobs:
         with:
           node-version: 24.22.1
           cache: npm
+      - name: Set preview paths on the runner
+        run: |
+          printf '%s\n' \
+            "PR_PREVIEW_ARTIFACT_DIR=${RUNNER_TEMP:?}/pr-preview-artifact" \
+            "PR_PREVIEW_IDENTITY_FILE=${RUNNER_TEMP:?}/pr-preview-identity.json" \
+            "PR_PREVIEW_DEPLOYMENT_FILE=${RUNNER_TEMP:?}/pr-preview-deployment.json" >> "${GITHUB_ENV:?}"
       - name: Recheck after acquiring this PR's deployment lock
         id: current
         env:
