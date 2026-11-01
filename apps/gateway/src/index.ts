@@ -13,6 +13,9 @@ const upstreamUrl = 'https://xrobo-io.qiniuapi.com/v1/ws/'
 export default {
   async fetch(request: Request, env: GatewayEnv): Promise<Response> {
     const url = new URL(request.url)
+    if (url.pathname === '/api/pr-preview-check' && request.method === 'GET') {
+      return Response.json({ revision: 'preview-acceptance-v1' }, { headers: { 'Cache-Control': 'no-store' } })
+    }
     if (url.pathname === '/api/health' && request.method === 'GET') {
       return Response.json({ status: 'ok', storage: env.SHARED_GAMES == null ? 'none' : 'r2' }, { headers: { 'Cache-Control': 'no-store' } })
     }
