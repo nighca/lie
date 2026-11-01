@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';import path from 'node:path';import sharp from 'sharp';import {Presentation,PresentationFile} from '@oai/artifact-tool';
-const root=process.cwd(),out=root+'/tmp/pitch/output',build=root+'/tmp/pitch/build';
+const root=process.cwd(),out=root+'/tmp/pitch/revision-02/output',build=root+'/tmp/pitch/revision-02/build';
 await fs.mkdir(build,{recursive:true});await fs.mkdir(out,{recursive:true});
 await sharp(root+'/design/brand/logo.svg').resize(660,353).png().toFile(build+'/logo.png');
 const p=Presentation.create({slideSize:{width:1280,height:720}}), C={yellow:'#FFF18A',white:'#FFFEF7',ink:'#111B45',blue:'#075BFA',muted:'#52607A'};
@@ -7,6 +7,9 @@ function t(s,str,x,y,w,h,size=30,color=C.ink,bold=false){const a=s.shapes.add({g
 async function im(s,file,x,y,w,h){let b=await fs.readFile(file);s.images.add({blob:b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),contentType:'image/png',alt:path.basename(file),fit:'contain',position:{left:x,top:y,width:w,height:h}});}
 async function portrait(id,state){const dest=build+'/'+id+'-'+state+'-trim.png';await sharp(root+'/design/character-presets/assets/'+id+'/'+state+'.png').trim().png().toFile(dest);const m=await sharp(dest).metadata();const upper=dest.replace('-trim.png','-upper.png');await sharp(dest).extract({left:0,top:0,width:m.width,height:Math.floor(m.height*.62)}).png().toFile(upper);return upper;}
 p.theme.defaultFont='Hiragino Sans GB';
+const caseEvidence=JSON.parse(await fs.readFile(root+'/docs/pitch/evidence/jiangsu-public.json','utf8'));
+const opening=caseEvidence.public;
+const zhou=await portrait(opening.characters[0].appearanceId,'default'),chen=await portrait(opening.characters[1].appearanceId,'default');
 const coral=await portrait('coral-bob','waiting'),sunny=await portrait('sunny-moustache','listening'),blue=await portrait('blue-glasses','speaking');
 {
 const s=p.slides.add();s.background.fill=C.yellow;await im(s,build+'/logo.png',64,45,220,118);
@@ -14,12 +17,12 @@ t(s,'谁在说谎？',60,225,750,145,106,C.ink,true);t(s,'轻松开口，认真�
 await im(s,build+'/coral-bob-waiting-trim.png',780,66,510,720);s.speakerNotes.text='20秒。开场邀请观众进入判断，而非先讲技术栈。正式字标与原创人物复用。来源：README.zh-CN.md；design/brand/logo.svg；design/character-presets/assets/coral-bob/waiting.png。';
 }
 {
-const s=p.slides.add();s.background.fill=C.white;t(s,'五分钟，纪念章不见了。',60,43,1150,80,62,C.ink,true);
-t(s,'18:00 交出装章的盒子',65,154,570,50,30,C.muted);t(s,'18:05 取回时只剩衬垫',695,154,570,50,30,C.muted);
-await im(s,sunny,30,288,380,332);await im(s,coral,450,288,370,332);await im(s,blue,865,288,380,332);
-t(s,'沈禾',85,222,250,55,37,C.ink,true);t(s,'顾遥',515,222,250,55,37,C.ink,true);t(s,'陈拓',956,222,250,55,37,C.ink,true);
-t(s,'你会先问谁？',365,640,600,70,49,C.blue,true);
-s.speakerNotes.text='40秒。只讲首案公共背景，不展示角色私设或答案。邀请观众选择询问对象，再口头说明自由语音追问、切人核对、最终指认。人物表情是对话状态，不是测谎信号。来源：content/games/01-empty-medal-box.json；design/character-presets。';
+const s=p.slides.add();s.background.fill=C.white;t(s,opening.title+'？',60,43,1150,90,68,C.ink,true);
+t(s,'你是播客主持人。两位嘉宾，只有一位真老乡。',65,155,1150,52,32,C.muted);
+t(s,opening.characters[0].name,175,225,350,55,40,C.ink,true);t(s,opening.characters[1].name,825,225,350,55,40,C.ink,true);
+await im(s,zhou,75,292,440,330);await im(s,chen,740,292,440,330);
+t(s,'先问一句：你哪里人？',230,642,1000,64,46,C.blue,true);
+s.speakerNotes.text='40秒。旅行播客临时来了小周、小陈两位嘉宾，一位真正来自江苏，另一位编了旅游人设。你临时当主持人，先问哪里人，再聊家乡、吃喝或去哪玩。只讲公共任务，不展示私设、正确人物、预期回答或结局。这是虚构故事与地域梗，不是现实籍贯鉴定规则，人物表情也不是测谎线索。来源：content/games/01-jiangsu-local.json，发布身份35e987a，必要公共投影保存在docs/pitch/evidence/jiangsu-public.json。';
 }
 {
 const s=p.slides.add();s.background.fill=C.ink;t(s,'谁负责真相？',64,44,1150,75,56,C.white,true);
@@ -30,7 +33,7 @@ t(s,'浏览器',72,619,330,50,35,C.yellow,true);t(s,'↔',355,615,80,54,40,C.whi
 s.speakerNotes.text='60秒。固定答案与指认由程序处理，AI自由表达角色。浏览器负责游戏状态，薄Worker保管连接凭据并转发语音，灵矽负责模型与语音。完整答案可检查是轻量单人游戏的明确取舍。下方只展示语音与规则职责链，分享另有已上线的私有R2快照存储。来源：docs/architecture-design.md；packages/game-core/src/session.ts；apps/gateway/src/index.ts。';
 }
 // Local authoring only. Copy this source to tmp/pitch/build (with runtime node_modules linked), run from repository root.
-const entries=[{id:0,title:'谁在说谎？',seconds:20},{id:1,title:'五分钟，纪念章不见了',seconds:40}];
+const entries=[{id:0,title:'谁在说谎？',seconds:20},{id:1,title:'谁才是江苏人？',seconds:40}];
 function page(title,bg=C.white){const s=p.slides.add();s.background.fill=bg;return {s,id:p.slides.items.length-1,title};}
 function add(e,seconds,notes){entries.push({id:e.id,title:e.title,seconds});e.s.speakerNotes.text=notes;return e.s;}
 function title(s,str,color=C.ink){t(s,str,64,45,1160,86,52,color,true);}
@@ -39,10 +42,13 @@ async function trimAsset(rel,name){const dest=build+'/'+name+'.png';await sharp(
 async function cropAsset(rel,rect,name){const dest=build+'/'+name+'.png';await sharp(path.join(root,rel)).extract(rect).png().toFile(dest);return dest;}
 // Product film page. The local HTML player supplies the already approved film here.
 {
-const e=page('一局 LIE',C.ink),s=e.s;title(s,'开口之后，故事才开始。',C.white);
-await asset(s,'docs/design/character-layout/official-investigation.png',270,158,950,534);
-t(s,'问',65,181,180,155,120,C.yellow,true);t(s,'听',65,353,180,155,120,'#78DDD7',true);t(s,'判断',65,546,210,77,55,C.white,true);
-add(e,90,'90秒。用户确认现场开口问优先，历史实录备用。打开官网，完成一个问题、一个回答、一次切人核对，控制90秒内回到本地讲稿；不自动开启麦克风。若现场不可用，HTML第3页按R打开28.5秒历史真人mic与角色声备用片（原3:07实录13.5–42.0秒），代替现场环节，不叠加计时；含交接线索与源持帧，未主观听审。按V为53.8秒横版宣传片，只有配乐和音效，无真实问答原声。所有历史画面不作为最新短链UI或声音性能证据。来源：docs/design/character-layout/official-investigation.png（演示模式界面）；docs/promo-video/2026-10-25/combined-demo/README.md；视频owner横v3回执。');
+const e=page('和两位嘉宾聊聊',C.ink),s=e.s;title(s,'和两位嘉宾聊聊。',C.white);
+t(s,'你哪里人？',65,225,660,130,85,C.yellow,true);t(s,'再追问：具体哪儿？',70,390,670,72,41,C.white,true);
+t(s,'家乡、吃喝、去哪玩，都可以问。',70,569,660,100,29,'#78DDD7');
+const talk=await portrait('blue-glasses','speaking'),listen=await portrait('plum-crop','listening');
+await im(s,talk,738,230,230,330);await im(s,listen,1000,230,230,330);
+t(s,'小周',778,590,200,55,34,C.white,true);t(s,'小陈',1040,590,200,55,34,C.white,true);
+add(e,90,'90秒。用户批准以《谁才是江苏人》现场开口问优先。打开首页置首的江苏案，问一位“你哪里人？”，听完切另一位问同一问题，再按现场回答追问“具体哪儿？”或家乡话题；90秒内返回本地讲稿，不跑满120秒、不揭答案。上屏是建议提问，不是模型回答或效果保证。无需文字口令或特定问序。本文件不会自动开麦或调用provider；介绍页后台准备已有上线行为，演讲者手动操作。若现场不可用，按R用另一案件《消失的纪念章》的28.5秒历史实录备用，明确另案，不能拼成江苏案同一局；含旧UI/关键线索/源持帧，未主观听审。V是53.8秒无真实问答原声宣传片。来源：docs/pitch/evidence/jiangsu-public.json；docs/promo-video/2026-10-25/combined-demo/README.md；video-backup-evidence.md。');
 }
 {
 const e=page('把等待变成角色入场',C.yellow),s=e.s;title(s,'连“等一下”，也在角色里。');
@@ -60,10 +66,10 @@ add(e,80,'80秒，含约45秒编辑器操作。打开lie.agency/editor，使用�
 }
 {
 const e=page('故事可以继续长出来',C.yellow),s=e.s;title(s,'玩法已备好，故事可以继续长。');
-t(s,'4',62,166,260,175,142,C.blue,true);t(s,'官方案件',65,343,370,58,39,C.ink,true);t(s,'8',705,166,260,175,142,C.blue,true);t(s,'套预设形象',709,343,460,58,39,C.ink,true);
+t(s,'5',62,166,260,175,142,C.blue,true);t(s,'官方案件',65,343,370,58,39,C.ink,true);t(s,'8',705,166,260,175,142,C.blue,true);t(s,'套预设形象',709,343,460,58,39,C.ink,true);
 const ids=['silver-bun','plum-crop','mint-puffs','ochre-freckles'];
 for(let i=0;i<ids.length;i++){const a=await trimAsset('design/character-presets/assets/'+ids[i]+'/default.png','cast-'+ids[i]);await im(s,a,40+i*307,446,290,274);}
-add(e,30,'30秒。玩家获得轻量语音推理，作者复用人物、声音、动画与引擎，主要投入故事设计。四个官方案件是当前内容起点，八套形象可以跨案复用。分享和改编支持朋友间传播；没有已形成社区规模或增长数据。商业上可进一步验证精品案件与主题定制，尚未确定付费模式，不在主讲宣布定价。来源：content/games四份JSON；design/character-presets/manifest.json；README.zh-CN.md。');
+add(e,30,'30秒。玩家获得轻量语音推理，作者复用人物、声音、动画与引擎，主要投入故事设计。五个官方案件是当前内容起点，八套形象可以跨案复用。分享和改编支持朋友间传播；没有已形成社区规模或增长数据。商业上可进一步验证精品案件与主题定制，尚未确定付费模式，不在主讲宣布定价。来源：content/games五份JSON（35e987a）；design/character-presets/manifest.json；README.zh-CN.md。');
 }
 entries.push({id:2,title:'谁负责真相？',seconds:60});
 {
@@ -110,18 +116,18 @@ add(e,0,'备页。完整游戏包和判定在浏览器，开发者工具可以�
 }
 {
 const e=page('三个时间不是同一件事',C.yellow),s=e.s;title(s,'三个“时间”，三种含义。');
-t(s,'8–10 分钟',65,199,600,105,78,C.blue,true);t(s,'各案件共享询问额度',710,218,510,70,36,C.ink,true);
+t(s,'2 / 8 / 9 / 10',65,210,650,100,62,C.blue,true);t(s,'分钟 · 按案件共享',780,218,440,70,34,C.ink,true);
 t(s,'600 秒',65,355,600,105,78,C.blue,true);t(s,'中继连接墙钟上限',710,377,510,70,36,C.ink,true);
 t(s,'30000 ms',65,511,600,105,78,C.blue,true);t(s,'Worker CPU 执行预算',710,532,530,70,36,C.ink,true);
 t(s,'它们都不是账户级费用硬上限',65,655,1150,40,27,C.muted);
-add(e,0,'备页。四官方案额度480/600/540/480秒，准备阶段不扣游戏额度；连接timer从relay创建起算包含准备，不保证完整10分钟询问。CPU30000ms只计执行。100ms播放储备也不是端到端延迟。线上近4分钟用户手测和本地16k试听不能泛化为全设备稳定性或SLA。来源：四案JSON；apps/gateway/cloudflare.config.ts；packages/voice/src/player.ts；apps/web/src/application/liveVoice.ts。');
+add(e,0,'备页。五官方案额度120/480/600/540/480秒，准备阶段不扣游戏额度；连接timer从relay创建起算包含准备，不保证完整10分钟询问。CPU30000ms只计执行。100ms播放储备也不是端到端延迟。线上近4分钟用户手测和本地16k试听不能泛化为全设备稳定性或SLA。来源：五案JSON（35e987a）；apps/gateway/cloudflare.config.ts；packages/voice/src/player.ts；apps/web/src/application/liveVoice.ts。');
 }
 {
 const e=page('AI 会不会说错？'),s=e.s;title(s,'AI 会失误，检查必须分层。');
 t(s,'程序检查',65,199,600,100,70,C.blue,true);t(s,'结构、规则、事件归属',65,321,650,70,35);
 t(s,'真实行为评估',65,450,760,100,70,C.blue,true);t(s,'亲历、同义追问、虚假转述与出戏',65,571,1120,70,35);
 const a=await trimAsset('design/character-presets/assets/ochre-freckles/waiting.png','ochre-waiting');await im(s,a,855,170,355,360);
-add(e,0,'备页。两类检查互不替代。假provider通过不代表真实麦克风、识别、听感或角色可信度。已有真实问答与人工反馈，也保留过失败与内容修订。四案全量盲测、多用户隔离、跨设备与费用硬限制尚未完整覆盖。来源：docs/validation.md；docs/case-behavior-validation.md；docs/case-live-followup.md。');
+add(e,0,'备页。两类检查互不替代。假provider通过不代表真实麦克风、识别、听感或角色可信度。已有真实问答与人工反馈，也保留过失败与内容修订。所有正式案件全量盲测、多用户隔离、跨设备与费用硬限制尚未完整覆盖。来源：docs/validation.md；docs/case-behavior-validation.md；docs/case-live-followup.md。');
 }
 {
 const e=page('性能收益的准确范围',C.ink),s=e.s;title(s,'让图片更轻，保留制作源。',C.white);
