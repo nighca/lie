@@ -1,0 +1,98 @@
+{
+  "node": "v24.22.1",
+  "platform": "darwin arm64",
+  "parentPID": 66194,
+  "cases": [
+    {
+      "route": "early",
+      "transport": "dispatch-array",
+      "status": 413,
+      "body": {
+        "error": "content_too_large"
+      }
+    },
+    {
+      "route": "early",
+      "transport": "dispatch-array",
+      "status": 413,
+      "body": {
+        "error": "content_too_large"
+      }
+    },
+    {
+      "route": "early",
+      "transport": "dispatch-array",
+      "status": 413,
+      "body": {
+        "error": "content_too_large"
+      }
+    },
+    {
+      "route": "read",
+      "transport": "dispatch-array",
+      "status": 413,
+      "body": {
+        "error": "content_too_large",
+        "size": 1048577
+      }
+    },
+    {
+      "route": "read",
+      "transport": "dispatch-array",
+      "status": 413,
+      "body": {
+        "error": "content_too_large",
+        "size": 1048577
+      }
+    },
+    {
+      "route": "read",
+      "transport": "dispatch-array",
+      "status": 413,
+      "body": {
+        "error": "content_too_large",
+        "size": 1048577
+      }
+    },
+    {
+      "route": "early",
+      "transport": "binding",
+      "status": 413,
+      "body": {
+        "error": "content_too_large"
+      }
+    },
+    {
+      "route": "early",
+      "transport": "binding",
+      "status": 413,
+      "body": {
+        "error": "content_too_large"
+      }
+    }
+  ],
+  "listener": "http://127.0.0.1:58092/",
+  "workerCounts": {
+    "requests": 8,
+    "responses": 8
+  },
+  "disposed": true,
+  "cleanupObservation": "Parent PID66194 exited; known runtime listener58092 absent after finally dispose. No stop of user services.",
+  "historicalRuntime": "Local-only toy runtime, no R2/provider bindings, no secrets or external requests",
+  "retryObservationFromCoordinator": {
+    "source": "Owner final receipt relayed by root; not queried again by investigator",
+    "head": "b80dfcc03c9eb67ac4b9d9f452e5bbe083546e0b",
+    "base": "35e987a7516493dcdccb8392cb8817f3b82744e4",
+    "testedMerge": "3831f8fa54e5b723f3e5ca124a4791136e9fe1ab",
+    "ciRun": 41312338210,
+    "attempt": 2,
+    "ciConclusion": "success",
+    "publisherRun": 41312905401,
+    "publisherConclusion": "success",
+    "actualPreviewDeployed": true,
+    "githubDeploymentId": 7473884244,
+    "artifactId": 13086620385,
+    "artifactDigest": "sha256:d9ac7c77b4749a0e9b8ce39ae8553744be31fe94ec4d4de78ebc5a06672eb8ca",
+    "boundary": "Gate restored on the only retry; EPIPE cause and fix not proven. Darwin experiment remains non-reproduction; Linux observation remains unavailable."
+  }
+}

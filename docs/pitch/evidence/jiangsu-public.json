@@ -1,0 +1,33 @@
+{
+  "sourceCommit": "35e987a7516493dcdccb8392cb8817f3b82744e4",
+  "sourcePath": "content/games/01-jiangsu-local.json",
+  "sourceSha256": "c8beefddac8e680caba7c8d2b18c55524c832f49a38432664fae47211bd4c1c8",
+  "public": {
+    "id": "jiangsu-local",
+    "title": "谁才是江苏人",
+    "summary": "旅行播客临时来了两位“老乡”。聊聊家乡、吃喝和去哪玩，找出真正的江苏本地嘉宾。",
+    "background": "旅行播客《带我去你的家乡》马上开录，你临时接替主持人，面前坐着两位报名来聊江苏的嘉宾：小周和小陈。\n制作人只留下一句：“两位里一位是真江苏人，另一位爱编旅游人设，想混进来当本地嘉宾。”\n先问问他们是哪里人，再聊聊家乡、吃喝和去哪玩，找出谁才是真正的江苏人。",
+    "interrogationLimitSeconds": 120,
+    "characters": [
+      {
+        "id": "zhou",
+        "name": "小周",
+        "appearanceId": "blue-glasses"
+      },
+      {
+        "id": "chen",
+        "name": "小陈",
+        "appearanceId": "plum-crop"
+      }
+    ]
+  },
+  "officialCount": 5,
+  "officialLimitsSeconds": [
+    120,
+    480,
+    600,
+    540,
+    480
+  ],
+  "note": "Only public background and appearances; no character profiles, answer, or ending."
+}
