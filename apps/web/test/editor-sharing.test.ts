@@ -87,6 +87,10 @@ describe('persistent sharing', () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('private server details', { status })))
     await expect(saveSharedGame(game, base)).rejects.toThrow(status === 404 ? '不存在' : status === 413 ? '内容过大' : '服务暂时不可用')
   })
+  it.each([null, {}, { id: 123 }, { id: 'not-a-content-id' }])('rejects a malformed successful save response %j', async (result) => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(result)))
+    await expect(saveSharedGame(game, base)).rejects.toMatchObject({ message: '暂时无法生成分享链接，请稍后重试。', retryable: true })
+  })
   it('times out the request and does not fall back to a fragment link', async () => {
     vi.useFakeTimers()
     vi.stubGlobal('fetch', vi.fn((_path, init) => new Promise((_resolve, reject) => init.signal.addEventListener('abort', () => reject(new Error('aborted'))))))

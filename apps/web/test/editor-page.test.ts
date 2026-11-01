@@ -361,6 +361,16 @@ describe('three-step editor', () => {
 })
 
 describe('persistent share request isolation', () => {
+  it('keeps malformed successful API data in the error dialog and can retry', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(Response.json({})).mockResolvedValueOnce(Response.json({ id: 'gmlvKTOY_GNRWutf2yaZBw' }))
+    const { wrapper, click } = page(game)
+    await click('分享案件')
+    expect(wrapper.get('dialog').text()).toContain('暂时无法生成分享链接')
+    expect(wrapper.find('input[aria-label="分享链接"]').exists()).toBe(false)
+    await click('重试')
+    expect(wrapper.get<HTMLInputElement>('input[aria-label="分享链接"]').element.value).toContain('v1.gmlvKTOY_GNRWutf2yaZBw')
+  })
+
   it('keeps a closed request out of a newer sharing dialog', async () => {
     let oldResult: (url: string) => void = () => {}
     let newResult: (url: string) => void = () => {}

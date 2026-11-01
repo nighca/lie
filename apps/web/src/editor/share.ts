@@ -53,9 +53,10 @@ async function sharedRequest<T>(path: string, init?: RequestInit): Promise<T> {
 export async function saveSharedGame(game: GameDefinition, baseUrl: string): Promise<string> {
   const body = serializeSharedGameV1(game)
   if (new TextEncoder().encode(body).byteLength > SHARED_GAME_BYTES_LIMIT) throw new ShareError('案件内容过大，请精简后再分享。', false)
-  const { id } = await sharedRequest<{ id: string }>(SHARED_GAME_API_PATH, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body })
+  const result = await sharedRequest<unknown>(SHARED_GAME_API_PATH, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body })
+  if (result == null || typeof result !== 'object' || !('id' in result) || typeof result.id !== 'string' || !SHARED_GAME_ID_PATTERN.test(result.id)) throw new ShareError('暂时无法生成分享链接，请稍后重试。')
   const url = new URL('/play', baseUrl)
-  url.searchParams.set('share', `v1.${id}`)
+  url.searchParams.set('share', `v1.${result.id}`)
   return url.href
 }
 
