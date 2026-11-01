@@ -4,7 +4,16 @@
 
 ## 范围与来源
 
-用户报告 Safari 经常将角色播放音识别为玩家输入，导致角色回答中断。截图中的玩家气泡“我在乎。”明确不是用户说的。设备、系统/Safari 版本、耳机/扬声器、页面 build hash 未知；本 Chat 已请求补充，尚未收到回复。不由截图推断 iPad 或具体版本。
+用户报告 Safari 经常将角色播放音识别为玩家输入，导致角色回答中断。截图中的玩家气泡“我在乎。”明确不是用户说的。首轮尚缺设备/输出信息；同日用户在本 Chat 补充了以下对照，替代首轮“设备/输出未知”的状态：
+
+| 用户报告的环境 | 输出与结果 | 未知信息 |
+| --- | --- | --- |
+| iPhone / Safari | 内置扬声器，遇到自打断；未用耳机 | 机型、iOS/Safari 版本 |
+| iPad / Safari，iPadOS **26.7.1** | 内置扬声器，遇到自打断；未用耳机 | 机型、Safari 完整版本 |
+| 同一 iPad / Chrome | 用户报告没有此问题 | Chrome 版本、是否同一次/同案件/同 build/相近音量的严格对照 |
+| MacBook / Safari | 用户报告没有此问题 | 机型、macOS/Safari 版本、该组的具体输出路由 |
+
+这是用户现场观察，不是本专项在真机上执行的验收。iPadOS 26.7.1 按用户提供原样记录，未独立读回；不将它自动等同 Safari 完整版本。页面 build hash 与耳机对照仍未知。
 
 原始 intake：协调者 Chat `01a18baa-4fac-71f2-a81f-c39be0640fe8`，工作树 `/Users/nighca/.codex/worktrees/lie-disconnect-evidence-integration/lie/docs/backlog/2026-11-01-safari-audio-tablet-cards/README.md`。本目录只复制语音相关原图，逐字节保留，无裁剪/重编码：109605 bytes，SHA256 `b3c0401c4246d319cb96ebd1952902e58c123c57f58a53c53c863cbd3d37a308`。不复制另一个 owner 的卡片布局附件。
 
@@ -57,9 +66,13 @@
 
 [Apple Safari 26.0 release notes](https://developer.apple.com/documentation/safari-release-notes/safari-26-release-notes) 记录了 microphone audio unit 的 AEC 模式变化对应 `configurationchange` 通知修复。这只说明设置可能随 capture 状态变化，不能据此断言用户命中该版本/bug。设备版本未补全前，不采用 UA sniff、强制 exact constraint、新的 AEC mode 或 WebRTC loopback workaround。
 
+同日补充后的调查优先级：**移动端 Safari 外放下的 capture/playback 音频会话、实际 AEC 状态/路由，以及其与两个 AudioContext 的交互**。这是待验证假设：同一 iPad Chrome 未出现、MacBook Safari 未出现，使“所有 Safari 均失败”“同设备必然回灌”不符合现有观察；不能因此跳到“Chrome 一定使用不同内核”或“供应商必然无关”。浏览器宿主、权限/音频会话、加载版本/缓存、不同会话的识别表现尚未做受控对照。
+
+针对补充条件查询了 WebKit 的 AEC/WebAudio/移动端相关报告，未找到足以确认本案根因的对应修复。[WebKit #218012](https://bugs.webkit.org/show_bug.cgi?id=218012) 讨论开启 mic 后音量/路由变化，只作为检查音频会话的背景，不是自打断的复现证据；不将音量/爆音 bug 与本案混为一个问题。
+
 ## 下一轮所需证据与判别
 
-先补设备、OS/Safari 完整版本、扬声器/有线或蓝牙耳机、build hash、是否有其他正在采集的 tab/app。用户可仅回复已知情况；目前没有要求其开始新付费会话。
+设备类别、iPadOS 版本和两台移动设备的外放已由用户补充，不重复请求。后续如取得手动窗口，优先在**同一 iPad 的 Safari 与 Chrome、相同 build hash 和输出/音量条件**比较实际设置与事件顺序，再按需要补齐机型、Safari/Chrome 完整版本、是否有其他正在采集的 tab/app；MacBook 作为附加对照。耳机是可选的第二维度，无需为调查购买设备。目前没有要求用户开始新付费会话。
 
 如用户之后自愿手动复测，保持同页面版本、角色/问题及音量范围，先比较原输出与耳机（设备允许时），每组观察“角色讲话时本人保持沉默”和“主动插话”两种情况，记录次数和是否产生玩家气泡。耳机降低发生率只加强回声/路由假设，不单独证明 AEC 故障；同设备其他浏览器结果是附加证据，不假设所有浏览器使用不同内核。
 
@@ -84,4 +97,4 @@
 
 启动服务 **0**，停止服务 **0**，浏览器/真实 mic/录音/上传 **0**，Linx 请求 **0**。未触碰 8787/8788、5176、5544 等其他 owner 服务，无新增端口/PID/PTY/保留 consumer。测试进程均退出，不需服务清理。Safari 真机/真实回声未验证，IAB 也未运行；因此状态仍为“待复现/实际设置与事件证据”，不能标已修复。
 
-给中央计划的批量更新建议：P1 Safari 自打断专项已完成首轮代码及 fake 事件路径核查，实际 settings/设备版本/现场 STT 时序仍缺失；根因未定、产品无改动，待用户复现信息或手动窗口。由协调者 review 后随正常批次归档本目录及测试，不为报告单独制造部署。
+给中央计划的批量更新建议：P1 Safari 自打断专项已完成首轮代码及 fake 事件路径核查。用户补充 iPhone/iPad Safari 内置扬声器均出现、iPadOS26.7.1、同 iPad Chrome 和 MacBook Safari 没出现；优先调查移动 Safari 音频会话/AEC 实际状态，实际 settings/build/现场 STT 时序仍缺失，根因未定、产品无改动。待同 iPad 手动对照窗口，由协调者 review 后随正常批次归档本目录及测试，不为报告单独制造部署。
