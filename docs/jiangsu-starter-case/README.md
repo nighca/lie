@@ -77,4 +77,4 @@
 
 最终内容相关2文件/9项测试、Web类型检查及一次生产构建均通过；最终入口`dist/assets/index-zKQdlIoI.js`（SHA-256 `244cb944c9d185d90d47321b64701529a8341876ed21613828595ac2e31fe78e`），postbuild8预设/121资源身份通过、82份图像缓存命中。最终JSON SHA-256为`c8beefddac8e680caba7c8d2b18c55524c832f49a38432664fae47211bd4c1c8`；性别/形象/家乡/答案/额度及旧四案字节身份检查通过，diff-check与文档链接通过。前期430项全Web检查只复用通用Web/UI/引擎/依赖未变的部分；最终内容与形象投影由本轮目标测试/类型/构建复核，没有将旧430项冒称最终版本重跑。旧四案再次逐字节对base检查，实际来源与文件清单另列。
 
-执行子代理未stage/commit，有序SHA列表为空；待root实际最终review后具名提交源分支，交总协调review、集成到main及依既定流程发布。本工作树没有自行更新main或push。`docs/project-plan.md`的dirty由root维护，不混入专项所有权。
+上述“执行子代理未stage/commit、有序SHA列表为空”是执行子代理交付前的阶段记录。源owner现已具名提交 `d6d33a7d8adde94977e450c2a89d2de58f40bf70`，当前交总协调review与整合，依既定流程发布；尚未因此称已合入main或上线。本专项未自行更新main或push；本轮中央dashboard后续修订由总协调另行安排，不混入专项所有权。

@@ -1,6 +1,6 @@
 # 开发与服务登记
 
-2026-11-01 当前登记截点：文档候选基于已审main `51264aebaf590badf0d0e3039ebbb6679994fe29`。持久8787/8788仍由用户保留；调查页UI5176试玩已接受并停清，P0验收5182已停清，礼物案5544用户已释放（退出原因/时间未知，本次未stop）。PR真实云验收及关闭回收已完成，无本地服务保留；5198和5177没有新consumer释放回执，继续保护。下面只按owner/root回执登记，不为文档更新扫描、启停或操作用户服务。
+2026-11-01 当前登记截点：文档候选依赖江苏案源 `d6d33a7d8adde94977e450c2a89d2de58f40bf70`（base为已审main `1e881802…`）。持久8787/8788继续随owning main保留；江苏案5544最终用户试玩已接受，owner在原PTY34175停PID29602并核监听空，无本项服务保留。调查页5176、P0验收5182均已停清；PR3自动云Preview已成功，无新本地服务。5198/5177仍无新consumer释放回执，继续保护。仅按owner/root回执登记，不为文档探测、启停或操作用户服务。
 
 ## 本地开发
 
@@ -28,11 +28,13 @@ npm run character-presets:check
 
 | 端口 / 生命周期 | owner、来源与最后回执 | consumer 与下一步 |
 | --- | --- | --- |
-| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；integrator已读回当前local main-status精确51264a，未将旧PID当本轮进程探测。 | 用户本地对比；5544旧proxy消费者已释放，不代表持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；先前main-status读回51264a属历史；本轮源基线为已审main1e88180，持久服务随owning main推进，不将旧SHA/PID当本轮服务实测。 | 用户本地对比；5544旧proxy消费者已释放，不代表持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 5544，江苏案最终试玩已停止交回 | 江苏案Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `lie-jiangsu-starter/lie`、branch `codex/lie-jiangsu-starter`、base1e88180＋当轮专项变更，最终源d6d33a7。原Web PID29602/PTY34175，strict127.0.0.1、proxy既有8788。用户接受后owner原PTY Ctrl-C停止，PID与5544监听核空，root收到同项回执。 | 用户consumer/服务turn已释放；没有关闭或刷新用户tab，不触碰8787/8788。旧礼物案释放事实另列，不将其PID套用于本轮；不自动重启。 |
 | 5544，礼物案用户试玩已释放 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`、原base f862＋dirty，原PID10258/PTY8214。用户明确本轮试玩结束不保留环境；owner只读核无listener、原PTY Unknown process。 | 退出时间/原因未知，本次没有执行stop。保留dirty内容/附件，不重启、刷新用户tab或升级旧前端；正式案件确认门禁不变。 |
 | 5176，调查页UI试玩已停止交回 | UI Chat `01a1964e-eda0-78c2-b353-ffcecf1cfed0`；WT `6d4d/lie`、branch `codex/investigation-ui-followup`、clean43a08229。Node24 Web以proxy8788、strict127.0.0.1:5176运行；原PID19329/PTY80248，用户明确验收通过并允许撤环境。owner复核监听后原PTY Ctrl-C exit130，ps19329及lsof5176均空。 | consumer/turn已释放，未动用户tab/storage/8787/8788，不把原分享QA或结果页旧PID套成本轮。新任务起前另协调。 |
 | 5182及内部63075，P0 fake验收已停止 | owner `/root/cookie_device_implementation`、P0 Chat `01a19557-145d-72f3-ace4-382ac03c22c9`；源cf375958（产品a178），Node41692/workerd41766、原PTY64276 Ctrl-C exit130，精确ps/listener均空。 | 自建pages2/3/4已关闭、native contexts closed/合成track停止；保留原page1。无真实provider/mic，本轮不重启；方法与身份见[本地验收](reviews/device-concurrency-2026-11-01/acceptance/README.md)。 |
 | PR原生云Preview验收，已收尾；无本地服务 | owner PR Chat `01a19533-d60a-7980-91b8-9e7ec1dbbe6a`；真实PR2 v1/v2同地址前后端同版、R2六请求/两合成、voice两Device/三逻辑WS与owned清理通过。close CI41296845867/cleanup publisher41296859092 job124819485297 success，10:18:42Z deleted=true，精确GET404。 | PR2 closed/unmerged，owned远端分支已删除GET404，main不变；private unknown=null、两owned绑定已解绑、两自建tab已关闭、服务0。共享测试R2按批准保留，关PR不删共享数据或扩大清理；真实fork未验。 |
+| PR3自动云Preview，成功保留；无本地服务 | 总协调按用户授权rename＋普通merge同步原PR分支，head d67d69c；CI41302052728与publisher41302167123实际成功，receipt/上传/固定4GET/publish均通过。 | PR3 OPEN且DO NOT MERGE，未合main；无新增provider/voice测试，无服务启停。PR2关闭回收记录不适用于PR3，不删除其预览或共享R2数据。 |
 | 5180，分享gateway验收已停止；原5176轮为历史 | owner `/root/share_frontend`；源27a＋dirty、最终34c5af8。原Web75839/PTY8893与gateway75292/PTY31258均Ctrl-C exit130，内部56985、workerd75705及56996/56997核空，自建IAB清理。 | 与新UI5176回执分开；不把本地R2/DEV身份当云验收。 |
 | 5198，最后登记为用户编辑consumer | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；cwd `lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`，原launcher95944已退出；PID13491只是源owner最后回执，不是本轮复核。 | 尚无consumer释放回执，不重启/停止、不清工程；未来须owner核当前command/cwd/精确PID，不能把launcher退出当服务已停。新视频Git入库撤销与专项上传授权均不改变该服务门禁。 |
 | 5177，最后登记为分享UI Demo用户审看 | owner `/root/share_ui_demo`、Chat `01a194d9-e260-7cd2-a8df-89b1478a1120`；WT `lie-share-storage-ui-demo/lie`，branch `codex/lie-share-storage-ui-demo`，c4ee640→eccf75f。原PID29883/PTY99739、a8＋dirty后HMR，仅历史来源。 | 没有新释放回执，仍保护用户consumer；不能因为正式分享已上线就擅停，用户释放后由owner原PTY停并核销。 |
