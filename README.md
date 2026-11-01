@@ -16,6 +16,8 @@ LIE is an AI voice detective game and a platform for creating your own mysteries
 
 [Play LIE](https://lie.agency/) · [Create a case](https://lie.agency/editor) · [Watch the demo (3:07, with audio)](media/promo-video/lie-demo.mp4) · [Mobile demo (2:09)](media/promo-video/lie-mobile-demo.mp4)
 
+**Comic promos:** [Desktop / landscape](https://www.youtube.com/watch?v=muUv193P4Go) · [Mobile / vertical](https://www.youtube.com/shorts/ld7W5MRuGD8)
+
 ## Play a case
 
 | Read the brief | Ask questions | Talk to someone else | Make your accusation |

@@ -16,6 +16,8 @@ LIE 既是 AI 语音推理游戏，也是让你创作自己谜题的游戏平台
 
 [开始游戏](https://lie.agency/) · [创作案件](https://lie.agency/editor) · [观看演示视频（3:07，含声音）](media/promo-video/lie-demo.mp4) · [移动端演示（2:09）](media/promo-video/lie-mobile-demo.mp4)
 
+**漫画风宣传片：** [桌面端横版](https://www.bilibili.com/video/BV17Lx46MEdy/) · [移动端竖版](https://www.bilibili.com/video/BV1jEx46KEcR/)
+
 ## 一局怎么玩
 
 | 接案 | 开口问话 | 换个人聊 | 做出指认 |
