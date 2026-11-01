@@ -105,20 +105,16 @@ onUnmounted(cancelPending)
       <p v-if="notice != null" class="demo-feedback" role="status">{{ notice }}</p>
     </main>
     <EditorDialog v-if="dialog" title="把谜题交给朋友" @close="closeShare">
-      <div v-if="sharing" class="share-pending" role="status"><span class="loading-ring" aria-hidden="true"></span><p>正在保存案件…</p><span class="muted">分享链接马上就好。</span></div>
+      <div v-if="sharing" class="share-pending" role="status"><span class="loading-ring" aria-hidden="true"></span><p>正在保存案件…</p></div>
       <template v-else-if="shareError != null">
         <p class="share-lead" role="status">{{ shareError }}</p>
-        <p class="snapshot-note">草稿仍保留在这里，可以继续编辑。</p>
         <div class="share-actions"><UiButton v-if="authorResult !== 'large'" @click="share">重试</UiButton><UiButton variant="secondary" @click="closeShare">继续编辑</UiButton></div>
       </template>
       <template v-else>
-        <p class="share-lead">链接准备好了，朋友打开就能玩。</p>
-        <label class="field">分享链接<input :value="shareUrl" readonly @focus="($event.target as HTMLInputElement).select()"></label>
-        <p class="snapshot-note">修改案件后需要重新生成链接，旧链接保留当时的内容。</p>
+        <div class="share-copy-group"><input :value="shareUrl" aria-label="分享链接" readonly @focus="($event.target as HTMLInputElement).select()"><UiButton @click="copy">{{ copied ? '已复制' : '复制链接' }}</UiButton></div>
         <p v-if="copyError" class="copy-error" role="status">无法自动复制，请选中上方链接手动复制。</p>
-        <div class="share-actions"><UiButton @click="copy">{{ copied ? '已复制链接' : '复制分享链接' }}</UiButton></div>
       </template>
-      <p class="share-disclosure">生成链接会将案件保存到 LIE 服务端，持有链接的人可以查看完整内容。</p>
+      <p class="share-note">{{ !sharing && shareError == null ? '案件已保存到 LIE，链接保留当前内容；修改后需重新分享。持有链接的人可查看完整内容。' : '案件会保存到 LIE，持有链接的人可查看完整内容。' }}</p>
     </EditorDialog>
   </div>
 
