@@ -65,7 +65,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .game-shell .background-dialog.lie-dialog { width: min(660px, calc(100% - 32px)); padding: 26px 28px; border-width: 2px; border-radius: 26px; }
 .public-background { line-height: 1.85; font-size: 15px; margin: 0; }
 .game-shell .background-dialog .lie-button { border-width: 2px; border-radius: 15px; min-height: 46px; font-size: 14px; }
-.accusation-hint { color: var(--lie-ink); background: color-mix(in srgb, var(--lie-canvas) 40%, var(--lie-surface)); text-align: center; margin: 12px 0 0; padding: 12px 16px; border-radius: 14px; font-weight: 650; }
+.accusation-hint { color: var(--lie-muted); text-align: center; margin: 12px 0 0; }
 .accusation-choices { margin: 16px auto 8px; padding-block: 24px; }
 .accusation-character { width: min(100%, 180px); justify-self: center; padding: 0; font: inherit; color: inherit; text-align: center; cursor: pointer; }
 .accusation-character strong { padding: 10px 8px; font-size: 18px; line-height: 1.4; overflow-wrap: anywhere; }
