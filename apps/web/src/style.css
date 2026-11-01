@@ -30,7 +30,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .flow-hint li { position: relative; flex: 1; padding: 6px 12px; border-radius: 99px; background: var(--lie-soft-blue); font-weight: 600; white-space: nowrap; }
 .flow-hint li + li::before { content: '→'; position: absolute; left: -24px; }
 .intro-start { width: min(100%, 660px); font-size: 22px; min-height: 64px; }
-.investigation { display: grid; grid-template-columns: 104px minmax(300px, .94fr) minmax(420px, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 20px; height: calc(100dvh - 132px); min-height: 480px; }
+.investigation { display: grid; grid-template-columns: 104px minmax(300px, .94fr) minmax(420px, 1fr); grid-template-rows: minmax(0, 1fr) 124px; gap: 20px; height: calc(100dvh - 132px); min-height: 480px; }
 .conversation-layout { display: contents; }
 .character-list { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; gap: 12px; min-height: 0; overflow-y: auto; padding: 4px 2px 8px; }
 .character-list > .lie-character { flex-shrink: 0; }
@@ -44,19 +44,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .conversation-copy h2 { flex-shrink: 0; margin: 0 0 16px; padding-bottom: 16px; border-bottom: 1px solid #111b451c; font-size: 20px; }
 .conversation-copy > .lie-transcript { flex: 1; min-height: 0; --lie-transcript-max-height: none; }
 .conversation-copy > .lie-notice { flex-shrink: 0; margin-top: 12px; padding: 10px 12px; border-width: 2px; border-radius: 14px; font-size: 13px; }
-.investigation > .lie-voice { grid-column: 2 / -1; }
+.investigation > .lie-voice { grid-column: 2 / -1; grid-template-columns: 100px minmax(0, 1fr) auto; }
 .interrogation-budget { white-space: nowrap; line-height: 1.3; }
 .interrogation-budget > span { display: block; color: var(--lie-muted); font-size: 12px; }
 .interrogation-budget strong { display: block; margin-top: 4px; font-size: 26px; font-weight: 850; font-variant-numeric: tabular-nums; }
-.interrogation-help { border-top: 1px solid #111b4529; padding-top: 6px; font-size: 13px; }
-.interrogation-help summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 36px; list-style: none; cursor: pointer; }
-.interrogation-help summary::-webkit-details-marker { display: none; }
-.interrogation-help summary:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 3px; border-radius: 6px; }
-.interrogation-help__trigger { flex-shrink: 0; color: var(--lie-primary); text-decoration: underline; text-underline-offset: 4px; }
-.interrogation-help__copy { padding-top: 8px; }
-.interrogation-help__copy p { margin: 0; }
-.interrogation-help__copy p + p { margin-top: 6px; }
-.interrogation-help__copy p:last-child { font-weight: 650; }
+.interrogation-budget__help { display: inline-flex; align-items: center; gap: 5px; border: 0; border-radius: 8px; background: transparent; color: inherit; padding: 4px; margin: 0 -4px -4px; font: inherit; cursor: pointer; }
+.interrogation-budget__help:hover { background: var(--lie-soft-blue); }
+.interrogation-budget__help:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 3px; }
+.interrogation-budget__info { display: inline-grid; place-items: center; width: 15px; height: 15px; border: 1px solid currentColor; border-radius: 50%; color: var(--lie-muted); font: 650 11px/1 var(--lie-font); }
+.time-help-dialog p { margin: 0 0 12px; }
+.time-help-notice { font-weight: 650; }
+.game-shell .time-help-dialog { width: min(540px, calc(100% - 32px)); padding: 26px 28px; }
+.game-shell .time-help-dialog .lie-dialog__header h2 { font-size: 24px; }
 .investigation-heading { font: inherit; margin: 0; }
 .investigation-title { display: flex; flex-direction: column; align-items: center; gap: 5px; border: 0; border-radius: 16px; background: transparent; color: inherit; padding: 6px 16px; max-width: 100%; font: inherit; font-weight: 800; cursor: pointer; }
 .investigation-title small { font-size: 11px; font-weight: 400; color: var(--lie-muted); }
@@ -235,7 +234,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .leave-confirmation .lie-dialog__actions { flex-wrap: wrap; gap: 12px; }
 
 @media (min-width: 851px) and (max-width: 1150px) {
-  .investigation { grid-template-columns: 104px minmax(260px, .94fr) minmax(340px, 1fr); gap: 16px; grid-template-rows: minmax(0, 1fr) auto; }
+  .investigation { grid-template-columns: 104px minmax(260px, .94fr) minmax(340px, 1fr); gap: 16px; grid-template-rows: minmax(0, 1fr) 132px; }
   .conversation-copy { padding: 20px; }
 }
 @media (max-width: 1000px) {
@@ -271,10 +270,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 700px) {
-  .game-shell--investigating { width: 100%; height: 100dvh; min-height: min-content; min-width: 0; overflow: visible; display: flex; flex-direction: column; padding: 16px 16px calc(182px + env(safe-area-inset-bottom)); }
-  .game-shell--investigating:has(.interrogation-help[open]) { padding-bottom: calc(190px + min(160px, 25dvh) + env(safe-area-inset-bottom)); }
-  .interrogation-help summary { min-height: 40px; }
-  .interrogation-help__copy { height: min(160px, 25dvh); overflow-y: auto; overscroll-behavior: contain; }
+  .game-shell--investigating { width: 100%; height: 100dvh; min-height: min-content; min-width: 0; overflow: visible; display: flex; flex-direction: column; padding: 16px 16px calc(132px + env(safe-area-inset-bottom)); }
   .game-shell--investigating > .lie-product-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; min-height: 0; margin-bottom: 12px; flex-shrink: 0; }
   .game-shell--investigating .lie-product-header__brand { grid-column: 1; grid-row: 1; }
   .game-shell--investigating .lie-product-header__actions { grid-column: 2; grid-row: 1; }
@@ -301,7 +297,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .game-shell--investigating .lie-transcript__bubble { padding: 9px 11px; }
   .game-shell--investigating .lie-transcript__bubble p { font-size: 15px; line-height: 1.75; font-weight: 550; }
   .game-shell--investigating .lie-transcript__bubble strong { font-size: 10px; }
-  .game-shell--investigating .investigation > .lie-voice { position: fixed; left: 0; right: 0; bottom: 0; width: 100%; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 34px 48px auto; gap: 8px 14px; padding: 10px 16px calc(14px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; }
+  .game-shell--investigating .investigation > .lie-voice { position: fixed; left: 0; right: 0; bottom: 0; width: 100%; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 34px 48px; gap: 8px 14px; padding: 10px 16px calc(14px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; }
 }
 @media (max-height: 700px) and (max-width: 700px) {
   .game-shell--investigating .investigation { min-height: 326px; grid-template-rows: 136px minmax(0, 1fr); gap: 10px; }

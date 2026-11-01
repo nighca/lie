@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 import { AnimatedPortrait, CharacterChoice, ProductHeader, Transcript, UiButton, UiDialog, UiNotice, VoiceControl } from '@lie/ui'
 
 import type { GameController } from './application/controller'
@@ -15,10 +15,13 @@ const voiceFeedback = ref(props.controller.getVoiceFeedback())
 const unsubscribeFeedback = props.controller.subscribeVoiceFeedback((value) => { voiceFeedback.value = value })
 onUnmounted(unsubscribeFeedback)
 const backgroundOpen = ref(false)
+const timeHelpOpen = ref(false)
+const timeHelpTrigger = ref<HTMLButtonElement | null>(null)
 const unsubscribe = props.controller.subscribe((value) => {
   if (value.busy && (!view.value.busy || value.currentCharacterId !== view.value.currentCharacterId)) connectionAttempt.value++
   view.value = value
   if (value.phase !== 'interrogating') backgroundOpen.value = false
+  if (value.phase !== 'interrogating' || value.accusationOpen) timeHelpOpen.value = false
 })
 onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
@@ -89,6 +92,7 @@ const durationLabel = computed(() => {
   return `${minutes > 0 ? `${minutes}分${remainder === 0 ? '钟' : ''}` : ''}${remainder > 0 ? `${remainder}秒` : ''}`
 })
 function openBackground() { props.controller.endConversation(); backgroundOpen.value = true }
+async function closeTimeHelp() { timeHelpOpen.value = false; await nextTick(); timeHelpTrigger.value?.focus() }
 function speak() { if (view.value.conversationActive) props.controller.endConversation(); else void props.controller.startConversation() }
 </script>
 
@@ -157,18 +161,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </section>
       </div>
       <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" @start="speak">
-        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><strong>{{ remainingTime }}</strong></div></template>
+        <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><button ref="timeHelpTrigger" type="button" class="interrogation-budget__help" aria-label="怎么算时间" aria-haspopup="dialog" @click="timeHelpOpen = true"><strong>{{ remainingTime }}</strong><span class="interrogation-budget__info" aria-hidden="true">i</span></button></div></template>
         <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
-        <template #help>
-          <details class="interrogation-help">
-            <summary><span>所有人物共享，结束对话后暂停</span><span class="interrogation-help__trigger">怎么算时间？</span></summary>
-            <div class="interrogation-help__copy">
-              <p>连接准备不计时；连接就绪后，说话、停顿、等待和回答都会计时。</p>
-              <p>切换人物沿用剩余时间；用完后仍可回看对话、提交指认。</p>
-              <p>查看这段说明不会暂停。需要思考时，可先结束对话。</p>
-            </div>
-          </details>
-        </template>
       </VoiceControl>
     </main>
 
@@ -229,6 +223,13 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
     </main>
 
+    <UiDialog class="time-help-dialog" :open="timeHelpOpen" title="怎么算时间" @close="closeTimeHelp">
+      <p>所有人物共享本局的询问时间。</p>
+      <p>连接准备不计时；连接就绪后，说话、停顿、等待和回答都会计时。</p>
+      <p>结束对话后暂停。切换人物沿用剩余时间；用完后仍可回看对话、提交指认。</p>
+      <p class="time-help-notice">查看说明不会暂停计时。需要思考时，可先结束对话。</p>
+      <template #actions><UiButton @click="closeTimeHelp">继续调查</UiButton></template>
+    </UiDialog>
     <UiDialog class="background-dialog" :open="backgroundOpen && view.phase === 'interrogating'" :title="view.title" @close="backgroundOpen = false">
       <p class="public-background"><CharacterNameText :text="view.background" :characters="characterNames" /></p>
       <template #actions><UiButton @click="backgroundOpen = false">继续调查</UiButton></template>
