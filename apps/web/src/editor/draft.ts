@@ -69,19 +69,25 @@ export function draftGame(draft: EditorDraft, characterPresets: readonly Charact
   return validateGame(draft)
 }
 
-export function saveDraft(storage: Pick<Storage, 'setItem'>, draft: EditorDraft, key = DRAFT_KEY) {
+export function saveDraft(storage: Pick<Storage, 'setItem'>, draft: EditorDraft) {
   if (!Number.isFinite(draft.interrogationLimitSeconds)) throw new RangeError('询问时长过大，草稿未能保存。请修改询问时长后重试。')
-  storage.setItem(key, JSON.stringify(draft))
+  storage.setItem(DRAFT_KEY, JSON.stringify(draft))
 }
 /** Drafts may be incomplete; validate their editable shape, not playable content. */
-export function loadDraft(storage: Pick<Storage, 'getItem'>, key = DRAFT_KEY): EditorDraft | null {
-  const text = storage.getItem(key)
-  if (text == null) return null
-  const value = JSON.parse(text)
-  if (value == null || typeof value !== 'object' || typeof value.id !== 'string' || typeof value.title !== 'string' || typeof value.background !== 'string' || typeof value.interrogationLimitSeconds !== 'number' || !Array.isArray(value.characters) || value.ending == null || typeof value.ending.culpritId !== 'string' || typeof value.ending.reveal !== 'string') throw new Error('草稿无法读取')
+export function loadDraft(storage: Pick<Storage, 'getItem'>): EditorDraft | null {
+  const text = storage.getItem(DRAFT_KEY)
+  return text == null ? null : readDraft(JSON.parse(text))
+}
+
+/** Reads the editable shape; incomplete story fields are valid while authoring. */
+export function readDraft(input: unknown): EditorDraft {
+  if (input == null || typeof input !== 'object' || Array.isArray(input)) throw new Error('草稿无法读取')
+  const value = input as Record<string, unknown>
+  const ending = value.ending as Record<string, unknown> | null
+  if (value == null || typeof value !== 'object' || typeof value.id !== 'string' || typeof value.title !== 'string' || typeof value.background !== 'string' || typeof value.interrogationLimitSeconds !== 'number' || !Array.isArray(value.characters) || ending == null || typeof ending !== 'object' || typeof ending.culpritId !== 'string' || typeof ending.reveal !== 'string') throw new Error('草稿无法读取')
   if (value.summary !== undefined && typeof value.summary !== 'string') throw new Error('草稿无法读取')
   for (const item of value.characters) {
     if (item == null || typeof item !== 'object' || typeof item.id !== 'string' || typeof item.name !== 'string' || typeof item.profile !== 'string' || (item.appearanceId !== null && typeof item.appearanceId !== 'string')) throw new Error('草稿无法读取')
   }
-  return { id: value.id, title: value.title, summary: value.summary ?? '', background: value.background, interrogationLimitSeconds: value.interrogationLimitSeconds, characters: value.characters.map((item: DraftCharacter) => ({ ...item })), ending: { culpritId: value.ending.culpritId, reveal: value.ending.reveal } }
+  return { id: value.id, title: value.title, summary: value.summary ?? '', background: value.background, interrogationLimitSeconds: value.interrogationLimitSeconds, characters: value.characters.map((item: DraftCharacter) => ({ ...item })), ending: { culpritId: ending.culpritId, reveal: ending.reveal } }
 }

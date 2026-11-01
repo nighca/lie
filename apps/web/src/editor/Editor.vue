@@ -6,18 +6,15 @@ import { AnimatedPortrait, CharacterChoice, ProductHeader, UiButton, UiNotice } 
 import CharacterNameText from '../presentation/CharacterNameText.vue'
 import type { CharacterPreset } from '../presentation/characterPresets'
 import type { PresetLoadStatus } from '../presentation/characterPresetLoader'
-import AuthoringDemo from './AuthoringDemo.vue'
 import EditorDialog from './EditorDialog.vue'
 import { createDraft, draftGame, draftIssues, DRAFT_KEY, loadDraft, removeCharacter, saveDraft, type DraftCharacter, type DraftIssue } from './draft'
 import { PROFILE_EXAMPLE } from './example'
 import { saveSharedGame, ShareError } from './share'
 import { prepareSubmission } from './submission'
-import { useAuthoringDemo } from './useAuthoringDemo'
+import { useEditorTools } from './useEditorTools'
 
 const props = withDefaults(defineProps<{ characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus }>(), { presetStatus: 'ready' })
 const emit = defineEmits<{ preview: [game: GameDefinition]; leave: []; showVersion: [trigger: HTMLButtonElement]; 'retry-presets': [] }>()
-const authoringDemo = import.meta.env.DEV && new URLSearchParams(location.search).get('webmcp') === '1'
-const draftKey = authoringDemo ? 'lie-webmcp-demo-draft' : DRAFT_KEY
 const draft = ref(createDraft(props.characterPresets[0]?.id ?? null))
 const step = ref(0)
 const selectedId = ref<string | null>(null)
@@ -26,7 +23,7 @@ const saveStatus = ref<string | null>(null)
 const busy = ref(false)
 const portraitActive = ref(true)
 const showIssues = ref(false)
-const overlay = ref<'example' | 'preset' | 'share' | 'submission' | 'delete' | 'clear' | null>(null)
+const overlay = ref<'example' | 'preset' | 'share' | 'submission' | 'delete' | 'clear' | 'ai-help' | null>(null)
 const shareUrl = ref<string | null>(null)
 const shareError = ref<string | null>(null)
 const shareRetryable = ref(true)
@@ -40,7 +37,7 @@ let shareRevision = 0
 let clearingDraft = false
 let saveNotice: string | null = null
 try {
-  const stored = loadDraft(localStorage, draftKey)
+  const stored = loadDraft(localStorage)
   if (stored != null) { draft.value = stored; saveStatus.value = '草稿已保存至此设备' }
 } catch { saveStatus.value = '本地草稿无法读取'; notice.value = '本地草稿无法读取。你仍可创作新案件；开始编辑后会保存新的草稿。' }
 selectedId.value = draft.value.characters[0]?.id ?? null
@@ -58,7 +55,7 @@ watch(draft, () => {
   closeShare()
   shareUrl.value = null
   try {
-    saveDraft(localStorage, draft.value, draftKey)
+    saveDraft(localStorage, draft.value)
     saveStatus.value = '草稿已保存至此设备'
     if (notice.value === saveNotice) notice.value = null
     saveNotice = null
@@ -68,9 +65,12 @@ watch(draft, () => {
     notice.value = saveNotice
   }
 }, { deep: true, flush: 'sync' })
-const { candidate: aiCandidate, previous: aiPrevious, status: aiStatus, message: aiMessage, canAdopt, canUndo, adopt, undo } = useAuthoringDemo({
-  enabled: authoringDemo, storageKey: draftKey, draft, presets: () => props.characterPresets,
-  replaceDraft(next) { draft.value = next; selectedId.value = next.characters[0]?.id ?? null; step.value = 0; closeOverlay() },
+const { supported: aiSupported, status: aiStatus } = useEditorTools({
+  draft, presets: () => props.characterPresets, isBusy: () => busy.value,
+  replaceDraft(next) {
+    draft.value = next
+    if (!next.characters.some((person) => person.id === selectedId.value)) selectedId.value = next.characters[0]?.id ?? null
+  },
 })
 function invalidateCopy() { copyRevision++; copied.value = false; copyError.value = null }
 function closeShare() { shareRevision++; busy.value = false; if (overlay.value === 'share') overlay.value = null; invalidateCopy() }
@@ -113,7 +113,7 @@ function deleteCharacter() {
   void focus(character.value == null ? 'add-character' : 'name')
 }
 function clearDraft() {
-  try { localStorage.removeItem(draftKey) }
+  try { localStorage.removeItem(DRAFT_KEY) }
   catch { notice.value = '无法清除本地草稿，内容已保留，请重试。'; return }
   clearingDraft = true
   draft.value = createDraft(props.characterPresets[0]?.id ?? null)
@@ -183,7 +183,7 @@ async function copy(text: string) {
     </nav>
     <div v-if="saveStatus != null" class="editor-draft-status"><p role="status">{{ saveStatus }}</p><button type="button" :disabled="busy" @click="overlay = 'clear'">清除草稿</button></div>
     <main ref="form">
-      <AuthoringDemo v-if="authoringDemo" :status="aiStatus" :message="aiMessage" :candidate="aiCandidate?.draft ?? null" :can-adopt="canAdopt && !busy" :can-undo="canUndo && !busy" :has-previous="aiPrevious != null" @adopt="adopt" @undo="undo" @discard="aiCandidate = null" />
+      <p v-if="aiSupported" class="editor-ai-help"><button type="button" class="text-button" :disabled="busy" @click="overlay = 'ai-help'">此浏览器支持 AI 助手协作编辑 · 了解用法</button></p>
       <div v-if="notice != null" role="alert" class="editor-notice"><UiNotice tone="error">{{ notice }}</UiNotice></div>
       <section v-if="showIssues && issues.length" class="error-summary" role="alert" aria-label="待补充内容"><strong>再补充这些，就能试玩或分享了</strong><ul><li v-for="(issue, index) in issues" :key="index"><button type="button" @click="goToIssue(issue)">{{ issue.message }}</button></li></ul></section>
       <fieldset class="editor-fields" :disabled="busy">
@@ -217,8 +217,15 @@ async function copy(text: string) {
         <div v-if="step < 2" class="quick-actions"><button type="button" class="text-button" @click="preview">试玩</button><button type="button" class="text-button" @click="share">分享案件</button></div>
       </fieldset>
     </main>
-    <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', preset: '选择人物预设', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？', clear: '清除本地草稿？' }[overlay]" @close="closeOverlay">
-      <template v-if="overlay === 'example'"><p>这是写给角色的扮演资料，仍是一份纯文本。</p><p class="example-text">{{ PROFILE_EXAMPLE }}</p><p class="muted">示例不会替换你正在写的内容。</p></template>
+    <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', preset: '选择人物预设', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？', clear: '清除本地草稿？', 'ai-help': '用 AI 助手协作编辑' }[overlay]" @close="closeOverlay">
+      <template v-if="overlay === 'ai-help'">
+        <p>此浏览器提供 WebMCP 网页工具接口，兼容的 AI 助手可以通过它协助编辑。这不表示已有助手连接；请在你正在使用的助手中发起请求。</p>
+        <p>描述你的案件灵感，或告诉助手要修改什么。例如：“帮我写一桩办公室午餐被拿错的轻松谜题，三个人物，有个善意的反转。”</p>
+        <p>修改会直接出现在当前表单，并像手动编辑一样保存到此设备。你可以继续手工修改；试玩、分享和投稿仍由你操作。</p>
+        <p>网页工具不返回已有草稿正文；助手仍可能通过普通浏览器能力查看页面。请核对人物所知、时间和答案，结构检查不能保证剧情与角色表现。</p>
+        <p role="status">{{ aiStatus }}</p>
+      </template>
+      <template v-else-if="overlay === 'example'"><p>这是写给角色的扮演资料，仍是一份纯文本。</p><p class="example-text">{{ PROFILE_EXAMPLE }}</p><p class="muted">示例不会替换你正在写的内容。</p></template>
       <div v-else-if="overlay === 'preset'" class="preset-grid"><button v-for="preset in characterPresets" :key="preset.id" type="button" class="editor-preset" :aria-label="preset.name" :aria-pressed="character?.appearanceId === preset.id" @click="chooseCharacterPreset(preset.id)"><img :src="preset.avatar" alt=""></button><div v-if="characterPresets.length === 0"><p role="status">{{ presetStatus === 'loading' ? '正在加载人物预设…' : '人物预设暂未加载，请重新加载。草稿仍保留在此浏览器。' }}</p><UiButton v-if="presetStatus !== 'loading'" @click="emit('retry-presets')">重新加载预设</UiButton></div></div>
       <template v-else-if="overlay === 'clear'"><p>将清除当前案件的全部编辑内容和此浏览器保存的草稿，重新开始创作。此操作无法撤销，已分享的链接不受影响。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留草稿</UiButton><UiButton @click="clearDraft">确认清除</UiButton></div></template>
       <template v-else-if="overlay === 'delete'"><p>将删除<CharacterNameText :text="character == null ? '' : name(character)" :characters="characterNames" />的设定。如果该人物是案件答案，需要重新选择；此操作无法撤销。</p><div class="dialog-actions"><UiButton variant="secondary" @click="overlay = null">保留人物</UiButton><UiButton @click="deleteCharacter">确认删除</UiButton></div></template>
