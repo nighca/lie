@@ -16,6 +16,32 @@ beforeEach(() => {
 afterEach(() => { cleanup.splice(0).forEach((action) => action()); vi.useRealTimers() })
 
 describe('game screens', () => {
+  it('lets players read timing rules without stopping or resetting their shared conversation budget', async () => {
+    vi.useFakeTimers()
+    let now = 0
+    const { controller, turns } = setup({ now: () => now, setTimeout, clearTimeout })
+    await controller.load('test'); controller.start(); await controller.startConversation()
+    const wrapper = mount(App, { props: { controller, characterPresets: [], demo: false } })
+    cleanup.push(() => { wrapper.unmount(); controller.dispose() })
+    const help = wrapper.get<HTMLDetailsElement>('.interrogation-help')
+    expect(help.element.open).toBe(false)
+    await help.get('summary').trigger('click')
+    expect(help.element.open).toBe(true)
+    now = 2000
+    await vi.advanceTimersByTimeAsync(250)
+    expect(controller.getView()).toMatchObject({ conversationActive: true, interrogationRemainingMs: 478000 })
+    expect(turns[0].closed).toBe(false)
+    await help.get('summary').trigger('click')
+    expect(help.element.open).toBe(false)
+    now = 3000
+    await vi.advanceTimersByTimeAsync(250)
+    expect(controller.getView().interrogationRemainingMs).toBe(477000)
+    await wrapper.get('.lie-voice__main button').trigger('click')
+    now = 9000
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(controller.getView()).toMatchObject({ conversationActive: false, interrogationRemainingMs: 477000 })
+  })
+
   it('ends a wrong accusation in failure and permits only a fresh attempt before a correct result', async () => {
     const { controller } = setup()
     await controller.load('test')

@@ -159,6 +159,16 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" @start="speak">
         <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><strong>{{ remainingTime }}</strong></div></template>
         <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
+        <template #help>
+          <details class="interrogation-help">
+            <summary><span>所有人物共享，结束对话后暂停</span><span class="interrogation-help__trigger">怎么算时间？</span></summary>
+            <div class="interrogation-help__copy">
+              <p>连接准备不计时；连接就绪后，说话、停顿、等待和回答都会计时。</p>
+              <p>切换人物沿用剩余时间；用完后仍可回看对话、提交指认。</p>
+              <p>查看这段说明不会暂停。需要思考时，可先结束对话。</p>
+            </div>
+          </details>
+        </template>
       </VoiceControl>
     </main>
 
@@ -225,7 +235,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     </UiDialog>
     <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="我有答案了" @close="controller.closeAccusation()">
       <p class="accusation-question">你认为谁是我们要找的人？</p>
-      <p class="accusation-hint">点击人物提交指认</p>
+      <p class="accusation-hint">点击人物会立即提交，结束本局；选错不会揭晓答案。</p>
       <div class="intro-characters accusation-choices" :class="{ 'intro-characters--many': view.characters.length > 5 }">
         <button v-for="(character, index) in view.characters" :key="character.id" type="button" class="intro-character accusation-character" :aria-label="`指认 ${character.name}`" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.accuse(character.id)">
           <span v-if="usableImage(characterPreset(character.appearanceId)?.avatar ?? null)" class="avatar-frame"><img :src="characterPreset(character.appearanceId)!.avatar" alt="" @error="brokenImages.add(characterPreset(character.appearanceId)!.avatar)"></span>

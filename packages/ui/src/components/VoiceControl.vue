@@ -53,12 +53,14 @@ function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(va
       </div>
     </div>
     <div v-if="$slots.answer" class="lie-voice__answer"><slot name="answer" /></div>
+    <div v-if="$slots.help" class="lie-voice__help"><slot name="help" /></div>
   </section>
 </template>
 
 <style scoped>
 .lie-voice { display: grid; grid-template-columns: 82px minmax(0, 1fr) auto; align-items: center; gap: 16px; min-height: 124px; border: 2px solid var(--lie-ink); border-radius: 24px; background: var(--lie-surface); padding: 16px 20px; box-shadow: 0 4px #111b4520; }
 .lie-voice__details { min-width: 0; }
+.lie-voice__help { grid-column: 1 / -1; min-width: 0; }
 .lie-voice__main { display: flex; align-items: center; gap: 24px; min-width: 0; }
 .lie-voice__actions { display: flex; gap: 12px; flex: 0 0 auto; padding: 0; }
 .lie-voice__actions :deep(.lie-button) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; min-width: 146px; border: 2px solid var(--lie-ink); border-radius: 14px; padding: 10px 16px; font-size: 14px; font-weight: 800; box-shadow: 0 3px var(--lie-ink); }
