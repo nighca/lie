@@ -1,6 +1,6 @@
 # 开发与服务登记
 
-2026-11-01 当前登记截点：owning local/remote main为a8be758，结果页/布局/前批归档已发布并恢复本地health/ready；Web64161、gateway64257、runner66435是该轮回执快照，不是本次重新探测值。分享联合候选正在隔离准备，尚无本批main自动重启维护窗口。下面服务事实来自各owner/root回执，不为文档更新扫描或操作用户服务。
+2026-11-01 当前登记截点：文档候选基于已审main `51264aebaf590badf0d0e3039ebbb6679994fe29`。持久8787/8788仍由用户保留；调查页UI5176试玩已接受并停清，P0验收5182已停清，礼物案5544用户已释放（退出原因/时间未知，本次未stop）。PR真实云验收及关闭回收已完成，无本地服务保留；5198和5177没有新consumer释放回执，继续保护。下面只按owner/root回执登记，不为文档更新扫描、启停或操作用户服务。
 
 ## 本地开发
 
@@ -17,7 +17,7 @@ npm run character-presets:check
 
 按实际改动运行必要检查；纯文档只做文档/链接/敏感材料检查。character presets 的生成/校验入口是根 scripts；素材或生成契约变化再运行生成，不手工改生成物。构建应从预期 clean HEAD 重做，页面版本注入精确 git SHA/dirty，build 后再改 tracked 文档会改变下一次身份。Mock 测试不能证明真实 provider。
 
-启动 Web/gateway 预览前先获得对应端口窗口并核 owner、consumer、cwd/SHA/listener，按应用 README 的 dev 命令配置已分配端口与同源 proxy。根 `npm run dev` 的默认开发端口不构成占用许可；5544/5198 与 8787/8788 有保留消费者，5176/5180分享验收已停止释放但需重新协调归属，不自行换端口起重复服务。无 consumer 的临时服务应关闭，稳定端口也不授权闲置常驻。
+启动 Web/gateway 预览前先获得对应端口窗口并核 owner、consumer、cwd/SHA/listener，按应用 README 的 dev 命令配置已分配端口与同源 proxy。根 `npm run dev` 的默认开发端口不构成占用许可；5198/5177 与 8787/8788 按最后owner回执有保留消费者，5544、5176、5180、5182已有释放回执但新任务仍需重新协调归属，不自行换端口起重复服务。无 consumer 的临时服务应关闭，稳定端口也不授权闲置常驻。
 
 私密配置只在各自获准的 ignored `.dev.vars` 等服务端位置，由应用内部读取；不查看/打印/复制凭据、不导出 token、不放 VITE/client/assets/提交。持久 main 环境使用 owning main 现有 ignored `.dev.vars`，不为“恢复环境”创建 provider 资源、修改套餐或扩大权限。需要真实 Linx/provider 验证时另外取得具体用户窗口，默认离线 fake，不自动执行付费测试命令。
 
@@ -28,12 +28,15 @@ npm run character-presets:check
 
 | 端口 / 生命周期 | owner、来源与最后回执 | consumer 与下一步 |
 | --- | --- | --- |
-| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。a8发布后main-status精确a8、health正常、voiceStatus ready；Web64161/gateway64257、runner66435仅当轮已核快照。 | 用户本地对比及5544 proxy复用8788；保留consumer。本批main更新会自动重启，须root取得新的无语音维护窗口；不沿用旧许可。 |
-| 5544，保留用户试玩 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`，原 base f862＋专项 dirty；已登记 PID10258 / PTY8214，Vite proxy8788。 | 用户仍审看礼物案，未释放 consumer；不要停、刷新用户 tab 或自行操作 mic。内容迭代后实际 SHA/dirty 由该 owner 下一批登记，不把旧 base 当当前 main。 |
-| 5176 Web / 5180 gateway，分享验收已停止释放 | owner `/root/share_frontend`，WT `lie-share-storage-frontend/lie`，启动源27a＋dirty，最终交付34c5af8。Web75839/PTY8893与gateway75292/PTY31258均原PTY Ctrl-C exit130；内部56985及workerd75705的56996/56997也核退出，所有listener为空。 | 本次自动验收consumer结束，自建两个IAB tab已关/网络与metrics恢复；不把本地R2合成数据或DEV身份当云端验证。再启动需重新分配。 |
-| 5198，保留用户编辑 | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；来源 cwd `/Users/nighca/.codex/worktrees/lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`，原 launcher session95944已退出；PID13491为源owner最近lsof回执，用户IAB编辑保留。 | 用户编辑 consumer 未释放；不重启/停止、不清工程。视频取消Git入库不等于关闭workbench或删除工程；未来停止须精确重核command/cwd/`.dev.pid`，不将已退出launcher当存活服务PTY。 |
-| 5177，分享UI Demo保留用户审看 | owner `/root/share_ui_demo`，发起Chat `01a194d9-e260-7cd2-a8df-89b1478a1120`；WT `lie-share-storage-ui-demo/lie`、branch `codex/lie-share-storage-ui-demo`，源c4ee640→eccf75f。原PID29883/PTY99739，启动源a8＋dirty后HMR，具体UI已获用户批准。 | 用户审看consumer仍保留，尚无停止许可；由原owner在用户释放后原PTY停并核PID/listener。此前布局93927/49034已停只属历史，不套到此服务。 |
-| 5545 / 5546，已停止交回 | 16k 音频专项；历史来源WT `lie-playback-16k-candidate/lie`（不能据旧路径认定仍在worktree list或有活跃服务）；原 PTY8226 / 17929 及内部监听已由 owner 停止核清，own Chrome 已关。 | 用户明确试听“没有电流声了，效果很好”并释放环境；不再启动或造语音流量。完整 PID 历史保留专项交付，不拼凑为当前运行值。 |
+| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；当前main源码为51264a，不把旧PID或源码SHA当本轮新探测。 | 用户本地对比；5544旧proxy消费者已释放，不代表持久main服务可停。后续集成/维护仍由root协调当前语音消费者及唯一turn，不复用旧窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 5544，礼物案用户试玩已释放 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`、原base f862＋dirty，原PID10258/PTY8214。用户明确本轮试玩结束不保留环境；owner只读核无listener、原PTY Unknown process。 | 退出时间/原因未知，本次没有执行stop。保留dirty内容/附件，不重启、刷新用户tab或升级旧前端；正式案件确认门禁不变。 |
+| 5176，调查页UI试玩已停止交回 | UI Chat `01a1964e-eda0-78c2-b353-ffcecf1cfed0`；WT `6d4d/lie`、branch `codex/investigation-ui-followup`、clean43a08229。Node24 Web以proxy8788、strict127.0.0.1:5176运行；原PID19329/PTY80248，用户明确验收通过并允许撤环境。owner复核监听后原PTY Ctrl-C exit130，ps19329及lsof5176均空。 | consumer/turn已释放，未动用户tab/storage/8787/8788，不把原分享QA或结果页旧PID套成本轮。新任务起前另协调。 |
+| 5182及内部63075，P0 fake验收已停止 | owner `/root/cookie_device_implementation`、P0 Chat `01a19557-145d-72f3-ace4-382ac03c22c9`；源cf375958（产品a178），Node41692/workerd41766、原PTY64276 Ctrl-C exit130，精确ps/listener均空。 | 自建pages2/3/4已关闭、native contexts closed/合成track停止；保留原page1。无真实provider/mic，本轮不重启；方法与身份见[本地验收](reviews/device-concurrency-2026-11-01/acceptance/README.md)。 |
+| PR原生云Preview验收，已收尾；无本地服务 | owner PR Chat `01a19533-d60a-7980-91b8-9e7ec1dbbe6a`；真实PR2 v1/v2同地址前后端同版、R2六请求/两合成、voice两Device/三逻辑WS与owned清理通过。close CI41296845867/cleanup publisher41296859092 job124819485297 success，10:18:42Z deleted=true，精确GET404。 | PR2 closed/unmerged，owned远端分支已删除GET404，main不变；private unknown=null、两owned绑定已解绑、两自建tab已关闭、服务0。共享测试R2按批准保留，关PR不删共享数据或扩大清理；真实fork未验。 |
+| 5180，分享gateway验收已停止；原5176轮为历史 | owner `/root/share_frontend`；源27a＋dirty、最终34c5af8。原Web75839/PTY8893与gateway75292/PTY31258均Ctrl-C exit130，内部56985、workerd75705及56996/56997核空，自建IAB清理。 | 与新UI5176回执分开；不把本地R2/DEV身份当云验收。 |
+| 5198，最后登记为用户编辑consumer | 视频 Chat `01a17dee-6a37-73f3-bf53-853df51f6b15`；cwd `lie-promo-production/lie/tmp/promo-landscape-v3-2026-10-30/workbench`，原launcher95944已退出；PID13491只是源owner最后回执，不是本轮复核。 | 尚无consumer释放回执，不重启/停止、不清工程；未来须owner核当前command/cwd/精确PID，不能把launcher退出当服务已停。新视频Git入库撤销与专项上传授权均不改变该服务门禁。 |
+| 5177，最后登记为分享UI Demo用户审看 | owner `/root/share_ui_demo`、Chat `01a194d9-e260-7cd2-a8df-89b1478a1120`；WT `lie-share-storage-ui-demo/lie`，branch `codex/lie-share-storage-ui-demo`，c4ee640→eccf75f。原PID29883/PTY99739、a8＋dirty后HMR，仅历史来源。 | 没有新释放回执，仍保护用户consumer；不能因为正式分享已上线就擅停，用户释放后由owner原PTY停并核销。 |
+| 5545/5546，16k试听已停止交回 | 历史WT `lie-playback-16k-candidate/lie`，原PTY8226/17929及内部监听owner已停核清，own Chrome已关。 | 用户试听正向反馈及旧PID只属历史，不重启或自动造语音流量。 |
 
 这张表没有登记为活动的旧 5402/5403、5507、5358/5359 等只是[历史快照](history/2026-10-30/coordinator-refresh-fd049/development.root-draft.md.txt)中的旧窗口，不能自动恢复。未知进程、消费者或归属先协调，不能杀未知 PID、按端口杀进程、`pkill` 或换口绕占用。
 
@@ -49,7 +52,7 @@ npm run character-presets:check
 - 日志：`~/Library/Logs/LIE/main-preview.log`；owning clean main：`/Users/nighca/code/nighca/lie`。
 - 固定入口 `http://127.0.0.1:8787/`，Worker8788；`/__lie/main-status` 用于非敏感源码/服务 SHA 核对。首页、health、voiceStatus 的 ready/200 不代表已完成真实推理或 provider 资源同一性。
 
-[`scripts/main-preview.mjs`](../scripts/main-preview.mjs) 约每 1.5 秒检查 owning main SHA；只有正确分支且 tracked clean 才随新 SHA 重启自有 children，lock 改变时正常 npm ci。保留单实例 PID lock、仅 ESRCH 可回收的陈旧锁、自有进程组和 launchd 30 秒失败退避；不要手工抢锁或另起 runner。应用本地状态/storage 不因维护清除。此次 UI 更新触发的是既有自动跟随，不再为报告文档制造额外 main 更新；旧children/PID仅为UI发布时快照；a8发布后的HTTP身份与当轮PID见[发布回执](results-layout-release/2026-10-31.md)，该快照不替代未来实际复核。后续发布必须取得新窗口。未人为改main模拟重启测试。
+[`scripts/main-preview.mjs`](../scripts/main-preview.mjs) 约每 1.5 秒检查 owning main SHA；只有正确分支且 tracked clean 才随新 SHA 重启自有 children，lock 改变时正常 npm ci。保留单实例 PID lock、仅 ESRCH 可回收的陈旧锁、自有进程组和 launchd 30 秒失败退避；不要手工抢锁或另起 runner。应用本地状态/storage 不因维护清除。main更新（包括文档）可能触发既有自动跟随，不为报告单独制造额外main更新；旧children/PID仅为当轮快照；a8历史身份见[发布回执](results-layout-release/2026-10-31.md)，P0配置与local-main恢复见[实际回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)，均不能替代下一维护turn实际复核。后续发布必须取得新窗口。未人为改main模拟重启测试。
 
 本地为 Vite DEV＋本地 workerd，页面版本显示“开发版”，不是线上 production 的同一 bundle；精确本地 main SHA 用 main-status 核。它绕过生产 Cloudflare 网络/平台 CPU 配额，仍受本地 workerd、provider、网络与设备限制。未读取 secret 手比 provider 资源，不把本地 ready、无断连观察或 runtime 恢复当线上配额/音爆根因证明。线上入口为 `https://lie.agency/` 与 `/editor`；旧平台原生地址保持现状，未授权 DNS 改动。
 
@@ -57,14 +60,16 @@ npm run character-presets:check
 
 每次启动登记 owner/chat、worktree/SHA/dirty、端口、PID、原 PTY/session、consumer 和停止条件。临时 consumer/验收结束后优先在原 PTY Ctrl-C，再核进程/监听消失；原 PTY 不可用时仅在 owner 确认不再需要、重新核 exact PID/cwd/命令后精确停止。服务关闭不连带清理 worktree/refs/用户文件。
 
-main 跟随重启会影响5544共享8788，发布 owner 必须持唯一 integration/publication turn，先确认实际语音消费者安全维护窗口，保用户 tab/其他端口不动。不要在非窗口自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
+main 跟随重启会影响所有复用8788的consumer（5544本轮已释放），发布 owner 必须持唯一 integration/publication turn，先确认实际语音消费者安全维护窗口，保用户 tab/其他端口不动。不要在非窗口自行 `kickstart`、停止或复制 launchd 服务树；不因某端口历史已空就默认可占用。
 
-原文档整理任务无服务操作、远端API、浏览器或应用测试；本批集成只执行必要离线checks/构建，main更新及自动跟随须新确认窗口，不创建真人provider/WS/mic/profile流量。旧完整登记、来源/批准门禁和已纳本批候选的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
+本轮文档整理无服务操作、远端API、浏览器或应用测试；仅做必要文档检查，main更新及自动跟随仍由root协调新窗口，不创建真人provider/WS/mic/profile流量。旧完整登记、来源/批准门禁和已纳本批候选的恢复证据见[日期索引](history/2026-10-30/README.md)；旧记录的“暂停/已停/当前 PID”不覆盖最新明确恢复和 consumer 回执。
 
 原语音Chat `01a18ac7-cdfc-7690-a0c9-bdc3e6fc8eb9` 现已archived，root未自行unarchive；若干旧voice WT已不在worktree list。精确提交（如1ee049e）及refs仍可归档，目录/旧PID只是历史证据；不为归档恢复chat、服务或旧WT。以上均为协调回执，本任务未额外探测。
 
 ## 分享R2与本地隔离（2026-11-01）
 
-用户自行启用R2后明确批准两桶创建：`lie-shared-games`（production）、`lie-shared-games-dev`（独立开发验收），均Standard/private。03:41:18Z实际readback：r2.dev关闭、无自定义域名、无CORS、无对象自动过期；保留平台7天abort未完成multipart默认规则。未上传用户案件、未部署Worker；完整事实与beta18 raw body修正见[发布准备](share-storage-release-readiness.md)。不重新创建、不扩权限或账单。
+用户自行启用R2后明确批准两桶创建：`lie-shared-games`（production）、`lie-shared-games-dev`（独立开发验收），均Standard/private。03:41:18Z实际readback：r2.dev关闭、无自定义域名、无CORS、无对象自动过期；保留平台7天abort未完成multipart默认规则。此时间点尚未上传案件或部署Worker，是创建阶段历史；后续98d71分享已上线、正式合成验收通过。完整创建事实与beta18 raw body修正见[发布准备](share-storage-release-readiness.md)。不重新创建、不扩权限或账单。
 
-正式配置默认生产桶，独立开发目标通过 `LIE_SHARE_BUCKET_NAME=lie-shared-games-dev` 明确覆盖；本地 `dev.remote:false`／插件remoteBindings:false只用各WT的Miniflare R2，不连接生产桶，不复制provider secrets。绑定的本地配置与构建dry-run不等于云部署验收；后续生产需核实际serving binding/CPU30000/voice600。合成云写读smoke须另获明确turn，本批候选准备不做。
+正式配置默认生产桶，独立开发目标通过 `LIE_SHARE_BUCKET_NAME=lie-shared-games-dev` 明确覆盖；本地 `dev.remote:false`／插件remoteBindings:false只用各WT的Miniflare R2，不连接生产桶，不复制provider secrets。绑定的本地配置与构建dry-run不等于云部署验收；正式serving R2/CPU30000/voice600已有已归档回执，不沿用本地build作证明。PR受信publisher固定共享非生产桶，真实六次请求/两合成案件已验；共享数据不按PR前缀隔离，关闭PR不删除。新的云写读/语音smoke仍须具体turn，本轮文档不执行。
+
+案件intro有效load会后台prepare并可能产生供应商OTA/绑定请求；准备仍无mic/WS、不扣玩法额度。只有health/status只读检查不能被扩大为实际案件浏览也零provider。生产/开发Cookie签名与环境按已批准配置隔离，不复制secret值或把两套token等同计费隔离。
