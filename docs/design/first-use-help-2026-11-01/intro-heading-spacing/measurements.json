@@ -1,0 +1,27 @@
+[
+  {
+    "pseudoBottom": "0px",
+    "scrollWidth": 1280,
+    "title": "36px",
+    "titleToBody": 36,
+    "width": 1280
+  },
+  {
+    "pseudoBottom": "0px",
+    "scrollWidth": 391,
+    "title": "36px",
+    "titleHeight": 40.796875,
+    "titleLineHeight": "40.8px",
+    "titleToBody": 36,
+    "width": 391
+  },
+  {
+    "pseudoBottom": "0px",
+    "scrollWidth": 320,
+    "title": "36px",
+    "titleHeight": 40.796875,
+    "titleLineHeight": "40.8px",
+    "titleToBody": 36,
+    "width": 320
+  }
+]
