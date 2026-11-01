@@ -45,7 +45,7 @@
 
 没有独立文本API/付费模型/真实voiceagent请求，无WS/mic/分享POST/投稿。上述验证证明当前客户端工具链和本地保护流程，不证明所有ChatGPT账户/模型、外部Chrome、生产trial或作者总负担下降；故事未做真实语音或可推理性质量验收。
 
-截图：[桌面候选](webmcp-authoring-demo-desktop.png)。截图只含本Chat生成的虚构故事，无用户原稿/账号内容。
+截图：[桌面候选](webmcp-authoring-demo-desktop.jpg)。截图只含本Chat生成的虚构故事，无用户原稿/账号内容。
 
 ## 服务台账与交接
 
