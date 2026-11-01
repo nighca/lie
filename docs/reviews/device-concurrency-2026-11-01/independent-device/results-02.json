@@ -1,0 +1,300 @@
+{
+  "owner": "lie-p0-independent-device-2026-11-01-run-02",
+  "startedAt": "2026-11-01T05:16:50.644Z",
+  "operations": [
+    {
+      "operation": "create-agent",
+      "startedAtMs": 1,
+      "durationMs": 1949,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "configure-agent",
+      "startedAtMs": 1953,
+      "durationMs": 549,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "read-agent",
+      "startedAtMs": 2502,
+      "durationMs": 2252,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "D1-ota-initial",
+      "startedAtMs": 4758,
+      "durationMs": 1866,
+      "status": 200,
+      "code": null,
+      "success": true
+    },
+    {
+      "operation": "D1-bind",
+      "startedAtMs": 6625,
+      "durationMs": 1211,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "D1-ota-token",
+      "startedAtMs": 7839,
+      "durationMs": 456,
+      "status": 200,
+      "code": null,
+      "success": true
+    },
+    {
+      "operation": "D2-ota-initial",
+      "startedAtMs": 13749,
+      "durationMs": 1855,
+      "status": 200,
+      "code": null,
+      "success": true
+    },
+    {
+      "operation": "D2-bind",
+      "startedAtMs": 15605,
+      "durationMs": 1715,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "D2-ota-token",
+      "startedAtMs": 17322,
+      "durationMs": 461,
+      "status": 200,
+      "code": null,
+      "success": true
+    },
+    {
+      "operation": "D1-unbind",
+      "startedAtMs": 100152,
+      "durationMs": 1762,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "D2-unbind",
+      "startedAtMs": 101916,
+      "durationMs": 501,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "delete-agent",
+      "startedAtMs": 102418,
+      "durationMs": 730,
+      "status": 200,
+      "code": 0,
+      "success": true
+    }
+  ],
+  "channels": [
+    {
+      "label": "D1-A",
+      "device": "D1",
+      "startedAtMs": 8296,
+      "openedAtMs": 10309,
+      "helloAtMs": 10745,
+      "readyAtMs": 10746,
+      "callerClose": true,
+      "closeAtMs": 45367,
+      "closeCode": 1000,
+      "closeObserved": true,
+      "terminated": false,
+      "readyState": 3
+    },
+    {
+      "label": "D2-X",
+      "device": "D2",
+      "startedAtMs": 17784,
+      "openedAtMs": 19456,
+      "helloAtMs": 19886,
+      "readyAtMs": 19886,
+      "callerClose": true,
+      "closeAtMs": 100145,
+      "closeCode": 1000,
+      "closeObserved": true,
+      "terminated": false,
+      "readyState": 3
+    },
+    {
+      "label": "D1-B",
+      "device": "D1",
+      "startedAtMs": 45367,
+      "openedAtMs": 47249,
+      "helloAtMs": 47976,
+      "readyAtMs": 47977,
+      "callerClose": true,
+      "closeAtMs": 60483,
+      "closeCode": 1000,
+      "closeObserved": true,
+      "terminated": false,
+      "readyState": 3
+    },
+    {
+      "label": "D1-A2",
+      "device": "D1",
+      "startedAtMs": 60483,
+      "openedAtMs": 62176,
+      "helloAtMs": 62583,
+      "readyAtMs": 62588,
+      "callerClose": true,
+      "closeAtMs": 74438,
+      "closeCode": 1000,
+      "closeObserved": true,
+      "terminated": false,
+      "readyState": 3
+    },
+    {
+      "label": "D1-N",
+      "device": "D1",
+      "startedAtMs": 74438,
+      "openedAtMs": 76126,
+      "helloAtMs": 76569,
+      "readyAtMs": 76569,
+      "callerClose": true,
+      "closeAtMs": 100151,
+      "closeCode": 1000,
+      "closeObserved": true,
+      "terminated": false,
+      "readyState": 3
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "channel": "D1-A",
+      "kind": "A",
+      "question": "我的暗号是青瓷风铃七二。请确认，并说出你的名字和人物口令。",
+      "text": "暗号确认，青瓷风铃七二。我是阿蓝，人物口令是蓝鲸七号。",
+      "audioBytes": 215680,
+      "toolsCalled": 1,
+      "startedAtMs": 22888,
+      "finishedAtMs": 32869,
+      "ttsStop": true,
+      "aborted": false,
+      "passed": true
+    },
+    {
+      "number": 2,
+      "channel": "D2-X",
+      "kind": "X",
+      "question": "你叫什么名字，人物口令是什么？你知道玩家的暗号吗？",
+      "text": "我叫小紫，人物口令是紫云六号。至于玩家的暗号，我这边不清楚，没有相关信息哦。",
+      "audioBytes": 293760,
+      "toolsCalled": 1,
+      "startedAtMs": 32870,
+      "finishedAtMs": 44935,
+      "ttsStop": true,
+      "aborted": false,
+      "passed": true
+    },
+    {
+      "number": 3,
+      "channel": "D1-B",
+      "kind": "B",
+      "question": "你叫什么名字，人物口令是什么？你知道玩家的暗号吗？",
+      "text": "我叫小黄，人物口令是柠檬九号。关于玩家的暗号，我不知道，没有这方面的信息。",
+      "audioBytes": 280320,
+      "toolsCalled": 1,
+      "startedAtMs": 47977,
+      "finishedAtMs": 59973,
+      "ttsStop": true,
+      "aborted": false,
+      "passed": true
+    },
+    {
+      "number": 4,
+      "channel": "D1-A2",
+      "kind": "A2",
+      "question": "我之前告诉你的暗号是什么？",
+      "text": "你的暗号是青瓷风铃七二，记得清清楚楚呢。我是阿蓝，口令蓝鲸七号。",
+      "audioBytes": 261760,
+      "toolsCalled": 1,
+      "startedAtMs": 62588,
+      "finishedAtMs": 73993,
+      "ttsStop": true,
+      "aborted": false,
+      "passed": true
+    },
+    {
+      "number": 5,
+      "channel": "D1-N",
+      "kind": "N",
+      "question": "你叫什么名字，人物口令是什么？你知道玩家的暗号吗？",
+      "text": "我叫阿绿，人物口令是青松三号。至于玩家的暗号嘛，我不清楚，也没有这方面的信息。",
+      "audioBytes": 309120,
+      "toolsCalled": 1,
+      "startedAtMs": 76569,
+      "finishedAtMs": 89418,
+      "ttsStop": true,
+      "aborted": false,
+      "passed": true
+    },
+    {
+      "number": 6,
+      "channel": "D2-X",
+      "kind": "X",
+      "question": "请再说你的名字和人物口令。你知道玩家的暗号吗？",
+      "text": "我叫小紫，人物口令是紫云六号。玩家的暗号我不知道，我的资料里没有这个信息。",
+      "audioBytes": 280320,
+      "toolsCalled": 0,
+      "startedAtMs": 89418,
+      "finishedAtMs": 99712,
+      "ttsStop": true,
+      "aborted": false,
+      "passed": false
+    }
+  ],
+  "completed": false,
+  "cleanup": {
+    "startedAt": "2026-11-01T05:18:30.357Z",
+    "allSocketsClosed": true,
+    "resourcesRemoved": true,
+    "scope": "Owned device bindings removed and owned Agent deleted; not proof of all provider registry/log/history erasure",
+    "finishedAt": "2026-11-01T05:18:33.794Z"
+  },
+  "config": {
+    "memModelId": "Memory_nomem",
+    "chatHistoryConf": 0,
+    "disable_greeting": true,
+    "max_tokens": 160,
+    "enable_search": false
+  },
+  "otaTargets": [
+    {
+      "device": "D1",
+      "scheme": "ws",
+      "knownHost": true,
+      "knownPath": true,
+      "hasQuery": false,
+      "hasUserinfo": false,
+      "hasUnexpectedPort": false
+    },
+    {
+      "device": "D2",
+      "scheme": "ws",
+      "knownHost": true,
+      "knownPath": true,
+      "hasQuery": false,
+      "hasUserinfo": false,
+      "hasUnexpectedPort": false
+    }
+  ],
+  "dynamicD2ToReadyMs": 6139,
+  "concurrentOpenBeforeQuestions": true,
+  "error": "Question assertion failed: 6",
+  "finishedAt": "2026-11-01T05:18:33.794Z",
+  "elapsedMs": 103150
+}
