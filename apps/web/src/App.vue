@@ -234,7 +234,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <PublicBackground class="public-background" :text="view.background" :characters="characterNames" />
       <template #actions><UiButton @click="backgroundOpen = false">继续调查</UiButton></template>
     </UiDialog>
-    <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="你认为谁是我们要找的人？" @close="controller.closeAccusation()">
+    <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="谁是要找的人" @close="controller.closeAccusation()">
       <p class="accusation-hint">点击人物会立即提交，结束本局；选错不会揭晓答案。</p>
       <div class="intro-characters accusation-choices" :class="{ 'intro-characters--many': view.characters.length > 5 }">
         <button v-for="(character, index) in view.characters" :key="character.id" type="button" class="intro-character accusation-character" :aria-label="`指认 ${character.name}`" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.accuse(character.id)">
