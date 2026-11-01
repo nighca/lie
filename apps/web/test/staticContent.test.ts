@@ -5,8 +5,8 @@ import { accuse, buildCharacterContext, createGameSession, getInterrogationRemai
 import { describe, expect, it } from 'vitest'
 
 import designCharacterPresets from '../../../design/character-presets/manifest.json'
-import authoredCase from '../../../content/games/02-empty-medal-box.json'
-import authoredDuckCase from '../../../content/games/03-duck-finale.json'
+import authoredCase from '../../../content/games/03-empty-medal-box.json'
+import authoredDuckCase from '../../../content/games/04-duck-finale.json'
 import { readBundledCase } from '../src/application/bundledCases'
 import { caseCatalog } from '../src/application/catalog'
 import gameConfig from '../src/game-config.json'

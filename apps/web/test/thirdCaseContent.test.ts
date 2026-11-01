@@ -4,7 +4,7 @@ import { fileURLToPath, URL as NodeURL } from 'node:url'
 import { accuse, appendDialogue, buildCharacterContext, consumeInterrogationTime, createGameSession, getInterrogationRemainingMs, selectCharacter, startSession, validateGame } from '@lie/game-core'
 import { describe, expect, it } from 'vitest'
 
-import authoredCase from '../../../content/games/04-salt-sugar-mixup.json'
+import authoredCase from '../../../content/games/05-salt-sugar-mixup.json'
 import characterPresets from '../public/appearances/manifest.json'
 
 describe('third case static integration', () => {

@@ -35,7 +35,7 @@ const catalog = Array.from({ length: 5 }, (_, index) => ({
 describe('homepage presentation', () => {
   it('puts the Jiangsu starter first while keeping the existing cases in order', async () => {
     expect(caseCatalog.map(({ id }) => id)).toEqual([
-      'jiangsu-local', 'empty-medal-box', 'duck-finale', 'salt-sugar-mixup', 'hackathon-old-project',
+      'jiangsu-local', 'hiking-loop', 'empty-medal-box', 'duck-finale', 'salt-sugar-mixup', 'hackathon-old-project',
     ])
     const { wrapper, router } = await home([...caseCatalog])
     const first = wrapper.findAll('.case-card')[0]
@@ -44,6 +44,16 @@ describe('homepage presentation', () => {
     await first.get('button').trigger('click')
     await flushPromises()
     expect(router.currentRoute.value.query).toEqual({ game: 'jiangsu-local', demo: '1' })
+  })
+
+  it('opens the real three-person hiking case from the second homepage card', async () => {
+    const { wrapper, router } = await home([...caseCatalog])
+    const second = wrapper.findAll('.case-card')[1]
+    expect(second.get('h3').text()).toBe('这条线你真走了吗')
+    expect(second.get('.case-cast').attributes('aria-label')).toContain('3位角色')
+    await second.get('button').trigger('click')
+    await flushPromises()
+    expect(router.currentRoute.value.query).toEqual({ game: 'hiking-loop', demo: '1' })
   })
 
   it.each([1, 5])('presents %i catalog entries with their public metadata and individual entry buttons', async (count) => {
