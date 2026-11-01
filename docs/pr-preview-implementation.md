@@ -5,7 +5,7 @@
 ## 用户已确认的行为
 
 - 每个指向 main 的贡献 PR 接受完整无凭据 CI。每 PR 有独立 Worker 预览入口，前端与 Worker 均来自同一次 PR 测试合并提交，新增接口及其消费方可端到端验证。
-- 同仓自动预览；fork/Dependabot 等低信任来源由维护者审查并批准当前 head SHA，更新后重新批准。默认链接公开。内部 AI 仍按隔离 worktree/review/main 集成，不引入内部 PR 或修改分支规则。
+- 同仓自动预览；fork/Dependabot 等低信任来源由维护者审查并通过GitHub手动入口批准当前 head SHA，更新后重新批准。用户已明确依赖GitHub原生write权限，不增加自定义admin角色检查；更严格人选可由用户配置Environment required reviewers。默认链接公开。内部 AI 仍按隔离 worktree/review/main 集成，不引入内部 PR 或修改分支规则。
 - 使用同 Cloudflare 账户的独立预览部署 token；拟设 `lie-pr-preview` 父 Worker，其下使用原生 `pr-N` Preview。不是所有 PR 共用一份后端代码或一个运行入口。
 - 生产桶独立，所有非生产（本地开发/测试及 PR）共用 `lie-shared-games-dev`，不加 PR 前缀，接受不同测试代码对数据的相互影响。关闭 PR 只撤预览入口，不删共享桶、共享案件或 Linx 设备。
 - 语音沿 P0 的浏览器身份方案接入，共用非生产 Agent/凭据，不复活固定 Device。生产与非生产凭据分开；无需每 PR 建 Agent/Device 池。7天闲置或20个容量警戒不是已定要求，本批不擅加闲置删除。
@@ -40,13 +40,13 @@ PR CI 在托管临时 runner 执行 PR 的 npm/构建/测试，只读 GitHub 权
 
 发布器自身只从默认分支固定 workflow SHA 获取代码与锁定工具。它可上传 PR Worker 模块为运行数据，但本地不 import/eval 模块，不执行 PR config、lockfile安装、package hooks或产物脚本；也不把生产 receipt/helper 改成接受 PR。构建output中的命名、绑定、账户与部署设置不能直接沿用：发布器重建允许的预览配置，固定父Worker、预览mode、测试R2、P0 secrets/text、CPU30000、已审兼容标志和观测设置，拒绝额外资源或触发器。
 
-四项runtime secret只在已验证的最后部署步骤进入权限受限临时输出，上传后立即清理；Cloudflare管理token仅传部署CLI，GitHub token不进入该CLI或runtime。子进程不继承PR npm/NODE_OPTIONS环境，不在PR工作目录运行。管理员批准当前SHA意味着允许该Worker读取已提供的非生产runtime凭据和共享数据；不能声称这些值对获准运行的代码保密。部署管理token始终不能供PR运行时获取。
+四项runtime secret只在已验证的最后部署步骤进入权限受限临时输出，上传后立即清理；Cloudflare管理token仅传部署CLI，GitHub token不进入该CLI或runtime。子进程不继承PR npm/NODE_OPTIONS环境，不在PR工作目录运行。维护者批准当前SHA意味着允许该Worker读取已提供的非生产runtime凭据和共享数据；不能声称这些值对获准运行的代码保密。部署管理token始终不能供PR运行时获取。
 
 ## 身份、并发与可见结果
 
 API独立核对固定PR CI workflow、成功结论、来源、run/attempt、当前PR open/draft/head/base/merge和merge提交父节点。手动入口只收PR号和完整当前head SHA，不收任意artifact/run作为授权；workflow_run不继承曾经的fork批准。artifact ID/name/digest和receipt必须全部匹配，不恢复缓存或较早产物。
 
-总协调review要求的管理员语义补强：手动批准与初始化入口都实时调用GitHub仓库权限API确认admin。事件sender必须与GitHub提供的原始actor身份一致；重跑者不同则也必须admin，不能借用原始admin权限。prepare与部署前/成功写回前的manual authorize均重新核权限，拒绝unknown/write/401/403，不从workflow输入接受actor或权限。GitHub Environment无required reviewers不构成管理员证明，也不新增PAT或Administration写权限。
+用户随后明确撤销自定义admin限制：手动批准和初始化直接依赖GitHub对workflow_dispatch的write权限限制，不调用collaborator permission API，不叠加actor/sender/rerunner角色证明；不会从输入接受权限或跳过当前SHA检查。更严格人选由用户配置Environment required reviewers，工作流遵守该环境原生保护规则。若用户为共享pr-preview配置reviewers，则同仓预览及初始化等引用该环境的job也遵守审批，不在代码中绕过。
 
 选择任务只读，确定PR号后按PR串行发布/关闭清理（cancel=false）；真正进入锁后重选并核同PR，防选择与上传之间更新。上传前重查，最终success前再查。晚到产物不覆盖当前入口；上传期间变旧时标本次deployment inactive，不删除整个pr-N以免误删新环境。更新失败明确提示稳定地址可能还是旧版本。
 
@@ -69,6 +69,8 @@ Checks固定CI gate与预览status分开；预览使用commit status链接及Git
 - 两workflow YAML解析及全部run的bash语法检查通过，diff check通过；actionlint未安装，未为此联网安装。生产workflow/helper与P0产品文件未改，不重复跑未受影响的应用全套。
 - 尚未验证原生Preview云端metadata实际形状、token权限、真实fork事件/跨run下载、公开URL或语音/R2接线；这些按[执行单](pr-preview-execution-plan.md)在用户批准后实测。CLI部署/删除仍使用cf，预览元数据GET因beta.18缺原生命令而采用其同一官方endpoint的精确只读回验。
 
-总协调对5516b7d的review后追加修复：手动预览与初始化核真实admin（含事件sender、原始actor、重跑者，权限撤销与401/403拒绝）；创建GitHub Deployment得到ID后立即保存到受信context，再写后续status。已用真实临时context文件和一次模拟commit-status失败复现并验证fail能把同一deployment从in_progress收尾为failure，不遗留无法追踪的已批准状态。父owner实际审阅delta并用Node24.22.1独立重跑：**206/206 tests、两YAML和28段bash语法检查、diff check通过**。只改授权/编排/workflow/docs，既有实际构建与schema证据仍适用，不重复构建未变应用。
+历史review修复0745ad9：曾追加自定义admin核验，并修复创建GitHub Deployment得到ID后立即保存到受信context、再写后续status。该批206tests通过是历史截点；admin部分随后被用户明确要求移除，保留Deployment失败恢复修复。已用真实临时context文件和一次模拟commit-status失败验证fail能把同一deployment从in_progress收尾为failure，不遗留无法追踪的已批准状态。此次仅移除不需要的角色限制，既有实际构建与schema证据仍适用，不重复构建未变应用。
 
-管理员检查使用[仓库权限只读API](https://docs.github.com/en/rest/collaborators/collaborators#get-repository-permissions-for-a-user)及GitHub原生actor环境变量，不新增PAT/Administration写权限；实际远端token对此API的可访问性仍在首次获准Actions验收中核实，错误不回退普通write权限。
+当前原生手动权限依据：[GitHub手动运行工作流](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)、[Environment required reviewers](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments#required-reviewers)。不新增PAT或权限查询要求，未修改用户现有Environment设置。
+
+用户要求移除admin限制的本轮delta：父owner实际审阅角色层移除、main/当前SHA及P2立即保存ID保留，独立Node24.22.1运行受影响GitHub授权/编排测试 **109/109通过**；两YAML与27段bash语法、diff check通过。未变产物/部署模块不重复扩测或重build；已有实际构建与字节/schema证据继续保留，远程启用仍未执行。

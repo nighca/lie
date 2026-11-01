@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import test from 'node:test'
 
 import { artifactName } from './pr-preview-github.mjs'
-import { authorize, cleanupAuthorize, cleanupReport, fail, githubClient, main, manualAdminApproval, notice, outputs, pending, prepare, previewURLs, probe, publish } from './pr-preview.mjs'
+import { authorize, cleanupAuthorize, cleanupReport, fail, githubClient, main, notice, outputs, pending, prepare, previewURLs, probe, publish } from './pr-preview.mjs'
 
 const headSha = 'a'.repeat(40), baseSha = 'b'.repeat(40), mergeSha = 'c'.repeat(40)
 const repo = { id: 1, full_name: 'nighca/lie' }
@@ -16,7 +16,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
     repository: { ...repo }, head_repository: headRepository, actor: { login: 'contributor' }, pull_requests: fork ? [] : [{ number: 42 }] }
   const receipt = { version: 1, repository: repo.full_name, prNumber: 42, headSha, baseSha, mergeSha, runId: '100', runAttempt: '2' }
   const state = {
-    event: dispatch ? { repository: { ...repo }, ref: 'refs/heads/main', inputs: { pr_number: '42', head_sha: headSha }, sender: { login: 'administrator', id: 12 } }
+    event: dispatch ? { repository: { ...repo }, ref: 'refs/heads/main', inputs: { pr_number: '42', head_sha: headSha } }
       : { repository: { ...repo }, action: 'completed', workflow_run: structuredClone(run) },
     run, receipt, workflow: { id: 10, name: 'PR CI', path: '.github/workflows/pr-ci.yml' },
     pr: { number: 42, state: 'open', draft: false, mergeable: true, merge_commit_sha: mergeSha,
@@ -24,9 +24,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
     mergeCommit: { sha: mergeSha, parents: [{ sha: baseSha }, { sha: headSha }] },
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: artifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 100, repository_id: 1, head_repository_id: headRepository.id, head_sha: headSha } }] },
-    runs: [structuredClone(run)], deployments: [], deploymentStatuses: {}, reads: [], writes: [],
-    actors: { trustedActor: 'administrator', triggeringActor: 'administrator' },
-    permissions: { administrator: { permission: 'admin', user: { login: 'administrator', id: 12 } } }
+    runs: [structuredClone(run)], deployments: [], deploymentStatuses: {}, reads: [], writes: []
   }
   state.api = async (path, body = null) => {
     if (body != null) {
@@ -34,12 +32,6 @@ function fixture({ fork = false, dispatch = false } = {}) {
       return path === 'deployments' ? { id: 300 } : { id: 400 }
     }
     state.reads.push(path)
-    const permission = /^collaborators\/([^/]+)\/permission$/.exec(path)
-    if (permission != null) {
-      const result = state.permissions[decodeURIComponent(permission[1])]
-      if (result instanceof Error) throw result
-      return structuredClone(result ?? { permission: 'none', user: null })
-    }
     if (path === 'actions/workflows/pr-ci.yml') return structuredClone(state.workflow)
     if (path === 'pulls/42') return structuredClone(state.pr)
     if (path === 'actions/runs/100') return structuredClone(state.run)
@@ -68,7 +60,7 @@ test('fork run with omitted PR association waits for approval; manual current SH
   const f = fixture({ fork: true })
   assert.equal((await prepare(f.event, f.api)).status, 'awaiting-approval')
   const manual = fixture({ fork: true, dispatch: true })
-  const context = await prepare(manual.event, manual.api, manual.actors)
+  const context = await prepare(manual.event, manual.api)
   assert.equal(context.action, 'deploy')
   assert.equal(context.approvalHeadSha, headSha)
 })
@@ -76,86 +68,37 @@ test('fork run with omitted PR association waits for approval; manual current SH
 test('manual approval of an old head does not discover or download a run', async () => {
   const f = fixture({ dispatch: true })
   f.event.inputs.head_sha = 'e'.repeat(40)
-  assert.equal((await prepare(f.event, f.api, f.actors)).status, 'stale')
+  assert.equal((await prepare(f.event, f.api)).status, 'stale')
   assert.equal(f.reads.some(path => path.startsWith('actions/runs/')), false)
 })
 
 test('manual approval cannot select a branch or arbitrary run ID', async () => {
   const f = fixture({ dispatch: true })
   f.event.ref = 'refs/heads/feature'
-  await assert.rejects(prepare(f.event, f.api, f.actors), /requires main/)
+  await assert.rejects(prepare(f.event, f.api), /requires main/)
   f.event.ref = 'refs/heads/main'
   f.event.inputs = { run_id: '100', head_sha: headSha }
-  await assert.rejects(prepare(f.event, f.api, f.actors), /PR number/)
+  await assert.rejects(prepare(f.event, f.api), /PR number/)
 })
 
-test('manual approval proves both original and rerun administrator identities through the API', async () => {
+test('manual path relies on the native workflow entry without querying collaborator permissions', async () => {
   const f = fixture({ fork: true, dispatch: true })
-  f.actors.triggeringActor = 'second-admin'
-  f.permissions['second-admin'] = { permission: 'admin', user: { login: 'second-admin', id: 13 } }
-  const context = await prepare(f.event, f.api, f.actors)
+  const context = await prepare(f.event, f.api)
+  assert.equal((await authorize(context, f.receipt, f.api)).status, 'deploy')
+  const started = await pending(context, f.receipt, f.api)
+  assert.equal((await publish(started, f.receipt, deployedPreview(), f.api)).status, 'success')
+  assert.equal(f.reads.some(path => path.startsWith('collaborators/')), false)
+})
+
+test('workflow inputs cannot substitute another head or select any actor permission mechanism', async () => {
+  const f = fixture({ fork: true, dispatch: true })
+  f.event.inputs.actor = 'made-up-user'
+  f.event.inputs.permission = 'admin'
+  const context = await prepare(f.event, f.api)
   assert.equal(context.action, 'deploy')
-  assert.deepEqual(context.adminApproval, { actor: { login: 'administrator', id: 12, permission: 'admin' },
-    triggeringActor: { login: 'second-admin', id: 13, permission: 'admin' } })
-  assert.ok(f.reads.includes('collaborators/administrator/permission'))
-  assert.ok(f.reads.includes('collaborators/second-admin/permission'))
-  assert.equal((await authorize(context, f.receipt, f.api, f.actors)).status, 'deploy')
-  assert.equal(f.reads.filter(path => path === 'collaborators/administrator/permission').length, 2)
-  assert.deepEqual(f.writes, [])
-})
-
-for (const [name, mutate] of [
-  ['write permission', f => { f.permissions.administrator.permission = 'write' }],
-  ['unknown permission', f => { f.permissions.administrator.permission = 'unknown' }],
-  ['missing user', f => { f.permissions.administrator.user = null }],
-  ['mismatched API login', f => { f.permissions.administrator.user.login = 'other-user' }],
-  ['mismatched API ID', f => { f.permissions.administrator.user.id = 99 }],
-  ['string API ID', f => { f.permissions.administrator.user.id = '12' }],
-  ['sender login mismatch', f => { f.event.sender.login = 'other-user' }],
-  ['sender ID mismatch', f => { f.event.sender.id = 99 }],
-  ['missing trusted actor', f => { delete f.actors.trustedActor }],
-  ['missing triggering actor', f => { delete f.actors.triggeringActor }],
-  ['ordinary writer rerun', f => { f.actors.triggeringActor = 'writer'; f.permissions.writer = { permission: 'write', user: { login: 'writer', id: 14 } } }],
-  ['API 401', f => { f.permissions.administrator = new Error('GitHub API failed (401)') }],
-  ['API 403', f => { f.permissions.administrator = new Error('GitHub API failed (403)') }],
-  ['network error', f => { f.permissions.administrator = new Error('unavailable') }]
-]) test(`manual approval refuses ${name} without a deployment or commit status write`, async () => {
-  const f = fixture({ fork: true, dispatch: true })
-  mutate(f)
-  await assert.rejects(prepare(f.event, f.api, f.actors), /Manual preview|administrator permission/)
-  assert.deepEqual(f.writes, [])
-  assert.equal(f.reads.some(path => path.startsWith('actions/runs/')), false)
-})
-
-test('workflow input actor names do not grant administrator approval', async () => {
-  const f = fixture({ fork: true, dispatch: true })
-  f.event.inputs.actor = 'administrator'
-  f.event.inputs.triggering_actor = 'administrator'
-  f.event.sender = { login: 'writer', id: 14 }
-  f.actors = { trustedActor: 'writer', triggeringActor: 'writer' }
-  f.permissions.writer = { permission: 'write', user: { login: 'writer', id: 14 } }
-  await assert.rejects(prepare(f.event, f.api, f.actors), /verified repository administrator/)
-  assert.deepEqual(f.writes, [])
-})
-
-test('manual context records are never a reusable administrator proof after permission revocation', async () => {
-  const f = fixture({ fork: true, dispatch: true })
-  const context = await prepare(f.event, f.api, f.actors)
-  f.permissions.administrator.permission = 'write'
-  for (const operation of [
-    () => authorize(context, f.receipt, f.api, f.actors),
-    () => pending(context, f.receipt, f.api, f.actors),
-    () => publish({ ...context, deploymentId: '300' }, f.receipt, deployedPreview(), f.api, f.actors),
-    () => fail({ ...context, deploymentId: '300' }, f.receipt, f.api, f.actors)
-  ]) await assert.rejects(operation(), /verified repository administrator/)
-  assert.deepEqual(f.writes, [])
-})
-
-test('manual authorization requires trusted actors again even when the context carries prior proof', async () => {
-  const f = fixture({ fork: true, dispatch: true })
-  const context = await prepare(f.event, f.api, f.actors)
-  await assert.rejects(authorize(context, f.receipt, f.api), /trusted GitHub event/)
-  assert.deepEqual(f.writes, [])
+  assert.equal(f.reads.some(path => path.startsWith('collaborators/')), false)
+  f.event.inputs.head_sha = 'e'.repeat(40)
+  assert.equal((await prepare(f.event, f.api)).status, 'stale')
 })
 
 for (const [name, mutate] of [
@@ -188,13 +131,13 @@ test('draft never starts publishing', async () => {
 test('manual discovery rejects the newest current-head run when it failed rather than using older success', async () => {
   const f = fixture({ dispatch: true })
   f.run.conclusion = 'failure'
-  await assert.rejects(prepare(f.event, f.api, f.actors), /did not complete/)
+  await assert.rejects(prepare(f.event, f.api), /did not complete/)
 })
 
 test('manual discovery fails closed after a bounded scan', async () => {
   const f = fixture({ dispatch: true })
   f.runs = Array.from({ length: 100 }, (_, index) => ({ id: index + 1, head_sha: 'e'.repeat(40) }))
-  await assert.rejects(prepare(f.event, f.api, f.actors), /rerun PR CI/)
+  await assert.rejects(prepare(f.event, f.api), /rerun PR CI/)
   assert.equal(f.reads.filter(path => path.startsWith('actions/workflows/10/runs?')).length, 3)
 })
 
@@ -552,59 +495,24 @@ function apiFetcher(api) {
   }
 }
 
-for (const [name, mutate, allowed] of [
-  ['administrator', () => {}, true],
-  ['ordinary write', f => { f.permissions.administrator.permission = 'write' }, false],
-  ['unknown permission', f => { f.permissions.administrator.permission = 'unknown' }, false],
-  ['API 401', f => { f.permissions.administrator = new Error('GitHub API failed (401)') }, false],
-  ['API 403', f => { f.permissions.administrator = new Error('GitHub API failed (403)') }, false],
-  ['mismatched sender', f => { f.event.sender.login = 'other-user' }, false],
-  ['ordinary writer rerun', f => { f.actors.triggeringActor = 'writer'; f.permissions.writer = { permission: 'write', user: { login: 'writer', id: 14 } } }, false]
-]) test(`initialize authorization ${allowed ? 'accepts' : 'refuses'} ${name} using read-only administrator verification`, async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-initialize-'))
-  try {
-    const f = fixture({ dispatch: true })
-    f.event.inputs = { operation: 'initialize' }
-    mutate(f)
-    const eventPath = join(directory, 'event.json')
-    await writeFile(eventPath, JSON.stringify(f.event))
-    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_EVENT_PATH: eventPath,
-      GITHUB_ACTOR: f.actors.trustedActor, GITHUB_TRIGGERING_ACTOR: f.actors.triggeringActor, GH_TOKEN: 'fake' }
-    if (allowed) assert.equal((await main('admin', env, apiFetcher(f.api))).actor.permission, 'admin')
-    else await assert.rejects(main('admin', env, apiFetcher(f.api)), /Manual preview|administrator permission/)
-    assert.deepEqual(f.writes, [])
-    assert.ok(f.reads.every(path => path.startsWith('collaborators/')))
-  } finally { await rm(directory, { recursive: true, force: true }) }
-})
-
-test('initialize authorization refuses an automatic event or preview operation', async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-initialize-input-'))
-  try {
-    const f = fixture({ dispatch: true })
-    const eventPath = join(directory, 'event.json')
-    await writeFile(eventPath, JSON.stringify(f.event))
-    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_EVENT_NAME: 'workflow_run', GITHUB_EVENT_PATH: eventPath, GH_TOKEN: 'fake' }
-    await assert.rejects(main('admin', env, apiFetcher(f.api)), /requires workflow_dispatch/)
-    await assert.rejects(main('admin', { ...env, GITHUB_EVENT_NAME: 'workflow_dispatch' }, apiFetcher(f.api)), /initialize operation/)
-    assert.deepEqual(f.reads, [])
-    assert.deepEqual(f.writes, [])
-  } finally { await rm(directory, { recursive: true, force: true }) }
-})
-
-test('recheck CLI refreshes administrator permission from trusted job actors instead of saved context proof', async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-admin-recheck-'))
+test('manual recheck CLI requires the saved PR/head to match the current native workflow event', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-event-recheck-'))
   try {
     const f = fixture({ fork: true, dispatch: true })
-    const context = await prepare(f.event, f.api, f.actors)
+    const context = await prepare(f.event, f.api)
     const contextPath = join(directory, 'context.json'), eventPath = join(directory, 'event.json'), identityPath = join(directory, 'identity.json')
     await writeFile(contextPath, JSON.stringify(context))
     await writeFile(eventPath, JSON.stringify(f.event))
     await writeFile(join(directory, 'receipt.json'), JSON.stringify(f.receipt))
-    f.permissions.administrator.permission = 'write'
-    await assert.rejects(main('recheck', { GITHUB_REPOSITORY: repo.full_name, GITHUB_EVENT_NAME: 'workflow_dispatch',
-      GITHUB_EVENT_PATH: eventPath, GITHUB_ACTOR: 'administrator', GITHUB_TRIGGERING_ACTOR: 'administrator',
-      GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath, PR_PREVIEW_ARTIFACT_DIR: directory, PR_PREVIEW_IDENTITY_FILE: identityPath }, apiFetcher(f.api)), /verified repository administrator/)
-    await assert.rejects(readFile(identityPath), { code: 'ENOENT' })
+    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_EVENT_PATH: eventPath,
+      GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath, PR_PREVIEW_ARTIFACT_DIR: directory, PR_PREVIEW_IDENTITY_FILE: identityPath }
+    assert.equal((await main('recheck', env, apiFetcher(f.api))).status, 'deploy')
+    const savedIdentity = await readFile(identityPath, 'utf8')
+    f.event.inputs.head_sha = 'e'.repeat(40)
+    await writeFile(eventPath, JSON.stringify(f.event))
+    await assert.rejects(main('recheck', env, apiFetcher(f.api)), /does not match the current GitHub event/)
+    assert.equal(await readFile(identityPath, 'utf8'), savedIdentity)
+    assert.equal(f.reads.some(path => path.startsWith('collaborators/')), false)
     assert.deepEqual(f.writes, [])
   } finally { await rm(directory, { recursive: true, force: true }) }
 })

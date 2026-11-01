@@ -3,7 +3,6 @@ const shaPattern = /^[a-f0-9]{40}$/
 const requireThat = (condition, message) => { if (!condition) throw new Error(message) }
 const positiveInteger = value => /^(?:[1-9][0-9]*)$/.test(String(value)) && Number.isSafeInteger(Number(value))
 const sha = value => typeof value === 'string' && shaPattern.test(value)
-const login = value => typeof value === 'string' && /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/.test(value)
 const sameRepository = (actual, expected) => positiveInteger(actual?.id) && positiveInteger(expected?.id) &&
   typeof actual?.full_name === 'string' && actual.full_name.length > 0 && actual.full_name === expected?.full_name && actual.id === expected.id
 
@@ -53,11 +52,9 @@ export function validateClosedPreview(pr, requestedNumber) {
 /**
  * All inputs are data: API responses, a GitHub event payload, and the downloaded
  * receipt. Dispatch callers pass approvalHeadSha explicitly from their input.
- * The trusted publisher must obtain both admin permissions from current GitHub
- * API responses; the proof cannot come from an artifact or dispatch input.
  * A receipt alone never authorizes publication or cleanup.
  */
-export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, receipt, artifacts, approvalHeadSha = null, adminApproval = null }) {
+export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, receipt, artifacts, approvalHeadSha = null }) {
   const identity = previewIdentity(pr)
   const outcome = status => ({ status, ...identity })
   requireThat(sameRepository(event?.repository, pr.base.repo), 'Unexpected event repository')
@@ -73,13 +70,10 @@ export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, rece
       upstream.head_sha === run.head_sha && upstream.workflow_id === workflow.id &&
       sameRepository(upstream.repository, run.repository) && sameRepository(upstream.head_repository, run.head_repository) &&
       upstream.event === 'pull_request' && upstream.status === 'completed' && upstream.conclusion === 'success', 'Triggering CI run changed or was unsuccessful')
-    requireThat(approvalHeadSha == null && adminApproval == null, 'A workflow_run cannot grant manual preview approval')
+    requireThat(approvalHeadSha == null, 'A workflow_run cannot grant manual preview approval')
   } else {
     requireThat(event.ref === 'refs/heads/main' && event.inputs != null, 'Manual preview approval must run from main')
     requireThat(sha(approvalHeadSha), 'Manual preview approval requires a complete head SHA')
-    const administrators = [adminApproval?.actor, adminApproval?.triggeringActor]
-    requireThat(administrators.every(actor => actor?.permission === 'admin' && login(actor.login) && Number.isSafeInteger(actor.id) && actor.id > 0), 'Manual preview approval requires current administrator permissions')
-    requireThat(adminApproval.actor.login === event.sender?.login && adminApproval.actor.id === event.sender?.id, 'Administrator approval does not match the dispatch sender')
   }
 
   requireThat(receipt?.version === 1 && receipt.repository === repository && receipt.prNumber === pr.number &&

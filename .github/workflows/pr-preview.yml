@@ -49,10 +49,6 @@ jobs:
         with:
           node-version: 24.22.1
           cache: npm
-      - name: Require a repository administrator for initialization
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/pr-preview.mjs admin
       - run: npm ci --ignore-scripts
       - name: Initialize only the dedicated parent without business bindings
         env:

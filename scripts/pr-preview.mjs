@@ -10,31 +10,6 @@ const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value)
 const integer = value => /^[1-9][0-9]*$/.test(String(value)) && Number.isSafeInteger(Number(value))
 const requireThat = (condition, message) => { if (!condition) throw new Error(message) }
 
-export class ManualApprovalError extends Error {}
-
-/** Actor names come from GitHub's immutable job environment, never workflow inputs. */
-export async function manualAdminApproval(event, api, { trustedActor, triggeringActor } = {}) {
-  if (event?.workflow_run != null) return null
-  const login = value => typeof value === 'string' && /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/.test(value)
-  const reject = message => { throw new ManualApprovalError(message) }
-  if (event?.repository?.full_name !== repository || !integer(event.repository.id) || event.ref !== 'refs/heads/main' ||
-    !login(trustedActor) || !login(triggeringActor) || event.sender?.login !== trustedActor || !Number.isSafeInteger(event.sender?.id) || event.sender.id <= 0) {
-    reject('Manual preview actor does not match the trusted GitHub event')
-  }
-  async function permission(name, expectedId = null) {
-    let access
-    try { access = await api(`collaborators/${encodeURIComponent(name)}/permission`) } catch {
-      reject('Cannot verify repository administrator permission')
-    }
-    if (access?.permission !== 'admin' || access.user?.login !== name || !Number.isSafeInteger(access.user?.id) || access.user.id <= 0 ||
-      (expectedId != null && access.user.id !== expectedId)) reject('Manual preview requires a verified repository administrator')
-    return { login: access.user.login, id: access.user.id, permission: 'admin' }
-  }
-  const actor = await permission(trustedActor, event.sender.id)
-  const triggering = triggeringActor === trustedActor ? actor : await permission(triggeringActor)
-  return { actor, triggeringActor: triggering }
-}
-
 export function githubClient(token, fetcher = fetch) {
   requireThat(typeof token === 'string' && token.length > 0, 'Missing GitHub token')
   return async (path, body = null) => {
@@ -112,14 +87,13 @@ async function latestRun(api, workflow, pr) {
 function skip(context, reason) { return { ...context, action: 'skip', status: reason } }
 
 /** Select only API identities. Downloading or executing PR code is never done here. */
-export async function prepare(event, api, actors = {}) {
+export async function prepare(event, api) {
   const source = eventIdentity(event)
-  const adminApproval = source.manual ? await manualAdminApproval(event, api, actors) : null
   const workflow = await api('actions/workflows/pr-ci.yml')
   let pr, run, artifacts
   if (source.manual) {
     pr = await currentPull(api, event.inputs.pr_number)
-    const context = { event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha, adminApproval }
+    const context = { event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha }
     if (pr.state !== 'open' || pr.head.sha !== source.approvalHeadSha) return skip(context, 'stale')
     run = await latestRun(api, workflow, pr)
     runIdentity(run, workflow, event)
@@ -146,25 +120,24 @@ export async function prepare(event, api, actors = {}) {
     if (discovered[0].mergeSha !== pr.merge_commit_sha || ![pr.head.sha, pr.merge_commit_sha].includes(run.head_sha)) return skip(context, 'stale')
   }
   const context = { event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha,
-    runId: String(run.id), runAttempt: String(run.run_attempt), receipt: provisionalReceipt(pr, run), adminApproval }
+    runId: String(run.id), runAttempt: String(run.run_attempt), receipt: provisionalReceipt(pr, run) }
   if (pr.draft === true) return skip(context, 'skipped')
   requireThat(sha(pr.merge_commit_sha), 'PR test merge is unavailable; resolve conflicts and rerun CI')
   const mergeCommit = await api(`git/commits/${pr.merge_commit_sha}`)
-  const outcome = validatePreviewRun({ event, run, workflow, pr, mergeCommit, receipt: context.receipt, artifacts, approvalHeadSha: source.approvalHeadSha, adminApproval })
+  const outcome = validatePreviewRun({ event, run, workflow, pr, mergeCommit, receipt: context.receipt, artifacts, approvalHeadSha: source.approvalHeadSha })
   if (outcome.status !== 'deploy') return skip(context, outcome.status)
   const artifact = selectPreviewArtifact(artifacts, pr, run)
   return { ...context, action: 'deploy', status: 'deploy', identity: outcome, artifactId: String(artifact.id), artifactDigest: artifact.digest }
 }
 
 /** Reread every identity after download and at both sides of cloud deployment. */
-export async function authorize(context, receipt, api, actors = {}) {
+export async function authorize(context, receipt, api) {
   requireThat(context?.action === 'deploy' && integer(context.prNumber) && integer(context.runId), 'Invalid deployment context')
-  const adminApproval = await manualAdminApproval(context.event, api, actors)
   const [pr, run, workflow, artifacts] = await Promise.all([
     currentPull(api, context.prNumber), api(`actions/runs/${context.runId}`), api('actions/workflows/pr-ci.yml'), artifactsFor(api, context.runId)
   ])
   const mergeCommit = sha(pr.merge_commit_sha) ? await api(`git/commits/${pr.merge_commit_sha}`) : null
-  const outcome = validatePreviewRun({ event: context.event, run, workflow, pr, mergeCommit, receipt, artifacts, approvalHeadSha: context.approvalHeadSha, adminApproval })
+  const outcome = validatePreviewRun({ event: context.event, run, workflow, pr, mergeCommit, receipt, artifacts, approvalHeadSha: context.approvalHeadSha })
   if (outcome.status === 'deploy') {
     requireThat(outcome.artifactId === context.artifactId && outcome.artifactDigest === context.artifactDigest &&
       outcome.runAttempt === context.runAttempt, 'Selected preview artifact changed')
@@ -179,8 +152,8 @@ async function commitStatus(api, context, state, description, targetURL) {
 }
 
 /** Must run only after authorize returned deploy. */
-export async function pending(context, receipt, api, actors = {}) {
-  const identity = await authorize(context, receipt, api, actors)
+export async function pending(context, receipt, api, { onDeploymentCreated = null } = {}) {
+  const identity = await authorize(context, receipt, api)
   if (identity.status !== 'deploy') return { ...context, status: identity.status }
   requireThat(context.deploymentId == null, 'Preview deployment already started')
   const deployment = await api('deployments', { ref: identity.headSha, environment: `preview/pr-${context.prNumber}`,
@@ -188,7 +161,7 @@ export async function pending(context, receipt, api, actors = {}) {
     description: `PR #${context.prNumber}: ${identity.mergeSha}`, payload: { preview: 'lie-pr-preview', pr_number: context.prNumber, ...identity } })
   requireThat(integer(deployment?.id), 'Invalid GitHub deployment ID')
   const updated = { ...context, deploymentId: String(deployment.id) }
-  if (actors.onDeploymentCreated != null) await actors.onDeploymentCreated(updated)
+  if (onDeploymentCreated != null) await onDeploymentCreated(updated)
   await api(`deployments/${updated.deploymentId}/statuses`, { state: 'in_progress', log_url: runURL(context), auto_inactive: false, description: 'Deploying this PR build' })
   await commitStatus(api, context, 'pending', 'Deploying current PR preview', runURL(context))
   return updated
@@ -279,12 +252,11 @@ async function inactive(api, context, description) {
 }
 
 /** Call only after the workflow's HTTP probe passes. Never delete an old run's whole preview. */
-export async function publish(context, receipt, result, api, actors = {}) {
+export async function publish(context, receipt, result, api) {
   requireThat(integer(context?.deploymentId), 'Missing pending GitHub deployment')
   const urls = previewURLs(result)
   let identity
-  try { identity = await authorize(context, receipt, api, actors) } catch (error) {
-    if (error instanceof ManualApprovalError) throw error
+  try { identity = await authorize(context, receipt, api) } catch {
     await inactive(api, context, 'Build identity changed; preview is not current')
     return { status: 'stale' }
   }
@@ -298,16 +270,14 @@ export async function publish(context, receipt, result, api, actors = {}) {
   return { status: 'success', ...urls }
 }
 
-export async function fail(context, receipt, api, actors = {}) {
-  await manualAdminApproval(context?.event, api, actors)
+export async function fail(context, receipt, api) {
   if (context?.deploymentId != null) {
     requireThat(integer(context.deploymentId), 'Invalid GitHub deployment ID')
     await api(`deployments/${context.deploymentId}/statuses`, { state: 'failure', log_url: runURL(context), auto_inactive: false,
       description: 'Update failed; stable URL may still serve an older build' })
   }
   let identity
-  try { identity = await authorize(context, receipt, api, actors) } catch (error) {
-    if (error instanceof ManualApprovalError) throw error
+  try { identity = await authorize(context, receipt, api) } catch {
     return { status: 'stale' }
   }
   if (identity.status === 'deploy') await commitStatus(api, context, 'failure', 'Update failed; existing preview may be an older build', runURL(context))
@@ -398,17 +368,10 @@ export async function main(command, env = process.env, fetcher = fetch) {
   const contextFile = resolve(env.PR_PREVIEW_CONTEXT_FILE ?? 'tmp/pr-preview-context.json')
   const identityFile = resolve(env.PR_PREVIEW_IDENTITY_FILE ?? 'tmp/pr-preview-identity.json')
   const receiptFile = resolve(env.PR_PREVIEW_ARTIFACT_DIR ?? `${env.RUNNER_TEMP ?? 'tmp'}/pr-preview-artifact`, 'receipt.json')
-  const actors = { trustedActor: env.GITHUB_ACTOR, triggeringActor: env.GITHUB_TRIGGERING_ACTOR }
-  if (command === 'admin') {
-    requireThat(env.GITHUB_EVENT_NAME === 'workflow_dispatch', 'Initialization requires workflow_dispatch')
-    const event = JSON.parse(await readFile(env.GITHUB_EVENT_PATH, 'utf8'))
-    requireThat(event.workflow_run == null && event.ref === 'refs/heads/main' && event.inputs?.operation === 'initialize', 'Initialization requires the main initialize operation')
-    return manualAdminApproval(event, api, actors)
-  }
   if (command === 'prepare') {
     requireThat(['workflow_run', 'workflow_dispatch'].includes(env.GITHUB_EVENT_NAME), 'Unexpected publisher event')
     const event = JSON.parse(await readFile(env.GITHUB_EVENT_PATH, 'utf8'))
-    const context = await prepare(event, api, actors)
+    const context = await prepare(event, api)
     if (env.SELECTED_PR_NUMBER != null) requireThat(integer(env.SELECTED_PR_NUMBER) && Number(env.SELECTED_PR_NUMBER) === context.prNumber, 'Selected PR changed between publisher jobs')
     await save(contextFile, context)
     await outputs({ action: context.action, status: context.status, pr_number: context.prNumber,
@@ -423,8 +386,8 @@ export async function main(command, env = process.env, fetcher = fetch) {
   if (context.event != null && context.event.workflow_run == null) {
     requireThat(env.GITHUB_EVENT_NAME === 'workflow_dispatch', 'Manual context requires the current workflow_dispatch event')
     const event = JSON.parse(await readFile(env.GITHUB_EVENT_PATH, 'utf8'))
-    requireThat(event.workflow_run == null && event.ref === 'refs/heads/main' && event.sender?.login === context.event?.sender?.login &&
-      event.sender?.id === context.event?.sender?.id && event.inputs?.pr_number === context.event?.inputs?.pr_number &&
+    requireThat(event.workflow_run == null && event.ref === 'refs/heads/main' && event.repository?.id === context.event?.repository?.id &&
+      event.repository?.full_name === repository && event.inputs?.pr_number === context.event?.inputs?.pr_number &&
       event.inputs?.head_sha === context.event?.inputs?.head_sha, 'Manual context does not match the current GitHub event')
   }
   if (command === 'cleanup-authorize') {
@@ -439,7 +402,7 @@ export async function main(command, env = process.env, fetcher = fetch) {
   if (command === 'notice') return notice(context, api)
   const receipt = JSON.parse(await readFile(receiptFile, 'utf8'))
   if (command === 'authorize' || command === 'recheck') {
-    const result = await authorize(context, receipt, api, actors)
+    const result = await authorize(context, receipt, api)
     if (result.status === 'deploy') {
       await save(identityFile, { version: 1, repository, ...result })
     }
@@ -447,17 +410,17 @@ export async function main(command, env = process.env, fetcher = fetch) {
     return result
   }
   if (command === 'pending') {
-    const result = await pending(context, receipt, api, { ...actors, onDeploymentCreated: created => save(contextFile, created) })
+    const result = await pending(context, receipt, api, { onDeploymentCreated: created => save(contextFile, created) })
     await save(contextFile, result)
     await outputs({ current: String(result.deploymentId != null), deployment_id: result.deploymentId ?? '' }, env.GITHUB_OUTPUT)
     return result
   }
   if (command === 'publish') {
     const result = JSON.parse(await readFile(env.PR_PREVIEW_DEPLOYMENT_FILE ?? 'tmp/pr-preview-deployment.json', 'utf8'))
-    return publish(context, receipt, result, api, actors)
+    return publish(context, receipt, result, api)
   }
-  if (command === 'fail') return fail(context, receipt, api, actors)
-  throw new Error('Expected admin, prepare, authorize, recheck, pending, probe, publish, fail, notice, cleanup-authorize or cleanup-report')
+  if (command === 'fail') return fail(context, receipt, api)
+  throw new Error('Expected prepare, authorize, recheck, pending, probe, publish, fail, notice, cleanup-authorize or cleanup-report')
 }
 
 if (process.argv[1] != null && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

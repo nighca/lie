@@ -12,7 +12,7 @@
 
 PR关闭只撤相应预览入口，不删除共享桶或按PR删除案件（已无归属前缀），用户已明确回复“没问题”。非生产数据统一清理需另定策略，不能保留旧逐PR清桶计划。当前接口相同规范化内容同ID同字节，但不同版本后端/规则仍可能产生兼容影响，用户已接受此非生产取舍。
 
-用户认为外部 PR 经管理员 review/批准后可作为可信预览输入，包括运行该 PR 的 Worker。审批绑定当前 SHA，更新后重新批准才可部署新的前后端并使用非生产后端能力；同仓自动策略不因此授予外部更新自动批准。批准后运行不代表把部署管理 token 放入 PR 构建，也不允许 PR 配置选择生产桶或生产凭据；发布器限定部署目标、非生产绑定与配置范围。
+用户认为外部 PR 经维护者 review/批准后可作为可信预览输入，包括运行该 PR 的 Worker。最新明确采用GitHub手动运行工作流原生write权限，不自建admin/actor/sender/rerunner角色检查，更严格人选可由用户配置Environment required reviewers。审批绑定当前 SHA，更新后重新批准才可部署新的前后端并使用非生产后端能力；同仓自动策略不因此授予外部更新自动批准。批准后运行不代表把部署管理 token 放入 PR 构建，也不允许 PR 配置选择生产桶或生产凭据；发布器限定部署目标、非生产绑定与配置范围。
 
 语音最终接入已由root/P0上线合同明确：基线16d6434按浏览器签名Cookie分配稳定Device/Client，prepare首次OTA/绑定，WS用共享token首握，仅HTTP401一次OTA重试。复用非生产Agent/API key/WS token，不能复用一个固定Device给所有访客；不需每PR设备池或activelease。生产与非生产Cookie签名分离，PR namespace为pr-N，沿host-only Cookie隔开身份。四项runtime配置与上线回执见[完整实施方案](pr-preview-implementation.md)。配置值尚未复制到GitHub或新Worker；两套凭据不自动构成计费/配额隔离。
 
