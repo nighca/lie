@@ -1,6 +1,6 @@
 # 独立 Safari 外放诊断工具
 
-2026-11-01。**v1已随730ba84上线，并取得用户手动iPad/iPhone合成信号样本；v2分时统计已完成离线检查、尚未发布。实际游戏STT自打断根因未定，没有产品语音修复。** 调查与设备对照见[专项记录](../../docs/reviews/safari-self-interruption-2026-11-01/README.md)。用户明确批准独立诊断入口，并要求不影响其他线上功能。本批继续只改独立HTML及必要档案，无应用入口/常规流程链接；由协调者 review/集成/发布。
+2026-11-01。**v1已随730ba84上线并取得用户手动iPad/iPhone样本，v2分时统计已随6bd6426上线。当前追加用户要求的一键复制按钮，待review/发布；实际游戏STT自打断根因未定，没有产品语音修复。** 调查与设备对照见[专项记录](../../docs/reviews/safari-self-interruption-2026-11-01/README.md)。用户明确批准独立诊断入口，并要求不影响其他线上功能。本批继续只改独立HTML及必要档案，无应用入口/常规流程链接；由协调者 review/集成/发布。
 
 ## 有依据的实验
 
@@ -23,7 +23,7 @@
 - 格式v2保留旧aggregate，新增每10帧（约200ms）音量窗口；每阶段最多50个窗口，超出置`timelineTruncated`但aggregate继续累计。每窗口只有frame位置/帧数、RMS/peak和相对阶段的首末帧主线程到达时间；没有音频样本或绝对时间。这些到达时间包含主线程调度，不能当实际声学采样时间。目的是分离启播瞬态/持续输入，并看首帧延迟，不自动作AEC/ASR结论。
 - 只输出 A/B/C、phase、三个阶段聚合音量、实际 capture/playback sampleRate/state、各阶段 actual track settings（AEC/NS/AGC/sampleRate/channelCount/latency；未报告为null）、清理终态、有限错误码。设置在采集resume后、阶段切换及每10帧重新读取。结果没有 deviceId/groupId/设备label/UA/会话ID/原话；不会打印异常原文。
 - 无 fetch/WebSocket/上传 API，无 Cookie 读写、local/sessionStorage、IndexedDB、MediaRecorder、第三方脚本或统计。页面请求本身仍会经过正常 HTTPS 主机，与“上传麦克风音频”不同；不扩展账号、Cloudflare权限、凭据或账单。
-- 最多6份完成结果存在页面内存，刷新/关闭即丢弃。只有用户自己手动选择复制结果文字时才会将其带出页面；没有自动剪贴板/下载/提交按钮。
+- 最多6份完成结果存在页面内存，刷新/关闭即丢弃。用户明确要求一键复制后，增加“复制全部结果”：仅在测试停止且有结果时可用，显式点击才将当前显示的完整JSON（含历史结果）写入系统剪贴板，不读取剪贴板、不后台复制/上传。成功、拒绝/不支持、复制期间又开始新测试均给如实反馈，不覆盖音频状态；失败保留原结果供手动复制。没有下载/提交或新网络接口。
 - 自动结束、停止按钮和 pagehide 都释放自有 mic tracks、capture graph、worklet port、module Blob URL、contexts、信号与静音source，以及 C 的audio元素/stream tracks。权限迟到也释放；权限框未决定时停止会等待其结束，页面明确提示。关闭context失败如实显示未清理并禁止下一组，不假称成功。
 - CSP：`default-src 'none'` / `connect-src 'none'`，脚本/样式用本地来源或单文件内容hash；仅为自有 AudioWorklet 允许 script/worker `blob:`，媒体只允许blob/srcObject。不移除或放宽产品页面的全局安全策略。
 
@@ -41,13 +41,15 @@ node spikes/safari-audio/build.mjs
 
 用户首轮[iPad六组](../../docs/reviews/safari-self-interruption-2026-11-01/ipad-first-pass/README.md)和[iPhone三组](../../docs/reviews/safari-self-interruption-2026-11-01/iphone-first-pass/README.md)已保全。C对Safari iPad不是一致收益，iPhone C还有明确响度/出声差异；不按C修产品。为避免反复只看整体RMS，格式v2新增瞬态/稳定段窗口及到达延迟，另加2项fake验证短峰/稳定输入、partial window、到达时间与窗口内存边界；当前共15项。下一手动窗口仅少量Safari B→A→A→B，而非重跑所有组。
 
+一键复制追加3项检查（共18项fake）：只有点击才复制完整历史/current、拒绝不伪称成功且保留原文、迟到clipboard结果不重开采集中复制按钮。工具tsc/独立build通过；不动probe音频代码、v2数据格式或产品语音。
+
 Vite独立配置，不读取应用vite.config、不导入应用main/controller，不会调用prepare/status/voice。产物在ignored `tmp/safari-audio-probe/`：普通index/assets与单文件`safari-audio.html`；后者将脚本和CSS内联并精确写入SHA256 CSP，无外部资源/导入请求。构建产物扫描已核对CSP hash、无网络/存储API引用、无provider入口；不因扫描通过声称已验证浏览器CSP或真实设备音频。
 
-首轮IAB对file://预览的唯一尝试被浏览器URL协议策略拒绝，仅允许http/https。没有换浏览器、原始CDP、注入或服务器绕过。v1正式HTTPS发布后，已用正常IAB自有tab完成不开mic的原生初始控件/inlineJS/自有样式验收并关闭tab；Cloudflare边缘beacon和验收工具style被CSP拦截的告警与页面自身功能分开保留，详见[验收补存](../../docs/reviews/safari-self-interruption-2026-11-01/ipad-first-pass/README.md)。v2仍仅离线fake，jsdom不实施真实CSP，不把v1验收当作v2已经上线。
+首轮IAB对file://预览的唯一尝试被浏览器URL协议策略拒绝，仅允许http/https。没有换浏览器、原始CDP、注入或服务器绕过。v1及v2正式HTTPS发布后，均已用正常IAB自有tab完成不开mic的初始控件/inlineJS/自有样式验收并关闭tab；边缘beacon和工具style被CSP拦截的告警与页面自身功能分开保留，详见[专项记录](../../docs/reviews/safari-self-interruption-2026-11-01/README.md)。一键复制当前仅fake验证，仍待发布后的明确合成文本clipboard验收，不调用真实mic。
 
 ## 已批准的线上入口范围
 
-用户已同意的范围：只将单文件产物作为同域可信HTTPS上的隐藏独立静态页面 `/_diagnostics/safari-audio.html`，不链接常规流程，不接gateway API，不改产品音频。Web postbuild在原校验之后调用本目录`build.mjs --publish`，仅向已有Web dist写这一文件；中间assets保留ignored tmp，不发布。普通Web测试/类型检查同时覆盖诊断工具。未改Worker/路由/CSP全局配置/部署workflow/锁文件或依赖。v1于730ba84发布，平台将.html正常307到canonical [诊断入口](https://lie.agency/_diagnostics/safari-audio)；v2待review/发布，仍沿用同入口。普通HTTP局域网不能代替iPad可信HTTPS开麦，不开新隧道/改DNS/增加服务账号。
+用户已同意的范围：只将单文件产物作为同域可信HTTPS上的隐藏独立静态页面 `/_diagnostics/safari-audio.html`，不链接常规流程，不接gateway API，不改产品音频。Web postbuild在原校验之后调用本目录`build.mjs --publish`，仅向已有Web dist写这一文件；中间assets保留ignored tmp，不发布。普通Web测试/类型检查同时覆盖诊断工具。未改Worker/路由/CSP全局配置/部署workflow/锁文件或依赖。v1于730ba84发布，平台将.html正常307到canonical [诊断入口](https://lie.agency/_diagnostics/safari-audio)；v2已随6bd6426沿用同入口上线，本次复制按钮也沿用它。普通HTTP局域网不能代替iPad可信HTTPS开麦，不开新隧道/改DNS/增加服务账号。
 
 用户手动在同iPad的Safari和Chrome保持相同音量/位置，每浏览器各跑A/B/C，第一轮本人不说话且确认每组均能听到信号。无音频、frames为0、初始化错误、context未running或清理失败的组不用于能量比较；设置null仅代表未报告。可再正常说话做一轮观察自己声音是否同样被抑制，但RMS不能区分真人/回声，合成信号也不能直接代替真实TTS/ASR验收。先看结果能否隔离输出路径/采样率，再决定最小产品改动，最后才由用户在真实玩法里复测。
 
