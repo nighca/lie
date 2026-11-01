@@ -10,7 +10,7 @@
 .role-switch button[aria-pressed=true] { background: #111b45; border-color: #111b45; color: white; }
 .demo-shell { max-width: 1200px; padding: 24px 32px 60px; }
 .demo-shell .page-heading { margin-top: 28px; }
-.demo-shell .share-disclosure { text-align: right; font-size: 12px; color: var(--lie-muted); margin: 18px 0 0; }
+.share-disclosure { font-size: 12px; line-height: 1.7; color: var(--lie-muted); margin: 24px 0 0; padding-top: 14px; border-top: 1px solid #e3e5e9; }
 .demo-shell .ending-layout { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
 .reveal-text { white-space: pre-wrap; }
 .share-lead { margin: 0 0 20px; }
@@ -26,6 +26,6 @@
 .demo-feedback { background: var(--lie-soft-blue); padding: 10px; border-radius: 12px; font-size: 13px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .loading-ring { animation: none; } }
-@media (max-width: 670px) { .prototype-bar { padding: 12px 16px; }.prototype-heading { gap: 3px; }.prototype-heading span { width: 100%; font-size: 11px; }.prototype-controls { gap: 10px; }.prototype-controls p { display: none; }.demo-shell { padding: 16px 16px 36px; }.demo-shell .ending-layout { grid-template-columns: 1fr; }.demo-shell .player-preview { display: none; }.demo-shell .page-heading { align-items: start; flex-direction: column; gap: 5px; }.demo-shell .share-disclosure { text-align: left; }.share-actions { align-items: stretch; flex-direction: column; }.state-card { padding: 28px 18px; }.state-card h1 { font-size: 24px; }.prototype-controls label { font-size: 12px; }.demo-shell .intro-card { padding: 28px 20px; }.demo-shell .intro-characters { padding-inline: 0; }.demo-shell .flow-hint { gap: 18px; }.demo-shell .flow-hint li { padding: 6px 4px; font-size: 12px; }.demo-shell .flow-hint li + li::before { left: -15px; }.demo-shell .intro-start { font-size: 19px; } }
+@media (max-width: 670px) { .prototype-bar { padding: 12px 16px; }.prototype-heading { gap: 3px; }.prototype-heading span { width: 100%; font-size: 11px; }.prototype-controls { gap: 10px; }.prototype-controls p { display: none; }.demo-shell { padding: 16px 16px 36px; }.demo-shell .ending-layout { grid-template-columns: 1fr; }.demo-shell .player-preview { display: none; }.demo-shell .page-heading { align-items: start; flex-direction: column; gap: 5px; }.share-actions { align-items: stretch; flex-direction: column; }.state-card { padding: 28px 18px; }.state-card h1 { font-size: 24px; }.prototype-controls label { font-size: 12px; }.demo-shell .intro-card { padding: 28px 20px; }.demo-shell .intro-characters { padding-inline: 0; }.demo-shell .flow-hint { gap: 18px; }.demo-shell .flow-hint li { padding: 6px 4px; font-size: 12px; }.demo-shell .flow-hint li + li::before { left: -15px; }.demo-shell .intro-start { font-size: 19px; } }
 .share-pending { min-height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 0 24px; text-align: center; }
 .share-pending p { margin: 18px 0 6px; font-weight: 700; }

@@ -102,7 +102,6 @@ onUnmounted(cancelPending)
         </div>
         <footer class="step-footer"><UiButton variant="quiet" @click="notice = '本原型聚焦分享体验，不切换完整编辑步骤。'">上一步</UiButton><div class="final-actions"><UiButton variant="quiet" @click="notice = '投稿给官方的既有流程保持原样。'">投稿给官方</UiButton><UiButton variant="secondary" @click="openPlayer">试玩</UiButton><UiButton @click="share">分享案件</UiButton></div></footer>
       </fieldset>
-      <p class="share-disclosure">生成链接会将案件保存到 LIE 服务端，持有链接的人可以查看完整内容。</p>
       <p v-if="notice != null" class="demo-feedback" role="status">{{ notice }}</p>
     </main>
     <EditorDialog v-if="dialog" title="把谜题交给朋友" @close="closeShare">
@@ -119,6 +118,7 @@ onUnmounted(cancelPending)
         <p v-if="copyError" class="copy-error" role="status">无法自动复制，请选中上方链接手动复制。</p>
         <div class="share-actions"><UiButton @click="copy">{{ copied ? '已复制链接' : '复制分享链接' }}</UiButton></div>
       </template>
+      <p class="share-disclosure">生成链接会将案件保存到 LIE 服务端，持有链接的人可以查看完整内容。</p>
     </EditorDialog>
   </div>
 
