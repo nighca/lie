@@ -1,0 +1,7 @@
+fc787dc3768c2f407190147d18016f75c2cfa5e1facb58d567db90c3064a27ca  packages/game-core/src/context.ts
+71bf50bf7d1a277233c1fb3700ebac31d99641be17fc7ea775993a81fa589070  packages/game-core/src/session.ts
+982e3a265427f73ac60098b17afab7f42d85b29f93be37d921667baeddf69d22  apps/web/src/application/controller.ts
+20a7a0b0459a5b0f73061465518b88dc08924361f09258cbd4eb609a78fef16c  apps/web/src/application/liveVoice.ts
+b46d1a78c1a7d56a0f2858c74a611059557b4aa6b29e7faed48b224fc3ddb6e2  packages/voice/src/channel.ts
+25445cff0bc39a3e1f37ef097b5c1c78f210bada9795dda1fe0521ab85d83015  apps/web/test/character-memory-wire.test.ts
+a5b7ec2aeba6a040592ff0e962ad0a7f418c7aa3797159cfb244adbde3f463c5  docs/reviews/character-memory-2026-11-01/probe.mjs
