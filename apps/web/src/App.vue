@@ -181,7 +181,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         <div class="result-heading-copy">
           <p class="eyebrow">{{ view.phase === 'solved' ? '指认正确' : '本局结束' }}</p>
           <h1 ref="resultHeading" class="case-title" tabindex="-1">{{ view.phase === 'solved' ? '谜题解开了！' : '指认不正确' }}</h1>
-          <p v-if="view.phase === 'solved'" class="result-celebration">漂亮！藏在对话里的真相，被你找到了。</p>
+          <p v-if="view.phase === 'solved'" class="result-celebration">漂亮！你找到了谜题的答案。</p>
         </div>
       </header>
       <div class="result-content">
@@ -194,8 +194,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           </div>
           <figcaption><span>你指认了</span><strong><CharacterNameText :text="resultCharacter.name" :characters="characterNames" /></strong></figcaption>
         </figure>
-        <section v-if="view.phase === 'solved'" class="result-story" aria-label="完整经过">
-          <h2>完整经过</h2><p v-for="(paragraph, index) in resultParagraphs" :key="index"><CharacterNameText :text="paragraph" :characters="characterNames" /></p>
+        <section v-if="view.phase === 'solved'" class="result-story" aria-label="揭晓内容">
+          <h2>揭晓内容</h2><p v-for="(paragraph, index) in resultParagraphs" :key="index"><CharacterNameText :text="paragraph" :characters="characterNames" /></p>
         </section>
         <section v-else class="result-story" aria-label="调查结果">
           <h2>这次调查已结束</h2><p>想再试一次，请重新开始一局。</p>
@@ -224,7 +224,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <template #actions><UiButton @click="backgroundOpen = false">继续调查</UiButton></template>
     </UiDialog>
     <UiDialog class="accusation-dialog" :open="view.accusationOpen && !backgroundOpen" title="我有答案了" @close="controller.closeAccusation()">
-      <p class="accusation-question">你认为谁是这次事件的责任人？</p>
+      <p class="accusation-question">你认为谁是我们要找的人？</p>
       <p class="accusation-hint">点击人物提交指认</p>
       <div class="intro-characters accusation-choices" :class="{ 'intro-characters--many': view.characters.length > 5 }">
         <button v-for="(character, index) in view.characters" :key="character.id" type="button" class="intro-character accusation-character" :aria-label="`指认 ${character.name}`" :style="{ ...fanStyle(index), '--character-accent': characterPreset(character.appearanceId)?.accent ?? 'var(--lie-aqua)' }" @click="controller.accuse(character.id)">
