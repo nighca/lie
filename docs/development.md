@@ -1,6 +1,6 @@
 # 开发与服务登记
 
-2026-11-01 当前登记截点：正式main为35e987a，持久8787/8788随owning main保留。当前5176为WebMCP Demo用户consumer、5544为首次帮助本地用户体验，均尚未释放；旧江苏5544与调查页5176停服记录仅对应旧轮。5177/5198没有新释放回执，继续保护。PR4实际云Preview已成功，无新本地服务；本轮仅按owner/root回执登记，不探测或启停服务。
+2026-11-01 当前登记截点：本批基线为35e987a，应用内容仍与35e987a相同，持久8787/8788随owning main保留。当前5176为WebMCP Demo用户consumer、5544为首次帮助本地用户体验，均尚未释放；旧江苏5544与调查页5176停服记录仅对应旧轮。5177/5198没有新释放回执，继续保护。PR4实际云Preview已成功，无新本地服务；本轮仅按owner/root回执登记，不探测或启停服务。
 
 ## 本地开发
 
@@ -28,8 +28,8 @@ npm run character-presets:check
 
 | 端口 / 生命周期 | owner、来源与最后回执 | consumer 与下一步 |
 | --- | --- | --- |
-| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；先前main-status读回51264a属历史；正式main现为35e987a，持久服务随owning main推进，不将旧SHA/PID当本轮服务实测。 | 用户本地对比；5544当前首次帮助consumer复用8788，旧江苏消费者已释放不代表新consumer或持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
-| 5176，WebMCP本地Demo用户审看保留 | Chat `01a19745`；WT `c4e9/lie`、branch `codex/webmcp-authoring-research`、base35e987a/current clean51830ee。Web PID48877/原PTY35629，入口 `/editor?demo=1&webmcp=1`。 | 用户consumer仍保留，owner释放后原PTY停并核PID/listener；无产品main/上线，不能用旧调查页5176退出记录停止本轮。Chrome token签名/生产支持未验，不读取或打印token。 |
+| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；先前main-status读回51264a属历史；本批基线35e987a，应用内容仍与35e987a相同，持久服务随owning main推进，不将旧SHA/PID当本轮服务实测。 | 用户本地对比；5544当前首次帮助consumer复用8788，旧江苏消费者已释放不代表新consumer或持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 5176，WebMCP本地Demo用户审看保留 | Chat `01a19745`；WT `c4e9/lie`、branch `codex/webmcp-authoring-research`、base35e987a，已验产品51830ee，文档head3e68803。Web PID48877/原PTY35629，入口 `/editor?demo=1&webmcp=1`。 | 用户consumer仍保留，owner释放后原PTY停并核PID/listener；无产品main/上线，不能用旧调查页5176退出记录停止本轮。Chrome token签名/生产支持未验，不读取或打印token。 |
 | 5544，首次帮助本地Vue体验保留 | Chat `01a19748`；WT `a92e/lie`、branch `codex/first-use-help-assessment`、base35e987a、最终clean360ac91。startup1b028cf＋dirty，运行产品hash与最终一致；Web PID64673/原PTY63756、cwd `apps/web`，strict127.0.0.1、proxy既有8788，入口 `/` 或 `/?demo=1`。 | 自动fake验收已结束，用户体验仍保留；用户仅批本地体验，未批产品合入。owner获用户释放后原PTY停核，不读editor store、不自动真实voice、不因旧江苏5544释放记录擅停。 |
 | 5544，江苏案最终试玩已停止交回 | 江苏案Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `lie-jiangsu-starter/lie`、branch `codex/lie-jiangsu-starter`、base1e88180＋当轮专项变更，最终源d6d33a7。原Web PID29602/PTY34175，strict127.0.0.1、proxy既有8788。用户接受后owner原PTY Ctrl-C停止，PID与5544监听核空，root收到同项回执。 | 用户consumer/服务turn已释放；没有关闭或刷新用户tab，不触碰8787/8788。旧礼物案释放事实另列，不将其PID套用于本轮；不自动重启。 |
 | 5544，礼物案用户试玩已释放 | 礼物案 Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `8b07/lie`、原base f862＋dirty，原PID10258/PTY8214。用户明确本轮试玩结束不保留环境；owner只读核无listener、原PTY Unknown process。 | 退出时间/原因未知，本次没有执行stop。保留dirty内容/附件，不重启、刷新用户tab或升级旧前端；正式案件确认门禁不变。 |
