@@ -1,0 +1,64 @@
+name: PR CI
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lie-pr-ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  CF_SEND_TELEMETRY: 'false'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.22.1
+          cache: npm
+      - run: npm ci
+      - name: Cache pinned image tools and verified derivatives
+        uses: actions/cache@v5
+        with:
+          path: tmp/image-build
+          key: ${{ runner.os }}-${{ runner.arch }}-lie-images-v1-${{ hashFiles('apps/web/build/image-tools.mjs', 'apps/web/build/image-optimize.mjs', 'apps/web/build/image-codec.mjs') }}-${{ hashFiles('design/character-presets/assets/**/*.png') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-lie-images-v1-${{ hashFiles('apps/web/build/image-tools.mjs', 'apps/web/build/image-optimize.mjs', 'apps/web/build/image-codec.mjs') }}-
+      - name: Check CI/CD handoff guards
+        run: node --test scripts/ci-release.test.mjs
+      - run: npm run typecheck
+      - name: Test with application and separate script coverage
+        run: npm run coverage
+      - name: Upload coverage reports and generated snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-pr-${{ github.event.pull_request.number }}-${{ github.sha }}
+          path: coverage/
+          if-no-files-found: warn
+          retention-days: 14
+      - run: npm run build
+      - name: Validate production build without uploading
+        run: npm exec --workspace @lie/gateway -- cf deploy --prebuilt --mode production --worker lie-game --provision=false --dry-run
+
+  gate:
+    if: always()
+    needs: [verify]
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Require every verification step to pass
+        env:
+          VERIFY_RESULT: ${{ needs.verify.result }}
+        run: test "$VERIFY_RESULT" = success
