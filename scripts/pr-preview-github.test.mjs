@@ -12,7 +12,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
     repository: { ...repository }, head_repository: headRepository, actor: { login: 'contributor' }, pull_requests: [{ number: 42 }] }
   const receipt = { version: 1, repository: 'nighca/lie', prNumber: 42, headSha, baseSha, mergeSha, runId: '100', runAttempt: '2' }
   return {
-    event: dispatch ? { repository: { ...repository }, ref: 'refs/heads/main', inputs: { pr: '42', head_sha: headSha } }
+    event: dispatch ? { repository: { ...repository }, ref: 'refs/heads/main', inputs: { pr: '42', head_sha: headSha }, sender: { login: 'maintainer', id: 7 } }
       : { action: 'completed', repository: { ...repository }, workflow_run: structuredClone(run) },
     run, workflow: { id: 10, path: '.github/workflows/pr-ci.yml', name: 'PR CI' },
     pr: { number: 42, state: 'open', draft: false, mergeable: true, merge_commit_sha: mergeSha,
@@ -20,7 +20,8 @@ function fixture({ fork = false, dispatch = false } = {}) {
     mergeCommit: { sha: mergeSha, parents: [{ sha: baseSha }, { sha: headSha }] }, receipt,
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: previewArtifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 100, repository_id: 1, head_repository_id: headRepository.id, head_sha: headSha } }] },
-    approvalHeadSha: dispatch ? headSha : null
+    approvalHeadSha: dispatch ? headSha : null,
+    adminApproval: dispatch ? { actor: { login: 'maintainer', id: 7, permission: 'admin' }, triggeringActor: { login: 'maintainer', id: 7, permission: 'admin' } } : null
   }
 }
 
@@ -52,6 +53,40 @@ test('fork requires manual approval of the current head from main', () => {
   assert.equal(validatePreviewRun(fixture({ fork: true, dispatch: true })).status, 'deploy')
   automatic.approvalHeadSha = headSha
   assert.throws(() => validatePreviewRun(automatic), /cannot grant manual/)
+})
+
+test('manual approval accepts two current administrators while keeping the original sender bound', () => {
+  const input = fixture({ fork: true, dispatch: true })
+  input.adminApproval.triggeringActor = { login: 'another-maintainer', id: 8, permission: 'admin' }
+  assert.equal(validatePreviewRun(input).status, 'deploy')
+})
+
+for (const [name, mutate] of [
+  ['missing proof', input => { input.adminApproval = null }],
+  ['missing actor proof', input => { delete input.adminApproval.actor }],
+  ['missing triggering actor proof', input => { delete input.adminApproval.triggeringActor }],
+  ['actor with write access', input => { input.adminApproval.actor.permission = 'write' }],
+  ['triggering actor with write access', input => { input.adminApproval.triggeringActor.permission = 'write' }],
+  ['unknown actor permission', input => { input.adminApproval.actor.permission = null }],
+  ['unknown triggering actor permission', input => { input.adminApproval.triggeringActor.permission = 'unknown' }],
+  ['actor sender login mismatch', input => { input.adminApproval.actor.login = 'another-maintainer' }],
+  ['actor sender ID mismatch', input => { input.adminApproval.actor.id = 8 }],
+  ['missing event sender', input => { delete input.event.sender }],
+  ['string actor ID', input => { input.adminApproval.actor.id = '7' }],
+  ['zero triggering actor ID', input => { input.adminApproval.triggeringActor.id = 0 }],
+  ['unsafe triggering actor ID', input => { input.adminApproval.triggeringActor.id = Number.MAX_SAFE_INTEGER + 1 }],
+  ['invalid actor login', input => { input.adminApproval.actor.login = '../maintainer' }],
+  ['invalid triggering actor login', input => { input.adminApproval.triggeringActor.login = '-maintainer' }]
+]) test(`manual approval rejects ${name}`, () => {
+  const input = fixture({ fork: true, dispatch: true })
+  mutate(input)
+  assert.throws(() => validatePreviewRun(input))
+})
+
+test('workflow_run cannot attach administrator proof even without an approval SHA', () => {
+  const input = fixture({ fork: true })
+  input.adminApproval = fixture({ dispatch: true }).adminApproval
+  assert.throws(() => validatePreviewRun(input), /cannot grant manual/)
 })
 
 test('Dependabot remains low trust even when its head repository is this repository', () => {

@@ -46,6 +46,8 @@ PR CI 在托管临时 runner 执行 PR 的 npm/构建/测试，只读 GitHub 权
 
 API独立核对固定PR CI workflow、成功结论、来源、run/attempt、当前PR open/draft/head/base/merge和merge提交父节点。手动入口只收PR号和完整当前head SHA，不收任意artifact/run作为授权；workflow_run不继承曾经的fork批准。artifact ID/name/digest和receipt必须全部匹配，不恢复缓存或较早产物。
 
+总协调review要求的管理员语义补强：手动批准与初始化入口都实时调用GitHub仓库权限API确认admin。事件sender必须与GitHub提供的原始actor身份一致；重跑者不同则也必须admin，不能借用原始admin权限。prepare与部署前/成功写回前的manual authorize均重新核权限，拒绝unknown/write/401/403，不从workflow输入接受actor或权限。GitHub Environment无required reviewers不构成管理员证明，也不新增PAT或Administration写权限。
+
 选择任务只读，确定PR号后按PR串行发布/关闭清理（cancel=false）；真正进入锁后重选并核同PR，防选择与上传之间更新。上传前重查，最终success前再查。晚到产物不覆盖当前入口；上传期间变旧时标本次deployment inactive，不删除整个pr-N以免误删新环境。更新失败明确提示稳定地址可能还是旧版本。
 
 Checks固定CI gate与预览status分开；预览使用commit status链接及GitHub Deployment，不写PR评论。成功状态写到当前PR head，同时记录实际merge/build SHA与发布器SHA。关闭PR由无凭据closed信号唤醒受信发布器，重查确已closed后只删对应Preview，再把相关Deployment标inactive。不修改共享R2或provider资源。
@@ -66,3 +68,7 @@ Checks固定CI gate与预览status分开；预览使用commit status链接及Git
 - 父owner独立执行全部预览helper及原生产handoff测试，**161/161通过**：身份审批/字节链路、固定资源/旧secret继承前检、初始化/删除回验、真实child fakeCLI不执行PR模块、URL/HTTP有界probe、通知跨run晚到竞态等。独立review owner复核关键边界与修复，不以作者selfreport代替review。
 - 两workflow YAML解析及全部run的bash语法检查通过，diff check通过；actionlint未安装，未为此联网安装。生产workflow/helper与P0产品文件未改，不重复跑未受影响的应用全套。
 - 尚未验证原生Preview云端metadata实际形状、token权限、真实fork事件/跨run下载、公开URL或语音/R2接线；这些按[执行单](pr-preview-execution-plan.md)在用户批准后实测。CLI部署/删除仍使用cf，预览元数据GET因beta.18缺原生命令而采用其同一官方endpoint的精确只读回验。
+
+总协调对5516b7d的review后追加修复：手动预览与初始化核真实admin（含事件sender、原始actor、重跑者，权限撤销与401/403拒绝）；创建GitHub Deployment得到ID后立即保存到受信context，再写后续status。已用真实临时context文件和一次模拟commit-status失败复现并验证fail能把同一deployment从in_progress收尾为failure，不遗留无法追踪的已批准状态。父owner实际审阅delta并用Node24.22.1独立重跑：**206/206 tests、两YAML和28段bash语法检查、diff check通过**。只改授权/编排/workflow/docs，既有实际构建与schema证据仍适用，不重复构建未变应用。
+
+管理员检查使用[仓库权限只读API](https://docs.github.com/en/rest/collaborators/collaborators#get-repository-permissions-for-a-user)及GitHub原生actor环境变量，不新增PAT/Administration写权限；实际远端token对此API的可访问性仍在首次获准Actions验收中核实，错误不回退普通write权限。
