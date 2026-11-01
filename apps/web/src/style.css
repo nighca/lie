@@ -48,8 +48,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .investigation > .lie-voice { grid-column: 2 / -1; grid-template-columns: 100px minmax(0, 1fr) auto; }
 .interrogation-budget { white-space: nowrap; line-height: 1.3; }
 .interrogation-budget > span { display: block; color: var(--lie-muted); font-size: 12px; }
-.interrogation-budget strong { display: block; margin-top: 4px; font-size: 26px; font-weight: 850; font-variant-numeric: tabular-nums; }
-.interrogation-budget__help { display: inline-flex; align-items: center; gap: 5px; border: 0; border-radius: 8px; background: transparent; color: inherit; padding: 4px; margin: 0 -4px -4px; font: inherit; cursor: pointer; }
+.interrogation-budget strong { display: block; margin: 0; font-size: 26px; font-weight: 850; font-variant-numeric: tabular-nums; }
+.interrogation-budget__help { display: inline-flex; align-items: center; gap: 5px; border: 0; border-radius: 8px; background: transparent; color: inherit; padding: 4px; margin: 4px -4px -4px; font: inherit; cursor: pointer; }
 .interrogation-budget__help:hover { background: var(--lie-soft-blue); }
 .interrogation-budget__help:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 3px; }
 .interrogation-budget__info { display: inline-grid; place-items: center; width: 15px; height: 15px; border: 1px solid currentColor; border-radius: 50%; color: var(--lie-muted); font: 650 11px/1 var(--lie-font); }
@@ -149,6 +149,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .conversation-copy { padding: 18px; }
   .conversation-copy h2 { margin-bottom: 12px; padding-bottom: 12px; }
   .interrogation-budget { display: flex; align-items: baseline; gap: 8px; }
+  .interrogation-budget__help { margin-top: 0; }
   .interrogation-budget strong { font-size: 22px; margin: 0; }
   .interrogation-budget > span { font-size: 11px; }
   .game-shell--investigating { padding-bottom: calc(175px + env(safe-area-inset-bottom)); }
