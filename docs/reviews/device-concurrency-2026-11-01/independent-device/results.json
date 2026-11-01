@@ -1,0 +1,90 @@
+{
+  "owner": "lie-p0-independent-device-2026-11-01",
+  "startedAt": "2026-11-01T05:05:32.099Z",
+  "operations": [
+    {
+      "operation": "create-agent",
+      "startedAtMs": 1,
+      "durationMs": 1951,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "configure-agent",
+      "startedAtMs": 1954,
+      "durationMs": 438,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "read-agent",
+      "startedAtMs": 2392,
+      "durationMs": 1259,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "D1-ota-initial",
+      "startedAtMs": 3653,
+      "durationMs": 1908,
+      "status": 200,
+      "code": null,
+      "success": true
+    },
+    {
+      "operation": "D1-bind",
+      "startedAtMs": 5562,
+      "durationMs": 451,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "D1-ota-token",
+      "startedAtMs": 6015,
+      "durationMs": 444,
+      "status": 200,
+      "code": null,
+      "success": true
+    },
+    {
+      "operation": "D1-unbind",
+      "startedAtMs": 6461,
+      "durationMs": 484,
+      "status": 200,
+      "code": 0,
+      "success": true
+    },
+    {
+      "operation": "delete-agent",
+      "startedAtMs": 6946,
+      "durationMs": 703,
+      "status": 200,
+      "code": 0,
+      "success": true
+    }
+  ],
+  "channels": [],
+  "questions": [],
+  "completed": false,
+  "cleanup": {
+    "startedAt": "2026-11-01T05:05:38.559Z",
+    "allSocketsClosed": true,
+    "resourcesRemoved": true,
+    "scope": "Owned device bindings removed and owned Agent deleted; not proof of all provider registry/log/history erasure",
+    "finishedAt": "2026-11-01T05:05:39.755Z"
+  },
+  "config": {
+    "memModelId": "Memory_nomem",
+    "chatHistoryConf": 0,
+    "disable_greeting": true,
+    "max_tokens": 160,
+    "enable_search": false
+  },
+  "error": "Unexpected OTA target",
+  "finishedAt": "2026-11-01T05:05:39.755Z",
+  "elapsedMs": 7657
+}
