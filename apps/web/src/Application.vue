@@ -186,7 +186,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
   </div>
   <div v-else-if="route.path !== '/editor' && route.path !== '/editor/preview'" class="game-shell home-shell">
     <ProductHeader class="home-header" @navigate-home="home" @show-version="showVersion">
-      <template #actions><UiButton variant="quiet" @click="editor">创作案件</UiButton></template>
+      <template #actions><UiButton variant="quiet" @click="editor">创作案件</UiButton><a class="home-github" href="https://github.com/nighca/lie" target="_blank" rel="noopener noreferrer" aria-label="在新标签页打开 LIE GitHub 仓库">GitHub <span aria-hidden="true">↗</span></a></template>
       <template v-if="demo" #notice><p>演示模式 · 对话为模拟内容，不使用麦克风</p></template>
     </ProductHeader>
     <main class="home-content">
@@ -231,6 +231,13 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
 </template>
 
 <style scoped>
+.home-header :deep(.lie-product-header__actions) { gap: 12px; }
+.home-github { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; padding: 8px 10px; border-radius: 10px; color: var(--lie-ink); font-size: 15px; font-weight: 650; text-decoration: none; white-space: nowrap; }
+.home-github:hover { background: #111b450b; text-decoration: underline; text-underline-offset: 4px; }
+.home-github:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 3px; }
+.home-github > span { font-size: 16px; }
+@media (max-width: 700px) { .home-header :deep(.lie-product-header__actions) { gap: 10px; } .home-github { padding: 6px 4px; font-size: 14px; } }
+
 .share-state-card { min-height: 370px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .share-state-card h1 { font-size: 28px; margin: 22px 0 0; }
 .share-state-card p { color: var(--lie-muted); margin: 16px 0 24px; }
