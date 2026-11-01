@@ -116,7 +116,6 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
     </main>
 
     <main v-else-if="view.phase === 'intro'" class="intro-card surface">
-      <p class="eyebrow">一桩小谜题，几位有话说的人</p>
       <h1 class="case-title lie-handwritten-underline">{{ view.title }}</h1>
       <PublicBackground class="background" :text="view.background" :characters="characterNames" />
       <div class="intro-characters" :class="{ 'intro-characters--many': view.characters.length > 5 }">
