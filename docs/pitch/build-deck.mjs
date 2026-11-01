@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';import path from 'node:path';import sharp from 'sharp';import {Presentation,PresentationFile} from '@oai/artifact-tool';
-const root=process.cwd(),out=root+'/tmp/pitch/revision-02/output',build=root+'/tmp/pitch/revision-02/build';
+const root=process.cwd(),out=root+'/tmp/pitch/revision-03/output',build=root+'/tmp/pitch/revision-03/build';
 await fs.mkdir(build,{recursive:true});await fs.mkdir(out,{recursive:true});
 await sharp(root+'/design/brand/logo.svg').resize(660,353).png().toFile(build+'/logo.png');
 const p=Presentation.create({slideSize:{width:1280,height:720}}), C={yellow:'#FFF18A',white:'#FFFEF7',ink:'#111B45',blue:'#075BFA',muted:'#52607A'};
@@ -25,12 +25,14 @@ t(s,'先问一句：你哪里人？',230,642,1000,64,46,C.blue,true);
 s.speakerNotes.text='40秒。旅行播客临时来了小周、小陈两位嘉宾，一位真正来自江苏，另一位编了旅游人设。你临时当主持人，先问哪里人，再聊家乡、吃喝或去哪玩。只讲公共任务，不展示私设、正确人物、预期回答或结局。这是虚构故事与地域梗，不是现实籍贯鉴定规则，人物表情也不是测谎线索。来源：content/games/01-jiangsu-local.json，发布身份35e987a，必要公共投影保存在docs/pitch/evidence/jiangsu-public.json。';
 }
 {
-const s=p.slides.add();s.background.fill=C.ink;t(s,'谁负责真相？',64,44,1150,75,56,C.white,true);
-t(s,'程序',64,196,560,150,120,C.yellow,true);t(s,'AI',756,196,450,150,120,'#78DDD7',true);
-t(s,'答案与终局',68,368,560,70,46,C.white,true);t(s,'角色与回答',762,368,450,70,46,C.white,true);
-t(s,'让判断有确定的结果',70,463,560,50,30,C.white);t(s,'让每次追问自由展开',764,463,470,50,30,C.white);
-t(s,'浏览器',72,619,330,50,35,C.yellow,true);t(s,'↔',355,615,80,54,40,C.white);t(s,'薄语音网关',468,619,360,50,35,C.white,true);t(s,'↔',833,615,80,54,40,C.white);t(s,'灵矽 AI',958,619,300,50,35,'#78DDD7',true);
-s.speakerNotes.text='60秒。固定答案与指认由程序处理，AI自由表达角色。浏览器负责游戏状态，薄Worker保管连接凭据并转发语音，灵矽负责模型与语音。完整答案可检查是轻量单人游戏的明确取舍。下方只展示语音与规则职责链，分享另有已上线的私有R2快照存储。来源：docs/architecture-design.md；packages/game-core/src/session.ts；apps/gateway/src/index.ts。';
+const s=p.slides.add();s.background.fill=C.ink;t(s,'两种 AI，两条接入路径。',64,44,1160,85,57,C.white,true);
+t(s,'玩',64,172,130,100,76,C.yellow,true);t(s,'浏览器',245,184,260,70,43,C.white,true);t(s,'↔',515,180,70,70,44,C.white);t(s,'薄语音网关',615,184,300,70,43,C.white,true);t(s,'↔',912,180,70,70,44,C.white);t(s,'AI 角色',1008,184,240,70,43,'#78DDD7',true);
+t(s,'程序判定答案与终局，模型表达角色。',245,279,980,48,30,C.white);
+t(s,'写',64,389,130,100,76,C.yellow,true);t(s,'自己的 Agent',245,402,380,70,43,'#78DDD7',true);t(s,'↔',628,398,70,70,44,C.white);t(s,'WebMCP',750,402,460,70,48,C.yellow,true);
+t(s,'页面工具 → 当前表单 → 本地草稿',245,497,980,58,35,C.white,true);
+t(s,'复用现有编辑器，无需另建创作模型服务',65,597,1150,50,33,C.yellow,true);
+t(s,'面向支持 WebMCP 的用户 Agent；兼容范围仍需逐项验证',65,665,1160,36,23,C.white);
+s.speakerNotes.text='60秒。上方游玩链：游戏状态/答案/指认在浏览器，薄Worker保管连接凭据并转语音，AI表达角色。下方创作链：用户自己的Agent调用浏览器页面开放的WebMCP工具，直接改当前表单并尝试本地保存，复用规则与现有编辑器。无需产品侧新增创作模型网关、密钥或推理配额服务，不等于零开发/维护/推理成本。编辑动作与特定模型API解耦，长期可适配更多支持WebMCP的用户Agent，这是方向并非普遍兼容承诺。document.modelContext存在不代表Agent在线；当前仍有浏览器/Agent支持限制。guide/state不返回原稿全文，update只修改指定字段，人物列表整体替换；不自动试玩/分享/开麦。分享另有私有R2快照，不在图中。来源：main6bd6426 apps/web/src/editor/useEditorTools.ts；docs/design/webmcp-direct-edit-2026-11-01.md；packages/game-core/src/session.ts；apps/gateway/src/index.ts；docs/pitch/evidence/revision-03/README.md。';
 }
 // Local authoring only. Copy this source to tmp/pitch/build (with runtime node_modules linked), run from repository root.
 const entries=[{id:0,title:'谁在说谎？',seconds:20},{id:1,title:'谁才是江苏人？',seconds:40}];
@@ -51,27 +53,29 @@ t(s,'小周',778,590,200,55,34,C.white,true);t(s,'小陈',1040,590,200,55,34,C.w
 add(e,90,'90秒。用户批准以《谁才是江苏人》现场开口问优先。打开首页置首的江苏案，问一位“你哪里人？”，听完切另一位问同一问题，再按现场回答追问“具体哪儿？”或家乡话题；90秒内返回本地讲稿，不跑满120秒、不揭答案。上屏是建议提问，不是模型回答或效果保证。无需文字口令或特定问序。本文件不会自动开麦或调用provider；介绍页后台准备已有上线行为，演讲者手动操作。若现场不可用，按R用另一案件《消失的纪念章》的28.5秒历史实录备用，明确另案，不能拼成江苏案同一局；含旧UI/关键线索/源持帧，未主观听审。V是53.8秒无真实问答原声宣传片。来源：docs/pitch/evidence/jiangsu-public.json；docs/promo-video/2026-10-25/combined-demo/README.md；video-backup-evidence.md。');
 }
 {
-const e=page('把等待变成角色入场',C.yellow),s=e.s;title(s,'连“等一下”，也在角色里。');
-const waiting=await trimAsset('design/character-presets/assets/salt-pepper-beard/waiting.png','beard-waiting');await im(s,waiting,775,172,430,548);
-t(s,'正在请 TA 过来…',65,200,760,87,60,C.blue,true);t(s,'搬个椅子…',65,325,680,72,48);t(s,'TA 正在入座…',65,427,730,72,48);t(s,'等 TA 坐稳…',65,529,690,72,48);
-t(s,'准备好，再开始计时',65,653,780,41,28,C.muted);
-add(e,40,'40秒。这里展示连接等待的四段文字，实际应用会替换角色姓名。等待可取消，ready立即离开；准备阶段不扣游戏询问额度。人物图是已有等待态，文字是实际产品文案示意，不称真实连接平均耗时。再口头点出姓名高亮便于核对、成功揭晓与失败保留悬念。来源：apps/web/src/presentation/VoiceConnectionNotice.vue；CharacterNameText.vue；App.vue。');
+const e=page('让第一次开口更从容',C.yellow),s=e.s;title(s,'第一次开口，也能心里有数。');
+const wait=await trimAsset('design/character-presets/assets/salt-pepper-beard/waiting.png','beard-waiting');await im(s,wait,90,360,250,280);
+t(s,'准备好',65,177,660,90,65,C.blue,true);t(s,'再开始计时',65,270,700,65,44,C.ink,true);
+const help=await cropAsset('docs/pitch/evidence/revision-03/time-help.jpg',{left:368,top:210,width:544,height:379},'time-help-crop');await im(s,help,510,181,706,492);
+t(s,'等候有回应，规则随时可查。',65,650,1150,48,30,C.ink,true);
+add(e,40,'40秒。准备阶段不扣游戏询问额度；等待可取消，ready立即离开。实际时间问号提供四段口语规则：人物共享额度、语音接通后计时、用完可回看再指认、查看说明不暂停。指认前明确点击人物立即结束，选错不揭答案。截图为已验收桌面模拟模式UI的实际计时说明裁图，不是现场语音性能证明。等待人物是已有正式资源，不把动作当测谎线索。来源：main6bd6426 docs/design/first-use-help-2026-11-01/acceptance-handoff.md；time-copy-readable/desktop-1280.jpg；docs/pitch/evidence/revision-03/README.md。');
 }
 {
-const e=page('你也能写一个案件'),s=e.s;title(s,'下一桩案子，可以由你来写。');
-const ed=await cropAsset('docs/character-name-highlights/evidence/editor-background-status.png',{left:0,top:36,width:1004,height:900},'editor-story');await im(s,ed,555,170,660,500);
-t(s,'写',65,180,200,160,118,C.blue,true);t(s,'故事、人物、结局',65,336,560,59,35,C.ink,true);t(s,'选好形象，就能试玩',65,437,530,55,32);
-t(s,'一个短链，发给朋友。',65,531,510,60,34,C.blue,true);t(s,'改稿不影响已分享的故事',65,602,500,50,27,C.muted);
-add(e,80,'80秒，含约45秒编辑器操作。打开lie.agency/editor，使用本人的已有草稿或预先准备的演示案，展示三步设定、预设形象、试玩入口和分享。不要清除用户已有草稿，不在台上完整编写优质剧本。离线版保留产品界面，现场没网络也能讲清流程。截图为既有界面证据裁去测试恢复按钮与拼接移动端区域，不冒充现场实时数据。短链已正式上线98d71fb9ebc2f517010598c4796c8db3014a73c7（总协调2026-11-01回执）：私有R2持久快照，修改后新链接、旧快照不变；默认不过期不是永久服务承诺，持链接者可看全文。原fragment只读兼容。当前截图不作为新短链UI证据。来源：docs/character-name-highlights/evidence/editor-background-status.png；docs/game-editor-implementation.md。');
+const e=page('和自己的AI一起写案件'),s=e.s;title(s,'和你常用的 AI，一起写案件。');
+t(s,'讨论意图',65,165,370,65,43,C.blue,true);t(s,'↓',110,245,150,90,65,C.blue,true);t(s,'直接填稿',65,350,370,65,43,C.ink,true);t(s,'↓',110,430,150,90,65,C.blue,true);t(s,'自己试玩',65,535,370,65,43,C.ink,true);
+const ed=await cropAsset('docs/pitch/evidence/revision-03/webmcp-entry.jpg',{left:20,top:232,width:1240,height:488},'webmcp-editor');await im(s,ed,365,203,860,376);
+t(s,'WebMCP：让助手的动作落进同一份草稿',365,610,860,46,30,C.blue,true);
+t(s,'已有验收画面 · 虚构示例 · 需要浏览器与助手支持',365,670,860,30,21,C.muted);
+add(e,80,'80秒，含原定约45秒编辑器展示。主讲：可以和自己的AI讨论故事，让它把想法直接写进LIE；人物、剧情、结局仍在同一份可编辑草稿里。减少讨论结果逐项搬到表单的操作。截图是已有真实工具写稿验收后的虚构午餐盒示例，入口由最终UI图呈现，不是当前在线Agent或新的一次现场生成。现场继续用已准备的本人演示案展示表单、预设和同引擎试玩，不清除用户已有草稿；本轮没有新增现场工具调用承诺。如要真人Agent现场改稿，先确认支持组合并排练，替换45秒而非叠加。表单规则和本地保存继续工作，保存失败会返回未落盘状态，不能把接口成功当故事质量。手动分享短链是另一项显式操作，改稿不影响已发快照。来源：main6bd6426 apps/web/src/editor/useEditorTools.ts；docs/design/webmcp-direct-edit-2026-11-01.md；docs/pitch/evidence/revision-03/README.md。');
 }
 {
 const e=page('故事可以继续长出来',C.yellow),s=e.s;title(s,'玩法已备好，故事可以继续长。');
-t(s,'5',62,166,260,175,142,C.blue,true);t(s,'官方案件',65,343,370,58,39,C.ink,true);t(s,'8',705,166,260,175,142,C.blue,true);t(s,'套预设形象',709,343,460,58,39,C.ink,true);
+t(s,'6',62,166,260,175,142,C.blue,true);t(s,'官方案件',65,343,370,58,39,C.ink,true);t(s,'8',705,166,260,175,142,C.blue,true);t(s,'套预设形象',709,343,460,58,39,C.ink,true);
 const ids=['silver-bun','plum-crop','mint-puffs','ochre-freckles'];
 for(let i=0;i<ids.length;i++){const a=await trimAsset('design/character-presets/assets/'+ids[i]+'/default.png','cast-'+ids[i]);await im(s,a,40+i*307,446,290,274);}
-add(e,30,'30秒。玩家获得轻量语音推理，作者复用人物、声音、动画与引擎，主要投入故事设计。五个官方案件是当前内容起点，八套形象可以跨案复用。分享和改编支持朋友间传播；没有已形成社区规模或增长数据。商业上可进一步验证精品案件与主题定制，尚未确定付费模式，不在主讲宣布定价。来源：content/games五份JSON（35e987a）；design/character-presets/manifest.json；README.zh-CN.md。');
+add(e,30,'30秒。玩家获得轻量语音推理，作者复用人物、声音、动画与引擎，主要投入故事设计。六个官方案件是当前内容起点（江苏第一、徒步《这条线你真走了吗》第二），八套形象可以跨案复用。分享和改编支持朋友间传播；没有已形成社区规模或增长数据。商业上可进一步验证精品案件与主题定制，尚未确定付费模式，不在主讲宣布定价。来源：main6bd6426 content/games六份JSON；design/character-presets/manifest.json；README.zh-CN.md。');
 }
-entries.push({id:2,title:'谁负责真相？',seconds:60});
+entries.push({id:2,title:'两种AI，两条接入路径',seconds:60});
 {
 const e=page('换个故事，不换引擎'),s=e.s;title(s,'换个故事，不用再造一遍游戏。');
 t(s,'01',65,177,180,100,78,C.blue,true);t(s,'02',65,339,180,100,78,C.blue,true);t(s,'03',65,501,180,100,78,C.blue,true);
@@ -116,11 +120,11 @@ add(e,0,'备页。完整游戏包和判定在浏览器，开发者工具可以�
 }
 {
 const e=page('三个时间不是同一件事',C.yellow),s=e.s;title(s,'三个“时间”，三种含义。');
-t(s,'2 / 8 / 9 / 10',65,210,650,100,62,C.blue,true);t(s,'分钟 · 按案件共享',780,218,440,70,34,C.ink,true);
+t(s,'2 / 6 / 8 / 9 / 10',65,210,700,100,54,C.blue,true);t(s,'分钟 · 按案件共享',780,218,440,70,34,C.ink,true);
 t(s,'600 秒',65,355,600,105,78,C.blue,true);t(s,'中继连接墙钟上限',710,377,510,70,36,C.ink,true);
 t(s,'30000 ms',65,511,600,105,78,C.blue,true);t(s,'Worker CPU 执行预算',710,532,530,70,36,C.ink,true);
 t(s,'它们都不是账户级费用硬上限',65,655,1150,40,27,C.muted);
-add(e,0,'备页。五官方案额度120/480/600/540/480秒，准备阶段不扣游戏额度；连接timer从relay创建起算包含准备，不保证完整10分钟询问。CPU30000ms只计执行。100ms播放储备也不是端到端延迟。线上近4分钟用户手测和本地16k试听不能泛化为全设备稳定性或SLA。来源：五案JSON（35e987a）；apps/gateway/cloudflare.config.ts；packages/voice/src/player.ts；apps/web/src/application/liveVoice.ts。');
+add(e,0,'备页。六官方案额度120/360/480/600/540/480秒，准备阶段不扣游戏额度；连接timer从relay创建起算包含准备，不保证完整10分钟询问。CPU30000ms只计执行。100ms播放储备也不是端到端延迟。线上近4分钟用户手测和本地16k试听不能泛化为全设备稳定性或SLA。来源：main6bd6426六案JSON；apps/gateway/cloudflare.config.ts；packages/voice/src/player.ts；apps/web/src/application/liveVoice.ts。');
 }
 {
 const e=page('AI 会不会说错？'),s=e.s;title(s,'AI 会失误，检查必须分层。');
