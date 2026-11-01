@@ -47,6 +47,7 @@ const characterNames = computed(() => draft.value.characters.map((person) => ({ 
 const issues = computed(() => draftIssues(draft.value, props.characterPresets))
 const minutes = computed({ get: () => draft.value.interrogationLimitSeconds / 60, set: (value: number) => { draft.value.interrogationLimitSeconds = Math.round(Number(value) * 60) } })
 const steps = ['故事设定', '故事人物', '答案揭晓']
+const aiExample = '请使用当前页面的工具，帮我写一桩轻松的办公室谜题：3 位人物、5 分钟，有一个善意的反转。直接填写编辑器。'
 function characterPreset(person: DraftCharacter) { return props.characterPresets.find((preset) => preset.id === person.appearanceId) ?? null }
 function invalid(field: string) { return showIssues.value && issues.value.some((issue) => issue.field === field && (issue.characterId == null || issue.characterId === selectedId.value)) }
 function name(person: DraftCharacter) { return person.name.trim() || `人物 ${draft.value.characters.indexOf(person) + 1}` }
@@ -183,11 +184,10 @@ async function copy(text: string) {
     </nav>
     <div v-if="saveStatus != null" class="editor-draft-status"><p role="status">{{ saveStatus }}</p><button type="button" :disabled="busy" @click="overlay = 'clear'">清除草稿</button></div>
     <main ref="form">
-      <p v-if="aiSupported" class="editor-ai-help"><button type="button" class="text-button" :disabled="busy" @click="overlay = 'ai-help'">此浏览器支持 AI 助手协作编辑 · 了解用法</button></p>
       <div v-if="notice != null" role="alert" class="editor-notice"><UiNotice tone="error">{{ notice }}</UiNotice></div>
       <section v-if="showIssues && issues.length" class="error-summary" role="alert" aria-label="待补充内容"><strong>再补充这些，就能试玩或分享了</strong><ul><li v-for="(issue, index) in issues" :key="index"><button type="button" @click="goToIssue(issue)">{{ issue.message }}</button></li></ul></section>
       <fieldset class="editor-fields" :disabled="busy">
-        <div class="page-heading"><h1>{{ steps[step] }}</h1></div>
+        <div class="page-heading"><h1>{{ steps[step] }}</h1><button v-if="aiSupported" type="button" class="editor-ai-entry" :disabled="busy" @click="overlay = 'ai-help'"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m8 2 1.7 4.3L14 8l-4.3 1.7L8 14l-1.7-4.3L2 8l4.3-1.7L8 2Zm7 10 .9 2.1L18 15l-2.1.9L15 18l-.9-2.1L12 15l2.1-.9L15 12Z" fill="currentColor" /></svg><span>让 AI 帮你写</span></button></div>
         <div v-if="step === 0" class="story-layout">
           <section class="panel form-panel" aria-label="故事设定">
             <label class="field">案件标题<input v-model="draft.title" name="title" data-field="title" :aria-invalid="invalid('title')" placeholder="给谜题起个名字"></label>
@@ -219,11 +219,17 @@ async function copy(text: string) {
     </main>
     <EditorDialog v-if="overlay != null" :title="{ example: '人物设定 · 完整示例', preset: '选择人物预设', share: '把谜题交给朋友', submission: '投稿到官方案件库', delete: '删除这位人物？', clear: '清除本地草稿？', 'ai-help': '用 AI 助手协作编辑' }[overlay]" @close="closeOverlay">
       <template v-if="overlay === 'ai-help'">
-        <p>此浏览器提供 WebMCP 网页工具接口，兼容的 AI 助手可以通过它协助编辑。这不表示已有助手连接；请在你正在使用的助手中发起请求。</p>
-        <p>描述你的案件灵感，或告诉助手要修改什么。例如：“帮我写一桩办公室午餐被拿错的轻松谜题，三个人物，有个善意的反转。”</p>
-        <p>修改会直接出现在当前表单，并像手动编辑一样保存到此设备。你可以继续手工修改；试玩、分享和投稿仍由你操作。</p>
-        <p>网页工具不返回已有草稿正文；助手仍可能通过普通浏览器能力查看页面。请核对人物所知、时间和答案，结构检查不能保证剧情与角色表现。</p>
-        <p role="status">{{ aiStatus }}</p>
+        <div class="ai-help-content">
+          <p class="ai-help-intro">有个故事点子，却不知道怎么写成案件？可以边和 AI 聊，边在这里完成。</p>
+          <ol class="ai-help-steps">
+            <li><strong>在 AI 助手中打开本页</strong><p>使用能操作网页的助手，例如 ChatGPT 内置浏览器，并保持编辑器打开。</p></li>
+            <li><strong>说出你想写的故事</strong><p>告诉它题材、人物数量和想要的反转，再说一句“直接填写编辑器”。</p></li>
+            <li><strong>看着表单一起调整</strong><p>AI 的修改会直接出现在这里，也会保存到此设备。你可以接着提要求，或自己动手改。</p></li>
+          </ol>
+          <div class="ai-help-example"><div class="ai-help-example-heading"><strong>不知道怎么开口？试试这段</strong><button type="button" class="text-button" @click="copy(aiExample)">{{ copied ? '已复制' : '复制示例' }}</button></div><p>{{ aiExample }}</p></div>
+          <p class="ai-help-tip">写完后，看看每个人知道什么、真相是否说得通，再亲自试玩。分享和投稿由你决定。</p>
+          <p v-if="aiStatus != null" role="status" class="ai-help-tip">{{ aiStatus }}</p>
+        </div>
       </template>
       <template v-else-if="overlay === 'example'"><p>这是写给角色的扮演资料，仍是一份纯文本。</p><p class="example-text">{{ PROFILE_EXAMPLE }}</p><p class="muted">示例不会替换你正在写的内容。</p></template>
       <div v-else-if="overlay === 'preset'" class="preset-grid"><button v-for="preset in characterPresets" :key="preset.id" type="button" class="editor-preset" :aria-label="preset.name" :aria-pressed="character?.appearanceId === preset.id" @click="chooseCharacterPreset(preset.id)"><img :src="preset.avatar" alt=""></button><div v-if="characterPresets.length === 0"><p role="status">{{ presetStatus === 'loading' ? '正在加载人物预设…' : '人物预设暂未加载，请重新加载。草稿仍保留在此浏览器。' }}</p><UiButton v-if="presetStatus !== 'loading'" @click="emit('retry-presets')">重新加载预设</UiButton></div></div>

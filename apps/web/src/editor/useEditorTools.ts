@@ -45,7 +45,7 @@ export function useEditorTools(options: {
   replaceDraft: (draft: EditorDraft) => void
 }) {
   const supported = ref(false)
-  const status = ref('正在准备网页工具…')
+  const status = ref<string | null>(null)
   const session = crypto.randomUUID()
   let generation = 0
   let active = false
@@ -169,7 +169,7 @@ export function useEditorTools(options: {
         if (registration.signal.aborted) return
         await context.registerTool(tool, { signal: registration.signal })
       }
-      if (!registration.signal.aborted) status.value = '网页工具已准备好，可在兼容的 AI 助手中提出编辑要求。'
+      if (!registration.signal.aborted) status.value = null
     } catch {
       registration.abort()
       if (controller === registration && active) status.value = '此浏览器提供网页工具接口，但本页工具未能完成注册。请重新打开编辑器后再试。'

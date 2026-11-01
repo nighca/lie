@@ -2,11 +2,13 @@
 
 2026-11-01，用户已确认内置浏览器测试通过，并明确调整交互：检测`document.modelContext`，支持时显示小提示，点击后弹窗介绍；不要独立Demo草稿、整案候选或采纳/放弃步骤；工具直接操作当前表单。本文替代[此前候选Demo](webmcp-authoring-demo-2026-11-01.md)的当前推荐与实现，旧文档/截图和提交保留历史，不改写旧审查事实。
 
+后续体验反馈：用户确认整体逻辑正确，但否决悬浮长蓝链入口和技术说明式弹窗，要求符合现有界面的入口与普通用户能实操的内容。本次据此调整视觉/文案；新样式尚待用户体验确认，不把“整体逻辑正确”当最终UI接受。
+
 ## 当前行为
 
 - 编辑器只检查当前Document的`modelContext`是否存在。它是浏览器向页面提供的WebMCP能力接口，不证明Agent已连接或在线；[规范API定义](https://webmachinelearning.github.io/webmcp/#extensions-to-document)。此前默认“旁边ChatGPT”的文案删除。
-- 支持时显示一个小入口：“此浏览器支持 AI 助手协作编辑 · 了解用法”。无接口时不显示AI入口，原表单继续工作。工具注册尚未完成或失败的信息只放弹窗，能力存在与本页注册状态分开表达。
-- 复用EditorDialog介绍使用方式：向兼容助手描述灵感/修改意图，助手改动立即出现在当前表单，沿用本地保存，作者继续手改；试玩、分享、投稿手动触发。入口与工具写入都尊重现有分享busy状态。
+- 支持时在步骤标题同行显示紧凑描边按钮“让 AI 帮你写”，去掉单独占一行的长蓝链。无接口时不显示AI入口，原表单继续工作。按钮不声明Agent在线；正常注册状态不占用用户文案，注册失败仍在弹窗给出恢复提示。
+- 复用EditorDialog给普通用户三步指引：在能操作网页的助手中打开本页→描述题材/人数/反转并要求直接填写→看着表单继续调整。配一段可通过现有copy函数复制的完整示例，简短提醒核对故事再试玩；不再堆接口/检测/Agent在线或内部返回数据的技术解释。试玩、分享、投稿手动触发。入口与工具写入都尊重现有分享busy状态。
 - 删除AuthoringDemo组件与独立候选状态，删除专门的采用/放弃/撤销流程和`lie-webmcp-demo-draft`读写。原存储中该旧key不迁移、不删除，也不覆盖普通稿；当前统一沿用既有`lie-editor-draft`。
 - 不再依赖DEV或`webmcp=1`查询参数；有接口的编辑器页面即可注册。旧链接仍可打开，但该参数无功能。是否正式集成/发布仍由总协调单独处理，本分支未自行main/push/部署。`demo=1`仍仅为既有fake语音开关，不是创作草稿模式。
 
@@ -39,7 +41,8 @@ changes允许`title/summary/background/interrogationLimitSeconds/characters/endi
 - Web生产构建及预设postbuild检查通过。复用本WT原hash校验图片缓存，未新增下载或改资源。
 - 独立只读实际代码审查无数据完整性/lifecycle阻塞；发现的分享busy入口问题已修并加回归，复核通过。审查者没有独立重跑测试，不混称双重运行。
 - 原生IAB在同一5176服务的`http://localhost:5176/editor?demo=1`独立测试来源验收，未在用户`127.0.0.1`来源写任何表单或localStorage。新页初始表单为空；实际guide/state/update工具发现成功，局部标题/背景更新立即显示并保存，再用本Chat先前创作的虚构三人物午餐故事完整填入，返回`updated/saved:true/issues:[]`，表单/三步完成标记/人物预览正确，无候选面板。
-- 小入口及原生dialog开/关已检查；截图字节经file确认JFIF JPEG后使用.jpg扩展名：[表单](webmcp-direct-edit-form.jpg)、[使用说明](webmcp-direct-edit-help.jpg)。只含本Chat生成的虚构内容，无用户原稿/账户信息。该测试页为临时tab，验收后关闭，不增加长期消费者。
+- 新入口及原生dialog开/关已检查；当前桌面截图：[入口](webmcp-entry-polished.jpg)、[实操说明](webmcp-help-polished.jpg)。原[表单](webmcp-direct-edit-form.jpg)/[技术说明](webmcp-direct-edit-help.jpg)保留作被替代的历史样式。四图均经file确认JFIF JPEG后使用.jpg，只含本Chat生成的虚构内容，无用户原稿/账户信息。每次测试页均临时打开并于验收后关闭，不增加长期消费者。
+- 本次UI增量额外通过Web typecheck、editor-webmcp/editor-page两文件49项，以及Web build/postbuild；独立只读源码复核无阻塞。工具数据/写入/存储保护未改，只有成功状态不再显示技术文案（status初始/ready为null，失败保留）；此前96项是直接写入版本的基线检查，不冒称本批又重跑四文件。浏览器本批未调用写工具、未碰用户127来源稿件。
 - 以上是工具与UI验证，不证明中文创作质量、推理趣味、真实角色表现或作者总耗时收益；未触发真实voiceagent/模型API/WS/mic/分享POST。
 
 ## 所有权与交接

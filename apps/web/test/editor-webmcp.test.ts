@@ -53,7 +53,7 @@ async function click(wrapper: VueWrapper, text: string) {
   await flushPromises()
 }
 async function help(wrapper: VueWrapper) {
-  await wrapper.get('.editor-ai-help button').trigger('click')
+  await wrapper.get('.editor-ai-entry').trigger('click')
   await flushPromises()
 }
 
@@ -61,11 +61,11 @@ describe('editor WebMCP tools', () => {
   it('shows a small support entry without requiring a query, with details only in the dialog', async () => {
     const wrapper = await page(story)
     expect(tools.size).toBe(3)
-    expect(wrapper.get('.editor-ai-help').text()).toContain('此浏览器支持 AI 助手协作编辑')
+    expect(wrapper.get('.editor-ai-entry').text()).toContain('让 AI 帮你写')
     expect(wrapper.get<HTMLInputElement>('[name=title]').element.value).toBe(story.title)
     await help(wrapper)
-    expect(wrapper.get('dialog').text()).toContain('这不表示已有助手连接')
-    expect(wrapper.get('dialog').text()).toContain('修改会直接出现在当前表单')
+    expect(wrapper.get('dialog').text()).toContain('在 AI 助手中打开本页')
+    expect(wrapper.get('dialog').text()).toContain('直接填写编辑器')
     await click(wrapper, '关闭')
     expect(wrapper.find('dialog').exists()).toBe(false)
   })
@@ -73,7 +73,7 @@ describe('editor WebMCP tools', () => {
   it('keeps normal editing with no AI entry when the API is absent', async () => {
     Reflect.deleteProperty(document, 'modelContext')
     const wrapper = await page(story)
-    expect(wrapper.find('.editor-ai-help').exists()).toBe(false)
+    expect(wrapper.find('.editor-ai-entry').exists()).toBe(false)
     expect(tools.size).toBe(0)
     await wrapper.get('[name=title]').setValue('手写案件')
     expect(saved().title).toBe('手写案件')
@@ -187,7 +187,7 @@ describe('editor WebMCP tools', () => {
     const wrapper = await page(story)
     await click(wrapper, '分享案件')
     expect(wrapper.get('dialog').text()).toContain('正在保存案件')
-    expect(wrapper.get('.editor-ai-help button').attributes('disabled')).toBeDefined()
+    expect(wrapper.get('.editor-ai-entry').attributes('disabled')).toBeDefined()
     expect(update({ title: '稍后再改' }).status).toBe('rejected')
     expect(saved().title).toBe(story.title)
     complete('https://lie.example/play?share=v1.test'); await flushPromises()
@@ -261,7 +261,7 @@ describe('editor WebMCP tools', () => {
     visible.value = true; await flushPromises()
     rejectOld(new Error('old activation')); await flushPromises()
     await help(wrapper)
-    expect(wrapper.get('dialog').text()).toContain('网页工具已准备好')
+    expect(wrapper.get('dialog').text()).not.toContain('未能完成注册')
     expect(tools.size).toBe(3)
   })
 })

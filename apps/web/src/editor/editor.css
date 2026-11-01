@@ -155,4 +155,18 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--lie-primary); o
 @media (prefers-reduced-motion: reduce) { .share-loading-ring { animation: none; } }
 @media (max-width: 670px) { .share-copy-group { align-items: stretch; flex-direction: column; } }
 
-.editor-ai-help { margin: 0 0 16px; text-align: right; font-size: 13px; }
+.editor-ai-entry { display: inline-flex; align-items: center; gap: 7px; flex-shrink: 0; padding: 8px 13px; border: 1.5px solid var(--lie-ink); border-radius: 999px; background: var(--lie-surface); box-shadow: 2px 2px 0 var(--lie-ink); color: var(--lie-ink); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.editor-ai-entry svg { color: var(--lie-primary); }
+.editor-ai-entry:hover:not(:disabled) { background: #edf3ff; }
+.editor-ai-entry:active:not(:disabled) { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--lie-ink); }
+.editor-ai-entry:disabled { opacity: .5; cursor: default; }
+.ai-help-content { font-size: 14px; line-height: 1.75; }
+.ai-help-intro { margin: 0 0 20px; font-size: 16px; }
+.ai-help-steps { display: grid; gap: 17px; margin: 0; padding-left: 24px; }
+.ai-help-steps li { padding-left: 5px; }
+.ai-help-steps li::marker { color: var(--lie-primary); font-weight: 800; }
+.ai-help-steps p { margin: 3px 0 0; color: var(--lie-muted); }
+.ai-help-example { margin-top: 22px; padding: 16px 18px; border: 1px solid #cbd6ec; border-radius: 16px; background: #edf3ff; }
+.ai-help-example-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.ai-help-example p { margin: 9px 0 0; }
+.ai-help-tip { margin: 18px 0 0; color: var(--lie-muted); font-size: 13px; }
