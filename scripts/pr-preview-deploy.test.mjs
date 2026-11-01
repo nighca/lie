@@ -7,7 +7,7 @@ import { after, test } from 'node:test'
 import { convertToWranglerConfig, OutputRootConfigSchema, OutputWorkerSchema } from '@cloudflare/config'
 
 import { pack } from './pr-preview-artifact.mjs'
-import { deletePreview, deployPreview, initializePreviewParent, previewResult, verifyRuntimeDeployment } from './pr-preview-deploy.mjs'
+import { deletePreview, deployPreview, initializePreviewParent, inspectPreview, PreviewOperationError, previewResult, verifyRuntimeDeployment } from './pr-preview-deploy.mjs'
 
 const id = { repository: 'nighca/lie', prNumber: 12, headSha: 'a'.repeat(40), baseSha: 'b'.repeat(40), mergeSha: 'c'.repeat(40), runId: '123', runAttempt: '2' }
 const result = { type: 'preview', version: 1, preview_id: 'preview-id', preview_name: 'pr-12', preview_slug: 'pr-12', preview_urls: ['https://pr-12-lie-pr-preview.example.workers.dev'], deployment_id: 'deployment-id', deployment_urls: ['https://deployment-id-lie-pr-preview.example.workers.dev'] }
@@ -295,7 +295,7 @@ test('Aborted or exit zero never proves deletion when the Preview remains or API
     await assert.rejects(() => deletePreview({ ...f, prNumber: 12 }, async (_executable, _args, options) => {
       stage = options.cwd
       return { stdout: 'Aborted.', stderr: '' }
-    }, async () => new Response(null, { status })), /absence could not be verified/)
+    }, async () => new Response(null, { status })), /stage=delete-confirm-absence/)
     await assert.rejects(() => access(stage), { code: 'ENOENT' })
   }
 })
@@ -306,4 +306,150 @@ test('already absent Preview is idempotent but invalid deletion targets never in
   let calls = 0
   for (const prNumber of ['../other', '0', '12/production', '9007199254740992']) await assert.rejects(() => deletePreview({ ...f, prNumber }, async () => { calls++ }, async () => { calls++ }))
   assert.equal(calls, 0)
+})
+
+test('inspect is read-only and exposes only known binding types and match booleans', async () => {
+  const f = await fixture(), calls = []
+  const value = metadata()
+  value.result.env.LINX_API_KEY.text = 'sensitive-value'
+  value.result.env['sensitive-key-name'] = { type: 'sensitive-type' }
+  value.result['sensitive-field-name'] = 'sensitive-value'
+  const summary = await inspectPreview({ ...f, prNumber: 12 }, async (_node, args) => {
+    assert.deepEqual(args, [f.cliPath, 'workers', 'get', 'lie-pr-preview'])
+    return { stdout: JSON.stringify({ name: 'lie-pr-preview', previews_base_config: {} }) }
+  }, async (url, init) => {
+    calls.push(url)
+    assert.equal(init.method, undefined)
+    return Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id' } : value)
+  })
+  assert.equal(calls.length, 2)
+  assert.equal(summary.envCount, 9)
+  assert.equal(summary.unknownEnvCount, 1)
+  assert.equal(summary.r2DevMatch, true)
+  assert.equal(summary.secretTypeMatch, true)
+  assert.equal(JSON.stringify(summary).includes('sensitive'), false)
+})
+
+test('inspect reports absent previews and denies invalid targets, forbidden metadata or mismatched identities', async () => {
+  const f = await fixture(), run = async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) })
+  assert.equal((await inspectPreview({ ...f, prNumber: 12 }, run, async () => new Response(null, { status: 404 }))).previewExists, false)
+  await assert.rejects(() => inspectPreview({ ...f, prNumber: '../production' }, run), /stage=inspect-input/)
+  await assert.rejects(() => inspectPreview({ ...f, prNumber: 12 }, run, async () => new Response(null, { status: 403 })), /stage=inspect-preview http=403/)
+  assert.equal((await inspectPreview({ ...f, prNumber: 12 }, run, async () => Response.json({ name: 'pr-13', id: 'other' }))).previewNameMatch, false)
+})
+
+test('safe operation errors distinguish upload, result validation and metadata failures without raw diagnostics', async () => {
+  const f = await fixture()
+  const parent = { stdout: JSON.stringify({ name: 'lie-pr-preview' }) }
+  await assert.rejects(() => deployPreview(f, async (_node, args) => {
+    if (args[1] === 'workers') return parent
+    throw Object.assign(Error('secret stderr'), { code: 7, stderr: secrets.LINX_API_KEY })
+  }, metadataRequest), error => error instanceof PreviewOperationError && error.stage === 'upload' && error.exitCode === 7 && !error.message.includes('secret'))
+  await assert.rejects(() => deployPreview(f, async (_node, args) => args[1] === 'workers' ? parent : { stdout: 'secret invalid JSON' }, metadataRequest), /stage=result-validate/)
+  await assert.rejects(() => deployPreview(f, async (_node, args) => args[1] === 'workers' ? parent : { stdout: JSON.stringify(result) }, async url => url.endsWith('/previews/pr-12') ? new Response(null, { status: 404 }) : new Response(null, { status: 403 })), /stage=post-metadata http=403/)
+})
+
+test('inspection projects only explicitly supplied public URLs matching the Preview and deployment identities', async () => {
+  const f = await fixture(), value = metadata()
+  value.result.id = '12345678-deployment'
+  value.result.deployment_urls = { public: 'https://12345678-lie-pr-preview.example.workers.dev', full: 'https://12345678-deployment-lie-pr-preview.example.workers.dev' }
+  value.result.urls = ['https://12345678-lie-game.example.workers.dev', 'https://user:password@12345678-lie-pr-preview.example.workers.dev', 'https://12345678-lie-pr-preview.example.workers.dev/?token=secret', 'https://12345678-lie-pr-preview.example.workers.dev/#secret']
+  value.result.env.LINX_API_KEY.text = 'https://12345678-lie-pr-preview.secret.workers.dev'
+  const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => Response.json(url.endsWith('/previews/pr-12') ? {
+    name: 'pr-12', id: 'preview-id', urls: ['https://pr-12-lie-pr-preview.example.workers.dev', 'https://pr-13-lie-pr-preview.example.workers.dev'], preview_urls: { other: 'http://pr-12-lie-pr-preview.example.workers.dev' }
+  } : value))
+  assert.deepEqual(summary.previewURLs, ['https://pr-12-lie-pr-preview.example.workers.dev'])
+  assert.deepEqual(summary.deploymentURLs, ['https://12345678-lie-pr-preview.example.workers.dev', 'https://12345678-deployment-lie-pr-preview.example.workers.dev'])
+  assert.equal(summary.previewURLCandidateCount, 3)
+  assert.equal(summary.deploymentURLCandidateCount, 6)
+  assert.equal(JSON.stringify(summary).includes('password'), false)
+  assert.equal(JSON.stringify(summary).includes('secret.workers.dev'), false)
+})
+
+test('inspection reports missing or mismatched latest identity as safe shape diagnostics', async () => {
+  const f = await fixture()
+  for (const deployment of [
+    { env: {} },
+    { id: { secret: 'sensitive-value' }, preview_id: 123, env: [] },
+    { id: 'deployment-id', preview_id: 'another-preview', env: metadata().result.env }
+  ]) {
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id' } : deployment))
+    assert.equal(summary.metadataHTTPcode, 200)
+    assert.equal(summary.previewIDMatch, false)
+    assert.equal(summary.deploymentIDPresent, Object.hasOwn(deployment, 'id'))
+    assert.deepEqual(summary.deploymentURLs, [])
+    assert.equal(JSON.stringify(summary).includes('sensitive-value'), false)
+    assert.throws(() => verifyRuntimeDeployment(deployment, result))
+  }
+})
+
+test('inspect reports parent and Preview shape mismatches without following an invalid resource ID', async () => {
+  const f = await fixture()
+  for (const parent of [{ id: 'parent-id' }, { name: { secret: 'sensitive-value' } }, { name: 'wrong-parent' }]) {
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify(parent) }), async () => { throw Error('must not follow') })
+    assert.equal(summary.parentNameMatch, false)
+    assert.equal(JSON.stringify(summary).includes('sensitive-value'), false)
+  }
+  for (const preview of [{ name: 'pr-12' }, { name: 'pr-12', id: '../production' }, { id: 'preview-id' }]) {
+    let requests = 0
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => {
+      requests++
+      assert.equal(url.endsWith('/previews/pr-12'), true)
+      return Response.json(preview)
+    })
+    assert.equal(summary.previewExists, true)
+    assert.equal(requests, 1)
+    assert.deepEqual(summary.deploymentURLs, [])
+  }
+  await assert.rejects(() => inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: 'invalid JSON' })), /stage=inspect-parent/)
+})
+
+test('diagnostic URL projection can use a missing preview_id only from the fixed verified latest endpoint', async () => {
+  const f = await fixture()
+  for (const previewId of [undefined, 'wrong-preview']) {
+    const deployment = { id: '12345678-deployment', urls: ['https://12345678-lie-pr-preview.example.workers.dev', 'https://12345678-lie-game.example.workers.dev'] }
+    if (previewId != null) deployment.preview_id = previewId
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => {
+      if (url.endsWith('/previews/pr-12')) return Response.json({ name: 'pr-12', id: 'preview-id' })
+      assert.equal(url.endsWith('/previews/preview-id/deployments/latest'), true)
+      return Response.json(deployment)
+    })
+    assert.deepEqual(summary.deploymentURLs, previewId == null ? ['https://12345678-lie-pr-preview.example.workers.dev'] : [])
+    assert.equal(summary.deploymentURLCandidateCount, previewId == null ? 2 : 0)
+    assert.throws(() => verifyRuntimeDeployment(deployment, result))
+  }
+})
+
+test('native deployment UUID short URLs and metadata without preview_id retain all identity and binding checks', () => {
+  const deploymentId = '063049c3-82d7-4aed-a9b6-2d490a1d84b3'
+  const actual = { ...result, deployment_id: deploymentId, deployment_urls: ['https://063049c3-lie-pr-preview.example.workers.dev'] }
+  assert.deepEqual(previewResult(actual, 12), actual)
+  assert.doesNotThrow(() => previewResult({ ...actual, deployment_urls: [`https://${deploymentId}-lie-pr-preview.example.workers.dev`] }, 12))
+  assert.throws(() => previewResult({ ...result, deployment_urls: ['https://deployme-lie-pr-preview.example.workers.dev'] }, 12))
+  for (const host of ['063049c4-lie-pr-preview.example.workers.dev', '063049c3-lie-game.example.workers.dev', '063049c3-lie-pr-preview.foreign.workers.dev']) assert.throws(() => previewResult({ ...actual, deployment_urls: [`https://${host}`] }, 12))
+  const value = metadata()
+  value.result.id = deploymentId
+  delete value.result.preview_id
+  assert.doesNotThrow(() => verifyRuntimeDeployment(value, actual))
+  for (const mutate of [v => { v.result.id = 'wrong-id' }, v => { v.result.preview_id = 'other-preview' }, v => { v.result.preview_id = null }, v => { v.result.preview_id = undefined }, v => { v.result.env.EXTRA = { type: 'secret_text' } }]) {
+    const bad = structuredClone(value)
+    mutate(bad)
+    assert.throws(() => verifyRuntimeDeployment(bad, actual))
+  }
+})
+
+test('both existing-latest preflight and exact-new postflight accept the observed native metadata shape', async () => {
+  const f = await fixture(), deploymentId = '063049c3-82d7-4aed-a9b6-2d490a1d84b3'
+  const uploaded = { ...result, deployment_id: deploymentId, deployment_urls: ['https://063049c3-lie-pr-preview.example.workers.dev'] }
+  const requests = []
+  assert.deepEqual(await deployPreview(f, async (_node, args) => ({ stdout: JSON.stringify(args[1] === 'workers' ? { name: 'lie-pr-preview' } : uploaded) }), async url => {
+    requests.push(url)
+    if (url.endsWith('/previews/pr-12')) return Response.json({ name: 'pr-12', id: 'preview-id' })
+    const value = metadata()
+    delete value.result.preview_id
+    if (!url.endsWith('/deployments/latest')) value.result.id = deploymentId
+    return Response.json(value)
+  }), uploaded)
+  assert.equal(requests[1].endsWith('/previews/preview-id/deployments/latest'), true)
+  assert.equal(requests[2].endsWith(`/previews/preview-id/deployments/${deploymentId}`), true)
 })

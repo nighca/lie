@@ -10,6 +10,11 @@ const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value)
 const integer = value => /^[1-9][0-9]*$/.test(String(value)) && Number.isSafeInteger(Number(value))
 const requireThat = (condition, message) => { if (!condition) throw new Error(message) }
 
+function publisherIdentity(value) {
+  requireThat(integer(value?.publisherRunId) && integer(value?.publisherRunAttempt), 'Invalid publisher run identity')
+  return { publisherRunId: String(value.publisherRunId), publisherRunAttempt: String(value.publisherRunAttempt) }
+}
+
 export function githubClient(token, fetcher = fetch) {
   requireThat(typeof token === 'string' && token.length > 0, 'Missing GitHub token')
   return async (path, body = null) => {
@@ -87,13 +92,14 @@ async function latestRun(api, workflow, pr) {
 function skip(context, reason) { return { ...context, action: 'skip', status: reason } }
 
 /** Select only API identities. Downloading or executing PR code is never done here. */
-export async function prepare(event, api) {
+export async function prepare(event, api, publisherData) {
   const source = eventIdentity(event)
+  const publisher = publisherIdentity(publisherData)
   const workflow = await api('actions/workflows/pr-ci.yml')
   let pr, run, artifacts
   if (source.manual) {
     pr = await currentPull(api, event.inputs.pr_number)
-    const context = { event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha }
+    const context = { ...publisher, event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha }
     if (pr.state !== 'open' || pr.head.sha !== source.approvalHeadSha) return skip(context, 'stale')
     run = await latestRun(api, workflow, pr)
     runIdentity(run, workflow, event)
@@ -108,18 +114,18 @@ export async function prepare(event, api) {
       requireThat(closed.length === 1, 'Ambiguous closed PR signal')
       const number = Number(closed[0].name.slice('pr-preview-closed-'.length))
       pr = await currentPull(api, number)
-      if (pr.state !== 'closed') return skip({ event, prNumber: number, previewName: `pr-${number}` }, 'reopened')
+      if (pr.state !== 'closed') return skip({ ...publisher, event, prNumber: number, previewName: `pr-${number}` }, 'reopened')
       const previewName = validateClosedPreview(pr, number)
-      return { action: 'cleanup', status: 'closed', event, prNumber: number, previewName, runId: String(run.id), runAttempt: String(run.run_attempt) }
+      return { ...publisher, action: 'cleanup', status: 'closed', event, prNumber: number, previewName, runId: String(run.id), runAttempt: String(run.run_attempt) }
     }
     const discovered = items.map(item => parsePreviewArtifactName(item.name)).filter(item => item != null && item.runId === String(run.id) && item.runAttempt === String(run.run_attempt))
     requireThat(discovered.length === 1, 'Preview build artifact missing or ambiguous')
     pr = await currentPull(api, discovered[0].prNumber)
-    const context = { event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: null }
+    const context = { ...publisher, event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: null }
     if (pr.state === 'closed') return skip(context, 'closed')
     if (discovered[0].mergeSha !== pr.merge_commit_sha || ![pr.head.sha, pr.merge_commit_sha].includes(run.head_sha)) return skip(context, 'stale')
   }
-  const context = { event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha,
+  const context = { ...publisher, event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha,
     runId: String(run.id), runAttempt: String(run.run_attempt), receipt: provisionalReceipt(pr, run) }
   if (pr.draft === true) return skip(context, 'skipped')
   requireThat(sha(pr.merge_commit_sha), 'PR test merge is unavailable; resolve conflicts and rerun CI')
@@ -145,7 +151,7 @@ export async function authorize(context, receipt, api) {
   return outcome
 }
 
-function runURL(context) { return `https://github.com/${repository}/actions/runs/${context.runId}` }
+function runURL(context) { return `https://github.com/${repository}/actions/runs/${publisherIdentity(context).publisherRunId}` }
 
 async function commitStatus(api, context, state, description, targetURL) {
   return api(`statuses/${context.receipt.headSha}`, { state, context: 'preview', description, target_url: targetURL })
@@ -254,7 +260,8 @@ async function inactive(api, context, description) {
 /** Call only after the workflow's HTTP probe passes. Never delete an old run's whole preview. */
 export async function publish(context, receipt, result, api) {
   requireThat(integer(context?.deploymentId), 'Missing pending GitHub deployment')
-  const urls = previewURLs(result)
+  const validated = previewResult(result, context.prNumber)
+  const urls = { url: validated.preview_urls[0], immutableURLs: validated.deployment_urls }
   let identity
   try { identity = await authorize(context, receipt, api) } catch {
     await inactive(api, context, 'Build identity changed; preview is not current')
@@ -309,7 +316,7 @@ async function approvedDeploymentStarted(context, api) {
 export async function notice(context, api) {
   if (context?.action !== 'skip' || context.status !== 'awaiting-approval') return { status: 'skipped' }
   requireThat(integer(context.prNumber) && sha(context.receipt?.headSha), 'Invalid preview approval notice')
-  const current = await prepare(context.event, api)
+  const current = await prepare(context.event, api, publisherIdentity(context))
   if (current.action !== 'skip' || current.status !== 'awaiting-approval' || current.prNumber !== context.prNumber ||
     current.receipt?.headSha !== context.receipt.headSha || current.receipt?.baseSha !== context.receipt.baseSha ||
     current.receipt?.mergeSha !== context.receipt.mergeSha) return { status: 'stale' }
@@ -362,16 +369,37 @@ async function save(path, value) {
   await writeFile(path, JSON.stringify(value, null, 2) + '\n', { mode: 0o600 })
 }
 
+async function successSummary(path, context, receipt, result) {
+  if (path == null) return
+  const deployment = previewResult(result, context.prNumber)
+  requireThat(integer(context.prNumber) && integer(receipt.runId) && integer(receipt.runAttempt) &&
+    sha(receipt.headSha) && sha(receipt.mergeSha), 'Invalid preview summary identity')
+  const publisher = publisherIdentity(context)
+  const links = deployment.preview_urls.map(url => `- Stable preview: [${url}](${url})`)
+  links.push(...deployment.deployment_urls.map(url => `- Immutable deployment: [${url}](${url})`))
+  links.push(`- PR head: \`${receipt.headSha}\``, `- Tested UI and Worker merge: \`${receipt.mergeSha}\``,
+    `- Producer CI: [run ${receipt.runId}, attempt ${receipt.runAttempt}](https://github.com/${repository}/actions/runs/${receipt.runId})`,
+    `- Publisher: [run ${publisher.publisherRunId}, attempt ${publisher.publisherRunAttempt}](${runURL(context)})`)
+  await appendFile(path, `\n### PR #${context.prNumber} preview\n\n${links.join('\n')}\n`)
+}
+
+async function failureSummary(path, context) {
+  if (path == null) return
+  requireThat(integer(context.prNumber), 'Invalid preview failure identity')
+  await appendFile(path, `\n### PR #${context.prNumber} preview update failed\n\nThe stable URL may still serve an older build. [Publisher logs](${runURL(context)}).\n`)
+}
+
 export async function main(command, env = process.env, fetcher = fetch) {
   requireThat(env.GITHUB_REPOSITORY === repository, 'Publisher requires nighca/lie')
   const api = command === 'probe' ? null : githubClient(env.GH_TOKEN, fetcher)
   const contextFile = resolve(env.PR_PREVIEW_CONTEXT_FILE ?? 'tmp/pr-preview-context.json')
   const identityFile = resolve(env.PR_PREVIEW_IDENTITY_FILE ?? 'tmp/pr-preview-identity.json')
   const receiptFile = resolve(env.PR_PREVIEW_ARTIFACT_DIR ?? `${env.RUNNER_TEMP ?? 'tmp'}/pr-preview-artifact`, 'receipt.json')
+  const publisher = () => publisherIdentity({ publisherRunId: env.GITHUB_RUN_ID, publisherRunAttempt: env.GITHUB_RUN_ATTEMPT })
   if (command === 'prepare') {
     requireThat(['workflow_run', 'workflow_dispatch'].includes(env.GITHUB_EVENT_NAME), 'Unexpected publisher event')
     const event = JSON.parse(await readFile(env.GITHUB_EVENT_PATH, 'utf8'))
-    const context = await prepare(event, api)
+    const context = await prepare(event, api, publisher())
     if (env.SELECTED_PR_NUMBER != null) requireThat(integer(env.SELECTED_PR_NUMBER) && Number(env.SELECTED_PR_NUMBER) === context.prNumber, 'Selected PR changed between publisher jobs')
     await save(contextFile, context)
     await outputs({ action: context.action, status: context.status, pr_number: context.prNumber,
@@ -379,6 +407,8 @@ export async function main(command, env = process.env, fetcher = fetch) {
     return context
   }
   const context = JSON.parse(await readFile(contextFile, 'utf8'))
+  const currentPublisher = publisher()
+  requireThat(context.publisherRunId === currentPublisher.publisherRunId && context.publisherRunAttempt === currentPublisher.publisherRunAttempt, 'Preview context belongs to another publisher run')
   if (command === 'probe') {
     const result = JSON.parse(await readFile(env.PR_PREVIEW_DEPLOYMENT_FILE ?? 'tmp/pr-preview-deployment.json', 'utf8'))
     return probe(context, result, fetcher)
@@ -417,9 +447,15 @@ export async function main(command, env = process.env, fetcher = fetch) {
   }
   if (command === 'publish') {
     const result = JSON.parse(await readFile(env.PR_PREVIEW_DEPLOYMENT_FILE ?? 'tmp/pr-preview-deployment.json', 'utf8'))
-    return publish(context, receipt, result, api)
+    const published = await publish(context, receipt, result, api)
+    if (published.status === 'success') await successSummary(env.GITHUB_STEP_SUMMARY, context, receipt, result)
+    return published
   }
-  if (command === 'fail') return fail(context, receipt, api)
+  if (command === 'fail') {
+    const failed = await fail(context, receipt, api)
+    await failureSummary(env.GITHUB_STEP_SUMMARY, context)
+    return failed
+  }
   throw new Error('Expected prepare, authorize, recheck, pending, probe, publish, fail, notice, cleanup-authorize or cleanup-report')
 }
 

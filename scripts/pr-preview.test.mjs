@@ -24,7 +24,8 @@ function fixture({ fork = false, dispatch = false } = {}) {
     mergeCommit: { sha: mergeSha, parents: [{ sha: baseSha }, { sha: headSha }] },
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: artifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 100, repository_id: 1, head_repository_id: headRepository.id, head_sha: headSha } }] },
-    runs: [structuredClone(run)], deployments: [], deploymentStatuses: {}, reads: [], writes: []
+    runs: [structuredClone(run)], deployments: [], deploymentStatuses: {}, reads: [], writes: [],
+    publisher: { publisherRunId: '500', publisherRunAttempt: '1' }
   }
   state.api = async (path, body = null) => {
     if (body != null) {
@@ -48,7 +49,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
 
 test('automatic publisher discovers a canonical artifact and independently selects the current PR', async () => {
   const f = fixture()
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   assert.equal(context.action, 'deploy')
   assert.equal(context.artifactId, '200')
   assert.equal(context.identity.mergeSha, mergeSha)
@@ -58,9 +59,9 @@ test('automatic publisher discovers a canonical artifact and independently selec
 
 test('fork run with omitted PR association waits for approval; manual current SHA permits it', async () => {
   const f = fixture({ fork: true })
-  assert.equal((await prepare(f.event, f.api)).status, 'awaiting-approval')
+  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'awaiting-approval')
   const manual = fixture({ fork: true, dispatch: true })
-  const context = await prepare(manual.event, manual.api)
+  const context = await prepare(manual.event, manual.api, manual.publisher)
   assert.equal(context.action, 'deploy')
   assert.equal(context.approvalHeadSha, headSha)
 })
@@ -68,22 +69,22 @@ test('fork run with omitted PR association waits for approval; manual current SH
 test('manual approval of an old head does not discover or download a run', async () => {
   const f = fixture({ dispatch: true })
   f.event.inputs.head_sha = 'e'.repeat(40)
-  assert.equal((await prepare(f.event, f.api)).status, 'stale')
+  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'stale')
   assert.equal(f.reads.some(path => path.startsWith('actions/runs/')), false)
 })
 
 test('manual approval cannot select a branch or arbitrary run ID', async () => {
   const f = fixture({ dispatch: true })
   f.event.ref = 'refs/heads/feature'
-  await assert.rejects(prepare(f.event, f.api), /requires main/)
+  await assert.rejects(prepare(f.event, f.api, f.publisher), /requires main/)
   f.event.ref = 'refs/heads/main'
   f.event.inputs = { run_id: '100', head_sha: headSha }
-  await assert.rejects(prepare(f.event, f.api), /PR number/)
+  await assert.rejects(prepare(f.event, f.api, f.publisher), /PR number/)
 })
 
 test('manual path relies on the native workflow entry without querying collaborator permissions', async () => {
   const f = fixture({ fork: true, dispatch: true })
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   assert.equal((await authorize(context, f.receipt, f.api)).status, 'deploy')
   const started = await pending(context, f.receipt, f.api)
   assert.equal((await publish(started, f.receipt, deployedPreview(), f.api)).status, 'success')
@@ -94,11 +95,11 @@ test('workflow inputs cannot substitute another head or select any actor permiss
   const f = fixture({ fork: true, dispatch: true })
   f.event.inputs.actor = 'made-up-user'
   f.event.inputs.permission = 'admin'
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   assert.equal(context.action, 'deploy')
   assert.equal(f.reads.some(path => path.startsWith('collaborators/')), false)
   f.event.inputs.head_sha = 'e'.repeat(40)
-  assert.equal((await prepare(f.event, f.api)).status, 'stale')
+  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'stale')
 })
 
 for (const [name, mutate] of [
@@ -112,38 +113,38 @@ for (const [name, mutate] of [
 ]) test(`prepare refuses ${name}`, async () => {
   const f = fixture()
   mutate(f)
-  await assert.rejects(prepare(f.event, f.api))
+  await assert.rejects(prepare(f.event, f.api, f.publisher))
   assert.deepEqual(f.writes, [])
 })
 
 test('old merge artifact is skipped when base changes', async () => {
   const f = fixture()
   f.pr.merge_commit_sha = 'e'.repeat(40)
-  assert.equal((await prepare(f.event, f.api)).status, 'stale')
+  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'stale')
 })
 
 test('draft never starts publishing', async () => {
   const f = fixture()
   f.pr.draft = true
-  assert.equal((await prepare(f.event, f.api)).status, 'skipped')
+  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'skipped')
 })
 
 test('manual discovery rejects the newest current-head run when it failed rather than using older success', async () => {
   const f = fixture({ dispatch: true })
   f.run.conclusion = 'failure'
-  await assert.rejects(prepare(f.event, f.api), /did not complete/)
+  await assert.rejects(prepare(f.event, f.api, f.publisher), /did not complete/)
 })
 
 test('manual discovery fails closed after a bounded scan', async () => {
   const f = fixture({ dispatch: true })
   f.runs = Array.from({ length: 100 }, (_, index) => ({ id: index + 1, head_sha: 'e'.repeat(40) }))
-  await assert.rejects(prepare(f.event, f.api), /rerun PR CI/)
+  await assert.rejects(prepare(f.event, f.api, f.publisher), /rerun PR CI/)
   assert.equal(f.reads.filter(path => path.startsWith('actions/workflows/10/runs?')).length, 3)
 })
 
 test('downloaded receipt must match independent API and the selected artifact', async () => {
   const f = fixture()
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   assert.equal((await authorize(context, f.receipt, f.api)).status, 'deploy')
   await assert.rejects(authorize(context, { ...f.receipt, runId: '101' }, f.api), /run or attempt/)
   f.artifacts.artifacts[0].id = 201
@@ -152,7 +153,7 @@ test('downloaded receipt must match independent API and the selected artifact', 
 
 test('pending creates non-production deployment bound to head, while describing the tested merge', async () => {
   const f = fixture()
-  const context = await pending(await prepare(f.event, f.api), f.receipt, f.api)
+  const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
   assert.equal(context.deploymentId, '300')
   const deployment = f.writes.find(item => item.path === 'deployments').body
   assert.equal(deployment.ref, headSha)
@@ -164,7 +165,7 @@ test('pending creates non-production deployment bound to head, while describing 
 
 test('pending rechecks and refuses a PR that closed before starting deployment', async () => {
   const f = fixture()
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   f.pr.state = 'closed'
   assert.equal((await pending(context, f.receipt, f.api)).status, 'closed')
   assert.deepEqual(f.writes, [])
@@ -172,8 +173,8 @@ test('pending rechecks and refuses a PR that closed before starting deployment',
 
 test('current deployment publishes only a Cloudflare URL and records UI+Worker merge identity', async () => {
   const f = fixture()
-  const context = await pending(await prepare(f.event, f.api), f.receipt, f.api)
-  const result = await publish(context, f.receipt, { preview_urls: ['https://pr-42-lie-pr-preview.account.workers.dev/'], deployment_urls: [] }, f.api)
+  const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
+  const result = await publish(context, f.receipt, deployedPreview(), f.api)
   assert.equal(result.status, 'success')
   assert.equal(f.writes.at(-1).body.state, 'success')
   assert.match(f.writes.at(-1).body.description, /UI and Worker/)
@@ -182,27 +183,27 @@ test('current deployment publishes only a Cloudflare URL and records UI+Worker m
 
 test('PR updated during upload only inactivates this run and never updates head status or deletes a preview', async () => {
   const f = fixture()
-  const context = await pending(await prepare(f.event, f.api), f.receipt, f.api)
+  const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
   f.writes.length = 0
   f.pr.head.sha = 'e'.repeat(40)
-  const result = await publish(context, f.receipt, { preview_urls: ['https://pr-42.account.workers.dev/'] }, f.api)
+  const result = await publish(context, f.receipt, deployedPreview(), f.api)
   assert.equal(result.status, 'stale')
   assert.deepEqual(f.writes.map(item => [item.path, item.body.state]), [['deployments/300/statuses', 'inactive']])
 })
 
 test('new CI attempt after upload never receives a success status', async () => {
   const f = fixture()
-  const context = await pending(await prepare(f.event, f.api), f.receipt, f.api)
+  const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
   f.writes.length = 0
   f.run.run_attempt++
-  const result = await publish(context, f.receipt, { preview_urls: ['https://pr-42.account.workers.dev/'] }, f.api)
+  const result = await publish(context, f.receipt, deployedPreview(), f.api)
   assert.equal(result.status, 'stale')
   assert.deepEqual(f.writes.map(item => item.body.state), ['inactive'])
 })
 
 test('failure status explicitly distinguishes an existing older preview', async () => {
   const f = fixture()
-  const context = await pending(await prepare(f.event, f.api), f.receipt, f.api)
+  const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
   f.writes.length = 0
   assert.equal((await fail(context, f.receipt, f.api)).status, 'failure')
   assert.match(f.writes.at(-1).body.description, /older build/)
@@ -212,9 +213,21 @@ test('failure status explicitly distinguishes an existing older preview', async 
   assert.equal(f.writes.some(item => item.path.startsWith('statuses/')), false)
 })
 
+test('deployment logs and failed commit status link to the publisher rather than the green producer CI', async () => {
+  const f = fixture()
+  const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
+  await fail(context, f.receipt, f.api)
+  const logs = f.writes.filter(item => item.path.endsWith('/statuses')).map(item => item.body.log_url)
+  assert.ok(logs.length > 0)
+  assert.ok(logs.every(url => url === 'https://github.com/nighca/lie/actions/runs/500'))
+  assert.equal(f.writes.at(-1).body.target_url, 'https://github.com/nighca/lie/actions/runs/500')
+  assert.equal(context.runId, '100')
+  assert.equal(context.publisherRunId, '500')
+})
+
 test('waiting notice rereads API identities and links only the trusted approval workflow', async () => {
   const f = fixture({ fork: true })
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   assert.equal((await notice(context, f.api)).status, 'awaiting-approval')
   assert.equal(f.writes.length, 1)
   assert.equal(f.writes[0].path, `statuses/${headSha}`)
@@ -225,7 +238,7 @@ test('waiting notice rereads API identities and links only the trusted approval 
 test('waiting notice never writes an old head or a draft/closed status', async () => {
   for (const mutate of [f => { f.pr.head.sha = 'e'.repeat(40) }, f => { f.pr.state = 'closed' }, f => { f.pr.draft = true }]) {
     const f = fixture({ fork: true })
-    const context = await prepare(f.event, f.api)
+    const context = await prepare(f.event, f.api, f.publisher)
     mutate(f)
     assert.equal((await notice(context, f.api)).status, 'stale')
     assert.deepEqual(f.writes, [])
@@ -237,7 +250,7 @@ test('waiting notice never writes an old head or a draft/closed status', async (
 
 for (const state of ['pending', 'in_progress', 'success']) test(`late automatic notice preserves a manually approved ${state} deployment`, async () => {
   const f = fixture({ fork: true })
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   f.deployments = [{ id: 300, sha: headSha, payload: { preview: 'lie-pr-preview', pr_number: 42, ...f.receipt } }]
   f.deploymentStatuses[300] = [{ state }]
   assert.equal((await notice(context, f.api)).status, 'already-approved')
@@ -254,7 +267,7 @@ for (const [name, mutate] of [
   ['a deployment with no status', f => { f.deploymentStatuses[300] = [] }]
 ]) test(`approval notice is not blocked by ${name}`, async () => {
   const f = fixture({ fork: true })
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   f.deployments = [{ id: 300, sha: headSha, payload: { preview: 'lie-pr-preview', pr_number: 42, ...f.receipt } }]
   f.deploymentStatuses[300] = [{ state: 'success' }]
   mutate(f)
@@ -266,7 +279,7 @@ for (const [name, mutate] of [
 for (const [name, changed] of [['another run', { runId: '101' }], ['another attempt', { runAttempt: '3' }]]) {
   test(`approval notice preserves same-code approved deployment from ${name}`, async () => {
     const f = fixture({ fork: true })
-    const context = await prepare(f.event, f.api)
+    const context = await prepare(f.event, f.api, f.publisher)
     f.deployments = [{ id: 300, sha: headSha, payload: { preview: 'lie-pr-preview', pr_number: 42, ...f.receipt, ...changed } }]
     f.deploymentStatuses[300] = [{ state: 'success' }]
     assert.equal((await notice(context, f.api)).status, 'already-approved')
@@ -276,7 +289,7 @@ for (const [name, changed] of [['another run', { runId: '101' }], ['another atte
 
 test('approval notice scans bounded deployment pages and finds a later-page success', async () => {
   const f = fixture({ fork: true })
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   const api = async (path, body) => {
     if (body == null && path.startsWith('deployments?')) {
       return path.endsWith('page=1') ? Array.from({ length: 100 }, (_, index) => ({ id: index + 1, sha: headSha, payload: { preview: 'other' } }))
@@ -291,7 +304,7 @@ test('approval notice scans bounded deployment pages and finds a later-page succ
 
 test('approval notice fails closed when deployment pagination exceeds its bound', async () => {
   const f = fixture({ fork: true })
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   f.deployments = Array.from({ length: 100 }, (_, index) => ({ id: index + 1, sha: headSha, payload: { preview: 'other' } }))
   await assert.rejects(notice(context, f.api), /exceeds approval-notice bound/)
   assert.equal(f.reads.filter(path => path.startsWith('deployments?')).length, 3)
@@ -302,18 +315,18 @@ test('closed signal authorizes cleanup only after reading current closed PR', as
   const f = fixture()
   f.pr.state = 'closed'
   f.artifacts = { total_count: 1, artifacts: [{ name: 'pr-preview-closed-42' }] }
-  const context = await prepare(f.event, f.api)
+  const context = await prepare(f.event, f.api, f.publisher)
   assert.equal(context.action, 'cleanup')
   assert.equal((await cleanupAuthorize(context, f.api)).previewName, 'pr-42')
   f.pr.state = 'open'
   assert.equal((await cleanupAuthorize(context, f.api)).status, 'reopened')
-  assert.equal((await prepare(f.event, f.api)).status, 'reopened')
+  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'reopened')
 })
 
 test('confirmed cleanup inactivates only project-marked deployment records and never writes storage/provider', async () => {
   const f = fixture()
   f.pr.state = 'closed'
-  const context = { action: 'cleanup', prNumber: 42, runId: '100' }
+  const context = { action: 'cleanup', prNumber: 42, runId: '100', publisherRunId: '500', publisherRunAttempt: '1' }
   f.deployments = [{ id: 300, payload: { preview: 'lie-pr-preview', pr_number: 42 } }, { id: 301, payload: { preview: 'other', pr_number: 42 } }]
   await cleanupReport(context, f.api)
   assert.deepEqual(f.writes.map(item => item.path), ['deployments/300/statuses'])
@@ -350,9 +363,9 @@ test('cleanup-report CLI requires an explicit deletion confirmation before any w
   const directory = await mkdtemp(join(tmpdir(), 'lie-preview-cli-'))
   try {
     const context = join(directory, 'context.json')
-    await writeFile(context, JSON.stringify({ action: 'cleanup', prNumber: 42, runId: '100' }))
+    await writeFile(context, JSON.stringify({ action: 'cleanup', prNumber: 42, runId: '100', publisherRunId: '500', publisherRunAttempt: '1' }))
     let calls = 0
-    await assert.rejects(main('cleanup-report', { GITHUB_REPOSITORY: repo.full_name, GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: context }, async () => { calls++; throw new Error('must not call') }), /not been confirmed/)
+    await assert.rejects(main('cleanup-report', { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: context }, async () => { calls++; throw new Error('must not call') }), /not been confirmed/)
     assert.equal(calls, 0)
   } finally { await rm(directory, { recursive: true, force: true }) }
 })
@@ -364,7 +377,7 @@ test('publisher job cannot silently change the PR selected for its concurrency g
     const event = join(directory, 'event.json')
     const context = join(directory, 'context.json')
     await writeFile(event, JSON.stringify(f.event))
-    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_EVENT_NAME: 'workflow_run', GITHUB_EVENT_PATH: event,
+    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', GITHUB_EVENT_NAME: 'workflow_run', GITHUB_EVENT_PATH: event,
       GH_TOKEN: 'fake', SELECTED_PR_NUMBER: '43', PR_PREVIEW_CONTEXT_FILE: context }
     const fetcher = async (url, init) => {
       const path = url.slice(`https://api.github.com/repos/${repo.full_name}/`.length)
@@ -382,7 +395,7 @@ test('closed signal cannot come from a different workflow even if it names a rea
   f.pr.state = 'closed'
   f.artifacts = { total_count: 1, artifacts: [{ name: 'pr-preview-closed-42' }] }
   f.run.workflow_id = f.event.workflow_run.workflow_id = 99
-  await assert.rejects(prepare(f.event, f.api), /Unexpected PR CI source/)
+  await assert.rejects(prepare(f.event, f.api, f.publisher), /Unexpected PR CI source/)
   assert.deepEqual(f.writes, [])
 })
 
@@ -479,9 +492,9 @@ test('HTTP probe CLI needs neither a GitHub token nor receipt access', async () 
   const directory = await mkdtemp(join(tmpdir(), 'lie-preview-probe-cli-'))
   try {
     const contextFile = join(directory, 'context.json'), deploymentFile = join(directory, 'deployment.json')
-    await writeFile(contextFile, JSON.stringify({ prNumber: 42 }))
+    await writeFile(contextFile, JSON.stringify({ prNumber: 42, publisherRunId: '500', publisherRunAttempt: '1' }))
     await writeFile(deploymentFile, JSON.stringify(deployedPreview()))
-    const result = await main('probe', { GITHUB_REPOSITORY: repo.full_name, PR_PREVIEW_CONTEXT_FILE: contextFile,
+    const result = await main('probe', { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', PR_PREVIEW_CONTEXT_FILE: contextFile,
       PR_PREVIEW_DEPLOYMENT_FILE: deploymentFile, PR_PREVIEW_ARTIFACT_DIR: join(directory, 'missing') }, async url => probeResponse(new URL(url).pathname))
     assert.equal(result.requests, 4)
   } finally { await rm(directory, { recursive: true, force: true }) }
@@ -499,12 +512,12 @@ test('manual recheck CLI requires the saved PR/head to match the current native 
   const directory = await mkdtemp(join(tmpdir(), 'lie-preview-event-recheck-'))
   try {
     const f = fixture({ fork: true, dispatch: true })
-    const context = await prepare(f.event, f.api)
+    const context = await prepare(f.event, f.api, f.publisher)
     const contextPath = join(directory, 'context.json'), eventPath = join(directory, 'event.json'), identityPath = join(directory, 'identity.json')
     await writeFile(contextPath, JSON.stringify(context))
     await writeFile(eventPath, JSON.stringify(f.event))
     await writeFile(join(directory, 'receipt.json'), JSON.stringify(f.receipt))
-    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_EVENT_PATH: eventPath,
+    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_EVENT_PATH: eventPath,
       GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath, PR_PREVIEW_ARTIFACT_DIR: directory, PR_PREVIEW_IDENTITY_FILE: identityPath }
     assert.equal((await main('recheck', env, apiFetcher(f.api))).status, 'deploy')
     const savedIdentity = await readFile(identityPath, 'utf8')
@@ -521,7 +534,7 @@ test('CLI persists the deployment ID before a pending status failure, so fail ca
   const directory = await mkdtemp(join(tmpdir(), 'lie-preview-pending-recovery-'))
   try {
     const f = fixture()
-    const context = await prepare(f.event, f.api)
+    const context = await prepare(f.event, f.api, f.publisher)
     const contextPath = join(directory, 'context.json')
     await writeFile(contextPath, JSON.stringify(context))
     await writeFile(join(directory, 'receipt.json'), JSON.stringify(f.receipt))
@@ -533,7 +546,7 @@ test('CLI persists the deployment ID before a pending status failure, so fail ca
       }
       return f.api(path, body)
     }
-    const env = { GITHUB_REPOSITORY: repo.full_name, GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath,
+    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath,
       PR_PREVIEW_ARTIFACT_DIR: directory }
     await assert.rejects(main('pending', env, apiFetcher(api)), /One commit status request failed/)
     assert.equal(JSON.parse(await readFile(contextPath, 'utf8')).deploymentId, '300')
@@ -541,5 +554,86 @@ test('CLI persists the deployment ID before a pending status failure, so fail ca
     await main('fail', env, apiFetcher(api))
     assert.deepEqual(f.writes.filter(item => item.path === 'deployments/300/statuses').map(item => item.body.state), ['in_progress', 'failure'])
     assert.equal(f.writes.at(-1).body.state, 'failure')
+  } finally { await rm(directory, { recursive: true, force: true }) }
+})
+
+test('prepare CLI takes publisher identity only from native run variables', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-publisher-identity-'))
+  try {
+    const f = fixture()
+    f.event.inputs = { publisher_run_id: '999', publisher_run_attempt: '999' }
+    f.receipt.publisherRunId = '999'
+    const eventPath = join(directory, 'event.json'), contextPath = join(directory, 'context.json')
+    await writeFile(eventPath, JSON.stringify(f.event))
+    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_EVENT_NAME: 'workflow_run', GITHUB_EVENT_PATH: eventPath,
+      GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '3', GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath }
+    const context = await main('prepare', env, apiFetcher(f.api))
+    assert.equal(context.publisherRunId, '500')
+    assert.equal(context.publisherRunAttempt, '3')
+    assert.equal(context.runId, '100')
+    await assert.rejects(main('prepare', { ...env, GITHUB_RUN_ID: 'https://evil.example/' }, apiFetcher(f.api)), /Invalid publisher run identity/)
+  } finally { await rm(directory, { recursive: true, force: true }) }
+})
+
+test('publish CLI summary exposes only validated URLs and public source/publisher identities', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-summary-'))
+  try {
+    const f = fixture()
+    const context = { ...await prepare(f.event, f.api, f.publisher), deploymentId: '300' }
+    const contextPath = join(directory, 'context.json'), resultPath = join(directory, 'result.json'), summaryPath = join(directory, 'summary.md')
+    await writeFile(contextPath, JSON.stringify(context))
+    await writeFile(join(directory, 'receipt.json'), JSON.stringify(f.receipt))
+    await writeFile(resultPath, JSON.stringify({ ...deployedPreview(), runtimeText: 'do-not-print-runtime-secret', rawCLI: 'do-not-print-raw-output' }))
+    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', GH_TOKEN: 'do-not-print-gh-token',
+      PR_PREVIEW_CONTEXT_FILE: contextPath, PR_PREVIEW_ARTIFACT_DIR: directory, PR_PREVIEW_DEPLOYMENT_FILE: resultPath,
+      GITHUB_STEP_SUMMARY: summaryPath, LINX_API_KEY: 'do-not-print-env' }
+    assert.equal((await main('publish', env, apiFetcher(f.api))).status, 'success')
+    const summary = await readFile(summaryPath, 'utf8')
+    assert.match(summary, /Stable preview: \[https:\/\/pr-42-lie-pr-preview\.account\.workers\.dev\]/)
+    assert.match(summary, /Immutable deployment: \[https:\/\/deployment-id-lie-pr-preview\.account\.workers\.dev\]/)
+    assert.match(summary, new RegExp(`PR head: .${headSha}.`))
+    assert.match(summary, new RegExp(`Tested UI and Worker merge: .${mergeSha}.`))
+    assert.match(summary, /Producer CI: \[run 100, attempt 2\]\(https:\/\/github\.com\/nighca\/lie\/actions\/runs\/100\)/)
+    assert.match(summary, /Publisher: \[run 500, attempt 1\]\(https:\/\/github\.com\/nighca\/lie\/actions\/runs\/500\)/)
+    assert.doesNotMatch(summary, /do-not-print/)
+    assert.ok(f.writes.filter(item => item.path.endsWith('/statuses')).every(item => item.body.log_url.endsWith('/500')))
+    f.writes.length = 0
+    await main('fail', env, apiFetcher(f.api))
+    const failure = (await readFile(summaryPath, 'utf8')).slice(summary.length)
+    assert.match(failure, /preview update failed/)
+    assert.match(failure, /Publisher logs\]\(https:\/\/github\.com\/nighca\/lie\/actions\/runs\/500\)/)
+    assert.doesNotMatch(failure, /do-not-print/)
+  } finally { await rm(directory, { recursive: true, force: true }) }
+})
+
+test('publish rejects a nonmatching target URL before API writes or a success summary', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-malicious-summary-'))
+  try {
+    const f = fixture()
+    const context = { ...await prepare(f.event, f.api, f.publisher), deploymentId: '300' }
+    const contextPath = join(directory, 'context.json'), resultPath = join(directory, 'result.json'), summaryPath = join(directory, 'summary.md')
+    await writeFile(contextPath, JSON.stringify(context))
+    await writeFile(join(directory, 'receipt.json'), JSON.stringify(f.receipt))
+    const result = deployedPreview()
+    result.preview_urls = ['https://pr-42-other-parent.account.workers.dev/']
+    await writeFile(resultPath, JSON.stringify(result))
+    await assert.rejects(main('publish', { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1',
+      GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath, PR_PREVIEW_ARTIFACT_DIR: directory,
+      PR_PREVIEW_DEPLOYMENT_FILE: resultPath, GITHUB_STEP_SUMMARY: summaryPath }, apiFetcher(f.api)), /Preview URL does not match/)
+    assert.deepEqual(f.writes, [])
+    await assert.rejects(readFile(summaryPath), { code: 'ENOENT' })
+  } finally { await rm(directory, { recursive: true, force: true }) }
+})
+
+test('CLI refuses to reuse another publisher run context for status links', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-other-publisher-'))
+  try {
+    const f = fixture()
+    const context = await prepare(f.event, f.api, f.publisher)
+    const contextPath = join(directory, 'context.json')
+    await writeFile(contextPath, JSON.stringify(context))
+    await assert.rejects(main('fail', { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '501', GITHUB_RUN_ATTEMPT: '1',
+      GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath }, apiFetcher(f.api)), /another publisher run/)
+    assert.deepEqual(f.writes, [])
   } finally { await rm(directory, { recursive: true, force: true }) }
 })
