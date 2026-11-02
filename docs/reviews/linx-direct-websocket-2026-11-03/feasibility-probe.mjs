@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { randomBytes, randomUUID } from 'node:crypto'
+import { createOwnedAgent, ownedAgentPath } from './owned-agent.mjs'
 const option = (name) => {
   const i = process.argv.indexOf(name)
   if (i < 0 || !process.argv[i + 1]) throw Error('missing-option')
@@ -107,15 +108,13 @@ try {
   })
   const page = await browser.newPage()
   await page.goto('https://lie.agency/', { waitUntil: 'domcontentloaded' })
-  state.agentId = await api('/xiaozhi/agent', 'POST', {
+  await createOwnedAgent(state, save, api, {
     agentName: state.name,
     assistantName: 'Transport test',
     memModelId: 'Memory_nomem',
     intentModelId: 'Intent_function_call',
     systemPrompt: 'Do not greet. Transport handshake test only.'
   })
-  if (typeof state.agentId !== 'string') throw Error('invalid-create-response')
-  await save()
   await api(`/xiaozhi/agent/${state.agentId}`, 'PUT', {
     chatHistoryConf: 0,
     memModelId: 'Memory_nomem',
@@ -372,9 +371,11 @@ try {
       result.cleanup.deviceUnbound = false
     }
   }
-  if (state.agentId) {
+  if (state.createUncertain === true) result.cleanup.agentCreationUncertain = true
+  const agentPath = ownedAgentPath(state)
+  if (agentPath != null) {
     try {
-      await api(`/xiaozhi/agent/${state.agentId}`, 'DELETE')
+      await api(agentPath, 'DELETE')
       result.cleanup.agentDeleted = true
     } catch {
       result.cleanup.agentDeleted = false

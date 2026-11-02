@@ -2,7 +2,7 @@
 
 2026-11-03。用户明确授权阅读文档、真实验证、可行时实现与PR预览，并由总协调代为决定待定事项。本专项为内部no-PR规则的明确例外；main/线上发布仍由总协调掌握。
 
-当前结论：**浏览器协议可连，但本轮完全不带token也完成相同的PCM/16k hello与MCP tools/list状态，不能据此建立“prepare下发token保护直连”的产品安全前提。** 已停止产品接入；安全产品化仍缺正式身份/权限、有效期与撤销合同。`device-scoped`是待证明要求，不是现有OTA token已证实属性。
+当前结论：**浏览器协议可连；本轮先合法后缺token的连接均收到PCM/16k hello与MCP tools/list，但此前认证状态是否延续未知。** 不能据此建立“prepare下发token保护直连”的产品安全前提，已停止产品接入；安全产品化仍缺正式身份/权限、有效期与撤销合同。`device-scoped`是待证明要求，不是现有OTA token已证实属性。
 
 ## 一手协议证据
 
@@ -29,7 +29,7 @@
 | 组 | 原生WS结果 | 关闭 | 结论边界 |
 | --- | --- | --- | --- |
 | 合法OTA token | PCM16 mono/16000 hello＋MCP tools/list及本地应答，5311ms | confirmed | 协议协商成立；未发listen或计费业务请求。 |
-| 完全省略hello.token | 同样PCM16 mono/16000 hello＋MCP tools/list及本地应答，1664ms | confirmed | **这一握手状态不以该token存在为必要条件。** 不能证明后续业务授权相同，也不能推断服务端完全没有其他身份校验。 |
+| 完全省略hello.token | 同样PCM16 mono/16000 hello＋MCP tools/list及本地应答，1664ms | confirmed | **本轮先合法后缺token的顺序中，该连接未因省略token被拒；可能继承认证状态。** 不能证明后续业务授权相同，也不能推断服务端完全没有其他身份校验。 |
 | 确切错误token | 未执行 | 不适用 | 按总协调预定门禁，前一阴性组达到同样握手状态即停止，不扩大探测。 |
 
 两次hello均检查format、sample_rate、channels与bits_per_sample/bit_depth（未声明bit-depth时沿用现有协议16默认），没有收/发音频或验证真实解码。时间包含各次网络/服务端准备差异，不能比较为缺token更快，更不能称大陆或iOS效果提升。
@@ -47,6 +47,8 @@
 脚本会创建1个临时Agent/Device、验证禁开场、只发hello/MCP，最多3次原生浏览器连接且每条确认关闭后再下一条；正向失败、未知事件、未知拒绝或负向也达到同样握手状态即停止。资源API有12秒deadline，采样窗口5分钟，cleanup单独最多1分钟；finally尝试关闭owned浏览器、解绑owned Device、删除owned Agent，并输出明确清理状态。API响应未知或cleanup失败需保留私密ledger交原owner处理，不盲建新身份或清理其他资源。实际无声学/推理验证，不能因脚本支持再跑而在未经协调窗口反复调用。
 
 输出只含阶段状态、固定协议枚举、有限数值、token结构摘要和清理布尔；不输出URL参数、身份、token、原始错误或正文。负向的generic close/error不是明确鉴权原因，只用于与正向区分，不升格为完整业务授权或权限边界证明。
+
+真实运行后还补充了[owned Agent回执保护](owned-agent.mjs)：请求前保存createAttempted/createUncertain，仅将官方ID表示的32位小写hex字符串赋为可清理ID。对象、数组、空值或丢失响应只保留待owner核对的私密ledger，不猜ID、不遍历账户或尝试删除未知目标。[离线fake检查](owned-agent.test.mjs)覆盖未知回执不delete、合法回执只delete本次ID、丢响应保留不确定状态，3项通过；没有为此重跑云实验。现脚本包含这项事后加固，真实JSON保持原始脱敏事实，不冒称新保护分支已在云端触发验证。
 
 ## 安全产品候选设计（有条件，未接入产品）
 
