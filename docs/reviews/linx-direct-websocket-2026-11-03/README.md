@@ -2,7 +2,7 @@
 
 2026-11-03。用户明确授权阅读文档、真实验证、可行时实现与PR预览，并由总协调代为决定待定事项。本专项为内部no-PR规则的明确例外；main/线上发布仍由总协调掌握。
 
-当前结论：**浏览器协议可连，但本轮完全不带token也完成相同的PCM/16k hello与MCP握手，不能据此建立“prepare下发token保护直连”的产品安全前提。** 已停止产品接入；安全产品化仍缺正式身份/权限、有效期与撤销合同。`device-scoped`是待证明要求，不是现有OTA token已证实属性。
+当前结论：**浏览器协议可连，但本轮完全不带token也完成相同的PCM/16k hello与MCP tools/list状态，不能据此建立“prepare下发token保护直连”的产品安全前提。** 已停止产品接入；安全产品化仍缺正式身份/权限、有效期与撤销合同。`device-scoped`是待证明要求，不是现有OTA token已证实属性。
 
 ## 一手协议证据
 
@@ -16,7 +16,7 @@
 [白名单结果](positive-browser-result.json)。环境：本机macOS、独立headless Google Chrome、Playwright驱动原生WebSocket、页面Origin为`https://lie.agency`。独占临时Agent/Device，先关闭开场问候并readback确认；未开mic、录音、上传PCM、发送listen或文本推理。不是Node自定义header探针，也不是大陆或iOS真机测试。
 
 1. 官方Device OTA流程取token；以真实Device/client标识作为ws2 query身份，以该OTA token放入hello，未使用公开demo的agentId/示例token。
-2. 连接open，收到PCM/16000 hello、MCP initialize与tools/list并应答，1787ms结束。首轮只断言format与sample_rate；没有独立录下channels/bit-depth，也未渲染或接收TTS音频。1787ms仅本机单次协议时长，不是首音时延或改善比例。
+2. 连接open，收到PCM/16000 hello与MCP tools/list并提交应答，1787ms结束。脚本支持initialize应答，但没有单独记录/断言其成功，因此不称已独立验证initialize。首轮只断言format与sample_rate；没有独立录下channels/bit-depth，也未渲染或接收TTS音频。1787ms仅本机单次协议时长，不是首音时延或改善比例。
 3. token可解析为JWT形式，payload只有data字段，没有可读exp；没有验证签名/解密data。这既不能证明永不过期，也不能证明已知短期或Device隔离。
 4. finally关闭浏览器、精确解绑owned Device与删除owned Agent，返回均成功。私密0600 ledger保留owned ID供追溯，token在收尾清空。没有用户tab、应用服务或共享资源操作。
 
@@ -28,8 +28,8 @@
 
 | 组 | 原生WS结果 | 关闭 | 结论边界 |
 | --- | --- | --- | --- |
-| 合法OTA token | PCM16 mono/16000 hello＋MCP initialize/tools-list，5311ms | confirmed | 协议协商成立；未发listen或计费业务请求。 |
-| 完全省略hello.token | 同样PCM16 mono/16000 hello＋MCP initialize/tools-list，1664ms | confirmed | **这一握手状态不以该token存在为必要条件。** 不能证明后续业务授权相同，也不能推断服务端完全没有其他身份校验。 |
+| 合法OTA token | PCM16 mono/16000 hello＋MCP tools/list及本地应答，5311ms | confirmed | 协议协商成立；未发listen或计费业务请求。 |
+| 完全省略hello.token | 同样PCM16 mono/16000 hello＋MCP tools/list及本地应答，1664ms | confirmed | **这一握手状态不以该token存在为必要条件。** 不能证明后续业务授权相同，也不能推断服务端完全没有其他身份校验。 |
 | 确切错误token | 未执行 | 不适用 | 按总协调预定门禁，前一阴性组达到同样握手状态即停止，不扩大探测。 |
 
 两次hello均检查format、sample_rate、channels与bits_per_sample/bit_depth（未声明bit-depth时沿用现有协议16默认），没有收/发音频或验证真实解码。时间包含各次网络/服务端准备差异，不能比较为缺token更快，更不能称大陆或iOS效果提升。
