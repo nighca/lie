@@ -38,6 +38,8 @@
 
 实测只覆盖来自本机Chrome/正式首页Origin的握手，不包含真实TTS、Origin白名单范围、跨Device/跨Agent、token到期/撤销或业务计费权限。JWT无可读exp不等于没有服务端期限。当前不能安全地把设备身份字段当作已证实的会话授权机制，也不会使用公开demo的agentId/静态token绕过这个缺口。
 
+两组按批准顺序在同一浏览器上下文、同一Device/client上先合法后缺token；没有清provider Cookie或检查服务端身份缓存。缺token组可能受到前组的浏览器/服务端认证状态影响，本轮不能分辨，也没有验证一个全新未认证上下文的缺token行为。因此该结果不是“灵矽无鉴权”的证据；它只说明本轮序列中的握手没有因省略hello.token而被拒绝，仍不足以确立安全分发合同。按预设停止条件不再扩大实验。
+
 ## 验证脚本与复验条件
 
 [feasibility-probe.mjs](feasibility-probe.mjs)是独立服务端执行工具，默认拒绝执行。只有明确传入`--execute-owned-probe`、`--key-file`（本机服务端既有私密文件）、`--private-state-dir`（预先建立0700的ignored目录）、`--playwright-module`（本机既有Playwright的绝对模块路径）才进入实验。私密ledger用0600和wx创建，拒绝覆盖先前实验；脚本内不包含凭据。需要Node24、Playwright及当前配置指定的macOS Google Chrome，不是PR浏览器里运行的功能。
