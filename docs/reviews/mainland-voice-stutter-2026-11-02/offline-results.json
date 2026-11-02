@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "node": "v24.22.1",
+  "kind": "deterministic fake scheduling; not network, browser or acoustic evidence",
+  "sourceSha256": {
+    "player": "4b1bdfa0b506a02c4aa2066a43438d8a7ea6afaae03a8e7927538a243ef30ab7",
+    "pcm": "f0d75bcd2d4a3e096aff705b58abea5526c3cc97d62d2f2ea99647f190bfb07f"
+  },
+  "fixture": {
+    "audioSeconds": 2,
+    "packetBytes": 640,
+    "packets": 100,
+    "sampleRate": 16000,
+    "graphRate": 16000,
+    "oneAnswer": true,
+    "contextAlwaysRunning": true,
+    "speechOrPrivateAudio": false
+  },
+  "assertions": "passed",
+  "cases": [
+    {
+      "name": "steady-20ms",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 96,
+      "gapCountWithinOneAnswer": 0,
+      "totalScheduledGapMs": 0,
+      "maxScheduledGapMs": 0,
+      "maxEnqueueCallbackIntervalMs": 20,
+      "peakQueueAheadMs": 116,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "constant-extra-500ms",
+      "firstCallbackMs": 500,
+      "firstScheduledStartMs": 596,
+      "gapCountWithinOneAnswer": 0,
+      "totalScheduledGapMs": 0,
+      "maxScheduledGapMs": 0,
+      "maxEnqueueCallbackIntervalMs": 20,
+      "peakQueueAheadMs": 116,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "100ms-batches-same-average-rate",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 16,
+      "gapCountWithinOneAnswer": 0,
+      "totalScheduledGapMs": 0,
+      "maxScheduledGapMs": 0,
+      "maxEnqueueCallbackIntervalMs": 100,
+      "peakQueueAheadMs": 116,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "delivery-hold-600-to-750ms-then-catch-up",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 96,
+      "gapCountWithinOneAnswer": 1,
+      "totalScheduledGapMs": 70,
+      "maxScheduledGapMs": 70,
+      "maxEnqueueCallbackIntervalMs": 170,
+      "peakQueueAheadMs": 186,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "delivery-hold-600-to-900ms-then-catch-up",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 96,
+      "gapCountWithinOneAnswer": 1,
+      "totalScheduledGapMs": 220,
+      "maxScheduledGapMs": 220,
+      "maxEnqueueCallbackIntervalMs": 320,
+      "peakQueueAheadMs": 336,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "delivery-hold-600-to-1100ms-then-catch-up",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 96,
+      "gapCountWithinOneAnswer": 1,
+      "totalScheduledGapMs": 420,
+      "maxScheduledGapMs": 420,
+      "maxEnqueueCallbackIntervalMs": 520,
+      "peakQueueAheadMs": 536,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "source-pause-300ms-no-catch-up",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 96,
+      "gapCountWithinOneAnswer": 1,
+      "totalScheduledGapMs": 300,
+      "maxScheduledGapMs": 300,
+      "maxEnqueueCallbackIntervalMs": 320,
+      "peakQueueAheadMs": 116,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "steady-network-main-thread-blocked-600-to-900ms",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 96,
+      "gapCountWithinOneAnswer": 1,
+      "totalScheduledGapMs": 220,
+      "maxScheduledGapMs": 220,
+      "maxEnqueueCallbackIntervalMs": 320,
+      "peakQueueAheadMs": 336,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    },
+    {
+      "name": "20ms-audio-every-25ms",
+      "firstCallbackMs": 0,
+      "firstScheduledStartMs": 116,
+      "gapCountWithinOneAnswer": 4,
+      "totalScheduledGapMs": 455,
+      "maxScheduledGapMs": 120,
+      "maxEnqueueCallbackIntervalMs": 25,
+      "peakQueueAheadMs": 116,
+      "scheduledSamples": 32000,
+      "remainingJobsAfterDrain": 0
+    }
+  ]
+}
