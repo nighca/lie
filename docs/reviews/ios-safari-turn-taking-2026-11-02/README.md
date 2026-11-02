@@ -2,6 +2,8 @@
 
 2026-11-02。用户已明确选择iPhone和iPad Safari轮流说话，并确认开启前低强调“兼容模式”按钮、点击解释弹窗，回答期间提示、可提问时波形。尾音保护期间继续提示，连接/错误仍用原提示。**本候选已实现并离线验收，未集成或发布，未验证真实Safari音频效果。**
 
+同日后续用户要求像剩余时间入口一样默认无边框。已追加仅scoped CSS调整：常态border=0，沿用该入口的8px圆角/4px留白、hover淡蓝背景和focus-visible轮廓，文字/位置/弹窗及音频逻辑不变。下述截图、results源hash和原生/离线检查对应`98dd6ddf58b12943c3c7fda61a86c2bdbaa9bc4d`的原细框版，保留作前版证据，不冒充本次无框截图；追加CSS差异单独交root审核，不为小样式重开服务或重跑无关suite。
+
 Owner：Safari共同负责人chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。新managed worktree `/Users/nighca/.codex/worktrees/lie-ios-safari-turn-taking/lie`，branch `codex/ios-safari-turn-taking`，实际起点clean `bb5fe51c641d65b61593aa5e820072f81d1350f2`。原`9423/lie`调查分支冻结保留9302，未复制旧App、重放旧main依赖、修改main或其他分支。提案9302与调查7685/f87/374/427是历史依据，runtime候选不依赖重放这些提交。
 
 ## 实际行为与接口
@@ -10,7 +12,7 @@ Owner：Safari共同负责人chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。新ma
 - liveVoice在TTS start后直接丢弃onFrame回调的上行PCM；不排队、不补发、不用静音替代。保持同mic/context/encoder/socket及realtime、16k、AEC/降噪、预算/连接上限；不额外发listen.stop/start或abort，不改变STT和aborted处理。
 - 普通stop保留现有flush/drain，等整轮answerEnded且真实player队列排空才启动300ms尾保护；句间queue空、outputLevel=0或onIdle本身不会解锁。aborted/STT有效本地中止后同样经尾保护恢复，新TTS取消待恢复。close/失效scope阻止旧回调和timer恢复。
 - `VoiceFeedback.inputPaused?`只在兼容模式反馈中附带；controller显式投影并沿用原close/reset清空，普通模式原feedback shape不变。App从这个同源状态派生inputNotice，避免网络stop后提前显示可提问。没有新增GameView/engine状态或packages/voice公共合同。
-- VoiceControl新增默认null的inputNotice和可选idle slot；preparing/error优先。兼容入口在idle的既有波形区域，灰色细框小按钮；开启后不显示入口，暂停上传时替换波形为“请等角色说完再提问”。关闭解释和Escape还焦点，开启、离页/终局、其他模态/模式切换关闭解释。解释不启动语音、不停止会话/计时，不称物理麦克风关闭。
+- VoiceControl新增默认null的inputNotice和可选idle slot；preparing/error优先。兼容入口在idle的既有波形区域，低强调无边框文字按钮；开启后不显示入口，暂停上传时替换波形为“请等角色说完再提问”。关闭解释和Escape还焦点，开启、离页/终局、其他模态/模式切换关闭解释。解释不启动语音、不停止会话/计时，不称物理麦克风关闭。
 
 ## 验证结果与限制
 

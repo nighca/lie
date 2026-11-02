@@ -263,8 +263,9 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 </template>
 
 <style scoped>
-.voice-compatibility-trigger { align-self: flex-start; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; background: transparent; color: var(--lie-muted); font: inherit; font-size: 12px; line-height: 1.6; cursor: pointer; }
-.voice-compatibility-trigger:hover { color: var(--lie-ink); }
+.voice-compatibility-trigger { align-self: flex-start; border: 0; border-radius: 8px; padding: 4px; background: transparent; color: var(--lie-muted); font: inherit; font-size: 12px; line-height: 1.6; cursor: pointer; }
+.voice-compatibility-trigger:hover { background: var(--lie-soft-blue); }
+.voice-compatibility-trigger:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 3px; }
 .intro-duration { text-autospace: normal; }
 .result-character figcaption strong :deep(.character-name-text) { display: inline; font: inherit; color: inherit; }
 .result-celebration { margin: 12px 0 0; font-size: 16px; font-weight: 600; line-height: 1.6; text-wrap: pretty; }
