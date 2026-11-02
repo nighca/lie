@@ -1,6 +1,6 @@
 # 开发与服务登记
 
-2026-11-02 当前登记截点：已审main e961e47已普通push，CI41369888679/CD41370035646通过，线上完整e961及prod/local health、voice ready已核。首次帮助/WebMCP和Safari独立诊断v2/复制已上线；本批仅联合语音调查资料和PPT v4提案归档，无产品观测接口或新服务。用户稍后方便再通知联合手动测试，统一由root通知，Safari负责人维护唯一测试说明、大陆负责人供分析输入；不各自补测、不自动mic/provider、无HAR/录音或产品trace实施授权。5176/5544已停止释放；8787/8788、5177/5198按最后owner/consumer回执保护。本轮不探测、启停服务或把旧PID当实时状态。
+2026-11-02 当前登记截点：已审main bb5fe51已普通push，CI41442518158/CD41442777477通过，线上完整bb5及prod/local health、voice ready已核。本批为用户已批准的iPhone/iPad Safari临时轮流说话兼容模式，平台外策略不变，候选待CI/CD；根因与真机音频效果未证。用户已提供一轮真实样本，灵矽草稿自行转交，不催补测，也不新增provider/观测授权。本轮兼容UI短5176已由owner原PTY28344 Ctrl-C停止PID75509，精确PID/child/listener核空；与旧WebMCP释放分别登记。5544已释放；8787/8788、5177/5198按最后owner/consumer回执保护，本轮不启停这些服务。
 
 ## 本地开发
 
@@ -28,7 +28,8 @@ npm run character-presets:check
 
 | 端口 / 生命周期 | owner、来源与最后回执 | consumer 与下一步 |
 | --- | --- | --- |
-| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；先前main-status读回51264a属历史；本批集成基线main为e961e47，持久服务随owning main推进，不将旧SHA/PID当本轮服务实测。 | 用户本地对比；5544首次帮助consumer已释放，仍不代表持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 8787 Web / 8788 Worker，持久保留，仅loopback | `session_limit_acceptance`＋总协调；owning main `/Users/nighca/code/nighca/lie`，launchd `dev.nighca.lie.main-preview`。P0实际配置/恢复回执为main16d6434、namespace `local-main`，runner81316/Web82946/gateway83547是当轮快照，后续main跟随会换children；先前main-status读回51264a属历史；本批集成基线main为bb5fe51，持久服务随owning main推进，不将旧SHA/PID当本轮服务实测。 | 用户本地对比；5544首次帮助consumer已释放，仍不代表持久main服务可停。后续由root持唯一集成turn，正常review后main→CI/CD；用户已接受短时不可用，明确正在语音时再简单协调，不设复杂固定窗口。[已归档回执](reviews/device-concurrency-2026-11-01/actual-prod-receipt.md)。 |
+| 5176，iOS Safari兼容UI验收已停止交回 | Safari Chat `01a19770`；WT `lie-ios-safari-turn-taking/lie`、branch `codex/ios-safari-turn-taking`，基线bb5＋98dd合成App/controller/fakevoice，未开真实provider。原PID75509/PTY28344，owner原PTY Ctrl-C退出，精确ps/children/lsof均空，自建tab关闭。 | consumer仅专项原生合成UI验收，已结束；源a6后续仅无框CSS，不为其重开服务。无用户tab/storage/clipboard/mic操作，不拿旧WebMCP停服记录冒充本轮；持久8787/8788保留。 |
 | 5176，WebMCP用户体验已停止交回 | Chat `01a19745`；WT `c4e9/lie`、branch `codex/webmcp-authoring-research`，最终clean3efe3c5。原PID48877/PTY35629，owner Ctrl-C exit130，精确ps及lsof LISTEN均空。 | 用户最终接受直接表单partial与新UI，consumer/turn已释放；未关闭用户tab或改store，不触其他服务。已随96c5fdd发布；不打印token，不据旧Demo检查冒称生产trial接受。 |
 | 5544，首次帮助用户体验已停止交回 | Chat `01a19748`；WT `a92e/lie`、branch `codex/first-use-help-assessment`，最终adfe295/clean20cb239。原PID64673/PTY63756，owner原PTY Ctrl-C，精确PID/cwd/child及双次lsof核空，root独立核无残留。 | 用户最终接受并要求提交合入，consumer已结束；已随96c5fdd发布。不读editor store、不自动真实voice、不操作持久8787/8788。 |
 | 5544，江苏案最终试玩已停止交回 | 江苏案Chat `01a18add-78a2-72d0-b8c1-7b0c2dac9c0e`；WT `lie-jiangsu-starter/lie`、branch `codex/lie-jiangsu-starter`、base1e88180＋当轮专项变更，最终源d6d33a7。原Web PID29602/PTY34175，strict127.0.0.1、proxy既有8788。用户接受后owner原PTY Ctrl-C停止，PID与5544监听核空，root收到同项回执。 | 用户consumer/服务turn已释放；没有关闭或刷新用户tab，不触碰8787/8788。旧礼物案释放事实另列，不将其PID套用于本轮；不自动重启。 |
