@@ -1,0 +1,6 @@
+{
+  "method": "built-in image_gen",
+  "reference": "docs/pitch/visual-direction-v4/C-editorial.jpg",
+  "source": "/Users/nighca/.codex/generated_images/01a1951e-6609-75e3-8db8-e013f8c3ada1/exec-13d9ce3c-21d6-489b-a958-bba471041d4d.png",
+  "prompt": "Edit target: this exact already approved C art-direction cover image. User explicitly prefers THIS original composition over a later recreation. Change ONLY two tiny branding/header details: remove the italic temporary 'LIE' logo at top left and remove '01 / 产品' at top right, filling those exact regions with matching ivory background. Keep the thin blue top rule exactly as-is. Preserve EVERYTHING ELSE exactly: the huge Chinese title 谁在说谎？ including the blue question mark, the bottom sentence 开口，故事才开始。, its underline, the giant yellow question mark at right, both character faces and original poses, hands visibly gripping the question mark, all colors, scale, crops and spacing. Do not reinterpret/recompose or redraw the page. Do not add any logo or new text. The real official logo will be overlaid later as an untouched source image. Output same widescreen aspect ratio, full original composition."
+}
