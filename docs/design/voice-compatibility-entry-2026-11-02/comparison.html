@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>语音兼容提示 · 设计对比</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 40px; background: #f3f4f7; color: #202a3e; font-family: 'PingFang SC', sans-serif; }
+header { margin-bottom: 28px; }
+.eyebrow { color: #7a8290; font-size: 13px; letter-spacing: 2px; }
+h1 { margin: 8px 0; font-size: 30px; font-weight: 650; }
+header p { margin: 0; color: #697181; font-size: 15px; }
+.columns { display: grid; grid-template-columns: repeat(3, 390px); gap: 24px; }
+article { overflow: hidden; border: 1px solid #e1e5eb; border-radius: 18px; background: white; box-shadow: 0 8px 28px #24334a06; }
+.title { display: flex; align-items: center; gap: 10px; padding: 20px 18px 8px; }
+.letter { color: #8a93a0; font-size: 14px; }
+h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.recommend { margin-left: auto; border-radius: 5px; padding: 3px 7px; background: #eaf4ef; color: #54766b; font-size: 12px; }
+.description { margin: 0 18px 18px; color: #818895; font-size: 12px; }
+.state { margin: 0; padding: 10px 18px; border-top: 1px solid #edf0f4; color: #798291; font-size: 12px; }
+iframe { display: block; width: 390px; height: 250px; border: 0; }
+footer { margin-top: 24px; color: #8a919d; font-size: 12px; }
+</style>
+<header>
+  <div class="eyebrow">LIE · 局部视觉探索</div>
+  <h1>让语音提示更轻一点</h1>
+  <p>相同位置、相同交互。上方是开启前，下方是角色回答时；都保留“听完再问”的清晰指引。</p>
+</header>
+<div class="columns">
+  <article><div class="title"><span class="letter">A</span><h2>轻文字</h2></div><p class="description">没有容器和图标，尽量融入控制栏。</p><p class="state">开启前</p><iframe title="A 开启前" src="/tmp/compatibility-design-variant.html?variant=a&state=idle"></iframe><p class="state">角色回答中</p><iframe title="A 回答中" src="/tmp/compatibility-design-variant.html?variant=a&state=speaking"></iframe></article>
+  <article><div class="title"><span class="letter">B</span><h2>轻图标</h2><span class="recommend">推荐</span></div><p class="description">信息图标呼应剩余时间，回答时换为声音符号。</p><p class="state">开启前</p><iframe title="B 开启前" src="/tmp/compatibility-design-variant.html?variant=b&state=idle"></iframe><p class="state">角色回答中</p><iframe title="B 回答中" src="/tmp/compatibility-design-variant.html?variant=b&state=speaking"></iframe></article>
+  <article><div class="title"><span class="letter">C</span><h2>柔和标签</h2></div><p class="description">用很淡的底色区分状态，没有描边。</p><p class="state">开启前</p><iframe title="C 开启前" src="/tmp/compatibility-design-variant.html?variant=c&state=idle"></iframe><p class="state">角色回答中</p><iframe title="C 回答中" src="/tmp/compatibility-design-variant.html?variant=c&state=speaking"></iframe></article>
+</div>
+<footer>静态设计稿 · 尚未选定或上线 · 点击“兼容模式”仍打开原说明弹窗；普通浏览器保持原界面。</footer>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>语音兼容提示静态方案</title>
+<div id="design"></div>
+<style>
+.design-context { margin: 14px 16px; border: 2px solid #202a3e; border-radius: 18px; background: #fffef8; padding: 12px; height: 145px; }
+.design-context h2 { margin: 0 0 10px; font-size: 15px; border-bottom: 1px solid #e2e3e0; padding-bottom: 8px; }
+.design-context p { margin: 0; color: #87909a; font-size: 13px; }
+.design-mode { align-self: flex-start; border: 0; padding: 4px; border-radius: 6px; background: transparent; color: #7b8390; font: inherit; font-size: 12px; letter-spacing: .2px; cursor: pointer; }
+.design-mode:focus-visible { outline: 3px solid #0067ef; outline-offset: 3px; }
+.design-mode:hover { background: #edf3fa; }
+.design-mode svg { width: 13px; height: 13px; }
+body[data-variant="a"] .lie-voice__status { color: #7b8390; font-size: 12px; font-weight: 500; letter-spacing: .2px; }
+body[data-variant="b"] .design-mode { display: inline-flex; align-items: center; gap: 5px; color: #737d8b; }
+body[data-variant="b"] .lie-voice__status { display: inline-flex; align-items: center; gap: 6px; color: #737d8b; font-size: 12px; font-weight: 500; }
+body[data-variant="b"] .lie-voice__status::before { content: ''; width: 13px; height: 13px; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='6' width='2' height='4' rx='1'/%3E%3Crect x='5' y='2' width='2' height='12' rx='1'/%3E%3Crect x='9' y='4' width='2' height='8' rx='1'/%3E%3Crect x='13' y='6' width='2' height='4' rx='1'/%3E%3C/svg%3E") center / contain no-repeat; }
+body[data-variant="c"] .design-mode { background: #edf3f7; color: #697a89; padding: 4px 9px; }
+body[data-variant="c"] .lie-voice__status { align-self: flex-start; background: #fff1d7; color: #8a744d; padding: 3px 9px; border-radius: 6px; font-size: 12px; font-weight: 500; }
+</style>
+<script type="module">
+import { createApp, h, ref } from 'vue'
+import { UiButton, UiDialog, VoiceControl } from '@lie/ui'
+import '@lie/ui/style.css'
+import '/src/style.css'
+
+const params = new URLSearchParams(location.search)
+const variant = ['a', 'b', 'c'].includes(params.get('variant')) ? params.get('variant') : 'a'
+const speaking = params.get('state') === 'speaking'
+document.body.dataset.variant = variant
+const info = () => h('svg', { class: 'interrogation-budget__info', viewBox: '0 0 16 16', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.3, 'aria-hidden': true }, [h('circle', { cx: 8, cy: 8, r: 6 }), h('path', { d: 'M8 7v4M8 4.5v.5', 'stroke-linecap': 'round' })])
+createApp({
+  setup() {
+    const open = ref(false)
+    return () => h('div', [
+      h('section', { class: 'design-context' }, [h('h2', '询问记录'), h('p', speaking ? '角色正在回答你的问题……' : '还没有对话，开口打个招呼吧。')]),
+      h(VoiceControl, { active: speaking, status: speaking ? 'speaking' : 'idle', label: '', actionLabel: speaking ? '结束对话' : '开启对话', inputNotice: speaking ? '听完再问' : null }, {
+        details: () => h('div', { class: 'interrogation-budget' }, [h('span', '剩余询问'), h('button', { class: 'interrogation-budget__help' }, [h('strong', '08:00'), info()])]),
+        idle: () => h('button', { class: 'design-mode', 'aria-haspopup': 'dialog', onClick: () => { open.value = true } }, variant === 'b' ? [info(), '兼容模式'] : '兼容模式'),
+        answer: () => h(UiButton, { variant: 'secondary' }, () => '我有答案了 →'),
+      }),
+      h(UiDialog, { open: open.value, title: '兼容模式', onClose: () => { open.value = false } }, { default: () => h('p', '角色回答时无法语音插话。请等角色说完、音量波形重新出现后，再继续提问。') }),
+    ])
+  },
+}).mount('#design')
+</script>
+</html>

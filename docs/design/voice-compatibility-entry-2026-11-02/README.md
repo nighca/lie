@@ -1,0 +1,25 @@
+# 兼容入口与回答提示：视觉对比
+
+2026-11-02。**设计探索，待用户选择；不是线上实现。** 用户认为“兼容模式”四字仍不美观，明确要求先出设计图，随后要求一并优化“等角色说完再说话”的提示。保留已批准的平台范围、底栏位置、点击说明、回答/尾保护暂停上传的行为，仅探索文案/视觉。
+
+## 三个方向
+
+| 方案 | 开启前“兼容模式” | 回答/尾保护时“听完再问” |
+| --- | --- | --- |
+| A 轻文字 | 低强调文字，无容器/图标 | 同级灰色短文案 |
+| B 轻图标（建议） | 小info图标＋文字，呼应剩余时间说明入口 | 小声音符号＋短文案，无描边/底色 |
+| C 柔和标签 | 很淡的蓝灰底色，无描边 | 淡暖色底标签，无描边 |
+
+“听完再问”是待用户选择的短文案，不按一句或句间静音提前恢复；实际行为仍应等整轮播放及尾保护完成。B仅为owner建议，三套都未获用户定稿。图中的声音符号是静态状态图标，不是正在接收玩家提问的波形。
+
+[完整对比图](comparison.jpg)上排为开启前、下排为回答中；[B局部放大](recommended-b.jpg)。图片为自有IAB对代码原生设计HTML的直接截图，JPEG字节原样保全，无生成或编辑用户截图。使用实际VoiceControl/UiButton/UiDialog和既有样式，只有设计HTML内的局部样式及合成文案；没有修改运行时源文件。
+
+可复现源：[comparison.html](comparison.html)、[variant.html](variant.html)。通过显式的独立设计query只选图稿样式/静态状态，不是产品/平台override；不导入main/liveVoice/controller，不申请mic、连接provider、读用户存储或剪贴板。B入口点击说明与关闭已经原生检查，图稿用于比较视觉，不是新语音验收。
+
+## 服务与证据
+
+root批准新的短5176窗口，启动前lsof无listener。owner本chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`，worktree `lie-ios-safari-turn-taking/lie`，HEAD a6a750eb3b0a636bcbb3af9da873e11b3857a619＋本目录设计文件；runtime对a6 diff为空。单Vite strict127.0.0.1:5176，PID70958，cwd本WT/apps/web，原PTY38046，consumer自建IAB tab6，stop条件为设计出图结束。
+
+静态源逐字复制到忽略apps/web/tmp独立入口，画板1320×920，六个390px宽内嵌设计视口，原生核对无横向溢出。截图前已确认三套两状态完整、默认无焦点框；B打开/关闭说明正常。截图后viewport reset、tab6关闭/IAB列表空；原PTY Ctrl-C后精确PID/children/lsof5176均空。未触8787/8788、5177、5198或用户tab，无保留consumer。
+
+未运行无关测试/build/部署。图片与HTML/文字提案保全以供用户选定，随后才按批准方向实施；不为设计反馈单独发布。最终commit和图片hash随批量handoff提供，不回写自身SHA。
