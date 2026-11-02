@@ -1,0 +1,85 @@
+{
+  "businessAuthorizationUntested": true,
+  "kind": "real browser handshake only; no mic/listen/audio/inference",
+  "operations": [
+    {
+      "method": "POST",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "PUT",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "GET",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "OTA",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "OTA",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "DELETE",
+      "status": 200,
+      "success": true
+    }
+  ],
+  "probes": [
+    {
+      "mode": "valid",
+      "outcome": "pcm-hello-and-tools",
+      "opened": true,
+      "types": [
+        "hello",
+        "mcp",
+        "mcp"
+      ],
+      "elapsedMs": 5311,
+      "closedConfirmed": true
+    },
+    {
+      "mode": "missing",
+      "outcome": "pcm-hello-and-tools",
+      "opened": true,
+      "types": [
+        "hello",
+        "mcp",
+        "mcp"
+      ],
+      "elapsedMs": 1664,
+      "closedConfirmed": true
+    }
+  ],
+  "cleanup": {
+    "deviceUnbound": true,
+    "agentDeleted": true
+  },
+  "greetingDisabled": true,
+  "tokenMetadata": {
+    "jwt": true,
+    "claimNames": [
+      "data"
+    ],
+    "hasExpiry": false,
+    "ttlSeconds": null
+  },
+  "handshakeAcceptedWithoutValidToken": true,
+  "browserClosed": true
+}

@@ -1,0 +1,68 @@
+{
+  "kind": "real browser handshake only; no mic/listen/audio/inference",
+  "operations": [
+    {
+      "method": "POST",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "PUT",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "GET",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "OTA",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "OTA",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "status": 200,
+      "success": true
+    },
+    {
+      "method": "DELETE",
+      "status": 200,
+      "success": true
+    }
+  ],
+  "probes": [
+    {
+      "outcome": "pcm-hello-and-tools",
+      "opened": true,
+      "types": [
+        "hello",
+        "mcp",
+        "mcp"
+      ],
+      "elapsedMs": 1787
+    }
+  ],
+  "cleanup": {
+    "deviceUnbound": true,
+    "agentDeleted": true
+  },
+  "greetingDisabled": true,
+  "tokenMetadata": {
+    "jwt": true,
+    "claimNames": [
+      "data"
+    ],
+    "hasExpiry": false,
+    "ttlSeconds": null
+  }
+}
