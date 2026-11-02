@@ -1,6 +1,6 @@
 # Safari 角色语音自打断调查
 
-2026-11-01，专项 Chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。状态：**诊断v1已随730ba84发布并收到用户iPad/iPhone数据，v2分时统计已随6bd6426发布；根因仍未定、无产品语音修复。用户现要求一键复制全部结果，已实现并离线检查，待review/发布；保持其他线上功能不变。**
+2026-11-01启动，2026-11-02更新，专项 Chat `01a19770-ee7d-7c31-96fe-b80657c3ee5d`。状态：**诊断v1/分时v2/一键复制均已正式发布，用户ABBA结果不支持B稳定改善；停止扩大合成音轮次。根因仍未定，游戏16k/自然插话未改。优先询问Mac远程Inspector可用性，产品内opt-in仅待确认提案，未实现。**
 
 ## 范围与来源
 
@@ -74,6 +74,8 @@
 
 ## 下一轮所需证据与判别
 
+2026-11-02后续[Safari B→A→A→B分时结果](ipad-abba-2026-11-02/README.md)：四轮>99.97%播放期输入能量在首10帧，B末次反而最高，不支持B可靠改善；停止更多合成音/采样率轮次，游戏16k和自然插话保持。已询问用户是否方便Mac远程Safari Web Inspector，优先不改产品只取其手动真实会话的白名单网络时序；若不便/不足，[产品侧opt-in仅有待确认设计](next-live-window.md)，未实现或扩展既有独立页权限。原JSON逐字、独立重算及证据已保全，无新音频/provider操作。
+
 用户现已提供[同iPad Safari/Chrome六组及条件确认](ipad-first-pass/README.md)和[iPhone Safari三组及C更响/出声不同](iphone-first-pass/README.md)，原JSON、哈希、计算和前次必要线上截图在这次正常调查批次保全。整体RMS不支持直接采用C；B在三个环境绝对值较低但基线不稳且每组一次，不能宣称修复。独立诊断格式v2只补每200ms窗口与主线程帧到达时间，保留8秒/显式点击/无录音上传/Linx/产品语音零改；待review/发布后仅做少量Safari A/B反序重复。不要再将实际settings或输出是否可听写成完全未知，也不要求用户重述已确认iPad条件。
 
 设备类别、iPadOS 版本和两台移动设备的外放已由用户补充，不重复请求。后续如取得手动窗口，优先在**同一 iPad 的 Safari 与 Chrome、相同 build hash 和输出/音量条件**比较实际设置与事件顺序，再按需要补齐机型、Safari/Chrome 完整版本、是否有其他正在采集的 tab/app；MacBook 作为附加对照。耳机是可选的第二维度，无需为调查购买设备。目前没有要求用户开始新付费会话。
@@ -96,6 +98,8 @@
 - 改 `autoGainControl`、强制 exact AEC、共享 AudioContext、改音频播放媒介或本地实现 AEC 都缺少本次设备对照证据，当前不做；如有明确证据再选最小修复。
 
 ## 交付与服务回执
+
+一键复制已随`c177b5f5ef1554d501d575b2e9dd577b343dfbab`发布，CI41324599750/CD41324774994 success，canonical12915B/SHA256 `d51a71e8829333b70b31cd86d872ff89fc1bae041529ea357cce1959eff196a1`。自有IAB tab4不开mic验收复制按钮可见/初始disabled、click listener注册、自有JS/CSS精确hash允许；reload0AudioContext/WS/runtime exception，状态未开mic、结果空，beacon/工具style被阻与页面自身分开。正常工具无非mic结果fixture入口，未DOM/CDP注入或改权限、不读写系统clipboard；真实iPadclipboard不冒充已由Agent验证。tab已关/list空。[复制版必要初态截图](production-copy-initial-page.jpg)按JPEG真实编码在本次ABBA正常批次补存，不为回执重部署。
 
 v2以`6bd6426f9fe9c5d76cc5e3b5c15334588de56d46`正式发布，CI41323231785/CD41323378232 success，canonical HTML12173B/SHA256 `f9a678de6fafb41364873d9fd5be41834772104474a15706a83dd9edb1fc1518`。随后自有IAB tab3不开mic验收：v2文案/formatVersion字段存在、start listener注册、JS/CSS自身hash精准允许、控件选择B正常；受控reload及选择后0AudioContext/WS/runtime exception，结果空、无audio元素/权限提示，未点击开始。边缘beacon被CSP阻、工具sidebar样式被阻与自有页面区分，不称console零告警。tab关闭后IAB list空，无服务/真实mic/provider。此次复制按钮正常批次补存[必要v2截图](production-v2-initial-page.jpg)，按真实JPEG编码修正后缀，字节不变、不重编码，不为旧回执单开部署。
 

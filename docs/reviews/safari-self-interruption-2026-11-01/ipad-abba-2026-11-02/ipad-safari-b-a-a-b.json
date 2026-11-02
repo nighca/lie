@@ -1,0 +1,1620 @@
+{
+  "completed": [
+    {
+      "formatVersion": 2,
+      "mode": "direct-default",
+      "phase": "stopped",
+      "settings": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "settingsByPhase": {
+        "quiet-before": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "playing": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "quiet-after": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        }
+      },
+      "contexts": {
+        "capture": {
+          "sampleRate": 48000,
+          "state": "closed"
+        },
+        "playback": {
+          "sampleRate": 48000,
+          "state": "closed"
+        }
+      },
+      "energy": {
+        "quiet-before": {
+          "frames": 100,
+          "rms": 0.00024694695474738765,
+          "peak": 0.001953125
+        },
+        "playing": {
+          "frames": 200,
+          "rms": 0.0004179946238818293,
+          "peak": 0.015838623046875
+        },
+        "quiet-after": {
+          "frames": 101,
+          "rms": 0.0001834627480531471,
+          "peak": 0.001495361328125
+        }
+      },
+      "timeline": {
+        "quiet-before": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 17,
+            "lastFrameAtMs": 195,
+            "rms": 0.0002790601625897276,
+            "peak": 0.001434326171875
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 217.00000000000364,
+            "lastFrameAtMs": 395,
+            "rms": 0.00040021210563560383,
+            "peak": 0.001953125
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 417,
+            "lastFrameAtMs": 595,
+            "rms": 0.0002741623747509554,
+            "peak": 0.001007080078125
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 617,
+            "lastFrameAtMs": 795,
+            "rms": 0.00020456169590295177,
+            "peak": 0.0008544921875
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 817,
+            "lastFrameAtMs": 995,
+            "rms": 0.00020164852016397474,
+            "peak": 0.000701904296875
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1017,
+            "lastFrameAtMs": 1195,
+            "rms": 0.00021778413720638558,
+            "peak": 0.000762939453125
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1217.0000000000036,
+            "lastFrameAtMs": 1396,
+            "rms": 0.00020324068374451404,
+            "peak": 0.000762939453125
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1417,
+            "lastFrameAtMs": 1596,
+            "rms": 0.00019516119460697825,
+            "peak": 0.000732421875
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1617,
+            "lastFrameAtMs": 1795,
+            "rms": 0.00020570098431419052,
+            "peak": 0.000732421875
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1817,
+            "lastFrameAtMs": 1995,
+            "rms": 0.0002120697223277794,
+            "peak": 0.000732421875
+          }
+        ],
+        "playing": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 3,
+            "lastFrameAtMs": 179,
+            "rms": 0.001869109404486524,
+            "peak": 0.015838623046875
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 201.00000000000364,
+            "lastFrameAtMs": 379,
+            "rms": 0,
+            "peak": 0
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 402,
+            "lastFrameAtMs": 579,
+            "rms": 0.000008409655641574327,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 601,
+            "lastFrameAtMs": 779,
+            "rms": 0.000013658534080481077,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 801,
+            "lastFrameAtMs": 979,
+            "rms": 0.00001229019446837388,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1001,
+            "lastFrameAtMs": 1179,
+            "rms": 0,
+            "peak": 0
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1201.0000000000036,
+            "lastFrameAtMs": 1379,
+            "rms": 0,
+            "peak": 0
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1401,
+            "lastFrameAtMs": 1579.0000000000036,
+            "rms": 0.000009635414840938636,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1601,
+            "lastFrameAtMs": 1780,
+            "rms": 0.00000593427627033388,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1801,
+            "lastFrameAtMs": 1979,
+            "rms": 0.000006823937919616057,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 100,
+            "frames": 10,
+            "firstFrameAtMs": 2001,
+            "lastFrameAtMs": 2179,
+            "rms": 0.000008374976501503047,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 110,
+            "frames": 10,
+            "firstFrameAtMs": 2201.0000000000036,
+            "lastFrameAtMs": 2379,
+            "rms": 0,
+            "peak": 0
+          },
+          {
+            "fromFrame": 120,
+            "frames": 10,
+            "firstFrameAtMs": 2401,
+            "lastFrameAtMs": 2579.0000000000036,
+            "rms": 0.000007610297143272401,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 130,
+            "frames": 10,
+            "firstFrameAtMs": 2601,
+            "lastFrameAtMs": 2779,
+            "rms": 0.0000070339542063086605,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 140,
+            "frames": 10,
+            "firstFrameAtMs": 2801,
+            "lastFrameAtMs": 2979,
+            "rms": 5.394796609394436e-7,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 150,
+            "frames": 10,
+            "firstFrameAtMs": 3001,
+            "lastFrameAtMs": 3179,
+            "rms": 0.0000052857995836452554,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 160,
+            "frames": 10,
+            "firstFrameAtMs": 3201.0000000000036,
+            "lastFrameAtMs": 3379,
+            "rms": 0.0000021579186437577744,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 170,
+            "frames": 10,
+            "firstFrameAtMs": 3401,
+            "lastFrameAtMs": 3579.0000000000036,
+            "rms": 0.000004108554692943194,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 180,
+            "frames": 10,
+            "firstFrameAtMs": 3601,
+            "lastFrameAtMs": 3779,
+            "rms": 0.000003145679951185349,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 190,
+            "frames": 10,
+            "firstFrameAtMs": 3801,
+            "lastFrameAtMs": 3979,
+            "rms": 0,
+            "peak": 0
+          }
+        ],
+        "quiet-after": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 5.000000000003638,
+            "lastFrameAtMs": 178,
+            "rms": 0.000016610367627774995,
+            "peak": 0.0001220703125
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 200.00000000000364,
+            "lastFrameAtMs": 378,
+            "rms": 0.0000044812546251185345,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 400,
+            "lastFrameAtMs": 578.0000000000036,
+            "rms": 0.00001305941983690162,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 600,
+            "lastFrameAtMs": 778,
+            "rms": 0.00001664537371007647,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 800,
+            "lastFrameAtMs": 978,
+            "rms": 0.000014882209169869355,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1000,
+            "lastFrameAtMs": 1178,
+            "rms": 0.0002693884002802662,
+            "peak": 0.001495361328125
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1200.0000000000036,
+            "lastFrameAtMs": 1378,
+            "rms": 0.00022784890109547821,
+            "peak": 0.000732421875
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1400,
+            "lastFrameAtMs": 1578.0000000000036,
+            "rms": 0.00024243894241416034,
+            "peak": 0.000946044921875
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1600,
+            "lastFrameAtMs": 1778,
+            "rms": 0.0002874707871540718,
+            "peak": 0.00146484375
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1800,
+            "lastFrameAtMs": 1978,
+            "rms": 0.00026005661681108175,
+            "peak": 0.001129150390625
+          },
+          {
+            "fromFrame": 100,
+            "frames": 1,
+            "firstFrameAtMs": 2000,
+            "lastFrameAtMs": 2000,
+            "rms": 0.00023357662677201457,
+            "peak": 0.000701904296875
+          }
+        ]
+      },
+      "timelineTruncated": false,
+      "cleanup": {
+        "tracksEnded": true,
+        "contextsClosed": true
+      },
+      "error": null
+    },
+    {
+      "formatVersion": 2,
+      "mode": "direct-16k",
+      "phase": "stopped",
+      "settings": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "settingsByPhase": {
+        "quiet-before": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "playing": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "quiet-after": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        }
+      },
+      "contexts": {
+        "capture": {
+          "sampleRate": 48000,
+          "state": "closed"
+        },
+        "playback": {
+          "sampleRate": 16000,
+          "state": "closed"
+        }
+      },
+      "energy": {
+        "quiet-before": {
+          "frames": 100,
+          "rms": 0.00026039566139105506,
+          "peak": 0.0025634765625
+        },
+        "playing": {
+          "frames": 200,
+          "rms": 0.0018229318334134438,
+          "peak": 0.072509765625
+        },
+        "quiet-after": {
+          "frames": 100,
+          "rms": 0.0001913489564958725,
+          "peak": 0.002197265625
+        }
+      },
+      "timeline": {
+        "quiet-before": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 21,
+            "lastFrameAtMs": 200,
+            "rms": 0.0003878442312522234,
+            "peak": 0.0025634765625
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 221,
+            "lastFrameAtMs": 400,
+            "rms": 0.0002737262597578711,
+            "peak": 0.001068115234375
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 421,
+            "lastFrameAtMs": 600,
+            "rms": 0.0002706838862764845,
+            "peak": 0.0009765625
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 621,
+            "lastFrameAtMs": 800,
+            "rms": 0.00023469721480522072,
+            "peak": 0.0008544921875
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 821,
+            "lastFrameAtMs": 1000,
+            "rms": 0.0002441900918437718,
+            "peak": 0.000885009765625
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1021,
+            "lastFrameAtMs": 1200,
+            "rms": 0.00022668547622425693,
+            "peak": 0.0008544921875
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1221,
+            "lastFrameAtMs": 1400,
+            "rms": 0.00023256829902701002,
+            "peak": 0.000885009765625
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1421,
+            "lastFrameAtMs": 1600,
+            "rms": 0.00022995190027900566,
+            "peak": 0.000885009765625
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1621,
+            "lastFrameAtMs": 1803,
+            "rms": 0.00021693187561309555,
+            "peak": 0.000732421875
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1821,
+            "lastFrameAtMs": 2000,
+            "rms": 0.00024355042166289412,
+            "peak": 0.000885009765625
+          }
+        ],
+        "playing": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 6,
+            "lastFrameAtMs": 180,
+            "rms": 0.00815231843892113,
+            "peak": 0.072509765625
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 201,
+            "lastFrameAtMs": 381,
+            "rms": 0,
+            "peak": 0
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 401,
+            "lastFrameAtMs": 580,
+            "rms": 0.000008748889878219388,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 601,
+            "lastFrameAtMs": 780,
+            "rms": 0.000014395112811365667,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 801,
+            "lastFrameAtMs": 980,
+            "rms": 0.00001399531275012523,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1001,
+            "lastFrameAtMs": 1180,
+            "rms": 9.344061823971474e-7,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1201,
+            "lastFrameAtMs": 1380,
+            "rms": 5.394796609394436e-7,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1401,
+            "lastFrameAtMs": 1580,
+            "rms": 0.000014872427894300786,
+            "peak": 0.000091552734375
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1601,
+            "lastFrameAtMs": 1780,
+            "rms": 0.00000881517029441173,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1801,
+            "lastFrameAtMs": 1980,
+            "rms": 0.000013594459290470476,
+            "peak": 0.000091552734375
+          },
+          {
+            "fromFrame": 100,
+            "frames": 10,
+            "firstFrameAtMs": 2001,
+            "lastFrameAtMs": 2180,
+            "rms": 0.000009859350573211735,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 110,
+            "frames": 10,
+            "firstFrameAtMs": 2201,
+            "lastFrameAtMs": 2380,
+            "rms": 9.344061823971474e-7,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 120,
+            "frames": 10,
+            "firstFrameAtMs": 2401,
+            "lastFrameAtMs": 2580,
+            "rms": 0.000008495734196212802,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 130,
+            "frames": 10,
+            "firstFrameAtMs": 2601,
+            "lastFrameAtMs": 2780,
+            "rms": 0.000008374976501503047,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 140,
+            "frames": 10,
+            "firstFrameAtMs": 2801,
+            "lastFrameAtMs": 2980,
+            "rms": 0.0000016184389828183308,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 150,
+            "frames": 10,
+            "firstFrameAtMs": 3001,
+            "lastFrameAtMs": 3180,
+            "rms": 0.000007157006469457138,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 160,
+            "frames": 10,
+            "firstFrameAtMs": 3201,
+            "lastFrameAtMs": 3380,
+            "rms": 0.000003145679951185349,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 170,
+            "frames": 10,
+            "firstFrameAtMs": 3401,
+            "lastFrameAtMs": 3580,
+            "rms": 0.000005367754852092853,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 180,
+            "frames": 10,
+            "firstFrameAtMs": 3601,
+            "lastFrameAtMs": 3780,
+            "rms": 0.000004000888245277983,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 190,
+            "frames": 10,
+            "firstFrameAtMs": 3801,
+            "lastFrameAtMs": 3980,
+            "rms": 0,
+            "peak": 0
+          }
+        ],
+        "quiet-after": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 5,
+            "lastFrameAtMs": 184,
+            "rms": 0.000017414416825124095,
+            "peak": 0.0001220703125
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 205,
+            "lastFrameAtMs": 384,
+            "rms": 0.0000035376047117216887,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 406,
+            "lastFrameAtMs": 584,
+            "rms": 0.00001077609778734248,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 605,
+            "lastFrameAtMs": 784,
+            "rms": 0.000014067908412617321,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 805,
+            "lastFrameAtMs": 984,
+            "rms": 0.000014979670651299943,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1005,
+            "lastFrameAtMs": 1184,
+            "rms": 0.00004539008876431262,
+            "peak": 0.00054931640625
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1205,
+            "lastFrameAtMs": 1384,
+            "rms": 0.0002946255447264209,
+            "peak": 0.00115966796875
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1405.0000000000073,
+            "lastFrameAtMs": 1584,
+            "rms": 0.0002508487607946258,
+            "peak": 0.000885009765625
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1605,
+            "lastFrameAtMs": 1784,
+            "rms": 0.0003807373646170131,
+            "peak": 0.002197265625
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1805,
+            "lastFrameAtMs": 1984,
+            "rms": 0.000261800536144615,
+            "peak": 0.000885009765625
+          }
+        ]
+      },
+      "timelineTruncated": false,
+      "cleanup": {
+        "tracksEnded": true,
+        "contextsClosed": true
+      },
+      "error": null
+    },
+    {
+      "formatVersion": 2,
+      "mode": "direct-16k",
+      "phase": "stopped",
+      "settings": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "settingsByPhase": {
+        "quiet-before": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "playing": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        },
+        "quiet-after": {
+          "echoCancellation": true,
+          "noiseSuppression": null,
+          "autoGainControl": null,
+          "sampleRate": 48000,
+          "channelCount": null,
+          "latency": null
+        }
+      },
+      "contexts": {
+        "capture": {
+          "sampleRate": 48000,
+          "state": "closed"
+        },
+        "playback": {
+          "sampleRate": 16000,
+          "state": "closed"
+        }
+      },
+      "energy": {
+        "quiet-before": {
+          "frames": 100,
+          "rms": 0.00029504941162676916,
+          "peak": 0.00201416015625
+        },
+        "playing": {
+          "frames": 200,
+          "rms": 0.002375254622001158,
+          "peak": 0.087127685546875
+        },
+        "quiet-after": {
+          "frames": 100,
+          "rms": 0.0001524273027338878,
+          "peak": 0.000946044921875
+        }
+      },
+      "timeline": {
+        "quiet-before": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 20,
+            "lastFrameAtMs": 199,
+            "rms": 0.0002516578655708578,
+            "peak": 0.00128173828125
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 220,
+            "lastFrameAtMs": 398,
+            "rms": 0.0002579474484306445,
+            "peak": 0.0009765625
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 420,
+            "lastFrameAtMs": 599,
+            "rms": 0.00025493539344554846,
+            "peak": 0.00091552734375
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 620,
+            "lastFrameAtMs": 798,
+            "rms": 0.00024612514261561987,
+            "peak": 0.0008544921875
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 820.0000000000073,
+            "lastFrameAtMs": 999,
+            "rms": 0.0002931087874466586,
+            "peak": 0.0013427734375
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1020,
+            "lastFrameAtMs": 1198.0000000000073,
+            "rms": 0.0002869291437261108,
+            "peak": 0.001007080078125
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1220,
+            "lastFrameAtMs": 1399.0000000000073,
+            "rms": 0.0003935773117671205,
+            "peak": 0.001678466796875
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1420,
+            "lastFrameAtMs": 1599,
+            "rms": 0.0003380854946003552,
+            "peak": 0.001312255859375
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1620,
+            "lastFrameAtMs": 1800,
+            "rms": 0.00034067531906311255,
+            "peak": 0.00201416015625
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1820.0000000000073,
+            "lastFrameAtMs": 1998,
+            "rms": 0.0002481887892010188,
+            "peak": 0.00091552734375
+          }
+        ],
+        "playing": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 6,
+            "lastFrameAtMs": 179.00000000000728,
+            "rms": 0.010622386415892702,
+            "peak": 0.087127685546875
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 201,
+            "lastFrameAtMs": 379,
+            "rms": 0,
+            "peak": 0
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 401,
+            "lastFrameAtMs": 580,
+            "rms": 0.00000762939453125,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 601,
+            "lastFrameAtMs": 780,
+            "rms": 0.000013530081063055571,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 801.0000000000073,
+            "lastFrameAtMs": 979,
+            "rms": 0.00001305941983690162,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1001,
+            "lastFrameAtMs": 1180,
+            "rms": 0.000004914893618288088,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1201,
+            "lastFrameAtMs": 1380.0000000000073,
+            "rms": 5.394796609394436e-7,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1401,
+            "lastFrameAtMs": 1580,
+            "rms": 0.000017085415402647928,
+            "peak": 0.000091552734375
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1601,
+            "lastFrameAtMs": 1779,
+            "rms": 0.000012720742798258259,
+            "peak": 0.000091552734375
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1801.0000000000073,
+            "lastFrameAtMs": 1979,
+            "rms": 0.000012891193579647675,
+            "peak": 0.000091552734375
+          },
+          {
+            "fromFrame": 100,
+            "frames": 10,
+            "firstFrameAtMs": 2001,
+            "lastFrameAtMs": 2180,
+            "rms": 0.000013003586234328697,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 110,
+            "frames": 10,
+            "firstFrameAtMs": 2201,
+            "lastFrameAtMs": 2380.0000000000073,
+            "rms": 0.0000018688123647942947,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 120,
+            "frames": 10,
+            "firstFrameAtMs": 2401,
+            "lastFrameAtMs": 2579,
+            "rms": 0.00001283462817478998,
+            "peak": 0.00006103515625
+          },
+          {
+            "fromFrame": 130,
+            "frames": 10,
+            "firstFrameAtMs": 2601,
+            "lastFrameAtMs": 2779,
+            "rms": 0.000007947031652831901,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 140,
+            "frames": 10,
+            "firstFrameAtMs": 2801.0000000000073,
+            "lastFrameAtMs": 2980,
+            "rms": 0.00000152587890625,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 150,
+            "frames": 10,
+            "firstFrameAtMs": 3001,
+            "lastFrameAtMs": 3179.0000000000073,
+            "rms": 0.000007780486318348366,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 160,
+            "frames": 10,
+            "firstFrameAtMs": 3201,
+            "lastFrameAtMs": 3380.0000000000073,
+            "rms": 0.000003814697265625,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 170,
+            "frames": 10,
+            "firstFrameAtMs": 3401,
+            "lastFrameAtMs": 3579,
+            "rms": 0.000006473755931273323,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 180,
+            "frames": 10,
+            "firstFrameAtMs": 3601,
+            "lastFrameAtMs": 3780,
+            "rms": 0.000004609316243589238,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 190,
+            "frames": 10,
+            "firstFrameAtMs": 3801.0000000000073,
+            "lastFrameAtMs": 3980,
+            "rms": 0,
+            "peak": 0
+          }
+        ],
+        "quiet-after": [
+          {
+            "fromFrame": 0,
+            "frames": 10,
+            "firstFrameAtMs": 7.999999999992724,
+            "lastFrameAtMs": 186,
+            "rms": 0.00002166667453180378,
+            "peak": 0.000152587890625
+          },
+          {
+            "fromFrame": 10,
+            "frames": 10,
+            "firstFrameAtMs": 207.99999999999272,
+            "lastFrameAtMs": 387,
+            "rms": 0.0000010789593218788872,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 20,
+            "frames": 10,
+            "firstFrameAtMs": 407.9999999999927,
+            "lastFrameAtMs": 586.9999999999927,
+            "rms": 0.000006585188484814479,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 30,
+            "frames": 10,
+            "firstFrameAtMs": 607.9999999999927,
+            "lastFrameAtMs": 785.9999999999927,
+            "rms": 0.000011456800398011173,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 40,
+            "frames": 10,
+            "firstFrameAtMs": 808,
+            "lastFrameAtMs": 986.9999999999927,
+            "rms": 0.000012868597254511262,
+            "peak": 0.000030517578125
+          },
+          {
+            "fromFrame": 50,
+            "frames": 10,
+            "firstFrameAtMs": 1007.9999999999927,
+            "lastFrameAtMs": 1186,
+            "rms": 0.000030148177808348445,
+            "peak": 0.000335693359375
+          },
+          {
+            "fromFrame": 60,
+            "frames": 10,
+            "firstFrameAtMs": 1207.9999999999927,
+            "lastFrameAtMs": 1387,
+            "rms": 0.00023617628437283357,
+            "peak": 0.000885009765625
+          },
+          {
+            "fromFrame": 70,
+            "frames": 10,
+            "firstFrameAtMs": 1407.9999999999927,
+            "lastFrameAtMs": 1585.9999999999927,
+            "rms": 0.00022724648214552098,
+            "peak": 0.000946044921875
+          },
+          {
+            "fromFrame": 80,
+            "frames": 10,
+            "firstFrameAtMs": 1607.9999999999927,
+            "lastFrameAtMs": 1786.9999999999927,
+            "rms": 0.0002582592308791803,
+            "peak": 0.000946044921875
+          },
+          {
+            "fromFrame": 90,
+            "frames": 10,
+            "firstFrameAtMs": 1808,
+            "lastFrameAtMs": 1985.9999999999927,
+            "rms": 0.00023770370119881708,
+            "peak": 0.000946044921875
+          }
+        ]
+      },
+      "timelineTruncated": false,
+      "cleanup": {
+        "tracksEnded": true,
+        "contextsClosed": true
+      },
+      "error": null
+    }
+  ],
+  "current": {
+    "formatVersion": 2,
+    "mode": "direct-default",
+    "phase": "stopped",
+    "settings": {
+      "echoCancellation": true,
+      "noiseSuppression": null,
+      "autoGainControl": null,
+      "sampleRate": 48000,
+      "channelCount": null,
+      "latency": null
+    },
+    "settingsByPhase": {
+      "quiet-before": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "playing": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      },
+      "quiet-after": {
+        "echoCancellation": true,
+        "noiseSuppression": null,
+        "autoGainControl": null,
+        "sampleRate": 48000,
+        "channelCount": null,
+        "latency": null
+      }
+    },
+    "contexts": {
+      "capture": {
+        "sampleRate": 48000,
+        "state": "closed"
+      },
+      "playback": {
+        "sampleRate": 48000,
+        "state": "closed"
+      }
+    },
+    "energy": {
+      "quiet-before": {
+        "frames": 100,
+        "rms": 0.00024161010843102256,
+        "peak": 0.00146484375
+      },
+      "playing": {
+        "frames": 200,
+        "rms": 0.0036530470139137087,
+        "peak": 0.136444091796875
+      },
+      "quiet-after": {
+        "frames": 101,
+        "rms": 0.00033338454084741567,
+        "peak": 0.00567626953125
+      }
+    },
+    "timeline": {
+      "quiet-before": [
+        {
+          "fromFrame": 0,
+          "frames": 10,
+          "firstFrameAtMs": 18,
+          "lastFrameAtMs": 195.99999999999272,
+          "rms": 0.000249912460840874,
+          "peak": 0.00115966796875
+        },
+        {
+          "fromFrame": 10,
+          "frames": 10,
+          "firstFrameAtMs": 217.99999999998545,
+          "lastFrameAtMs": 395.9999999999927,
+          "rms": 0.0003017143400290759,
+          "peak": 0.00146484375
+        },
+        {
+          "fromFrame": 20,
+          "frames": 10,
+          "firstFrameAtMs": 417.9999999999927,
+          "lastFrameAtMs": 595.9999999999927,
+          "rms": 0.00025134078919422735,
+          "peak": 0.000946044921875
+        },
+        {
+          "fromFrame": 30,
+          "frames": 10,
+          "firstFrameAtMs": 617.9999999999927,
+          "lastFrameAtMs": 795.9999999999927,
+          "rms": 0.00024245994955777008,
+          "peak": 0.001068115234375
+        },
+        {
+          "fromFrame": 40,
+          "frames": 10,
+          "firstFrameAtMs": 817.9999999999927,
+          "lastFrameAtMs": 995.9999999999927,
+          "rms": 0.0002274717765585926,
+          "peak": 0.000946044921875
+        },
+        {
+          "fromFrame": 50,
+          "frames": 10,
+          "firstFrameAtMs": 1017.9999999999927,
+          "lastFrameAtMs": 1195.9999999999927,
+          "rms": 0.00022243119983836259,
+          "peak": 0.000823974609375
+        },
+        {
+          "fromFrame": 60,
+          "frames": 10,
+          "firstFrameAtMs": 1217.9999999999927,
+          "lastFrameAtMs": 1395.9999999999927,
+          "rms": 0.00022000255735120668,
+          "peak": 0.000946044921875
+        },
+        {
+          "fromFrame": 70,
+          "frames": 10,
+          "firstFrameAtMs": 1417.9999999999927,
+          "lastFrameAtMs": 1595.9999999999927,
+          "rms": 0.00023597348515872474,
+          "peak": 0.000946044921875
+        },
+        {
+          "fromFrame": 80,
+          "frames": 10,
+          "firstFrameAtMs": 1617.9999999999927,
+          "lastFrameAtMs": 1795.9999999999927,
+          "rms": 0.0002208574649983235,
+          "peak": 0.000732421875
+        },
+        {
+          "fromFrame": 90,
+          "frames": 10,
+          "firstFrameAtMs": 1817.9999999999927,
+          "lastFrameAtMs": 1995.9999999999927,
+          "rms": 0.000232864694337037,
+          "peak": 0.0008544921875
+        }
+      ],
+      "playing": [
+        {
+          "fromFrame": 0,
+          "frames": 10,
+          "firstFrameAtMs": 7,
+          "lastFrameAtMs": 178,
+          "rms": 0.016336844119183843,
+          "peak": 0.136444091796875
+        },
+        {
+          "fromFrame": 10,
+          "frames": 10,
+          "firstFrameAtMs": 200,
+          "lastFrameAtMs": 378,
+          "rms": 0,
+          "peak": 0
+        },
+        {
+          "fromFrame": 20,
+          "frames": 10,
+          "firstFrameAtMs": 400,
+          "lastFrameAtMs": 578,
+          "rms": 0.000012051062773842861,
+          "peak": 0.00006103515625
+        },
+        {
+          "fromFrame": 30,
+          "frames": 10,
+          "firstFrameAtMs": 600,
+          "lastFrameAtMs": 778,
+          "rms": 0.000016184389828183307,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 40,
+          "frames": 10,
+          "firstFrameAtMs": 800,
+          "lastFrameAtMs": 978,
+          "rms": 0.000016407633337102178,
+          "peak": 0.00006103515625
+        },
+        {
+          "fromFrame": 50,
+          "frames": 10,
+          "firstFrameAtMs": 1000,
+          "lastFrameAtMs": 1178,
+          "rms": 0.000010735509704185706,
+          "peak": 0.00006103515625
+        },
+        {
+          "fromFrame": 60,
+          "frames": 10,
+          "firstFrameAtMs": 1200,
+          "lastFrameAtMs": 1378,
+          "rms": 0,
+          "peak": 0
+        },
+        {
+          "fromFrame": 70,
+          "frames": 10,
+          "firstFrameAtMs": 1400,
+          "lastFrameAtMs": 1578,
+          "rms": 0.00001948858608161133,
+          "peak": 0.000091552734375
+        },
+        {
+          "fromFrame": 80,
+          "frames": 10,
+          "firstFrameAtMs": 1600,
+          "lastFrameAtMs": 1778,
+          "rms": 0.000011844005352981586,
+          "peak": 0.000091552734375
+        },
+        {
+          "fromFrame": 90,
+          "frames": 10,
+          "firstFrameAtMs": 1800,
+          "lastFrameAtMs": 1978,
+          "rms": 0.00001476440618924227,
+          "peak": 0.000091552734375
+        },
+        {
+          "fromFrame": 100,
+          "frames": 10,
+          "firstFrameAtMs": 2000,
+          "lastFrameAtMs": 2178,
+          "rms": 0.000018318492437046767,
+          "peak": 0.000091552734375
+        },
+        {
+          "fromFrame": 110,
+          "frames": 10,
+          "firstFrameAtMs": 2200,
+          "lastFrameAtMs": 2378,
+          "rms": 0,
+          "peak": 0
+        },
+        {
+          "fromFrame": 120,
+          "frames": 10,
+          "firstFrameAtMs": 2400,
+          "lastFrameAtMs": 2578,
+          "rms": 0.000016801998554645723,
+          "peak": 0.000091552734375
+        },
+        {
+          "fromFrame": 130,
+          "frames": 10,
+          "firstFrameAtMs": 2600,
+          "lastFrameAtMs": 2778,
+          "rms": 0.000008897326499702913,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 140,
+          "frames": 10,
+          "firstFrameAtMs": 2800,
+          "lastFrameAtMs": 2978,
+          "rms": 0.0000013214498959113139,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 150,
+          "frames": 10,
+          "firstFrameAtMs": 3000,
+          "lastFrameAtMs": 3179.0000000000146,
+          "rms": 0.000008529922399520072,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 160,
+          "frames": 10,
+          "firstFrameAtMs": 3200,
+          "lastFrameAtMs": 3378,
+          "rms": 0.000003145679951185349,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 170,
+          "frames": 10,
+          "firstFrameAtMs": 3400,
+          "lastFrameAtMs": 3578,
+          "rms": 0.000007177310074701988,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 180,
+          "frames": 10,
+          "firstFrameAtMs": 3600,
+          "lastFrameAtMs": 3778,
+          "rms": 0.0000069716136484134925,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 190,
+          "frames": 10,
+          "firstFrameAtMs": 3800,
+          "lastFrameAtMs": 3978,
+          "rms": 0.000012755015180435553,
+          "peak": 0.000091552734375
+        }
+      ],
+      "quiet-after": [
+        {
+          "fromFrame": 0,
+          "frames": 10,
+          "firstFrameAtMs": 9,
+          "lastFrameAtMs": 178,
+          "rms": 0.00001864914941647387,
+          "peak": 0.000152587890625
+        },
+        {
+          "fromFrame": 10,
+          "frames": 10,
+          "firstFrameAtMs": 200,
+          "lastFrameAtMs": 378,
+          "rms": 0.0000022243316249257282,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 20,
+          "frames": 10,
+          "firstFrameAtMs": 400,
+          "lastFrameAtMs": 578,
+          "rms": 0.000002089395742436089,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 30,
+          "frames": 10,
+          "firstFrameAtMs": 600,
+          "lastFrameAtMs": 779,
+          "rms": 0.000008864555388353158,
+          "peak": 0.000030517578125
+        },
+        {
+          "fromFrame": 40,
+          "frames": 10,
+          "firstFrameAtMs": 800,
+          "lastFrameAtMs": 978,
+          "rms": 0.000014565950845364977,
+          "peak": 0.00006103515625
+        },
+        {
+          "fromFrame": 50,
+          "frames": 10,
+          "firstFrameAtMs": 1000,
+          "lastFrameAtMs": 1178,
+          "rms": 0.0009413595462527569,
+          "peak": 0.00567626953125
+        },
+        {
+          "fromFrame": 60,
+          "frames": 10,
+          "firstFrameAtMs": 1200,
+          "lastFrameAtMs": 1378,
+          "rms": 0.0003091891556601595,
+          "peak": 0.0015869140625
+        },
+        {
+          "fromFrame": 70,
+          "frames": 10,
+          "firstFrameAtMs": 1400,
+          "lastFrameAtMs": 1578,
+          "rms": 0.00021869829431043033,
+          "peak": 0.000885009765625
+        },
+        {
+          "fromFrame": 80,
+          "frames": 10,
+          "firstFrameAtMs": 1600,
+          "lastFrameAtMs": 1779,
+          "rms": 0.0002197073557194523,
+          "peak": 0.000823974609375
+        },
+        {
+          "fromFrame": 90,
+          "frames": 10,
+          "firstFrameAtMs": 1800,
+          "lastFrameAtMs": 1978,
+          "rms": 0.00020038601468454702,
+          "peak": 0.00067138671875
+        },
+        {
+          "fromFrame": 100,
+          "frames": 1,
+          "firstFrameAtMs": 2000,
+          "lastFrameAtMs": 2000,
+          "rms": 0.00019770291930923368,
+          "peak": 0.000640869140625
+        }
+      ]
+    },
+    "timelineTruncated": false,
+    "cleanup": {
+      "tracksEnded": true,
+      "contextsClosed": true
+    },
+    "error": null
+  }
+}

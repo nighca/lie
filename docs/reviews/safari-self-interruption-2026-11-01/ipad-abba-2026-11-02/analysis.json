@@ -1,0 +1,72 @@
+{
+  "received": "2026-11-02",
+  "sourceFile": "ipad-safari-b-a-a-b.json",
+  "sourceBytes": 44846,
+  "sourceSHA256": "4c08d692d46f88e2ebbaa34674bde4fe7b1544310aeb80283806cc76d81934e8",
+  "independentTrials": 4,
+  "order": "B-A-A-B",
+  "maxAggregateReconstructionAbsError": 4.336808689942018e-19,
+  "rows": [
+    {
+      "trial": 1,
+      "mode": "direct-default",
+      "wholePlayingRMS": 0.0004179946238818293,
+      "first10FramesRMS": 0.001869109404486524,
+      "remaining190FramesRMS": 6.570051438838752e-06,
+      "firstWindowEnergyPercent": 99.9765296399082,
+      "firstPlayingFrameArrivalMs": 3,
+      "lastPlayingFrameArrivalMs": 3979,
+      "quietBeforeRMS": 0.00024694695474738765,
+      "quietAfterRMS": 0.0001834627480531471,
+      "playingFrames": 200
+    },
+    {
+      "trial": 2,
+      "mode": "direct-16k",
+      "wholePlayingRMS": 0.0018229318334134438,
+      "first10FramesRMS": 0.00815231843892113,
+      "remaining190FramesRMS": 8.314400533862577e-06,
+      "firstWindowEnergyPercent": 99.99802373749198,
+      "firstPlayingFrameArrivalMs": 6,
+      "lastPlayingFrameArrivalMs": 3980,
+      "quietBeforeRMS": 0.00026039566139105506,
+      "quietAfterRMS": 0.0001913489564958725,
+      "playingFrames": 200
+    },
+    {
+      "trial": 3,
+      "mode": "direct-16k",
+      "wholePlayingRMS": 0.002375254622001158,
+      "first10FramesRMS": 0.010622386415892702,
+      "remaining190FramesRMS": 9.168648570179238e-06,
+      "firstWindowEnergyPercent": 99.99858448682784,
+      "firstPlayingFrameArrivalMs": 6,
+      "lastPlayingFrameArrivalMs": 3980,
+      "quietBeforeRMS": 0.00029504941162676916,
+      "quietAfterRMS": 0.0001524273027338878,
+      "playingFrames": 200
+    },
+    {
+      "trial": 4,
+      "mode": "direct-default",
+      "wholePlayingRMS": 0.0036530470139137087,
+      "first10FramesRMS": 0.016336844119183843,
+      "remaining190FramesRMS": 1.1639186907741606e-05,
+      "firstWindowEnergyPercent": 99.9990355974124,
+      "firstPlayingFrameArrivalMs": 7,
+      "lastPlayingFrameArrivalMs": 3978,
+      "quietBeforeRMS": 0.00024161010843102256,
+      "quietAfterRMS": 0.00033338454084741567,
+      "playingFrames": 200
+    }
+  ],
+  "B2OverB1RMSRatio": 8.739459326028214,
+  "B2OverB1Db": 18.82969130947132,
+  "interpretation": [
+    "More than 99.97% of measured playing-phase energy lies in the first ten received PCM frames in all four trials.",
+    "Default playback rate B does not show repeatable improvement.",
+    "No evidence that this diagnostic code gates input during playback. Near-zero steady values do not identify a specific browser processing mechanism.",
+    "Relative frame receipt timestamps and phase grouping are not calibrated acoustic onset times.",
+    "No ASR/STT events or real-game self-interruption were captured. Stop extending synthetic-tone comparisons and obtain a user-controlled real-game metadata timeline before changing voice behavior."
+  ]
+}

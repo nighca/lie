@@ -1,6 +1,6 @@
 # 独立 Safari 外放诊断工具
 
-2026-11-01。**v1已随730ba84上线并取得用户手动iPad/iPhone样本，v2分时统计已随6bd6426上线。当前追加用户要求的一键复制按钮，待review/发布；实际游戏STT自打断根因未定，没有产品语音修复。** 调查与设备对照见[专项记录](../../docs/reviews/safari-self-interruption-2026-11-01/README.md)。用户明确批准独立诊断入口，并要求不影响其他线上功能。本批继续只改独立HTML及必要档案，无应用入口/常规流程链接；由协调者 review/集成/发布。
+2026-11-01启动，2026-11-02更新。**v1已随730ba84上线，v2分时统计随6bd6426上线，一键复制随c177b5f上线。后续ABBA不支持B稳定改善，停止扩大合成音轮次；实际游戏STT自打断根因未定，没有产品语音修复。** 调查与设备对照见[专项记录](../../docs/reviews/safari-self-interruption-2026-11-01/README.md)。用户明确批准独立诊断入口并要求不影响其他线上功能；新的产品侧观测仅提案、尚待确认，没有写入实现或扩展该页权限。
 
 ## 有依据的实验
 
@@ -40,6 +40,8 @@ node spikes/safari-audio/build.mjs
 首版13项fake通过：三组实际采集模块+合成stream/context/worklet的设置、音量计算/唯一输出、正常和多次停止、迟到权限、play拒绝、播放timeout、start/stop双失败仍清理、阶段设置变化、context清理失败，以及UI显式开始/禁止重叠/HTTP拒绝/pagehide。TypeScript通过。
 
 用户首轮[iPad六组](../../docs/reviews/safari-self-interruption-2026-11-01/ipad-first-pass/README.md)和[iPhone三组](../../docs/reviews/safari-self-interruption-2026-11-01/iphone-first-pass/README.md)已保全。C对Safari iPad不是一致收益，iPhone C还有明确响度/出声差异；不按C修产品。为避免反复只看整体RMS，格式v2新增瞬态/稳定段窗口及到达延迟，另加2项fake验证短峰/稳定输入、partial window、到达时间与窗口内存边界；当前共15项。下一手动窗口仅少量Safari B→A→A→B，而非重跑所有组。
+
+上述ABBA已取得[四轮结果](../../docs/reviews/safari-self-interruption-2026-11-01/ipad-abba-2026-11-02/README.md)：各组>99.97%测得播放期输入能量在首10帧，B末次反而最高。停止更多音调/采样率试验；保持游戏16k和自然插话，优先由用户手动正常游戏+现有Inspector取得白名单STT/TTS/aborted顺序。后续[产品内opt-in设计](../../docs/reviews/safari-self-interruption-2026-11-01/next-live-window.md)仍未确认/未实现，不自动扩大入口/数据或provider范围。
 
 一键复制追加3项检查（共18项fake）：只有点击才复制完整历史/current、拒绝不伪称成功且保留原文、迟到clipboard结果不重开采集中复制按钮。工具tsc/独立build通过；不动probe音频代码、v2数据格式或产品语音。
 
