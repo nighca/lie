@@ -5,7 +5,7 @@ import { observeVoicePlayback } from './voicePlaybackDiagnostics'
 import { VoiceAvailabilityError } from './voice'
 import type { VoicePort } from './voice'
 
-export function createLiveVoicePort(dependencies: {
+export function createLiveVoicePort(overrides: {
   createChannel: typeof createVoiceChannel
   createPlayer: typeof createPcmPlayer
   openMic: typeof openMicrophone
@@ -15,15 +15,16 @@ export function createLiveVoicePort(dependencies: {
   onPlayback?: PlaybackObserver
   onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void
   now?: () => number
-} = {
-  createChannel: createVoiceChannel,
-  createPlayer: createPcmPlayer,
-  openMic: openMicrophone,
-  createContext: () => new AudioContext({ sampleRate: 16000 }),
-  ...(import.meta.env.DEV ? { onPlayback: observeVoicePlayback } : {}),
-  fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal }),
-  prepareDevice: (signal: AbortSignal) => fetch('/api/voice/prepare', { method: 'POST', credentials: 'same-origin', cache: 'no-store', signal }),
-}): VoicePort {
+} | null = null, turnTaking = false): VoicePort {
+  const dependencies: NonNullable<typeof overrides> = overrides ?? {
+    createChannel: createVoiceChannel,
+    createPlayer: createPcmPlayer,
+    openMic: openMicrophone,
+    createContext: () => new AudioContext({ sampleRate: 16000 }),
+    ...(import.meta.env.DEV ? { onPlayback: observeVoicePlayback } : {}),
+    fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal }),
+    prepareDevice: (signal: AbortSignal) => fetch('/api/voice/prepare', { method: 'POST', credentials: 'same-origin', cache: 'no-store', signal }),
+  }
   let generation = 0
   let preparedGeneration: number | null = null
   let pending: { generation: number; promise: Promise<number> } | null = null
@@ -100,6 +101,8 @@ export function createLiveVoicePort(dependencies: {
       let inputLevel = 0
       let outputLevel = 0
       let inputActive = false
+      let inputPaused = false
+      let inputResumeTimer: ReturnType<typeof setTimeout> | null = null
       let inputTransitionAt: number | null = null
       let lastFeedbackAt = -Infinity
       function feedback(force = false) {
@@ -107,10 +110,10 @@ export function createLiveVoicePort(dependencies: {
         const now = performance.now()
         if (!force && now - lastFeedbackAt < 50) return
         lastFeedbackAt = now
-        scope.onEvent({ type: 'audioLevel', inputLevel, outputLevel, inputActive })
+        scope.onEvent({ type: 'audioLevel', inputLevel, outputLevel, inputActive, ...(turnTaking ? { inputPaused } : {}) })
       }
       function inputMeter(level: number) {
-        if (!capturing || !current()) return
+        if (!capturing || !current() || inputPaused) return
         inputLevel = level
         const switching = inputActive ? level < 0.008 : level >= 0.012
         const now = performance.now()
@@ -123,6 +126,29 @@ export function createLiveVoicePort(dependencies: {
         feedback()
       }
       function current() { return !closed && scope.isCurrent() }
+      function cancelInputResume() {
+        if (inputResumeTimer != null) clearTimeout(inputResumeTimer)
+        inputResumeTimer = null
+      }
+      function pauseInput() {
+        if (!turnTaking) return
+        cancelInputResume()
+        inputPaused = true
+        inputLevel = 0
+        inputActive = false
+        inputTransitionAt = null
+        feedback(true)
+      }
+      function resumeInputAfterPlayback() {
+        if (!inputPaused) return
+        cancelInputResume()
+        inputResumeTimer = setTimeout(() => {
+          inputResumeTimer = null
+          if (!capturing || !current() || answerInProgress || playing) return
+          inputPaused = false
+          feedback(true)
+        }, 300)
+      }
       function answerDrained() {
         playing = false
         if (outputLevel !== 0) { outputLevel = 0; feedback(true) }
@@ -130,6 +156,7 @@ export function createLiveVoicePort(dependencies: {
           answerEnded = false
           answerInProgress = false
           scope.onEvent({ type: 'listening' })
+          resumeInputAfterPlayback()
         }
       }
       function observeAnswer(state: 'start' | 'stop' | 'aborted') {
@@ -143,6 +170,7 @@ export function createLiveVoicePort(dependencies: {
         player?.stop(reason)
         playing = false
         scope.onEvent({ type: 'interrupted' })
+        resumeInputAfterPlayback()
       }
       const channel = dependencies.createChannel({
         listenMode: 'realtime',
@@ -167,6 +195,7 @@ export function createLiveVoicePort(dependencies: {
               if (answerEnded) interruptAnswer('new-answer')
               answerEnded = false
               answerInProgress = true
+              pauseInput()
               scope.onEvent({ type: 'speaking' })
             }
             if (event.state === 'sentence' && answerInProgress && event.text != null) { scope.onEvent({ type: 'assistantText', text: event.text }) }
@@ -198,6 +227,7 @@ export function createLiveVoicePort(dependencies: {
       function close() {
         if (closed) return
         closed = true
+        cancelInputResume()
         finishStartup('cancelled')
         report('cleanup', 'started')
         capturing = false
@@ -240,7 +270,7 @@ export function createLiveVoicePort(dependencies: {
               signal: scope.signal,
               onLevel: inputMeter,
               onFrame(data) {
-                if (!capturing || !current()) return
+                if (!capturing || !current() || inputPaused) return
                 channel.input(data)
                 if (!firstForwarded) { firstForwarded = true; report('firstForwardedPcm', 'completed') }
               },

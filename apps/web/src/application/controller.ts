@@ -140,7 +140,8 @@ export function createGameController(options: ControllerOptions) {
     if (busy && event.type !== 'closed' && event.type !== 'error') return
     if (enabledAt != null && remainingMs() <= 0) { expireBudget(); return }
     if (event.type === 'audioLevel') {
-      publishFeedback({ inputLevel: event.inputLevel, outputLevel: event.outputLevel, inputActive: event.inputActive })
+      publishFeedback({ inputLevel: event.inputLevel, outputLevel: event.outputLevel, inputActive: event.inputActive,
+        ...(event.inputPaused == null ? {} : { inputPaused: event.inputPaused }) })
       return
     }
     if (event.type === 'userText') { append('user', event.text); voiceStatus = 'waiting' }

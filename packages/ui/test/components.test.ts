@@ -108,6 +108,19 @@ describe('shared controls', () => {
     expect(wrapper.find('.lie-voice__waveform').exists()).toBe(false)
   })
 
+  it('prioritizes connection and errors over an upload pause notice', async () => {
+    const wrapper = mount(VoiceControl, { props: { active: true, status: 'speaking', label: '正在回答', inputNotice: '请等角色说完再提问' } })
+    wrappers.push(wrapper)
+    expect(wrapper.get('[role="status"]').text()).toBe('请等角色说完再提问')
+    expect(wrapper.find('.lie-voice__waveform').exists()).toBe(false)
+    await wrapper.setProps({ preparing: true })
+    expect(wrapper.get('[role="status"]').text()).toBe('正在连接')
+    await wrapper.setProps({ preparing: false, status: 'error', label: '语音暂时中断' })
+    expect(wrapper.get('[role="status"]').text()).toBe('语音暂时中断')
+    await wrapper.setProps({ status: 'recording', inputNotice: null })
+    expect(wrapper.find('.lie-voice__waveform').exists()).toBe(true)
+  })
+
   it('opens a native modal and requests closure on Escape', async () => {
     // jsdom lacks native modal methods; browser verification covers actual focus behavior.
     Object.defineProperties(HTMLDialogElement.prototype, {

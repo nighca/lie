@@ -1,0 +1,96 @@
+{
+  "kind": "offline candidate and synthetic UI; not live Safari audio verification",
+  "base": "bb5fe51c641d65b61593aa5e820072f81d1350f2",
+  "runtimeSha256": {
+    "apps/web/src/App.vue": "1f7a60531670cb1388a037d6b6e9f66573e6f97bf7e511920ef09918e97e5a97",
+    "apps/web/src/Application.vue": "12305f7b124b2ab5a95aeaa7f2ea75316300853b78df3198411914a8bbbee6f0",
+    "apps/web/src/application/controller.ts": "ff98099d88b479932c3ebeae366820c8af3dad7f2a21df090bc6d85e250fe9ce",
+    "apps/web/src/application/liveVoice.ts": "76daeceedb755638ff2f94558dfaa1f52c63677789935f0f00db22829ce5154d",
+    "apps/web/src/application/voice.ts": "4a7d68dbcb44bdef79583c18667cdffa312d1302dd8b54a5319c6a6f93c4395a",
+    "apps/web/src/application/voiceInputPolicy.ts": "509d20d93318df056e3a981b52bff2b12f821cc920b0738d3be38b36c4e91ae2",
+    "apps/web/src/main.ts": "f0945b8e8813bdfb2300ad69e82843660664c3209e746d5b1477777df095d08f",
+    "packages/ui/src/components/VoiceControl.vue": "1b6351766675b42dcbb1cd782d92f27bd360876de26f78cfe8cbe5c60b22028b"
+  },
+  "runtimeCompositeSha256": "82c226443bb161cd0b33094e44ccd69f8e836825bcd49ca3e7d42590b5865653",
+  "checks": {
+    "web": {
+      "files": 50,
+      "tests": 488,
+      "passed": true
+    },
+    "ui": {
+      "tests": 9,
+      "passed": true
+    },
+    "webTypecheck": true,
+    "uiTypecheck": true,
+    "finalTargetChecks": {
+      "App": 25,
+      "policy": 14
+    },
+    "finalCleanBuild": "see handoff"
+  },
+  "nativeUi": {
+    "viewports": [
+      [
+        390,
+        844
+      ],
+      [
+        820,
+        1180
+      ]
+    ],
+    "source": "real App/controller with fake voice and explicit synthetic state controls",
+    "completeShortWindow": {
+      "events": 50,
+      "truncated": false,
+      "hasMore": false,
+      "apiVoiceRequests": 0,
+      "audioContexts": 0,
+      "runtimeExceptions": 0,
+      "sockets": [
+        "vite-hmr"
+      ]
+    },
+    "viewportReset": true,
+    "ownTabClosed": true
+  },
+  "service": {
+    "owner": "01a19770-ee7d-7c31-96fe-b80657c3ee5d",
+    "port": 5176,
+    "host": "127.0.0.1",
+    "pid": 75509,
+    "ptySession": 28344,
+    "stopped": true,
+    "listenerAfterStop": false,
+    "childProcessesAfterStop": false
+  },
+  "images": {
+    "phone-blocked.jpg": {
+      "bytes": 35557,
+      "sha256": "f7879c69df40d19d83fce0fac4dbc179e88db1c2d9cda1ba5c7a5d4eb59369ef",
+      "mime": "image/jpeg"
+    },
+    "phone-dialog.jpg": {
+      "bytes": 45583,
+      "sha256": "3f240707f85a1c1329f37276a343834d4437db91e041a62b5ad7262459462b3d",
+      "mime": "image/jpeg"
+    },
+    "phone-idle.jpg": {
+      "bytes": 35132,
+      "sha256": "743216abc27100e4dc80468a9080a41029332e35ad6809be77f6187952f61582",
+      "mime": "image/jpeg"
+    },
+    "tablet-dialog.jpg": {
+      "bytes": 59241,
+      "sha256": "a28e7700dd209b195ead491492d4d86c88a193fbe7e33945879a6dd9817042f6",
+      "mime": "image/jpeg"
+    },
+    "tablet-idle.jpg": {
+      "bytes": 48047,
+      "sha256": "eba0bd174ac43f71ab7f75b9a703a0f444e7f5f2f5b204ab0911bbc9bbc3e518",
+      "mime": "image/jpeg"
+    }
+  }
+}

@@ -8,7 +8,7 @@ import PublicBackground from './presentation/PublicBackground.vue'
 import VoiceConnectionNotice from './presentation/VoiceConnectionNotice.vue'
 import type { CharacterPreset } from './presentation/characterPresets'
 
-const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; allowRemix?: boolean; returnLabel?: string }>(), { allowRemix: true, returnLabel: '返回案件列表' })
+const props = withDefaults(defineProps<{ controller: GameController; characterPresets: readonly CharacterPreset[]; demo: boolean; allowRemix?: boolean; returnLabel?: string; turnTaking?: boolean }>(), { allowRemix: true, returnLabel: '返回案件列表', turnTaking: false })
 const emit = defineEmits<{ navigateHome: []; showVersion: [trigger: HTMLButtonElement]; requestEnd: []; retry: []; remix: [] }>()
 const view = ref(props.controller.getView())
 const connectionAttempt = ref(0)
@@ -18,11 +18,17 @@ onUnmounted(unsubscribeFeedback)
 const backgroundOpen = ref(false)
 const timeHelpOpen = ref(false)
 const timeHelpTrigger = ref<HTMLButtonElement | null>(null)
+const compatibilityOpen = ref(false)
+const compatibilityTrigger = ref<HTMLButtonElement | null>(null)
+const inputNotice = computed(() => props.turnTaking && view.value.conversationActive && voiceFeedback.value.inputPaused === true ? '请等角色说完再提问' : null)
+watch([backgroundOpen, timeHelpOpen], ([background, timing]) => { if (background || timing) compatibilityOpen.value = false })
+watch(() => props.turnTaking, (enabled) => { if (!enabled) compatibilityOpen.value = false })
 const unsubscribe = props.controller.subscribe((value) => {
   if (value.busy && (!view.value.busy || value.currentCharacterId !== view.value.currentCharacterId)) connectionAttempt.value++
   view.value = value
   if (value.phase !== 'interrogating') backgroundOpen.value = false
   if (value.phase !== 'interrogating' || value.accusationOpen) timeHelpOpen.value = false
+  if (value.phase !== 'interrogating' || value.accusationOpen || value.conversationActive) compatibilityOpen.value = false
 })
 onUnmounted(unsubscribe)
 const brokenImages = ref(new Set<string>())
@@ -94,6 +100,8 @@ const durationLabel = computed(() => {
 })
 function openBackground() { props.controller.endConversation(); backgroundOpen.value = true }
 async function closeTimeHelp() { timeHelpOpen.value = false; await nextTick(); timeHelpTrigger.value?.focus() }
+async function closeCompatibility() { compatibilityOpen.value = false; await nextTick(); compatibilityTrigger.value?.focus() }
+function showCompatibility() { backgroundOpen.value = false; timeHelpOpen.value = false; compatibilityOpen.value = true }
 function speak() { if (view.value.conversationActive) props.controller.endConversation(); else void props.controller.startConversation() }
 </script>
 
@@ -159,7 +167,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
           <UiNotice v-if="view.notice != null">{{ view.notice }}</UiNotice>
         </section>
       </div>
-      <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" @start="speak">
+      <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" :input-notice="inputNotice" @start="speak">
+        <template #idle><button v-if="turnTaking" ref="compatibilityTrigger" type="button" class="voice-compatibility-trigger" aria-haspopup="dialog" @click="showCompatibility">兼容模式</button></template>
         <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><button ref="timeHelpTrigger" type="button" class="interrogation-budget__help" :aria-label="`剩余询问${remainingTime}，怎么算时间`" aria-haspopup="dialog" @click="timeHelpOpen = true"><strong>{{ remainingTime }}</strong><svg class="interrogation-budget__info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" /></svg></button></div></template>
         <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
       </VoiceControl>
@@ -222,6 +231,12 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
       <UiButton variant="secondary" @click="emit('navigateHome')">{{ returnLabel }}</UiButton>
     </main>
 
+    <UiDialog :open="compatibilityOpen" title="兼容模式" @close="closeCompatibility">
+      <p>当前浏览器暂时使用轮流说话模式，减少角色声音被误当作提问的情况。</p>
+      <p>角色回答时无法语音插话。请等角色说完、音量波形重新出现后，再继续提问。</p>
+      <p>你仍可以随时结束对话或切换人物。</p>
+      <template #actions><UiButton @click="closeCompatibility">知道了</UiButton></template>
+    </UiDialog>
     <UiDialog class="time-help-dialog" :open="timeHelpOpen" title="怎么算时间" @close="closeTimeHelp">
       <p>所有人物共用本局的询问时间，换人不会增加时间。</p>
       <p>语音接通后开始计时。说话、停顿、等回答和听回答都会计时，连接准备时不计时。</p>
@@ -248,6 +263,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 </template>
 
 <style scoped>
+.voice-compatibility-trigger { align-self: flex-start; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; background: transparent; color: var(--lie-muted); font: inherit; font-size: 12px; line-height: 1.6; cursor: pointer; }
+.voice-compatibility-trigger:hover { color: var(--lie-ink); }
 .intro-duration { text-autospace: normal; }
 .result-character figcaption strong :deep(.character-name-text) { display: inline; font: inherit; color: inherit; }
 .result-celebration { margin: 12px 0 0; font-size: 16px; font-weight: 600; line-height: 1.6; text-wrap: pretty; }

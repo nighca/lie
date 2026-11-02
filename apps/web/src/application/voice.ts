@@ -5,6 +5,8 @@ export interface VoiceFeedback {
   inputLevel: number
   outputLevel: number
   inputActive: boolean
+  /** PCM upload is paused while the turn-taking mode plays an answer. */
+  inputPaused?: boolean
 }
 
 export type ConversationEvent =

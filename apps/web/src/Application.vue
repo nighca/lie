@@ -16,7 +16,7 @@ import { usePageTitle } from './application/pageTitle'
 import type { CharacterPreset } from './presentation/characterPresets'
 import type { PresetLoadStatus } from './presentation/characterPresetLoader'
 
-const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; catalog: readonly CaseSummary[]; characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus; loadCharacterPresets?: () => Promise<readonly CharacterPreset[] | null>; demo: boolean }>()
+const props = defineProps<{ createController: (game: GameDefinition | null) => GameController; catalog: readonly CaseSummary[]; characterPresets: readonly CharacterPreset[]; presetStatus?: PresetLoadStatus; loadCharacterPresets?: () => Promise<readonly CharacterPreset[] | null>; demo: boolean; turnTaking?: boolean }>()
 const pageBuild = import.meta.env.DEV ? null : import.meta.env.LIE_PAGE_BUILD
 const versionOpen = ref(false)
 let versionTrigger: HTMLElement | null = null
@@ -179,7 +179,7 @@ onUnmounted(() => { answer(false); removeGuard(); lifecycle.dispose(); discard()
   <KeepAlive v-if="route.path === '/editor' || route.path === '/editor/preview'" :max="1">
     <Editor v-if="route.path === '/editor'" :key="editorRevision" :character-presets="characterPresets" :preset-status="presetStatus" @show-version="showVersion" @retry-presets="loadCharacterPresets?.()" @preview="preview" @leave="home" />
   </KeepAlive>
-  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :allow-remix="route.path !== '/editor/preview'" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @show-version="showVersion" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
+  <App v-if="controller != null" :key="instance" :controller="controller" :character-presets="characterPresets" :demo="demo" :turn-taking="turnTaking" :allow-remix="route.path !== '/editor/preview'" :return-label="route.path === '/editor/preview' ? '返回编辑器' : '返回案件列表'" @show-version="showVersion" @navigate-home="returnFromGame" @request-end="end" @retry="loadCurrent" @remix="remix" />
   <div v-else-if="shareLoading || shareError != null" class="game-shell">
     <ProductHeader @navigate-home="home" @show-version="showVersion"><template #actions><UiButton variant="quiet" @click="home">返回首页</UiButton></template></ProductHeader>
     <main class="intro-card surface share-state-card"><span v-if="shareLoading" class="share-loading-ring" aria-hidden="true"></span><span v-else class="share-question" aria-hidden="true">?</span><h1>{{ shareLoading ? '正在打开分享案件…' : '分享案件无法打开' }}</h1><p v-if="shareError != null" role="status">{{ shareError }}</p><div v-if="shareError != null" class="share-state-actions"><UiButton v-if="shareRetryable" @click="loadCurrent">重试</UiButton><UiButton :variant="shareRetryable ? 'secondary' : 'primary'" @click="home">返回首页</UiButton></div></main>

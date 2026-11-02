@@ -9,6 +9,7 @@ import { caseCatalog } from './application/catalog'
 import { createGameController } from './application/controller'
 import { createDemoVoicePort } from './application/demoVoice'
 import { createLiveVoicePort } from './application/liveVoice'
+import { needsTurnTakingVoice } from './application/voiceInputPolicy'
 import { createCharacterPresetLoader } from './presentation/characterPresetLoader'
 import './style.css'
 
@@ -16,7 +17,8 @@ const demo = import.meta.env.DEV && new URLSearchParams(location.search).get('de
 
 async function main() {
   const presets = createCharacterPresetLoader()
-  const voice = demo ? createDemoVoicePort() : createLiveVoicePort()
+  const turnTaking = !demo && needsTurnTakingVoice(navigator)
+  const voice = demo ? createDemoVoicePort() : createLiveVoicePort(null, turnTaking)
   const createController = (game: GameDefinition | null = null) => createGameController({
     async readGame(gameId) {
       if (game != null) return game
@@ -32,7 +34,7 @@ async function main() {
     setup() {
       onUnmounted(presets.cancel)
       return () => h(Application, {
-        createController, catalog: caseCatalog, demo,
+        createController, catalog: caseCatalog, demo, turnTaking,
         characterPresets: presets.state.presets,
         presetStatus: presets.state.status,
         loadCharacterPresets: presets.load,

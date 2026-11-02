@@ -16,7 +16,8 @@ const props = withDefaults(defineProps<{
   disabled?: boolean
   inputLevel?: number
   inputActive?: boolean
-}>(), { active: false, preparing: false, actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false, inputLevel: 0, inputActive: false })
+  inputNotice?: string | null
+}>(), { active: false, preparing: false, actionLabel: null, cancelLabel: null, interruptLabel: null, disabled: false, inputLevel: 0, inputActive: false, inputNotice: null })
 
 const emit = defineEmits<{ start: []; cancel: []; interrupt: [] }>()
 const enabled = computed(() => props.active && !props.preparing)
@@ -30,7 +31,7 @@ watch([showInput, () => props.inputActive, level], ([visible, active, value], [w
 const feedbackLabel = computed(() => {
   if (props.preparing) return '正在连接'
   if (props.status === 'error') return props.label
-  return ''
+  return props.inputNotice ?? ''
 })
 function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(value) * 85))}px` }
 </script>
@@ -46,6 +47,7 @@ function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(va
       </div>
       <div class="lie-voice__feedback">
         <span v-if="feedbackLabel" class="lie-voice__status" role="status">{{ feedbackLabel }}</span>
+        <slot v-else-if="!enabled && $slots.idle" name="idle" />
         <template v-else-if="showInput">
           <div class="lie-voice__waveform" aria-label="玩家声音音量" role="img"><i v-for="(sample, index) in samples" :key="index" :style="{ height: height(sample) }" /></div>
           <meter class="lie-voice__static-meter" aria-label="玩家声音音量" min="0" max="1" :value="level" />
