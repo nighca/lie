@@ -1,0 +1,7 @@
+{
+  "method": "built-in image_gen",
+  "status": "production derivative of user-approved B style",
+  "source": "/Users/nighca/.codex/generated_images/01a1951e-6609-75e3-8db8-e013f8c3ada1/exec-4ae9f7e3-b857-4f7d-8d4f-426fa3187258.png",
+  "reference": "docs/pitch/visual-direction-v4/B-comic-panels.jpg",
+  "prompt": "Edit target: supplied approved LIE comic-style slide concept. Prepare a reusable background illustration for the actual slide deck. Preserve the exact two characters' identities, clothing, drawing style, yellow/blue/navy palette, diagonal split composition, all facial expressions and existing close-up crops. REMOVE ALL typography, ALL logos, ALL text in the image, including large Chinese title, upper-left LIE, giant cropped upper-right LIE, small section label, and speech-balloon sentence. Replace each removed text area with clean matching flat warm yellow background, keep the central diagonal band as a wide clean yellow empty area for later native slide text. Keep the ivory speech balloon, empty, near the bottom. No new words, watermarks, patterns, or characters. Goal: polished comic-panel background with a spacious clean diagonal yellow band across middle and clear top-left area where the actual official logo will be overlaid later. Single fullbleed16:9 illustration, no frame."
+}
