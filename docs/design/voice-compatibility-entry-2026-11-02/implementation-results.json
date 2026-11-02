@@ -1,0 +1,91 @@
+{
+  "kind": "B implementation synthetic UI, not live microphone or provider verification",
+  "base": "fae16961a2f90d6268bba6721b259cf2f93f478b",
+  "sourceSha256": {
+    "apps/web/src/App.vue": "9e1b5c19fb18a84f394a936f60a1252cab39087278a818d47b2e3612b144a652",
+    "packages/ui/src/components/VoiceControl.vue": "18cf2f379ad8a70679400361627ab0d900d441adffcb1a9c6fb0ef9ef6186172"
+  },
+  "checks": {
+    "webTargetFiles": 2,
+    "webTargetTests": 32,
+    "uiTests": 9,
+    "webTypecheck": true,
+    "uiTypecheck": true,
+    "cleanBuild": "see handoff"
+  },
+  "native": {
+    "actualViewports": [
+      [
+        390,
+        844
+      ],
+      [
+        745,
+        1072
+      ]
+    ],
+    "secondRequestedViewport": [
+      820,
+      1180
+    ],
+    "completeWindow": {
+      "events": 50,
+      "truncated": false,
+      "hasMore": false,
+      "voiceRequests": 0,
+      "audioContexts": 0,
+      "runtimeExceptions": 0,
+      "sockets": [
+        "vite-hmr"
+      ]
+    },
+    "viewportReset": true,
+    "tabClosed": true
+  },
+  "service": {
+    "port": 5176,
+    "pid": 98807,
+    "pty": 69001,
+    "stopped": true,
+    "listenerAfterStop": false,
+    "childrenAfterStop": false
+  },
+  "images": {
+    "implemented-phone-idle.jpg": {
+      "bytes": 35562,
+      "sha256": "34cb4387cb9302aea400d7d0195fa2388be84c1b3296f7cf2fc0b994aa32a6a8",
+      "dimensions": [
+        390,
+        844
+      ],
+      "mime": "image/jpeg"
+    },
+    "implemented-phone-speaking.jpg": {
+      "bytes": 35526,
+      "sha256": "811c8977f2f92e0995e2ee10bc1baaa5bbd117cb3e7f0ffcbb208298b5440758",
+      "dimensions": [
+        390,
+        844
+      ],
+      "mime": "image/jpeg"
+    },
+    "implemented-tablet-idle.jpg": {
+      "bytes": 38081,
+      "sha256": "d3e645858415c9545d1cc2ff1bce37a8803f11e606007a18c8a46927b67cb6ec",
+      "dimensions": [
+        745,
+        1072
+      ],
+      "mime": "image/jpeg"
+    },
+    "implemented-tablet-speaking.jpg": {
+      "bytes": 38187,
+      "sha256": "03cb0129b5ffa9d973d0b10ab0fe5a57966767c5985fd295afa38db6eee16681",
+      "dimensions": [
+        745,
+        1072
+      ],
+      "mime": "image/jpeg"
+    }
+  }
+}

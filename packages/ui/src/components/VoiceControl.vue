@@ -33,6 +33,7 @@ const feedbackLabel = computed(() => {
   if (props.status === 'error') return props.label
   return props.inputNotice ?? ''
 })
+const showInputNotice = computed(() => !props.preparing && props.status !== 'error' && props.inputNotice != null)
 function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(value) * 85))}px` }
 </script>
 
@@ -46,7 +47,7 @@ function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(va
         <UiButton v-if="actionLabel != null" :disabled="disabled" :aria-pressed="enabled" @click="emit('start')"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg>{{ actionLabel }}</UiButton>
       </div>
       <div class="lie-voice__feedback">
-        <span v-if="feedbackLabel" class="lie-voice__status" role="status">{{ feedbackLabel }}</span>
+        <span v-if="feedbackLabel" class="lie-voice__status" :class="{ 'lie-voice__status--input-notice': showInputNotice }" role="status"><svg v-if="showInputNotice" class="lie-voice__notice-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><rect x="1" y="6" width="2" height="4" rx="1"/><rect x="5" y="2" width="2" height="12" rx="1"/><rect x="9" y="4" width="2" height="8" rx="1"/><rect x="13" y="6" width="2" height="4" rx="1"/></svg>{{ feedbackLabel }}</span>
         <slot v-else-if="!enabled && $slots.idle" name="idle" />
         <template v-else-if="showInput">
           <div class="lie-voice__waveform" aria-label="玩家声音音量" role="img"><i v-for="(sample, index) in samples" :key="index" :style="{ height: height(sample) }" /></div>
@@ -67,6 +68,8 @@ function height(value: number) { return `${Math.max(3, Math.min(30, Math.sqrt(va
 .lie-voice__actions svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 .lie-voice__feedback { display: flex; flex: 1; flex-direction: column; justify-content: center; max-width: 390px; min-width: 0; height: 48px; }
 .lie-voice__status { flex: none; font-size: 13px; line-height: 20px; font-weight: 800; }
+.lie-voice__status--input-notice { display: inline-flex; align-items: center; gap: 6px; color: #737d8b; font-size: 12px; font-weight: 500; }
+.lie-voice__notice-icon { flex: none; width: 13px; height: 13px; }
 .lie-voice__waveform { display: flex; align-items: center; gap: 3px; height: 32px; overflow: hidden; }
 .lie-voice__waveform i { flex: 1; min-width: 2px; max-width: 8px; border-radius: 3px; background: #202020; }
 .lie-voice__static-meter { display: none; width: 100%; }

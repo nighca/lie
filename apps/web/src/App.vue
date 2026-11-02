@@ -20,7 +20,7 @@ const timeHelpOpen = ref(false)
 const timeHelpTrigger = ref<HTMLButtonElement | null>(null)
 const compatibilityOpen = ref(false)
 const compatibilityTrigger = ref<HTMLButtonElement | null>(null)
-const inputNotice = computed(() => props.turnTaking && view.value.conversationActive && voiceFeedback.value.inputPaused === true ? '请等角色说完再提问' : null)
+const inputNotice = computed(() => props.turnTaking && view.value.conversationActive && voiceFeedback.value.inputPaused === true ? '听完再问' : null)
 watch([backgroundOpen, timeHelpOpen], ([background, timing]) => { if (background || timing) compatibilityOpen.value = false })
 watch(() => props.turnTaking, (enabled) => { if (!enabled) compatibilityOpen.value = false })
 const unsubscribe = props.controller.subscribe((value) => {
@@ -168,7 +168,7 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
         </section>
       </div>
       <VoiceControl :preparing="view.busy" :active="view.conversationActive && !view.busy" :status="view.voiceStatus" :label="view.busy ? '正在连接语音…' : labels[view.voiceStatus]" :action-label="actionLabel" :disabled="!view.conversationActive && view.interrogationRemainingMs <= 0" :input-level="voiceFeedback.inputLevel" :input-active="voiceFeedback.inputActive" :input-notice="inputNotice" @start="speak">
-        <template #idle><button v-if="turnTaking" ref="compatibilityTrigger" type="button" class="voice-compatibility-trigger" aria-haspopup="dialog" @click="showCompatibility">兼容模式</button></template>
+        <template #idle><button v-if="turnTaking" ref="compatibilityTrigger" type="button" class="voice-compatibility-trigger" aria-haspopup="dialog" @click="showCompatibility"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6"/><path d="M8 7v4M8 4.5v.5" stroke-linecap="round"/></svg>兼容模式</button></template>
         <template #details><div class="interrogation-budget" aria-label="剩余询问时间"><span>剩余询问</span><button ref="timeHelpTrigger" type="button" class="interrogation-budget__help" :aria-label="`剩余询问${remainingTime}，怎么算时间`" aria-haspopup="dialog" @click="timeHelpOpen = true"><strong>{{ remainingTime }}</strong><svg class="interrogation-budget__info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" /></svg></button></div></template>
         <template #answer><UiButton variant="secondary" @click="controller.openAccusation()">我有答案了 <span aria-hidden="true">→</span></UiButton></template>
       </VoiceControl>
@@ -263,7 +263,8 @@ function speak() { if (view.value.conversationActive) props.controller.endConver
 </template>
 
 <style scoped>
-.voice-compatibility-trigger { align-self: flex-start; border: 0; border-radius: 8px; padding: 4px; background: transparent; color: var(--lie-muted); font: inherit; font-size: 12px; line-height: 1.6; cursor: pointer; }
+.voice-compatibility-trigger { display: inline-flex; align-items: center; align-self: flex-start; gap: 5px; border: 0; border-radius: 8px; padding: 4px; background: transparent; color: #737d8b; font: inherit; font-size: 12px; line-height: 1.6; letter-spacing: .2px; cursor: pointer; }
+.voice-compatibility-trigger svg { flex: none; width: 13px; height: 13px; }
 .voice-compatibility-trigger:hover { background: var(--lie-soft-blue); }
 .voice-compatibility-trigger:focus-visible { outline: 3px solid var(--lie-primary); outline-offset: 3px; }
 .intro-duration { text-autospace: normal; }

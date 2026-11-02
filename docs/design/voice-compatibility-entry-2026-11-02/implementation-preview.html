@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>合成语音兼容界面验收</title>
+<div id="preview"></div>
+<script type="module">
+import { createApp, h, ref } from 'vue'
+import App from '/src/App.vue'
+import { setup } from '/test/helpers.ts'
+import '@lie/ui/style.css'
+import '/src/style.css'
+
+const { controller, turns } = setup({
+  now: () => performance.now(),
+  setTimeout: (action, delay) => window.setTimeout(action, delay),
+  clearTimeout: timer => window.clearTimeout(timer),
+})
+await controller.load('test')
+controller.start()
+createApp({
+  setup() {
+    const turnTaking = ref(true)
+    function emit(event) { turns.at(-1)?.scope.onEvent(event) }
+    return () => h('div', [
+      h('aside', { style: 'position:relative;z-index:5;padding:8px;background:#fff6d5;font:12px sans-serif' }, [
+        h('p', '合成UI验收：真实App/controller，fake voice；无麦克风、无供应商。'),
+        h('button', { onClick: () => { turnTaking.value = !turnTaking.value } }, turnTaking.value ? '切到普通模式' : '切到兼容模式'),
+        h('button', { onClick: () => { emit({ type: 'speaking' }); emit({ type: 'audioLevel', inputLevel: 0, outputLevel: .1, inputActive: false, inputPaused: true }) } }, '合成：回答/尾保护'),
+        h('button', { onClick: () => { emit({ type: 'listening' }); emit({ type: 'audioLevel', inputLevel: .05, outputLevel: 0, inputActive: true, inputPaused: false }) } }, '合成：恢复提问'),
+        h('button', { onClick: () => emit({ type: 'error' }) }, '合成：错误'),
+      ]),
+      h(App, { controller, characterPresets: [], demo: false, turnTaking: turnTaking.value }),
+    ])
+  },
+}).mount('#preview')
+</script>
+</html>
