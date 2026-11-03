@@ -2,6 +2,10 @@
 
 2026-11-03。本轮按六条反馈简化架构、调整主标题/WebMCP对齐、统一协调 Agent称谓并精简指标页；产品→技术→工程和C方向不变。14页＝13主讲＋1张Q&A占位，560秒预算，另40秒机动；另有10分钟评委问答。最终视觉及现场验收仍待确认；本轮导出/检查结果以[交接](revision-09-handoff.md)为准。
 
+## 2026-11-03 直连正式发布更新
+
+浏览器直连已随 `7ff0824` 正式上线，同SHA预览已获用户验收，CI/CD成功，见[发布记录](../releases/2026-11-03-direct-voice.md)。当前讲述以已上线状态为准；冻结的旧源、导出与dated handoff保留当时截点，不重导大文件或改变三天统计。
+
 ## 本地交付入口
 
 目录 `/Users/nighca/.codex/worktrees/e6ff/lie/tmp/pitch/revision-09/output/`：`LIE-roadshow-v9.html`、`LIE-roadshow-v9.pdf`、`LIE-roadshow-v9.pptx`。制作源与14页PNG已只读核对；主标题末尾句号已删、正文/问号/封面图保留，重点7/8/9/10/12无重叠。HTML/PDF/PPTX均已生成；PPTX实核14页/14 notes、27媒体、0 external、ZIP完整，最终receipt与文件SHA一致、结构/布局0 finding且第一方import通过。HTML14图/14标题、13主讲与Q&A边界正确，无网络API；p8/p10 metadata准确。第12页notes仍保留66/97、上屏已删除该说明，第10页无旧Router称谓。以上不等于现场实播或产品部署验证。HTML内嵌图片与两段旧媒体；PDF为静态图片页无视频；PPTX正文/专业图原生可编辑，首页及产品截图为图片，无内嵌视频。字体Hiragino Sans GB，其他机器可能替换。
@@ -50,8 +54,8 @@
 
 ## 直连方案讲述边界
 
-本轮2026-11-03已批准、正在推进合入的直连方案尚未成为正式线上实现；当前正式main仍为旧relay。介绍页发起一次POST prepare，薄gateway依据签名Cookie和namespace分配浏览器Device/Client身份，完成OTA与必要绑定/Agent归属检查，返回transport、Device/Client、Device token及期限。浏览器在本局内存持有并复用token；点击开始等待同一个pending prepare，再以原生WSS直连Linx `/v1/ws/`。URL带Device/Client，token在hello中，不放URL或长期保存。音频、STT/TTS与MCP角色上下文在浏览器和Linx之间传输，不经Worker；管理API key、签名secret和设备管理仍在gateway。静态资源、prepare及分享API仍由托管端提供，分享快照进入R2；游戏状态、判定、询问计时留浏览器。token足够一局是用户批准的工程假设，失败重试可重新prepare，新局重新准备，不引入复杂TTL状态机。relay仅为服务端显式运营回滚，非客户端自动fallback。
+2026-11-03直连已随 `7ff082483481f9e94979eb867c2ca575d5eff8b3` 正式上线，单prepare与局内复用已生效。介绍页发起一次POST prepare，薄gateway依据签名Cookie和namespace分配浏览器Device/Client身份，完成OTA与必要绑定/Agent归属检查，返回transport、Device/Client、Device token及期限。浏览器在本局内存持有并复用token；点击开始等待同一个pending prepare，再以原生WSS直连Linx `/v1/ws/`。URL带Device/Client，token在hello中，不放URL或长期保存。音频、STT/TTS与MCP角色上下文在浏览器和Linx之间传输，不经Worker；管理API key、签名secret和设备管理仍在gateway。静态资源、prepare及分享API仍由托管端提供，分享快照进入R2；游戏状态、判定、询问计时留浏览器。token足够一局是用户批准的工程假设，失败重试可重新prepare，新局重新准备，不引入复杂TTL状态机。relay仅为服务端显式运营回滚，非客户端自动fallback。
 
-资料来源为直连专项 `/Users/nighca/.codex/worktrees/lie-formal-direct-integration/lie/docs/architecture.md` 与 `docs/reviews/voice-direct-formal-2026-11-03/README.md`，加本轮总协调正式回执。专项文档旧的status/per-open准备与期限条目已由本轮“一次intro prepare、本局复用、重试可重准备”的明确决定覆盖。不能把旧固定身份实验、无输入握手或已批准方案说成正式发布、真人语音通过或性能改善已证；等待同候选验收与合入/生产回执。
+现行合同来源为固定7ff的[每局prepare方案](https://github.com/nighca/lie/blob/7ff082483481f9e94979eb867c2ca575d5eff8b3/docs/reviews/voice-case-prepare-2026-11-03/README.md)、`docs/architecture.md` 与 `apps/gateway/README.md`；旧voice-direct-formal的status/per-open方案已被替代。7ff内候选文档的“尚未部署/等待用户”是发布前截点，当前发布状态以[正式发布记录](../releases/2026-11-03-direct-voice.md)及总协调本轮回执为准。`/api/voice/status`已删除；健康GET不签Cookie、不调用OTA/绑定，介绍页单prepare完成身份与准备；open等同一pending、切人/停后开复用，显式retry重新prepare，新局reset。本专项只读核文档，不新增provider、浏览器或性能验收。
 
 主标题统一删末尾句号，问号保留，正文标点与封面图不改。第10页主标题“人定方向，协调 Agent 持续推进”；旧Router仅为历史称谓，本版图/notes/讲述都称协调 Agent，机制不变。

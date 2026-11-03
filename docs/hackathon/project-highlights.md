@@ -1,6 +1,6 @@
 # LIE Hackathon 项目亮点
 
-路演讨论稿。2026-11-03补充已批准、未合入/上线的直连方案；正式产品仍为旧relay。原有能力按固定 main `6bd6426` 的六案与已上线创作工具、首次帮助范围维护；v1.2.0 正式 release 仍对应 `f504e1a`，后续内容与工具增量不倒写为该 tag 原始内容。商业方向仍待验证。
+路演讨论稿。2026-11-03按总协调正式回执更新直连已发布状态（main/线上7ff0824，见[发布记录](../releases/2026-11-03-direct-voice.md)）。原有能力按固定 main `6bd6426` 的六案与已上线创作工具、首次帮助范围维护；v1.2.0 正式 release 仍对应 `f504e1a`，后续内容与工具增量不倒写为该 tag 原始内容。商业方向仍待验证。
 
 [立即体验](https://lie.agency/) · [创作案件](https://lie.agency/editor) · [观看历史真实演示（3 分 07 秒）](../../media/promo-video/lie-demo.mp4)
 
@@ -73,13 +73,13 @@ LIE 的品牌主题可以承载更多人与 AI 的博弈方式。未来可探索
 
 ### 浏览器承担游戏逻辑 轻量云端连接 AI
 
-游戏核心在浏览器中负责内容校验、会话、历史、询问额度和指认。当前正式线上薄Cloudflare Worker保管管理凭据并中继语音协议；本轮用户已批准推进浏览器直连Linx的新方案，尚未合入/上线。[整体架构](../architecture.md)。
+游戏核心在浏览器中负责内容校验、会话、历史、询问额度和指认。当前正式线上浏览器原生WSS直连Linx，薄Cloudflare Worker保管管理凭据并提供每局prepare、设备管理和分享服务；单prepare与本局凭据复用已生效。[整体架构](../architecture.md)。
 
 **低基础设施成本与低运维负担是这一架构的直接优势。** 游戏计算和会话状态由玩家浏览器承担，官方内容随静态资源分发，用户分享快照由 R2 按链接读取；无需常驻游戏服务器或局进度数据库。无共享游戏状态也减少了扩容时的状态协调工作，为从原型走向持续运营提供轻量基础。语音 AI 调用、快照存储费用与供应商配额仍需单独考虑。
 
 规则与 AI 表达各司其职：模型组织角色回答，程序判定答案和终局。切人、重开或结束时，编排器约束异步事件的归属，防止旧连接回包写入新的人物或会话。完整故事允许在浏览器中查看；供应商管理API key与签名secret保留服务端，直连方案只向本局浏览器提供临时Device token。[核心规则](../../packages/game-core/src/session.ts)、[对话编排](../../apps/web/src/application/controller.ts)、[薄网关](../../apps/gateway/src/index.ts)。
 
-游玩与创作是两条不同的 AI 链路：当前线上游玩由浏览器经薄网关中继至灵矽；已批准的新方案将音频、转写和角色上下文改为浏览器直连Linx，gateway只准备身份/凭证并承担管理和分享服务；创作中，用户的 Agent 经 WebMCP 页面工具直接编辑浏览器中的表单。后一条复用现有编辑器与保存机制，无须另建产品侧创作模型后端，也不能把游戏角色模型当成已经接入的创作助手。页面工具注册依赖当前 Document 的能力，不能仅凭接口存在就断言 Agent 已在线。
+游玩与创作是两条不同的 AI 链路：当前线上游玩的音频、转写和角色上下文由浏览器直连Linx，gateway只准备身份/凭证并承担管理和分享服务；创作中，用户的 Agent 经 WebMCP 页面工具直接编辑浏览器中的表单。后一条复用现有编辑器与保存机制，无须另建产品侧创作模型后端，也不能把游戏角色模型当成已经接入的创作助手。页面工具注册依赖当前 Document 的能力，不能仅凭接口存在就断言 Agent 已在线。
 
 ### 统一规格连接内容生产与运行消费
 
@@ -93,11 +93,11 @@ LIE 的品牌主题可以承载更多人与 AI 的博弈方式。未来可探索
 
 规格落实为文档、类型与校验器，生成逻辑和消费逻辑围绕相同契约实现。这为更开放的生产与消费社区打下基础：未来内容作者、工具开发者和运行端可以围绕统一规格协作，分别扩展创作工具、资源与使用场景。[游戏包规格](../../content/games/README.md)、[人物素材规格](../../design/character-presets/README.md)、[动画包规格](../animation/contract.md)。
 
-### 已批准的直连分工（未合入/上线）
+### 已上线的浏览器直连与薄网关分工
 
 介绍页一次POST prepare，由gateway根据签名Cookie与namespace分配浏览器Device/Client隔离身份，完成OTA及必要绑定/Agent归属检查，返回transport、Device/Client、临时token与期限。浏览器本局内存复用token，开始时等同一pending prepare，再原生WSS连接Linx `/v1/ws/`；Device/Client在URL，token在hello，不长期保存。音频、STT/TTS与MCP上下文不再经过Worker；静态资源、prepare、分享API与R2快照仍由托管端提供，管理API key/签名secret/设备管理仍在gateway。
 
-token覆盖一局是本轮批准的工程假设，重试可重新prepare，新局重新准备；relay只保留为服务端明确配置的运营回滚，不自动fallback。该方案状态为“已确定方案，合入推进中”，不能称已正式发布、真人语音全验或延迟/成本改善已证。方案来源为直连专项的 `docs/architecture.md` 与 `docs/reviews/voice-direct-formal-2026-11-03/README.md`，其中旧status/per-open条目以本轮总协调确认的一次intro准备、本局复用为准；不把旧实验或历史期限逻辑直接推广为新合同。
+token覆盖一局是本轮批准的工程假设，重试可重新prepare，新局重新准备；relay只保留为服务端明确配置的运营回滚，不自动fallback。该能力已随7ff正式发布；`/api/voice/status`已删除，健康GET不签Cookie、不做OTA/绑定。现行[每局prepare合同](https://github.com/nighca/lie/blob/7ff082483481f9e94979eb867c2ca575d5eff8b3/docs/reviews/voice-case-prepare-2026-11-03/README.md)替代旧status/per-open方案，文内候选阶段的待验状态由[正式发布记录](../releases/2026-11-03-direct-voice.md)覆盖。用户同SHA预览接受与生产部署不等于全部设备/真人语音场景或性能改善全验。
 
 ### 自研轻量骨骼动画规格与播放器
 

@@ -67,7 +67,7 @@ npm run build
 npm run dev --workspace @lie/gateway
 ```
 
-Use `http://127.0.0.1:8787/` for the Worker-served app and `/api/voice`. A missing service or configuration produces an error, never a silent switch to fake answers. See the [web application notes](apps/web/README.md), [gateway notes](apps/gateway/README.md) and [development guide](docs/development.md) for details and historical experiments. Keep management keys and private bindings out of frontend variables, URLs and Git history.
+Use `http://127.0.0.1:8787/` for the Worker-served app. The app prepares a case through same-origin `POST /api/voice/prepare`, then opens a native WebSocket directly to Linx. `GET /api/health` checks configuration without preparing a provider device; `/api/voice` is reserved for server-selected relay rollback. A missing service or configuration produces an error, never a silent switch to fake answers. See the [web application notes](apps/web/README.md), [gateway notes](apps/gateway/README.md) and [development guide](docs/development.md) for details and historical experiments. Keep management keys and private bindings out of frontend variables, URLs and Git history.
 
 ## Checks and deployment
 
@@ -81,7 +81,7 @@ Automated checks cover content validation, accusation rules, character context, 
 
 [CI](https://github.com/nighca/lie/actions/workflows/ci.yml) performs checks, coverage, build and a deployment dry run. A separate [CD workflow](https://github.com/nighca/lie/actions/workflows/cd.yml) receives only a successful same-repository main CI run, verifies its exact SHA and artifact, then deploys that prebuilt output if the SHA is still main. CD does not rebuild or rerun tests. Manual runs start from CI; [handoff and permissions](docs/ci-cd.md) describe the boundary. The [release verification record](docs/releases/2026-10-25-combined-demo/README.md) documents actual runs of the existing CI/CD workflows.
 
-Local and online development previews support real voice. Application authentication is temporarily disabled by the project owner's decision; provider credentials remain on the Worker. Production access, concurrency allocation and account-wide spending controls are still deferred. A browser's questioning timer is not a hard provider spending cap. Continuous-voice user testing and bounded real-model checks do not establish unrestricted multi-user readiness; see the [online voice preview boundaries](docs/online-voice-preview.md).
+Production uses direct browser-to-Linx voice connections, released as `7ff0824` on 2026-11-03 after user acceptance of the same preview build; see the [release record](docs/releases/2026-11-03-direct-voice.md). Application authentication is temporarily disabled by the project owner's decision. Management keys and the Cookie signing secret remain on the Worker; the browser holds only the current case's connection token in memory. Production access, concurrency allocation and account-wide spending controls are still deferred. A browser's questioning timer is not a hard provider spending cap. Continuous-voice user testing and bounded real-model checks do not establish unrestricted multi-user readiness; see the [online voice preview boundaries](docs/online-voice-preview.md).
 
 ## Architecture
 
@@ -101,12 +101,18 @@ flowchart LR
         Web --> Voice
         UI --> Animation
     end
-    Gateway["apps/gateway<br/>Static assets and thin voice relay"]
+    Gateway["apps/gateway<br/>Assets, identity and connection preparation"]
     Linx["Linx<br/>Voice and language models"]
+    R2["Private R2<br/>Shared case snapshots"]
     Content --> Web
-    Voice <-->|"Same-origin WebSocket · client MCP"| Gateway
-    Gateway <-->|"Authentication · text and audio"| Linx
+    Voice <-->|"POST prepare · Device token"| Gateway
+    Voice <-->|"Native WSS · audio, transcripts and client MCP"| Linx
+    Gateway <-->|"OTA · device binding and ownership"| Linx
+    Web <-->|"Sharing API"| Gateway
+    Gateway <-->|"Snapshot read/write"| R2
 ```
+
+Voice preparation starts once when the case introduction loads. Opening a conversation waits for that same result; character switches and stopping/reopening reuse it within the case. An explicit retry refreshes preparation, while a new case or restart clears it. The native socket uses Linx `/v1/ws/`, with the Device token in hello, not the URL or persistent browser storage. The Worker handles identity, provider management and sharing; audio, transcripts and role-context tools travel directly between the browser and Linx. See the [per-case transport contract](docs/reviews/voice-case-prepare-2026-11-03/README.md).
 
 Stories primarily contain plain-text public backgrounds and character profiles, with only the metadata the engine needs. Additional cases use content packages and presentation configuration. Game content and session logic run in the browser; complete answers are inspectable in developer tools. Provider management credentials stay on the hosted side. No game database or traditional always-running server is required. Shared case and character specifications connect authoring tools with the engine; a custom lightweight 2D skeletal animation format and Canvas player bring reusable characters to life.
 
@@ -115,9 +121,9 @@ Stories primarily contain plain-text public backgrounds and character profiles, 
 | [apps/web](apps/web) | Vue pages, browser conversation orchestration and presentation |
 | [packages/game-core](packages/game-core) | Independent TypeScript content validation, sessions, accusation and role context |
 | [packages/ui](packages/ui) | Shared Vue components and visual styling |
-| [packages/voice](packages/voice) | Linx protocol, PCM, microphone capture and playback |
+| [packages/voice](packages/voice) | Linx protocol, native direct WebSocket, PCM, microphone capture and playback |
 | [packages/character-animation](packages/character-animation) | Independent animation package validation, state playback and Canvas rendering |
-| [apps/gateway](apps/gateway) | Static assets and thin voice transport; no case rules |
+| [apps/gateway](apps/gateway) | Static assets, browser identity, connection preparation and sharing API; no case rules |
 
 ## More about the project
 

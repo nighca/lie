@@ -2,6 +2,10 @@
 
 内部稿，2026-11-03。当前v9为13主讲＋1张Q&A占位/560秒，本轮落实六条版面/措辞反馈，保留单张Q&A占位；不预设观众会问什么。逐页以[当前大纲](outline-v9.md)、[反馈映射](revision-09-feedback.md)和[放映提示](presenter-guide.md)为准。旧v6/v7/v8大纲与冻结工程证据保留，不能混用页号。
 
+## 2026-11-03 直连正式发布更新
+
+浏览器直连已随 `7ff0824` 正式上线，同SHA预览已获用户验收，CI/CD成功，见[发布记录](../releases/2026-11-03-direct-voice.md)。当前讲述以已上线状态为准；冻结的旧源、导出与dated handoff保留当时截点，不重导大文件或改变三天统计。
+
 ## 当前主讲逐页提示
 
 | 页 | 部分 | 内容 | 秒数 |
@@ -28,9 +32,9 @@
 
 ## 本轮直连方案及状态
 
-本轮2026-11-03已批准、正在推进合入的直连方案尚未成为正式线上实现；当前正式main仍为旧relay。介绍页发起一次POST prepare，薄gateway依据签名Cookie和namespace分配浏览器Device/Client身份，完成OTA与必要绑定/Agent归属检查，返回transport、Device/Client、Device token及期限。浏览器在本局内存持有并复用token；点击开始等待同一个pending prepare，再以原生WSS直连Linx `/v1/ws/`。URL带Device/Client，token在hello中，不放URL或长期保存。音频、STT/TTS与MCP角色上下文在浏览器和Linx之间传输，不经Worker；管理API key、签名secret和设备管理仍在gateway。静态资源、prepare及分享API仍由托管端提供，分享快照进入R2；游戏状态、判定、询问计时留浏览器。token足够一局是用户批准的工程假设，失败重试可重新prepare，新局重新准备，不引入复杂TTL状态机。relay仅为服务端显式运营回滚，非客户端自动fallback。
+2026-11-03直连已随 `7ff082483481f9e94979eb867c2ca575d5eff8b3` 正式上线，单prepare与局内复用已生效。介绍页发起一次POST prepare，薄gateway依据签名Cookie和namespace分配浏览器Device/Client身份，完成OTA与必要绑定/Agent归属检查，返回transport、Device/Client、Device token及期限。浏览器在本局内存持有并复用token；点击开始等待同一个pending prepare，再以原生WSS直连Linx `/v1/ws/`。URL带Device/Client，token在hello中，不放URL或长期保存。音频、STT/TTS与MCP角色上下文在浏览器和Linx之间传输，不经Worker；管理API key、签名secret和设备管理仍在gateway。静态资源、prepare及分享API仍由托管端提供，分享快照进入R2；游戏状态、判定、询问计时留浏览器。token足够一局是用户批准的工程假设，失败重试可重新prepare，新局重新准备，不引入复杂TTL状态机。relay仅为服务端显式运营回滚，非客户端自动fallback。
 
-资料来源为直连专项 `/Users/nighca/.codex/worktrees/lie-formal-direct-integration/lie/docs/architecture.md` 与 `docs/reviews/voice-direct-formal-2026-11-03/README.md`，加本轮总协调正式回执。专项文档旧的status/per-open准备与期限条目已由本轮“一次intro prepare、本局复用、重试可重准备”的明确决定覆盖。不能把旧固定身份实验、无输入握手或已批准方案说成正式发布、真人语音通过或性能改善已证；等待同候选验收与合入/生产回执。
+现行合同来源为固定7ff的[每局prepare方案](https://github.com/nighca/lie/blob/7ff082483481f9e94979eb867c2ca575d5eff8b3/docs/reviews/voice-case-prepare-2026-11-03/README.md)、`docs/architecture.md` 与 `apps/gateway/README.md`；旧voice-direct-formal的status/per-open方案已被替代。7ff内候选文档的“尚未部署/等待用户”是发布前截点，当前发布状态以[正式发布记录](../releases/2026-11-03-direct-voice.md)及总协调本轮回执为准。`/api/voice/status`已删除；健康GET不签Cookie、不调用OTA/绑定，介绍页单prepare完成身份与准备；open等同一pending、切人/停后开复用，显式retry重新prepare，新局reset。本专项只读核文档，不新增provider、浏览器或性能验收。
 
 ## 内部参考资料（不作为预设问题或备页）
 
@@ -46,7 +50,7 @@
 | 切换人物会串记忆吗？ | 每个角色装配本人历史，连接和事件有归属约束，旧连接事件不应写入新人物/新局。 | 这是本应用的设计和程序检查，不等同供应商多用户并发隔离已全面验收。 |
 | 内容如何扩展、如何保证可解？ | 统一 JSON、结构与引用校验保证能运行，设定区分公共背景与个人经历。作者同引擎试玩，官方收录另经维护者评审。 | 结构校验不能自动证明剧情逻辑和模型表现；没有自动判案或 AI 自动评审能力。 |
 | 创作要什么能力？ | 作者可自己写文本，也可在支持页面能力的助手中讨论并直接填写；选预设、设定正确目标与时长，再亲自检查和同引擎试玩。 | 八套预设，无上传、账号云同步或作品管理；工具支持不代表推理质量已验，人工表单仍可独立使用。 |
-| WebMCP 与产品里的语音 AI 是一回事吗？ | 不是同一链路。当前线上语音经Worker中继；本轮已批但尚未合入的方案改浏览器直连Linx；创作Agent调用页面的guide/state/update工具，直接修改当前表单并尝试本地保存。 | 当前没有新增产品侧创作模型后端，不说游戏语音模型自动写案。页面接口存在不代表Agent已连接。 |
+| WebMCP 与产品里的语音 AI 是一回事吗？ | 不是同一链路。当前线上语音由浏览器直连Linx，gateway负责身份/凭据准备及管理；创作Agent调用页面的guide/state/update工具，直接修改当前表单并尝试本地保存。 | 当前没有新增产品侧创作模型后端，不说游戏语音模型自动写案。页面接口存在不代表Agent已连接。 |
 | 助手能看原稿或直接发布吗？ | 工具读取创作规则与revision/是否有内容，不返回完整原稿；更新只提供所需字段，现有规则和保存继续生效。 | characters若提供会替换整列表，ending按字段合并；过期版本与存储冲突拒绝。保存失败可能内存已更新但未落盘。工具不自动试玩、分享、投稿或开启语音；不能承诺助手通过正常浏览绝不见页面内容。 |
 | 这项功能提效多少、适配哪些助手？ | 当前降低的是把讨论结果逐项搬到表单的操作负担；已有特定IAB来源的工具发现、完整/局部写入和保存验收。更多支持WebMCP的用户Agent适配是后续方向。 | 无总耗时对照或量化提效；未验所有Agent/浏览器，生产Chrome trial接受未核，不宣称全面兼容。 |
 | 语音延迟和成本怎样？ | 已改进 PCM 100ms 储备与连续调度，浏览器播放上下文 16kHz；真人反馈推动调整。 | 100ms 是缓冲设置，不是首音延迟。没有平均/p95 时延或费用统计。 |

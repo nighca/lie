@@ -67,7 +67,7 @@ npm run build
 npm run dev --workspace @lie/gateway
 ```
 
-通过 `http://127.0.0.1:8787/` 使用 Worker 提供的页面与 `/api/voice`。服务或配置未就绪时会显示错误，不会自动替换成假回答。配置细节及历史实验见 [Web 应用说明](apps/web/README.md)、[网关说明](apps/gateway/README.md)与[开发指南](docs/development.md)。不要把管理 key 或私有配置放进前端变量、URL 或提交记录。
+通过 `http://127.0.0.1:8787/` 使用 Worker 提供的页面。应用经同源 `POST /api/voice/prepare` 准备本局连接，再以原生 WebSocket 直连灵矽；`GET /api/health` 只检查配置，不准备供应商设备。`/api/voice` 仅在服务端明确选择 relay 回滚时启用。服务或配置未就绪时会显示错误，不会自动替换成假回答。配置细节及历史实验见 [Web 应用说明](apps/web/README.md)、[网关说明](apps/gateway/README.md)与[开发指南](docs/development.md)。不要把管理 key 或私有配置放进前端变量、URL 或提交记录。
 
 ## 工程检查与部署
 
@@ -81,7 +81,7 @@ npm run build
 
 [CI](https://github.com/nighca/lie/actions/workflows/ci.yml) 负责检查、覆盖率、构建和部署 dry run。独立的[CD workflow](https://github.com/nighca/lie/actions/workflows/cd.yml) 仅接收本仓 main 成功 CI，校验同一 SHA 与产物，确认仍为最新 main 后部署预构建产物，不重复构建或测试。手动重验从 CI 发起；[交接与权限](docs/ci-cd.md)说明边界。[发布核验记录](docs/releases/2026-10-25-combined-demo/README.md)保留现有 CI/CD 的实际执行证据。
 
-本地与线上开发预览已支持真实语音。应用访问鉴权按项目负责人决定临时关闭，供应商凭据仍保留在 Worker。正式访问、并发分配和账户级支出控制仍暂缓；浏览器内的询问倒计时不是供应商费用硬上限。持续语音真人试玩与受控模型检查不等于已具备不受限的多人正式服务能力；见[线上语音预览边界](docs/online-voice-preview.md)。
+浏览器原生语音直连已于2026-11-03随 `7ff0824` 正式上线，发布前用户已验收同一预览版本，见[发布记录](docs/releases/2026-11-03-direct-voice.md)。应用访问鉴权按项目负责人决定临时关闭；管理密钥与 Cookie 签名密钥留在 Worker，浏览器只在本局内存中持有连接 token。正式访问、并发分配和账户级支出控制仍暂缓；浏览器内的询问倒计时不是供应商费用硬上限。持续语音真人试玩与受控模型检查不等于已具备不受限的多人正式服务能力；见[线上语音预览边界](docs/online-voice-preview.md)。
 
 ## 架构
 
@@ -101,12 +101,18 @@ flowchart LR
         Web --> Voice
         UI --> Animation
     end
-    Gateway["apps/gateway<br/>静态资源与薄语音网关"]
+    Gateway["apps/gateway<br/>静态资源、身份与连接准备"]
     Linx["灵矽<br/>语音与语言模型"]
+    R2["私有 R2<br/>分享案件快照"]
     Content --> Web
-    Voice <-->|"同源 WebSocket · 端侧 MCP"| Gateway
-    Gateway <-->|"鉴权 · 文本与音频"| Linx
+    Voice <-->|"POST prepare · Device token"| Gateway
+    Voice <-->|"原生 WSS · 音频、转写与端侧 MCP"| Linx
+    Gateway <-->|"OTA · 设备绑定与归属校验"| Linx
+    Web <-->|"分享 API"| Gateway
+    Gateway <-->|"快照读写"| R2
 ```
+
+进入案件介绍时准备一次连接，开始对话等待同一结果；切换人物、停止后再开在本局内复用。显式失败重试会重新准备，新局或重开会清除原准备结果。原生连接使用灵矽 `/v1/ws/`，Device token 放在 hello 中，不放 URL 或持久存储。Worker 负责身份、供应商管理与分享，音频、转写和角色上下文工具直接在浏览器与灵矽之间传输，见[每局准备合同](docs/reviews/voice-case-prepare-2026-11-03/README.md)。
 
 故事以公共背景和各角色设定的纯文本为主，只保留程序需要的少量元数据；形象通过独立资源配置复用。同一玩法下，新增故事通过内容包与配置完成。游戏内容和单局逻辑在浏览器运行，完整答案可被开发者工具检查；平台管理凭据留在托管端。无需游戏数据库或传统常驻服务端。统一的案件与人物素材规格连接创作工具和运行引擎，自研轻量 2D 骨骼动画格式与 Canvas 播放器让人物资源持续复用。
 
@@ -115,9 +121,9 @@ flowchart LR
 | [apps/web](apps/web) | Vue 页面、浏览器对话编排与展示 |
 | [packages/game-core](packages/game-core) | 独立 TypeScript 内容校验、会话、指认与角色上下文 |
 | [packages/ui](packages/ui) | 统一视觉的公共 Vue 组件 |
-| [packages/voice](packages/voice) | 灵矽协议、PCM、麦克风与播放 |
+| [packages/voice](packages/voice) | 灵矽协议、原生直连 WebSocket、PCM、麦克风与播放 |
 | [packages/character-animation](packages/character-animation) | 独立动画包校验、状态播放与 Canvas 渲染 |
-| [apps/gateway](apps/gateway) | 静态资源与薄语音网关，不处理案件规则 |
+| [apps/gateway](apps/gateway) | 静态资源、浏览器身份、连接准备与分享 API，不处理案件规则 |
 
 ## 继续了解
 

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-03",
+  "source": "7ff082483481f9e94979eb867c2ca575d5eff8b3",
+  "production": {
+    "source": "7ff082483481f9e94979eb867c2ca575d5eff8b3",
+    "clean": true,
+    "homeStatus": 200,
+    "jsStatus": 200,
+    "healthStatus": 200,
+    "health": {
+      "status": "ok",
+      "storage": "r2",
+      "voice": {
+        "status": "ready",
+        "transport": "direct"
+      }
+    },
+    "noProviderRequests": true
+  },
+  "publicationHandoff": {
+    "verifiedBy": "project coordinator",
+    "sameShaPreviewAcceptedByUser": true,
+    "publicationAuthorizedByUser": true,
+    "ciRun": 41585128790,
+    "ciStatus": "success",
+    "cdRun": 41585316225,
+    "cdStatus": "success",
+    "productionTrafficPercent": 100
+  },
+  "boundary": {
+    "providerOperationInThisDocumentationTask": false,
+    "newBrowserOrMicrophoneTest": false,
+    "globalDeviceOrPerformanceGuarantee": false
+  }
+}

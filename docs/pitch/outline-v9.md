@@ -44,11 +44,15 @@
 第2页现场优先，R为原实录13.5–42.0秒的28.5秒另一纪念章案备用，保留真实玩家/角色声音；V为历史横v3宣传片53.8秒，只有配乐与音效。替代现场环节、不叠加时间，不换片、不新录或启动provider。第5页操作只用自己预置稿。静态PDF无视频；离线HTML不代替实际官网操作。浏览器实播、全屏、音响及原生PowerPoint彩排仍需演讲者确认。
 
 
+## 2026-11-03 直连正式发布更新
+
+浏览器直连已随 `7ff0824` 正式上线，同SHA预览已获用户验收，CI/CD成功，见[发布记录](../releases/2026-11-03-direct-voice.md)。当前讲述以已上线状态为准；冻结的旧源、导出与dated handoff保留当时截点，不重导大文件或改变三天统计。
+
 ## 直连方案状态与准确分工
 
-本轮2026-11-03已批准、正在推进合入的直连方案尚未成为正式线上实现；当前正式main仍为旧relay。介绍页发起一次POST prepare，薄gateway依据签名Cookie和namespace分配浏览器Device/Client身份，完成OTA与必要绑定/Agent归属检查，返回transport、Device/Client、Device token及期限。浏览器在本局内存持有并复用token；点击开始等待同一个pending prepare，再以原生WSS直连Linx `/v1/ws/`。URL带Device/Client，token在hello中，不放URL或长期保存。音频、STT/TTS与MCP角色上下文在浏览器和Linx之间传输，不经Worker；管理API key、签名secret和设备管理仍在gateway。静态资源、prepare及分享API仍由托管端提供，分享快照进入R2；游戏状态、判定、询问计时留浏览器。token足够一局是用户批准的工程假设，失败重试可重新prepare，新局重新准备，不引入复杂TTL状态机。relay仅为服务端显式运营回滚，非客户端自动fallback。
+2026-11-03直连已随 `7ff082483481f9e94979eb867c2ca575d5eff8b3` 正式上线，单prepare与局内复用已生效。介绍页发起一次POST prepare，薄gateway依据签名Cookie和namespace分配浏览器Device/Client身份，完成OTA与必要绑定/Agent归属检查，返回transport、Device/Client、Device token及期限。浏览器在本局内存持有并复用token；点击开始等待同一个pending prepare，再以原生WSS直连Linx `/v1/ws/`。URL带Device/Client，token在hello中，不放URL或长期保存。音频、STT/TTS与MCP角色上下文在浏览器和Linx之间传输，不经Worker；管理API key、签名secret和设备管理仍在gateway。静态资源、prepare及分享API仍由托管端提供，分享快照进入R2；游戏状态、判定、询问计时留浏览器。token足够一局是用户批准的工程假设，失败重试可重新prepare，新局重新准备，不引入复杂TTL状态机。relay仅为服务端显式运营回滚，非客户端自动fallback。
 
-资料来源为直连专项 `/Users/nighca/.codex/worktrees/lie-formal-direct-integration/lie/docs/architecture.md` 与 `docs/reviews/voice-direct-formal-2026-11-03/README.md`，加本轮总协调正式回执。专项文档旧的status/per-open准备与期限条目已由本轮“一次intro prepare、本局复用、重试可重准备”的明确决定覆盖。不能把旧固定身份实验、无输入握手或已批准方案说成正式发布、真人语音通过或性能改善已证；等待同候选验收与合入/生产回执。
+现行合同来源为固定7ff的[每局prepare方案](https://github.com/nighca/lie/blob/7ff082483481f9e94979eb867c2ca575d5eff8b3/docs/reviews/voice-case-prepare-2026-11-03/README.md)、`docs/architecture.md` 与 `apps/gateway/README.md`；旧voice-direct-formal的status/per-open方案已被替代。7ff内候选文档的“尚未部署/等待用户”是发布前截点，当前发布状态以[正式发布记录](../releases/2026-11-03-direct-voice.md)及总协调本轮回执为准。`/api/voice/status`已删除；健康GET不签Cookie、不调用OTA/绑定，介绍页单prepare完成身份与准备；open等同一pending、切人/停后开复用，显式retry重新prepare，新局reset。本专项只读核文档，不新增provider、浏览器或性能验收。
 
 旧v7的三种时间、改稿保护、统计范围备页已从本版移除；旧文件保留，不作为本版放映流程。旧relay默认600秒/Worker 30000ms属于历史中继资料，不再主讲或做备页。
 
