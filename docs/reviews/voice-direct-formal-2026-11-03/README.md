@@ -38,6 +38,6 @@
 
 从当前四绑定更新时，cf 可能继承旧 PRIVATE_PREVIEW_DEVICE_ID/CLIENT_ID secret。必须 exact readback；只在它们是唯一多余项、latest 锁定新 CLI deployment 时，才经批准清掉这两个废弃固定项，绝不能复用旧实验删除 Cookie/namespace 的 PATCH。完整代码/module/assets hash、同 child、namespace、expiry 与实际 binding 列表作为验收依据。失败/漂移停止，不盲重试/回滚。
 
-原 fixed Device 保留到新候选验收后再用原 ledger 精确清理；新动态 Devices 清理只能列出本专项 owned Agent 的 bindings，逐项校验 AgentId 和 ID 后精确解绑，混入/未知项停 owner 核对，不扫描全账号。共享测试 Agent 本身在用户测试期间保留，不擅自新建 Agent、删 Agent 或回收生产设备。
+复用 Agent 后，其 ownership 和到期清理职责续归本正式方案 owner。旧 fixed Device 保留到新候选验收后；若提前清理旧 fixed 身份，只能精确解绑原 Device 并标记该 ledger 的 device 状态，不能删除仍服务新 per-device 的 Agent。旧 `resource-ops.mjs cleanup` 会解绑旧 Device 后直接删 Agent，迁移后已被本计划取代，必须保留历史但禁止在新 Agent 活跃期间执行。只有整个 preview 用户验收结束或原到期后的协调关闭阶段，才按该 owned Agent 的 bindings 列表逐项校验 AgentId 和 ID、解绑全部已确认 owned 的设备（含仍绑定的已知旧 fixed Device），再删除该确切 Agent；混入/未知项停 owner 核对，不扫描全账号。测试期间保留 Agent，不擅自新建、删 Agent 或回收生产设备；后续最小 operator 需区分 fixed-only unbind 与整组关闭，不能复用旧 cleanup 的删除行为。
 
 原简化任务 no-input 预算仅剩 1 次（已使用 1/2）；正式 per-device 两 browser contexts 的真实验证涉及新动态 Devices，需 root 另批具体资源与拨号预算。不得悄悄复用或扩大预算。正式 verifier 最小保留准备状态、身份匹配、同源 Cookie 和 socket 数量、原生握手 HTTP status 数值、close code/关闭确认；不记录 raw headers/URL 参数/正文，不发 mic/listen/binary/文本推理，不做 ws2 回退。`/ws/` 原生行为如果不符合用户转述，报告实际失败并停，不自行恢复旧 endpoint。
