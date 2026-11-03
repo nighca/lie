@@ -37,7 +37,17 @@ export interface VoiceSocket {
   close(code?: number, reason?: string): void
 }
 
+export type DirectVoiceConnection = {
+  url: 'wss://xrobo-io.qiniuapi.com/v1/ws/'
+  deviceId: string
+  clientId: string
+  token: string
+  /** Client close deadline from socket open; not a provider-enforced limit. */
+  maxSessionSeconds: number
+}
+
 export type VoiceChannelOptions = {
+  directConnection?: DirectVoiceConnection
   onStartup?: VoiceStartupObserver
   tools: readonly VoiceTool[]
   onEvent: (event: VoiceEvent) => void

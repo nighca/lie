@@ -1,5 +1,5 @@
-import { createPcmPlayer, createVoiceChannel, openMicrophone } from '@lie/voice'
-import type { PcmFormat, PlaybackObserver, PlaybackStopReason, VoiceStartupObservation } from '@lie/voice'
+import { createPcmPlayer, createVoiceChannel, openMicrophone, readDirectVoiceConnection } from '@lie/voice'
+import type { DirectVoiceConnection, PcmFormat, PlaybackObserver, PlaybackStopReason, VoiceChannelOptions, VoiceStartupObservation } from '@lie/voice'
 
 import { observeVoicePlayback } from './voicePlaybackDiagnostics'
 import { VoiceAvailabilityError } from './voice'
@@ -25,23 +25,27 @@ export function createLiveVoicePort(overrides: {
     fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal }),
     prepareDevice: (signal: AbortSignal) => fetch('/api/voice/prepare', { method: 'POST', credentials: 'same-origin', cache: 'no-store', signal }),
   }
+  let directTransport = false
   let generation = 0
   let preparedGeneration: number | null = null
   let pending: { generation: number; promise: Promise<number> } | null = null
+  async function status(signal: AbortSignal): Promise<boolean> {
+    const response = await dependencies.fetchStatus(signal)
+    if (!response.ok) throw new VoiceAvailabilityError('check-failed')
+    const result = await response.json()
+    if (result?.status !== 'ready') throw new VoiceAvailabilityError(result?.status === 'unavailable' ? 'unavailable' : 'check-failed')
+    if (result.transport !== 'direct' && result.transport !== 'relay') throw new VoiceAvailabilityError('check-failed')
+    return result.transport === 'direct'
+  }
   async function prepareAttempt() {
     const signal = AbortSignal.timeout(20000)
-    async function status() {
-      const response = await dependencies.fetchStatus(signal)
-      if (!response.ok) throw new VoiceAvailabilityError('check-failed')
-      const result = await response.json()
-      if (result?.status !== 'ready') throw new VoiceAvailabilityError(result?.status === 'unavailable' ? 'unavailable' : 'check-failed')
-    }
     try {
-      await status()
+      directTransport = await status(signal)
+      if (directTransport) return
       let response = await dependencies.prepareDevice(signal)
       if (response.status === 409) {
         if ((await response.json())?.error !== 'identity-required') throw new VoiceAvailabilityError('check-failed')
-        await status()
+        if (await status(signal) !== directTransport) throw new VoiceAvailabilityError('check-failed')
         response = await dependencies.prepareDevice(signal)
       }
       if (response.status !== 204) throw new VoiceAvailabilityError('check-failed')
@@ -72,6 +76,7 @@ export function createLiveVoicePort(overrides: {
   return {
     async prepare() { await ensurePrepared() },
     create(scope) {
+      let openingStarted = false
       let startedAt: number | null = null
       let startupFinished = false
       let firstForwarded = false
@@ -89,6 +94,7 @@ export function createLiveVoicePort(overrides: {
         startupFinished = true
         report('startup', result)
       }
+      let channel: ReturnType<typeof createVoiceChannel> | null = null
       let context: AudioContext | null = null
       let player: ReturnType<typeof createPcmPlayer> | null = null
       let microphone: Awaited<ReturnType<typeof openMicrophone>> | null = null
@@ -172,7 +178,7 @@ export function createLiveVoicePort(overrides: {
         scope.onEvent({ type: 'interrupted' })
         resumeInputAfterPlayback()
       }
-      const channel = dependencies.createChannel({
+      const channelOptions: VoiceChannelOptions = {
         listenMode: 'realtime',
         ...(observe == null ? {} : { onStartup: observe }),
         ...(scope.voiceId != null ? { voiceId: scope.voiceId } : {}),
@@ -223,7 +229,7 @@ export function createLiveVoicePort(overrides: {
             scope.onEvent(event.code === 'payload-too-large' ? { type: 'error', reason: 'context-too-large' } : { type: 'error' })
           }
         },
-      })
+      }
       function close() {
         if (closed) return
         closed = true
@@ -231,7 +237,7 @@ export function createLiveVoicePort(overrides: {
         finishStartup('cancelled')
         report('cleanup', 'started')
         capturing = false
-        channel.close()
+        channel?.close()
         const micStop = microphone?.stop()
         microphone = null
         answerEnded = false
@@ -244,6 +250,8 @@ export function createLiveVoicePort(overrides: {
       }
       return {
         async open() {
+          if (openingStarted) throw new Error('Voice connection can only be opened once')
+          openingStarted = true
           if (observe != null) {
             try { startedAt = (dependencies.now ?? performance.now.bind(performance))() } catch { startedAt = 0 }
           }
@@ -251,14 +259,41 @@ export function createLiveVoicePort(overrides: {
           try {
             if (!current()) return
             report('status', 'started')
-            try { preparationGeneration = await ensurePrepared() }
-            catch (error) {
+            try {
+              const attempt = await ensurePrepared()
+              if (!directTransport) preparationGeneration = attempt
+            } catch (error) {
               if (!current()) { report('status', 'cancelled'); return }
               report('status', 'failed')
               throw error
             }
             if (!current()) { report('status', 'cancelled'); return }
             report('status', 'completed')
+            let directConnection: DirectVoiceConnection | null = null
+            if (directTransport) {
+              try {
+                const signal = AbortSignal.any([scope.signal, AbortSignal.timeout(20000)])
+                let response = await dependencies.prepareDevice(signal)
+                if (!current() || signal.aborted) return
+                if (response.status === 409) {
+                  if ((await response.json())?.error !== 'identity-required') throw new VoiceAvailabilityError('check-failed')
+                  if (!current() || signal.aborted) return
+                  if (!await status(signal)) throw new VoiceAvailabilityError('check-failed')
+                  if (!current() || signal.aborted) return
+                  response = await dependencies.prepareDevice(signal)
+                }
+                if (!current() || signal.aborted) return
+                if (!response.ok) throw new VoiceAvailabilityError('check-failed')
+                const value = await response.json()
+                if (!current() || signal.aborted) return
+                directConnection = readDirectVoiceConnection(value)
+              } catch {
+                if (!current() || scope.signal.aborted) return
+                throw new VoiceAvailabilityError('check-failed')
+              }
+            }
+            if (!current() || scope.signal.aborted) return
+            channel = dependencies.createChannel({ ...channelOptions, ...(directConnection == null ? {} : { directConnection }) })
             context = dependencies.createContext()
             player = dependencies.createPlayer(context, answerDrained, (level) => {
               const ended = outputLevel !== 0 && level === 0
@@ -271,7 +306,7 @@ export function createLiveVoicePort(overrides: {
               onLevel: inputMeter,
               onFrame(data) {
                 if (!capturing || !current() || inputPaused) return
-                channel.input(data)
+                channel!.input(data)
                 if (!firstForwarded) { firstForwarded = true; report('firstForwardedPcm', 'completed') }
               },
             }).then(async (mic) => {

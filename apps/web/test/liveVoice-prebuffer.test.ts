@@ -35,7 +35,7 @@ function fixture() {
     },
     openMic: async () => ({ stop: async () => {} }),
     prepareDevice: async () => new Response(null, { status: 204 }),
-    fetchStatus: async () => new Response('{"status":"ready"}'),
+    fetchStatus: async () => Response.json({ status: 'ready', transport: 'relay' }),
   }).create(scope)
   return { connection, sources, events, context, receive: (event: Parameters<VoiceChannelOptions['onEvent']>[0]) => receive(event) }
 }

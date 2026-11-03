@@ -1,5 +1,5 @@
-export { createVoiceChannel } from './channel'
-export type { PcmFormat, VoiceChannel, VoiceChannelOptions, VoiceEvent, VoiceSocket, VoiceTool } from './types'
+export { createVoiceChannel, readDirectVoiceConnection } from './channel'
+export type { DirectVoiceConnection, PcmFormat, VoiceChannel, VoiceChannelOptions, VoiceEvent, VoiceSocket, VoiceTool } from './types'
 export { createPcmEncoder, decodePcm16 } from './pcm'
 export { createPcmPlayer } from './player'
 export type { PlaybackObservation, PlaybackObserver, PlaybackStopReason } from './player'

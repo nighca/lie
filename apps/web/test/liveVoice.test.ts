@@ -24,7 +24,7 @@ function setupBridge(voiceId: string | null = null, diagnostics: { onPlayback?: 
   const dependencies = {
     ...diagnostics,
     prepareDevice: async () => new Response(null, { status: 204 }),
-    fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready' }))),
+    fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready', transport: 'relay' }))),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
     createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void, onPlayback?: import('@lie/voice').PlaybackObserver, onError: () => void = () => {}) { playbackFailure = onError; expect(onPlayback).toBe(diagnostics.onPlayback); drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
     openMic: vi.fn(async (value: { onFrame(data: Uint8Array): void; onLevel?: (level: number) => void }): Promise<{ stop(): Promise<void> }> => { onFrame = value.onFrame; inputMeter = value.onLevel ?? (() => {}); return { stop: stopMic } }),
@@ -65,8 +65,9 @@ describe('continuous browser voice and device bridge', () => {
     } finally { bridge.connection.close(); time.mockRestore() }
   })
 
-  it.each([null, 'vendor:voice/warm'])('passes configured voice %s without changing the provider default', (voiceId) => {
+  it.each([null, 'vendor:voice/warm'])('passes configured voice %s without changing the provider default', async (voiceId) => {
     const bridge = setupBridge(voiceId)
+    await bridge.connection.open()
     if (voiceId == null) expect(Object.hasOwn(bridge.options(), 'voiceId')).toBe(false)
     else expect(bridge.options().voiceId).toBe(voiceId)
     bridge.connection.close()
@@ -96,7 +97,7 @@ describe('continuous browser voice and device bridge', () => {
     bridge.dependencies.fetchStatus.mockImplementation(() => new Promise((resolve) => { ready = resolve }))
     const opening = bridge.connection.open()
     bridge.expire(); bridge.connection.close()
-    ready(new Response(JSON.stringify({ status: 'ready' })))
+    ready(new Response(JSON.stringify({ status: 'ready', transport: 'relay' })))
     await opening
     expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
     expect(bridge.channel.open).not.toHaveBeenCalled()
@@ -158,11 +159,13 @@ describe('continuous browser voice and device bridge', () => {
 
   it('keeps tool reads scoped and rejects expired invocations', async () => {
     const bridge = setupBridge()
+    await bridge.connection.open()
     const tool = bridge.options().tools[0]
     const context = JSON.parse(await tool.execute({}, new AbortController().signal))
     expect(context).toMatchObject({ characterId: 'one', profile: '甲自己的设定' })
     bridge.expire()
     await expect(tool.execute({}, new AbortController().signal)).rejects.toThrow('expired')
+    bridge.connection.close()
   })
 
   it('cleans a microphone grant arriving after cancellation without opening capture', async () => {
@@ -248,7 +251,7 @@ describe('local startup diagnostics', () => {
     expect(events).toEqual([{ stage: 'startup', result: 'started', elapsedMs: 0 }, { stage: 'status', result: 'started', elapsedMs: 0 }])
     expect(bridge.dependencies.openMic).toHaveBeenCalledTimes(0)
     now = 140
-    status(new Response('{"status":"ready"}'))
+    status(Response.json({ status: 'ready', transport: 'relay' }))
     await vi.waitFor(() => expect(bridge.channel.open).toHaveBeenCalledOnce())
     expect(bridge.dependencies.openMic).toHaveBeenCalledOnce()
     expect(bridge.context.resume).toHaveBeenCalledOnce()

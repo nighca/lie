@@ -16,7 +16,7 @@ it('keeps the controller connecting after the transport opens until microphone c
     createContext: () => ({ state: 'running', resume: async () => {}, close: async () => {} }) as unknown as AudioContext,
     openMic: () => new Promise(resolve => { grant = resolve }),
     prepareDevice: async () => new Response(null, { status: 204 }),
-    fetchStatus: async () => new Response('{"status":"ready"}'),
+    fetchStatus: async () => Response.json({ status: 'ready', transport: 'relay' }),
   })
   const controller = createGameController({ readGame: async () => game, voice, now: () => now, newSessionId: () => 'capture-test', clock: { now: () => now, setTimeout, clearTimeout } })
   try {

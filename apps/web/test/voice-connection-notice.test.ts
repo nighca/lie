@@ -180,7 +180,7 @@ it.each(['microphone', 'playback', 'channel'] as const)('hides immediately when 
     createContext: () => ({ resume: () => last === 'playback' ? gate : Promise.resolve(), close: async () => {} }) as unknown as AudioContext,
     openMic: async () => { if (last === 'microphone') await gate; return { async stop() {} } },
     prepareDevice: async () => new Response(null, { status: 204 }),
-    fetchStatus: async () => new Response('{"status":"ready"}'),
+    fetchStatus: async () => Response.json({ status: 'ready', transport: 'relay' }),
   })
   const controller = createGameController({ readGame: async () => game, voice, now: () => 0, newSessionId: () => 'all-ready' })
   const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })

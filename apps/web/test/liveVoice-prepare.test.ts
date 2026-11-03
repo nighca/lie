@@ -14,7 +14,7 @@ function deferred<T>() {
 function fixture() {
   const channels: { open: ReturnType<typeof vi.fn>; close: ReturnType<typeof vi.fn> }[] = []
   const dependencies = {
-    fetchStatus: vi.fn(async (_signal: AbortSignal) => Response.json({ status: 'ready' })),
+    fetchStatus: vi.fn(async (_signal: AbortSignal) => Response.json({ status: 'ready', transport: 'relay' })),
     prepareDevice: vi.fn(async (_signal: AbortSignal) => new Response(null, { status: 204 })),
     createChannel: vi.fn(() => {
       const channel = { open: vi.fn(async () => {}), close: vi.fn(), startInput: vi.fn(), input: vi.fn(), stopInput: vi.fn(), interrupt: vi.fn() }
@@ -68,8 +68,8 @@ describe('app-owned browser device preparation', () => {
     expect(f.dependencies.openMic).not.toHaveBeenCalled()
     ready.resolve(new Response(null, { status: 204 }))
     await Promise.all([oldOpen, newOpen])
-    expect(f.channels[0].open).not.toHaveBeenCalled()
-    expect(f.channels[1].open).toHaveBeenCalledOnce()
+    expect(f.channels).toHaveLength(1)
+    expect(f.channels[0].open).toHaveBeenCalledOnce()
     expect(f.dependencies.fetchStatus).toHaveBeenCalledOnce()
     expect(f.dependencies.openMic).toHaveBeenCalledOnce()
     second.connection.close()
@@ -100,11 +100,12 @@ describe('app-owned browser device preparation', () => {
     const f = fixture()
     await f.voice.prepare()
     const old = f.conversation(), late = deferred<void>()
-    f.channels[0].open.mockImplementation(() => late.promise)
+    const makeChannel = f.dependencies.createChannel.getMockImplementation()!
+    f.dependencies.createChannel.mockImplementationOnce(() => { const channel = makeChannel(); channel.open.mockImplementation(() => late.promise); return channel })
     const oldOpening = old.connection.open().catch(() => {})
     await vi.waitFor(() => expect(f.channels[0].open).toHaveBeenCalledOnce())
     const failed = f.conversation()
-    f.channels[1].open.mockRejectedValue(new Error('new connection failed'))
+    f.dependencies.createChannel.mockImplementationOnce(() => { const channel = makeChannel(); channel.open.mockRejectedValue(new Error('new connection failed')); return channel })
     await expect(failed.connection.open()).rejects.toThrow('new connection failed')
     await f.voice.prepare()
     expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)

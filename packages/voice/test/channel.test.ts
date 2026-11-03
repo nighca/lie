@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { createVoiceChannel } from '../src/channel'
+import { createVoiceChannel, readDirectVoiceConnection } from '../src/channel'
 import type { VoiceEvent, VoiceSocket, VoiceTool } from '../src/types'
 
 class FakeSocket implements VoiceSocket {
@@ -286,7 +286,6 @@ describe('Linx voice channel', () => {
   })
 })
 
-
 it('observes socket, discovery and readiness without exposing protocol payloads or changing gates', async () => {
   const socket = new FakeSocket()
   const observations: unknown[] = []
@@ -315,7 +314,6 @@ it('contains observer exceptions and distinguishes handshake failure from cancel
     { stage: 'channelReady', result: 'started' }, { stage: 'socket', result: 'started' }, { stage: 'channelReady', result: 'failed' },
   ])
 })
-
 
 it('retains failed startup diagnostics when an error consumer closes synchronously', async () => {
   const socket = new FakeSocket()
@@ -424,4 +422,138 @@ it('contains an oversized tool-failure reply even when the inbound request fits 
   expect(socket.sent).toHaveLength(before)
   expect(events.filter(event => event.type === 'error')).toEqual([{ type: 'error', code: 'payload-too-large', message: 'Voice context exceeds the transport frame limit' }])
   expect(JSON.stringify(events)).not.toContain('private body')
+})
+
+const directConnection = {
+  url: 'wss://xrobo-io.qiniuapi.com/v1/ws/' as const,
+  deviceId: '02:00:00:00:00:01', clientId: '00000000-0000-4000-8000-000000000001',
+  token: 'fake-device-token', maxSessionSeconds: 600,
+}
+
+describe('browser direct voice transport', () => {
+  it('uses the exact provider endpoint and sends the credential only in hello', async () => {
+    const socket = new FakeSocket()
+    let address = ''
+    vi.stubGlobal('WebSocket', function (url: URL) { address = String(url); return socket })
+    const channel = createVoiceChannel({ directConnection, tools: [], onEvent() {} })
+    try {
+      const opening = channel.open()
+      socket.connect(); socket.hello()
+      await opening
+      const url = new URL(address)
+      expect(url.origin + url.pathname).toBe(directConnection.url)
+      expect(Object.fromEntries(url.searchParams)).toEqual({ 'device-id': directConnection.deviceId, 'client-id': directConnection.clientId })
+      expect(socket.json()[0]).toMatchObject({ device_id: directConnection.deviceId, device_mac: directConnection.deviceId, token: directConnection.token, audio_params: { format: 'pcm', sample_rate: 16000 } })
+    } finally { channel.close(); vi.unstubAllGlobals() }
+  })
+
+  it('bounds the direct connection from socket open and cancels its timer on close', async () => {
+    vi.useFakeTimers()
+    const socket = new FakeSocket()
+    const events: VoiceEvent[] = []
+    const channel = createVoiceChannel({ directConnection, createSocket: () => socket, tools: [], onEvent: event => events.push(event) })
+    const opening = channel.open()
+    socket.connect()
+    vi.advanceTimersByTime(9000)
+    socket.hello()
+    await opening
+    vi.advanceTimersByTime(590999)
+    expect(events.some(event => event.type === 'closed')).toBe(false)
+    vi.advanceTimersByTime(1)
+    expect(events.at(-1)).toEqual({ type: 'closed', code: 1000, reason: 'Conversation time limit' })
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it.each(['text', 'binary'])('rejects oversized inbound %s before parsing or decoding', async kind => {
+    const { socket, channel, events } = await ready()
+    if (kind === 'binary') socket.onmessage?.({ data: new ArrayBuffer(65538) })
+    else socket.onmessage?.({ data: '中'.repeat(30000) })
+    expect(events).toContainEqual({ type: 'error', code: 'payload-too-large', message: 'Voice message exceeds the transport frame limit' })
+    expect(events.at(-1)?.type).toBe('closed')
+    channel.close()
+  })
+})
+
+
+it.each(['wss://evil.example/v1/ws/', 'wss://xrobo-io.qiniuapi.com/v1/ws2', 'wss://xrobo-io.qiniuapi.com/v1/ws', 'wss://xrobo-io.qiniuapi.com/v1/ws/?token=secret', 'wss://user:pass@xrobo-io.qiniuapi.com/v1/ws/', 'wss://xrobo-io.qiniuapi.com/v1/ws/#x'])('rejects unapproved direct endpoint %s', url => {
+  expect(() => readDirectVoiceConnection({ ...directConnection, url })).toThrow('Invalid direct voice connection')
+})
+
+it('removes the direct deadline on an explicit caller close', async () => {
+  vi.useFakeTimers()
+  const socket = new FakeSocket()
+  const channel = createVoiceChannel({ directConnection, createSocket: () => socket, tools: [], onEvent() {} })
+  const opening = channel.open()
+  socket.connect(); socket.hello()
+  await opening
+  channel.close()
+  expect(vi.getTimerCount()).toBe(0)
+})
+
+it('does not expose a provider close reason from the direct transport', async () => {
+  const socket = new FakeSocket()
+  const events: VoiceEvent[] = []
+  const channel = createVoiceChannel({ directConnection, createSocket: () => socket, tools: [], onEvent: event => events.push(event) })
+  const opening = channel.open()
+  socket.connect(); socket.hello()
+  await opening
+  socket.onclose?.({ code: 1008, reason: 'private-provider-detail' })
+  expect(events.at(-1)).toEqual({ type: 'closed', code: 1008, reason: 'Direct voice connection closed' })
+})
+
+it.each([1, 600, Math.floor(0x7fffffff / 1000)])('accepts the configured direct session limit %i seconds', seconds => {
+  expect(readDirectVoiceConnection({ ...directConnection, maxSessionSeconds: seconds }).maxSessionSeconds).toBe(seconds)
+})
+
+it.each([0, -1, 1.5, NaN, Infinity, '600', null, Math.floor(0x7fffffff / 1000) + 1])('rejects invalid direct session limit %s', maxSessionSeconds => {
+  expect(() => readDirectVoiceConnection({ ...directConnection, maxSessionSeconds })).toThrow('Invalid direct voice connection')
+})
+
+it('closes a one-second direct session from native socket open', async () => {
+  vi.useFakeTimers()
+  const socket = new FakeSocket()
+  const events: VoiceEvent[] = []
+  const channel = createVoiceChannel({ directConnection: { ...directConnection, maxSessionSeconds: 1 }, createSocket: () => socket, tools: [], onEvent: event => events.push(event) })
+  const opening = channel.open()
+  socket.connect(); socket.hello()
+  await opening
+  vi.advanceTimersByTime(999)
+  expect(events.at(-1)?.type).toBe('ready')
+  vi.advanceTimersByTime(1)
+  expect(events.at(-1)).toEqual({ type: 'closed', code: 1000, reason: 'Conversation time limit' })
+  expect(vi.getTimerCount()).toBe(0)
+})
+
+it('keeps the maximum direct session deadline representable without an immediate timer overflow', async () => {
+  vi.useFakeTimers()
+  const socket = new FakeSocket()
+  const events: VoiceEvent[] = []
+  const seconds = Math.floor(0x7fffffff / 1000)
+  const channel = createVoiceChannel({ directConnection: { ...directConnection, maxSessionSeconds: seconds }, createSocket: () => socket, tools: [], onEvent: event => events.push(event) })
+  const opening = channel.open()
+  socket.connect(); socket.hello()
+  await opening
+  vi.advanceTimersByTime(seconds * 1000 - 1)
+  expect(events.at(-1)?.type).toBe('ready')
+  vi.advanceTimersByTime(1)
+  expect(events.at(-1)?.type).toBe('closed')
+  expect(vi.getTimerCount()).toBe(0)
+})
+
+it.each(['deviceId', 'clientId', 'token'])('rejects empty, oversized or whitespace-bearing direct %s', field => {
+  for (const value of ['', ' ', '\n', 'value\u0000', 'x'.repeat(field === 'token' ? 8193 : 257)]) {
+    expect(() => readDirectVoiceConnection({ ...directConnection, [field]: value })).toThrow('Invalid direct voice connection')
+  }
+})
+
+it.each(['text', 'binary'])('enforces the inbound direct %s frame limit before application parsing', async kind => {
+  const socket = new FakeSocket()
+  const events: VoiceEvent[] = []
+  const channel = createVoiceChannel({ directConnection, createSocket: () => socket, tools: [], onEvent: event => events.push(event) })
+  const opening = channel.open()
+  socket.connect(); socket.hello()
+  await opening
+  socket.onmessage?.({ data: kind === 'text' ? '中'.repeat(30000) : new ArrayBuffer(65538) })
+  expect(events).toContainEqual({ type: 'error', code: 'payload-too-large', message: 'Voice message exceeds the transport frame limit' })
+  expect(events.at(-1)?.type).toBe('closed')
 })

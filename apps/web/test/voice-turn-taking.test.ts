@@ -5,7 +5,7 @@ import { afterEach, expect, it, vi } from 'vitest'
 import { createLiveVoicePort } from '../src/application/liveVoice'
 import type { ConversationEvent } from '../src/application/voice'
 
-async function fixture(turnTaking = true) {
+async function fixture(turnTaking = true, direct = false) {
   const sent: (string | Uint8Array)[] = []
   const sources: { onended: (() => void) | null; stop: ReturnType<typeof vi.fn> }[] = []
   const events: ConversationEvent[] = []
@@ -25,12 +25,15 @@ async function fixture(turnTaking = true) {
       return source
     },
   }
+  const createChannel = vi.fn((options: Parameters<typeof createVoiceChannel>[0]) => createVoiceChannel({ ...options, createSocket: () => socket }))
+  const prepareDevice = vi.fn(async () => direct ? Response.json({ url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: '02:00:00:00:00:01', clientId: 'synthetic-client', token: 'synthetic-device-token', maxSessionSeconds: 600 }) : new Response(null, { status: 204 }))
   const connection = createLiveVoicePort({
-    createChannel: options => createVoiceChannel({ ...options, createSocket: () => socket }),
+    createChannel,
     createPlayer: createPcmPlayer,
     createContext: () => context as unknown as AudioContext,
     openMic: async options => { mic = options; return { stop: stopMic } },
-    fetchStatus: async () => new Response('{"status":"ready"}'), prepareDevice: async () => new Response(null, { status: 204 }),
+    prepareDevice,
+    fetchStatus: async () => Response.json({ status: 'ready', transport: direct ? 'direct' : 'relay' }),
   }, turnTaking).create({
     sessionId: 'synthetic', characterId: 'one', voiceId: null, epoch: 1, signal: abort.signal,
     isCurrent: () => current,
@@ -45,7 +48,7 @@ async function fixture(turnTaking = true) {
   receive({ type: 'mcp', payload: { id: 'tools', method: 'tools/list' } })
   await opening
   return {
-    connection, receive, sources, events, sent, stopMic,
+    connection, receive, sources, events, sent, stopMic, socket, createChannel, prepareDevice,
     frame(value: number) { mic!.onFrame(new Uint8Array(640).fill(value)) },
     level(value: number) { mic!.onLevel?.(value) },
     expire() { current = false; abort.abort() },
@@ -186,5 +189,43 @@ it('does not guess an answer end from idle, and a manually restarted scope accep
     expect(old.binary()).toHaveLength(0)
     expect(fresh.binary().map(frame => frame[0])).toEqual([3])
   } finally { fresh.connection.close(); old.connection.close() }
+  expect(vi.getTimerCount()).toBe(0)
+})
+
+
+it('keeps direct turn-taking input blocked until normal stop, real-player drain and the tail guard', async () => {
+  vi.useFakeTimers()
+  const f = await fixture(true, true)
+  try {
+    expect(f.prepareDevice).toHaveBeenCalledOnce()
+    expect(f.createChannel).toHaveBeenCalledOnce()
+    expect(f.createChannel.mock.calls[0][0].directConnection?.url).toBe('wss://xrobo-io.qiniuapi.com/v1/ws/')
+    const hello = f.sent.filter(value => typeof value === 'string').map(value => JSON.parse(value)).find(value => value.type === 'hello')
+    expect(hello).toMatchObject({ device_id: '02:00:00:00:00:01', token: 'synthetic-device-token', audio_params: { format: 'pcm', sample_rate: 16000 } })
+    f.frame(1)
+    f.receive({ type: 'tts', state: 'start' })
+    f.frame(2)
+    f.receive(new ArrayBuffer(640))
+    expect(f.sources).toHaveLength(0)
+    f.receive({ type: 'tts', state: 'stop', is_aborted: false })
+    expect(f.sources).toHaveLength(1)
+    vi.advanceTimersByTime(300)
+    f.frame(3)
+    expect(f.paused()).toBe(true)
+    f.sources[0].onended?.()
+    vi.advanceTimersByTime(299)
+    f.frame(4)
+    expect(f.paused()).toBe(true)
+    vi.advanceTimersByTime(1)
+    f.frame(5)
+    expect(f.paused()).toBe(false)
+    expect(f.binary().map(frame => frame[0])).toEqual([1, 5])
+    f.connection.close()
+    f.frame(6)
+    expect(f.binary().map(frame => frame[0])).toEqual([1, 5])
+    expect(f.stopMic).toHaveBeenCalledOnce()
+    expect(f.socket.close).toHaveBeenCalledOnce()
+    expect(f.createChannel).toHaveBeenCalledOnce()
+  } finally { f.connection.close() }
   expect(vi.getTimerCount()).toBe(0)
 })

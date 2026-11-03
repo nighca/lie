@@ -45,7 +45,7 @@ describe('character memory through controller, live bridge and MCP wire', () => 
       createContext: () => ({ resume: async () => {}, close: async () => {}, state: 'running' }) as unknown as AudioContext,
       createPlayer: () => ({ enqueue() {}, flush() {}, stop() {} }),
       openMic: async () => ({ stop: async () => {} }),
-      fetchStatus: async () => new Response(JSON.stringify({ status: 'ready' })),
+      fetchStatus: async () => new Response(JSON.stringify({ status: 'ready', transport: 'relay' })),
       prepareDevice: async () => new Response(null, { status: 204 }),
     })
     let sequence = 0

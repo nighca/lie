@@ -1,6 +1,6 @@
 import { VOICE_TEXT_FRAME_BYTES_LIMIT } from './protocol'
 import { observeStartup } from './startup'
-import type { PcmFormat, VoiceChannel, VoiceChannelOptions, VoiceSocket } from './types'
+import type { DirectVoiceConnection, PcmFormat, VoiceChannel, VoiceChannelOptions, VoiceSocket } from './types'
 
 const inputFormat = {
   format: 'pcm', sample_rate: 16000, channels: 1, bit_depth: 16,
@@ -11,9 +11,26 @@ function record(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value != null && !Array.isArray(value)
 }
 
-function browserSocket(): VoiceSocket {
-  const url = new URL('/api/voice', globalThis.location.href)
-  url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:'
+/** Validate the server-issued descriptor before constructing a native socket. */
+export function readDirectVoiceConnection(value: unknown): DirectVoiceConnection {
+  if (!record(value) || value.url !== 'wss://xrobo-io.qiniuapi.com/v1/ws/' ||
+      typeof value.deviceId !== 'string' || !/^[!-~]{1,256}$/.test(value.deviceId) ||
+      typeof value.clientId !== 'string' || !/^[!-~]{1,256}$/.test(value.clientId) ||
+      typeof value.token !== 'string' || !/^[!-~]{1,8192}$/.test(value.token) ||
+      typeof value.maxSessionSeconds !== 'number' || !Number.isInteger(value.maxSessionSeconds) ||
+      value.maxSessionSeconds <= 0 || value.maxSessionSeconds > Math.floor(0x7fffffff / 1000)) {
+    throw new Error('Invalid direct voice connection')
+  }
+  return { url: value.url, deviceId: value.deviceId, clientId: value.clientId, token: value.token, maxSessionSeconds: value.maxSessionSeconds }
+}
+
+function browserSocket(direct: DirectVoiceConnection | null): VoiceSocket {
+  const url = direct == null ? new URL('/api/voice', globalThis.location.href) : new URL(direct.url)
+  if (direct == null) url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:'
+  else {
+    url.searchParams.set('device-id', direct.deviceId)
+    url.searchParams.set('client-id', direct.clientId)
+  }
   const native = new WebSocket(url)
   const socket: VoiceSocket = {
     get binaryType() { return native.binaryType },
@@ -31,6 +48,7 @@ function browserSocket(): VoiceSocket {
 }
 
 export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
+  const direct = options.directConnection == null ? null : readDirectVoiceConnection(options.directConnection)
   const tools = new Map(options.tools.map((tool) => [tool.name, tool]))
   if (tools.size !== options.tools.length) throw new Error('Duplicate voice tool name')
   let socket: VoiceSocket | null = null
@@ -43,6 +61,7 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
   let inputActive = false
   let interrupted = false
   let settleOpen: ((error: Error | null) => void) | null = null
+  let sessionTimer: ReturnType<typeof setTimeout> | null = null
   let handshakeTimer: ReturnType<typeof setTimeout> | null = null
   let removeAbortListener: (() => void) | null = null
   const calls = new Map<string | number, AbortController>()
@@ -83,6 +102,8 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
     if (state === 'closed') return
     if (state === 'opening') observeStartup(options.onStartup, 'channelReady', openingFailed ? 'failed' : 'cancelled')
     state = 'closed'
+    if (sessionTimer != null) clearTimeout(sessionTimer)
+    sessionTimer = null
     speaking = false
     inputActive = false
     removeAbortListener?.()
@@ -177,6 +198,11 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
 
   function message(data: unknown) {
     if (state === 'closed') return
+    if ((data instanceof ArrayBuffer && data.byteLength > VOICE_TEXT_FRAME_BYTES_LIMIT) ||
+        (typeof data === 'string' && new TextEncoder().encode(data).byteLength > VOICE_TEXT_FRAME_BYTES_LIMIT)) {
+      fail('payload-too-large', 'Voice message exceeds the transport frame limit')
+      return
+    }
     if (data instanceof ArrayBuffer) {
       if (state !== 'ready' || !speaking || interrupted) return
       if (data.byteLength % 2 !== 0) return fail('protocol', 'Invalid PCM frame length')
@@ -243,17 +269,19 @@ export function createVoiceChannel(options: VoiceChannelOptions): VoiceChannel {
         }
         try {
           observeStartup(options.onStartup, 'socket', 'started')
-          socket = (options.createSocket ?? browserSocket)()
+          socket = options.createSocket != null ? options.createSocket() : browserSocket(direct)
           socket.binaryType = 'arraybuffer'
           socket.onopen = () => {
             observeStartup(options.onStartup, 'socketOpen', 'completed')
-            if (state === 'opening') send({ type: 'hello', version: 1, features: { mcp: true }, transport: 'websocket', audio_params: inputFormat })
+            if (direct != null) sessionTimer = setTimeout(() => close(1000, 'Conversation time limit'), direct.maxSessionSeconds * 1000)
+            if (state === 'opening') send({ type: 'hello', version: 1, features: { mcp: true }, transport: 'websocket', audio_params: inputFormat,
+              ...(direct == null ? {} : { device_id: direct.deviceId, device_mac: direct.deviceId, device_name: 'LIE-Web', token: direct.token }) })
           }
           socket.onmessage = (event) => message(event.data)
           socket.onerror = () => fail('connection', 'Voice connection failed')
           socket.onclose = (event) => {
             openingFailed = state === 'opening'
-            close(event.code, event.reason)
+            close(event.code, direct == null ? event.reason : 'Direct voice connection closed')
           }
         } catch {
           fail('connection', 'Voice connection could not be opened')
