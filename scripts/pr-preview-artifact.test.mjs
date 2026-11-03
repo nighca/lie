@@ -20,7 +20,7 @@ async function fixture() {
   const worker = {
     name: 'lie-game', compatibilityDate: '2099-01-01', compatibilityFlags: ['untrusted'],
     domains: ['production.example'], triggers: [{ type: 'scheduled', cron: '* * * * *' }],
-    env: { SHARED_GAMES: { type: 'r2', name: 'lie-shared-games' }, EVIL: { type: 'worker', worker: 'production' } },
+    env: { SHARED_GAMES: { type: 'r2', name: 'lie-shared-games' }, VOICE_TRANSPORT: { type: 'text', value: 'relay' }, EVIL: { type: 'worker', worker: 'production' } },
     unsafe: { metadata: { untrusted: true } }, exports: { BadClass: { type: 'durable-object' } },
     manifest: { type: 'complete', mainModule: 'index.js', modules: { 'index.js': { type: 'esm' }, 'helper.wasm': { type: 'wasm' } } }
   }
@@ -49,6 +49,7 @@ test('roundtrip preserves PR module and static bytes while rebuilding every depl
   assert.deepEqual(result.worker.compatibilityFlags, ['enable_request_signal'])
   assert.deepEqual(result.worker.env.SHARED_GAMES, { type: 'r2', name: 'lie-shared-games-dev' })
   assert.deepEqual(result.worker.env.VOICE_DEVICE_ENVIRONMENT, { type: 'text', value: 'pr-12' })
+  assert.deepEqual(result.worker.env.VOICE_TRANSPORT, { type: 'text', value: 'direct' })
   for (const field of ['domains', 'triggers', 'unsafe', 'exports', 'accountId']) assert.equal(result.worker[field], undefined)
   assert.equal(result.worker.env.EVIL, undefined)
   assert.deepEqual(JSON.parse(await readFile(join(f.target, 'v0/config.json'), 'utf8')), { buildContext: { mode: 'preview', isPreview: true } })

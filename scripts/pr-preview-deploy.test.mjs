@@ -16,6 +16,7 @@ function metadata() {
   return { success: true, result: { id: result.deployment_id, preview_id: result.preview_id, urls: result.deployment_urls, env: {
     ASSETS: { type: 'assets' }, SHARED_GAMES: { type: 'r2_bucket', bucket_name: 'lie-shared-games-dev' },
     VOICE_MAX_SESSION_SECONDS: { type: 'plain_text', text: '600' }, VOICE_DEVICE_ENVIRONMENT: { type: 'plain_text', text: 'pr-12' },
+    VOICE_TRANSPORT: { type: 'plain_text', text: 'direct' },
     ...Object.fromEntries(Object.keys(secrets).map(name => [name, { type: 'secret_text' }]))
   } } }
 }
@@ -69,8 +70,11 @@ test('final upload receives only constrained configuration and the deployment to
     OutputWorkerSchema.parse(worker)
     const converted = convertToWranglerConfig({ worker, containers: [] })
     assert.equal(converted.r2_buckets[0].bucket_name, 'lie-shared-games-dev')
+    assert.equal(converted.vars.VOICE_TRANSPORT, 'direct')
     assert.deepEqual(converted.unsafe.bindings.find(binding => binding.name === 'LINX_API_KEY'), { type: 'secret_text', text: secrets.LINX_API_KEY, name: 'LINX_API_KEY' })
     assert.equal(worker.name, 'lie-pr-preview')
+    assert.equal(Object.keys(worker.env).length, 9)
+    assert.deepEqual(worker.env.VOICE_TRANSPORT, { type: 'text', value: 'direct' })
     for (const [name, text] of Object.entries(secrets)) assert.deepEqual(worker.env[name], { type: 'unsafe:secret_text', text })
     assert.deepEqual((await readdir(stage)).sort(), ['.cloudflare', 'config'])
     return { stdout: JSON.stringify({ ...result, secret: 'do-not-return' }), stderr: '' }
@@ -127,6 +131,7 @@ test('post-upload inherited secrets, wrong storage, missing fields and failed me
     value => { value.result.env.OLD_SECRET = { type: 'secret_text' } },
     value => { value.result.env.SHARED_GAMES.bucket_name = 'lie-shared-games' },
     value => { delete value.result.env.VOICE_DEVICE_ENVIRONMENT },
+    value => { delete value.result.env.VOICE_TRANSPORT },
     value => { value.result.env.LINX_API_KEY.type = 'inherit' },
     value => { value.result.id = 'old-deployment' },
     value => { value.result.preview_id = 'other-preview' },
@@ -145,14 +150,18 @@ test('post-upload inherited secrets, wrong storage, missing fields and failed me
   await assert.rejects(() => deployPreview(f, async (_executable, args) => ({ stdout: JSON.stringify(args[1] === 'workers' ? { name: 'lie-pr-preview' } : result) }), async () => new Response(null, { status: 403 })))
 })
 
-test('old inherited secret or production binding is rejected before uploading PR code', async () => {
+test('legacy and direct preflight reject inherited secrets, wrong variables and production bindings before upload', async () => {
   const f = await fixture()
-  for (const mutate of [
+  for (const legacy of [true, false]) for (const mutate of [
     value => { value.result.env.OLD_SECRET = { type: 'secret_text' } },
     value => { value.result.env.SHARED_GAMES.bucket_name = 'lie-shared-games' },
-    value => { delete value.result.env.LINX_API_KEY }
+    value => { delete value.result.env.LINX_API_KEY },
+    value => { value.result.env.VOICE_DEVICE_ENVIRONMENT.text = 'production' },
+    value => { value.result.env.VOICE_MAX_SESSION_SECONDS.text = '601' },
+    value => { value.result.env.LINX_API_KEY.type = 'inherit' }
   ]) {
     const previous = metadata()
+    if (legacy) delete previous.result.env.VOICE_TRANSPORT
     mutate(previous)
     let uploads = 0
     await assert.rejects(() => deployPreview(f, async (_executable, args) => {
@@ -163,15 +172,41 @@ test('old inherited secret or production binding is rejected before uploading PR
   }
 })
 
-test('existing verified preview bindings allow replacement without inheriting extra names', async () => {
+test('exact legacy eight or direct nine bindings allow replacement but every new deployment must be direct', async () => {
   const f = await fixture()
-  let uploads = 0
-  const value = await deployPreview(f, async (_executable, args) => {
-    if (args[1] === 'previews') uploads++
-    return { stdout: JSON.stringify(args[1] === 'workers' ? { name: 'lie-pr-preview' } : result) }
-  }, async url => Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id' } : metadata()))
-  assert.deepEqual(value, result)
-  assert.equal(uploads, 1)
+  for (const legacy of [true, false]) {
+    const previous = metadata()
+    if (legacy) delete previous.result.env.VOICE_TRANSPORT
+    let uploads = 0
+    const value = await deployPreview(f, async (_executable, args) => {
+      if (args[1] === 'previews') uploads++
+      return { stdout: JSON.stringify(args[1] === 'workers' ? { name: 'lie-pr-preview' } : result) }
+    }, async url => Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id' } : url.endsWith('/deployments/latest') ? previous : metadata()))
+    assert.deepEqual(value, result)
+    assert.equal(uploads, 1)
+    if (legacy) assert.throws(() => verifyRuntimeDeployment(previous, result), /requires direct transport/)
+    else assert.doesNotThrow(() => verifyRuntimeDeployment(previous, result))
+  }
+})
+
+test('unknown or malformed transport is rejected in both old preflight and new postflight', async () => {
+  const f = await fixture()
+  for (const transport of [null, [], 'direct', { type: 'plain_text', text: 'relay' }, { type: 'plain_text', text: 'unknown' }, { type: 'text', value: 'direct' }, { type: 'secret_text' }, { type: 'plain_text', text: 'direct', extra: true }]) {
+    const value = metadata()
+    value.result.env.VOICE_TRANSPORT = transport
+    assert.throws(() => verifyRuntimeDeployment(value, result))
+    for (const preflight of [true, false]) {
+      let uploads = 0
+      await assert.rejects(() => deployPreview(f, async (_node, args) => {
+        if (args[1] === 'previews') uploads++
+        return { stdout: JSON.stringify(args[1] === 'workers' ? { name: 'lie-pr-preview' } : result) }
+      }, async url => {
+        if (url.endsWith('/previews/pr-12')) return preflight ? Response.json({ name: 'pr-12', id: 'preview-id' }) : new Response(null, { status: 404 })
+        return Response.json(value)
+      }), error => error.stage === (preflight ? 'old-preview-preflight' : 'post-metadata'))
+      assert.equal(uploads, preflight ? 0 : 1)
+    }
+  }
 })
 
 test('initialization does not overwrite an existing dedicated parent', async () => {
@@ -323,10 +358,13 @@ test('inspect is read-only and exposes only known binding types and match boolea
     return Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id' } : value)
   })
   assert.equal(calls.length, 2)
-  assert.equal(summary.envCount, 9)
+  assert.equal(summary.envCount, 10)
   assert.equal(summary.unknownEnvCount, 1)
   assert.equal(summary.r2DevMatch, true)
   assert.equal(summary.secretTypeMatch, true)
+  assert.equal(summary.voiceTransportPresent, true)
+  assert.equal(summary.legacyBindingsMatch, false)
+  assert.equal(summary.directBindingsMatch, false)
   assert.equal(JSON.stringify(summary).includes('sensitive'), false)
 })
 
@@ -336,6 +374,25 @@ test('inspect reports absent previews and denies invalid targets, forbidden meta
   await assert.rejects(() => inspectPreview({ ...f, prNumber: '../production' }, run), /stage=inspect-input/)
   await assert.rejects(() => inspectPreview({ ...f, prNumber: 12 }, run, async () => new Response(null, { status: 403 })), /stage=inspect-preview http=403/)
   assert.equal((await inspectPreview({ ...f, prNumber: 12 }, run, async () => Response.json({ name: 'pr-13', id: 'other' }))).previewNameMatch, false)
+})
+
+test('inspection distinguishes exact legacy bindings from the required direct deployment contract', async () => {
+  const f = await fixture()
+  for (const mode of ['legacy', 'direct', 'invalid']) {
+    const value = metadata()
+    if (mode === 'legacy') delete value.result.env.VOICE_TRANSPORT
+    if (mode === 'invalid') value.result.env.VOICE_TRANSPORT.text = 'private-unknown-mode'
+    const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }),
+      async url => Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id' } : value))
+    assert.equal(summary.envCount, mode === 'legacy' ? 8 : 9)
+    assert.equal(summary.unknownEnvCount, 0)
+    assert.equal(summary.voiceTransportPresent, mode !== 'legacy')
+    assert.equal(summary.legacyBindingsMatch, mode === 'legacy')
+    assert.equal(summary.directBindingsMatch, mode === 'direct')
+    assert.equal(JSON.stringify(summary).includes('private-unknown-mode'), false)
+    if (mode === 'direct') assert.doesNotThrow(() => verifyRuntimeDeployment(value, result))
+    else assert.throws(() => verifyRuntimeDeployment(value, result))
+  }
 })
 
 test('safe operation errors distinguish upload, result validation and metadata failures without raw diagnostics', async () => {

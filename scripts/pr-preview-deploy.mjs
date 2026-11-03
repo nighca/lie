@@ -9,6 +9,8 @@ import { restore, validateIdentity } from './pr-preview-artifact.mjs'
 
 const runFile = promisify(execFile)
 const secretNames = ['LINX_API_KEY', 'LINX_WS_TOKEN', 'LINX_AGENT_ID', 'VOICE_DEVICE_COOKIE_SECRET']
+const legacyBindingNames = ['ASSETS', 'SHARED_GAMES', 'VOICE_MAX_SESSION_SECONDS', 'VOICE_DEVICE_ENVIRONMENT', ...secretNames]
+const bindingNames = [...legacyBindingNames, 'VOICE_TRANSPORT']
 const requireThat = (condition, message) => { if (!condition) throw Error(message) }
 
 export class PreviewOperationError extends Error {
@@ -109,20 +111,32 @@ export function previewResult(value, prNumber) {
   return { type: 'preview', version: 1, preview_id: value.preview_id, preview_name: value.preview_name, preview_slug: value.preview_slug, preview_urls: ownFirst(previewUrls), deployment_id: value.deployment_id, deployment_urls: ownFirst(deploymentUrls) }
 }
 
-export function verifyRuntimeDeployment(value, expected) {
+function runtimeBindingContract(env, previewName) {
+  requireThat(env != null && typeof env === 'object' && !Array.isArray(env), 'Invalid preview runtime bindings')
+  const legacy = !Object.hasOwn(env, 'VOICE_TRANSPORT')
+  const names = legacy ? legacyBindingNames : bindingNames
+  requireThat(Object.keys(env).length === names.length && names.every(name => Object.hasOwn(env, name)), 'Unexpected preview runtime bindings')
+  requireThat(env.ASSETS?.type === 'assets' && env.SHARED_GAMES?.type === 'r2_bucket' && env.SHARED_GAMES.bucket_name === 'lie-shared-games-dev', 'Unexpected preview storage bindings')
+  requireThat(env.VOICE_MAX_SESSION_SECONDS?.type === 'plain_text' && env.VOICE_MAX_SESSION_SECONDS.text === '600' && env.VOICE_DEVICE_ENVIRONMENT?.type === 'plain_text' && env.VOICE_DEVICE_ENVIRONMENT.text === previewName, 'Unexpected preview runtime variables')
+  requireThat(secretNames.every(name => env[name]?.type === 'secret_text'), 'Unexpected preview secret binding type')
+  if (!legacy) requireThat(env.VOICE_TRANSPORT?.type === 'plain_text' && env.VOICE_TRANSPORT.text === 'direct' && Object.keys(env.VOICE_TRANSPORT).length === 2, 'Unexpected preview transport binding')
+  return legacy ? 'legacy' : 'direct'
+}
+
+function verifyDeployment(value, expected, { allowLegacy = false } = {}) {
   const deployment = value?.result ?? value
   // Callers read the fixed, verified Preview's latest or exact deployment endpoint.
   // Cloudflare may omit preview_id; an explicitly returned foreign identity is rejected.
   requireThat(value?.success !== false && deployment != null && deployment.id === expected.deployment_id && (!Object.hasOwn(deployment, 'preview_id') || deployment.preview_id === expected.preview_id) && deployment.env != null && typeof deployment.env === 'object' && !Array.isArray(deployment.env), 'Invalid preview deployment metadata')
-  const names = ['ASSETS', 'SHARED_GAMES', 'VOICE_MAX_SESSION_SECONDS', 'VOICE_DEVICE_ENVIRONMENT', ...secretNames]
-  requireThat(Object.keys(deployment.env).length === names.length && names.every(name => Object.hasOwn(deployment.env, name)), 'Unexpected preview runtime bindings')
-  const env = deployment.env
-  requireThat(env.ASSETS.type === 'assets' && env.SHARED_GAMES.type === 'r2_bucket' && env.SHARED_GAMES.bucket_name === 'lie-shared-games-dev', 'Unexpected preview storage bindings')
-  requireThat(env.VOICE_MAX_SESSION_SECONDS.type === 'plain_text' && env.VOICE_MAX_SESSION_SECONDS.text === '600' && env.VOICE_DEVICE_ENVIRONMENT.type === 'plain_text' && env.VOICE_DEVICE_ENVIRONMENT.text === expected.preview_name, 'Unexpected preview runtime variables')
-  requireThat(secretNames.every(name => env[name].type === 'secret_text'), 'Unexpected preview secret binding type')
+  const contract = runtimeBindingContract(deployment.env, expected.preview_name)
+  requireThat(allowLegacy || contract === 'direct', 'New preview deployment requires direct transport')
   if (expected.deployment_urls != null) {
     requireThat(Array.isArray(deployment.urls) && expected.deployment_urls.every(url => deployment.urls.includes(url)), 'Deployment URLs do not match current Cloudflare metadata')
   }
+}
+
+export function verifyRuntimeDeployment(value, expected) {
+  verifyDeployment(value, expected)
 }
 
 export async function deployPreview(options, run = runFile, request = fetch) {
@@ -148,7 +162,7 @@ export async function deployPreview(options, run = runFile, request = fetch) {
       const previous = await readMetadata(`${apiRoot(options)}/previews/${encodeURIComponent(existing.id)}/deployments/latest`, options, request)
       requireThat(previous != null && typeof previous.id === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(previous.id), 'Existing preview deployment could not be verified')
       // cf inherits omitted old secret names. Reject every extra binding before PR code can run.
-      verifyRuntimeDeployment(previous, { preview_id: existing.id, deployment_id: previous.id, preview_name: existing.name })
+      verifyDeployment(previous, { preview_id: existing.id, deployment_id: previous.id, preview_name: existing.name }, { allowLegacy: true })
     }
     // Absolute trusted CLI, empty project, no npm/package hooks, PR config or NODE_OPTIONS.
     stage = 'upload'
@@ -243,9 +257,11 @@ export async function inspectPreview(options, run = runFile, request = fetch) {
     const deploymentLinks = deploymentIDValid && (!Object.hasOwn(deployment, 'preview_id') || previewIDMatch) ? publicInspectionUrls(deployment, ['urls', 'deployment_urls'], deploymentHostLabels(deployment.id), deploymentHostLabels(deployment.id)) : { urls: [], candidateCount: 0 }
     Object.assign(summary, { deploymentURLs: deploymentLinks.urls, deploymentURLCandidateCount: deploymentLinks.candidateCount })
     const knownFields = ['id', 'preview_id', 'env', 'main_module', 'modules', 'assets', 'compatibility_date', 'compatibility_flags', 'limits', 'annotations', 'urls', 'created_on', 'modified_on']
-    const names = ['ASSETS', 'SHARED_GAMES', 'VOICE_MAX_SESSION_SECONDS', 'VOICE_DEVICE_ENVIRONMENT', ...secretNames]
+    const names = bindingNames
     const knownTypes = ['assets', 'r2_bucket', 'plain_text', 'secret_text', 'inherit']
     const bindings = deployment.env != null && typeof deployment.env === 'object' && !Array.isArray(deployment.env) ? deployment.env : {}
+    let bindingContract = null
+    try { bindingContract = runtimeBindingContract(bindings, `pr-${prNumber}`) } catch { /* Inspection reports contracts without authorizing deployment. */ }
     Object.assign(summary, {
       ...(deploymentIDValid ? { deploymentID: deployment.id } : {}),
       topLevelFields: Object.keys(deployment).filter(key => knownFields.includes(key)).sort(),
@@ -256,7 +272,10 @@ export async function inspectPreview(options, run = runFile, request = fetch) {
       r2DevMatch: bindings.SHARED_GAMES?.type === 'r2_bucket' && bindings.SHARED_GAMES.bucket_name === 'lie-shared-games-dev',
       namespacePrMatch: bindings.VOICE_DEVICE_ENVIRONMENT?.type === 'plain_text' && bindings.VOICE_DEVICE_ENVIRONMENT.text === `pr-${prNumber}`,
       voice600Match: bindings.VOICE_MAX_SESSION_SECONDS?.type === 'plain_text' && bindings.VOICE_MAX_SESSION_SECONDS.text === '600',
-      secretTypeMatch: secretNames.every(name => bindings[name]?.type === 'secret_text')
+      secretTypeMatch: secretNames.every(name => bindings[name]?.type === 'secret_text'),
+      voiceTransportPresent: Object.hasOwn(bindings, 'VOICE_TRANSPORT'),
+      legacyBindingsMatch: bindingContract === 'legacy',
+      directBindingsMatch: bindingContract === 'direct'
     })
     return summary
   } catch (error) { throw new PreviewOperationError(stage, error) }

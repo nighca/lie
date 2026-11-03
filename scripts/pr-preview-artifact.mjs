@@ -120,6 +120,7 @@ export async function restore(artifact, destination, value) {
       ASSETS: { type: 'assets' },
       SHARED_GAMES: { type: 'r2', name: 'lie-shared-games-dev' },
       VOICE_MAX_SESSION_SECONDS: { type: 'text', value: '600' },
+      VOICE_TRANSPORT: { type: 'text', value: 'direct' },
       VOICE_DEVICE_ENVIRONMENT: { type: 'text', value: `pr-${id.prNumber}` }
     },
     observability: { enabled: true, redactQueryString: true, logs: { enabled: true, headSamplingRate: 1 }, traces: { enabled: true, headSamplingRate: 0.01 } },
