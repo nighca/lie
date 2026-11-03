@@ -1,8 +1,8 @@
 # LIE 路演制作简报
 
-> 2026-11-03 最新状态：v7按11条PDF反馈更新，沿用原C封面与简洁C正文；新增指认结果页，澄清玩家/作者价值，按README模块关系重绘架构，动画生产/播放共用规格，WebMCP桥梁与Router 30分钟待办回路。16页＝13主讲＋3问答/560秒。主指标785 commits、97 Agents、>5,277 Agent分钟（运行记录仅覆盖66/97，含工具/等待与并行，非有效工时）。见[当前大纲](outline-v7.md)、[放映指南](presenter-guide.md)、[11条处理](revision-07-feedback.md)、[本轮交接](revision-07-handoff.md)。最终导出/验收以交接实际记录为准，本文不提前宣称通过。
+> 2026-11-03 最新状态：v8保留13页主讲，删除原三张技术QA，仅留1张Q&A占位，合计14页/560秒。第11页以“需求与约束→交互/技术设计→关键取舍确认→实现验证→审查集成”覆盖技术与交互设计，用真实技术方案摘录渲染＋最终UI作证。第7页按本轮已批准直连方案表达职责，按用户最新决定直接呈现完整直连架构，不上状态标签或旧relay对照；正式发布与验收边界留内部记录，不据图证明。原C与简洁正文不变，指标785 commits、97 Agents、>5,277 Agent分钟，运行时长仅覆盖66/97，非有效工时。见[当前大纲](outline-v8.md)、[放映指南](presenter-guide.md)、[本轮反馈](revision-08-feedback.md)、[本轮交接](revision-08-handoff.md)。已只读核对制作源及重点7/11/14页PNG；HTML/PDF/PPTX已生成，PPTX14页/14 notes、最终receipt同hash且import通过，HTML14页/13主讲边界已核；这不等于浏览器/音响/PowerPoint现场实播或产品直连部署验收。
 
-v6保留为15页历史可用稿：[旧大纲](outline-v6.md)、[旧反馈](revision-06-feedback.md)、[旧交接](revision-06-handoff.md)；三天[统计证据](engineering-evidence-v6.md)继续作为冻结来源，不覆写。以下旧阶段制作过程保留其当时页码/状态，当前使用请以顶部v7入口为准。
+v7冻结历史可用稿：[旧大纲](outline-v7.md)、[旧反馈](revision-07-feedback.md)、[旧交接](revision-07-handoff.md)。v6及更早稿继续保留；[三天统计证据](engineering-evidence-v6.md)冻结不覆写，统计定义保留notes/讲稿，已删除的QA不在本版放映流程。以下旧阶段记录保留当时页码和状态。
 
 ## 历史制作简报（2026-11-01至11-02）
 

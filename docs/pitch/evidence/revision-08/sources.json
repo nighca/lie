@@ -1,0 +1,14 @@
+{
+  "git_source": "3de59d67412366634211ecc79341741e28f35864:docs/design/webmcp-direct-edit-2026-11-01.md",
+  "source_sha256": "0cbbd5c251af2b226ce8cc20613aa779a4770bf9a29898eacf1b5cb278ad0b69",
+  "render": "docs/pitch/render-source-v8.mjs",
+  "selected_sections": [
+    "document title",
+    "工具合同 table: three data rows",
+    "保存、并发和外发边界: first bullet"
+  ],
+  "image": "webmcp-design-excerpt.jpg",
+  "image_sha256": "ae505447289779a96e69874b7b3497192f81a47a93d1ffbf4a433f2a50b14855",
+  "transform": "Exact-source text reflow, Markdown inline code marks removed for display; JPEG quality92, width1400",
+  "browser_screenshot": false
+}
