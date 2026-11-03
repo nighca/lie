@@ -415,17 +415,18 @@ function deployedPreview() {
 
 function probeResponse(path) {
   if (path === '/' || path === '/editor') return new Response('<html>preview</html>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
-  return Response.json(path === '/api/health' ? { status: 'ok', storage: 'r2' } : { status: 'ready' })
+  assert.equal(path, '/api/health')
+  return Response.json({ status: 'ok', storage: 'r2', voice: { status: 'ready', transport: 'direct' } })
 }
 
-test('HTTP probe makes exactly four same-origin bounded GETs and does not prepare or open voice', async () => {
+test('HTTP probe makes exactly three same-origin bounded GETs and does not prepare or open voice', async () => {
   const calls = []
   const result = await probe({ prNumber: 42 }, deployedPreview(), async (url, options) => {
     calls.push({ url, options })
     return probeResponse(new URL(url).pathname)
   })
-  assert.deepEqual(result, { status: 'passed', url: 'https://pr-42.preview.lie.agency', requests: 4 })
-  assert.deepEqual(calls.map(call => new URL(call.url).pathname), ['/', '/editor', '/api/health', '/api/voice/status'])
+  assert.deepEqual(result, { status: 'passed', url: 'https://pr-42.preview.lie.agency', requests: 3 })
+  assert.deepEqual(calls.map(call => new URL(call.url).pathname), ['/', '/editor', '/api/health'])
   assert.ok(calls.every(call => call.options.method === 'GET' && call.options.redirect === 'manual' && call.options.credentials === 'omit' &&
     call.options.headers['Cache-Control'] === 'no-store' && call.options.signal instanceof AbortSignal))
 })
@@ -460,11 +461,15 @@ test('HTTP probe never follows redirects or retries a failed request', async () 
 for (const [name, path, response] of [
   ['HTML instead of health JSON', '/api/health', () => new Response('<html>fallback</html>', { headers: { 'Content-Type': 'text/html' } })],
   ['JSON instead of editor HTML', '/editor', () => Response.json({ status: 'ok' })],
-  ['wrong storage', '/api/health', () => Response.json({ status: 'ok', storage: 'none' })],
-  ['unavailable voice', '/api/voice/status', () => Response.json({ status: 'unavailable' })],
+  ['wrong storage', '/api/health', () => Response.json({ status: 'ok', storage: 'none', voice: { status: 'ready', transport: 'direct' } })],
+  ['unavailable voice', '/api/health', () => Response.json({ status: 'ok', storage: 'r2', voice: { status: 'unavailable' } })],
+  ['missing voice readiness', '/api/health', () => Response.json({ status: 'ok', storage: 'r2' })],
+  ['relay transport', '/api/health', () => Response.json({ status: 'ok', storage: 'r2', voice: { status: 'ready', transport: 'relay' } })],
+  ['missing transport', '/api/health', () => Response.json({ status: 'ok', storage: 'r2', voice: { status: 'ready' } })],
   ['invalid JSON', '/api/health', () => new Response('{invalid}', { headers: { 'Content-Type': 'application/json' } })],
   ['oversized JSON', '/api/health', () => new Response(JSON.stringify({ status: 'ok', storage: 'r2', extra: 'x'.repeat(65536) }), { headers: { 'Content-Type': 'application/json' } })],
-  ['non-200 voice status', '/api/voice/status', () => Response.json({ error: 'unavailable' }, { status: 503 })]
+  ['removed endpoint response', '/api/health', () => Response.json({ error: 'Not found' }, { status: 404 })],
+  ['non-200 health', '/api/health', () => Response.json({ error: 'unavailable' }, { status: 503 })]
 ]) test(`HTTP probe refuses ${name}`, async () => {
   const calls = []
   await assert.rejects(probe({ prNumber: 42 }, deployedPreview(), async url => {
@@ -504,7 +509,7 @@ test('HTTP probe CLI needs neither a GitHub token nor receipt access', async () 
     await writeFile(deploymentFile, JSON.stringify(deployedPreview()))
     const result = await main('probe', { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', PR_PREVIEW_CONTEXT_FILE: contextFile,
       PR_PREVIEW_DEPLOYMENT_FILE: deploymentFile, PR_PREVIEW_ARTIFACT_DIR: join(directory, 'missing') }, async url => probeResponse(new URL(url).pathname))
-    assert.equal(result.requests, 4)
+    assert.equal(result.requests, 3)
   } finally { await rm(directory, { recursive: true, force: true }) }
 })
 

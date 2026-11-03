@@ -226,11 +226,11 @@ async function boundedJSON(response, signal) {
   }
 }
 
-/** Four bounded GETs only. Config ready is not proof of live provider/voice behavior. */
+/** Three bounded GETs only. Config ready is not proof of live provider/voice behavior. */
 export async function probe(context, result, fetcher = fetch, { timeoutMs = 10000 } = {}) {
   requireThat(integer(context?.prNumber) && Number.isSafeInteger(timeoutMs) && timeoutMs > 0 && timeoutMs <= 10000, 'Invalid preview probe identity or deadline')
   const origin = previewURLs(result, context.prNumber).url
-  const routes = ['/', '/editor', '/api/health', '/api/voice/status']
+  const routes = ['/', '/editor', '/api/health']
   for (const path of routes) {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), timeoutMs)
@@ -245,8 +245,9 @@ export async function probe(context, result, fetcher = fetch, { timeoutMs = 1000
       } else {
         requireThat(/^application\/json(?:\s*;|$)/i.test(response.headers.get('Content-Type') ?? ''), 'Preview API probe did not return JSON')
         const body = await boundedJSON(response, controller.signal)
-        requireThat(body?.status === (path === '/api/health' ? 'ok' : 'ready'), 'Preview API probe returned an unexpected status')
-        if (path === '/api/health') requireThat(body.storage === 'r2', 'Preview health probe did not confirm R2 configuration')
+        requireThat(body?.status === 'ok', 'Preview API probe returned an unexpected status')
+        requireThat(body.storage === 'r2', 'Preview health probe did not confirm R2 configuration')
+        requireThat(body.voice?.status === 'ready' && body.voice.transport === 'direct', 'Preview health probe did not confirm direct voice configuration')
       }
       requireThat(!controller.signal.aborted, 'Preview probe timed out')
     } catch {
