@@ -17,6 +17,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
     run, workflow: { id: 10, path: '.github/workflows/pr-ci.yml', name: 'PR CI' },
     pr: { number: 42, state: 'open', draft: false, mergeable: true, merge_commit_sha: mergeSha,
       base: { repo: { ...repository }, ref: 'main', sha: baseSha }, head: { repo: headRepository, sha: headSha }, user: { login: 'contributor' } },
+    mainRef: { ref: 'refs/heads/main', object: { type: 'commit', sha: baseSha } },
     mergeCommit: { sha: mergeSha, tree: { sha: 'f'.repeat(40) }, parents: [{ sha: baseSha }, { sha: headSha }] }, receipt,
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: previewArtifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 100, repository_id: 1, head_repository_id: headRepository.id, head_sha: headSha } }] },
@@ -235,4 +236,31 @@ test('regenerated merge does not grant fork or Dependabot approval and cannot re
   assert.equal(validatePreviewRun(input).status, 'deploy')
   input.approvalHeadSha = '0'.repeat(40)
   assert.equal(validatePreviewRun(input).status, 'stale')
+})
+
+test('independent main tip rejects a stale PR base even when both merge commits have equivalent trees', () => {
+  const input = fixture()
+  input.pr.merge_commit_sha = 'e'.repeat(40)
+  input.currentMergeCommit = { ...structuredClone(input.mergeCommit), sha: input.pr.merge_commit_sha }
+  input.mainRef.object.sha = '0'.repeat(40)
+  assert.equal(validatePreviewRun(input).status, 'stale')
+  input.pr.base.sha = input.receipt.baseSha = input.mainRef.object.sha
+  assert.throws(() => validatePreviewRun(input), /current PR test merge/)
+  input.mergeCommit.parents[0].sha = input.currentMergeCommit.parents[0].sha = input.mainRef.object.sha
+  assert.equal(validatePreviewRun(input).status, 'deploy')
+  assert.equal(validatePreviewRun(input).baseSha, input.mainRef.object.sha)
+})
+
+test('main branch proof requires exact ref, commit type and a complete lowercase SHA even for same-SHA merges', () => {
+  for (const mainRef of [null, {}, { ref: 'refs/heads/other', object: { type: 'commit', sha: baseSha } },
+    { ref: 'refs/heads/main' }, { ref: 'refs/heads/main', object: null },
+    { ref: 'refs/heads/main', object: { sha: baseSha } },
+    { ref: 'refs/heads/main', object: { type: 'tag', sha: baseSha } },
+    { ref: 'refs/heads/main', object: { type: 'commit', sha: baseSha.toUpperCase() } },
+    { ref: 'refs/heads/main', object: { type: 'commit', sha: baseSha.slice(0, 39) } },
+    { ref: 'refs/heads/main', object: { type: 'commit', sha: 1 } }]) {
+    const input = fixture()
+    input.mainRef = mainRef
+    assert.throws(() => validatePreviewRun(input), /Invalid current main ref/)
+  }
 })

@@ -67,7 +67,7 @@ export function validateClosedPreview(pr, requestedNumber) {
  * receipt. Dispatch callers pass approvalHeadSha explicitly from their input.
  * A receipt alone never authorizes publication or cleanup.
  */
-export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, currentMergeCommit = mergeCommit, receipt, artifacts, approvalHeadSha = null }) {
+export function validatePreviewRun({ event, run, workflow, pr, mainRef, mergeCommit, currentMergeCommit = mergeCommit, receipt, artifacts, approvalHeadSha = null }) {
   const identity = previewIdentity(pr)
   const outcome = status => ({ status, ...identity })
   requireThat(sameRepository(event?.repository, pr.base.repo), 'Unexpected event repository')
@@ -102,11 +102,13 @@ export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, curr
   if (run.pull_requests?.length > 0) requireThat(run.pull_requests.some(item => item.number === pr.number), 'PR CI belongs to another PR')
   if (pr.state === 'closed') return outcome('closed')
   requireThat(pr.state === 'open', 'Unexpected PR state')
+  requireThat(mainRef?.ref === 'refs/heads/main' && mainRef.object?.type === 'commit' && sha(mainRef.object.sha), 'Invalid current main ref')
+  if (pr.base.sha !== mainRef.object.sha) return outcome('stale')
   if (pr.head?.sha !== receipt.headSha || pr.base.sha !== receipt.baseSha || !sha(pr.merge_commit_sha)) return outcome('stale')
   if (approvalHeadSha != null && approvalHeadSha !== pr.head.sha) return outcome('stale')
   if (pr.mergeable === false) return outcome('stale')
   validateMergeEquivalence({ testedCommit: mergeCommit, currentCommit: currentMergeCommit, testedSha: receipt.mergeSha,
-    currentSha: pr.merge_commit_sha, baseSha: receipt.baseSha, headSha: receipt.headSha })
+    currentSha: pr.merge_commit_sha, baseSha: mainRef.object.sha, headSha: receipt.headSha })
 
   const artifact = selectPreviewArtifact(artifacts, pr, run)
   requireThat(parsePreviewArtifactName(artifact.name).mergeSha === receipt.mergeSha, 'Preview receipt merge does not match the tested artifact')

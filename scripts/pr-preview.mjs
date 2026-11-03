@@ -144,8 +144,9 @@ export async function prepare(event, api, publisherData) {
     artifactId: String(artifact.id), artifactDigest: artifact.digest }
   if (pr.draft === true) return skip(context, 'skipped')
   requireThat(sha(pr.merge_commit_sha), 'PR test merge is unavailable; resolve conflicts and rerun CI')
+  const mainRef = await api('git/ref/heads/main')
   const commits = await mergeCommits(api, testedMergeSha, pr.merge_commit_sha)
-  const outcome = validatePreviewRun({ event, run, workflow, pr, ...commits, receipt: context.receipt, artifacts, approvalHeadSha: source.approvalHeadSha })
+  const outcome = validatePreviewRun({ event, run, workflow, pr, mainRef, ...commits, receipt: context.receipt, artifacts, approvalHeadSha: source.approvalHeadSha })
   if (outcome.status !== 'deploy') return skip(context, outcome.status)
   return { ...context, action: 'deploy', status: 'deploy', identity: outcome }
 }
@@ -155,11 +156,11 @@ export async function authorize(context, receipt, api) {
   requireThat(context?.action === 'deploy' && integer(context.prNumber) && integer(context.runId), 'Invalid deployment context')
   requireThat(['repository', 'prNumber', 'headSha', 'baseSha', 'mergeSha', 'runId', 'runAttempt'].every(key =>
     receipt?.[key] === context.receipt?.[key]), 'Preview receipt run or attempt or build identity changed')
-  const [pr, run, workflow, artifacts] = await Promise.all([
-    currentPull(api, context.prNumber), api(`actions/runs/${context.runId}`), api('actions/workflows/pr-ci.yml'), artifactsFor(api, context.runId)
+  const [pr, run, workflow, artifacts, mainRef] = await Promise.all([
+    currentPull(api, context.prNumber), api(`actions/runs/${context.runId}`), api('actions/workflows/pr-ci.yml'), artifactsFor(api, context.runId), api('git/ref/heads/main')
   ])
   const commits = sha(pr.merge_commit_sha) ? await mergeCommits(api, receipt?.mergeSha, pr.merge_commit_sha) : {}
-  const outcome = validatePreviewRun({ event: context.event, run, workflow, pr, ...commits, receipt, artifacts, approvalHeadSha: context.approvalHeadSha })
+  const outcome = validatePreviewRun({ event: context.event, run, workflow, pr, mainRef, ...commits, receipt, artifacts, approvalHeadSha: context.approvalHeadSha })
   if (outcome.status === 'deploy') {
     requireThat(outcome.artifactId === context.artifactId && outcome.artifactDigest === context.artifactDigest &&
       outcome.runAttempt === context.runAttempt, 'Selected preview artifact changed')

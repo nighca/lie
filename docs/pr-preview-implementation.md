@@ -2,6 +2,12 @@
 
 2026-11-01；本地实施中，尚未启用远程预览。基线为已审并上线的 `16d64347b853ffaaac1f2dbaa9d8ddd232f9859a`。本文件与[最新用户决定](pr-ci-preview-storage-contract.md)覆盖 [10月25日提案](pr-ci-preview-proposal.md)及[续接记录](pr-ci-preview-review-2026-11-01.md)中的 UI-only/main gateway harness 限制；保留旧文档以记录备选。
 
+## 2026-11-03 独立当前 main 基线校验
+
+PR API 的 `base.sha` 和测试 merge 可能落后于仓库实际 main。发布器在每次可发布的 prepare 及每次 authorize 中，独立读取固定本仓 `git/ref/heads/main`，严格要求响应 `ref` 为 `refs/heads/main`、`object.type` 为 `commit`、`object.sha` 为完整40位小写 SHA。当前 PR base 与 tested/current 两个 merge 的首个父节点都必须等于此独立 main tip，不能只证明两个旧 merge 内容等价。
+
+main ref 不跨调用缓存；下载、部署及发布各既有授权边界和等待审批通知的两次完整 prepare 都重读。main 前进而 PR API 尚未刷新时，本次候选过期；上传后发现变化仅把本次 Deployment 标为 inactive，不删除其他预览或写成功状态。main API 失败或字段缺失、畸形时拒绝授权。关闭清理及无发布权限的早退保持原行为；producer 触发机制与应用代码不在本次修复范围。
+
 ## 2026-11-03 GitHub 重新生成测试 merge 的内容等价校验
 
 GitHub 可能为未变的 PR base/head 重新生成测试 merge SHA。发布器从精确 CI run/attempt 的唯一规范 artifact 名取得真正被测试的 SHA；每次授权都重新读取当前 PR、run/attempt、workflow、artifact provenance/digest，并从固定本仓 `git/commits/{完整SHA}` 读取 tested/current 两个 commit。仅当响应 SHA 精确匹配、两者都恰有按序排列的当前 base/head 两个父节点、完整40位小写 tree SHA 完全相同，才允许继续。相同 merge SHA 也校验 commit 内容；API失败、字段缺失或畸形、父节点或 tree 变化均拒绝，不缓存先前等价结论。

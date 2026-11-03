@@ -22,6 +22,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
     run, receipt, workflow: { id: 10, name: 'PR CI', path: '.github/workflows/pr-ci.yml' },
     pr: { number: 42, state: 'open', draft: false, mergeable: true, merge_commit_sha: mergeSha,
       base: { repo: { ...repo }, ref: 'main', sha: baseSha }, head: { repo: headRepository, sha: headSha }, user: { login: 'contributor' } },
+    mainRef: { ref: 'refs/heads/main', object: { type: 'commit', sha: baseSha } },
     mergeCommit: { sha: mergeSha, tree: { sha: 'f'.repeat(40) }, parents: [{ sha: baseSha }, { sha: headSha }] },
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: artifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 100, repository_id: 1, head_repository_id: headRepository.id, head_sha: headSha } }] },
@@ -35,6 +36,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
     }
     state.reads.push(path)
     if (path === 'actions/workflows/pr-ci.yml') return structuredClone(state.workflow)
+    if (path === 'git/ref/heads/main') return structuredClone(state.mainRef)
     if (path === 'pulls/42') return structuredClone(state.pr)
     if (path === 'actions/runs/100') return structuredClone(state.run)
     if (path === 'actions/runs/100/artifacts?per_page=100') return structuredClone(state.artifacts)
@@ -125,7 +127,7 @@ for (const [name, mutate] of [
 test('old merge artifact is skipped when base changes', async () => {
   const f = fixture()
   f.pr.base.sha = 'e'.repeat(40)
-  await assert.rejects(prepare(f.event, f.api, f.publisher), /current PR test merge/)
+  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'stale')
 })
 
 test('draft never starts publishing', async () => {
@@ -697,7 +699,7 @@ test('every authorize boundary rereads the exact tested/current commit proof and
     const identity = await authorize(context, f.receipt, f.api)
     assert.equal(identity.mergeSha, mergeSha)
     assert.equal(identity.currentMergeSha, currentSha)
-    for (const path of ['pulls/42', 'actions/runs/100', 'actions/workflows/pr-ci.yml', 'actions/runs/100/artifacts?per_page=100',
+    for (const path of ['pulls/42', 'actions/runs/100', 'actions/workflows/pr-ci.yml', 'actions/runs/100/artifacts?per_page=100', 'git/ref/heads/main',
       `git/commits/${mergeSha}`, `git/commits/${currentSha}`]) assert.ok(f.reads.includes(path))
   }
   f.commits[f.pr.merge_commit_sha].tree.sha = '1'.repeat(40)
@@ -846,7 +848,7 @@ test('notice rechecks PR/run/artifact/commit proof after deployment-list queries
       }
       return f.api(path, body)
     }
-    if (['base', 'attempt', 'tree'].includes(change)) await assert.rejects(notice(context, api))
+    if (['attempt', 'tree'].includes(change)) await assert.rejects(notice(context, api))
     else assert.equal((await notice(context, api)).status, change === 'equivalent' ? 'awaiting-approval' : 'stale')
     assert.equal(f.writes.length, change === 'equivalent' ? 1 : 0)
   }
@@ -892,5 +894,84 @@ test('missing active-deployment merge identity cannot suppress approval or write
   f.deployments = [{ id: 300, sha: headSha, payload }]
   f.deploymentStatuses[300] = [{ state: 'success' }]
   await assert.rejects(notice(context, f.api), /Invalid preview merge SHA/)
+  assert.deepEqual(f.writes, [])
+})
+
+test('prepare rejects stale PR API base against the independent main tip before any deployment write', async () => {
+  for (const dispatch of [false, true]) {
+    const f = fixture({ dispatch })
+    regenerateMerge(f)
+    f.mainRef.object.sha = '0'.repeat(40)
+    const context = await prepare(f.event, f.api, f.publisher)
+    assert.equal(context.action, 'skip')
+    assert.equal(context.status, 'stale')
+    assert.equal(context.receipt.baseSha, baseSha)
+    assert.ok(f.reads.includes('git/ref/heads/main'))
+    assert.deepEqual(f.writes, [])
+  }
+})
+
+test('every authorization refreshes fixed main ref and rejects a main advance without a PR API change', async () => {
+  const f = fixture()
+  const context = await prepare(f.event, f.api, f.publisher)
+  for (let index = 0; index < 2; index++) {
+    f.reads.length = 0
+    assert.equal((await authorize(context, f.receipt, f.api)).status, 'deploy')
+    assert.equal(f.reads.filter(path => path === 'git/ref/heads/main').length, 1)
+  }
+  f.mainRef.object.sha = '0'.repeat(40)
+  assert.equal((await authorize(context, f.receipt, f.api)).status, 'stale')
+  assert.equal((await pending(context, f.receipt, f.api)).status, 'stale')
+  assert.deepEqual(f.writes, [])
+})
+
+test('main advancing during upload inactivates only this deployment and cannot mark the old build successful', async () => {
+  const f = fixture()
+  const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
+  f.writes.length = 0
+  f.mainRef.object.sha = '0'.repeat(40)
+  assert.equal((await authorize(context, f.receipt, f.api)).status, 'stale')
+  assert.equal((await publish(context, f.receipt, deployedPreview(), f.api)).status, 'stale')
+  assert.deepEqual(f.writes.map(item => [item.path, item.body.state]), [['deployments/300/statuses', 'inactive']])
+})
+
+test('main ref API failure or malformed data blocks prepare, authorize, notice and publication', async () => {
+  for (const response of ['error', null, {},
+    { ref: 'refs/heads/main', object: { type: 'tree', sha: baseSha } },
+    { ref: 'refs/heads/other', object: { type: 'commit', sha: baseSha } },
+    { ref: 'refs/heads/main', object: { type: 'commit', sha: 'bad' } }]) {
+    const f = fixture()
+    const context = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
+    f.writes.length = 0
+    const api = async (path, body) => {
+      if (path === 'git/ref/heads/main' && body == null) {
+        if (response === 'error') throw new Error('Main ref API failed')
+        return structuredClone(response)
+      }
+      return f.api(path, body)
+    }
+    await assert.rejects(prepare(f.event, api, f.publisher))
+    await assert.rejects(authorize(context, f.receipt, api))
+    assert.deepEqual(f.writes, [])
+    assert.equal((await publish(context, f.receipt, deployedPreview(), api)).status, 'stale')
+    assert.deepEqual(f.writes.map(item => [item.path, item.body.state]), [['deployments/300/statuses', 'inactive']])
+    const fork = fixture({ fork: true })
+    const waiting = await prepare(fork.event, fork.api, fork.publisher)
+    const noticeAPI = (path, body) => path === 'git/ref/heads/main' ? api(path, body) : fork.api(path, body)
+    await assert.rejects(notice(waiting, noticeAPI))
+    assert.deepEqual(fork.writes, [])
+  }
+})
+
+test('notice rereads main after deployment-list queries and suppresses stale-base pending writes', async () => {
+  const f = fixture({ fork: true })
+  const context = await prepare(f.event, f.api, f.publisher)
+  f.reads.length = 0
+  const api = async (path, body) => {
+    if (body == null && path.startsWith('deployments?')) f.mainRef.object.sha = '0'.repeat(40)
+    return f.api(path, body)
+  }
+  assert.equal((await notice(context, api)).status, 'stale')
+  assert.equal(f.reads.filter(path => path === 'git/ref/heads/main').length, 2)
   assert.deepEqual(f.writes, [])
 })

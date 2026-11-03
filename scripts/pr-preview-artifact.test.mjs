@@ -66,6 +66,7 @@ test('real packed receipt satisfies the GitHub authorization contract', async ()
   const result = validatePreviewRun({
     event: { action: 'completed', repository, workflow_run: run }, run,
     workflow: { id: 10, path: '.github/workflows/pr-ci.yml', name: 'PR CI' }, pr,
+    mainRef: { ref: 'refs/heads/main', object: { type: 'commit', sha: id.baseSha } },
     mergeCommit: { sha: id.mergeSha, tree: { sha: 'e'.repeat(40) }, parents: [{ sha: id.baseSha }, { sha: id.headSha }] }, receipt,
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: artifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`, workflow_run: { id: 123, repository_id: 1, head_repository_id: 1, head_sha: id.headSha } }] }
   })
