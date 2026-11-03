@@ -1,8 +1,8 @@
 # LIE 路演制作简报
 
-> 2026-11-03 最新状态：v8保留13页主讲，删除原三张技术QA，仅留1张Q&A占位，合计14页/560秒。第11页以“需求与约束→交互/技术设计→关键取舍确认→实现验证→审查集成”覆盖技术与交互设计，用真实技术方案摘录渲染＋最终UI作证。第7页按本轮已批准直连方案表达职责，按用户最新决定直接呈现完整直连架构，不上状态标签或旧relay对照；正式发布与验收边界留内部记录，不据图证明。原C与简洁正文不变，指标785 commits、97 Agents、>5,277 Agent分钟，运行时长仅覆盖66/97，非有效工时。见[当前大纲](outline-v8.md)、[放映指南](presenter-guide.md)、[本轮反馈](revision-08-feedback.md)、[本轮交接](revision-08-handoff.md)。已只读核对制作源及重点7/11/14页PNG；HTML/PDF/PPTX已生成，PPTX14页/14 notes、最终receipt同hash且import通过，HTML14页/13主讲边界已核；这不等于浏览器/音响/PowerPoint现场实播或产品直连部署验收。
+> 2026-11-03 最新状态：v9落实六条反馈：第7移除内容资源节点并重排服务关系、删除底部总结；第8标题“自研轻量骨骼动画”；主标题去末尾句号（正文/问号/封面图不变）；WebMCP长期适配对齐用户Agent、轻量实现对齐编辑器；第10统一“协调 Agent”；第12删最下可核记录整句，指标和97拆分不变。14页＝13主讲＋1张Q&A占位/560秒，沿用既有事实，不新增产品验收或私人记录查询。见[当前大纲](outline-v9.md)、[放映指南](presenter-guide.md)、[六条反馈](revision-09-feedback.md)、[本轮交接](revision-09-handoff.md)。已实际阅14页PNG并核标题、重点7/8/9/10/12无重叠；制作源与逐页表一致，最终HTML/PDF/PPTX已生成，PPTX14页/14 notes、receipt同hash且import通过，HTML14页边界已核；不是现场实播或产品部署证明。
 
-v7冻结历史可用稿：[旧大纲](outline-v7.md)、[旧反馈](revision-07-feedback.md)、[旧交接](revision-07-handoff.md)。v6及更早稿继续保留；[三天统计证据](engineering-evidence-v6.md)冻结不覆写，统计定义保留notes/讲稿，已删除的QA不在本版放映流程。以下旧阶段记录保留当时页码和状态。
+v8冻结历史稿：[旧大纲](outline-v8.md)、[旧反馈](revision-08-feedback.md)、[旧交接](revision-08-handoff.md)；更早版本和素材继续保留。[三天统计证据](engineering-evidence-v6.md)冻结不覆写；66/97覆盖、等待与并行、31缺失不估等定义保留notes和内部讲稿，不加回指标页。旧三张技术QA不在本版放映流程。
 
 ## 历史制作简报（2026-11-01至11-02）
 
