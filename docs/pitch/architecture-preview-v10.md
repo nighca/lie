@@ -1,6 +1,8 @@
-# 架构单页布局样图 v10（待用户确认）
+# 架构单页布局样图 v10（布局已确认）
 
-2026-11-03。用户要求本次先单独看图确认，接受后才更新演示文档。本次只生成架构单页PNG，没有制作V10全套、PDF或PPTX，没有替换V9；V9交付文件SHA全部核对未变。源与轻量图只保存为待确认提案，归档不等于接受。
+2026-11-03后续确认：用户回复“这张图 OK 的”，要求按随后反馈优化标题。布局已确认，V10采用标题“模块化架构，Serverless 部署”。下文保留单图交付时的提案记录，正式交付见[本轮交接](revision-10-handoff.md)。
+
+原提案记录：用户要求本次先单独看图确认，接受后才更新演示文档。本次只生成架构单页PNG，没有制作V10全套、PDF或PPTX，没有替换V9；V9交付文件SHA全部核对未变。源与轻量图只保存为待确认提案，归档不等于接受。
 
 [轻量预览](evidence/revision-10-proposal/architecture.jpg) · [可复现源码](architecture-preview-v10.mjs)。本机原PNG为`tmp/pitch/architecture-v10/architecture-preview.png`。
 
