@@ -2,6 +2,26 @@
 
 2026-11-01；本地实施中，尚未启用远程预览。基线为已审并上线的 `16d64347b853ffaaac1f2dbaa9d8ddd232f9859a`。本文件与[最新用户决定](pr-ci-preview-storage-contract.md)覆盖 [10月25日提案](pr-ci-preview-proposal.md)及[续接记录](pr-ci-preview-review-2026-11-01.md)中的 UI-only/main gateway harness 限制；保留旧文档以记录备选。
 
+## 2026-11-03 独立当前 main 基线校验
+
+PR API 的 `base.sha` 和测试 merge 可能落后于仓库实际 main。发布器在每次可发布的 prepare 及每次 authorize 中，独立读取固定本仓 `git/ref/heads/main`，严格要求响应 `ref` 为 `refs/heads/main`、`object.type` 为 `commit`、`object.sha` 为完整40位小写 SHA。当前 PR base 与 tested/current 两个 merge 的首个父节点都必须等于此独立 main tip，不能只证明两个旧 merge 内容等价。
+
+main ref 不跨调用缓存；下载、部署及发布各既有授权边界和等待审批通知的两次完整 prepare 都重读。main 前进而 PR API 尚未刷新时，本次候选过期；上传后发现变化仅把本次 Deployment 标为 inactive，不删除其他预览或写成功状态。main API 失败或字段缺失、畸形时拒绝授权。关闭清理及无发布权限的早退保持原行为；producer 触发机制与应用代码不在本次修复范围。
+
+## 2026-11-03 GitHub 重新生成测试 merge 的内容等价校验
+
+GitHub 可能为未变的 PR base/head 重新生成测试 merge SHA。发布器从精确 CI run/attempt 的唯一规范 artifact 名取得真正被测试的 SHA；每次授权都重新读取当前 PR、run/attempt、workflow、artifact provenance/digest，并从固定本仓 `git/commits/{完整SHA}` 读取 tested/current 两个 commit。仅当响应 SHA 精确匹配、两者都恰有按序排列的当前 base/head 两个父节点、完整40位小写 tree SHA 完全相同，才允许继续。相同 merge SHA 也校验 commit 内容；API失败、字段缺失或畸形、父节点或 tree 变化均拒绝，不缓存先前等价结论。
+
+artifact 名、下载 receipt、restore/build identity、deployment payload 的 `mergeSha` 和 Tested UI and Worker 摘要始终保留真正测试的 SHA；独立 `currentMergeSha` 只用于审计，不替换 receipt 或伪称 CI 测过新 SHA。手动入口仍批准当前完整 head SHA，保持原有三页 run 扫描上限；额外候选仅接受 API 明确关联当前 PR/full head/base、同仓及 head 仓库、固定 workflow/event、合法 run/attempt 的记录，不搜索任意旧 merge。缺失关联且 run 仅标记旧 merge 时拒绝该候选，等待具备所需身份关联的新 CI 证据。最新候选失败时不回退旧成功。
+
+fork/Dependabot 审批、下载前后及部署前后授权和资源边界保持原合同。等待审批通知在查询既有部署后、写 pending 前重复完整校验；同 head/base 的活跃部署也必须通过 tested/payload merge 的相同内容证明，才能抑制晚到通知。
+
+## 2026-11-03 自定义预览域名约定
+
+所有新发布的 PR 预览入口使用 `preview.lie.agency`：稳定地址为 `pr-N.preview.lie.agency`；不可变地址只接受部署 API 实际返回的完整 deployment ID 或 UUID 首8位，例如 `063049c3.preview.lie.agency`，不自行增加 PR 后缀或生成缺失地址。上述日期较新的约定覆盖本文早期启用状态和链接约定，云资源验收由专项资源记录单独保存。
+
+发布器严格核对 CLI 返回的 PR/name/slug、deployment ID、HTTPS origin 及固定自家域名；如同时返回旧 `workers.dev` 地址，也要核对同一父 Worker 和账户。新部署的全部不可变地址还必须逐一出现在固定 Preview 的精确 deployment metadata 中。只有平台返回且校验通过的自家域名可用于 HTTP probe、成功 Step Summary、GitHub Deployment 和 commit status；缺少稳定或不可变自家域名时失败，不回退发布 `workers.dev`。只读 inspect 仍可展示身份匹配的平台原始两类地址，自家域名排在前面。身份审批、产物信任、关闭清理和资源权限保持既有合同。
+
 ## 用户已确认的行为
 
 - 每个指向 main 的贡献 PR 接受完整无凭据 CI。每 PR 有独立 Worker 预览入口，前端与 Worker 均来自同一次 PR 测试合并提交，新增接口及其消费方可端到端验证。
