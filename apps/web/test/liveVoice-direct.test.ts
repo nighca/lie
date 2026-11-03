@@ -1,87 +1,109 @@
+import type { VoiceStartupObservation } from '@lie/voice'
 import { expect, it, vi } from 'vitest'
-import type { VoiceChannelOptions, VoiceStartupObservation } from '@lie/voice'
 
-import { createGameController } from '../src/application/controller'
 import { createLiveVoicePort } from '../src/application/liveVoice'
-import type { ConversationScope } from '../src/application/voice'
-import { game } from './helpers'
+import { descriptor, voiceFixture } from './liveVoice-fixture'
 
-const descriptor = { url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: '02:00:00:00:00:01', clientId: 'test-client', token: 'fake-ota-token', maxSessionSeconds: 600 }
-
-function fixture(transport: 'relay' | 'direct', onStartup: (event: VoiceStartupObservation & { elapsedMs: number }) => void = () => {}) {
-  const abort = new AbortController()
-  const scope: ConversationScope = {
-    sessionId: 'test', characterId: 'one', voiceId: null, epoch: 1, signal: abort.signal,
-    isCurrent: () => !abort.signal.aborted, readContext: () => ({ background: '', characterId: 'one', characterName: 'A', profile: '', history: [], systemPrompt: '' }), onEvent() {},
-  }
-  const channel = { open: vi.fn(async () => {}), startInput: vi.fn(), input: vi.fn(), stopInput: vi.fn(), interrupt: vi.fn(), close: vi.fn() }
-  const dependencies = {
-    onStartup,
-    fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready', transport }))),
-    prepareDevice: vi.fn(async (_signal: AbortSignal) => transport === 'direct' ? Response.json(descriptor) : new Response(null, { status: 204 })),
-    createChannel: vi.fn((_options: VoiceChannelOptions) => channel),
-    createPlayer: vi.fn(() => ({ enqueue: vi.fn(), flush: vi.fn(), stop: vi.fn() })),
-    createContext: vi.fn(() => ({ resume: async () => {}, close: async () => {}, state: 'running' }) as unknown as AudioContext),
-    openMic: vi.fn(async () => ({ stop: async () => {} })),
-  }
-  const port = createLiveVoicePort(dependencies)
-  return { dependencies, port, scope, abort, channel }
-}
-
-it('prepares relay connections through the existing 204 path', async () => {
-  const f = fixture('relay')
-  const connection = f.port.create(f.scope)
-  await connection.open()
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
-  expect(f.dependencies.createChannel.mock.calls[0][0]).not.toHaveProperty('directConnection')
-  connection.close()
-})
-
-it('checks only availability during intro and gets a fresh direct descriptor from prepare for each open', async () => {
-  const f = fixture('direct')
+it.each(['relay', 'direct'] as const)('prepares %s once and shares that case result across opens', async transport => {
+  const f = voiceFixture(transport)
   await Promise.all([f.port.prepare(), f.port.prepare()])
-  expect(f.dependencies.prepareDevice).not.toHaveBeenCalled()
-  let sequence = 0
-  f.dependencies.prepareDevice.mockImplementation(async () => Response.json({ ...descriptor, token: `fresh-${++sequence}` }))
-  for (let i = 0; i < 2; i++) {
+  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
+  expect(f.dependencies.openMic).not.toHaveBeenCalled()
+  for (let index = 0; index < 2; index++) {
     const connection = f.port.create(f.scope)
     await connection.open()
-    expect(f.dependencies.createChannel.mock.calls[i][0].directConnection).toEqual({ ...descriptor, token: `fresh-${i + 1}` })
+    const options = f.dependencies.createChannel.mock.calls[index][0]
+    if (transport === 'direct') expect(options.directConnection).toEqual({ url: descriptor.url, deviceId: descriptor.deviceId, clientId: descriptor.clientId, token: descriptor.token, maxSessionSeconds: descriptor.maxSessionSeconds })
+    else expect(options).not.toHaveProperty('directConnection')
     connection.close()
   }
-  expect(f.dependencies.fetchStatus).toHaveBeenCalledOnce()
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
+  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
 })
 
-it('drops a late direct descriptor after cancellation before creating capture or a socket', async () => {
-  const f = fixture('direct')
-  let complete!: (response: Response) => void
-  f.dependencies.prepareDevice.mockImplementation(() => new Promise(resolve => { complete = resolve }))
-  const connection = f.port.create(f.scope)
-  const opening = connection.open()
-  await vi.waitFor(() => expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce())
-  f.abort.abort(); connection.close()
-  expect(f.dependencies.prepareDevice.mock.calls[0][0].aborted).toBe(true)
-  complete(new Response(JSON.stringify(descriptor)))
-  await opening
+it.each([null, 'unknown', 'DIRECT'])('rejects missing or unknown preparation transport: %s', async transport => {
+  const f = voiceFixture()
+  f.dependencies.prepareDevice.mockResolvedValue(Response.json({ ...descriptor, transport }))
+  await expect(f.port.prepare()).rejects.toMatchObject({ reason: 'check-failed' })
   expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-  expect(f.dependencies.createContext).not.toHaveBeenCalled()
   expect(f.dependencies.openMic).not.toHaveBeenCalled()
 })
 
-it.each(['http', 'endpoint'])('fails %s descriptor acquisition before opening microphone', async failure => {
-  const f = fixture('direct')
-  f.dependencies.prepareDevice.mockResolvedValue(new Response(JSON.stringify({ ...descriptor, url: 'wss://other.example/ws' }), { status: failure === 'http' ? 502 : 200 }))
+it.each(['http', 'endpoint', 'legacy-204'])('rejects %s preparation before microphone or socket creation', async failure => {
+  const f = voiceFixture()
+  f.dependencies.prepareDevice.mockResolvedValue(failure === 'legacy-204' ? new Response(null, { status: 204 })
+    : Response.json({ ...descriptor, url: 'wss://other.example/ws' }, { status: failure === 'http' ? 502 : 200 }))
   const connection = f.port.create(f.scope)
   await expect(connection.open()).rejects.toMatchObject({ reason: 'check-failed' })
   expect(f.dependencies.createChannel).not.toHaveBeenCalled()
   expect(f.dependencies.openMic).not.toHaveBeenCalled()
-  connection.close()
 })
 
-it('does not create a second transport when the same connection is opened again', async () => {
-  const f = fixture('direct')
-  const connection = f.port.create(f.scope)
+it('retains a failed preparation until explicit reset, including identity conflicts', async () => {
+  const f = voiceFixture()
+  f.dependencies.prepareDevice.mockResolvedValue(Response.json({ error: 'identity-required' }, { status: 409 }))
+  await expect(f.port.prepare()).rejects.toMatchObject({ reason: 'check-failed' })
+  for (let index = 0; index < 2; index++) await expect(f.port.create(f.scope).open()).rejects.toMatchObject({ reason: 'check-failed' })
+  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
+  f.port.reset()
+  f.dependencies.prepareDevice.mockResolvedValue(Response.json({ ...descriptor, token: 'explicit-retry-token' }))
+  const fresh = f.port.create(f.scope)
+  await fresh.open()
+  expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
+  expect(f.dependencies.createChannel.mock.calls[0][0].directConnection?.token).toBe('explicit-retry-token')
+  fresh.close()
+})
+
+it('discards a cancelled conversation while preserving the shared preparation for another turn', async () => {
+  const f = voiceFixture()
+  let complete!: (response: Response) => void
+  f.dependencies.prepareDevice.mockImplementation(() => new Promise(resolve => { complete = resolve }))
+  const old = f.port.create(f.scope), opening = old.open()
+  await vi.waitFor(() => expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce())
+  const signal = f.dependencies.prepareDevice.mock.calls[0][0]
+  f.abort.abort(); old.close()
+  expect(signal.aborted).toBe(false)
+  complete(Response.json(descriptor))
+  await opening
+  expect(f.dependencies.openMic).not.toHaveBeenCalled()
+  const next = f.port.create({ ...f.scope, signal: new AbortController().signal, isCurrent: () => true })
+  await next.open()
+  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
+  expect(f.dependencies.createChannel).toHaveBeenCalledOnce()
+  next.close()
+})
+
+it('never replaces a new case descriptor with an old response after reset', async () => {
+  const f = voiceFixture()
+  let complete!: (response: Response) => void
+  f.dependencies.prepareDevice.mockImplementationOnce(() => new Promise(resolve => { complete = resolve }))
+  const old = f.port.create(f.scope), opening = old.open()
+  await vi.waitFor(() => expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce())
+  const oldSignal = f.dependencies.prepareDevice.mock.calls[0][0]
+  f.port.reset()
+  expect(oldSignal.aborted).toBe(true)
+  f.dependencies.prepareDevice.mockResolvedValue(Response.json({ ...descriptor, token: 'new-case-token' }))
+  const fresh = f.port.create(f.scope)
+  await fresh.open()
+  complete(Response.json({ ...descriptor, token: 'old-case-token' }))
+  await opening
+  expect(f.dependencies.createChannel).toHaveBeenCalledOnce()
+  expect(f.dependencies.createChannel.mock.calls[0][0].directConnection?.token).toBe('new-case-token')
+  expect(f.dependencies.openMic).toHaveBeenCalledOnce()
+  fresh.close(); old.close()
+})
+
+it('does not issue another preparation automatically after transport failure', async () => {
+  const f = voiceFixture()
+  f.channel.open.mockRejectedValueOnce(new Error('Transport failed'))
+  await expect(f.port.create(f.scope).open()).rejects.toThrow('Transport failed')
+  const next = f.port.create(f.scope)
+  await next.open()
+  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
+  next.close()
+})
+
+it('does not open the same conversation twice', async () => {
+  const f = voiceFixture(), connection = f.port.create(f.scope)
   const opening = connection.open()
   await expect(connection.open()).rejects.toThrow('only be opened once')
   await opening
@@ -90,158 +112,10 @@ it('does not create a second transport when the same connection is opened again'
   connection.close()
 })
 
-it('loads the direct intro with a status check and no device preparation or capture', async () => {
-  const f = fixture('direct')
-  const controller = createGameController({ readGame: async () => game, voice: f.port, now: () => 0, newSessionId: () => 'test' })
-  try {
-    await controller.load('test')
-    await f.port.prepare()
-    expect(controller.getView()).toMatchObject({ phase: 'intro', conversationActive: false })
-    expect(f.dependencies.fetchStatus).toHaveBeenCalledOnce()
-    expect(f.dependencies.prepareDevice).not.toHaveBeenCalled()
-    expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-    expect(f.dependencies.openMic).not.toHaveBeenCalled()
-  } finally { controller.dispose() }
-})
-
-it('recovers an expired direct identity once with status and prepare under one scoped deadline', async () => {
-  const f = fixture('direct')
-  await f.port.prepare()
-  f.dependencies.prepareDevice.mockResolvedValueOnce(Response.json({ error: 'identity-required' }, { status: 409 }))
-  const connection = f.port.create(f.scope)
-  await connection.open()
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
-  expect(f.dependencies.fetchStatus).toHaveBeenCalledTimes(2)
-  const signal = f.dependencies.prepareDevice.mock.calls[0][0]
-  expect(f.dependencies.prepareDevice.mock.calls[1][0]).toBe(signal)
-  expect(f.dependencies.fetchStatus.mock.calls[1][0]).toBe(signal)
-  expect(f.dependencies.createChannel).toHaveBeenCalledOnce()
-  expect(f.dependencies.createChannel.mock.calls[0][0].directConnection).toEqual(descriptor)
-  connection.close()
-})
-
-it('stops a repeated direct identity conflict and waits for a new explicit open', async () => {
-  const f = fixture('direct')
-  f.dependencies.prepareDevice.mockImplementation(async () => Response.json({ error: 'identity-required' }, { status: 409 }))
-  const failed = f.port.create(f.scope)
-  await expect(failed.open()).rejects.toMatchObject({ reason: 'check-failed' })
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
-  expect(f.dependencies.fetchStatus).toHaveBeenCalledTimes(2)
-  expect(f.dependencies.openMic).not.toHaveBeenCalled()
-  await f.port.prepare()
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
-  f.dependencies.prepareDevice.mockImplementation(async () => Response.json(descriptor))
-  const fresh = f.port.create(f.scope)
-  await fresh.open()
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(3)
-  expect(f.dependencies.createChannel).toHaveBeenCalledOnce()
-  fresh.close()
-})
-
-it('discards a descriptor whose JSON finishes after close', async () => {
-  const f = fixture('direct')
-  let complete!: (value: unknown) => void
-  const response = Response.json(descriptor)
-  const json = vi.spyOn(response, 'json').mockImplementation(() => new Promise(resolve => { complete = resolve }))
-  f.dependencies.prepareDevice.mockResolvedValue(response)
-  const connection = f.port.create(f.scope)
-  const opening = connection.open()
-  await vi.waitFor(() => expect(json).toHaveBeenCalledOnce())
-  connection.close()
-  complete(descriptor)
-  await opening
-  expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-  expect(f.dependencies.openMic).not.toHaveBeenCalled()
-})
-
-it('gets another direct descriptor after a transport failure without redoing relay identity preparation', async () => {
-  const f = fixture('direct')
-  f.channel.open.mockRejectedValueOnce(new Error('Transport failed'))
-  const failed = f.port.create(f.scope)
-  await expect(failed.open()).rejects.toThrow('Transport failed')
-  const fresh = f.port.create(f.scope)
-  await fresh.open()
-  expect(f.dependencies.fetchStatus).toHaveBeenCalledOnce()
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
-  expect(f.dependencies.createChannel).toHaveBeenCalledTimes(2)
-  fresh.close()
-})
-
-it.each([null, 'unknown', 'DIRECT'])('rejects a missing or unknown server-selected transport: %s', async transport => {
-  const f = fixture('direct')
-  f.dependencies.fetchStatus.mockResolvedValue(Response.json({ status: 'ready', ...(transport == null ? {} : { transport }) }))
-  await expect(f.port.prepare()).rejects.toMatchObject({ reason: 'check-failed' })
-  expect(f.dependencies.prepareDevice).not.toHaveBeenCalled()
-  expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-  expect(f.dependencies.openMic).not.toHaveBeenCalled()
-})
-
-it('does not retry a direct conflict that is not identity-required', async () => {
-  const f = fixture('direct')
-  f.dependencies.prepareDevice.mockResolvedValue(Response.json({ error: 'provider-failed' }, { status: 409 }))
-  const connection = f.port.create(f.scope)
-  await expect(connection.open()).rejects.toMatchObject({ reason: 'check-failed' })
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
-  expect(f.dependencies.fetchStatus).toHaveBeenCalledOnce()
-  expect(f.dependencies.openMic).not.toHaveBeenCalled()
-})
-
-it('does not switch transports during direct identity recovery', async () => {
-  const f = fixture('direct')
-  await f.port.prepare()
-  f.dependencies.prepareDevice.mockResolvedValue(Response.json({ error: 'identity-required' }, { status: 409 }))
-  f.dependencies.fetchStatus.mockResolvedValue(Response.json({ status: 'ready', transport: 'relay' }))
-  const connection = f.port.create(f.scope)
-  await expect(connection.open()).rejects.toMatchObject({ reason: 'check-failed' })
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
-  expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-  expect(f.dependencies.openMic).not.toHaveBeenCalled()
-})
-
-it('discards a status recovery finishing after cancellation without issuing the second prepare', async () => {
-  const f = fixture('direct')
-  await f.port.prepare()
-  let complete!: (response: Response) => void
-  f.dependencies.prepareDevice.mockResolvedValue(Response.json({ error: 'identity-required' }, { status: 409 }))
-  f.dependencies.fetchStatus.mockImplementation(() => new Promise(resolve => { complete = resolve }))
-  const connection = f.port.create(f.scope)
-  const opening = connection.open()
-  await vi.waitFor(() => expect(f.dependencies.fetchStatus).toHaveBeenCalledTimes(2))
-  f.abort.abort(); connection.close()
-  complete(Response.json({ status: 'ready', transport: 'direct' }))
-  await opening
-  expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
-  expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-  expect(f.dependencies.openMic).not.toHaveBeenCalled()
-})
-
-it('uses one twenty-second direct recovery deadline without extending it for the retry', async () => {
-  const f = fixture('direct')
-  await f.port.prepare()
-  const clock = new AbortController()
-  const timeout = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(clock.signal)
-  let attempts = 0
-  f.dependencies.prepareDevice.mockImplementation(signal => {
-    if (attempts++ === 0) return Promise.resolve(Response.json({ error: 'identity-required' }, { status: 409 }))
-    return new Promise((_resolve, reject) => signal.addEventListener('abort', () => reject(new DOMException('Timed out', 'AbortError')), { once: true }))
-  })
-  try {
-    const connection = f.port.create(f.scope)
-    const opening = connection.open()
-    await vi.waitFor(() => expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2))
-    expect(timeout).toHaveBeenCalledExactlyOnceWith(20000)
-    clock.abort()
-    await expect(opening).rejects.toMatchObject({ reason: 'check-failed' })
-    expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
-    expect(f.dependencies.openMic).not.toHaveBeenCalled()
-  } finally { timeout.mockRestore() }
-})
-
-it.each(['response', 'json'] as const)('fails a late direct %s after its deadline but silently drops it after scope cancellation', async stage => {
-  for (const cancellation of ['deadline', 'scope']) {
+it.each(['response', 'json'] as const)('reports late preparation %s as failed on timeout and cancelled after reset', async stage => {
+  for (const cancellation of ['deadline', 'reset']) {
     const events: VoiceStartupObservation[] = []
-    const f = fixture('direct', event => events.push(event))
-    await f.port.prepare()
+    const f = voiceFixture('direct', event => events.push(event))
     const clock = new AbortController()
     const timeout = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(clock.signal)
     let complete!: () => void
@@ -253,49 +127,44 @@ it.each(['response', 'json'] as const)('fails a late direct %s after its deadlin
       f.dependencies.prepareDevice.mockResolvedValue(response)
     }
     try {
-      const connection = f.port.create(f.scope)
-      const opening = connection.open()
+      const connection = f.port.create(f.scope), opening = connection.open()
       await vi.waitFor(() => expect(stage === 'response' ? f.dependencies.prepareDevice : json).toHaveBeenCalledOnce())
-      if (cancellation === 'scope') { f.abort.abort(); connection.close() }
-      clock.abort()
-      complete()
+      if (cancellation === 'reset') { f.port.reset(); connection.close() }
+      clock.abort(); complete()
       if (cancellation === 'deadline') await expect(opening).rejects.toMatchObject({ reason: 'check-failed' })
       else await expect(opening).resolves.toBeUndefined()
       expect(events).toContainEqual(expect.objectContaining({ stage: 'startup', result: cancellation === 'deadline' ? 'failed' : 'cancelled' }))
-      await vi.waitFor(() => expect(events).toContainEqual(expect.objectContaining({ stage: 'cleanup', result: 'completed' })))
-      expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
-      expect(f.dependencies.fetchStatus).toHaveBeenCalledOnce()
-      expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-      expect(f.dependencies.createContext).not.toHaveBeenCalled()
       expect(f.dependencies.openMic).not.toHaveBeenCalled()
+      expect(f.dependencies.createChannel).not.toHaveBeenCalled()
+      if (cancellation === 'deadline') {
+        await expect(f.port.prepare()).rejects.toMatchObject({ reason: 'check-failed' })
+        expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
+      }
     } finally { timeout.mockRestore() }
   }
 })
 
-it.each(['response', 'json'] as const)('does not cache a late intro status %s after its preparation deadline', async stage => {
-  const f = fixture('direct')
-  const clock = new AbortController()
+it('keeps a completed preparation after its request deadline instead of treating it as a token TTL', async () => {
+  const f = voiceFixture(), clock = new AbortController()
   const timeout = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(clock.signal)
-  let complete!: () => void
-  const response = Response.json({ status: 'ready', transport: 'direct' })
-  const json = vi.spyOn(response, 'json')
-  if (stage === 'response') f.dependencies.fetchStatus.mockImplementation(() => new Promise(resolve => { complete = () => resolve(response) }))
-  else {
-    json.mockImplementation(() => new Promise(resolve => { complete = () => resolve({ status: 'ready', transport: 'direct' }) }))
-    f.dependencies.fetchStatus.mockResolvedValue(response)
-  }
   try {
-    const preparation = f.port.prepare()
-    await vi.waitFor(() => expect(stage === 'response' ? f.dependencies.fetchStatus : json).toHaveBeenCalledOnce())
-    clock.abort()
-    complete()
-    await expect(preparation).rejects.toMatchObject({ reason: 'check-failed' })
-    expect(f.dependencies.prepareDevice).not.toHaveBeenCalled()
-    expect(f.dependencies.createChannel).not.toHaveBeenCalled()
-    timeout.mockReturnValue(new AbortController().signal)
-    f.dependencies.fetchStatus.mockImplementation(async () => Response.json({ status: 'ready', transport: 'direct' }))
     await f.port.prepare()
-    expect(f.dependencies.fetchStatus).toHaveBeenCalledTimes(2)
-    expect(f.dependencies.prepareDevice).not.toHaveBeenCalled()
+    clock.abort()
+    const connection = f.port.create(f.scope)
+    await connection.open()
+    expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
+    connection.close()
   } finally { timeout.mockRestore() }
+})
+
+it('uses one same-origin no-store POST prepare with no body for the default adapter', async () => {
+  const request = vi.fn(async (_url: string, _options: RequestInit) => Response.json(descriptor))
+  vi.stubGlobal('fetch', request)
+  try {
+    const port = createLiveVoicePort()
+    await Promise.all([port.prepare(), port.prepare()])
+    expect(request).toHaveBeenCalledExactlyOnceWith('/api/voice/prepare', expect.objectContaining({ method: 'POST', credentials: 'same-origin', cache: 'no-store', signal: expect.any(AbortSignal) }))
+    expect(request.mock.calls[0][1]).not.toHaveProperty('body')
+    port.reset()
+  } finally { vi.unstubAllGlobals() }
 })

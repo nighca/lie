@@ -99,7 +99,7 @@ describe('accusation result projection', () => {
     let reads = 0
     const controller = createGameController({
       readGame: () => ++reads === 1 ? Promise.resolve(game) : new Promise((resolve, rejectRead) => { finish = resolve; reject = rejectRead }),
-      voice: { async prepare() {}, create() { throw new Error('This test does not open voice') } },
+      voice: { reset() {}, async prepare() {}, create() { throw new Error('This test does not open voice') } },
       newSessionId: () => 'result-session',
       now: () => 100,
     })

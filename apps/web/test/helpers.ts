@@ -17,7 +17,7 @@ export function setup(clock: ConversationClock = { now: () => 0, setTimeout, cle
   const turns: { scope: ConversationScope; closed: boolean }[] = []
   let number = 0
   const voice: VoicePort = {
-    async prepare() {},
+    reset() {}, async prepare() {},
     create(scope) {
       const turn = { scope, closed: false }
       turns.push(turn)

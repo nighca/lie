@@ -3,18 +3,20 @@
  const v = await import('/@fs/Users/nighca/code/nighca/lie/packages/voice/src/index.ts');
  const {createLiveVoicePort} = await import('/src/application/liveVoice.ts');
  const {createGameController} = await import('/src/application/controller.ts');
- const s = {source:status.sha, attempts:[], contexts:[], tracks:[], sockets:[], finished:false};
+ const s = {source:status.sha, prepareRequests:0, events:[], attempts:[], contexts:[], tracks:[], sockets:[], finished:false};
  let controller, pendingOpen;
  const makeContext = () => {const c=new AudioContext();s.contexts.push(c);return c};
- const makeSocket = () => {
-  const n = new WebSocket('ws://127.0.0.1:8787/api/voice');s.sockets.push(n);
+ const makeSocket = direct => {
+  const url=direct?new URL(direct.url):new URL('/api/voice',location.href);
+  if(direct){url.searchParams.set('device-id',direct.deviceId);url.searchParams.set('client-id',direct.clientId)}else url.protocol=location.protocol==='https:'?'wss:':'ws:';
+  const n = new WebSocket(url);s.sockets.push(n);
   const w = {get binaryType(){return n.binaryType},set binaryType(x){n.binaryType=x},get readyState(){return n.readyState},onopen:null,onmessage:null,onerror:null,onclose:null,send(d){n.send(typeof d==='string'?d:d.slice().buffer)},close(c,r){n.close(c,r)}};
   n.onopen=()=>w.onopen?.(); n.onmessage=e=>w.onmessage?.({data:e.data}); n.onerror=()=>w.onerror?.();n.onclose=e=>w.onclose?.({code:e.code,reason:e.reason});return w;
  };
  const fixture={id:'latency-probe',title:'连接诊断',summary:'无问答诊断',background:'仅测试连接。',interrogationLimitSeconds:480,characters:[{id:'a',name:'甲',profile:'仅测试连接。'},{id:'b',name:'乙',profile:'仅测试连接。'}],ending:{culpritId:'a',reveal:'诊断'}};
- const voice = {create(scope) {
-  const a={events:[],outcome:'pending'};s.attempts.push(a);
-  const port=createLiveVoicePort({createChannel:o=>v.createVoiceChannel({...o,createSocket:makeSocket}),createPlayer:v.createPcmPlayer,createContext:makeContext,fetchStatus:signal=>fetch('/api/voice/status',{credentials:'same-origin',cache:'no-store',signal:AbortSignal.any([signal,AbortSignal.timeout(10000)])}),openMic:o=>v.openMicrophone({...o,createContext:makeContext,getUserMedia:async constraints=>{const stream=await navigator.mediaDevices.getUserMedia(constraints);s.tracks.push(...stream.getTracks());return stream},onFrame:()=>{}}),onStartup:e=>a.events.push(e)});
+ const port=createLiveVoicePort({createChannel:o=>v.createVoiceChannel({...o,createSocket:()=>makeSocket(o.directConnection)}),createPlayer:v.createPcmPlayer,createContext:makeContext,prepareDevice:signal=>{s.prepareRequests++;return fetch('/api/voice/prepare',{method:'POST',credentials:'same-origin',cache:'no-store',signal})},openMic:o=>v.openMicrophone({...o,createContext:makeContext,getUserMedia:async constraints=>{const stream=await navigator.mediaDevices.getUserMedia(constraints);s.tracks.push(...stream.getTracks());return stream},onFrame:()=>{}}),onStartup:e=>s.events.push(e)});
+ const voice = {prepare:()=>port.prepare(),reset:()=>port.reset(),create(scope) {
+  const a={outcome:'pending'};s.attempts.push(a);
   const c=port.create(scope);
   return {open() {const t=setTimeout(()=>controller.endConversation(),15000);pendingOpen=c.open().then(()=>{a.outcome=scope.isCurrent()?'ready':'cancelled'},()=>{a.outcome='failed'}).finally(()=>clearTimeout(t));return pendingOpen},close(){c.close()}};
  }};

@@ -36,7 +36,9 @@ export interface Conversation {
   close(): void
 }
 
+/** Owned by one game controller; reset before a new case or an explicit retry. */
 export interface VoicePort {
+  reset(): void
   prepare(): Promise<void>
   create(scope: ConversationScope): Conversation
 }

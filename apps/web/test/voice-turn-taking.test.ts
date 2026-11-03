@@ -26,14 +26,13 @@ async function fixture(turnTaking = true, direct = false) {
     },
   }
   const createChannel = vi.fn((options: Parameters<typeof createVoiceChannel>[0]) => createVoiceChannel({ ...options, createSocket: () => socket }))
-  const prepareDevice = vi.fn(async () => direct ? Response.json({ url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: '02:00:00:00:00:01', clientId: 'synthetic-client', token: 'synthetic-device-token', maxSessionSeconds: 600 }) : new Response(null, { status: 204 }))
+  const prepareDevice = vi.fn(async () => direct ? Response.json({ transport: 'direct', url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: '02:00:00:00:00:01', clientId: 'synthetic-client', token: 'synthetic-device-token', maxSessionSeconds: 600 }) : Response.json({ transport: 'relay' }))
   const connection = createLiveVoicePort({
     createChannel,
     createPlayer: createPcmPlayer,
     createContext: () => context as unknown as AudioContext,
     openMic: async options => { mic = options; return { stop: stopMic } },
     prepareDevice,
-    fetchStatus: async () => Response.json({ status: 'ready', transport: direct ? 'direct' : 'relay' }),
   }, turnTaking).create({
     sessionId: 'synthetic', characterId: 'one', voiceId: null, epoch: 1, signal: abort.signal,
     isCurrent: () => current,

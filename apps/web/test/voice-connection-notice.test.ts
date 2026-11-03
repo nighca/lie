@@ -14,7 +14,7 @@ function scene() {
   const attempts: { scope: ConversationScope; ready(): void; fail(): void; closed: boolean }[] = []
   const controller = createGameController({
     readGame: async () => game, now: () => 0, newSessionId: () => 'notice-test',
-    voice: { async prepare() {}, create(scope) {
+    voice: { reset() {}, async prepare() {}, create(scope) {
       let ready = () => {}; let fail = () => {}
       const prepared = new Promise<void>((resolve, reject) => { ready = resolve; fail = () => reject(new Error('Preparation failed')) })
       const attempt = { scope, ready: () => ready(), fail: () => fail(), closed: false }
@@ -179,8 +179,7 @@ it.each(['microphone', 'playback', 'channel'] as const)('hides immediately when 
     createPlayer: () => ({ enqueue() {}, flush() {}, stop() {} }),
     createContext: () => ({ resume: () => last === 'playback' ? gate : Promise.resolve(), close: async () => {} }) as unknown as AudioContext,
     openMic: async () => { if (last === 'microphone') await gate; return { async stop() {} } },
-    prepareDevice: async () => new Response(null, { status: 204 }),
-    fetchStatus: async () => Response.json({ status: 'ready', transport: 'relay' }),
+    prepareDevice: async () => Response.json({ transport: 'relay' }),
   })
   const controller = createGameController({ readGame: async () => game, voice, now: () => 0, newSessionId: () => 'all-ready' })
   const wrapper = mount(App, { props: { controller, characterPresets: [], demo: true } })

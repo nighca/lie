@@ -10,7 +10,6 @@ export function createLiveVoicePort(overrides: {
   createPlayer: typeof createPcmPlayer
   openMic: typeof openMicrophone
   createContext: () => AudioContext
-  fetchStatus: (signal: AbortSignal) => Promise<Response>
   prepareDevice: (signal: AbortSignal) => Promise<Response>
   onPlayback?: PlaybackObserver
   onStartup?: (event: VoiceStartupObservation & { elapsedMs: number }) => void
@@ -22,69 +21,44 @@ export function createLiveVoicePort(overrides: {
     openMic: openMicrophone,
     createContext: () => new AudioContext({ sampleRate: 16000 }),
     ...(import.meta.env.DEV ? { onPlayback: observeVoicePlayback } : {}),
-    fetchStatus: (signal: AbortSignal) => fetch('/api/voice/status', { credentials: 'same-origin', cache: 'no-store', signal }),
     prepareDevice: (signal: AbortSignal) => fetch('/api/voice/prepare', { method: 'POST', credentials: 'same-origin', cache: 'no-store', signal }),
   }
-  let directTransport = false
-  let generation = 0
-  let preparedGeneration: number | null = null
-  let pending: { generation: number; promise: Promise<number> } | null = null
-  async function status(signal: AbortSignal): Promise<boolean> {
-    signal.throwIfAborted()
-    const response = await dependencies.fetchStatus(signal)
-    signal.throwIfAborted()
-    if (!response.ok) throw new VoiceAvailabilityError('check-failed')
-    const result = await response.json()
-    signal.throwIfAborted()
-    if (result?.status !== 'ready') throw new VoiceAvailabilityError(result?.status === 'unavailable' ? 'unavailable' : 'check-failed')
-    if (result.transport !== 'direct' && result.transport !== 'relay') throw new VoiceAvailabilityError('check-failed')
-    return result.transport === 'direct'
-  }
-  async function prepareAttempt() {
-    const signal = AbortSignal.timeout(20000)
-    try {
-      directTransport = await status(signal)
-      if (directTransport) return
-      let response = await dependencies.prepareDevice(signal)
-      if (response.status === 409) {
-        if ((await response.json())?.error !== 'identity-required') throw new VoiceAvailabilityError('check-failed')
-        if (await status(signal) !== directTransport) throw new VoiceAvailabilityError('check-failed')
-        response = await dependencies.prepareDevice(signal)
+  let caseAbort = new AbortController()
+  let preparation: Promise<DirectVoiceConnection | null> | null = null
+  function ensurePrepared(): Promise<DirectVoiceConnection | null> {
+    if (preparation != null) return preparation
+    const signal = AbortSignal.any([caseAbort.signal, AbortSignal.timeout(20000)])
+    preparation = (async () => {
+      try {
+        signal.throwIfAborted()
+        const response = await dependencies.prepareDevice(signal)
+        signal.throwIfAborted()
+        if (response.status === 503) throw new VoiceAvailabilityError('unavailable')
+        if (!response.ok) throw new VoiceAvailabilityError('check-failed')
+        const result = await response.json()
+        signal.throwIfAborted()
+        if (result?.transport === 'relay') return null
+        if (result?.transport !== 'direct') throw new VoiceAvailabilityError('check-failed')
+        return readDirectVoiceConnection(result)
+      } catch (error) {
+        throw error instanceof VoiceAvailabilityError ? error : new VoiceAvailabilityError('check-failed')
       }
-      if (response.status !== 204) throw new VoiceAvailabilityError('check-failed')
-    } catch (error) {
-      throw error instanceof VoiceAvailabilityError ? error : new VoiceAvailabilityError('check-failed')
-    }
-  }
-  function ensurePrepared(): Promise<number> {
-    if (preparedGeneration === generation) return Promise.resolve(generation)
-    if (pending != null) return pending.promise
-    const attempt = ++generation
-    const promise = prepareAttempt().then(() => {
-      if (generation === attempt) preparedGeneration = attempt
-      if (pending?.generation === attempt) pending = null
-      return attempt
-    }, error => {
-      if (pending?.generation === attempt) pending = null
-      throw error
-    })
-    pending = { generation: attempt, promise }
-    return promise
-  }
-  function invalidatePrepared(attempt: number | null) {
-    if (attempt == null || generation !== attempt || preparedGeneration !== attempt) return
-    preparedGeneration = null
-    generation++
+    })()
+    return preparation
   }
   return {
     async prepare() { await ensurePrepared() },
+    reset() {
+      caseAbort.abort()
+      caseAbort = new AbortController()
+      preparation = null
+    },
     create(scope) {
       let openingStarted = false
       let startedAt: number | null = null
       let startupFinished = false
       let firstForwarded = false
-      let preparationGeneration: number | null = null
-      let channelReady = false
+      const caseSignal = caseAbort.signal
       let micReady: Promise<void> | null = null
       const observe = dependencies.onStartup == null ? null : (event: VoiceStartupObservation) => {
         try {
@@ -134,7 +108,7 @@ export function createLiveVoicePort(overrides: {
         }
         feedback()
       }
-      function current() { return !closed && scope.isCurrent() }
+      function current() { return !closed && !caseSignal.aborted && !scope.signal.aborted && scope.isCurrent() }
       function cancelInputResume() {
         if (inputResumeTimer != null) clearTimeout(inputResumeTimer)
         inputResumeTimer = null
@@ -196,7 +170,7 @@ export function createLiveVoicePort(overrides: {
         }],
         onEvent(event) {
           if (!current()) return
-          if (event.type === 'ready') { format = event.format; channelReady = true }
+          if (event.type === 'ready') format = event.format
           if (event.type === 'stt') { interruptAnswer('stt'); scope.onEvent({ type: 'userText', text: event.text }) }
           if (event.type === 'tts') {
             if (event.state === 'start') {
@@ -223,11 +197,9 @@ export function createLiveVoicePort(overrides: {
             try { playing = true; player!.enqueue(event.data, format) } catch { scope.onEvent({ type: 'error' }) }
           }
           if (event.type === 'closed') {
-            if (!channelReady) invalidatePrepared(preparationGeneration)
             finishStartup('failed'); scope.onEvent({ type: 'closed' })
           }
           if (event.type === 'error') {
-            if (!channelReady) invalidatePrepared(preparationGeneration)
             finishStartup('failed')
             scope.onEvent(event.code === 'payload-too-large' ? { type: 'error', reason: 'context-too-large' } : { type: 'error' })
           }
@@ -261,46 +233,16 @@ export function createLiveVoicePort(overrides: {
           report('startup', 'started')
           try {
             if (!current()) return
-            report('status', 'started')
-            try {
-              const attempt = await ensurePrepared()
-              if (!directTransport) preparationGeneration = attempt
-            } catch (error) {
-              if (!current()) { report('status', 'cancelled'); return }
-              report('status', 'failed')
+            report('prepare', 'started')
+            let directConnection: DirectVoiceConnection | null
+            try { directConnection = await ensurePrepared() }
+            catch (error) {
+              if (!current()) { report('prepare', 'cancelled'); return }
+              report('prepare', 'failed')
               throw error
             }
-            if (!current()) { report('status', 'cancelled'); return }
-            report('status', 'completed')
-            let directConnection: DirectVoiceConnection | null = null
-            if (directTransport) {
-              try {
-                const signal = AbortSignal.any([scope.signal, AbortSignal.timeout(20000)])
-                function requestCurrent() {
-                  if (!current() || scope.signal.aborted) return false
-                  if (signal.aborted) throw new VoiceAvailabilityError('check-failed')
-                  return true
-                }
-                let response = await dependencies.prepareDevice(signal)
-                if (!requestCurrent()) return
-                if (response.status === 409) {
-                  if ((await response.json())?.error !== 'identity-required') throw new VoiceAvailabilityError('check-failed')
-                  if (!requestCurrent()) return
-                  if (!await status(signal)) throw new VoiceAvailabilityError('check-failed')
-                  if (!requestCurrent()) return
-                  response = await dependencies.prepareDevice(signal)
-                }
-                if (!requestCurrent()) return
-                if (!response.ok) throw new VoiceAvailabilityError('check-failed')
-                const value = await response.json()
-                if (!requestCurrent()) return
-                directConnection = readDirectVoiceConnection(value)
-              } catch {
-                if (!current() || scope.signal.aborted) return
-                throw new VoiceAvailabilityError('check-failed')
-              }
-            }
-            if (!current() || scope.signal.aborted) return
+            if (!current()) { report('prepare', 'cancelled'); return }
+            report('prepare', 'completed')
             channel = dependencies.createChannel({ ...channelOptions, ...(directConnection == null ? {} : { directConnection }) })
             context = dependencies.createContext()
             player = dependencies.createPlayer(context, answerDrained, (level) => {
@@ -326,10 +268,7 @@ export function createLiveVoicePort(overrides: {
               report('playbackResume', scope.signal.aborted || closed ? 'cancelled' : 'failed')
               throw error
             })
-            const transportReady = channel.open({ signal: scope.signal }).then(() => { channelReady = true }, error => {
-              if (current()) invalidatePrepared(preparationGeneration)
-              throw error
-            })
+            const transportReady = channel.open({ signal: scope.signal })
             await Promise.all([playbackReady, transportReady, micReady])
             if (!current()) return
             channel.startInput()

@@ -30,7 +30,7 @@ async function screen(path = '/', readGame = async (id: string): Promise<unknown
   const voice = vi.fn(() => { throw new Error('Title checks never open voice') })
   const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/:all(.*)*', component: Application }] })
   await router.push(path)
-  const wrapper = mount(Application, { props: { characterPresets: [preset], catalog: [], demo: true, createController: (content: GameDefinition | null) => createGameController({ readGame: content == null ? reads : async () => content, voice: { async prepare() {}, create: voice }, now: () => 0, newSessionId: () => 'title-session' }) }, global: { plugins: [router] } })
+  const wrapper = mount(Application, { props: { characterPresets: [preset], catalog: [], demo: true, createController: (content: GameDefinition | null) => createGameController({ readGame: content == null ? reads : async () => content, voice: { reset() {}, async prepare() {}, create: voice }, now: () => 0, newSessionId: () => 'title-session' }) }, global: { plugins: [router] } })
   cleanup.push(() => wrapper.unmount())
   await settle()
   async function click(text: string) {

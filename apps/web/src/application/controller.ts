@@ -107,6 +107,7 @@ export function createGameController(options: ControllerOptions) {
     session = consumeInterrogationTime(requireSession(), elapsed)
   }
   function stopVoice(interrupted = true) {
+    const preserveError = active == null && voiceStatus === 'error'
     const expired = enabledAt != null && remainingMs() <= 0
     settleTime()
     flushPending(interrupted)
@@ -117,7 +118,7 @@ export function createGameController(options: ControllerOptions) {
     previous?.abort.abort()
     previous?.connection.close()
     busy = false
-    voiceStatus = 'idle'
+    voiceStatus = preserveError ? 'error' : 'idle'
     return expired
   }
   function showExpiry() {
@@ -161,10 +162,11 @@ export function createGameController(options: ControllerOptions) {
     publish()
   }
 
-  async function startConversation() {
+  async function startConversation(retry = false) {
     const current = requireSession()
     if (current.phase !== 'interrogating' || accusationOpen || active != null || getInterrogationRemainingMs(current) <= 0) return
     stopVoice()
+    if (retry) options.voice.reset()
     const epoch = voiceEpoch
     const abort = new AbortController()
     const characterId = current.currentCharacterId!
@@ -196,7 +198,8 @@ export function createGameController(options: ControllerOptions) {
       if (voiceEpoch === epoch && !abort.signal.aborted) {
         if (error instanceof VoiceAvailabilityError) {
           stopVoice()
-          notice = error.reason === 'unavailable' ? '当前环境尚未开放语音体验。' : '暂时无法确认语音服务状态，请检查网络后重试。'
+          voiceStatus = 'error'
+          notice = error.reason === 'unavailable' ? '当前环境尚未开放语音体验。' : '语音准备失败，请检查网络后重试。'
           publish()
         } else acceptEvent({ type: 'error' })
       }
@@ -223,6 +226,8 @@ export function createGameController(options: ControllerOptions) {
     async load(gameId: string) {
       const request = ++loadEpoch
       stopVoice()
+      options.voice.reset()
+      voiceStatus = 'idle'
       session = null
       loadState = 'loading'
       accusationOpen = false
@@ -254,7 +259,7 @@ export function createGameController(options: ControllerOptions) {
       publish()
       if (resume && !expired) void startConversation()
     },
-    startConversation,
+    startConversation() { return startConversation(voiceStatus === 'error') },
     endConversation() {
       if (stopVoice()) showExpiry()
       publish()
@@ -282,6 +287,8 @@ export function createGameController(options: ControllerOptions) {
     },
     restart() {
       stopVoice()
+      options.voice.reset()
+      voiceStatus = 'idle'
       session = restartSession(requireSession(), { sessionId: options.newSessionId(), now: options.now() })
       const request = loadEpoch
       accusationOpen = false
@@ -289,7 +296,7 @@ export function createGameController(options: ControllerOptions) {
       publish()
       if (request === loadEpoch && loadState == null) void options.voice.prepare().catch(() => {})
     },
-    dispose() { ++loadEpoch; stopVoice(); listeners.clear(); feedbackListeners.clear() },
+    dispose() { ++loadEpoch; stopVoice(); options.voice.reset(); listeners.clear(); feedbackListeners.clear() },
   }
 }
 

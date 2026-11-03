@@ -23,8 +23,7 @@ function setupBridge(voiceId: string | null = null, diagnostics: { onPlayback?: 
   let onFrame: (data: Uint8Array) => void = () => {}
   const dependencies = {
     ...diagnostics,
-    prepareDevice: async () => new Response(null, { status: 204 }),
-    fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready', transport: 'relay' }))),
+    prepareDevice: vi.fn(async (_signal: AbortSignal) => Response.json({ transport: 'relay' })),
     createChannel(value: VoiceChannelOptions) { options = value; return channel },
     createPlayer(_context: AudioContext, onIdle: () => void = () => {}, onLevel?: (level: number) => void, onPlayback?: import('@lie/voice').PlaybackObserver, onError: () => void = () => {}) { playbackFailure = onError; expect(onPlayback).toBe(diagnostics.onPlayback); drained = onIdle; outputMeter = onLevel ?? (() => {}); return player },
     openMic: vi.fn(async (value: { onFrame(data: Uint8Array): void; onLevel?: (level: number) => void }): Promise<{ stop(): Promise<void> }> => { onFrame = value.onFrame; inputMeter = value.onLevel ?? (() => {}); return { stop: stopMic } }),
@@ -73,9 +72,9 @@ describe('continuous browser voice and device bridge', () => {
     bridge.connection.close()
   })
 
-  it('reports unavailable before preparing devices or opening WebSocket', async () => {
+  it('rejects unavailable preparation before opening capture or WebSocket', async () => {
     const bridge = setupBridge()
-    bridge.dependencies.fetchStatus.mockResolvedValue(new Response(JSON.stringify({ status: 'unavailable' })))
+    bridge.dependencies.prepareDevice.mockResolvedValue(new Response(null, { status: 503 }))
     await expect(bridge.connection.open()).rejects.toMatchObject({ reason: 'unavailable' })
     expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
     expect(bridge.channel.open).not.toHaveBeenCalled()
@@ -84,8 +83,8 @@ describe('continuous browser voice and device bridge', () => {
 
   it.each(['network', 'unexpected-response', 'null-response', 'http-failure'])('keeps %s failures explicit instead of opening capture', async (failure) => {
     const bridge = setupBridge()
-    if (failure === 'network') bridge.dependencies.fetchStatus.mockRejectedValue(new Error('network'))
-    else bridge.dependencies.fetchStatus.mockResolvedValue(new Response(JSON.stringify(failure === 'null-response' ? null : { status: 'unknown' }), { status: failure === 'http-failure' ? 500 : 200 }))
+    if (failure === 'network') bridge.dependencies.prepareDevice.mockRejectedValue(new Error('network'))
+    else bridge.dependencies.prepareDevice.mockResolvedValue(new Response(JSON.stringify(failure === 'null-response' ? null : { status: 'unknown' }), { status: failure === 'http-failure' ? 500 : 200 }))
     await expect(bridge.connection.open()).rejects.toBeInstanceOf(VoiceAvailabilityError)
     expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
     expect(bridge.channel.open).not.toHaveBeenCalled()
@@ -94,10 +93,10 @@ describe('continuous browser voice and device bridge', () => {
   it('cancels a pending availability check without preparing capture', async () => {
     const bridge = setupBridge()
     let ready!: (response: Response) => void
-    bridge.dependencies.fetchStatus.mockImplementation(() => new Promise((resolve) => { ready = resolve }))
+    bridge.dependencies.prepareDevice.mockImplementation(() => new Promise((resolve) => { ready = resolve }))
     const opening = bridge.connection.open()
     bridge.expire(); bridge.connection.close()
-    ready(new Response(JSON.stringify({ status: 'ready', transport: 'relay' })))
+    ready(new Response(JSON.stringify({ transport: 'relay' })))
     await opening
     expect(bridge.dependencies.openMic).not.toHaveBeenCalled()
     expect(bridge.channel.open).not.toHaveBeenCalled()
@@ -245,13 +244,13 @@ describe('local startup diagnostics', () => {
     const bridge = setupBridge(null, { now: () => now, onStartup: event => events.push(event) })
     let status!: (value: Response) => void
     let channelReady!: () => void
-    bridge.dependencies.fetchStatus.mockImplementation(() => new Promise(resolve => { status = resolve }))
+    bridge.dependencies.prepareDevice.mockImplementation(() => new Promise(resolve => { status = resolve }))
     bridge.channel.open.mockImplementation(() => new Promise(resolve => { channelReady = resolve }))
     const opening = bridge.connection.open()
-    expect(events).toEqual([{ stage: 'startup', result: 'started', elapsedMs: 0 }, { stage: 'status', result: 'started', elapsedMs: 0 }])
+    expect(events).toEqual([{ stage: 'startup', result: 'started', elapsedMs: 0 }, { stage: 'prepare', result: 'started', elapsedMs: 0 }])
     expect(bridge.dependencies.openMic).toHaveBeenCalledTimes(0)
     now = 140
-    status(Response.json({ status: 'ready', transport: 'relay' }))
+    status(Response.json({ transport: 'relay' }))
     await vi.waitFor(() => expect(bridge.channel.open).toHaveBeenCalledOnce())
     expect(bridge.dependencies.openMic).toHaveBeenCalledOnce()
     expect(bridge.context.resume).toHaveBeenCalledOnce()

@@ -4,6 +4,7 @@ import type { VoicePort } from '../application/voice'
 export function createConnectionDemoVoice(readDelay: () => number) {
   let current: { ready(): void; fail(): void } | null = null
   const voice: VoicePort = {
+    reset() {},
     async prepare() {},
     create() {
       let timer: ReturnType<typeof setTimeout> | null = null

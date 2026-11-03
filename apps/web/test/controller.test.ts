@@ -167,7 +167,7 @@ describe('browser orchestration', () => {
     const { controller, voice } = setup()
     voice.create = () => ({ async open() { throw new VoiceAvailabilityError(reason) }, close() {} })
     await controller.load('test'); controller.start(); await controller.startConversation()
-    expect(controller.getView()).toMatchObject({ voiceStatus: 'idle', conversationActive: false, interrogationRemainingMs: 480000 })
+    expect(controller.getView()).toMatchObject({ voiceStatus: 'error', conversationActive: false, interrogationRemainingMs: 480000 })
     expect(controller.getView().notice).toContain(message)
     controller.selectCharacter('two')
     controller.dispose()

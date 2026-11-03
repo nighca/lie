@@ -25,8 +25,7 @@ describe('self-interruption event-path investigation (synthetic audio only)', ()
       createContext: () => context as unknown as AudioContext,
       createPlayer: () => player,
       openMic: async options => { capture = options; return { stop: micStop } },
-      fetchStatus: async () => Response.json({ status: 'ready', transport: 'relay' }),
-      prepareDevice: async () => new Response(null, { status: 204 }),
+      prepareDevice: async () => Response.json({ transport: 'relay' }),
     }).create({
       sessionId: 'offline', characterId: 'one', voiceId: null, epoch: 1,
       signal: new AbortController().signal, isCurrent: () => true,

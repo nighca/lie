@@ -20,7 +20,7 @@ async function prepare(seconds = 10) {
   let peak = 0
   let sequence = 0
   const voice: VoicePort = {
-    async prepare() {},
+    reset() {}, async prepare() {},
     create(scope) {
       const ready = deferred()
       const turn = { scope, ready, closed: false }

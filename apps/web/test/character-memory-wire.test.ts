@@ -45,8 +45,7 @@ describe('character memory through controller, live bridge and MCP wire', () => 
       createContext: () => ({ resume: async () => {}, close: async () => {}, state: 'running' }) as unknown as AudioContext,
       createPlayer: () => ({ enqueue() {}, flush() {}, stop() {} }),
       openMic: async () => ({ stop: async () => {} }),
-      fetchStatus: async () => new Response(JSON.stringify({ status: 'ready', transport: 'relay' })),
-      prepareDevice: async () => new Response(null, { status: 204 }),
+      prepareDevice: async () => Response.json({ transport: 'relay' }),
     })
     let sequence = 0
     const controller = createGameController({ readGame: async () => game, voice: port, newSessionId: () => `session-${++sequence}`, now: () => 100 })

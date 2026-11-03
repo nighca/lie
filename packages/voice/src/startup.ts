@@ -1,5 +1,5 @@
 export type VoiceStartupStage =
-  | 'startup' | 'status' | 'statusHeaders' | 'playbackResume'
+  | 'startup' | 'prepare' | 'playbackResume'
   | 'microphone' | 'worklet' | 'captureResume'
   | 'socket' | 'socketOpen' | 'hello' | 'toolsList' | 'channelReady'
   | 'listenStart' | 'firstForwardedPcm' | 'cleanup'
