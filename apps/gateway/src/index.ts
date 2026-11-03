@@ -2,10 +2,10 @@ import type { InferEnv } from 'cf/config'
 
 import type config from '../cloudflare.config'
 import { sharedGames } from './shared-games'
-import { browserDeviceCookie, deviceProvider, newBrowserDevice, readBrowserDevice, voiceConfigured, VoiceDeviceError } from './browser-device'
+import { browserDeviceCookie, deviceProvider, newBrowserDevice, readBrowserDevice, voiceConfigured, voiceSessionLimitSeconds, voiceTransport, VoiceDeviceError } from './browser-device'
 
 type ConfiguredEnv = InferEnv<ReturnType<typeof config.worker>>
-export type GatewayEnv = Omit<ConfiguredEnv, 'SHARED_GAMES'> & Partial<Pick<ConfiguredEnv, 'SHARED_GAMES'>> & Partial<Record<
+export type GatewayEnv = Omit<ConfiguredEnv, 'SHARED_GAMES' | 'LINX_API_KEY' | 'LINX_WS_TOKEN' | 'VOICE_DEVICE_COOKIE_SECRET' | 'LINX_AGENT_ID'> & Partial<Pick<ConfiguredEnv, 'SHARED_GAMES'>> & Partial<Record<
   'LINX_API_KEY' | 'LINX_WS_TOKEN' | 'VOICE_DEVICE_COOKIE_SECRET' | 'LINX_AGENT_ID', string
 >>
 const upstreamUrl = 'https://xrobo-io.qiniuapi.com/v1/ws/'
@@ -23,10 +23,11 @@ export default {
         const device = await readBrowserDevice(request, env) ?? newBrowserDevice(request, env)
         headers.set('Set-Cookie', await browserDeviceCookie(request, env, device))
       }
-      return Response.json({ status: voiceStatus(env) }, { headers })
+      const status = voiceStatus(env)
+      return Response.json(status === 'ready' ? { status, transport: voiceTransport(env) } : { status }, { headers })
     }
     if (url.pathname === '/api/voice/prepare' && request.method === 'POST') return prepareVoice(request, env)
-    if (url.pathname === '/api/voice' && request.method === 'GET') return relayVoice(request, env)
+    if (url.pathname === '/api/voice' && request.method === 'GET' && voiceTransport(env) === 'relay') return relayVoice(request, env)
     if (url.pathname === '/api/shared-games/v1' || url.pathname.startsWith('/api/shared-games/v1/')) return sharedGames(request, env.SHARED_GAMES)
     if (url.pathname.startsWith('/api/')) return Response.json({ error: 'Not found' }, { status: 404 })
     const response = await env.ASSETS.fetch(request)
@@ -81,8 +82,13 @@ async function prepareVoice(request: Request, env: GatewayEnv): Promise<Response
   if (device == null) return Response.json({ error: 'identity-required' }, { status: 409, headers })
   const signal = AbortSignal.any([request.signal, AbortSignal.timeout(18000)])
   try {
-    await deviceProvider(env, device, signal).prepare()
-    return new Response(null, { status: 204, headers })
+    const token = await deviceProvider(env, device, signal).prepare()
+    if (signal.aborted) return Response.json({ error: 'prepare-timeout' }, { status: 504, headers })
+    if (voiceTransport(env) === 'relay') return new Response(null, { status: 204, headers })
+    return Response.json({
+      url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: device.deviceId, clientId: device.clientId,
+      token, maxSessionSeconds: voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS)
+    }, { headers })
   } catch (error) {
     const status = signal.aborted ? 504 : error instanceof VoiceDeviceError ? error.status === 409 ? 502 : error.status : 502
     return Response.json({ error: status === 504 ? 'prepare-timeout' : 'provider-unavailable' }, { status, headers })
@@ -94,10 +100,10 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
   if (request.headers.get('Origin') !== new URL(request.url).origin || new URL(request.url).search !== '') {
     return new Response('Forbidden', { status: 403 })
   }
-  const status = voiceStatus(env)
-  if (status === 'unavailable') return new Response('Voice unavailable', { status: 503 })
   const sessionLimitSeconds = voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS)
   if (sessionLimitSeconds == null) return new Response('Invalid voice session limit configuration', { status: 500 })
+  const status = voiceStatus(env)
+  if (status === 'unavailable') return new Response('Voice unavailable', { status: 503 })
   const device = await readBrowserDevice(request, env)
   if (device == null) return new Response('Voice identity required', { status: 409 })
   let response: Response
@@ -136,12 +142,6 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
   const [client, server] = Object.values(new WebSocketPair())
   relaySockets(server, upstream, sessionLimitSeconds)
   return new Response(null, { status: 101, webSocket: client })
-}
-
-function voiceSessionLimitSeconds(value = '600'): number | null {
-  if (!/^[1-9][0-9]*$/.test(value)) return null
-  const seconds = Number(value)
-  return Number.isSafeInteger(seconds) && seconds <= Math.floor(0x7fffffff / 1000) ? seconds : null
 }
 
 /** Owns both accepted sockets for one bounded conversation; no shared connection state. */

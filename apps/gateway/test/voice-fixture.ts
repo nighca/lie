@@ -5,7 +5,7 @@ import { Miniflare } from 'miniflare'
 import { workerScript } from './worker-script'
 
 export const testOrigin = 'https://game.example'
-export const credentials = { LINX_API_KEY: 'fake-management-key', LINX_WS_TOKEN: 'fake-shared-token', LINX_AGENT_ID: 'test-agent', VOICE_DEVICE_COOKIE_SECRET: 'test-cookie-signing-key-at-least-32-bytes', VOICE_DEVICE_ENVIRONMENT: 'test' }
+export const credentials = { VOICE_TRANSPORT: 'relay', LINX_API_KEY: 'fake-management-key', LINX_WS_TOKEN: 'fake-shared-token', LINX_AGENT_ID: 'test-agent', VOICE_DEVICE_COOKIE_SECRET: 'test-cookie-signing-key-at-least-32-bytes', VOICE_DEVICE_ENVIRONMENT: 'test' }
 export const fakeLinx = `
 const devices = new Map();
 const sockets = new Map();

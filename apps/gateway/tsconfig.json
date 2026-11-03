@@ -1,5 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": { "lib": ["ES2022"], "types": ["@cloudflare/workers-types", "node"] },
-  "include": ["src/**/*.ts", "test/**/*.ts", "cloudflare.config.ts", "vite.config.ts", "vitest.config.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts", "cloudflare.config.ts", "vite.config.ts", "direct-preview.vite.config.ts", "vitest.config.ts"]
 }

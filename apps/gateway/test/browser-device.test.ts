@@ -100,3 +100,28 @@ it('rejects an erroring request stream without reaching the provider', async () 
     expect(fetch).not.toHaveBeenCalled()
   } finally { globalThis.fetch = previous }
 })
+
+
+it.each(['ota', 'ownership'])('does not return a direct token after cancellation during %s', async stage => {
+  const { default: gateway } = await import('../src/index')
+  const one = await signedRequest()
+  const abort = new AbortController()
+  let finish!: (response: Response) => void
+  const previous = globalThis.fetch
+  try {
+    const delayed = () => new Promise<Response>(resolve => { finish = resolve })
+    const provider = vi.fn().mockImplementationOnce(stage === 'ota' ? delayed : async () => Response.json({ websocket: { token: 'private-ota-token' } }))
+    if (stage === 'ownership') provider.mockImplementationOnce(delayed)
+    globalThis.fetch = provider
+    const result = gateway.fetch(new Request('https://game.example/api/voice/prepare', {
+      method: 'POST', headers: { Origin: 'https://game.example', Cookie: one.cookie }, signal: abort.signal
+    }), { ...env, VOICE_TRANSPORT: 'direct' })
+    await vi.waitFor(() => expect(finish).toBeTypeOf('function'))
+    abort.abort()
+    finish(Response.json(stage === 'ota' ? { websocket: { token: 'private-ota-token' } } : { code: 0, data: [{ id: one.device.deviceId, agentId: env.LINX_AGENT_ID }] }))
+    const response = await result
+    expect(response.status).toBe(504)
+    expect(await response.json()).toEqual({ error: 'prepare-timeout' })
+    expect(provider).toHaveBeenCalledTimes(stage === 'ota' ? 1 : 2)
+  } finally { globalThis.fetch = previous }
+})

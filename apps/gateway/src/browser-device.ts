@@ -26,9 +26,20 @@ function cookieName(request: Request) { return loopback(request) ? 'lie-device-d
 function environment(request: Request, env: GatewayEnv) {
   return `${env.VOICE_DEVICE_ENVIRONMENT}:${loopback(request) ? 'development' : 'https'}`
 }
+export function voiceTransport(env: GatewayEnv): 'direct' | 'relay' | null {
+  return env.VOICE_TRANSPORT === 'direct' || env.VOICE_TRANSPORT === 'relay' ? env.VOICE_TRANSPORT : null
+}
+export function voiceSessionLimitSeconds(value = '600'): number | null {
+  if (!/^[1-9][0-9]*$/.test(value)) return null
+  const seconds = Number(value)
+  return Number.isSafeInteger(seconds) && seconds <= Math.floor(0x7fffffff / 1000) ? seconds : null
+}
 export function voiceConfigured(env: GatewayEnv) {
-  return Boolean(env.LINX_API_KEY && env.LINX_WS_TOKEN && env.LINX_AGENT_ID && env.VOICE_DEVICE_COOKIE_SECRET &&
-    encoder.encode(env.VOICE_DEVICE_COOKIE_SECRET).byteLength >= 32 && env.VOICE_DEVICE_ENVIRONMENT)
+  const transport = voiceTransport(env)
+  return transport != null && voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS) != null && Boolean(
+    env.LINX_API_KEY && env.LINX_AGENT_ID && env.VOICE_DEVICE_COOKIE_SECRET &&
+    encoder.encode(env.VOICE_DEVICE_COOKIE_SECRET).byteLength >= 32 && env.VOICE_DEVICE_ENVIRONMENT &&
+    (transport === 'direct' || env.LINX_WS_TOKEN))
 }
 function encode(bytes: Uint8Array) { return btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '') }
 function decode(value: string) {
@@ -130,11 +141,11 @@ export function deviceProvider(env: GatewayEnv, device: BrowserDevice, signal: A
       [value.macAddress, value.id].some(mac => typeof mac === 'string' && mac.toLowerCase() === device.deviceId) && value.agentId === env.LINX_AGENT_ID)
   }
   return {
-    async prepare() {
+    async prepare(): Promise<string> {
       const first = await ota()
       if (first.token != null) {
         if (!await belongsToAgent()) throw new VoiceDeviceError(502, 'device-ownership')
-        return
+        return first.token
       }
       let bindError: VoiceDeviceError | null = null
       try {
@@ -148,6 +159,7 @@ export function deviceProvider(env: GatewayEnv, device: BrowserDevice, signal: A
       }
       const confirmed = await ota()
       if (confirmed.token == null || (bindError != null && !await belongsToAgent())) throw bindError ?? new VoiceDeviceError(502, 'device-not-prepared')
+      return confirmed.token
     },
     async token() {
       const result = await ota()

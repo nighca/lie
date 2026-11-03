@@ -97,7 +97,7 @@ describe('gateway in workerd', () => {
     const upstream = await checked.getWorker('upstream')
     const response = await checked.dispatchFetch(`${testOrigin}/api/voice/status`)
     expect(response.status).toBe(200)
-    expect(await response.json()).toEqual({ status: 'ready' })
+    expect(await response.json()).toEqual({ status: 'ready', transport: 'relay' })
     expect(response.headers.get('Cache-Control')).toBe('no-store')
     expect(response.headers.get('Set-Cookie')).toContain('HttpOnly')
     expect(await (await upstream.fetch('https://upstream.test/count')).json()).toEqual({ calls: 0 })
