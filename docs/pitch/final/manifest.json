@@ -1,0 +1,192 @@
+{
+  "status": "user-accepted",
+  "acceptedDate": "2026-11-03",
+  "version": "V14",
+  "pdf": {
+    "path": "docs/pitch/final/LIE-roadshow-v14.pdf",
+    "bytes": 7863949,
+    "sha256": "3f6fcf1c3503ffd0a3b7745387f66fc9063278924b79301e57e8af937c8db9f2",
+    "pages": 16,
+    "pageSizePoints": [
+      960,
+      540
+    ]
+  },
+  "sourceCommit": "91b405db19444811fc1b8dc58f2cc00310b646c0",
+  "userDecision": "OK 这个版本我没啥问题了，推进把这版 PDF（和其他你觉得需要持久化的材料）合入主干并 push 到仓库吧",
+  "scope": "Final PDF visual acceptance and repository archival/integration/push; does not establish live projection, audio or product-demo rehearsal acceptance.",
+  "sourceFiles": [
+    {
+      "path": "docs/pitch/build-deck-v14.mjs",
+      "sha256": "5329cfaaadf88e4a971199330ffffa4efd1565241519f0d610acb2f49ff4afd3"
+    },
+    {
+      "path": "docs/pitch/package-pdf-v14.py",
+      "sha256": "6b20d81e273ca2eb3e0dc7120b1446ef2eea8055d034acbf24ce616d8df827e5"
+    },
+    {
+      "path": "docs/pitch/role-fan-v14.mjs",
+      "sha256": "a661982913ea008d43058576e70c28ee324f629d6a95e461f7001029f726d4cb"
+    },
+    {
+      "path": "docs/pitch/render-game-json-v11.py",
+      "sha256": "c98c266cb309fcccb560d56615c4dfd3fa5b523a1c1320d6aff78d75ee12f382"
+    },
+    {
+      "path": "docs/pitch/engineering-evidence-v6.md",
+      "sha256": "b30fb5f0c85640de54b26ee68d885af2c74bd017296a52b52afca1a1d0172e32"
+    },
+    {
+      "path": "docs/pitch/engineering-output-evidence-v11.md",
+      "sha256": "dc938182f65e101b0367a9dd979a55c83fc61396679d182a5e84df61f2636636"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "path": "design/brand/logo.svg",
+      "sha256": "162d54b712d988ecf64de7b9ea823c1186407f41b1be6be168698859e57221fb"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-03/webmcp-entry.jpg",
+      "sha256": "12dde198414ee7f852d62028e429ba0c868febb139653d66042885bad1b73cad"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-06/cover-C.jpg",
+      "sha256": "eb456fdfaa9cb7c0f5285b66b080ee5ae840fc294e3ec0bf1a2713004c26baa0"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-06/investigation-dialogue.jpg",
+      "sha256": "6e2a1ce69508cffcae3cdab74448c2863abbc7e6c7b9e9320736fd9c3c420d62"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-06/webmcp-before.jpg",
+      "sha256": "256ab7c8091d679d4e0d7109d7c498c6bb6698d6a827aeb2455db48d050901fb"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-06/webmcp-after.jpg",
+      "sha256": "12dde198414ee7f852d62028e429ba0c868febb139653d66042885bad1b73cad"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-07/result-success.jpg",
+      "sha256": "580ade7ed7ff4471d87efea15011983b4517a4e7fe37b912809a07dfb7d7a830"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-07/result-failure.jpg",
+      "sha256": "484656d22af7702d592e3414d0f05c21345dc214336a9bfa75920d2e567dd5d7"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-08/webmcp-design-excerpt.jpg",
+      "sha256": "ae505447289779a96e69874b7b3497192f81a47a93d1ffbf4a433f2a50b14855"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-11/builtin-game-json.png",
+      "sha256": "73279a723d5626c8dba54c7afaf6a80e5e47191997ab2a422f1b3689b7305b3e"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/default.png",
+      "sha256": "0ad2f768f9f807dd24a6b046987d48769c8a586c047bf3bd876f0cb57752bcfe"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/listening.png",
+      "sha256": "e973cbefcf45c56f24194f684261916f442a0006a103c3df31c2190a09ef4bea"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/waiting.png",
+      "sha256": "2b838b4611a02db67373a5b704e39c108b6b3561a428b5ec287057e254c4a62e"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/speaking.png",
+      "sha256": "ba2df466dad419d3a7cda3bbff7745dc13e085497380467a320884f759d9300d"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/accused-correctly.png",
+      "sha256": "a0eb5e5078a73f9f264cd0af8ea3927e5fe574d08443437be04d085db1546647"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/accused-wrongly.png",
+      "sha256": "ff0020fbfe45a86fb1e9b442d42604b9ca4eca01bd257036676729bcf6abc567"
+    },
+    {
+      "path": "design/character-presets/assets/blue-glasses/listening.png",
+      "sha256": "7b4316cc472819c0bcae016233e190c6430944c94001de8b2880747fd8969f46"
+    },
+    {
+      "path": "design/character-presets/assets/blue-glasses/speaking.png",
+      "sha256": "219b1ff733c7d2afce9e6e25fd2e955f4ea04035fafdf429bd4aa47cb0cdb39c"
+    },
+    {
+      "path": "design/character-presets/assets/plum-crop/default.png",
+      "sha256": "6882fdb4feaf3b4e9daa6de266a8df57c521906af1120c09cb4b6e5291b09c74"
+    },
+    {
+      "path": "design/character-presets/assets/plum-crop/listening.png",
+      "sha256": "92b62ffcf2ffdaed406bf1644562e1d16d41a575c1843eda936d023f1ab20a78"
+    },
+    {
+      "path": "design/character-presets/assets/plum-crop/accused-correctly.png",
+      "sha256": "e2cd98ae59b427c28d30b769d0a3998c1904d22946e987a9fde48b46ea873722"
+    },
+    {
+      "path": "design/character-presets/assets/sunny-moustache/speaking.png",
+      "sha256": "e5d2fea1e8a173a8030357753ddfc6f3ab2efc9d1f667ca2044688dcb39f7854"
+    },
+    {
+      "path": "design/character-presets/assets/silver-bun/accused-wrongly.png",
+      "sha256": "f34ee337ce3c1c1cb4a9d9fc12e819d8dbb36f0144df1ad7dfad04f1a6a339e2"
+    },
+    {
+      "path": "design/character-presets/assets/salt-pepper-beard/waiting.png",
+      "sha256": "ca3ef9c3872e101df164b3b2a993c4c0e02a8d4c2134941921f58ec61e1652bf"
+    },
+    {
+      "path": "design/character-presets/assets/mint-puffs/speaking.png",
+      "sha256": "19cc842e30cdab98b0bdb6c5d15135da5d19bb6a04f189be8308cbec82125ac9"
+    },
+    {
+      "path": "design/character-presets/assets/ochre-freckles/default.png",
+      "sha256": "b31013bc49144a7fb96a7d3304d025bbef9a4b5fe20a896caf4889c8f320595d"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/animation/parts/head.png",
+      "sha256": "fb92081b74134fd8397e0239f2a9603bb8b99f06ee82efc6ed1ce129e3ca925e"
+    },
+    {
+      "path": "design/character-presets/assets/coral-bob/animation/parts/body.png",
+      "sha256": "cbb674ca5531a36caa2355f613ad7e5247817b256aa8adde261decc75b32ce27"
+    }
+  ],
+  "supportingFiles": [
+    {
+      "path": "docs/pitch/presenter-guide.md",
+      "sha256": "6bf3cc2f5f5807a60233cf28fa862a2c7eb3494b10fa50d722a8964f03a4f8b9"
+    },
+    {
+      "path": "docs/pitch/content-notes.md",
+      "sha256": "143b3ef098917ddb9dc3eea036a14813a255d537c48f1ede885ef1ae4fb279a1"
+    },
+    {
+      "path": "docs/pitch/outline-v14.md",
+      "sha256": "207390fe719c9b378a18dd09b9017e71e94c206d28b98f7f37023284b1b063b3"
+    },
+    {
+      "path": "docs/pitch/evidence/revision-11/json-source.json",
+      "sha256": "15fe3a6a10889ac87f5703fca7f1e448cc249cf8506d1d0c2a86a22c28ffcd78"
+    },
+    {
+      "path": "content/games/01-empty-medal-box.json",
+      "sha256": "8e13af7c7f4897c6c1031a277d1a5ba9adf67ddb3f2a56ef0b524617c13d6e3a"
+    }
+  ],
+  "reproductionEnvironment": {
+    "bundleVersion": "26.1026.10807",
+    "nodePackages": [
+      "@oai/artifact-tool",
+      "sharp"
+    ],
+    "pythonPackages": [
+      "reportlab"
+    ],
+    "font": "Hiragino Sans GB",
+    "scope": "Environment dependencies are not bundled in Git; canonical PDF is self-contained."
+  }
+}
