@@ -14,7 +14,7 @@
 - [最终制作源](../build-deck-v14.mjs)、[三层角色布局](../role-fan-v14.mjs)、[PDF打包脚本](../package-pdf-v14.py)。源代码含逐页讲述备注、素材路径与事实来源；[内部备稿](../content-notes.md)保存完整统计定义。
 - [最后一轮反馈](../revision-14-feedback.md)、[交接与检查](../revision-14-handoff.md)、[最后三页阅图](../evidence/revision-14/README.md)。更早C方向/截图/设计方案与决定按原路径和Git历史保留，不与最终状态混用。
 - [Agent统计原始方法](../engineering-evidence-v6.md)、[文档372的去重与分类](../engineering-output-evidence-v11.md)。原始时长/覆盖记录不因显示取整而改变；无需重新读取私人聊天才能理解本次统计口径。
-- [真实JSON视窗生成脚本](../render-game-json-v11.py)及[原文/hash记录](../evidence/revision-11/json-source.json)。角色/品牌原画来自仓库`design/`正式资源，不改变像素或上传新媒体。
+- [真实JSON视窗生成脚本](../render-game-json-v11.py)及[原文/hash记录](../evidence/revision-11/json-source.json)。其原文来自历史 `content/games/01-empty-medal-box.json`，当前 `content/games/03-empty-medal-box.json` 与其同blob；旧renderer按旧树路径保留，不在新main直接重跑，见[历史制作路径](../README.md#历史制作路径)。V14重建使用已入库PNG，不依赖执行该历史renderer。角色/品牌原画来自仓库`design/`正式资源，不改变像素或上传新媒体。
 
 ## 重新制作
 

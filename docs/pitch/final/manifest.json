@@ -173,8 +173,9 @@
       "sha256": "15fe3a6a10889ac87f5703fca7f1e448cc249cf8506d1d0c2a86a22c28ffcd78"
     },
     {
-      "path": "content/games/01-empty-medal-box.json",
-      "sha256": "8e13af7c7f4897c6c1031a277d1a5ba9adf67ddb3f2a56ef0b524617c13d6e3a"
+      "path": "content/games/03-empty-medal-box.json",
+      "sha256": "8e13af7c7f4897c6c1031a277d1a5ba9adf67ddb3f2a56ef0b524617c13d6e3a",
+      "historicalSourcePath": "content/games/01-empty-medal-box.json"
     }
   ],
   "reproductionEnvironment": {
