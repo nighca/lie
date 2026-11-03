@@ -20,7 +20,7 @@ Local configuration and service startup require a current service turn; the user
 
 ## Server configuration and rollout
 
-This source defaults to browser direct transport. The formal candidate must first be deployed to the approved Cloudflare preview and explicitly accepted by the user at that same candidate SHA before main integration and production publication. See the [per-case preparation plan](../../docs/reviews/voice-case-prepare-2026-11-03/README.md); source/build checks do not claim that rollout has happened.
+Browser direct transport and per-case preparation were released at `7ff0824` after the user explicitly accepted the same preview SHA. See the [release verification](../../docs/releases/2026-11-03-direct-voice.md) for the completed rollout and the [per-case preparation plan](../../docs/reviews/voice-case-prepare-2026-11-03/README.md) for the retained design and historical gates.
 
 | Binding | Meaning |
 | --- | --- |
@@ -43,7 +43,7 @@ Prepare and relay WS reject query parameters and require exact same Origin. Prep
 | Endpoint | Behavior |
 | --- | --- |
 | `GET /api/health` | Health/storage plus `voice:{status:"ready",transport:"direct"\|"relay"}` or `voice:{status:"unavailable"}`. Configuration only: no Cookie, OTA, bind or WS. |
-| `POST /api/voice/prepare` | Empty body. Reuses a valid signed Cookie or creates an identity in this request. Direct returns `{transport:"direct",url,deviceId,clientId,token,maxSessionSeconds}` after preparation/ownership checks; relay returns `{transport:"relay"}`. Signs/renews the same identity on success and provider failure. Bad body400, origin403, unavailable503, provider failure502/503, timeout504. |
+| `POST /api/voice/prepare` | Empty body. Reuses a valid signed Cookie or creates an identity in this request. Direct returns `{transport:"direct",url,deviceId,clientId,token,maxSessionSeconds}` after preparation/ownership checks; relay returns `{transport:"relay"}`. Signs/renews the same identity on success and provider failure. Bad body400, origin403, configuration unavailable503, provider preparation failure502, timeout504. |
 | `GET /api/voice` | Direct mode404. Explicit relay mode retains WebSocket upgrade, shared-token first attempt and only401-triggered same-Device OTA + one retry. Plain relay HTTP426. |
 | `/api/shared-games/v1…` | Separate R2-backed API. Other `/api/*` returns404. There is no `/api/voice/status` or `/api/voice/connection` endpoint. |
 

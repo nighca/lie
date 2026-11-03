@@ -1,0 +1,147 @@
+{
+  "completedAt": "2026-11-03T05:58:07.784Z",
+  "scope": "Only direct-test-20261103, its exact owned Agent and Agent-scoped Devices, and closing research PR5 with its automatic preview cleanup",
+  "provider": {
+    "completed": true,
+    "unboundDevices": 7,
+    "allIndividuallyOwnershipChecked": true,
+    "emptyBeforeAgentDelete": true,
+    "agentDelete": {
+      "status": 200,
+      "code": 0,
+      "confirmed": true,
+      "readback": {
+        "status": 200,
+        "code": 500,
+        "dataNull": true,
+        "notFoundRecognized": true
+      }
+    },
+    "bindingsAfterDeletion": {
+      "status": 200,
+      "code": 0,
+      "empty": true
+    },
+    "noOtherAgentAccessed": true,
+    "noOtaOrWebSocket": true
+  },
+  "platform": {
+    "direct": {
+      "absent": true,
+      "http404": true,
+      "previewNotFound": true
+    },
+    "pr5": {
+      "absent": true,
+      "http404": true,
+      "previewNotFound": true
+    },
+    "parentUnchanged": true,
+    "sharedDomainUnchanged": true,
+    "productionVersionUnchanged": true,
+    "productionR2BindingPreserved": true,
+    "productionNamespace": "production",
+    "productionTransport": "direct"
+  },
+  "github": {
+    "pr": {
+      "number": 5,
+      "state": "closed",
+      "merged": false,
+      "head": "7f90b173e0b4df4a48380dc1821decd4974346d5",
+      "branch": "codex/linx-direct-websocket",
+      "branchRetained": true
+    },
+    "producer": {
+      "id": 41586651294,
+      "event": "pull_request",
+      "head": "7f90b173e0b4df4a48380dc1821decd4974346d5",
+      "conclusion": "success"
+    },
+    "publisher": {
+      "id": 41586665143,
+      "event": "workflow_run",
+      "head": "7ff082483481f9e94979eb867c2ca575d5eff8b3",
+      "conclusion": "success",
+      "jobId": 125753744827,
+      "cleanupSteps": [
+        {
+          "name": "Confirm this PR is still closed before removal",
+          "conclusion": "success"
+        },
+        {
+          "name": "Remove only the closed PR's native Preview",
+          "conclusion": "success"
+        },
+        {
+          "name": "Mark the removed preview inactive",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "mainUnchanged": "7ff082483481f9e94979eb867c2ca575d5eff8b3"
+  },
+  "production": {
+    "source": "7ff082483481f9e94979eb867c2ca575d5eff8b3",
+    "clean": true,
+    "homeStatus": 200,
+    "jsStatus": 200,
+    "healthStatus": 200,
+    "health": {
+      "status": "ok",
+      "storage": "r2",
+      "voice": {
+        "status": "ready",
+        "transport": "direct"
+      }
+    },
+    "noProviderRequests": true
+  },
+  "publicDirectUrls": {
+    "stableStatus": 404,
+    "latestImmutableStatus": 500,
+    "nativeApi404Authoritative": true,
+    "immutableHttp500NotReportedAs404": true
+  },
+  "materials": {
+    "removedCredentialCopies": [
+      "tmp/formal-direct/private/runtime-values.json",
+      "tmp/formal-direct/staging/.cloudflare/output/v0/workers/default/worker.config.json",
+      "tmp/case-prepare-7ff/private/runtime-values.json",
+      "tmp/case-prepare-7ff/staging/.cloudflare/output/v0/workers/default/worker.config.json"
+    ],
+    "retained": "Original resource ledger; per-round private Device/ownership/attempt records; sanitized deployment/cleanup receipts; private workflow logs; all source branches/worktrees/history",
+    "originalLedgerByteUnchanged": true,
+    "userOriginalApiKeyFileUntouched": true,
+    "noDirectoriesDeleted": true
+  },
+  "limits": {
+    "noNewAgentOrDevice": true,
+    "noPrepareOtaWebSocketMicInference": true,
+    "noAccountWideScan": true,
+    "noOtherAgentAccessed": true,
+    "noManualPr5Delete": true,
+    "noRetryOrForceReferenceDelete": true
+  },
+  "resources": {
+    "sharedParentDomainR2Preserved": true,
+    "otherPreviewsUntouched": true,
+    "remainingUnknownOrMixedBindings": 0
+  },
+  "source": {
+    "head": "7ff082483481f9e94979eb867c2ca575d5eff8b3",
+    "mainAndProductionUnchanged": true,
+    "workingTreeClean": true,
+    "noGitMutation": true
+  },
+  "services": {
+    "browserStarted": false,
+    "temporaryServiceStarted": false,
+    "ownedRetainedBrowserOrService": false
+  },
+  "notes": [
+    "Provider Agent deletion readback is HTTP200/code500 with explicit not-found and null data, not HTTP404.",
+    "Unbind removes the seven confirmed bindings; no claim is made about provider historical record retention or unmeasured token revocation.",
+    "GitHub connector close returned explicit403; one gh API close succeeded without changing title/body/head or deleting branch."
+  ]
+}
