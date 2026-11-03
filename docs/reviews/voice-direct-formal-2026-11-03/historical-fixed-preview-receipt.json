@@ -1,0 +1,204 @@
+{
+  "status": "historical-fixed-device-experiment; not formal per-browser acceptance",
+  "capturedDate": "2026-11-03",
+  "endpoint": "wss://xrobo-io.qiniuapi.com/v1/ws2",
+  "build": {
+    "source": "ba68c6455f1b7e997abbe34e3e38b746689f826a",
+    "clean": true,
+    "previewBuild": {
+      "isPreview": true,
+      "mode": "preview"
+    },
+    "bindingTypes": {
+      "ASSETS": "assets",
+      "PRIVATE_PREVIEW_DEVICE_ID": "secret",
+      "PRIVATE_PREVIEW_CLIENT_ID": "secret",
+      "PRIVATE_PREVIEW_EXPIRES_AT": "text"
+    },
+    "js": "/assets/index-CgYNkIrI.js",
+    "jsSha256": "d621b2498b53759f1816872560216bb3f8103f6434aed043945105edf9b00326",
+    "jsBytes": 281094,
+    "htmlSha256": "e1db38c687982fab87ade1817f57178fdcc245e73e7cd2f9fd240b19b1201dae",
+    "workerSha256": "583be9c9ce90119d231ac2194b5a6adce32b41e9cc0580e34c57ded4db356b42",
+    "workerBytes": 32416
+  },
+  "platform": {
+    "oldDeployment": "b134ad51-108b-4740-af20-4a487e3bee23",
+    "cliDeployment": {
+      "id": "0a162a30-abef-4565-b98d-8f8dcb679bb5",
+      "number": 2,
+      "latestMatches": true,
+      "urls": [
+        "https://0a162a30.preview.lie.agency",
+        "https://0a162a30-lie-pr-preview.nighca.workers.dev"
+      ],
+      "modules": [
+        {
+          "name": "index.js",
+          "bytes": 32416,
+          "sha256": "583be9c9ce90119d231ac2194b5a6adce32b41e9cc0580e34c57ded4db356b42"
+        }
+      ],
+      "envTypes": {
+        "ASSETS": "assets",
+        "PRIVATE_PREVIEW_CLIENT_ID": "secret_text",
+        "PRIVATE_PREVIEW_DEVICE_ID": "secret_text",
+        "PRIVATE_PREVIEW_EXPIRES_AT": "plain_text",
+        "VOICE_DEVICE_COOKIE_SECRET": "secret_text"
+      },
+      "expiryUnchanged": true,
+      "needsPatch": true,
+      "extras": [
+        "VOICE_DEVICE_COOKIE_SECRET"
+      ],
+      "configuration": {
+        "main_module": "index.js",
+        "compatibility_date": "2026-10-23",
+        "compatibility_flags": [
+          "enable_request_signal"
+        ],
+        "limits": {
+          "cpu_ms": 30000
+        },
+        "assets": {
+          "config": {
+            "html_handling": "auto-trailing-slash",
+            "not_found_handling": "single-page-application",
+            "run_worker_first": [
+              "/api/*",
+              "/games/*",
+              "/static/*",
+              "/assets/*"
+            ],
+            "base_path": "/"
+          }
+        }
+      }
+    },
+    "patch": {
+      "id": "4cdff3cd-efa1-4bd9-b7ad-e72426c9e336",
+      "number": 3,
+      "created_on": "2026-11-03T03:20:49.425449Z",
+      "performedOnce": true,
+      "reason": "Only original Cookie signing secret was inherited"
+    },
+    "finalDeployment": {
+      "id": "4cdff3cd-efa1-4bd9-b7ad-e72426c9e336",
+      "number": 3,
+      "latestMatches": true,
+      "urls": [
+        "https://4cdff3cd.preview.lie.agency",
+        "https://4cdff3cd-lie-pr-preview.nighca.workers.dev"
+      ],
+      "envTypes": {
+        "ASSETS": "assets",
+        "PRIVATE_PREVIEW_CLIENT_ID": "secret_text",
+        "PRIVATE_PREVIEW_DEVICE_ID": "secret_text",
+        "PRIVATE_PREVIEW_EXPIRES_AT": "plain_text"
+      },
+      "modules": [
+        {
+          "name": "index.js",
+          "bytes": 32416,
+          "sha256": "583be9c9ce90119d231ac2194b5a6adce32b41e9cc0580e34c57ded4db356b42"
+        }
+      ],
+      "modulesEqualCli": true,
+      "configurationEqualCli": true,
+      "expiryUnchanged": true,
+      "parentEmptyUnchanged": true,
+      "pr5DeploymentUnchanged": true
+    }
+  },
+  "http": [
+    {
+      "origin": "https://direct-test-20261103.preview.lie.agency",
+      "paths": [
+        {
+          "path": "/",
+          "status": 200,
+          "noSetCookie": true
+        },
+        {
+          "path": "/editor",
+          "status": 200,
+          "noSetCookie": true
+        },
+        {
+          "path": "/api/health",
+          "status": 200,
+          "noSetCookie": true
+        },
+        {
+          "path": "/api/voice/status",
+          "status": 200,
+          "noSetCookie": true
+        }
+      ],
+      "js": "/assets/index-CgYNkIrI.js",
+      "jsSha256": "d621b2498b53759f1816872560216bb3f8103f6434aed043945105edf9b00326",
+      "embeddedSource": "ba68c6455f1b7e997abbe34e3e38b746689f826a",
+      "removedConnectionPost": 404
+    },
+    {
+      "origin": "https://4cdff3cd.preview.lie.agency",
+      "paths": [
+        {
+          "path": "/",
+          "status": 200,
+          "noSetCookie": true
+        },
+        {
+          "path": "/editor",
+          "status": 200,
+          "noSetCookie": true
+        },
+        {
+          "path": "/api/health",
+          "status": 200,
+          "noSetCookie": true
+        },
+        {
+          "path": "/api/voice/status",
+          "status": 200,
+          "noSetCookie": true
+        }
+      ],
+      "js": "/assets/index-CgYNkIrI.js",
+      "jsSha256": "d621b2498b53759f1816872560216bb3f8103f6434aed043945105edf9b00326",
+      "embeddedSource": "ba68c6455f1b7e997abbe34e3e38b746689f826a",
+      "removedConnectionPost": 404
+    }
+  ],
+  "noInputChannel": {
+    "microphoneInvokedByProbe": false,
+    "listenSent": false,
+    "binaryFramesSent": 0,
+    "badOriginStatus": 403,
+    "health": {
+      "status": "ok",
+      "storage": "none"
+    },
+    "relayStatus": 404,
+    "status": {
+      "status": "ready",
+      "transport": "direct"
+    },
+    "prepareStatus": 200,
+    "descriptorNoStore": true,
+    "fixedIdentityMatch": true,
+    "channelReady": true,
+    "providerSockets": 1,
+    "relaySockets": 0,
+    "prepareRequests": 1,
+    "socketClosed": true,
+    "sameOriginCookies": 0,
+    "browserClosed": true
+  },
+  "limitations": [
+    "No microphone, listen, audio input or inference.",
+    "Fixed Device identity; does not establish per-browser isolation.",
+    "Not a /v1/ws/ endpoint check or user voice/iPad acceptance.",
+    "Raw credentials, Device/Client values, Cookie/token and private ledger are omitted."
+  ]
+}

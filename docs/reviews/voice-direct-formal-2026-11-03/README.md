@@ -11,7 +11,7 @@
 1. `GET /api/voice/status` 保留主干签名 Cookie、namespace、过期校验及 `newBrowserDevice`；各 browser context 得到各自 Device/Client。intro 只做 readiness/身份引导，不取 OTA token。
 2. 每次显式 open 正常路径只 POST 一次 `/api/voice/prepare`，使用服务器验过的 Cookie 身份。prepare 完成当前 Agent 的绑定/ownership 校验后返回 fresh descriptor：固定 `wss://xrobo-io.qiniuapi.com/v1/ws/`（末尾斜杠）、DeviceId、ClientId、token、由既有 `VOICE_MAX_SESSION_SECONDS` parser 得到的期限（默认 600 秒）。请求保持 exact Origin、无 query、空 body；响应 no-store，不输出管理凭据。
 3. `deviceProvider.prepare(): Promise<string>` 返回已取得的 first/confirmed token。已有 token 的分支保留 `belongsToAgent()`；新绑定成功返回 confirmed token；409、网络或响应不确定后的恢复仍要求 confirmed token 加 ownership。正常已绑定为 1 OTA + 1 ownership GET；新绑定为 2 OTA + 1 bind，异常恢复另有 ownership GET。不能再追加 `.token()`，不能跨请求缓存。
-4. 无效/过期 Cookie 的 `identity-required` 409 可触发一次 status 更新身份，再 prepare 一次；不对任意 provider/WS 失败重试。响应迟到或 scope 取消后不得创建 mic/socket。descriptor 只在当次连接内存中使用，不进 URL、storage 或日志；URL 只携带协议需要的 Device/Client，token 放 hello。
+4. 无效/过期 Cookie 的 `identity-required` 409 可触发一次 status 更新身份，再 prepare 一次；不对任意 provider/WS 失败重试。响应迟到或 scope 取消后不得创建 mic/socket。descriptor 只在当次连接内存中使用；token 不进 URL、storage 或日志，URL 只携带协议需要的 Device/Client，token 放 hello。
 5. 严格单 endpoint `/v1/ws/`，不保留 ws2 fallback。继续原生 WebSocket，不模拟浏览器无法设置的 HTTP 鉴权 header。保留 64 KiB 限制、single-open/socket、取消/关闭与 iOS 回答 drain+300ms 暂停上行；不改音频机制。服务端复用既有正整数且 `seconds <= floor(0x7fffffff / 1000)` 的配置校验；descriptor 类型为 number，客户端同样校验正整数/timer 上限，不把临时版字面量 600 硬编码到正式合同。preview 仍固定 600 秒；客户端期限不等于供应商硬上限。
 
 ## 已批准的服务端回滚能力
@@ -51,3 +51,7 @@
 部署前 fresh 锁 exact child/current4cd deployment、原四bindings、空 parent、main3de/PR5a91不变；私密内部比较原 Agent/expiry，另生成新 Cookie secret。只对同 child 一次 cf prebuilt upload。回读恰八项则不 PATCH；若唯一多余项为原 `PRIVATE_PREVIEW_DEVICE_ID`/`PRIVATE_PREVIEW_CLIENT_ID` 且 latest 仍是该新 CLI deployment，拟经资源 GO 后至多一次 JSON Merge Patch 将这两个字段设 null。不得删除正式 Cookie secret/namespace。未知额外字段、身份/latest漂移或未知响应先精确回读并停，不重试/删除。验证 exact module/assets/full SHA、stable/immutable `/` `/editor` `/api/health` `/api/voice/status`、原 expiry、Cookie隔离与404 relay/旧connection，然后才进行获批 no-input 检查。
 
 无输入检查不触 mic、AudioContext、listen、音频或推理，只证明受限协议握手。真实语音、Safari/iPad autoplay/播放/中断和大陆体验均留给用户同 SHA 验收，不能先宣称通过。旧 ba68/4cd 四绑定部署与私密 staging 保留作为经审回滚资料；任何实际回滚仍需协调决定，不自动恢复固定身份。
+
+## 历史实验回执保全
+
+[ba68/4cd 脱敏回执](historical-fixed-preview-receipt.json) 保全用户转向正式 per-browser 方案前已完成的固定身份实验：单 prepare、四 bindings、ws2 的一次 no-input channel ready/关闭，以及源码/module/assets/HTTP 对照。它不构成 `/v1/ws/`、Cookie 隔离、真人语音或正式候选验收，也不授权继续部署固定方案。原始实验 source、private staging/ledger 仍保留；本文只归档必要脱敏事实，不复制凭据或身份值。
