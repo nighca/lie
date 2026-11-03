@@ -1,0 +1,30 @@
+[
+  {
+    "source": "docs/design/result-page-ui/success-actions.png",
+    "source_sha256": "9ae655298665ebb53c93060fcf8fa8bdae6f7d912d440045da092fdeb3fbc0a7",
+    "actual_format": "JPEG despite .png extension",
+    "crop_xywh": [
+      132,
+      310,
+      1042,
+      773
+    ],
+    "output": "result-success.jpg",
+    "output_sha256": "580ade7ed7ff4471d87efea15011983b4517a4e7fe37b912809a07dfb7d7a830",
+    "operation": "Crop desktop result card only, JPEG quality92; no text or artwork changes"
+  },
+  {
+    "source": "docs/design/result-page-ui/failure-motion-settled.png",
+    "source_sha256": "7f8444b64ceae38a2d04f321e576ab6bb998ba5f614d742aa33784f2cefac161",
+    "actual_format": "JPEG despite .png extension",
+    "crop_xywh": [
+      273,
+      310,
+      760,
+      724
+    ],
+    "output": "result-failure.jpg",
+    "output_sha256": "484656d22af7702d592e3414d0f05c21345dc214336a9bfa75920d2e567dd5d7",
+    "operation": "Crop desktop result card only, JPEG quality92; no text or artwork changes"
+  }
+]
