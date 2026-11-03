@@ -33,3 +33,26 @@ it('keeps static assets available after expiry without extending the API window'
   expect(await (await preview.fetch(request, env)).text()).toBe('static')
   expect(delegate).toHaveBeenCalledExactlyOnceWith(request, env)
 })
+
+
+it.each(['/api/voice/prepare', '/api/voice/status', '/api/shared-games/v1'])('discards a late %s response when the original preview deadline passes', async path => {
+  vi.useFakeTimers().setSystemTime(new Date('2026-11-03T23:59:59Z'))
+  let complete!: (response: Response) => void
+  const delegate = vi.spyOn(gateway, 'fetch').mockImplementation(() => new Promise(resolve => { complete = resolve }))
+  const cancelled = vi.fn()
+  const late = new Response(new ReadableStream({
+    start(controller) { controller.enqueue(new TextEncoder().encode('{"token":"private-late-token"}')) },
+    cancel: cancelled
+  }), { headers: { 'Set-Cookie': 'late-cookie', 'Content-Type': 'application/json' } })
+  const request = new Request(`https://preview.example${path}`)
+  const pending = preview.fetch(request, env)
+  expect(delegate).toHaveBeenCalledExactlyOnceWith(request, env)
+  vi.setSystemTime(new Date(env.PRIVATE_PREVIEW_EXPIRES_AT))
+  complete(late)
+  const response = await pending
+  expect(response.status).toBe(410)
+  expect(response.headers.get('Cache-Control')).toBe('no-store')
+  expect(response.headers.get('Set-Cookie')).toBeNull()
+  expect(await response.json()).toEqual({ error: 'preview-expired' })
+  expect(cancelled).toHaveBeenCalledOnce()
+})
