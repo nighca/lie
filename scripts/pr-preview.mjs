@@ -2,7 +2,7 @@ import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { parsePreviewArtifactName, selectPreviewArtifact, validateClosedPreview, validatePreviewRun } from './pr-preview-github.mjs'
+import { parsePreviewArtifactName, selectPreviewArtifact, validateClosedPreview, validateMergeEquivalence, validatePreviewRun } from './pr-preview-github.mjs'
 import { previewDomain, previewResult } from './pr-preview-deploy.mjs'
 
 const repository = 'nighca/lie'
@@ -70,8 +70,8 @@ async function currentPull(api, number) {
   return pr
 }
 
-function provisionalReceipt(pr, run) {
-  return { version: 1, repository, prNumber: pr.number, headSha: pr.head.sha, baseSha: pr.base.sha, mergeSha: pr.merge_commit_sha,
+function provisionalReceipt(pr, run, testedMergeSha) {
+  return { version: 1, repository, prNumber: pr.number, headSha: pr.head.sha, baseSha: pr.base.sha, mergeSha: testedMergeSha,
     runId: String(run.id), runAttempt: String(run.run_attempt) }
 }
 
@@ -80,13 +80,25 @@ async function latestRun(api, workflow, pr) {
   for (let page = 1; page <= 3; page++) {
     const response = await api(`actions/workflows/${workflow.id}/runs?event=pull_request&per_page=100&page=${page}`)
     requireThat(Array.isArray(response?.workflow_runs), 'Invalid PR CI run listing')
-    candidates.push(...response.workflow_runs.filter(run => run.head_sha === pr.head.sha || run.head_sha === pr.merge_commit_sha))
+    candidates.push(...response.workflow_runs.filter(run => run.head_sha === pr.head.sha || run.head_sha === pr.merge_commit_sha ||
+      (sha(run.head_sha) && integer(run.id) && integer(run.run_attempt) && run.workflow_id === workflow.id && run.event === 'pull_request' &&
+        run.repository?.id === pr.base.repo.id && run.repository?.full_name === repository &&
+        run.head_repository?.id === pr.head.repo.id && run.head_repository?.full_name === pr.head.repo.full_name &&
+        Array.isArray(run.pull_requests) && run.pull_requests.some(item =>
+          item.number === pr.number && item.head?.sha === pr.head.sha && item.base?.sha === pr.base.sha))))
     if (response.workflow_runs.length < 100) break
   }
   requireThat(candidates.length > 0, 'No recent CI run for the current PR; rerun PR CI')
   for (const run of candidates) requireThat(integer(run.id), 'Invalid listed CI run')
   const id = Math.max(...candidates.map(run => Number(run.id)))
   return api(`actions/runs/${id}`)
+}
+
+async function mergeCommits(api, testedSha, currentSha) {
+  requireThat(sha(testedSha) && sha(currentSha), 'Invalid preview merge SHA')
+  const mergeCommit = await api(`git/commits/${testedSha}`)
+  const currentMergeCommit = testedSha === currentSha ? mergeCommit : await api(`git/commits/${currentSha}`)
+  return { mergeCommit, currentMergeCommit }
 }
 
 function skip(context, reason) { return { ...context, action: 'skip', status: reason } }
@@ -123,27 +135,31 @@ export async function prepare(event, api, publisherData) {
     pr = await currentPull(api, discovered[0].prNumber)
     const context = { ...publisher, event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: null }
     if (pr.state === 'closed') return skip(context, 'closed')
-    if (discovered[0].mergeSha !== pr.merge_commit_sha || ![pr.head.sha, pr.merge_commit_sha].includes(run.head_sha)) return skip(context, 'stale')
+    if (![pr.head.sha, discovered[0].mergeSha].includes(run.head_sha)) return skip(context, 'stale')
   }
+  const artifact = selectPreviewArtifact(artifacts, pr, run)
+  const testedMergeSha = parsePreviewArtifactName(artifact.name).mergeSha
   const context = { ...publisher, event, prNumber: pr.number, previewName: `pr-${pr.number}`, approvalHeadSha: source.approvalHeadSha,
-    runId: String(run.id), runAttempt: String(run.run_attempt), receipt: provisionalReceipt(pr, run) }
+    runId: String(run.id), runAttempt: String(run.run_attempt), receipt: provisionalReceipt(pr, run, testedMergeSha),
+    artifactId: String(artifact.id), artifactDigest: artifact.digest }
   if (pr.draft === true) return skip(context, 'skipped')
   requireThat(sha(pr.merge_commit_sha), 'PR test merge is unavailable; resolve conflicts and rerun CI')
-  const mergeCommit = await api(`git/commits/${pr.merge_commit_sha}`)
-  const outcome = validatePreviewRun({ event, run, workflow, pr, mergeCommit, receipt: context.receipt, artifacts, approvalHeadSha: source.approvalHeadSha })
+  const commits = await mergeCommits(api, testedMergeSha, pr.merge_commit_sha)
+  const outcome = validatePreviewRun({ event, run, workflow, pr, ...commits, receipt: context.receipt, artifacts, approvalHeadSha: source.approvalHeadSha })
   if (outcome.status !== 'deploy') return skip(context, outcome.status)
-  const artifact = selectPreviewArtifact(artifacts, pr, run)
-  return { ...context, action: 'deploy', status: 'deploy', identity: outcome, artifactId: String(artifact.id), artifactDigest: artifact.digest }
+  return { ...context, action: 'deploy', status: 'deploy', identity: outcome }
 }
 
 /** Reread every identity after download and at both sides of cloud deployment. */
 export async function authorize(context, receipt, api) {
   requireThat(context?.action === 'deploy' && integer(context.prNumber) && integer(context.runId), 'Invalid deployment context')
+  requireThat(['repository', 'prNumber', 'headSha', 'baseSha', 'mergeSha', 'runId', 'runAttempt'].every(key =>
+    receipt?.[key] === context.receipt?.[key]), 'Preview receipt run or attempt or build identity changed')
   const [pr, run, workflow, artifacts] = await Promise.all([
     currentPull(api, context.prNumber), api(`actions/runs/${context.runId}`), api('actions/workflows/pr-ci.yml'), artifactsFor(api, context.runId)
   ])
-  const mergeCommit = sha(pr.merge_commit_sha) ? await api(`git/commits/${pr.merge_commit_sha}`) : null
-  const outcome = validatePreviewRun({ event: context.event, run, workflow, pr, mergeCommit, receipt, artifacts, approvalHeadSha: context.approvalHeadSha })
+  const commits = sha(pr.merge_commit_sha) ? await mergeCommits(api, receipt?.mergeSha, pr.merge_commit_sha) : {}
+  const outcome = validatePreviewRun({ event: context.event, run, workflow, pr, ...commits, receipt, artifacts, approvalHeadSha: context.approvalHeadSha })
   if (outcome.status === 'deploy') {
     requireThat(outcome.artifactId === context.artifactId && outcome.artifactDigest === context.artifactDigest &&
       outcome.runAttempt === context.runAttempt, 'Selected preview artifact changed')
@@ -265,7 +281,7 @@ export async function publish(context, receipt, result, api) {
   await api(`deployments/${context.deploymentId}/statuses`, { state: 'success', environment_url: urls.url, log_url: runURL(context),
     auto_inactive: false, description: `UI and Worker merge ${identity.mergeSha.slice(0, 12)}` })
   await commitStatus(api, context, 'success', `UI and Worker ${identity.mergeSha.slice(0, 12)}`, urls.url)
-  return { status: 'success', ...urls }
+  return { status: 'success', ...urls, currentMergeSha: identity.currentMergeSha }
 }
 
 export async function fail(context, receipt, api) {
@@ -291,11 +307,15 @@ async function approvedDeploymentStarted(context, api) {
       const payload = deployment.payload
       // Approval follows the code, so a newer CI run must also suppress a late notice.
       if (deployment.sha !== expected.headSha || payload?.preview !== 'lie-pr-preview' || payload.pr_number !== context.prNumber ||
-        !['headSha', 'baseSha', 'mergeSha'].every(key => payload[key] === expected[key])) continue
+        !['headSha', 'baseSha'].every(key => payload[key] === expected[key])) continue
       requireThat(integer(deployment.id), 'Invalid preview deployment ID')
       const statuses = await api(`deployments/${deployment.id}/statuses?per_page=1`)
       requireThat(Array.isArray(statuses) && statuses.length <= 1, 'Invalid latest deployment status listing')
-      if (['pending', 'queued', 'in_progress', 'success'].includes(statuses[0]?.state)) return true
+      if (!['pending', 'queued', 'in_progress', 'success'].includes(statuses[0]?.state)) continue
+      const commits = await mergeCommits(api, expected.mergeSha, payload.mergeSha)
+      validateMergeEquivalence({ testedCommit: commits.mergeCommit, currentCommit: commits.currentMergeCommit,
+        testedSha: expected.mergeSha, currentSha: payload.mergeSha, baseSha: expected.baseSha, headSha: expected.headSha })
+      return true
     }
     if (deployments.length < 100) return false
     requireThat(page < 3, 'Preview deployment listing exceeds approval-notice bound')
@@ -307,14 +327,14 @@ async function approvedDeploymentStarted(context, api) {
 export async function notice(context, api) {
   if (context?.action !== 'skip' || context.status !== 'awaiting-approval') return { status: 'skipped' }
   requireThat(integer(context.prNumber) && sha(context.receipt?.headSha), 'Invalid preview approval notice')
+  const sameWaitingBuild = current => current.action === 'skip' && current.status === 'awaiting-approval' &&
+    current.prNumber === context.prNumber && current.artifactId === context.artifactId && current.artifactDigest === context.artifactDigest &&
+    ['headSha', 'baseSha', 'mergeSha', 'runId', 'runAttempt'].every(key => current.receipt?.[key] === context.receipt[key])
   const current = await prepare(context.event, api, publisherIdentity(context))
-  if (current.action !== 'skip' || current.status !== 'awaiting-approval' || current.prNumber !== context.prNumber ||
-    current.receipt?.headSha !== context.receipt.headSha || current.receipt?.baseSha !== context.receipt.baseSha ||
-    current.receipt?.mergeSha !== context.receipt.mergeSha) return { status: 'stale' }
-  const pr = await currentPull(api, context.prNumber)
-  if (pr.state !== 'open' || pr.draft === true || pr.head.sha !== context.receipt.headSha ||
-    pr.base.sha !== context.receipt.baseSha || pr.merge_commit_sha !== context.receipt.mergeSha) return { status: 'stale' }
+  if (!sameWaitingBuild(current)) return { status: 'stale' }
   if (await approvedDeploymentStarted(context, api)) return { status: 'already-approved' }
+  const latest = await prepare(context.event, api, publisherIdentity(context))
+  if (!sameWaitingBuild(latest)) return { status: 'stale' }
   await commitStatus(api, context, 'pending', `Preview requires approval of head ${context.receipt.headSha.slice(0, 12)}`,
     `https://github.com/${repository}/actions/workflows/pr-preview.yml`)
   return { status: 'awaiting-approval' }
@@ -360,15 +380,16 @@ async function save(path, value) {
   await writeFile(path, JSON.stringify(value, null, 2) + '\n', { mode: 0o600 })
 }
 
-async function successSummary(path, context, receipt, result) {
+async function successSummary(path, context, receipt, result, currentMergeSha) {
   if (path == null) return
   const urls = previewURLs(result, context.prNumber)
   requireThat(integer(context.prNumber) && integer(receipt.runId) && integer(receipt.runAttempt) &&
-    sha(receipt.headSha) && sha(receipt.mergeSha), 'Invalid preview summary identity')
+    sha(receipt.headSha) && sha(receipt.mergeSha) && sha(currentMergeSha), 'Invalid preview summary identity')
   const publisher = publisherIdentity(context)
   const links = [`- Stable preview: [${urls.url}](${urls.url})`]
   links.push(...urls.immutableURLs.map(url => `- Immutable deployment: [${url}](${url})`))
   links.push(`- PR head: \`${receipt.headSha}\``, `- Tested UI and Worker merge: \`${receipt.mergeSha}\``,
+    `- Current PR merge (content equivalent): \`${currentMergeSha}\``,
     `- Producer CI: [run ${receipt.runId}, attempt ${receipt.runAttempt}](https://github.com/${repository}/actions/runs/${receipt.runId})`,
     `- Publisher: [run ${publisher.publisherRunId}, attempt ${publisher.publisherRunAttempt}](${runURL(context)})`)
   await appendFile(path, `\n### PR #${context.prNumber} preview\n\n${links.join('\n')}\n`)
@@ -439,7 +460,7 @@ export async function main(command, env = process.env, fetcher = fetch) {
   if (command === 'publish') {
     const result = JSON.parse(await readFile(env.PR_PREVIEW_DEPLOYMENT_FILE ?? 'tmp/pr-preview-deployment.json', 'utf8'))
     const published = await publish(context, receipt, result, api)
-    if (published.status === 'success') await successSummary(env.GITHUB_STEP_SUMMARY, context, receipt, result)
+    if (published.status === 'success') await successSummary(env.GITHUB_STEP_SUMMARY, context, receipt, result, published.currentMergeSha)
     return published
   }
   if (command === 'fail') {

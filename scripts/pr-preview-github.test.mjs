@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { artifactName, parsePreviewArtifactName, previewArtifactName, selectPreviewArtifact, validateClosedPreview, validatePreviewRun } from './pr-preview-github.mjs'
+import { artifactName, parsePreviewArtifactName, previewArtifactName, selectPreviewArtifact, validateClosedPreview, validateMergeEquivalence, validatePreviewRun } from './pr-preview-github.mjs'
 
 const headSha = 'a'.repeat(40), baseSha = 'b'.repeat(40), mergeSha = 'c'.repeat(40)
 const repository = { id: 1, full_name: 'nighca/lie' }
@@ -17,7 +17,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
     run, workflow: { id: 10, path: '.github/workflows/pr-ci.yml', name: 'PR CI' },
     pr: { number: 42, state: 'open', draft: false, mergeable: true, merge_commit_sha: mergeSha,
       base: { repo: { ...repository }, ref: 'main', sha: baseSha }, head: { repo: headRepository, sha: headSha }, user: { login: 'contributor' } },
-    mergeCommit: { sha: mergeSha, parents: [{ sha: baseSha }, { sha: headSha }] }, receipt,
+    mergeCommit: { sha: mergeSha, tree: { sha: 'f'.repeat(40) }, parents: [{ sha: baseSha }, { sha: headSha }] }, receipt,
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: previewArtifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 100, repository_id: 1, head_repository_id: headRepository.id, head_sha: headSha } }] },
     approvalHeadSha: dispatch ? headSha : null
@@ -26,7 +26,7 @@ function fixture({ fork = false, dispatch = false } = {}) {
 
 test('same-repository successful current merge deploys its exact artifact', () => {
   const result = validatePreviewRun(fixture())
-  assert.deepEqual(result, { status: 'deploy', prNumber: 42, previewName: 'pr-42', headSha, baseSha, mergeSha,
+  assert.deepEqual(result, { status: 'deploy', prNumber: 42, previewName: 'pr-42', headSha, baseSha, mergeSha, currentMergeSha: mergeSha,
     runId: '100', runAttempt: '2', artifactId: '200', artifactDigest: `sha256:${'d'.repeat(64)}` })
 })
 
@@ -153,4 +153,86 @@ test('cleanup only returns one canonical name for a confirmed closed main PR', (
   assert.throws(() => validateClosedPreview(pr, '42/other'))
   pr.state = 'open'
   assert.throws(() => validateClosedPreview(pr, 42))
+})
+
+test('regenerated merge with the same ordered parents and tree retains the tested identity', () => {
+  const input = fixture()
+  input.pr.merge_commit_sha = 'e'.repeat(40)
+  input.currentMergeCommit = { ...structuredClone(input.mergeCommit), sha: input.pr.merge_commit_sha }
+  const result = validatePreviewRun(input)
+  assert.equal(result.status, 'deploy')
+  assert.equal(result.mergeSha, mergeSha)
+  assert.equal(result.currentMergeSha, input.pr.merge_commit_sha)
+  assert.equal(result.artifactId, '200')
+  assert.equal(input.artifacts.artifacts[0].name, previewArtifactName(input.receipt))
+})
+
+test('both commit facts require exact response SHAs, ordered parents and complete equal tree SHAs', () => {
+  const currentSha = 'e'.repeat(40)
+  const valid = { testedSha: mergeSha, currentSha, baseSha, headSha,
+    testedCommit: { sha: mergeSha, parents: [{ sha: baseSha }, { sha: headSha }], tree: { sha: 'f'.repeat(40) } },
+    currentCommit: { sha: currentSha, parents: [{ sha: baseSha }, { sha: headSha }], tree: { sha: 'f'.repeat(40) } } }
+  assert.doesNotThrow(() => validateMergeEquivalence(valid))
+  for (const key of ['testedCommit', 'currentCommit']) {
+    for (const mutate of [
+      commit => { commit.sha = '0'.repeat(40) },
+      commit => { delete commit.sha },
+      commit => { commit.parents.reverse() },
+      commit => { commit.parents[0].sha = '0'.repeat(40) },
+      commit => { commit.parents[1].sha = '0'.repeat(40) },
+      commit => { commit.parents.pop() },
+      commit => { commit.parents.push({ sha: headSha }) },
+      commit => { delete commit.parents },
+      commit => { commit.tree.sha = '0'.repeat(40) },
+      commit => { commit.tree.sha = 'F'.repeat(40) },
+      commit => { commit.tree.sha = 'f'.repeat(39) },
+      commit => { commit.tree = null }
+    ]) {
+      const value = structuredClone(valid)
+      mutate(value[key])
+      assert.throws(() => validateMergeEquivalence(value))
+    }
+    const value = structuredClone(valid)
+    value[key] = null
+    assert.throws(() => validateMergeEquivalence(value))
+  }
+  for (const key of ['testedSha', 'currentSha', 'baseSha', 'headSha']) {
+    assert.throws(() => validateMergeEquivalence({ ...valid, [key]: 'bad' }))
+  }
+  const same = { ...valid, currentSha: mergeSha, currentCommit: valid.testedCommit }
+  assert.doesNotThrow(() => validateMergeEquivalence(same))
+  same.testedCommit = same.currentCommit = { ...valid.testedCommit, tree: null }
+  assert.throws(() => validateMergeEquivalence(same))
+})
+
+test('artifact selection learns tested merge independently and rejects another canonical merge in the same attempt', () => {
+  const input = fixture()
+  input.pr.merge_commit_sha = 'e'.repeat(40)
+  assert.equal(selectPreviewArtifact(input.artifacts, input.pr, input.run).name, previewArtifactName(input.receipt))
+  for (const prNumber of [42, 43]) {
+    const artifacts = structuredClone(input.artifacts)
+    artifacts.artifacts.push({ ...artifacts.artifacts[0], id: 201,
+      name: previewArtifactName({ ...input.receipt, prNumber, mergeSha: '0'.repeat(40) }) })
+    artifacts.total_count++
+    assert.throws(() => selectPreviewArtifact(artifacts, input.pr, input.run), /ambiguous/)
+  }
+  input.receipt.mergeSha = 'e'.repeat(40)
+  input.mergeCommit = { ...input.mergeCommit, sha: 'e'.repeat(40) }
+  assert.throws(() => validatePreviewRun(input), /receipt merge/)
+})
+
+test('regenerated merge does not grant fork or Dependabot approval and cannot reuse an old head approval', () => {
+  for (const options of [{ fork: true }, {}]) {
+    const input = fixture(options)
+    if (!options.fork) input.pr.user.login = 'dependabot[bot]'
+    input.pr.merge_commit_sha = 'e'.repeat(40)
+    input.currentMergeCommit = { ...structuredClone(input.mergeCommit), sha: input.pr.merge_commit_sha }
+    assert.equal(validatePreviewRun(input).status, 'awaiting-approval')
+  }
+  const input = fixture({ fork: true, dispatch: true })
+  input.pr.merge_commit_sha = 'e'.repeat(40)
+  input.currentMergeCommit = { ...structuredClone(input.mergeCommit), sha: input.pr.merge_commit_sha }
+  assert.equal(validatePreviewRun(input).status, 'deploy')
+  input.approvalHeadSha = '0'.repeat(40)
+  assert.equal(validatePreviewRun(input).status, 'stale')
 })

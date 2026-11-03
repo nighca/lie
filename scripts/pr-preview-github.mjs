@@ -28,17 +28,30 @@ export function parsePreviewArtifactName(name) {
 
 export function selectPreviewArtifact(artifacts, pr, run) {
   previewIdentity(pr)
-  requireThat(sha(pr.merge_commit_sha) && positiveInteger(run?.id) && positiveInteger(run.run_attempt), 'Invalid artifact selection identity')
+  requireThat(positiveInteger(run?.id) && positiveInteger(run.run_attempt), 'Invalid artifact selection identity')
   const listing = Array.isArray(artifacts) ? { artifacts, total_count: artifacts.length } : artifacts
   requireThat(Array.isArray(listing?.artifacts) && listing.total_count === listing.artifacts.length, 'Incomplete preview artifact listing')
-  const name = previewArtifactName({ prNumber: pr.number, mergeSha: pr.merge_commit_sha, runId: String(run.id), runAttempt: String(run.run_attempt) })
-  const matches = listing.artifacts.filter(item => item.name === name)
+  const matches = listing.artifacts.filter(item => {
+    const identity = parsePreviewArtifactName(item.name)
+    return identity != null && identity.runId === String(run.id) && identity.runAttempt === String(run.run_attempt)
+  })
   requireThat(matches.length === 1, 'Preview artifact missing or ambiguous')
   const artifact = matches[0]
+  requireThat(parsePreviewArtifactName(artifact.name).prNumber === pr.number, 'Preview artifact belongs to another PR')
   requireThat(positiveInteger(artifact.id) && artifact.expired === false && typeof artifact.digest === 'string' && /^sha256:[a-f0-9]{64}$/.test(artifact.digest), 'Preview artifact expired or invalid')
   requireThat(artifact.workflow_run?.id === run.id && artifact.workflow_run.repository_id === run.repository?.id &&
     artifact.workflow_run.head_repository_id === run.head_repository?.id && artifact.workflow_run.head_sha === run.head_sha, 'Preview artifact provenance mismatch')
   return artifact
+}
+
+/** A regenerated merge is usable only when both ordered parents and the full tree match. */
+export function validateMergeEquivalence({ testedCommit, currentCommit, testedSha, currentSha, baseSha, headSha }) {
+  requireThat([testedSha, currentSha, baseSha, headSha].every(sha), 'Invalid preview merge identity')
+  for (const [commit, expectedSha] of [[testedCommit, testedSha], [currentCommit, currentSha]]) {
+    requireThat(commit?.sha === expectedSha && Array.isArray(commit.parents) && commit.parents.length === 2 &&
+      commit.parents[0]?.sha === baseSha && commit.parents[1]?.sha === headSha && sha(commit.tree?.sha), 'Preview is not the current PR test merge')
+  }
+  requireThat(testedCommit.tree.sha === currentCommit.tree.sha, 'PR test merge tree changed')
 }
 
 /** Only a current API-confirmed closed PR can authorize removing its preview. */
@@ -54,7 +67,7 @@ export function validateClosedPreview(pr, requestedNumber) {
  * receipt. Dispatch callers pass approvalHeadSha explicitly from their input.
  * A receipt alone never authorizes publication or cleanup.
  */
-export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, receipt, artifacts, approvalHeadSha = null }) {
+export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, currentMergeCommit = mergeCommit, receipt, artifacts, approvalHeadSha = null }) {
   const identity = previewIdentity(pr)
   const outcome = status => ({ status, ...identity })
   requireThat(sameRepository(event?.repository, pr.base.repo), 'Unexpected event repository')
@@ -89,17 +102,18 @@ export function validatePreviewRun({ event, run, workflow, pr, mergeCommit, rece
   if (run.pull_requests?.length > 0) requireThat(run.pull_requests.some(item => item.number === pr.number), 'PR CI belongs to another PR')
   if (pr.state === 'closed') return outcome('closed')
   requireThat(pr.state === 'open', 'Unexpected PR state')
-  if (pr.head?.sha !== receipt.headSha || pr.base.sha !== receipt.baseSha || pr.merge_commit_sha !== receipt.mergeSha) return outcome('stale')
+  if (pr.head?.sha !== receipt.headSha || pr.base.sha !== receipt.baseSha || !sha(pr.merge_commit_sha)) return outcome('stale')
   if (approvalHeadSha != null && approvalHeadSha !== pr.head.sha) return outcome('stale')
   if (pr.mergeable === false) return outcome('stale')
-  requireThat(mergeCommit?.sha === receipt.mergeSha && Array.isArray(mergeCommit.parents) && mergeCommit.parents.length === 2 &&
-    mergeCommit.parents[0]?.sha === receipt.baseSha && mergeCommit.parents[1]?.sha === receipt.headSha, 'Preview is not the current PR test merge')
+  validateMergeEquivalence({ testedCommit: mergeCommit, currentCommit: currentMergeCommit, testedSha: receipt.mergeSha,
+    currentSha: pr.merge_commit_sha, baseSha: receipt.baseSha, headSha: receipt.headSha })
 
   const artifact = selectPreviewArtifact(artifacts, pr, run)
+  requireThat(parsePreviewArtifactName(artifact.name).mergeSha === receipt.mergeSha, 'Preview receipt merge does not match the tested artifact')
 
   if (pr.draft === true) return outcome('skipped')
   const lowTrust = pr.head.repo.id !== pr.base.repo.id || [pr.user?.login, run.actor?.login, run.triggering_actor?.login].includes('dependabot[bot]')
   if (lowTrust && approvalHeadSha == null) return outcome('awaiting-approval')
-  return { status: 'deploy', ...identity, headSha: receipt.headSha, baseSha: receipt.baseSha, mergeSha: receipt.mergeSha,
+  return { status: 'deploy', ...identity, headSha: receipt.headSha, baseSha: receipt.baseSha, mergeSha: receipt.mergeSha, currentMergeSha: pr.merge_commit_sha,
     runId: receipt.runId, runAttempt: receipt.runAttempt, artifactId: String(artifact.id), artifactDigest: artifact.digest }
 }

@@ -2,6 +2,14 @@
 
 2026-11-01；本地实施中，尚未启用远程预览。基线为已审并上线的 `16d64347b853ffaaac1f2dbaa9d8ddd232f9859a`。本文件与[最新用户决定](pr-ci-preview-storage-contract.md)覆盖 [10月25日提案](pr-ci-preview-proposal.md)及[续接记录](pr-ci-preview-review-2026-11-01.md)中的 UI-only/main gateway harness 限制；保留旧文档以记录备选。
 
+## 2026-11-03 GitHub 重新生成测试 merge 的内容等价校验
+
+GitHub 可能为未变的 PR base/head 重新生成测试 merge SHA。发布器从精确 CI run/attempt 的唯一规范 artifact 名取得真正被测试的 SHA；每次授权都重新读取当前 PR、run/attempt、workflow、artifact provenance/digest，并从固定本仓 `git/commits/{完整SHA}` 读取 tested/current 两个 commit。仅当响应 SHA 精确匹配、两者都恰有按序排列的当前 base/head 两个父节点、完整40位小写 tree SHA 完全相同，才允许继续。相同 merge SHA 也校验 commit 内容；API失败、字段缺失或畸形、父节点或 tree 变化均拒绝，不缓存先前等价结论。
+
+artifact 名、下载 receipt、restore/build identity、deployment payload 的 `mergeSha` 和 Tested UI and Worker 摘要始终保留真正测试的 SHA；独立 `currentMergeSha` 只用于审计，不替换 receipt 或伪称 CI 测过新 SHA。手动入口仍批准当前完整 head SHA，保持原有三页 run 扫描上限；额外候选仅接受 API 明确关联当前 PR/full head/base、同仓及 head 仓库、固定 workflow/event、合法 run/attempt 的记录，不搜索任意旧 merge。缺失关联且 run 仅标记旧 merge 时拒绝该候选，等待具备所需身份关联的新 CI 证据。最新候选失败时不回退旧成功。
+
+fork/Dependabot 审批、下载前后及部署前后授权和资源边界保持原合同。等待审批通知在查询既有部署后、写 pending 前重复完整校验；同 head/base 的活跃部署也必须通过 tested/payload merge 的相同内容证明，才能抑制晚到通知。
+
 ## 2026-11-03 自定义预览域名约定
 
 所有新发布的 PR 预览入口使用 `preview.lie.agency`：稳定地址为 `pr-N.preview.lie.agency`；不可变地址只接受部署 API 实际返回的完整 deployment ID 或 UUID 首8位，例如 `063049c3.preview.lie.agency`，不自行增加 PR 后缀或生成缺失地址。上述日期较新的约定覆盖本文早期启用状态和链接约定，云资源验收由专项资源记录单独保存。

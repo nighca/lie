@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
 
+import { validateIdentity } from './pr-preview-artifact.mjs'
 import { artifactName } from './pr-preview-github.mjs'
 import { authorize, cleanupAuthorize, cleanupReport, fail, githubClient, main, notice, outputs, pending, prepare, previewURLs, probe, publish } from './pr-preview.mjs'
 
@@ -21,10 +22,10 @@ function fixture({ fork = false, dispatch = false } = {}) {
     run, receipt, workflow: { id: 10, name: 'PR CI', path: '.github/workflows/pr-ci.yml' },
     pr: { number: 42, state: 'open', draft: false, mergeable: true, merge_commit_sha: mergeSha,
       base: { repo: { ...repo }, ref: 'main', sha: baseSha }, head: { repo: headRepository, sha: headSha }, user: { login: 'contributor' } },
-    mergeCommit: { sha: mergeSha, parents: [{ sha: baseSha }, { sha: headSha }] },
+    mergeCommit: { sha: mergeSha, tree: { sha: 'f'.repeat(40) }, parents: [{ sha: baseSha }, { sha: headSha }] },
     artifacts: { total_count: 1, artifacts: [{ id: 200, name: artifactName(receipt), expired: false, digest: `sha256:${'d'.repeat(64)}`,
       workflow_run: { id: 100, repository_id: 1, head_repository_id: headRepository.id, head_sha: headSha } }] },
-    runs: [structuredClone(run)], deployments: [], deploymentStatuses: {}, reads: [], writes: [],
+    commits: {}, runs: [structuredClone(run)], deployments: [], deploymentStatuses: {}, reads: [], writes: [],
     publisher: { publisherRunId: '500', publisherRunAttempt: '1' }
   }
   state.api = async (path, body = null) => {
@@ -37,7 +38,11 @@ function fixture({ fork = false, dispatch = false } = {}) {
     if (path === 'pulls/42') return structuredClone(state.pr)
     if (path === 'actions/runs/100') return structuredClone(state.run)
     if (path === 'actions/runs/100/artifacts?per_page=100') return structuredClone(state.artifacts)
-    if (path === `git/commits/${state.pr.merge_commit_sha}`) return structuredClone(state.mergeCommit)
+    if (path.startsWith('git/commits/')) {
+      const requested = path.slice('git/commits/'.length)
+      if (Object.hasOwn(state.commits, requested)) return structuredClone(state.commits[requested])
+      if (requested === mergeSha) return structuredClone(state.mergeCommit)
+    }
     const latestStatus = /^deployments\/([1-9][0-9]*)\/statuses\?per_page=1$/.exec(path)
     if (latestStatus != null) return structuredClone(state.deploymentStatuses[latestStatus[1]] ?? [])
     if (path.startsWith('actions/workflows/10/runs?')) return { workflow_runs: structuredClone(state.runs) }
@@ -119,8 +124,8 @@ for (const [name, mutate] of [
 
 test('old merge artifact is skipped when base changes', async () => {
   const f = fixture()
-  f.pr.merge_commit_sha = 'e'.repeat(40)
-  assert.equal((await prepare(f.event, f.api, f.publisher)).status, 'stale')
+  f.pr.base.sha = 'e'.repeat(40)
+  await assert.rejects(prepare(f.event, f.api, f.publisher), /current PR test merge/)
 })
 
 test('draft never starts publishing', async () => {
@@ -262,7 +267,6 @@ for (const [name, mutate] of [
   ['another PR', f => { f.deployments[0].payload.pr_number = 43 }],
   ['an older head', f => { f.deployments[0].sha = f.deployments[0].payload.headSha = 'e'.repeat(40) }],
   ['an older base', f => { f.deployments[0].payload.baseSha = 'e'.repeat(40) }],
-  ['an older merge', f => { f.deployments[0].payload.mergeSha = 'e'.repeat(40) }],
   ['a failed deployment', f => { f.deploymentStatuses[300] = [{ state: 'failure' }] }],
   ['a deployment with no status', f => { f.deploymentStatuses[300] = [] }]
 ]) test(`approval notice is not blocked by ${name}`, async () => {
@@ -581,6 +585,7 @@ test('publish CLI summary exposes only validated URLs and public source/publishe
   const directory = await mkdtemp(join(tmpdir(), 'lie-preview-summary-'))
   try {
     const f = fixture()
+    const currentSha = regenerateMerge(f)
     const context = { ...await prepare(f.event, f.api, f.publisher), deploymentId: '300' }
     const contextPath = join(directory, 'context.json'), resultPath = join(directory, 'result.json'), summaryPath = join(directory, 'summary.md')
     await writeFile(contextPath, JSON.stringify(context))
@@ -598,6 +603,7 @@ test('publish CLI summary exposes only validated URLs and public source/publishe
     assert.match(summary, /Immutable deployment: \[https:\/\/deployment-id\.preview\.lie\.agency\]/)
     assert.match(summary, new RegExp(`PR head: .${headSha}.`))
     assert.match(summary, new RegExp(`Tested UI and Worker merge: .${mergeSha}.`))
+    assert.ok(summary.includes(`Current PR merge (content equivalent): \`${currentSha}\``))
     assert.match(summary, /Producer CI: \[run 100, attempt 2\]\(https:\/\/github\.com\/nighca\/lie\/actions\/runs\/100\)/)
     assert.match(summary, /Publisher: \[run 500, attempt 1\]\(https:\/\/github\.com\/nighca\/lie\/actions\/runs\/500\)/)
     assert.doesNotMatch(summary, /do-not-print|workers\.dev/)
@@ -659,4 +665,232 @@ test('mixed platform URLs probe and publish only custom-domain links', async () 
   assert.ok(statuses.length > 0)
   assert.ok(statuses.every(item => item.body.environment_url == null || item.body.environment_url === 'https://pr-42.preview.lie.agency'))
   assert.ok(statuses.every(item => item.body.target_url == null || item.body.target_url === 'https://pr-42.preview.lie.agency'))
+})
+
+function regenerateMerge(f, currentSha = 'e'.repeat(40)) {
+  f.pr.merge_commit_sha = currentSha
+  f.commits[currentSha] = { ...structuredClone(f.mergeCommit), sha: currentSha }
+  return currentSha
+}
+
+test('automatic and manual discovery preserve the actual tested SHA when GitHub regenerates an equivalent merge', async () => {
+  for (const dispatch of [false, true]) {
+    const f = fixture({ dispatch })
+    const currentSha = regenerateMerge(f)
+    const context = await prepare(f.event, f.api, f.publisher)
+    assert.equal(context.action, 'deploy')
+    assert.equal(context.receipt.mergeSha, mergeSha)
+    assert.equal(context.identity.mergeSha, mergeSha)
+    assert.equal(context.identity.currentMergeSha, currentSha)
+    assert.equal(context.artifactId, '200')
+    assert.deepEqual(f.reads.filter(path => path.startsWith('git/commits/')), [`git/commits/${mergeSha}`, `git/commits/${currentSha}`])
+    assert.deepEqual(f.writes, [])
+  }
+})
+
+test('every authorize boundary rereads the exact tested/current commit proof and artifact identity', async () => {
+  const f = fixture()
+  const context = await prepare(f.event, f.api, f.publisher)
+  for (const currentSha of ['e'.repeat(40), '0'.repeat(40)]) {
+    regenerateMerge(f, currentSha)
+    f.reads.length = 0
+    const identity = await authorize(context, f.receipt, f.api)
+    assert.equal(identity.mergeSha, mergeSha)
+    assert.equal(identity.currentMergeSha, currentSha)
+    for (const path of ['pulls/42', 'actions/runs/100', 'actions/workflows/pr-ci.yml', 'actions/runs/100/artifacts?per_page=100',
+      `git/commits/${mergeSha}`, `git/commits/${currentSha}`]) assert.ok(f.reads.includes(path))
+  }
+  f.commits[f.pr.merge_commit_sha].tree.sha = '1'.repeat(40)
+  await assert.rejects(authorize(context, f.receipt, f.api), /tree changed/)
+  assert.deepEqual(f.writes, [])
+})
+
+test('pending and publication permit equivalent regeneration during deployment and retain tested payload/build description', async () => {
+  const f = fixture()
+  const context = await prepare(f.event, f.api, f.publisher)
+  regenerateMerge(f)
+  const started = await pending(context, f.receipt, f.api)
+  const deployment = f.writes.find(item => item.path === 'deployments').body
+  assert.equal(deployment.payload.mergeSha, mergeSha)
+  assert.equal(deployment.payload.currentMergeSha, 'e'.repeat(40))
+  assert.equal(deployment.description, `PR #42: ${mergeSha}`)
+  const currentSha = regenerateMerge(f, '0'.repeat(40))
+  assert.equal((await authorize(started, f.receipt, f.api)).status, 'deploy')
+  assert.equal((await publish(started, f.receipt, deployedPreview(), f.api)).currentMergeSha, currentSha)
+  assert.equal(f.writes.at(-1).body.description, `UI and Worker ${mergeSha.slice(0, 12)}`)
+  assert.equal(f.receipt.mergeSha, mergeSha)
+})
+
+test('actual tree or merge-parent changes during upload inactivate only this deployment', async () => {
+  for (const mutate of [
+    commit => { commit.tree.sha = '0'.repeat(40) },
+    commit => { commit.parents[0].sha = '0'.repeat(40) },
+    commit => { commit.parents[1].sha = '0'.repeat(40) }
+  ]) {
+    const f = fixture()
+    const started = await pending(await prepare(f.event, f.api, f.publisher), f.receipt, f.api)
+    mutate(f.commits[regenerateMerge(f)])
+    f.writes.length = 0
+    assert.equal((await publish(started, f.receipt, deployedPreview(), f.api)).status, 'stale')
+    assert.deepEqual(f.writes.map(item => [item.path, item.body.state]), [['deployments/300/statuses', 'inactive']])
+  }
+})
+
+test('commit API failures, absent facts and mismatched response SHAs never authorize or publish', async () => {
+  for (const which of ['tested', 'current']) {
+    const f = fixture()
+    const currentSha = regenerateMerge(f)
+    const failedPath = `git/commits/${which === 'tested' ? mergeSha : currentSha}`
+    for (const response of [null, {}, { ...f.mergeCommit, sha: '0'.repeat(40) }, 'error']) {
+      const api = async (path, body) => {
+        if (path === failedPath && body == null) {
+          if (response === 'error') throw new Error('API unavailable')
+          return structuredClone(response)
+        }
+        return f.api(path, body)
+      }
+      await assert.rejects(prepare(f.event, api, f.publisher))
+      assert.deepEqual(f.writes, [])
+    }
+  }
+})
+
+test('regeneration cannot replace the downloaded receipt, run attempt, artifact ID, digest or artifact merge', async () => {
+  for (const change of ['receipt', 'attempt', 'id', 'digest', 'artifact-merge', 'provenance']) {
+    const f = fixture()
+    const context = await prepare(f.event, f.api, f.publisher)
+    const currentSha = regenerateMerge(f)
+    const receipt = structuredClone(f.receipt)
+    if (change === 'receipt') receipt.mergeSha = currentSha
+    if (change === 'attempt') f.run.run_attempt++
+    if (change === 'id') f.artifacts.artifacts[0].id++
+    if (change === 'digest') f.artifacts.artifacts[0].digest = `sha256:${'0'.repeat(64)}`
+    if (change === 'artifact-merge') f.artifacts.artifacts[0].name = artifactName({ ...f.receipt, mergeSha: currentSha })
+    if (change === 'provenance') f.artifacts.artifacts[0].workflow_run.head_repository_id++
+    await assert.rejects(authorize(context, receipt, f.api))
+    assert.deepEqual(f.writes, [])
+  }
+})
+
+test('manual old-merge run discovery requires explicit current PR/full-head/base and repository association', async () => {
+  const f = fixture({ dispatch: true })
+  regenerateMerge(f)
+  f.run.head_sha = f.runs[0].head_sha = f.artifacts.artifacts[0].workflow_run.head_sha = mergeSha
+  f.runs[0].pull_requests = [{ number: 42, head: { sha: headSha }, base: { sha: baseSha } }]
+  assert.equal((await prepare(f.event, f.api, f.publisher)).identity.mergeSha, mergeSha)
+  for (const mutate of [
+    run => { run.pull_requests = [] },
+    run => { delete run.pull_requests },
+    run => { run.pull_requests[0].number = 43 },
+    run => { run.pull_requests[0].head.sha = '0'.repeat(40) },
+    run => { run.pull_requests[0].base.sha = '0'.repeat(40) },
+    run => { run.repository.id = 99 },
+    run => { run.head_repository.id = 99 },
+    run => { run.workflow_id = 99 },
+    run => { run.event = 'push' },
+    run => { run.id = 0 },
+    run => { run.run_attempt = 0 }
+  ]) {
+    const saved = structuredClone(f.runs)
+    mutate(f.runs[0])
+    await assert.rejects(prepare(f.event, f.api, f.publisher), /rerun PR CI/)
+    f.runs = saved
+  }
+  const oldRun = { ...structuredClone(f.runs[0]), id: 99 }
+  f.runs.push(oldRun)
+  f.run.conclusion = 'failure'
+  await assert.rejects(prepare(f.event, f.api, f.publisher), /did not complete/)
+})
+
+test('fork notice accepts equivalent regeneration but still requires current complete-head approval', async () => {
+  const f = fixture({ fork: true })
+  regenerateMerge(f)
+  const context = await prepare(f.event, f.api, f.publisher)
+  assert.equal(context.status, 'awaiting-approval')
+  regenerateMerge(f, '0'.repeat(40))
+  assert.equal((await notice(context, f.api)).status, 'awaiting-approval')
+  f.writes.length = 0
+  f.deployments = [{ id: 300, sha: headSha, payload: { preview: 'lie-pr-preview', pr_number: 42, ...f.receipt, mergeSha: 'e'.repeat(40) } }]
+  f.deploymentStatuses[300] = [{ state: 'success' }]
+  assert.equal((await notice(context, f.api)).status, 'already-approved')
+  assert.deepEqual(f.writes, [])
+})
+
+test('approval notice refuses missing or changed active-deployment merge facts', async () => {
+  for (const facts of [null, { sha: 'e'.repeat(40), parents: [], tree: { sha: 'f'.repeat(40) } },
+    { sha: 'e'.repeat(40), parents: [{ sha: baseSha }, { sha: headSha }], tree: { sha: '0'.repeat(40) } }]) {
+    const f = fixture({ fork: true })
+    const context = await prepare(f.event, f.api, f.publisher)
+    f.deployments = [{ id: 300, sha: headSha, payload: { preview: 'lie-pr-preview', pr_number: 42, ...f.receipt, mergeSha: 'e'.repeat(40) } }]
+    f.deploymentStatuses[300] = [{ state: 'success' }]
+    f.commits['e'.repeat(40)] = facts
+    await assert.rejects(notice(context, f.api))
+    assert.deepEqual(f.writes, [])
+  }
+})
+
+test('notice rechecks PR/run/artifact/commit proof after deployment-list queries and before writing pending', async () => {
+  for (const change of ['head', 'base', 'closed', 'draft', 'digest', 'attempt', 'tree', 'equivalent']) {
+    const f = fixture({ fork: true })
+    const context = await prepare(f.event, f.api, f.publisher)
+    const api = async (path, body) => {
+      if (body == null && path.startsWith('deployments?')) {
+        if (change === 'head') f.pr.head.sha = '0'.repeat(40)
+        if (change === 'base') f.pr.base.sha = '0'.repeat(40)
+        if (change === 'closed') f.pr.state = 'closed'
+        if (change === 'draft') f.pr.draft = true
+        if (change === 'digest') f.artifacts.artifacts[0].digest = `sha256:${'0'.repeat(64)}`
+        if (change === 'attempt') f.run.run_attempt++
+        if (change === 'tree') f.commits[regenerateMerge(f)].tree.sha = '0'.repeat(40)
+        if (change === 'equivalent') regenerateMerge(f)
+      }
+      return f.api(path, body)
+    }
+    if (['base', 'attempt', 'tree'].includes(change)) await assert.rejects(notice(context, api))
+    else assert.equal((await notice(context, api)).status, change === 'equivalent' ? 'awaiting-approval' : 'stale')
+    assert.equal(f.writes.length, change === 'equivalent' ? 1 : 0)
+  }
+})
+
+test('same-SHA authorization still rereads and validates the commit once on every call', async () => {
+  const f = fixture()
+  const context = await prepare(f.event, f.api, f.publisher)
+  for (let attempt = 0; attempt < 2; attempt++) {
+    f.reads.length = 0
+    assert.equal((await authorize(context, f.receipt, f.api)).status, 'deploy')
+    assert.deepEqual(f.reads.filter(path => path.startsWith('git/commits/')), [`git/commits/${mergeSha}`])
+  }
+  delete f.mergeCommit.tree
+  await assert.rejects(authorize(context, f.receipt, f.api), /current PR test merge/)
+})
+
+test('CLI recheck persists tested restore/build identity and keeps current merge in an independent audit field', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'lie-preview-equivalent-'))
+  try {
+    const f = fixture()
+    const currentSha = regenerateMerge(f)
+    const context = await prepare(f.event, f.api, f.publisher)
+    const contextPath = join(directory, 'context.json'), identityPath = join(directory, 'identity.json')
+    await writeFile(contextPath, JSON.stringify(context))
+    await writeFile(join(directory, 'receipt.json'), JSON.stringify(f.receipt))
+    const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', GH_TOKEN: 'fake-token',
+      PR_PREVIEW_CONTEXT_FILE: contextPath, PR_PREVIEW_ARTIFACT_DIR: directory, PR_PREVIEW_IDENTITY_FILE: identityPath }
+    assert.equal((await main('recheck', env, apiFetcher(f.api))).status, 'deploy')
+    const identity = JSON.parse(await readFile(identityPath, 'utf8'))
+    assert.equal(identity.mergeSha, mergeSha)
+    assert.equal(identity.currentMergeSha, currentSha)
+    assert.deepEqual(validateIdentity(identity), { repository: repo.full_name, prNumber: 42, headSha, baseSha, mergeSha, runId: '100', runAttempt: '2' })
+    assert.equal(JSON.parse(await readFile(join(directory, 'receipt.json'), 'utf8')).mergeSha, mergeSha)
+  } finally { await rm(directory, { recursive: true, force: true }) }
+})
+
+test('missing active-deployment merge identity cannot suppress approval or write a notice', async () => {
+  const f = fixture({ fork: true })
+  const context = await prepare(f.event, f.api, f.publisher)
+  const payload = { preview: 'lie-pr-preview', pr_number: 42, ...f.receipt }
+  delete payload.mergeSha
+  f.deployments = [{ id: 300, sha: headSha, payload }]
+  f.deploymentStatuses[300] = [{ state: 'success' }]
+  await assert.rejects(notice(context, f.api), /Invalid preview merge SHA/)
+  assert.deepEqual(f.writes, [])
 })
