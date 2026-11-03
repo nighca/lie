@@ -2,6 +2,12 @@
 
 2026-11-01；本地实施中，尚未启用远程预览。基线为已审并上线的 `16d64347b853ffaaac1f2dbaa9d8ddd232f9859a`。本文件与[最新用户决定](pr-ci-preview-storage-contract.md)覆盖 [10月25日提案](pr-ci-preview-proposal.md)及[续接记录](pr-ci-preview-review-2026-11-01.md)中的 UI-only/main gateway harness 限制；保留旧文档以记录备选。
 
+## 2026-11-03 自定义预览域名约定
+
+所有新发布的 PR 预览入口使用 `preview.lie.agency`：稳定地址为 `pr-N.preview.lie.agency`；不可变地址只接受部署 API 实际返回的完整 deployment ID 或 UUID 首8位，例如 `063049c3.preview.lie.agency`，不自行增加 PR 后缀或生成缺失地址。上述日期较新的约定覆盖本文早期启用状态和链接约定，云资源验收由专项资源记录单独保存。
+
+发布器严格核对 CLI 返回的 PR/name/slug、deployment ID、HTTPS origin 及固定自家域名；如同时返回旧 `workers.dev` 地址，也要核对同一父 Worker 和账户。新部署的全部不可变地址还必须逐一出现在固定 Preview 的精确 deployment metadata 中。只有平台返回且校验通过的自家域名可用于 HTTP probe、成功 Step Summary、GitHub Deployment 和 commit status；缺少稳定或不可变自家域名时失败，不回退发布 `workers.dev`。只读 inspect 仍可展示身份匹配的平台原始两类地址，自家域名排在前面。身份审批、产物信任、关闭清理和资源权限保持既有合同。
+
 ## 用户已确认的行为
 
 - 每个指向 main 的贡献 PR 接受完整无凭据 CI。每 PR 有独立 Worker 预览入口，前端与 Worker 均来自同一次 PR 测试合并提交，新增接口及其消费方可端到端验证。

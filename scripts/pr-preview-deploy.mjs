@@ -68,27 +68,45 @@ function apiRoot(options) {
   return `https://api.cloudflare.com/client/v4/accounts/${options.accountId}/workers/workers/lie-pr-preview`
 }
 
+export const previewDomain = 'preview.lie.agency'
+
+function ownFirst(urls) {
+  return [...urls.filter(url => new URL(url).hostname.endsWith(`.${previewDomain}`)), ...urls.filter(url => !new URL(url).hostname.endsWith(`.${previewDomain}`))]
+}
+
+function deploymentHostLabels(id) {
+  const labels = [id.toLowerCase()]
+  if (/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(id)) labels.push(id.slice(0, 8).toLowerCase())
+  return labels
+}
+
 export function previewResult(value, prNumber) {
   requireThat(value != null && value.type === 'preview' && value.version === 1 && value.preview_name === `pr-${prNumber}`, 'Unexpected preview deployment response')
+  for (const key of ['preview_id', 'deployment_id']) requireThat(typeof value[key] === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value[key]), 'Invalid preview deployment identity')
+  requireThat(value.preview_slug === value.preview_name, 'Invalid preview slug')
   const urls = field => {
     requireThat(Array.isArray(value[field]) && value[field].length > 0 && value[field].length <= 10, 'Missing preview deployment URL')
     return value[field].map(raw => {
       requireThat(typeof raw === 'string', 'Invalid preview deployment URL')
       const url = new URL(raw)
-      requireThat(url.protocol === 'https:' && url.hostname.endsWith('.workers.dev') && url.hostname.split('.').length === 4 && url.port === '' && url.username === '' && url.password === '' && url.pathname === '/' && url.search === '' && url.hash === '', 'Invalid preview deployment URL')
+      requireThat(url.protocol === 'https:' && url.port === '' && url.username === '' && url.password === '' && url.pathname === '/' && url.search === '' && url.hash === '', 'Invalid preview deployment URL')
       return url.origin
     })
   }
-  for (const key of ['preview_id', 'deployment_id']) requireThat(typeof value[key] === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value[key]), 'Invalid preview deployment identity')
-  requireThat(typeof value.preview_slug === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(value.preview_slug), 'Invalid preview slug')
   const previewUrls = urls('preview_urls'), deploymentUrls = urls('deployment_urls')
-  requireThat(previewUrls.every(url => new URL(url).hostname.startsWith(`${value.preview_slug}-lie-pr-preview.`)), 'Preview URL does not match deployment target')
-  const accountDomain = new URL(previewUrls[0]).hostname.split('.').slice(1).join('.')
-  requireThat([...previewUrls, ...deploymentUrls].every(url => new URL(url).hostname.endsWith(`.${accountDomain}`)), 'Inconsistent preview URL account')
-  const deploymentLabels = [value.deployment_id]
-  if (/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(value.deployment_id)) deploymentLabels.push(value.deployment_id.slice(0, 8))
-  requireThat(deploymentUrls.every(url => deploymentLabels.some(id => new URL(url).hostname === `${id.toLowerCase()}-lie-pr-preview.${accountDomain}`)), 'Deployment URL does not match deployment identity')
-  return { type: 'preview', version: 1, preview_id: value.preview_id, preview_name: value.preview_name, preview_slug: value.preview_slug, preview_urls: previewUrls, deployment_id: value.deployment_id, deployment_urls: deploymentUrls }
+  const customPreview = `https://${value.preview_slug}.${previewDomain}`
+  const workerPreviews = previewUrls.filter(url => url !== customPreview)
+  const deploymentLabels = deploymentHostLabels(value.deployment_id)
+  const customDeployments = deploymentLabels.map(id => `https://${id}.${previewDomain}`)
+  const workerDeployments = deploymentUrls.filter(url => !customDeployments.includes(url))
+  if (workerPreviews.length > 0 || workerDeployments.length > 0) {
+    requireThat(workerPreviews.length > 0, 'Missing workers.dev preview identity')
+    const accountDomain = new URL(workerPreviews[0]).hostname.split('.').slice(1).join('.')
+    requireThat(/^[a-z0-9-]+\.workers\.dev$/.test(accountDomain), 'Invalid preview account domain')
+    requireThat(workerPreviews.every(url => url === `https://${value.preview_slug}-lie-pr-preview.${accountDomain}`), 'Preview URL does not match deployment target')
+    requireThat(workerDeployments.every(url => deploymentLabels.some(id => url === `https://${id}-lie-pr-preview.${accountDomain}`)), 'Deployment URL does not match deployment identity')
+  }
+  return { type: 'preview', version: 1, preview_id: value.preview_id, preview_name: value.preview_name, preview_slug: value.preview_slug, preview_urls: ownFirst(previewUrls), deployment_id: value.deployment_id, deployment_urls: ownFirst(deploymentUrls) }
 }
 
 export function verifyRuntimeDeployment(value, expected) {
@@ -102,6 +120,9 @@ export function verifyRuntimeDeployment(value, expected) {
   requireThat(env.ASSETS.type === 'assets' && env.SHARED_GAMES.type === 'r2_bucket' && env.SHARED_GAMES.bucket_name === 'lie-shared-games-dev', 'Unexpected preview storage bindings')
   requireThat(env.VOICE_MAX_SESSION_SECONDS.type === 'plain_text' && env.VOICE_MAX_SESSION_SECONDS.text === '600' && env.VOICE_DEVICE_ENVIRONMENT.type === 'plain_text' && env.VOICE_DEVICE_ENVIRONMENT.text === expected.preview_name, 'Unexpected preview runtime variables')
   requireThat(secretNames.every(name => env[name].type === 'secret_text'), 'Unexpected preview secret binding type')
+  if (expected.deployment_urls != null) {
+    requireThat(Array.isArray(deployment.urls) && expected.deployment_urls.every(url => deployment.urls.includes(url)), 'Deployment URLs do not match current Cloudflare metadata')
+  }
 }
 
 export async function deployPreview(options, run = runFile, request = fetch) {
@@ -146,7 +167,7 @@ export async function deployPreview(options, run = runFile, request = fetch) {
   }
 }
 
-function publicInspectionUrls(value, fields, labels) {
+function publicInspectionUrls(value, fields, labels, customLabels) {
   const candidates = fields.flatMap(field => {
     const entry = value[field]
     return Array.isArray(entry) ? entry : entry != null && typeof entry === 'object' ? Object.values(entry) : []
@@ -154,10 +175,11 @@ function publicInspectionUrls(value, fields, labels) {
   const urls = candidates.filter(raw => {
     try {
       const url = new URL(raw), parts = url.hostname.split('.')
-      return url.protocol === 'https:' && url.port === '' && url.username === '' && url.password === '' && url.search === '' && url.hash === '' && url.pathname === '/' && parts.length === 4 && parts.slice(2).join('.') === 'workers.dev' && labels.some(label => parts[0] === `${label.toLowerCase()}-lie-pr-preview`)
+      const knownHost = (parts.length === 4 && parts.slice(2).join('.') === 'workers.dev' && labels.some(label => parts[0] === `${label.toLowerCase()}-lie-pr-preview`)) || customLabels.some(label => url.hostname === `${label.toLowerCase()}.${previewDomain}`)
+      return knownHost && url.protocol === 'https:' && url.port === '' && url.username === '' && url.password === '' && url.search === '' && url.hash === '' && url.pathname === '/'
     } catch { return false }
   })
-  return { urls: [...new Set(urls.map(raw => new URL(raw).origin))], candidateCount: candidates.length }
+  return { urls: ownFirst([...new Set(urls.map(raw => new URL(raw).origin))]), candidateCount: candidates.length }
 }
 
 export async function inspectPreview(options, run = runFile, request = fetch) {
@@ -206,7 +228,7 @@ export async function inspectPreview(options, run = runFile, request = fetch) {
     if (!summary.previewNameMatch || !summary.previewObjectIDValid) return summary
     Object.assign(summary, { previewExists: true, previewID: preview.id, previewName: preview.name })
     const previewLabels = [preview.name, ...(publicId(preview.slug) ? [preview.slug] : [])]
-    const previewLinks = publicInspectionUrls(preview, ['urls', 'preview_urls'], previewLabels)
+    const previewLinks = publicInspectionUrls(preview, ['urls', 'preview_urls'], previewLabels, [preview.name])
     Object.assign(summary, { previewURLs: previewLinks.urls, previewURLCandidateCount: previewLinks.candidateCount })
     stage = 'inspect-deployment'
     const deployment = await readMetadata(`${apiRoot(options)}/previews/${encodeURIComponent(preview.id)}/deployments/latest`, options, request)
@@ -218,7 +240,7 @@ export async function inspectPreview(options, run = runFile, request = fetch) {
       previewIDPresent: Object.hasOwn(deployment, 'preview_id'), previewIDType: valueType(deployment.preview_id), previewIDMatch,
       envPresent: Object.hasOwn(deployment, 'env'), envType: valueType(deployment.env)
     })
-    const deploymentLinks = deploymentIDValid && (!Object.hasOwn(deployment, 'preview_id') || previewIDMatch) ? publicInspectionUrls(deployment, ['urls', 'deployment_urls'], [deployment.id, deployment.id.slice(0, 8)]) : { urls: [], candidateCount: 0 }
+    const deploymentLinks = deploymentIDValid && (!Object.hasOwn(deployment, 'preview_id') || previewIDMatch) ? publicInspectionUrls(deployment, ['urls', 'deployment_urls'], deploymentHostLabels(deployment.id), deploymentHostLabels(deployment.id)) : { urls: [], candidateCount: 0 }
     Object.assign(summary, { deploymentURLs: deploymentLinks.urls, deploymentURLCandidateCount: deploymentLinks.candidateCount })
     const knownFields = ['id', 'preview_id', 'env', 'main_module', 'modules', 'assets', 'compatibility_date', 'compatibility_flags', 'limits', 'annotations', 'urls', 'created_on', 'modified_on']
     const names = ['ASSETS', 'SHARED_GAMES', 'VOICE_MAX_SESSION_SECONDS', 'VOICE_DEVICE_ENVIRONMENT', ...secretNames]

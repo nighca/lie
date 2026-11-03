@@ -13,7 +13,7 @@ const id = { repository: 'nighca/lie', prNumber: 12, headSha: 'a'.repeat(40), ba
 const result = { type: 'preview', version: 1, preview_id: 'preview-id', preview_name: 'pr-12', preview_slug: 'pr-12', preview_urls: ['https://pr-12-lie-pr-preview.example.workers.dev'], deployment_id: 'deployment-id', deployment_urls: ['https://deployment-id-lie-pr-preview.example.workers.dev'] }
 const secrets = { LINX_API_KEY: 'fake-api-key', LINX_WS_TOKEN: 'fake-ws-token', LINX_AGENT_ID: 'fake-agent-id', VOICE_DEVICE_COOKIE_SECRET: 'fake-signing-key-32-bytes-or-longer' }
 function metadata() {
-  return { success: true, result: { id: result.deployment_id, preview_id: result.preview_id, env: {
+  return { success: true, result: { id: result.deployment_id, preview_id: result.preview_id, urls: result.deployment_urls, env: {
     ASSETS: { type: 'assets' }, SHARED_GAMES: { type: 'r2_bucket', bucket_name: 'lie-shared-games-dev' },
     VOICE_MAX_SESSION_SECONDS: { type: 'plain_text', text: '600' }, VOICE_DEVICE_ENVIRONMENT: { type: 'plain_text', text: 'pr-12' },
     ...Object.fromEntries(Object.keys(secrets).map(name => [name, { type: 'secret_text' }]))
@@ -351,15 +351,15 @@ test('safe operation errors distinguish upload, result validation and metadata f
 
 test('inspection projects only explicitly supplied public URLs matching the Preview and deployment identities', async () => {
   const f = await fixture(), value = metadata()
-  value.result.id = '12345678-deployment'
-  value.result.deployment_urls = { public: 'https://12345678-lie-pr-preview.example.workers.dev', full: 'https://12345678-deployment-lie-pr-preview.example.workers.dev' }
+  value.result.id = '12345678-1234-1234-1234-123456789abc'
+  value.result.deployment_urls = { public: 'https://12345678-lie-pr-preview.example.workers.dev', full: 'https://12345678-1234-1234-1234-123456789abc-lie-pr-preview.example.workers.dev' }
   value.result.urls = ['https://12345678-lie-game.example.workers.dev', 'https://user:password@12345678-lie-pr-preview.example.workers.dev', 'https://12345678-lie-pr-preview.example.workers.dev/?token=secret', 'https://12345678-lie-pr-preview.example.workers.dev/#secret']
   value.result.env.LINX_API_KEY.text = 'https://12345678-lie-pr-preview.secret.workers.dev'
   const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => Response.json(url.endsWith('/previews/pr-12') ? {
     name: 'pr-12', id: 'preview-id', urls: ['https://pr-12-lie-pr-preview.example.workers.dev', 'https://pr-13-lie-pr-preview.example.workers.dev'], preview_urls: { other: 'http://pr-12-lie-pr-preview.example.workers.dev' }
   } : value))
   assert.deepEqual(summary.previewURLs, ['https://pr-12-lie-pr-preview.example.workers.dev'])
-  assert.deepEqual(summary.deploymentURLs, ['https://12345678-lie-pr-preview.example.workers.dev', 'https://12345678-deployment-lie-pr-preview.example.workers.dev'])
+  assert.deepEqual(summary.deploymentURLs, ['https://12345678-lie-pr-preview.example.workers.dev', 'https://12345678-1234-1234-1234-123456789abc-lie-pr-preview.example.workers.dev'])
   assert.equal(summary.previewURLCandidateCount, 3)
   assert.equal(summary.deploymentURLCandidateCount, 6)
   assert.equal(JSON.stringify(summary).includes('password'), false)
@@ -407,7 +407,7 @@ test('inspect reports parent and Preview shape mismatches without following an i
 test('diagnostic URL projection can use a missing preview_id only from the fixed verified latest endpoint', async () => {
   const f = await fixture()
   for (const previewId of [undefined, 'wrong-preview']) {
-    const deployment = { id: '12345678-deployment', urls: ['https://12345678-lie-pr-preview.example.workers.dev', 'https://12345678-lie-game.example.workers.dev'] }
+    const deployment = { id: '12345678-1234-1234-1234-123456789abc', urls: ['https://12345678-lie-pr-preview.example.workers.dev', 'https://12345678-lie-game.example.workers.dev'] }
     if (previewId != null) deployment.preview_id = previewId
     const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }), async url => {
       if (url.endsWith('/previews/pr-12')) return Response.json({ name: 'pr-12', id: 'preview-id' })
@@ -429,6 +429,7 @@ test('native deployment UUID short URLs and metadata without preview_id retain a
   for (const host of ['063049c4-lie-pr-preview.example.workers.dev', '063049c3-lie-game.example.workers.dev', '063049c3-lie-pr-preview.foreign.workers.dev']) assert.throws(() => previewResult({ ...actual, deployment_urls: [`https://${host}`] }, 12))
   const value = metadata()
   value.result.id = deploymentId
+  value.result.urls = actual.deployment_urls
   delete value.result.preview_id
   assert.doesNotThrow(() => verifyRuntimeDeployment(value, actual))
   for (const mutate of [v => { v.result.id = 'wrong-id' }, v => { v.result.preview_id = 'other-preview' }, v => { v.result.preview_id = null }, v => { v.result.preview_id = undefined }, v => { v.result.env.EXTRA = { type: 'secret_text' } }]) {
@@ -447,9 +448,70 @@ test('both existing-latest preflight and exact-new postflight accept the observe
     if (url.endsWith('/previews/pr-12')) return Response.json({ name: 'pr-12', id: 'preview-id' })
     const value = metadata()
     delete value.result.preview_id
-    if (!url.endsWith('/deployments/latest')) value.result.id = deploymentId
+    if (!url.endsWith('/deployments/latest')) { value.result.id = deploymentId; value.result.urls = uploaded.deployment_urls }
     return Response.json(value)
   }), uploaded)
   assert.equal(requests[1].endsWith('/previews/preview-id/deployments/latest'), true)
   assert.equal(requests[2].endsWith(`/previews/preview-id/deployments/${deploymentId}`), true)
+})
+
+function customResult() {
+  return { ...result, deployment_id: '063049c3-82d7-4aed-a9b6-2d490a1d84b3',
+    preview_urls: ['https://pr-12-lie-pr-preview.example.workers.dev', 'https://pr-12.preview.lie.agency'],
+    deployment_urls: ['https://063049c3-lie-pr-preview.example.workers.dev', 'https://063049c3.preview.lie.agency'] }
+}
+
+test('custom domain URLs are platform-supplied exact identities and sort ahead of workers.dev', () => {
+  const mixed = customResult()
+  const validated = previewResult(mixed, 12)
+  assert.deepEqual(validated.preview_urls, mixed.preview_urls.toReversed())
+  assert.deepEqual(validated.deployment_urls, mixed.deployment_urls.toReversed())
+  const custom = { ...mixed, preview_urls: ['https://pr-12.preview.lie.agency'], deployment_urls: ['https://063049c3.preview.lie.agency'] }
+  assert.deepEqual(previewResult(custom, 12), custom)
+  assert.doesNotThrow(() => previewResult({ ...custom, deployment_urls: [`https://${mixed.deployment_id}.preview.lie.agency`] }, 12))
+})
+
+test('mixed URLs reject foreign PRs, deployments, accounts, subdomains and injected URL components', () => {
+  for (const bad of [
+    { preview_slug: 'pr-13' },
+    { preview_urls: ['https://pr-13.preview.lie.agency'] },
+    { preview_urls: ['https://pr-12.extra.preview.lie.agency'] },
+    { preview_urls: ['https://pr-12.preview.lie.agency.evil.example'] },
+    { preview_urls: ['https://pr-12.preview.lie.agency.'] },
+    { preview_urls: ['https://user:password@pr-12.preview.lie.agency'] },
+    { preview_urls: ['https://pr-12.preview.lie.agency:444'] },
+    { preview_urls: ['https://pr-12.preview.lie.agency/?token=secret'] },
+    { preview_urls: ['https://pr-12.preview.lie.agency/path'] },
+    { deployment_urls: ['https://063049c4.preview.lie.agency'] },
+    { deployment_urls: ['https://063049c3-pr-13.preview.lie.agency'] },
+    { deployment_urls: ['https://063049c3.extra.preview.lie.agency'] },
+    { deployment_urls: ['https://063049c3-lie-pr-preview.foreign.workers.dev'] },
+    { deployment_urls: ['https://063049c3.preview.lie.agency/#secret'] }
+  ]) assert.throws(() => previewResult({ ...customResult(), ...bad }, 12))
+  assert.throws(() => previewResult({ ...customResult(), preview_urls: ['https://pr-12.preview.lie.agency', 'https://pr-12-lie-pr-preview.other.workers.dev'] }, 12))
+})
+
+test('postflight requires every claimed immutable URL in the exact deployment metadata', () => {
+  const expected = previewResult(customResult(), 12)
+  const value = metadata()
+  value.result.id = expected.deployment_id
+  value.result.urls = expected.deployment_urls
+  assert.doesNotThrow(() => verifyRuntimeDeployment(value, expected))
+  for (const urls of [undefined, [], ['https://063049c4.preview.lie.agency'], expected.deployment_urls.slice(0, 1)]) {
+    const bad = structuredClone(value)
+    if (urls == null) delete bad.result.urls
+    else bad.result.urls = urls
+    assert.throws(() => verifyRuntimeDeployment(bad, expected), /Deployment URLs do not match/)
+  }
+})
+
+test('inspection projects custom URLs first without inventing them or accepting a wrong deployment', async () => {
+  const f = await fixture(), supplied = customResult(), value = metadata()
+  value.result.id = supplied.deployment_id
+  value.result.urls = [...supplied.deployment_urls, 'https://063049c4.preview.lie.agency']
+  delete value.result.preview_id
+  const summary = await inspectPreview({ ...f, prNumber: 12 }, async () => ({ stdout: JSON.stringify({ name: 'lie-pr-preview' }) }),
+    async url => Response.json(url.endsWith('/previews/pr-12') ? { name: 'pr-12', id: 'preview-id', urls: [...supplied.preview_urls, 'https://pr-13.preview.lie.agency'] } : value))
+  assert.deepEqual(summary.previewURLs, supplied.preview_urls.toReversed())
+  assert.deepEqual(summary.deploymentURLs, supplied.deployment_urls.toReversed())
 })

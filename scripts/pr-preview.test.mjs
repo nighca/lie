@@ -332,13 +332,15 @@ test('confirmed cleanup inactivates only project-marked deployment records and n
   assert.deepEqual(f.writes.map(item => item.path), ['deployments/300/statuses'])
 })
 
-test('preview URL parser refuses arbitrary domains, credential URLs, query injection and missing URLs', () => {
-  assert.equal(previewURLs({ previewUrls: { default: 'https://pr-42.account.workers.dev' } }).url, 'https://pr-42.account.workers.dev/')
-  for (const value of ['http://pr-42.account.workers.dev', 'https://workers.dev.evil.example', 'https://user@pr-42.account.workers.dev',
-    'https://pr-42.account.workers.dev/?token=x', 'https://pr-42.account.workers.dev/path', 'https://pr-42.account.workers.dev/#fragment']) {
-    assert.throws(() => previewURLs({ preview_urls: [value] }))
+test('preview URL parser requires validated custom-domain identities', () => {
+  assert.equal(previewURLs(deployedPreview(), 42).url, 'https://pr-42.preview.lie.agency')
+  for (const value of ['http://pr-42.preview.lie.agency', 'https://preview.lie.agency.evil.example', 'https://user@pr-42.preview.lie.agency',
+    'https://pr-42.preview.lie.agency/?token=x', 'https://pr-42.preview.lie.agency/path', 'https://pr-42.preview.lie.agency/#fragment',
+    'https://pr-43.preview.lie.agency', 'https://pr-42-lie-pr-preview.account.workers.dev']) {
+    assert.throws(() => previewURLs({ ...deployedPreview(), preview_urls: [value] }, 42))
   }
-  assert.throws(() => previewURLs({ preview_urls: [] }))
+  assert.throws(() => previewURLs({ ...deployedPreview(), preview_urls: [] }, 42))
+  assert.throws(() => previewURLs({ ...deployedPreview(), deployment_urls: ['https://deployment-id-lie-pr-preview.account.workers.dev'] }, 42))
 })
 
 test('GitHub client is fixed to this repository and never emits an opaque error response', async () => {
@@ -401,8 +403,8 @@ test('closed signal cannot come from a different workflow even if it names a rea
 
 function deployedPreview() {
   return { type: 'preview', version: 1, preview_id: 'preview-id', preview_name: 'pr-42', preview_slug: 'pr-42',
-    preview_urls: ['https://pr-42-lie-pr-preview.account.workers.dev/'], deployment_id: 'deployment-id',
-    deployment_urls: ['https://deployment-id-lie-pr-preview.account.workers.dev/'] }
+    preview_urls: ['https://pr-42.preview.lie.agency/'], deployment_id: 'deployment-id',
+    deployment_urls: ['https://deployment-id.preview.lie.agency/'] }
 }
 
 function probeResponse(path) {
@@ -416,7 +418,7 @@ test('HTTP probe makes exactly four same-origin bounded GETs and does not prepar
     calls.push({ url, options })
     return probeResponse(new URL(url).pathname)
   })
-  assert.deepEqual(result, { status: 'passed', url: 'https://pr-42-lie-pr-preview.account.workers.dev', requests: 4 })
+  assert.deepEqual(result, { status: 'passed', url: 'https://pr-42.preview.lie.agency', requests: 4 })
   assert.deepEqual(calls.map(call => new URL(call.url).pathname), ['/', '/editor', '/api/health', '/api/voice/status'])
   assert.ok(calls.every(call => call.options.method === 'GET' && call.options.redirect === 'manual' && call.options.credentials === 'omit' &&
     call.options.headers['Cache-Control'] === 'no-store' && call.options.signal instanceof AbortSignal))
@@ -426,8 +428,8 @@ test('HTTP probe validates every returned URL and its parent target before any n
   for (const mutate of [
     data => { data.preview_urls = ['https://localhost/'] },
     data => { data.preview_urls = ['https://pr-42-other.account.workers.dev/'] },
-    data => { data.preview_urls = ['https://user:password@pr-42-lie-pr-preview.account.workers.dev/'] },
-    data => { data.preview_urls = ['https://pr-42-lie-pr-preview.account.workers.dev/?token=bad'] },
+    data => { data.preview_urls = ['https://user:password@pr-42.preview.lie.agency/'] },
+    data => { data.preview_urls = ['https://pr-42.preview.lie.agency/?token=bad'] },
     data => { data.deployment_urls = ['https://deployment-lie-pr-preview.evil.workers.dev/'] },
     data => { data.preview_name = 'pr-43' }
   ]) {
@@ -583,19 +585,22 @@ test('publish CLI summary exposes only validated URLs and public source/publishe
     const contextPath = join(directory, 'context.json'), resultPath = join(directory, 'result.json'), summaryPath = join(directory, 'summary.md')
     await writeFile(contextPath, JSON.stringify(context))
     await writeFile(join(directory, 'receipt.json'), JSON.stringify(f.receipt))
-    await writeFile(resultPath, JSON.stringify({ ...deployedPreview(), runtimeText: 'do-not-print-runtime-secret', rawCLI: 'do-not-print-raw-output' }))
+    const supplied = deployedPreview()
+    supplied.preview_urls.unshift('https://pr-42-lie-pr-preview.account.workers.dev')
+    supplied.deployment_urls.unshift('https://deployment-id-lie-pr-preview.account.workers.dev')
+    await writeFile(resultPath, JSON.stringify({ ...supplied, runtimeText: 'do-not-print-runtime-secret', rawCLI: 'do-not-print-raw-output' }))
     const env = { GITHUB_REPOSITORY: repo.full_name, GITHUB_RUN_ID: '500', GITHUB_RUN_ATTEMPT: '1', GH_TOKEN: 'do-not-print-gh-token',
       PR_PREVIEW_CONTEXT_FILE: contextPath, PR_PREVIEW_ARTIFACT_DIR: directory, PR_PREVIEW_DEPLOYMENT_FILE: resultPath,
       GITHUB_STEP_SUMMARY: summaryPath, LINX_API_KEY: 'do-not-print-env' }
     assert.equal((await main('publish', env, apiFetcher(f.api))).status, 'success')
     const summary = await readFile(summaryPath, 'utf8')
-    assert.match(summary, /Stable preview: \[https:\/\/pr-42-lie-pr-preview\.account\.workers\.dev\]/)
-    assert.match(summary, /Immutable deployment: \[https:\/\/deployment-id-lie-pr-preview\.account\.workers\.dev\]/)
+    assert.match(summary, /Stable preview: \[https:\/\/pr-42\.preview\.lie\.agency\]/)
+    assert.match(summary, /Immutable deployment: \[https:\/\/deployment-id\.preview\.lie\.agency\]/)
     assert.match(summary, new RegExp(`PR head: .${headSha}.`))
     assert.match(summary, new RegExp(`Tested UI and Worker merge: .${mergeSha}.`))
     assert.match(summary, /Producer CI: \[run 100, attempt 2\]\(https:\/\/github\.com\/nighca\/lie\/actions\/runs\/100\)/)
     assert.match(summary, /Publisher: \[run 500, attempt 1\]\(https:\/\/github\.com\/nighca\/lie\/actions\/runs\/500\)/)
-    assert.doesNotMatch(summary, /do-not-print/)
+    assert.doesNotMatch(summary, /do-not-print|workers\.dev/)
     assert.ok(f.writes.filter(item => item.path.endsWith('/statuses')).every(item => item.body.log_url.endsWith('/500')))
     f.writes.length = 0
     await main('fail', env, apiFetcher(f.api))
@@ -636,4 +641,22 @@ test('CLI refuses to reuse another publisher run context for status links', asyn
       GH_TOKEN: 'fake', PR_PREVIEW_CONTEXT_FILE: contextPath }, apiFetcher(f.api)), /another publisher run/)
     assert.deepEqual(f.writes, [])
   } finally { await rm(directory, { recursive: true, force: true }) }
+})
+
+test('mixed platform URLs probe and publish only custom-domain links', async () => {
+  const supplied = deployedPreview()
+  supplied.preview_urls.unshift('https://pr-42-lie-pr-preview.account.workers.dev')
+  supplied.deployment_urls.unshift('https://deployment-id-lie-pr-preview.account.workers.dev')
+  assert.deepEqual(previewURLs(supplied, 42), { url: 'https://pr-42.preview.lie.agency', immutableURLs: ['https://deployment-id.preview.lie.agency'] })
+  const calls = []
+  await probe({ prNumber: 42 }, supplied, async url => { calls.push(url); return probeResponse(new URL(url).pathname) })
+  assert.ok(calls.every(url => new URL(url).hostname === 'pr-42.preview.lie.agency'))
+  const f = fixture()
+  const context = { ...await prepare(f.event, f.api, f.publisher), deploymentId: '300' }
+  const result = await publish(context, f.receipt, supplied, f.api)
+  assert.equal(result.status, 'success')
+  const statuses = f.writes.filter(item => item.path.endsWith('/statuses') || item.path.startsWith('statuses/'))
+  assert.ok(statuses.length > 0)
+  assert.ok(statuses.every(item => item.body.environment_url == null || item.body.environment_url === 'https://pr-42.preview.lie.agency'))
+  assert.ok(statuses.every(item => item.body.target_url == null || item.body.target_url === 'https://pr-42.preview.lie.agency'))
 })

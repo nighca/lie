@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { parsePreviewArtifactName, selectPreviewArtifact, validateClosedPreview, validatePreviewRun } from './pr-preview-github.mjs'
-import { previewResult } from './pr-preview-deploy.mjs'
+import { previewDomain, previewResult } from './pr-preview-deploy.mjs'
 
 const repository = 'nighca/lie'
 const sha = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value)
@@ -173,19 +173,12 @@ export async function pending(context, receipt, api, { onDeploymentCreated = nul
   return updated
 }
 
-export function previewURLs(result) {
-  const values = result?.preview_urls ?? result?.previewUrls
-  const deployments = result?.deployment_urls ?? result?.deploymentUrls ?? []
-  const list = value => Array.isArray(value) ? value : value != null && typeof value === 'object' ? Object.values(value) : []
-  const safe = value => {
-    requireThat(typeof value === 'string', 'Invalid Cloudflare preview URL')
-    const url = new URL(value)
-    requireThat(url.protocol === 'https:' && url.hostname.endsWith('.workers.dev') && !url.username && !url.password && !url.port && !url.search && !url.hash && url.pathname === '/', 'Unexpected Cloudflare preview URL')
-    return url.href
-  }
-  const preview = list(values).map(safe), immutable = list(deployments).map(safe)
-  requireThat(preview.length > 0, 'Cloudflare did not return a stable preview URL')
-  return { url: preview[0], immutableURLs: immutable }
+export function previewURLs(result, prNumber) {
+  const deployment = previewResult(result, prNumber)
+  const urls = deployment.preview_urls.filter(url => new URL(url).hostname.endsWith(`.${previewDomain}`))
+  const immutableURLs = deployment.deployment_urls.filter(url => new URL(url).hostname.endsWith(`.${previewDomain}`))
+  requireThat(urls.length > 0 && immutableURLs.length > 0, 'Cloudflare did not return the configured custom preview URLs')
+  return { url: urls[0], immutableURLs }
 }
 
 async function boundedJSON(response, signal) {
@@ -219,8 +212,7 @@ async function boundedJSON(response, signal) {
 /** Four bounded GETs only. Config ready is not proof of live provider/voice behavior. */
 export async function probe(context, result, fetcher = fetch, { timeoutMs = 10000 } = {}) {
   requireThat(integer(context?.prNumber) && Number.isSafeInteger(timeoutMs) && timeoutMs > 0 && timeoutMs <= 10000, 'Invalid preview probe identity or deadline')
-  const deployment = previewResult(result, context.prNumber)
-  const origin = new URL(deployment.preview_urls[0]).origin
+  const origin = previewURLs(result, context.prNumber).url
   const routes = ['/', '/editor', '/api/health', '/api/voice/status']
   for (const path of routes) {
     const controller = new AbortController()
@@ -260,8 +252,7 @@ async function inactive(api, context, description) {
 /** Call only after the workflow's HTTP probe passes. Never delete an old run's whole preview. */
 export async function publish(context, receipt, result, api) {
   requireThat(integer(context?.deploymentId), 'Missing pending GitHub deployment')
-  const validated = previewResult(result, context.prNumber)
-  const urls = { url: validated.preview_urls[0], immutableURLs: validated.deployment_urls }
+  const urls = previewURLs(result, context.prNumber)
   let identity
   try { identity = await authorize(context, receipt, api) } catch {
     await inactive(api, context, 'Build identity changed; preview is not current')
@@ -371,12 +362,12 @@ async function save(path, value) {
 
 async function successSummary(path, context, receipt, result) {
   if (path == null) return
-  const deployment = previewResult(result, context.prNumber)
+  const urls = previewURLs(result, context.prNumber)
   requireThat(integer(context.prNumber) && integer(receipt.runId) && integer(receipt.runAttempt) &&
     sha(receipt.headSha) && sha(receipt.mergeSha), 'Invalid preview summary identity')
   const publisher = publisherIdentity(context)
-  const links = deployment.preview_urls.map(url => `- Stable preview: [${url}](${url})`)
-  links.push(...deployment.deployment_urls.map(url => `- Immutable deployment: [${url}](${url})`))
+  const links = [`- Stable preview: [${urls.url}](${urls.url})`]
+  links.push(...urls.immutableURLs.map(url => `- Immutable deployment: [${url}](${url})`))
   links.push(`- PR head: \`${receipt.headSha}\``, `- Tested UI and Worker merge: \`${receipt.mergeSha}\``,
     `- Producer CI: [run ${receipt.runId}, attempt ${receipt.runAttempt}](https://github.com/${repository}/actions/runs/${receipt.runId})`,
     `- Publisher: [run ${publisher.publisherRunId}, attempt ${publisher.publisherRunAttempt}](${runURL(context)})`)
