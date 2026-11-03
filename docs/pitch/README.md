@@ -121,3 +121,7 @@
 ## v3 修订（2026-11-02）
 
 用户确认WebMCP进入主讲：第5页用实际编辑器验收画面讲讨论→直接填稿→自己试玩；第7页分开用户Agent创作链与角色语音链，解释复用编辑器、无需新增创作模型服务与长期适配方向。第4页同步首用计时说明，第6/14页同步六案。11主讲＋5备页、560秒和原媒体不变。当前交付入口见 [放映指南](presenter-guide.md) 与 [v3交接](revision-03-handoff.md)。v1/v2及其历史说明原样保留，不能把旧四/五案或“没有AI创作入口”沿用为当前结论。
+
+## 历史制作路径
+
+V11的JSON视窗与renderer冻结于源分支的 `content/games/01-empty-medal-box.json`；当前main对应 `content/games/03-empty-medal-box.json`，两者正文SHA256均为 `8e13af7c7f4897c6c1031a277d1a5ba9adf67ddb3f2a56ef0b524617c13d6e3a`。旧路径/图中文字和生成脚本保留当时身份，不在新main直接重跑该renderer或冒称当前路径。
