@@ -5,7 +5,7 @@ import type { GatewayEnv } from '../src/index'
 import { credentials } from './voice-fixture'
 
 const env: GatewayEnv = { ...credentials, VOICE_MAX_SESSION_SECONDS: '600', ASSETS: { fetch: vi.fn() } as unknown as Fetcher }
-const request = new Request('https://game.example/api/voice/status')
+const request = new Request('https://game.example/api/voice/prepare')
 
 async function signedRequest(now = Date.now()) {
   const device = newBrowserDevice(request, env, now)
@@ -36,7 +36,7 @@ describe('server-signed browser identity', () => {
     expect(await readBrowserDevice(tampered, env, 1700000000000)).toBeNull()
   })
   it('isolates loopback cookie names and environment from HTTPS identities', async () => {
-    const local = new Request('http://127.0.0.1/api/voice/status')
+    const local = new Request('http://127.0.0.1/api/voice/prepare')
     const device = newBrowserDevice(local, env)
     const cookie = await browserDeviceCookie(local, env, device)
     expect(cookie.startsWith('lie-device-dev=')).toBe(true)

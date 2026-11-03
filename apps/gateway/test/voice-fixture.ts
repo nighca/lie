@@ -2,6 +2,9 @@ import { fileURLToPath, URL as NodeURL } from 'node:url'
 
 import { Miniflare } from 'miniflare'
 
+import { browserDeviceCookie, newBrowserDevice } from '../src/browser-device'
+import type { GatewayEnv } from '../src/index'
+
 import { workerScript } from './worker-script'
 
 export const testOrigin = 'https://game.example'
@@ -28,6 +31,7 @@ export default { async fetch(request) {
     if(options.oversizedOta) return Response.json({padding:'x'.repeat(65537)});
     if(!devices.has(mac)) devices.set(mac,{mac,client,code:String(devices.size+1).padStart(6,'0'),agent:null});
     const d=devices.get(mac);
+    if(options.failConfirmedOta && d.agent) return new Response('private provider failure',{status:500});
     return Response.json(d.agent ? {websocket:{url:'ws://xrobo-io.qiniuapi.com/v1/ws/',token:'device-token-'+mac}} : {activation:{code:d.code}});
   }
   if(url.origin === 'https://xrobo.qiniu.com') {
@@ -85,4 +89,11 @@ export function cookieFrom(response: { headers: { get(name: string): string | nu
   const cookie = response.headers.get('Set-Cookie')?.split(';')[0]
   if (!cookie) throw new Error('Missing fixture cookie')
   return cookie
+}
+
+export async function signedCookie(bindings: Record<string, string> = credentials) {
+  const env: GatewayEnv = { ...credentials, VOICE_MAX_SESSION_SECONDS: '600', ...bindings,
+    ASSETS: { fetch: async () => new Response('unused'), connect() { throw new Error('Unexpected asset connection') } } }
+  const request = new Request(`${testOrigin}/api/voice/prepare`)
+  return (await browserDeviceCookie(request, env, newBrowserDevice(request, env))).split(';')[0]
 }

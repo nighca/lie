@@ -2,6 +2,12 @@
 
 2026-11-01；本地实施中，尚未启用远程预览。基线为已审并上线的 `16d64347b853ffaaac1f2dbaa9d8ddd232f9859a`。本文件与[最新用户决定](pr-ci-preview-storage-contract.md)覆盖 [10月25日提案](pr-ci-preview-proposal.md)及[续接记录](pr-ci-preview-review-2026-11-01.md)中的 UI-only/main gateway harness 限制；保留旧文档以记录备选。
 
+## 2026-11-03 每局 prepare 与只读部署探针
+
+当前候选默认 direct，受信 restore 强制 `VOICE_TRANSPORT=direct`；新 runtime 精确九项，只有旧资源 preflight 可接受缺 mode 的精确 legacy 八项。身份、来源、digest、main-tip、cleanup 门禁不变。后文 P0 的 status/204/relay 描述保留为历史合同，由[每局 prepare 方案](reviews/voice-case-prepare-2026-11-03/README.md)覆盖。
+
+部署 probe 仅执行三个有界 GET：`/`、`/editor`、`/api/health`。health 必须为200 JSON、`status:ok`、`storage:r2`、`voice:{status:ready,transport:direct}`；404、缺字段或 relay 不算通过。health 只检查服务配置，不签 Cookie、不进行 OTA/绑定/WS；publisher 不调用 prepare，因此自动 smoke 不创建 provider Device。它不证明真实语音或 provider 可用。案件页面背景阶段的单 POST prepare 才创建/续期身份及取得当前局凭据，失败由玩家明确重试。
+
 ## 2026-11-03 独立当前 main 基线校验
 
 PR API 的 `base.sha` 和测试 merge 可能落后于仓库实际 main。发布器在每次可发布的 prepare 及每次 authorize 中，独立读取固定本仓 `git/ref/heads/main`，严格要求响应 `ref` 为 `refs/heads/main`、`object.type` 为 `commit`、`object.sha` 为完整40位小写 SHA。当前 PR base 与 tested/current 两个 merge 的首个父节点都必须等于此独立 main tip，不能只证明两个旧 merge 内容等价。

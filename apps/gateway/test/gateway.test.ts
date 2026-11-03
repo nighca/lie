@@ -2,7 +2,7 @@ import { Miniflare } from 'miniflare'
 import type { WebSocket as TestSocket } from 'miniflare'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-import { cookieFrom, credentials, fakeLinx, testOrigin, voiceRuntime } from './voice-fixture'
+import { cookieFrom, credentials, fakeLinx, signedCookie, testOrigin, voiceRuntime } from './voice-fixture'
 
 const runtimes: Miniflare[] = []
 async function runtime(bindings: Record<string, string> = credentials, upstream = fakeLinx, secondGateway = false) {
@@ -10,16 +10,12 @@ async function runtime(bindings: Record<string, string> = credentials, upstream 
   runtimes.push(instance)
   return instance
 }
-async function identity(instance: Miniflare) {
-  const response = await instance.dispatchFetch(`${testOrigin}/api/voice/status`)
-  return cookieFrom(response)
-}
 async function prepare(instance: Miniflare, cookie: string) {
   return instance.dispatchFetch(`${testOrigin}/api/voice/prepare`, { method: 'POST', headers: { Origin: testOrigin, Cookie: cookie } })
 }
 async function preparedHeaders(instance: Miniflare) {
-  const cookie = await identity(instance)
-  expect((await prepare(instance, cookie)).status).toBe(204)
+  const cookie = await signedCookie()
+  expect((await prepare(instance, cookie)).status).toBe(200)
   return voiceHeaders({ Cookie: cookie })
 }
 async function control(instance: Miniflare, value: object) {
@@ -53,7 +49,7 @@ function closed(socket: TestSocket): Promise<{ code: number; reason: string }> {
 describe('gateway in workerd', () => {
   it('serves health/static bindings while missing game/API paths remain explicit failures', async () => {
     const health = await gateway.dispatchFetch(`${testOrigin}/api/health`)
-    expect(await health.json()).toEqual({ status: 'ok', storage: 'none' })
+    expect(await health.json()).toEqual({ status: 'ok', storage: 'none', voice: { status: 'ready', transport: 'relay' } })
     expect(health.headers.get('Cache-Control')).toBe('no-store')
     expect(await (await gateway.dispatchFetch(`${testOrigin}/`)).text()).toContain('static app')
     const javascript = await gateway.dispatchFetch(`${testOrigin}/app.js`)
@@ -89,27 +85,24 @@ describe('gateway in workerd', () => {
     expect((await unconfigured.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders() })).status).toBe(503)
   }, 20000)
 
-  it('bootstraps only a private browser identity without calling the provider', async () => {
+  it('reports configuration readiness without a Cookie or provider call', async () => {
     const checked = await runtime(credentials, `let calls = 0; export default { fetch(request) {
       if (new URL(request.url).pathname === '/count') return Response.json({calls});
       calls++; return new Response('Unexpected upstream request', {status: 500});
     } }`)
     const upstream = await checked.getWorker('upstream')
-    const response = await checked.dispatchFetch(`${testOrigin}/api/voice/status`)
+    const response = await checked.dispatchFetch(`${testOrigin}/api/health`)
     expect(response.status).toBe(200)
-    expect(await response.json()).toEqual({ status: 'ready', transport: 'relay' })
+    expect(await response.json()).toEqual({ status: 'ok', storage: 'none', voice: { status: 'ready', transport: 'relay' } })
     expect(response.headers.get('Cache-Control')).toBe('no-store')
-    expect(response.headers.get('Set-Cookie')).toContain('HttpOnly')
+    expect(response.headers.get('Set-Cookie')).toBeNull()
     expect(await (await upstream.fetch('https://upstream.test/count')).json()).toEqual({ calls: 0 })
-    for (const headers of [{ Origin: 'https://elsewhere.example' }, { 'Sec-Fetch-Site': 'cross-site' }]) {
-      expect((await checked.dispatchFetch(`${testOrigin}/api/voice/status`, { headers })).status).toBe(403)
-    }
   }, 20000)
 
   it.each(['LINX_API_KEY', 'LINX_WS_TOKEN', 'LINX_AGENT_ID', 'VOICE_DEVICE_COOKIE_SECRET'])('reports unavailable when %s is not configured', async (key) => {
     const unconfigured = await runtime({ ...credentials, [key]: '' })
-    const response = await unconfigured.dispatchFetch(`${testOrigin}/api/voice/status`)
-    expect(await response.json()).toEqual({ status: 'unavailable' })
+    const response = await unconfigured.dispatchFetch(`${testOrigin}/api/health`)
+    expect(await response.json()).toEqual({ status: 'ok', storage: 'none', voice: { status: 'unavailable' } })
     expect(response.headers.get('Set-Cookie')).toBeNull()
   }, 20000)
 
@@ -174,10 +167,9 @@ it('does not open the upstream in workerd when the deployment cap is invalid', a
   expect(await (await upstream.fetch('https://upstream.test/count')).json()).toEqual({ calls: 0 })
 }, 20000)
 
-it('requires a valid bootstrap identity and an empty same-origin prepare request', async () => {
+it('requires an empty same-origin prepare request before creating an identity', async () => {
   const instance = await runtime()
-  expect((await prepare(instance, '')).status).toBe(409)
-  const cookie = await identity(instance)
+  const cookie = await signedCookie()
   for (const request of [
     { headers: { Origin: 'https://elsewhere.example', Cookie: cookie } },
     { headers: { Origin: testOrigin, Cookie: cookie }, body: '{}' },
@@ -192,13 +184,13 @@ it('requires a valid bootstrap identity and an empty same-origin prepare request
 
 it('prepares one stable identity without returning credentials or opening a socket', async () => {
   const instance = await runtime()
-  const cookie = await identity(instance)
+  const cookie = await signedCookie()
   const first = await prepare(instance, cookie)
-  expect(first.status).toBe(204)
-  expect(await first.text()).toBe('')
-  expect(first.headers.get('Set-Cookie')).toBeNull()
+  expect(first.status).toBe(200)
+  expect(await first.json()).toEqual({ transport: 'relay' })
+  expect(cookieFrom(first)).toBeTruthy()
   expect((await snapshot(instance)).calls).toEqual({ ota: 2, bind: 1, list: 0, ws: 0 })
-  expect((await prepare(instance, cookie)).status).toBe(204)
+  expect((await prepare(instance, cookie)).status).toBe(200)
   const inspected = await snapshot(instance)
   expect(inspected.devices).toHaveLength(1)
   expect(inspected.calls.bind).toBe(1)
@@ -207,9 +199,9 @@ it('prepares one stable identity without returning credentials or opening a sock
 
 it.each(['conflictAfterBind', 'malformedAfterBind'])('reconciles an uncertain %s bind once without allocating another identity', async mode => {
   const instance = await runtime()
-  const cookie = await identity(instance)
+  const cookie = await signedCookie()
   await control(instance, { [mode]: true })
-  expect((await prepare(instance, cookie)).status).toBe(204)
+  expect((await prepare(instance, cookie)).status).toBe(200)
   const inspected = await snapshot(instance)
   expect(inspected.calls).toEqual({ ota: 2, bind: 1, list: 1, ws: 0 })
   expect(inspected.devices).toHaveLength(1)
@@ -217,12 +209,12 @@ it.each(['conflictAfterBind', 'malformedAfterBind'])('reconciles an uncertain %s
 
 it('does not treat conflict without a matching bound identity as successful preparation', async () => {
   const instance = await runtime()
-  const cookie = await identity(instance)
+  const cookie = await signedCookie()
   await control(instance, { rejectBind: true })
   expect((await prepare(instance, cookie)).status).toBe(502)
   expect((await snapshot(instance)).calls).toEqual({ ota: 2, bind: 1, list: 0, ws: 0 })
   await control(instance, { rejectBind: false })
-  expect((await prepare(instance, cookie)).status).toBe(204)
+  expect((await prepare(instance, cookie)).status).toBe(200)
   await control(instance, { foreignAgent: true })
   expect((await prepare(instance, cookie)).status).toBe(502)
   expect((await snapshot(instance)).devices).toHaveLength(1)
@@ -230,12 +222,12 @@ it('does not treat conflict without a matching bound identity as successful prep
 
 it('reconciles concurrent first preparation across two gateway instances using the same cookie', async () => {
   const instance = await runtime(credentials, fakeLinx, true)
-  const cookie = await identity(instance)
+  const cookie = await signedCookie()
   const results = await Promise.all([
     prepare(instance, cookie),
     instance.dispatchFetch('https://game-two.example/api/voice/prepare', { method: 'POST', headers: { Origin: 'https://game-two.example', Cookie: cookie } })
   ])
-  expect(results.map(response => response.status)).toEqual([204, 204])
+  expect(results.map(response => response.status)).toEqual([200, 200])
   const inspected = await snapshot(instance)
   expect(inspected.devices).toHaveLength(1)
   expect(inspected.calls.ws).toBe(0)
@@ -263,11 +255,11 @@ it('keeps different cookie identities online while a newer same-device socket re
 
 it('uses only the current cookie after bootstrap candidates compete, without creating during WebSocket upgrade', async () => {
   const instance = await runtime()
-  const cookieA = await identity(instance), cookieB = await identity(instance)
-  expect((await prepare(instance, cookieA)).status).toBe(204)
+  const cookieA = await signedCookie(), cookieB = await signedCookie()
+  expect((await prepare(instance, cookieA)).status).toBe(200)
   expect((await instance.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders({ Cookie: cookieB }) })).status).toBe(503)
   expect((await snapshot(instance)).calls.bind).toBe(1)
-  expect((await prepare(instance, cookieB)).status).toBe(204)
+  expect((await prepare(instance, cookieB)).status).toBe(200)
   const b = (await instance.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders({ Cookie: cookieB }) })).webSocket!
   b.accept(); b.close()
   expect((await snapshot(instance)).calls.bind).toBe(2)
@@ -275,9 +267,9 @@ it('uses only the current cookie after bootstrap candidates compete, without cre
 
 it('accepts a zero-byte stream while rejecting actual prepare body bytes', async () => {
   const instance = await runtime()
-  const cookie = await identity(instance)
+  const cookie = await signedCookie()
   const empty = await instance.dispatchFetch(`${testOrigin}/api/voice/prepare`, { method: 'POST', headers: { Origin: testOrigin, Cookie: cookie }, body: '' })
-  expect(empty.status).toBe(204)
+  expect(empty.status).toBe(200)
   const filled = await instance.dispatchFetch(`${testOrigin}/api/voice/prepare`, { method: 'POST', headers: { Origin: testOrigin, Cookie: cookie }, body: 'x' })
   expect(filled.status).toBe(400)
   expect((await snapshot(instance)).calls.bind).toBe(1)
@@ -302,4 +294,20 @@ it.each([false, true])('uses shared token first and refreshes only one rejected 
   await closeEvent
   expect((await snapshot(instance)).calls).toEqual(after)
   socket.close()
+}, 20000)
+
+it('creates a relay identity through the same single prepare response contract', async () => {
+  const instance = await runtime()
+  const first = await prepare(instance, '')
+  expect(first.status).toBe(200)
+  expect(await first.json()).toEqual({ transport: 'relay' })
+  const cookie = cookieFrom(first)
+  expect(first.headers.get('Cache-Control')).toBe('no-store')
+  const opened = await instance.dispatchFetch(`${testOrigin}/api/voice`, { headers: voiceHeaders({ Cookie: cookie }) })
+  expect(opened.status).toBe(101)
+  opened.webSocket!.accept(); opened.webSocket!.close()
+  const before = await snapshot(instance)
+  expect((await prepare(instance, cookie)).status).toBe(200)
+  expect((await snapshot(instance)).devices).toHaveLength(1)
+  expect(before.calls.bind).toBe(1)
 }, 20000)

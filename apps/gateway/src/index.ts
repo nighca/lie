@@ -14,17 +14,8 @@ export default {
   async fetch(request: Request, env: GatewayEnv): Promise<Response> {
     const url = new URL(request.url)
     if (url.pathname === '/api/health' && request.method === 'GET') {
-      return Response.json({ status: 'ok', storage: env.SHARED_GAMES == null ? 'none' : 'r2' }, { headers: { 'Cache-Control': 'no-store' } })
-    }
-    if (url.pathname === '/api/voice/status' && request.method === 'GET') {
-      if ((request.headers.get('Origin') != null && request.headers.get('Origin') !== url.origin) || request.headers.get('Sec-Fetch-Site') === 'cross-site' || url.search !== '') return new Response('Forbidden', { status: 403 })
-      const headers = new Headers({ 'Cache-Control': 'no-store' })
-      if (voiceConfigured(env)) {
-        const device = await readBrowserDevice(request, env) ?? newBrowserDevice(request, env)
-        headers.set('Set-Cookie', await browserDeviceCookie(request, env, device))
-      }
-      const status = voiceStatus(env)
-      return Response.json(status === 'ready' ? { status, transport: voiceTransport(env) } : { status }, { headers })
+      const voice = voiceConfigured(env) ? { status: 'ready', transport: voiceTransport(env) } : { status: 'unavailable' }
+      return Response.json({ status: 'ok', storage: env.SHARED_GAMES == null ? 'none' : 'r2', voice }, { headers: { 'Cache-Control': 'no-store' } })
     }
     if (url.pathname === '/api/voice/prepare' && request.method === 'POST') return prepareVoice(request, env)
     if (url.pathname === '/api/voice' && request.method === 'GET' && voiceTransport(env) === 'relay') return relayVoice(request, env)
@@ -48,11 +39,6 @@ export default {
     return response
   }
 } satisfies ExportedHandler<GatewayEnv>
-
-// Application access checks are temporarily disabled by user decision; provider credentials remain required.
-function voiceStatus(env: GatewayEnv): 'unavailable' | 'ready' {
-  return voiceConfigured(env) ? 'ready' : 'unavailable'
-}
 
 async function emptyRequestBody(request: Request) {
   if (request.body == null) return true
@@ -78,15 +64,16 @@ async function prepareVoice(request: Request, env: GatewayEnv): Promise<Response
   if (request.headers.get('Origin') !== url.origin || url.search !== '' || request.headers.get('Sec-Fetch-Site') === 'cross-site') return Response.json({ error: 'forbidden' }, { status: 403, headers })
   if (!await emptyRequestBody(request)) return Response.json({ error: 'invalid-request' }, { status: 400, headers })
   if (!voiceConfigured(env)) return Response.json({ error: 'unavailable' }, { status: 503, headers })
-  const device = await readBrowserDevice(request, env)
-  if (device == null) return Response.json({ error: 'identity-required' }, { status: 409, headers })
+  const device = await readBrowserDevice(request, env) ?? newBrowserDevice(request, env)
+  headers.set('Set-Cookie', await browserDeviceCookie(request, env, device))
   const signal = AbortSignal.any([request.signal, AbortSignal.timeout(18000)])
   try {
+    signal.throwIfAborted()
     const token = await deviceProvider(env, device, signal).prepare()
     if (signal.aborted) return Response.json({ error: 'prepare-timeout' }, { status: 504, headers })
-    if (voiceTransport(env) === 'relay') return new Response(null, { status: 204, headers })
+    if (voiceTransport(env) === 'relay') return Response.json({ transport: 'relay' }, { headers })
     return Response.json({
-      url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: device.deviceId, clientId: device.clientId,
+      transport: 'direct', url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: device.deviceId, clientId: device.clientId,
       token, maxSessionSeconds: voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS)
     }, { headers })
   } catch (error) {
@@ -102,8 +89,7 @@ async function relayVoice(request: Request, env: GatewayEnv): Promise<Response> 
   }
   const sessionLimitSeconds = voiceSessionLimitSeconds(env.VOICE_MAX_SESSION_SECONDS)
   if (sessionLimitSeconds == null) return new Response('Invalid voice session limit configuration', { status: 500 })
-  const status = voiceStatus(env)
-  if (status === 'unavailable') return new Response('Voice unavailable', { status: 503 })
+  if (!voiceConfigured(env)) return new Response('Voice unavailable', { status: 503 })
   const device = await readBrowserDevice(request, env)
   if (device == null) return new Response('Voice identity required', { status: 409 })
   let response: Response

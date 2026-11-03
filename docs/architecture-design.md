@@ -18,11 +18,12 @@ flowchart LR
         Web --> Voice["voice：协议、采集与播放"]
     end
     Static --> Web
-    Voice <-->|"同源 WebSocket /api/voice"| Gateway["apps/gateway：静态服务与薄中继"]
-    Gateway <-->|"鉴权头、JSON 与 PCM"| Provider["Linx 语音服务"]
+    Voice <-->|"每局同源 POST prepare"| Gateway["apps/gateway：静态服务与身份准备"]
+    Gateway <-->|"私有管理凭据、OTA 与绑定"| Provider["Linx 语音服务"]
+    Voice <-->|"原生 WSS、Device token"| Provider
 ```
 
-一轮交流的数据流为：控制器建立当前人物的 `ConversationScope` → 适配器检查语音可用性并准备传输/播放器/麦克风 → 服务通过端侧 MCP 读取该人物上下文 → PCM 双向流动，STT/TTS 事件投影为人物历史和视图 → 用户切人、停止或指认时关闭旧作用域。计时和指认由程序执行，模型只生成角色表达。
+一轮交流的数据流为：控制器建立当前人物的 `ConversationScope` → 适配器等待背景阶段已发出的本局 prepare，再准备传输/播放器/麦克风 → 服务通过端侧 MCP 读取该人物上下文 → PCM 双向流动，STT/TTS 事件投影为人物历史和视图 → 用户切人、停止或指认时关闭旧作用域。计时和指认由程序执行，模型只生成角色表达。
 
 | 模块 | 责任与依赖 | 对外边界 |
 | --- | --- | --- |
@@ -31,7 +32,7 @@ flowchart LR
 | `@lie/ui` | 无案件规则的展示组件；依赖 Vue、character-animation | 组件与展示类型从包根导出，样式通过 `@lie/ui/style.css` 引入 |
 | `@lie/voice` | Linx WebSocket/MCP、PCM 编解码、麦克风与播放 | 包根导出 channel、PCM、player、microphone 与观测类型 |
 | `@lie/character-animation` | 非可执行动画包校验、确定性采样、浏览器加载与 Canvas 渲染 | 包根导出解析器、时间线、渲染器、加载器和类型；另有 `@lie/character-animation/contract` 子路径 |
-| `apps/gateway` | Worker 静态服务、供应商凭据与双向中继 | HTTP/WS 路由；源码另导出 `relaySockets` 供测试 |
+| `apps/gateway` | Worker 静态服务、私有管理凭据与 Cookie Device 准备；服务端可选 relay 回滚 | HTTP/WS 路由；源码另导出 `relaySockets` 供测试 |
 
 包的准确导出以各自入口为准：[core](../packages/game-core/src/index.ts)、[ui](../packages/ui/src/index.ts)、[voice](../packages/voice/src/index.ts)、[animation](../packages/character-animation/src/index.ts)。
 
@@ -102,7 +103,7 @@ buildCharacterContext(game: GameDefinition, characterId: string,
 ### VoicePort 与事件
 
 ```ts
-interface VoicePort { create(scope: ConversationScope): Conversation }
+interface VoicePort { prepare(): Promise<void>; reset(): void; create(scope: ConversationScope): Conversation }
 interface Conversation { open(): Promise<void>; close(): void }
 ```
 
@@ -116,7 +117,7 @@ interface Conversation { open(): Promise<void>; close(): void }
 | `audioLevel { inputLevel, outputLevel, inputActive }` | 单独发布线性 RMS 与本地输入活动估计；不是服务端 VAD |
 | `closed`、`error { reason?: 'context-too-large' }` | 停连接，保留已显示历史，给出重连或容量提示 |
 
-真实适配器先 GET `/api/voice/status`，随后并行准备 channel、播放器 AudioContext 与麦克风，全部成功才 listen.start 并转发采集帧。端侧工具 `self.lie_character_context` 无参数，返回当前作用域上下文 JSON。TTS stop 与本地播放排空共同决定回到聆听，STT 打断时清空旧播放。`VoiceAvailabilityError` 区分 unavailable 与 check-failed；容量超限不静默截断上下文。没有自动切替身或隐式重连。[接口](../apps/web/src/application/voice.ts)、[真实适配器](../apps/web/src/application/liveVoice.ts)。
+每个 controller 独占 VoicePort，案件背景阶段开始唯一 POST `/api/voice/prepare`。open 等待同一 pending，成功的身份/凭据仅本局内存复用，失败也保留至玩家明确 retry。load/restart/dispose 在关闭旧对话后 reset，取消并清除旧准备；角色切换/停止重开复用本局结果。准备成功后并行启动 channel、播放器 AudioContext 与麦克风，全部就绪才 listen.start 并转发采集帧。端侧工具 `self.lie_character_context` 无参数，返回当前作用域上下文 JSON。TTS stop 与本地播放排空共同决定回到聆听，STT 打断时清空旧播放。`VoiceAvailabilityError` 区分 unavailable 与 check-failed；容量超限不静默截断上下文。没有自动切替身或隐式重连。[接口](../apps/web/src/application/voice.ts)、[真实适配器](../apps/web/src/application/liveVoice.ts)。
 
 ### 页面、编辑器与分享
 
@@ -198,15 +199,15 @@ input 帧长度必须恰好 640 bytes；协商只接受 PCM16 mono 16 kHz。麦�
 
 AnimatedPortrait 限同源动画 URL，src 变化、卸载或 reduced-motion 会取消加载/RAF；后台暂停，恢复不补算后台时间。基础态变化复用时间线。结果动作一次展示后停帧，reduced-motion、缺态或失败使用静态回退；调用方通过结果阶段组件卸载/新挂载界定下一次展示，不能依赖重复赋同态重播。
 
-## gateway：网络路由、缓存与中继
+## gateway：网络路由、身份准备与缓存
 
-Worker 的实际接口为 `fetch(request, env): Promise<Response>`，依赖 ASSETS binding 与三项私密 Linx binding（token、device、agent）；不将其下发浏览器。当前应用访问鉴权按用户决定临时关闭，Origin 检查不是用户身份认证。代码不依赖完整 Node.js 服务器运行时。[入口](../apps/gateway/src/index.ts)、[宿主配置](../apps/gateway/cloudflare.config.ts)。
+Worker 的实际接口为 `fetch(request, env): Promise<Response>`。direct 依赖 ASSETS、私有管理 key/Agent/Cookie 签名材料、namespace 与有效期限；只有当前 Cookie Device 的 token 会下发浏览器，管理凭据不下发。服务端明确选择 relay 时另需共享 WS token，浏览器没有切换或 fallback。当前应用访问鉴权按用户决定临时关闭，Origin 检查不是用户身份认证。代码不依赖完整 Node.js 服务器运行时。[入口](../apps/gateway/src/index.ts)、[宿主配置](../apps/gateway/cloudflare.config.ts)。
 
 | 路由 | 行为与错误 |
 | --- | --- |
-| GET `/api/health` | `{ status: 'ok', storage: 'none' }`，no-store；不代表供应商可用 |
-| GET `/api/voice/status` | `{ status: 'ready' \| 'unavailable' }`，仅检查三项 binding 是否存在，no-store；有 Origin 则须同源，拒 Sec-Fetch-Site: cross-site 和任何 query（403） |
-| GET `/api/voice` | 要求 Upgrade: websocket（否则 426）；Origin 必须精确同源且无 query（403）；binding 缺失 503，上游握手失败 502，成功 101 |
+| GET `/api/health` | `status:ok`、storage 与 voice 配置就绪状态及 transport，no-store；不签 Cookie、不调用 provider，不代表供应商可用 |
+| POST `/api/voice/prepare` | 精确同源、无 query、空 body；复用有效 Cookie 或本请求新建身份，OTA/绑定/归属检查后返回 direct descriptor 或 relay transport。provider 成功/失败均签同身份 Cookie；前置 Origin/body/config 失败不签。全部 no-store |
+| GET `/api/voice` | direct 返回404。仅显式 relay 要求 Upgrade（否则426）、精确 Origin/无 query/有效 Cookie，配置缺失503，上游失败502/504，成功101 |
 | 其他 `/api/*` | JSON 404，不回落到 SPA |
 | `/static/*`、`/assets/*` | ASSETS 响应须为 200/206/304、合法内容地址且不是 HTML；否则 404/no-store。成功设一年 public immutable；304 缺 Content-Type 时用 HEAD 检查元数据 |
 | `/games/*` | 兼容静态路径 guard；非 304 且非 application/json 返回 404。当前官方案件已打入前端，不从这里加载 |
@@ -214,7 +215,9 @@ Worker 的实际接口为 `fetch(request, env): Promise<Response>`，依赖 ASSE
 
 内容地址要求 `/static/<64位小写hex>/…`，或 `/assets/<name>-<hash>.js|css`。HTML 及其他普通资源不由这一 guard 强设 immutable；不可让缺失资源的 SPA HTML 获得长缓存。
 
-中继上游固定为 Linx WS 地址，服务端附鉴权与设备/agent/protocol/client headers，握手超时 10 秒。`relaySockets(browser, upstream)` 一连接一对 socket，双向透传文本和二进制；任意帧 UTF-8/二进制大小 >65,536 bytes 关闭 1009，最多持续 180 秒（1000），发送/错误关闭 1011。一端关闭结束另一端，1005/1006 分别转 1000/1011。它不解析案件规则，不提供复用连接池、自动重连、并发调度或账户级费用硬限额。浏览器共享询问额度可跨多个连接累计，不能与单连接 180 秒混为一谈。
+直连固定 `wss://xrobo-io.qiniuapi.com/v1/ws/`，Device/Client 进入 query、token 只进入 hello；假定 token 覆盖一局是用户批准的工程假设，不是已知 TTL。缺失/失效 Cookie 的身份建立已合入 prepare，独立 status 接口删除。两 tab 初次 Cookie 竞争不设全局锁，各 direct 案件使用自己的返回 descriptor；迟到 Set-Cookie 可能影响后续案件身份，但不得改当前局内存或开旧局 mic/socket。
+
+relay 上游同样固定 `/v1/ws/`，服务端使用 Cookie Device/Client 和 Agent headers；共享 token 首拨401时只取一次同 Device OTA token 并重握，总9秒。两种 transport 保留64 KiB帧限制，连接期限配置默认600秒，direct 客户端从socket open计时、relay由Worker计时；不等同于游戏询问额度，不声称provider硬上限。没有连接池、自动重连或账户级费用硬限额。详见[gateway合同](../apps/gateway/README.md)与[每局prepare验收门槛](reviews/voice-case-prepare-2026-11-03/README.md)。
 
 ## 内容与资源流水线
 

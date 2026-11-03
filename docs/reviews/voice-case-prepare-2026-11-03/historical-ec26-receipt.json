@@ -1,0 +1,282 @@
+{
+  "status": "superseded-before-user-acceptance",
+  "date": "2026-11-03",
+  "replacement": "README.md",
+  "source": "ec26f1a59472bf038a9ad71ef2340273a6cbc5d9",
+  "stableUrl": "https://direct-test-20261103.preview.lie.agency",
+  "immutableUrl": "https://e0938651.preview.lie.agency",
+  "deployment": "e0938651-fc5f-45af-9a42-5ef63029ffe5",
+  "expiry": "2026-11-04T00:22:26.438Z",
+  "mainIntegrated": false,
+  "userAcceptanceRecorded": false,
+  "omitted": [
+    "Agent/Device/Client identifiers",
+    "Cookie payload/signature",
+    "tokens and management credentials",
+    "private ownership/attempt ledgers",
+    "raw provider data"
+  ],
+  "build": {
+    "source": "ec26f1a59472bf038a9ad71ef2340273a6cbc5d9",
+    "clean": true,
+    "js": "/assets/index-eR6XD7Ny.js",
+    "jsBytes": 281635,
+    "jsSha256": "7edc9aa69ebbdb939535965b610c1cb18ca4c649e52002dfa160971c7ac830de",
+    "htmlSha256": "ad153cb88035ed4353553b209f4896e7be0e5796878fbdb13426db8cf9d7f57d",
+    "workerBytes": 30307,
+    "workerSha256": "92225dffceb2b35f3a5011cc154d506ec0ec2f3ab1d3838200b98008866b8f97",
+    "bindingCount": 8,
+    "originalExpiryMatches": true,
+    "sameOwnedAgentFromLedger": true,
+    "freshCookieSecret": true,
+    "stageModuleAndAssetsMatch": true,
+    "exactWs": true,
+    "noWs2": true
+  },
+  "platform": {
+    "cli": {
+      "id": "0d37634d-c160-44f7-b66d-870a2fb65540",
+      "urls": [
+        "https://0d37634d.preview.lie.agency",
+        "https://0d37634d-lie-pr-preview.nighca.workers.dev"
+      ],
+      "envTypes": {
+        "ASSETS": "assets",
+        "LINX_AGENT_ID": "secret_text",
+        "LINX_API_KEY": "secret_text",
+        "PRIVATE_PREVIEW_CLIENT_ID": "secret_text",
+        "PRIVATE_PREVIEW_DEVICE_ID": "secret_text",
+        "PRIVATE_PREVIEW_EXPIRES_AT": "plain_text",
+        "VOICE_DEVICE_COOKIE_SECRET": "secret_text",
+        "VOICE_DEVICE_ENVIRONMENT": "plain_text",
+        "VOICE_MAX_SESSION_SECONDS": "plain_text",
+        "VOICE_TRANSPORT": "plain_text"
+      },
+      "extras": [
+        "PRIVATE_PREVIEW_CLIENT_ID",
+        "PRIVATE_PREVIEW_DEVICE_ID"
+      ],
+      "modules": [
+        {
+          "name": "index.js",
+          "bytes": 30307,
+          "sha256": "92225dffceb2b35f3a5011cc154d506ec0ec2f3ab1d3838200b98008866b8f97"
+        }
+      ],
+      "checks": {
+        "identity": true,
+        "types": true,
+        "mode": true,
+        "namespace": true,
+        "deadline": true,
+        "expiry": true,
+        "module": true,
+        "onlyAllowedExtras": true
+      },
+      "allChecksPassed": true
+    },
+    "patch": {
+      "success": true,
+      "id": "e0938651-fc5f-45af-9a42-5ef63029ffe5",
+      "created_on": "2026-11-03T04:46:54.057231Z",
+      "number": 5
+    },
+    "final": {
+      "id": "e0938651-fc5f-45af-9a42-5ef63029ffe5",
+      "urls": [
+        "https://e0938651.preview.lie.agency",
+        "https://e0938651-lie-pr-preview.nighca.workers.dev"
+      ],
+      "envTypes": {
+        "ASSETS": "assets",
+        "LINX_AGENT_ID": "secret_text",
+        "LINX_API_KEY": "secret_text",
+        "PRIVATE_PREVIEW_EXPIRES_AT": "plain_text",
+        "VOICE_DEVICE_COOKIE_SECRET": "secret_text",
+        "VOICE_DEVICE_ENVIRONMENT": "plain_text",
+        "VOICE_MAX_SESSION_SECONDS": "plain_text",
+        "VOICE_TRANSPORT": "plain_text"
+      },
+      "modules": [
+        {
+          "name": "index.js",
+          "bytes": 30307,
+          "sha256": "92225dffceb2b35f3a5011cc154d506ec0ec2f3ab1d3838200b98008866b8f97"
+        }
+      ],
+      "checks": {
+        "latest": true,
+        "exactEight": true,
+        "secretTypes": true,
+        "assets": true,
+        "mode": true,
+        "namespace": true,
+        "limit": true,
+        "expiry": true,
+        "module": true,
+        "parent": true,
+        "pr5": true
+      },
+      "allChecksPassed": true
+    }
+  },
+  "http": [
+    {
+      "origin": "https://direct-test-20261103.preview.lie.agency",
+      "paths": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/editor",
+          "status": 200
+        },
+        {
+          "path": "/api/health",
+          "status": 200
+        },
+        {
+          "path": "/api/voice/status",
+          "status": 200
+        }
+      ],
+      "statusOnlyCookieIssued": true,
+      "noPrepareOrWebSocket": true,
+      "embeddedSource": "ec26f1a59472bf038a9ad71ef2340273a6cbc5d9",
+      "jsSha256": "7edc9aa69ebbdb939535965b610c1cb18ca4c649e52002dfa160971c7ac830de",
+      "relayStatus": 404,
+      "oldConnectionPostStatus": 404
+    },
+    {
+      "origin": "https://e0938651.preview.lie.agency",
+      "paths": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/editor",
+          "status": 200
+        },
+        {
+          "path": "/api/health",
+          "status": 200
+        },
+        {
+          "path": "/api/voice/status",
+          "status": 200
+        }
+      ],
+      "statusOnlyCookieIssued": true,
+      "noPrepareOrWebSocket": true,
+      "embeddedSource": "ec26f1a59472bf038a9ad71ef2340273a6cbc5d9",
+      "jsSha256": "7edc9aa69ebbdb939535965b610c1cb18ca4c649e52002dfa160971c7ac830de",
+      "relayStatus": 404,
+      "oldConnectionPostStatus": 404
+    },
+    {
+      "origin": "https://lie.agency",
+      "unchangedSource": "3de59d67412366634211ecc79341741e28f35864",
+      "verified": true
+    },
+    {
+      "origin": "https://pr-5.preview.lie.agency",
+      "unchangedSource": "a91d5eeb87d39b3e24ccfa2c802f56b11393dd15",
+      "verified": true
+    }
+  ],
+  "ui": {
+    "source": "ec26f1a59472bf038a9ad71ef2340273a6cbc5d9",
+    "origin": "https://direct-test-20261103.preview.lie.agency",
+    "uiFullVersionMatches": true,
+    "uiDirtyMarkerAbsent": true,
+    "voiceHttpRequests": 0,
+    "webSocketAttempts": 0,
+    "microphoneAttempts": 0,
+    "browserClosed": true,
+    "pageStatus": 200
+  },
+  "noInput": {
+    "stage": "complete",
+    "failed": false,
+    "contexts": [
+      {
+        "label": "A",
+        "statusCodes": [
+          200,
+          200
+        ],
+        "cookiePresent": true,
+        "httpOnlySecure": true,
+        "identityStable": true,
+        "namespaceMatch": true,
+        "prepareRequests": 2
+      },
+      {
+        "label": "B",
+        "statusCodes": [
+          200,
+          200
+        ],
+        "cookiePresent": true,
+        "httpOnlySecure": true,
+        "identityStable": true,
+        "namespaceMatch": true,
+        "prepareRequests": 1
+      }
+    ],
+    "prepares": [
+      {
+        "label": "prepare-A-first",
+        "context": "A",
+        "status": 200,
+        "noStore": true,
+        "identityMatch": true,
+        "endpointMatch": true
+      },
+      {
+        "label": "prepare-B-first",
+        "context": "B",
+        "status": 200,
+        "noStore": true,
+        "identityMatch": true,
+        "endpointMatch": true
+      },
+      {
+        "label": "prepare-A-again",
+        "context": "A",
+        "status": 200,
+        "noStore": true,
+        "identityMatch": true,
+        "endpointMatch": true
+      }
+    ],
+    "prepareRequests": 3,
+    "providerSockets": 1,
+    "relaySockets": 0,
+    "otherSockets": 0,
+    "providerHttpStatus": 101,
+    "nativeCloseCode": 1000,
+    "socketClosedConfirmed": true,
+    "channelReady": true,
+    "channelEvents": [
+      "ready",
+      "closed"
+    ],
+    "unexpectedInbound": false,
+    "sentHelloFrames": 1,
+    "sentMcpFrames": 2,
+    "listenFrames": 0,
+    "binaryFrames": 0,
+    "otherSentFrames": 0,
+    "microphoneCalls": 0,
+    "browserClosed": true,
+    "identitiesDifferent": true
+  },
+  "limits": [
+    "The one native no-input handshake tested protocol readiness and closure, not actual speech, Safari autoplay, mainland performance or business authorization.",
+    "Two prepared provider devices were confirmed by the automated check. Other status-only Cookie candidates were not provider Device creations.",
+    "Original owned Agent and fixed Device were retained; expiry does not delete resources. Old whole-Agent cleanup is superseded."
+  ]
+}

@@ -61,7 +61,7 @@ describe('shared games using local R2 in workerd', () => {
     expect(response.headers.get('Cache-Control')).toBe('no-store')
     const bucket = await runtime.getR2Bucket('SHARED_GAMES')
     expect((await bucket.list()).objects.map((object) => object.key)).toContain(`games/v1/${expectedId}.json`)
-    expect(await (await runtime.dispatchFetch(origin + '/api/health')).json()).toEqual({ status: 'ok', storage: 'r2' })
+    expect(await (await runtime.dispatchFetch(origin + '/api/health')).json()).toEqual({ status: 'ok', storage: 'r2', voice: { status: 'unavailable' } })
   })
 
   it('keeps an old snapshot unchanged when the content changes', async () => {

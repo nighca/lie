@@ -1,5 +1,7 @@
 # 本地 WebSocket 拒绝握手：宿主边界与处理选项
 
+> 2026-11-03 维护：下方表格为原日期实测。当前可执行脚本改用 `/api/health` 的 `voice.status === "unavailable"` 作无凭据门禁，并显式选择本地 relay 配置；不再请求已删除的 voice/status，不调用 prepare。纯响应门禁测试不等于重新运行下方网络实验。
+
 2026-10-25；reviewed main `bf0583753c518adc5f6e61e7dd80d2b0ce99ff84`。这是[依赖审计未闭合项](dependency-audit.md)的独立定位，不预设依赖补丁回归。没有修改Web/gateway生产配置、Worker门禁、供应商参数、握手超时或凭据，也没有开启麦克风/真实provider。结论是当前Cloudflare Vite开发宿主丢弃非101响应；Web Vite代理本身能保留HTTP拒绝。
 
 ## 完整网络对照
@@ -33,7 +35,7 @@ Node24.22.1、Vite8.3.5、`@cloudflare/vite-plugin@2.0.0-beta.v.4`，macOS ARM64
 PATH=/private/tmp/lie-toolchain-node/node-v24.22.1-darwin-arm64/bin:$PATH node scripts/dev-websocket-rejection.mjs
 ```
 
-[诊断脚本](../scripts/dev-websocket-rejection.mjs)拒绝环境/凭据文件（只允许仓库.env.example模板），并在任何实际WS之前要求gateway公开status=unavailable；不读取/输出secret内容。它加载现Web/gateway Vite配置，用port0分配端口，关闭HMR/文件监听，不改主预览配置。四个自有服务均在finally关闭；结束用TCP探针确认所有自有端口ECONNREFUSED。成功输出依赖版本、有限握手状态和本次自有端口；没有人声、游戏内容或身份日志。
+[诊断脚本](../scripts/dev-websocket-rejection.mjs)拒绝环境/凭据文件（只允许仓库.env.example模板），并在任何实际WS之前要求 `/api/health` 返回 `voice.status=unavailable`；不读取/输出secret内容。它加载现Web/gateway Vite配置，用port0分配端口，关闭HMR/文件监听，不改主预览配置。四个自有服务均在finally关闭；结束用TCP探针确认所有自有端口ECONNREFUSED。成功输出依赖版本、有限握手状态和本次自有端口；没有人声、游戏内容或身份日志。
 
 脚本接受两类明确结果：当前已知“开发宿主丢弃拒绝”，或未来宿主已正确保留503/403；其他意外结果失败。它不是要求永远保留bug的测试，也不自动升级/修补vendor文件。实际执行成功，四个自有端口关闭；source diff/syntax检查通过。无正式行为变化，因此未用全仓重跑伪装已修复线上或真人语音。
 
