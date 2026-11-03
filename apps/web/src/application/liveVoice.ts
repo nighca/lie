@@ -30,9 +30,12 @@ export function createLiveVoicePort(overrides: {
   let preparedGeneration: number | null = null
   let pending: { generation: number; promise: Promise<number> } | null = null
   async function status(signal: AbortSignal): Promise<boolean> {
+    signal.throwIfAborted()
     const response = await dependencies.fetchStatus(signal)
+    signal.throwIfAborted()
     if (!response.ok) throw new VoiceAvailabilityError('check-failed')
     const result = await response.json()
+    signal.throwIfAborted()
     if (result?.status !== 'ready') throw new VoiceAvailabilityError(result?.status === 'unavailable' ? 'unavailable' : 'check-failed')
     if (result.transport !== 'direct' && result.transport !== 'relay') throw new VoiceAvailabilityError('check-failed')
     return result.transport === 'direct'
@@ -273,19 +276,24 @@ export function createLiveVoicePort(overrides: {
             if (directTransport) {
               try {
                 const signal = AbortSignal.any([scope.signal, AbortSignal.timeout(20000)])
+                function requestCurrent() {
+                  if (!current() || scope.signal.aborted) return false
+                  if (signal.aborted) throw new VoiceAvailabilityError('check-failed')
+                  return true
+                }
                 let response = await dependencies.prepareDevice(signal)
-                if (!current() || signal.aborted) return
+                if (!requestCurrent()) return
                 if (response.status === 409) {
                   if ((await response.json())?.error !== 'identity-required') throw new VoiceAvailabilityError('check-failed')
-                  if (!current() || signal.aborted) return
+                  if (!requestCurrent()) return
                   if (!await status(signal)) throw new VoiceAvailabilityError('check-failed')
-                  if (!current() || signal.aborted) return
+                  if (!requestCurrent()) return
                   response = await dependencies.prepareDevice(signal)
                 }
-                if (!current() || signal.aborted) return
+                if (!requestCurrent()) return
                 if (!response.ok) throw new VoiceAvailabilityError('check-failed')
                 const value = await response.json()
-                if (!current() || signal.aborted) return
+                if (!requestCurrent()) return
                 directConnection = readDirectVoiceConnection(value)
               } catch {
                 if (!current() || scope.signal.aborted) return

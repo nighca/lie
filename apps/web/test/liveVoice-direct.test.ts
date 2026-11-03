@@ -1,5 +1,5 @@
 import { expect, it, vi } from 'vitest'
-import type { VoiceChannelOptions } from '@lie/voice'
+import type { VoiceChannelOptions, VoiceStartupObservation } from '@lie/voice'
 
 import { createGameController } from '../src/application/controller'
 import { createLiveVoicePort } from '../src/application/liveVoice'
@@ -8,7 +8,7 @@ import { game } from './helpers'
 
 const descriptor = { url: 'wss://xrobo-io.qiniuapi.com/v1/ws/', deviceId: '02:00:00:00:00:01', clientId: 'test-client', token: 'fake-ota-token', maxSessionSeconds: 600 }
 
-function fixture(transport: 'relay' | 'direct') {
+function fixture(transport: 'relay' | 'direct', onStartup: (event: VoiceStartupObservation & { elapsedMs: number }) => void = () => {}) {
   const abort = new AbortController()
   const scope: ConversationScope = {
     sessionId: 'test', characterId: 'one', voiceId: null, epoch: 1, signal: abort.signal,
@@ -16,6 +16,7 @@ function fixture(transport: 'relay' | 'direct') {
   }
   const channel = { open: vi.fn(async () => {}), startInput: vi.fn(), input: vi.fn(), stopInput: vi.fn(), interrupt: vi.fn(), close: vi.fn() }
   const dependencies = {
+    onStartup,
     fetchStatus: vi.fn(async (_signal: AbortSignal) => new Response(JSON.stringify({ status: 'ready', transport }))),
     prepareDevice: vi.fn(async (_signal: AbortSignal) => transport === 'direct' ? Response.json(descriptor) : new Response(null, { status: 204 })),
     createChannel: vi.fn((_options: VoiceChannelOptions) => channel),
@@ -233,5 +234,68 @@ it('uses one twenty-second direct recovery deadline without extending it for the
     await expect(opening).rejects.toMatchObject({ reason: 'check-failed' })
     expect(f.dependencies.prepareDevice).toHaveBeenCalledTimes(2)
     expect(f.dependencies.openMic).not.toHaveBeenCalled()
+  } finally { timeout.mockRestore() }
+})
+
+it.each(['response', 'json'] as const)('fails a late direct %s after its deadline but silently drops it after scope cancellation', async stage => {
+  for (const cancellation of ['deadline', 'scope']) {
+    const events: VoiceStartupObservation[] = []
+    const f = fixture('direct', event => events.push(event))
+    await f.port.prepare()
+    const clock = new AbortController()
+    const timeout = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(clock.signal)
+    let complete!: () => void
+    const response = Response.json(descriptor)
+    const json = vi.spyOn(response, 'json')
+    if (stage === 'response') f.dependencies.prepareDevice.mockImplementation(() => new Promise(resolve => { complete = () => resolve(response) }))
+    else {
+      json.mockImplementation(() => new Promise(resolve => { complete = () => resolve(descriptor) }))
+      f.dependencies.prepareDevice.mockResolvedValue(response)
+    }
+    try {
+      const connection = f.port.create(f.scope)
+      const opening = connection.open()
+      await vi.waitFor(() => expect(stage === 'response' ? f.dependencies.prepareDevice : json).toHaveBeenCalledOnce())
+      if (cancellation === 'scope') { f.abort.abort(); connection.close() }
+      clock.abort()
+      complete()
+      if (cancellation === 'deadline') await expect(opening).rejects.toMatchObject({ reason: 'check-failed' })
+      else await expect(opening).resolves.toBeUndefined()
+      expect(events).toContainEqual(expect.objectContaining({ stage: 'startup', result: cancellation === 'deadline' ? 'failed' : 'cancelled' }))
+      await vi.waitFor(() => expect(events).toContainEqual(expect.objectContaining({ stage: 'cleanup', result: 'completed' })))
+      expect(f.dependencies.prepareDevice).toHaveBeenCalledOnce()
+      expect(f.dependencies.fetchStatus).toHaveBeenCalledOnce()
+      expect(f.dependencies.createChannel).not.toHaveBeenCalled()
+      expect(f.dependencies.createContext).not.toHaveBeenCalled()
+      expect(f.dependencies.openMic).not.toHaveBeenCalled()
+    } finally { timeout.mockRestore() }
+  }
+})
+
+it.each(['response', 'json'] as const)('does not cache a late intro status %s after its preparation deadline', async stage => {
+  const f = fixture('direct')
+  const clock = new AbortController()
+  const timeout = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(clock.signal)
+  let complete!: () => void
+  const response = Response.json({ status: 'ready', transport: 'direct' })
+  const json = vi.spyOn(response, 'json')
+  if (stage === 'response') f.dependencies.fetchStatus.mockImplementation(() => new Promise(resolve => { complete = () => resolve(response) }))
+  else {
+    json.mockImplementation(() => new Promise(resolve => { complete = () => resolve({ status: 'ready', transport: 'direct' }) }))
+    f.dependencies.fetchStatus.mockResolvedValue(response)
+  }
+  try {
+    const preparation = f.port.prepare()
+    await vi.waitFor(() => expect(stage === 'response' ? f.dependencies.fetchStatus : json).toHaveBeenCalledOnce())
+    clock.abort()
+    complete()
+    await expect(preparation).rejects.toMatchObject({ reason: 'check-failed' })
+    expect(f.dependencies.prepareDevice).not.toHaveBeenCalled()
+    expect(f.dependencies.createChannel).not.toHaveBeenCalled()
+    timeout.mockReturnValue(new AbortController().signal)
+    f.dependencies.fetchStatus.mockImplementation(async () => Response.json({ status: 'ready', transport: 'direct' }))
+    await f.port.prepare()
+    expect(f.dependencies.fetchStatus).toHaveBeenCalledTimes(2)
+    expect(f.dependencies.prepareDevice).not.toHaveBeenCalled()
   } finally { timeout.mockRestore() }
 })
